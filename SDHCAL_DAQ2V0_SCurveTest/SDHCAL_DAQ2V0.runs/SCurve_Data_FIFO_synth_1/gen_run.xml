@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenRun Id="SCurve_Data_FIFO_synth_1" LaunchPart="xc7a100tfgg484-2" LaunchTime="1488437193">
+  <File Type="RDS-PROPCONSTRS" Name="SCurve_Data_FIFO_drc_synth.rpt"/>
+  <File Type="PA-TCL" Name="SCurve_Data_FIFO.tcl"/>
+  <File Type="RDS-RDS" Name="SCurve_Data_FIFO.vds"/>
+  <File Type="RDS-UTIL" Name="SCurve_Data_FIFO_utilization_synth.rpt"/>
+  <File Type="RDS-UTIL-PB" Name="SCurve_Data_FIFO_utilization_synth.pb"/>
+  <File Type="RDS-DCP" Name="SCurve_Data_FIFO.dcp"/>
+  <File Type="VDS-TIMINGSUMMARY" Name="SCurve_Data_FIFO_timing_summary_synth.rpt"/>
+  <File Type="VDS-TIMING-PB" Name="SCurve_Data_FIFO_timing_summary_synth.pb"/>
+  <FileSet Name="sources" Type="BlockSrcs" RelSrcDir="$PSRCDIR/SCurve_Data_FIFO">
+    <File Path="$PSRCDIR/sources_1/ip/SCurve_Data_FIFO/SCurve_Data_FIFO.xci">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <Config>
+      <Option Name="TopModule" Val="SCurve_Data_FIFO"/>
+      <Option Name="UseBlackboxStub" Val="1"/>
+    </Config>
+  </FileSet>
+  <FileSet Name="constrs_in" Type="BlockSrcs" RelSrcDir="$PSRCDIR/SCurve_Data_FIFO">
+    <File Path="$PSRCDIR/sources_1/ip/SCurve_Data_FIFO/SCurve_Data_FIFO.xci">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <Config>
+      <Option Name="TopModule" Val="SCurve_Data_FIFO"/>
+      <Option Name="UseBlackboxStub" Val="1"/>
+    </Config>
+  </FileSet>
+  <Strategy Version="1" Minor="2">
+    <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2016">
+      <Desc>Vivado Synthesis Defaults</Desc>
+    </StratHandle>
+    <Step Id="synth_design"/>
+  </Strategy>
+</GenRun>
