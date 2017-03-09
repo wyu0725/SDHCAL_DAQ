@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenRun Id="impl_1" LaunchPart="xc7a100tfgg484-2" LaunchTime="1489049370">
+  <File Type="PWROPT-DRC" Name="FPGA_TOP_drc_pwropted.rpt"/>
+  <File Type="OPT-METHODOLOGY-DRC" Name="FPGA_TOP_methodology_drc_opted.rpt"/>
+  <File Type="INIT-TIMING" Name="FPGA_TOP_timing_summary_init.rpt"/>
+  <File Type="ROUTE-PWR-RPX" Name="FPGA_TOP_power_routed.rpx"/>
+  <File Type="PA-TCL" Name="FPGA_TOP.tcl"/>
+  <File Type="OPT-HWDEF" Name="FPGA_TOP.hwdef"/>
+  <File Type="RDI-RDI" Name="FPGA_TOP.vdi"/>
+  <File Type="OPT-DCP" Name="FPGA_TOP_opt.dcp"/>
+  <File Type="OPT-DRC" Name="FPGA_TOP_drc_opted.rpt"/>
+  <File Type="OPT-TIMING" Name="FPGA_TOP_timing_summary_opted.rpt"/>
+  <File Type="PWROPT-DCP" Name="FPGA_TOP_pwropt.dcp"/>
+  <File Type="PWROPT-TIMING" Name="FPGA_TOP_timing_summary_pwropted.rpt"/>
+  <File Type="PLACE-DCP" Name="FPGA_TOP_placed.dcp"/>
+  <File Type="PLACE-IO" Name="FPGA_TOP_io_placed.rpt"/>
+  <File Type="PLACE-CLK" Name="FPGA_TOP_clock_utilization_placed.rpt"/>
+  <File Type="PLACE-UTIL" Name="FPGA_TOP_utilization_placed.rpt"/>
+  <File Type="PLACE-UTIL-PB" Name="FPGA_TOP_utilization_placed.pb"/>
+  <File Type="PLACE-CTRL" Name="FPGA_TOP_control_sets_placed.rpt"/>
+  <File Type="PLACE-SIMILARITY" Name="FPGA_TOP_incremental_reuse_placed.rpt"/>
+  <File Type="PLACE-PRE-SIMILARITY" Name="FPGA_TOP_incremental_reuse_pre_placed.rpt"/>
+  <File Type="PLACE-TIMING" Name="FPGA_TOP_timing_summary_placed.rpt"/>
+  <File Type="POSTPLACE-PWROPT-DCP" Name="FPGA_TOP_postplace_pwropt.dcp"/>
+  <File Type="POSTPLACE-PWROPT-TIMING" Name="FPGA_TOP_timing_summary_postplace_pwropted.rpt"/>
+  <File Type="PHYSOPT-DCP" Name="FPGA_TOP_physopt.dcp"/>
+  <File Type="PHYSOPT-DRC" Name="FPGA_TOP_drc_physopted.rpt"/>
+  <File Type="PHYSOPT-TIMING" Name="FPGA_TOP_timing_summary_physopted.rpt"/>
+  <File Type="ROUTE-ERROR-DCP" Name="FPGA_TOP_routed_error.dcp"/>
+  <File Type="ROUTE-DCP" Name="FPGA_TOP_routed.dcp"/>
+  <File Type="ROUTE-BLACKBOX-DCP" Name="FPGA_TOP_routed_bb.dcp"/>
+  <File Type="ROUTE-DRC" Name="FPGA_TOP_drc_routed.rpt"/>
+  <File Type="ROUTE-DRC-PB" Name="FPGA_TOP_drc_routed.pb"/>
+  <File Type="BG-BIN" Name="FPGA_TOP.bin"/>
+  <File Type="ROUTE-DRC-RPX" Name="FPGA_TOP_drc_routed.rpx"/>
+  <File Type="BG-DRC" Name="FPGA_TOP.drc"/>
+  <File Type="ROUTE-METHODOLOGY-DRC" Name="FPGA_TOP_methodology_drc_routed.rpt"/>
+  <File Type="BITSTR-MSK" Name="FPGA_TOP.msk"/>
+  <File Type="ROUTE-METHODOLOGY-DRC-RPX" Name="FPGA_TOP_methodology_drc_routed.rpx"/>
+  <File Type="BG-BGN" Name="FPGA_TOP.bgn"/>
+  <File Type="ROUTE-METHODOLOGY-DRC-PB" Name="FPGA_TOP_methodology_drc_routed.pb"/>
+  <File Type="ROUTE-PWR" Name="FPGA_TOP_power_routed.rpt"/>
+  <File Type="ROUTE-PWR-SUM" Name="FPGA_TOP_power_summary_routed.pb"/>
+  <File Type="ROUTE-STATUS" Name="FPGA_TOP_route_status.rpt"/>
+  <File Type="ROUTE-STATUS-PB" Name="FPGA_TOP_route_status.pb"/>
+  <File Type="ROUTE-TIMINGSUMMARY" Name="FPGA_TOP_timing_summary_routed.rpt"/>
+  <File Type="ROUTE-TIMING-PB" Name="FPGA_TOP_timing_summary_routed.pb"/>
+  <File Type="ROUTE-TIMING-RPX" Name="FPGA_TOP_timing_summary_routed.rpx"/>
+  <File Type="ROUTE-SIMILARITY" Name="FPGA_TOP_incremental_reuse_routed.rpt"/>
+  <File Type="ROUTE-CLK" Name="FPGA_TOP_clock_utilization_routed.rpt"/>
+  <File Type="POSTROUTE-PHYSOPT-DCP" Name="FPGA_TOP_postroute_physopt.dcp"/>
+  <File Type="POSTROUTE-PHYSOPT-BLACKBOX-DCP" Name="FPGA_TOP_postroute_physopt_bb.dcp"/>
+  <File Type="POSTROUTE-PHYSOPT-TIMING" Name="FPGA_TOP_timing_summary_postroute_physopted.rpt"/>
+  <File Type="POSTROUTE-PHYSOPT-TIMING-PB" Name="FPGA_TOP_timing_summary_postroute_physopted.pb"/>
+  <File Type="POSTROUTE-PHYSOPT-TIMING-RPX" Name="FPGA_TOP_timing_summary_postroute_physopted.rpx"/>
+  <File Type="BG-BIT" Name="FPGA_TOP.bit"/>
+  <File Type="BITSTR-RBT" Name="FPGA_TOP.rbt"/>
+  <File Type="BITSTR-NKY" Name="FPGA_TOP.nky"/>
+  <File Type="BITSTR-BMM" Name="FPGA_TOP_bd.bmm"/>
+  <File Type="BITSTR-MMI" Name="FPGA_TOP.mmi"/>
+  <File Type="BITSTR-SYSDEF" Name="FPGA_TOP.sysdef"/>
+  <File Type="WBT-USG" Name="usage_statistics_webtalk.html"/>
+  <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">
+    <Filter Type="Srcs"/>
+    <File Path="$PPRDIR/RTL/PULSESYNC.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/RTL/Param_Bitshift.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/RTL/Microroc_Parameters.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/RTL/Trig_Gen.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/RTL/SlowControl_ReadReg.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/RTL/Redundancy.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/RTL/RamReadOut.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/RTL/Internal_Trig_Gen.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/RTL/Hold_Gen.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/RTL/DaqControl.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/RTL/usb_synchronous_slavefifo.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/RTL/usb_command_interpreter.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/RTL/Microroc_top.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/RTL/Clk_Management.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/ip/usb_data_fifo/usb_data_fifo.xci">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/RTL/FPGA_TOP.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <Config>
+      <Option Name="DesignMode" Val="RTL"/>
+      <Option Name="TopModule" Val="FPGA_TOP"/>
+      <Option Name="TopAutoSet" Val="TRUE"/>
+    </Config>
+  </FileSet>
+  <FileSet Name="constrs_in" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1">
+    <Filter Type="Constrs"/>
+    <File Path="$PPRDIR/Constraints/SDHCAL_DAQ2V0.xdc">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+      </FileInfo>
+    </File>
+    <Config>
+      <Option Name="TargetConstrsFile" Val="$PPRDIR/Constraints/SDHCAL_DAQ2V0.xdc"/>
+      <Option Name="ConstrsType" Val="XDC"/>
+    </Config>
+  </FileSet>
+  <Strategy Version="1" Minor="2">
+    <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2016"/>
+    <Step Id="init_design"/>
+    <Step Id="opt_design"/>
+    <Step Id="power_opt_design"/>
+    <Step Id="place_design"/>
+    <Step Id="post_place_power_opt_design"/>
+    <Step Id="phys_opt_design"/>
+    <Step Id="route_design"/>
+    <Step Id="post_route_phys_opt_design"/>
+    <Step Id="write_bitstream"/>
+  </Strategy>
+  <BlockFileSet Type="BlockSrcs" Name="usb_cmd_fifo"/>
+  <BlockFileSet Type="BlockSrcs" Name="param_store_fifo"/>
+</GenRun>

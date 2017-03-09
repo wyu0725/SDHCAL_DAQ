@@ -1,0 +1,1244 @@
+#-----------------------------------------------------------
+# Vivado v2016.3 (64-bit)
+# SW Build 1682563 on Mon Oct 10 19:07:27 MDT 2016
+# IP Build 1681267 on Mon Oct 10 21:28:31 MDT 2016
+# Start of session at: Thu Mar 09 16:49:31 2017
+# Process ID: 9000
+# Current directory: D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/SDHCAL_DAQ2V0.runs/synth_1
+# Command line: vivado.exe -log FPGA_TOP.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source FPGA_TOP.tcl
+# Log file: D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/SDHCAL_DAQ2V0.runs/synth_1/FPGA_TOP.vds
+# Journal file: D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/SDHCAL_DAQ2V0.runs/synth_1\vivado.jou
+#-----------------------------------------------------------
+source FPGA_TOP.tcl -notrace
+Command: synth_design -top FPGA_TOP -part xc7a100tfgg484-2
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7a100t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a100t'
+INFO: Launching helper process for spawning children vivado processes
+INFO: Helper process launched with PID 6160 
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:10 ; elapsed = 00:00:13 . Memory (MB): peak = 355.719 ; gain = 146.328
+---------------------------------------------------------------------------------
+INFO: [Synth 8-638] synthesizing module 'FPGA_TOP' [D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/RTL/FPGA_TOP.v:23]
+INFO: [Synth 8-638] synthesizing module 'Clk_Management' [D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/RTL/Clk_Management.v:23]
+INFO: [Synth 8-638] synthesizing module 'BUFG' [D:/Xilinx/Vivado/2016.3/scripts/rt/data/unisim_comp.v:607]
+INFO: [Synth 8-256] done synthesizing module 'BUFG' (1#1) [D:/Xilinx/Vivado/2016.3/scripts/rt/data/unisim_comp.v:607]
+INFO: [Synth 8-638] synthesizing module 'MMCME2_BASE' [D:/Xilinx/Vivado/2016.3/scripts/rt/data/unisim_comp.v:20534]
+	Parameter BANDWIDTH bound to: OPTIMIZED - type: string 
+	Parameter CLKFBOUT_MULT_F bound to: 16.000000 - type: float 
+	Parameter CLKFBOUT_PHASE bound to: 0.000000 - type: float 
+	Parameter CLKIN1_PERIOD bound to: 25.000000 - type: float 
+	Parameter CLKOUT0_DIVIDE_F bound to: 1.000000 - type: float 
+	Parameter CLKOUT0_DUTY_CYCLE bound to: 0.500000 - type: float 
+	Parameter CLKOUT0_PHASE bound to: 0.000000 - type: float 
+	Parameter CLKOUT1_DIVIDE bound to: 16 - type: integer 
+	Parameter CLKOUT1_DUTY_CYCLE bound to: 0.500000 - type: float 
+	Parameter CLKOUT1_PHASE bound to: 0.000000 - type: float 
+	Parameter CLKOUT2_DIVIDE bound to: 128 - type: integer 
+	Parameter CLKOUT2_DUTY_CYCLE bound to: 0.500000 - type: float 
+	Parameter CLKOUT2_PHASE bound to: 0.000000 - type: float 
+	Parameter CLKOUT3_DIVIDE bound to: 1 - type: integer 
+	Parameter CLKOUT3_DUTY_CYCLE bound to: 0.500000 - type: float 
+	Parameter CLKOUT3_PHASE bound to: 0.000000 - type: float 
+	Parameter CLKOUT4_CASCADE bound to: FALSE - type: string 
+	Parameter CLKOUT4_DIVIDE bound to: 1 - type: integer 
+	Parameter CLKOUT4_DUTY_CYCLE bound to: 0.500000 - type: float 
+	Parameter CLKOUT4_PHASE bound to: 0.000000 - type: float 
+	Parameter CLKOUT5_DIVIDE bound to: 1 - type: integer 
+	Parameter CLKOUT5_DUTY_CYCLE bound to: 0.500000 - type: float 
+	Parameter CLKOUT5_PHASE bound to: 0.000000 - type: float 
+	Parameter CLKOUT6_DIVIDE bound to: 1 - type: integer 
+	Parameter CLKOUT6_DUTY_CYCLE bound to: 0.500000 - type: float 
+	Parameter CLKOUT6_PHASE bound to: 0.000000 - type: float 
+	Parameter DIVCLK_DIVIDE bound to: 1 - type: integer 
+	Parameter REF_JITTER1 bound to: 0.000000 - type: float 
+	Parameter STARTUP_WAIT bound to: FALSE - type: string 
+INFO: [Synth 8-256] done synthesizing module 'MMCME2_BASE' (2#1) [D:/Xilinx/Vivado/2016.3/scripts/rt/data/unisim_comp.v:20534]
+INFO: [Synth 8-256] done synthesizing module 'Clk_Management' (3#1) [D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/RTL/Clk_Management.v:23]
+INFO: [Synth 8-638] synthesizing module 'usb_command_interpreter' [D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/RTL/usb_command_interpreter.v:21]
+	Parameter Idle bound to: 1'b0 
+	Parameter READ bound to: 1'b1 
+INFO: [Synth 8-638] synthesizing module 'usb_cmd_fifo' [D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/SDHCAL_DAQ2V0.runs/synth_1/.Xil/Vivado-9000-WYU/realtime/usb_cmd_fifo_stub.v:6]
+INFO: [Synth 8-256] done synthesizing module 'usb_cmd_fifo' (4#1) [D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/SDHCAL_DAQ2V0.runs/synth_1/.Xil/Vivado-9000-WYU/realtime/usb_cmd_fifo_stub.v:6]
+INFO: [Synth 8-226] default block is never used [D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/RTL/usb_command_interpreter.v:100]
+INFO: [Synth 8-256] done synthesizing module 'usb_command_interpreter' (5#1) [D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/RTL/usb_command_interpreter.v:21]
+INFO: [Synth 8-638] synthesizing module 'usb_synchronous_slavefifo' [D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/RTL/usb_synchronous_slavefifo.v:26]
+	Parameter EP6_ADDR bound to: 2'b10 
+	Parameter EP2_ADDR bound to: 2'b00 
+	Parameter Idle bound to: 3'b000 
+	Parameter READ bound to: 3'b001 
+	Parameter READ_PROCESS bound to: 3'b010 
+	Parameter WRITE bound to: 3'b011 
+	Parameter WRITE_PROCESS bound to: 3'b100 
+	Parameter PKTEND bound to: 3'b101 
+INFO: [Synth 8-256] done synthesizing module 'usb_synchronous_slavefifo' (6#1) [D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/RTL/usb_synchronous_slavefifo.v:26]
+INFO: [Synth 8-638] synthesizing module 'Microroc_top' [D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/RTL/Microroc_top.v:23]
+INFO: [Synth 8-638] synthesizing module 'SlowControl_ReadReg' [D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/RTL/SlowControl_ReadReg.v:60]
+INFO: [Synth 8-638] synthesizing module 'Microroc_Parameters' [D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/RTL/Microroc_Parameters.v:21]
+	Parameter SC_NUM bound to: 36 - type: integer 
+	Parameter RE_NUM bound to: 3 - type: integer 
+	Parameter Idle bound to: 4'b0000 
+	Parameter READ_PROCESS bound to: 4'b0001 
+	Parameter READ_PROCESS_LOOP bound to: 4'b0010 
+	Parameter READ_PROCESS_ASIC bound to: 4'b0011 
+	Parameter SC_PROCESS bound to: 4'b0100 
+	Parameter SC_PROCESS_LOOP bound to: 4'b0101 
+	Parameter SC_PROCESS_ASIC bound to: 4'b0110 
+	Parameter END_PROCESS bound to: 4'b0111 
+INFO: [Synth 8-226] default block is never used [D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/RTL/Microroc_Parameters.v:169]
+INFO: [Synth 8-256] done synthesizing module 'Microroc_Parameters' (7#1) [D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/RTL/Microroc_Parameters.v:21]
+INFO: [Synth 8-638] synthesizing module 'PULSESYNC' [D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/RTL/PULSESYNC.v:23]
+INFO: [Synth 8-256] done synthesizing module 'PULSESYNC' (8#1) [D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/RTL/PULSESYNC.v:23]
+INFO: [Synth 8-638] synthesizing module 'Param_Bitshift' [D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/RTL/Param_Bitshift.v:28]
+	Parameter Idle bound to: 3'b000 
+	Parameter READ_FIFO bound to: 3'b001 
+	Parameter DATA_LATENCY bound to: 3'b110 
+	Parameter GET_DATA bound to: 3'b010 
+	Parameter LOOP bound to: 3'b011 
+	Parameter END_ONCE bound to: 3'b101 
+	Parameter END bound to: 3'b100 
+INFO: [Synth 8-256] done synthesizing module 'Param_Bitshift' (9#1) [D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/RTL/Param_Bitshift.v:28]
+INFO: [Synth 8-638] synthesizing module 'param_store_fifo' [D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/SDHCAL_DAQ2V0.runs/synth_1/.Xil/Vivado-9000-WYU/realtime/param_store_fifo_stub.v:6]
+INFO: [Synth 8-256] done synthesizing module 'param_store_fifo' (10#1) [D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/SDHCAL_DAQ2V0.runs/synth_1/.Xil/Vivado-9000-WYU/realtime/param_store_fifo_stub.v:6]
+INFO: [Synth 8-256] done synthesizing module 'SlowControl_ReadReg' (11#1) [D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/RTL/SlowControl_ReadReg.v:60]
+INFO: [Synth 8-638] synthesizing module 'Redundancy' [D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/RTL/Redundancy.v:22]
+INFO: [Synth 8-256] done synthesizing module 'Redundancy' (12#1) [D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/RTL/Redundancy.v:22]
+INFO: [Synth 8-638] synthesizing module 'DaqControl' [D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/RTL/DaqControl.v:22]
+	Parameter Idle bound to: 4'b0000 
+	Parameter CHIPRESET bound to: 4'b0001 
+	Parameter POWOND bound to: 4'b0010 
+	Parameter RELEASE bound to: 4'b0011 
+	Parameter ACQUISITION bound to: 4'b0100 
+	Parameter WAIT bound to: 4'b0101 
+	Parameter START_READOUT bound to: 4'b0110 
+	Parameter WAIT_READ bound to: 4'b0111 
+	Parameter END_READOUT bound to: 4'b1000 
+	Parameter T_minPwrRst bound to: 8 - type: integer 
+	Parameter T_minRstStart bound to: 40 - type: integer 
+	Parameter T_minSro bound to: 16 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'DaqControl' (13#1) [D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/RTL/DaqControl.v:22]
+INFO: [Synth 8-638] synthesizing module 'RamReadOut' [D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/RTL/RamReadOut.v:22]
+	Parameter DATA_WIDTH bound to: 4'b1111 
+INFO: [Synth 8-256] done synthesizing module 'RamReadOut' (14#1) [D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/RTL/RamReadOut.v:22]
+INFO: [Synth 8-638] synthesizing module 'Hold_Gen' [D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/RTL/Hold_Gen.v:4]
+	Parameter Idle bound to: 2'b00 
+	Parameter DELAY bound to: 2'b01 
+	Parameter HOLDGEN bound to: 2'b10 
+INFO: [Synth 8-256] done synthesizing module 'Hold_Gen' (15#1) [D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/RTL/Hold_Gen.v:4]
+INFO: [Synth 8-638] synthesizing module 'Internal_Trig_Gen' [D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/RTL/Internal_Trig_Gen.v:23]
+INFO: [Synth 8-256] done synthesizing module 'Internal_Trig_Gen' (16#1) [D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/RTL/Internal_Trig_Gen.v:23]
+INFO: [Synth 8-638] synthesizing module 'Trig_Gen' [D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/RTL/Trig_Gen.v:1]
+INFO: [Synth 8-256] done synthesizing module 'Trig_Gen' (17#1) [D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/RTL/Trig_Gen.v:1]
+INFO: [Synth 8-638] synthesizing module 'OBUFDS' [D:/Xilinx/Vivado/2016.3/scripts/rt/data/unisim_comp.v:21941]
+	Parameter CAPACITANCE bound to: DONT_CARE - type: string 
+	Parameter IOSTANDARD bound to: DEFAULT - type: string 
+	Parameter SLEW bound to: SLOW - type: string 
+INFO: [Synth 8-256] done synthesizing module 'OBUFDS' (18#1) [D:/Xilinx/Vivado/2016.3/scripts/rt/data/unisim_comp.v:21941]
+INFO: [Synth 8-256] done synthesizing module 'Microroc_top' (19#1) [D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/RTL/Microroc_top.v:23]
+INFO: [Synth 8-638] synthesizing module 'usb_data_fifo' [d:/Vivado_workspace/SDHCAL_DAQ2V0_latest/SDHCAL_DAQ2V0.srcs/sources_1/ip/usb_data_fifo/synth/usb_data_fifo.vhd:73]
+	Parameter C_COMMON_CLOCK bound to: 0 - type: integer 
+	Parameter C_SELECT_XPM bound to: 0 - type: integer 
+	Parameter C_COUNT_TYPE bound to: 0 - type: integer 
+	Parameter C_DATA_COUNT_WIDTH bound to: 13 - type: integer 
+	Parameter C_DEFAULT_VALUE bound to: BlankString - type: string 
+	Parameter C_DIN_WIDTH bound to: 16 - type: integer 
+	Parameter C_DOUT_RST_VAL bound to: F5F7 - type: string 
+	Parameter C_DOUT_WIDTH bound to: 16 - type: integer 
+	Parameter C_ENABLE_RLOCS bound to: 0 - type: integer 
+	Parameter C_FAMILY bound to: artix7 - type: string 
+	Parameter C_FULL_FLAGS_RST_VAL bound to: 0 - type: integer 
+	Parameter C_HAS_ALMOST_EMPTY bound to: 0 - type: integer 
+	Parameter C_HAS_ALMOST_FULL bound to: 0 - type: integer 
+	Parameter C_HAS_BACKUP bound to: 0 - type: integer 
+	Parameter C_HAS_DATA_COUNT bound to: 0 - type: integer 
+	Parameter C_HAS_INT_CLK bound to: 0 - type: integer 
+	Parameter C_HAS_MEMINIT_FILE bound to: 0 - type: integer 
+	Parameter C_HAS_OVERFLOW bound to: 0 - type: integer 
+	Parameter C_HAS_RD_DATA_COUNT bound to: 0 - type: integer 
+	Parameter C_HAS_RD_RST bound to: 0 - type: integer 
+	Parameter C_HAS_RST bound to: 1 - type: integer 
+	Parameter C_HAS_SRST bound to: 0 - type: integer 
+	Parameter C_HAS_UNDERFLOW bound to: 0 - type: integer 
+	Parameter C_HAS_VALID bound to: 0 - type: integer 
+	Parameter C_HAS_WR_ACK bound to: 0 - type: integer 
+	Parameter C_HAS_WR_DATA_COUNT bound to: 0 - type: integer 
+	Parameter C_HAS_WR_RST bound to: 0 - type: integer 
+	Parameter C_IMPLEMENTATION_TYPE bound to: 2 - type: integer 
+	Parameter C_INIT_WR_PNTR_VAL bound to: 0 - type: integer 
+	Parameter C_MEMORY_TYPE bound to: 1 - type: integer 
+	Parameter C_MIF_FILE_NAME bound to: BlankString - type: string 
+	Parameter C_OPTIMIZATION_MODE bound to: 0 - type: integer 
+	Parameter C_OVERFLOW_LOW bound to: 0 - type: integer 
+	Parameter C_PRELOAD_LATENCY bound to: 1 - type: integer 
+	Parameter C_PRELOAD_REGS bound to: 0 - type: integer 
+	Parameter C_PRIM_FIFO_TYPE bound to: 8kx4 - type: string 
+	Parameter C_PROG_EMPTY_THRESH_ASSERT_VAL bound to: 2 - type: integer 
+	Parameter C_PROG_EMPTY_THRESH_NEGATE_VAL bound to: 3 - type: integer 
+	Parameter C_PROG_EMPTY_TYPE bound to: 0 - type: integer 
+	Parameter C_PROG_FULL_THRESH_ASSERT_VAL bound to: 8189 - type: integer 
+	Parameter C_PROG_FULL_THRESH_NEGATE_VAL bound to: 8188 - type: integer 
+	Parameter C_PROG_FULL_TYPE bound to: 0 - type: integer 
+	Parameter C_RD_DATA_COUNT_WIDTH bound to: 13 - type: integer 
+	Parameter C_RD_DEPTH bound to: 8192 - type: integer 
+	Parameter C_RD_FREQ bound to: 1 - type: integer 
+	Parameter C_RD_PNTR_WIDTH bound to: 13 - type: integer 
+	Parameter C_UNDERFLOW_LOW bound to: 0 - type: integer 
+	Parameter C_USE_DOUT_RST bound to: 1 - type: integer 
+	Parameter C_USE_ECC bound to: 0 - type: integer 
+	Parameter C_USE_EMBEDDED_REG bound to: 0 - type: integer 
+	Parameter C_USE_PIPELINE_REG bound to: 0 - type: integer 
+	Parameter C_POWER_SAVING_MODE bound to: 0 - type: integer 
+	Parameter C_USE_FIFO16_FLAGS bound to: 0 - type: integer 
+	Parameter C_USE_FWFT_DATA_COUNT bound to: 0 - type: integer 
+	Parameter C_VALID_LOW bound to: 0 - type: integer 
+	Parameter C_WR_ACK_LOW bound to: 0 - type: integer 
+	Parameter C_WR_DATA_COUNT_WIDTH bound to: 13 - type: integer 
+	Parameter C_WR_DEPTH bound to: 8192 - type: integer 
+	Parameter C_WR_FREQ bound to: 1 - type: integer 
+	Parameter C_WR_PNTR_WIDTH bound to: 13 - type: integer 
+	Parameter C_WR_RESPONSE_LATENCY bound to: 1 - type: integer 
+	Parameter C_MSGON_VAL bound to: 1 - type: integer 
+	Parameter C_ENABLE_RST_SYNC bound to: 1 - type: integer 
+	Parameter C_EN_SAFETY_CKT bound to: 0 - type: integer 
+	Parameter C_ERROR_INJECTION_TYPE bound to: 0 - type: integer 
+	Parameter C_SYNCHRONIZER_STAGE bound to: 2 - type: integer 
+	Parameter C_INTERFACE_TYPE bound to: 0 - type: integer 
+	Parameter C_AXI_TYPE bound to: 1 - type: integer 
+	Parameter C_HAS_AXI_WR_CHANNEL bound to: 1 - type: integer 
+	Parameter C_HAS_AXI_RD_CHANNEL bound to: 1 - type: integer 
+	Parameter C_HAS_SLAVE_CE bound to: 0 - type: integer 
+	Parameter C_HAS_MASTER_CE bound to: 0 - type: integer 
+	Parameter C_ADD_NGC_CONSTRAINT bound to: 0 - type: integer 
+	Parameter C_USE_COMMON_OVERFLOW bound to: 0 - type: integer 
+	Parameter C_USE_COMMON_UNDERFLOW bound to: 0 - type: integer 
+	Parameter C_USE_DEFAULT_SETTINGS bound to: 0 - type: integer 
+	Parameter C_AXI_ID_WIDTH bound to: 1 - type: integer 
+	Parameter C_AXI_ADDR_WIDTH bound to: 32 - type: integer 
+	Parameter C_AXI_DATA_WIDTH bound to: 64 - type: integer 
+	Parameter C_AXI_LEN_WIDTH bound to: 8 - type: integer 
+	Parameter C_AXI_LOCK_WIDTH bound to: 1 - type: integer 
+	Parameter C_HAS_AXI_ID bound to: 0 - type: integer 
+	Parameter C_HAS_AXI_AWUSER bound to: 0 - type: integer 
+	Parameter C_HAS_AXI_WUSER bound to: 0 - type: integer 
+	Parameter C_HAS_AXI_BUSER bound to: 0 - type: integer 
+	Parameter C_HAS_AXI_ARUSER bound to: 0 - type: integer 
+	Parameter C_HAS_AXI_RUSER bound to: 0 - type: integer 
+	Parameter C_AXI_ARUSER_WIDTH bound to: 1 - type: integer 
+	Parameter C_AXI_AWUSER_WIDTH bound to: 1 - type: integer 
+	Parameter C_AXI_WUSER_WIDTH bound to: 1 - type: integer 
+	Parameter C_AXI_BUSER_WIDTH bound to: 1 - type: integer 
+	Parameter C_AXI_RUSER_WIDTH bound to: 1 - type: integer 
+	Parameter C_HAS_AXIS_TDATA bound to: 1 - type: integer 
+	Parameter C_HAS_AXIS_TID bound to: 0 - type: integer 
+	Parameter C_HAS_AXIS_TDEST bound to: 0 - type: integer 
+	Parameter C_HAS_AXIS_TUSER bound to: 1 - type: integer 
+	Parameter C_HAS_AXIS_TREADY bound to: 1 - type: integer 
+	Parameter C_HAS_AXIS_TLAST bound to: 0 - type: integer 
+	Parameter C_HAS_AXIS_TSTRB bound to: 0 - type: integer 
+	Parameter C_HAS_AXIS_TKEEP bound to: 0 - type: integer 
+	Parameter C_AXIS_TDATA_WIDTH bound to: 8 - type: integer 
+	Parameter C_AXIS_TID_WIDTH bound to: 1 - type: integer 
+	Parameter C_AXIS_TDEST_WIDTH bound to: 1 - type: integer 
+	Parameter C_AXIS_TUSER_WIDTH bound to: 4 - type: integer 
+	Parameter C_AXIS_TSTRB_WIDTH bound to: 1 - type: integer 
+	Parameter C_AXIS_TKEEP_WIDTH bound to: 1 - type: integer 
+	Parameter C_WACH_TYPE bound to: 0 - type: integer 
+	Parameter C_WDCH_TYPE bound to: 0 - type: integer 
+	Parameter C_WRCH_TYPE bound to: 0 - type: integer 
+	Parameter C_RACH_TYPE bound to: 0 - type: integer 
+	Parameter C_RDCH_TYPE bound to: 0 - type: integer 
+	Parameter C_AXIS_TYPE bound to: 0 - type: integer 
+	Parameter C_IMPLEMENTATION_TYPE_WACH bound to: 1 - type: integer 
+	Parameter C_IMPLEMENTATION_TYPE_WDCH bound to: 1 - type: integer 
+	Parameter C_IMPLEMENTATION_TYPE_WRCH bound to: 1 - type: integer 
+	Parameter C_IMPLEMENTATION_TYPE_RACH bound to: 1 - type: integer 
+	Parameter C_IMPLEMENTATION_TYPE_RDCH bound to: 1 - type: integer 
+	Parameter C_IMPLEMENTATION_TYPE_AXIS bound to: 1 - type: integer 
+	Parameter C_APPLICATION_TYPE_WACH bound to: 0 - type: integer 
+	Parameter C_APPLICATION_TYPE_WDCH bound to: 0 - type: integer 
+	Parameter C_APPLICATION_TYPE_WRCH bound to: 0 - type: integer 
+	Parameter C_APPLICATION_TYPE_RACH bound to: 0 - type: integer 
+	Parameter C_APPLICATION_TYPE_RDCH bound to: 0 - type: integer 
+	Parameter C_APPLICATION_TYPE_AXIS bound to: 0 - type: integer 
+	Parameter C_PRIM_FIFO_TYPE_WACH bound to: 512x36 - type: string 
+	Parameter C_PRIM_FIFO_TYPE_WDCH bound to: 1kx36 - type: string 
+	Parameter C_PRIM_FIFO_TYPE_WRCH bound to: 512x36 - type: string 
+	Parameter C_PRIM_FIFO_TYPE_RACH bound to: 512x36 - type: string 
+	Parameter C_PRIM_FIFO_TYPE_RDCH bound to: 1kx36 - type: string 
+	Parameter C_PRIM_FIFO_TYPE_AXIS bound to: 1kx18 - type: string 
+	Parameter C_USE_ECC_WACH bound to: 0 - type: integer 
+	Parameter C_USE_ECC_WDCH bound to: 0 - type: integer 
+	Parameter C_USE_ECC_WRCH bound to: 0 - type: integer 
+	Parameter C_USE_ECC_RACH bound to: 0 - type: integer 
+	Parameter C_USE_ECC_RDCH bound to: 0 - type: integer 
+	Parameter C_USE_ECC_AXIS bound to: 0 - type: integer 
+	Parameter C_ERROR_INJECTION_TYPE_WACH bound to: 0 - type: integer 
+	Parameter C_ERROR_INJECTION_TYPE_WDCH bound to: 0 - type: integer 
+	Parameter C_ERROR_INJECTION_TYPE_WRCH bound to: 0 - type: integer 
+	Parameter C_ERROR_INJECTION_TYPE_RACH bound to: 0 - type: integer 
+	Parameter C_ERROR_INJECTION_TYPE_RDCH bound to: 0 - type: integer 
+	Parameter C_ERROR_INJECTION_TYPE_AXIS bound to: 0 - type: integer 
+	Parameter C_DIN_WIDTH_WACH bound to: 1 - type: integer 
+	Parameter C_DIN_WIDTH_WDCH bound to: 64 - type: integer 
+	Parameter C_DIN_WIDTH_WRCH bound to: 2 - type: integer 
+	Parameter C_DIN_WIDTH_RACH bound to: 32 - type: integer 
+	Parameter C_DIN_WIDTH_RDCH bound to: 64 - type: integer 
+	Parameter C_DIN_WIDTH_AXIS bound to: 1 - type: integer 
+	Parameter C_WR_DEPTH_WACH bound to: 16 - type: integer 
+	Parameter C_WR_DEPTH_WDCH bound to: 1024 - type: integer 
+	Parameter C_WR_DEPTH_WRCH bound to: 16 - type: integer 
+	Parameter C_WR_DEPTH_RACH bound to: 16 - type: integer 
+	Parameter C_WR_DEPTH_RDCH bound to: 1024 - type: integer 
+	Parameter C_WR_DEPTH_AXIS bound to: 1024 - type: integer 
+	Parameter C_WR_PNTR_WIDTH_WACH bound to: 4 - type: integer 
+	Parameter C_WR_PNTR_WIDTH_WDCH bound to: 10 - type: integer 
+	Parameter C_WR_PNTR_WIDTH_WRCH bound to: 4 - type: integer 
+	Parameter C_WR_PNTR_WIDTH_RACH bound to: 4 - type: integer 
+	Parameter C_WR_PNTR_WIDTH_RDCH bound to: 10 - type: integer 
+	Parameter C_WR_PNTR_WIDTH_AXIS bound to: 10 - type: integer 
+	Parameter C_HAS_DATA_COUNTS_WACH bound to: 0 - type: integer 
+	Parameter C_HAS_DATA_COUNTS_WDCH bound to: 0 - type: integer 
+	Parameter C_HAS_DATA_COUNTS_WRCH bound to: 0 - type: integer 
+	Parameter C_HAS_DATA_COUNTS_RACH bound to: 0 - type: integer 
+	Parameter C_HAS_DATA_COUNTS_RDCH bound to: 0 - type: integer 
+	Parameter C_HAS_DATA_COUNTS_AXIS bound to: 0 - type: integer 
+	Parameter C_HAS_PROG_FLAGS_WACH bound to: 0 - type: integer 
+	Parameter C_HAS_PROG_FLAGS_WDCH bound to: 0 - type: integer 
+	Parameter C_HAS_PROG_FLAGS_WRCH bound to: 0 - type: integer 
+	Parameter C_HAS_PROG_FLAGS_RACH bound to: 0 - type: integer 
+	Parameter C_HAS_PROG_FLAGS_RDCH bound to: 0 - type: integer 
+	Parameter C_HAS_PROG_FLAGS_AXIS bound to: 0 - type: integer 
+	Parameter C_PROG_FULL_TYPE_WACH bound to: 0 - type: integer 
+	Parameter C_PROG_FULL_TYPE_WDCH bound to: 0 - type: integer 
+	Parameter C_PROG_FULL_TYPE_WRCH bound to: 0 - type: integer 
+	Parameter C_PROG_FULL_TYPE_RACH bound to: 0 - type: integer 
+	Parameter C_PROG_FULL_TYPE_RDCH bound to: 0 - type: integer 
+	Parameter C_PROG_FULL_TYPE_AXIS bound to: 0 - type: integer 
+	Parameter C_PROG_FULL_THRESH_ASSERT_VAL_WACH bound to: 1023 - type: integer 
+	Parameter C_PROG_FULL_THRESH_ASSERT_VAL_WDCH bound to: 1023 - type: integer 
+	Parameter C_PROG_FULL_THRESH_ASSERT_VAL_WRCH bound to: 1023 - type: integer 
+	Parameter C_PROG_FULL_THRESH_ASSERT_VAL_RACH bound to: 1023 - type: integer 
+	Parameter C_PROG_FULL_THRESH_ASSERT_VAL_RDCH bound to: 1023 - type: integer 
+	Parameter C_PROG_FULL_THRESH_ASSERT_VAL_AXIS bound to: 1023 - type: integer 
+	Parameter C_PROG_EMPTY_TYPE_WACH bound to: 0 - type: integer 
+	Parameter C_PROG_EMPTY_TYPE_WDCH bound to: 0 - type: integer 
+	Parameter C_PROG_EMPTY_TYPE_WRCH bound to: 0 - type: integer 
+	Parameter C_PROG_EMPTY_TYPE_RACH bound to: 0 - type: integer 
+	Parameter C_PROG_EMPTY_TYPE_RDCH bound to: 0 - type: integer 
+	Parameter C_PROG_EMPTY_TYPE_AXIS bound to: 0 - type: integer 
+	Parameter C_PROG_EMPTY_THRESH_ASSERT_VAL_WACH bound to: 1022 - type: integer 
+	Parameter C_PROG_EMPTY_THRESH_ASSERT_VAL_WDCH bound to: 1022 - type: integer 
+	Parameter C_PROG_EMPTY_THRESH_ASSERT_VAL_WRCH bound to: 1022 - type: integer 
+	Parameter C_PROG_EMPTY_THRESH_ASSERT_VAL_RACH bound to: 1022 - type: integer 
+	Parameter C_PROG_EMPTY_THRESH_ASSERT_VAL_RDCH bound to: 1022 - type: integer 
+	Parameter C_PROG_EMPTY_THRESH_ASSERT_VAL_AXIS bound to: 1022 - type: integer 
+	Parameter C_REG_SLICE_MODE_WACH bound to: 0 - type: integer 
+	Parameter C_REG_SLICE_MODE_WDCH bound to: 0 - type: integer 
+	Parameter C_REG_SLICE_MODE_WRCH bound to: 0 - type: integer 
+	Parameter C_REG_SLICE_MODE_RACH bound to: 0 - type: integer 
+	Parameter C_REG_SLICE_MODE_RDCH bound to: 0 - type: integer 
+	Parameter C_REG_SLICE_MODE_AXIS bound to: 0 - type: integer 
+INFO: [Synth 8-3491] module 'fifo_generator_v13_1_2' declared at 'd:/Vivado_workspace/SDHCAL_DAQ2V0_latest/SDHCAL_DAQ2V0.srcs/sources_1/ip/usb_data_fifo/hdl/fifo_generator_v13_1_vhsyn_rfs.vhd:38270' bound to instance 'U0' of component 'fifo_generator_v13_1_2' [d:/Vivado_workspace/SDHCAL_DAQ2V0_latest/SDHCAL_DAQ2V0.srcs/sources_1/ip/usb_data_fifo/synth/usb_data_fifo.vhd:540]
+INFO: [Synth 8-256] done synthesizing module 'usb_data_fifo' (47#1) [d:/Vivado_workspace/SDHCAL_DAQ2V0_latest/SDHCAL_DAQ2V0.srcs/sources_1/ip/usb_data_fifo/synth/usb_data_fifo.vhd:73]
+INFO: [Synth 8-256] done synthesizing module 'FPGA_TOP' (48#1) [D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/RTL/FPGA_TOP.v:23]
+WARNING: [Synth 8-3331] design wr_status_flags_as has unconnected port WR_RST
+WARNING: [Synth 8-3331] design wr_status_flags_as has unconnected port SAFETY_CKT_WR_RST
+WARNING: [Synth 8-3331] design wr_status_flags_as has unconnected port WR_PNTR_PLUS3[12]
+WARNING: [Synth 8-3331] design wr_status_flags_as has unconnected port WR_PNTR_PLUS3[11]
+WARNING: [Synth 8-3331] design wr_status_flags_as has unconnected port WR_PNTR_PLUS3[10]
+WARNING: [Synth 8-3331] design wr_status_flags_as has unconnected port WR_PNTR_PLUS3[9]
+WARNING: [Synth 8-3331] design wr_status_flags_as has unconnected port WR_PNTR_PLUS3[8]
+WARNING: [Synth 8-3331] design wr_status_flags_as has unconnected port WR_PNTR_PLUS3[7]
+WARNING: [Synth 8-3331] design wr_status_flags_as has unconnected port WR_PNTR_PLUS3[6]
+WARNING: [Synth 8-3331] design wr_status_flags_as has unconnected port WR_PNTR_PLUS3[5]
+WARNING: [Synth 8-3331] design wr_status_flags_as has unconnected port WR_PNTR_PLUS3[4]
+WARNING: [Synth 8-3331] design wr_status_flags_as has unconnected port WR_PNTR_PLUS3[3]
+WARNING: [Synth 8-3331] design wr_status_flags_as has unconnected port WR_PNTR_PLUS3[2]
+WARNING: [Synth 8-3331] design wr_status_flags_as has unconnected port WR_PNTR_PLUS3[1]
+WARNING: [Synth 8-3331] design wr_status_flags_as has unconnected port WR_PNTR_PLUS3[0]
+WARNING: [Synth 8-3331] design wr_bin_cntr has unconnected port SRST
+WARNING: [Synth 8-3331] design wr_logic has unconnected port WR_EN_INTO_LOGIC
+WARNING: [Synth 8-3331] design wr_logic has unconnected port WR_RST_INTO_LOGIC
+WARNING: [Synth 8-3331] design wr_logic has unconnected port RD_EN
+WARNING: [Synth 8-3331] design wr_logic has unconnected port SRST_FULL_FF
+WARNING: [Synth 8-3331] design wr_logic has unconnected port WR_RST_BUSY
+WARNING: [Synth 8-3331] design wr_logic has unconnected port EMPTY
+WARNING: [Synth 8-3331] design wr_logic has unconnected port RAM_RD_EN
+WARNING: [Synth 8-3331] design wr_logic has unconnected port ALMOST_EMPTY
+WARNING: [Synth 8-3331] design wr_logic has unconnected port PROG_FULL_THRESH[12]
+WARNING: [Synth 8-3331] design wr_logic has unconnected port PROG_FULL_THRESH[11]
+WARNING: [Synth 8-3331] design wr_logic has unconnected port PROG_FULL_THRESH[10]
+WARNING: [Synth 8-3331] design wr_logic has unconnected port PROG_FULL_THRESH[9]
+WARNING: [Synth 8-3331] design wr_logic has unconnected port PROG_FULL_THRESH[8]
+WARNING: [Synth 8-3331] design wr_logic has unconnected port PROG_FULL_THRESH[7]
+WARNING: [Synth 8-3331] design wr_logic has unconnected port PROG_FULL_THRESH[6]
+WARNING: [Synth 8-3331] design wr_logic has unconnected port PROG_FULL_THRESH[5]
+WARNING: [Synth 8-3331] design wr_logic has unconnected port PROG_FULL_THRESH[4]
+WARNING: [Synth 8-3331] design wr_logic has unconnected port PROG_FULL_THRESH[3]
+WARNING: [Synth 8-3331] design wr_logic has unconnected port PROG_FULL_THRESH[2]
+WARNING: [Synth 8-3331] design wr_logic has unconnected port PROG_FULL_THRESH[1]
+WARNING: [Synth 8-3331] design wr_logic has unconnected port PROG_FULL_THRESH[0]
+WARNING: [Synth 8-3331] design wr_logic has unconnected port PROG_FULL_THRESH_ASSERT[12]
+WARNING: [Synth 8-3331] design wr_logic has unconnected port PROG_FULL_THRESH_ASSERT[11]
+WARNING: [Synth 8-3331] design wr_logic has unconnected port PROG_FULL_THRESH_ASSERT[10]
+WARNING: [Synth 8-3331] design wr_logic has unconnected port PROG_FULL_THRESH_ASSERT[9]
+WARNING: [Synth 8-3331] design wr_logic has unconnected port PROG_FULL_THRESH_ASSERT[8]
+WARNING: [Synth 8-3331] design wr_logic has unconnected port PROG_FULL_THRESH_ASSERT[7]
+WARNING: [Synth 8-3331] design wr_logic has unconnected port PROG_FULL_THRESH_ASSERT[6]
+WARNING: [Synth 8-3331] design wr_logic has unconnected port PROG_FULL_THRESH_ASSERT[5]
+WARNING: [Synth 8-3331] design wr_logic has unconnected port PROG_FULL_THRESH_ASSERT[4]
+WARNING: [Synth 8-3331] design wr_logic has unconnected port PROG_FULL_THRESH_ASSERT[3]
+WARNING: [Synth 8-3331] design wr_logic has unconnected port PROG_FULL_THRESH_ASSERT[2]
+WARNING: [Synth 8-3331] design wr_logic has unconnected port PROG_FULL_THRESH_ASSERT[1]
+WARNING: [Synth 8-3331] design wr_logic has unconnected port PROG_FULL_THRESH_ASSERT[0]
+WARNING: [Synth 8-3331] design wr_logic has unconnected port PROG_FULL_THRESH_NEGATE[12]
+WARNING: [Synth 8-3331] design wr_logic has unconnected port PROG_FULL_THRESH_NEGATE[11]
+WARNING: [Synth 8-3331] design wr_logic has unconnected port PROG_FULL_THRESH_NEGATE[10]
+WARNING: [Synth 8-3331] design wr_logic has unconnected port PROG_FULL_THRESH_NEGATE[9]
+WARNING: [Synth 8-3331] design wr_logic has unconnected port PROG_FULL_THRESH_NEGATE[8]
+WARNING: [Synth 8-3331] design wr_logic has unconnected port PROG_FULL_THRESH_NEGATE[7]
+WARNING: [Synth 8-3331] design wr_logic has unconnected port PROG_FULL_THRESH_NEGATE[6]
+WARNING: [Synth 8-3331] design wr_logic has unconnected port PROG_FULL_THRESH_NEGATE[5]
+WARNING: [Synth 8-3331] design wr_logic has unconnected port PROG_FULL_THRESH_NEGATE[4]
+WARNING: [Synth 8-3331] design wr_logic has unconnected port PROG_FULL_THRESH_NEGATE[3]
+WARNING: [Synth 8-3331] design wr_logic has unconnected port PROG_FULL_THRESH_NEGATE[2]
+WARNING: [Synth 8-3331] design wr_logic has unconnected port PROG_FULL_THRESH_NEGATE[1]
+WARNING: [Synth 8-3331] design wr_logic has unconnected port PROG_FULL_THRESH_NEGATE[0]
+WARNING: [Synth 8-3331] design rd_status_flags_as has unconnected port SAFETY_CKT_RD_RST
+WARNING: [Synth 8-3331] design rd_status_flags_as has unconnected port RD_PNTR_PLUS2[12]
+WARNING: [Synth 8-3331] design rd_status_flags_as has unconnected port RD_PNTR_PLUS2[11]
+WARNING: [Synth 8-3331] design rd_status_flags_as has unconnected port RD_PNTR_PLUS2[10]
+WARNING: [Synth 8-3331] design rd_status_flags_as has unconnected port RD_PNTR_PLUS2[9]
+WARNING: [Synth 8-3331] design rd_status_flags_as has unconnected port RD_PNTR_PLUS2[8]
+WARNING: [Synth 8-3331] design rd_status_flags_as has unconnected port RD_PNTR_PLUS2[7]
+WARNING: [Synth 8-3331] design rd_status_flags_as has unconnected port RD_PNTR_PLUS2[6]
+WARNING: [Synth 8-3331] design rd_status_flags_as has unconnected port RD_PNTR_PLUS2[5]
+WARNING: [Synth 8-3331] design rd_status_flags_as has unconnected port RD_PNTR_PLUS2[4]
+WARNING: [Synth 8-3331] design rd_status_flags_as has unconnected port RD_PNTR_PLUS2[3]
+WARNING: [Synth 8-3331] design rd_status_flags_as has unconnected port RD_PNTR_PLUS2[2]
+WARNING: [Synth 8-3331] design rd_status_flags_as has unconnected port RD_PNTR_PLUS2[1]
+WARNING: [Synth 8-3331] design rd_status_flags_as has unconnected port RD_PNTR_PLUS2[0]
+WARNING: [Synth 8-3331] design rd_bin_cntr has unconnected port SRST
+WARNING: [Synth 8-3331] design rd_logic has unconnected port RD_EN_INTO_LOGIC
+WARNING: [Synth 8-3331] design rd_logic has unconnected port RD_RST_INTO_LOGIC
+WARNING: [Synth 8-3331] design rd_logic has unconnected port RD_RST_BUSY
+WARNING: [Synth 8-3331] design rd_logic has unconnected port RAM_WR_EN
+WARNING: [Synth 8-3331] design rd_logic has unconnected port RST_FULL_FF
+WARNING: [Synth 8-3331] design rd_logic has unconnected port ALMOST_FULL_FB
+WARNING: [Synth 8-3331] design rd_logic has unconnected port FULL
+WARNING: [Synth 8-3331] design rd_logic has unconnected port WR_PNTR_PLUS1_RD[12]
+WARNING: [Synth 8-3331] design rd_logic has unconnected port WR_PNTR_PLUS1_RD[11]
+WARNING: [Synth 8-3331] design rd_logic has unconnected port WR_PNTR_PLUS1_RD[10]
+WARNING: [Synth 8-3331] design rd_logic has unconnected port WR_PNTR_PLUS1_RD[9]
+WARNING: [Synth 8-3331] design rd_logic has unconnected port WR_PNTR_PLUS1_RD[8]
+WARNING: [Synth 8-3331] design rd_logic has unconnected port WR_PNTR_PLUS1_RD[7]
+WARNING: [Synth 8-3331] design rd_logic has unconnected port WR_PNTR_PLUS1_RD[6]
+WARNING: [Synth 8-3331] design rd_logic has unconnected port WR_PNTR_PLUS1_RD[5]
+WARNING: [Synth 8-3331] design rd_logic has unconnected port WR_PNTR_PLUS1_RD[4]
+WARNING: [Synth 8-3331] design rd_logic has unconnected port WR_PNTR_PLUS1_RD[3]
+WARNING: [Synth 8-3331] design rd_logic has unconnected port WR_PNTR_PLUS1_RD[2]
+WARNING: [Synth 8-3331] design rd_logic has unconnected port WR_PNTR_PLUS1_RD[1]
+WARNING: [Synth 8-3331] design rd_logic has unconnected port WR_PNTR_PLUS1_RD[0]
+WARNING: [Synth 8-3331] design rd_logic has unconnected port PROG_EMPTY_THRESH[12]
+WARNING: [Synth 8-3331] design rd_logic has unconnected port PROG_EMPTY_THRESH[11]
+INFO: [Common 17-14] Message 'Synth 8-3331' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:01:01 ; elapsed = 00:01:05 . Memory (MB): peak = 578.852 ; gain = 369.461
+---------------------------------------------------------------------------------
+
+Report Check Netlist: 
++------+------------------+-------+---------+-------+------------------+
+|      |Item              |Errors |Warnings |Status |Description       |
++------+------------------+-------+---------+-------+------------------+
+|1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
++------+------------------+-------+---------+-------+------------------+
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:01:01 ; elapsed = 00:01:06 . Memory (MB): peak = 578.852 ; gain = 369.461
+---------------------------------------------------------------------------------
+WARNING: [Project 1-486] Could not resolve non-primitive black box cell 'param_store_fifo' instantiated as 'Microroc_u1/SC_Readreg/param_store_fifo_16bitx256deep' [D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/RTL/SlowControl_ReadReg.v:283]
+WARNING: [Project 1-486] Could not resolve non-primitive black box cell 'usb_cmd_fifo' instantiated as 'usb_control/usbcmdfifo_16depth' [D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/RTL/usb_command_interpreter.v:78]
+INFO: [Netlist 29-17] Analyzing 37 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Device 21-403] Loading part xc7a100tfgg484-2
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/SDHCAL_DAQ2V0.runs/synth_1/.Xil/Vivado-9000-WYU/dcp/param_store_fifo_in_context.xdc] for cell 'Microroc_u1/SC_Readreg/param_store_fifo_16bitx256deep'
+Finished Parsing XDC File [D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/SDHCAL_DAQ2V0.runs/synth_1/.Xil/Vivado-9000-WYU/dcp/param_store_fifo_in_context.xdc] for cell 'Microroc_u1/SC_Readreg/param_store_fifo_16bitx256deep'
+Parsing XDC File [D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/SDHCAL_DAQ2V0.runs/synth_1/.Xil/Vivado-9000-WYU/dcp_2/usb_cmd_fifo_in_context.xdc] for cell 'usb_control/usbcmdfifo_16depth'
+Finished Parsing XDC File [D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/SDHCAL_DAQ2V0.runs/synth_1/.Xil/Vivado-9000-WYU/dcp_2/usb_cmd_fifo_in_context.xdc] for cell 'usb_control/usbcmdfifo_16depth'
+Parsing XDC File [d:/Vivado_workspace/SDHCAL_DAQ2V0_latest/SDHCAL_DAQ2V0.srcs/sources_1/ip/usb_data_fifo/usb_data_fifo/usb_data_fifo.xdc] for cell 'usb_data_fifo_8192depth/U0'
+Finished Parsing XDC File [d:/Vivado_workspace/SDHCAL_DAQ2V0_latest/SDHCAL_DAQ2V0.srcs/sources_1/ip/usb_data_fifo/usb_data_fifo/usb_data_fifo.xdc] for cell 'usb_data_fifo_8192depth/U0'
+Parsing XDC File [D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/Constraints/SDHCAL_DAQ2V0.xdc]
+INFO: [Constraints 18-483] create_clock: no pin(s)/port(s)/net(s) specified as objects, only virtual clock 'VIRTUAL_pll_5' will be created. If you don't want this, please specify pin(s)/ports(s)/net(s) as objects to the command. [D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/Constraints/SDHCAL_DAQ2V0.xdc:183]
+INFO: [Timing 38-2] Deriving generated clocks [D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/Constraints/SDHCAL_DAQ2V0.xdc:230]
+Finished Parsing XDC File [D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/Constraints/SDHCAL_DAQ2V0.xdc]
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/Constraints/SDHCAL_DAQ2V0.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/FPGA_TOP_propImpl.xdc].
+Resolution: To avoid this warning, move constraints listed in [.Xil/FPGA_TOP_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
+Parsing XDC File [D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/SDHCAL_DAQ2V0.runs/synth_1/dont_touch.xdc]
+Finished Parsing XDC File [D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/SDHCAL_DAQ2V0.runs/synth_1/dont_touch.xdc]
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/SDHCAL_DAQ2V0.runs/synth_1/dont_touch.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/FPGA_TOP_propImpl.xdc].
+Resolution: To avoid this warning, move constraints listed in [.Xil/FPGA_TOP_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
+Parsing XDC File [d:/Vivado_workspace/SDHCAL_DAQ2V0_latest/SDHCAL_DAQ2V0.srcs/sources_1/ip/usb_data_fifo/usb_data_fifo/usb_data_fifo_clocks.xdc] for cell 'usb_data_fifo_8192depth/U0'
+Finished Parsing XDC File [d:/Vivado_workspace/SDHCAL_DAQ2V0_latest/SDHCAL_DAQ2V0.srcs/sources_1/ip/usb_data_fifo/usb_data_fifo/usb_data_fifo_clocks.xdc] for cell 'usb_data_fifo_8192depth/U0'
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [d:/Vivado_workspace/SDHCAL_DAQ2V0_latest/SDHCAL_DAQ2V0.srcs/sources_1/ip/usb_data_fifo/usb_data_fifo/usb_data_fifo_clocks.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/FPGA_TOP_propImpl.xdc].
+Resolution: To avoid this warning, move constraints listed in [.Xil/FPGA_TOP_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
+Completed Processing XDC Constraints
+
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 5 instances were transformed.
+  MMCME2_BASE => MMCME2_ADV: 1 instances
+  OBUFDS => OBUFDS: 4 instances
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.008 . Memory (MB): peak = 711.484 ; gain = 0.000
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:01:11 ; elapsed = 00:01:17 . Memory (MB): peak = 711.484 ; gain = 502.094
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7a100tfgg484-2
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:01:11 ; elapsed = 00:01:17 . Memory (MB): peak = 711.484 ; gain = 502.094
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+Applied set_property ASYNC_REG = true for usb_cy7c68013A/Acq_Start_Stop_sync1_reg. (constraint file  D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/Constraints/SDHCAL_DAQ2V0.xdc, line 150).
+Applied set_property ASYNC_REG = true for usb_cy7c68013A/Acq_Start_Stop_sync2_reg. (constraint file  D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/Constraints/SDHCAL_DAQ2V0.xdc, line 151).
+Applied set_property DONT_TOUCH = true for usb_data_fifo_8192depth/U0. (constraint file  D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/SDHCAL_DAQ2V0.runs/synth_1/dont_touch.xdc, line 10).
+Applied set_property DONT_TOUCH = true for usb_data_fifo_8192depth. (constraint file  auto generated constraint, line ).
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:01:11 ; elapsed = 00:01:17 . Memory (MB): peak = 711.484 ; gain = 502.094
+---------------------------------------------------------------------------------
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[0]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[1]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[2]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[3]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[4]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[5]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[6]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[7]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[8]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[9]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[10]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[11]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[12]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[13]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[14]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[15]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[16]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[17]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[18]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[19]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[20]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[21]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[22]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[23]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[24]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[25]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[26]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[27]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[28]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[29]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[30]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[31]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[32]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[33]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[34]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[35]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[36]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[37]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[38]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[39]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[40]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[41]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[42]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[43]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[44]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[45]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[46]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[47]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[48]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[49]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[50]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[51]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[52]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[53]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[54]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[55]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[56]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[57]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[58]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[59]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[60]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[61]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[62]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[63]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_param_Ctest" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_param_Read_reg" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-802] inferred FSM for state register 'State_reg' in module 'usb_synchronous_slavefifo'
+INFO: [Synth 8-5544] ROM "nSLOE" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "nSLWR" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "nPKTEND" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "Ctr_rd_en" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "out_to_ext_fifo_rd_en" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "ControlWord" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "State" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "State" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "State" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-802] inferred FSM for state register 'State_reg' in module 'Microroc_Parameters'
+INFO: [Synth 8-5544] ROM "asic_cnt" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "shift_cnt" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "param_store_fifo_din" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "param_store_fifo_wr_en" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "State" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "State" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "State" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "State" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "State" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-802] inferred FSM for state register 'State_reg' in module 'Param_Bitshift'
+INFO: [Synth 8-5544] ROM "sr_in_r" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "sr_ck_en" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "State" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-802] inferred FSM for state register 'State_reg' in module 'DaqControl'
+INFO: [Synth 8-5544] ROM "delay_cnt" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "State" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "State" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "State" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "State" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "State" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "State" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "counter" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                    Idle |                              000 |                              000
+                    READ |                              001 |                              001
+            READ_PROCESS |                              010 |                              010
+                   WRITE |                              011 |                              011
+           WRITE_PROCESS |                              100 |                              100
+                  PKTEND |                              101 |                              101
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'State_reg' using encoding 'sequential' in module 'usb_synchronous_slavefifo'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                    Idle |                              000 |                              000
+            READ_PROCESS |                              001 |                              001
+       READ_PROCESS_LOOP |                              010 |                              010
+       READ_PROCESS_ASIC |                              011 |                              011
+              SC_PROCESS |                              100 |                              100
+         SC_PROCESS_LOOP |                              101 |                              101
+         SC_PROCESS_ASIC |                              110 |                              110
+             END_PROCESS |                              111 |                              111
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'State_reg' using encoding 'sequential' in module 'Microroc_Parameters'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                    Idle |                              000 |                              000
+               READ_FIFO |                              001 |                              001
+            DATA_LATENCY |                              010 |                              110
+                GET_DATA |                              011 |                              010
+                    LOOP |                              100 |                              011
+                END_ONCE |                              101 |                              101
+                     END |                              110 |                              100
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'State_reg' using encoding 'sequential' in module 'Param_Bitshift'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                    Idle |                             0000 |                             0000
+               CHIPRESET |                             0001 |                             0001
+                  POWOND |                             0010 |                             0010
+                 RELEASE |                             0011 |                             0011
+             ACQUISITION |                             0100 |                             0100
+                    WAIT |                             0101 |                             0101
+           START_READOUT |                             0110 |                             0110
+               WAIT_READ |                             0111 |                             0111
+             END_READOUT |                             1000 |                             1000
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'State_reg' using encoding 'sequential' in module 'DaqControl'
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:01:14 ; elapsed = 00:01:20 . Memory (MB): peak = 711.484 ; gain = 502.094
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input     16 Bit       Adders := 1     
+	   2 Input      8 Bit       Adders := 2     
+	   2 Input      6 Bit       Adders := 3     
+	   2 Input      5 Bit       Adders := 1     
+	   2 Input      4 Bit       Adders := 3     
+	   2 Input      3 Bit       Adders := 4     
+	   2 Input      2 Bit       Adders := 1     
++---XORs : 
+	   2 Input      1 Bit         XORs := 77    
++---XORs : 
+	               13 Bit    Wide XORs := 2     
+	               12 Bit    Wide XORs := 2     
+	               11 Bit    Wide XORs := 2     
+	               10 Bit    Wide XORs := 2     
+	                9 Bit    Wide XORs := 2     
+	                8 Bit    Wide XORs := 2     
+	                7 Bit    Wide XORs := 2     
+	                6 Bit    Wide XORs := 2     
+	                5 Bit    Wide XORs := 2     
+	                4 Bit    Wide XORs := 2     
+	                3 Bit    Wide XORs := 2     
+	                2 Bit    Wide XORs := 2     
++---Registers : 
+	              592 Bit    Registers := 1     
+	               64 Bit    Registers := 3     
+	               16 Bit    Registers := 6     
+	               13 Bit    Registers := 11    
+	               10 Bit    Registers := 3     
+	                8 Bit    Registers := 2     
+	                6 Bit    Registers := 3     
+	                5 Bit    Registers := 2     
+	                4 Bit    Registers := 69    
+	                3 Bit    Registers := 7     
+	                2 Bit    Registers := 8     
+	                1 Bit    Registers := 64    
++---Muxes : 
+	   8 Input    592 Bit        Muxes := 1     
+	  67 Input     64 Bit        Muxes := 1     
+	   2 Input     64 Bit        Muxes := 1     
+	   8 Input     64 Bit        Muxes := 1     
+	   8 Input     16 Bit        Muxes := 1     
+	   7 Input     16 Bit        Muxes := 1     
+	   2 Input     16 Bit        Muxes := 9     
+	   9 Input     16 Bit        Muxes := 1     
+	   2 Input      8 Bit        Muxes := 1     
+	   2 Input      6 Bit        Muxes := 4     
+	   8 Input      6 Bit        Muxes := 1     
+	   4 Input      6 Bit        Muxes := 1     
+	   2 Input      5 Bit        Muxes := 1     
+	   2 Input      4 Bit        Muxes := 3     
+	  18 Input      4 Bit        Muxes := 1     
+	  12 Input      3 Bit        Muxes := 1     
+	   2 Input      3 Bit        Muxes := 4     
+	  14 Input      3 Bit        Muxes := 1     
+	   7 Input      3 Bit        Muxes := 1     
+	  10 Input      3 Bit        Muxes := 1     
+	   2 Input      2 Bit        Muxes := 1     
+	   4 Input      2 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 98    
+	   6 Input      1 Bit        Muxes := 2     
+	   8 Input      1 Bit        Muxes := 9     
+	   7 Input      1 Bit        Muxes := 11    
+	   9 Input      1 Bit        Muxes := 9     
+	   3 Input      1 Bit        Muxes := 1     
+	   4 Input      1 Bit        Muxes := 6     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Hierarchical Component Statistics 
+---------------------------------------------------------------------------------
+Hierarchical RTL Component report 
+Module usb_command_interpreter 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input      8 Bit       Adders := 1     
++---Registers : 
+	               64 Bit    Registers := 2     
+	               10 Bit    Registers := 3     
+	                8 Bit    Registers := 1     
+	                5 Bit    Registers := 1     
+	                4 Bit    Registers := 66    
+	                3 Bit    Registers := 1     
+	                2 Bit    Registers := 6     
+	                1 Bit    Registers := 16    
++---Muxes : 
+	  67 Input     64 Bit        Muxes := 1     
+	   2 Input     64 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 78    
+Module usb_synchronous_slavefifo 
+Detailed RTL Component Info : 
++---Registers : 
+	               16 Bit    Registers := 2     
+	                1 Bit    Registers := 2     
++---Muxes : 
+	  12 Input      3 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 5     
+	   6 Input      1 Bit        Muxes := 2     
+Module Microroc_Parameters 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input      6 Bit       Adders := 1     
+	   2 Input      3 Bit       Adders := 2     
++---Registers : 
+	              592 Bit    Registers := 1     
+	               64 Bit    Registers := 1     
+	               16 Bit    Registers := 1     
+	                6 Bit    Registers := 1     
+	                3 Bit    Registers := 1     
+	                1 Bit    Registers := 2     
++---Muxes : 
+	   8 Input    592 Bit        Muxes := 1     
+	   8 Input     64 Bit        Muxes := 1     
+	   8 Input     16 Bit        Muxes := 1     
+	   2 Input      6 Bit        Muxes := 2     
+	   8 Input      6 Bit        Muxes := 1     
+	   2 Input      3 Bit        Muxes := 1     
+	  14 Input      3 Bit        Muxes := 1     
+	   8 Input      1 Bit        Muxes := 9     
+Module PULSESYNC 
+Detailed RTL Component Info : 
++---XORs : 
+	   2 Input      1 Bit         XORs := 1     
++---Registers : 
+	                3 Bit    Registers := 1     
+	                1 Bit    Registers := 1     
+Module Param_Bitshift 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input      4 Bit       Adders := 1     
+	   2 Input      3 Bit       Adders := 1     
+	   2 Input      2 Bit       Adders := 1     
++---Registers : 
+	               16 Bit    Registers := 1     
+	                4 Bit    Registers := 1     
+	                3 Bit    Registers := 1     
+	                2 Bit    Registers := 1     
+	                1 Bit    Registers := 5     
++---Muxes : 
+	   7 Input     16 Bit        Muxes := 1     
+	   2 Input      4 Bit        Muxes := 1     
+	   2 Input      3 Bit        Muxes := 2     
+	   7 Input      3 Bit        Muxes := 1     
+	  10 Input      3 Bit        Muxes := 1     
+	   2 Input      2 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 1     
+	   7 Input      1 Bit        Muxes := 11    
+Module Redundancy 
+Detailed RTL Component Info : 
++---Muxes : 
+	   2 Input      1 Bit        Muxes := 7     
+Module DaqControl 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input     16 Bit       Adders := 1     
++---Registers : 
+	               16 Bit    Registers := 1     
+	                1 Bit    Registers := 8     
++---Muxes : 
+	   2 Input     16 Bit        Muxes := 4     
+	   9 Input     16 Bit        Muxes := 1     
+	  18 Input      4 Bit        Muxes := 1     
+	   9 Input      1 Bit        Muxes := 9     
+Module RamReadOut 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input      4 Bit       Adders := 1     
+	   2 Input      3 Bit       Adders := 1     
++---Registers : 
+	               16 Bit    Registers := 1     
+	                4 Bit    Registers := 1     
+	                3 Bit    Registers := 1     
+	                1 Bit    Registers := 4     
++---Muxes : 
+	   2 Input     16 Bit        Muxes := 3     
+	   2 Input      4 Bit        Muxes := 1     
+	   2 Input      3 Bit        Muxes := 1     
+	   3 Input      1 Bit        Muxes := 1     
+Module Hold_Gen 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input      8 Bit       Adders := 1     
+	   2 Input      5 Bit       Adders := 1     
+	   2 Input      4 Bit       Adders := 1     
++---Registers : 
+	                8 Bit    Registers := 1     
+	                5 Bit    Registers := 1     
+	                4 Bit    Registers := 1     
+	                2 Bit    Registers := 1     
+	                1 Bit    Registers := 6     
++---Muxes : 
+	   2 Input      8 Bit        Muxes := 1     
+	   2 Input      5 Bit        Muxes := 1     
+	   2 Input      4 Bit        Muxes := 1     
+	   4 Input      2 Bit        Muxes := 1     
+	   4 Input      1 Bit        Muxes := 6     
+	   2 Input      1 Bit        Muxes := 3     
+Module Internal_Trig_Gen 
+Detailed RTL Component Info : 
++---Registers : 
+	                1 Bit    Registers := 1     
+Module Trig_Gen 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input      6 Bit       Adders := 2     
++---Registers : 
+	                6 Bit    Registers := 2     
+	                1 Bit    Registers := 3     
++---Muxes : 
+	   2 Input      6 Bit        Muxes := 2     
+	   4 Input      6 Bit        Muxes := 1     
+Module synchronizer_ff 
+Detailed RTL Component Info : 
++---Registers : 
+	                1 Bit    Registers := 1     
+Module reset_blk_ramfifo 
+Detailed RTL Component Info : 
++---Registers : 
+	                3 Bit    Registers := 2     
+	                1 Bit    Registers := 6     
+Module bindec 
+Detailed RTL Component Info : 
++---Muxes : 
+	   2 Input      1 Bit        Muxes := 2     
+Module blk_mem_gen_mux 
+Detailed RTL Component Info : 
++---Registers : 
+	                1 Bit    Registers := 1     
++---Muxes : 
+	   2 Input     16 Bit        Muxes := 1     
+Module blk_mem_gen_mux__parameterized0 
+Detailed RTL Component Info : 
++---Registers : 
+	                1 Bit    Registers := 1     
++---Muxes : 
+	   2 Input     16 Bit        Muxes := 1     
+Module synchronizer_ff__parameterized0 
+Detailed RTL Component Info : 
++---Registers : 
+	               13 Bit    Registers := 1     
+Module synchronizer_ff__parameterized1 
+Detailed RTL Component Info : 
++---Registers : 
+	               13 Bit    Registers := 1     
+Module synchronizer_ff__parameterized2 
+Detailed RTL Component Info : 
++---Registers : 
+	               13 Bit    Registers := 1     
+Module synchronizer_ff__parameterized3 
+Detailed RTL Component Info : 
++---Registers : 
+	               13 Bit    Registers := 1     
+Module clk_x_pntrs 
+Detailed RTL Component Info : 
++---XORs : 
+	   2 Input      1 Bit         XORs := 24    
++---XORs : 
+	               13 Bit    Wide XORs := 2     
+	               12 Bit    Wide XORs := 2     
+	               11 Bit    Wide XORs := 2     
+	               10 Bit    Wide XORs := 2     
+	                9 Bit    Wide XORs := 2     
+	                8 Bit    Wide XORs := 2     
+	                7 Bit    Wide XORs := 2     
+	                6 Bit    Wide XORs := 2     
+	                5 Bit    Wide XORs := 2     
+	                4 Bit    Wide XORs := 2     
+	                3 Bit    Wide XORs := 2     
+	                2 Bit    Wide XORs := 2     
++---Registers : 
+	               13 Bit    Registers := 4     
+Module rd_bin_cntr 
+Detailed RTL Component Info : 
++---Registers : 
+	               13 Bit    Registers := 1     
+Module compare 
+Detailed RTL Component Info : 
++---XORs : 
+	   2 Input      1 Bit         XORs := 13    
+Module rd_status_flags_as 
+Detailed RTL Component Info : 
++---Registers : 
+	                1 Bit    Registers := 2     
+Module wr_bin_cntr 
+Detailed RTL Component Info : 
++---Registers : 
+	               13 Bit    Registers := 2     
+Module wr_status_flags_as 
+Detailed RTL Component Info : 
++---Registers : 
+	                1 Bit    Registers := 2     
+---------------------------------------------------------------------------------
+Finished RTL Hierarchical Component Statistics
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 240 (col length:80)
+BRAMs: 270 (col length: RAMB18 80 RAMB36 40)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+INFO: [Synth 8-5546] ROM "Microroc_param_Ctest" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[0]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[1]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[2]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[3]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[4]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[5]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[6]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[7]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[8]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[9]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[10]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[11]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[12]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[13]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[14]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[15]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[16]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[17]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[18]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[19]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[20]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[21]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[22]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[23]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[24]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[25]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[26]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[27]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[28]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[29]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[30]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[31]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[32]" won't be mapped to RAM because it is too sparse
+INFO: [Common 17-14] Message 'Synth 8-5546' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+WARNING: [Synth 8-3917] design FPGA_TOP has port SR_RSTB driven by constant 1
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:01:19 ; elapsed = 00:01:26 . Memory (MB): peak = 711.484 ; gain = 502.094
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+INFO: [Synth 8-5578] Moved timing constraint from pin 'usb_data_fifo_8192depth/U0/rst' to pin 'i_57/i_39/O'
+INFO: [Synth 8-5819] Moved 1 constraints on hierarchical pins to their respective driving/loading pins
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:01:29 ; elapsed = 00:01:36 . Memory (MB): peak = 711.484 ; gain = 502.094
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:01:30 ; elapsed = 00:01:37 . Memory (MB): peak = 711.484 ; gain = 502.094
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:01:31 ; elapsed = 00:01:38 . Memory (MB): peak = 712.945 ; gain = 503.555
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:01:32 ; elapsed = 00:01:39 . Memory (MB): peak = 712.945 ; gain = 503.555
+---------------------------------------------------------------------------------
+
+Report Check Netlist: 
++------+------------------+-------+---------+-------+------------------+
+|      |Item              |Errors |Warnings |Status |Description       |
++------+------------------+-------+---------+-------+------------------+
+|1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
++------+------------------+-------+---------+-------+------------------+
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:01:32 ; elapsed = 00:01:39 . Memory (MB): peak = 712.945 ; gain = 503.555
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:01:32 ; elapsed = 00:01:39 . Memory (MB): peak = 712.945 ; gain = 503.555
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:01:32 ; elapsed = 00:01:39 . Memory (MB): peak = 712.945 ; gain = 503.555
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:01:32 ; elapsed = 00:01:39 . Memory (MB): peak = 712.945 ; gain = 503.555
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:01:32 ; elapsed = 00:01:39 . Memory (MB): peak = 712.945 ; gain = 503.555
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++------+-----------------+----------+
+|      |BlackBox name    |Instances |
++------+-----------------+----------+
+|1     |param_store_fifo |         1|
+|2     |usb_cmd_fifo     |         1|
++------+-----------------+----------+
+
+Report Cell Usage: 
++------+-----------------+------+
+|      |Cell             |Count |
++------+-----------------+------+
+|1     |param_store_fifo |     1|
+|2     |usb_cmd_fifo     |     1|
+|3     |BUFG             |     3|
+|4     |CARRY4           |    14|
+|5     |LUT1             |    63|
+|6     |LUT2             |   317|
+|7     |LUT3             |   446|
+|8     |LUT4             |   157|
+|9     |LUT5             |   196|
+|10    |LUT6             |   188|
+|11    |MMCME2_BASE      |     1|
+|12    |MUXCY            |    28|
+|13    |MUXF7            |    18|
+|14    |RAMB36E1         |     2|
+|15    |RAMB36E1_1       |     2|
+|16    |FDCE             |  1431|
+|17    |FDPE             |    51|
+|18    |FDRE             |    45|
+|19    |IBUF             |    17|
+|20    |IOBUF            |    16|
+|21    |OBUF             |    36|
+|22    |OBUFDS           |     4|
++------+-----------------+------+
+
+Report Instance Areas: 
++------+-------------------------------------------------------------------------+-----------------------------------------+------+
+|      |Instance                                                                 |Module                                   |Cells |
++------+-------------------------------------------------------------------------+-----------------------------------------+------+
+|1     |top                                                                      |                                         |  3071|
+|2     |  usb_data_fifo_8192depth                                                |usb_data_fifo                            |   365|
+|3     |    U0                                                                   |fifo_generator_v13_1_2                   |   365|
+|4     |      inst_fifo_gen                                                      |fifo_generator_v13_1_2_synth             |   365|
+|5     |        \gconvfifo.rf                                                    |fifo_generator_top                       |   365|
+|6     |          \grf.rf                                                        |fifo_generator_ramfifo                   |   365|
+|7     |            \gntv_or_sync_fifo.gcx.clkx                                  |clk_x_pntrs                              |   134|
+|8     |              \gnxpm_cdc.gsync_stage[1].rd_stg_inst                      |synchronizer_ff__parameterized0          |    13|
+|9     |              \gnxpm_cdc.gsync_stage[1].wr_stg_inst                      |synchronizer_ff__parameterized1          |    13|
+|10    |              \gnxpm_cdc.gsync_stage[2].rd_stg_inst                      |synchronizer_ff__parameterized2          |    27|
+|11    |              \gnxpm_cdc.gsync_stage[2].wr_stg_inst                      |synchronizer_ff__parameterized3          |    27|
+|12    |            \gntv_or_sync_fifo.gl0.rd                                    |rd_logic                                 |    90|
+|13    |              \gras.rsts                                                 |rd_status_flags_as                       |    31|
+|14    |                c0                                                       |compare_4                                |    13|
+|15    |                c1                                                       |compare_5                                |    13|
+|16    |              rpntr                                                      |rd_bin_cntr                              |    59|
+|17    |            \gntv_or_sync_fifo.gl0.wr                                    |wr_logic                                 |   100|
+|18    |              \gwas.wsts                                                 |wr_status_flags_as                       |    31|
+|19    |                c1                                                       |compare                                  |    14|
+|20    |                c2                                                       |compare_3                                |    13|
+|21    |              wpntr                                                      |wr_bin_cntr                              |    69|
+|22    |            \gntv_or_sync_fifo.mem                                       |memory                                   |    21|
+|23    |              \gbm.gbmg.gbmga.ngecc.bmg                                  |blk_mem_gen_v8_3_4                       |    21|
+|24    |                inst_blk_mem_gen                                         |blk_mem_gen_v8_3_4_synth                 |    21|
+|25    |                  \gnbram.gnativebmg.native_blk_mem_gen                  |blk_mem_gen_top                          |    21|
+|26    |                    \valid.cstr                                          |blk_mem_gen_generic_cstr                 |    21|
+|27    |                      \has_mux_b.B                                       |blk_mem_gen_mux__parameterized0          |    17|
+|28    |                      \ramloop[0].ram.r                                  |blk_mem_gen_prim_width                   |     1|
+|29    |                        \prim_noinit.ram                                 |blk_mem_gen_prim_wrapper                 |     1|
+|30    |                      \ramloop[1].ram.r                                  |blk_mem_gen_prim_width__parameterized0   |     1|
+|31    |                        \prim_noinit.ram                                 |blk_mem_gen_prim_wrapper__parameterized0 |     1|
+|32    |                      \ramloop[2].ram.r                                  |blk_mem_gen_prim_width__parameterized1   |     1|
+|33    |                        \prim_noinit.ram                                 |blk_mem_gen_prim_wrapper__parameterized1 |     1|
+|34    |                      \ramloop[3].ram.r                                  |blk_mem_gen_prim_width__parameterized2   |     1|
+|35    |                        \prim_noinit.ram                                 |blk_mem_gen_prim_wrapper__parameterized2 |     1|
+|36    |            rstblk                                                       |reset_blk_ramfifo                        |    20|
+|37    |              \ngwrdrst.grst.g7serrst.gwrrd_rst_sync_stage[1].rrst_inst  |synchronizer_ff                          |     2|
+|38    |              \ngwrdrst.grst.g7serrst.gwrrd_rst_sync_stage[1].wrst_inst  |synchronizer_ff_0                        |     2|
+|39    |              \ngwrdrst.grst.g7serrst.gwrrd_rst_sync_stage[2].rrst_inst  |synchronizer_ff_1                        |     2|
+|40    |              \ngwrdrst.grst.g7serrst.gwrrd_rst_sync_stage[2].wrst_inst  |synchronizer_ff_2                        |     2|
+|41    |  Clk_Gen                                                                |Clk_Management                           |    18|
+|42    |  Microroc_u1                                                            |Microroc_top                             |  1763|
+|43    |    AutoDAQ                                                              |DaqControl                               |   138|
+|44    |    Hold_Gen                                                             |Hold_Gen                                 |    52|
+|45    |    RAM_Read                                                             |RamReadOut                               |    62|
+|46    |    SC_Readreg                                                           |SlowControl_ReadReg                      |  1468|
+|47    |      BitShift                                                           |Param_Bitshift                           |    75|
+|48    |      Microroc_Param                                                     |Microroc_Parameters                      |  1368|
+|49    |      pulse_sync                                                         |PULSESYNC                                |     7|
+|50    |    Trig_Gen                                                             |Trig_Gen                                 |    37|
+|51    |    Trig_Gen_en                                                          |Internal_Trig_Gen                        |     2|
+|52    |  usb_control                                                            |usb_command_interpreter                  |   802|
+|53    |  usb_cy7c68013A                                                         |usb_synchronous_slavefifo                |    50|
++------+-------------------------------------------------------------------------+-----------------------------------------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:01:32 ; elapsed = 00:01:39 . Memory (MB): peak = 712.945 ; gain = 503.555
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 496 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:25 ; elapsed = 00:01:24 . Memory (MB): peak = 712.945 ; gain = 300.645
+Synthesis Optimization Complete : Time (s): cpu = 00:01:33 ; elapsed = 00:01:39 . Memory (MB): peak = 712.945 ; gain = 503.555
+INFO: [Project 1-571] Translating synthesized netlist
+INFO: [Netlist 29-17] Analyzing 84 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 1 inverter(s) to 4 load pin(s).
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 29 instances were transformed.
+  (MUXCY,XORCY) => CARRY4: 8 instances
+  IOBUF => IOBUF (IBUF, OBUFT): 16 instances
+  MMCME2_BASE => MMCME2_ADV: 1 instances
+  OBUFDS => OBUFDS_DUAL_BUF (INV, OBUFDS, OBUFDS): 4 instances
+
+INFO: [Common 17-83] Releasing license: Synthesis
+219 Infos, 103 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:01:29 ; elapsed = 00:01:34 . Memory (MB): peak = 712.945 ; gain = 443.281
+INFO: [Common 17-1381] The checkpoint 'D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/SDHCAL_DAQ2V0.runs/synth_1/FPGA_TOP.dcp' has been generated.
+report_utilization: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.033 . Memory (MB): peak = 712.945 ; gain = 0.000
+INFO: [Common 17-206] Exiting Vivado at Thu Mar 09 16:51:14 2017...
