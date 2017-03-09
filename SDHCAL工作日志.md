@@ -574,3 +574,12 @@
 +  以前的USB命令有两个地方需要修改
    +  在Trig_Gen里面产生的raz_chn只在上位机发送Trig_Gen_en的时候产生了一次，实际上应该在每次比较之后都产生才可以
    +  根据之前邮件交流的内容，SC参数581和582是指定internal raz 的宽度的，也就是说internal raz和external raz需要两套独立的命令来控制
++  上述两个地方修改完成
++  在代码中添加了如下的模块
+   +  USB发送命令控制是使用internal raz还是external raz
+   +  USB命令选择internal raz的宽度，即对应的SC参数
+   +  USB命令选择external raz的宽度，即产生的脉冲的宽度
+   +  USB命令控制external raz在trigger有效之后多长时间输出
++  目前的实验观察到如下两个现象
+   +  在使用internal raz的时候，如果不给Start_acq信号，那么trigger没有输出；使用external raz的时候，不给Start_acq，trigger也有输出，同时，外部给的raz信号能够很好的清除trigger。（这里存在一个猜想，外部的raz信号其实可以任意长度的，只要外部有raz，trigger相当于被锁死，明天试一试）
+   +  在trigger有输出的时候，成形输出会受到干扰，而且，当阈值设得很低的时候，误触发特别的严重。（从一个角度说明了En_Count_T的重要性）
