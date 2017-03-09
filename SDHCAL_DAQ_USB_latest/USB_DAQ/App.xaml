@@ -1,0 +1,25 @@
+﻿<Application x:Class="USB_DAQ.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:USB_DAQ"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <!--A common ItemContainerStyle to generate checkable ListBox-->
+        <!--This style doesn't handle the data binding which should be handle at where it is used.-->
+        <Style x:Key="CheckListBoxItemContainerStyle"
+           TargetType="{x:Type ListBoxItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                        <CheckBox Margin="{TemplateBinding Margin}"
+                      Content="{TemplateBinding Content}"
+                      ContentTemplate="{TemplateBinding ContentTemplate}"
+                      ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
+                      FocusVisualStyle="{TemplateBinding FocusVisualStyle}"
+                      IsChecked="{Binding IsSelected, RelativeSource={RelativeSource TemplatedParent}}"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Application.Resources>
+</Application>
