@@ -1,0 +1,37 @@
+filename = 'Charge_vs_ShaperOut20170110.xlsx';
+sheet = 1;
+xlRange = 'A2:D26';
+subsetA = xlsread(filename,sheet,xlRange);
+
+Charge = subsetA(:,1)';
+Vout_min1 = subsetA(:,2)';
+Vout_min2 = subsetA(:,3)';
+Vout_min3 = subsetA(:,3)';
+Vout_minAve = (Vout_min1 + Vout_min2 + Vout_min3)/3.0;
+deltaV = 2.143 - Vout_minAve;
+Rp = corrcoef(Charge, deltaV);
+R = Rp(2,1);
+x = linspace(min(Charge),max(Charge));
+p0 = polyfit(Charge,deltaV,1);
+y0 = polyval(p0,x);
+figure(1);
+plot(Charge,deltaV,'x');
+hold on;
+plot(x,y0);
+str0 = sprintf('Charge vs High Gain Shaper output \\DeltaV\n--The Linear correlation coefficient is %1.6f',R');
+legend(str0);
+xlabel('Inject Charge (fC)');
+ylabel('\DeltaV (V)');
+hold off;
+
+deltaV_Polyfit = p0(1)*Charge + p0(2);
+Deviation_Polyfit = abs(deltaV - deltaV_Polyfit)./deltaV_Polyfit;
+Percent_Dev_Polyfit = Deviation_Polyfit .* 100;
+figure(2);
+plot(Charge,Percent_Dev_Polyfit);
+xlabel('Inject Charge(fC)');
+ylabel('偏离线性的比例(%)');
+strOut1 = sprintf('$$\\frac{\\Delta V_{Measure} - \\Delta V_{Linear fit}}{\\Delta V_{Linear fit}}$$');
+text('Interpreter','latex','String',strOut1,'Position',[250, 6],'FontSize',14);
+h = legend('$$\frac{\Delta V_{Measure} - \Delta V_{Linear fit}}{\Delta V_{Linear fit}} vs Charge $$');
+set(h,'Interpreter','latex');
