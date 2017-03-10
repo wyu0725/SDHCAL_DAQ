@@ -864,7 +864,7 @@ localparam [7:0] CPT_MAX_200 = 8'h00,
                   CPT_MAX_50000 = 8'h07;
 always @(posedge clk or negedge reset_n)begin
   if(~reset_n)
-    CPT_MAX <= CPT_MAX_10000;
+    CPT_MAX <= 16'd10000;
   else if(fifo_rden && USB_COMMAND[15:8] == 8'hE2)begin
     case(USB_COMMAND)
       CPT_MAX_200:  CPT_MAX <= 16'd200;
