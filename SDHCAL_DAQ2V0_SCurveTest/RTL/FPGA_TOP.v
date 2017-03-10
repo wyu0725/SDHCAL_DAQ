@@ -233,7 +233,7 @@ module FPGA_TOP(
       /*--- Start Signal ---*/
       .USB_Acq_Start_Stop(),
       .Microroc_Acq_Start_Stop(),
-      .SCTest_Start_Stop()
+      .SCTest_Start_Stop(),
       /*--- USB Data FIFO write ---*/
       .Microroc_usb_data_fifo_wr_din(),
       .Microroc_usb_data_fifo_wr_en(),

@@ -877,9 +877,9 @@ always @(posedge clk or negedge reset_n)begin
       CPT_MAX_50000:CPT_MAX <= 16'd50000;
       default:CPT_MAX <= 16'd10000;
     endcase
-    else
-      CPT_MAX <= CPT_MAX;
   end
+  else
+      CPT_MAX <= CPT_MAX;
 end
 //Swap the LSB and MSB
   function [9:0] Invert_10bit(input [9:0] num);
