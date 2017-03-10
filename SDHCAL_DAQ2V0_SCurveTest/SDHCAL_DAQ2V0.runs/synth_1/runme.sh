@@ -24,7 +24,7 @@ else
 fi
 export LD_LIBRARY_PATH
 
-HD_PWD='D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/SDHCAL_DAQ2V0.runs/synth_1'
+HD_PWD='D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/SDHCAL_DAQ2V0.runs/synth_1'
 cd "$HD_PWD"
 
 HD_LOG=runme.log

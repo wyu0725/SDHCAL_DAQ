@@ -1,10 +1,10 @@
 -- Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2016.3 (win64) Build 1682563 Mon Oct 10 19:07:27 MDT 2016
--- Date        : Mon Nov 14 15:17:41 2016
+-- Date        : Mon Nov 14 15:17:40 2016
 -- Host        : Explorer-PC running 64-bit major release  (build 9200)
--- Command     : write_vhdl -force -mode funcsim
---               d:/Xilinx_Vivado_workspace/SDHCAL_DAQ2V0/SDHCAL_DAQ2V0.srcs/sources_1/ip/param_store_fifo/param_store_fifo_sim_netlist.vhdl
+-- Command     : write_vhdl -force -mode funcsim -rename_top param_store_fifo -prefix
+--               param_store_fifo_ param_store_fifo_sim_netlist.vhdl
 -- Design      : param_store_fifo
 -- Purpose     : This VHDL netlist is a functional simulation representation of the design and should not be modified or
 --               synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -26,8 +26,6 @@ entity param_store_fifo_blk_mem_gen_prim_wrapper is
     Q : in STD_LOGIC_VECTOR ( 7 downto 0 );
     din : in STD_LOGIC_VECTOR ( 15 downto 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of param_store_fifo_blk_mem_gen_prim_wrapper : entity is "blk_mem_gen_prim_wrapper";
 end param_store_fifo_blk_mem_gen_prim_wrapper;
 
 architecture STRUCTURE of param_store_fifo_blk_mem_gen_prim_wrapper is
@@ -228,8 +226,6 @@ entity param_store_fifo_rd_bin_cntr is
     rd_clk : in STD_LOGIC;
     AR : in STD_LOGIC_VECTOR ( 0 to 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of param_store_fifo_rd_bin_cntr : entity is "rd_bin_cntr";
 end param_store_fifo_rd_bin_cntr;
 
 architecture STRUCTURE of param_store_fifo_rd_bin_cntr is
@@ -531,8 +527,6 @@ entity param_store_fifo_rd_status_flags_as is
     AR : in STD_LOGIC_VECTOR ( 0 to 0 );
     rd_en : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of param_store_fifo_rd_status_flags_as : entity is "rd_status_flags_as";
 end param_store_fifo_rd_status_flags_as;
 
 architecture STRUCTURE of param_store_fifo_rd_status_flags_as is
@@ -595,8 +589,6 @@ entity param_store_fifo_synchronizer_ff is
     in0 : in STD_LOGIC_VECTOR ( 0 to 0 );
     rd_clk : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of param_store_fifo_synchronizer_ff : entity is "synchronizer_ff";
 end param_store_fifo_synchronizer_ff;
 
 architecture STRUCTURE of param_store_fifo_synchronizer_ff is
@@ -1509,8 +1501,6 @@ entity param_store_fifo_wr_bin_cntr is
     \ngwrdrst.grst.g7serrst.wr_rst_reg_reg[1]\ : in STD_LOGIC_VECTOR ( 0 to 0 );
     RD_PNTR_WR : in STD_LOGIC_VECTOR ( 7 downto 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of param_store_fifo_wr_bin_cntr : entity is "wr_bin_cntr";
 end param_store_fifo_wr_bin_cntr;
 
 architecture STRUCTURE of param_store_fifo_wr_bin_cntr is
@@ -2015,8 +2005,6 @@ entity param_store_fifo_wr_status_flags_as is
     \ngwrdrst.grst.g7serrst.wr_rst_reg_reg[0]\ : in STD_LOGIC_VECTOR ( 0 to 0 );
     wr_en : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of param_store_fifo_wr_status_flags_as : entity is "wr_status_flags_as";
 end param_store_fifo_wr_status_flags_as;
 
 architecture STRUCTURE of param_store_fifo_wr_status_flags_as is
@@ -2084,8 +2072,6 @@ entity param_store_fifo_blk_mem_gen_prim_width is
     Q : in STD_LOGIC_VECTOR ( 7 downto 0 );
     din : in STD_LOGIC_VECTOR ( 15 downto 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of param_store_fifo_blk_mem_gen_prim_width : entity is "blk_mem_gen_prim_width";
 end param_store_fifo_blk_mem_gen_prim_width;
 
 architecture STRUCTURE of param_store_fifo_blk_mem_gen_prim_width is
@@ -2121,8 +2107,6 @@ entity param_store_fifo_clk_x_pntrs is
     rd_clk : in STD_LOGIC;
     \ngwrdrst.grst.g7serrst.rd_rst_reg_reg[1]\ : in STD_LOGIC_VECTOR ( 0 to 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of param_store_fifo_clk_x_pntrs : entity is "clk_x_pntrs";
 end param_store_fifo_clk_x_pntrs;
 
 architecture STRUCTURE of param_store_fifo_clk_x_pntrs is
@@ -2810,8 +2794,6 @@ entity param_store_fifo_rd_logic is
     AR : in STD_LOGIC_VECTOR ( 0 to 0 );
     rd_en : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of param_store_fifo_rd_logic : entity is "rd_logic";
 end param_store_fifo_rd_logic;
 
 architecture STRUCTURE of param_store_fifo_rd_logic is
@@ -2851,8 +2833,6 @@ entity param_store_fifo_reset_blk_ramfifo is
     ram_empty_fb_i_reg : in STD_LOGIC;
     rd_en : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of param_store_fifo_reset_blk_ramfifo : entity is "reset_blk_ramfifo";
 end param_store_fifo_reset_blk_ramfifo;
 
 architecture STRUCTURE of param_store_fifo_reset_blk_ramfifo is
@@ -3104,8 +3084,6 @@ entity param_store_fifo_wr_logic is
     wr_en : in STD_LOGIC;
     RD_PNTR_WR : in STD_LOGIC_VECTOR ( 7 downto 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of param_store_fifo_wr_logic : entity is "wr_logic";
 end param_store_fifo_wr_logic;
 
 architecture STRUCTURE of param_store_fifo_wr_logic is
@@ -3152,8 +3130,6 @@ entity param_store_fifo_blk_mem_gen_generic_cstr is
     Q : in STD_LOGIC_VECTOR ( 7 downto 0 );
     din : in STD_LOGIC_VECTOR ( 15 downto 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of param_store_fifo_blk_mem_gen_generic_cstr : entity is "blk_mem_gen_generic_cstr";
 end param_store_fifo_blk_mem_gen_generic_cstr;
 
 architecture STRUCTURE of param_store_fifo_blk_mem_gen_generic_cstr is
@@ -3187,8 +3163,6 @@ entity param_store_fifo_blk_mem_gen_top is
     Q : in STD_LOGIC_VECTOR ( 7 downto 0 );
     din : in STD_LOGIC_VECTOR ( 15 downto 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of param_store_fifo_blk_mem_gen_top : entity is "blk_mem_gen_top";
 end param_store_fifo_blk_mem_gen_top;
 
 architecture STRUCTURE of param_store_fifo_blk_mem_gen_top is
@@ -3222,8 +3196,6 @@ entity param_store_fifo_blk_mem_gen_v8_3_4_synth is
     Q : in STD_LOGIC_VECTOR ( 7 downto 0 );
     din : in STD_LOGIC_VECTOR ( 15 downto 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of param_store_fifo_blk_mem_gen_v8_3_4_synth : entity is "blk_mem_gen_v8_3_4_synth";
 end param_store_fifo_blk_mem_gen_v8_3_4_synth;
 
 architecture STRUCTURE of param_store_fifo_blk_mem_gen_v8_3_4_synth is
@@ -3257,8 +3229,6 @@ entity param_store_fifo_blk_mem_gen_v8_3_4 is
     Q : in STD_LOGIC_VECTOR ( 7 downto 0 );
     din : in STD_LOGIC_VECTOR ( 15 downto 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of param_store_fifo_blk_mem_gen_v8_3_4 : entity is "blk_mem_gen_v8_3_4";
 end param_store_fifo_blk_mem_gen_v8_3_4;
 
 architecture STRUCTURE of param_store_fifo_blk_mem_gen_v8_3_4 is
@@ -3292,8 +3262,6 @@ entity param_store_fifo_memory is
     Q : in STD_LOGIC_VECTOR ( 7 downto 0 );
     din : in STD_LOGIC_VECTOR ( 15 downto 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of param_store_fifo_memory : entity is "memory";
 end param_store_fifo_memory;
 
 architecture STRUCTURE of param_store_fifo_memory is
@@ -3327,8 +3295,6 @@ entity param_store_fifo_fifo_generator_ramfifo is
     din : in STD_LOGIC_VECTOR ( 15 downto 0 );
     rst : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of param_store_fifo_fifo_generator_ramfifo : entity is "fifo_generator_ramfifo";
 end param_store_fifo_fifo_generator_ramfifo;
 
 architecture STRUCTURE of param_store_fifo_fifo_generator_ramfifo is
@@ -3421,8 +3387,6 @@ entity param_store_fifo_fifo_generator_top is
     din : in STD_LOGIC_VECTOR ( 15 downto 0 );
     rst : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of param_store_fifo_fifo_generator_top : entity is "fifo_generator_top";
 end param_store_fifo_fifo_generator_top;
 
 architecture STRUCTURE of param_store_fifo_fifo_generator_top is
@@ -3456,8 +3420,6 @@ entity param_store_fifo_fifo_generator_v13_1_2_synth is
     din : in STD_LOGIC_VECTOR ( 15 downto 0 );
     rst : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of param_store_fifo_fifo_generator_v13_1_2_synth : entity is "fifo_generator_v13_1_2_synth";
 end param_store_fifo_fifo_generator_v13_1_2_synth;
 
 architecture STRUCTURE of param_store_fifo_fifo_generator_v13_1_2_synth is
@@ -4117,8 +4079,6 @@ entity param_store_fifo_fifo_generator_v13_1_2 is
   attribute C_WR_PNTR_WIDTH_WRCH of param_store_fifo_fifo_generator_v13_1_2 : entity is 4;
   attribute C_WR_RESPONSE_LATENCY : integer;
   attribute C_WR_RESPONSE_LATENCY of param_store_fifo_fifo_generator_v13_1_2 : entity is 1;
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of param_store_fifo_fifo_generator_v13_1_2 : entity is "fifo_generator_v13_1_2";
 end param_store_fifo_fifo_generator_v13_1_2;
 
 architecture STRUCTURE of param_store_fifo_fifo_generator_v13_1_2 is

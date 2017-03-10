@@ -3,7 +3,6 @@
 # 
 
 set_param simulator.modelsimInstallPath D:/Program%20Files/ModelSim/win64
-set_msg_config -id {Common 17-41} -limit 10000000
 set_msg_config -id {HDL 9-1061} -limit 100000
 set_msg_config -id {HDL 9-1654} -limit 100000
 set_msg_config  -ruleid {1}  -id {Synth 8-3917}  -string {{WARNING: [Synth 8-3917] design FPGA_TOP has port usb_slcs driven by constant 0}}  -suppress 
@@ -20,44 +19,51 @@ set_param project.singleFileAddWarning.threshold 0
 set_param project.compositeFile.enableAutoGeneration 0
 set_param synth.vivado.isSynthRun true
 set_msg_config -source 4 -id {IP_Flow 19-2162} -severity warning -new_severity info
-set_property webtalk.parent_dir D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/SDHCAL_DAQ2V0.cache/wt [current_project]
-set_property parent.project_path D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/SDHCAL_DAQ2V0.xpr [current_project]
+set_property webtalk.parent_dir D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/SDHCAL_DAQ2V0.cache/wt [current_project]
+set_property parent.project_path D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/SDHCAL_DAQ2V0.xpr [current_project]
 set_property XPM_LIBRARIES {XPM_CDC XPM_MEMORY} [current_project]
 set_property default_lib xil_defaultlib [current_project]
 set_property target_language Verilog [current_project]
-set_property ip_output_repo d:/Vivado_workspace/SDHCAL_DAQ2V0_latest/SDHCAL_DAQ2V0.cache/ip [current_project]
+set_property ip_output_repo d:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/SDHCAL_DAQ2V0.cache/ip [current_project]
 set_property ip_cache_permissions {read write} [current_project]
-add_files -quiet d:/Vivado_workspace/SDHCAL_DAQ2V0_latest/SDHCAL_DAQ2V0.srcs/sources_1/ip/param_store_fifo/param_store_fifo.dcp
-set_property used_in_implementation false [get_files d:/Vivado_workspace/SDHCAL_DAQ2V0_latest/SDHCAL_DAQ2V0.srcs/sources_1/ip/param_store_fifo/param_store_fifo.dcp]
-add_files -quiet d:/Vivado_workspace/SDHCAL_DAQ2V0_latest/SDHCAL_DAQ2V0.srcs/sources_1/ip/usb_cmd_fifo/usb_cmd_fifo.dcp
-set_property used_in_implementation false [get_files d:/Vivado_workspace/SDHCAL_DAQ2V0_latest/SDHCAL_DAQ2V0.srcs/sources_1/ip/usb_cmd_fifo/usb_cmd_fifo.dcp]
+add_files -quiet D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/SDHCAL_DAQ2V0.srcs/sources_1/ip/param_store_fifo/param_store_fifo.dcp
+set_property used_in_implementation false [get_files D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/SDHCAL_DAQ2V0.srcs/sources_1/ip/param_store_fifo/param_store_fifo.dcp]
+add_files -quiet D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/SDHCAL_DAQ2V0.srcs/sources_1/ip/usb_cmd_fifo/usb_cmd_fifo.dcp
+set_property used_in_implementation false [get_files D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/SDHCAL_DAQ2V0.srcs/sources_1/ip/usb_cmd_fifo/usb_cmd_fifo.dcp]
+add_files -quiet d:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/SDHCAL_DAQ2V0.srcs/sources_1/ip/SCurve_Data_FIFO/SCurve_Data_FIFO.dcp
+set_property used_in_implementation false [get_files d:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/SDHCAL_DAQ2V0.srcs/sources_1/ip/SCurve_Data_FIFO/SCurve_Data_FIFO.dcp]
 read_verilog -library xil_defaultlib {
-  D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/RTL/PULSESYNC.v
-  D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/RTL/Param_Bitshift.v
-  D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/RTL/Microroc_Parameters.v
-  D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/RTL/Trig_Gen.v
-  D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/RTL/SlowControl_ReadReg.v
-  D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/RTL/Redundancy.v
-  D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/RTL/RamReadOut.v
-  D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/RTL/Internal_Trig_Gen.v
-  D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/RTL/Hold_Gen.v
-  D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/RTL/DaqControl.v
-  D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/RTL/usb_synchronous_slavefifo.v
-  D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/RTL/usb_command_interpreter.v
-  D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/RTL/Microroc_top.v
-  D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/RTL/Clk_Management.v
-  D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/RTL/FPGA_TOP.v
+  D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/SCurve_Single_Input.v
+  D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/PULSESYNC.v
+  D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/Param_Bitshift.v
+  D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/Microroc_Parameters.v
+  D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/SCurve_Test_Control.v
+  D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/SCurve_Single_Test.v
+  D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/Trig_Gen.v
+  D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/SlowControl_ReadReg.v
+  D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/Redundancy.v
+  D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/RamReadOut.v
+  D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/Internal_Trig_Gen.v
+  D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/Hold_Gen.v
+  D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/DaqControl.v
+  D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/SCurve_Test_Top.v
+  D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/ACQ_or_SCTest_Switch.v
+  D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/usb_synchronous_slavefifo.v
+  D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/usb_command_interpreter.v
+  D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/Microroc_top.v
+  D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/Clk_Management.v
+  D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/FPGA_TOP.v
 }
-read_ip -quiet D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/SDHCAL_DAQ2V0.srcs/sources_1/ip/usb_data_fifo/usb_data_fifo.xci
-set_property used_in_implementation false [get_files -all d:/Vivado_workspace/SDHCAL_DAQ2V0_latest/SDHCAL_DAQ2V0.srcs/sources_1/ip/usb_data_fifo/usb_data_fifo/usb_data_fifo.xdc]
-set_property used_in_implementation false [get_files -all d:/Vivado_workspace/SDHCAL_DAQ2V0_latest/SDHCAL_DAQ2V0.srcs/sources_1/ip/usb_data_fifo/usb_data_fifo/usb_data_fifo_clocks.xdc]
-set_property is_locked true [get_files D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/SDHCAL_DAQ2V0.srcs/sources_1/ip/usb_data_fifo/usb_data_fifo.xci]
+read_ip -quiet D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/SDHCAL_DAQ2V0.srcs/sources_1/ip/usb_data_fifo/usb_data_fifo.xci
+set_property used_in_implementation false [get_files -all d:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/SDHCAL_DAQ2V0.srcs/sources_1/ip/usb_data_fifo/usb_data_fifo/usb_data_fifo.xdc]
+set_property used_in_implementation false [get_files -all d:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/SDHCAL_DAQ2V0.srcs/sources_1/ip/usb_data_fifo/usb_data_fifo/usb_data_fifo_clocks.xdc]
+set_property is_locked true [get_files D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/SDHCAL_DAQ2V0.srcs/sources_1/ip/usb_data_fifo/usb_data_fifo.xci]
 
 foreach dcp [get_files -quiet -all *.dcp] {
   set_property used_in_implementation false $dcp
 }
-read_xdc D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/Constraints/SDHCAL_DAQ2V0.xdc
-set_property used_in_implementation false [get_files D:/Vivado_workspace/SDHCAL_DAQ2V0_latest/Constraints/SDHCAL_DAQ2V0.xdc]
+read_xdc D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/Constraints/SDHCAL_DAQ2V0.xdc
+set_property used_in_implementation false [get_files D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/Constraints/SDHCAL_DAQ2V0.xdc]
 
 read_xdc dont_touch.xdc
 set_property used_in_implementation false [get_files dont_touch.xdc]

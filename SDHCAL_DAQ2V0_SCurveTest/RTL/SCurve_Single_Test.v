@@ -88,7 +88,7 @@ module SCurve_Single_Test(
                      DATA_OUT = 3'd4,
                      DATA_OUT_ONCE = 3'd5,
                      ALL_DONE = 3'd6;
-    reg [96:0] CPT_DATA;
+    reg [95:0] CPT_DATA;
     reg [2:0] data_out_cnt;
     wire CPT_All_Done;
     assign CPT_All_Done = CPT_DONE_trigger0 & CPT_DONE_trigger1 & CPT_DONE_trigger2;

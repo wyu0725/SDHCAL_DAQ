@@ -251,3 +251,6 @@ set_property PACKAGE_PIN AB22 [get_ports {ADG804_Addr[0]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {ADG804_Addr[0]}]
 set_property PACKAGE_PIN AB20 [get_ports ADG819_Addr]
 set_property IOSTANDARD LVCMOS33 [get_ports ADG819_Addr]
+
+set_property PACKAGE_PIN N14 [get_ports CLK_EXT]
+set_property IOSTANDARD LVCMOS33 [get_ports CLK_EXT]

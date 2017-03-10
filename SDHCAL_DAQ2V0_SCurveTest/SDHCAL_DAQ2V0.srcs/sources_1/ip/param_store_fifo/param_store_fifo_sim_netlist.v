@@ -1,10 +1,10 @@
 // Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2016.3 (win64) Build 1682563 Mon Oct 10 19:07:27 MDT 2016
-// Date        : Mon Nov 14 15:17:41 2016
+// Date        : Mon Nov 14 15:17:40 2016
 // Host        : Explorer-PC running 64-bit major release  (build 9200)
-// Command     : write_verilog -force -mode funcsim
-//               d:/Xilinx_Vivado_workspace/SDHCAL_DAQ2V0/SDHCAL_DAQ2V0.srcs/sources_1/ip/param_store_fifo/param_store_fifo_sim_netlist.v
+// Command     : write_verilog -force -mode funcsim -rename_top param_store_fifo -prefix
+//               param_store_fifo_ param_store_fifo_sim_netlist.v
 // Design      : param_store_fifo
 // Purpose     : This verilog netlist is a functional simulation representation of the design and should not be modified
 //               or synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -603,7 +603,6 @@ module param_store_fifo
         .wr_rst_busy(NLW_U0_wr_rst_busy_UNCONNECTED));
 endmodule
 
-(* ORIG_REF_NAME = "blk_mem_gen_generic_cstr" *) 
 module param_store_fifo_blk_mem_gen_generic_cstr
    (dout,
     rd_clk,
@@ -646,7 +645,6 @@ module param_store_fifo_blk_mem_gen_generic_cstr
         .wr_clk(wr_clk));
 endmodule
 
-(* ORIG_REF_NAME = "blk_mem_gen_prim_width" *) 
 module param_store_fifo_blk_mem_gen_prim_width
    (dout,
     rd_clk,
@@ -689,7 +687,6 @@ module param_store_fifo_blk_mem_gen_prim_width
         .wr_clk(wr_clk));
 endmodule
 
-(* ORIG_REF_NAME = "blk_mem_gen_prim_wrapper" *) 
 module param_store_fifo_blk_mem_gen_prim_wrapper
    (dout,
     rd_clk,
@@ -867,7 +864,6 @@ module param_store_fifo_blk_mem_gen_prim_wrapper
         .WEBWE({WEBWE,WEBWE,WEBWE,WEBWE}));
 endmodule
 
-(* ORIG_REF_NAME = "blk_mem_gen_top" *) 
 module param_store_fifo_blk_mem_gen_top
    (dout,
     rd_clk,
@@ -910,7 +906,6 @@ module param_store_fifo_blk_mem_gen_top
         .wr_clk(wr_clk));
 endmodule
 
-(* ORIG_REF_NAME = "blk_mem_gen_v8_3_4" *) 
 module param_store_fifo_blk_mem_gen_v8_3_4
    (dout,
     rd_clk,
@@ -953,7 +948,6 @@ module param_store_fifo_blk_mem_gen_v8_3_4
         .wr_clk(wr_clk));
 endmodule
 
-(* ORIG_REF_NAME = "blk_mem_gen_v8_3_4_synth" *) 
 module param_store_fifo_blk_mem_gen_v8_3_4_synth
    (dout,
     rd_clk,
@@ -996,7 +990,6 @@ module param_store_fifo_blk_mem_gen_v8_3_4_synth
         .wr_clk(wr_clk));
 endmodule
 
-(* ORIG_REF_NAME = "clk_x_pntrs" *) 
 module param_store_fifo_clk_x_pntrs
    (ram_empty_fb_i_reg,
     RD_PNTR_WR,
@@ -1521,7 +1514,6 @@ module param_store_fifo_clk_x_pntrs
         .O(ram_empty_i_i_9_n_0));
 endmodule
 
-(* ORIG_REF_NAME = "fifo_generator_ramfifo" *) 
 module param_store_fifo_fifo_generator_ramfifo
    (dout,
     empty,
@@ -1613,7 +1605,6 @@ module param_store_fifo_fifo_generator_ramfifo
         .wr_clk(wr_clk));
 endmodule
 
-(* ORIG_REF_NAME = "fifo_generator_top" *) 
 module param_store_fifo_fifo_generator_top
    (dout,
     empty,
@@ -1723,7 +1714,7 @@ endmodule
 (* C_WR_DEPTH_WRCH = "16" *) (* C_WR_FREQ = "1" *) (* C_WR_PNTR_WIDTH = "8" *) 
 (* C_WR_PNTR_WIDTH_AXIS = "10" *) (* C_WR_PNTR_WIDTH_RACH = "4" *) (* C_WR_PNTR_WIDTH_RDCH = "10" *) 
 (* C_WR_PNTR_WIDTH_WACH = "4" *) (* C_WR_PNTR_WIDTH_WDCH = "10" *) (* C_WR_PNTR_WIDTH_WRCH = "4" *) 
-(* C_WR_RESPONSE_LATENCY = "1" *) (* ORIG_REF_NAME = "fifo_generator_v13_1_2" *) 
+(* C_WR_RESPONSE_LATENCY = "1" *) 
 module param_store_fifo_fifo_generator_v13_1_2
    (backup,
     backup_marker,
@@ -2735,7 +2726,6 @@ module param_store_fifo_fifo_generator_v13_1_2
         .wr_en(wr_en));
 endmodule
 
-(* ORIG_REF_NAME = "fifo_generator_v13_1_2_synth" *) 
 module param_store_fifo_fifo_generator_v13_1_2_synth
    (dout,
     empty,
@@ -2778,7 +2768,6 @@ module param_store_fifo_fifo_generator_v13_1_2_synth
         .wr_en(wr_en));
 endmodule
 
-(* ORIG_REF_NAME = "memory" *) 
 module param_store_fifo_memory
    (dout,
     rd_clk,
@@ -2821,7 +2810,6 @@ module param_store_fifo_memory
         .wr_clk(wr_clk));
 endmodule
 
-(* ORIG_REF_NAME = "rd_bin_cntr" *) 
 module param_store_fifo_rd_bin_cntr
    (Q,
     \DEVICE_7SERIES.NO_BMM_INFO.SDP.WIDE_PRIM18.ram ,
@@ -3046,7 +3034,6 @@ module param_store_fifo_rd_bin_cntr
         .Q(Q[7]));
 endmodule
 
-(* ORIG_REF_NAME = "rd_logic" *) 
 module param_store_fifo_rd_logic
    (empty,
     out,
@@ -3091,7 +3078,6 @@ module param_store_fifo_rd_logic
         .rd_clk(rd_clk));
 endmodule
 
-(* ORIG_REF_NAME = "rd_status_flags_as" *) 
 module param_store_fifo_rd_status_flags_as
    (empty,
     out,
@@ -3148,7 +3134,6 @@ module param_store_fifo_rd_status_flags_as
         .Q(ram_empty_i));
 endmodule
 
-(* ORIG_REF_NAME = "reset_blk_ramfifo" *) 
 module param_store_fifo_reset_blk_ramfifo
    (out,
     \gc0.count_reg[1] ,
@@ -3345,7 +3330,6 @@ module param_store_fifo_reset_blk_ramfifo
         .Q(wr_rst_reg[2]));
 endmodule
 
-(* ORIG_REF_NAME = "synchronizer_ff" *) 
 module param_store_fifo_synchronizer_ff
    (out,
     \ngwrdrst.grst.g7serrst.rd_rst_asreg_reg ,
@@ -4039,7 +4023,6 @@ module param_store_fifo_synchronizer_ff__parameterized3
         .O(\gnxpm_cdc.rd_pntr_bin_reg[6] [6]));
 endmodule
 
-(* ORIG_REF_NAME = "wr_bin_cntr" *) 
 module param_store_fifo_wr_bin_cntr
    (ram_full_fb_i_reg,
     Q,
@@ -4427,7 +4410,6 @@ module param_store_fifo_wr_bin_cntr
         .O(ram_full_i_i_9_n_0));
 endmodule
 
-(* ORIG_REF_NAME = "wr_logic" *) 
 module param_store_fifo_wr_logic
    (full,
     WEBWE,
@@ -4473,7 +4455,6 @@ module param_store_fifo_wr_logic
         .wr_en(wr_en));
 endmodule
 
-(* ORIG_REF_NAME = "wr_status_flags_as" *) 
 module param_store_fifo_wr_status_flags_as
    (full,
     out,

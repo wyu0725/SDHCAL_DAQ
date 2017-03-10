@@ -1,10 +1,10 @@
 -- Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2016.3 (win64) Build 1682563 Mon Oct 10 19:07:27 MDT 2016
--- Date        : Mon Nov 14 15:17:41 2016
+-- Date        : Mon Nov 14 15:17:40 2016
 -- Host        : Explorer-PC running 64-bit major release  (build 9200)
--- Command     : write_vhdl -force -mode synth_stub
---               d:/Xilinx_Vivado_workspace/SDHCAL_DAQ2V0/SDHCAL_DAQ2V0.srcs/sources_1/ip/param_store_fifo/param_store_fifo_stub.vhdl
+-- Command     : write_vhdl -force -mode synth_stub -rename_top param_store_fifo -prefix
+--               param_store_fifo_ param_store_fifo_stub.vhdl
 -- Design      : param_store_fifo
 -- Purpose     : Stub declaration of top-level module interface
 -- Device      : xc7a100tfgg484-2
