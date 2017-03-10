@@ -40,6 +40,7 @@ module SCurve_Test_Control(
     output reg SC_Param_Load,
     input Microroc_Config_Done,
     /*--- USB Data FIFO Interface ---*/
+    //input usb_data_fifo_full,
     output reg [15:0] usb_data_fifo_wr_din,
     output reg usb_data_fifo_wr_en,
     /*--- Done Indicator ---*/

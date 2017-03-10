@@ -49,11 +49,15 @@ module ACQ_or_SCTest_Switch(
     // SC parameter load
     input USB_SC_Param_Load,
     input SCTest_SC_Param_Load,
-    output out_to_Microroc_SC_Param_Load,
+    output out_to_Microroc_SC_Param_Load
     //Config Done signal
     //input in_Microroc_Config_Done,
     //output SCTest_Microroc_Config_Done,
     /*--- 3 triggers ---*/
+    // This function does not need. When S Curve Test processing,
+    // the Hold_Gen module must work to generate Raz_en signal to reset the
+    // trigger.
+    /*
     input Pin_out_trigger0b,
     input Pin_out_trigger1b,
     input Pin_out_trigger2b,
@@ -62,7 +66,7 @@ module ACQ_or_SCTest_Switch(
     output SCTest_out_trigger2b,
     output HoldGen_out_trigger0b,
     output HoldGen_out_trigger1b,
-    output HoldGen_out_trigger2b
+    output HoldGen_out_trigger2b*/
     );
     /*--- Start Stop Signal ---*/
     assign Microroc_Acq_Start_Stop = ACQ_or_SCTest ? USB_Acq_Start_Stop : 1'b0;
@@ -80,6 +84,7 @@ module ACQ_or_SCTest_Switch(
     // SC Param load
     assign out_to_Microroc_SC_Param_Load = ACQ_or_SCTest ? USB_SC_Param_Load : SCTest_SC_Param_Load;
     /*--- 3 triggers ---*/
+    /*
     // out_trigger0b
     assign SCTest_out_trigger0b = ACQ_or_SCTest ? 1'b1 : Pin_out_trigger0b;
     assign HoldGen_out_trigger0b = ACQ_or_SCTest ? Pin_out_trigger0b : 1'b1;
@@ -89,4 +94,5 @@ module ACQ_or_SCTest_Switch(
     // out_trigger2b
     assign SCTest_out_trigger2b = ACQ_or_SCTest ? 1'b1 : Pin_out_trigger2b;
     assign HoldGen_out_trigger2b = ACQ_or_SCTest ? Pin_out_trigger2b : 1'b1;
+    */
 endmodule
