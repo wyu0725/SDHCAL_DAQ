@@ -39,9 +39,13 @@ module ACQ_or_SCTest_Switch(
     input [63:0] SCTest_Microroc_CTest_Chn_Out,
     output [63:0] out_to_Microroc_CTest_Chn_Out,
     // 10bit DAC Code
-    input [9:0] USB_Microroc_10bit_DAC_Out,
+    input [9:0] USB_Microroc_10bit_DAC0_Out,
+    input [9:0] USB_Microroc_10bit_DAC1_Out,
+    input [9:0] USB_Microroc_10bit_DAC2_Out,
     input [9:0] SCTest_Microroc_10bit_DAC_Out,
-    output [9:0] out_to_Microroc_10bit_DAC_Out,
+    output [9:0] out_to_Microroc_10bit_DAC0_Out,
+    output [9:0] out_to_Microroc_10bit_DAC1_Out,
+    output [9:0] out_to_Microroc_10bit_DAC2_Out,
     // SC parameter load
     input USB_SC_Param_Load,
     input SCTest_SC_Param_Load,
@@ -70,7 +74,9 @@ module ACQ_or_SCTest_Switch(
     // Ctest channel select
     assign out_to_Microroc_CTest_Chn_Out = ACQ_or_SCTest ? USB_Microroc_CTest_Chn_Out : SCTest_Microroc_CTest_Chn_Out;
     // 10 bit DAC out
-    assign out_to_Microroc_10bit_DAC_Out = ACQ_or_SCTest ? USB_Microroc_10bit_DAC_Out : SCTest_Microroc_10bit_DAC_Out;
+    assign out_to_Microroc_10bit_DAC0_Out = ACQ_or_SCTest ? USB_Microroc_10bit_DAC0_Out : SCTest_Microroc_10bit_DAC_Out;
+    assign out_to_Microroc_10bit_DAC1_Out = ACQ_or_SCTest ? USB_Microroc_10bit_DAC1_Out : SCTest_Microroc_10bit_DAC_Out;
+    assign out_to_Microroc_10bit_DAC2_Out = ACQ_or_SCTest ? USB_Microroc_10bit_DAC2_Out : SCTest_Microroc_10bit_DAC_Out;
     // SC Param load
     assign out_to_Microroc_SC_Param_Load = ACQ_or_SCTest ? USB_SC_Param_Load : SCTest_SC_Param_Load;
     /*--- 3 triggers ---*/
