@@ -230,8 +230,8 @@ module FPGA_TOP(
       .out_to_ext_fifo_rd_en(out_to_ext_fifo_rd_en)   //fifo interface
     );
     //Start Singnal
-    reg Microroc_Acq_Start_Stop;
-    reg SCTest_Start_Stop;
+    wire Microroc_Acq_Start_Stop;
+    wire SCTest_Start_Stop;
     //USB FIFO data
     wire usb_data_fifo_wr_en;
     wire usb_data_fifo_wr_full;
@@ -443,7 +443,7 @@ module FPGA_TOP(
       .usb_data_fifo_wr_en(SCTest_usb_data_fifo_wr_en),
       .usb_data_fifo_wr_din(SCTest_usb_data_fifo_wr_din),
       /*--- Microroc Config Interface ---*/
-      .Microrc_Config_Done(Config_Done),
+      .Microroc_Config_Done(Config_Done),
       .Microroc_CTest_Chn_Out(SCTest_Microroc_CTest_Chn_Out),
       .Microroc_10bit_DAC_Out(SCTest_Microroc_10bit_DAC_Out),
       .SC_Param_Load(SCTest_SC_Param_Load),

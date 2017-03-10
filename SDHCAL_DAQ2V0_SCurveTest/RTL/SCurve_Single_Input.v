@@ -37,7 +37,7 @@ module SCurve_Single_Input(
   );
   //sync the CLK_EXT
   reg CLK_EXT_sync;
-  always @(posedge Clk or reset_n)begin
+  always @(posedge Clk or negedge reset_n)begin
     if(~reset_n)
       CLK_EXT_sync <= 1'b0;
     else

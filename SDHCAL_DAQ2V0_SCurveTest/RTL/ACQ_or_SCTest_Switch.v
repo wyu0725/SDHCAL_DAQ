@@ -70,7 +70,7 @@ module ACQ_or_SCTest_Switch(
     );
     /*--- Start Stop Signal ---*/
     assign Microroc_Acq_Start_Stop = ACQ_or_SCTest ? USB_Acq_Start_Stop : 1'b0;
-    assign SCTest_Acq_Start_Stop = ACQ_or_SCTest ? 1'b0 : USB_Acq_Start_Stop;
+    assign SCTest_Start_Stop = ACQ_or_SCTest ? 1'b0 : USB_Acq_Start_Stop;
     /*--- USB FIFO write ---*/
     assign out_to_usb_data_fifo_wr_din = ACQ_or_SCTest ? Microroc_usb_data_fifo_wr_din : SCTest_usb_data_fifo_wr_din;
     assign out_to_usb_data_fifo_wr_en = ACQ_or_SCTest ? Microroc_usb_data_fifo_wr_en : SCTest_usb_data_fifo_wr_en;
