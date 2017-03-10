@@ -866,7 +866,7 @@ always @(posedge clk or negedge reset_n)begin
   if(~reset_n)
     CPT_MAX <= 16'd10000;
   else if(fifo_rden && USB_COMMAND[15:8] == 8'hE2)begin
-    case(USB_COMMAND)
+    case(USB_COMMAND[7:0])
       CPT_MAX_200:  CPT_MAX <= 16'd200;
       CPT_MAX_1000: CPT_MAX <= 16'd1000;
       CPT_MAX_2000: CPT_MAX <= 16'd2000;
