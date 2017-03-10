@@ -486,6 +486,7 @@
   + out_t&h的hold信号应该由high gain shaper的触发信号来产生
 
 ## 2017/01/18
+
 + out_q应当测量管脚而不是连接器上的点，测试的时候失误了，测量当连接器上的点了。
   + 多路选通器A0，A1没有分配管脚
   + 多路选通器可能带来延迟
@@ -535,7 +536,6 @@
   ![3fC Chn1 Inject wi ACQ](http://ogs54iji1.bkt.clouddn.com/SDHCAL3fC_Ch1_Inject_WithAcq.jpg-SDHCAL)
 
 
-
 ## 2017/02/24
 
 + 昨天的第三个问题：成形信号会受到开始采集与否的影响。原因应当是数据传输管脚Dout的串扰
@@ -566,8 +566,7 @@
    ![S曲线测试时序](http://ogs54iji1.bkt.clouddn.com/SDHCALScurveCali_TS.png-SDHCAL)
 
 
-
-## 2017/03/09
+##  2017/03/09
 
 +  添加了上位机修改SC parameter 336：Select latched (RS : 1) or direct output (trigger : 0)， 和SC parameter 575：Select Channel Trigger selected by Read Register (0) or NOR64 output (1) 的逻辑
 +  目前的情况来看，要有trigger输出，必须要StartAcq有效，在S曲线测试的时候，这个比较麻烦
@@ -583,3 +582,13 @@
 +  目前的实验观察到如下两个现象
    +  在使用internal raz的时候，如果不给Start_acq信号，那么trigger没有输出；使用external raz的时候，不给Start_acq，trigger也有输出，同时，外部给的raz信号能够很好的清除trigger。（这里存在一个猜想，外部的raz信号其实可以任意长度的，只要外部有raz，trigger相当于被锁死，明天试一试）
    +  在trigger有输出的时候，成形输出会受到干扰，而且，当阈值设得很低的时候，误触发特别的严重。（从一个角度说明了En_Count_T的重要性）
+
+
+## 2017/03/10
+
++ sw_hg=11，sw_lg=11时，达峰时间最长，达峰时间在输入很大的时候不会随着输入的减小而减小，只有当输入减小到一定程度时，会随着输入的减小而减小，最大的达峰时间不超过100ns，这个时间可以用作En_Count_T的参考，同时，从电荷注入开始到有成形输出，这个过程有大约50ns的延迟
++ 修正一下昨天观察到的第一个现象
+  + 使能PowerPulsing时，只有Start_Acq信号来的时候，才有trigger输出
+  + 不使能PowerPulsing时，在使用internal raz的时候，如果不给Start_acq信号，那么trigger没有输出；使用external raz的时候，不给Start_acq，trigger也有输出
+  + 原因是使能PowerPulsing时，只有在Start_Acq时，芯片的Power_on管脚才为1，其他时候为0，相当于没有供电，不使能PowerPulsing时，Power_on管脚为1
++ S曲线测试代码完成
