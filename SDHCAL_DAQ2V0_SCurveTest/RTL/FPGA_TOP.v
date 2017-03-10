@@ -87,7 +87,7 @@ module FPGA_TOP(
     //----LED indicator---//   
     output [5:0] LED
     );
-//----Clock management instantiation----//
+    /*----Clock management instantiation----*/
     wire Clk;
     wire Clk_5M;
     wire IFCLK;
@@ -107,7 +107,7 @@ module FPGA_TOP(
     );
     assign LED[4] = !CLKGOOD;
     assign LED[5] = 1'b1;
-//-----usb_command_interpreter instantiation---//
+    /*--- usb_command_interpreter instantiation ---*/
     wire in_from_usb_Ctr_rd_en;
     wire [15:0] in_from_usb_ControlWord;
     wire out_to_usb_Acq_Start_Stop;
@@ -142,6 +142,12 @@ module FPGA_TOP(
     wire Microroc_OTAQ_en;
     wire Microroc_RS_or_Discri;
     wire Microroc_NOR64_or_Disc;
+    /*--- S Curve Test Port ---*/
+    wire ACQ_or_SCTest;
+    wire Single_or_64Chn;
+    wire CTest_or_Input;
+    wire [5:0] SingleTest_Chn;
+    wire [15:0] CPT_MAX;
     usb_command_interpreter usb_control
     (
       .IFCLK(IFCLK),
@@ -188,6 +194,13 @@ module FPGA_TOP(
       .Microroc_RS_or_Discri(Microroc_RS_or_Discri),
       .Microroc_NOR64_or_Disc(Microroc_NOR64_or_Disc),
       //new add 20170308 done
+      /*--- S Curve Test Command ---*/
+      .ACQ_or_SCTest(ACQ_or_SCTest),
+      .Single_or_64Chn(Single_or_64Chn),
+      .CTest_or_Input(CTest_or_Input),
+      .SingleTest_Chn(SingleTest_Chn),
+      .CPT_MAX(CPT_MAX),
+      /*----------------------------*/
       .LED(LED[3:0])
     );    
     /*-----------USB2.0 instantiation------------*/
@@ -213,6 +226,44 @@ module FPGA_TOP(
       .in_from_ext_fifo_dout(in_from_ext_fifo_dout),  //fifo interface
       .in_from_ext_fifo_empty(in_from_ext_fifo_empty),//fifo interface
       .out_to_ext_fifo_rd_en(out_to_ext_fifo_rd_en)   //fifo interface
+    );
+    /*--- ACQ or SCurve Test Switcher instantion ---*/
+    ACQ_or_SCTest_Switch ACQ_or_SCTest_switcher(
+      .ACQ_or_SCTest(),
+      /*--- Start Signal ---*/
+      .USB_Acq_Start_Stop(),
+      .Microroc_Acq_Start_Stop(),
+      .SCTest_Start_Stop()
+      /*--- USB Data FIFO write ---*/
+      .Microroc_usb_data_fifo_wr_din(),
+      .Microroc_usb_data_fifo_wr_en(),
+      .SCTest_usb_data_fifo_wr_din(),
+      .SCTest_usb_data_fifo_wr_en(),
+      .out_to_usb_data_fifo_wr_din(),
+      .out_to_usb_data_fifo_wr_en(),
+      /*--- SC param ---*/
+      // CTest Channel select
+      .USB_Microroc_CTest_Chn_Out(),
+      .SCTest_Microroc_CTest_Chn_Out(),
+      .out_to_Microroc_CTest_Chn_Out(),
+      // 10bit DAC code out
+      .USB_Microroc_10bit_DAC_Out(),
+      .SCTest_Microroc_10bit_DAC_Out(),
+      .out_to_Microroc_10bit_DAC_Out(),
+      // SC param load
+      .USB_SC_Param_Load(),
+      .SCTest_SC_Param_Load(),
+      .out_to_Microroc_SC_Param_Load(),
+      /*--- 3 triggers ---*/
+      .Pin_out_trigger0b(),
+      .Pin_out_trigger1b(),
+      .Pin_out_trigger2b(),
+      .SCTest_out_trigger0b(),
+      .SCTest_out_trigger1b(),
+      .SCTest_out_trigger2b(),
+      .HoldGen_out_trigger0b(),
+      .HoldGen_out_trigger1b(),
+      .HoldGen_out_trigger2b()
     );
     //------Microroc_top instantiation--------------//
     wire usb_data_fifo_wr_en;
@@ -340,6 +391,38 @@ module FPGA_TOP(
       .CK_5N(CK_5N),
       .Start_Readout_t(Start_Readout_t)
     );
+
+    /*------------ S Curve Test Instantiation ------------*/
+    // This aera is for S Curve test, including SCurve-Test top. 
+    // This module is added by wyu 20170310, 
+    // 
+    
+    //SCurve Test Top instantio
+    SCurve_Test_Top Microroc_SCurveTest(
+      .Clk(),
+      .reset_n(),
+      /*--- Test parameters and control interface--from upper level ---*/
+      .Test_Start(),
+      .SingleTest_Chn(),
+      .Single_or_64Chn(),
+      .Ctest_or_Input(),
+      .CPT_MAX(),
+      /*--- USB Data FIFO Interface ---*/
+      .usb_data_fifo_wr_en(),
+      .usb_data_fifo_wr_din(),
+      /*--- Microroc Config Interface ---*/
+      .Microrc_Config_Done(),
+      .Microroc_CTest_Chn_Out(),
+      .Microroc_10bit_DAC_Out(),
+      .SC_Param_Load(),
+      /*--- PIN ---*/
+      .CLK_EXT(),
+      .out_trigger0b(),
+      .out_trigger1b(),
+      .out_trigger2b(),
+      /*--- Done Indicator ---*/
+      .SCurve_Test_Done()
+    );
     /*------------usb data fifo instantiation-------*/ 
     //per ASIC 1270 depth x 16bit, 4 ASIC 5080 depth
     usb_data_fifo usb_data_fifo_8192depth 
@@ -355,6 +438,7 @@ module FPGA_TOP(
       .dout(in_from_ext_fifo_dout),   // output [15 : 0] dout
       .empty(in_from_ext_fifo_empty)  // output empty
     );
+    
 //assignmeng
 assign TP[3] = START_ACQ;
 assign TP[2] = Start_Readout_t;
