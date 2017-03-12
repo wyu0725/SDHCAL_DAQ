@@ -82,8 +82,9 @@
 + > 新添加命令结束 20170308
 
 + B类：采集参数，可以调整
-  + B1XX:XX*25ns为Start_Acq有效时间（默认值最小值为8）
-  + B2XY: X:sw_hg<1:0>, sw_lg<1:0>
+  + B1XX:XX为Start_Acq_Time的低八位
+  + B2YY:YY为Start_Acq_Time的高八位，YYXX*25ns为Start_Acq的时间
+  + B3XY: X:sw_hg<1:0>, sw_lg<1:0>
 
 + C类：10-bit DAC和4-bit DAC码值设置
   + CXXX:10-bit DAC Code(这里是需要修改的) C000~CBFF
