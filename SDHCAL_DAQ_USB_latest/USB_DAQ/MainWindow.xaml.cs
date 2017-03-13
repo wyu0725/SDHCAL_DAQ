@@ -790,8 +790,12 @@ namespace USB_DAQ
                 bResult = CommandSend(bytes_Shaper_Output_Enable, bytes_Shaper_Output_Enable.Length);
                 if(bResult)
                 {
-                    string report = string.Format("You have {0} the shaper outpur", cbxShaper_Output_Enable.Text);
+                    string report = string.Format("You have {0} the shaper output", cbxShaper_Output_Enable.Text);
                     txtReport.AppendText(report);
+                }
+                else
+                {
+                    MessageBox.Show("Set shaper state failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             //-----if there is Read Register opertation
