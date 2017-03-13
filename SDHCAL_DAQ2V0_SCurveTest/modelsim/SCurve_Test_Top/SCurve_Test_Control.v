@@ -33,12 +33,14 @@ module SCurve_Test_Control(
     /*--- Test Parameter Interface ---*/
     input Single_or_64Chn,//High:Single Channel test, Low:64 Channel test through Ctest pin
     input [5:0] SingleTest_Chn,
+    input Ctest_or_Input,//Add by wyu 20170307. When single channel test, this parameter can choose the charge inject from Ctest pin or the input pin
     /*--- Microroc SC Parameter Interface ---*/  
     output reg [63:0] Microroc_CTest_Chn_Out,
     output reg [9:0] Microroc_10bit_DAC_Out,
     output reg SC_Param_Load,
     input Microroc_Config_Done,
     /*--- USB Data FIFO Interface ---*/
+    //input usb_data_fifo_full,
     output reg [15:0] usb_data_fifo_wr_din,
     output reg usb_data_fifo_wr_en,
     /*--- Done Indicator ---*/
@@ -62,7 +64,8 @@ module SCurve_Test_Control(
                      CHECK_ALL_DONE = 4'd14,
                      ALL_DONE = 4'd15;
   localparam [15:0] SCURVE_TEST_HEADER = 16'h5343;//In ASCII 53 = S,43 = C.0x5343 stands for SC
-  localparam [63:0] SINGLE_CHN_PARAM = 64'h0;
+  localparam [63:0] SINGLE_CHN_PARAM_Ctest = 64'h0000_0000_0000_0001;
+  localparam [63:0] SINGLE_CHN_PARAM_Input = 64'h0;
   reg [63:0] All_Chn_Param;
   reg [5:0] Test_Chn;
   reg [9:0] Actual_10bit_DAC_Code;//In SC param the LSB of 10bit DAC code come first, so it's necessary to invert the code
@@ -109,8 +112,8 @@ module SCurve_Test_Control(
         end
         OUT_TEST_CHN_SC:begin
           usb_data_fifo_wr_en <= 1'b0;
-          if(Single_or_64Chn)begin //Single Channel test, charge inject from input pin 
-            Microroc_CTest_Chn_Out <= SINGLE_CHN_PARAM;
+          /*if(Single_or_64Chn)begin //Single Channel test, charge inject from input pin 
+            Microroc_CTest_Chn_Out <= SINGLE_CHN_PARAM << SingleTest_Chn;
             usb_data_fifo_wr_din <= {8'h63,2'b00,SingleTest_Chn}; 
             State <= OUT_TEST_CHN_USB;
           end
@@ -118,6 +121,20 @@ module SCurve_Test_Control(
             Microroc_CTest_Chn_Out <= All_Chn_Param;
             usb_data_fifo_wr_din <= {8'h43,2'b00,Test_Chn};
             State <= OUT_TEST_CHN_USB;            
+          end*/
+          if(~Single_or_64Chn)begin//64 Channel test, charge inject from CTest pin
+            Microroc_CTest_Chn_Out <= All_Chn_Param;
+            usb_data_fifo_wr_din <= {8'h63,2'b00,Test_Chn}; //0x63 in ascii is c, meaning channel
+            State <= OUT_TEST_CHN_USB;
+          end
+          else if(Ctest_or_Input)begin//Single channel test, the charge is injected from Ctest pin, therefor the SC parameter should be valid
+            Microroc_CTest_Chn_Out <= SINGLE_CHN_PARAM_Ctest << SingleTest_Chn;
+            usb_data_fifo_wr_din <= {8'h43,2'b00,SingleTest_Chn};  //0x43 in ascii is C, meaning Ctest
+            State <= OUT_TEST_CHN_USB;
+          end
+          else begin// Single channel test, the charge is injected from input pin, therefor none of Ctest parameter can be selected
+            Microroc_CTest_Chn_Out <= SINGLE_CHN_PARAM_Input;
+            usb_data_fifo_wr_din <= {8'h49,2'b00,SingleTest_Chn};  //0x49 in ascii is I, meaning Input
           end
         end
         OUT_TEST_CHN_USB:begin

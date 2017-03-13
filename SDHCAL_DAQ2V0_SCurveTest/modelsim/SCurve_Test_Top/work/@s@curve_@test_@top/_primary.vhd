@@ -7,6 +7,7 @@ entity SCurve_Test_Top is
         Test_Start      : in     vl_logic;
         SingleTest_Chn  : in     vl_logic_vector(5 downto 0);
         Single_or_64Chn : in     vl_logic;
+        Ctest_or_Input  : in     vl_logic;
         CPT_MAX         : in     vl_logic_vector(15 downto 0);
         usb_data_fifo_wr_en: out    vl_logic;
         usb_data_fifo_wr_din: out    vl_logic_vector(15 downto 0);

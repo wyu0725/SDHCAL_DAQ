@@ -27,8 +27,10 @@ module SCurve_Test_Top(
     input Test_Start,
     input [5:0] SingleTest_Chn,
     input Single_or_64Chn,
+    input Ctest_or_Input, //Add by wyu 20170307. When single channel test, this parameter can choose the charge inject from Ctest pin or the input pin
     input [15:0] CPT_MAX,
     /*--- USB Data FIFO Interface ---*/
+    //input usb_data_fifo_full,
     output usb_data_fifo_wr_en,
     output [15:0] usb_data_fifo_wr_din,
     /*---Microroc Config Interface ---*/
@@ -45,6 +47,20 @@ module SCurve_Test_Top(
     output SCurve_Test_Done //This should be connect to a LED to indicate test done
     );
     /*--- SCurve_Test_Control ---*/
+    // Generate a start pulse 
+    reg Test_Start_reg1;
+    reg Test_Start_reg2;
+    always @(posedge Clk or negedge reset_n) begin
+      if(!reset_n) begin
+        Test_Start_reg1 <= 1'b0;
+        Test_Start_reg2 <= 1'b0;
+      end
+      else begin
+        Test_Start_reg1 <= Test_Start;
+        Test_Start_reg2 <= Test_Start_reg1;
+      end
+    end
+    wire Test_Start_Pulse = Test_Start_reg1 & (~Test_Start_reg2);
     wire Single_Test_Start;
     wire Single_Test_Done;
     wire SCurve_Data_fifo_empty;
@@ -53,7 +69,7 @@ module SCurve_Test_Top(
     SCurve_Test_Control SC_test_control(
       .Clk(Clk),
       .reset_n(reset_n),
-      .Test_Start(Test_Start),
+      .Test_Start(Test_Start_Pulse),
       /*--- Lower-Level module:SCurve Single Test Interface ---*/
       .Single_Test_Start(Single_Test_Start),
       .Single_Test_Done(Single_Test_Done),
@@ -63,6 +79,7 @@ module SCurve_Test_Top(
       /*--- Test Parameter Interface ---*/
       .Single_or_64Chn(Single_or_64Chn),
       .SingleTest_Chn(SingleTest_Chn),
+      .Ctest_or_Input(Ctest_or_Input),//Add by wyu 20170307. When single channel test, this parameter can choose the charge inject from Ctest pin or the input pin
       /*--- Microroc SC Parameter Interface ---*/
       .Microroc_CTest_Chn_Out(Microroc_CTest_Chn_Out),
       .Microroc_10bit_DAC_Out(Microroc_10bit_DAC_Out),

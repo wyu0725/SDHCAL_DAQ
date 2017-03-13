@@ -1350,7 +1350,7 @@ namespace USB_DAQ
                 if(bResult)
                 {
                     string report = string.Format("Set the single test channel to {0}\n", value_SingleTestChn + 1);
-                    txtCommand.AppendText(report);
+                    txtReport.AppendText(report);
                 }
                 else
                 {

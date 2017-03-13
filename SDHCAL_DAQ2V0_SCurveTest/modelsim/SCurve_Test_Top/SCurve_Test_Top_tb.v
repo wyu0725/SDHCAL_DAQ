@@ -6,6 +6,7 @@ reg reset_n;
 reg Test_Start;
 reg [5:0] SingleTest_Chn;
 reg Single_or_64Chn;
+reg Ctest_or_Input;
 reg [15:0] CPT_MAX;
 /*--- USB Data FIFO Interface ---*/
 wire usb_data_fifo_wr_en;
@@ -29,6 +30,7 @@ SCurve_Test_Top uut(
   .Test_Start(Test_Start),
   .SingleTest_Chn(SingleTest_Chn),
   .Single_or_64Chn(Single_or_64Chn),
+  .Ctest_or_Input(Ctest_or_Input),
   .CPT_MAX(CPT_MAX),
   .usb_data_fifo_wr_en(usb_data_fifo_wr_en),
   .usb_data_fifo_wr_din(usb_data_fifo_wr_din),
@@ -49,6 +51,7 @@ initial begin
   Test_Start = 1'b0;
   SingleTest_Chn = 6'b0;
   Single_or_64Chn = 1'b0;
+  Ctest_or_Input = 1'b1;
   CPT_MAX = 16'd100;
   Microroc_Config_Done = 1'b0;
   CLK_EXT = 1'b0;
@@ -61,7 +64,6 @@ initial begin
   #25;
   Test_Start = 1'b1;
   #25;
-  Test_Start = 1'b0;
 
 end
 //Generate 40M 
