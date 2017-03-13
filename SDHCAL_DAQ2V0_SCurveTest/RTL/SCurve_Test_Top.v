@@ -47,6 +47,20 @@ module SCurve_Test_Top(
     output SCurve_Test_Done //This should be connect to a LED to indicate test done
     );
     /*--- SCurve_Test_Control ---*/
+    // Generate a start pulse 
+    reg Test_Start_reg1;
+    reg Test_Start_reg2;
+    always @(posedge Clk or negedge reset_n) begin
+      if(!reset_n) begin
+        Test_Start_reg1 <= 1'b0;
+        Test_Start_reg2 <= 1'b0;
+      end
+      else begin
+        Test_Start_reg1 <= Test_Start;
+        Test_Start_reg2 <= Test_Start_reg1;
+      end
+    end
+    wire Test_Start_Pulse = Test_Start_reg1 & (~Test_Start_reg2);
     wire Single_Test_Start;
     wire Single_Test_Done;
     wire SCurve_Data_fifo_empty;
@@ -55,7 +69,7 @@ module SCurve_Test_Top(
     SCurve_Test_Control SC_test_control(
       .Clk(Clk),
       .reset_n(reset_n),
-      .Test_Start(Test_Start),
+      .Test_Start(Test_Start_Pulse),
       /*--- Lower-Level module:SCurve Single Test Interface ---*/
       .Single_Test_Start(Single_Test_Start),
       .Single_Test_Done(Single_Test_Done),
