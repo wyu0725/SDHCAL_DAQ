@@ -1,7 +1,7 @@
 Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2016.3 (win64) Build 1682563 Mon Oct 10 19:07:27 MDT 2016
-| Date             : Fri Mar 10 21:18:47 2017
+| Date             : Mon Mar 13 14:25:50 2017
 | Host             : WYU running 64-bit major release  (build 9200)
 | Command          : report_power -file FPGA_TOP_power_routed.rpt -pb FPGA_TOP_power_summary_routed.pb -rpx FPGA_TOP_power_routed.rpx
 | Design           : FPGA_TOP
@@ -31,7 +31,7 @@ Table of Contents
 
 +--------------------------+-------+
 | Total On-Chip Power (W)  | 0.368 |
-| Dynamic (W)              | 0.261 |
+| Dynamic (W)              | 0.260 |
 | Device Static (W)        | 0.108 |
 | Total Off-Chip Power (W) | 0.005 |
 | Effective TJA (C/W)      | 2.7   |
@@ -51,13 +51,13 @@ Table of Contents
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
 | Clocks         |     0.005 |        8 |       --- |             --- |
-| Slice Logic    |     0.003 |     4320 |       --- |             --- |
-|   LUT as Logic |     0.002 |     1741 |     63400 |            2.75 |
+| Slice Logic    |     0.003 |     4323 |       --- |             --- |
+|   LUT as Logic |     0.002 |     1746 |     63400 |            2.75 |
 |   Register     |    <0.001 |     2201 |    126800 |            1.74 |
 |   CARRY4       |    <0.001 |       52 |     15850 |            0.33 |
 |   F7/F8 Muxes  |    <0.001 |       18 |     63400 |            0.03 |
 |   Others       |     0.000 |      127 |       --- |             --- |
-| Signals        |     0.003 |     2774 |       --- |             --- |
+| Signals        |     0.003 |     2772 |       --- |             --- |
 | Block RAM      |     0.001 |      5.5 |       135 |            4.07 |
 | MMCM           |     0.086 |        1 |         6 |           16.67 |
 | I/O            |     0.164 |       78 |       285 |           27.37 |
@@ -145,7 +145,7 @@ Table of Contents
 +----------------------------------------------------------------------------+-----------+
 | Name                                                                       | Power (W) |
 +----------------------------------------------------------------------------+-----------+
-| FPGA_TOP                                                                   |     0.261 |
+| FPGA_TOP                                                                   |     0.260 |
 |   ACQ_or_SCTest_switcher                                                   |    <0.001 |
 |   Clk_Gen                                                                  |     0.086 |
 |   Microroc_SCurveTest                                                      |     0.002 |

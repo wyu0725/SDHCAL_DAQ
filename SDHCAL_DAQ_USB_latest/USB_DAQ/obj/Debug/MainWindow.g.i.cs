@@ -609,6 +609,22 @@ namespace USB_DAQ {
         #line default
         #line hidden
         
+        
+        #line 214 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.Label lblShaper_Output_Enable;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 215 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.ComboBox cbxShaper_Output_Enable;
+        
+        #line default
+        #line hidden
+        
         private bool _contentLoaded;
         
         /// <summary>
@@ -1058,6 +1074,12 @@ namespace USB_DAQ {
             
             #line default
             #line hidden
+            return;
+            case 86:
+            this.lblShaper_Output_Enable = ((System.Windows.Controls.Label)(target));
+            return;
+            case 87:
+            this.cbxShaper_Output_Enable = ((System.Windows.Controls.ComboBox)(target));
             return;
             }
             this._contentLoaded = true;
