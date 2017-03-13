@@ -564,6 +564,8 @@ namespace USB_DAQ
                 txtDAC2_VTH.IsEnabled = true;
                 txtHeader.IsEnabled = true;
                 txtCTest.IsEnabled = true;
+
+                //Raz_Chn_Select.IsEnabled = true;
                 byte[] Slow_Control = ConstCommandByteArray(0xA0, 0xA0);
                 //bResult = false;
                 bResult = CommandSend(Slow_Control, Slow_Control.Length);
@@ -590,6 +592,7 @@ namespace USB_DAQ
                 txtDAC2_VTH.IsEnabled = false;
                 txtHeader.IsEnabled = false;
                 txtCTest.IsEnabled = false;
+                //Raz_Chn_Select.IsEnabled = false;
                 byte[] Read_Register = ConstCommandByteArray(0xA0, 0xA1);
                 //bResult = false;
                 bResult = CommandSend(Read_Register, Read_Register.Length);
@@ -614,7 +617,7 @@ namespace USB_DAQ
             if ((string)btnSC_or_ReadReg.Content == "Slow control")
             {
                 Regex rx_int = new Regex(rx_Integer);
-                bool Is_DAC_legal = rx_int.IsMatch(txtDAC0_VTH.Text) && rx_int.IsMatch(txtDAC0_VTH.Text) && rx_int.IsMatch(txtDAC0_VTH.Text);
+                bool Is_DAC_legal = rx_int.IsMatch(txtDAC0_VTH.Text) && rx_int.IsMatch(txtDAC1_VTH.Text) && rx_int.IsMatch(txtDAC2_VTH.Text);
                 if (Is_DAC_legal)
                 {
                     int value_DAC0 = Int32.Parse(txtDAC0_VTH.Text) + 49152; //header
@@ -767,6 +770,19 @@ namespace USB_DAQ
                                      "USB Error",   //caption
                                      MessageBoxButton.OK,//button
                                      MessageBoxImage.Error);//icon
+                }
+                //------------------Internal RAZ Mode Select ----------------------------//
+                int value_Internal_RAZ_Time = cbxInternal_RAZ_Time.SelectedIndex + 176;//0xB0
+                byte[] bytes_Internal_RAZ_Time = ConstCommandByteArray(0xA8, (byte)value_Internal_RAZ_Time);
+                bResult = CommandSend(bytes_Internal_RAZ_Time, bytes_Internal_RAZ_Time.Length);
+                if(bResult)
+                {
+                    string report = string.Format("Internal RAZ Mode: {0} \n", cbxInternal_RAZ_Time.Text);
+                    txtReport.AppendText(report);
+                }
+                else
+                {
+                    MessageBox.Show("Set Internal RAZ Mode failed, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             //-----if there is Read Register opertation
@@ -1024,9 +1040,9 @@ namespace USB_DAQ
         //RAZ width
         private void btnSet_Raz_Width_Click(object sender, RoutedEventArgs e)
         {
-            int value = cbxRaz_mode.SelectedIndex + 160 + 1;
+            int value = cbxRaz_mode.SelectedIndex + 192;//0xC0
             byte[] bytes = new byte[2];
-            bytes = ConstCommandByteArray(0xAA, (byte)(value));
+            bytes = ConstCommandByteArray(0xA8, (byte)(value));
             bool bResult = CommandSend(bytes, bytes.Length);
             if (bResult)
             {
@@ -1146,6 +1162,204 @@ namespace USB_DAQ
                                  "USB Error",   //caption
                                  MessageBoxButton.OK,//button
                                  MessageBoxImage.Error);//icon
+            }
+        }
+        //RAZ Channel Select
+        private void RAZ_Chn_Select_Checked(object sender, RoutedEventArgs e)
+        {
+            //Get Radiobuttom reference
+            var button = sender as RadioButton;
+            //Display button content as title
+            bool bResult = false;
+            if(button.Content.ToString() == "Internal")
+            {
+                byte[] bytes = ConstCommandByteArray(0xA8,0xA0);
+                bResult = CommandSend(bytes,bytes.Length);
+                if (bResult)
+                {
+                    txtReport.AppendText("Internal RAZ Channel Enable \n");
+                }
+                else
+                {
+                    MessageBox.Show("Fail to set internal RAZ Channel, please check the USB \n","USB Error",MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            else if(button.Content.ToString() == "External")
+            {
+                byte[] bytes = ConstCommandByteArray(0xA8, 0xA1);
+                bResult = CommandSend(bytes, bytes.Length);
+                if(bResult)
+                {
+                    txtReport.AppendText("External RAZ Channel Enable \n");
+                }
+                else
+                {
+                    MessageBox.Show("Fail to set external RAZ Channel, please check the USB \n", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            
+            
+        }
+
+        private void btnSet_External_RAZ_Delay_Click(object sender, RoutedEventArgs e)
+        {
+            Regex rx_int = new Regex(rx_Integer);
+            bool Is_Time_Legel = rx_int.IsMatch(txtExternal_RAZ_Delay.Text);
+            if(Is_Time_Legel)
+            {
+                int value = Int16.Parse(txtExternal_RAZ_Delay.Text) / 25 + 208;//0xD0
+                byte[] bytes = ConstCommandByteArray(0xA8, (byte)value);
+                bool bResult = CommandSend(bytes, bytes.Length);
+                if(bResult)
+                {
+                    string report = string.Format("Set External RAZ Delay Time {0}ns \n", txtExternal_RAZ_Delay.Text);
+                    txtReport.AppendText(report);
+                }
+                else
+                {
+                    MessageBox.Show("Set External RAZ Delay Time failure, please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Illegal External RAZ Delay Time, please re-type(Integer:0--6375,step:25ns)", "Ilegal Input", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void ACQ_or_SCTest_Checked(object sender, RoutedEventArgs e)
+        {
+            var botton = sender as RadioButton;
+            bool bResult = false;
+            if(botton.Content.ToString() == "ACQ")
+            {
+                byte[] bytes = ConstCommandByteArray(0xE0, 0xA0);
+                bResult = CommandSend(bytes, bytes.Length);
+                if(bResult)
+                {
+                    txtReport.AppendText("Select ACQ mode\n");
+                }
+                else
+                {
+                    MessageBox.Show("Set ACQ Mode Failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            else if(botton.Content.ToString() == "SCTest")
+            {
+                byte[] bytes = ConstCommandByteArray(0xE0, 0xA1);
+                bResult = CommandSend(bytes, bytes.Length);
+                if(bResult)
+                {
+                    txtReport.AppendText("Select S Curve Test Mode");
+                }
+                else
+                {
+                    MessageBox.Show("Set S Curve Test mode failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
+        private void Single_or_64Chn_Checked(object sender, RoutedEventArgs e)
+        {
+            var botton = sender as RadioButton;
+            bool bResult = false;
+            if (botton.Content.ToString() == "Single")
+            {
+                byte[] bytes = ConstCommandByteArray(0xE0, 0xB0);
+                bResult = CommandSend(bytes, bytes.Length);
+                if (bResult)
+                {
+                    txtReport.AppendText("Set S Curve in single test mode \n");
+                }
+                else
+                {
+                    MessageBox.Show("Set S Curve single test mode failure. Please check the USB\n", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            else if (botton.Content.ToString() == "64Chn")
+            {
+                byte[] bytes = ConstCommandByteArray(0xE0, 0xB1);
+                bResult = CommandSend(bytes, bytes.Length);
+                if(bResult)
+                {
+                    txtReport.AppendText("Set S Curve test in 64 channel mode \n");
+                }
+                else
+                {
+                    MessageBox.Show("Set S Curve test in 64 channel mode failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
+        private void CTest_or_Input_Checked(object sender, RoutedEventArgs e)
+        {
+            var button = sender as RadioButton;
+            bool bResult = false;
+            if(button.Content.ToString() == "CTest")
+            {
+                byte[] bytes = ConstCommandByteArray(0xE0, 0xC0);
+                bResult = CommandSend(bytes, bytes.Length);
+                if(bResult)
+                {
+                    txtReport.AppendText("The charge is input in CTest Pin\n");
+                }
+                else
+                {
+                    MessageBox.Show("Set charge inject method failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            else if(button.Content.ToString() == "Input")
+            {
+                byte[] bytes = ConstCommandByteArray(0xE0, 0xC1);
+                bResult = CommandSend(bytes, bytes.Length);
+                if(bResult)
+                {
+                    txtReport.AppendText("The charge is injected in Input Pin\n");
+                }
+                else
+                {
+                    MessageBox.Show("Set charge inject method failure.Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
+        private void btnSet_SCT_Param_Click(object sender, RoutedEventArgs e)
+        {
+            /*-------------- Set the single test channel -------------------*/
+            Regex rx_int = new Regex(rx_Integer);
+            bool Is_Single_Test_Chn_Legal = rx_int.IsMatch(txtSingleTest_Chn.Text) && (short.Parse(txtSingleTest_Chn.Text) <= 64);
+            byte[] bytes = new byte[2];
+            bool bResult = false;
+            if(Is_Single_Test_Chn_Legal)
+            {
+                int value_SingleTestChn = Int16.Parse(txtSingleTest_Chn.Text) - 1;
+                bytes = ConstCommandByteArray(0xE1, (byte)value_SingleTestChn);
+                bResult = CommandSend(bytes, bytes.Length);
+                if(bResult)
+                {
+                    string report = string.Format("Set the single test channel to {0}\n", value_SingleTestChn + 1);
+                    txtCommand.AppendText(report);
+                }
+                else
+                {
+                    MessageBox.Show("Set single test channel failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Ilegal input the channel must between 1 to 64\n", "Ilegal Input", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            /*---------------------- Set the max counter--------------------------*/
+            int value_CPTMAX = cbxCPT_MAX.SelectedIndex;
+            bytes = ConstCommandByteArray(0xE2, (byte)value_CPTMAX);
+            bResult = CommandSend(bytes, bytes.Length);
+            if (bResult)
+            {
+                string report = string.Format("Set the S Curve test max count to {0}\n", cbxCPT_MAX.Text);
+                txtReport.AppendText(report);
+            }
+            else
+            {
+                MessageBox.Show("Set S Curve test max count failure. Please check the USB\n", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }
