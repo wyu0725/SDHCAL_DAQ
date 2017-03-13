@@ -58,21 +58,6 @@ module SCurve_Single_Input(
   end
   wire CLK_EXT_rising;
   assign CLK_EXT_rising = CLK_EXT_reg1&(~CLK_EXT_reg2);
-  //Catch the falling edge of trigger
-  reg trigger_reg1;
-  reg trigger_reg2;
-  always @(posedge Clk or negedge reset_n)begin
-    if(~reset_n)begin
-      trigger_reg1 <= 1'b1;
-      trigger_reg2 <= 1'b1;
-    end
-    else begin
-      trigger_reg1 <= Trigger;
-      trigger_reg2 <= trigger_reg1;
-    end
-  end
-  wire Trigger_Falling;
-  assign Trigger_Falling = (~trigger_reg1)&trigger_reg2; 
   //Generate Enable Count signal
   reg Enable_Count_P;
   reg Enable_Count_T;
@@ -90,6 +75,22 @@ module SCurve_Single_Input(
       Enable_Count_T <= 1'b0;
     end
   end
+  //Catch the falling edge of trigger
+  reg trigger_reg1;
+  reg trigger_reg2;
+  always @(posedge Clk or negedge reset_n)begin
+    if(~reset_n)begin
+      trigger_reg1 <= 1'b1;
+      trigger_reg2 <= 1'b1;
+    end
+    else begin
+      trigger_reg1 <= (Trigger && trigger_reg1) || (~Enable_Count_T);
+      trigger_reg2 <= trigger_reg1;
+    end
+  end
+  wire Trigger_Falling;
+  assign Trigger_Falling = (~trigger_reg1)&trigger_reg2; 
+  
   //Count PUSLE
   always @(posedge Clk or negedge reset_n)begin
     if(~reset_n)
