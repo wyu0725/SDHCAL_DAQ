@@ -784,6 +784,15 @@ namespace USB_DAQ
                 {
                     MessageBox.Show("Set Internal RAZ Mode failed, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
+                //----------------------- Select shaper output enable --------------------//
+                int value_Shaper_Output_Enable = cbxShaper_Output_Enable.SelectedIndex + 208;
+                byte[] bytes_Shaper_Output_Enable = ConstCommandByteArray(0xA0, (byte)value_Shaper_Output_Enable);
+                bResult = CommandSend(bytes_Shaper_Output_Enable, bytes_Shaper_Output_Enable.Length);
+                if(bResult)
+                {
+                    string report = string.Format("You have {0} the shaper outpur", cbxShaper_Output_Enable.Text);
+                    txtReport.AppendText(report);
+                }
             }
             //-----if there is Read Register opertation
             else if ((string)btnSC_or_ReadReg.Content == "Read Register")
