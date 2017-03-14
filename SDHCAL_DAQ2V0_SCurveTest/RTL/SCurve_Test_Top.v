@@ -110,7 +110,7 @@ module SCurve_Test_Top(
     /*--- SCurve Data FIFO instantiation ---*/
     wire fifo_full;
     SCurve_Data_FIFO scurve_data_fifo_16x16(
-      .clk(Clk),
+      .clk(~Clk),
       .rst(!reset_n || SCurve_Test_Done),
       .din(SCurve_Data),
       .wr_en(SCurve_Data_wr_en),
@@ -120,4 +120,12 @@ module SCurve_Test_Top(
       .full(fifo_full),
       .empty(SCurve_Data_fifo_empty)
     );
+    (*mark_debug = "true"*)wire[15:0] SCurve_Data_debug;
+    (*mark_debug = "true"*)wire SCurve_Data_wr_en_debug;
+    (*mark_debug = "true"*)wire SCurve_Data_fifo_rd_en_debug;
+    (*mark_debug = "true"*)wire[15:0] SCurve_Data_fifo_din_debug;
+    assign SCurve_Data_debug = SCurve_Data;
+    assign SCurve_Data_wr_en_debug = SCurve_Data_wr_en;
+    assign SCurve_Data_fifo_rd_en_debug = SCurve_Data_fifo_rd_en;
+    assign SCurve_Data_fifo_din_debug = SCurve_Data_fifo_din;
 endmodule

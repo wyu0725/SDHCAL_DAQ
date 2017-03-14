@@ -35,13 +35,13 @@
     <Option Name="WTVcsLaunchSim" Val="0"/>
     <Option Name="WTRivieraLaunchSim" Val="0"/>
     <Option Name="WTActivehdlLaunchSim" Val="0"/>
-    <Option Name="WTXSimExportSim" Val="6"/>
-    <Option Name="WTModelSimExportSim" Val="6"/>
-    <Option Name="WTQuestaExportSim" Val="6"/>
-    <Option Name="WTIesExportSim" Val="6"/>
-    <Option Name="WTVcsExportSim" Val="6"/>
-    <Option Name="WTRivieraExportSim" Val="6"/>
-    <Option Name="WTActivehdlExportSim" Val="6"/>
+    <Option Name="WTXSimExportSim" Val="7"/>
+    <Option Name="WTModelSimExportSim" Val="7"/>
+    <Option Name="WTQuestaExportSim" Val="7"/>
+    <Option Name="WTIesExportSim" Val="7"/>
+    <Option Name="WTVcsExportSim" Val="7"/>
+    <Option Name="WTRivieraExportSim" Val="7"/>
+    <Option Name="WTActivehdlExportSim" Val="7"/>
     <Option Name="GenerateIPUpgradeLog" Val="TRUE"/>
     <Option Name="XSimRadix" Val="hex"/>
     <Option Name="XSimTimeUnit" Val="ns"/>
@@ -142,6 +142,31 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
+      <File Path="$PSRCDIR/sources_1/ip/SCurve_Data_FIFO/SCurve_Data_FIFO.xci">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+        <CompFileExtendedInfo CompFileName="SCurve_Data_FIFO.xci" FileRelPathName="SCurve_Data_FIFO.xml"/>
+        <CompFileExtendedInfo CompFileName="SCurve_Data_FIFO.xci" FileRelPathName="SCurve_Data_FIFO/SCurve_Data_FIFO.xdc"/>
+        <CompFileExtendedInfo CompFileName="SCurve_Data_FIFO.xci" FileRelPathName="hdl/blk_mem_gen_v8_3_vhsyn_rfs.vhd"/>
+        <CompFileExtendedInfo CompFileName="SCurve_Data_FIFO.xci" FileRelPathName="SCurve_Data_FIFO_stub.vhdl"/>
+        <CompFileExtendedInfo CompFileName="SCurve_Data_FIFO.xci" FileRelPathName="SCurve_Data_FIFO_stub.v"/>
+        <CompFileExtendedInfo CompFileName="SCurve_Data_FIFO.xci" FileRelPathName="SCurve_Data_FIFO.dcp"/>
+        <CompFileExtendedInfo CompFileName="SCurve_Data_FIFO.xci" FileRelPathName="synth/SCurve_Data_FIFO.vhd"/>
+        <CompFileExtendedInfo CompFileName="SCurve_Data_FIFO.xci" FileRelPathName="hdl/fifo_generator_v13_1_rfs.v"/>
+        <CompFileExtendedInfo CompFileName="SCurve_Data_FIFO.xci" FileRelPathName="hdl/fifo_generator_v13_1_rfs.vhd"/>
+        <CompFileExtendedInfo CompFileName="SCurve_Data_FIFO.xci" FileRelPathName="SCurve_Data_FIFO_ooc.xdc"/>
+        <CompFileExtendedInfo CompFileName="SCurve_Data_FIFO.xci" FileRelPathName="SCurve_Data_FIFO_sim_netlist.vhdl"/>
+        <CompFileExtendedInfo CompFileName="SCurve_Data_FIFO.xci" FileRelPathName="hdl/fifo_generator_v13_1_vhsyn_rfs.vhd"/>
+        <CompFileExtendedInfo CompFileName="SCurve_Data_FIFO.xci" FileRelPathName="SCurve_Data_FIFO_sim_netlist.v"/>
+        <CompFileExtendedInfo CompFileName="SCurve_Data_FIFO.xci" FileRelPathName="sim/SCurve_Data_FIFO.v"/>
+        <CompFileExtendedInfo CompFileName="SCurve_Data_FIFO.xci" FileRelPathName="SCurve_Data_FIFO.veo"/>
+        <CompFileExtendedInfo CompFileName="SCurve_Data_FIFO.xci" FileRelPathName="doc/fifo_generator_v13_1_changelog.txt"/>
+        <CompFileExtendedInfo CompFileName="SCurve_Data_FIFO.xci" FileRelPathName="simulation/fifo_generator_vlog_beh.v"/>
+        <CompFileExtendedInfo CompFileName="SCurve_Data_FIFO.xci" FileRelPathName="SCurve_Data_FIFO.vho"/>
+      </File>
       <File Path="$PPRDIR/RTL/SCurve_Test_Top.v">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
@@ -190,6 +215,19 @@
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
+        <CompFileExtendedInfo CompFileName="usb_data_fifo.xci" FileRelPathName="usb_data_fifo.xml"/>
+        <CompFileExtendedInfo CompFileName="usb_data_fifo.xci" FileRelPathName="hdl/fifo_generator_v13_1_vhsyn_rfs.vhd"/>
+        <CompFileExtendedInfo CompFileName="usb_data_fifo.xci" FileRelPathName="usb_data_fifo/usb_data_fifo.xdc"/>
+        <CompFileExtendedInfo CompFileName="usb_data_fifo.xci" FileRelPathName="hdl/blk_mem_gen_v8_3_vhsyn_rfs.vhd"/>
+        <CompFileExtendedInfo CompFileName="usb_data_fifo.xci" FileRelPathName="synth/usb_data_fifo.vhd"/>
+        <CompFileExtendedInfo CompFileName="usb_data_fifo.xci" FileRelPathName="sim/usb_data_fifo.v"/>
+        <CompFileExtendedInfo CompFileName="usb_data_fifo.xci" FileRelPathName="hdl/fifo_generator_v13_1_rfs.v"/>
+        <CompFileExtendedInfo CompFileName="usb_data_fifo.xci" FileRelPathName="hdl/fifo_generator_v13_1_rfs.vhd"/>
+        <CompFileExtendedInfo CompFileName="usb_data_fifo.xci" FileRelPathName="simulation/fifo_generator_vlog_beh.v"/>
+        <CompFileExtendedInfo CompFileName="usb_data_fifo.xci" FileRelPathName="usb_data_fifo/usb_data_fifo_clocks.xdc"/>
+        <CompFileExtendedInfo CompFileName="usb_data_fifo.xci" FileRelPathName="usb_data_fifo.veo"/>
+        <CompFileExtendedInfo CompFileName="usb_data_fifo.xci" FileRelPathName="usb_data_fifo.vho"/>
+        <CompFileExtendedInfo CompFileName="usb_data_fifo.xci" FileRelPathName="doc/fifo_generator_v13_1_changelog.txt"/>
       </File>
       <File Path="$PPRDIR/RTL/FPGA_TOP.v">
         <FileInfo>
@@ -237,6 +275,25 @@
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
+        <CompFileExtendedInfo CompFileName="param_store_fifo.xci" FileRelPathName="param_store_fifo/param_store_fifo.xdc"/>
+        <CompFileExtendedInfo CompFileName="param_store_fifo.xci" FileRelPathName="hdl/blk_mem_gen_v8_3_vhsyn_rfs.vhd"/>
+        <CompFileExtendedInfo CompFileName="param_store_fifo.xci" FileRelPathName="param_store_fifo_sim_netlist.vhdl"/>
+        <CompFileExtendedInfo CompFileName="param_store_fifo.xci" FileRelPathName="param_store_fifo_sim_netlist.v"/>
+        <CompFileExtendedInfo CompFileName="param_store_fifo.xci" FileRelPathName="sim/param_store_fifo.v"/>
+        <CompFileExtendedInfo CompFileName="param_store_fifo.xci" FileRelPathName="hdl/fifo_generator_v13_1_rfs.v"/>
+        <CompFileExtendedInfo CompFileName="param_store_fifo.xci" FileRelPathName="hdl/fifo_generator_v13_1_rfs.vhd"/>
+        <CompFileExtendedInfo CompFileName="param_store_fifo.xci" FileRelPathName="simulation/fifo_generator_vlog_beh.v"/>
+        <CompFileExtendedInfo CompFileName="param_store_fifo.xci" FileRelPathName="param_store_fifo_stub.vhdl"/>
+        <CompFileExtendedInfo CompFileName="param_store_fifo.xci" FileRelPathName="param_store_fifo_stub.v"/>
+        <CompFileExtendedInfo CompFileName="param_store_fifo.xci" FileRelPathName="param_store_fifo.dcp"/>
+        <CompFileExtendedInfo CompFileName="param_store_fifo.xci" FileRelPathName="param_store_fifo.veo"/>
+        <CompFileExtendedInfo CompFileName="param_store_fifo.xci" FileRelPathName="doc/fifo_generator_v13_1_changelog.txt"/>
+        <CompFileExtendedInfo CompFileName="param_store_fifo.xci" FileRelPathName="param_store_fifo.vho"/>
+        <CompFileExtendedInfo CompFileName="param_store_fifo.xci" FileRelPathName="param_store_fifo_ooc.xdc"/>
+        <CompFileExtendedInfo CompFileName="param_store_fifo.xci" FileRelPathName="synth/param_store_fifo.vhd"/>
+        <CompFileExtendedInfo CompFileName="param_store_fifo.xci" FileRelPathName="hdl/fifo_generator_v13_1_vhsyn_rfs.vhd"/>
+        <CompFileExtendedInfo CompFileName="param_store_fifo.xci" FileRelPathName="param_store_fifo/param_store_fifo_clocks.xdc"/>
+        <CompFileExtendedInfo CompFileName="param_store_fifo.xci" FileRelPathName="param_store_fifo.xml"/>
       </File>
       <Config>
         <Option Name="TopModule" Val="param_store_fifo"/>
@@ -250,22 +307,28 @@
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
+        <CompFileExtendedInfo CompFileName="usb_cmd_fifo.xci" FileRelPathName="usb_cmd_fifo.xml"/>
+        <CompFileExtendedInfo CompFileName="usb_cmd_fifo.xci" FileRelPathName="synth/usb_cmd_fifo.vhd"/>
+        <CompFileExtendedInfo CompFileName="usb_cmd_fifo.xci" FileRelPathName="usb_cmd_fifo/usb_cmd_fifo_clocks.xdc"/>
+        <CompFileExtendedInfo CompFileName="usb_cmd_fifo.xci" FileRelPathName="simulation/fifo_generator_vlog_beh.v"/>
+        <CompFileExtendedInfo CompFileName="usb_cmd_fifo.xci" FileRelPathName="usb_cmd_fifo/usb_cmd_fifo.xdc"/>
+        <CompFileExtendedInfo CompFileName="usb_cmd_fifo.xci" FileRelPathName="sim/usb_cmd_fifo.v"/>
+        <CompFileExtendedInfo CompFileName="usb_cmd_fifo.xci" FileRelPathName="usb_cmd_fifo_stub.vhdl"/>
+        <CompFileExtendedInfo CompFileName="usb_cmd_fifo.xci" FileRelPathName="usb_cmd_fifo_sim_netlist.v"/>
+        <CompFileExtendedInfo CompFileName="usb_cmd_fifo.xci" FileRelPathName="usb_cmd_fifo_stub.v"/>
+        <CompFileExtendedInfo CompFileName="usb_cmd_fifo.xci" FileRelPathName="hdl/fifo_generator_v13_1_rfs.vhd"/>
+        <CompFileExtendedInfo CompFileName="usb_cmd_fifo.xci" FileRelPathName="hdl/blk_mem_gen_v8_3_vhsyn_rfs.vhd"/>
+        <CompFileExtendedInfo CompFileName="usb_cmd_fifo.xci" FileRelPathName="usb_cmd_fifo_sim_netlist.vhdl"/>
+        <CompFileExtendedInfo CompFileName="usb_cmd_fifo.xci" FileRelPathName="usb_cmd_fifo_ooc.xdc"/>
+        <CompFileExtendedInfo CompFileName="usb_cmd_fifo.xci" FileRelPathName="usb_cmd_fifo.dcp"/>
+        <CompFileExtendedInfo CompFileName="usb_cmd_fifo.xci" FileRelPathName="hdl/fifo_generator_v13_1_rfs.v"/>
+        <CompFileExtendedInfo CompFileName="usb_cmd_fifo.xci" FileRelPathName="hdl/fifo_generator_v13_1_vhsyn_rfs.vhd"/>
+        <CompFileExtendedInfo CompFileName="usb_cmd_fifo.xci" FileRelPathName="usb_cmd_fifo.vho"/>
+        <CompFileExtendedInfo CompFileName="usb_cmd_fifo.xci" FileRelPathName="doc/fifo_generator_v13_1_changelog.txt"/>
+        <CompFileExtendedInfo CompFileName="usb_cmd_fifo.xci" FileRelPathName="usb_cmd_fifo.veo"/>
       </File>
       <Config>
         <Option Name="TopModule" Val="usb_cmd_fifo"/>
-        <Option Name="UseBlackboxStub" Val="1"/>
-      </Config>
-    </FileSet>
-    <FileSet Name="SCurve_Data_FIFO" Type="BlockSrcs" RelSrcDir="$PSRCDIR/SCurve_Data_FIFO">
-      <File Path="$PSRCDIR/sources_1/ip/SCurve_Data_FIFO/SCurve_Data_FIFO.xci">
-        <FileInfo>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="implementation"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <Config>
-        <Option Name="TopModule" Val="SCurve_Data_FIFO"/>
         <Option Name="UseBlackboxStub" Val="1"/>
       </Config>
     </FileSet>
@@ -313,14 +376,6 @@
       <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
       <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
     </Run>
-    <Run Id="SCurve_Data_FIFO_synth_1" Type="Ft3:Synth" SrcSet="SCurve_Data_FIFO" Part="xc7a100tfgg484-2" ConstrsSet="SCurve_Data_FIFO" Description="Vivado Synthesis Defaults" Dir="$PRUNDIR/SCurve_Data_FIFO_synth_1" IncludeInArchive="true">
-      <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2016"/>
-        <Step Id="synth_design"/>
-      </Strategy>
-      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
-      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
-    </Run>
     <Run Id="impl_1" Type="Ft2:EntireDesign" Part="xc7a100tfgg484-2" ConstrsSet="constrs_1" Description="Default settings for Implementation." State="current" Dir="$PRUNDIR/impl_1" SynthRun="synth_1" IncludeInArchive="true">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2016"/>
@@ -353,21 +408,6 @@
       <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
     </Run>
     <Run Id="usb_cmd_fifo_impl_1" Type="Ft2:EntireDesign" Part="xc7a100tfgg484-2" ConstrsSet="usb_cmd_fifo" Description="Default settings for Implementation." SynthRun="usb_cmd_fifo_synth_1" IncludeInArchive="false">
-      <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2016"/>
-        <Step Id="init_design"/>
-        <Step Id="opt_design"/>
-        <Step Id="power_opt_design"/>
-        <Step Id="place_design"/>
-        <Step Id="post_place_power_opt_design"/>
-        <Step Id="phys_opt_design"/>
-        <Step Id="route_design"/>
-        <Step Id="post_route_phys_opt_design"/>
-        <Step Id="write_bitstream"/>
-      </Strategy>
-      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
-    </Run>
-    <Run Id="SCurve_Data_FIFO_impl_1" Type="Ft2:EntireDesign" Part="xc7a100tfgg484-2" ConstrsSet="SCurve_Data_FIFO" Description="Default settings for Implementation." SynthRun="SCurve_Data_FIFO_synth_1" IncludeInArchive="false">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2016"/>
         <Step Id="init_design"/>

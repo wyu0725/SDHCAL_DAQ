@@ -3,6 +3,9 @@
 
 # XDC: D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/Constraints/SDHCAL_DAQ2V0.xdc
 
+# IP: ip/SCurve_Data_FIFO/SCurve_Data_FIFO.xci
+set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==SCurve_Data_FIFO || ORIG_REF_NAME==SCurve_Data_FIFO}]
+
 # IP: ip/usb_data_fifo/usb_data_fifo.xci
 set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==usb_data_fifo || ORIG_REF_NAME==usb_data_fifo}]
 

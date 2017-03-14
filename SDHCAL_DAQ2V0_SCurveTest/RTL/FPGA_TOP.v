@@ -461,7 +461,7 @@ module FPGA_TOP(
     usb_data_fifo usb_data_fifo_8192depth 
     (
       .rst(out_to_rst_usb_data_fifo || !reset_n), // input rst
-      .wr_clk(Clk),  // input wr_clk -----new
+      .wr_clk(~Clk),  // input wr_clk -----new
       .wr_en(usb_data_fifo_wr_en),    // input wr_en  -----new
       .din(usb_data_fifo_wr_din),     // input [15 : 0] din  --new
       .full(usb_data_fifo_wr_full),   // output full     ----new
@@ -474,10 +474,14 @@ module FPGA_TOP(
     
 //assignmeng
 assign TP[3] = START_ACQ;
-assign TP[2] = Start_Readout_t;
+assign TP[2] = usb_data_fifo_wr_en;
 assign TP[1] = TRANSMITON1B&TRANSMITON2B;
 assign TP[0] = DOUT1B&DOUT2B;
 //debug
+(*mark_debug = "true"*)wire usb_data_fifo_wr_en_debug;
+(*mark_debug = "true"*)wire[15:0] usb_data_fifo_wr_din_debug;
+assign usb_data_fifo_wr_en_debug = usb_data_fifo_wr_en;
+assign usb_data_fifo_wr_din = usb_data_fifo_wr_din;
 /*
 (*mark_debug = "true"*)wire START_ACQ_PIN;
 (*mark_debug = "true"*)wire RESET_B_PIN;
