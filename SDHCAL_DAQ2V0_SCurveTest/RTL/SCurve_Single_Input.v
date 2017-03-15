@@ -35,14 +35,6 @@ module SCurve_Single_Input(
     output reg [15:0] CPT_TRIGGER,
     output reg CPT_DONE
   );
-  //sync the CLK_EXT
-  reg CLK_EXT_sync;
-  always @(posedge Clk or negedge reset_n)begin
-    if(~reset_n)
-      CLK_EXT_sync <= 1'b0;
-    else
-      CLK_EXT_sync <= CLK_EXT;
-  end
   //Catch the rising edge of CLK_EXT
   reg CLK_EXT_reg1;
   reg CLK_EXT_reg2;
@@ -58,23 +50,6 @@ module SCurve_Single_Input(
   end
   wire CLK_EXT_rising;
   assign CLK_EXT_rising = CLK_EXT_reg1&(~CLK_EXT_reg2);
-  //Generate Enable Count signal
-  reg Enable_Count_P;
-  reg Enable_Count_T;
-  always @(posedge Clk or negedge reset_n)begin
-    if(~reset_n) begin
-      Enable_Count_P <= 1'b0;
-      Enable_Count_T <= 1'b0;
-    end
-    else if(Test_Start)begin
-      Enable_Count_P <= 1'b1 & (~CPT_DONE);
-      Enable_Count_T <= CLK_EXT_sync & (~CPT_DONE);
-    end
-    else begin
-      Enable_Count_P <= 1'b0;
-      Enable_Count_T <= 1'b0;
-    end
-  end
   //Catch the falling edge of trigger
   reg trigger_reg1;
   reg trigger_reg2;
@@ -90,7 +65,11 @@ module SCurve_Single_Input(
   end
   wire Trigger_Falling;
   assign Trigger_Falling = (~trigger_reg1)&trigger_reg2; 
-  
+  //Generate Enable Count signal
+  wire Enable_Count_P;
+  wire Enable_Count_T;
+  assign Enable_Count_P = Test_Start & (reset_n) & (~CPT_Done);
+  assign Enable_Count_T = Enable_Count_P & CLK_EXT;
   //Count PUSLE
   always @(posedge Clk or negedge reset_n)begin
     if(~reset_n)
@@ -124,8 +103,11 @@ module SCurve_Single_Input(
     else
       CPT_Full <= 1'b0;
   end
-  wire CLK_EXT_sync_n = ~CLK_EXT_sync;
-  always @(posedge CLK_EXT_sync_n or negedge reset_n)begin
+  // When the CPT_PULSE is full (CPT_Full is enable), the Enable_Count_T
+  // signal should not disable. Because at the rising edge, CPT_Full is
+  // enbale, at the same time there could come a trigger.
+  wire CLK_EXT_n = ~CLK_EXT;
+  always @(posedge CLK_EXT_n or negedge reset_n)begin
     if(~reset_n)
       CPT_DONE <= 1'b0;
     else if(CPT_Full)
