@@ -72,6 +72,7 @@ module usb_command_interpreter(
       output reg CTest_or_Input,
       output reg [5:0] SingleTest_Chn,
       output reg [15:0] CPT_MAX,
+      output reg SCTest_Start_Stop,
       /*-------LED test------------------*/
       output reg [3:0] LED
     );
@@ -880,6 +881,17 @@ always @(posedge clk or negedge reset_n)begin
   end
   else
       CPT_MAX <= CPT_MAX;
+end
+//S Curve test Start Stop Signl
+always @(posedge clk or negedge reset_n) begin
+  if(~reset_n)
+    SCTest_Start_Stop <= 1'b0;
+  else if(fifo_rden && USB_COMMAND == 16'hE0F0)
+    SCTest_Start_Stop <= 1'b1;
+  else if(fifo_rden && USB_COMMAND == 16'hE0F1)
+    SCTest_Start_Stop <= 1'b0;
+  else
+    SCTest_Start_Stop <= SCTest_Start_Stop;
 end
 //Swap the LSB and MSB
   function [9:0] Invert_10bit(input [9:0] num);

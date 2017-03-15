@@ -22,10 +22,18 @@
 
 module ACQ_or_SCTest_Switch(
     input ACQ_or_SCTest,
-    /*--- Start signal ---*/
-    input USB_Acq_Start_Stop,
-    output Microroc_Acq_Start_Stop,
-    output SCTest_Start_Stop,
+    /*--- USB Sart Stop Signal select ---*/
+    input Microroc_Acq_Start_Stop,
+    input SCTest_Start_Stop,
+    output out_to_usb_Acq_Start_Stop,
+    // When  the USB Data FIFO empty and S Curve Test Done,the USB should be
+    // Stopped
+    input SCTest_Done,
+    input USB_Data_FIFO_Empty,    
+    // When USB synchronous slavefifo module enable the nPKTEND, all the data
+    // are transmitted to PC
+    input nPKTEND,
+    output Data_Transmit_Done,
     /*--- USB Data FIFO Write Interface ---*/
     input [15:0] Microroc_usb_data_fifo_wr_din,
     input Microroc_usb_data_fifo_wr_en,
@@ -68,9 +76,10 @@ module ACQ_or_SCTest_Switch(
     output HoldGen_out_trigger1b,
     output HoldGen_out_trigger2b*/
     );
-    /*--- Start Stop Signal ---*/
-    assign Microroc_Acq_Start_Stop = ACQ_or_SCTest ? USB_Acq_Start_Stop : 1'b0;
-    assign SCTest_Start_Stop = ACQ_or_SCTest ? 1'b0 : USB_Acq_Start_Stop;
+    /*--- USB Start Stop Signal ---*/
+    wire SCTest_Start_Stop_Internal = (~(USB_Data_FIFO_Empty & SCTest_Done))&SCTest_Start_Stop;
+    assign out_to_usb_Acq_Start_Stop = ACQ_or_SCTest ? Microroc_Acq_Start_Stop : SCTest_Start_Stop_Internal;
+    assign Data_Transmit_Done = ~nPKTEND;
     /*--- USB FIFO write ---*/
     assign out_to_usb_data_fifo_wr_din = ACQ_or_SCTest ? Microroc_usb_data_fifo_wr_din : SCTest_usb_data_fifo_wr_din;
     assign out_to_usb_data_fifo_wr_en = ACQ_or_SCTest ? Microroc_usb_data_fifo_wr_en : SCTest_usb_data_fifo_wr_en;

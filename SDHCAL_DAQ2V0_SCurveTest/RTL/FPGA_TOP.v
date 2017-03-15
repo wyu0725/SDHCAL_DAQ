@@ -150,6 +150,7 @@ module FPGA_TOP(
     wire CTest_or_Input;
     wire [5:0] SingleTest_Chn;
     wire [15:0] CPT_MAX;
+    wire SCTest_Start_Stop;
     usb_command_interpreter usb_control
     (
       .IFCLK(IFCLK),
@@ -202,6 +203,7 @@ module FPGA_TOP(
       .CTest_or_Input(CTest_or_Input),
       .SingleTest_Chn(SingleTest_Chn),
       .CPT_MAX(CPT_MAX),
+      .SCTest_Start_Stop(),
       /*----------------------------*/
       .LED(LED[3:0])
     );    
