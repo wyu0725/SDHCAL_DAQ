@@ -111,8 +111,7 @@ module FPGA_TOP(
     //assign LED[5] = 1'b1;
     /*--- usb_command_interpreter instantiation ---*/
     wire in_from_usb_Ctr_rd_en;
-    wire [15:0] in_from_usb_ControlWord;
-    wire out_to_usb_Acq_Start_Stop;
+    wire [15:0] in_from_usb_ControlWord;    
     wire out_to_rst_usb_data_fifo;
     //Microroc 
     wire Microroc_sc_or_read;//
@@ -150,7 +149,9 @@ module FPGA_TOP(
     wire CTest_or_Input;
     wire [5:0] SingleTest_Chn;
     wire [15:0] CPT_MAX;
+    //Start Singnal
     wire SCTest_Start_Stop;
+    wire Microroc_Acq_Start_Stop;
     usb_command_interpreter usb_control
     (
       .IFCLK(IFCLK),
@@ -158,7 +159,7 @@ module FPGA_TOP(
       .reset_n(reset_n),
       .in_from_usb_Ctr_rd_en(in_from_usb_Ctr_rd_en),
       .in_from_usb_ControlWord(in_from_usb_ControlWord),
-      .out_to_usb_Acq_Start_Stop(out_to_usb_Acq_Start_Stop),
+      .Microroc_Acq_Start_Stop(Microroc_Acq_Start_Stop),
       .out_to_rst_usb_data_fifo(out_to_rst_usb_data_fifo),
       //microroc
       .Microroc_sc_or_read(Microroc_sc_or_read),
@@ -203,7 +204,7 @@ module FPGA_TOP(
       .CTest_or_Input(CTest_or_Input),
       .SingleTest_Chn(SingleTest_Chn),
       .CPT_MAX(CPT_MAX),
-      .SCTest_Start_Stop(),
+      .SCTest_Start_Stop(SCTest_Start_Stop),
       /*----------------------------*/
       .LED(LED[3:0])
     );    
@@ -231,9 +232,8 @@ module FPGA_TOP(
       .in_from_ext_fifo_empty(in_from_ext_fifo_empty),//fifo interface
       .out_to_ext_fifo_rd_en(out_to_ext_fifo_rd_en)   //fifo interface
     );
-    //Start Singnal
-    wire Microroc_Acq_Start_Stop;
-    wire SCTest_Start_Stop;
+    
+    
     //USB FIFO data
     wire usb_data_fifo_wr_en;
     wire usb_data_fifo_wr_full;
@@ -251,6 +251,8 @@ module FPGA_TOP(
     wire [9:0] out_to_Microroc_10bit_DAC2_Out;
     wire SCTest_SC_Param_Load;
     wire out_to_Microroc_SC_Param_Load;
+    wire out_to_usb_Acq_Start_Stop;
+    wire SCurve_Test_Done;
     //3 triggers
     /*wire SCTest_out_trigger0b;
     wire SCTest_out_trigger1b;
@@ -259,12 +261,20 @@ module FPGA_TOP(
     wire HoldGen_out_trigger1b;
     wire HoldGen_out_trigger2b;*/
     /*--- ACQ or SCurve Test Switcher instantion ---*/
-    ACQ_or_SCTest_Switch ACQ_or_SCTest_switcher(
+    ACQ_or_SCTest_Switch ACQ_or_SCTest_Switcher(
       .ACQ_or_SCTest(ACQ_or_SCTest),
-      /*--- Start Signal ---*/
-      .USB_Acq_Start_Stop(out_to_usb_Acq_Start_Stop),
+      /*--- USB Start Stop Signal Select ---*/
       .Microroc_Acq_Start_Stop(Microroc_Acq_Start_Stop),
       .SCTest_Start_Stop(SCTest_Start_Stop),
+      .out_to_usb_Acq_Start_Stop(out_to_usb_Acq_Start_Stop),
+      .SCTest_Done(SCurve_Test_Done),
+      .USB_Data_FIFO_Empty(in_from_ext_fifo_empty),
+      .nPKTEND(usb_pktend),
+      .Data_Transmit_Done(),
+      /*--- Start Signal ---
+      .USB_Acq_Start_Stop(out_to_usb_Acq_Start_Stop),
+      .Microroc_Acq_Start_Stop(Microroc_Acq_Start_Stop),
+      .SCTest_Start_Stop(SCTest_Start_Stop),*/
       /*--- USB Data FIFO write ---*/
       .Microroc_usb_data_fifo_wr_din(Microroc_usb_data_fifo_wr_din),
       .Microroc_usb_data_fifo_wr_en(Microroc_usb_data_fifo_wr_en),
@@ -429,8 +439,7 @@ module FPGA_TOP(
     // This module is added by wyu 20170310, 
     // 
     
-    //SCurve Test Top instantion
-    wire SCurve_Test_Done;
+    //SCurve Test Top instantion    
     SCurve_Test_Top Microroc_SCurveTest(
       .Clk(Clk),
       .reset_n(reset_n),

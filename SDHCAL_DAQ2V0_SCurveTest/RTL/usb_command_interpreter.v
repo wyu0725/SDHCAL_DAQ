@@ -25,7 +25,7 @@ module usb_command_interpreter(
       /*--------USB interface------------*/
       input in_from_usb_Ctr_rd_en,
       input [15:0] in_from_usb_ControlWord,
-      output reg out_to_usb_Acq_Start_Stop,
+      output reg Microroc_Acq_Start_Stop,
       /*-------clear usb fifo------------*/
       output reg out_to_rst_usb_data_fifo, //asynchronized reset
       //-------Microroc parameter--------//
@@ -125,13 +125,13 @@ end
 //acq start or stop f0f0,f0f1
 always @ (posedge clk , negedge reset_n) begin
   if(~reset_n)
-    out_to_usb_Acq_Start_Stop <= 1'b0;
+    Microroc_Acq_Start_Stop <= 1'b0;
   else if(fifo_rden && USB_COMMAND == 16'hf0f0)
-    out_to_usb_Acq_Start_Stop <= 1'b1;
+    Microroc_Acq_Start_Stop <= 1'b1;
   else if(fifo_rden && USB_COMMAND == 16'hf0f1)
-    out_to_usb_Acq_Start_Stop <= 1'b0;
+    Microroc_Acq_Start_Stop <= 1'b0;
   else
-    out_to_usb_Acq_Start_Stop <= out_to_usb_Acq_Start_Stop;
+    Microroc_Acq_Start_Stop <= Microroc_Acq_Start_Stop;
 end
 //clear usb data fifo a0f0
 always @ (posedge clk , negedge reset_n) begin

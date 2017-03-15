@@ -44,7 +44,8 @@ module SCurve_Test_Top(
     input out_trigger1b,
     input out_trigger2b,
     /*--- Done Indicator ---*/
-    output SCurve_Test_Done //This should be connect to a LED to indicate test done
+    output SCurve_Test_Done,
+    input Data_Transmit_Done
     );
     /*--- SCurve_Test_Control ---*/
     // Generate a start pulse 
