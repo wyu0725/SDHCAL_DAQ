@@ -108,6 +108,8 @@
   + E0B1:选择64通道测试
   + E0C0:单通道测试时从Ctest管脚输入信号
   + E0C1:单通道测试时选择从Input管脚输入信号
+  + E0F0:SCurve 测试开始命令
+  + E0F1:SCurve测试结束命令
   + E1XX:XX为单通道测试时的通道号
   + E2XX:选择最大计数：
     + 00：200
@@ -593,3 +595,20 @@
   + 不使能PowerPulsing时，在使用internal raz的时候，如果不给Start_acq信号，那么trigger没有输出；使用external raz的时候，不给Start_acq，trigger也有输出
   + 原因是使能PowerPulsing时，只有在Start_Acq时，芯片的Power_on管脚才为1，其他时候为0，相当于没有供电，不使能PowerPulsing时，Power_on管脚为1
 + S曲线测试代码完成
+
+
+
+## 2017/03/15
+
++ SCurve测试逻辑还需要如下修改
+  + 给SCurve Test一个单独的启动信号
+  + SCurve Test 结束之后判断USB大FIFO是否为空，若为空，停止USB_Acq_Start_Stop
+  + 在下层SCTest_Control中加入channel mask,多通道测试时屏蔽非测试通道的trigger
++ 上位机需要增加一个线程接收SCurve test的数据
++ 组会：
+  + 尽快和探测器尽心联调
+    + 联调时可以使用粗略阈值
+    + 接上阳极板测噪声
+  + 使用高频时钟来输出hold信号，如400M时钟，5ns的步进长度
+  + 再焊一块测试板，四片芯片都焊上
+  + “触发率-阈值”测试==>目的是阈值标定
