@@ -123,7 +123,7 @@ module SCurve_Single_Test(
           end
           TEST_PROCESS:begin
             if(CPT_All_Done)begin
-              Single_Chn_Test_Start <= 1'b1;
+              Single_Chn_Test_Start <= 1'b0;
               TEST_State <= TEST_DONE;
             end
             else 
