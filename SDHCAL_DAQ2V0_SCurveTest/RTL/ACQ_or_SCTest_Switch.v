@@ -32,8 +32,8 @@ module ACQ_or_SCTest_Switch(
     //input USB_Data_FIFO_Empty,    
     // When USB synchronous slavefifo module enable the nPKTEND, all the data
     // are transmitted to PC
-    //input nPKTEND,
-    //output Data_Transmit_Done,
+    input nPKTEND,
+    output Data_Transmit_Done,
     /*--- USB Data FIFO Write Interface ---*/
     input [15:0] Microroc_usb_data_fifo_wr_din,
     input Microroc_usb_data_fifo_wr_en,
@@ -81,7 +81,7 @@ module ACQ_or_SCTest_Switch(
     );
     /*--- USB Start Stop Signal ---*/
     assign out_to_usb_Acq_Start_Stop = ACQ_or_SCTest ? Microroc_Acq_Start_Stop : SCTest_Start_Stop;
-    //assign Data_Transmit_Done = ~nPKTEND;
+    assign Data_Transmit_Done = ~nPKTEND;
     /*--- USB FIFO write ---*/
     assign out_to_usb_data_fifo_wr_din = ACQ_or_SCTest ? Microroc_usb_data_fifo_wr_din : SCTest_usb_data_fifo_wr_din;
     assign out_to_usb_data_fifo_wr_en = ACQ_or_SCTest ? Microroc_usb_data_fifo_wr_en : SCTest_usb_data_fifo_wr_en;

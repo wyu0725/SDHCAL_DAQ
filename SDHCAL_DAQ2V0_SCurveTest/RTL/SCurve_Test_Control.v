@@ -45,7 +45,8 @@ module SCurve_Test_Control(
     output reg [15:0] usb_data_fifo_wr_din,
     output reg usb_data_fifo_wr_en,
     /*--- Done Indicator ---*/
-    output reg SCurve_Test_Done
+    output reg SCurve_Test_Done,
+    input Data_Transmit_Done
     );
     reg [3:0] State;
     localparam [3:0] IDLE = 4'd0,
@@ -226,6 +227,7 @@ module SCurve_Test_Control(
             Test_Chn <= 6'd0;
             usb_data_fifo_wr_din <= 16'hFF45;
             usb_data_fifo_wr_en <= 1'b1;
+            SCurve_Test_Done <= 1'b1;
             State <= ALL_DONE;
           end
           else begin
@@ -237,8 +239,12 @@ module SCurve_Test_Control(
         end
         ALL_DONE:begin
           usb_data_fifo_wr_en <= 1'b0;
-          SCurve_Test_Done <= 1'b1;
-          State <= IDLE;
+          if(Data_Transmit_Done)begin
+            SCurve_Test_Done <= 1'b0;
+            State <= IDLE;
+          end
+          else
+            State <= ALL_DONE;
         end
       endcase
     end

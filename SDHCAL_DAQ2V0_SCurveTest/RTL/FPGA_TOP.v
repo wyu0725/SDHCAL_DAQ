@@ -257,6 +257,7 @@ module FPGA_TOP(
     wire [191:0] SCTest_Channel_Discri_Mask;
     wire [191:0] out_to_Microroc_Channel_Discri_Mask;
     wire SCTest_SC_Param_Load;
+    wire USB_Data_Transmit_Done;
     
     
     //3 triggers
@@ -275,8 +276,8 @@ module FPGA_TOP(
       .out_to_usb_Acq_Start_Stop(out_to_usb_Acq_Start_Stop),
       //.SCTest_Done(SCurve_Test_Done),
       //.USB_Data_FIFO_Empty(in_from_ext_fifo_empty),
-      //.nPKTEND(usb_pktend),
-      //.Data_Transmit_Done(),
+      .nPKTEND(usb_pktend),
+      .Data_Transmit_Done(USB_Data_Transmit_Done),
       /*--- Start Signal ---
       .USB_Acq_Start_Stop(out_to_usb_Acq_Start_Stop),
       .Microroc_Acq_Start_Stop(Microroc_Acq_Start_Stop),
@@ -474,7 +475,8 @@ module FPGA_TOP(
       .out_trigger1b(OUT_TRIG1B),
       .out_trigger2b(OUT_TRIG2B),
       /*--- Done Indicator ---*/
-      .SCurve_Test_Done(SCurve_Test_Done)
+      .SCurve_Test_Done(SCurve_Test_Done),
+      .Data_Transmit_Done(USB_Data_Transmit_Done)
     );
     assign LED[5] = SCTest_Start_Stop;
     /*------------usb data fifo instantiation-------*/ 

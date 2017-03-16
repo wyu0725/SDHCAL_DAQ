@@ -1,7 +1,7 @@
 Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2016.3 (win64) Build 1682563 Mon Oct 10 19:07:27 MDT 2016
-| Date             : Thu Mar 16 19:16:27 2017
+| Date             : Thu Mar 16 20:22:35 2017
 | Host             : WYU running 64-bit major release  (build 9200)
 | Command          : report_power -file FPGA_TOP_power_routed.rpt -pb FPGA_TOP_power_summary_routed.pb -rpx FPGA_TOP_power_routed.rpx
 | Design           : FPGA_TOP
@@ -30,8 +30,8 @@ Table of Contents
 ----------
 
 +--------------------------+-------+
-| Total On-Chip Power (W)  | 0.377 |
-| Dynamic (W)              | 0.269 |
+| Total On-Chip Power (W)  | 0.378 |
+| Dynamic (W)              | 0.270 |
 | Device Static (W)        | 0.108 |
 | Total Off-Chip Power (W) | 0.005 |
 | Effective TJA (C/W)      | 2.7   |
@@ -51,20 +51,20 @@ Table of Contents
 | On-Chip                  | Power (W) | Used     | Available | Utilization (%) |
 +--------------------------+-----------+----------+-----------+-----------------+
 | Clocks                   |     0.009 |        9 |       --- |             --- |
-| Slice Logic              |     0.004 |     8826 |       --- |             --- |
-|   LUT as Logic           |     0.004 |     3296 |     63400 |            5.20 |
+| Slice Logic              |     0.004 |     8829 |       --- |             --- |
+|   LUT as Logic           |     0.004 |     3297 |     63400 |            5.20 |
 |   Register               |    <0.001 |     4225 |    126800 |            3.33 |
 |   CARRY4                 |    <0.001 |      103 |     15850 |            0.65 |
 |   LUT as Shift Register  |    <0.001 |      125 |     19000 |            0.66 |
 |   LUT as Distributed RAM |    <0.001 |       24 |     19000 |            0.13 |
 |   F7/F8 Muxes            |    <0.001 |       30 |     63400 |            0.05 |
 |   Others                 |     0.000 |      394 |       --- |             --- |
-| Signals                  |     0.004 |     6033 |       --- |             --- |
+| Signals                  |     0.004 |     6038 |       --- |             --- |
 | Block RAM                |     0.003 |     17.5 |       135 |           12.96 |
 | MMCM                     |     0.086 |        1 |         6 |           16.67 |
 | I/O                      |     0.163 |       78 |       285 |           27.37 |
 | Static Power             |     0.108 |          |           |                 |
-| Total                    |     0.377 |          |           |                 |
+| Total                    |     0.378 |          |           |                 |
 +--------------------------+-----------+----------+-----------+-----------------+
 
 
@@ -74,7 +74,7 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) |
 +-----------+-------------+-----------+-------------+------------+
-| Vccint    |       1.000 |     0.035 |       0.020 |      0.016 |
+| Vccint    |       1.000 |     0.036 |       0.020 |      0.016 |
 | Vccaux    |       1.800 |     0.066 |       0.048 |      0.018 |
 | Vcco33    |       3.300 |     0.007 |       0.003 |      0.004 |
 | Vcco25    |       2.500 |     0.067 |       0.063 |      0.004 |
@@ -148,7 +148,7 @@ Table of Contents
 +----------------------------------------------------------------------------------+-----------+
 | Name                                                                             | Power (W) |
 +----------------------------------------------------------------------------------+-----------+
-| FPGA_TOP                                                                         |     0.269 |
+| FPGA_TOP                                                                         |     0.270 |
 |   ACQ_or_SCTest_Switcher                                                         |    <0.001 |
 |   Clk_Gen                                                                        |     0.086 |
 |   Microroc_SCurveTest                                                            |     0.003 |

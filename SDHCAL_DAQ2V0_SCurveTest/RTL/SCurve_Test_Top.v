@@ -45,7 +45,8 @@ module SCurve_Test_Top(
     input out_trigger1b,
     input out_trigger2b,
     /*--- Done Indicator ---*/
-    output SCurve_Test_Done
+    output SCurve_Test_Done,
+    input Data_Transmit_Done
     //input Data_Transmit_Done
     );
     /*--- SCurve_Test_Control ---*/
@@ -92,7 +93,8 @@ module SCurve_Test_Top(
       .usb_data_fifo_wr_din(usb_data_fifo_wr_din),
       .usb_data_fifo_wr_en(usb_data_fifo_wr_en),
       /*--- Done Indicator ---*/
-      .SCurve_Test_Done(SCurve_Test_Done)
+      .SCurve_Test_Done(SCurve_Test_Done),
+      .Data_Transmit_Done(Data_Transmit_Done)
     );
     /*--- SCurve_Single_Channel ---*/
     wire [15:0] SCurve_Data;
