@@ -53,7 +53,7 @@ namespace USB_DAQ
         //private int wave_cnt;
         private CancellationTokenSource data_acq_cts = new CancellationTokenSource();
         private CancellationTokenSource file_write_cts = new CancellationTokenSource();
-        private static int Scurve_data_length;
+        private static int Scurve_Data_Length;
         public MainWindow()
         {
 
@@ -1275,7 +1275,7 @@ namespace USB_DAQ
                 {
                     MessageBox.Show("Set S Curve single test mode failure. Please check the USB\n", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-                Scurve_data_length = 7171 * 2;//单通道产生这多字节的数据
+                Scurve_Data_Length = 7171 * 2;//单通道产生这多字节的数据
             }
             else if (botton.Content.ToString() == "64Chn")
             {
@@ -1289,7 +1289,7 @@ namespace USB_DAQ
                 {
                     MessageBox.Show("Set S Curve test in 64 channel mode failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-                Scurve_data_length = 458818 * 2;//64通道产生这么多字节的数据
+                Scurve_Data_Length = 458818 * 2;//64通道产生这么多字节的数据
             }
         }
         //E0C0:单通道测试时从CTest管脚输入,E0C1单通道测试从direct input输入
@@ -1380,13 +1380,13 @@ namespace USB_DAQ
                 StringBuilder reports = new StringBuilder();                
                 bool bResult = false;
                 byte[] cmd_ClrUSBFifo = ConstCommandByteArray(0xF0, 0xFA);
-                bResult = CommandSend(cmd_ClrUSBFifo, 2);//
+                bResult = CommandSend(cmd_ClrUSBFifo, cmd_ClrUSBFifo.Length);//
                 if (bResult)
                     reports.AppendLine("USB fifo cleared");
                 else
                     reports.AppendLine("fail to clear USB fifo");
                 byte[] cmd_ScurveStart = ConstCommandByteArray(0xE0, 0xF0);
-                bResult = CommandSend(cmd_ScurveStart, 2);
+                bResult = CommandSend(cmd_ScurveStart, cmd_ScurveStart.Length);
                 if (bResult)
                 {
                     reports.AppendLine("Scurve Test Thread start");
@@ -1416,11 +1416,23 @@ namespace USB_DAQ
             string report;
             bw = new BinaryWriter(File.Open(filepath, FileMode.Append));
             bool bResult = false;
-            byte[] bytes = new byte[Scurve_data_length];//
-            bResult = DataRecieve(bytes, bytes.Length);
-            if (bResult)
+            int Data_Length = 0;
+            const int Package_Length = 2048;
+            byte[] bytes = new byte[Package_Length];//
+            while (Data_Length < Scurve_Data_Length)
             {
-                 bw.Write(bytes); //接收成功写入文件
+                bResult = DataRecieve(bytes, bytes.Length);
+                if (bResult)
+                {
+                    bw.Write(bytes); //接收成功写入文件
+                    Data_Length += Package_Length;
+                    report = string.Format("Get {0} data\n", Package_Length / 2);
+                    txtReport.AppendText(report);
+                }
+                else
+                {
+                    txtReport.AppendText("Get S curve test data failure\n");
+                }
             }
             //---------------------------------------//
             bw.Flush();
