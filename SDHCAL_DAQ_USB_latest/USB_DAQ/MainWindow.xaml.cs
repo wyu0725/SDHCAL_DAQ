@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Text.RegularExpressions;//new add
 using System.Threading;//new add20150809
 using System.Windows.Threading;//new add 20150818
+using System.Threading.Tasks;
 using System.IO;//new add 20150810
 using Microsoft.Win32;//new add for SaveFileDialog
 using CyUSB;//new add
@@ -36,6 +37,7 @@ namespace USB_DAQ
         private string filepath = null;//文件路径
         private static bool AcqStart = false; //采集标志
         private static bool Enabled_Ext_Trigger = false;
+        private static bool ScurveStart_En = false;
        // private static bool SPopen = false; //串口是否打开
        // private SerialPort mySerialPort = new SerialPort();//新建串口
         private static int Packetcnt;
@@ -43,12 +45,15 @@ namespace USB_DAQ
         private Sync_Thread_Buffer threadbuffer = new Sync_Thread_Buffer(16384*512);
         //private delegate void DisplayPacketNum(StringBuilder packetnum); //delegate
         private delegate void DisplayPacketNum(string packetnum); //delegate
-        private ObservableDataSource<Point> dataSource1 = new ObservableDataSource<Point>();
-        private ObservableDataSource<Point> dataSource2 = new ObservableDataSource<Point>();
-        private LineGraph Chn1 = new LineGraph();
-        private LineGraph Chn2 = new LineGraph();
-        private DispatcherTimer timer = new DispatcherTimer();
+        //private ObservableDataSource<Point> dataSource1 = new ObservableDataSource<Point>();
+        //private ObservableDataSource<Point> dataSource2 = new ObservableDataSource<Point>();
+        //private LineGraph Chn1 = new LineGraph();
+        //private LineGraph Chn2 = new LineGraph();
+        //private DispatcherTimer timer = new DispatcherTimer();
         //private int wave_cnt;
+        private CancellationTokenSource data_acq_cts = new CancellationTokenSource();
+        private CancellationTokenSource file_write_cts = new CancellationTokenSource();
+        private static int Scurve_data_length;
         public MainWindow()
         {
 
@@ -346,8 +351,6 @@ namespace USB_DAQ
             }
             else //file is exsits
             {
-                CancellationTokenSource cts_a = new CancellationTokenSource();
-                CancellationTokenSource cts_b = new CancellationTokenSource();
                 StringBuilder reports = new StringBuilder();
                 if (!AcqStart) //Acquisition is not start then start acquisition
                 {
@@ -373,10 +376,15 @@ namespace USB_DAQ
                     bResult = CommandSend(cmd_AcqStart, 2);
                     if (bResult)
                     {
-                       // reports.AppendFormat("{0} Data Acquisition Thread Start\n", cbxChn_Select.Text.Trim());           
-                       // ThreadPool.QueueUserWorkItem(new WaitCallback(AcquisitionCallBack),cts_a.Token);//读取usb数据
-                        ThreadPool.QueueUserWorkItem(new WaitCallback(Async_AcquisitionThreadCallBack), cts_a.Token);//读取usb数据
-                        ThreadPool.QueueUserWorkItem(new WaitCallback(WriteFileCallBack),cts_b.Token);//写入文件
+                        reports.AppendLine("Data Acquisition Thread start");
+                        data_acq_cts.Dispose(); //clean up old token source
+                        file_write_cts.Dispose();//clean up old token source
+                        data_acq_cts = new CancellationTokenSource(); //reset the token
+                        file_write_cts = new CancellationTokenSource();//reset the token
+                        Task data_acq = Task.Factory.StartNew(() => Async_AcquisitionThreadCallBack(data_acq_cts.Token), data_acq_cts.Token);
+                        Task write_file = Task.Factory.StartNew(() => WriteFileCallBack(file_write_cts.Token), file_write_cts.Token);
+                        //ThreadPool.QueueUserWorkItem(new WaitCallback(Async_AcquisitionThreadCallBack), cts_a.Token);//读取usb数据
+                        //ThreadPool.QueueUserWorkItem(new WaitCallback(WriteFileCallBack),cts_b.Token);//写入文件
                     }
                     else
                         reports.AppendLine("Data Acquisition Start failure");
@@ -397,18 +405,16 @@ namespace USB_DAQ
                     }                       
                     else
                         reports.AppendLine("Data Acquisition Stoped failure");
-                    cts_a.Cancel();
-                    cts_a.Dispose();
-                    cts_b.Cancel();
-                    cts_b.Dispose();                                
+                    data_acq_cts.Cancel(); //stop the thread
+                    file_write_cts.Cancel();//stop the thread                             
                     txtReport.AppendText(reports.ToString());
                 }
             }
         }
         //data aquisition thread
-        private unsafe void Async_AcquisitionThreadCallBack(object StartOrNot)
+        private unsafe void Async_AcquisitionThreadCallBack(CancellationToken cancellationToken)
         {
-            CancellationToken token = (CancellationToken)StartOrNot;
+            //CancellationToken token = (CancellationToken)StartOrNot;
             //StringBuilder sb = new StringBuilder();
             string report;
             // DisplayPacketNum dp = new DisplayPacketNum((StringBuilder s) => { ShowPacketNum(s); });
@@ -420,13 +426,7 @@ namespace USB_DAQ
             //(the command buffer) with size of SINGLE_XFER_LEN and data buffer length. This buffer will be passed
             //to the singleXer the first parameter of BeginDataXfer. This is the requirement specific to the BUFFERED 
             //mode only. The below sample example shows the usage of it. 
-            if (token.IsCancellationRequested)
-            {
-                report = string.Format("Data Acquisition thread stopped.\n");
-                //delegate
-                Dispatcher.Invoke(dp, report);
-            }
-            else
+            while (!cancellationToken.IsCancellationRequested)
             {
                 byte[] cmdBufs = new byte[CyConst.SINGLE_XFER_LEN + ((BulkInEndPt.XferMode == XMODE.BUFFERED) ? BufSz : 0)];
                 byte[] xferBufs = new byte[BufSz];
@@ -435,72 +435,62 @@ namespace USB_DAQ
                 {
                     OVERLAPPED* ovLapStatus = (OVERLAPPED*)tmp0;
                     ovLapStatus->hEvent = PInvoke.CreateEvent(0, 0, 0, 0);
-                }              
-                while (AcqStart)
-                {
-                    BulkInEndPt.BeginDataXfer(ref cmdBufs, ref xferBufs, ref BufSz, ref ovLaps);
-                    fixed (byte* tmp0 = ovLaps)
-                    {
-                        OVERLAPPED* ovLapStatus = (OVERLAPPED*)tmp0;
-                        if (!BulkInEndPt.WaitForXfer(ovLapStatus->hEvent, 500))
-                        {
-                            BulkInEndPt.Abort();
-                            PInvoke.WaitForSingleObject(ovLapStatus->hEvent, CyConst.INFINITE);
-                        }
-                    }
-                    if (BulkInEndPt.FinishDataXfer(ref cmdBufs, ref xferBufs, ref BufSz, ref ovLaps))
-                    {
-                        //传输成功,写入缓存
-                        threadbuffer.setBuffer(xferBufs);
-                        Packetcnt++;
-                    }
-                    else
-                    {
-                        //传输失败
-                        report = string.Format("Get Data faliure .\n");
-                        //delegate
-                        Dispatcher.Invoke(dp, report);
-                        // this.Dispatcher.Invoke(dp, sb);
-                    }
-                    if (Packetcnt % 100 == 0)
-                    {
-                        report = string.Format("Aquired {0} packets\n", Packetcnt);
-                        Dispatcher.Invoke(dp, report);
-                        //this.Dispatcher.Invoke(dp, sb);
-                    }
-                    // BulkInEndPt.BeginDataXfer(ref cmdBufs, ref xferBufs, ref BufSz, ref ovLaps);
                 }
+                BulkInEndPt.BeginDataXfer(ref cmdBufs, ref xferBufs, ref BufSz, ref ovLaps);
+                fixed (byte* tmp0 = ovLaps)
+                {
+                    OVERLAPPED* ovLapStatus = (OVERLAPPED*)tmp0;
+                    if (!BulkInEndPt.WaitForXfer(ovLapStatus->hEvent, 500))
+                    {
+                        BulkInEndPt.Abort();
+                        PInvoke.WaitForSingleObject(ovLapStatus->hEvent, CyConst.INFINITE);
+                    }
+                }
+                if (BulkInEndPt.FinishDataXfer(ref cmdBufs, ref xferBufs, ref BufSz, ref ovLaps))
+                {
+                    //传输成功,写入缓存
+                    threadbuffer.setBuffer(xferBufs);
+                    Packetcnt++;
+                }
+                else
+                {
+                    //传输失败
+                    report = string.Format("Get Data faliure .\n");
+                    //delegate
+                    Dispatcher.Invoke(dp, report);
+                    // this.Dispatcher.Invoke(dp, sb);
+                }
+                if (Packetcnt % 100 == 0)
+                {
+                    report = string.Format("Aquired {0} packets\n", Packetcnt);
+                    Dispatcher.Invoke(dp, report);
+                    //this.Dispatcher.Invoke(dp, sb);
+                }
+
             }
             report = string.Format("About {0} packets in total\n", Packetcnt);
             Dispatcher.Invoke(dp, report);
             //delegate
         }
         //wrting file thread
-        private void WriteFileCallBack(object stateInfo)
+        private void WriteFileCallBack(CancellationToken cancellationToken)
         {
-            CancellationToken token = (CancellationToken)stateInfo;
+            //CancellationToken token = (CancellationToken)stateInfo;
             DisplayPacketNum dp2 = new DisplayPacketNum((string s) => { ShowPacketNum(s); });
             string report;
-            if (token.IsCancellationRequested)
+            bw = new BinaryWriter(File.Open(filepath, FileMode.Append));
+            byte[] buffer = new byte[4096];
+            while (!cancellationToken.IsCancellationRequested)
             {
-                report = string.Format("File closed\n");
-                Dispatcher.Invoke(dp2, report);
-            }
-            else
-            {
-                bw = new BinaryWriter(File.Open(filepath, FileMode.Append));
-                byte[] buffer = new byte[4096];
-                while (AcqStart)
-                {
-                    buffer = threadbuffer.getBuffer();
-                    bw.Write(buffer);
-                }
-                bw.Flush();
-                bw.Dispose();
-                bw.Close();
-                report = string.Format("{0}\n",filepath);
-                Dispatcher.Invoke(dp2, report);
-            }
+                buffer = threadbuffer.getBuffer();
+                bw.Write(buffer);
+            }           
+            bw.Flush();
+            bw.Dispose();
+            bw.Close();
+            report = string.Format("data stored in {0}\n",filepath);
+            Dispatcher.Invoke(dp2, report);
+            
         }
         private void ShowPacketNum(object packetnum)
         {
@@ -1209,9 +1199,7 @@ namespace USB_DAQ
                 {
                     MessageBox.Show("Fail to set external RAZ Channel, please check the USB \n", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-            }
-            
-            
+            }                    
         }
 
         private void btnSet_External_RAZ_Delay_Click(object sender, RoutedEventArgs e)
@@ -1238,12 +1226,12 @@ namespace USB_DAQ
                 MessageBox.Show("Illegal External RAZ Delay Time, please re-type(Integer:0--6375,step:25ns)", "Ilegal Input", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
+        //E0A0选择ACQ，E0A1选择Scurve
         private void ACQ_or_SCTest_Checked(object sender, RoutedEventArgs e)
         {
             var botton = sender as RadioButton;
             bool bResult = false;
-            if(botton.Content.ToString() == "ACQ")
+            if(botton.Content.ToString() == "ACQ") //这里已经直接将通道都切换过去
             {
                 byte[] bytes = ConstCommandByteArray(0xE0, 0xA0);
                 bResult = CommandSend(bytes, bytes.Length);
@@ -1270,7 +1258,7 @@ namespace USB_DAQ
                 }
             }
         }
-
+        //E0B0选择单通道测试，E0B1选择64通道测试，这里决定要获取的数据长度
         private void Single_or_64Chn_Checked(object sender, RoutedEventArgs e)
         {
             var botton = sender as RadioButton;
@@ -1287,6 +1275,7 @@ namespace USB_DAQ
                 {
                     MessageBox.Show("Set S Curve single test mode failure. Please check the USB\n", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
+                Scurve_data_length = 7171 * 2;//单通道产生这多字节的数据
             }
             else if (botton.Content.ToString() == "64Chn")
             {
@@ -1300,9 +1289,10 @@ namespace USB_DAQ
                 {
                     MessageBox.Show("Set S Curve test in 64 channel mode failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
+                Scurve_data_length = 458818 * 2;//64通道产生这么多字节的数据
             }
         }
-
+        //E0C0:单通道测试时从CTest管脚输入,E0C1单通道测试从direct input输入
         private void CTest_or_Input_Checked(object sender, RoutedEventArgs e)
         {
             var button = sender as RadioButton;
@@ -1374,6 +1364,70 @@ namespace USB_DAQ
             {
                 MessageBox.Show("Set S Curve test max count failure. Please check the USB\n", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+        //--Scurve测试开始E0F0,Scurve测试结束E0F1--//
+        private void btnScurve_start_Click(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(filepath.Trim()))
+            {
+                MessageBox.Show("You should save the file first before Scurve start", //text
+                                        "imformation", //caption
+                                   MessageBoxButton.OK, //button
+                                    MessageBoxImage.Error);//icon     
+            }
+            else //file is exsits
+            {
+                StringBuilder reports = new StringBuilder();                
+                bool bResult = false;
+                byte[] cmd_ClrUSBFifo = ConstCommandByteArray(0xF0, 0xFA);
+                bResult = CommandSend(cmd_ClrUSBFifo, 2);//
+                if (bResult)
+                    reports.AppendLine("USB fifo cleared");
+                else
+                    reports.AppendLine("fail to clear USB fifo");
+                byte[] cmd_ScurveStart = ConstCommandByteArray(0xE0, 0xF0);
+                bResult = CommandSend(cmd_ScurveStart, 2);
+                if (bResult)
+                {
+                    reports.AppendLine("Scurve Test Thread start");
+                    Task Scurve_test = new Task(() => Get_ScurveResultCallBack());
+                    //Start the task
+                    Scurve_test.Start();
+                    //wait for task ending
+                    Scurve_test.Wait();
+                    byte [] cmd_ScurveEnd = ConstCommandByteArray(0xE0, 0xF1);
+                    if (CommandSend(cmd_ScurveEnd, 2))
+                    {
+                        reports.AppendLine("Scurve Test Thread End");
+                    }
+                    else
+                    {
+                        reports.AppendLine("Scurve Test End failure");
+                    }
+                }
+                else
+                    reports.AppendLine("Scurve Start failure");
+                txtReport.AppendText(reports.ToString());                               
+            }
+        }
+        private void Get_ScurveResultCallBack()
+        {
+            DisplayPacketNum dp2 = new DisplayPacketNum((string s) => { ShowPacketNum(s); });
+            string report;
+            bw = new BinaryWriter(File.Open(filepath, FileMode.Append));
+            bool bResult = false;
+            byte[] bytes = new byte[Scurve_data_length];//
+            bResult = DataRecieve(bytes, bytes.Length);
+            if (bResult)
+            {
+                 bw.Write(bytes); //接收成功写入文件
+            }
+            //---------------------------------------//
+            bw.Flush();
+            bw.Dispose();
+            bw.Close();
+            report = string.Format("data stored in {0}\n", filepath);
+            Dispatcher.Invoke(dp2, report);
         }
     }
 }
