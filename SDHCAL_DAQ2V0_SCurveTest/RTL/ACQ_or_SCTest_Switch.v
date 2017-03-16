@@ -28,12 +28,12 @@ module ACQ_or_SCTest_Switch(
     output out_to_usb_Acq_Start_Stop,
     // When  the USB Data FIFO empty and S Curve Test Done,the USB should be
     // Stopped
-    input SCTest_Done,
-    input USB_Data_FIFO_Empty,    
+    //input SCTest_Done,
+    //input USB_Data_FIFO_Empty,    
     // When USB synchronous slavefifo module enable the nPKTEND, all the data
     // are transmitted to PC
-    input nPKTEND,
-    output Data_Transmit_Done,
+    //input nPKTEND,
+    //output Data_Transmit_Done,
     /*--- USB Data FIFO Write Interface ---*/
     input [15:0] Microroc_usb_data_fifo_wr_din,
     input Microroc_usb_data_fifo_wr_en,
@@ -54,6 +54,9 @@ module ACQ_or_SCTest_Switch(
     output [9:0] out_to_Microroc_10bit_DAC0_Out,
     output [9:0] out_to_Microroc_10bit_DAC1_Out,
     output [9:0] out_to_Microroc_10bit_DAC2_Out,
+    // Channel Mask
+    input [191:0] SCTest_Channel_Discri_Mask,
+    output [191:0] out_to_Microroc_Channel_Discri_Mask,
     // SC parameter load
     input USB_SC_Param_Load,
     input SCTest_SC_Param_Load,
@@ -77,9 +80,8 @@ module ACQ_or_SCTest_Switch(
     output HoldGen_out_trigger2b*/
     );
     /*--- USB Start Stop Signal ---*/
-    wire SCTest_Start_Stop_Internal = (~(USB_Data_FIFO_Empty & SCTest_Done))&SCTest_Start_Stop;
-    assign out_to_usb_Acq_Start_Stop = ACQ_or_SCTest ? Microroc_Acq_Start_Stop : SCTest_Start_Stop_Internal;
-    assign Data_Transmit_Done = ~nPKTEND;
+    assign out_to_usb_Acq_Start_Stop = ACQ_or_SCTest ? Microroc_Acq_Start_Stop : SCTest_Start_Stop;
+    //assign Data_Transmit_Done = ~nPKTEND;
     /*--- USB FIFO write ---*/
     assign out_to_usb_data_fifo_wr_din = ACQ_or_SCTest ? Microroc_usb_data_fifo_wr_din : SCTest_usb_data_fifo_wr_din;
     assign out_to_usb_data_fifo_wr_en = ACQ_or_SCTest ? Microroc_usb_data_fifo_wr_en : SCTest_usb_data_fifo_wr_en;
@@ -90,6 +92,8 @@ module ACQ_or_SCTest_Switch(
     assign out_to_Microroc_10bit_DAC0_Out = ACQ_or_SCTest ? USB_Microroc_10bit_DAC0_Out : SCTest_Microroc_10bit_DAC_Out;
     assign out_to_Microroc_10bit_DAC1_Out = ACQ_or_SCTest ? USB_Microroc_10bit_DAC1_Out : SCTest_Microroc_10bit_DAC_Out;
     assign out_to_Microroc_10bit_DAC2_Out = ACQ_or_SCTest ? USB_Microroc_10bit_DAC2_Out : SCTest_Microroc_10bit_DAC_Out;
+    // Microroc Channel Discriminator Msak
+    assign out_to_Microroc_Channel_Discri_Mask = ACQ_or_SCTest ? {192{1'b1}} : SCTest_Channel_Discri_Mask;
     // SC Param load
     assign out_to_Microroc_SC_Param_Load = ACQ_or_SCTest ? USB_SC_Param_Load : SCTest_SC_Param_Load;
     /*--- 3 triggers ---*/

@@ -57,7 +57,6 @@ start_step init_design
 set ACTIVE_STEP init_design
 set rc [catch {
   create_msg_db init_design.pb
-  set_param project.hsv.suppressChildGraphs 0
   set_param simulator.modelsimInstallPath D:/Program%20Files/ModelSim/win64
   set_property design_mode GateLvl [current_fileset]
   set_param project.singleFileAddWarning.threshold 0

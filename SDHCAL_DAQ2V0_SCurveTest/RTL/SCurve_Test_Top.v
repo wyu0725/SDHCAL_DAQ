@@ -37,6 +37,7 @@ module SCurve_Test_Top(
     input Microroc_Config_Done,
     output [63:0] Microroc_CTest_Chn_Out,
     output [9:0] Microroc_10bit_DAC_Out,
+    output [191:0] Microroc_Discriminator_Mask,
     output SC_Param_Load,
     /*--- Pin ---*/
     input CLK_EXT,
@@ -44,8 +45,8 @@ module SCurve_Test_Top(
     input out_trigger1b,
     input out_trigger2b,
     /*--- Done Indicator ---*/
-    output SCurve_Test_Done,
-    input Data_Transmit_Done
+    output SCurve_Test_Done
+    //input Data_Transmit_Done
     );
     /*--- SCurve_Test_Control ---*/
     // Generate a start pulse 
@@ -84,6 +85,7 @@ module SCurve_Test_Top(
       /*--- Microroc SC Parameter Interface ---*/
       .Microroc_CTest_Chn_Out(Microroc_CTest_Chn_Out),
       .Microroc_10bit_DAC_Out(Microroc_10bit_DAC_Out),
+      .Microroc_Discriminator_Mask(Microroc_Discriminator_Mask),
       .SC_Param_Load(SC_Param_Load),
       .Microroc_Config_Done(Microroc_Config_Done),
       /*--- USB Data FIFO Interface ---*/

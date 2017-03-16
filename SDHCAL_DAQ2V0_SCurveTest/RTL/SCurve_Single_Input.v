@@ -50,6 +50,8 @@ module SCurve_Single_Input(
   end
   wire CLK_EXT_rising;
   assign CLK_EXT_rising = CLK_EXT_reg1&(~CLK_EXT_reg2);
+  wire CLK_EXT_falling;
+  assign CLK_EXT_falling = (~CLK_EXT_reg1)&CLK_EXT_reg2;
   //Catch the falling edge of trigger
   reg trigger_reg1;
   reg trigger_reg2;
@@ -68,7 +70,7 @@ module SCurve_Single_Input(
   //Generate Enable Count signal
   wire Enable_Count_P;
   wire Enable_Count_T;
-  assign Enable_Count_P = Test_Start & (reset_n) & (~CPT_Done);
+  assign Enable_Count_P = Test_Start & (reset_n) & (~CPT_DONE);
   assign Enable_Count_T = Enable_Count_P & CLK_EXT;
   //Count PUSLE
   always @(posedge Clk or negedge reset_n)begin
@@ -106,7 +108,8 @@ module SCurve_Single_Input(
   // When the CPT_PULSE is full (CPT_Full is enable), the Enable_Count_T
   // signal should not disable. Because at the rising edge, CPT_Full is
   // enbale, at the same time there could come a trigger.
-  wire CLK_EXT_n = ~CLK_EXT;
+  /*------  这种方式会报一个错误，CLE_EXT不是从专用时钟管脚输入的------*/
+  /*wire CLK_EXT_n = ~CLK_EXT;
   always @(posedge CLK_EXT_n or negedge reset_n)begin
     if(~reset_n)
       CPT_DONE <= 1'b0;
@@ -114,5 +117,14 @@ module SCurve_Single_Input(
       CPT_DONE <= 1'b1;
     else
       CPT_DONE <= 1'b0;
+  end*/
+ always @(posedge Clk or negedge reset_n) begin
+  if(~reset_n) begin
+    CPT_DONE <= 1'b0;
   end
+  else if(CLK_EXT_falling & CPT_Full)
+    CPT_DONE <= 1'b1;
+  else
+    CPT_DONE <= 1'b0;
+ end
 endmodule

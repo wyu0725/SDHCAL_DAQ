@@ -152,6 +152,8 @@ module FPGA_TOP(
     //Start Singnal
     wire SCTest_Start_Stop;
     wire Microroc_Acq_Start_Stop;
+    wire SCurve_Test_Done;
+    wire in_from_ext_fifo_empty;
     usb_command_interpreter usb_control
     (
       .IFCLK(IFCLK),
@@ -205,13 +207,16 @@ module FPGA_TOP(
       .SingleTest_Chn(SingleTest_Chn),
       .CPT_MAX(CPT_MAX),
       .SCTest_Start_Stop(SCTest_Start_Stop),
+      .SCTest_Done(SCurve_Test_Done),
+      .USB_FIFO_Empty(in_from_ext_fifo_empty),
       /*----------------------------*/
       .LED(LED[3:0])
     );    
     /*-----------USB2.0 instantiation------------*/
     wire [15:0] in_from_ext_fifo_dout;
-    wire in_from_ext_fifo_empty;
     wire out_to_ext_fifo_rd_en;
+    wire out_to_Microroc_SC_Param_Load;
+    wire out_to_usb_Acq_Start_Stop;
     usb_synchronous_slavefifo usb_cy7c68013A
     (
       .IFCLK(IFCLK),
@@ -249,10 +254,11 @@ module FPGA_TOP(
     wire [9:0] out_to_Microroc_10bit_DAC0_Out;
     wire [9:0] out_to_Microroc_10bit_DAC1_Out;
     wire [9:0] out_to_Microroc_10bit_DAC2_Out;
+    wire [191:0] SCTest_Channel_Discri_Mask;
+    wire [191:0] out_to_Microroc_Channel_Discri_Mask;
     wire SCTest_SC_Param_Load;
-    wire out_to_Microroc_SC_Param_Load;
-    wire out_to_usb_Acq_Start_Stop;
-    wire SCurve_Test_Done;
+    
+    
     //3 triggers
     /*wire SCTest_out_trigger0b;
     wire SCTest_out_trigger1b;
@@ -267,10 +273,10 @@ module FPGA_TOP(
       .Microroc_Acq_Start_Stop(Microroc_Acq_Start_Stop),
       .SCTest_Start_Stop(SCTest_Start_Stop),
       .out_to_usb_Acq_Start_Stop(out_to_usb_Acq_Start_Stop),
-      .SCTest_Done(SCurve_Test_Done),
-      .USB_Data_FIFO_Empty(in_from_ext_fifo_empty),
-      .nPKTEND(usb_pktend),
-      .Data_Transmit_Done(),
+      //.SCTest_Done(SCurve_Test_Done),
+      //.USB_Data_FIFO_Empty(in_from_ext_fifo_empty),
+      //.nPKTEND(usb_pktend),
+      //.Data_Transmit_Done(),
       /*--- Start Signal ---
       .USB_Acq_Start_Stop(out_to_usb_Acq_Start_Stop),
       .Microroc_Acq_Start_Stop(Microroc_Acq_Start_Stop),
@@ -295,6 +301,9 @@ module FPGA_TOP(
       .out_to_Microroc_10bit_DAC0_Out(out_to_Microroc_10bit_DAC0_Out),
       .out_to_Microroc_10bit_DAC1_Out(out_to_Microroc_10bit_DAC1_Out),
       .out_to_Microroc_10bit_DAC2_Out(out_to_Microroc_10bit_DAC2_Out),
+      // Channel Discriminator Mask
+      .SCTest_Channel_Discri_Mask(SCTest_Channel_Discri_Mask),
+      .out_to_Microroc_Channel_Discri_Mask(out_to_Microroc_Channel_Discri_Mask),
       // SC param load
       .USB_SC_Param_Load(Microroc_param_load),
       .SCTest_SC_Param_Load(SCTest_SC_Param_Load),
@@ -349,7 +358,7 @@ module FPGA_TOP(
       .En_bg(1'b1),                  //enable bandgap
       .En_bg_pp(1'b1),               //enable bandgap for powerpulsing
       .header(Microroc_param_header),                //header
-      .Chn_discri_mask({192{1'b1}}), //no channel discriminators mask
+      .Chn_discri_mask(out_to_Microroc_Channel_Discri_Mask), //no channel discriminators mask
       .Rs_or_discri(Microroc_RS_or_Discri),           //select latched or directly output // Modefied by wyu 20170308, this parameter should be set by usb
       .En_discri1_pp(1'b1),          //enable disc1 powerpulsing if disc0 enabled  /enable
       .En_discri2_pp(1'b1),          //enable disc2 powerpulsing if disc0 enabled  /enable
@@ -457,6 +466,7 @@ module FPGA_TOP(
       .Microroc_Config_Done(Config_Done),
       .Microroc_CTest_Chn_Out(SCTest_Microroc_CTest_Chn_Out),
       .Microroc_10bit_DAC_Out(SCTest_Microroc_10bit_DAC_Out),
+      .Microroc_Discriminator_Mask(SCTest_Channel_Discri_Mask),
       .SC_Param_Load(SCTest_SC_Param_Load),
       /*--- PIN ---*/
       .CLK_EXT(CLK_EXT),
@@ -466,7 +476,7 @@ module FPGA_TOP(
       /*--- Done Indicator ---*/
       .SCurve_Test_Done(SCurve_Test_Done)
     );
-    assign LED[5] = ~SCurve_Test_Done;
+    assign LED[5] = SCTest_Start_Stop;
     /*------------usb data fifo instantiation-------*/ 
     //per ASIC 1270 depth x 16bit, 4 ASIC 5080 depth
     usb_data_fifo usb_data_fifo_8192depth 

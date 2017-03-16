@@ -37,7 +37,7 @@ module SCurve_Test_Control(
     /*--- Microroc SC Parameter Interface ---*/  
     output reg [63:0] Microroc_CTest_Chn_Out,
     output reg [9:0] Microroc_10bit_DAC_Out,
-    output reg [191:0] Microroc_Discriminator_Mask;
+    output reg [191:0] Microroc_Discriminator_Mask,
     output reg SC_Param_Load,
     input Microroc_Config_Done,
     /*--- USB Data FIFO Interface ---*/
@@ -88,6 +88,7 @@ module SCurve_Test_Control(
       SCurve_Test_Done <= 1'b0;
       Discri_Mask_Shift <= 8'b0;
       All_Chn_Discri_Mask <= {3'b111, 189'b0};
+      Microroc_Discriminator_Mask <= {192{1'b1}};
       State <= IDLE;
     end
     else begin
@@ -105,6 +106,7 @@ module SCurve_Test_Control(
             SC_Param_Load <= 1'b0;
             SCurve_Test_Done <= 1'b0;
             All_Chn_Discri_Mask <= {3'b111, 189'b0};
+            Microroc_Discriminator_Mask <= {192{1'b1}};
             State <= IDLE;
           end
           else begin
@@ -123,12 +125,13 @@ module SCurve_Test_Control(
           if(Single_or_64Chn) begin //Select single channel test and the charge is injected from CTest pin
             Microroc_CTest_Chn_Out <= Ctest_or_Input ? (SINGLE_CHN_PARAM_Ctest << SingleTest_Chn) : CTest_CHN_PARAM_Input;
             usb_data_fifo_wr_din <= {8'h43, 2'b00, SingleTest_Chn};//0x43 in ascii is C   
-            Microroc_Discriminator_Mask <= DISCRIMINATOR_MASK >> Discri_Mask_Shift;
+            Microroc_Discriminator_Mask <= (DISCRIMINATOR_MASK >> Discri_Mask_Shift);
             State <= OUT_TEST_CHN_USB;
           end
           else begin
-            Microroc_Ctest_Chn_Out <= Ctest_or_Input ? All_Chn_Param : CTest_CHN_PARAM_Input;
-            usb_data_fifo_wr_din <= {8'h63, 2'b00, Test_Chn}//0x63 in ascii is c, meaning channel
+            Microroc_CTest_Chn_Out <= Ctest_or_Input ? All_Chn_Param : CTest_CHN_PARAM_Input;
+            usb_data_fifo_wr_din <= {8'h63, 2'b00, Test_Chn};//0x63 in ascii is c, meaning channel
+            Microroc_Discriminator_Mask <= All_Chn_Discri_Mask;
             State <= OUT_TEST_CHN_USB;
           end
           /*if(~Single_or_64Chn)begin//64 Channel test, charge inject from CTest pin
@@ -153,7 +156,6 @@ module SCurve_Test_Control(
         OUT_DAC_CODE_SC:begin
           usb_data_fifo_wr_en <= 1'b0;
           Microroc_10bit_DAC_Out <= Invert(Actual_10bit_DAC_Code);
-          Microroc_Discriminator_Mask <= Ctest_or_Input
           usb_data_fifo_wr_din <= {4'hD,2'b00,Actual_10bit_DAC_Code};
           State <= OUT_DAC_CODE_USB;
         end
@@ -220,6 +222,7 @@ module SCurve_Test_Control(
           end
           else if(Test_Chn == 6'd63)begin
             All_Chn_Param <= 64'h0000_0000_0000_0001;
+            All_Chn_Discri_Mask <= {3'b111, 189'b0};
             Test_Chn <= 6'd0;
             usb_data_fifo_wr_din <= 16'hFF45;
             usb_data_fifo_wr_en <= 1'b1;
@@ -227,8 +230,9 @@ module SCurve_Test_Control(
           end
           else begin
             All_Chn_Param <= All_Chn_Param << 1'b1;
+            All_Chn_Discri_Mask <= (All_Chn_Discri_Mask >> 3);
             Test_Chn <= Test_Chn + 1'b1;
-            State <= OUT_TEST_CHN_SC;
+            State <= OUT_TEST_CHN_AND_DISCRI_MASK_SC;
           end
         end
         ALL_DONE:begin
