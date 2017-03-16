@@ -33,6 +33,7 @@ module SCurve_Test_Top(
     //input usb_data_fifo_full,
     output usb_data_fifo_wr_en,
     output [15:0] usb_data_fifo_wr_din,
+    input usb_data_fifo_full,
     /*---Microroc Config Interface ---*/
     input Microroc_Config_Done,
     output [63:0] Microroc_CTest_Chn_Out,
@@ -92,6 +93,7 @@ module SCurve_Test_Top(
       /*--- USB Data FIFO Interface ---*/
       .usb_data_fifo_wr_din(usb_data_fifo_wr_din),
       .usb_data_fifo_wr_en(usb_data_fifo_wr_en),
+      .usb_data_fifo_full(usb_data_fifo_full),
       /*--- Done Indicator ---*/
       .SCurve_Test_Done(SCurve_Test_Done),
       .Data_Transmit_Done(Data_Transmit_Done)

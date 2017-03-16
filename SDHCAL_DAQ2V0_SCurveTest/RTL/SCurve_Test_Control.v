@@ -44,6 +44,7 @@ module SCurve_Test_Control(
     //input usb_data_fifo_full,
     output reg [15:0] usb_data_fifo_wr_din,
     output reg usb_data_fifo_wr_en,
+    input usb_data_fifo_full,
     /*--- Done Indicator ---*/
     output reg SCurve_Test_Done,
     input Data_Transmit_Done
@@ -74,6 +75,8 @@ module SCurve_Test_Control(
   reg [63:0] All_Chn_Param;
   reg [5:0] Test_Chn;
   reg [9:0] Actual_10bit_DAC_Code;//In SC param the LSB of 10bit DAC code come first, so it's necessary to invert the code
+  reg [7:0] SC_Param_Load_Cnt;
+  localparam [7:0] SC_PARAM_LOAD_DELAY = 8'd200;
   always @(posedge Clk or negedge reset_n)begin
     if(~reset_n)begin
       All_Chn_Param <= 64'h0000_0000_0000_0001;
@@ -90,6 +93,7 @@ module SCurve_Test_Control(
       Discri_Mask_Shift <= 8'b0;
       All_Chn_Discri_Mask <= {3'b111, 189'b0};
       Microroc_Discriminator_Mask <= {192{1'b1}};
+      SC_Param_Load_Cnt <= 8'b0;
       State <= IDLE;
     end
     else begin
@@ -108,6 +112,7 @@ module SCurve_Test_Control(
             SCurve_Test_Done <= 1'b0;
             All_Chn_Discri_Mask <= {3'b111, 189'b0};
             Microroc_Discriminator_Mask <= {192{1'b1}};
+            SC_Param_Load_Cnt <= 8'b0;
             State <= IDLE;
           end
           else begin
@@ -171,8 +176,14 @@ module SCurve_Test_Control(
         end
         WAIT_LOAD_SC_PARAM_DONE:begin
           SC_Param_Load <= 1'b0;
-          if(Microroc_Config_Done)
+          if(Microroc_Config_Done || (SC_Param_Load_Cnt != 8'd0 && SC_Param_Load_Cnt < SC_PARAM_LOAD_DELAY)) begin
+            State <= WAIT_LOAD_SC_PARAM_DONE;
+            SC_Param_Load_Cnt <= SC_Param_Load_Cnt + 1'b1;
+          end
+          else if(SC_Param_Load_Cnt == SC_PARAM_LOAD_DELAY)begin
             State <= START_SCURVE_TEST;
+            SC_Param_Load_Cnt <= 8'b0;
+          end
           else
             State <= WAIT_LOAD_SC_PARAM_DONE;
         end
@@ -202,8 +213,12 @@ module SCurve_Test_Control(
           State <= OUT_TRIGGER_DATA;
         end
         OUT_TRIGGER_DATA:begin
-          usb_data_fifo_wr_en <= 1'b1;
-          State <= WAIT_TRIGGER_DATA;
+          if(usb_data_fifo_full)
+            State <= OUT_TRIGGER_DATA;
+          else begin
+            usb_data_fifo_wr_en <= 1'b1;
+            State <= WAIT_TRIGGER_DATA;
+          end
         end
         CHECK_CHN_DONE:begin
           if(Actual_10bit_DAC_Code == 10'd1023)begin

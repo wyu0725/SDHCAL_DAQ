@@ -463,6 +463,7 @@ module FPGA_TOP(
       //.usb_data_fifo_full(),
       .usb_data_fifo_wr_en(SCTest_usb_data_fifo_wr_en),
       .usb_data_fifo_wr_din(SCTest_usb_data_fifo_wr_din),
+      .usb_data_fifo_full(usb_data_fifo_wr_full),
       /*--- Microroc Config Interface ---*/
       .Microroc_Config_Done(Config_Done),
       .Microroc_CTest_Chn_Out(SCTest_Microroc_CTest_Chn_Out),
