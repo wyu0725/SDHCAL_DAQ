@@ -65,7 +65,7 @@ module SCurve_Test_Control(
                      OUT_TRIGGER_DATA = 5'd12,
                      CHECK_CHN_DONE = 5'd13,
                      CHECK_ALL_DONE = 5'd14,
-                     TAIL_OUTR = 5'd15,
+                     TAIL_OUT = 5'd15,
                      WAIT_DONE = 5'd16,
                      ALL_DONE = 5'd17;
   localparam [15:0] SCURVE_TEST_HEADER = 16'h5343;//In ASCII 53 = S,43 = C.0x5343 stands for SC
