@@ -65,8 +65,9 @@ module SCurve_Test_Control(
                      OUT_TRIGGER_DATA = 5'd12,
                      CHECK_CHN_DONE = 5'd13,
                      CHECK_ALL_DONE = 5'd14,
-                     WAIT_DONE = 5'd15,
-                     ALL_DONE = 5'd16;
+                     TAIL_OUTR = 5'd15,
+                     WAIT_DONE = 5'd16,
+                     ALL_DONE = 5'd17;
   localparam [15:0] SCURVE_TEST_HEADER = 16'h5343;//In ASCII 53 = S,43 = C.0x5343 stands for SC
   localparam [63:0] SINGLE_CHN_PARAM_Ctest = 64'h0000_0000_0000_0001;
   localparam [63:0] CTest_CHN_PARAM_Input = 64'h0;
@@ -236,7 +237,7 @@ module SCurve_Test_Control(
             usb_data_fifo_wr_din <= 16'hFF45;
             //usb_data_fifo_wr_en <= 1'b1;
             //SCurve_Test_Done <= 1'b1;
-            State <= WAIT_DONE;
+            State <= TAIL_OUT;
           end
           else if(Test_Chn == 6'd63)begin
             All_Chn_Param <= 64'h0000_0000_0000_0001;
@@ -245,7 +246,7 @@ module SCurve_Test_Control(
             usb_data_fifo_wr_din <= 16'hFF45;
             //usb_data_fifo_wr_en <= 1'b1;
             //SCurve_Test_Done <= 1'b1;
-            State <= WAIT_DONE;
+            State <= TAIL_OUT;
           end
           else begin
             All_Chn_Param <= All_Chn_Param << 1'b1;
@@ -254,13 +255,17 @@ module SCurve_Test_Control(
             State <= OUT_TEST_CHN_AND_DISCRI_MASK_SC;
           end
         end
-        WAIT_DONE:begin
+        TAIL_OUT:begin
           usb_data_fifo_wr_en <= 1'b1;
+          State <= WAIT_DONE;
+        end
+        WAIT_DONE:begin
+          usb_data_fifo_wr_en <= 1'b0;
           SCurve_Test_Done <= 1'b1;
           State <= ALL_DONE;
         end
         ALL_DONE:begin
-          usb_data_fifo_wr_en <= 1'b0;
+          //usb_data_fifo_wr_en <= 1'b0;
           if(Data_Transmit_Done)begin
             SCurve_Test_Done <= 1'b0;
             State <= IDLE;
