@@ -66,8 +66,9 @@ module SCurve_Test_Control(
                      CHECK_CHN_DONE = 5'd13,
                      CHECK_ALL_DONE = 5'd14,
                      TAIL_OUT = 5'd15,
-                     WAIT_DONE = 5'd16,
-                     ALL_DONE = 5'd17;
+                     WAIT_TAIL_WRITE = 5'd16,
+                     WAIT_DONE = 5'd17,
+                     ALL_DONE = 5'd18;
   localparam [15:0] SCURVE_TEST_HEADER = 16'h5343;//In ASCII 53 = S,43 = C.0x5343 stands for SC
   localparam [63:0] SINGLE_CHN_PARAM_Ctest = 64'h0000_0000_0000_0001;
   localparam [63:0] CTest_CHN_PARAM_Input = 64'h0;
@@ -79,6 +80,7 @@ module SCurve_Test_Control(
   reg [9:0] Actual_10bit_DAC_Code;//In SC param the LSB of 10bit DAC code come first, so it's necessary to invert the code
   reg [11:0] SC_Param_Load_Cnt;
   localparam [11:0] SC_PARAM_LOAD_DELAY = 12'd2800;
+  reg [3:0] Wait_Tail_Cnt;
   always @(posedge Clk or negedge reset_n)begin
     if(~reset_n)begin
       All_Chn_Param <= 64'h0000_0000_0000_0001;
@@ -96,6 +98,7 @@ module SCurve_Test_Control(
       All_Chn_Discri_Mask <= {3'b111, 189'b0};
       Microroc_Discriminator_Mask <= {192{1'b1}};
       SC_Param_Load_Cnt <= 12'b0;
+      Wait_Tail_Cnt <= 4'b0;
       State <= IDLE;
     end
     else begin
@@ -115,6 +118,7 @@ module SCurve_Test_Control(
             All_Chn_Discri_Mask <= {3'b111, 189'b0};
             Microroc_Discriminator_Mask <= {192{1'b1}};
             SC_Param_Load_Cnt <= 12'b0;
+            Wait_Tail_Cnt <= 4'b0;
             State <= IDLE;
           end
           else begin
@@ -257,10 +261,21 @@ module SCurve_Test_Control(
         end
         TAIL_OUT:begin
           usb_data_fifo_wr_en <= 1'b1;
-          State <= WAIT_DONE;
+          State <= WAIT_TAIL_WRITE;
+        end
+        WAIT_TAIL_WRITE:begin
+          usb_data_fifo_wr_en <= 1'b0;
+          if(Wait_Tail_Cnt < 15) begin
+            Wait_Tail_Cnt <= Wait_Tail_Cnt + 1'b1;
+            State <= WAIT_TAIL_WRITE;
+          end
+          else begin
+            Wait_Tail_Cnt <= 4'b0;
+            State <= WAIT_DONE;
+          end
         end
         WAIT_DONE:begin
-          usb_data_fifo_wr_en <= 1'b0;
+          //usb_data_fifo_wr_en <= 1'b0;
           SCurve_Test_Done <= 1'b1;
           State <= ALL_DONE;
         end

@@ -101,7 +101,7 @@ namespace USB_DAQ
                 BulkOutEndPt = myDevice.EndPointOf(0x02) as CyBulkEndPoint; //EP2
                 BulkInEndPt = myDevice.EndPointOf(0x86) as CyBulkEndPoint;  //EP6
                 BulkInEndPt.XferSize = BulkInEndPt.MaxPktSize * 8;//4KB = 512bytes*8,4096
-                BulkInEndPt.TimeOut = 1000;
+                BulkInEndPt.TimeOut = 100;
 
                 btnSC_or_ReadReg.IsEnabled = true;
                 btnReset_cntb.IsEnabled = true;
@@ -1400,7 +1400,7 @@ namespace USB_DAQ
                     reports.AppendLine("USB fifo cleared");
                 else
                     reports.AppendLine("fail to clear USB fifo");
-                byte[] bytes = new byte[1024];
+                byte[] bytes = new byte[2048];
                 bResult = DataRecieve(bytes, bytes.Length);//读空剩余在USB芯片里面的数据
                 byte[] cmd_ScurveStart = ConstCommandByteArray(0xE0, 0xF0);
                 bResult = CommandSend(cmd_ScurveStart, 2);
@@ -1452,6 +1452,12 @@ namespace USB_DAQ
                     bw.Write(bytes); //接收成功写入文件,写文件很慢，没事可以等
                 }
             }*/
+            byte[] test = new byte[512];
+            bResult = DataRecieve(test, test.Length);
+            if (bResult)
+            {
+                bw.Write(test); //接收成功写入文件
+            }
             byte[] re_bytes = new byte[Scurve_Data_Remain];
             bResult = DataRecieve(re_bytes, re_bytes.Length);
             if (bResult)
@@ -1459,7 +1465,7 @@ namespace USB_DAQ
                  bw.Write(re_bytes); //接收成功写入文件
             }
             //---------------------------------------//
-            bw.Flush();
+            //bw.Flush();
             bw.Dispose();
             bw.Close();
             //report = string.Format("data stored in {0}\n", filepath);
