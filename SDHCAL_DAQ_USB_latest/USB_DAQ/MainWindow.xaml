@@ -92,13 +92,13 @@
                 <Label x:Name="lblDAC2_VTH" Content="DAC2 VTH:" HorizontalAlignment="Left" Margin="17,79,0,0" VerticalAlignment="Top"/>
                 <Label x:Name="lblHeader" Content="Header:" HorizontalAlignment="Left" Margin="34,101,0,0" VerticalAlignment="Top"/>
                 <Label x:Name="lblCTest" Content="CTest:" HorizontalAlignment="Left" Margin="44,124,0,0" VerticalAlignment="Top"/>
-                <TextBox x:Name="txtDAC0_VTH" HorizontalAlignment="Left" Height="20" Margin="86,40,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="68"/>
-                <TextBox x:Name="txtDAC1_VTH" HorizontalAlignment="Left" Height="20" Margin="86,62,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="68"/>
-                <TextBox x:Name="txtDAC2_VTH" HorizontalAlignment="Left" Height="20" Margin="86,84,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="68"/>
-                <TextBox x:Name="txtHeader" HorizontalAlignment="Left" Height="20" Margin="86,106,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="68"/>
-                <TextBox x:Name="txtCTest" HorizontalAlignment="Left" Height="20" Margin="86,128,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="68"/>
+                <TextBox x:Name="txtDAC0_VTH" HorizontalAlignment="Left" Height="20" Margin="86,40,0,0" TextWrapping="Wrap" Text="550" VerticalAlignment="Top" Width="68"/>
+                <TextBox x:Name="txtDAC1_VTH" HorizontalAlignment="Left" Height="20" Margin="86,62,0,0" TextWrapping="Wrap" Text="540" VerticalAlignment="Top" Width="68"/>
+                <TextBox x:Name="txtDAC2_VTH" HorizontalAlignment="Left" Height="20" Margin="86,84,0,0" TextWrapping="Wrap" Text="530" VerticalAlignment="Top" Width="68"/>
+                <TextBox x:Name="txtHeader" HorizontalAlignment="Left" Height="20" Margin="86,106,0,0" TextWrapping="Wrap" Text="A1" VerticalAlignment="Top" Width="68"/>
+                <TextBox x:Name="txtCTest" HorizontalAlignment="Left" Height="20" Margin="86,128,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="68"/>
                 <Label x:Name="lblRead_Reg" Content="ReadRegister:" HorizontalAlignment="Left" Margin="357,117,0,0" VerticalAlignment="Top"/>
-                <TextBox x:Name="txtRead_reg" HorizontalAlignment="Left" Height="20" Margin="446,122,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="76"/>
+                <TextBox x:Name="txtRead_reg" HorizontalAlignment="Left" Height="20" Margin="446,122,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="76"/>
                 <StackPanel HorizontalAlignment="Left" Height="30" Margin="403,203,0,0" VerticalAlignment="Top" Width="69">
                     <RadioButton GroupName="PP_En_Dis" Checked="PowerPulsing_Checked" Content="Enable"/>
                     <RadioButton GroupName="PP_En_Dis" Checked="PowerPulsing_Checked" Content="Disable"/>
@@ -115,10 +115,10 @@
                 <Button x:Name="btnTRIG_EXT_EN" Content="TRIG EXT" HorizontalAlignment="Left" Margin="364,294,0,0" VerticalAlignment="Top" Width="76" Height="24" Click="btnTRIG_EXT_EN_Click"/>
                 <Label x:Name="lblRAZ_External" Content="External RAZ Time" HorizontalAlignment="Left" Margin="4,233,0,0" VerticalAlignment="Top"/>
                 <ComboBox x:Name="cbxRaz_mode" HorizontalAlignment="Left" Margin="122,237,0,0" VerticalAlignment="Top" Width="74" RenderTransformOrigin="0.088,-0.048">
-                    <ComboBoxItem Content="75 ns" IsSelected="True"/>
+                    <ComboBoxItem Content="75 ns"/>
                     <ComboBoxItem Content="250 ns"/>
                     <ComboBoxItem Content="500 ns"/>
-                    <ComboBoxItem Content="1000 ns"/>
+                    <ComboBoxItem Content="1000 ns" IsSelected="True"/>
                 </ComboBox>
                 <ComboBox x:Name="cbxTrig_Coincid" HorizontalAlignment="Left" Margin="76,294,0,0" VerticalAlignment="Top" Width="94" RenderTransformOrigin="0.088,-0.048" Height="24">
                     <ComboBoxItem Content="OUT_TRIG0B" IsSelected="True"/>
@@ -157,8 +157,8 @@
                 <Button x:Name="btnOut_th_set" Content="set" HorizontalAlignment="Left" Margin="447,233,0,0" VerticalAlignment="Top" Width="75" Height="24" Click="btnOut_th_set_Click"/>
                 <Label x:Name="lblOut_sh" Content="Out sh:" HorizontalAlignment="Left" Margin="200,120,0,0" VerticalAlignment="Top"/>
                 <ComboBox x:Name="cbxOut_sh" HorizontalAlignment="Left" Margin="266,123,0,0" VerticalAlignment="Top" Width="76">
-                    <ComboBoxItem Content="low gain" IsSelected="True"/>
-                    <ComboBoxItem Content="high gain" />
+                    <ComboBoxItem Content="low gain" />
+                    <ComboBoxItem Content="high gain" IsSelected="True" />
                 </ComboBox>
                 <Label x:Name="Raz_Chn_Select" Content="RAZ Chn Select" HorizontalAlignment="Left" Margin="162,49,0,0" VerticalAlignment="Top" Width="104"/>
                 <StackPanel HorizontalAlignment="Left" Height="33" Margin="270,49,0,0" VerticalAlignment="Top" Width="100">

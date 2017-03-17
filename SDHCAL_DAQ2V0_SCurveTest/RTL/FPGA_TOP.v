@@ -479,7 +479,7 @@ module FPGA_TOP(
       .SCurve_Test_Done(SCurve_Test_Done),
       .Data_Transmit_Done(USB_Data_Transmit_Done)
     );
-    assign LED[5] = SCTest_Start_Stop;
+    assign LED[5] = ~(SCTest_Start_Stop || SCurve_Test_Done);
     /*------------usb data fifo instantiation-------*/ 
     //per ASIC 1270 depth x 16bit, 4 ASIC 5080 depth
     usb_data_fifo usb_data_fifo_8192depth 
@@ -499,7 +499,7 @@ module FPGA_TOP(
 //assignmeng
 assign TP[3] = START_ACQ;
 assign TP[2] = usb_data_fifo_wr_en;
-assign TP[1] = TRANSMITON1B&TRANSMITON2B;
+assign TP[1] = Config_Done;
 assign TP[0] = DOUT1B&DOUT2B;
 //debug
 (*mark_debug = "true"*)wire usb_data_fifo_wr_en_debug;

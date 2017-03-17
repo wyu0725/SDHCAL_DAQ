@@ -49,23 +49,24 @@ module SCurve_Test_Control(
     output reg SCurve_Test_Done,
     input Data_Transmit_Done
     );
-    reg [3:0] State;
-    localparam [3:0] IDLE = 4'd0,
-                     HEADER_OUT = 4'd1,
-                     OUT_TEST_CHN_AND_DISCRI_MASK_SC = 4'd2,
-                     OUT_TEST_CHN_USB = 4'd3,
-                     OUT_DAC_CODE_SC = 4'd4,
-                     OUT_DAC_CODE_USB = 4'd5,
-                     LOAD_SC_PARAM = 4'd6,
-                     WAIT_LOAD_SC_PARAM_DONE = 4'd7,
-                     START_SCURVE_TEST = 4'd8,
-                     PROCESS_SCURVE_TEST = 4'd9,
-                     WAIT_TRIGGER_DATA = 4'd10,
-                     GET_TRIGGER_DATA = 4'd11,
-                     OUT_TRIGGER_DATA = 4'd12,
-                     CHECK_CHN_DONE = 4'd13,
-                     CHECK_ALL_DONE = 4'd14,
-                     ALL_DONE = 4'd15;
+    reg [4:0] State;
+    localparam [4:0] IDLE = 5'd0,
+                     HEADER_OUT = 5'd1,
+                     OUT_TEST_CHN_AND_DISCRI_MASK_SC = 5'd2,
+                     OUT_TEST_CHN_USB = 5'd3,
+                     OUT_DAC_CODE_SC = 5'd4,
+                     OUT_DAC_CODE_USB = 5'd5,
+                     LOAD_SC_PARAM = 5'd6,
+                     WAIT_LOAD_SC_PARAM_DONE = 5'd7,
+                     START_SCURVE_TEST = 5'd8,
+                     PROCESS_SCURVE_TEST = 5'd9,
+                     WAIT_TRIGGER_DATA = 5'd10,
+                     GET_TRIGGER_DATA = 5'd11,
+                     OUT_TRIGGER_DATA = 5'd12,
+                     CHECK_CHN_DONE = 5'd13,
+                     CHECK_ALL_DONE = 5'd14,
+                     WAIT_DONE = 5'd15,
+                     ALL_DONE = 5'd16;
   localparam [15:0] SCURVE_TEST_HEADER = 16'h5343;//In ASCII 53 = S,43 = C.0x5343 stands for SC
   localparam [63:0] SINGLE_CHN_PARAM_Ctest = 64'h0000_0000_0000_0001;
   localparam [63:0] CTest_CHN_PARAM_Input = 64'h0;
@@ -75,8 +76,8 @@ module SCurve_Test_Control(
   reg [63:0] All_Chn_Param;
   reg [5:0] Test_Chn;
   reg [9:0] Actual_10bit_DAC_Code;//In SC param the LSB of 10bit DAC code come first, so it's necessary to invert the code
-  reg [7:0] SC_Param_Load_Cnt;
-  localparam [7:0] SC_PARAM_LOAD_DELAY = 8'd200;
+  reg [11:0] SC_Param_Load_Cnt;
+  localparam [11:0] SC_PARAM_LOAD_DELAY = 12'd2800;
   always @(posedge Clk or negedge reset_n)begin
     if(~reset_n)begin
       All_Chn_Param <= 64'h0000_0000_0000_0001;
@@ -93,7 +94,7 @@ module SCurve_Test_Control(
       Discri_Mask_Shift <= 8'b0;
       All_Chn_Discri_Mask <= {3'b111, 189'b0};
       Microroc_Discriminator_Mask <= {192{1'b1}};
-      SC_Param_Load_Cnt <= 8'b0;
+      SC_Param_Load_Cnt <= 12'b0;
       State <= IDLE;
     end
     else begin
@@ -112,7 +113,7 @@ module SCurve_Test_Control(
             SCurve_Test_Done <= 1'b0;
             All_Chn_Discri_Mask <= {3'b111, 189'b0};
             Microroc_Discriminator_Mask <= {192{1'b1}};
-            SC_Param_Load_Cnt <= 8'b0;
+            SC_Param_Load_Cnt <= 12'b0;
             State <= IDLE;
           end
           else begin
@@ -233,17 +234,18 @@ module SCurve_Test_Control(
         CHECK_ALL_DONE:begin
           if(Single_or_64Chn)begin //If single Channel test, only need one Channel data.
             usb_data_fifo_wr_din <= 16'hFF45;
-            usb_data_fifo_wr_en <= 1'b1;
-            State <= ALL_DONE;
+            //usb_data_fifo_wr_en <= 1'b1;
+            //SCurve_Test_Done <= 1'b1;
+            State <= WAIT_DONE;
           end
           else if(Test_Chn == 6'd63)begin
             All_Chn_Param <= 64'h0000_0000_0000_0001;
             All_Chn_Discri_Mask <= {3'b111, 189'b0};
             Test_Chn <= 6'd0;
             usb_data_fifo_wr_din <= 16'hFF45;
-            usb_data_fifo_wr_en <= 1'b1;
-            SCurve_Test_Done <= 1'b1;
-            State <= ALL_DONE;
+            //usb_data_fifo_wr_en <= 1'b1;
+            //SCurve_Test_Done <= 1'b1;
+            State <= WAIT_DONE;
           end
           else begin
             All_Chn_Param <= All_Chn_Param << 1'b1;
@@ -251,6 +253,11 @@ module SCurve_Test_Control(
             Test_Chn <= Test_Chn + 1'b1;
             State <= OUT_TEST_CHN_AND_DISCRI_MASK_SC;
           end
+        end
+        WAIT_DONE:begin
+          usb_data_fifo_wr_en <= 1'b1;
+          SCurve_Test_Done <= 1'b1;
+          State <= ALL_DONE;
         end
         ALL_DONE:begin
           usb_data_fifo_wr_en <= 1'b0;
@@ -261,6 +268,7 @@ module SCurve_Test_Control(
           else
             State <= ALL_DONE;
         end
+        default:State <= IDLE;
       endcase
     end
   end

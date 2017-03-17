@@ -53,7 +53,11 @@ namespace USB_DAQ
         //private int wave_cnt;
         private CancellationTokenSource data_acq_cts = new CancellationTokenSource();
         private CancellationTokenSource file_write_cts = new CancellationTokenSource();
-        private static int Scurve_Data_Length;
+        private const int Single_SCurve_Data_Length = 7171 * 2;
+        private const int AllChn_SCurve_Data_Length = 458818 * 2;
+        private const int SCurve_Package_Length = 512;
+        private static int Scurve_Data_Pkg;
+        private static int Scurve_Data_Remain;
         public MainWindow()
         {
 
@@ -97,7 +101,7 @@ namespace USB_DAQ
                 BulkOutEndPt = myDevice.EndPointOf(0x02) as CyBulkEndPoint; //EP2
                 BulkInEndPt = myDevice.EndPointOf(0x86) as CyBulkEndPoint;  //EP6
                 BulkInEndPt.XferSize = BulkInEndPt.MaxPktSize * 8;//4KB = 512bytes*8,4096
-                BulkInEndPt.TimeOut = 100;
+                BulkInEndPt.TimeOut = 1000;
 
                 btnSC_or_ReadReg.IsEnabled = true;
                 btnReset_cntb.IsEnabled = true;
@@ -212,7 +216,14 @@ namespace USB_DAQ
         private bool CommandSend(byte[] OutData, int xferLen)
         {
             bool bResult = false;
-            bResult = BulkOutEndPt.XferData(ref OutData,ref xferLen);
+            if (BulkInEndPt == null)
+            {
+                bResult = false;
+            }
+            else
+            {
+                bResult = BulkOutEndPt.XferData(ref OutData, ref xferLen);
+            }
             return bResult;
         }
         //data recieve method
@@ -1275,7 +1286,9 @@ namespace USB_DAQ
                 {
                     MessageBox.Show("Set S Curve single test mode failure. Please check the USB\n", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-                Scurve_Data_Length = 7171 * 2;//单通道产生这多字节的数据
+                //Scurve_data_length = 7171 * 2;//单通道产生这多字节的数据
+                Scurve_Data_Pkg = Single_SCurve_Data_Length / SCurve_Package_Length;
+                Scurve_Data_Remain = Single_SCurve_Data_Length % SCurve_Package_Length;
             }
             else if (botton.Content.ToString() == "64Chn")
             {
@@ -1289,7 +1302,9 @@ namespace USB_DAQ
                 {
                     MessageBox.Show("Set S Curve test in 64 channel mode failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-                Scurve_Data_Length = 458818 * 2;//64通道产生这么多字节的数据
+                //Scurve_data_length = 458818 * 2;//64通道产生这么多字节的数据
+                Scurve_Data_Pkg = AllChn_SCurve_Data_Length / SCurve_Package_Length;
+                Scurve_Data_Remain = AllChn_SCurve_Data_Length % SCurve_Package_Length;
             }
         }
         //E0C0:单通道测试时从CTest管脚输入,E0C1单通道测试从direct input输入
@@ -1380,13 +1395,15 @@ namespace USB_DAQ
                 StringBuilder reports = new StringBuilder();                
                 bool bResult = false;
                 byte[] cmd_ClrUSBFifo = ConstCommandByteArray(0xF0, 0xFA);
-                bResult = CommandSend(cmd_ClrUSBFifo, cmd_ClrUSBFifo.Length);//
+                bResult = CommandSend(cmd_ClrUSBFifo, 2);//
                 if (bResult)
                     reports.AppendLine("USB fifo cleared");
                 else
                     reports.AppendLine("fail to clear USB fifo");
+                byte[] bytes = new byte[1024];
+                bResult = DataRecieve(bytes, bytes.Length);//读空剩余在USB芯片里面的数据
                 byte[] cmd_ScurveStart = ConstCommandByteArray(0xE0, 0xF0);
-                bResult = CommandSend(cmd_ScurveStart, cmd_ScurveStart.Length);
+                bResult = CommandSend(cmd_ScurveStart, 2);
                 if (bResult)
                 {
                     reports.AppendLine("Scurve Test Thread start");
@@ -1395,7 +1412,7 @@ namespace USB_DAQ
                     Scurve_test.Start();
                     //wait for task ending
                     Scurve_test.Wait();
-                    byte [] cmd_ScurveEnd = ConstCommandByteArray(0xE0, 0xF1);
+                    byte [] cmd_ScurveEnd = ConstCommandByteArray(0xE0, 0xF1);//这里需要添加取消操作吗？
                     if (CommandSend(cmd_ScurveEnd, 2))
                     {
                         reports.AppendLine("Scurve Test Thread End");
@@ -1413,33 +1430,40 @@ namespace USB_DAQ
         private void Get_ScurveResultCallBack()
         {
             DisplayPacketNum dp2 = new DisplayPacketNum((string s) => { ShowPacketNum(s); });
-            string report;
+            //string report;
             bw = new BinaryWriter(File.Open(filepath, FileMode.Append));
             bool bResult = false;
-            int Data_Length = 0;
-            const int Package_Length = 2048;
-            byte[] bytes = new byte[Package_Length];//
-            while (Data_Length < Scurve_Data_Length)
+            byte[] bytes = new byte[SCurve_Package_Length];//应分片，不让太大了一次性弄不完
+            int Package_Count = 0;
+            while (Package_Count < Scurve_Data_Pkg)
             {
                 bResult = DataRecieve(bytes, bytes.Length);
                 if (bResult)
                 {
-                    bw.Write(bytes); //接收成功写入文件
-                    Data_Length += Package_Length;
-                    report = string.Format("Get {0} data\n", Package_Length / 2);
-                    txtReport.AppendText(report);
+                    bw.Write(bytes); //接收成功写入文件,写文件很慢，没事可以等
+                    Package_Count++;
                 }
-                else
+            }
+            /*for (int i = 0; i < Scurve_data_pkg; i++)
+            {
+                bResult = DataRecieve(bytes, bytes.Length);
+                if (bResult)
                 {
-                    txtReport.AppendText("Get S curve test data failure\n");
+                    bw.Write(bytes); //接收成功写入文件,写文件很慢，没事可以等
                 }
+            }*/
+            byte[] re_bytes = new byte[Scurve_Data_Remain];
+            bResult = DataRecieve(re_bytes, re_bytes.Length);
+            if (bResult)
+            {
+                 bw.Write(re_bytes); //接收成功写入文件
             }
             //---------------------------------------//
             bw.Flush();
             bw.Dispose();
             bw.Close();
-            report = string.Format("data stored in {0}\n", filepath);
-            Dispatcher.Invoke(dp2, report);
+            //report = string.Format("data stored in {0}\n", filepath);
+            //Dispatcher.Invoke(dp2, report);
         }
     }
 }
