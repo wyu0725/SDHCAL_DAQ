@@ -19,18 +19,30 @@ Legend_Trig0 = sprintf('Trigger0:Trigger Rate vs DAC Code\n Middle of trigger ra
 Legend_Trig1 = sprintf('Trigger1:Trigger Rate vs DAC Code\n Middle of trigger rate is :%f', Middle1);
 Legend_Trig2 = sprintf('Trigger2:Trigger Rate vs DAC Code\n Middle of trigger rate is :%f', Middle2);
 
-figure(1)
-plot(DAC_Code, Trig_Ratio0);
-axis([x0_S x0_E, -0.2 1.2])
-h = legend(Legend_Trig0);
-set(h,'Location','northoutside');
-figure(2)
-plot(DAC_Code, Trig_Ratio1);
-axis([x1_S x1_E, -0.2 1.2])
-h = legend(Legend_Trig1);
-set(h,'Location','northoutside');
-figure(3)
-plot(DAC_Code, Trig_Ratio2);
-axis([x2_S x2_E, -0.2 1.2])
-h = legend(Legend_Trig2);
-set(h,'Location','northoutside');
+plot(DAC_Code, Trig_Ratio0,'k*-');
+hold on;
+plot(DAC_Code, Trig_Ratio1,'b*-');
+hold on;
+plot(DAC_Code, Trig_Ratio2,'r*-');
+hold off;
+axis([0 1024, -0.1 1.1])
+xlabel('\bfDAC Code');
+ylabel('\bfTrigger rate');
+h = legend('Triiger0','Trigger1','Trigger2');
+set(h, 'Location','southeast')
+title('\bfS-Curve Test, 80fC');
+% figure(1)
+% plot(DAC_Code, Trig_Ratio0,'k*-');
+% axis([x0_S x0_E, -0.2 1.2])
+% h = legend(Legend_Trig0);
+% set(h,'Location','northoutside');
+% figure(2)
+% plot(DAC_Code, Trig_Ratio1,'k*-');
+% axis([x1_S x1_E, -0.2 1.2])
+% h = legend(Legend_Trig1);
+% set(h,'Location','northoutside');
+% figure(3)
+% plot(DAC_Code, Trig_Ratio2,'k*-');
+% axis([x2_S x2_E, -0.2 1.2])
+% h = legend(Legend_Trig2);
+% set(h,'Location','northoutside');

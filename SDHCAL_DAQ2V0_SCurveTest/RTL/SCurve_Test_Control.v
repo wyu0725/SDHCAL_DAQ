@@ -72,7 +72,7 @@ module SCurve_Test_Control(
   localparam [15:0] SCURVE_TEST_HEADER = 16'h5343;//In ASCII 53 = S,43 = C.0x5343 stands for SC
   localparam [63:0] SINGLE_CHN_PARAM_Ctest = 64'h0000_0000_0000_0001;
   localparam [63:0] CTest_CHN_PARAM_Input = 64'h0;
-  localparam [191:0] DISCRIMINATOR_MASK = {3'b111,189'b0};
+  localparam [191:0] DISCRIMINATOR_MASK = {189'b0, 3'b111};
   reg [8:0] Discri_Mask_Shift;
   reg [191:0] All_Chn_Discri_Mask;
   reg [63:0] All_Chn_Param;
@@ -95,7 +95,7 @@ module SCurve_Test_Control(
       SC_Param_Load <= 1'b0;
       SCurve_Test_Done <= 1'b0;
       Discri_Mask_Shift <= 8'b0;
-      All_Chn_Discri_Mask <= {3'b111, 189'b0};
+      All_Chn_Discri_Mask <= {189'b0, 3'b111};
       Microroc_Discriminator_Mask <= {192{1'b1}};
       SC_Param_Load_Cnt <= 12'b0;
       Wait_Tail_Cnt <= 4'b0;
@@ -115,7 +115,7 @@ module SCurve_Test_Control(
             Microroc_10bit_DAC_Out <= 10'b0;
             SC_Param_Load <= 1'b0;
             SCurve_Test_Done <= 1'b0;
-            All_Chn_Discri_Mask <= {3'b111, 189'b0};
+            All_Chn_Discri_Mask <= {189'b0, 3'b111};
             Microroc_Discriminator_Mask <= {192{1'b1}};
             SC_Param_Load_Cnt <= 12'b0;
             Wait_Tail_Cnt <= 4'b0;
@@ -137,7 +137,7 @@ module SCurve_Test_Control(
           if(Single_or_64Chn) begin //Select single channel test and the charge is injected from CTest pin
             Microroc_CTest_Chn_Out <= Ctest_or_Input ? (SINGLE_CHN_PARAM_Ctest << SingleTest_Chn) : CTest_CHN_PARAM_Input;
             usb_data_fifo_wr_din <= {8'h43, 2'b00, SingleTest_Chn};//0x43 in ascii is C   
-            Microroc_Discriminator_Mask <= (DISCRIMINATOR_MASK >> Discri_Mask_Shift);
+            Microroc_Discriminator_Mask <= (DISCRIMINATOR_MASK << Discri_Mask_Shift);
             State <= OUT_TEST_CHN_USB;
           end
           else begin
@@ -245,7 +245,7 @@ module SCurve_Test_Control(
           end
           else if(Test_Chn == 6'd63)begin
             All_Chn_Param <= 64'h0000_0000_0000_0001;
-            All_Chn_Discri_Mask <= {3'b111, 189'b0};
+            All_Chn_Discri_Mask <= {189'b0, 3'b111};
             Test_Chn <= 6'd0;
             usb_data_fifo_wr_din <= 16'hFF45;
             //usb_data_fifo_wr_en <= 1'b1;
@@ -254,7 +254,7 @@ module SCurve_Test_Control(
           end
           else begin
             All_Chn_Param <= All_Chn_Param << 1'b1;
-            All_Chn_Discri_Mask <= (All_Chn_Discri_Mask >> 3);
+            All_Chn_Discri_Mask <= (All_Chn_Discri_Mask << 3);
             Test_Chn <= Test_Chn + 1'b1;
             State <= OUT_TEST_CHN_AND_DISCRI_MASK_SC;
           end
