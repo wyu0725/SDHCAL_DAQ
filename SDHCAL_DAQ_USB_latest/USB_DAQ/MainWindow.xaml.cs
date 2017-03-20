@@ -1288,9 +1288,9 @@ namespace USB_DAQ
                 }
                 //Scurve_data_length = 7171 * 2;//单通道产生这多字节的数据
                 Scurve_Data_Pkg = Single_SCurve_Data_Length / SCurve_Package_Length;
-                Scurve_Data_Remain = Single_SCurve_Data_Length % SCurve_Package_Length + 1;
+                Scurve_Data_Remain = Single_SCurve_Data_Length % SCurve_Package_Length;
             }
-            else if (botton.Content.ToString() == "64Chn")
+            else if (botton.Content.ToString() == "Auto")
             {
                 byte[] bytes = ConstCommandByteArray(0xE0, 0xB1);
                 bResult = CommandSend(bytes, bytes.Length);
@@ -1304,7 +1304,7 @@ namespace USB_DAQ
                 }
                 //Scurve_data_length = 458818 * 2;//64通道产生这么多字节的数据
                 Scurve_Data_Pkg = AllChn_SCurve_Data_Length / SCurve_Package_Length;
-                Scurve_Data_Remain = AllChn_SCurve_Data_Length % SCurve_Package_Length + 1;
+                Scurve_Data_Remain = AllChn_SCurve_Data_Length % SCurve_Package_Length;
             }
         }
         //E0C0:单通道测试时从CTest管脚输入,E0C1单通道测试从direct input输入
