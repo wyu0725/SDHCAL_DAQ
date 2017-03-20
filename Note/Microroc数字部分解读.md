@@ -18,12 +18,15 @@
 + 还可以在SC参数中设置trigger mask，是的某一通道的某一个比较器不输出，当然这个功能不用
 + 编码：每个通道的3个比较器输出的结果会被编码成两位二进制，编码方式如下
 
-|Discri2|Discri2|Discri0|EnCode<1>|EnCode<0>|
-|---|---|---|---|---|
-|0|0|0|0|0|
-|0|0|1|0|1
-|0|1|1|1|0|
-|1|1|1|1|1|
+| Discri2 | Discri2 | Discri0 | EnCode<1> | EnCode<0> |
+| :-----: | :-----: | :-----: | :-------: | :-------: |
+|    0    |    0    |    0    |     0     |     0     |
+|    0    |    0    |    1    |     0     |     1     |
+|    0    |    1    |    1    |     1     |     0     |
+|    1    |    1    |    1    |     1     |     1     |
+
+
+
 
 + 编码的结果通过一个或非门输出写使能信号，输出给后端电路进行一次写入使能，然后编码信息被写入RAM
 
@@ -36,11 +39,11 @@
 + 编码信息在触发信号的作用下，被写入RAM
 + 片内RAM大小为128×160b，即RAM的一个地址存储一次编码的结果，即为1帧
 + 帧按照如下的顺序排列
-	1 byte Header (a5a5)
-	3 bites BCID (Bunch Counter ID)
-	4 bytes (encode0<Ch48>,encode1<ch48>,...,encode0<Ch63>,encode1<ch63>)
-	4 bytes (Ch32 to Ch47)
-	4 bytes (Ch16 to Ch31)
-	4 bytes (Ch0  to Ch15)
+   1 byte Header (a5a5)
+    3 bites BCID (Bunch Counter ID)
+    4 bytes (encode0<Ch48>,encode1<ch48>,...,encode0<Ch63>,encode1<ch63>)
+    4 bytes (Ch32 to Ch47)
+    4 bytes (Ch16 to Ch31)
+    4 bytes (Ch0  to Ch15)
 + 帧的顺序有一点点奇怪，排列下来似乎是这样子的$Ch48\sim Ch63,Ch32\sim Ch47,Ch16\sim Ch31,Ch0\simCh15$
 + 当可以读出后，TransmitOn管脚输出低电平，在读书时钟控制下串行读回
