@@ -11,8 +11,8 @@ Trig_Ratio2 = T2./P2;
 [Start2, Middle2, End2] = FindStartMidEnd(Trig_Ratio2, 1024);
 x0_S = Start0 - 10;
 x0_E = End0 + 10;
-x1_S = Start0 - 10;
-x1_E = End0 + 10;
+x1_S = Start1 - 10;
+x1_E = End1 + 10;
 x2_S = Start2 - 10;
 x2_E = End2 + 10;
 Legend_Trig0 = sprintf('Trigger0:Trigger Rate vs DAC Code\n Middle of trigger rate is :%f', Middle0);
@@ -34,15 +34,18 @@ title('\bfS-Curve Test, 80fC');
 % figure(1)
 % plot(DAC_Code, Trig_Ratio0,'k*-');
 % axis([x0_S x0_E, -0.2 1.2])
+% % axis([Start0 End0, -0.2 1.2])
 % h = legend(Legend_Trig0);
 % set(h,'Location','northoutside');
 % figure(2)
 % plot(DAC_Code, Trig_Ratio1,'k*-');
 % axis([x1_S x1_E, -0.2 1.2])
+% % axis([Start1 End1, -0.2 1.2])
 % h = legend(Legend_Trig1);
 % set(h,'Location','northoutside');
 % figure(3)
 % plot(DAC_Code, Trig_Ratio2,'k*-');
 % axis([x2_S x2_E, -0.2 1.2])
+% % axis([Start2 End2, -0.2 1.2])
 % h = legend(Legend_Trig2);
 % set(h,'Location','northoutside');
