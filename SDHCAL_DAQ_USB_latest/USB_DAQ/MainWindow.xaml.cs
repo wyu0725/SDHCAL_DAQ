@@ -1435,7 +1435,7 @@ namespace USB_DAQ
             bool bResult = false;
             byte[] bytes = new byte[SCurve_Package_Length];//应分片，不让太大了一次性弄不完
             int Package_Count = 0;
-            while (Package_Count < Scurve_Data_Pkg)
+            while (Package_Count <= Scurve_Data_Pkg)//这里应该用<=而不是<最后一个包虽然不够512个，但是USB还是提交了这么多，要是少抓一个可能出现超时最后一个包收不到的情况
             {
                 bResult = DataRecieve(bytes, bytes.Length);
                 if (bResult)
