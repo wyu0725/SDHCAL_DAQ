@@ -1435,7 +1435,7 @@ namespace USB_DAQ
             bool bResult = false;
             byte[] bytes = new byte[SCurve_Package_Length];//应分片，不让太大了一次性弄不完
             int Package_Count = 0;
-            while (Package_Count <= Scurve_Data_Pkg)//这里应该用<=而不是<最后一个包虽然不够512个，但是USB还是提交了这么多，要是少抓一个可能出现超时最后一个包收不到的情况
+            while (Package_Count < Scurve_Data_Pkg)
             {
                 bResult = DataRecieve(bytes, bytes.Length);
                 if (bResult)
@@ -1457,13 +1457,18 @@ namespace USB_DAQ
             if (bResult)
             {
                 bw.Write(test); //接收成功写入文件
-            }
-            byte[] re_bytes = new byte[Scurve_Data_Remain];
-            bResult = DataRecieve(re_bytes, re_bytes.Length);
-            if (bResult)
-            {
-                 bw.Write(re_bytes); //接收成功写入文件
             }*/
+            byte[] re_bytes = new byte[Scurve_Data_Remain];
+            bool IsDone = false;
+            while (!IsDone)
+            {
+                bResult = DataRecieve(re_bytes, re_bytes.Length);
+                if (bResult)
+                {
+                    bw.Write(re_bytes); //接收成功写入文件
+                    IsDone = true;
+                }
+            }
             //---------------------------------------//
             //bw.Flush();
             bw.Dispose();
