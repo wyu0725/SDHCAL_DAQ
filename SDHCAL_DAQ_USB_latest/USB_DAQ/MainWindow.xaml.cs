@@ -1452,7 +1452,7 @@ namespace USB_DAQ
                     bw.Write(bytes); //接收成功写入文件,写文件很慢，没事可以等
                 }
             }*/
-            byte[] test = new byte[512];
+            /*byte[] test = new byte[512];
             bResult = DataRecieve(test, test.Length);
             if (bResult)
             {
@@ -1463,7 +1463,7 @@ namespace USB_DAQ
             if (bResult)
             {
                  bw.Write(re_bytes); //接收成功写入文件
-            }
+            }*/
             //---------------------------------------//
             //bw.Flush();
             bw.Dispose();
