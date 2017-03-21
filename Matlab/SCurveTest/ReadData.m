@@ -1,5 +1,5 @@
 function [Channel, DAC_Code, CountP0, CountT0, CountP1, CountT1, CountP2, CountT2] = ReadData(Initialdata, ReadStart)
-Channel = Initialdata(ReadStart);
+Channel = bitand(Initialdata(ReadStart), uint16(255));
 DAC_Code = 1:1:1024;
 CountP0 = 1:1:1024;
 CountP1 = 1:1:1024;
