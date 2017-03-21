@@ -1,5 +1,5 @@
 %% SCurve Plot
-function SCurvePlot
+% function SCurvePlot
 InitialData = Importdata();
 %Test_Header = InitialData(1);
 %[Test_Channel, DAC_Code, P0, T0, P1, T1, P2, T2] = ReadData(InitialData, 2);
