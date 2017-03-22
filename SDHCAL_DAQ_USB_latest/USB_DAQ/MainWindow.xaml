@@ -6,7 +6,7 @@
         xmlns:d3="http://research.microsoft.com/DynamicDataDisplay/1.0"
         xmlns:ext="clr-namespace:USB_DAQ.Extension"   
         mc:Ignorable="d"
-        Title="SDHCAL_DAQ_USB" Height="807.333" Width="1211.667" Closing="Window_Closing">
+        Title="SDHCAL_DAQ_USB" Height="665.333" Width="1042.167" Closing="Window_Closing">
     <Window.Resources>
         <Style x:Key="ButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="DarkGreen"/>
@@ -46,17 +46,17 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Label x:Name="label" Content="Message" HorizontalAlignment="Left" Margin="97,10,0,0" VerticalAlignment="Top"/>
-        <GroupBox x:Name="gbxUSBStatus" Header="Status" HorizontalAlignment="Left" Margin="977,34,0,0" VerticalAlignment="Top" Height="56" Width="189">
+        <GroupBox x:Name="gbxUSBStatus" Header="Status" HorizontalAlignment="Left" Margin="818,32,0,0" VerticalAlignment="Top" Height="57" Width="189">
             <Label x:Name="usb_status" Content="USB device not connected" HorizontalAlignment="Left" Height="24" Margin="9,2,0,0" VerticalAlignment="Top" Width="160" Background="Transparent" />
         </GroupBox>
-        <Button x:Name="btnCommandSend" Content="CommandSend" HorizontalAlignment="Left" Margin="1063,100,0,0" VerticalAlignment="Top" Width="102" Height="22" Click="btnCommandSend_Click"/>
-        <TextBox x:Name="txtCommand" HorizontalAlignment="Left" Height="22" Margin="980,100,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="78" IsEnabled="False"/>
-        <TextBox x:Name="txtReport" HorizontalAlignment="Left" Height="704" Margin="22,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="212" IsReadOnlyCaretVisible="True" IsUndoEnabled="False" IsReadOnly="True"
+        <Button x:Name="btnCommandSend" Content="CommandSend" HorizontalAlignment="Left" Margin="904,98,0,0" VerticalAlignment="Top" Width="102" Height="22" Click="btnCommandSend_Click"/>
+        <TextBox x:Name="txtCommand" HorizontalAlignment="Left" Height="22" Margin="821,99,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="78" IsEnabled="False"/>
+        <TextBox x:Name="txtReport" HorizontalAlignment="Left" Height="534" Margin="22,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="212" IsReadOnlyCaretVisible="True" IsUndoEnabled="False" IsReadOnly="True"
                  ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto"
                  ScrollViewer.CanContentScroll="True">
         </TextBox>
-        <Button x:Name="btnClearReport" Content="Clear" HorizontalAlignment="Left" Margin="85,745,0,0" VerticalAlignment="Top" Width="73" Click="btnClearReport_Click" Height="21"/>
-        <GroupBox x:Name="gbxFile" Header="File operations" HorizontalAlignment="Left" Height="85" Margin="258,681,0,0" VerticalAlignment="Top" Width="556">
+        <Button x:Name="btnClearReport" Content="Clear" HorizontalAlignment="Left" Margin="83,589,0,0" VerticalAlignment="Top" Width="73" Click="btnClearReport_Click" Height="21"/>
+        <GroupBox x:Name="gbxFile" Header="File operations" HorizontalAlignment="Left" Height="85" Margin="259,537,0,0" VerticalAlignment="Top" Width="556">
             <Grid Margin="0,0,0,0">
                 <Label x:Name="label1" Content="File Directory:" HorizontalAlignment="Left" Margin="3,5,0,0" VerticalAlignment="Top"/>
                 <TextBox x:Name="txtFileDir" HorizontalAlignment="Left" Height="23" Margin="93,9,0,0" TextWrapping="Wrap" Text="D:\ExperimentsData\test" VerticalAlignment="Top" Width="302"/>
@@ -67,8 +67,8 @@
                 <Button x:Name="btnFileSave" Content="Save" HorizontalAlignment="Left" Margin="222,38,0,0" VerticalAlignment="Top" Width="54" Click="btnFileSave_Click"/>
             </Grid>
         </GroupBox>
-        <GroupBox x:Name="gbxMICROROC" Header="MICROROC Control" HorizontalAlignment="Left" Margin="258,28,0,0" VerticalAlignment="Top" Height="648" Width="694">
-            <Grid  Margin="0,0,-12,0" >
+        <GroupBox x:Name="gbxMICROROC" Header="MICROROC Control" HorizontalAlignment="Left" Margin="258,28,0,0" VerticalAlignment="Top" Height="494" Width="540">
+            <Grid  Margin="0,0,0,0" >
                 <Label x:Name="lblASIC_Number" Content="ASIC Number:" HorizontalAlignment="Left" Margin="1,11,0,0" VerticalAlignment="Top"/>
                 <ComboBox x:Name="cbxASIC_Number" HorizontalAlignment="Left" Margin="85,14,0,0" VerticalAlignment="Top" Width="69" RenderTransformOrigin="0.088,-0.048">
                     <ComboBox.Items>
@@ -78,9 +78,9 @@
                         <ComboBoxItem Content="4 ASICs"/>
                     </ComboBox.Items>
                 </ComboBox>
-                <Button x:Name="btnAcqStart" Content="AcqStart" HorizontalAlignment="Left" Margin="439,547,0,0" VerticalAlignment="Top" Width="84" Height="25" Click="btnAcqStart_Click"/>
+                <Button x:Name="btnAcqStart" Content="AcqStart" HorizontalAlignment="Left" Margin="402,352,0,0" VerticalAlignment="Top" Width="84" Height="25" Click="btnAcqStart_Click"/>
                 <Label x:Name="lblSc_or_Read" Content="SC or Read:" HorizontalAlignment="Left" Margin="357,12,0,0" VerticalAlignment="Top" Width="72" Height="23"/>
-                <Button x:Name="btnSC_or_ReadReg" Content="Load Param" HorizontalAlignment="Left" Margin="600,352,0,0" VerticalAlignment="Top" Width="84" Height="24" Click="btnSC_or_ReadReg_Click"/>
+                <Button x:Name="btnSC_or_ReadReg" Content="Load Param" HorizontalAlignment="Left" Margin="437,147,0,0" VerticalAlignment="Top" Width="84" Height="24" Click="btnSC_or_ReadReg_Click"/>
                 <StackPanel HorizontalAlignment="Left" Height="31" Margin="434,14,0,0" VerticalAlignment="Top" Width="75">
                     <!--RadioButton x:Name="rtnSC" Content="SC" HorizontalAlignment="Left" VerticalAlignment="Top"/-->
                     <RadioButton GroupName="SC_or_Read" Checked="SC_or_Read_Checked" Margin="-2,0,-7,0" Content="SC"/>
@@ -99,7 +99,7 @@
                 <TextBox x:Name="txtCTest" HorizontalAlignment="Left" Height="20" Margin="86,128,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="68"/>
                 <Label x:Name="lblRead_Reg" Content="ReadRegister:" HorizontalAlignment="Left" Margin="357,117,0,0" VerticalAlignment="Top"/>
                 <TextBox x:Name="txtRead_reg" HorizontalAlignment="Left" Height="20" Margin="446,122,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="76"/>
-                <StackPanel HorizontalAlignment="Left" Height="30" Margin="395,398,0,0" VerticalAlignment="Top" Width="69">
+                <StackPanel HorizontalAlignment="Left" Height="30" Margin="403,203,0,0" VerticalAlignment="Top" Width="69">
                     <RadioButton GroupName="PP_En_Dis" Checked="PowerPulsing_Checked" Content="Enable"/>
                     <RadioButton GroupName="PP_En_Dis" Checked="PowerPulsing_Checked" Content="Disable"/>
                 </StackPanel>
@@ -109,27 +109,27 @@
                     <!--RadioButton x:Name="rtnChannel1" Content="Channel1"/-->
                     <!--RadioButton x:Name="rtnChannel2" Content="Channel2"/-->
                 </StackPanel>
-                <Label x:Name="lblPower_Pulsing" Content="Powerpulsing" HorizontalAlignment="Left" Margin="311,403,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="lblPower_Pulsing" Content="Powerpulsing" HorizontalAlignment="Left" Margin="310,203,0,0" VerticalAlignment="Top"/>
                 <Label x:Name="lblChannel_Sel" Content="Channel select" HorizontalAlignment="Left" Margin="163,14,0,0" VerticalAlignment="Top"/>
-                <Button x:Name="btnReset_cntb" Content="Reset cntb" HorizontalAlignment="Left" Margin="449,493,0,0" VerticalAlignment="Top" Width="76" Height="24" Click="btnReset_cntb_Click"/>
-                <Button x:Name="btnTRIG_EXT_EN" Content="TRIG EXT" HorizontalAlignment="Left" Margin="365,494,0,0" VerticalAlignment="Top" Width="76" Height="24" Click="btnTRIG_EXT_EN_Click"/>
-                <Label x:Name="lblRAZ_External" Content="External RAZ Time" HorizontalAlignment="Left" Margin="5,433,0,0" VerticalAlignment="Top"/>
-                <ComboBox x:Name="cbxRaz_mode" HorizontalAlignment="Left" Margin="123,437,0,0" VerticalAlignment="Top" Width="74" RenderTransformOrigin="0.088,-0.048">
+                <Button x:Name="btnReset_cntb" Content="Reset cntb" HorizontalAlignment="Left" Margin="448,293,0,0" VerticalAlignment="Top" Width="76" Height="24" Click="btnReset_cntb_Click"/>
+                <Button x:Name="btnTRIG_EXT_EN" Content="TRIG EXT" HorizontalAlignment="Left" Margin="364,294,0,0" VerticalAlignment="Top" Width="76" Height="24" Click="btnTRIG_EXT_EN_Click"/>
+                <Label x:Name="lblRAZ_External" Content="External RAZ Time" HorizontalAlignment="Left" Margin="4,233,0,0" VerticalAlignment="Top"/>
+                <ComboBox x:Name="cbxRaz_mode" HorizontalAlignment="Left" Margin="122,237,0,0" VerticalAlignment="Top" Width="74" RenderTransformOrigin="0.088,-0.048">
                     <ComboBoxItem Content="75 ns"/>
                     <ComboBoxItem Content="250 ns"/>
                     <ComboBoxItem Content="500 ns"/>
                     <ComboBoxItem Content="1000 ns" IsSelected="True"/>
                 </ComboBox>
-                <ComboBox x:Name="cbxTrig_Coincid" HorizontalAlignment="Left" Margin="77,494,0,0" VerticalAlignment="Top" Width="94" RenderTransformOrigin="0.088,-0.048" Height="24">
+                <ComboBox x:Name="cbxTrig_Coincid" HorizontalAlignment="Left" Margin="76,294,0,0" VerticalAlignment="Top" Width="94" RenderTransformOrigin="0.088,-0.048" Height="24">
                     <ComboBoxItem Content="OUT_TRIG0B" IsSelected="True"/>
                     <ComboBoxItem Content="OUT_TRIG1B"/>
                     <ComboBoxItem Content="OUT_TRIG2B"/>
                     <ComboBoxItem Content="EXT_TRIGB"/>
                 </ComboBox>
-                <TextBox x:Name="txtHold_delay" HorizontalAlignment="Left" Height="21" Margin="177,496,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="68"/>
-                <Button x:Name="btnSet_Raz_Width" Content="SET RAZ" HorizontalAlignment="Left" Margin="205,436,0,0" VerticalAlignment="Top" Width="76" Height="24" Click="btnSet_Raz_Width_Click"/>
-                <Button x:Name="btnSet_Hold" Content="SET HOLD" HorizontalAlignment="Left" Margin="251,494,0,0" VerticalAlignment="Top" Width="76" Height="24" Click="btnSet_Hold_Click"/>
-                <Label x:Name="lblHold_Gen" Content="Hold Gen" HorizontalAlignment="Left" Margin="5,493,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="txtHold_delay" HorizontalAlignment="Left" Height="21" Margin="176,296,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="68"/>
+                <Button x:Name="btnSet_Raz_Width" Content="SET RAZ" HorizontalAlignment="Left" Margin="204,236,0,0" VerticalAlignment="Top" Width="76" Height="24" Click="btnSet_Raz_Width_Click"/>
+                <Button x:Name="btnSet_Hold" Content="SET HOLD" HorizontalAlignment="Left" Margin="250,294,0,0" VerticalAlignment="Top" Width="76" Height="24" Click="btnSet_Hold_Click"/>
+                <Label x:Name="lblHold_Gen" Content="Hold Gen" HorizontalAlignment="Left" Margin="4,293,0,0" VerticalAlignment="Top"/>
                 <Label x:Name="lblsw_hg" Content="sw hg:" HorizontalAlignment="Left" Margin="352,82,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.348,0.846"/>
                 <Label x:Name="lblsw_lg" Content="sw lg:" HorizontalAlignment="Left" Margin="438,83,0,0" VerticalAlignment="Top"/>
                 <ComboBox x:Name="cbxsw_hg" HorizontalAlignment="Left" Margin="395,86,0,0" VerticalAlignment="Top" Width="41" RenderTransformOrigin="3.89,0">
@@ -144,17 +144,17 @@
                     <ComboBoxItem Content="10"/>
                     <ComboBoxItem Content="11"/>
                 </ComboBox>
-                <Label x:Name="lblStartAcq_Time" Content="StartAcq Time(ns)" HorizontalAlignment="Left" Margin="5,463,0,0" VerticalAlignment="Top"/>
-                <TextBox x:Name="txtStartAcqTime" HorizontalAlignment="Left" Height="20" Margin="123,468,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="74"/>
-                <Button x:Name="btnSetAcqTime" Content="SET Time" HorizontalAlignment="Left" Margin="206,465,0,0" VerticalAlignment="Top" Width="75" Height="24" Click="btnSetAcqTime_Click"/>
-                <Label x:Name="lblOUT_TH" Content="OUT TH:" HorizontalAlignment="Left" Margin="296,431,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.806,0.942"/>
-                <ComboBox x:Name="cbxOut_th" HorizontalAlignment="Left" Margin="365,435,0,0" VerticalAlignment="Top" Width="74">
+                <Label x:Name="lblStartAcq_Time" Content="StartAcq Time(ns)" HorizontalAlignment="Left" Margin="4,263,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="txtStartAcqTime" HorizontalAlignment="Left" Height="20" Margin="122,268,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="74"/>
+                <Button x:Name="btnSetAcqTime" Content="SET Time" HorizontalAlignment="Left" Margin="205,265,0,0" VerticalAlignment="Top" Width="75" Height="24" Click="btnSetAcqTime_Click"/>
+                <Label x:Name="lblOUT_TH" Content="OUT TH:" HorizontalAlignment="Left" Margin="295,231,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.806,0.942"/>
+                <ComboBox x:Name="cbxOut_th" HorizontalAlignment="Left" Margin="364,235,0,0" VerticalAlignment="Top" Width="74">
                     <ComboBoxItem Content="ASIC 1" IsSelected="True"/>
                     <ComboBoxItem Content="ASIC 2"/>
                     <ComboBoxItem Content="ASIC 3"/>
                     <ComboBoxItem Content="ASIC 4"/>
                 </ComboBox>
-                <Button x:Name="btnOut_th_set" Content="set" HorizontalAlignment="Left" Margin="448,433,0,0" VerticalAlignment="Top" Width="75" Height="24" Click="btnOut_th_set_Click"/>
+                <Button x:Name="btnOut_th_set" Content="set" HorizontalAlignment="Left" Margin="447,233,0,0" VerticalAlignment="Top" Width="75" Height="24" Click="btnOut_th_set_Click"/>
                 <Label x:Name="lblOut_sh" Content="Out sh:" HorizontalAlignment="Left" Margin="200,120,0,0" VerticalAlignment="Top"/>
                 <ComboBox x:Name="cbxOut_sh" HorizontalAlignment="Left" Margin="266,123,0,0" VerticalAlignment="Top" Width="76">
                     <ComboBoxItem Content="low gain" />
@@ -174,34 +174,34 @@
                     <ComboBoxItem Content="500ns"/>
                     <ComboBoxItem Content="1us" IsSelected="True"/>
                 </ComboBox>
-                <Label x:Name="lblExternal_RAZ_Delay" Content="External RAZ Delay" HorizontalAlignment="Left" Margin="5,403,0,0" VerticalAlignment="Top" Width="121"/>
-                <TextBox x:Name="txtExternal_RAZ_Delay" HorizontalAlignment="Left" Height="23" Margin="123,405,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="74"/>
-                <Button x:Name="btnSet_External_RAZ_Delay" Content="Set Delay" HorizontalAlignment="Left" Margin="206,405,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="btnSet_External_RAZ_Delay_Click" RenderTransformOrigin="-0.213,0.652"/>
-                <Label x:Name="lblACQ_or_SCTest" Content="ACQ or SCTest" HorizontalAlignment="Left" Margin="6,530,0,0" VerticalAlignment="Top" Height="24" RenderTransformOrigin="4.713,0.917"/>
-                <StackPanel HorizontalAlignment="Left" Height="30" Margin="96,524,0,0" VerticalAlignment="Top" Width="60">
+                <Label x:Name="lblExternal_RAZ_Delay" Content="External RAZ Delay" HorizontalAlignment="Left" Margin="4,203,0,0" VerticalAlignment="Top" Width="121"/>
+                <TextBox x:Name="txtExternal_RAZ_Delay" HorizontalAlignment="Left" Height="23" Margin="122,205,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="74"/>
+                <Button x:Name="btnSet_External_RAZ_Delay" Content="Set Delay" HorizontalAlignment="Left" Margin="205,205,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="btnSet_External_RAZ_Delay_Click" RenderTransformOrigin="-0.213,0.652"/>
+                <Label x:Name="lblACQ_or_SCTest" Content="ACQ or SCTest" HorizontalAlignment="Left" Margin="14,344,0,0" VerticalAlignment="Top" Height="24" RenderTransformOrigin="4.713,0.917"/>
+                <StackPanel HorizontalAlignment="Left" Height="30" Margin="106,342,0,0" VerticalAlignment="Top" Width="60">
                     <RadioButton GroupName="ACQ_or_SCTest" Checked="ACQ_or_SCTest_Checked" Content="ACQ"/>
                     <RadioButton GroupName="ACQ_or_SCTest" Checked="ACQ_or_SCTest_Checked" Content="SCTest"/>
                     <!--RadioButton x:Name="radioButton" Content="RadioButton"/>
                     <RadioButton x:Name="radioButton1" Content="RadioButton"/-->
                 </StackPanel>
-                <Label x:Name="lblSing_or_Auto" Content="Single or Auto" HorizontalAlignment="Left" Margin="7,557,0,0" VerticalAlignment="Top"/>
-                <StackPanel HorizontalAlignment="Left" Height="30" Margin="96,557,0,0" VerticalAlignment="Top" Width="60">
+                <Label x:Name="lblSing_or_Auto" Content="Single or Auto" HorizontalAlignment="Left" Margin="15,371,0,0" VerticalAlignment="Top"/>
+                <StackPanel HorizontalAlignment="Left" Height="30" Margin="106,372,0,0" VerticalAlignment="Top" Width="60">
                     <RadioButton GroupName="Single_or_64Chn" Checked="Single_or_64Chn_Checked" Content="Single"/>
                     <RadioButton GroupName="Single_or_64Chn" Checked="Single_or_64Chn_Checked" Content="Auto"/>
                     <!--RadioButton x:Name="radioButton" Content="RadioButton"/>
                     <RadioButton x:Name="radioButton1" Content="RadioButton"/-->
                 </StackPanel>
-                <Label x:Name="lblCTest_or_Input" Content="CTest or Input" HorizontalAlignment="Left" Margin="9,588,0,0" VerticalAlignment="Top" Height="24" RenderTransformOrigin="-0.152,0.542"/>
-                <StackPanel HorizontalAlignment="Left" Height="30" Margin="96,588,0,0" VerticalAlignment="Top" Width="60">
+                <Label x:Name="lblCTest_or_Input" Content="CTest or Input" HorizontalAlignment="Left" Margin="17,402,0,0" VerticalAlignment="Top" Height="24" RenderTransformOrigin="-0.152,0.542"/>
+                <StackPanel HorizontalAlignment="Left" Height="30" Margin="106,402,0,0" VerticalAlignment="Top" Width="60">
                     <RadioButton GroupName="CTest_or_Input" Checked="CTest_or_Input_Checked" Content="CTest"/>
                     <RadioButton GroupName="CTest_or_Input" Checked="CTest_or_Input_Checked" Content="Input"/>
                     <!--RadioButton x:Name="radioButton" Content="RadioButton"/>
                     <RadioButton x:Name="radioButton1" Content="RadioButton"/-->
                 </StackPanel>
-                <Label x:Name="lblSingleTest_Chn" Content="Single channel#:" HorizontalAlignment="Left" Margin="152,532,0,0" VerticalAlignment="Top" Height="25" RenderTransformOrigin="0.452,1.083"/>
-                <TextBox x:Name="txtSingleTest_Chn" HorizontalAlignment="Left" Height="24" Margin="248,534,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="65"/>
-                <Label x:Name="lblCPT_MAX" Content="Max count:" HorizontalAlignment="Left" Margin="157,560,0,0" VerticalAlignment="Top" Height="24"/>
-                <ComboBox x:Name="cbxCPT_MAX" HorizontalAlignment="Left" Margin="249,564,0,0" VerticalAlignment="Top" Width="65">
+                <Label x:Name="lblSingleTest_Chn" Content="Single channel#:" HorizontalAlignment="Left" Margin="160,346,0,0" VerticalAlignment="Top" Height="25" RenderTransformOrigin="0.452,1.083"/>
+                <TextBox x:Name="txtSingleTest_Chn" HorizontalAlignment="Left" Height="24" Margin="256,348,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="65"/>
+                <Label x:Name="lblCPT_MAX" Content="Max count:" HorizontalAlignment="Left" Margin="165,374,0,0" VerticalAlignment="Top" Height="24"/>
+                <ComboBox x:Name="cbxCPT_MAX" HorizontalAlignment="Left" Margin="257,378,0,0" VerticalAlignment="Top" Width="65">
                     <ComboBoxItem Content= "200"/>
                     <ComboBoxItem Content= "1000"/>
                     <ComboBoxItem Content= "2000"/>
@@ -210,143 +210,15 @@
                     <ComboBoxItem Content= "20000"/>
                     <ComboBoxItem Content= "50000"/>
                 </ComboBox>
-                <Button x:Name="btnSet_SCT_Param" Content="Set Param" HorizontalAlignment="Left" Margin="159,592,0,0" VerticalAlignment="Top" Width="76" Height="24" Click="btnSet_SCT_Param_Click"/>
+                <Button x:Name="btnSet_SCT_Param" Content="Set Param" HorizontalAlignment="Left" Margin="167,406,0,0" VerticalAlignment="Top" Width="76" Height="24" Click="btnSet_SCT_Param_Click"/>
                 <Label x:Name="lblShaper_Output_Enable" Content="Shaper output" HorizontalAlignment="Left" Margin="165,86,0,0" VerticalAlignment="Top"/>
                 <ComboBox x:Name="cbxShaper_Output_Enable" HorizontalAlignment="Left" Margin="266,89,0,0" VerticalAlignment="Top" Width="76">
                     <ComboBoxItem Content= "Disable"/>
                     <ComboBoxItem Content= "Enable" IsSelected ="True"/>
                 </ComboBox>
-                <Button x:Name="btnScurve_start" Content="Scurve start" HorizontalAlignment="Left" Margin="249,592,0,0" VerticalAlignment="Top" Width="76" Height="24" Click="btnScurve_start_Click"/>
-                
-                <Label x:Name="lbl4bitDAC" Content="4-Bit DAC" HorizontalAlignment="Left" Margin="1,149,0,0" VerticalAlignment="Top" Width="65"/>
-                <Label x:Name="lbl4bitDAC_Chn1" Content="Chn1:" HorizontalAlignment="Left" Margin="8,174,0,0" VerticalAlignment="Top" Height="22" Width="42"/>
-                <Label x:Name="lbl4bitDAC_Chn2" Content="Chn2:" HorizontalAlignment="Left" Margin="8,196,0,0" VerticalAlignment="Top" Height="22" Width="42"/>
-                <Label x:Name="lbl4bitDAC_Chn3" Content="Chn3:" HorizontalAlignment="Left" Margin="8,218,0,0" VerticalAlignment="Top" Height="22" Width="42"/>
-                <Label x:Name="lbl4bitDAC_Chn4" Content="Chn4:" HorizontalAlignment="Left" Margin="8,240,0,0" VerticalAlignment="Top" Height="22" Width="42"/>
-                <Label x:Name="lbl4bitDAC_Chn5" Content="Chn5:" HorizontalAlignment="Left" Margin="8,262,0,0" VerticalAlignment="Top" Height="22" Width="42"/>
-                <Label x:Name="lbl4bitDAC_Chn6" Content="Chn6:" HorizontalAlignment="Left" Margin="8,284,0,0" VerticalAlignment="Top" Height="22" Width="42"/>
-                <Label x:Name="lbl4bitDAC_Chn7" Content="Chn7:" HorizontalAlignment="Left" Margin="8,306,0,0" VerticalAlignment="Top" Height="22" Width="42"/>
-                <Label x:Name="lbl4bitDAC_Chn8" Content="Chn8:" HorizontalAlignment="Left" Margin="8,328,0,0" VerticalAlignment="Top" Height="22" Width="42"/>
-                <TextBox x:Name="txt4bitDAC_Chn1" HorizontalAlignment="Left" Height="22" Margin="50,174,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="20"/>
-                <TextBox x:Name="txt4bitDAC_Chn2" HorizontalAlignment="Left" Height="22" Margin="50,196,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="20"/>
-                <TextBox x:Name="txt4bitDAC_Chn3" HorizontalAlignment="Left" Height="22" Margin="50,218,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="20"/>
-                <TextBox x:Name="txt4bitDAC_Chn4" HorizontalAlignment="Left" Height="22" Margin="50,240,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="20"/>
-                <TextBox x:Name="txt4bitDAC_Chn5" HorizontalAlignment="Left" Height="22" Margin="50,262,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="20"/>
-                <TextBox x:Name="txt4bitDAC_Chn6" HorizontalAlignment="Left" Height="22" Margin="50,284,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="20"/>
-                <TextBox x:Name="txt4bitDAC_Chn7" HorizontalAlignment="Left" Height="22" Margin="50,306,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="20"/>
-                <TextBox x:Name="txt4bitDAC_Chn8" HorizontalAlignment="Left" Height="22" Margin="50,328,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="20"/>
-                <Label x:Name="lbl4bitDAC_Chn9" Content="Chn9:" HorizontalAlignment="Left" Margin="70,174,0,0" VerticalAlignment="Top" Height="22" Width="50"/>
-                <Label x:Name="lbl4bitDAC_Chn10" Content="Chn10:" HorizontalAlignment="Left" Margin="70,196,0,0" VerticalAlignment="Top" Height="22" Width="50"/>
-                <Label x:Name="lbl4bitDAC_Chn11" Content="Chn11:" HorizontalAlignment="Left" Margin="70,218,0,0" VerticalAlignment="Top" Height="22" Width="50"/>
-                <Label x:Name="lbl4bitDAC_Chn12" Content="Chn12:" HorizontalAlignment="Left" Margin="70,240,0,0" VerticalAlignment="Top" Height="22" Width="50"/>
-                <Label x:Name="lbl4bitDAC_Chn13" Content="Chn13:" HorizontalAlignment="Left" Margin="70,262,0,0" VerticalAlignment="Top" Height="22" Width="50"/>
-                <Label x:Name="lbl4bitDAC_Chn14" Content="Chn14:" HorizontalAlignment="Left" Margin="70,284,0,0" VerticalAlignment="Top" Height="22" Width="50"/>
-                <Label x:Name="lbl4bitDAC_Chn15" Content="Chn15:" HorizontalAlignment="Left" Margin="70,306,0,0" VerticalAlignment="Top" Height="22" Width="50"/>
-                <Label x:Name="lbl4bitDAC_Chn16" Content="Chn16:" HorizontalAlignment="Left" Margin="70,328,0,0" VerticalAlignment="Top" Height="22" Width="50"/>
-                <TextBox x:Name="txt4bitDAC_Chn9" HorizontalAlignment="Left" Height="22" Margin="121,174,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="20"/>
-                <TextBox x:Name="txt4bitDAC_Chn10" HorizontalAlignment="Left" Height="22" Margin="121,196,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="20"/>
-                <TextBox x:Name="txt4bitDAC_Chn11" HorizontalAlignment="Left" Height="22" Margin="121,218,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="20"/>
-                <TextBox x:Name="txt4bitDAC_Chn12" HorizontalAlignment="Left" Height="22" Margin="121,240,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="20"/>
-                <TextBox x:Name="txt4bitDAC_Chn13" HorizontalAlignment="Left" Height="22" Margin="121,262,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="20"/>
-                <TextBox x:Name="txt4bitDAC_Chn14" HorizontalAlignment="Left" Height="22" Margin="121,284,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="20"/>
-                <TextBox x:Name="txt4bitDAC_Chn15" HorizontalAlignment="Left" Height="22" Margin="121,306,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="20"/>
-                <TextBox x:Name="txt4bitDAC_Chn16" HorizontalAlignment="Left" Height="22" Margin="121,328,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="20"/>
-                <Label x:Name="lbl4bitDAC_Chn17" Content="Chn17:" HorizontalAlignment="Left" Margin="141,174,0,0" VerticalAlignment="Top" Height="22" Width="50"/>
-                <Label x:Name="lbl4bitDAC_Chn18" Content="Chn18:" HorizontalAlignment="Left" Margin="141,196,0,0" VerticalAlignment="Top" Height="22" Width="50"/>
-                <Label x:Name="lbl4bitDAC_Chn19" Content="Chn19:" HorizontalAlignment="Left" Margin="141,218,0,0" VerticalAlignment="Top" Height="22" Width="50"/>
-                <Label x:Name="lbl4bitDAC_Chn20" Content="Chn20:" HorizontalAlignment="Left" Margin="141,240,0,0" VerticalAlignment="Top" Height="22" Width="50"/>
-                <Label x:Name="lbl4bitDAC_Chn21" Content="Chn21:" HorizontalAlignment="Left" Margin="141,262,0,0" VerticalAlignment="Top" Height="22" Width="50"/>
-                <Label x:Name="lbl4bitDAC_Chn22" Content="Chn22:" HorizontalAlignment="Left" Margin="141,284,0,0" VerticalAlignment="Top" Height="22" Width="50"/>
-                <Label x:Name="lbl4bitDAC_Chn23" Content="Chn23:" HorizontalAlignment="Left" Margin="141,306,0,0" VerticalAlignment="Top" Height="22" Width="50"/>
-                <Label x:Name="lbl4bitDAC_Chn24" Content="Chn24:" HorizontalAlignment="Left" Margin="141,328,0,0" VerticalAlignment="Top" Height="22" Width="50"/>
-                <TextBox x:Name="txt4bitDAC_Chn17" HorizontalAlignment="Left" Height="22" Margin="191,174,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="20"/>
-                <TextBox x:Name="txt4bitDAC_Chn18" HorizontalAlignment="Left" Height="22" Margin="191,196,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="20"/>
-                <TextBox x:Name="txt4bitDAC_Chn19" HorizontalAlignment="Left" Height="22" Margin="191,218,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="20"/>
-                <TextBox x:Name="txt4bitDAC_Chn20" HorizontalAlignment="Left" Height="22" Margin="191,240,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="20"/>
-                <TextBox x:Name="txt4bitDAC_Chn21" HorizontalAlignment="Left" Height="22" Margin="191,262,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="20"/>
-                <TextBox x:Name="txt4bitDAC_Chn22" HorizontalAlignment="Left" Height="22" Margin="191,284,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="20"/>
-                <TextBox x:Name="txt4bitDAC_Chn23" HorizontalAlignment="Left" Height="22" Margin="191,306,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="20"/>
-                <TextBox x:Name="txt4bitDAC_Chn24" HorizontalAlignment="Left" Height="22" Margin="191,328,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="20"/>
-                <Label x:Name="lbl4bitDAC_Chn25" Content="Chn25:" HorizontalAlignment="Left" Margin="211,174,0,0" VerticalAlignment="Top" Height="22" Width="50"/>
-                <Label x:Name="lbl4bitDAC_Chn26" Content="Chn26:" HorizontalAlignment="Left" Margin="211,196,0,0" VerticalAlignment="Top" Height="22" Width="50"/>
-                <Label x:Name="lbl4bitDAC_Chn27" Content="Chn27:" HorizontalAlignment="Left" Margin="211,218,0,0" VerticalAlignment="Top" Height="22" Width="50"/>
-                <Label x:Name="lbl4bitDAC_Chn28" Content="Chn28:" HorizontalAlignment="Left" Margin="211,240,0,0" VerticalAlignment="Top" Height="22" Width="50"/>
-                <Label x:Name="lbl4bitDAC_Chn29" Content="Chn29:" HorizontalAlignment="Left" Margin="211,262,0,0" VerticalAlignment="Top" Height="22" Width="50"/>
-                <Label x:Name="lbl4bitDAC_Chn30" Content="Chn30:" HorizontalAlignment="Left" Margin="211,284,0,0" VerticalAlignment="Top" Height="22" Width="50"/>
-                <Label x:Name="lbl4bitDAC_Chn31" Content="Chn31:" HorizontalAlignment="Left" Margin="211,306,0,0" VerticalAlignment="Top" Height="22" Width="50"/>
-                <Label x:Name="lbl4bitDAC_Chn32" Content="Chn32:" HorizontalAlignment="Left" Margin="211,328,0,0" VerticalAlignment="Top" Height="22" Width="50"/>
-                <TextBox x:Name="txt4bitDAC_Chn25" HorizontalAlignment="Left" Height="22" Margin="261,174,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="20"/>
-                <TextBox x:Name="txt4bitDAC_Chn26" HorizontalAlignment="Left" Height="22" Margin="261,196,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="20"/>
-                <TextBox x:Name="txt4bitDAC_Chn27" HorizontalAlignment="Left" Height="22" Margin="261,218,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="20"/>
-                <TextBox x:Name="txt4bitDAC_Chn28" HorizontalAlignment="Left" Height="22" Margin="261,240,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="20"/>
-                <TextBox x:Name="txt4bitDAC_Chn29" HorizontalAlignment="Left" Height="22" Margin="261,262,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="20"/>
-                <TextBox x:Name="txt4bitDAC_Chn30" HorizontalAlignment="Left" Height="22" Margin="261,284,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="20"/>
-                <TextBox x:Name="txt4bitDAC_Chn31" HorizontalAlignment="Left" Height="22" Margin="261,306,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="20"/>
-                <TextBox x:Name="txt4bitDAC_Chn32" HorizontalAlignment="Left" Height="22" Margin="261,328,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="20"/>
-                <Label x:Name="lbl4bitDAC_Chn33" Content="Chn33:" HorizontalAlignment="Left" Margin="281,174,0,0" VerticalAlignment="Top" Height="22" Width="50"/>
-                <Label x:Name="lbl4bitDAC_Chn34" Content="Chn34:" HorizontalAlignment="Left" Margin="281,196,0,0" VerticalAlignment="Top" Height="22" Width="50"/>
-                <Label x:Name="lbl4bitDAC_Chn35" Content="Chn35:" HorizontalAlignment="Left" Margin="281,218,0,0" VerticalAlignment="Top" Height="22" Width="50"/>
-                <Label x:Name="lbl4bitDAC_Chn36" Content="Chn36:" HorizontalAlignment="Left" Margin="281,240,0,0" VerticalAlignment="Top" Height="22" Width="50"/>
-                <Label x:Name="lbl4bitDAC_Chn37" Content="Chn37:" HorizontalAlignment="Left" Margin="281,262,0,0" VerticalAlignment="Top" Height="22" Width="50"/>
-                <Label x:Name="lbl4bitDAC_Chn38" Content="Chn38:" HorizontalAlignment="Left" Margin="281,284,0,0" VerticalAlignment="Top" Height="22" Width="50"/>
-                <Label x:Name="lbl4bitDAC_Chn39" Content="Chn39:" HorizontalAlignment="Left" Margin="281,306,0,0" VerticalAlignment="Top" Height="22" Width="50"/>
-                <Label x:Name="lbl4bitDAC_Chn40" Content="Chn40:" HorizontalAlignment="Left" Margin="281,328,0,0" VerticalAlignment="Top" Height="22" Width="50"/>
-                <TextBox x:Name="txt4bitDAC_Chn33" HorizontalAlignment="Left" Height="22" Margin="331,174,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="20"/>
-                <TextBox x:Name="txt4bitDAC_Ch34" HorizontalAlignment="Left" Height="22" Margin="331,196,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="20"/>
-                <TextBox x:Name="txt4bitDAC_Chn35" HorizontalAlignment="Left" Height="22" Margin="331,218,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="20"/>
-                <TextBox x:Name="txt4bitDAC_Chn36" HorizontalAlignment="Left" Height="22" Margin="331,240,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="20"/>
-                <TextBox x:Name="txt4bitDAC_Chn37" HorizontalAlignment="Left" Height="22" Margin="331,262,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="20"/>
-                <TextBox x:Name="txt4bitDAC_Chn38" HorizontalAlignment="Left" Height="22" Margin="331,284,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="20"/>
-                <TextBox x:Name="txt4bitDAC_Chn39" HorizontalAlignment="Left" Height="22" Margin="331,306,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="20"/>
-                <TextBox x:Name="txt4bitDAC_Chn40" HorizontalAlignment="Left" Height="22" Margin="331,328,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="20"/>
-                <Label x:Name="lbl4bitDAC_Chn41" Content="Chn41:" HorizontalAlignment="Left" Margin="351,174,0,0" VerticalAlignment="Top" Height="22" Width="50"/>
-                <Label x:Name="lbl4bitDAC_Chn42" Content="Chn42:" HorizontalAlignment="Left" Margin="351,196,0,0" VerticalAlignment="Top" Height="22" Width="50"/>
-                <Label x:Name="lbl4bitDAC_Chn43" Content="Chn43:" HorizontalAlignment="Left" Margin="351,218,0,0" VerticalAlignment="Top" Height="22" Width="50"/>
-                <Label x:Name="lbl4bitDAC_Chn44" Content="Chn44:" HorizontalAlignment="Left" Margin="351,240,0,0" VerticalAlignment="Top" Height="22" Width="50"/>
-                <Label x:Name="lbl4bitDAC_Chn45" Content="Chn45:" HorizontalAlignment="Left" Margin="351,262,0,0" VerticalAlignment="Top" Height="22" Width="50"/>
-                <Label x:Name="lbl4bitDAC_Chn46" Content="Chn46:" HorizontalAlignment="Left" Margin="351,284,0,0" VerticalAlignment="Top" Height="22" Width="50"/>
-                <Label x:Name="lbl4bitDAC_Chn47" Content="Chn47:" HorizontalAlignment="Left" Margin="351,306,0,0" VerticalAlignment="Top" Height="22" Width="50"/>
-                <Label x:Name="lbl4bitDAC_Chn48" Content="Chn48:" HorizontalAlignment="Left" Margin="351,328,0,0" VerticalAlignment="Top" Height="22" Width="50"/>
-                <TextBox x:Name="txt4bitDAC_Chn41" HorizontalAlignment="Left" Height="22" Margin="401,174,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="20"/>
-                <TextBox x:Name="txt4bitDAC_Chn42" HorizontalAlignment="Left" Height="22" Margin="401,196,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="20"/>
-                <TextBox x:Name="txt4bitDAC_Chn43" HorizontalAlignment="Left" Height="22" Margin="401,218,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="20"/>
-                <TextBox x:Name="txt4bitDAC_Chn44" HorizontalAlignment="Left" Height="22" Margin="401,240,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="20"/>
-                <TextBox x:Name="txt4bitDAC_Chn45" HorizontalAlignment="Left" Height="22" Margin="401,262,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="20"/>
-                <TextBox x:Name="txt4bitDAC_Chn46" HorizontalAlignment="Left" Height="22" Margin="401,284,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="20"/>
-                <TextBox x:Name="txt4bitDAC_Chn47" HorizontalAlignment="Left" Height="22" Margin="401,306,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="20"/>
-                <TextBox x:Name="txt4bitDAC_Chn48" HorizontalAlignment="Left" Height="22" Margin="401,328,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="20"/>
-                <Label x:Name="lbl4bitDAC_Chn49" Content="Chn49:" HorizontalAlignment="Left" Margin="421,174,0,0" VerticalAlignment="Top" Height="22" Width="50"/>
-                <Label x:Name="lbl4bitDAC_Chn50" Content="Chn50:" HorizontalAlignment="Left" Margin="421,196,0,0" VerticalAlignment="Top" Height="22" Width="50"/>
-                <Label x:Name="lbl4bitDAC_Chn51" Content="Chn51:" HorizontalAlignment="Left" Margin="421,218,0,0" VerticalAlignment="Top" Height="22" Width="50"/>
-                <Label x:Name="lbl4bitDAC_Chn52" Content="Chn52:" HorizontalAlignment="Left" Margin="421,240,0,0" VerticalAlignment="Top" Height="22" Width="50"/>
-                <Label x:Name="lbl4bitDAC_Chn53" Content="Chn53:" HorizontalAlignment="Left" Margin="421,262,0,0" VerticalAlignment="Top" Height="22" Width="50"/>
-                <Label x:Name="lbl4bitDAC_Chn54" Content="Chn54:" HorizontalAlignment="Left" Margin="421,284,0,0" VerticalAlignment="Top" Height="22" Width="50"/>
-                <Label x:Name="lbl4bitDAC_Chn55" Content="Chn55:" HorizontalAlignment="Left" Margin="421,306,0,0" VerticalAlignment="Top" Height="22" Width="50"/>
-                <Label x:Name="lbl4bitDAC_Chn56" Content="Chn56:" HorizontalAlignment="Left" Margin="421,328,0,0" VerticalAlignment="Top" Height="22" Width="50"/>
-                <TextBox x:Name="txt4bitDAC_Chn49" HorizontalAlignment="Left" Height="22" Margin="471,174,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="20"/>
-                <TextBox x:Name="txt4bitDAC_Chn50" HorizontalAlignment="Left" Height="22" Margin="471,196,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="20"/>
-                <TextBox x:Name="txt4bitDAC_Chn51" HorizontalAlignment="Left" Height="22" Margin="471,218,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="20"/>
-                <TextBox x:Name="txt4bitDAC_Chn52" HorizontalAlignment="Left" Height="22" Margin="471,240,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="20"/>
-                <TextBox x:Name="txt4bitDAC_Chn53" HorizontalAlignment="Left" Height="22" Margin="471,262,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="20"/>
-                <TextBox x:Name="txt4bitDAC_Chn54" HorizontalAlignment="Left" Height="22" Margin="471,284,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="20"/>
-                <TextBox x:Name="txt4bitDAC_Chn55" HorizontalAlignment="Left" Height="22" Margin="471,306,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="20"/>
-                <TextBox x:Name="txt4bitDAC_Chn56" HorizontalAlignment="Left" Height="22" Margin="471,328,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="20"/>
-                <Label x:Name="lbl4bitDAC_Chn57" Content="Chn57:" HorizontalAlignment="Left" Margin="491,174,0,0" VerticalAlignment="Top" Height="22" Width="50"/>
-                <Label x:Name="lbl4bitDAC_Chn58" Content="Chn58:" HorizontalAlignment="Left" Margin="491,196,0,0" VerticalAlignment="Top" Height="22" Width="50"/>
-                <Label x:Name="lbl4bitDAC_Chn59" Content="Chn59:" HorizontalAlignment="Left" Margin="491,218,0,0" VerticalAlignment="Top" Height="22" Width="50"/>
-                <Label x:Name="lbl4bitDAC_Chn60" Content="Chn60:" HorizontalAlignment="Left" Margin="491,240,0,0" VerticalAlignment="Top" Height="22" Width="50"/>
-                <Label x:Name="lbl4bitDAC_Chn61" Content="Chn61:" HorizontalAlignment="Left" Margin="491,262,0,0" VerticalAlignment="Top" Height="22" Width="50"/>
-                <Label x:Name="lbl4bitDAC_Chn62" Content="Chn62:" HorizontalAlignment="Left" Margin="491,284,0,0" VerticalAlignment="Top" Height="22" Width="50"/>
-                <Label x:Name="lbl4bitDAC_Chn63" Content="Chn63:" HorizontalAlignment="Left" Margin="491,306,0,0" VerticalAlignment="Top" Height="22" Width="50"/>
-                <Label x:Name="lbl4bitDAC_Chn64" Content="Chn64:" HorizontalAlignment="Left" Margin="491,328,0,0" VerticalAlignment="Top" Height="22" Width="50"/>
-                <TextBox x:Name="txt4bitDAC_Chn57" HorizontalAlignment="Left" Height="22" Margin="541,174,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="20"/>
-                <TextBox x:Name="txt4bitDAC_Chn58" HorizontalAlignment="Left" Height="22" Margin="541,196,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="20"/>
-                <TextBox x:Name="txt4bitDAC_Chn59" HorizontalAlignment="Left" Height="22" Margin="541,218,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="20"/>
-                <TextBox x:Name="txt4bitDAC_Chn60" HorizontalAlignment="Left" Height="22" Margin="541,240,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="20"/>
-                <TextBox x:Name="txt4bitDAC_Chn61" HorizontalAlignment="Left" Height="22" Margin="541,262,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="20"/>
-                <TextBox x:Name="txt4bitDAC_Chn62" HorizontalAlignment="Left" Height="22" Margin="541,284,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="20"/>
-                <TextBox x:Name="txt4bitDAC_Chn63" HorizontalAlignment="Left" Height="22" Margin="541,306,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="20"/>
-                <TextBox x:Name="txt4bitDAC_Chn64" HorizontalAlignment="Left" Height="22" Margin="541,328,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="20"/>
+                <Button x:Name="btnScurve_start" Content="Scurve start" HorizontalAlignment="Left" Margin="257,406,0,0" VerticalAlignment="Top" Width="76" Height="24" Click="btnScurve_start_Click"/>
+                <CheckBox x:Name="chk_PedCali" Content="PedCali" HorizontalAlignment="Left" Margin="27,158,0,0" VerticalAlignment="Top" Checked="chk_PedCali_Checked" Unchecked="chk_PedCali_UnChecked"/>
+                <Button x:Name="btnChnCali" Content="ChnCali" HorizontalAlignment="Left" Margin="93,153,0,0" VerticalAlignment="Top" Width="58" Height="24" Click="btnChnCali_Click"/>
 
             </Grid>
         </GroupBox>

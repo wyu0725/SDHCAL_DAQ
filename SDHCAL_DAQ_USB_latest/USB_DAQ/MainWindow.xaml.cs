@@ -58,9 +58,10 @@ namespace USB_DAQ
         private const int SCurve_Package_Length = 512;
         private static int Scurve_Data_Pkg;
         private static int Scurve_Data_Remain;
-        TextBox[] txt4bitDAC_Chn = new TextBox[64];
+        private NoSortHashtable hasht = new NoSortHashtable(); //排序之后的哈希表
         public MainWindow()
-        {          
+        {
+
             InitializeComponent();
             //Dynamic list of USB devices bound to CyUSB.sys
             usbDevices = new USBDeviceList(CyConst.DEVICES_CYUSB);
@@ -70,14 +71,6 @@ namespace USB_DAQ
             RefreshDevice();
             //cbxAverage_Points.SelectedIndex = 0;
             //Initial_SerialPort();
-            txt4bitDAC_Chn[0] = txt4bitDAC_Chn1;
-            txt4bitDAC_Chn[1] = txt4bitDAC_Chn2;
-            txt4bitDAC_Chn[3] = txt4bitDAC_Chn3;
-            txt4bitDAC_Chn[4] = txt4bitDAC_Chn4;
-            txt4bitDAC_Chn[0] = txt4bitDAC_Chn1;
-            txt4bitDAC_Chn[1] = txt4bitDAC_Chn2;
-            txt4bitDAC_Chn[3] = txt4bitDAC_Chn3;
-            txt4bitDAC_Chn[4] = txt4bitDAC_Chn4;
         }
         private void usbDevices_DeviceAttached(object sender, EventArgs e)
         {
@@ -806,16 +799,6 @@ namespace USB_DAQ
                 {
                     MessageBox.Show("Set shaper state failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-
-                //---------------------- Set 4-bit DAC Code ---------------------------//
-                TextBox test = new TextBox();
-                test.Name = txt4bitDAC_Chn1.Name;
-                /*string DAC_4bit_Chn = "txt4bitDAC_Chn";
-                for(int i = 0; i < 64; i++)
-                {
-                    TextBox txt4bitDAC_Chn = (TextBox)(DAC_4bit_Chn + i.ToString());
-                }
-                int value_4bitDAC = txt4bitDAC_Chn1.Text*/
             }
             //-----if there is Read Register opertation
             else if ((string)btnSC_or_ReadReg.Content == "Read Register")
@@ -1447,13 +1430,13 @@ namespace USB_DAQ
         }
         private void Get_ScurveResultCallBack()
         {
-            DisplayPacketNum dp2 = new DisplayPacketNum((string s) => { ShowPacketNum(s); });
+            //DisplayPacketNum dp2 = new DisplayPacketNum((string s) => { ShowPacketNum(s); });
             //string report;
             bw = new BinaryWriter(File.Open(filepath, FileMode.Append));
             bool bResult = false;
             byte[] bytes = new byte[SCurve_Package_Length];//应分片，不让太大了一次性弄不完
             int Package_Count = 0;
-            while (Package_Count < Scurve_Data_Pkg)
+            while (Package_Count <= Scurve_Data_Pkg)//这里应该用<=而不是<最后一个包虽然不够512个，但是USB还是提交了这么多，要是少抓一个可能出现超时最后一个包收不到的情况
             {
                 bResult = DataRecieve(bytes, bytes.Length);
                 if (bResult)
@@ -1475,24 +1458,249 @@ namespace USB_DAQ
             if (bResult)
             {
                 bw.Write(test); //接收成功写入文件
-            }*/
-            byte[] re_bytes = new byte[Scurve_Data_Remain];
-            bool IsDone = false;
-            while (!IsDone)
-            {
-                bResult = DataRecieve(re_bytes, re_bytes.Length);
-                if (bResult)
-                {
-                    bw.Write(re_bytes); //接收成功写入文件
-                    IsDone = true;
-                }
             }
+            byte[] re_bytes = new byte[Scurve_Data_Remain];
+            bResult = DataRecieve(re_bytes, re_bytes.Length);
+            if (bResult)
+            {
+                 bw.Write(re_bytes); //接收成功写入文件
+            }*/
             //---------------------------------------//
             //bw.Flush();
             bw.Dispose();
             bw.Close();
             //report = string.Format("data stored in {0}\n", filepath);
             //Dispatcher.Invoke(dp2, report);
+        }
+        //control channel calibration
+        private void btnChnCali_Click(object sender, RoutedEventArgs e)
+        {
+            StringBuilder details = new StringBuilder();
+            byte[] param = new byte[2];
+            byte[] bytes = new byte[2];
+            byte byte1, byte2;
+            bool bResult = false;
+            foreach (string str in hasht.Keys)
+            {
+                param = (byte[])hasht[str];//获取参数  
+                byte1 = (byte)(param[0] >> 4 + 0xC0);
+                byte2 = (byte)(param[0] << 4 + param[1]);   
+                bytes = ConstCommandByteArray(byte1, byte2);
+                bResult = CommandSend(bytes, bytes.Length);
+                if (bResult)
+                    details.AppendFormat("{0}, 4-bitDAC: {1}\n",str,param[1]);
+                Thread.Sleep(10);
+            }
+            if (chk_PedCali.IsChecked.Value)
+                txtReport.AppendText(details.ToString());
+            else
+                txtReport.AppendText("All channels without calibration\n");
+        }
+        //load channel calibration parameter
+        
+        private void chk_PedCali_Checked(object sender, RoutedEventArgs e)
+        {
+            hasht.Clear();
+            /*
+            //This parameter is caculated via DC voltage measured by KEITHLEY2701
+            hasht.Add("Chn0", new byte[] { 0xC0, 0x02}); //chn0
+            hasht.Add("Chn1", new byte[] { 0xC1, 0x03});//chn1
+            hasht.Add("Chn2", new byte[] { 0xC2, 0x06});//chn2
+            hasht.Add("Chn3", new byte[] { 0xC3, 0x01});//chn3
+            hasht.Add("Chn4", new byte[] { 0xC4, 0x03});//chn4
+            hasht.Add("Chn5", new byte[] { 0xC5, 0x03});//chn5
+            hasht.Add("Chn6", new byte[] { 0xC6, 0x03});//chn6
+            hasht.Add("Chn7", new byte[] { 0xC7, 0x01});//chn7
+            hasht.Add("Chn8", new byte[] { 0xC8, 0x05});//chn8
+            hasht.Add("Chn9", new byte[] { 0xC9, 0x02});//chn9
+            hasht.Add("Chn10", new byte[] { 0xCA, 0x04});//chn10
+            hasht.Add("Chn11", new byte[] { 0xCB, 0x04});//chn11
+            hasht.Add("Chn12", new byte[] { 0xCC, 0x03});//chn12
+            hasht.Add("Chn13", new byte[] { 0xCD, 0x03});//chn13
+            hasht.Add("Chn14", new byte[] { 0xCE, 0x03});//chn14
+            hasht.Add("Chn15", new byte[] { 0xCF, 0x03});//chn15
+            hasht.Add("Chn16", new byte[] { 0xD0, 0x02});//chn16
+            hasht.Add("Chn17", new byte[] { 0xD1, 0x01});//chn17
+            hasht.Add("Chn18", new byte[] { 0xD2, 0x03});//chn18
+            hasht.Add("Chn19", new byte[] { 0xD3, 0x04});//chn19
+            hasht.Add("Chn20", new byte[] { 0xD4, 0x02});//chn20
+            hasht.Add("Chn21", new byte[] { 0xD5, 0x02});//chn21
+            hasht.Add("Chn22", new byte[] { 0xD6, 0x02});//chn22
+            hasht.Add("Chn23", new byte[] { 0xD7, 0x03});//chn23
+            hasht.Add("Chn24", new byte[] { 0xD8, 0x02});//chn24
+            hasht.Add("Chn25", new byte[] { 0xD9, 0x03});//chn25
+            hasht.Add("Chn26", new byte[] { 0xDA, 0x04});//chn26
+            hasht.Add("Chn27", new byte[] { 0xDB, 0x02});//chn27
+            hasht.Add("Chn28", new byte[] { 0xDC, 0x00});//chn28
+            hasht.Add("Chn29", new byte[] { 0xDD, 0x02});//chn29
+            hasht.Add("Chn30", new byte[] { 0xDE, 0x04});//chn30
+            hasht.Add("Chn31", new byte[] { 0xDF, 0x04});//chn31
+            hasht.Add("Chn32", new byte[] { 0xE0, 0x03});//chn32
+            hasht.Add("Chn33", new byte[] { 0xE1, 0x01});//chn33
+            hasht.Add("Chn34", new byte[] { 0xE2, 0x00});//chn34
+            hasht.Add("Chn35", new byte[] { 0xE3, 0x04});//chn35
+            hasht.Add("Chn36", new byte[] { 0xE4, 0x02});//chn36
+            hasht.Add("Chn37", new byte[] { 0xE5, 0x02});//chn37
+            hasht.Add("Chn38", new byte[] { 0xE6, 0x01});//chn38
+            hasht.Add("Chn39", new byte[] { 0xE7, 0x03});//chn39
+            hasht.Add("Chn40", new byte[] { 0xE8, 0x03});//chn40
+            hasht.Add("Chn41", new byte[] { 0xE9, 0x02});//chn41
+            hasht.Add("Chn42", new byte[] { 0xEA, 0x03});//chn42
+            hasht.Add("Chn43", new byte[] { 0xEB, 0x04});//chn43
+            hasht.Add("Chn44", new byte[] { 0xEC, 0x04});//chn44
+            hasht.Add("Chn45", new byte[] { 0xED, 0x03});//chn45
+            hasht.Add("Chn46", new byte[] { 0xEE, 0x03});//chn46
+            hasht.Add("Chn47", new byte[] { 0xEF, 0x05});//chn47
+            hasht.Add("Chn48", new byte[] { 0xF0, 0x04});//chn48
+            hasht.Add("Chn49", new byte[] { 0xF1, 0x06});//chn49
+            hasht.Add("Chn50", new byte[] { 0xF2, 0x01});//chn50
+            hasht.Add("Chn51", new byte[] { 0xF3, 0x05});//chn51
+            hasht.Add("Chn52", new byte[] { 0xF4, 0x03});//chn52
+            hasht.Add("Chn53", new byte[] { 0xF5, 0x01});//chn53
+            hasht.Add("Chn54", new byte[] { 0xF6, 0x02});//chn54
+            hasht.Add("Chn55", new byte[] { 0xF7, 0x03});//chn55
+            hasht.Add("Chn56", new byte[] { 0xF8, 0x04});//chn56
+            hasht.Add("Chn57", new byte[] { 0xF9, 0x02});//chn57
+            hasht.Add("Chn58", new byte[] { 0xFA, 0x01});//chn58
+            hasht.Add("Chn59", new byte[] { 0xFB, 0x05});//chn59
+            hasht.Add("Chn60", new byte[] { 0xFC, 0x02});//chn60
+            hasht.Add("Chn61", new byte[] { 0xFD, 0x03});//chn61
+            hasht.Add("Chn62", new byte[] { 0xFE, 0x03});//chn62
+            hasht.Add("Chn63", new byte[] { 0xFF, 0x04});//chn63*/
+            //The parameter is caculate via S Curve Test
+            hasht.Add("Chn0", new byte[] { 0xC0, 0x02 }); //chn0
+            hasht.Add("Chn1", new byte[] { 0xC1, 0x02 });//chn1
+            hasht.Add("Chn2", new byte[] { 0xC2, 0x04 });//chn2
+            hasht.Add("Chn3", new byte[] { 0xC3, 0x02 });//chn3
+            hasht.Add("Chn4", new byte[] { 0xC4, 0x03 });//chn4
+            hasht.Add("Chn5", new byte[] { 0xC5, 0x03 });//chn5
+            hasht.Add("Chn6", new byte[] { 0xC6, 0x01 });//chn6
+            hasht.Add("Chn7", new byte[] { 0xC7, 0x01 });//chn7
+            hasht.Add("Chn8", new byte[] { 0xC8, 0x03 });//chn8
+            hasht.Add("Chn9", new byte[] { 0xC9, 0x02 });//chn9
+            hasht.Add("Chn10", new byte[] { 0xCA, 0x02 });//chn10
+            hasht.Add("Chn11", new byte[] { 0xCB, 0x03 });//chn11
+            hasht.Add("Chn12", new byte[] { 0xCC, 0x01 });//chn12
+            hasht.Add("Chn13", new byte[] { 0xCD, 0x03 });//chn13
+            hasht.Add("Chn14", new byte[] { 0xCE, 0x02 });//chn14
+            hasht.Add("Chn15", new byte[] { 0xCF, 0x01 });//chn15
+            hasht.Add("Chn16", new byte[] { 0xD0, 0x02 });//chn16
+            hasht.Add("Chn17", new byte[] { 0xD1, 0x02 });//chn17
+            hasht.Add("Chn18", new byte[] { 0xD2, 0x02 });//chn18
+            hasht.Add("Chn19", new byte[] { 0xD3, 0x03 });//chn19
+            hasht.Add("Chn20", new byte[] { 0xD4, 0x02 });//chn20
+            hasht.Add("Chn21", new byte[] { 0xD5, 0x02 });//chn21
+            hasht.Add("Chn22", new byte[] { 0xD6, 0x02 });//chn22
+            hasht.Add("Chn23", new byte[] { 0xD7, 0x02 });//chn23
+            hasht.Add("Chn24", new byte[] { 0xD8, 0x02 });//chn24
+            hasht.Add("Chn25", new byte[] { 0xD9, 0x02 });//chn25
+            hasht.Add("Chn26", new byte[] { 0xDA, 0x03 });//chn26
+            hasht.Add("Chn27", new byte[] { 0xDB, 0x01 });//chn27
+            hasht.Add("Chn28", new byte[] { 0xDC, 0x01 });//chn28
+            hasht.Add("Chn29", new byte[] { 0xDD, 0x02 });//chn29
+            hasht.Add("Chn30", new byte[] { 0xDE, 0x02 });//chn30
+            hasht.Add("Chn31", new byte[] { 0xDF, 0x02 });//chn31
+            hasht.Add("Chn32", new byte[] { 0xE0, 0x02 });//chn32
+            hasht.Add("Chn33", new byte[] { 0xE1, 0x02 });//chn33
+            hasht.Add("Chn34", new byte[] { 0xE2, 0x01 });//chn34
+            hasht.Add("Chn35", new byte[] { 0xE3, 0x03 });//chn35
+            hasht.Add("Chn36", new byte[] { 0xE4, 0x01 });//chn36
+            hasht.Add("Chn37", new byte[] { 0xE5, 0x01 });//chn37
+            hasht.Add("Chn38", new byte[] { 0xE6, 0x01 });//chn38
+            hasht.Add("Chn39", new byte[] { 0xE7, 0x01 });//chn39
+            hasht.Add("Chn40", new byte[] { 0xE8, 0x00 });//chn40
+            hasht.Add("Chn41", new byte[] { 0xE9, 0x01 });//chn41
+            hasht.Add("Chn42", new byte[] { 0xEA, 0x01 });//chn42
+            hasht.Add("Chn43", new byte[] { 0xEB, 0x01 });//chn43
+            hasht.Add("Chn44", new byte[] { 0xEC, 0x01 });//chn44
+            hasht.Add("Chn45", new byte[] { 0xED, 0x01 });//chn45
+            hasht.Add("Chn46", new byte[] { 0xEE, 0x00 });//chn46
+            hasht.Add("Chn47", new byte[] { 0xEF, 0x02 });//chn47
+            hasht.Add("Chn48", new byte[] { 0xF0, 0x01 });//chn48
+            hasht.Add("Chn49", new byte[] { 0xF1, 0x03 });//chn49
+            hasht.Add("Chn50", new byte[] { 0xF2, 0x00 });//chn50
+            hasht.Add("Chn51", new byte[] { 0xF3, 0x02 });//chn51
+            hasht.Add("Chn52", new byte[] { 0xF4, 0x02 });//chn52
+            hasht.Add("Chn53", new byte[] { 0xF5, 0x00 });//chn53
+            hasht.Add("Chn54", new byte[] { 0xF6, 0x01 });//chn54
+            hasht.Add("Chn55", new byte[] { 0xF7, 0x02 });//chn55
+            hasht.Add("Chn56", new byte[] { 0xF8, 0x01 });//chn56
+            hasht.Add("Chn57", new byte[] { 0xF9, 0x01 });//chn57
+            hasht.Add("Chn58", new byte[] { 0xFA, 0x00 });//chn58
+            hasht.Add("Chn59", new byte[] { 0xFB, 0x01 });//chn59
+            hasht.Add("Chn60", new byte[] { 0xFC, 0x00 });//chn60
+            hasht.Add("Chn61", new byte[] { 0xFD, 0x01 });//chn61
+            hasht.Add("Chn62", new byte[] { 0xFE, 0x01 });//chn62
+            hasht.Add("Chn63", new byte[] { 0xFF, 0x01 });//chn63
+        }
+        //without calibration
+        private void chk_PedCali_UnChecked(object sender, RoutedEventArgs e)
+        {
+            hasht.Clear();
+            hasht.Add("Chn0", new byte[] { 0xC0, 0x00});//chn0
+            hasht.Add("Chn1", new byte[] { 0xC1, 0x00 });//chn1
+            hasht.Add("Chn2", new byte[] { 0xC2, 0x00 });//chn2
+            hasht.Add("Chn3", new byte[] { 0xC3, 0x00 });//chn3
+            hasht.Add("Chn4", new byte[] { 0xC4, 0x00 });//chn4
+            hasht.Add("Chn5", new byte[] { 0xC5, 0x00 });//chn5
+            hasht.Add("Chn6", new byte[] { 0xC6, 0x00 });//chn6
+            hasht.Add("Chn7", new byte[] { 0xC7, 0x00 });//chn7
+            hasht.Add("Chn8", new byte[] { 0xC8, 0x00 });//chn8
+            hasht.Add("Chn9", new byte[] { 0xC9, 0x00 });//chn9
+            hasht.Add("Chn10", new byte[] { 0xCA, 0x00 });//chn10
+            hasht.Add("Chn11", new byte[] { 0xCB, 0x00 });//chn11
+            hasht.Add("Chn12", new byte[] { 0xCC, 0x00 });//chn12
+            hasht.Add("Chn13", new byte[] { 0xCD, 0x00 });//chn13
+            hasht.Add("Chn14", new byte[] { 0xCE, 0x00 });//chn14
+            hasht.Add("Chn15", new byte[] { 0xCF, 0x00 });//chn15
+            hasht.Add("Chn16", new byte[] { 0xD0, 0x00 });//chn16
+            hasht.Add("Chn17", new byte[] { 0xD1, 0x00 });//chn17
+            hasht.Add("Chn18", new byte[] { 0xD2, 0x00 });//chn18
+            hasht.Add("Chn19", new byte[] { 0xD3, 0x00 });//chn19
+            hasht.Add("Chn20", new byte[] { 0xD4, 0x00 });//chn20
+            hasht.Add("Chn21", new byte[] { 0xD5, 0x00 });//chn21
+            hasht.Add("Chn22", new byte[] { 0xD6, 0x00 });//chn22
+            hasht.Add("Chn23", new byte[] { 0xD7, 0x00 });//chn23
+            hasht.Add("Chn24", new byte[] { 0xD8, 0x00 });//chn24
+            hasht.Add("Chn25", new byte[] { 0xD9, 0x00 });//chn25
+            hasht.Add("Chn26", new byte[] { 0xDA, 0x00 });//chn26
+            hasht.Add("Chn27", new byte[] { 0xDB, 0x00 });//chn27
+            hasht.Add("Chn28", new byte[] { 0xDC, 0x00 });//chn28
+            hasht.Add("Chn29", new byte[] { 0xDD, 0x00 });//chn29
+            hasht.Add("Chn30", new byte[] { 0xDE, 0x00 });//chn30
+            hasht.Add("Chn31", new byte[] { 0xDF, 0x00 });//chn31
+            hasht.Add("Chn32", new byte[] { 0xE0, 0x00 });//chn32
+            hasht.Add("Chn33", new byte[] { 0xE1, 0x00 });//chn33
+            hasht.Add("Chn34", new byte[] { 0xE2, 0x00 });//chn34
+            hasht.Add("Chn35", new byte[] { 0xE3, 0x00 });//chn35
+            hasht.Add("Chn36", new byte[] { 0xE4, 0x00 });//chn36
+            hasht.Add("Chn37", new byte[] { 0xE5, 0x00 });//chn37
+            hasht.Add("Chn38", new byte[] { 0xE6, 0x00 });//chn38
+            hasht.Add("Chn39", new byte[] { 0xE7, 0x00 });//chn39
+            hasht.Add("Chn40", new byte[] { 0xE8, 0x00 });//chn40
+            hasht.Add("Chn41", new byte[] { 0xE9, 0x00 });//chn41
+            hasht.Add("Chn42", new byte[] { 0xEA, 0x00 });//chn42
+            hasht.Add("Chn43", new byte[] { 0xEB, 0x00 });//chn43
+            hasht.Add("Chn44", new byte[] { 0xEC, 0x00 });//chn44
+            hasht.Add("Chn45", new byte[] { 0xED, 0x00 });//chn45
+            hasht.Add("Chn46", new byte[] { 0xEE, 0x00 });//chn46
+            hasht.Add("Chn47", new byte[] { 0xEF, 0x00 });//chn47
+            hasht.Add("Chn48", new byte[] { 0xF0, 0x00 });//chn48
+            hasht.Add("Chn49", new byte[] { 0xF1, 0x00 });//chn49
+            hasht.Add("Chn50", new byte[] { 0xF2, 0x00 });//chn50
+            hasht.Add("Chn51", new byte[] { 0xF3, 0x00 });//chn51
+            hasht.Add("Chn52", new byte[] { 0xF4, 0x00 });//chn52
+            hasht.Add("Chn53", new byte[] { 0xF5, 0x00 });//chn53
+            hasht.Add("Chn54", new byte[] { 0xF6, 0x00 });//chn54
+            hasht.Add("Chn55", new byte[] { 0xF7, 0x00 });//chn55
+            hasht.Add("Chn56", new byte[] { 0xF8, 0x00 });//chn56
+            hasht.Add("Chn57", new byte[] { 0xF9, 0x00 });//chn57
+            hasht.Add("Chn58", new byte[] { 0xFA, 0x00 });//chn58
+            hasht.Add("Chn59", new byte[] { 0xFB, 0x00 });//chn59
+            hasht.Add("Chn60", new byte[] { 0xFC, 0x00 });//chn60
+            hasht.Add("Chn61", new byte[] { 0xFD, 0x00 });//chn61
+            hasht.Add("Chn62", new byte[] { 0xFE, 0x00 });//chn62
+            hasht.Add("Chn63", new byte[] { 0xFF, 0x00 });//chn63
         }
     }
 }
