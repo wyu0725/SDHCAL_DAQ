@@ -1,9 +1,9 @@
 %% 64 Channel SCurvePlot
 InitialData = Importdata();
-legend_str = cell(1,4);
-for i=59:1:63
+legend_str = cell(1,64);
+for i=0:1:63
     SCurvePlotSingleChannel(InitialData, i);
-    legend_str{i-58} = sprintf('Channel%d',i+1);    
+    legend_str{i+1} = sprintf('Channel%d',i+1);    
 end
 % legend_str = {'Channel1','Channel2'};
 figure(1)
