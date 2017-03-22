@@ -1,4 +1,4 @@
-function [param,stat]=sigm_fit(x,y,fixed_params,initial_params,plot_flag)
+function [param,stat,rref]=sigm_fit(x,y,fixed_params,initial_params,plot_flag)
 % Optimization of parameters of the sigmoid function
 %
 % Syntax:
@@ -149,6 +149,7 @@ end
     
 if plot_flag==1 
     x_vector=min(x):(max(x)-min(x))/100:max(x);
+    rref = f(param(isnan(fixed_params)),x_vector);
     plot(x,y,'k.',x_vector,f(param(isnan(fixed_params)),x_vector),'r-')
     xlim([min(x) max(x)])
 end
