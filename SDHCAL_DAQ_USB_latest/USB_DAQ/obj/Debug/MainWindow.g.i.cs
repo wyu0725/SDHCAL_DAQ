@@ -634,7 +634,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 220 "..\..\MainWindow.xaml"
+        #line 221 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl4bitDAC;
         
@@ -642,7 +642,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 221 "..\..\MainWindow.xaml"
+        #line 222 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl4bitDAC_Chn1;
         
@@ -650,7 +650,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 222 "..\..\MainWindow.xaml"
+        #line 223 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl4bitDAC_Chn2;
         
@@ -658,7 +658,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 223 "..\..\MainWindow.xaml"
+        #line 224 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl4bitDAC_Chn3;
         
@@ -666,7 +666,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 224 "..\..\MainWindow.xaml"
+        #line 225 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl4bitDAC_Chn4;
         
@@ -674,7 +674,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 225 "..\..\MainWindow.xaml"
+        #line 226 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl4bitDAC_Chn5;
         
@@ -682,7 +682,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 226 "..\..\MainWindow.xaml"
+        #line 227 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl4bitDAC_Chn6;
         
@@ -690,7 +690,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 227 "..\..\MainWindow.xaml"
+        #line 228 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl4bitDAC_Chn7;
         
@@ -698,7 +698,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 228 "..\..\MainWindow.xaml"
+        #line 229 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl4bitDAC_Chn8;
         
@@ -706,7 +706,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 229 "..\..\MainWindow.xaml"
+        #line 230 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox txt4bitDAC_Chn1;
         
@@ -714,7 +714,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 230 "..\..\MainWindow.xaml"
+        #line 231 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox txt4bitDAC_Chn2;
         
@@ -722,7 +722,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 231 "..\..\MainWindow.xaml"
+        #line 232 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox txt4bitDAC_Chn3;
         
@@ -730,7 +730,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 232 "..\..\MainWindow.xaml"
+        #line 233 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox txt4bitDAC_Chn4;
         
@@ -738,7 +738,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 233 "..\..\MainWindow.xaml"
+        #line 234 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox txt4bitDAC_Chn5;
         
@@ -746,7 +746,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 234 "..\..\MainWindow.xaml"
+        #line 235 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox txt4bitDAC_Chn6;
         
@@ -754,7 +754,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 235 "..\..\MainWindow.xaml"
+        #line 236 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox txt4bitDAC_Chn7;
         
@@ -762,7 +762,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 236 "..\..\MainWindow.xaml"
+        #line 237 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox txt4bitDAC_Chn8;
         
@@ -770,7 +770,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 237 "..\..\MainWindow.xaml"
+        #line 238 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl4bitDAC_Chn9;
         
@@ -778,7 +778,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 238 "..\..\MainWindow.xaml"
+        #line 239 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl4bitDAC_Chn10;
         
@@ -786,7 +786,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 239 "..\..\MainWindow.xaml"
+        #line 240 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl4bitDAC_Chn11;
         
@@ -794,7 +794,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 240 "..\..\MainWindow.xaml"
+        #line 241 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl4bitDAC_Chn12;
         
@@ -802,7 +802,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 241 "..\..\MainWindow.xaml"
+        #line 242 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl4bitDAC_Chn13;
         
@@ -810,7 +810,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 242 "..\..\MainWindow.xaml"
+        #line 243 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl4bitDAC_Chn14;
         
@@ -818,7 +818,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 243 "..\..\MainWindow.xaml"
+        #line 244 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl4bitDAC_Chn15;
         
@@ -826,7 +826,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 244 "..\..\MainWindow.xaml"
+        #line 245 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl4bitDAC_Chn16;
         
@@ -834,7 +834,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 245 "..\..\MainWindow.xaml"
+        #line 246 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox txt4bitDAC_Chn9;
         
@@ -842,7 +842,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 246 "..\..\MainWindow.xaml"
+        #line 247 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox txt4bitDAC_Chn10;
         
@@ -850,7 +850,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 247 "..\..\MainWindow.xaml"
+        #line 248 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox txt4bitDAC_Chn11;
         
@@ -858,7 +858,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 248 "..\..\MainWindow.xaml"
+        #line 249 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox txt4bitDAC_Chn12;
         
@@ -866,7 +866,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 249 "..\..\MainWindow.xaml"
+        #line 250 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox txt4bitDAC_Chn13;
         
@@ -874,7 +874,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 250 "..\..\MainWindow.xaml"
+        #line 251 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox txt4bitDAC_Chn14;
         
@@ -882,7 +882,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 251 "..\..\MainWindow.xaml"
+        #line 252 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox txt4bitDAC_Chn15;
         
@@ -890,7 +890,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 252 "..\..\MainWindow.xaml"
+        #line 253 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox txt4bitDAC_Chn16;
         
@@ -898,7 +898,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 253 "..\..\MainWindow.xaml"
+        #line 254 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl4bitDAC_Chn17;
         
@@ -906,7 +906,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 254 "..\..\MainWindow.xaml"
+        #line 255 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl4bitDAC_Chn18;
         
@@ -914,7 +914,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 255 "..\..\MainWindow.xaml"
+        #line 256 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl4bitDAC_Chn19;
         
@@ -922,7 +922,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 256 "..\..\MainWindow.xaml"
+        #line 257 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl4bitDAC_Chn20;
         
@@ -930,7 +930,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 257 "..\..\MainWindow.xaml"
+        #line 258 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl4bitDAC_Chn21;
         
@@ -938,7 +938,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 258 "..\..\MainWindow.xaml"
+        #line 259 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl4bitDAC_Chn22;
         
@@ -946,7 +946,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 259 "..\..\MainWindow.xaml"
+        #line 260 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl4bitDAC_Chn23;
         
@@ -954,7 +954,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 260 "..\..\MainWindow.xaml"
+        #line 261 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl4bitDAC_Chn24;
         
@@ -962,7 +962,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 261 "..\..\MainWindow.xaml"
+        #line 262 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox txt4bitDAC_Chn17;
         
@@ -970,7 +970,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 262 "..\..\MainWindow.xaml"
+        #line 263 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox txt4bitDAC_Chn18;
         
@@ -978,7 +978,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 263 "..\..\MainWindow.xaml"
+        #line 264 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox txt4bitDAC_Chn19;
         
@@ -986,7 +986,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 264 "..\..\MainWindow.xaml"
+        #line 265 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox txt4bitDAC_Chn20;
         
@@ -994,7 +994,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 265 "..\..\MainWindow.xaml"
+        #line 266 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox txt4bitDAC_Chn21;
         
@@ -1002,7 +1002,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 266 "..\..\MainWindow.xaml"
+        #line 267 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox txt4bitDAC_Chn22;
         
@@ -1010,7 +1010,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 267 "..\..\MainWindow.xaml"
+        #line 268 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox txt4bitDAC_Chn23;
         
@@ -1018,7 +1018,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 268 "..\..\MainWindow.xaml"
+        #line 269 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox txt4bitDAC_Chn24;
         
@@ -1026,7 +1026,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 269 "..\..\MainWindow.xaml"
+        #line 270 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl4bitDAC_Chn25;
         
@@ -1034,7 +1034,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 270 "..\..\MainWindow.xaml"
+        #line 271 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl4bitDAC_Chn26;
         
@@ -1042,7 +1042,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 271 "..\..\MainWindow.xaml"
+        #line 272 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl4bitDAC_Chn27;
         
@@ -1050,7 +1050,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 272 "..\..\MainWindow.xaml"
+        #line 273 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl4bitDAC_Chn28;
         
@@ -1058,7 +1058,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 273 "..\..\MainWindow.xaml"
+        #line 274 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl4bitDAC_Chn29;
         
@@ -1066,7 +1066,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 274 "..\..\MainWindow.xaml"
+        #line 275 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl4bitDAC_Chn30;
         
@@ -1074,7 +1074,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 275 "..\..\MainWindow.xaml"
+        #line 276 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl4bitDAC_Chn31;
         
@@ -1082,7 +1082,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 276 "..\..\MainWindow.xaml"
+        #line 277 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl4bitDAC_Chn32;
         
@@ -1090,7 +1090,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 277 "..\..\MainWindow.xaml"
+        #line 278 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox txt4bitDAC_Chn25;
         
@@ -1098,7 +1098,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 278 "..\..\MainWindow.xaml"
+        #line 279 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox txt4bitDAC_Chn26;
         
@@ -1106,7 +1106,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 279 "..\..\MainWindow.xaml"
+        #line 280 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox txt4bitDAC_Chn27;
         
@@ -1114,7 +1114,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 280 "..\..\MainWindow.xaml"
+        #line 281 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox txt4bitDAC_Chn28;
         
@@ -1122,7 +1122,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 281 "..\..\MainWindow.xaml"
+        #line 282 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox txt4bitDAC_Chn29;
         
@@ -1130,7 +1130,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 282 "..\..\MainWindow.xaml"
+        #line 283 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox txt4bitDAC_Chn30;
         
@@ -1138,7 +1138,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 283 "..\..\MainWindow.xaml"
+        #line 284 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox txt4bitDAC_Chn31;
         
@@ -1146,7 +1146,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 284 "..\..\MainWindow.xaml"
+        #line 285 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox txt4bitDAC_Chn32;
         
@@ -1154,7 +1154,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 285 "..\..\MainWindow.xaml"
+        #line 286 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl4bitDAC_Chn33;
         
@@ -1162,7 +1162,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 286 "..\..\MainWindow.xaml"
+        #line 287 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl4bitDAC_Chn34;
         
@@ -1170,7 +1170,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 287 "..\..\MainWindow.xaml"
+        #line 288 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl4bitDAC_Chn35;
         
@@ -1178,7 +1178,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 288 "..\..\MainWindow.xaml"
+        #line 289 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl4bitDAC_Chn36;
         
@@ -1186,7 +1186,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 289 "..\..\MainWindow.xaml"
+        #line 290 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl4bitDAC_Chn37;
         
@@ -1194,7 +1194,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 290 "..\..\MainWindow.xaml"
+        #line 291 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl4bitDAC_Chn38;
         
@@ -1202,7 +1202,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 291 "..\..\MainWindow.xaml"
+        #line 292 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl4bitDAC_Chn39;
         
@@ -1210,7 +1210,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 292 "..\..\MainWindow.xaml"
+        #line 293 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl4bitDAC_Chn40;
         
@@ -1218,7 +1218,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 293 "..\..\MainWindow.xaml"
+        #line 294 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox txt4bitDAC_Chn33;
         
@@ -1226,7 +1226,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 294 "..\..\MainWindow.xaml"
+        #line 295 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox txt4bitDAC_Ch34;
         
@@ -1234,7 +1234,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 295 "..\..\MainWindow.xaml"
+        #line 296 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox txt4bitDAC_Chn35;
         
@@ -1242,7 +1242,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 296 "..\..\MainWindow.xaml"
+        #line 297 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox txt4bitDAC_Chn36;
         
@@ -1250,7 +1250,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 297 "..\..\MainWindow.xaml"
+        #line 298 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox txt4bitDAC_Chn37;
         
@@ -1258,7 +1258,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 298 "..\..\MainWindow.xaml"
+        #line 299 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox txt4bitDAC_Chn38;
         
@@ -1266,7 +1266,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 299 "..\..\MainWindow.xaml"
+        #line 300 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox txt4bitDAC_Chn39;
         
@@ -1274,7 +1274,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 300 "..\..\MainWindow.xaml"
+        #line 301 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox txt4bitDAC_Chn40;
         
@@ -1282,7 +1282,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 301 "..\..\MainWindow.xaml"
+        #line 302 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl4bitDAC_Chn41;
         
@@ -1290,7 +1290,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 302 "..\..\MainWindow.xaml"
+        #line 303 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl4bitDAC_Chn42;
         
@@ -1298,7 +1298,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 303 "..\..\MainWindow.xaml"
+        #line 304 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl4bitDAC_Chn43;
         
@@ -1306,7 +1306,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 304 "..\..\MainWindow.xaml"
+        #line 305 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl4bitDAC_Chn44;
         
@@ -1314,7 +1314,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 305 "..\..\MainWindow.xaml"
+        #line 306 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl4bitDAC_Chn45;
         
@@ -1322,7 +1322,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 306 "..\..\MainWindow.xaml"
+        #line 307 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl4bitDAC_Chn46;
         
@@ -1330,7 +1330,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 307 "..\..\MainWindow.xaml"
+        #line 308 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl4bitDAC_Chn47;
         
@@ -1338,7 +1338,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 308 "..\..\MainWindow.xaml"
+        #line 309 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl4bitDAC_Chn48;
         
@@ -1346,7 +1346,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 309 "..\..\MainWindow.xaml"
+        #line 310 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox txt4bitDAC_Chn41;
         
@@ -1354,7 +1354,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 310 "..\..\MainWindow.xaml"
+        #line 311 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox txt4bitDAC_Chn42;
         
@@ -1362,7 +1362,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 311 "..\..\MainWindow.xaml"
+        #line 312 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox txt4bitDAC_Chn43;
         
@@ -1370,7 +1370,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 312 "..\..\MainWindow.xaml"
+        #line 313 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox txt4bitDAC_Chn44;
         
@@ -1378,7 +1378,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 313 "..\..\MainWindow.xaml"
+        #line 314 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox txt4bitDAC_Chn45;
         
@@ -1386,7 +1386,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 314 "..\..\MainWindow.xaml"
+        #line 315 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox txt4bitDAC_Chn46;
         
@@ -1394,7 +1394,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 315 "..\..\MainWindow.xaml"
+        #line 316 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox txt4bitDAC_Chn47;
         
@@ -1402,7 +1402,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 316 "..\..\MainWindow.xaml"
+        #line 317 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox txt4bitDAC_Chn48;
         
@@ -1410,7 +1410,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 317 "..\..\MainWindow.xaml"
+        #line 318 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl4bitDAC_Chn49;
         
@@ -1418,7 +1418,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 318 "..\..\MainWindow.xaml"
+        #line 319 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl4bitDAC_Chn50;
         
@@ -1426,7 +1426,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 319 "..\..\MainWindow.xaml"
+        #line 320 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl4bitDAC_Chn51;
         
@@ -1434,7 +1434,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 320 "..\..\MainWindow.xaml"
+        #line 321 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl4bitDAC_Chn52;
         
@@ -1442,7 +1442,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 321 "..\..\MainWindow.xaml"
+        #line 322 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl4bitDAC_Chn53;
         
@@ -1450,7 +1450,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 322 "..\..\MainWindow.xaml"
+        #line 323 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl4bitDAC_Chn54;
         
@@ -1458,7 +1458,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 323 "..\..\MainWindow.xaml"
+        #line 324 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl4bitDAC_Chn55;
         
@@ -1466,7 +1466,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 324 "..\..\MainWindow.xaml"
+        #line 325 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl4bitDAC_Chn56;
         
@@ -1474,7 +1474,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 325 "..\..\MainWindow.xaml"
+        #line 326 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox txt4bitDAC_Chn49;
         
@@ -1482,7 +1482,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 326 "..\..\MainWindow.xaml"
+        #line 327 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox txt4bitDAC_Chn50;
         
@@ -1490,7 +1490,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 327 "..\..\MainWindow.xaml"
+        #line 328 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox txt4bitDAC_Chn51;
         
@@ -1498,7 +1498,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 328 "..\..\MainWindow.xaml"
+        #line 329 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox txt4bitDAC_Chn52;
         
@@ -1506,7 +1506,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 329 "..\..\MainWindow.xaml"
+        #line 330 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox txt4bitDAC_Chn53;
         
@@ -1514,7 +1514,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 330 "..\..\MainWindow.xaml"
+        #line 331 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox txt4bitDAC_Chn54;
         
@@ -1522,7 +1522,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 331 "..\..\MainWindow.xaml"
+        #line 332 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox txt4bitDAC_Chn55;
         
@@ -1530,7 +1530,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 332 "..\..\MainWindow.xaml"
+        #line 333 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox txt4bitDAC_Chn56;
         
@@ -1538,7 +1538,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 333 "..\..\MainWindow.xaml"
+        #line 334 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl4bitDAC_Chn57;
         
@@ -1546,7 +1546,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 334 "..\..\MainWindow.xaml"
+        #line 335 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl4bitDAC_Chn58;
         
@@ -1554,7 +1554,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 335 "..\..\MainWindow.xaml"
+        #line 336 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl4bitDAC_Chn59;
         
@@ -1562,7 +1562,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 336 "..\..\MainWindow.xaml"
+        #line 337 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl4bitDAC_Chn60;
         
@@ -1570,7 +1570,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 337 "..\..\MainWindow.xaml"
+        #line 338 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl4bitDAC_Chn61;
         
@@ -1578,7 +1578,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 338 "..\..\MainWindow.xaml"
+        #line 339 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl4bitDAC_Chn62;
         
@@ -1586,7 +1586,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 339 "..\..\MainWindow.xaml"
+        #line 340 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl4bitDAC_Chn63;
         
@@ -1594,7 +1594,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 340 "..\..\MainWindow.xaml"
+        #line 341 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl4bitDAC_Chn64;
         
@@ -1602,7 +1602,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 341 "..\..\MainWindow.xaml"
+        #line 342 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox txt4bitDAC_Chn57;
         
@@ -1610,7 +1610,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 342 "..\..\MainWindow.xaml"
+        #line 343 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox txt4bitDAC_Chn58;
         
@@ -1618,7 +1618,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 343 "..\..\MainWindow.xaml"
+        #line 344 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox txt4bitDAC_Chn59;
         
@@ -1626,7 +1626,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 344 "..\..\MainWindow.xaml"
+        #line 345 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox txt4bitDAC_Chn60;
         
@@ -1634,7 +1634,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 345 "..\..\MainWindow.xaml"
+        #line 346 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox txt4bitDAC_Chn61;
         
@@ -1642,7 +1642,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 346 "..\..\MainWindow.xaml"
+        #line 347 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox txt4bitDAC_Chn62;
         
@@ -1650,7 +1650,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 347 "..\..\MainWindow.xaml"
+        #line 348 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox txt4bitDAC_Chn63;
         
@@ -1658,7 +1658,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 348 "..\..\MainWindow.xaml"
+        #line 349 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox txt4bitDAC_Chn64;
         

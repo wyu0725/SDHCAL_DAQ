@@ -58,9 +58,9 @@ namespace USB_DAQ
         private const int SCurve_Package_Length = 512;
         private static int Scurve_Data_Pkg;
         private static int Scurve_Data_Remain;
+        TextBox[] txt4bitDAC_Chn = new TextBox[64];
         public MainWindow()
-        {
-
+        {          
             InitializeComponent();
             //Dynamic list of USB devices bound to CyUSB.sys
             usbDevices = new USBDeviceList(CyConst.DEVICES_CYUSB);
@@ -70,6 +70,14 @@ namespace USB_DAQ
             RefreshDevice();
             //cbxAverage_Points.SelectedIndex = 0;
             //Initial_SerialPort();
+            txt4bitDAC_Chn[0] = txt4bitDAC_Chn1;
+            txt4bitDAC_Chn[1] = txt4bitDAC_Chn2;
+            txt4bitDAC_Chn[3] = txt4bitDAC_Chn3;
+            txt4bitDAC_Chn[4] = txt4bitDAC_Chn4;
+            txt4bitDAC_Chn[0] = txt4bitDAC_Chn1;
+            txt4bitDAC_Chn[1] = txt4bitDAC_Chn2;
+            txt4bitDAC_Chn[3] = txt4bitDAC_Chn3;
+            txt4bitDAC_Chn[4] = txt4bitDAC_Chn4;
         }
         private void usbDevices_DeviceAttached(object sender, EventArgs e)
         {
@@ -798,6 +806,16 @@ namespace USB_DAQ
                 {
                     MessageBox.Show("Set shaper state failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
+
+                //---------------------- Set 4-bit DAC Code ---------------------------//
+                TextBox test = new TextBox();
+                test.Name = txt4bitDAC_Chn1.Name;
+                /*string DAC_4bit_Chn = "txt4bitDAC_Chn";
+                for(int i = 0; i < 64; i++)
+                {
+                    TextBox txt4bitDAC_Chn = (TextBox)(DAC_4bit_Chn + i.ToString());
+                }
+                int value_4bitDAC = txt4bitDAC_Chn1.Text*/
             }
             //-----if there is Read Register opertation
             else if ((string)btnSC_or_ReadReg.Content == "Read Register")
