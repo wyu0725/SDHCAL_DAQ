@@ -1501,7 +1501,8 @@ namespace USB_DAQ
         private void chk_PedCali_Checked(object sender, RoutedEventArgs e)
         {
             hasht.Clear();
-            /*
+            #region Microroc No.203
+            /*--- MICROROC NO.203 SC 4-bit DAC Parameter ---*/
             //This parameter is caculated via DC voltage measured by KEITHLEY2701
             hasht.Add("Chn0", new byte[] { 0xC0, 0x02}); //chn0
             hasht.Add("Chn1", new byte[] { 0xC1, 0x03});//chn1
@@ -1566,7 +1567,8 @@ namespace USB_DAQ
             hasht.Add("Chn60", new byte[] { 0xFC, 0x02});//chn60
             hasht.Add("Chn61", new byte[] { 0xFD, 0x03});//chn61
             hasht.Add("Chn62", new byte[] { 0xFE, 0x03});//chn62
-            hasht.Add("Chn63", new byte[] { 0xFF, 0x04});//chn63*/
+            hasht.Add("Chn63", new byte[] { 0xFF, 0x04});//chn63
+            /*----
             //The parameter is caculate via S Curve Test
             hasht.Add("Chn0", new byte[] { 0xC0, 0x02 }); //chn0
             hasht.Add("Chn1", new byte[] { 0xC1, 0x02 });//chn1
@@ -1632,6 +1634,8 @@ namespace USB_DAQ
             hasht.Add("Chn61", new byte[] { 0xFD, 0x01 });//chn61
             hasht.Add("Chn62", new byte[] { 0xFE, 0x01 });//chn62
             hasht.Add("Chn63", new byte[] { 0xFF, 0x01 });//chn63
+            */
+            # endregion
         }
         //without calibration
         private void chk_PedCali_UnChecked(object sender, RoutedEventArgs e)
