@@ -1,7 +1,7 @@
 Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2016.3 (win64) Build 1682563 Mon Oct 10 19:07:27 MDT 2016
-| Date             : Sat Mar 18 10:13:27 2017
+| Date             : Thu Mar 23 12:43:49 2017
 | Host             : WYU running 64-bit major release  (build 9200)
 | Command          : report_power -file FPGA_TOP_power_routed.rpt -pb FPGA_TOP_power_summary_routed.pb -rpx FPGA_TOP_power_routed.rpx
 | Design           : FPGA_TOP
@@ -51,15 +51,15 @@ Table of Contents
 | On-Chip                  | Power (W) | Used     | Available | Utilization (%) |
 +--------------------------+-----------+----------+-----------+-----------------+
 | Clocks                   |     0.009 |        9 |       --- |             --- |
-| Slice Logic              |     0.004 |     8901 |       --- |             --- |
-|   LUT as Logic           |     0.003 |     3352 |     63400 |            5.29 |
-|   Register               |    <0.001 |     4242 |    126800 |            3.35 |
-|   CARRY4                 |    <0.001 |      106 |     15850 |            0.67 |
+| Slice Logic              |     0.004 |     8919 |       --- |             --- |
+|   LUT as Logic           |     0.003 |     3362 |     63400 |            5.30 |
+|   Register               |    <0.001 |     4246 |    126800 |            3.35 |
+|   CARRY4                 |    <0.001 |      107 |     15850 |            0.68 |
 |   LUT as Shift Register  |    <0.001 |      125 |     19000 |            0.66 |
 |   LUT as Distributed RAM |    <0.001 |       24 |     19000 |            0.13 |
 |   F7/F8 Muxes            |    <0.001 |       30 |     63400 |            0.05 |
 |   Others                 |     0.000 |      394 |       --- |             --- |
-| Signals                  |     0.004 |     6103 |       --- |             --- |
+| Signals                  |     0.004 |     6112 |       --- |             --- |
 | Block RAM                |     0.003 |     17.5 |       135 |           12.96 |
 | MMCM                     |     0.086 |        1 |         6 |           16.67 |
 | I/O                      |     0.163 |       78 |       285 |           27.37 |
@@ -220,8 +220,8 @@ Table of Contents
 |     Trig_Gen_en                                                                  |    <0.001 |
 |   dbg_hub                                                                        |     0.002 |
 |     inst                                                                         |     0.002 |
-|       CORE_XSDB.UUT_MASTER                                                       |     0.001 |
-|         U_ICON_INTERFACE                                                         |    <0.001 |
+|       CORE_XSDB.UUT_MASTER                                                       |     0.002 |
+|         U_ICON_INTERFACE                                                         |     0.001 |
 |           U_CMD1                                                                 |    <0.001 |
 |           U_CMD2                                                                 |    <0.001 |
 |           U_CMD3                                                                 |    <0.001 |
