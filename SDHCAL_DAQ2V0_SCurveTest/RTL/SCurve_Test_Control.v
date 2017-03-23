@@ -78,8 +78,8 @@ module SCurve_Test_Control(
   reg [63:0] All_Chn_Param;
   reg [5:0] Test_Chn;
   reg [9:0] Actual_10bit_DAC_Code;//In SC param the LSB of 10bit DAC code come first, so it's necessary to invert the code
-  reg [11:0] SC_Param_Load_Cnt;
-  localparam [11:0] SC_PARAM_LOAD_DELAY = 12'd2800;
+  reg [15:0] SC_Param_Load_Cnt;
+  localparam [15:0] SC_PARAM_LOAD_DELAY = 16'd40_000;
   reg [3:0] Wait_Tail_Cnt;
   always @(posedge Clk or negedge reset_n)begin
     if(~reset_n)begin
@@ -97,7 +97,7 @@ module SCurve_Test_Control(
       Discri_Mask_Shift <= 8'b0;
       All_Chn_Discri_Mask <= {189'b0, 3'b111};
       Microroc_Discriminator_Mask <= {192{1'b1}};
-      SC_Param_Load_Cnt <= 12'b0;
+      SC_Param_Load_Cnt <= 16'b0;
       Wait_Tail_Cnt <= 4'b0;
       State <= IDLE;
     end
@@ -117,7 +117,7 @@ module SCurve_Test_Control(
             SCurve_Test_Done <= 1'b0;
             All_Chn_Discri_Mask <= {189'b0, 3'b111};
             Microroc_Discriminator_Mask <= {192{1'b1}};
-            SC_Param_Load_Cnt <= 12'b0;
+            SC_Param_Load_Cnt <= 16'b0;
             Wait_Tail_Cnt <= 4'b0;
             State <= IDLE;
           end
@@ -182,13 +182,13 @@ module SCurve_Test_Control(
         end
         WAIT_LOAD_SC_PARAM_DONE:begin
           SC_Param_Load <= 1'b0;
-          if(Microroc_Config_Done || (SC_Param_Load_Cnt != 8'd0 && SC_Param_Load_Cnt < SC_PARAM_LOAD_DELAY)) begin
+          if(Microroc_Config_Done || (SC_Param_Load_Cnt != 16'd0 && SC_Param_Load_Cnt < SC_PARAM_LOAD_DELAY)) begin
             State <= WAIT_LOAD_SC_PARAM_DONE;
             SC_Param_Load_Cnt <= SC_Param_Load_Cnt + 1'b1;
           end
           else if(SC_Param_Load_Cnt == SC_PARAM_LOAD_DELAY)begin
             State <= START_SCURVE_TEST;
-            SC_Param_Load_Cnt <= 8'b0;
+            SC_Param_Load_Cnt <= 16'b0;
           end
           else
             State <= WAIT_LOAD_SC_PARAM_DONE;
