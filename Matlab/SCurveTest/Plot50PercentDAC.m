@@ -1,4 +1,8 @@
 % ImportData_0fC = Importdata();
+prompt_asic = 'Please Input the ASIC ID';
+dlg_title_asic = 'ASIC ID';
+answer = inputdlg(prompt_asic, dlg_title_asic);
+ASIC_ID = str2double(answer);
 prompt_num = {'Input the number of the data'};
 dlg_title_num = 'Number of data';
 answer = inputdlg(prompt_num,dlg_title_num);
@@ -37,7 +41,8 @@ h = legend(Legend_str);
 set(h,'Location','eastout');
 xlabel('\bf Channel Number');
 ylabel('\bf DAC Code')
-title('\bf 50 % Trig efficiency with different charge input');
+title1_str = sprintf('50%% Trig efficiency with different charge input--ASIC Number:%d',ASIC_ID);
+title(title1_str);
 hold off
 
 % Charge = [0,1,2,4,5,6,8,10];
@@ -49,7 +54,7 @@ p0 = polyfit(Charge,DeltaV,1);
 y0 = polyval(p0,x);
 figure(2)
 plot(Charge,DeltaV,'r*');
-linear_legend_str = sprintf('Linear fit of shaper output,R:%1.6f',R);
+linear_legend_str = sprintf('Linear fit of shaper output,R:%1.6f -- ASIC ID£º%d',R, ASIC_ID);
 xlabel('Charge(fC)');
 h = ylabel('\Delta V (mV)');
 set(h,'Interpreter','tex');
