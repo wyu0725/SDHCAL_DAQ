@@ -620,10 +620,83 @@
 + 阳极板接上探测器后侧边漏气，阳极板不平整
   + 以后阳极板做厚一点，厚度：3.2mm
   + 考虑阳极板残铜率，做成关于中心层对称的结构
+
 + S曲线测试完成
   + 单通道S曲线：
+
+    ![单通道S曲线](http://ogs54iji1.bkt.clouddn.com/SDHCALSCurve80fC.jpg-SDHCAL)
+
+  + 64通道S曲线
+
+    ![64通道S曲线](http://ogs54iji1.bkt.clouddn.com/SDHCALTrig0_SCurve_0fC_WoCorrection.jpg-SDHCAL)
+
   + 根据零输入情况下S曲线计算64通道基线不一致性，然后做修正，修正结果与直接用电压表量到的值计算出来的修正做对比
     + 直接用电压表量到的结果做修正，S曲线50%触发率对应的码值一致性更好
+
+      + 64通道S曲线，未修正
+
+        ![64通道S曲线，未修正](http://ogs54iji1.bkt.clouddn.com/SDHCALTrig0_SCurve_0fC_WoCorrection.jpg-SDHCAL)
+
+      + 64通道S曲线，使用电压表测量到的结果修正
+
+        ![64通道S曲线，DC修正](http://ogs54iji1.bkt.clouddn.com/SDHCALTrig0_SCurve_0fC_WiCorrection_DC.jpg-SDHCAL)
+
+      + 使用未修正的S曲线的50%触发率的值作为基线电压值进行修正
+
+        ![64通道S曲线，SCurveTest修正](http://ogs54iji1.bkt.clouddn.com/SDHCALTrig0_SCurve_0fC_WiCorrection_SCT.jpg-SDHCAL)
+
+    + 可以明显看到修正之后的S曲线更加聚拢，即一致性更好
+
+    + 统计分析
+
+      ![64通道S曲线50%触发率对应的DAC码值对比](http://ogs54iji1.bkt.clouddn.com/SDHCALComparisonOf50PercentTriggerEfficiency.jpg-SDHCAL)
+
+    + 不管是用直流电压进行修正还是用S曲线的值尽心修正，修正之后的结果都更好
+
+      + 使用S曲线进行修正的方法有一点不完善的地方，使用S曲线50%触发率对应的DAC码值进行修正时，对应的码值大部分时候不是整数，结果是取整了的，也就是说DAC码值对应的点并不是50%的点，只是最靠近50%触发率的点。这样修正的4-bitDAC码值就不是很准确。
+
+      + 这些比较中没有包含61通道，61通道有问题，64通道50%触发率对应的DAC码值更低
+
+        + 61通道S曲线和其他通道S曲线对比
+
+          ![61通道和其他通道对比](http://ogs54iji1.bkt.clouddn.com/SDHCALChn61SCurve_vs_All.jpg-SDHCAL)
+
+        + 61通道明显噪声更大
+
+        + trigger有输出时out_sh会有一个反向的噪声，感觉像是互感串扰
+
+          + 红色：out_trigger0， 绿色：out_sh， 黄色：DAC输出电压
+
+          ![61通道0fC](http://ogs54iji1.bkt.clouddn.com/SDHCALch61-0fC1.jpg-SDHCAL)
+
+          ![61通道0fC](http://ogs54iji1.bkt.clouddn.com/SDHCALch61-0fC2.jpg-SDHCAL)
+
+        + 每个通道都有这样的现象，但是61通道更严重，这样子会造成一个结果，就是每当trigger从0跳变到1的时候，out_sh会有一个向下的串扰，这个串扰可能会使out_sh低于DAC值，然后trigger又输出了，形成一个正反馈，61通道的正反馈尤其严重
+
+          + 1通道在配置时，会有一段上述的反馈，但是反馈很快就消失了的，在进行S曲线测试时不会有干扰，红色：out_trigger0， 黄色：DAC输出电压， 绿色：out_sh， 蓝色：FPGA配置输出完成， 白色虚线：配置稳定后基线的电压
+
+            ![1通道配置时的波形](http://ogs54iji1.bkt.clouddn.com/SDHCALchn1_Config.jpg-SDHCAL)
+
+          + 61通道配置时，正反馈一直持续，红色：out_trigger0， 黄色：DAC输出电压， 绿色：out_sh， 蓝色：FPGA配置输出完成， 白色虚线：配置稳定后基线的电压
+
+            ![61通道配置时的波形](http://ogs54iji1.bkt.clouddn.com/SDHCALchn61_Config.jpg-SDHCAL)
+
   + 64通道S曲线测试已做：0fC, 1fC, 2fC, 4fC, 5fC, 6fC, 8fC, 10fC
+
+    + 50%触发率对应的DAC码值曲线，1fC时和0fC没有办法分辨，第61通道的数据有问题
+
+      ![50%触发率对应的DAC码值](http://ogs54iji1.bkt.clouddn.com/SDHCALASIC203_50PercentTrig_Efficiency_vs_Charge.jpg-SDHCAL)
+
+    + 转换成电压值之后进行线性拟合
+
+      ![50%触发率对应的DAC码值转换成电压值之后线性拟合](http://ogs54iji1.bkt.clouddn.com/SDHCALASIC203_LinearfitOfCharge_vs_50TrigEfficiency.jpg-SDHCAL)
+
     + 在低电荷量(<4fC)输入时，61通道的结果是有问题的
+
 + 另外一块板B板是好的
+
+  + 64通道S曲线，每个通道都是好的
+
+  ![B板ASIC215的S曲线](http://ogs54iji1.bkt.clouddn.com/SDHCALB_Board_0fC_DAC0.jpg-SDHCAL)
+
+  ![B板ASIC215的S曲线](http://ogs54iji1.bkt.clouddn.com/SDHCALASIC215_SCurveDAC0.jpg-SDHCAL)
