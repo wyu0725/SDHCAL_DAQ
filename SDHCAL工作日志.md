@@ -700,3 +700,21 @@
   ![B板ASIC215的S曲线](http://ogs54iji1.bkt.clouddn.com/SDHCALB_Board_0fC_DAC0.jpg-SDHCAL)
 
   ![B板ASIC215的S曲线](http://ogs54iji1.bkt.clouddn.com/SDHCALASIC215_SCurveDAC0.jpg-SDHCAL)
+
+
+
+## 2017/03/27
+
++ 多片ASIC工作方式
+  + 配置
+    + 级联配置的方式，配置好第一片之后，再对第一片进行配置，第一片将配置信息输出给第二片，以此类推。目前的逻辑在不修改的情况下是可以配置4片的。
+      + Header要不一样
+      + 10-bit DAC码值可能不一样
+      + 4-bit DAC ，码值不一样
+    + 可以再加一个配置多片的模块，自动改变Header，以及预先将DAC码值准备好
+  + ACQ
+    + 同步给出Start_Acq信号，现在的逻辑就是这么做的
+    + 当一片芯片的一个通道给出trigger信号之后，所有的芯片都应该在这一时刻将比较器的结果编码存入RAM中 => trigger应当送到FPGA中然后trig_ext输出，trigger输出到trig_ext输出之间延时应当尽可能的小
+    + 数据读回：目前看来不需要修改的
+    + rst_counterb：什么时候清零BCID，是每一次start_acq之后就清零一次还是一次测试清零一次？
+    + VAL_EVT的作用是什么？
