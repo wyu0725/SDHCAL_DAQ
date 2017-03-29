@@ -756,3 +756,20 @@
     ![50%触发率对应DAC码值对比](http://ogs54iji1.bkt.clouddn.com/SDHCALComparisonOf50PercentTriggerEfficiency_Wi_Wo_HV.jpg-SDHCAL)
 
     ​
+
+## 2017/03/29
+
++ 组会
+  + S曲线50%触发率对应的DAC码值，转换成电压值之后，最终转换成电荷量
+    + 做分布图统计
+    + 50%触发率对应的值应该拟合得到，线性拟合的误差也不会太大
+  + 探测器需要测量的指标
+    + 探测效率：$\eta = \frac {N_{Det}}{N_{in}}$，对不同pad计算效率
+    + 均匀性：同样的电荷量，不同pad输出是否是一样的
+    + 串扰：击中其中一个pad，其他pad上是否有信号
+    + 台基宽度：没有粒子入射时的基线波动
+  + 没有击中的ASIC不写RAM
+  + 台基稳定性测试：不同温度下台基电压是否会有变化
++ 开始修改逻辑
+  + ext_raz在配置完成之后才释放，之前一直有效抑制trigger输出
+  + 在S曲线测试时，强制选择SC，避免上位机选择Read Register的测试错误
