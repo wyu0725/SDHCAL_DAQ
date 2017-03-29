@@ -40,6 +40,7 @@ module SCurve_Test_Top(
     output [9:0] Microroc_10bit_DAC_Out,
     output [191:0] Microroc_Discriminator_Mask,
     output SC_Param_Load,
+    output Force_Ext_RAZ,
     /*--- Pin ---*/
     input CLK_EXT,
     input out_trigger0b,
@@ -88,6 +89,7 @@ module SCurve_Test_Top(
       .Microroc_CTest_Chn_Out(Microroc_CTest_Chn_Out),
       .Microroc_10bit_DAC_Out(Microroc_10bit_DAC_Out),
       .Microroc_Discriminator_Mask(Microroc_Discriminator_Mask),
+      .Force_Ext_RAZ(Force_Ext_RAZ),
       .SC_Param_Load(SC_Param_Load),
       .Microroc_Config_Done(Microroc_Config_Done),
       /*--- USB Data FIFO Interface ---*/

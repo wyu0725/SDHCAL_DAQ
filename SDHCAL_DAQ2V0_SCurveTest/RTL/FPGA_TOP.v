@@ -324,6 +324,7 @@ module FPGA_TOP(
     wire Config_Done;
     //Test Port
     wire Start_Readout_t;
+    wire Force_Ext_RAZ;
     Microroc_top Microroc_u1
     (
       .Clk(Clk),
@@ -395,6 +396,7 @@ module FPGA_TOP(
       //--------Trig_Gen interface---//
       .rst_cntb(Microroc_rst_cntb),
       .Raz_en(~Microroc_Internal_or_External_raz_chn),//modefied by wyu 20170309
+      .Force_RAZ(Force_Ext_RAZ),
       .Trig_en(Microroc_trig_en),
       .Raz_mode(Microroc_External_RAZ_Mode),//2bit//modefied by wyu 20170309
       .External_RAZ_Delay_Time(Microroc_External_RAZ_Delay_Time),//new added by wyu 20170309
@@ -470,6 +472,7 @@ module FPGA_TOP(
       .Microroc_10bit_DAC_Out(SCTest_Microroc_10bit_DAC_Out),
       .Microroc_Discriminator_Mask(SCTest_Channel_Discri_Mask),
       .SC_Param_Load(SCTest_SC_Param_Load),
+      .Force_Ext_RAZ(Force_Ext_RAZ),
       /*--- PIN ---*/
       .CLK_EXT(CLK_EXT),
       .out_trigger0b(OUT_TRIG0B),

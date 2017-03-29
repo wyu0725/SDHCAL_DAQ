@@ -4,6 +4,7 @@ module Trig_Gen
   input reset_n,
   input rst_cntb,
   input Raz_en,
+  input Force_RAZ,// Active H, when H, force external raz to H
   input Trig_en,
   input [1:0] Raz_mode,
   output Raz_chn,     //the width of the pulse must be changed according to the chosen peaking time to avoid "re-triggering"
@@ -48,6 +49,9 @@ always @ (posedge Clk , negedge reset_n) begin
   if(~reset_n) begin
     Raz_chn_ext <= 1'b0;
     counter1 <= 6'b0;
+  end
+  else if (Force_RAZ)begin
+    Raz_chn_ext <= 1'b1;
   end
   else if(Raz_en || (counter1 < DELAY_CONST && counter1 != 6'd0))begin
     Raz_chn_ext <= 1'b1;

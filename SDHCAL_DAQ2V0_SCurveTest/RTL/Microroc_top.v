@@ -87,6 +87,7 @@ module Microroc_top(
       //--------Trig_Gen interface---//
       input rst_cntb,
       input Raz_en,
+      input Force_RAZ,
       input Trig_en,
       input [1:0] Raz_mode,
       input [3:0] External_RAZ_Delay_Time,//Set delay time for external raz mode
@@ -354,6 +355,7 @@ Trig_Gen Trig_Gen
    .reset_n(reset_n),
    .rst_cntb(rst_cntb),
    .Raz_en(Single_RAZ_en),
+   .Force_RAZ(Force_RAZ),
    .Trig_en(Trig_en_i),//Modefied by wyu for RAM test
    .Raz_mode(Raz_mode),
    .Raz_chn(Raz_chn), //the width of the pulse must be changed according to the chosen peaking time to avoid "re-triggering"

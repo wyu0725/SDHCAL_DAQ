@@ -38,6 +38,7 @@ module SCurve_Test_Control(
     output reg [63:0] Microroc_CTest_Chn_Out,
     output reg [9:0] Microroc_10bit_DAC_Out,
     output reg [191:0] Microroc_Discriminator_Mask,
+    output reg Force_Ext_RAZ,
     output reg SC_Param_Load,
     input Microroc_Config_Done,
     /*--- USB Data FIFO Interface ---*/
@@ -178,6 +179,7 @@ module SCurve_Test_Control(
         LOAD_SC_PARAM:begin
           usb_data_fifo_wr_en <= 1'b0;
           SC_Param_Load <= 1'b1;
+          Force_Ext_RAZ <= 1'b1;
           State <= WAIT_LOAD_SC_PARAM_DONE;
         end
         WAIT_LOAD_SC_PARAM_DONE:begin
@@ -186,9 +188,10 @@ module SCurve_Test_Control(
             State <= WAIT_LOAD_SC_PARAM_DONE;
             SC_Param_Load_Cnt <= SC_Param_Load_Cnt + 1'b1;
           end
-          else if(SC_Param_Load_Cnt == SC_PARAM_LOAD_DELAY)begin
-            State <= START_SCURVE_TEST;
+          else if(SC_Param_Load_Cnt == SC_PARAM_LOAD_DELAY)begin            
+            Force_Ext_RAZ <= 1'b0;
             SC_Param_Load_Cnt <= 16'b0;
+            State <= START_SCURVE_TEST;
           end
           else
             State <= WAIT_LOAD_SC_PARAM_DONE;
