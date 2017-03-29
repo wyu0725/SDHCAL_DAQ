@@ -226,10 +226,11 @@ always @ (posedge Clk , negedge reset_n) begin
          end
          else begin
            shift_cnt <= 6'b0;
-           State <= SC_PROCESS_ASIC; 
+           //State <= SC_PROCESS_ASIC; 
+           State <= END_PROCESS;
          end
       end
-      SC_PROCESS_ASIC:begin
+      /*SC_PROCESS_ASIC:begin
         if(asic_cnt < asic_num - 1'b1) begin
           asic_cnt <= asic_cnt + 1'b1;
           param592b_shiftreg <= param592b; //reload parameter
@@ -240,7 +241,7 @@ always @ (posedge Clk , negedge reset_n) begin
           State <= END_PROCESS;
           Process_Done <= 1'b1;
         end
-      end      
+      end*/      
       END_PROCESS:begin
         Process_Done <= 1'b0;
         State <= Idle;
