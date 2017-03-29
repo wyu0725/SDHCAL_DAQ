@@ -114,7 +114,7 @@ module FPGA_TOP(
     wire [15:0] in_from_usb_ControlWord;    
     wire out_to_rst_usb_data_fifo;
     //Microroc 
-    wire Microroc_sc_or_read;//
+    wire USB_Microroc_SC_or_Read;//
     wire Microroc_param_load;//
     wire [2:0] Microroc_param_asic_num;//
     wire [9:0] Microroc_param_DAC0_Vth;//
@@ -164,7 +164,7 @@ module FPGA_TOP(
       .Microroc_Acq_Start_Stop(Microroc_Acq_Start_Stop),
       .out_to_rst_usb_data_fifo(out_to_rst_usb_data_fifo),
       //microroc
-      .Microroc_sc_or_read(Microroc_sc_or_read),
+      .Microroc_sc_or_read(USB_Microroc_SC_or_Read),
       .Microroc_param_load(Microroc_param_load),
       .Microroc_param_asic_num(Microroc_param_asic_num),
       .Microroc_param_DAC0_Vth(Microroc_param_DAC0_Vth),
@@ -258,6 +258,7 @@ module FPGA_TOP(
     wire [191:0] out_to_Microroc_Channel_Discri_Mask;
     wire SCTest_SC_Param_Load;
     wire USB_Data_Transmit_Done;
+    wire Microroc_sc_or_read;
     
     
     //3 triggers
@@ -308,7 +309,10 @@ module FPGA_TOP(
       // SC param load
       .USB_SC_Param_Load(Microroc_param_load),
       .SCTest_SC_Param_Load(SCTest_SC_Param_Load),
-      .out_to_Microroc_SC_Param_Load(out_to_Microroc_SC_Param_Load)
+      .out_to_Microroc_SC_Param_Load(out_to_Microroc_SC_Param_Load),
+      // SC or ReadRAM
+      .USB_Microroc_SC_or_Read(USB_Microroc_SC_or_Read),
+      .Microroc_SC_or_Read(Microroc_sc_or_read)
       /*--- 3 triggers ---*/
       /*.Pin_out_trigger0b(OUT_TRIG0B),
       .Pin_out_trigger1b(OUT_TRIG1B),

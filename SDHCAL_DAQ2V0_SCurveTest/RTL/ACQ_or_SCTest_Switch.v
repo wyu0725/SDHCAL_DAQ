@@ -60,7 +60,10 @@ module ACQ_or_SCTest_Switch(
     // SC parameter load
     input USB_SC_Param_Load,
     input SCTest_SC_Param_Load,
-    output out_to_Microroc_SC_Param_Load
+    output out_to_Microroc_SC_Param_Load,
+    // Select SC param or Read RAM
+    input USB_Microroc_SC_or_Read,
+    output Microroc_SC_or_Read
     //Config Done signal
     //input in_Microroc_Config_Done,
     //output SCTest_Microroc_Config_Done,
@@ -96,6 +99,9 @@ module ACQ_or_SCTest_Switch(
     assign out_to_Microroc_Channel_Discri_Mask = ACQ_or_SCTest ? {192{1'b1}} : SCTest_Channel_Discri_Mask;
     // SC Param load
     assign out_to_Microroc_SC_Param_Load = ACQ_or_SCTest ? USB_SC_Param_Load : SCTest_SC_Param_Load;
+    // Select SC or Read RAM, When SCurve Test, the select must be in read
+    // mode
+    assign Microroc_SC_or_Read = ACQ_or_SCTest ? USB_Microroc_SC_or_Read : 1'b0;
     /*--- 3 triggers ---*/
     /*
     // out_trigger0b
