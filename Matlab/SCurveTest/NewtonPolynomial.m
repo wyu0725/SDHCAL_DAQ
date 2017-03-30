@@ -14,9 +14,10 @@ function [y, R, A, L] = NewtonPolynomial(X,Y,x,M)
     % 构造差商表
     for j = 2:1:n
         for i = j:1:n
-        end
-    
+            A(i,j) = (A(i,j-1) - A(i-1,j-1))/(X(i) - X(i-1));
+        end    
     end
+    % 构造插值函数
 end
 % %求牛顿插值多项式、差商、插值及其误差估计的MATLAB主程序  
 % %输入的量:X是n+1个节点(x_i,y_i)(i = 1,2, ... , n+1)横坐标向量，Y是纵坐标向量，  
