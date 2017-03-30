@@ -59,8 +59,13 @@ namespace USB_DAQ
         private static int Scurve_Data_Pkg;
         private static int Scurve_Data_Remain;
         private NoSortHashtable hasht = new NoSortHashtable(); //排序之后的哈希表
+
+        //SC Parameter
+        
+        
         public MainWindow()
         {
+            //txtDAC0_VTH_ASIC[0].Margin = ""
 
             InitializeComponent();
             //Dynamic list of USB devices bound to CyUSB.sys
@@ -614,12 +619,255 @@ namespace USB_DAQ
         }
         private void btnSC_or_ReadReg_Click(object sender, RoutedEventArgs e)
         {
-            //if there is a slow control operation
             bool bResult = false;
+            /*----------------ASIC number and start load---------------------*/
+            int ASIC_Number = cbxASIC_Number.SelectedIndex + 1;
+            int value = ASIC_Number + 176;
+            byte[] com_bytes = new byte[2];
+            com_bytes = ConstCommandByteArray(0xA0, (byte)(value));
+            bResult = CommandSend(com_bytes, com_bytes.Length);
+            if (bResult)
+            {
+                string report = string.Format("ASIC quantity : {0}\n", cbxASIC_Number.Text);
+                txtReport.AppendText(report);
+            }
+            else
+            {
+                MessageBox.Show("set ASIC quantity failure, please check USB", //text
+                                 "USB Error",   //caption
+                                 MessageBoxButton.OK,//button
+                                 MessageBoxImage.Error);//icon
+            }
+            //if there is a slow control operation      
+            #region Slow Control      
             if ((string)btnSC_or_ReadReg.Content == "Slow control")
             {
+                #region Generate the Array of SC parameter
+                // 10-bit DAC Code
+                TextBox[] txtDAC0_VTH_ASIC = new TextBox[4] { txtDAC0_VTH_ASIC1, txtDAC0_VTH_ASIC2, txtDAC0_VTH_ASIC3, txtDAC0_VTH_ASIC4 };
+                TextBox[] txtDAC1_VTH_ASIC = new TextBox[4] { txtDAC1_VTH_ASIC1, txtDAC1_VTH_ASIC2, txtDAC1_VTH_ASIC3, txtDAC1_VTH_ASIC4 };
+                TextBox[] txtDAC2_VTH_ASIC = new TextBox[4] { txtDAC2_VTH_ASIC1, txtDAC2_VTH_ASIC2, txtDAC2_VTH_ASIC3, txtDAC2_VTH_ASIC4 };
+                //Select Shaper Output
+                ComboBox[] cbxOut_sh_ASIC = new ComboBox[4] { cbxOut_sh_ASIC1, cbxOut_sh_ASIC2, cbxOut_sh_ASIC3, cbxOut_sh_ASIC4 };
+                //Shaper Output Enable
+                ComboBox[] cbxShaper_Output_Enable_ASIC = new ComboBox[4] { cbxShaper_Output_Enable_ASIC1, cbxShaper_Output_Enable_ASIC2, cbxShaper_Output_Enable_ASIC3, cbxShaper_Output_Enable_ASIC4 };
+                // CTest Channel
+                TextBox[] txtCTest_ASIC = new TextBox[4] { txtCTest_ASIC1, txtCTest_ASIC2, txtCTest_ASIC3, txtCTest_ASIC4 };
+                // sw hg
+                ComboBox[] cbxsw_hg_ASIC = new ComboBox[4] { cbxsw_hg_ASIC1, cbxsw_hg_ASIC2, cbxsw_hg_ASIC3, cbxsw_hg_ASIC4 };
+                // sw lg
+                ComboBox[] cbxsw_lg_ASIC = new ComboBox[4] { cbxsw_lg_ASIC1, cbxsw_lg_ASIC2, cbxsw_lg_ASIC3, cbxsw_lg_ASIC4 };
+                // Internal Raz time
+                ComboBox[] cbxInternal_RAZ_Time_ASIC = new ComboBox[4] { cbxInternal_RAZ_Time_ASIC1, cbxInternal_RAZ_Time_ASIC2, cbxInternal_RAZ_Time_ASIC3, cbxInternal_RAZ_Time_ASIC4 };
+                #endregion
                 Regex rx_int = new Regex(rx_Integer);
-                bool Is_DAC_legal = rx_int.IsMatch(txtDAC0_VTH.Text) && rx_int.IsMatch(txtDAC1_VTH.Text) && rx_int.IsMatch(txtDAC2_VTH.Text);
+                Regex rx_b = new Regex(rx_Byte);
+                #region Check Header Legal
+                bool Is_Header_Legal = false;
+                Is_Header_Legal = rx_b.IsMatch(txtHeader.Text);
+                byte[] Header_Value = new byte[1];
+                if (Is_Header_Legal)
+                {
+                    Header_Value = HexStringToByteArray(txtHeader.Text.Trim());
+                }
+                else
+                {
+                    MessageBox.Show("Header value is illegal. Please re-type (Eg:Hex:AA).\n Set header default value 0xA1", "Illega Input", MessageBoxButton.OK, MessageBoxImage.Error);
+                    string header_default = "A1";
+                    Header_Value = HexStringToByteArray(header_default);
+                }
+                #endregion
+                bool Is_DAC_Legal = false;
+                int DAC0_Value, DAC1_Value, DAC2_Value;
+                int ShaperOutput_Value;
+                int ShaperOutputEnable_Value;
+                bool IsCTestLegal = false;
+                int CTest_Value;
+                int SW_HG_Value, SW_LG_Value, SW_Value;
+                int InternalRazTime_Value;
+                byte[] Command_Bytes = new byte[2];
+                for (int i = 0;i < ASIC_Number; i++)
+                {
+                    #region Header   
+                    Header_Value[0] += (byte)i;
+                    Command_Bytes = ConstCommandByteArray(0xAB, Header_Value[0]);
+                    bResult = CommandSend(Command_Bytes, Command_Bytes.Length);
+                    if (bResult)
+                    {
+                        string report = string.Format("Setting header: 0x{0}\n", txtHeader.Text.Trim());
+                        txtReport.AppendText(report);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Set header failure. Please check USB", //text
+                                         "USB Error",   //caption
+                                         MessageBoxButton.OK,//button
+                                         MessageBoxImage.Error);//icon
+                    }
+                    #endregion
+                    #region 10-bit DAC
+                    Is_DAC_Legal = rx_int.IsMatch(txtDAC0_VTH_ASIC[i].Text) && rx_int.IsMatch(txtDAC1_VTH_ASIC[i].Text) && rx_int.IsMatch(txtDAC2_VTH_ASIC[i].Text);
+                    if(Is_DAC_Legal)
+                    {
+                        DAC0_Value = Int32.Parse(txtDAC0_VTH_ASIC[i].Text) + 49152;//0xC000
+                        DAC1_Value = Int32.Parse(txtDAC1_VTH_ASIC[i].Text) + 50176;//0xC400
+                        DAC2_Value = Int32.Parse(txtDAC2_VTH_ASIC[i].Text) + 51200;//0xC800
+                        #region DAC0
+                        Command_Bytes = ConstCommandByteArray((byte)(DAC0_Value >> 8), (byte)DAC0_Value);
+                        bResult = CommandSend(Command_Bytes, Command_Bytes.Length);
+                        if (bResult)
+                        {
+                            string report = string.Format("Setting DAC0 VTH: {0}\n", txtDAC0_VTH_ASIC[i].Text);
+                            txtReport.AppendText(report);
+                        }
+                        else
+                        {
+                            //txtReport.AppendText("set DAC0 failure, please check USB\n");
+                            MessageBox.Show("Set DAC0 failure. Please check USB", //text
+                                             "USB Error",   //caption
+                                             MessageBoxButton.OK,//button
+                                             MessageBoxImage.Error);//icon
+                        }
+                        #endregion
+                        #region DAC1
+                        Command_Bytes = ConstCommandByteArray((byte)(DAC1_Value >> 8), (byte)DAC1_Value);
+                        bResult = CommandSend(Command_Bytes, Command_Bytes.Length);
+                        if (bResult)
+                        {
+                            string report = string.Format("Setting DAC1 VTH: {0}\n", txtDAC1_VTH_ASIC[i].Text);
+                            txtReport.AppendText(report);
+                        }
+                        else
+                        {
+                            //txtReport.AppendText("set DAC0 failure, please check USB\n");
+                            MessageBox.Show("Set DAC1 failure. Please check USB", //text
+                                             "USB Error",   //caption
+                                             MessageBoxButton.OK,//button
+                                             MessageBoxImage.Error);//icon
+                        }
+                        #endregion
+                        #region DAC2
+                        Command_Bytes = ConstCommandByteArray((byte)(DAC2_Value >> 8), (byte)DAC2_Value);
+                        bResult = CommandSend(Command_Bytes, Command_Bytes.Length);
+                        if (bResult)
+                        {
+                            string report = string.Format("Setting DAC2 VTH: {0}\n", txtDAC2_VTH_ASIC[i].Text);
+                            txtReport.AppendText(report);
+                        }
+                        else
+                        {
+                            //txtReport.AppendText("set DAC0 failure, please check USB\n");
+                            MessageBox.Show("Set DAC0 failure. Please check USB", //text
+                                             "USB Error",   //caption
+                                             MessageBoxButton.OK,//button
+                                             MessageBoxImage.Error);//icon
+                        }
+                        #endregion
+                    }
+                    else
+                    {
+                        MessageBox.Show("DAC value is illegal,please re-type(Integer:0--1023)", //text
+                    "Illegal input",   //caption
+                    MessageBoxButton.OK,//button
+                    MessageBoxImage.Error);//icon
+                    }
+                    #endregion
+                    #region Shaper Output
+                    ShaperOutput_Value = cbxOut_sh_ASIC[i].SelectedIndex + 192;//C0
+                    Command_Bytes = ConstCommandByteArray(0xA0, (byte)ShaperOutput_Value);
+                    bResult = CommandSend(Command_Bytes, Command_Bytes.Length);
+                    if (bResult)
+                    {
+                        string report = string.Format("Shape output: {0}\n", cbxOut_sh_ASIC[i].Text);
+                        txtReport.AppendText(report);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Set shape output failure. Please check USB", //text
+                                         "USB Error",   //caption
+                                         MessageBoxButton.OK,//button
+                                         MessageBoxImage.Error);//icon
+                    }
+                    #endregion
+                    #region Shaper Output Enable
+                    ShaperOutputEnable_Value = cbxShaper_Output_Enable_ASIC[i].SelectedIndex + 208;//0xD0
+                    Command_Bytes = ConstCommandByteArray(0xA0, (byte)ShaperOutputEnable_Value);
+                    bResult = CommandSend(Command_Bytes, Command_Bytes.Length);
+                    if (bResult)
+                    {
+                        string report = string.Format("You have {0} the shaper output", cbxShaper_Output_Enable_ASIC[i].Text);
+                        txtReport.AppendText(report);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Set shaper state failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    #endregion
+                    #region CTest Channel
+                    IsCTestLegal = rx_int.IsMatch(txtCTest_ASIC[i].Text);
+                    if(IsCTestLegal)
+                    {
+                        CTest_Value = Int32.Parse(txtCTest_ASIC[i].Text);//A1XX
+                        Command_Bytes = ConstCommandByteArray(0xA1, (byte)CTest_Value);
+                        bResult = CommandSend(Command_Bytes, Command_Bytes.Length);
+                        if (bResult)
+                        {
+                            string report = string.Format("Setting CTest channel: {0}\n", txtCTest_ASIC[i].Text);
+                            txtReport.AppendText(report);
+                        }
+                        else
+                        {
+                            //txtReport.AppendText("set DAC0 failure, please check USB\n");
+                            MessageBox.Show("Set Ctest failure. Please check USB", //text
+                                             "USB Error",   //caption
+                                             MessageBoxButton.OK,//button
+                                             MessageBoxImage.Error);//icon
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ctest value is illegal,please re-type(Integer:0--64,or 255)", //text
+                  "Illegal input",   //caption
+                  MessageBoxButton.OK,//button
+                  MessageBoxImage.Error);//icon
+                    }
+                    #endregion
+                    #region sw_hg sw_lg
+                    SW_HG_Value = cbxsw_hg_ASIC[i].SelectedIndex * 16;
+                    SW_LG_Value = cbxsw_lg_ASIC[i].SelectedIndex;
+                    SW_Value = SW_HG_Value + SW_LG_Value;
+                    Command_Bytes = ConstCommandByteArray(0xB3, (byte)SW_Value);
+                    bResult = CommandSend(Command_Bytes, Command_Bytes.Length);
+                    if (bResult)
+                    {
+                        string report = string.Format("Set sw_hg: {0}; sw_lg: {1}\n", cbxsw_hg_ASIC[i].Text, cbxsw_lg_ASIC[i].Text);
+                        txtReport.AppendText(report);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Set sw_hg and sw_lg failure. Please check USB", //text
+                                         "USB Error",   //caption
+                                         MessageBoxButton.OK,//button
+                                         MessageBoxImage.Error);//icon
+                    }
+                    #endregion
+                    #region Internal RAZ Time
+                    InternalRazTime_Value = cbxInternal_RAZ_Time_ASIC[i].SelectedIndex + 176;//0xB0
+                    Command_Bytes = ConstCommandByteArray(0xA8, (byte)InternalRazTime_Value);
+                    bResult = CommandSend(Command_Bytes, Command_Bytes.Length);
+                    if (bResult)
+                    {
+                        string report = string.Format("Internal RAZ Mode: {0} \n", cbxInternal_RAZ_Time_ASIC[i].Text);
+                        txtReport.AppendText(report);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Set Internal RAZ Mode failed. Please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    #endregion
+                }
+                #region Old Code
+                /*bool Is_DAC_legal = rx_int.IsMatch(txtDAC0_VTH.Text) && rx_int.IsMatch(txtDAC1_VTH.Text) && rx_int.IsMatch(txtDAC2_VTH.Text);
                 if (Is_DAC_legal)
                 {
                     int value_DAC0 = Int32.Parse(txtDAC0_VTH.Text) + 49152; //header
@@ -680,9 +928,9 @@ namespace USB_DAQ
                     "Illegal input",   //caption
                     MessageBoxButton.OK,//button
                     MessageBoxImage.Error);//icon
-                }
+                }*/
                 //*************** Header**********************//
-                Regex rx_b = new Regex(rx_Byte);
+                /*Regex rx_b = new Regex(rx_Byte);
                 bool Is_header_legal = rx_b.IsMatch(txtHeader.Text);
                 if (Is_header_legal)
                 {
@@ -710,9 +958,10 @@ namespace USB_DAQ
                   "Illegal input",   //caption
                   MessageBoxButton.OK,//button
                   MessageBoxImage.Error);//icon                     
-                }
+                }*/
+
                 /*-------------CText--------------*/
-                bool Is_Ctest_legal = rx_int.IsMatch(txtCTest.Text);
+                /*bool Is_Ctest_legal = rx_int.IsMatch(txtCTest.Text);
                 if (Is_Ctest_legal)
                 {
                     int value_Ctest = Int32.Parse(txtCTest.Text) + 41216; //header
@@ -738,9 +987,9 @@ namespace USB_DAQ
                   "Illegal input",   //caption
                   MessageBoxButton.OK,//button
                   MessageBoxImage.Error);//icon  
-                }
+                }*/
                 //------------------sw_hg and sw_lg---------------------------//
-                int value_hg = cbxsw_hg.SelectedIndex * 16;
+                /*int value_hg = cbxsw_hg.SelectedIndex * 16;
                 int value_lg = cbxsw_lg.SelectedIndex;
                 int value_sw = value_hg + value_lg; //B3              
                 byte[] sw_bytes = ConstCommandByteArray(0xB3, (byte)(value_sw));
@@ -756,9 +1005,9 @@ namespace USB_DAQ
                                      "USB Error",   //caption
                                      MessageBoxButton.OK,//button
                                      MessageBoxImage.Error);//icon
-                }
+                }*/
                 //-----------------Out_sh, high gain shaper or low gain shaper-----------//
-                int value_out_sh = cbxOut_sh.SelectedIndex + 192; //要不要加1？
+                /*int value_out_sh = cbxOut_sh.SelectedIndex + 192; //要不要加1？
                 byte [] bytes_sh = ConstCommandByteArray(0xA0, (byte)(value_out_sh));
                 bResult = CommandSend(bytes_sh, bytes_sh.Length);
                 if (bResult)
@@ -772,9 +1021,9 @@ namespace USB_DAQ
                                      "USB Error",   //caption
                                      MessageBoxButton.OK,//button
                                      MessageBoxImage.Error);//icon
-                }
+                }*/
                 //------------------Internal RAZ Mode Select ----------------------------//
-                int value_Internal_RAZ_Time = cbxInternal_RAZ_Time.SelectedIndex + 176;//0xB0
+                /*int value_Internal_RAZ_Time = cbxInternal_RAZ_Time.SelectedIndex + 176;//0xB0
                 byte[] bytes_Internal_RAZ_Time = ConstCommandByteArray(0xA8, (byte)value_Internal_RAZ_Time);
                 bResult = CommandSend(bytes_Internal_RAZ_Time, bytes_Internal_RAZ_Time.Length);
                 if(bResult)
@@ -785,9 +1034,9 @@ namespace USB_DAQ
                 else
                 {
                     MessageBox.Show("Set Internal RAZ Mode failed, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                }*/
                 //----------------------- Select shaper output enable --------------------//
-                int value_Shaper_Output_Enable = cbxShaper_Output_Enable.SelectedIndex + 208;
+                /*int value_Shaper_Output_Enable = cbxShaper_Output_Enable.SelectedIndex + 208;
                 byte[] bytes_Shaper_Output_Enable = ConstCommandByteArray(0xA0, (byte)value_Shaper_Output_Enable);
                 bResult = CommandSend(bytes_Shaper_Output_Enable, bytes_Shaper_Output_Enable.Length);
                 if(bResult)
@@ -798,14 +1047,23 @@ namespace USB_DAQ
                 else
                 {
                     MessageBox.Show("Set shaper state failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                }*/
+                #endregion
             }
+            #endregion
+            #region Read Reg
             //-----if there is Read Register opertation
             else if ((string)btnSC_or_ReadReg.Content == "Read Register")
             {
+                TextBox[] txtRead_reg_ASIC = new TextBox[4] { txtCTest_ASIC1, txtCTest_ASIC2, txtCTest_ASIC3, txtCTest_ASIC4 };
                 Regex rx_int = new Regex(rx_Integer);
-                bool Is_ReadReg_legal = rx_int.IsMatch(txtRead_reg.Text);
-                if (Is_ReadReg_legal)
+                bool Is_ReadReg_legal = false;
+                for(int i = 0;i< ASIC_Number; i++)
+                {
+                    Is_ReadReg_legal = rx_int.IsMatch(txtRead_reg_ASIC[i].Text);
+                }                
+                #region Old Code
+                /*if (Is_ReadReg_legal)
                 {
                     int value_ReadReg = Int32.Parse(txtRead_reg.Text) + 41472; //header
                     byte[] bytes = ConstCommandByteArray((byte)(value_ReadReg >> 8), (byte)(value_ReadReg));
@@ -829,40 +1087,27 @@ namespace USB_DAQ
                   "Illegal input",   //caption
                   MessageBoxButton.OK,//button
                   MessageBoxImage.Error);//icon  
-                }
+                }*/
+                #endregion
             }
-            /*----------------ASIC number and start load---------------------*/
-            int value = cbxASIC_Number.SelectedIndex + 176 + 1;
-            byte[] com_bytes = new byte[2];
-            com_bytes = ConstCommandByteArray(0xA0,(byte)(value));
-            bResult = CommandSend(com_bytes, com_bytes.Length);
-            if (bResult)
-            {
-                string report = string.Format("ASIC quantity : {0}\n", cbxASIC_Number.Text);
-                txtReport.AppendText(report);
-            }
-            else
-            {
-                MessageBox.Show("set ASIC quantity failure, please check USB", //text
-                                 "USB Error",   //caption
-                                 MessageBoxButton.OK,//button
-                                 MessageBoxImage.Error);//icon
-            }
+            #endregion
+
             //---start load
             com_bytes = ConstCommandByteArray(0xD0, 0xA2);
-            bResult = CommandSend(com_bytes, com_bytes.Length);
-            if (bResult)
-            {
-                txtReport.AppendText("Load parameter done!\n");
+                bResult = CommandSend(com_bytes, com_bytes.Length);
+                if (bResult)
+                {
+                    txtReport.AppendText("Load parameter done!\n");
+                }
+                else
+                {
+                    MessageBox.Show("Load parameter failure, please check USB", //text
+                                     "USB Error",   //caption
+                                     MessageBoxButton.OK,//button
+                                     MessageBoxImage.Error);//icon
+                }
             }
-            else
-            {
-                MessageBox.Show("Load parameter failure, please check USB", //text
-                                 "USB Error",   //caption
-                                 MessageBoxButton.OK,//button
-                                 MessageBoxImage.Error);//icon
-            }
-        }
+        
         private void PowerPulsing_Checked(object sender, RoutedEventArgs e)
         {
             //Get Radiobutton reference
@@ -1213,7 +1458,7 @@ namespace USB_DAQ
                 }
             }                    
         }
-
+        //设定EXT_RAZ延迟A8XX
         private void btnSet_External_RAZ_Delay_Click(object sender, RoutedEventArgs e)
         {
             Regex rx_int = new Regex(rx_Integer);
