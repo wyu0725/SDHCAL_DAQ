@@ -561,16 +561,64 @@ namespace USB_DAQ
             var button = sender as RadioButton;
             //Display button content as title
             bool bResult = false;
+            #region Generate the Array of SC parameter
+            // 10-bit DAC Code
+            TextBox[] txtDAC0_VTH_ASIC = new TextBox[4] { txtDAC0_VTH_ASIC1, txtDAC0_VTH_ASIC2, txtDAC0_VTH_ASIC3, txtDAC0_VTH_ASIC4 };
+            TextBox[] txtDAC1_VTH_ASIC = new TextBox[4] { txtDAC1_VTH_ASIC1, txtDAC1_VTH_ASIC2, txtDAC1_VTH_ASIC3, txtDAC1_VTH_ASIC4 };
+            TextBox[] txtDAC2_VTH_ASIC = new TextBox[4] { txtDAC2_VTH_ASIC1, txtDAC2_VTH_ASIC2, txtDAC2_VTH_ASIC3, txtDAC2_VTH_ASIC4 };
+            //Select Shaper Output
+            ComboBox[] cbxOut_sh_ASIC = new ComboBox[4] { cbxOut_sh_ASIC1, cbxOut_sh_ASIC2, cbxOut_sh_ASIC3, cbxOut_sh_ASIC4 };
+            //Shaper Output Enable
+            ComboBox[] cbxShaper_Output_Enable_ASIC = new ComboBox[4] { cbxShaper_Output_Enable_ASIC1, cbxShaper_Output_Enable_ASIC2, cbxShaper_Output_Enable_ASIC3, cbxShaper_Output_Enable_ASIC4 };
+            // CTest Channel
+            TextBox[] txtCTest_ASIC = new TextBox[4] { txtCTest_ASIC1, txtCTest_ASIC2, txtCTest_ASIC3, txtCTest_ASIC4 };
+            // sw hg
+            ComboBox[] cbxsw_hg_ASIC = new ComboBox[4] { cbxsw_hg_ASIC1, cbxsw_hg_ASIC2, cbxsw_hg_ASIC3, cbxsw_hg_ASIC4 };
+            // sw lg
+            ComboBox[] cbxsw_lg_ASIC = new ComboBox[4] { cbxsw_lg_ASIC1, cbxsw_lg_ASIC2, cbxsw_lg_ASIC3, cbxsw_lg_ASIC4 };
+            // Internal Raz time
+            ComboBox[] cbxInternal_RAZ_Time_ASIC = new ComboBox[4] { cbxInternal_RAZ_Time_ASIC1, cbxInternal_RAZ_Time_ASIC2, cbxInternal_RAZ_Time_ASIC3, cbxInternal_RAZ_Time_ASIC4 };
+            //Read Reg
+            TextBox[] txtRead_reg_ASIC = new TextBox[4] { txtRead_reg_ASIC1, txtRead_reg_ASIC2, txtRead_reg_ASIC3, txtRead_reg_ASIC4 };
+            #endregion
+            #region Select SC
             if (button.Content.ToString() == "SC")
             { 
                 btnSC_or_ReadReg.Content = "Slow control";
                 btnSC_or_ReadReg.Background = Brushes.GreenYellow;
-                txtRead_reg.IsEnabled = false;
+                for(int i = 0;i <= cbxASIC_Number.SelectedIndex; i++)
+                {
+                    txtRead_reg_ASIC[i].IsEnabled = false;
+                    txtDAC0_VTH_ASIC[i].IsEnabled = true;
+                    txtDAC1_VTH_ASIC[i].IsEnabled = true;
+                    txtDAC2_VTH_ASIC[i].IsEnabled = true;
+                    txtCTest_ASIC[i].IsEnabled = true;
+                    cbxShaper_Output_Enable_ASIC[i].IsEnabled = true;
+                    cbxOut_sh_ASIC[i].IsEnabled = true;
+                    cbxsw_hg_ASIC[i].IsEnabled = true;
+                    cbxsw_lg_ASIC[i].IsEnabled = true;
+                    cbxInternal_RAZ_Time_ASIC[i].IsEnabled = true;               
+                }
+                for(int i = cbxASIC_Number.SelectedIndex + 1; i < 4; i++)
+                {
+                    txtRead_reg_ASIC[i].IsEnabled = false;
+                    txtDAC0_VTH_ASIC[i].IsEnabled = false;
+                    txtDAC1_VTH_ASIC[i].IsEnabled = false;
+                    txtDAC2_VTH_ASIC[i].IsEnabled = false;
+                    txtCTest_ASIC[i].IsEnabled = false;
+                    cbxShaper_Output_Enable_ASIC[i].IsEnabled = false;
+                    cbxOut_sh_ASIC[i].IsEnabled = false;
+                    cbxsw_hg_ASIC[i].IsEnabled = false;
+                    cbxsw_lg_ASIC[i].IsEnabled = false;
+                    cbxInternal_RAZ_Time_ASIC[i].IsEnabled = false;
+                }
+                txtHeader.IsEnabled = true;
+                /*txtRead_reg.IsEnabled = false;
                 txtDAC0_VTH.IsEnabled = true;
                 txtDAC1_VTH.IsEnabled = true;
                 txtDAC2_VTH.IsEnabled = true;
                 txtHeader.IsEnabled = true;
-                txtCTest.IsEnabled = true;
+                txtCTest.IsEnabled = true;*/
 
                 //Raz_Chn_Select.IsEnabled = true;
                 byte[] Slow_Control = ConstCommandByteArray(0xA0, 0xA0);
@@ -589,16 +637,45 @@ namespace USB_DAQ
                                      MessageBoxImage.Error);//icon
                 }
             }
+            #endregion
+            #region Select ReadReg
             else if (button.Content.ToString() == "ReadReg")
             {             
                 btnSC_or_ReadReg.Content = "Read Register";
                 btnSC_or_ReadReg.Background = Brushes.Orange;
-                txtRead_reg.IsEnabled = true;
+                for (int i = 0; i <= cbxASIC_Number.SelectedIndex; i++)
+                {
+                    txtRead_reg_ASIC[i].IsEnabled = true;
+                    txtDAC0_VTH_ASIC[i].IsEnabled = false;
+                    txtDAC1_VTH_ASIC[i].IsEnabled = false;
+                    txtDAC2_VTH_ASIC[i].IsEnabled = false;
+                    txtCTest_ASIC[i].IsEnabled = false;
+                    cbxShaper_Output_Enable_ASIC[i].IsEnabled = false;
+                    cbxOut_sh_ASIC[i].IsEnabled = false;
+                    cbxsw_hg_ASIC[i].IsEnabled = false;
+                    cbxsw_lg_ASIC[i].IsEnabled = false;
+                    cbxInternal_RAZ_Time_ASIC[i].IsEnabled = false;
+                }
+                for (int i = cbxASIC_Number.SelectedIndex + 1; i < 4; i++)
+                {
+                    txtRead_reg_ASIC[i].IsEnabled = false;
+                    txtDAC0_VTH_ASIC[i].IsEnabled = false;
+                    txtDAC1_VTH_ASIC[i].IsEnabled = false;
+                    txtDAC2_VTH_ASIC[i].IsEnabled = false;
+                    txtCTest_ASIC[i].IsEnabled = false;
+                    cbxShaper_Output_Enable_ASIC[i].IsEnabled = false;
+                    cbxOut_sh_ASIC[i].IsEnabled = false;
+                    cbxsw_hg_ASIC[i].IsEnabled = false;
+                    cbxsw_lg_ASIC[i].IsEnabled = false;
+                    cbxInternal_RAZ_Time_ASIC[i].IsEnabled = false;
+                }
+                txtHeader.IsEnabled = false;
+                /*txtRead_reg.IsEnabled = true;
                 txtDAC0_VTH.IsEnabled = false;
                 txtDAC1_VTH.IsEnabled = false;
                 txtDAC2_VTH.IsEnabled = false;
                 txtHeader.IsEnabled = false;
-                txtCTest.IsEnabled = false;
+                txtCTest.IsEnabled = false;*/
                 //Raz_Chn_Select.IsEnabled = false;
                 byte[] Read_Register = ConstCommandByteArray(0xA0, 0xA1);
                 //bResult = false;
@@ -616,10 +693,12 @@ namespace USB_DAQ
                                      MessageBoxImage.Error);//icon
                 }
             }
+            #endregion
         }
         private void btnSC_or_ReadReg_Click(object sender, RoutedEventArgs e)
         {
             bool bResult = false;
+            #region Set ASIC Number
             /*----------------ASIC number and start load---------------------*/
             int ASIC_Number = cbxASIC_Number.SelectedIndex + 1;
             int value = ASIC_Number + 176;
@@ -638,6 +717,7 @@ namespace USB_DAQ
                                  MessageBoxButton.OK,//button
                                  MessageBoxImage.Error);//icon
             }
+            #endregion
             //if there is a slow control operation      
             #region Slow Control      
             if ((string)btnSC_or_ReadReg.Content == "Slow control")
@@ -865,6 +945,24 @@ namespace USB_DAQ
                         MessageBox.Show("Set Internal RAZ Mode failed. Please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                     #endregion
+                    #region Start Load
+                    Command_Bytes = ConstCommandByteArray(0xD0, 0xA2);
+                    bResult = CommandSend(Command_Bytes, Command_Bytes.Length);
+                    if (bResult)
+                    {
+                        string report = string.Format("Load No.%d ASIC parameter done!\n", i + 1);
+                        txtReport.AppendText(report);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Load parameter failure, please check USB", //text
+                                         "USB Error",   //caption
+                                         MessageBoxButton.OK,//button
+                                         MessageBoxImage.Error);//icon
+                    }
+                    #endregion
+                    //Sleep 100ms to wait load done
+                    Thread.Sleep(100);
                 }
                 #region Old Code
                 /*bool Is_DAC_legal = rx_int.IsMatch(txtDAC0_VTH.Text) && rx_int.IsMatch(txtDAC1_VTH.Text) && rx_int.IsMatch(txtDAC2_VTH.Text);
@@ -1055,12 +1153,59 @@ namespace USB_DAQ
             //-----if there is Read Register opertation
             else if ((string)btnSC_or_ReadReg.Content == "Read Register")
             {
-                TextBox[] txtRead_reg_ASIC = new TextBox[4] { txtCTest_ASIC1, txtCTest_ASIC2, txtCTest_ASIC3, txtCTest_ASIC4 };
+                TextBox[] txtRead_reg_ASIC = new TextBox[4] { txtRead_reg_ASIC1, txtRead_reg_ASIC2, txtRead_reg_ASIC3, txtRead_reg_ASIC4 };
                 Regex rx_int = new Regex(rx_Integer);
                 bool Is_ReadReg_legal = false;
+                int ReadReg_Value;
+                byte[] Command_Bytes = new byte[2];
                 for(int i = 0;i< ASIC_Number; i++)
                 {
+                    #region Set ReadReg
                     Is_ReadReg_legal = rx_int.IsMatch(txtRead_reg_ASIC[i].Text);
+                    if(Is_ReadReg_legal)
+                    {
+                        ReadReg_Value = Int32.Parse(txtRead_reg_ASIC[i].Text) + 41472;//0xA200
+                        Command_Bytes = ConstCommandByteArray((byte)(ReadReg_Value >> 8), (byte)ReadReg_Value);
+                        bResult = CommandSend(Command_Bytes, Command_Bytes.Length);
+                        if (bResult)
+                        {
+                            string report = string.Format("Setting ReadReg channel: {0}\n", txtRead_reg_ASIC[i].Text);
+                            txtReport.AppendText(report);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Set ReadReg failure. Please check USB", //text
+                                             "USB Error",   //caption
+                                             MessageBoxButton.OK,//button
+                                             MessageBoxImage.Error);//icon
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("ReadReg value is illegal,please re-type(Integer:0--64)", //text
+                  "Illegal input",   //caption
+                  MessageBoxButton.OK,//button
+                  MessageBoxImage.Error);//icon 
+                    }
+                    #endregion
+                    #region Start Load
+                    Command_Bytes = ConstCommandByteArray(0xD0, 0xA2);
+                    bResult = CommandSend(Command_Bytes, Command_Bytes.Length);
+                    if (bResult)
+                    {
+                        string report = string.Format("Load No.%d ASIC parameter done!\n", i + 1);
+                        txtReport.AppendText(report);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Load parameter failure, please check USB", //text
+                                         "USB Error",   //caption
+                                         MessageBoxButton.OK,//button
+                                         MessageBoxImage.Error);//icon
+                    }
+                    #endregion
+                    //Sleep 100ms to wait load done
+                    Thread.Sleep(100);
                 }                
                 #region Old Code
                 /*if (Is_ReadReg_legal)
@@ -1092,8 +1237,9 @@ namespace USB_DAQ
             }
             #endregion
 
+            #region Old Code
             //---start load
-            com_bytes = ConstCommandByteArray(0xD0, 0xA2);
+            /*com_bytes = ConstCommandByteArray(0xD0, 0xA2);
                 bResult = CommandSend(com_bytes, com_bytes.Length);
                 if (bResult)
                 {
@@ -1105,9 +1251,10 @@ namespace USB_DAQ
                                      "USB Error",   //caption
                                      MessageBoxButton.OK,//button
                                      MessageBoxImage.Error);//icon
-                }
-            }
-        
+                }*/
+            #endregion
+        }
+
         private void PowerPulsing_Checked(object sender, RoutedEventArgs e)
         {
             //Get Radiobutton reference
@@ -1490,6 +1637,8 @@ namespace USB_DAQ
             bool bResult = false;
             if(botton.Content.ToString() == "ACQ") //这里已经直接将通道都切换过去
             {
+                btnAcqStart.IsEnabled = true;
+                btnScurve_start.IsEnabled = false;
                 byte[] bytes = ConstCommandByteArray(0xE0, 0xA0);
                 bResult = CommandSend(bytes, bytes.Length);
                 if(bResult)
@@ -1503,6 +1652,8 @@ namespace USB_DAQ
             }
             else if(botton.Content.ToString() == "SCTest")
             {
+                btnAcqStart.IsEnabled = false;
+                btnScurve_start.IsEnabled = true;
                 byte[] bytes = ConstCommandByteArray(0xE0, 0xA1);
                 bResult = CommandSend(bytes, bytes.Length);
                 if(bResult)
