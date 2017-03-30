@@ -1,0 +1,26 @@
+% SCurve with newton polynomial
+InitialData = Importdata();
+%Test_Header = InitialData(1);
+%[Test_Channel, DAC_Code, P0, T0, P1, T1, P2, T2] = ReadData(InitialData, 2);
+[~, DAC_Code, P0, T0, P1, T1, P2, T2] = ReadData(InitialData, 2);
+%DAC_Code1 = 1:1:1024;
+Trig_Ratio0 = (T0./P0).*100 ;
+Trig_Ratio1 = (T1./P1).*100;
+Trig_Ratio2 = (T2./P2).*100;
+[Start0, Middle0, End0] = FindStartMidEnd(Trig_Ratio0, 50);
+[Start1, Middle1, End1] = FindStartMidEnd(Trig_Ratio1, 50);
+[Start2, Middle2, End2] = FindStartMidEnd(Trig_Ratio2, 50);
+x0 = 1:1024;
+x1 = Start1:End2;
+x2 = Start2:End2;
+y0 = Trig_Ratio0(x0);
+y1 = Trig_Ratio0(x1);
+y2 = Trig_Ratio0(x2);
+x0_NP = Start0:0.01:End0;
+x1_NP = Start1:0.01:End1;
+x2_NP = Start2:0.01:End2;
+% [y0_NP,~,~,~] = NewtonPolynomial(x0,y0,x0_NP,0.1);
+yy = spline(x0,y0,x0_NP);
+plot(x0_NP,yy);
+hold on;
+plot(x0,y0);
