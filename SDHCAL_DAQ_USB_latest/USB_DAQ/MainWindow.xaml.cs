@@ -58,7 +58,8 @@ namespace USB_DAQ
         private const int SCurve_Package_Length = 512;
         private static int Scurve_Data_Pkg;
         private static int Scurve_Data_Remain;
-        private NoSortHashtable hasht = new NoSortHashtable(); //排序之后的哈希表
+        //private NoSortHashtable hasht = new NoSortHashtable(); //排序之后的哈希表
+        private NoSortHashtable[] CaliHashTable = new NoSortHashtable[4];
 
         //SC Parameter
         
@@ -580,6 +581,9 @@ namespace USB_DAQ
             ComboBox[] cbxInternal_RAZ_Time_ASIC = new ComboBox[4] { cbxInternal_RAZ_Time_ASIC1, cbxInternal_RAZ_Time_ASIC2, cbxInternal_RAZ_Time_ASIC3, cbxInternal_RAZ_Time_ASIC4 };
             //Read Reg
             TextBox[] txtRead_reg_ASIC = new TextBox[4] { txtRead_reg_ASIC1, txtRead_reg_ASIC2, txtRead_reg_ASIC3, txtRead_reg_ASIC4 };
+            // 4-bit DAC Cali
+            //CheckBox[] chk_PedCali_ASIC = new CheckBox[4] { chk_PedCali_ASIC1, chk_PedCali_ASIC2, chk_PedCali_ASIC3, chk_PedCali_ASIC4 };
+            ComboBox[] cbxPedCali_ASIC = new ComboBox[4] { cbxPedCali_ASIC1, cbxPedCali_ASIC2, cbxPedCali_ASIC3, cbxPedCali_ASIC4 };
             #endregion
             #region Select SC
             if (button.Content.ToString() == "SC")
@@ -597,7 +601,9 @@ namespace USB_DAQ
                     cbxOut_sh_ASIC[i].IsEnabled = true;
                     cbxsw_hg_ASIC[i].IsEnabled = true;
                     cbxsw_lg_ASIC[i].IsEnabled = true;
-                    cbxInternal_RAZ_Time_ASIC[i].IsEnabled = true;               
+                    cbxInternal_RAZ_Time_ASIC[i].IsEnabled = true;
+                    cbxPedCali_ASIC[i].IsEnabled = true;   
+                    //chk_PedCali_ASIC[i].IsEnabled = true;
                 }
                 for(int i = cbxASIC_Number.SelectedIndex + 1; i < 4; i++)
                 {
@@ -611,6 +617,8 @@ namespace USB_DAQ
                     cbxsw_hg_ASIC[i].IsEnabled = false;
                     cbxsw_lg_ASIC[i].IsEnabled = false;
                     cbxInternal_RAZ_Time_ASIC[i].IsEnabled = false;
+                    cbxPedCali_ASIC[i].IsEnabled = false;
+                    //chk_PedCali_ASIC[i].IsEnabled = false;
                 }
                 txtHeader.IsEnabled = true;
                 /*txtRead_reg.IsEnabled = false;
@@ -655,6 +663,8 @@ namespace USB_DAQ
                     cbxsw_hg_ASIC[i].IsEnabled = false;
                     cbxsw_lg_ASIC[i].IsEnabled = false;
                     cbxInternal_RAZ_Time_ASIC[i].IsEnabled = false;
+                    cbxPedCali_ASIC[i].IsEnabled = false;
+                    //chk_PedCali_ASIC[i].IsEnabled = false;
                 }
                 for (int i = cbxASIC_Number.SelectedIndex + 1; i < 4; i++)
                 {
@@ -668,6 +678,8 @@ namespace USB_DAQ
                     cbxsw_hg_ASIC[i].IsEnabled = false;
                     cbxsw_lg_ASIC[i].IsEnabled = false;
                     cbxInternal_RAZ_Time_ASIC[i].IsEnabled = false;
+                    cbxPedCali_ASIC[i].IsEnabled = false;
+                    //chk_PedCali_ASIC[i].IsEnabled = false;
                 }
                 txtHeader.IsEnabled = false;
                 /*txtRead_reg.IsEnabled = true;
@@ -739,6 +751,8 @@ namespace USB_DAQ
                 ComboBox[] cbxsw_lg_ASIC = new ComboBox[4] { cbxsw_lg_ASIC1, cbxsw_lg_ASIC2, cbxsw_lg_ASIC3, cbxsw_lg_ASIC4 };
                 // Internal Raz time
                 ComboBox[] cbxInternal_RAZ_Time_ASIC = new ComboBox[4] { cbxInternal_RAZ_Time_ASIC1, cbxInternal_RAZ_Time_ASIC2, cbxInternal_RAZ_Time_ASIC3, cbxInternal_RAZ_Time_ASIC4 };
+                // 4-bit DAC Cali
+                ComboBox[] cbxPedCali_ASIC = new ComboBox[4] { cbxPedCali_ASIC1, cbxPedCali_ASIC2, cbxPedCali_ASIC3, cbxPedCali_ASIC4 };
                 #endregion
                 Regex rx_int = new Regex(rx_Integer);
                 Regex rx_b = new Regex(rx_Byte);
@@ -766,10 +780,14 @@ namespace USB_DAQ
                 int SW_HG_Value, SW_LG_Value, SW_Value;
                 int InternalRazTime_Value;
                 byte[] Command_Bytes = new byte[2];
+                byte[] PedCali_Param;
+                byte PedCali_Byte1,PedCali_Byte2;
+                StringBuilder details = new StringBuilder();
+                NoSortHashtable TempHashTabel;
                 for (int i = 0;i < ASIC_Number; i++)
                 {
                     #region Header   
-                    Header_Value[0] += (byte)i;
+                    Header_Value[0] += 1;
                     Command_Bytes = ConstCommandByteArray(0xAB, Header_Value[0]);
                     bResult = CommandSend(Command_Bytes, Command_Bytes.Length);
                     if (bResult)
@@ -945,12 +963,37 @@ namespace USB_DAQ
                         MessageBox.Show("Set Internal RAZ Mode failed. Please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                     #endregion
+                    #region 4bitDAC Cali
+                    /*TempHashTabel = CaliHashTable[i];
+                    foreach(string str in TempHashTabel.Keys)
+                    {
+                        PedCali_Param = (byte[])TempHashTabel[str];
+                        PedCali_Byte1 = (byte)(PedCali_Param[0] >> 4 + 0xC0);
+                        PedCali_Byte2 = (byte)(PedCali_Param[0] << 4 + PedCali_Param[1]);
+                        Command_Bytes = ConstCommandByteArray(PedCali_Byte1, PedCali_Byte2);
+                        bResult = CommandSend(Command_Bytes, Command_Bytes.Length);
+                        if(bResult)
+                        {
+                            details.AppendFormat("{0}, 4-bitDAC: {1}\n", str, PedCali_Param[1]);
+                        }
+                        else
+                        {
+                            MessageBox.Show("4bit-DAC Cali faliure. Please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                        Thread.Sleep(10);
+                    }
+                    if(cbxPedCali_ASIC[i].SelectedIndex == 0)
+                        txtReport.AppendText(details.ToString());
+                    else
+                        txtReport.AppendText("All channels without calibration\n");
+                        */
+                    #endregion
                     #region Start Load
                     Command_Bytes = ConstCommandByteArray(0xD0, 0xA2);
                     bResult = CommandSend(Command_Bytes, Command_Bytes.Length);
                     if (bResult)
                     {
-                        string report = string.Format("Load No.%d ASIC parameter done!\n", i + 1);
+                        string report = string.Format("Load No.{0} ASIC parameter done!\n",i+1);
                         txtReport.AppendText(report);
                     }
                     else
@@ -1193,7 +1236,7 @@ namespace USB_DAQ
                     bResult = CommandSend(Command_Bytes, Command_Bytes.Length);
                     if (bResult)
                     {
-                        string report = string.Format("Load No.%d ASIC parameter done!\n", i + 1);
+                        string report = string.Format("Load No.{0} ASIC parameter done!\n", i + 1);
                         txtReport.AppendText(report);
                     }
                     else
@@ -1868,8 +1911,124 @@ namespace USB_DAQ
             //report = string.Format("data stored in {0}\n", filepath);
             //Dispatcher.Invoke(dp2, report);
         }
-        //control channel calibration
+
         private void btnChnCali_Click(object sender, RoutedEventArgs e)
+        {
+            ComboBox[] cbxPedCali_ASIC = new ComboBox[4] { cbxPedCali_ASIC1, cbxPedCali_ASIC2, cbxPedCali_ASIC3, cbxPedCali_ASIC4 };
+            string[] Chn = new string[64];
+            byte[] Command_Header = new byte[64];
+            for(int i = 0; i < 64; i++)
+            {
+                Chn[i] = string.Format("Chn{0}", i);
+                Command_Header[i] = (byte)(0xC0 + i);
+            }
+            byte[,] DCCali = new byte[4, 64];
+            byte[,] SCTCali = new byte[4, 64];
+            int ASIC_Number = cbxASIC_Number.SelectedIndex + 1;
+            for(int i = 0; i < ASIC_Number; i++)
+            {
+                CaliHashTable[i].Clear();
+                switch(cbxPedCali_ASIC[i].SelectedIndex)
+                {
+                    case 0:
+                        for (int j = 0; j < 64; j++)
+                        {
+                            CaliHashTable[i].Add(Chn[j], new byte[] { Command_Header[j], 0x00 });
+                        }
+                        #region Without Cali
+
+                        /*CaliHashTable[i].Add("Chn0", new byte[] { 0xC0, 0x00 });//chn0
+                        CaliHashTable[i].Add("Chn1", new byte[] { 0xC1, 0x00 });//chn1
+                        CaliHashTable[i].Add("Chn2", new byte[] { 0xC2, 0x00 });//chn2
+                        CaliHashTable[i].Add("Chn3", new byte[] { 0xC3, 0x00 });//chn3
+                        CaliHashTable[i].Add("Chn4", new byte[] { 0xC4, 0x00 });//chn4
+                        CaliHashTable[i].Add("Chn5", new byte[] { 0xC5, 0x00 });//chn5
+                        CaliHashTable[i].Add("Chn6", new byte[] { 0xC6, 0x00 });//chn6
+                        CaliHashTable[i].Add("Chn7", new byte[] { 0xC7, 0x00 });//chn7
+                        CaliHashTable[i].Add("Chn8", new byte[] { 0xC8, 0x00 });//chn8
+                        CaliHashTable[i].Add("Chn9", new byte[] { 0xC9, 0x00 });//chn9
+                        CaliHashTable[i].Add("Chn10", new byte[] { 0xCA, 0x00 });//chn10
+                        CaliHashTable[i].Add("Chn11", new byte[] { 0xCB, 0x00 });//chn11
+                        CaliHashTable[i].Add("Chn12", new byte[] { 0xCC, 0x00 });//chn12
+                        CaliHashTable[i].Add("Chn13", new byte[] { 0xCD, 0x00 });//chn13
+                        CaliHashTable[i].Add("Chn14", new byte[] { 0xCE, 0x00 });//chn14
+                        CaliHashTable[i].Add("Chn15", new byte[] { 0xCF, 0x00 });//chn15
+                        CaliHashTable[i].Add("Chn16", new byte[] { 0xD0, 0x00 });//chn16
+                        CaliHashTable[i].Add("Chn17", new byte[] { 0xD1, 0x00 });//chn17
+                        CaliHashTable[i].Add("Chn18", new byte[] { 0xD2, 0x00 });//chn18
+                        CaliHashTable[i].Add("Chn19", new byte[] { 0xD3, 0x00 });//chn19
+                        CaliHashTable[i].Add("Chn20", new byte[] { 0xD4, 0x00 });//chn20
+                        CaliHashTable[i].Add("Chn21", new byte[] { 0xD5, 0x00 });//chn21
+                        CaliHashTable[i].Add("Chn22", new byte[] { 0xD6, 0x00 });//chn22
+                        CaliHashTable[i].Add("Chn23", new byte[] { 0xD7, 0x00 });//chn23
+                        CaliHashTable[i].Add("Chn24", new byte[] { 0xD8, 0x00 });//chn24
+                        CaliHashTable[i].Add("Chn25", new byte[] { 0xD9, 0x00 });//chn25
+                        CaliHashTable[i].Add("Chn26", new byte[] { 0xDA, 0x00 });//chn26
+                        CaliHashTable[i].Add("Chn27", new byte[] { 0xDB, 0x00 });//chn27
+                        CaliHashTable[i].Add("Chn28", new byte[] { 0xDC, 0x00 });//chn28
+                        CaliHashTable[i].Add("Chn29", new byte[] { 0xDD, 0x00 });//chn29
+                        CaliHashTable[i].Add("Chn30", new byte[] { 0xDE, 0x00 });//chn30
+                        CaliHashTable[i].Add("Chn31", new byte[] { 0xDF, 0x00 });//chn31
+                        CaliHashTable[i].Add("Chn32", new byte[] { 0xE0, 0x00 });//chn32
+                        CaliHashTable[i].Add("Chn33", new byte[] { 0xE1, 0x00 });//chn33
+                        CaliHashTable[i].Add("Chn34", new byte[] { 0xE2, 0x00 });//chn34
+                        CaliHashTable[i].Add("Chn35", new byte[] { 0xE3, 0x00 });//chn35
+                        CaliHashTable[i].Add("Chn36", new byte[] { 0xE4, 0x00 });//chn36
+                        CaliHashTable[i].Add("Chn37", new byte[] { 0xE5, 0x00 });//chn37
+                        CaliHashTable[i].Add("Chn38", new byte[] { 0xE6, 0x00 });//chn38
+                        CaliHashTable[i].Add("Chn39", new byte[] { 0xE7, 0x00 });//chn39
+                        CaliHashTable[i].Add("Chn40", new byte[] { 0xE8, 0x00 });//chn40
+                        CaliHashTable[i].Add("Chn41", new byte[] { 0xE9, 0x00 });//chn41
+                        CaliHashTable[i].Add("Chn42", new byte[] { 0xEA, 0x00 });//chn42
+                        CaliHashTable[i].Add("Chn43", new byte[] { 0xEB, 0x00 });//chn43
+                        CaliHashTable[i].Add("Chn44", new byte[] { 0xEC, 0x00 });//chn44
+                        CaliHashTable[i].Add("Chn45", new byte[] { 0xED, 0x00 });//chn45
+                        CaliHashTable[i].Add("Chn46", new byte[] { 0xEE, 0x00 });//chn46
+                        CaliHashTable[i].Add("Chn47", new byte[] { 0xEF, 0x00 });//chn47
+                        CaliHashTable[i].Add("Chn48", new byte[] { 0xF0, 0x00 });//chn48
+                        CaliHashTable[i].Add("Chn49", new byte[] { 0xF1, 0x00 });//chn49
+                        CaliHashTable[i].Add("Chn50", new byte[] { 0xF2, 0x00 });//chn50
+                        CaliHashTable[i].Add("Chn51", new byte[] { 0xF3, 0x00 });//chn51
+                        CaliHashTable[i].Add("Chn52", new byte[] { 0xF4, 0x00 });//chn52
+                        CaliHashTable[i].Add("Chn53", new byte[] { 0xF5, 0x00 });//chn53
+                        CaliHashTable[i].Add("Chn54", new byte[] { 0xF6, 0x00 });//chn54
+                        CaliHashTable[i].Add("Chn55", new byte[] { 0xF7, 0x00 });//chn55
+                        CaliHashTable[i].Add("Chn56", new byte[] { 0xF8, 0x00 });//chn56
+                        CaliHashTable[i].Add("Chn57", new byte[] { 0xF9, 0x00 });//chn57
+                        CaliHashTable[i].Add("Chn58", new byte[] { 0xFA, 0x00 });//chn58
+                        CaliHashTable[i].Add("Chn59", new byte[] { 0xFB, 0x00 });//chn59
+                        CaliHashTable[i].Add("Chn60", new byte[] { 0xFC, 0x00 });//chn60
+                        CaliHashTable[i].Add("Chn61", new byte[] { 0xFD, 0x00 });//chn61
+                        CaliHashTable[i].Add("Chn62", new byte[] { 0xFE, 0x00 });//chn62
+                        CaliHashTable[i].Add("Chn63", new byte[] { 0xFF, 0x00 });//chn63*/
+                        #endregion
+                        break;
+                    case 1:
+                        for(int j = 0;j<64;j++)
+                        {
+                            CaliHashTable[i].Add(Chn[j], new byte[] { Command_Header[j], DCCali[i,j] });
+                        }
+                        break;
+                    case 2:
+                        for (int j = 0; j < 64; j++)
+                        {
+                            CaliHashTable[i].Add(Chn[j], new byte[] { Command_Header[j], DCCali[i, j] });
+                        }
+                        break;
+                    default:                    
+                        for (int j = 0; j < 64; j++)
+                        {
+                            CaliHashTable[i].Add(Chn[j], new byte[] { Command_Header[j], 0x00 });
+                        }
+                        break;                        
+
+                }
+            }
+        }
+        //control channel calibration
+
+        #region Old Code for ChnCali
+        /*private void btnChnCali_Click(object sender, RoutedEventArgs e)
         {
             StringBuilder details = new StringBuilder();
             byte[] param = new byte[2];
@@ -1891,14 +2050,14 @@ namespace USB_DAQ
                 txtReport.AppendText(details.ToString());
             else
                 txtReport.AppendText("All channels without calibration\n");
-        }
+        }*/
         //load channel calibration parameter
-        
-        private void chk_PedCali_Checked(object sender, RoutedEventArgs e)
+
+        /*private void chk_PedCali_Checked(object sender, RoutedEventArgs e)
         {
             hasht.Clear();
             #region Microroc No.203
-            /*--- MICROROC NO.203 SC 4-bit DAC Parameter ---*/
+            //--- MICROROC NO.203 SC 4-bit DAC Parameter ---
             //This parameter is caculated via DC voltage measured by KEITHLEY2701
             hasht.Add("Chn0", new byte[] { 0xC0, 0x02}); //chn0
             hasht.Add("Chn1", new byte[] { 0xC1, 0x03});//chn1
@@ -2031,8 +2190,8 @@ namespace USB_DAQ
             hasht.Add("Chn62", new byte[] { 0xFE, 0x01 });//chn62
             hasht.Add("Chn63", new byte[] { 0xFF, 0x01 });//chn63
             */
-            # endregion
-        }
+        //# endregion
+        /*}
         //without calibration
         private void chk_PedCali_UnChecked(object sender, RoutedEventArgs e)
         {
@@ -2101,6 +2260,51 @@ namespace USB_DAQ
             hasht.Add("Chn61", new byte[] { 0xFD, 0x00 });//chn61
             hasht.Add("Chn62", new byte[] { 0xFE, 0x00 });//chn62
             hasht.Add("Chn63", new byte[] { 0xFF, 0x00 });//chn63
+        }*/
+        #endregion
+
+        /*private void chk_PedCali_ASIC1_Checked(object sender, RoutedEventArgs e)
+        {
+            CaliHashTable[1].Clear();
+            CaliHashTable[1]
+
         }
+
+        private void chk_PedCali_ASIC2_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void chk_PedCali_ASIC3_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+
+
+        private void chk_PedCali_ASIC4_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void chk_PedCali_ASIC1_Unchecked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void chk_PedCali_ASIC2_Unchecked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void chk_PedCali_ASIC3_Unchecked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void chk_PedCali_ASIC4_Unchecked(object sender, RoutedEventArgs e)
+        {
+
+        }*/
     }
 }

@@ -6,7 +6,7 @@
         xmlns:d3="http://research.microsoft.com/DynamicDataDisplay/1.0"
         xmlns:ext="clr-namespace:USB_DAQ.Extension"   
         mc:Ignorable="d"
-        Title="SDHCAL_DAQ_USB" Height="877.333" Width="1275.167" Closing="Window_Closing">
+        Title="SDHCAL_DAQ_USB" Height="877.333" Width="1294" Closing="Window_Closing">
     <Window.Resources>
         <Style x:Key="ButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="DarkGreen"/>
@@ -163,17 +163,16 @@
                         </ComboBox>
                         <Label x:Name="lblHeader" Content="Start Header:" HorizontalAlignment="Left" Margin="0,30,0,0" VerticalAlignment="Top" Height="24" Width="90"/>
                         <TextBox x:Name="txtHeader" HorizontalAlignment="Left" Height="20" Margin="100,30,0,0" TextWrapping="Wrap" Text="A1" VerticalAlignment="Top" Width="70"/>
-                        <CheckBox x:Name="chk_PedCali" Content="PedCali" HorizontalAlignment="Left" Margin="0,60,0,0" VerticalAlignment="Top" Checked="chk_PedCali_Checked" Unchecked="chk_PedCali_UnChecked" Width="90" Height="24"/>
-                        <Button x:Name="btnChnCali" Content="ChnCali" HorizontalAlignment="Left" Margin="100,60,0,0" VerticalAlignment="Top" Width="70" Height="24" Click="btnChnCali_Click"/>
-                        <Label x:Name="Raz_Chn_Select" Content="RAZ Chn Select" HorizontalAlignment="Left" Margin="0,90,0,0" VerticalAlignment="Top" Width="100"/>
-                        <StackPanel HorizontalAlignment="Left" Height="30" Margin="100,90,0,0" VerticalAlignment="Top" Width="75">
+                        
+                        <Label x:Name="Raz_Chn_Select" Content="RAZ Chn Select" HorizontalAlignment="Left" Margin="0,60,0,0" VerticalAlignment="Top" Width="100"/>
+                        <StackPanel HorizontalAlignment="Left" Height="30" Margin="100,60,0,0" VerticalAlignment="Top" Width="75">
                             <RadioButton GroupName="RAZ_Chn_Select1" Checked="RAZ_Chn_Select_Checked" Content="Internal"/>
                             <RadioButton GroupName="RAZ_Chn_Select1" Checked="RAZ_Chn_Select_Checked" Content="External"/>
                             <!--RadioButton x:Name="RAZ_Chn_Select1" Content="Internal"/-->
                             <!--RadioButton x:Name="RAZ_Chn_Select" Content="External"/-->
                         </StackPanel>
-                        <Label x:Name="lblChannel_Sel" Content="Channel select" HorizontalAlignment="Left" Margin="0,120,0,0" VerticalAlignment="Top" Height="24" Width="100"/>
-                        <StackPanel HorizontalAlignment="Left" Height="30" Margin="100,120,0,0" VerticalAlignment="Top" Width="75">
+                        <Label x:Name="lblChannel_Sel" Content="Channel select" HorizontalAlignment="Left" Margin="0,90,0,0" VerticalAlignment="Top" Height="24" Width="100"/>
+                        <StackPanel HorizontalAlignment="Left" Height="30" Margin="100,90,0,0" VerticalAlignment="Top" Width="75">
                             <RadioButton GroupName="Chn_Select" Checked="ChannelSelect_Checked" Margin="0,0,-9,0" Content="Channel1"/>
                             <RadioButton GroupName="Chn_Select" Checked="ChannelSelect_Checked" Margin="0,0,-9,0" Content="Channel2"/>
                             <!--RadioButton x:Name="rtnChannel1" Content="Channel1"/-->
@@ -220,10 +219,10 @@
                             <ComboBoxItem Content="500ns"/>
                             <ComboBoxItem Content="1us" IsSelected="True"/>
                         </ComboBox>
-                        <Label x:Name="lblRead_Reg" Content="ReadRegister:" HorizontalAlignment="Left" Margin="180,250,0,0" VerticalAlignment="Top" Height="24" Width="90"/>
-                        <TextBox x:Name="txtRead_reg_ASIC1" HorizontalAlignment="Left" Height="24" Margin="290,250,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="50"/>
+                        <Label x:Name="lblRead_Reg" Content="ReadRegister:" HorizontalAlignment="Left" Margin="180,275,0,0" VerticalAlignment="Top" Height="24" Width="90"/>
+                        <TextBox x:Name="txtRead_reg_ASIC1" HorizontalAlignment="Left" Height="24" Margin="290,275,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="50"/>
                         <Label x:Name="lblSc_or_Read" Content="SC or Read:" HorizontalAlignment="Left" Margin="0,300,0,0" VerticalAlignment="Top" Width="100" Height="24"/>
-                        <Button x:Name="btnSC_or_ReadReg" Content="Load Param" HorizontalAlignment="Left" Margin="684,300,0,0" VerticalAlignment="Top" Width="84" Height="24" Click="btnSC_or_ReadReg_Click"/>
+                        <Button x:Name="btnSC_or_ReadReg" Content="Load Param" HorizontalAlignment="Left" Margin="684,0,0,0" VerticalAlignment="Top" Width="84" Height="24" Click="btnSC_or_ReadReg_Click"/>
                         <Label x:Name="lblASIC2" Content="ASIC2" HorizontalAlignment="Left" Margin="400,0,0,0" VerticalAlignment="Top" Width="50" Height="24"/>
                         <TextBox x:Name="txtDAC0_VTH_ASIC2" HorizontalAlignment="Left" Height="24" Margin="380,25,0,0" TextWrapping="Wrap" Text="550" VerticalAlignment="Top" Width="85"/>
                         <TextBox x:Name="txtDAC1_VTH_ASIC2" HorizontalAlignment="Left" Height="24" Margin="380,50,0,0" TextWrapping="Wrap" Text="540" VerticalAlignment="Top" Width="85"/>
@@ -255,7 +254,7 @@
                             <ComboBoxItem Content="500ns"/>
                             <ComboBoxItem Content="1us" IsSelected="True"/>
                         </ComboBox>
-                        <TextBox x:Name="txtRead_reg_ASIC2" HorizontalAlignment="Left" Height="24" Margin="380,250,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="50"/>
+                        <TextBox x:Name="txtRead_reg_ASIC2" HorizontalAlignment="Left" Height="24" Margin="380,275,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="50"/>
                         <Label x:Name="lblASIC3" Content="ASIC3" HorizontalAlignment="Left" Margin="490,0,0,0" VerticalAlignment="Top" Width="50" Height="24"/>
                         <TextBox x:Name="txtDAC0_VTH_ASIC3" HorizontalAlignment="Left" Height="24" Margin="470,25,0,0" TextWrapping="Wrap" Text="550" VerticalAlignment="Top" Width="85"/>
                         <TextBox x:Name="txtDAC1_VTH_ASIC3" HorizontalAlignment="Left" Height="24" Margin="470,50,0,0" TextWrapping="Wrap" Text="540" VerticalAlignment="Top" Width="85"/>
@@ -287,7 +286,7 @@
                             <ComboBoxItem Content="500ns"/>
                             <ComboBoxItem Content="1us" IsSelected="True"/>
                         </ComboBox>
-                        <TextBox x:Name="txtRead_reg_ASIC3" HorizontalAlignment="Left" Height="24" Margin="470,250,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="50"/>
+                        <TextBox x:Name="txtRead_reg_ASIC3" HorizontalAlignment="Left" Height="24" Margin="470,275,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="50"/>
                         <Label x:Name="lblASIC4" Content="ASIC4" HorizontalAlignment="Left" Margin="580,0,0,0" VerticalAlignment="Top" Width="50" Height="24"/>
                         <TextBox x:Name="txtDAC0_VTH_ASIC4" HorizontalAlignment="Left" Height="24" Margin="560,25,0,0" TextWrapping="Wrap" Text="550" VerticalAlignment="Top" Width="85"/>
                         <TextBox x:Name="txtDAC1_VTH_ASIC4" HorizontalAlignment="Left" Height="24" Margin="560,50,0,0" TextWrapping="Wrap" Text="540" VerticalAlignment="Top" Width="85"/>
@@ -319,7 +318,35 @@
                             <ComboBoxItem Content="500ns"/>
                             <ComboBoxItem Content="1us" IsSelected="True"/>
                         </ComboBox>
-                        <TextBox x:Name="txtRead_reg_ASIC4" HorizontalAlignment="Left" Height="24" Margin="560,250,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="50"/>
+                        <TextBox x:Name="txtRead_reg_ASIC4" HorizontalAlignment="Left" Height="24" Margin="560,275,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="50"/>
+                        <Label x:Name="lbl4bitDAC_Cali" Content="Ped Cali:" HorizontalAlignment="Left" Margin="180,250,0,0" VerticalAlignment="Top" Height="24" Width="75"/>
+                        <!--CheckBox x:Name="chk_PedCali_ASIC1" Content="PedCali 1" HorizontalAlignment="Left" Margin="290,250,0,0" VerticalAlignment="Top" Checked="chk_PedCali_ASIC1_Checked" Unchecked="chk_PedCali_ASIC1_Unchecked" Width="80" Height="24"/>                        
+                        <CheckBox x:Name="chk_PedCali_ASIC2" Content="PedCali 2" HorizontalAlignment="Left" Margin="380,250,0,0" VerticalAlignment="Top" Checked="chk_PedCali_ASIC2_Checked" Unchecked="chk_PedCali_ASIC2_Unchecked" Width="80" Height="24"/>
+                        <CheckBox x:Name="chk_PedCali_ASIC3" Content="PedCali 3" HorizontalAlignment="Left" Margin="470,250,0,0" VerticalAlignment="Top" Checked="chk_PedCali_ASIC3_Checked" Unchecked="chk_PedCali_ASIC3_Unchecked" Width="80" Height="24"/>
+                        <CheckBox x:Name="chk_PedCali_ASIC4" Content="PedCali 4" HorizontalAlignment="Left" Margin="560,250,0,0" VerticalAlignment="Top" Checked="chk_PedCali_ASIC4_Checked" Unchecked="chk_PedCali_ASIC4_Unchecked" Width="80" Height="24"/-->
+                        <Button x:Name="btnChnCali" Content="ChnCali" HorizontalAlignment="Left" Margin="640,275,0,0" VerticalAlignment="Top" Width="70" Height="24" Click="btnChnCali_Click"/>
+                        
+                        <ComboBox x:Name="cbxPedCali_ASIC1" HorizontalAlignment="Left" Margin="290,250,0,0" VerticalAlignment="Top" Width="85" Height="24">
+                            <ComboBoxItem Content= "Without Cali"/>
+                            <ComboBoxItem Content= "DC Cali" IsSelected ="True"/>
+                            <ComboBoxItem Content= "SCurve Cali" />
+                        </ComboBox>
+                        <ComboBox x:Name="cbxPedCali_ASIC2" HorizontalAlignment="Left" Margin="380,250,0,0" VerticalAlignment="Top" Width="85" Height="24">
+                            <ComboBoxItem Content= "Without Cali"/>
+                            <ComboBoxItem Content= "DC Cali" IsSelected ="True"/>
+                            <ComboBoxItem Content= "SCurve Cali" />
+                        </ComboBox>
+                        <ComboBox x:Name="cbxPedCali_ASIC3" HorizontalAlignment="Left" Margin="470,250,0,0" VerticalAlignment="Top" Width="85" Height="24">
+                            <ComboBoxItem Content= "Without Cali"/>
+                            <ComboBoxItem Content= "DC Cali" IsSelected ="True"/>
+                            <ComboBoxItem Content= "SCurve Cali" />
+                        </ComboBox>
+                        <ComboBox x:Name="cbxPedCali_ASIC4" HorizontalAlignment="Left" Margin="560,250,0,0" VerticalAlignment="Top" Width="85" Height="24">
+                            <ComboBoxItem Content= "Without Cali"/>
+                            <ComboBoxItem Content= "DC Cali" IsSelected ="True"/>
+                            <ComboBoxItem Content= "SCurve Cali" />
+                        </ComboBox>
+                       
 
 
                     </Grid>
