@@ -201,7 +201,11 @@ always @ (posedge Clk , negedge reset_n) begin
          end
       end
       READ_PROCESS_ASIC:begin
-        if(asic_cnt < asic_num - 1'b1) begin
+        asic_cnt <= 3'b0;
+        State <= END_PROCESS;
+        Process_Done <= 1'b1;
+        // This module should Config the ASIC once
+        /*if(asic_cnt < asic_num - 1'b1) begin
           asic_cnt <= asic_cnt + 1'b1;
           Read_shiftreg <= Read_reg; //reload parameter
           State <= READ_PROCESS;
@@ -210,7 +214,7 @@ always @ (posedge Clk , negedge reset_n) begin
           asic_cnt <= 3'b0;
           State <= END_PROCESS;
           Process_Done <= 1'b1;
-        end
+        end*/
       end
       SC_PROCESS:begin
         param_store_fifo_wr_en <= 1'b1;
