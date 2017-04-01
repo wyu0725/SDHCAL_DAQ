@@ -712,8 +712,8 @@ namespace USB_DAQ
             bool bResult = false;
             #region Set ASIC Number
             /*----------------ASIC number and start load---------------------*/
-            int ASIC_Number = cbxASIC_Number.SelectedIndex + 1;
-            int value = ASIC_Number + 176;
+            int ASIC_Number = cbxASIC_Number.SelectedIndex;
+            int value = ASIC_Number + 176 + 1;
             byte[] com_bytes = new byte[2];
             com_bytes = ConstCommandByteArray(0xA0, (byte)(value));
             bResult = CommandSend(com_bytes, com_bytes.Length);
@@ -784,11 +784,11 @@ namespace USB_DAQ
                 byte PedCali_Byte1,PedCali_Byte2;
                 StringBuilder details = new StringBuilder();
                 NoSortHashtable TempHashTabel;
-                Header_Value[0] -= 1;
-                for (int i = 0;i < ASIC_Number; i++)
+                Header_Value[0] += (byte)ASIC_Number;
+                for (int i = ASIC_Number;i >= 0; i--)
                 {
                     #region Header   
-                    Header_Value[0] += 1;
+                    Header_Value[0] -= 1;
                     Command_Bytes = ConstCommandByteArray(0xAB, Header_Value[0]);
                     bResult = CommandSend(Command_Bytes, Command_Bytes.Length);
                     if (bResult)
@@ -1202,7 +1202,7 @@ namespace USB_DAQ
                 bool Is_ReadReg_legal = false;
                 int ReadReg_Value;
                 byte[] Command_Bytes = new byte[2];
-                for(int i = 0;i< ASIC_Number; i++)
+                for(int i = ASIC_Number;i>= 0; i--)
                 {
                     #region Set ReadReg
                     Is_ReadReg_legal = rx_int.IsMatch(txtRead_reg_ASIC[i].Text);
