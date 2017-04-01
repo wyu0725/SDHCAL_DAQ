@@ -1,7 +1,7 @@
 Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2016.3 (win64) Build 1682563 Mon Oct 10 19:07:27 MDT 2016
-| Date         : Fri Mar 31 21:04:09 2017
+| Date         : Sat Apr 01 14:56:10 2017
 | Host         : WYU running 64-bit major release  (build 9200)
 | Command      : report_utilization -file FPGA_TOP_utilization_placed.rpt -pb FPGA_TOP_utilization_placed.pb
 | Design       : FPGA_TOP
@@ -31,13 +31,13 @@ Table of Contents
 +----------------------------+------+-------+-----------+-------+
 |          Site Type         | Used | Fixed | Available | Util% |
 +----------------------------+------+-------+-----------+-------+
-| Slice LUTs                 | 3511 |     0 |     63400 |  5.54 |
-|   LUT as Logic             | 3362 |     0 |     63400 |  5.30 |
+| Slice LUTs                 | 3495 |     0 |     63400 |  5.51 |
+|   LUT as Logic             | 3346 |     0 |     63400 |  5.28 |
 |   LUT as Memory            |  149 |     0 |     19000 |  0.78 |
 |     LUT as Distributed RAM |   24 |     0 |           |       |
 |     LUT as Shift Register  |  125 |     0 |           |       |
-| Slice Registers            | 4247 |     0 |    126800 |  3.35 |
-|   Register as Flip Flop    | 4247 |     0 |    126800 |  3.35 |
+| Slice Registers            | 4241 |     0 |    126800 |  3.34 |
+|   Register as Flip Flop    | 4241 |     0 |    126800 |  3.34 |
 |   Register as Latch        |    0 |     0 |    126800 |  0.00 |
 | F7 Muxes                   |   29 |     0 |     31700 |  0.09 |
 | F8 Muxes                   |    0 |     0 |     15850 |  0.00 |
@@ -56,8 +56,8 @@ Table of Contents
 | 0     |            _ |         Set |            - |
 | 0     |            _ |       Reset |            - |
 | 0     |          Yes |           - |            - |
-| 353   |          Yes |           - |          Set |
-| 2269  |          Yes |           - |        Reset |
+| 352   |          Yes |           - |          Set |
+| 2264  |          Yes |           - |        Reset |
 | 9     |          Yes |         Set |            - |
 | 1616  |          Yes |       Reset |            - |
 +-------+--------------+-------------+--------------+
@@ -69,13 +69,13 @@ Table of Contents
 +-------------------------------------------+------+-------+-----------+-------+
 |                 Site Type                 | Used | Fixed | Available | Util% |
 +-------------------------------------------+------+-------+-----------+-------+
-| Slice                                     | 1634 |     0 |     15850 | 10.31 |
-|   SLICEL                                  | 1128 |     0 |           |       |
-|   SLICEM                                  |  506 |     0 |           |       |
-| LUT as Logic                              | 3362 |     0 |     63400 |  5.30 |
+| Slice                                     | 1638 |     0 |     15850 | 10.33 |
+|   SLICEL                                  | 1117 |     0 |           |       |
+|   SLICEM                                  |  521 |     0 |           |       |
+| LUT as Logic                              | 3346 |     0 |     63400 |  5.28 |
 |   using O5 output only                    |    1 |       |           |       |
-|   using O6 output only                    | 2840 |       |           |       |
-|   using O5 and O6                         |  521 |       |           |       |
+|   using O6 output only                    | 2817 |       |           |       |
+|   using O5 and O6                         |  528 |       |           |       |
 | LUT as Memory                             |  149 |     0 |     19000 |  0.78 |
 |   LUT as Distributed RAM                  |   24 |     0 |           |       |
 |     using O5 output only                  |    0 |       |           |       |
@@ -85,11 +85,11 @@ Table of Contents
 |     using O5 output only                  |    4 |       |           |       |
 |     using O6 output only                  |   33 |       |           |       |
 |     using O5 and O6                       |   88 |       |           |       |
-| LUT Flip Flop Pairs                       | 2249 |     0 |     63400 |  3.55 |
-|   fully used LUT-FF pairs                 |  193 |       |           |       |
-|   LUT-FF pairs with one unused LUT output | 1994 |       |           |       |
-|   LUT-FF pairs with one unused Flip Flop  | 1884 |       |           |       |
-| Unique Control Sets                       |  513 |       |           |       |
+| LUT Flip Flop Pairs                       | 2264 |     0 |     63400 |  3.57 |
+|   fully used LUT-FF pairs                 |  202 |       |           |       |
+|   LUT-FF pairs with one unused LUT output | 1988 |       |           |       |
+|   LUT-FF pairs with one unused Flip Flop  | 1903 |       |           |       |
+| Unique Control Sets                       |  510 |       |           |       |
 +-------------------------------------------+------+-------+-----------+-------+
 * Note: Review the Control Sets Report for more information regarding control sets.
 
@@ -186,14 +186,14 @@ Table of Contents
 +------------+------+---------------------+
 |  Ref Name  | Used | Functional Category |
 +------------+------+---------------------+
-| FDCE       | 2269 |        Flop & Latch |
+| FDCE       | 2264 |        Flop & Latch |
 | FDRE       | 1616 |        Flop & Latch |
-| LUT6       | 1089 |                 LUT |
-| LUT3       | 1062 |                 LUT |
-| LUT2       |  567 |                 LUT |
-| LUT5       |  555 |                 LUT |
-| LUT4       |  536 |                 LUT |
-| FDPE       |  353 |        Flop & Latch |
+| LUT3       | 1093 |                 LUT |
+| LUT6       | 1084 |                 LUT |
+| LUT2       |  582 |                 LUT |
+| LUT5       |  552 |                 LUT |
+| LUT4       |  489 |                 LUT |
+| FDPE       |  352 |        Flop & Latch |
 | SRL16E     |  120 |  Distributed Memory |
 | CARRY4     |  107 |          CarryLogic |
 | SRLC32E    |   91 |  Distributed Memory |
