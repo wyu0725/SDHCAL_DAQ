@@ -784,6 +784,7 @@ namespace USB_DAQ
                 byte PedCali_Byte1,PedCali_Byte2;
                 StringBuilder details = new StringBuilder();
                 NoSortHashtable TempHashTabel;
+                Header_Value[0] -= 1;
                 for (int i = 0;i < ASIC_Number; i++)
                 {
                     #region Header   
