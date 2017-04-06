@@ -22,13 +22,17 @@
 
 module SCurve_Test_Top(
     input Clk,
+    input Clk_5M,// Use 5M clock to generate 1k clock
     input reset_n,
+    /*--- Select Trigger-efficiency test or Count-efficiency test ---*/
+    input TrigEffi_or_CountEffi,
     /*--- Test parameters and control interface--from upper level ---*/
     input Test_Start,
     input [5:0] SingleTest_Chn,
     input Single_or_64Chn,
     input Ctest_or_Input, //Add by wyu 20170307. When single channel test, this parameter can choose the charge inject from Ctest pin or the input pin
     input [15:0] CPT_MAX,
+    input [15:0] Counter_MAX,
     /*--- USB Data FIFO Interface ---*/
     //input usb_data_fifo_full,
     output usb_data_fifo_wr_en,
@@ -64,8 +68,36 @@ module SCurve_Test_Top(
         Test_Start_reg1 <= Test_Start;
         Test_Start_reg2 <= Test_Start_reg1;
       end
-    end
+    end 
     wire Test_Start_Pulse = Test_Start_reg1 & (~Test_Start_reg2);
+    /*--- Generate 1k Clock ---*/
+    reg [11:0] Clock1K_Cnt; 
+    localparam [11:0] Clock1K_Max = 12'd1250;
+    reg Clk_1K;
+    always @(posedge Clk_5M or negedge reset_n) begin
+      if(~reset_n) begin
+        Clk_1K <= 1'b0;
+        Clock1K_Cnt <= 12'd0;
+      end
+      else if(TrigEffi_or_CountEffi) begin
+        Clk_1K <= 1'b0;
+        Clock1K_Cnt = 12'd0;
+      end
+      else if(Clock1K_Cnt == Clock1K_Max) begin
+        Clk_1K <= ~Clk_1K;
+        Clock1K_Cnt <= 12'b0;
+      end
+      else begin
+        Clock1K_Cnt <= Clock1K_Cnt + 1'b1;
+        Clk_1K <= Clk_1K;
+      end
+    end
+    /*--- Switcher for Trigger-efficiency and Count-efficiency ---*/
+    wire CLK_EXT_Gen;
+    wire CPT_MAX_Gen;
+    assign CLK_EXT_Gen = TrigEffi_or_CountEffi ? CLK_EXT : Clk_1K;
+    assign CPT_MAX_Gen = TrigEffi_or_CountEffi ? CPT_MAX : Counter_MAX;
+    //
     wire Single_Test_Start;
     wire Single_Test_Done;
     wire SCurve_Data_fifo_empty;
@@ -106,12 +138,13 @@ module SCurve_Test_Top(
     SCurve_Single_Test SC_test_single(
       .Clk(Clk),
       .reset_n(reset_n),
-      .CLK_EXT(CLK_EXT),
+      .TrigEffi_or_CountEffi(TrigEffi_or_CountEffi),
+      .CLK_EXT(CLK_EXT_Gen),
       .out_trigger0b(out_trigger0b),
       .out_trigger1b(out_trigger1b),
       .out_trigger2b(out_trigger2b),
       .SCurve_Test_Start(Single_Test_Start),
-      .CPT_MAX(CPT_MAX),
+      .CPT_MAX(CPT_MAX_Gen),
       .SCurve_Data(SCurve_Data),
       .SCurve_Data_wr_en(SCurve_Data_wr_en),
       .One_Channel_Done(Single_Test_Done)

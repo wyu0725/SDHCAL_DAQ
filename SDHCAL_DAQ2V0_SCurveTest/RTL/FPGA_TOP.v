@@ -149,6 +149,8 @@ module FPGA_TOP(
     wire CTest_or_Input;
     wire [5:0] SingleTest_Chn;
     wire [15:0] CPT_MAX;
+    wire TrigEffi_or_CountEffi;
+    wire [15:0] Counter_MAX;
     //Start Singnal
     wire SCTest_Start_Stop;
     wire Microroc_Acq_Start_Stop;
@@ -207,6 +209,10 @@ module FPGA_TOP(
       .SingleTest_Chn(SingleTest_Chn),
       .CPT_MAX(CPT_MAX),
       .SCTest_Start_Stop(SCTest_Start_Stop),
+      //Count Efficiency
+      .TrigEffi_or_CountEffi(TrigEffi_or_CountEffi),
+      .Counter_MAX(Counter_MAX),
+      //Done Signal
       .SCTest_Done(SCurve_Test_Done),
       .USB_FIFO_Empty(in_from_ext_fifo_empty),
       /*----------------------------*/
@@ -458,13 +464,17 @@ module FPGA_TOP(
     //SCurve Test Top instantion    
     SCurve_Test_Top Microroc_SCurveTest(
       .Clk(Clk),
+      Clk_5M(Clk_5M),
       .reset_n(reset_n),
+      // Select Trig Efficiency or Counter Efficiency test
+      .TrigEffi_or_CountEffi(TrigEffi_or_CountEffi),
       /*--- Test parameters and control interface--from upper level ---*/
       .Test_Start(SCTest_Start_Stop),
       .SingleTest_Chn(SingleTest_Chn),
       .Single_or_64Chn(Single_or_64Chn),
       .Ctest_or_Input(CTest_or_Input),
       .CPT_MAX(CPT_MAX),
+      .Counter_MAX(Counter_MAX),
       /*--- USB Data FIFO Interface ---*/
       //.usb_data_fifo_full(),
       .usb_data_fifo_wr_en(SCTest_usb_data_fifo_wr_en),

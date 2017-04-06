@@ -73,6 +73,9 @@ module usb_command_interpreter(
       output reg [5:0] SingleTest_Chn,
       output reg [15:0] CPT_MAX,
       output reg SCTest_Start_Stop,
+      // Count Efficirncy
+      output reg TrigEffi_or_CountEffi,
+      output reg [15:0] Counter_MAX,
       input SCTest_Done,
       input USB_FIFO_Empty,
       /*-------LED test------------------*/
@@ -847,6 +850,17 @@ always @(posedge clk or negedge reset_n)begin
   else
     CTest_or_Input <= CTest_or_Input;
 end
+// Select Trigger Efficiency test or Counter Efficiency test
+always @(posedge clk or negedge reset_n) begin
+  if(~reset_n)
+    TrigEffi_or_CountEffi <= 1'b1;
+  else if(fifo_rden && USB_COMMAND == 16'hE0D0)
+    TrigEffi_or_CountEffi <= 1'b1;
+  else if(fifo_rden && USB_COMMAND == 16'hE0D1)
+    TrigEffi_or_CountEffi <= 1'b0;
+  else
+    TrigEffi_or_CountEffi <= TrigEffi_or_CountEffi;
+end
 // When single channel test, Choose which channel are selected. Note that when choose 64 channel test, this parameter is shield
 always @(posedge clk or negedge reset_n)begin
   if(~reset_n)
@@ -883,6 +897,34 @@ always @(posedge clk or negedge reset_n)begin
   end
   else
       CPT_MAX <= CPT_MAX;
+end
+// Select Counter efficiency test time
+localparam [7:0] Counter_MAX_0_1s = 8'h00,
+                  Counter_MAX_1s = 8'h01,
+                  Counter_MAX_2s = 8'h02,
+                  Counter_MAX_4s = 8'h03,
+                  Counter_MAX_5s = 8'h04,
+                  Counter_MAX_6s = 8'h05,
+                  Counter_MAX_8s = 8'h06,
+                  Counter_MAX_10s = 8'h07;
+always @(posedge clk or negedge reset_n) begin
+  if(~reset_n)
+    Counter_MAX <= 16'd1000;//Defaut 1s
+  else if(fifo_rden && USB_COMMAND[15:8] == 8'hE3) begin
+    case(USB_COMMAND[7:0])
+      Counter_MAX_0_1s: Counter_MAX <= 16'd100;
+      Counter_MAX_1s:   Counter_MAX <= 16'd1000;
+      Counter_MAX_2s:   Counter_MAX <= 16'd2000;
+      Counter_MAX_4s:   Counter_MAX <= 16'd4000;
+      Counter_MAX_5s:   Counter_MAX <= 16'd5000;
+      Counter_MAX_6s:   Counter_MAX <= 16'd6000;
+      Counter_MAX_8s:   Counter_MAX <= 16'd8000;
+      Counter_Max_10s:  Counter_MAX <= 16'd10000;
+      default: Counter_MAX <= 16'd1000;
+    endcase
+  end
+  else
+    Counter_MAX <= Counter_MAX;
 end
 //S Curve test Start Stop Signl
 always @(posedge clk or negedge reset_n) begin

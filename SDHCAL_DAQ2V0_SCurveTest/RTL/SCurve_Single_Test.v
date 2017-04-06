@@ -23,6 +23,7 @@
 module SCurve_Single_Test(
     input Clk,
     input reset_n,
+    input TrigEffi_or_CountEffi,
     input CLK_EXT,
     input out_trigger0b,
     input out_trigger1b,
@@ -49,6 +50,7 @@ module SCurve_Single_Test(
     SCurve_Single_Input Trigger0(
       .Clk(Clk),
       .reset_n(out_reset_n),
+      .TrigEffi_or_CountEffi(TrigEffi_or_CountEffi),
       .Trigger(out_trigger0b),
       .CLK_EXT(CLK_EXT),
       .Test_Start(Single_Chn_Test_Start),
@@ -60,6 +62,7 @@ module SCurve_Single_Test(
     SCurve_Single_Input Trigger1(
       .Clk(Clk),
       .reset_n(out_reset_n),
+      .TrigEffi_or_CountEffi(TrigEffi_or_CountEffi),
       .Trigger(out_trigger1b),
       .CLK_EXT(CLK_EXT),
       .Test_Start(Single_Chn_Test_Start),
@@ -71,6 +74,7 @@ module SCurve_Single_Test(
     SCurve_Single_Input Trigger2(
       .Clk(Clk),
       .reset_n(out_reset_n),
+      .TrigEffi_or_CountEffi(TrigEffi_or_CountEffi),
       .Trigger(out_trigger2b),
       .CLK_EXT(CLK_EXT),
       .Test_Start(Single_Chn_Test_Start),

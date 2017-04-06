@@ -27,6 +27,7 @@
 module SCurve_Single_Input(
     input Clk,
     input reset_n,
+    input TrigEffi_or_CountEffi,
     input Trigger,
     input CLK_EXT,
     input Test_Start,
@@ -61,7 +62,7 @@ module SCurve_Single_Input(
       trigger_reg2 <= 1'b1;
     end
     else begin
-      trigger_reg1 <= (Trigger && trigger_reg1) || (~Enable_Count_T);
+      trigger_reg1 <= TrigEffi_or_CountEffi ? ((Trigger && trigger_reg1) || (~Enable_Count_T)) : Trigger;
       trigger_reg2 <= trigger_reg1;
     end
   end
@@ -71,7 +72,7 @@ module SCurve_Single_Input(
   wire Enable_Count_P;
   wire Enable_Count_T;
   assign Enable_Count_P = Test_Start & (reset_n) & (~CPT_DONE);
-  assign Enable_Count_T = Enable_Count_P & CLK_EXT;
+  assign Enable_Count_T = TrigEffi_or_CountEffi ? (Enable_Count_P & CLK_EXT) : Enable_Count_P;
   //Count PUSLE
   always @(posedge Clk or negedge reset_n)begin
     if(~reset_n)
