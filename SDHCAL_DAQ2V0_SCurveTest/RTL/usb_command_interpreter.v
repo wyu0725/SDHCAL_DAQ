@@ -919,7 +919,7 @@ always @(posedge clk or negedge reset_n) begin
       Counter_MAX_5s:   Counter_MAX <= 16'd5000;
       Counter_MAX_6s:   Counter_MAX <= 16'd6000;
       Counter_MAX_8s:   Counter_MAX <= 16'd8000;
-      Counter_Max_10s:  Counter_MAX <= 16'd10000;
+      Counter_MAX_10s:  Counter_MAX <= 16'd10000;
       default: Counter_MAX <= 16'd1000;
     endcase
   end
