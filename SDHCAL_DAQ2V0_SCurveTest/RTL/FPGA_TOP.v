@@ -464,7 +464,7 @@ module FPGA_TOP(
     //SCurve Test Top instantion    
     SCurve_Test_Top Microroc_SCurveTest(
       .Clk(Clk),
-      Clk_5M(Clk_5M),
+      .Clk_5M(Clk_5M),
       .reset_n(reset_n),
       // Select Trig Efficiency or Counter Efficiency test
       .TrigEffi_or_CountEffi(TrigEffi_or_CountEffi),
