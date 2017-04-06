@@ -30,7 +30,7 @@ namespace USB_DAQ
         private CyBulkEndPoint BulkOutEndPt;
         private const int VID = 0x04B4;
         private const int PID = 0x1004;
-        private string rx_Command= @"\b[0-9a-fA-F]{4}\b";//match 16 bit Hex
+        private string rx_Command = @"\b[0-9a-fA-F]{4}\b";//match 16 bit Hex
         private string rx_Byte = @"\b[0-9a-fA-F]{2}\b";//match 8 bit Hex
         private string rx_Integer = @"^\d+$";   //匹配非负 整数
         //private string rx_Float = @"^\d+(\.\d{1,3})?$";//小数可有可无最多3位小数 
@@ -38,11 +38,11 @@ namespace USB_DAQ
         private static bool AcqStart = false; //采集标志
         private static bool Enabled_Ext_Trigger = false;
         private static bool ScurveStart_En = false;
-       // private static bool SPopen = false; //串口是否打开
-       // private SerialPort mySerialPort = new SerialPort();//新建串口
+        // private static bool SPopen = false; //串口是否打开
+        // private SerialPort mySerialPort = new SerialPort();//新建串口
         private static int Packetcnt;
         private BinaryWriter bw;
-        private Sync_Thread_Buffer threadbuffer = new Sync_Thread_Buffer(16384*512);
+        private Sync_Thread_Buffer threadbuffer = new Sync_Thread_Buffer(16384 * 512);
         //private delegate void DisplayPacketNum(StringBuilder packetnum); //delegate
         private delegate void DisplayPacketNum(string packetnum); //delegate
         //private ObservableDataSource<Point> dataSource1 = new ObservableDataSource<Point>();
@@ -59,7 +59,9 @@ namespace USB_DAQ
         private static int Scurve_Data_Pkg;
         private static int Scurve_Data_Remain;
         //private NoSortHashtable hasht = new NoSortHashtable(); //排序之后的哈希表
-        private NoSortHashtable[] CaliHashTable = new NoSortHashtable[4];
+     
+        private NoSortHashtable[] CaliHashTable = new NoSortHashtable[4]{new NoSortHashtable(), new NoSortHashtable(), new NoSortHashtable(), new NoSortHashtable() };
+        
 
         //SC Parameter
         
@@ -1820,6 +1822,19 @@ namespace USB_DAQ
             {
                 MessageBox.Show("Set S Curve test max count failure. Please check the USB\n", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            // Set Counter Time
+            int value_CounterTime = cbxCount_Time.SelectedIndex;
+            bytes = ConstCommandByteArray(0xE3, (byte)value_CounterTime);
+            bResult = CommandSend(bytes, bytes.Length);
+            if (bResult)
+            {
+                string report = string.Format("Set the S Curve test max time to {0}\n", cbxCount_Time.Text);
+                txtReport.AppendText(report);
+            }
+            else
+            {
+                MessageBox.Show("Set S Curve test max count failure. Please check the USB\n", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
         //--Scurve测试开始E0F0,Scurve测试结束E0F1--//
         private void btnScurve_start_Click(object sender, RoutedEventArgs e)
@@ -1923,8 +1938,30 @@ namespace USB_DAQ
                 Chn[i] = string.Format("Chn{0}", i);
                 Command_Header[i] = (byte)(0xC0 + i);
             }
+            byte[] DCCaliDataTemp = new byte[64];
+            byte[] SCTCaliDataTemp = new byte[64];
             byte[,] DCCali = new byte[4, 64];
             byte[,] SCTCali = new byte[4, 64];
+            StreamReader DCCaliFile, SCTCaliFile;
+            
+            string DCCaliFileName,SCTCaliFileName;
+            for(int i = 0; i < 4; i++)
+            {
+                DCCaliFileName = string.Format("D:\\ExperimentsData\\test\\DCCali{0}.txt", i);
+                SCTCaliFileName = string.Format("D:\\ExperimentsData\\test\\SCTCali{0}.txt", i);
+                DCCaliFile = File.OpenText(DCCaliFileName);
+                SCTCaliFile = File.OpenText(SCTCaliFileName);
+                string DCCaliString, SCTCaliString;
+                
+                for (int j = 0; j < 64; j++)
+                {
+                    DCCaliString = DCCaliFile.ReadLine();
+                    SCTCaliString = SCTCaliFile.ReadLine();
+                    DCCali[i, j] = byte.Parse(DCCaliString);
+                    SCTCali[i, j] = byte.Parse(SCTCaliString);
+
+                }              
+            }
             int ASIC_Number = cbxASIC_Number.SelectedIndex + 1;
             for(int i = 0; i < ASIC_Number; i++)
             {
@@ -2023,6 +2060,52 @@ namespace USB_DAQ
                         }
                         break;                        
 
+                }
+            }
+        }
+
+        // Select Trigger efficiency test or counter efficiency test
+        private void Trig_or_Count_Checked(object sender, RoutedEventArgs e)
+        {
+            var button = sender as RadioButton;
+            bool bResult = false;
+            byte[] CommandBytes = new byte[2];
+            if(button.Content.ToString() == "Trig")
+            {
+                cbxCPT_MAX.IsEnabled = true;
+                cbxCount_Time.IsEnabled = false;
+                CommandBytes = ConstCommandByteArray(0xE0, 0xD0);
+                bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                if (bResult)
+                {
+                    txtReport.AppendText("You are testing Trigger-Efficiency\n");
+                }
+                else
+                {
+                    // txtReport.AppendText("select failure, please check USB\n");
+                    MessageBox.Show("select failure, please check USB", //text
+                                     "USB Error",   //caption
+                                     MessageBoxButton.OK,//button
+                                     MessageBoxImage.Error);//icon
+                }
+            }
+            else if(button.Content.ToString() == "Count")
+            {
+                cbxCount_Time.IsEnabled = true;
+                cbxCPT_MAX.IsEnabled = false;
+                CommandBytes = ConstCommandByteArray(0xE0, 0xD1);
+                bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                if (bResult)
+                {
+                    txtReport.AppendText("You are testing Counter-Efficiency\n");
+                }
+                else
+                {
+                    // txtReport.AppendText("select failure, please check USB\n");
+                    MessageBox.Show("select failure, please check USB", //text
+                                     "USB Error",   //caption
+                                     MessageBoxButton.OK,//button
+                                     MessageBoxImage.Error);//icon
                 }
             }
         }

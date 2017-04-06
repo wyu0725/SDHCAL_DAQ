@@ -69,15 +69,8 @@
         </GroupBox>
         <GroupBox x:Name="gbxMICROROC" Header="MICROROC Control" HorizontalAlignment="Left" Margin="258,28,0,0" VerticalAlignment="Top" Height="718" Width="797">
             <Grid  Margin="0,0,0,0" >
-                <GroupBox x:Name="gbxSCurveTest" Header="SCurve Test" HorizontalAlignment="Left" Margin="0,542,0,0" VerticalAlignment="Top" Height="144" Width="363">
+                <GroupBox x:Name="gbxSCurveTest" Header="SCurve Test" HorizontalAlignment="Left" Margin="0,550,0,0" VerticalAlignment="Top" Height="144" Width="363">
                     <Grid  Margin="0,0,0,0" >
-                        <Label x:Name="lblACQ_or_SCTest" Content="ACQ or SCTest" HorizontalAlignment="Left" VerticalAlignment="Top" Height="24" RenderTransformOrigin="4.713,0.917"/>
-                        <StackPanel HorizontalAlignment="Left" Height="30" Margin="94,0,0,0" VerticalAlignment="Top" Width="60">
-                            <RadioButton GroupName="ACQ_or_SCTest" Checked="ACQ_or_SCTest_Checked" Content="ACQ"/>
-                            <RadioButton GroupName="ACQ_or_SCTest" Checked="ACQ_or_SCTest_Checked" Content="SCTest"/>
-                            <!--RadioButton x:Name="radioButton" Content="RadioButton"/>
-                    <RadioButton x:Name="radioButton1" Content="RadioButton"/-->
-                        </StackPanel>
                         <Label x:Name="lblSing_or_Auto" Content="Single or Auto" HorizontalAlignment="Left" Margin="0,30,0,0" VerticalAlignment="Top" Height="24"/>
                         <StackPanel HorizontalAlignment="Left" Height="30" Margin="94,30,0,0" VerticalAlignment="Top" Width="60">
                             <RadioButton GroupName="Single_or_64Chn" Checked="Single_or_64Chn_Checked" Content="Single"/>
@@ -85,7 +78,7 @@
                             <!--RadioButton x:Name="radioButton" Content="RadioButton"/>
                     <RadioButton x:Name="radioButton1" Content="RadioButton"/-->
                         </StackPanel>
-                        <Label x:Name="lblCTest_or_Input" Content="CTest or Input" HorizontalAlignment="Left" Margin="0,60,0,0" VerticalAlignment="Top" Height="24" />
+                        <Label x:Name="lblCTest_or_Input" Content="CTest or Input" HorizontalAlignment="Left" Margin="0,60,0,0" VerticalAlignment="Top" Height="24" Width="92" />
                         <StackPanel HorizontalAlignment="Left" Height="30" Margin="94,60,0,-6" VerticalAlignment="Top" Width="60">
                             <RadioButton GroupName="CTest_or_Input" Checked="CTest_or_Input_Checked" Content="CTest"/>
                             <RadioButton GroupName="CTest_or_Input" Checked="CTest_or_Input_Checked" Content="Input"/>
@@ -106,10 +99,27 @@
                         <Button x:Name="btnScurve_start" Content="Scurve start" HorizontalAlignment="Left" Margin="262,30,0,0" VerticalAlignment="Top" Width="76" Height="24" Click="btnScurve_start_Click"/>
                         <Label x:Name="lblSingleTest_Chn" Content="Single channel#:" HorizontalAlignment="Left" Margin="160,0,0,0" VerticalAlignment="Top" Height="25" RenderTransformOrigin="0.452,1.083" Width="102"/>
                         <TextBox x:Name="txtSingleTest_Chn" HorizontalAlignment="Left" Height="24" Margin="262,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="65"/>
+                        <Label x:Name="lblTrigEffi_or_CountEffi" Content="Trig or Count" HorizontalAlignment="Left" Margin="00,00,0,0" VerticalAlignment="Top" Height="24" Width="92"/>
+                        <StackPanel HorizontalAlignment="Left" Height="30" Margin="95,0,0,0" VerticalAlignment="Top" Width="60">
+                            <RadioButton GroupName="Trig_or_Count" Checked="Trig_or_Count_Checked" Content="Trig"/>
+                            <RadioButton GroupName="Trig_or_Count" Checked="Trig_or_Count_Checked" Content="Count"/>
+                            <!--RadioButton x:Name="radioButton" Content="RadioButton"/>
+                    <RadioButton x:Name="radioButton1" Content="RadioButton"/-->
+                        </StackPanel>
+                        <Label x:Name="lblCountTime" Content="Count Time:" HorizontalAlignment="Left" Margin="170,90,0,0" VerticalAlignment="Top" Height="24" Width="80"/>
+                        <ComboBox x:Name="cbxCount_Time" HorizontalAlignment="Left" Margin="250,90,0,0" VerticalAlignment="Top" Width="50">
+                            <ComboBoxItem Content= "0.1s"/>
+                            <ComboBoxItem Content= "1s" IsSelected= "True"/>
+                            <ComboBoxItem Content= "2s"/>
+                            <ComboBoxItem Content= "4s"/>
+                            <ComboBoxItem Content= "5s"/>
+                            <ComboBoxItem Content= "6s"/>
+                            <ComboBoxItem Content= "7s"/>
+                        </ComboBox>
                     </Grid>
 
                 </GroupBox>
-                <GroupBox x:Name="gbx" Header="ACQ Control" HorizontalAlignment="Left" Height="173" Margin="0,353,0,0" VerticalAlignment="Top" Width="605">
+                <GroupBox x:Name="gbx" Header="ACQ Control" HorizontalAlignment="Left" Height="173" Margin="0,340,0,0" VerticalAlignment="Top" Width="605">
                     <Grid Margin="0,0,0,0">
                         <Label x:Name="lblExternal_RAZ_Delay" Content="External RAZ Delay" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="120" Height="24"/>
                         <TextBox x:Name="txtExternal_RAZ_Delay" HorizontalAlignment="Left" Height="24" Margin="120,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="75"/>
@@ -152,7 +162,7 @@
                         <Button x:Name="btnReset_cntb" Content="Reset cntb" HorizontalAlignment="Left" Margin="360,30,0,0" VerticalAlignment="Top" Width="76" Height="24" Click="btnReset_cntb_Click"/>
                     </Grid>
                 </GroupBox>
-                <GroupBox x:Name="gbxSC_ReadReg" Header="SC/ReadReg Control" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Height="348" Width="780">
+                <GroupBox x:Name="gbxSC_ReadReg" Header="SC/ReadReg Control" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Height="331" Width="780">
                     <Grid Margin="0,0,0,0">
                         <Label x:Name="lblASIC_Number" Content="ASIC Number:" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Height="24" Width="90"/>
                         <ComboBox x:Name="cbxASIC_Number" HorizontalAlignment="Left" Margin="100,0,0,0" VerticalAlignment="Top" Width="70" RenderTransformOrigin="0.088,-0.048">
@@ -163,7 +173,7 @@
                         </ComboBox>
                         <Label x:Name="lblHeader" Content="Start Header:" HorizontalAlignment="Left" Margin="0,30,0,0" VerticalAlignment="Top" Height="24" Width="90"/>
                         <TextBox x:Name="txtHeader" HorizontalAlignment="Left" Height="20" Margin="100,30,0,0" TextWrapping="Wrap" Text="A1" VerticalAlignment="Top" Width="70"/>
-                        
+
                         <Label x:Name="Raz_Chn_Select" Content="RAZ Chn Select" HorizontalAlignment="Left" Margin="0,60,0,0" VerticalAlignment="Top" Width="100"/>
                         <StackPanel HorizontalAlignment="Left" Height="30" Margin="100,60,0,0" VerticalAlignment="Top" Width="75">
                             <RadioButton GroupName="RAZ_Chn_Select1" Checked="RAZ_Chn_Select_Checked" Content="Internal"/>
@@ -181,7 +191,7 @@
                         <Label x:Name="lblASIC1" Content="ASIC1" HorizontalAlignment="Left" Margin="580,0,0,0" VerticalAlignment="Top" Width="50" Height="24"/>
                         <Label x:Name="lblDAC0_VTH" Content="DAC0 VTH:" HorizontalAlignment="Left" Margin="180,25,0,0" VerticalAlignment="Top" Height="24" Width="75"/>
                         <TextBox x:Name="txtDAC0_VTH_ASIC1" HorizontalAlignment="Left" Height="24" Margin="560,25,0,0" TextWrapping="Wrap" Text="550" VerticalAlignment="Top" Width="85"/>
-                      
+
                         <Label x:Name="lblDAC1_VTH" Content="DAC1 VTH:" HorizontalAlignment="Left" Margin="180,50,0,0" VerticalAlignment="Top" Height="24" Width="75"/>
                         <TextBox x:Name="txtDAC1_VTH_ASIC1" HorizontalAlignment="Left" Height="24" Margin="560,50,0,0" TextWrapping="Wrap" Text="540" VerticalAlignment="Top" Width="85"/>
                         <Label x:Name="lblDAC2_VTH" Content="DAC2 VTH:" HorizontalAlignment="Left" Margin="180,75,0,0" VerticalAlignment="Top" Height="24" Width="75"/>
@@ -221,7 +231,7 @@
                         </ComboBox>
                         <Label x:Name="lblRead_Reg" Content="ReadRegister:" HorizontalAlignment="Left" Margin="180,275,0,0" VerticalAlignment="Top" Height="24" Width="90"/>
                         <TextBox x:Name="txtRead_reg_ASIC1" HorizontalAlignment="Left" Height="24" Margin="560,275,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="50"/>
-                        <Label x:Name="lblSc_or_Read" Content="SC or Read:" HorizontalAlignment="Left" Margin="0,300,0,0" VerticalAlignment="Top" Width="100" Height="24"/>
+                        <Label x:Name="lblSc_or_Read" Content="SC or Read:" HorizontalAlignment="Left" Margin="0,275,0,0" VerticalAlignment="Top" Width="100" Height="24"/>
                         <Button x:Name="btnSC_or_ReadReg" Content="Load Param" HorizontalAlignment="Left" Margin="684,0,0,0" VerticalAlignment="Top" Width="84" Height="24" Click="btnSC_or_ReadReg_Click"/>
                         <Label x:Name="lblASIC2" Content="ASIC2" HorizontalAlignment="Left" Margin="490,0,0,0" VerticalAlignment="Top" Width="50" Height="24"/>
                         <TextBox x:Name="txtDAC0_VTH_ASIC2" HorizontalAlignment="Left" Height="24" Margin="470,25,0,0" TextWrapping="Wrap" Text="550" VerticalAlignment="Top" Width="85"/>
@@ -325,7 +335,7 @@
                         <CheckBox x:Name="chk_PedCali_ASIC3" Content="PedCali 3" HorizontalAlignment="Left" Margin="470,250,0,0" VerticalAlignment="Top" Checked="chk_PedCali_ASIC3_Checked" Unchecked="chk_PedCali_ASIC3_Unchecked" Width="80" Height="24"/>
                         <CheckBox x:Name="chk_PedCali_ASIC4" Content="PedCali 4" HorizontalAlignment="Left" Margin="560,250,0,0" VerticalAlignment="Top" Checked="chk_PedCali_ASIC4_Checked" Unchecked="chk_PedCali_ASIC4_Unchecked" Width="80" Height="24"/-->
                         <Button x:Name="btnChnCali" Content="ChnCali" HorizontalAlignment="Left" Margin="640,275,0,0" VerticalAlignment="Top" Width="70" Height="24" Click="btnChnCali_Click"/>
-                        
+
                         <ComboBox x:Name="cbxPedCali_ASIC1" HorizontalAlignment="Left" Margin="560,250,0,0" VerticalAlignment="Top" Width="85" Height="24">
                             <ComboBoxItem Content= "Without Cali"/>
                             <ComboBoxItem Content= "DC Cali" IsSelected ="True"/>
@@ -346,16 +356,23 @@
                             <ComboBoxItem Content= "DC Cali" IsSelected ="True"/>
                             <ComboBoxItem Content= "SCurve Cali" />
                         </ComboBox>
-                       
+
 
 
                     </Grid>
                 </GroupBox>
-                <StackPanel HorizontalAlignment="Left" Height="31" Margin="100,315,0,0" VerticalAlignment="Top" Width="75">
+                <StackPanel HorizontalAlignment="Left" Height="31" Margin="100,290,0,0" VerticalAlignment="Top" Width="75">
                     <!--RadioButton x:Name="rtnSC" Content="SC" HorizontalAlignment="Left" VerticalAlignment="Top"/-->
                     <RadioButton GroupName="SC_or_Read" Checked="SC_or_Read_Checked" Margin="-2,0,-7,0" Content="SC"/>
                     <RadioButton GroupName="SC_or_Read" Checked="SC_or_Read_Checked" Margin="-2,0,-7,0" Content="ReadReg"/>
                     <!--RadioButton x:Name="rtnReadReg" Content="ReadReg" HorizontalAlignment="Left" VerticalAlignment="Top"/-->
+                </StackPanel>
+                <Label x:Name="lblACQ_or_SCTest" Content="ACQ or SCTest" HorizontalAlignment="Left" VerticalAlignment="Top" Height="24" RenderTransformOrigin="4.713,0.917" Margin="610,350,0,0"/>
+                <StackPanel HorizontalAlignment="Left" Height="30" Margin="710,350,0,0" VerticalAlignment="Top" Width="60">
+                    <RadioButton GroupName="ACQ_or_SCTest" Checked="ACQ_or_SCTest_Checked" Content="ACQ"/>
+                    <RadioButton GroupName="ACQ_or_SCTest" Checked="ACQ_or_SCTest_Checked" Content="SCTest"/>
+                    <!--RadioButton x:Name="radioButton" Content="RadioButton"/>
+                    <RadioButton x:Name="radioButton1" Content="RadioButton"/-->
                 </StackPanel>
 
 
