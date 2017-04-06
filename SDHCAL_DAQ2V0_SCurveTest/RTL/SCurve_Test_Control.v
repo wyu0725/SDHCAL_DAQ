@@ -100,6 +100,7 @@ module SCurve_Test_Control(
       Microroc_Discriminator_Mask <= {192{1'b1}};
       SC_Param_Load_Cnt <= 16'b0;
       Wait_Tail_Cnt <= 4'b0;
+      Force_Ext_RAZ <= 1'b0;
       State <= IDLE;
     end
     else begin

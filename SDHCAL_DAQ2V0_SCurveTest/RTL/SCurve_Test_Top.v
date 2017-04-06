@@ -94,7 +94,7 @@ module SCurve_Test_Top(
     end
     /*--- Switcher for Trigger-efficiency and Count-efficiency ---*/
     wire CLK_EXT_Gen;
-    wire CPT_MAX_Gen;
+    wire [15:0] CPT_MAX_Gen;
     assign CLK_EXT_Gen = TrigEffi_or_CountEffi ? CLK_EXT : Clk_1K;
     assign CPT_MAX_Gen = TrigEffi_or_CountEffi ? CPT_MAX : Counter_MAX;
     //
