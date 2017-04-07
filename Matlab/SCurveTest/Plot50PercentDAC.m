@@ -16,7 +16,11 @@ mean_DAC1 = 1:1:Data_Number;
 mean_DAC2 = 1:1:Data_Number;
 Legend_str = cell(Data_Number,1);
 Channel0_DAC = 1:1:Data_Number;
-DeltaV = 1:1:Data_Number;
+Channel1_DAC = 1:1:Data_Number;
+Channel2_DAC = 1:1:Data_Number;
+DeltaV0 = 1:1:Data_Number;
+DeltaV1 = 1:1:Data_Number;
+DeltaV2 = 1:1:Data_Number;
 prompt_Charge = 'Input the charge and select the file';
 dlg_title_Charge = 'Charge';
 Charge = 1:1:Data_Number;
@@ -31,9 +35,19 @@ for i = 1:1:Data_Number
     Legend_str{i} = str_tmp;
 %     mean_DAC0(i) = mean(DAC0_50Percent);
     Channel0_DAC(i) = DAC0_50Percent(1);
-    DeltaV(i) = 2.43*(Channel0_DAC(1) - Channel0_DAC(i));
+    Channel1_DAC(i) = DAC1_50Percent(1);
+    Channel2_DAC(i) = DAC2_50Percent(1);
+    DeltaV0(i) = 2.43*(Channel0_DAC(1) - Channel0_DAC(i));
+    DeltaV1(i) = 2.43*(Channel1_DAC(1) - Channel1_DAC(i));
+    DeltaV2(i) = 2.43*(Channel2_DAC(1) - Channel2_DAC(i));
     figure(1);
     stairs(Channel,DAC0_50Percent);
+    hold on;
+    figure(2);
+    stairs(Channel,DAC1_50Percent);
+    hold on;
+    figure(3);
+    stairs(Channel,DAC2_50Percent);
     hold on;
 end
 figure(1)
@@ -41,23 +55,77 @@ h = legend(Legend_str);
 set(h,'Location','eastout');
 xlabel('\bf Channel Number');
 ylabel('\bf DAC Code')
-title1_str = sprintf('50%% Trig efficiency with different charge input--ASIC Number:%d',ASIC_ID);
+title1_str = sprintf('Trig0:50%% Trig efficiency with different charge input--ASIC Number:%d',ASIC_ID);
+title(title1_str);
+hold off
+figure(2)
+h = legend(Legend_str);
+set(h,'Location','eastout');
+xlabel('\bf Channel Number');
+ylabel('\bf DAC Code')
+title1_str = sprintf('Trig1:50%% Trig efficiency with different charge input--ASIC Number:%d',ASIC_ID);
+title(title1_str);
+hold off
+figure(3)
+h = legend(Legend_str);
+set(h,'Location','eastout');
+xlabel('\bf Channel Number');
+ylabel('\bf DAC Code')
+title1_str = sprintf('Trig2:50%% Trig efficiency with different charge input--ASIC Number:%d',ASIC_ID);
 title(title1_str);
 hold off
 
-% Charge = [0,1,2,4,5,6,8,10];
-
-Rp = corrcoef(Charge, DeltaV);
-R = Rp(2,1);
-x = linspace(min(Charge),max(Charge));
-p0 = polyfit(Charge,DeltaV,1);
-y0 = polyval(p0,x);
-figure(2)
-plot(Charge,DeltaV,'r*');
-linear_legend_str = sprintf('Linear fit of shaper output,R:%1.6f -- ASIC ID£º%d',R, ASIC_ID);
+% DAC0
+DAC0_Fit = Channel0_DAC(1:8);
+DAC0_Charge_Fit = Charge(1:8);
+Rp0 = corrcoef(DAC0_Charge_Fit, DAC0_Fit);
+R0 = Rp0(2,1);
+x0 = linspace(min(DAC0_Charge_Fit),max(DAC0_Charge_Fit));
+p0 = polyfit(DAC0_Charge_Fit,DAC0_Fit,1);
+y0 = polyval(p0,x0);
+figure(4)
+plot(DAC0_Charge_Fit,DAC0_Fit,'r*');
+linear_legend_str = sprintf('DAC0:Linear fit of shaper output,R:%1.6f -- ASIC ID£º%d \n slope:%1.4f (Code/Charge)',R0, ASIC_ID,p0(1));
 xlabel('Charge(fC)');
-h = ylabel('\Delta V (mV)');
-set(h,'Interpreter','tex');
+h0 = ylabel('DAC Code');
+set(h0,'Interpreter','tex');
 hold on
-plot(x,y0)
-legend('Shaper output',linear_legend_str);
+plot(x0,y0)
+h0 = legend('Shaper0 output',linear_legend_str);
+set(h0,'Location','northeast');
+% DAC1
+DAC1_Fit = Channel1_DAC(1:8);
+DAC1_Charge_Fit = Charge(1:8);
+Rp1 = corrcoef(DAC1_Charge_Fit, DAC1_Fit);
+R1 = Rp1(2,1);
+x1 = linspace(min(DAC1_Charge_Fit),max(DAC1_Charge_Fit));
+p1 = polyfit(DAC1_Charge_Fit,DAC0_Fit,1);
+y1 = polyval(p1,x1);
+figure(5)
+plot(DAC1_Charge_Fit,DAC0_Fit,'r*');
+linear_legend_str = sprintf('DAC1:Linear fit of shaper output,R:%1.6f -- ASIC ID£º%d \n slope:%1.4f (Code/Charge)',R1, ASIC_ID,p1(1));
+xlabel('Charge(fC)');
+h1 = ylabel('DAC Code');
+set(h1,'Interpreter','tex');
+hold on
+plot(x1,y1)
+h1 = legend('Shaper1 output',linear_legend_str);
+set(h1,'Location','northeast');
+% DAC2
+DAC2_Fit = Channel2_DAC;
+DAC2_Charge_Fit = Charge;
+Rp2 = corrcoef(DAC2_Charge_Fit, DAC2_Fit);
+R2 = Rp2(2,1);
+x2 = linspace(min(DAC2_Charge_Fit),max(DAC2_Charge_Fit));
+p2 = polyfit(DAC2_Charge_Fit,DAC2_Fit,1);
+y2 = polyval(p2,x2);
+figure(6)
+plot(DAC2_Charge_Fit,DAC2_Fit,'r*');
+linear_legend_str = sprintf('DAC2:Linear fit of shaper output,R:%1.6f -- ASIC ID£º%d \n slope:%1.4f (Code/Charge)',R2, ASIC_ID,p2(1));
+xlabel('Charge(fC)');
+h2 = ylabel('DAC Code');
+% set(h2,'Interpreter','tex');
+hold on
+plot(x2,y2)
+h2 = legend('Shaper2 output',linear_legend_str);
+set(h2,'Location','northeast');
