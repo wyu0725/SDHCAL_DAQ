@@ -789,7 +789,52 @@
 ## 2017/04/07
 
 + ASIC ID 223S曲线测试完成
+
 + 计数率测试逻辑、上位机完成
+
++ 完成的测试
+
+  + 电荷注入S曲线测试
+
+    + 50%触发率和电压的关系
+
+      + Trigger0
+
+        ![50%触发率对应DAC码值 Trigger0](http://ogs54iji1.bkt.clouddn.com/50PerTrigEffi_DAC0_ID223.jpg-SDHCAL)
+
+      + Trigger1
+
+        ![50%触发率对应DAC码值 Trigger1](http://ogs54iji1.bkt.clouddn.com/50PerTrigEffi_DAC1_ID223.jpg-SDHCAL)
+
+      + Trigger2
+
+        ![50%触发率对应DAC码值 Trigger2](http://ogs54iji1.bkt.clouddn.com/50PerTrigEffi_DAC2_ID223.jpg-SDHCAL)
+
+    + 50%触发率对应的DAC码值和输入电荷的关系（通道1）
+
+      + Trigger0
+
+        ![50%触发率对应的DAC码值和输入电荷的关系 Trigger0](http://ogs54iji1.bkt.clouddn.com/Shaper0_LinearFit_DACvsCharge_ID223.jpg-SDHCAL)
+
+      + Trigger1
+
+        ![50%触发率对应的DAC码值和输入电荷的关系 Trigger1](http://ogs54iji1.bkt.clouddn.com/Shaper1_LinearFit_DACvsCharge_ID223.jpg-SDHCAL)
+
+      + ![50%触发率对应的DAC码值和输入电荷的关系 Trigger2](http://ogs54iji1.bkt.clouddn.com/Shaper2_LinearFit_DACvsCharge_ID223.jpg-SDHCAL)
+
 + 可以进行的测试：
-  + 均匀性测量：测量每个pad的计数率S曲线，得到输出信号的分布，可以测量均匀性
-  + 串扰测量：选择一个中心pad，击中其中一个pad，对周围的8/15个PAD设置阈值，使用ASIC的采集功能，在读回的数据中分析，周围的pad是否有击中信息
+
+  + 串扰测量：
+    + 选择一个中心pad，击中其中一个pad，设定阈值，读出周围pad是否有击中
+    + 测试方法
+      + 使用准直孔，击中击中一个中心pad
+      + 设置阈值使得被击中的pad能够过DAC2的阈
+      + 设置DAC0和DAC1的阈值，读回数据，分析是否有被击中的pad，根据PAD击中信息可以得到串扰的大小范围，改变DAC0和DAC1的阈值可以得到更精确的范围
+      + 如：一开始测量时可以将DAC0和DAC1的值设置在10fC和20fC，然后根据读出信号分析串是否超过20fC，若超过，将阈值 设置为20fC,30fC；若没超过，将阈值降低为5fC,10fC
+      + 相当于将DAC0和DAC1当成一个ADC的阈值来使用，人为设定阈值，这样就不需要对一个阈值范围进行扫描
+  + 均匀性测量：
+    + 使用同一放射源，分析每个pad读出的信号分布是否一样
+    + 方法
+      + 对每个pad测量计数率的S曲线，根据S曲线找到计数率为最大值50%处的DAC码值，该值为成形信号分布的峰值
+      + 分析峰值是否一致
+  + ​
