@@ -11,7 +11,7 @@ for i = 1:1:Len - 1
     end   
 end
 for i = 1:1:Len - 1
-    if(Trig_Ratio(i) ~= 100 && abs(Trig_Ratio(i + 1) - 100) < 0.01)
+    if(Trig_Ratio(i) ~= 100 && abs(Trig_Ratio(i + 1) - 100) < 0.1)
         End = i;
         break;        
     end
