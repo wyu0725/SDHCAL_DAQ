@@ -861,3 +861,13 @@
       ![S曲线](http://ogs54iji1.bkt.clouddn.com/SDHCALSCurve.jpg-SDHCAL)
 
       ![S曲线微分](http://ogs54iji1.bkt.clouddn.com/SDHCALDiffSCurve.jpg-SDHCAL)
+
+
+
+## 2014/04/10
+
++ 超过500fC后输入电荷和成形输出之间就不再是线性的了
+
+  ![50%触发率对应的DAC码值和输入电荷的关系 Trigger2](http://ogs54iji1.bkt.clouddn.com/SDHCALCharge_vs_DAC2_NonLinear.jpg-SDHCAL)
+
++ 读出板到连接器的映射完成，下一步想如何将映射表和MATLAB程序联系起来
