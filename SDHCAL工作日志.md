@@ -814,13 +814,13 @@
 
       + Trigger0
 
-        ![50%触发率对应的DAC码值和输入电荷的关系 Trigger0](http://ogs54iji1.bkt.clouddn.com/Shaper0_LinearFit_DACvsCharge_ID223.jpg-SDHCAL)
+        ![50%触发率对应的DAC码值和输入电荷的关系 Trigger0](http://ogs54iji1.bkt.clouddn.com/SDHCALCharge_vs_DAC0.jpg-SDHCAL)
 
       + Trigger1
 
-        ![50%触发率对应的DAC码值和输入电荷的关系 Trigger1](http://ogs54iji1.bkt.clouddn.com/Shaper1_LinearFit_DACvsCharge_ID223.jpg-SDHCAL)
+        ![50%触发率对应的DAC码值和输入电荷的关系 Trigger1](http://ogs54iji1.bkt.clouddn.com/SDHCALCharge_vs_DAC1.jpg-SDHCAL)
 
-      + ![50%触发率对应的DAC码值和输入电荷的关系 Trigger2](http://ogs54iji1.bkt.clouddn.com/Shaper2_LinearFit_DACvsCharge_ID223.jpg-SDHCAL)
+      + ![50%触发率对应的DAC码值和输入电荷的关系 Trigger2](http://ogs54iji1.bkt.clouddn.com/SDHCALCharge_vs_DAC2.jpg-SDHCAL)
 
 + 可以进行的测试：
 
