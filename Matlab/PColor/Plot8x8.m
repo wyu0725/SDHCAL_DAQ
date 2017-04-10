@@ -2,13 +2,25 @@
 % Read data from *.dat, and plot as hitmap
 
 %--- Open file and Import data ---%
-InitialData = importdata();
+InitialData = ImportData();
 % Read one pack
-prompt = {'Which package would you want to display';
+prompt = {'Which package would you want to display'};
 dlg_title = 'Input the package number';
 answer = inputdlg(prompt,dlg_title);
 PackNo = str2double(answer);
 [header, BCID, Ch_data] = ReadPackage(InitialData, PackNo);
+% % % Get mapping function
+% [FileName,PathName,FilterIndex] = uigetfile('*.txt','Select the file');
+% if FilterIndex
+%     filename = [PathName FileName];
+%     delimiterIn = ' ';
+%     headerlinesIn = 1;
+%     A = importdata(filename, delimiterIn, headerlinesIn);
+% end
+% ASIC_Channel = A.data(:,1);
+% Pad_Channel = A.data(:,2);
+[ASIC_Channel, Pad_Channel] = GetMapping();
+New_ChannelData = Mapping(Ch_data, ASIC_Channel, Pad_Channel);
 
 %----- Plot The Data -----%
 X = 1:9;
@@ -19,7 +31,7 @@ for i = 1:9
         if (i == 9) || (j ==9)
             C(i,j) = 0;
         else
-            C(i,j) = Ch_data((i - 1)*8 + j);
+            C(i,j) = New_ChannelData((i - 1)*8 + j);
         end
     end
 end

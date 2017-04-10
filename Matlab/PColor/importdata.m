@@ -1,4 +1,4 @@
-function InitialData = importdata()
+function InitialData = ImportData()
 [FileName,PathName,FilterIndex] = uigetfile('*.dat','Select the file');
 if FilterIndex
     filename = [PathName FileName];

@@ -2,15 +2,18 @@
 % Read data from *.dat, and plot as hitmap
 
 %--- Open file and Import data ---%
-InitialData = importdata();
+InitialData = ImportData();
 % Read one pack
 prompt = {'Which package would you want to display start from','How many package would you like to display'};
 dlg_title = 'Input the package number';
 answer = inputdlg(prompt,dlg_title);
 PackNo = str2double(answer(1));
 DisplayNo = str2double(answer(2));
+% Get Mapping Function
+[ASIC_Channel, Pad_Channel] = GetMapping();
 for DisplayK = 1:DisplayNo
     [header, BCID, Ch_data] = ReadPackage(InitialData, PackNo + DisplayK - 1);
+    NewChannelData = Mapping(Ch_data, ASIC_Channel, Pad_Channel);    
 
     %----- Plot The Data -----%
     X = 1:9;
@@ -21,7 +24,7 @@ for DisplayK = 1:DisplayNo
             if (i == 9) || (j ==9)
                 C(i,j) = 0;
             else
-                C(i,j) = Ch_data((i - 1)*8 + j);
+                C(i,j) = NewChannelData((i - 1)*8 + j);
             end
         end
     end
