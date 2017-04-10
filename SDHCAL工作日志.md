@@ -854,12 +854,10 @@
 
         ![不同触发和阈值](http://ogs54iji1.bkt.clouddn.com/SDHCALVth_vs_Output.jpg-USTCwyu)
 
+    + 对所有的Vth进行扫描，测量对应的计数率，就可以得到如下的曲线，称为计数率S曲线，若成形输出服从高斯分布，则S曲线50%触发率对应的Vth值可以视为成形输出分布的峰值
 
-      + 对所有的Vth进行扫描，测量对应的计数率，就可以得到如下的曲线，称为计数率S曲线，若成形输出服从高斯分布，则S曲线50%触发率对应的Vth值可以视为成形输出分布的峰值
+    + 理论上对S曲线进行微分可以得到原有的曲线，然后再做高斯拟合即可
 
-      + 理论上对S曲线进行微分可以得到原有的曲线，然后再做高斯拟合即可
+      ![S曲线](http://ogs54iji1.bkt.clouddn.com/SDHCALSCurve.jpg-SDHCAL)
 
-        ![S曲线](http://ogs54iji1.bkt.clouddn.com/SDHCALSCurve.jpg-SDHCAL)
-
-        ![S曲线微分](http://ogs54iji1.bkt.clouddn.com/SDHCALDiffSCurve.jpg-SDHCAL)
-  + ​
+      ![S曲线微分](http://ogs54iji1.bkt.clouddn.com/SDHCALDiffSCurve.jpg-SDHCAL)
