@@ -118,15 +118,15 @@ plot(x1,y1)
 h1 = legend('Shaper1 output',linear_legend_str);
 set(h1,'Location','northeast');
 % DAC2
-DAC2_Fit = Channel2_DAC;
-DAC2_Charge_Fit = Charge;
+DAC2_Fit = Channel2_DAC(1:26);
+DAC2_Charge_Fit = Charge(1:26);
 Rp2 = corrcoef(DAC2_Charge_Fit, DAC2_Fit);
 R2 = Rp2(2,1);
 x2 = linspace(min(DAC2_Charge_Fit),max(DAC2_Charge_Fit));
-p2 = polyfit(Charge,Channel2_DAC,1);
+p2 = polyfit(DAC2_Charge_Fit,DAC2_Fit,1);
 y2 = polyval(p2,x2);
 figure(6)
-plot(DAC2_Charge_Fit,DAC2_Fit,'r*');
+plot(Charge,Channel2_DAC,'r*');
 y2_LinearFit = p2(1)*DAC2_Charge_Fit + p2(2);
 DNL2 = (DAC2_Fit - y2_LinearFit)/y2_LinearFit(1);
 Max_DNL2 = max(DNL2);
