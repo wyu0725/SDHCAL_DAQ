@@ -75,9 +75,14 @@ title1_str = sprintf('Trig2:50%% Trig efficiency with different charge input--AS
 title(title1_str);
 hold off
 
+
 % DAC0
-DAC0_Fit = Channel0_DAC(1:8);
-DAC0_Charge_Fit = Charge(1:8);
+prompt_DAC0 = 'Input the DAC0 Linear range';
+dlg_title_DAC0 = 'DAC0 Linear range';
+answer_DAC0 = inputdlg(prompt_DAC0, dlg_title_DAC0);
+LinearDAC0 = str2double(answer_DAC0);
+DAC0_Fit = Channel0_DAC(1:LinearDAC0);
+DAC0_Charge_Fit = Charge(1:LinearDAC0);
 Rp0 = corrcoef(DAC0_Charge_Fit, DAC0_Fit);
 R0 = Rp0(2,1);
 x0 = linspace(min(DAC0_Charge_Fit),max(DAC0_Charge_Fit));
@@ -97,8 +102,12 @@ plot(x0,y0)
 h0 = legend('Shaper0 output',linear_legend_str);
 set(h0,'Location','northeast');
 % DAC1
-DAC1_Fit = Channel1_DAC(1:8);
-DAC1_Charge_Fit = Charge(1:8);
+prompt_DAC1 = 'Input the DAC1 Linear range';
+dlg_title_DAC1 = 'DAC1 Linear range';
+answer_DAC1 = inputdlg(prompt_DAC1, dlg_title_DAC1);
+LinearDAC1 = str2double(answer_DAC1);
+DAC1_Fit = Channel1_DAC(1:LinearDAC1);
+DAC1_Charge_Fit = Charge(1:LinearDAC1);
 Rp1 = corrcoef(DAC1_Charge_Fit, DAC1_Fit);
 R1 = Rp1(2,1);
 x1 = linspace(min(DAC1_Charge_Fit),max(DAC1_Charge_Fit));
@@ -118,8 +127,12 @@ plot(x1,y1)
 h1 = legend('Shaper1 output',linear_legend_str);
 set(h1,'Location','northeast');
 % DAC2
-DAC2_Fit = Channel2_DAC(1:26);
-DAC2_Charge_Fit = Charge(1:26);
+prompt_DAC2 = 'Input the DAC2 Linear range';
+dlg_title_DAC2 = 'DAC2 Linear range';
+answer_DAC2 = inputdlg(prompt_DAC2, dlg_title_DAC2);
+LinearDAC2 = str2double(answer_DAC2);
+DAC2_Fit = Channel2_DAC(1:LinearDAC2);
+DAC2_Charge_Fit = Charge(1:LinearDAC2);
 Rp2 = corrcoef(DAC2_Charge_Fit, DAC2_Fit);
 R2 = Rp2(2,1);
 x2 = linspace(min(DAC2_Charge_Fit),max(DAC2_Charge_Fit));
