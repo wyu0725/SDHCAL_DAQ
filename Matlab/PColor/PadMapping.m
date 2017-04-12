@@ -8,7 +8,7 @@ function [ Pad ] = PadMapping( MapData, A, B, C, D, E, F, G, H, J, K, L, M, N, P
     Pad= zeros(30, 30);
     for i = 1:1:30
         for j = 1:1:30
-            mapdata = MapData(i,j);
+            mapdata = char(MapData(i,j));
             MapDataLength = length(mapdata);
             MapDataHeader = mapdata(1);
             if(MapDataLength == 2)
