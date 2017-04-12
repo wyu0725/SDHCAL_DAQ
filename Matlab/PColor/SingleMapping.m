@@ -1,4 +1,4 @@
-function [ NewData ] = Mapping( OldData, OldIndex, NewIndex )
+function [ NewData ] = SingleMapping( OldData, OldIndex, NewIndex )
 %Mapping 此处显示有关此函数的摘要
 % 将OldData的值通过映射关系OldIndex --> NewIndex映射到NewData
 %   此处显示详细说明
