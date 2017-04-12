@@ -886,6 +886,7 @@
 ## 2017/04/12
 
 +  映射程序全部完成
+
 + 电子学方面可以做串扰测试
   + 即对其中一个通道注入电荷量，分析其他通道击中信息
   + 测试步骤：
@@ -899,3 +900,19 @@
     8. 改变注入电荷量，重复1~7
     9. 改变注入通道，重复1~8
   + 测量探测器串扰后再和电子学串扰做对比
+
++  更新三组图片，添加DAC码值计算的公式
+
+   + DAC0 $Code = -4.2575\times Charge + 594.2183$
+
+     ![50%触发率对应的DAC码值和输入电荷的关系 Trigger2](http://ogs54iji1.bkt.clouddn.com/SDHCALASIC223_DAC0_vs_Charge.jpg-SDHCAL)
+
+   +  DAC1 $Code = -4.3499\times Charge + 607.6550$
+
+      ![50%触发率对应的DAC码值和输入电荷的关系 Trigger2](http://ogs54iji1.bkt.clouddn.com/SDHCALASIC223_DAC1_vs_Charge.jpg-SDHCAL)
+
+   +  DAC2 $Code = -1.0123\times Charge + 609.8125$
+
+      ![50%触发率对应的DAC码值和输入电荷的关系 Trigger2](http://ogs54iji1.bkt.clouddn.com/SDHCALASIC223_DAC2_vs_Charge.jpg-SDHCAL)
+
+      ​
