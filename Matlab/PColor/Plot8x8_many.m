@@ -13,7 +13,7 @@ DisplayNo = str2double(answer(2));
 [ASIC_Channel, Pad_Channel] = GetMapping();
 for DisplayK = 1:DisplayNo
     [header, BCID, Ch_data] = ReadPackage(InitialData, PackNo + DisplayK - 1);
-    NewChannelData = Mapping(Ch_data, ASIC_Channel, Pad_Channel);    
+    NewChannelData = SingleMapping(Ch_data, ASIC_Channel, Pad_Channel);    
 
     %----- Plot The Data -----%
     X = 1:9;

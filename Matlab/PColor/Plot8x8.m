@@ -20,7 +20,7 @@ PackNo = str2double(answer);
 % ASIC_Channel = A.data(:,1);
 % Pad_Channel = A.data(:,2);
 [ASIC_Channel, Pad_Channel] = GetMapping();
-New_ChannelData = Mapping(Ch_data, ASIC_Channel, Pad_Channel);
+New_ChannelData = SingleMapping(Ch_data, ASIC_Channel, Pad_Channel);
 
 %----- Plot The Data -----%
 X = 1:9;
