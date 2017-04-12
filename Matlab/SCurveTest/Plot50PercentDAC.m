@@ -93,7 +93,7 @@ plot(Charge,Channel0_DAC,'r*');
 y0_LinearFit = p0(1)*DAC0_Charge_Fit + p0(2);
 DNL0 = (DAC0_Fit - y0_LinearFit)/y0_LinearFit(1);
 Max_DNL0 = max(DNL0);
-linear_legend_str = sprintf('DAC0:Linear fit of shaper output,MAX DNL:%2.3f%% -- ASIC ID£º%d \n slope:%1.4f (Code/Charge)',Max_DNL0*100, ASIC_ID,p0(1));
+linear_legend_str = sprintf('DAC0:Linear fit of shaper output,MAX DNL:%2.3f%% -- ASIC ID£º%d ',Max_DNL0*100, ASIC_ID);
 xlabel('Charge(fC)');
 h0 = ylabel('DAC Code');
 set(h0,'Interpreter','tex');
@@ -101,6 +101,11 @@ hold on
 plot(x0,y0)
 h0 = legend('Shaper0 output',linear_legend_str);
 set(h0,'Location','northeast');
+function0Str = sprintf('Linearfit function: DAC Code = %1.4f \\ast Charge + %3.4f',p0(1), p0(2));
+y0_txt = (2*max(Channel0_DAC) + min(Channel0_DAC))/3;
+x0_txt = max(Charge)/6;
+text('String',function0Str,'Position',[x0_txt y0_txt],'Interpreter','tex');
+hold off;
 % DAC1
 prompt_DAC1 = 'Input the DAC1 Linear range';
 dlg_title_DAC1 = 'DAC1 Linear range';
@@ -118,7 +123,7 @@ plot(Charge,Channel1_DAC,'r*');
 y1_LinearFit = p1(1)*DAC1_Charge_Fit + p1(2);
 DNL1 = (DAC1_Fit - y1_LinearFit)/y1_LinearFit(1);
 Max_DNL1 = max(DNL1);
-linear_legend_str = sprintf('DAC1:Linear fit of shaper output,MAX DNL: %2.3f%% -- ASIC ID£º%d \n slope:%1.4f (Code/Charge)',Max_DNL1*100, ASIC_ID,p1(1));
+linear_legend_str = sprintf('DAC1:Linear fit of shaper output,MAX DNL: %2.3f%% -- ASIC ID£º%d',Max_DNL1*100, ASIC_ID);
 xlabel('Charge(fC)');
 h1 = ylabel('DAC Code');
 set(h1,'Interpreter','tex');
@@ -126,6 +131,11 @@ hold on
 plot(x1,y1)
 h1 = legend('Shaper1 output',linear_legend_str);
 set(h1,'Location','northeast');
+function1Str = sprintf('Linearfit function: DAC Code = %1.4f \\ast Charge + %3.4f',p1(1), p1(2));
+y1_txt = (2*max(Channel1_DAC) + min(Channel1_DAC))/3;
+x1_txt = max(Charge)/6;
+text('String',function1Str,'Position',[x1_txt y1_txt],'Interpreter','tex');
+hold off;
 % DAC2
 prompt_DAC2 = 'Input the DAC2 Linear range';
 dlg_title_DAC2 = 'DAC2 Linear range';
@@ -143,11 +153,16 @@ plot(Charge,Channel2_DAC,'r*');
 y2_LinearFit = p2(1)*DAC2_Charge_Fit + p2(2);
 DNL2 = (DAC2_Fit - y2_LinearFit)/y2_LinearFit(1);
 Max_DNL2 = max(DNL2);
-linear_legend_str = sprintf('DAC2:Linear fit of shaper output,Max DNL:%2.3f %%-- ASIC ID£º%d \n slope:%1.4f (Code/Charge)',Max_DNL2*100, ASIC_ID,p2(1));
+linear_legend_str = sprintf('DAC2:Linear fit of shaper output,Max DNL:%2.3f %%-- ASIC ID£º%d ',Max_DNL2*100, ASIC_ID);
 xlabel('Charge(fC)');
 h2 = ylabel('DAC Code');
-% set(h2,'Interpreter','tex');
+set(h2,'Interpreter','tex');
 hold on
 plot(x2,y2)
 h2 = legend('Shaper2 output',linear_legend_str);
 set(h2,'Location','northeast');
+function2Str = sprintf('Linearfit function: DAC Code = %1.4f \\ast Charge + %3.4f',p2(1), p2(2));
+y2_txt = (2*max(Channel2_DAC) + min(Channel2_DAC))/3;
+x2_txt = max(Charge)/6;
+text('String',function2Str,'Position',[x2_txt y2_txt],'Interpreter','tex');
+hold off;
