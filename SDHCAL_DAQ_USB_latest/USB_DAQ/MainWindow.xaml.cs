@@ -61,6 +61,7 @@ namespace USB_DAQ
         //private NoSortHashtable hasht = new NoSortHashtable(); //排序之后的哈希表
      
         private NoSortHashtable[] CaliHashTable = new NoSortHashtable[4]{new NoSortHashtable(), new NoSortHashtable(), new NoSortHashtable(), new NoSortHashtable() };
+        private int SlowACQDataNumber = 100;
         
 
         //SC Parameter
@@ -2108,6 +2109,106 @@ namespace USB_DAQ
                                      MessageBoxImage.Error);//icon
                 }
             }
+        }
+
+        private void DataRateSelect_Checked(object sender, RoutedEventArgs e)
+        {
+            var button = sender as RadioButton;
+            //bool bResult = false;
+            //byte[] CommandBytes = new byte[2];
+            if(button.Content.ToString() == "Fast")
+            {
+                btnAcqStart.IsEnabled = true;
+                btnSlowACQ.IsEnabled = false;
+                txtSlowACQDataNum.IsEnabled = true;
+                txtReport.AppendText("Set fast data rate acq\n");              
+            }
+            else if(button.Content.ToString() == "Slow")
+            {
+                btnAcqStart.IsEnabled = false;
+                btnSlowACQ.IsEnabled = true;
+                txtSlowACQDataNum.IsEnabled = false;
+                Regex rx_int = new Regex(rx_Integer);
+                bool Is_DataNum_Legal = rx_int.IsMatch(txtSlowACQDataNum.Text);
+                if(Is_DataNum_Legal)
+                {
+                    SlowACQDataNumber = Int16.Parse(txtSlowACQDataNum.Text);
+                    string report = string.Format("Set slow data rate ACQ. Max data package: {0}\n", txtSlowACQDataNum.Text);
+                    txtReport.AppendText(report);
+                }
+                else
+                {
+                    MessageBox.Show("Ilegal input the Data Package Num must be Int\n", "Ilegal Input", MessageBoxButton.OK, MessageBoxImage.Error);
+                }                
+            }
+        }
+        // Slow data rate ACQ
+        private void btnSlowACQ_Click(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(filepath.Trim()))
+            {
+                MessageBox.Show("You should save the file first before Scurve start", //text
+                                        "imformation", //caption
+                                   MessageBoxButton.OK, //button
+                                    MessageBoxImage.Error);//icon     
+            }
+            else //file is exsits
+            {
+                StringBuilder reports = new StringBuilder();
+                bool bResult = false;
+                byte[] cmd_ClrUSBFifo = ConstCommandByteArray(0xF0, 0xFA);
+                bResult = CommandSend(cmd_ClrUSBFifo, 2);//
+                if (bResult)
+                    reports.AppendLine("USB fifo cleared");
+                else
+                    reports.AppendLine("fail to clear USB fifo");
+                byte[] bytes = new byte[2048];
+                bResult = DataRecieve(bytes, bytes.Length);//读空剩余在USB芯片里面的数据
+                byte[] CmdSlowACQ = ConstCommandByteArray(0xF0, 0xF0);
+                bResult = CommandSend(CmdSlowACQ, CmdSlowACQ.Length);
+                if(bResult)
+                {
+                    reports.AppendLine("Slow data rate ACQ Start\n");
+                    Task SlowDataRateACQ = new Task(() => Get_SlowDataRateResultCallBack());
+                    SlowDataRateACQ.Start();
+                    SlowDataRateACQ.Wait();
+                    byte[] ACQStop = ConstCommandByteArray(0xF0, 0xF1);
+                    if (CommandSend(ACQStop, ACQStop.Length)) 
+                    {
+                        reports.AppendLine("Slow data rate ACQ Stop\n");
+                    }
+                    else
+                    {
+                        reports.AppendLine("Slow data rate ACQ Stop failure\n");
+                    }
+                }
+                else
+                {
+                    reports.AppendLine("Slow data rate ACQ start failure\n");
+                }
+                txtReport.AppendText(reports.ToString());
+            }
+        }
+        // Slow data rate acquisition thread
+        private void Get_SlowDataRateResultCallBack()
+        {            
+            bw = new BinaryWriter(File.Open(filepath, FileMode.Append));
+            //private int SingleDataLength = 512;
+            bool bResult = false;
+            byte[] bytes = new byte[512];
+            int Package_Count = 0;
+            while(Package_Count < SlowACQDataNumber)
+            {
+                bResult = DataRecieve(bytes, bytes.Length);
+                if (bResult)
+                {
+                    bw.Write(bytes);
+                    Package_Count++;
+                }                
+            }
+            bw.Flush();
+            bw.Dispose();
+            bw.Close();
         }
         //control channel calibration
 
