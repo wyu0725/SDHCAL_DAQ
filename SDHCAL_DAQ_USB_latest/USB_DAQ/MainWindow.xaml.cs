@@ -2120,14 +2120,14 @@ namespace USB_DAQ
             {
                 btnAcqStart.IsEnabled = true;
                 btnSlowACQ.IsEnabled = false;
-                txtSlowACQDataNum.IsEnabled = true;
+                txtSlowACQDataNum.IsEnabled = false;
                 txtReport.AppendText("Set fast data rate acq\n");              
             }
             else if(button.Content.ToString() == "Slow")
             {
                 btnAcqStart.IsEnabled = false;
                 btnSlowACQ.IsEnabled = true;
-                txtSlowACQDataNum.IsEnabled = false;
+                txtSlowACQDataNum.IsEnabled = true;
                 Regex rx_int = new Regex(rx_Integer);
                 bool Is_DataNum_Legal = rx_int.IsMatch(txtSlowACQDataNum.Text);
                 if(Is_DataNum_Legal)
@@ -2155,6 +2155,17 @@ namespace USB_DAQ
             else //file is exsits
             {
                 StringBuilder reports = new StringBuilder();
+                Regex rx_int = new Regex(rx_Integer);
+                bool Is_DataNum_Legal = rx_int.IsMatch(txtSlowACQDataNum.Text);
+                if (Is_DataNum_Legal)
+                {
+                    SlowACQDataNumber = Int16.Parse(txtSlowACQDataNum.Text);
+                    
+                }
+                else
+                {
+                    SlowACQDataNumber = 100;
+                }
                 bool bResult = false;
                 byte[] cmd_ClrUSBFifo = ConstCommandByteArray(0xF0, 0xFA);
                 bResult = CommandSend(cmd_ClrUSBFifo, 2);//
