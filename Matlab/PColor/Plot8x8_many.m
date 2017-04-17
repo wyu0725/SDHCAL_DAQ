@@ -36,7 +36,7 @@ for DisplayK = 1:DisplayNo
     colormap(flipud(gray(4)))
     % a = axes;
     caxis([0,4]);
-    colorbar('Ticks',[0.5,1.5,2.5,3.5],'TickLabels',{'<50','50~150','>150','Not Use'});
+    colorbar('Ticks',[0.5,1.5,2.5,3.5],'TickLabels',{'<50fC','50~150fC','150~300fC','>300fC'});
     axis ij
     axis square
 
