@@ -24,6 +24,7 @@ DeltaV2 = 1:1:Data_Number;
 prompt_Charge = 'Input the charge and select the file';
 dlg_title_Charge = 'Charge';
 Charge = 1:1:Data_Number;
+Channel(61) = [];
 for i = 1:1:Data_Number
     Charge_answer = inputdlg(prompt_Charge, dlg_title_Charge);
     Charge(i) = str2double(Charge_answer);
@@ -40,6 +41,10 @@ for i = 1:1:Data_Number
     DeltaV0(i) = 2.43*(Channel0_DAC(1) - Channel0_DAC(i));
     DeltaV1(i) = 2.43*(Channel1_DAC(1) - Channel1_DAC(i));
     DeltaV2(i) = 2.43*(Channel2_DAC(1) - Channel2_DAC(i));
+    
+    DAC0_50Percent(61) = [];
+    DAC1_50Percent(61) = [];
+    DAC2_50Percent(61) = [];
     figure(1);
     stairs(Channel,DAC0_50Percent);
     hold on;

@@ -5,21 +5,31 @@ DC_VoutSh = FileData(:,2)';
 Mean_DC_VoutSh = mean(DC_VoutSh);
 Var_DC_VoutSh = var(DC_VoutSh);
 Std_DC_VoutSh = std(DC_VoutSh);
-
+FileImport_C = uiimport('-file');
+FileData_C = FileImport_C.data;
+Channel_C = FileData_C(:,1)';
+DC_VoutSh_C = FileData_C(:,2)';
+Mean_DC_VoutSh_C = mean(DC_VoutSh_C);
+Var_DC_VoutSh_C = var(DC_VoutSh_C);
+Std_DC_VoutSh_C = std(DC_VoutSh_C);
 %------ Plot ------%
 plot(Channel, DC_VoutSh,'ob');
 hold on;
 plot(Channel, DC_VoutSh,'--k');
+hold on
+plot(Channel, DC_VoutSh_C,'*r');
+hold on;
+plot(Channel, DC_VoutSh_C,'--b');
 xlabel('Channel');
 ylabel('DC Voltage');
 Max_DC_VoutSh = max(DC_VoutSh);
 Min_DC_VoutSh = min(DC_VoutSh);
 yMax = Max_DC_VoutSh + (Max_DC_VoutSh - Min_DC_VoutSh)/5;
 yMin = Min_DC_VoutSh - (Max_DC_VoutSh - Min_DC_VoutSh)/5;
-axis([0 Channel(64) yMin yMax]);
-h = legend('DC Voltage vs Channel without correction');
+% axis([0 Channel(64) yMin yMax]);
+h = legend('DC Voltage vs Channel without correction','','DC Voltage vs Channel with correction');
 set(h,'Interpreter','latex','FontSize',10,'Location','southeast');
 xtext = max(Channel)/10;
 ytext = yMax - (yMax - yMin)/15;
 textOut = sprintf('Mean = %.5fV,\\sigma = %.5fmV \n Max = %.5fV,Min = %.5fV',Mean_DC_VoutSh,sqrt(Var_DC_VoutSh)*1000,Max_DC_VoutSh,Min_DC_VoutSh);
-text('Interpreter','tex','String',textOut,'Position',[xtext, ytext],'FontSize',14,'color','r');
+text('Interpreter','tex','String',textOut,'Position',[xtext, ytext],'FontSize',14,'color','b');

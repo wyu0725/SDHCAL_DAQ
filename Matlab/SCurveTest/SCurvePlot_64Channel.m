@@ -14,18 +14,22 @@ for i=0:1:63
 end
 Channel_Number = 1:1:64;
 figure(4)
+Channel_Number(61) = [];
+DAC0_50percent(61) = [];
 stairs(Channel_Number, DAC0_50percent);
 xlabel('\bf Channel');
 ylabel('\bf DAC Code of 50% Trig Efficiency');
 title4_str = sprintf('50%% Trig Efficiency of DAC0 -- ASIC ID:%d',ASIC_ID);
 title(title4_str);
 figure(5)
+DAC1_50percent(61) = [];
 stairs(Channel_Number, DAC1_50percent);
 xlabel('\bf Channel');
 ylabel('\bf DAC Code of 50% Trig Efficiency');
 title5_str = sprintf('50%% Trig Efficiency of DAC1 -- ASIC ID:%d',ASIC_ID);
 title(title5_str);
 figure(6)
+DAC2_50percent(61) = [];
 stairs(Channel_Number, DAC2_50percent);
 xlabel('\bf Channel');
 ylabel('\bf DAC Code of 50% Trig Efficiency');
