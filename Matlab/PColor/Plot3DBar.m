@@ -9,12 +9,12 @@ z = C;
     if zm ~= m || zn ~= n
         error('Wrong Data');
     end
-    dx = (x(2) - x(1))/100;
-    dy = (y(2) - y(1))/100;
-    XStart = x(1) - 50*dx;
-    XEnd = x(m) + 50*dx;
-    YStart = y(1) - 50*dy;
-    YEnd = y(n) + 50*dy;
+    dx = (x(2) - x(1))/6;
+    dy = (y(2) - y(1))/6;
+    XStart = x(1) - 3*dx;
+    XEnd = x(m) + 3*dx;
+    YStart = y(1) - 3*dy;
+    YEnd = y(n) + 3*dy;
     X = XStart:dx:XEnd;
     Y = YStart:dy:YEnd;
     M = length(X);
@@ -26,6 +26,6 @@ z = C;
         end
     end
     figure
-    surf(X,Y,Z,'FaceColor','interp');
+    surf(Y,X,Z,Z,'FaceColor','interp');
     colormap(summer)
 % end
