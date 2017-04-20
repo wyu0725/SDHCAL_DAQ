@@ -25,11 +25,11 @@ module SweepACQ_Control(
     input reset_n,
     // ACQ Control
     input SweepStart,
-    output SingleACQStart,
-    output ACQDone,
+    output reg SingleACQStart,
+    output reg ACQDone,
     // Sweep ACQ parameters
     input [9:0] StartDAC0,
-    input [9:0] StopDAC0,
+    input [9:0] EndDAC0,
     input [15:0] MaxPackageNumber,
     // ACQ Data Enable for Data Counts
     input ParallelData_en,
@@ -83,6 +83,7 @@ module SweepACQ_Control(
         SweepACQData_en <= 1'b0;
         FireDataCount <= 16'b0;
         SweepACQFifoData_en <= 1'b0;
+        ACQDone <= 1'b0;
         State <= IDLE;
       end
       else begin
@@ -98,6 +99,7 @@ module SweepACQ_Control(
               SweepACQData <= 1'b0;
               FireDataCount <= 16'b0;
               SweepACQFifoData_rden <= 1'b0;
+              ACQDone <= 1'b0;
               State <= IDLE;
             end
             else begin
@@ -200,6 +202,7 @@ module SweepACQ_Control(
             State <= ALL_DONE;
           end
           ALL_DONE:begin
+            ACQDone <= 1'b1;
             SweepACQData_en <= 1'b0;
             State <= IDLE;
           end
@@ -207,6 +210,8 @@ module SweepACQ_Control(
         endcase
       end
     end
+
+    // Count the ACQ Data
     reg [3:0] OneFireDataCount;
     localparam [3:0] ONE_FIRE_DATA_NUM = 5'd9;
     always @ (posedge Clk or negedge reset_n) begin
