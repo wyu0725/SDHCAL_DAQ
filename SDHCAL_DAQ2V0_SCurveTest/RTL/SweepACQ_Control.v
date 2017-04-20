@@ -26,14 +26,14 @@ module SweepACQ_Control(
     // ACQ Control
     input SweepStart,
     output reg SingleACQStart,
+    output reg OneDACDone,
     output reg ACQDone,
     // Sweep ACQ parameters
     input [9:0] StartDAC0,
     input [9:0] EndDAC0,
     input [15:0] MaxPackageNumber,
     // ACQ Data Enable for Data Counts
-    input ParallelData_en,
-    
+    input ParallelData_en,    
     // Microroc SC Parameters
     output reg [9:0] OutDAC0,
     //output [9:0] OutDAC1, //Only need to sweep DAC0
@@ -74,6 +74,7 @@ module SweepACQ_Control(
     always @(posedge Clk or negedge reset_n) begin
       if(~reset_n) begin
         SingleACQStart <= 1'b0;
+        OneDACDone <= 1'b0;
         ACQDone <= 1'b0;
         OutDAC0 <= 10'b0;
         TestDAC0 <= StartDAC0;
@@ -91,6 +92,7 @@ module SweepACQ_Control(
           IDLE:begin
             if(~SweepStart) begin
               SingleACQStart <= 1'b0;
+              OneDACDone <= 1'b0;
               ACQDone <= 1'b0;
               OutDAC0 <= 10'b0;
               TestDAC0 <= StartDAC0;
@@ -184,10 +186,12 @@ module SweepACQ_Control(
             else begin
               FireDataCount <= 16'b0;
               SingleACQStart <= 1'b0;
+              OneDACDone <= 1'b1;
               State <= CHECK_ALL_DONE;
             end
           end
           CHECK_ALL_DONE:begin
+            OneDACDone <= 1'b0;
             if(TestDAC0 <= EndDAC0) begin
               TestDAC0 <= TestDAC0 + 1'b1;
               State <= SC_PARAM_OUT;
