@@ -58,30 +58,45 @@ module SweepACQ_Top(
     end
     assign SweepStart_Pulse = SweepStart_reg1 && (~SweepStart_reg2);
     //Instantiation SweepACQ Control
+    wire rstExtFIFO;
+    wire [15:0] SweepFifoData;
+    wire SweepFifoData_rden;
+    wire SweepFifoFull;
+    wire SweepFifoEmpty;
     SweepACQ_Control SweepACQ_Control(
-      .Clk(),
-      .reset_n(),
+      .Clk(Clk),
+      .reset_n(reset_n),
       //ACQ Control
-      .SweepStart(),
-      .SingleACQStart(),
-      .ACQDone(),
+      .SweepStart(SweepStart_Pulse),
+      .SingleACQStart(SingleACQStart),
+      .OneDACDone(rstExtFIFO),
+      .ACQDone(ACQDone),
       // Sweep ACQ Parameters
-      .StartDAC0(),
-      .EndDAC0(),
-      .MaxPackageNumber()
+      .StartDAC0(StartDAC0),
+      .EndDAC0(EndDAC0),
+      .MaxPackageNumber(MaxPackageNumber),
       //ACQ Data Enable for Data Counts
-      .ParallelData_en()
-
+      .ParallelData_en(ParallelData_en),
+      // Microroc SC Parameters
+      .OutDAC0(OutDAC0),
+      .LoadSCParameter(LoadSCParameter),
+      .MicrorocConfigDone(MicrorocConfigDone),
+      // Get ACQ Data
+      .SweepACQFifoData(SweepFifoData),
+      .SweepACQFifoData_rden(SweepFifoData_rden),
+      // Data Output
+      .SweepACQData(SweepACQData),
+      .SweepACQData_en(SweepACQData_en)
     );
     SweepACQ_FIFO SweepACQ_DataFIFO16x128(
-      .clk(),
-      .rst(),
-      .din(),
-      .wr_en(),
-      .rd_en(),
-      .dout(),
-      .full(),
-      .empty()
+      .clk(Clk),
+      .rst(~reset_n | rstExtFIFO),
+      .din(ParallelData),
+      .wr_en(ParallelData_en),
+      .rd_en(SweepFifoData_rden),
+      .dout(SweepFifoData),
+      .full(SweepFifoFull),
+      .empty(SweepFifoEmpty)
     );
 
 endmodule
