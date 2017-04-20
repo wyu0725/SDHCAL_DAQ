@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <GenRun Id="impl_1" LaunchPart="xc7a100tfgg484-2" LaunchTime="1491475141">
-  <File Type="PWROPT-DRC" Name="FPGA_TOP_drc_pwropted.rpt"/>
-  <File Type="OPT-METHODOLOGY-DRC" Name="FPGA_TOP_methodology_drc_opted.rpt"/>
-  <File Type="INIT-TIMING" Name="FPGA_TOP_timing_summary_init.rpt"/>
   <File Type="ROUTE-PWR-RPX" Name="FPGA_TOP_power_routed.rpx"/>
   <File Type="PA-TCL" Name="FPGA_TOP.tcl"/>
-  <File Type="OPT-HWDEF" Name="FPGA_TOP.hwdef"/>
+  <File Type="INIT-TIMING" Name="FPGA_TOP_timing_summary_init.rpt"/>
+  <File Type="OPT-METHODOLOGY-DRC" Name="FPGA_TOP_methodology_drc_opted.rpt"/>
+  <File Type="PWROPT-DRC" Name="FPGA_TOP_drc_pwropted.rpt"/>
   <File Type="RDI-RDI" Name="FPGA_TOP.vdi"/>
   <File Type="OPT-DCP" Name="FPGA_TOP_opt.dcp"/>
+  <File Type="OPT-HWDEF" Name="FPGA_TOP.hwdef"/>
   <File Type="OPT-DRC" Name="FPGA_TOP_drc_opted.rpt"/>
   <File Type="OPT-TIMING" Name="FPGA_TOP_timing_summary_opted.rpt"/>
   <File Type="PWROPT-DCP" Name="FPGA_TOP_pwropt.dcp"/>
@@ -31,14 +31,14 @@
   <File Type="ROUTE-BLACKBOX-DCP" Name="FPGA_TOP_routed_bb.dcp"/>
   <File Type="ROUTE-DRC" Name="FPGA_TOP_drc_routed.rpt"/>
   <File Type="ROUTE-DRC-PB" Name="FPGA_TOP_drc_routed.pb"/>
-  <File Type="BG-BIN" Name="FPGA_TOP.bin"/>
   <File Type="ROUTE-DRC-RPX" Name="FPGA_TOP_drc_routed.rpx"/>
-  <File Type="BG-DRC" Name="FPGA_TOP.drc"/>
+  <File Type="BG-BIN" Name="FPGA_TOP.bin"/>
   <File Type="ROUTE-METHODOLOGY-DRC" Name="FPGA_TOP_methodology_drc_routed.rpt"/>
-  <File Type="BITSTR-MSK" Name="FPGA_TOP.msk"/>
+  <File Type="BG-DRC" Name="FPGA_TOP.drc"/>
   <File Type="ROUTE-METHODOLOGY-DRC-RPX" Name="FPGA_TOP_methodology_drc_routed.rpx"/>
-  <File Type="BG-BGN" Name="FPGA_TOP.bgn"/>
+  <File Type="BITSTR-MSK" Name="FPGA_TOP.msk"/>
   <File Type="ROUTE-METHODOLOGY-DRC-PB" Name="FPGA_TOP_methodology_drc_routed.pb"/>
+  <File Type="BG-BGN" Name="FPGA_TOP.bgn"/>
   <File Type="ROUTE-PWR" Name="FPGA_TOP_power_routed.rpt"/>
   <File Type="ROUTE-PWR-SUM" Name="FPGA_TOP_power_summary_routed.pb"/>
   <File Type="ROUTE-STATUS" Name="FPGA_TOP_route_status.rpt"/>
@@ -247,6 +247,6 @@
     <Step Id="post_route_phys_opt_design"/>
     <Step Id="write_bitstream"/>
   </Strategy>
-  <BlockFileSet Type="BlockSrcs" Name="usb_cmd_fifo"/>
   <BlockFileSet Type="BlockSrcs" Name="param_store_fifo"/>
+  <BlockFileSet Type="BlockSrcs" Name="usb_cmd_fifo"/>
 </GenRun>
