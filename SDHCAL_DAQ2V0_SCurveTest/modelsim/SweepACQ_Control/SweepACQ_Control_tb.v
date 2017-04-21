@@ -64,18 +64,18 @@ end
 // Genarate Clk
 localparam High = 13;
 localparam Low = 12;
-always @ (*) begin
+always begin
 	#(Low) clk = ~clk;
 	#(High) clk = ~clk;
 end
 // Generate Config done signal
 reg [2:0] SCLoadCount;
 always @(posedge clk or posedge reset_n) begin
-	if (reset_n) begin
+	if (~reset_n) begin
 		SCLoadCount <= 3'b0;
 		MicrorocConfigDone <= 1'b0;
   end
-	else if (SCLoadCount || (SCLoadCount != 3'b0 && SCLoadCount <= 3'd7)) begin
+	else if (LoadSCParameter || (SCLoadCount != 3'b0 && SCLoadCount <= 3'd7)) begin
 		SCLoadCount <= SCLoadCount + 1'b1;
 		MicrorocConfigDone <= (SCLoadCount == 3'd7);
 	end
@@ -129,20 +129,34 @@ always @ (posedge clk or negedge reset_n) begin
       DATAOUT:begin
         if(ParallelDataCount < 4'd10)begin
           ParallelData_en <= 1'b1;
+          ParallelDataCount <= ParallelDataCount + 1'b1;
           State <= DATAINTERVAL;
+        end
+        else begin
+          ParallelDataCount <= 4'b0;
+          State <= IDLE;
         end
       end
       DATAINTERVAL:begin
         ParallelData_en <= 1'b0;
         if(DataInterval < 3'd7) begin
+          DataInterval <= DataInterval + 1'b1;
+          State <= DATAINTERVAL;
+        end
+        else begin
+          DataInterval <= 3'b0;
+          State <= DATAOUT;
         end
       end
+      default:State <= IDLE;
     endcase
   end
 end
 // Generate the FIFO Data
-always @(posedge clk or posedge reset_n) begin
-	if (reset_n) begin
+wire reset_nr;
+assign reset_nr = reset_n && (~OneDACDone);
+always @(posedge clk or posedge reset_nr) begin
+	if (~reset_nr) begin
 		SweepACQFifoData <= 16'b0;		
 	end
 	else if(~SingleACQStart) begin

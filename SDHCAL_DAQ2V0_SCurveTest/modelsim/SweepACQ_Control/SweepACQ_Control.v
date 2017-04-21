@@ -1,4 +1,4 @@
-`timescale 1ns / 1ps
+`timescale 1ns / 1ns
 //////////////////////////////////////////////////////////////////////////////////
 // Company:USTC 
 // Engineer: Yu Wang
@@ -57,14 +57,15 @@ module SweepACQ_Control(
                      START_ACQ = 4'd7,           //0111
                      WAIT_ONCE_DATA = 4'd5,      //0101
                      GET_ONE_DATA = 4'd4,        //0100
-                     OUT_ONE_DATA = 4'd12,       //1100
-                     CHECK_ONE_DAC_DONE = 4'd13, //1101
-                     CHECK_ALL_DONE = 4'd15,     //1111
-                     TAIL_OUT = 4'd14,           //1110
-                     ALL_DONE = 4'd10;            //1010
+                     WAIT_FIFO_DATA = 4'd12,     //1100
+                     OUT_ONE_DATA = 4'd13,       //1101
+                     CHECK_ONE_DAC_DONE = 4'd15, //1111
+                     CHECK_ALL_DONE = 4'd14,     //1110
+                     TAIL_OUT = 4'd10,           //1010
+                     ALL_DONE = 4'd11;           //1011
     reg [9:0] TestDAC0;
     reg [15:0] SCParamLoadDelayCount;
-    localparam [15:0] SC_PARAM_LOAD_DELAY = 16'd40_000;
+    localparam [15:0] SC_PARAM_LOAD_DELAY = 16'd40;//40_000
     reg OneFire;
     reg [15:0] FireDataCount;
     reg [3:0] DataReadCount;
@@ -83,6 +84,9 @@ module SweepACQ_Control(
         SweepACQData <= 16'b0;
         SweepACQData_en <= 1'b0;
         FireDataCount <= 16'b0;
+        SCParamLoadDelayCount <= 16'b0;
+        DataReadCount <= 4'b0;
+        SweepACQFifoData_rden <= 1'b0;
         //SweepACQFifoData_en <= 1'b0;
         ACQDone <= 1'b0;
         State <= IDLE;
@@ -100,6 +104,8 @@ module SweepACQ_Control(
               SweepACQData <= 16'b0;
               SweepACQData <= 1'b0;
               FireDataCount <= 16'b0;
+              SCParamLoadDelayCount <= 16'b0;
+              DataReadCount <= 4'b0;
               SweepACQFifoData_rden <= 1'b0;
               ACQDone <= 1'b0;
               State <= IDLE;
@@ -126,7 +132,7 @@ module SweepACQ_Control(
           end
           WAIT_LOAD_DONE:begin
             LoadSCParameter <= 1'b0;
-            SweepACQData <= 1'b0;
+            SweepACQData_en <= 1'b0;
             if(MicrorocConfigDone || (SCParamLoadDelayCount != 16'd0 && SCParamLoadDelayCount < SC_PARAM_LOAD_DELAY)) begin
               State <= WAIT_LOAD_DONE;
               SCParamLoadDelayCount <= SCParamLoadDelayCount + 1'b1;
@@ -155,19 +161,17 @@ module SweepACQ_Control(
           end
           GET_ONE_DATA:begin
             SweepACQFifoData_rden <= 1'b0;
+            SweepACQData_en <= 1'b0;
+            //SweepACQData <= SweepACQFifoData;
+            State <= WAIT_FIFO_DATA;            
+          end
+          WAIT_FIFO_DATA:begin
             SweepACQData <= SweepACQFifoData;
             State <= OUT_ONE_DATA;
-            /*if(DataReadCount <= DATA_READ_NUM) begin
-              SweepACQFifoData_rden <= 1'b1;
-              State <= OUT_ONE_DATA;
-            end
-            else begin
-              State <= CHECK_ONE_DAC_DONE;
-            end*/
           end
           OUT_ONE_DATA:begin
             SweepACQData_en <= 1'b1;
-            if(DataReadCount < DATA_READ_NUM) begin
+            if(DataReadCount < DATA_READ_NUM - 1'b1) begin
               SweepACQFifoData_rden <= 1'b1;
               DataReadCount <= DataReadCount + 1'b1;
               State <= GET_ONE_DATA;
@@ -179,7 +183,7 @@ module SweepACQ_Control(
           end
           CHECK_ONE_DAC_DONE:begin
             SweepACQData_en <= 1'b0;
-            if(FireDataCount < MaxPackageNumber) begin
+            if(FireDataCount < MaxPackageNumber - 1'b1) begin
               FireDataCount <= FireDataCount + 1'b1;
               State <= WAIT_ONCE_DATA;
             end
@@ -192,7 +196,7 @@ module SweepACQ_Control(
           end
           CHECK_ALL_DONE:begin
             OneDACDone <= 1'b0;
-            if(TestDAC0 <= EndDAC0) begin
+            if(TestDAC0 < EndDAC0) begin
               TestDAC0 <= TestDAC0 + 1'b1;
               State <= SC_PARAM_OUT;
             end
@@ -232,7 +236,7 @@ module SweepACQ_Control(
         OneFire <= 1'b1;
       end
       else begin
-        OneFireDataCount <= OneFireDataCount <= 1'b1;
+        OneFireDataCount <= OneFireDataCount + 1'b1;
         OneFire <= 1'b0;
       end
     end
