@@ -35,7 +35,7 @@ module SweepACQ_Top(
     input [15:0] ParallelData,
     input ParallelData_en,
     // SC Parameters
-    output OutDAC0,
+    output [9:0] OutDAC0,
     output LoadSCParameter,
     input MicrorocConfigDone,
     //Data out
@@ -45,7 +45,7 @@ module SweepACQ_Top(
     // Generate the Start Pulse
     wire SweepStart_Pulse;
     reg SweepStart_reg1;
-    //reg SweepStart_reg2;
+    reg SweepStart_reg2;
     always @ (posedge Clk or negedge reset_n) begin
       if(~reset_n) begin
         SweepStart_reg1 <= 1'b0;
