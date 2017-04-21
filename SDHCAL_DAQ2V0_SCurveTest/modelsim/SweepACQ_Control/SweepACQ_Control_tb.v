@@ -49,9 +49,9 @@ initial begin
 	reset_n = 1'b0;
 	SweepStart = 1'b0;
 	StartDAC0 = 10'd500;
-	EndDAC0 = 10'd550;
-	MaxPackageNumber = 16'd1000;
-	ParallelData_en = 1'b0;
+	EndDAC0 = 10'd505;
+	MaxPackageNumber = 16'd10;
+	//ParallelData_en = 1'b0;
 	//MicrorocConfigDone = 1'b0;
 	SweepACQFifoData = 16'b0;
 	#(100);
@@ -140,5 +140,18 @@ always @ (posedge clk or negedge reset_n) begin
     endcase
   end
 end
-
+// Generate the FIFO Data
+always @(posedge clk or posedge reset_n) begin
+	if (reset_n) begin
+		SweepACQFifoData <= 16'b0;		
+	end
+	else if(~SingleACQStart) begin
+    SweepACQFifoData <= 16'b0;		
+	end
+  else if(SweeACQFifoData_rden) begin
+    SweepACQFifoData <= SweepACQFifoData + 2'd3;
+  end
+  else
+    SweepACQFifoData <= SweepACQFifoData;
+end
 endmodule
