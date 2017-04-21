@@ -65,6 +65,7 @@ module SweepACQ_Control(
                      ALL_DONE = 4'd11;           //1011
     reg [9:0] TestDAC0;
     reg [15:0] SCParamLoadDelayCount;
+    localparam [15:0] SC_PARAM_LOAD_DELAY = 16'd40_000;//40_000
     reg OneFire;
     reg [15:0] FireDataCount;
     reg [3:0] DataReadCount;
