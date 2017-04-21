@@ -61,14 +61,14 @@ module SweepACQ_Control(
                      CHECK_ONE_DAC_DONE = 4'd13, //1101
                      CHECK_ALL_DONE = 4'd15,     //1111
                      TAIL_OUT = 4'd14,           //1110
-                     ALLDONE = 4'd10;            //1010
+                     ALL_DONE = 4'd10;            //1010
     reg [9:0] TestDAC0;
     reg [15:0] SCParamLoadDelayCount;
     localparam [15:0] SC_PARAM_LOAD_DELAY = 16'd40_000;
     reg OneFire;
     reg [15:0] FireDataCount;
     reg [3:0] DataReadCount;
-    localparam [3:0] DATA_RAED_NUM = 4'd10;
+    localparam [3:0] DATA_READ_NUM = 4'd10;
     //wire [15:0] SweepACQFifoData;
     //reg SweepACQFifoData_en;
     always @(posedge Clk or negedge reset_n) begin
@@ -83,7 +83,7 @@ module SweepACQ_Control(
         SweepACQData <= 16'b0;
         SweepACQData_en <= 1'b0;
         FireDataCount <= 16'b0;
-        SweepACQFifoData_en <= 1'b0;
+        //SweepACQFifoData_en <= 1'b0;
         ACQDone <= 1'b0;
         State <= IDLE;
       end
@@ -96,7 +96,7 @@ module SweepACQ_Control(
               ACQDone <= 1'b0;
               OutDAC0 <= 10'b0;
               TestDAC0 <= StartDAC0;
-              LoadParameter <= 1'b0;
+              LoadSCParameter <= 1'b0;
               SweepACQData <= 16'b0;
               SweepACQData <= 1'b0;
               FireDataCount <= 16'b0;
@@ -120,14 +120,14 @@ module SweepACQ_Control(
             State <= LOAD_SC_PARAM;
           end
           LOAD_SC_PARAM:begin
-            SweepACQDATA_en <= 1'b1;
+            SweepACQData_en <= 1'b1;
             LoadSCParameter <= 1'b1;
-            Stare <= WAIT_LOAD_DONE;
+            State <= WAIT_LOAD_DONE;
           end
           WAIT_LOAD_DONE:begin
             LoadSCParameter <= 1'b0;
             SweepACQData <= 1'b0;
-            if(MicrorocConfigDone || (SCParamLoadDely_cnt != 16'd0 && SCParamLoadDelayCount < SC_PARAM_LOAD_DELAY)) begin
+            if(MicrorocConfigDone || (SCParamLoadDelayCount != 16'd0 && SCParamLoadDelayCount < SC_PARAM_LOAD_DELAY)) begin
               State <= WAIT_LOAD_DONE;
               SCParamLoadDelayCount <= SCParamLoadDelayCount + 1'b1;
             end
@@ -178,7 +178,7 @@ module SweepACQ_Control(
             end
           end
           CHECK_ONE_DAC_DONE:begin
-            SweepACQDATA_en <= 1'b0;
+            SweepACQData_en <= 1'b0;
             if(FireDataCount < MaxPackageNumber) begin
               FireDataCount <= FireDataCount + 1'b1;
               State <= WAIT_ONCE_DATA;

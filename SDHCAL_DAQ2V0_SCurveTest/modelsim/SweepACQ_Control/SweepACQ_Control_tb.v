@@ -35,7 +35,7 @@ SweepACQ_Control uut(
   .EndDAC0(EndDAC0),
   .MaxPackageNumber(MaxPackageNumber),
   .ParallelData_en(ParallelData_en),
-  ,OutDAC0(OutDAC0),
+  .OutDAC0(OutDAC0),
   .LoadSCParameter(LoadSCParameter),
   .MicrorocConfigDone(MicrorocConfigDone),
   .SweepACQFifoData(SweepACQFifoData),
@@ -73,8 +73,8 @@ reg [2:0] SCLoadCount;
 always @(posedge clk or posedge reset_n) begin
 	if (reset_n) begin
 		SCLoadCount <= 3'b0;
-		MicrorocConfigDone <= 1'b0		
-	end
+		MicrorocConfigDone <= 1'b0;
+  end
 	else if (SCLoadCount || (SCLoadCount != 3'b0 && SCLoadCount <= 3'd7)) begin
 		SCLoadCount <= SCLoadCount + 1'b1;
 		MicrorocConfigDone <= (SCLoadCount == 3'd7);
@@ -85,7 +85,7 @@ always @(posedge clk or posedge reset_n) begin
 	end
 end
 // Generate Fire Data enable
-reg [3:0] ParallenDataCount;
+reg [3:0] ParallelDataCount;
 reg [2:0] DataInterval;
 reg [4:0] DataWait;
 reg [2:0] State;
@@ -100,7 +100,7 @@ always @ (posedge clk or negedge reset_n) begin
     ParallelDataCount <= 4'b0;
     DataInterval <= 3'b0;
     DataWait <= 5'b0;
-    State <= IDLE
+    State <= IDLE;
   end
   else begin
     case(State)
@@ -110,7 +110,7 @@ always @ (posedge clk or negedge reset_n) begin
           ParallelDataCount <= 4'b0;
           DataInterval <= 3'b0;
           DataWait <= 5'b0;
-          State <= IDLE
+          State <= IDLE;
         end
         else begin
           State <= DATAWAIT;
@@ -148,7 +148,7 @@ always @(posedge clk or posedge reset_n) begin
 	else if(~SingleACQStart) begin
     SweepACQFifoData <= 16'b0;		
 	end
-  else if(SweeACQFifoData_rden) begin
+  else if(SweepACQFifoData_rden) begin
     SweepACQFifoData <= SweepACQFifoData + 2'd3;
   end
   else
