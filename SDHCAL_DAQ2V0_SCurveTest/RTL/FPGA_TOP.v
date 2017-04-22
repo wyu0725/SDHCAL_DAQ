@@ -275,9 +275,9 @@ module FPGA_TOP(
     wire HoldGen_out_trigger1b;
     wire HoldGen_out_trigger2b;*/
     /*--- ACQ or SCurve Test Switcher instantion ---*/
-    ACQ_or_SCTest_Switch ACQ_or_SCTest_Switcher(
+    /*ACQ_or_SCTest_Switch ACQ_or_SCTest_Switcher(
       .ACQ_or_SCTest(ACQ_or_SCTest),
-      /*--- USB Start Stop Signal Select ---*/
+      //--- USB Start Stop Signal Select ---
       .Microroc_Acq_Start_Stop(Microroc_Acq_Start_Stop),
       .SCTest_Start_Stop(SCTest_Start_Stop),
       .out_to_usb_Acq_Start_Stop(out_to_usb_Acq_Start_Stop),
@@ -285,18 +285,18 @@ module FPGA_TOP(
       //.USB_Data_FIFO_Empty(in_from_ext_fifo_empty),
       .nPKTEND(usb_pktend),
       .Data_Transmit_Done(USB_Data_Transmit_Done),
-      /*--- Start Signal ---
-      .USB_Acq_Start_Stop(out_to_usb_Acq_Start_Stop),
-      .Microroc_Acq_Start_Stop(Microroc_Acq_Start_Stop),
-      .SCTest_Start_Stop(SCTest_Start_Stop),*/
-      /*--- USB Data FIFO write ---*/
+      //--- Start Signal ---
+      //.USB_Acq_Start_Stop(out_to_usb_Acq_Start_Stop),
+      //.Microroc_Acq_Start_Stop(Microroc_Acq_Start_Stop),
+      //.SCTest_Start_Stop(SCTest_Start_Stop),
+      //--- USB Data FIFO write ---
       .Microroc_usb_data_fifo_wr_din(Microroc_usb_data_fifo_wr_din),
       .Microroc_usb_data_fifo_wr_en(Microroc_usb_data_fifo_wr_en),
       .SCTest_usb_data_fifo_wr_din(SCTest_usb_data_fifo_wr_din),
       .SCTest_usb_data_fifo_wr_en(SCTest_usb_data_fifo_wr_en),
       .out_to_usb_data_fifo_wr_din(usb_data_fifo_wr_din),
       .out_to_usb_data_fifo_wr_en(usb_data_fifo_wr_en),
-      /*--- SC param ---*/
+      //--- SC param ---
       // CTest Channel select
       .USB_Microroc_CTest_Chn_Out(Microroc_param_Ctest),
       .SCTest_Microroc_CTest_Chn_Out(SCTest_Microroc_CTest_Chn_Out),
@@ -319,17 +319,17 @@ module FPGA_TOP(
       // SC or ReadRAM
       .USB_Microroc_SC_or_Read(USB_Microroc_SC_or_Read),
       .Microroc_SC_or_Read(Microroc_sc_or_read)
-      /*--- 3 triggers ---*/
-      /*.Pin_out_trigger0b(OUT_TRIG0B),
-      .Pin_out_trigger1b(OUT_TRIG1B),
-      .Pin_out_trigger2b(OUT_TRIG2B),
-      .SCTest_out_trigger0b(),
-      .SCTest_out_trigger1b(),
-      .SCTest_out_trigger2b(),
-      .HoldGen_out_trigger0b(),
-      .HoldGen_out_trigger1b(),
-      .HoldGen_out_trigger2b()*/
-    );
+      //--- 3 triggers ---
+      //.Pin_out_trigger0b(OUT_TRIG0B),
+      //.Pin_out_trigger1b(OUT_TRIG1B),
+     // .Pin_out_trigger2b(OUT_TRIG2B),
+      //.SCTest_out_trigger0b(),
+      //.SCTest_out_trigger1b(),
+      //.SCTest_out_trigger2b(),
+      //.HoldGen_out_trigger0b(),
+      //.HoldGen_out_trigger1b(),
+      //.HoldGen_out_trigger2b()
+    );*/
     //------Microroc_top instantiation--------------//
     wire Config_Done;
     //Test Port
@@ -455,47 +455,49 @@ module FPGA_TOP(
       .CK_5N(CK_5N),
       .Start_Readout_t(Start_Readout_t)
     );
-
+    /*------------ Sweep Test Instantiation --------------*/
+    SweepTest_Top Microroc_SweepTest(
+    );
     /*------------ S Curve Test Instantiation ------------*/
     // This aera is for S Curve test, including SCurve-Test top. 
     // This module is added by wyu 20170310, 
     // 
     
     //SCurve Test Top instantion    
-    SCurve_Test_Top Microroc_SCurveTest(
+    /*SCurve_Test_Top Microroc_SCurveTest(
       .Clk(Clk),
       .Clk_5M(Clk_5M),
       .reset_n(reset_n),
       // Select Trig Efficiency or Counter Efficiency test
       .TrigEffi_or_CountEffi(TrigEffi_or_CountEffi),
-      /*--- Test parameters and control interface--from upper level ---*/
+      //--- Test parameters and control interface--from upper level ---
       .Test_Start(SCTest_Start_Stop),
       .SingleTest_Chn(SingleTest_Chn),
       .Single_or_64Chn(Single_or_64Chn),
       .Ctest_or_Input(CTest_or_Input),
       .CPT_MAX(CPT_MAX),
       .Counter_MAX(Counter_MAX),
-      /*--- USB Data FIFO Interface ---*/
+      //--- USB Data FIFO Interface ---
       //.usb_data_fifo_full(),
       .usb_data_fifo_wr_en(SCTest_usb_data_fifo_wr_en),
       .usb_data_fifo_wr_din(SCTest_usb_data_fifo_wr_din),
       .usb_data_fifo_full(usb_data_fifo_wr_full),
-      /*--- Microroc Config Interface ---*/
+      //--- Microroc Config Interface ---
       .Microroc_Config_Done(Config_Done),
       .Microroc_CTest_Chn_Out(SCTest_Microroc_CTest_Chn_Out),
       .Microroc_10bit_DAC_Out(SCTest_Microroc_10bit_DAC_Out),
       .Microroc_Discriminator_Mask(SCTest_Channel_Discri_Mask),
       .SC_Param_Load(SCTest_SC_Param_Load),
       .Force_Ext_RAZ(Force_Ext_RAZ),
-      /*--- PIN ---*/
+      //--- PIN ---
       .CLK_EXT(CLK_EXT),
       .out_trigger0b(OUT_TRIG0B),
       .out_trigger1b(OUT_TRIG1B),
       .out_trigger2b(OUT_TRIG2B),
-      /*--- Done Indicator ---*/
+      //--- Done Indicator ---
       .SCurve_Test_Done(SCurve_Test_Done),
       .Data_Transmit_Done(USB_Data_Transmit_Done)
-    );
+    );*/
     assign LED[5] = ~(SCTest_Start_Stop || SCurve_Test_Done);
     /*------------usb data fifo instantiation-------*/ 
     //per ASIC 1270 depth x 16bit, 4 ASIC 5080 depth

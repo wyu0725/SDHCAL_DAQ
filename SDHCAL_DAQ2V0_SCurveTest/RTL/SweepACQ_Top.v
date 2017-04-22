@@ -90,7 +90,7 @@ module SweepACQ_Top(
     );
     SweepACQ_FIFO SweepACQ_DataFIFO16x128(
       .clk(Clk),
-      .rst(~reset_n | rstExtFIFO),
+      .rst(~reset_n | rstExtFIFO | (~StartSweep)),
       .din(ParallelData),
       .wr_en(ParallelData_en),
       .rd_en(SweepFifoData_rden),
