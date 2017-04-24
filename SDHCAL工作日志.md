@@ -65,11 +65,7 @@
 
 + A9A1:External trigger enable
 
-+ >  这条命令没用了AAAX:Raz mode select
-
 + ABXX:XX id Chip ID
-
-+ > 新添加的命令 20170308
 
 + ACA0:SC336=> Select latched
 
@@ -79,7 +75,14 @@
 
 + ACB1:SC575=>Select Channel Trigger selected by NOR64
 
-+ > 新添加命令结束 20170308
++ ADXX(未实现):Microroc Channel Mask channel
+
+  + XX:{2'b00, Mask_or_UnMask, MaskChannel}
+
++ AE0X(未实现):Microroc Discriminator Mask Channel
+
+  + X:{1'b0, DiscriMask}
+  + DiscriMask:000, 001, 010, 011, 100, 101, 110, 111
 
 + B类：采集参数，可以调整
   + B1XX:XX为Start_Acq_Time的低八位
@@ -102,8 +105,9 @@
   + D2F1:选择监控测试板上的out_T&H（默认）
 
 + E类：S曲线测试(还没有完成，这段代码目前在新的逻辑中)
-  + E0A0:选择ACQ
+  + E0A0:选择Normal ACQ
   + E0A1:选择S Curve Test
+  + E0A2(未实现):选择 Sweep ACQ
   + E0B0:选择单通道测试
   + E0B1:选择64通道测试
   + E0C0:单通道测试时从Ctest管脚输入信号
@@ -901,17 +905,17 @@
     9. 改变注入通道，重复1~8
   + 测量探测器串扰后再和电子学串扰做对比
 
-+  更新三组图片，添加DAC码值计算的公式
++ 更新三组图片，添加DAC码值计算的公式
 
    + DAC0 $Code = -4.2575\times Charge + 594.2183$
 
      ![50%触发率对应的DAC码值和输入电荷的关系 Trigger2](http://ogs54iji1.bkt.clouddn.com/SDHCALASIC223_DAC0_vs_Charge.jpg-SDHCAL)
 
-   +  DAC1 $Code = -4.3499\times Charge + 607.6550$
+   + DAC1 $Code = -4.3499\times Charge + 607.6550$
 
       ![50%触发率对应的DAC码值和输入电荷的关系 Trigger2](http://ogs54iji1.bkt.clouddn.com/SDHCALASIC223_DAC1_vs_Charge.jpg-SDHCAL)
 
-   +  DAC2 $Code = -1.0123\times Charge + 609.8125$
+   + DAC2 $Code = -1.0123\times Charge + 609.8125$
 
       ![50%触发率对应的DAC码值和输入电荷的关系 Trigger2](http://ogs54iji1.bkt.clouddn.com/SDHCALASIC223_DAC2_vs_Charge.jpg-SDHCAL)
 
