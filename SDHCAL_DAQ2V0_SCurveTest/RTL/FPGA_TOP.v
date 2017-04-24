@@ -456,7 +456,7 @@ module FPGA_TOP(
       .Start_Readout_t(Start_Readout_t)
     );
     /*------------ Sweep Test Instantiation --------------*/
-    SweepTest_Top Microroc_SweepTest(
+    Controller_Top Microroc_Control(
     );
     /*------------ S Curve Test Instantiation ------------*/
     // This aera is for S Curve test, including SCurve-Test top. 

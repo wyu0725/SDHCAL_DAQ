@@ -20,7 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module SweepTest_Top(
+module Controller_Top(
     input Clk,
     input reset_n,
     // Mode Select
@@ -76,7 +76,42 @@ module SweepTest_Top(
     input out_trigger2b
     );
     // Switcher for ACQ, SweepACQ or SCurve Test
-    TestSwitcher Switcher();
+    Switcher Switcher(
+      // Mode Select
+      .ModeSelect(),
+      // 10-bit DAC
+      .USBMicroroc10bitDAC0(),
+      .USBMicroroc10bitDAC1(),
+      .USBMicroroc10bitDAC2(),
+      .SCTest10bitDAC0(),
+      .SCTest10bitDAC1(),
+      .SCTest10bitDAC2(),
+      .SweepACQ10bitDAC0(),
+      .SweepACQ10bitDAC1(),
+      .SweepACQ10bitDAC2(),
+      // Channel and Discriminator Mask
+      .USBMicrorocChannelMask(),
+      .USBMicrorocDiscriMask(),
+      .SCTestChannelMask(),
+      .SCTestDiscriMask(),
+      .OutMicrorocChannelMask(),
+      .OutMicrorocDiscriMask(),
+      // CTest Channel
+      .USBMicrorocCTestChannel(),
+      .SCTestMicrorocCTestChannel(),
+      .OutMicrorocCTestChannel(),
+      // SC Parameters Load
+      .USBMicrorocSCParameterLoad(),
+      .SCTestMicrorocSCParameterLoad(),
+      .SweepACQMicrorocSCParameterLoad(),
+      .OutMicrorocSCParameterLoad(),
+      // SC or readreg
+      .USB_SC_or_Readreg(),
+      .OutMicrorocSC_or_Readreg(),
+      // USB Start
+      .USBMicreorocACQStartStop
+
+    );
     SweepACQ_Top SweepACQ(
       .Clk(),
       .reset_n(),
