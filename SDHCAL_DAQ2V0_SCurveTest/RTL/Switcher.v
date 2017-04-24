@@ -38,16 +38,16 @@ module Switcher(
     output [9:0] OutMicroroc10bitDAC1,
     output [9:0] OutMicroroc10bitDAC2,
     // Channel Discriminator Mask
-    input [6:0] USBMicrorocChannelMask,
+    input [191:0] USBMicrorocChannelMask,
     input [1:0] USBMicrorocDiscriMask,
-    input [6:0] SCTestChannelMask,
+    input [191:0] SCTestChannelMask,
     input [1:0] SCTestDiscriMask,
-    output [6:0] OutMicrorocChannelMask,
+    output [191:0] OutMicrorocChannelMask,
     output [1:0] OutMicrorocDiscriMask,
     // CTest Channel
-    input [6:0] USBMicrorocCTestChannel,
-    input [6:0] SCTestMicrorocCTestChannel,
-    output [6:0] OutMicrorocCTestChannel,
+    input [63:0] USBMicrorocCTestChannel,
+    input [63:0] SCTestMicrorocCTestChannel,
+    output [63:0] OutMicrorocCTestChannel,
     // SC Parameters Load
     input USBMicrorocSCParameterLoad,
     input SCTestMicrorocSCParameterLoad,
