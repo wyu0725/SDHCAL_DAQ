@@ -171,3 +171,84 @@ y2_txt = (2*max(Channel2_DAC) + min(Channel2_DAC))/3;
 x2_txt = max(Charge)/6;
 text('String',function2Str,'Position',[x2_txt y2_txt],'Interpreter','tex');
 hold off;
+
+% DeltaV0
+DeltaV0_Fit = DeltaV0(1:LinearDAC0);
+Rpv0 = corrcoef(DAC0_Charge_Fit, DeltaV0_Fit);
+Rv0 = Rpv0(2,1);
+xv0 = linspace(min(DAC0_Charge_Fit),max(DAC0_Charge_Fit));
+pv0 = polyfit(DAC0_Charge_Fit,DeltaV0_Fit,1);
+yv0 = polyval(pv0,xv0);
+figure(7)
+plot(Charge,DeltaV0,'r*');
+yv0_LinearFit = pv0(1)*DAC0_Charge_Fit + pv0(2);
+DNLv0 = (DeltaV0_Fit - yv0_LinearFit)/yv0_LinearFit(LinearDAC0);
+Max_DNLv0 = max(DNLv0);
+linear_legend_str = sprintf('DAC0:Linear fit of shaper output,MAX DNL:%2.3f%% -- ASIC ID£º%d ',Max_DNLv0*100, ASIC_ID);
+xlabel('Charge(fC)');
+hv0 = ylabel('Shaper output voltage ');
+set(hv0,'Interpreter','tex');
+hold on
+plot(xv0,yv0)
+hv0 = legend('Shaper0 output',linear_legend_str);
+set(hv0,'Location','northeast');
+function0Str = sprintf('Linearfit function: Shaper Output = %1.4f \\ast Charge',pv0(1));
+y0_txt = (2*max(Channel0_DAC) + min(Channel0_DAC))/3;
+x0_txt = max(Charge)/6;
+text('String',function0Str,'Position',[x0_txt y0_txt],'Interpreter','tex');
+title('Shaper0');
+hold off;
+
+% DeltaV1
+DeltaV1_Fit = DeltaV1(1:LinearDAC1);
+Rpv1 = corrcoef(DAC1_Charge_Fit, DeltaV1_Fit);
+Rv1 = Rpv1(2,1);
+xv1 = linspace(min(DAC1_Charge_Fit),max(DAC1_Charge_Fit));
+pv1 = polyfit(DAC1_Charge_Fit,DeltaV1_Fit,1);
+yv1 = polyval(pv1,xv1);
+figure(8)
+plot(Charge,DeltaV1,'r*');
+yv1_LinearFit = pv1(1)*DAC1_Charge_Fit + pv1(2);
+DNLv1 = (DeltaV1_Fit - yv1_LinearFit)/yv1_LinearFit(LinearDAC1);
+Max_DNLv1 = max(DNLv1);
+linear_legend_str = sprintf('DAC1:Linear fit of shaper output,MAX DNL:%2.3f%% -- ASIC ID£º%d ',Max_DNLv1*100, ASIC_ID);
+xlabel('Charge(fC)');
+hv1 = ylabel('Shaper output voltage ');
+set(hv1,'Interpreter','tex');
+hold on
+plot(xv1,yv1)
+hv1 = legend('Shaper1 output',linear_legend_str);
+set(hv1,'Location','northeast');
+function0Str = sprintf('Linearfit function: Shaper Output = %1.4f  \\ast Charge',pv1(1));
+y1_txt = (2*max(Channel1_DAC) + min(Channel1_DAC))/3;
+x1_txt = max(Charge)/6;
+text('String',function0Str,'Position',[x1_txt y1_txt],'Interpreter','tex');
+title('Shaper1');
+hold off;
+
+% DeltaV2
+DeltaV2_Fit = DeltaV2(1:LinearDAC2);
+Rpv2 = corrcoef(DAC2_Charge_Fit, DeltaV2_Fit);
+Rv2 = Rpv2(2,1);
+xv2 = linspace(min(DAC2_Charge_Fit),max(DAC2_Charge_Fit));
+pv2 = polyfit(DAC2_Charge_Fit,DeltaV2_Fit,1);
+yv2 = polyval(pv2,xv2);
+figure(9)
+plot(Charge,DeltaV2,'r*');
+yv2_LinearFit = pv2(1)*DAC2_Charge_Fit + pv2(2);
+DNLv2 = (DeltaV2_Fit - yv2_LinearFit)/yv2_LinearFit(LinearDAC2);
+Max_DNLv2 = max(DNLv2);
+linear_legend_str = sprintf('DAC2:Linear fit of shaper output,MAX DNL:%2.3f%% -- ASIC ID£º%d ',Max_DNLv2*100, ASIC_ID);
+xlabel('Charge(fC)');
+hv2 = ylabel('Shaper output voltage ');
+set(hv2,'Interpreter','tex');
+hold on
+plot(xv2,yv2)
+hv2 = legend('Shaper2 output',linear_legend_str);
+set(hv2,'Location','northeast');
+function0Str = sprintf('Linearfit function: Shaper Output = %1.4f \\ast Charge',pv2(1));
+y2_txt = (2*max(Channel2_DAC) + min(Channel2_DAC))/3;
+x2_txt = max(Charge)/6;
+text('String',function0Str,'Position',[x2_txt y2_txt],'Interpreter','tex');
+title('Shaper2');
+hold off;
