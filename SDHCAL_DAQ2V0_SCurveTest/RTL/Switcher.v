@@ -28,22 +28,19 @@ module Switcher(
     input [9:0] USBMicroroc10bitDAC0,
     input [9:0] USBMicroroc10bitDAC1,
     input [9:0] USBMicroroc10bitDAC2,
-    input [9:0] SCTest10bitDAC0,
-    input [9:0] SCTest10bitDAC1,
-    input [9:0] SCTest10bitDAC2,
-    input [9:0] SweepACQ10bitDAC0,
-    input [9:0] SweepACQ10bitDAC1,
-    input [9:0] SweepACQ10bitDAC2,
+    input [9:0] SCTest10bitDAC,
+    input [9:0] SweepACQ10bitDAC,
+    input [1:0] SweepACQDacSelect;
     output [9:0] OutMicroroc10bitDAC0,
     output [9:0] OutMicroroc10bitDAC1,
     output [9:0] OutMicroroc10bitDAC2,
     // Channel Discriminator Mask
     input [191:0] USBMicrorocChannelMask,
-    input [1:0] USBMicrorocDiscriMask,
+    //input [1:0] USBMicrorocDiscriMask,
     input [191:0] SCTestChannelMask,
-    input [1:0] SCTestDiscriMask,
+    //input [1:0] SCTestDiscriMask,
     output [191:0] OutMicrorocChannelMask,
-    output [1:0] OutMicrorocDiscriMask,
+    //output [1:0] OutMicrorocDiscriMask,
     // CTest Channel
     input [63:0] USBMicrorocCTestChannel,
     input [63:0] SCTestMicrorocCTestChannel,
@@ -87,7 +84,7 @@ module Switcher(
           OutMicroroc10bitDAC1 = USBMicroroc10bitDAC1;
           OutMicroroc10bitDAC2 = USBMicroroc10bitDAC2;
           OutMicrorocChannelMask = USBMicrorocChannelMask;
-          OutMicrorocDiscriMask = USBMicrorocDiscriMask;
+          //OutMicrorocDiscriMask = USBMicrorocDiscriMask;
           OutMicrorocCTestChannel = USBMicrorocCTestChannel;
           OutMicrorocSCParameterLoad = USBMicrorocSCParameterLoad;
           OutMicroroc_SC_or_Readreg = USB_SC_or_Readreg;
@@ -99,11 +96,11 @@ module Switcher(
           ParallelData_en = 1'b0;
         end
         SCurveMode:begin
-          OutMicroroc10bitDAC0 = SCTest10bitDAC0;
-          OutMicroroc10bitDAC1 = SCTest10bitDAC1;
-          OutMicroroc10bitDAC2 = SCTest10bitDAC2;
+          OutMicroroc10bitDAC0 = SCTest10bitDAC;
+          OutMicroroc10bitDAC1 = SCTest10bitDAC;
+          OutMicroroc10bitDAC2 = SCTest10bitDAC;
           OutMicrorocChannelMask = SCTestMicrorocChannelMask;
-          OutMicrorocDiscriMask = SCTestMicrorocDiscriMask;
+          //OutMicrorocDiscriMask = SCTestMicrorocDiscriMask;
           OutMicrorocCTestChannel = SCTestMicrorocCTestChannel;
           OutMicrorocSCParameterLoad = SCTestMicrorocSCParameterLoad;
           OutMicroroc_SC_or_Readreg = 1'b0; //SC
@@ -119,7 +116,7 @@ module Switcher(
           OutMicroroc10bitDAC1 = SweepACQ10bitDAC1;
           OutMicroroc10bitDAC2 = SweepACQ10bitDAC2;
           OutMicrorocChannelMask = USBMicrorocChannelMask;
-          OutMicrorocDiscriMask = USBMicrorocDiscriMask;
+          //OutMicrorocDiscriMask = USBMicrorocDiscriMask;
           OutMicrorocCTestChannel = USBMicrorocCTestChannel;
           OutMicrorocSCParameterLoad = SweepACQMicrorocSCParameterLoad;
           OutMicroroc_SC_or_Readreg = 1'b0; // SC
@@ -135,7 +132,7 @@ module Switcher(
           OutMicroroc10bitDAC1 = USBMicroroc10bitDAC1;
           OutMicroroc10bitDAC2 = USBMicroroc10bitDAC2;
           OutMicrorocChannelMask = USBMicrorocChannelMask;
-          OutMicrorocDiscriMask = USBMicrorocDiscriMask;
+          //OutMicrorocDiscriMask = USBMicrorocDiscriMask;
           OutMicrorocCTestChannel = USBMicrorocCTestChannel;
           OutMicrorocSCParameterLoad = USBMicrorocSCParameterLoad;
           OutMicroroc_SC_or_Readreg = USB_SC_or_Readreg;

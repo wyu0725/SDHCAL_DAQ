@@ -76,32 +76,37 @@ module Controller_Top(
     input out_trigger2b
     );
     // Switcher for ACQ, SweepACQ or SCurve Test
+    wire [9:0] SCTest10bitDAC0;
+    wire [9:0] SweepACQ10bitDAC0;
+    // Channel Mask
+    wire [191:0] SCTestChannelMask;
+    // CTest Channel
+    wire [63:0] SCTestMicrorocCTestChannel;
     Switcher Switcher(
       // Mode Select
-      .ModeSelect(),
+      .ModeSelect(ModeSelect),
       // 10-bit DAC
-      .USBMicroroc10bitDAC0(),
-      .USBMicroroc10bitDAC1(),
-      .USBMicroroc10bitDAC2(),
-      .SCTest10bitDAC0(),
-      .SCTest10bitDAC1(),
-      .SCTest10bitDAC2(),
-      .SweepACQ10bitDAC0(),
-      .SweepACQ10bitDAC1(),
-      .SweepACQ10bitDAC2(),
+      .USBMicroroc10bitDAC0(USBMicroroc10bitDAC0),
+      .USBMicroroc10bitDAC1(USBMicroroc10bitDAC1),
+      .USBMicroroc10bitDAC2(USBMicroroc10bitDAC2),
+      .SCTest10bitDAC0(SCTest10bitDAC0),
+      .SweepACQ10bitDAC0(SweepACQ10bitDAC0),
+      .OutMicroroc10bitDAC0(OutMicroroc10bitDAC0),
+      .OutMicroroc10bitDAC1(OutMicroroc10bitDAC1),
+      .OutMicroroc10bitDAC2(OutMicroroc10bitDAC2),
       // Channel and Discriminator Mask
-      .USBMicrorocChannelMask(),
+      .USBMicrorocChannelMask(USBMicrorocChannelMask),
       //.USBMicrorocDiscriMask(),
-      .SCTestChannelMask(),
+      .SCTestChannelMask(SCTestChannelMask),
       //.SCTestDiscriMask(),
-      .OutMicrorocChannelMask(),
+      .OutMicrorocChannelMask(OutMicrorocChannelMask),
       //.OutMicrorocDiscriMask(),
       // CTest Channel
-      .USBMicrorocCTestChannel(),
-      .SCTestMicrorocCTestChannel(),
-      .OutMicrorocCTestChannel(),
+      .USBMicrorocCTestChannel(USBMicrorocCTestChannel),
+      .SCTestMicrorocCTestChannel(SCTestMicrorocCTestChannel),
+      .OutMicrorocCTestChannel(OutMicrorocCTestChannel),
       // SC Parameters Load
-      .USBMicrorocSCParameterLoad(),
+      .USBMicrorocSCParameterLoad(USBMicrorocSCParameterLoad),
       .SCTestMicrorocSCParameterLoad(),
       .SweepACQMicrorocSCParameterLoad(),
       .OutMicrorocSCParameterLoad(),
