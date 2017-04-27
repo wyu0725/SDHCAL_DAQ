@@ -1,8 +1,5 @@
-%% SCurve Plot
-% function SCurvePlot
+% SCurve Plot
 InitialData = Importdata();
-%Test_Header = InitialData(1);
-%[Test_Channel, DAC_Code, P0, T0, P1, T1, P2, T2] = ReadData(InitialData, 2);
 [~, DAC_Code, P0, T0, P1, T1, P2, T2] = ReadData(InitialData, 2);
 %DAC_Code1 = 1:1:1024;
 Trig_Ratio0 = (T0./P0).*100 ;
@@ -11,12 +8,7 @@ Trig_Ratio2 = (T2./P2).*100;
 [Start0, Middle0, End0] = FindStartMidEnd(Trig_Ratio0, 50);
 [Start1, Middle1, End1] = FindStartMidEnd(Trig_Ratio1, 50);
 [Start2, Middle2, End2] = FindStartMidEnd(Trig_Ratio2, 50);
-% x0_S = Start0 - 10;
-% x0_E = End0 + 10;
-% x1_S = Start0 - 10;
-% x1_E = End0 + 10;
-% x2_S = Start2 - 10;
-% x2_E = End2 + 10;
+
 Legend_Trig0 = sprintf('Trigger0:Trigger Rate vs DAC Code\n Middle of trigger rate is :%f', Middle0);
 Legend_Trig1 = sprintf('Trigger1:Trigger Rate vs DAC Code\n Middle of trigger rate is :%f', Middle1);
 Legend_Trig2 = sprintf('Trigger2:Trigger Rate vs DAC Code\n Middle of trigger rate is :%f', Middle2);
