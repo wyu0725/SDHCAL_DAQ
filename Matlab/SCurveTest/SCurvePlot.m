@@ -17,43 +17,45 @@ Trig_Ratio2 = (T2./P2).*100;
 % x1_E = End0 + 10;
 % x2_S = Start2 - 10;
 % x2_E = End2 + 10;
-% Legend_Trig0 = sprintf('Trigger0:Trigger Rate vs DAC Code\n Middle of trigger rate is :%f', Middle0);
-% Legend_Trig1 = sprintf('Trigger1:Trigger Rate vs DAC Code\n Middle of trigger rate is :%f', Middle1);
-% Legend_Trig2 = sprintf('Trigger2:Trigger Rate vs DAC Code\n Middle of trigger rate is :%f', Middle2);
- Trig0_DAC = trig_efficiency( DAC_Code,Trig_Ratio0,50);
- Trig1_DAC = trig_efficiency( DAC_Code,Trig_Ratio1,50);
- Trig2_DAC = trig_efficiency( DAC_Code,Trig_Ratio2,50);
-Trig0_str = sprintf('Trig0 50 percent trigger efficiency = %d',round(Trig0_DAC));
-Trig1_str = sprintf('Trig1 50 percent trigger efficiency = %d',round(Trig1_DAC));
-Trig2_str = sprintf('Trig2 50 percent trigger efficiency = %d',round(Trig2_DAC));
+Legend_Trig0 = sprintf('Trigger0:Trigger Rate vs DAC Code\n Middle of trigger rate is :%f', Middle0);
+Legend_Trig1 = sprintf('Trigger1:Trigger Rate vs DAC Code\n Middle of trigger rate is :%f', Middle1);
+Legend_Trig2 = sprintf('Trigger2:Trigger Rate vs DAC Code\n Middle of trigger rate is :%f', Middle2);
+%  Trig0_DAC = trig_efficiency( DAC_Code,Trig_Ratio0,50);
+%  Trig1_DAC = trig_efficiency( DAC_Code,Trig_Ratio1,50);
+%  Trig2_DAC = trig_efficiency( DAC_Code,Trig_Ratio2,50);
+% Trig0_str = sprintf('Trig0 50 percent trigger efficiency = %d',round(Trig0_DAC));
+% Trig1_str = sprintf('Trig1 50 percent trigger efficiency = %d',round(Trig1_DAC));
+% Trig2_str = sprintf('Trig2 50 percent trigger efficiency = %d',round(Trig2_DAC));
 
-plot(DAC_Code, Trig_Ratio0,'k*-');
-hold on;
-plot(DAC_Code, Trig_Ratio1,'b*-');
-hold on;
-plot(DAC_Code, Trig_Ratio2,'r*-');
-hold off;
-axis([0 1024, -10 110]);
-xlabel('\bfDAC Code');
-ylabel('\bfTrigger efficiency (%)');
-h = legend('Trig0','Trig1','Trig2');
-set(h, 'Location','southeast')
-title('\bfS-Curve Test, 80fC');
-text(600,80,Trig0_str);
-text(600,70,Trig1_str);
-text(600,60,Trig2_str);
-% figure(1)
 % plot(DAC_Code, Trig_Ratio0,'k*-');
-% axis([x0_S x0_E, -0.2 1.2])
-% h = legend(Legend_Trig0);
-% set(h,'Location','northoutside');
-% figure(2)
-% plot(DAC_Code, Trig_Ratio1,'k*-');
+% hold on;
+% plot(DAC_Code, Trig_Ratio1,'b*-');
+% hold on;
+% plot(DAC_Code, Trig_Ratio2,'r*-');
+% hold off;
+% axis([0 1024, -10 110]);
+% xlabel('\bfDAC Code');
+% ylabel('\bfTrigger efficiency (%)');
+% h = legend('Trig0','Trig1','Trig2');
+% set(h, 'Location','southeast')
+% title('\bfS-Curve Test, 80fC');
+% text(600,80,Trig0_str);
+% text(600,70,Trig1_str);
+% text(600,60,Trig2_str);
+figure(1)
+plot(DAC_Code, Trig_Ratio0,'r*-');
+axis([580 630, -10 110]);
+h = legend(Legend_Trig0);
+set(h,'Location','northwest');
+figure(2)
+plot(DAC_Code, Trig_Ratio1,'b*-');
+axis([580 630, -10 110]);
 % axis([x1_S x1_E, -0.2 1.2])
-% h = legend(Legend_Trig1);
-% set(h,'Location','northoutside');
-% figure(3)
-% plot(DAC_Code, Trig_Ratio2,'k*-');
+h = legend(Legend_Trig1);
+set(h,'Location','northwest');
+figure(3)
+plot(DAC_Code, Trig_Ratio2,'k*-');
+axis([580 630, -10 110]);
 % axis([x2_S x2_E, -0.2 1.2])
-% h = legend(Legend_Trig2);
-% set(h,'Location','northoutside');
+h = legend(Legend_Trig2);
+set(h,'Location','northwest');
