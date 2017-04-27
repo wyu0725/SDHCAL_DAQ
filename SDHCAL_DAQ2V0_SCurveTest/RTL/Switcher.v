@@ -23,123 +23,128 @@
 module Switcher(
     // ModeSelect
     input [1:0] ModeSelect,
+    input [1:0] DacSelect,
     // --- SC Parameters--- //
     // 10-bits DAC
-    input [9:0] USBMicroroc10bitDAC0,
-    input [9:0] USBMicroroc10bitDAC1,
-    input [9:0] USBMicroroc10bitDAC2,
-    input [9:0] SCTest10bitDAC,
-    input [9:0] SweepACQ10bitDAC,
-    input [1:0] SweepACQDacSelect;
-    output [9:0] OutMicroroc10bitDAC0,
-    output [9:0] OutMicroroc10bitDAC1,
-    output [9:0] OutMicroroc10bitDAC2,
+    input [9:0] UsbMicroroc10BitDac0,
+    input [9:0] UsbMicroroc10BitDac1,
+    input [9:0] UsbMicroroc10BitDac2,
+    input [9:0] SCTest10BitDac,
+    input [9:0] SweepAcq10BitDac,
+    input [1:0] SweepAcqDacSelect;
+    output [9:0] OutMicroroc10BitDac0,
+    output [9:0] OutMicroroc10BitDac1,
+    output [9:0] OutMicroroc10BitDac2,
     // Channel Discriminator Mask
-    input [191:0] USBMicrorocChannelMask,
+    input [191:0] UsbMicrorocChannelMask,
     //input [1:0] USBMicrorocDiscriMask,
-    input [191:0] SCTestChannelMask,
+    input [191:0] SCTestMicrorocChannelMask,
     //input [1:0] SCTestDiscriMask,
     output [191:0] OutMicrorocChannelMask,
     //output [1:0] OutMicrorocDiscriMask,
     // CTest Channel
-    input [63:0] USBMicrorocCTestChannel,
+    input [63:0] UsbMicrorocCTestChannel,
     input [63:0] SCTestMicrorocCTestChannel,
     output [63:0] OutMicrorocCTestChannel,
     // SC Parameters Load
-    input USBMicrorocSCParameterLoad,
+    input UsbMicrorocSCParameterLoad,
     input SCTestMicrorocSCParameterLoad,
-    input SweepACQMicrorocSCParameterLoad,
+    input SweepAcqMicrorocSCParameterLoad,
     output OutMicrorocSCParameterLoad,
     // SC or Read Register Select
-    input USB_SC_or_Readreg,
-    output OutMicroroc_SC_or_Readreg,
+    input UsbSCOrReadreg,
+    output OutMicrorocSCOrReadreg,
     // USB Start
-    input USBMicrorocACQStartStop,
-    input SweepTestUSBStartStop,
-    output USBStartStop,
+    input UsbMicrorocAcqStartStop,
+    input SweepTestUsbStartStop,
+    output OutUsbStartStop,
     // Microroc ACQ Start
-    input SweepACQMicrorocACQStartStop,
-    output MicrorocACQStartStop,
+    input SweepAcqMicrorocAcqStartStop,
+    output MicrorocAcqStartStop,
     // USB Data
-    input [15:0] MicrorocACQData,
-    input MicrorocACQData_en,
-    input [15:0] SweepACQData,
-    input SweepACQData_en,
+    input [15:0] MicrorocAcqData,
+    input MicrorocAcqData_en,
+    input [15:0] SweepAcqData,
+    input SweepAcqData_en,
     input [15:0] SCTestData,
     input SCTestData_en,
-    output [15:0] USBFifoData,
-    output USBFifoData_en,
+    output [15:0] UsbFifoData,
+    output UsbFifoData_en,
     output [15:0] ParallelData,
     output ParallelData_en
     );
     // Mux4
-    localparam [1:0] ACQMode = 2'b00,
-                     SCurveMode = 2'b01,
-                     SweepACQMode = 2'b10;
+    localparam [1:0] ACQ_MODE = 2'b00,
+                     SCURVE_MODE = 2'b01,
+                     SWEEP_ACQ_MODE = 2'b10;
                      //None = 2'b11;
+    localparam [1:0] NONE_DAC = '2'b00,
+                     DAC0_SELECTED = 2'b01,
+                     DAC1_SELECTED = 2'b10,
+                     DAC2_SELECTED = 2'b11;
     always @(*) begin
       case(ModeSelect)
-        ACQMode:begin
-          OutMicroroc10bitDAC0 = USBMicroroc10bitDAC0;
-          OutMicroroc10bitDAC1 = USBMicroroc10bitDAC1;
-          OutMicroroc10bitDAC2 = USBMicroroc10bitDAC2;
-          OutMicrorocChannelMask = USBMicrorocChannelMask;
+        ACQ_MODE:begin
+          OutMicroroc10BitDac0 = UsbMicroroc10BitDac0;
+          OutMicroroc10BitDac1 = UsbMicroroc10BitDac1;
+          OutMicroroc10BitDac2 = UsbMicroroc10BitDac2;
+          OutMicrorocChannelMask = UsbMicrorocChannelMask;
           //OutMicrorocDiscriMask = USBMicrorocDiscriMask;
-          OutMicrorocCTestChannel = USBMicrorocCTestChannel;
-          OutMicrorocSCParameterLoad = USBMicrorocSCParameterLoad;
-          OutMicroroc_SC_or_Readreg = USB_SC_or_Readreg;
-          USBStartStop = USBMicrorocACQStartStop;
-          MicrorocACQStartStop = USBMicrorocACQStartStop;
-          USBFifoData = MicrorocACQData;
-          USBFifoData_en = MicrorocACQData_en;
+          OutMicrorocCTestChannel = UsbMicrorocCTestChannel;
+          OutMicrorocSCParameterLoad = UsbMicrorocSCParameterLoad;
+          OutMicrorocSCOrReadreg = UsbSCOrReadreg;
+          OutUsbStartStop = UsbMicrorocAcqStartStop;
+          MicrorocAcqStartStop = UsbMicrorocAcqStartStop;
+          UsbFifoData = MicrorocAcqData;
+          UsbFifoData_en = MicrorocAcqData_en;
           ParallelData = 16'b0;
           ParallelData_en = 1'b0;
         end
-        SCurveMode:begin
-          OutMicroroc10bitDAC0 = SCTest10bitDAC;
-          OutMicroroc10bitDAC1 = SCTest10bitDAC;
-          OutMicroroc10bitDAC2 = SCTest10bitDAC;
+        SCURVE_MODE:begin
+          OutMicroroc10BitDac0 = SCTest10BitDac;
+          OutMicroroc10BitDac1 = SCTest10BitDac;
+          OutMicroroc10BitDac2 = SCTest10BitDac;
           OutMicrorocChannelMask = SCTestMicrorocChannelMask;
           //OutMicrorocDiscriMask = SCTestMicrorocDiscriMask;
           OutMicrorocCTestChannel = SCTestMicrorocCTestChannel;
           OutMicrorocSCParameterLoad = SCTestMicrorocSCParameterLoad;
-          OutMicroroc_SC_or_Readreg = 1'b0; //SC
-          USBStartStop = SweepTestUSBStartStop;
-          MicrorocACQStartStop = 1'b0;
-          USBFifoData = SCTestData;
-          USBFifoData_en = SCTestData_en;
+          OutMicrorocSCOrReadreg = 1'b0; //SC
+          OutUsbStartStop = SweepTestUsbStartStop;
+          MicrorocAcqStartStop = 1'b0;
+          UsbFifoData = SCTestData;
+          UsbFifoData_en = SCTestData_en;
           ParallelData = 16'b0;
           ParallelData_en = 1'b0;
         end
-        SweepACQMode:begin
-          OutMicroroc10bitDAC0 = SweepACQ10bitDAC0;
-          OutMicroroc10bitDAC1 = SweepACQ10bitDAC1;
-          OutMicroroc10bitDAC2 = SweepACQ10bitDAC2;
-          OutMicrorocChannelMask = USBMicrorocChannelMask;
+        SWEEP_ACQ_MODE:begin
+          OutMicroroc10BitDac0 = (DacSelect == DAC0_SELECTED) ? SweepAcq10BitDac : UsbMicroroc10BitDac0;
+          OutMicroroc10BitDac1 = (DacSelect == DAC1_SELECTED) ? SweepAcq10BitDac : UsbMicroroc10BitDac1;
+          OutMicroroc10BitDac2 = (DacSelect == DAC2_SELECTED) ? SweepAcq10BitDac : UsbMicroroc10BitDac2;
+          OutMicrorocChannelMask = UsbMicrorocChannelMask;
           //OutMicrorocDiscriMask = USBMicrorocDiscriMask;
-          OutMicrorocCTestChannel = USBMicrorocCTestChannel;
-          OutMicrorocSCParameterLoad = SweepACQMicrorocSCParameterLoad;
-          OutMicroroc_SC_or_Readreg = 1'b0; // SC
-          USBStartStop = SweepTestUSBStartStop;
-          MicrorocACQStartStop = SweepACQMicrorocACQStartStop;
-          USBFifoData = SweepACQData;
-          USBFifoData_en = SweepACQData_en;
-          ParallelData = MicrorocACQData;
-          ParallelData_en = MicrorocACQData_en;
+          OutMicrorocCTestChannel = UsbMicrorocCTestChannel;
+          OutMicrorocSCParameterLoad = SweepAcqMicrorocSCParameterLoad;
+          OutMicrorocSCOrReadreg = 1'b0; // SC
+          OutUsbStartStop = SweepTestUsbStartStop;
+          MicrorocAcqStartStop = SweepAcqMicrorocAcqStartStop;
+          UsbFifoData = SweepAcqData;
+          UsbFifoData_en = SweepAcqData_en;
+          ParallelData = MicrorocAcqData;
+          ParallelData_en = MicrorocAcqData_en;
         end
         default:begin
-          OutMicroroc10bitDAC0 = USBMicroroc10bitDAC0;
-          OutMicroroc10bitDAC1 = USBMicroroc10bitDAC1;
-          OutMicroroc10bitDAC2 = USBMicroroc10bitDAC2;
-          OutMicrorocChannelMask = USBMicrorocChannelMask;
+          OutMicroroc10BitDac0 = UsbMicroroc10BitDac0;
+          OutMicroroc10BitDac1 = UsbMicroroc10BitDac1;
+          OutMicroroc10BitDac2 = UsbMicroroc10BitDac2;
+          OutMicrorocChannelMask = UsbMicrorocChannelMask;
           //OutMicrorocDiscriMask = USBMicrorocDiscriMask;
-          OutMicrorocCTestChannel = USBMicrorocCTestChannel;
-          OutMicrorocSCParameterLoad = USBMicrorocSCParameterLoad;
-          OutMicroroc_SC_or_Readreg = USB_SC_or_Readreg;
-          USBStartStop = USBMicrorocACQStartStop;
-          MicrorocACQStartStop = USBMicrorocACQStartStop;
-          USBFifoData = MicrorocACQData;
-          USBFifoData_en = MicrorocACQData_en;
+          OutMicrorocCTestChannel = UsbMicrorocCTestChannel;
+          OutMicrorocSCParameterLoad = UsbMicrorocSCParameterLoad;
+          OutMicrorocSCOrReadreg = UsbSCOrReadreg;
+          OutUsbStartStop = UsbMicrorocAcqStartStop;
+          MicrorocAcqStartStop = UsbMicrorocAcqStartStop;
+          UsbFifoData = MicrorocAcqData;
+          UsbFifoData_en = MicrorocAcqData_en;
           ParallelData = 16'b0;
           ParallelData_en = 1'b0;
         end
