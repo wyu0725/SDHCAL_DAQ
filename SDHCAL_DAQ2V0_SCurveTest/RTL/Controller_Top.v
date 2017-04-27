@@ -25,49 +25,50 @@ module Controller_Top(
     input reset_n,
     // Mode Select
     input [1:0] ModeSelect,
+    input [1:0] DACSelect,
     // Microroc SC Parameter
-    input [9:0] USBMicroroc10bitDAC0,
-    input [9:0] USBMicroroc10bitDAC1,
-    input [9:0] USBMicroroc10bitDAC2,
-    output [9:0] OutMicroroc10bitDAC0,
-    output [9:0] OutMicroroc10bitDAC1,
-    output [9:0] OutMicroroc10bitDAC2,
-    input [191:0] USBMicrorocChannelMask,
-    //input [1:0] USBMicrorocDiscriMask,
+    input [9:0] UsbMicroroc10BitDac0,
+    input [9:0] UsbMicroroc10BitDac1,
+    input [9:0] UsbMicroroc10BitDac2,
+    output [9:0] OutMicroroc10BitDac0,
+    output [9:0] OutMicroroc10BitDac1,
+    output [9:0] OutMicroroc10BitDac2,
+    input [191:0] UsbMicrorocChannelMask,
     output [191:0] OutMicrorocChannelMask,
-    //output [1:0] OutMicrorocDiscriMask,
-    input [63:0] USBMicrorocCTestChannel,
+    input [63:0] UsbMicrorocCTestChannel,
     output [63:0] OutMicrorocCTestChannel,
-    input USBMicrorocSCParameterLoad,
+    input UsbMicrorocSCParameterLoad,
     output OutMicrorocSCParameterLoad,
-    input USB_SC_or_Readreg,
-    output Microroc_SC_or_Readreg,
+    input UsbScOrReadreg,
+    output MicrorocSCOrReadreg,
     input MicrorocConfigDone,
     // Microroc ACQ Control and Data
     output MicrorocAcqStartStop,
     input [15:0] MicrorocACQData,
-    input MicrorocACQData_en,
+    input MicrorocAcqData_en,
     // USB Interface
     input nPKTEND,
-    input USBDataFifoFull,
+    input UsbDataFifoFull,
     output [15:0] OutUsbExtFifoData,
     output OutUsbExtFifoData_en,
-    output UsbStartStop,
+    output OutUsbStartStop,
+    // Sweep Test Start Signal
+    input SweepTestStartStop
     // The following ports is set for SweepACQ and SCurve Test
     input SweepStart,
-    input StartDAC,
-    input EndDAC,
+    input StartDac,
+    input EndDac,
     output SweepTestDone,
     input DataTransmitDone,
     // Sweep ACQ
     input [15:0] MaxPakageNumber,
     //SCurve Test
-    input TrigEffi_or_CountEffi,
+    input TrigEffiOrCountEffi,
     input [5:0] SingleTestChannel,
-    input Single_or_64Chn,
-    input CTest_or_Input,
+    input SingleOr64Chn,
+    input CTestOrInput,
     input [15:0] CPT_MAX,
-    input [15:0] CounterMAX,
+    input [15:0] CounterMax,
     output ForceExtRaz,
       // Pin
     input CLK_EXT,
@@ -76,50 +77,75 @@ module Controller_Top(
     input out_trigger2b
     );
     // Switcher for ACQ, SweepACQ or SCurve Test
-    wire [9:0] SCTest10bitDAC0;
-    wire [9:0] SweepACQ10bitDAC0;
+    wire [9:0] SCTest10BitDac;
+    wire [9:0] SweepAcq10BitDac;
     // Channel Mask
     wire [191:0] SCTestChannelMask;
     // CTest Channel
     wire [63:0] SCTestMicrorocCTestChannel;
+    // SC Parameter Load
+    wire SCTestMicrorocSCParameterLoad;
+    wire SweepAcqMicrorocSCParameterLoad;
+    // Usb Start Stop
+    wire SweepTestUsbStartyStop;
+    // Microroc ACQ Start Stop
+    wire SweepAcqMicrorocAcqStatStop;
+    // Data
+    wire [15:0] SweepAcqData;
+    wire SweepAcqData_en;
+    wire [15:0] SCTestData;
+    wire SCTestData_en;
     Switcher Switcher(
       // Mode Select
       .ModeSelect(ModeSelect),
+      .DacSelect(DacSelect),
       // 10-bit DAC
-      .USBMicroroc10bitDAC0(USBMicroroc10bitDAC0),
-      .USBMicroroc10bitDAC1(USBMicroroc10bitDAC1),
-      .USBMicroroc10bitDAC2(USBMicroroc10bitDAC2),
-      .SCTest10bitDAC0(SCTest10bitDAC0),
-      .SweepACQ10bitDAC0(SweepACQ10bitDAC0),
-      .OutMicroroc10bitDAC0(OutMicroroc10bitDAC0),
-      .OutMicroroc10bitDAC1(OutMicroroc10bitDAC1),
-      .OutMicroroc10bitDAC2(OutMicroroc10bitDAC2),
+      .UsbMicroroc10BitDac0(UsbMicroroc10BitDac0),
+      .UsbMicroroc10BitDac1(UsbMicroroc10BitDac1),
+      .UsbMicroroc10BitDac2(UsbMicroroc10BitDac2),
+      .SCTest10BitDAC(SCTest10BitDac),
+      .SweepACQ10BitDac(SweepAcq10BitDac),
+      .OutMicroroc10BitDac0(OutMicroroc10BitDac0),
+      .OutMicroroc10BitDac1(OutMicroroc10BitDac1),
+      .OutMicroroc10BitDac2(OutMicroroc10BitDac2),
       // Channel and Discriminator Mask
-      .USBMicrorocChannelMask(USBMicrorocChannelMask),
-      //.USBMicrorocDiscriMask(),
+      .UsbMicrorocChannelMask(UsbMicrorocChannelMask),
       .SCTestChannelMask(SCTestChannelMask),
-      //.SCTestDiscriMask(),
       .OutMicrorocChannelMask(OutMicrorocChannelMask),
-      //.OutMicrorocDiscriMask(),
       // CTest Channel
-      .USBMicrorocCTestChannel(USBMicrorocCTestChannel),
+      .UsbMicrorocCTestChannel(UsbMicrorocCTestChannel),
       .SCTestMicrorocCTestChannel(SCTestMicrorocCTestChannel),
       .OutMicrorocCTestChannel(OutMicrorocCTestChannel),
       // SC Parameters Load
-      .USBMicrorocSCParameterLoad(USBMicrorocSCParameterLoad),
-      .SCTestMicrorocSCParameterLoad(),
-      .SweepACQMicrorocSCParameterLoad(),
-      .OutMicrorocSCParameterLoad(),
+      .UsbMicrorocSCParameterLoad(UsbMicrorocSCParameterLoad),
+      .SCTestMicrorocSCParameterLoad(SCTestMicrorocSCparameterLoad),
+      .SweepAcqMicrorocSCParameterLoad(SweepAcqSCParameterLoad),
+      .OutMicrorocSCParameterLoad(OutMicrorocSCParameterLoad),
       // SC or readreg
-      .USB_SC_or_Readreg(),
-      .OutMicrorocSC_or_Readreg(),
+      .UsbSCOrReadreg(UsbSCOrReadreg),
+      .OutMicrorocSCOrReadreg(OutMicrorocSCOrReadreg),
       // USB Start
-      .USBMicreorocACQStartStop
-
+      .UsbMicreorocAcqStartStop(UsbMicrorocAcqStartStop),
+      .SweepTestUsbStartStop(SweepTestUsbStartStop),
+      .OutUsbStartStop(OutUsbStartStop),
+      // Microroc ACQ Start
+      .SweepAcqMicrorocACQStartStop(SweepAcqMicrorocAcqStartStop),
+      .MicrorocAcqStartStop(MicrorocAcqStartStop),
+      // USB Data
+      .MicrorocAcqData(MicrorocAcqData),
+      .MicrorocAcqData_en(MicrorocAcqData_en),
+      .SweepAcqData(SweepAcqData),
+      .SweepAcqData_en(SweepAcqData_en),
+      .SCTestData(SCTestData),
+      .SCTestData_en(SCTestData_en),
+      .UsbFifoData(OutUsbExtFifoData),
+      .UsbFifoData_en(OutUsbExtFifoData_en),
+      .ParallelData(MicrorocAcqData),
+      .ParallelData_en(MicrorocAcqData_en)
     );
     SweepACQ_Top SweepACQ(
-      .Clk(),
-      .reset_n(),
+      .Clk(Clk),
+      .reset_n(reset_n),
       // ACQ Control
       .SweepStart(),
       .SingleACQStart(),
