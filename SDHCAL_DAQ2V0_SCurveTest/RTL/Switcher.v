@@ -54,8 +54,12 @@ module Switcher(
     // SC or Read Register Select
     input UsbSCOrReadreg,
     output OutMicrorocSCOrReadreg,
-    // USB Start
+    // Start Signel
     input UsbMicrorocAcqStartStop,
+    input UsbSweepTestStartStop,
+    output OutSCTestStartStop,
+    // USB Start
+    input UsbMicrorocUsbStartStop,
     input SweepTestUsbStartStop,
     output OutUsbStartStop,
     // Microroc ACQ Start
@@ -93,7 +97,7 @@ module Switcher(
           OutMicrorocCTestChannel = UsbMicrorocCTestChannel;
           OutMicrorocSCParameterLoad = UsbMicrorocSCParameterLoad;
           OutMicrorocSCOrReadreg = UsbSCOrReadreg;
-          OutUsbStartStop = UsbMicrorocAcqStartStop;
+          OutUsbStartStop = UsbMicrorocUsbStartStop;
           MicrorocAcqStartStop = UsbMicrorocAcqStartStop;
           UsbFifoData = MicrorocAcqData;
           UsbFifoData_en = MicrorocAcqData_en;
