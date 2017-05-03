@@ -1,6 +1,6 @@
 % SCurve Plot
 InitialData = Importdata();
-[~, DAC_Code, P0, T0, P1, T1, P2, T2] = ReadData(InitialData, 2);
+[~, DAC_Code, P0, T0, P1, T1, P2, T2] = ReadData(InitialData, 2 + 7169*10);
 %DAC_Code1 = 1:1:1024;
 Trig_Ratio0 = (T0./P0).*100 ;
 Trig_Ratio1 = (T1./P1).*100;
