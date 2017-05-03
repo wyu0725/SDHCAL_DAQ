@@ -58,9 +58,15 @@ module Switcher(
     input UsbMicrorocAcqStartStop,
     input UsbSweepTestStartStop,
     output OutSCTestStartStop,
-    output 
+    output OutSweepAcqStartStop,
+    // Done Signal
+    input SCTestDone,
+    input SweepAcqDone,
+    output SweepTestDone,
+    //input DataTransmitDone,
+    //output OutNormalAcqStartStop,
     // USB Start
-    input UsbMicrorocUsbStartStop,
+    //input UsbMicrorocUsbStartStop,
     input SweepTestUsbStartStop,
     output OutUsbStartStop,
     // Microroc ACQ Start
@@ -83,7 +89,7 @@ module Switcher(
                      SCURVE_MODE = 2'b01,
                      SWEEP_ACQ_MODE = 2'b10;
                      //None = 2'b11;
-    localparam [1:0] NONE_DAC = '2'b00,
+    localparam [1:0] NONE_DAC = 2'b00,
                      DAC0_SELECTED = 2'b01,
                      DAC1_SELECTED = 2'b10,
                      DAC2_SELECTED = 2'b11;
@@ -94,11 +100,14 @@ module Switcher(
           OutMicroroc10BitDac1 = UsbMicroroc10BitDac1;
           OutMicroroc10BitDac2 = UsbMicroroc10BitDac2;
           OutMicrorocChannelMask = UsbMicrorocChannelMask;
-          //OutMicrorocDiscriMask = USBMicrorocDiscriMask;
           OutMicrorocCTestChannel = UsbMicrorocCTestChannel;
           OutMicrorocSCParameterLoad = UsbMicrorocSCParameterLoad;
           OutMicrorocSCOrReadreg = UsbSCOrReadreg;
-          OutUsbStartStop = UsbMicrorocUsbStartStop;
+          OutSCTestStartStop = 1'b0;
+          OutSweepAcqStartStop = 1'b0;
+          SweepTestDone = 1'b0;
+          //OutNormalAcqStartStop = UsbMicrorocAcqStartStop;
+          OutUsbStartStop = UsbMicrorocAcqStartStop;
           MicrorocAcqStartStop = UsbMicrorocAcqStartStop;
           UsbFifoData = MicrorocAcqData;
           UsbFifoData_en = MicrorocAcqData_en;
@@ -114,6 +123,9 @@ module Switcher(
           OutMicrorocCTestChannel = SCTestMicrorocCTestChannel;
           OutMicrorocSCParameterLoad = SCTestMicrorocSCParameterLoad;
           OutMicrorocSCOrReadreg = 1'b0; //SC
+          OutSCTestStartStop = UsbSweepTestStartStop;
+          OutSweepAcqStartStop = 1'b0;
+          SweepTestDone = SCTestDone;
           OutUsbStartStop = SweepTestUsbStartStop;
           MicrorocAcqStartStop = 1'b0;
           UsbFifoData = SCTestData;
@@ -130,6 +142,9 @@ module Switcher(
           OutMicrorocCTestChannel = UsbMicrorocCTestChannel;
           OutMicrorocSCParameterLoad = SweepAcqMicrorocSCParameterLoad;
           OutMicrorocSCOrReadreg = 1'b0; // SC
+          OutSCTestStartStop = 1'b0;
+          OutSweepAcqStartStop = UsbSweepTestStartStop;
+          SweepTestDone = SweepAcqDone;
           OutUsbStartStop = SweepTestUsbStartStop;
           MicrorocAcqStartStop = SweepAcqMicrorocAcqStartStop;
           UsbFifoData = SweepAcqData;
@@ -146,6 +161,9 @@ module Switcher(
           OutMicrorocCTestChannel = UsbMicrorocCTestChannel;
           OutMicrorocSCParameterLoad = UsbMicrorocSCParameterLoad;
           OutMicrorocSCOrReadreg = UsbSCOrReadreg;
+          OutSCTestStartStop = 1'b0;
+          OutSweepAcqStartStop = 1'b0;
+          SweepTestDone = 1'b0;
           OutUsbStartStop = UsbMicrorocAcqStartStop;
           MicrorocAcqStartStop = UsbMicrorocAcqStartStop;
           UsbFifoData = MicrorocAcqData;
