@@ -66,7 +66,7 @@ module usb_command_interpreter(
       //new add by wyu 20170308, SC parameter 575  Select Channel Trigger selected by Read Register (0) or NOR64 output (1)
       output reg Microroc_NOR64_or_Disc,
       //new add 20170308 done
-      /*------ S Curve Test Poart ------*/
+      //*** S Curve Test Poart
       output reg ACQ_or_SCTest,
       output reg Single_or_64Chn,
       output reg CTest_or_Input,
@@ -78,7 +78,7 @@ module usb_command_interpreter(
       output reg [15:0] Counter_MAX,
       input SCTest_Done,
       input USB_FIFO_Empty,
-      /*-------LED test------------------*/
+      //*** LED test
       output reg [3:0] LED
     );
 wire [15:0] USB_COMMAND;
