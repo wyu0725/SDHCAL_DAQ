@@ -34,6 +34,8 @@ module SCurve_Test_Control(
     input Single_or_64Chn,//High:Single Channel test, Low:64 Channel test through Ctest pin
     input [5:0] SingleTest_Chn,
     input Ctest_or_Input,//Add by wyu 20170307. When single channel test, this parameter can choose the charge inject from Ctest pin or the input pin
+    input [9:0] StartDac,
+    input [9:0] EndDac,
     /*--- Microroc SC Parameter Interface ---*/  
     output reg [63:0] Microroc_CTest_Chn_Out,
     output reg [9:0] Microroc_10bit_DAC_Out,
@@ -91,7 +93,7 @@ module SCurve_Test_Control(
       Microroc_CTest_Chn_Out <= 64'd0;
       usb_data_fifo_wr_din <= 16'd0;
       usb_data_fifo_wr_en <= 1'b0;
-      Actual_10bit_DAC_Code <= 10'b0;
+      Actual_10bit_DAC_Code <= StartDac;
       Microroc_10bit_DAC_Out <= 10'b0;
       SC_Param_Load <= 1'b0;
       SCurve_Test_Done <= 1'b0;
@@ -114,6 +116,7 @@ module SCurve_Test_Control(
             Microroc_CTest_Chn_Out <= 64'd0;
             usb_data_fifo_wr_din <= 16'd0;
             usb_data_fifo_wr_en <= 1'b0;
+            Actual_10bit_DAC_Code <= StartDac;
             Microroc_10bit_DAC_Out <= 10'b0;
             SC_Param_Load <= 1'b0;
             SCurve_Test_Done <= 1'b0;
@@ -231,8 +234,8 @@ module SCurve_Test_Control(
           end
         end
         CHECK_CHN_DONE:begin
-          if(Actual_10bit_DAC_Code == 10'd1023)begin
-            Actual_10bit_DAC_Code <= 10'b0;
+          if(Actual_10bit_DAC_Code == EndDac)begin
+            Actual_10bit_DAC_Code <= StartDac;
             State <= CHECK_ALL_DONE;
           end
           else begin
