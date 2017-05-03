@@ -22,10 +22,11 @@
 
 module Controller_Top(
     input Clk,
+    input Clk_5M,
     input reset_n,
     // Mode Select
     input [1:0] ModeSelect,
-    input [1:0] DACSelect,
+    input [1:0] DacSelect,
     // Microroc SC Parameter
     input [9:0] UsbMicroroc10BitDac0,
     input [9:0] UsbMicroroc10BitDac1,
@@ -39,7 +40,7 @@ module Controller_Top(
     output [63:0] OutMicrorocCTestChannel,
     input UsbMicrorocSCParameterLoad,
     output OutMicrorocSCParameterLoad,
-    input UsbScOrReadreg,
+    input UsbSCOrReadreg,
     output MicrorocSCOrReadreg,
     input MicrorocConfigDone,
     // Microroc ACQ Control and Data
@@ -59,17 +60,17 @@ module Controller_Top(
     output SweepTestDone,
     input DataTransmitDone,
     // The following ports is set for SweepACQ and SCurve Test
-    input SweepStart,
+    //input SweepStart,
     input StartDac,
     input EndDac,
-    output SweepTestDone,
-    input DataTransmitDone,
+    //output SweepTestDone,
+    //input DataTransmitDone,
     // Sweep ACQ
     input [15:0] MaxPakageNumber,
     //SCurve Test
     input TrigEffiOrCountEffi,
     input [5:0] SingleTestChannel,
-    input SingleOr64Chn,
+    input SingleOr64Channel,
     input CTestOrInput,
     input [15:0] CPT_MAX,
     input [15:0] CounterMax,
@@ -190,26 +191,28 @@ module Controller_Top(
       .Clk_5M(Clk_5M),
       .reset_n(reset_n),
       // Select Trig Efficiency or Counter Efficiency test
-      .TrigEffi_or_CountEffi(TrigEffi_or_CountEffi),
+      .TrigEffi_or_CountEffi(TrigEffiOrCountEffi),
       //--- Test parameters and control interface--from upper level ---
-      .Test_Start(SCTest_Start_Stop),
-      .SingleTest_Chn(SingleTest_Chn),
-      .Single_or_64Chn(Single_or_64Chn),
-      .Ctest_or_Input(CTest_or_Input),
+      .Test_Start(SCTestStartStop),
+      .SingleTest_Chn(SingleTestChannel),
+      .Single_or_64Chn(SingleOr64Channel),
+      .Ctest_or_Input(CTestOrInput),
       .CPT_MAX(CPT_MAX),
-      .Counter_MAX(Counter_MAX),
+      .Counter_MAX(CounterMax),
+      .StartDac(StartDac),
+      .EndDac(EndDac),
       //--- USB Data FIFO Interface ---
       //.usb_data_fifo_full(),
-      .usb_data_fifo_wr_en(SCTest_usb_data_fifo_wr_en),
-      .usb_data_fifo_wr_din(SCTest_usb_data_fifo_wr_din),
-      .usb_data_fifo_full(usb_data_fifo_wr_full),
+      .usb_data_fifo_wr_en(SCTestData),
+      .usb_data_fifo_wr_din(SCTestData_en),
+      .usb_data_fifo_full(UsbDataFifoFull),
       //--- Microroc Config Interface ---
-      .Microroc_Config_Done(Config_Done),
-      .Microroc_CTest_Chn_Out(SCTest_Microroc_CTest_Chn_Out),
-      .Microroc_10bit_DAC_Out(SCTest_Microroc_10bit_DAC_Out),
-      .Microroc_Discriminator_Mask(SCTest_Channel_Discri_Mask),
-      .SC_Param_Load(SCTest_SC_Param_Load),
-      .Force_Ext_RAZ(Force_Ext_RAZ),
+      .Microroc_Config_Done(MicrorocConfigDone),
+      .Microroc_CTest_Chn_Out(OutMicrorocCTestChannel),
+      .Microroc_10bit_DAC_Out(SCTest10BitDac),
+      .Microroc_Discriminator_Mask(SCTestChannelMask),
+      .SC_Param_Load(SCTestMicrorocSCParameterLoad),
+      .Force_Ext_RAZ(ForceExtRaz),
       //--- PIN ---
       .CLK_EXT(CLK_EXT),
       .out_trigger0b(OUT_TRIG0B),
