@@ -33,6 +33,8 @@ module SCurve_Test_Top(
     input Ctest_or_Input, //Add by wyu 20170307. When single channel test, this parameter can choose the charge inject from Ctest pin or the input pin
     input [15:0] CPT_MAX,
     input [15:0] Counter_MAX,
+    input [9:0] StartDac,
+    input [9:0] EndDac,
     /*--- USB Data FIFO Interface ---*/
     //input usb_data_fifo_full,
     output usb_data_fifo_wr_en,
@@ -117,6 +119,8 @@ module SCurve_Test_Top(
       .Single_or_64Chn(Single_or_64Chn),
       .SingleTest_Chn(SingleTest_Chn),
       .Ctest_or_Input(Ctest_or_Input),//Add by wyu 20170307. When single channel test, this parameter can choose the charge inject from Ctest pin or the input pin
+      .StartDac(StartDac),
+      .EndDac(EndDac),
       /*--- Microroc SC Parameter Interface ---*/
       .Microroc_CTest_Chn_Out(Microroc_CTest_Chn_Out),
       .Microroc_10bit_DAC_Out(Microroc_10bit_DAC_Out),
