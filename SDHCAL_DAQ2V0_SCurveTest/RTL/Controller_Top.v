@@ -44,7 +44,7 @@ module Controller_Top(
     input MicrorocConfigDone,
     // Microroc ACQ Control and Data
     output MicrorocAcqStartStop,
-    input [15:0] MicrorocACQData,
+    input [15:0] MicrorocAcqData,
     input MicrorocAcqData_en,
     // USB Interface
     input nPKTEND,
@@ -53,7 +53,11 @@ module Controller_Top(
     output OutUsbExtFifoData_en,
     output OutUsbStartStop,
     // Sweep Test Start Signal
+    input NormalAcqStartStop,
     input SweepTestStartStop,
+    // Sweep Test Done Signal
+    output SweepTestDone,
+    input DataTransmitDone,
     // The following ports is set for SweepACQ and SCurve Test
     input SweepStart,
     input StartDac,
@@ -86,11 +90,18 @@ module Controller_Top(
     // SC Parameter Load
     wire SCTestMicrorocSCParameterLoad;
     wire SweepAcqMicrorocSCParameterLoad;
+    // Start and done signal
+    wire SweepAcqStartStop;
+    wire SCTestStartStop;
+    wire SCTestDone;
+    wire SweepAcqDone;
     // Usb Start Stop
-    wire SweepTestUsbStartyStop;
+    wire SweepTestUsbStartStop;
     // Microroc ACQ Start Stop
-    wire SweepAcqMicrorocAcqStatStop;
+    wire SweepAcqMicrorocAcqStartStop;
     // Data
+    wire [15:0] ParallelData;
+    wire ParallelData_en;
     wire [15:0] SweepAcqData;
     wire SweepAcqData_en;
     wire [15:0] SCTestData;
@@ -124,8 +135,17 @@ module Controller_Top(
       // SC or readreg
       .UsbSCOrReadreg(UsbSCOrReadreg),
       .OutMicrorocSCOrReadreg(OutMicrorocSCOrReadreg),
+      // Start Signal
+      .UsbMicrorocAcqStartStop(NormalAcqStartStop),
+      .UsbSweepTestStartStop(SweepTestStartStop),
+      .OutSCTestStartStop(SCTestStartStop),
+      .OutSweepAcqStartStop(SweepAcqStartStop),
+      // Done Signal
+      .SCTestDone(SCTestDone),
+      .SweepAcqDone(SweepAcqDone),
+      .SweepTestDone(SweepTestDone),
       // USB Start
-      .UsbMicreorocAcqStartStop(UsbMicrorocAcqStartStop),
+      //.UsbMicreorocAcqStartStop(UsbMicrorocAcqStartStop),
       .SweepTestUsbStartStop(SweepTestUsbStartStop),
       .OutUsbStartStop(OutUsbStartStop),
       // Microroc ACQ Start
@@ -140,30 +160,30 @@ module Controller_Top(
       .SCTestData_en(SCTestData_en),
       .UsbFifoData(OutUsbExtFifoData),
       .UsbFifoData_en(OutUsbExtFifoData_en),
-      .ParallelData(MicrorocAcqData),
-      .ParallelData_en(MicrorocAcqData_en)
+      .ParallelData(ParallelData),
+      .ParallelData_en(ParallelData_en)
     );
     SweepACQ_Top SweepACQ(
       .Clk(Clk),
       .reset_n(reset_n),
       // ACQ Control
-      .SweepStart(),
-      .SingleACQStart(),
-      .ACQDone(),
+      .SweepStart(SweepAcqStartStop),
+      .SingleACQStart(SweepAcqMicrorocAcqStartStop),
+      .ACQDone(SweepAcqDone),
       // Sweep ACQ Parameters
-      .StartDAC0(),
-      .EndDAC0(),
-      .MaxPackageNumber(),
+      .StartDAC0(StartDac),
+      .EndDAC0(EndDac),
+      .MaxPackageNumber(MaxPackageNumber),
       // ACQ Data
-      .ParallelData(),
-      .ParallelData_en(),
+      .ParallelData(ParallelData),
+      .ParallelData_en(ParallelData_en),
       // SC Parameters
-      .OutDAC0(),
-      .LoadSCParameters(),
-      .MicrorocConfigDone(),
+      .OutDAC0(SweepAcq10BitDac),
+      .LoadSCParameters(SweepAcqSCParameterLoad),
+      .MicrorocConfigDone(MicrorocConfigDone),
       // Data Out
-      .SweepACQData(),
-      .SweepACQData_en()
+      .SweepACQData(SweepAcqData),
+      .SweepACQData_en(SweepAcqData_en)
     );
     SCurve_Test_Top Microroc_SCurveTest(
       .Clk(Clk),
