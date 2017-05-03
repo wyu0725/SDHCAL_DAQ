@@ -31,7 +31,7 @@ module Switcher(
     input [9:0] UsbMicroroc10BitDac2,
     input [9:0] SCTest10BitDac,
     input [9:0] SweepAcq10BitDac,
-    input [1:0] SweepAcqDacSelect;
+    input [1:0] SweepAcqDacSelect,
     output [9:0] OutMicroroc10BitDac0,
     output [9:0] OutMicroroc10BitDac1,
     output [9:0] OutMicroroc10BitDac2,
@@ -58,6 +58,7 @@ module Switcher(
     input UsbMicrorocAcqStartStop,
     input UsbSweepTestStartStop,
     output OutSCTestStartStop,
+    output 
     // USB Start
     input UsbMicrorocUsbStartStop,
     input SweepTestUsbStartStop,

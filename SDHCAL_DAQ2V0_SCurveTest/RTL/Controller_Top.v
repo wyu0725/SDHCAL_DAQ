@@ -53,7 +53,7 @@ module Controller_Top(
     output OutUsbExtFifoData_en,
     output OutUsbStartStop,
     // Sweep Test Start Signal
-    input SweepTestStartStop
+    input SweepTestStartStop,
     // The following ports is set for SweepACQ and SCurve Test
     input SweepStart,
     input StartDac,
