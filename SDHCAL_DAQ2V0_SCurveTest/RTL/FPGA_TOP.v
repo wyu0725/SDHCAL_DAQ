@@ -244,7 +244,8 @@ module FPGA_TOP(
       .out_to_ext_fifo_rd_en(out_to_ext_fifo_rd_en)   //fifo interface
     );
     
-    
+
+    /*
     //USB FIFO data
     wire usb_data_fifo_wr_en;
     wire usb_data_fifo_wr_full;
@@ -264,7 +265,7 @@ module FPGA_TOP(
     wire [191:0] out_to_Microroc_Channel_Discri_Mask;
     wire SCTest_SC_Param_Load;
     wire USB_Data_Transmit_Done;
-    wire Microroc_sc_or_read;
+    wire Microroc_sc_or_read;*/
     
     
     //3 triggers
@@ -335,14 +336,21 @@ module FPGA_TOP(
     //Test Port
     wire Start_Readout_t;
     wire Force_Ext_RAZ;
+    wire [9:0] Microroc10BitDac0;
+    wire [9:0] Microroc10BitDac1;
+    wire [9:0] Microroc10BitDac2;
+    wire [191:0] MicrorocChannelMask;
+    wire [63:0] MicrorocCTestChannel;
+    wire MicrorocSCOrReadreg;
+    wire MicrorocSCParameterLoad;
     Microroc_top Microroc_u1
     (
       .Clk(Clk),
       .Clk_5M(Clk_5M),
       .reset_n(reset_n),
       //--------Microroc slow control registers interaface----------//
-      .sc_or_read(Microroc_sc_or_read),      //slow control or read? 1 => read register
-      .start_load(out_to_Microroc_SC_Param_Load),      //start load parameters
+      .sc_or_read(MicrorocSCOrReadreg),      //slow control or read? 1 => read register
+      .start_load(MicrorocSCParameterLoad),      //start load parameters
       .asic_num(Microroc_param_asic_num),    //how many asics?
       //-----parameters-------//
       .En_dout(2'b11),               //enable dout1b and dout2b
@@ -362,15 +370,15 @@ module FPGA_TOP(
       .Disc_or_or(Microroc_NOR64_or_Disc),             //select channel trigger selected by read register(0) or Nor64 output(1)// Modefied by wyu 20170308, this parameter should be set by usb
       .En_trig_out(1'b1),            //Enable trigger out
       .Trigb(3'b111),                //trigger
-      .DAC2_Vth(out_to_Microroc_10bit_DAC2_Out),  //10-bit triple DAC voltage threshold
-      .DAC1_Vth(out_to_Microroc_10bit_DAC1_Out),  //10-bit triple DAC voltage threshold
-      .DAC0_Vth(out_to_Microroc_10bit_DAC0_Out),  //10-bit triple DAC voltage threshold
+      .DAC2_Vth(Microroc10BitDac2),  //10-bit triple DAC voltage threshold
+      .DAC1_Vth(Microroc10BitDac1),  //10-bit triple DAC voltage threshold
+      .DAC0_Vth(Microroc10BitDac0),  //10-bit triple DAC voltage threshold
       .En_dac(1'b1),                 //enable dac
       .En_dac_pp(1'b1),              //enable dac for power pulsing
       .En_bg(1'b1),                  //enable bandgap
       .En_bg_pp(1'b1),               //enable bandgap for powerpulsing
       .header(Microroc_param_header),                //header
-      .Chn_discri_mask(out_to_Microroc_Channel_Discri_Mask), //no channel discriminators mask
+      .Chn_discri_mask(MicrorocChannelMask), //no channel discriminators mask
       .Rs_or_discri(Microroc_RS_or_Discri),           //select latched or directly output // Modefied by wyu 20170308, this parameter should be set by usb
       .En_discri1_pp(1'b1),          //enable disc1 powerpulsing if disc0 enabled  /enable
       .En_discri2_pp(1'b1),          //enable disc2 powerpulsing if disc0 enabled  /enable
@@ -387,7 +395,7 @@ module FPGA_TOP(
       .En_shhg_pp(1'b1),             //enable shaper high gain power pulsing  /enable
       .En_gbst(1'b1),                //enable gain boost
       .En_Preamp_pp(1'b1),           //enable preamplifier power pulsing /enable
-      .Ctest(out_to_Microroc_CTest_Chn_Out),  //enable test capacitor from chn 0-63
+      .Ctest(MicrorocCTestChannel),  //enable test capacitor from chn 0-63
       //--64bit read register-//
       .Read_reg(Microroc_param_Read_reg), //read register
       //-----Redundancy interface---------//
@@ -457,6 +465,60 @@ module FPGA_TOP(
     );
     /*------------ Sweep Test Instantiation --------------*/
     Controller_Top Microroc_Control(
+      .Clk(Clk),
+      .Clk_5M(Clk_5M),
+      .reset_n(reset_n),
+      //*** Mode select
+      .ModeSelelct(),
+      .DacSelect(),
+      //*** Microroc parameters
+      .UsbMicroroc10BitDac0(Microroc_param_DAC0_Vth),
+      .UsbMicroroc10BitDac1(Microroc_param_DAC1_Vth),
+      .UsbMicroroc10BitDac2(Microroc_param_DAC2_Vth),
+      .OutMicroroc10BitDac0(Microroc10BitDac0),
+      .OutMicroroc10BitDac1(Microroc10BitDac1),
+      .OutMicroroc10BitDac2(Microroc10BitDac2),
+      .UsbMicrorocChannelMask(),
+      .OutMicrorocChannelMask(),
+      .UsbMicrorocCTestChannel(),
+      .OutMicrorocCTestChannel(),
+      .UsbMicrorocSCParameterLoad(),
+      .OutMicrorocSCParameterLoad(),
+      .UsbSCOrReadreg(),
+      .MicrorocSCOrReadreg(),
+      .MicrorocConfigDone(),
+      //*** Microroc acq and data
+      .MicrorocAcqStartStop(),
+      .MicrorocAcqData(),
+      .MicrorocAcqData_en(),
+      //*** Usb interface
+      .nPKTEND(),
+      .UsbDataFifoFull(),
+      .OutUsbExtFifoData(),
+      .OutUsbExtFifoData_en(),
+      .OutUsbStartStop(),
+      //*** Sweep test start signal
+      .NormalAcqStartStop(),
+      .SweepTestStartStop(),
+      //*** Done signal
+      .SweepTestDone(),
+      .DataTransmitDone(),
+      //*** Sweep test parameters
+      .StartDac(),
+      .EndDac(),
+      .MaxPackageNumber(),
+      .TrigEffiOrCountEffi(),
+      .SingleTestChannel(),
+      .SingleOr64Channel(),
+      .CTestOrInput(),
+      .CPT_MAX(),
+      .CounterMax(),
+      .ForceExtRaz(),
+      //*** Pin
+      .CLK_EXT(),
+      .out_trigger0b(),
+      .out_trigger1b(),
+      .out_Trigger2b()
     );
     /*------------ S Curve Test Instantiation ------------*/
     // This aera is for S Curve test, including SCurve-Test top. 
