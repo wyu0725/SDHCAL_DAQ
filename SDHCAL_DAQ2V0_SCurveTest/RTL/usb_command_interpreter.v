@@ -66,6 +66,9 @@ module usb_command_interpreter(
       //new add by wyu 20170308, SC parameter 575  Select Channel Trigger selected by Read Register (0) or NOR64 output (1)
       output reg Microroc_NOR64_or_Disc,
       //new add 20170308 done
+      //*** Channel and Discri Mask
+      // Add by wyu 20170504
+      output reg [191:0] MicrorocChannelMask,
       //*** S Curve Test Poart
       output reg ACQ_or_SCTest,
       output reg Single_or_64Chn,
@@ -73,7 +76,7 @@ module usb_command_interpreter(
       output reg [5:0] SingleTest_Chn,
       output reg [15:0] CPT_MAX,
       output reg SCTest_Start_Stop,
-      // Count Efficirncy
+      //*** Count Efficirncy
       output reg TrigEffi_or_CountEffi,
       output reg [15:0] Counter_MAX,
       input SCTest_Done,
@@ -500,6 +503,49 @@ always @(posedge clk or negedge reset_n) begin
     Microroc_NOR64_or_Disc <= 1'b1;
   else
     Microroc_NOR64_or_Disc <= Microroc_NOR64_or_Disc;
+end
+// ADXX && AE0X
+// Channel and Discriminator mask
+//*** DiscriMask
+reg [2:0] DiscriMask;
+always @ (posedge clk or negedge reset_n) begin
+  if(~reset_n)
+    DiscriMask <= 3'b1;
+  else if(fifo_rden && USB_COMMAND[15:4] == 12'hAE0) begin
+    case(USB_COMMAND[3:0])
+      4'd0:DiscriMask <= 3'b111;
+      4'd1:DiscriMask <= 3'b110;
+      4'd2:DiscriMask <= 3'b101;
+      4'd3:DiscriMask <= 3'b100;
+      4'd4:DiscriMask <= 3'b011;
+      4'd5:DiscriMask <= 3'b010;
+      4'd6:DiscriMsak <= 3'b001;
+      4'd7:DiscriMask <= 3'b000;
+      default:DiscriMask <= 3'b111;
+    endcase
+  end
+  else
+    DiscriMask <= DiscriMask;
+end
+//*** Channel Mask
+reg [7:0] MaskShift;
+always @(posedge clk or negedge reset_n)begin
+  if(~reset_n)
+    MaskShift <= 8'b0;
+  else if(fifo_rden && USB_COMMAND[15:8] == 8'hAD) begin
+    MaskShift <= USB_COMMAND[5:0] + USB_COMMAND[5:0] + USB_COMMAND[5:0];
+  end
+  else
+    MaskShift <= MaskShift;
+end
+//*** Load mask or Unmask
+reg [191:0] SingleChannelMask;
+reg [1:0] State;
+localparam [1:0] IDLE,
+                 GET_SINGLE_MASK,
+                 GENERATE_MASK;
+always @(posedge clk or negedge reset_n) begin
+  if(~reset_n)
 end
 // B type command
 //led interface
