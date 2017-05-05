@@ -7,15 +7,15 @@ ChannelNumber = str2double(answer);
 TrigRatio0 = (T0./P0).*100 ;
 TrigRatio1 = (T1./P1).*100;
 TrigRatio2 = (T2./P2).*100;
-for i = 1:1:1023
-    if(TrigRatio0(i) > TrigRatio0(i+1))
-        TrigRatio0(i) = TrigRatio0(i+1);
+for i = 1024:-1:2
+    if(TrigRatio0(i-1) > TrigRatio0(i))
+        TrigRatio0(i-1) = TrigRatio0(i);
     end
-    if(TrigRatio1(i) > TrigRatio1(i+1))
-        TrigRatio1(i) = TrigRatio1(i+1);
+    if(TrigRatio1(i-1) > TrigRatio1(i))
+        TrigRatio1(i-1) = TrigRatio1(i);
     end
-    if(TrigRatio2(i) > TrigRatio2(i+1))
-        TrigRatio2(i) = TrigRatio2(i+1);
+    if(TrigRatio2(i-1) > TrigRatio2(i))
+        TrigRatio2(i-1) = TrigRatio2(i);
     end
 end
 [~, DacPercent0, ~] = FindStartMidEnd(TrigRatio0, 50);
