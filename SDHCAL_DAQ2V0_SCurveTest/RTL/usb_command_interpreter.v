@@ -540,12 +540,35 @@ always @(posedge clk or negedge reset_n)begin
 end
 //*** Load mask or Unmask
 reg [191:0] SingleChannelMask;
+reg MaskOrUnMask;
 reg [1:0] State;
 localparam [1:0] IDLE,
                  GET_SINGLE_MASK,
+                 GET_SINGLE_UNMASK,
                  GENERATE_MASK;
 always @(posedge clk or negedge reset_n) begin
-  if(~reset_n)
+  if(~reset_n) begin
+    State <= 2'b0;
+    SingleChannelMask <= 192'b1;
+    MicrorocChannelMask <= 192'b1;
+    MaskOrUnmask <= 1'b0;
+  end
+  else begin
+    case(State):
+      IDLE:begin
+        if(fifo_rden && USB_COMMAND == 16'hAE10)begin
+          MicrorocChannelMask <= 192'b1;
+          State <= IDLE;
+        end
+        else if(fifo_rden && USB_COMMAND == 16'hAE11) begin
+          SingleChannelMask <= {189'b1,DiscriMask} << MaskShift;
+          MaskOrUnmask <= 1'b1;
+          State <= GET_SINGLE
+        end
+      end
+    endcase
+  end
+
 end
 // B type command
 //led interface
