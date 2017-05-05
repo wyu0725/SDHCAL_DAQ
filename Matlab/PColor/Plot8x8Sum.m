@@ -11,29 +11,43 @@ PackNo = str2double(answer(1));
 DisplayNo = str2double(answer(2));
 % Get Mapping Function
 [ASIC_Channel, Pad_Channel] = GetMapping();
+
+ChannelDataTemp = zeros(64,1);
+for i = 1:DisplayNo
+    [~, ~, Ch_data] = ReadPackage(InitialData, PackNo + i - 1);
+    ChannelDataTemp = ChannelDataTemp + Ch_data;
+end
+[MaxNumber,FiredChannel] = max(ChannelDataTemp);
 SumData = zeros(64,1);
+NotHitted = zeros(64,1);
 GreatThan1 = zeros(64,1);
 GreatThan2 = zeros(64,1);
 GreatThan3 = zeros(64,1);
+FiredCount = 0;
 for DisplayK = 1:DisplayNo
     [header, BCID, Ch_data] = ReadPackage(InitialData, PackNo + DisplayK - 1);
 %     if(header ~= hex2dec('A0'))
 %         continue;
 %     end
 %     NewChannelData = SingleMapping(Ch_data, ASIC_Channel, Pad_Channel);
-    for k = 1:1:64
-        if(Ch_data(k) == 1)
-            GreatThan1(k) = GreatThan1(k) + 1;
+    if(Ch_data(FiredChannel) == 3)
+        for k = 1:1:64
+            if(Ch_data(k) == 0)
+                NotHitted(k) = NotHitted(k) + 1;
+            end
+            if(Ch_data(k) == 1)
+                GreatThan1(k) = GreatThan1(k) + 1;
+            end
+            if(Ch_data(k) == 2)
+                GreatThan2(k) = GreatThan2(k) + 1;
+            end
+            if(Ch_data(k) == 3)
+                GreatThan3(k) = GreatThan3(k) + 1;
+            end
         end
-        if(Ch_data(k) == 2)
-            GreatThan2(k) = GreatThan2(k) + 1;
-        end
-        if(Ch_data(k) == 3)
-            GreatThan3(k) = GreatThan3(k) + 1;
-        end
+        FiredCount = FiredCount + 1;
+        SumData = SumData + Ch_data;
     end
-    
-    SumData = SumData + Ch_data;
 
 %     %----- Plot The Data -----%
 %     X = 1:9;
@@ -77,6 +91,8 @@ for DisplayK = 1:DisplayNo
 %         end
 %     end
 end
+
+%*** Plot Sum Data 2D
 NewSumData = SingleMapping(SumData, ASIC_Channel, Pad_Channel);
  X = 1:9;
  Y = 1:9;
@@ -91,47 +107,66 @@ for i = 1:9
         end
 end
 figure;
-fig = pcolor(X,Y,CTotal);
+pcolor(X,Y,CTotal);
+title('Sum of the hit data')
     % coclormap summer
-ax = gca;
 colormap(flipud(gray))
 colorbar;
 axis ij;
 axis square;
 legend_str = sprintf('The Pad that hitted \n header = %X, BCID = %u',header,BCID);
-    h = legend(legend_str);
-    set(h,'Location','northoutside');
-    for i = 1:8
-        for j = 1:8
-            PadNum = j + 8*(i - 1);
-            str = ['Ch', int2str(PadNum)];
-            xText_o = 1.1;
-            yText_o = 1.5;
-            xText = xText_o + (j - 1);
-            yText = yText_o + (i - 1);
-            text('String',str,'Position',[xText, yText],'FontSize',10,'Color','r');
-        end
+h = legend(legend_str);
+set(h,'Location','northoutside');
+for i = 1:8
+    for j = 1:8
+        PadNum = j + 8*(i - 1);
+        str = ['Ch', int2str(PadNum)];
+        xText_o = 1.1;
+        yText_o = 1.5;
+        xText = xText_o + (j - 1);
+        yText = yText_o + (i - 1);
+        text('String',str,'Position',[xText, yText],'FontSize',10,'Color','r');
     end
-  
- C3D = zeros(8,8);   
+end
+%*** Plot Sum Data 3D  
+C3DSumData = zeros(8,8);   
 for i = 1:8
     for j = 1:8        
-        C3D(i,j) = NewSumData((i - 1)*8 + j);
+        C3DSumData(i,j) = NewSumData((i - 1)*8 + j);
     end
 end
 width = 1;
 figure;
-b = bar3(C3D,width);
+b = bar3(C3DSumData,width);
+title('Sum of the hit data');
 colormap(flipud(parula))
 colorbar;
-% a = axes;
-% caxis([0,4]);
-% colorbar('Ticks',[0.5,1.5,2.5,3.5],'TickLabels',{'<2fC','2fC~20fC','20fC~200fC','>200fC'});
 for k = 1:length(b)
     zdata = b(k).ZData;
     b(k).CData = zdata;
     b(k).FaceColor = 'interp';
 end
+%*** Plot Not Hitted Data 3D
+NewNotHitted = SingleMapping(NotHitted, ASIC_Channel, Pad_Channel);
+C3DNotHitted = zeros(8,8);   
+for i = 1:8
+    for j = 1:8        
+        C3DNotHitted(i,j) = NewNotHitted((i - 1)*8 + j);
+    end
+end
+width = 1;
+figure;
+b1 = bar3(C3DNotHitted,width);
+StrNotHitted = sprintf('Hitted Count: Charge below 3fC.(Total count:%d)',FiredCount);
+title(StrNotHitted);
+colormap(flipud(parula))
+colorbar;
+for k = 1:length(b1)
+    zdata = b1(k).ZData;
+    b1(k).CData = zdata;
+    b1(k).FaceColor = 'interp';
+end
+%*** Plot Hitted Data between 1 and 2
 NewGreatThan1 = SingleMapping(GreatThan1, ASIC_Channel, Pad_Channel);
 C3D1 = zeros(8,8);   
 for i = 1:8
@@ -142,6 +177,8 @@ end
 width = 1;
 figure;
 b1 = bar3(C3D1,width);
+StrGreatThan1 = sprintf('Hitted Count: Charge between 3fC and 20fC.(Total count:%d)',FiredCount);
+title(StrGreatThan1);
 colormap(flipud(parula))
 colorbar;
 for k = 1:length(b1)
@@ -149,6 +186,7 @@ for k = 1:length(b1)
     b1(k).CData = zdata;
     b1(k).FaceColor = 'interp';
 end
+%*** Plot Hitted Data between 2 and 3
 NewGreatThan2 = SingleMapping(GreatThan2, ASIC_Channel, Pad_Channel);
 C3D2 = zeros(8,8);   
 for i = 1:8
@@ -159,6 +197,8 @@ end
 width = 1;
 figure;
 b2 = bar3(C3D2,width);
+StrGreatThan2 = sprintf('Hitted Count: Charge between 20fC and 150fC.(Total count:%d)',FiredCount);
+title(StrGreatThan2);
 colormap(flipud(parula))
 colorbar;
 for k = 1:length(b2)
@@ -176,6 +216,8 @@ end
 width = 1;
 figure;
 b3 = bar3(C3D2,width);
+StrGreatThan3 = sprintf('Hitted Count: Charge Greater Than 150fC.(Total count:%d)',FiredCount);
+title(StrGreatThan3);
 colormap(flipud(parula))
 colorbar;
 for k = 1:length(b3)
@@ -184,7 +226,7 @@ for k = 1:length(b3)
     b3(k).FaceColor = 'interp';
 end
 
-WeightSum = (3*NewGreatThan1 + 20*NewGreatThan2 + 150*NewGreatThan3)/DisplayNo;
+WeightSum = (3*NewGreatThan1 + 20*NewGreatThan2 + 150*NewGreatThan3)/FiredCount;
 C3DWeight = zeros(8,8);   
 for i = 1:8
     for j = 1:8        
@@ -194,6 +236,7 @@ end
 width = 1;
 figure;
 bWeight = bar3(C3DWeight,width);
+title('Average hitted charge')
 colormap(flipud(parula))
 colorbar;
 for k = 1:length(bWeight)
@@ -213,6 +256,7 @@ for i = 1:9
 end
 figure;
 fig = pcolor(X,Y,CWeight);
+title('Average hitted charge')
     % coclormap summer
 ax = gca;
 colormap(flipud(gray))
