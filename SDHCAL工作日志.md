@@ -84,9 +84,11 @@
   + X:{1'b0, DiscriMask}
   + DiscriMask:000, 001, 010, 011, 100, 101, 110, 111
 
-+ AE10:Channel mask
++ AE10:All channel unmask
 
-+ AE11:Channel unmask
++ AE11:Channel mask
+
++ AE12:Channel unmask
 
 + B类：采集参数，可以调整
   + B1XX:XX为Start_Acq_Time的低八位
