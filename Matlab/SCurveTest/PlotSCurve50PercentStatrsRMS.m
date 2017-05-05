@@ -33,18 +33,31 @@ for i = 1:1:6
     ylabel('\bfTrigger efficiency (%)')
     hold off
 end
+% figure(1)
+% title('\bf TRIG0: S Curve 0fC,without 4-bit DAC Correction')
+% figure(2)
+% title('\bf TRIG1: S Curve 0fC,without 4-bit DAC Correction')
+% figure(3)
+% title('\bf TRIG2: S Curve 0fC,without 4-bit DAC Correction')
+% figure(4)
+% title('\bf TRIG0: S Curve 0fC,with 4-bit DAC DC Correction')
+% figure(5)
+% title('\bf TRIG1: S Curve 0fC,with 4-bit DAC DC Correction')
+% figure(6)
+% title('\bf TRIG2: S Curve 0fC,with 4-bit DAC DC Correction')
+
 figure(1)
-title('\bf TRIG0: S Curve 0fC,without 4-bit DAC Correction')
+title('\bf TRIG0: S Curve 0fC,without HV')
 figure(2)
-title('\bf TRIG1: S Curve 0fC,without 4-bit DAC Correction')
+title('\bf TRIG1: S Curve 0fC,without HV')
 figure(3)
-title('\bf TRIG2: S Curve 0fC,without 4-bit DAC Correction')
+title('\bf TRIG2: S Curve 0fC,without HV')
 figure(4)
-title('\bf TRIG0: S Curve 0fC,with 4-bit DAC DC Correction')
+title('\bf TRIG0: S Curve 0fC,with HV')
 figure(5)
-title('\bf TRIG1: S Curve 0fC,with 4-bit DAC DC Correction')
+title('\bf TRIG1: S Curve 0fC,with HV')
 figure(6)
-title('\bf TRIG2: S Curve 0fC,with 4-bit DAC DC Correction')
+title('\bf TRIG2: S Curve 0fC,with HV')
 
 
 Channel = 1:1:64;
