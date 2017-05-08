@@ -219,7 +219,7 @@ module Controller_Top(
       .out_trigger1b(OUT_TRIG1B),
       .out_trigger2b(OUT_TRIG2B),
       //--- Done Indicator ---
-      .SCurve_Test_Done(SCurve_Test_Done),
-      .Data_Transmit_Done(USB_Data_Transmit_Done)
+      .SCurve_Test_Done(SCTestDone),
+      .Data_Transmit_Done(DataTransmitDone)
     );
 endmodule

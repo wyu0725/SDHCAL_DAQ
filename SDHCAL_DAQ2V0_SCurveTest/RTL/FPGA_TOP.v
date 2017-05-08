@@ -114,13 +114,13 @@ module FPGA_TOP(
     wire [15:0] in_from_usb_ControlWord;    
     wire out_to_rst_usb_data_fifo;
     //Microroc 
-    wire USB_Microroc_SC_or_Read;//
-    wire Microroc_param_load;//
+    wire UsbMicrorocSCOrReadreg;//
+    wire UsbMicrorocSCParameterLoad;//
     wire [2:0] Microroc_param_asic_num;//
     wire [9:0] Microroc_param_DAC0_Vth;//
     wire [9:0] Microroc_param_DAC1_Vth;//
     wire [9:0] Microroc_param_DAC2_Vth;//
-    wire [63:0] Microroc_param_Ctest;//
+    wire [63:0] UsbMicrorocCTestChannel;//
     wire [63:0] Microroc_param_Read_reg;//
     wire Microroc_powerpulsing_en;//
     wire Microroc_sel_readout_chn;//
@@ -143,19 +143,28 @@ module FPGA_TOP(
     wire Microroc_OTAQ_en;
     wire Microroc_RS_or_Discri;
     wire Microroc_NOR64_or_Disc;
-    /*--- S Curve Test Port ---*/
+    wire UsbMicrorocChannelMask;
+    //--- Sweep Test ---//
+    wire SweepTestStartStop;
+    wire [1:0] ModeSelect;
+    wire [1:0] DacSelect;
+    //*** S Curve Test Port
     wire ACQ_or_SCTest;
-    wire Single_or_64Chn;
-    wire CTest_or_Input;
-    wire [5:0] SingleTest_Chn;
+    wire SingleOr64Channel;
+    wire CTestOrInput;
+    wire [5:0] SingleTestChannel;
     wire [15:0] CPT_MAX;
-    wire TrigEffi_or_CountEffi;
-    wire [15:0] Counter_MAX;
+    wire TrigEffiOrCountEffi;
+    wire [15:0] CounterMax;
     //Start Singnal
-    wire SCTest_Start_Stop;
-    wire Microroc_Acq_Start_Stop;
-    wire SCurve_Test_Done;
+    wire UsbMicrorocAcqStartStop;
+    wire SweepTestDone;
     wire in_from_ext_fifo_empty;
+    // Start and end DAC
+    wire [9:0] StartDac;
+    wire [9:0] EndDac;
+    // Max package number
+    wire [15:0] MaxPackageNumber;
     usb_command_interpreter usb_control
     (
       .IFCLK(IFCLK),
@@ -163,16 +172,16 @@ module FPGA_TOP(
       .reset_n(reset_n),
       .in_from_usb_Ctr_rd_en(in_from_usb_Ctr_rd_en),
       .in_from_usb_ControlWord(in_from_usb_ControlWord),
-      .Microroc_Acq_Start_Stop(Microroc_Acq_Start_Stop),
+      .Microroc_Acq_Start_Stop(UsbMicrorocAcqStartStop),
       .out_to_rst_usb_data_fifo(out_to_rst_usb_data_fifo),
       //microroc
-      .Microroc_sc_or_read(USB_Microroc_SC_or_Read),
-      .Microroc_param_load(Microroc_param_load),
+      .Microroc_sc_or_read(UsbMicrorocSCOrReadreg),
+      .Microroc_param_load(UsbMicrorocSCParameterLoad),
       .Microroc_param_asic_num(Microroc_param_asic_num),
       .Microroc_param_DAC0_Vth(Microroc_param_DAC0_Vth),
       .Microroc_param_DAC1_Vth(Microroc_param_DAC1_Vth),
       .Microroc_param_DAC2_Vth(Microroc_param_DAC2_Vth),
-      .Microroc_param_Ctest(Microroc_param_Ctest),
+      .Microroc_param_Ctest(UsbMicrorocCTestChannel),
       .Microroc_param_Read_reg(Microroc_param_Read_reg),
       .Microroc_powerpulsing_en(Microroc_powerpulsing_en),
       .Microroc_sel_readout_chn(Microroc_sel_readout_chn),
@@ -202,19 +211,29 @@ module FPGA_TOP(
       .Microroc_RS_or_Discri(Microroc_RS_or_Discri),
       .Microroc_NOR64_or_Disc(Microroc_NOR64_or_Disc),
       //new add 20170308 done
-      /*--- S Curve Test Command ---*/
-      .ACQ_or_SCTest(ACQ_or_SCTest),
-      .Single_or_64Chn(Single_or_64Chn),
-      .CTest_or_Input(CTest_or_Input),
-      .SingleTest_Chn(SingleTest_Chn),
+      // Channel Mask
+      .MicrorocChannelMask(UsbMicrorocChannelMask),
+      //--- Sweep Test Port ---//
+      //Mode Select
+      .ModeSelect(ModeSelect),
+      .DacSelect(DacSelect),
+      //Test Dac
+      .StartDac(StartDac),
+      .EndDac(EndDac),
+      //*** S Curve test port
+      .Single_or_64Chn(SingleOr64Channel),
+      .CTest_or_Input(CTestOrInput),
+      .SingleTest_Chn(SingleTestChannel),
       .CPT_MAX(CPT_MAX),
-      .SCTest_Start_Stop(SCTest_Start_Stop),
+      .SweepTestStartStop(SweepTestStartStop),
       //Count Efficiency
-      .TrigEffi_or_CountEffi(TrigEffi_or_CountEffi),
-      .Counter_MAX(Counter_MAX),
+      .TrigEffi_or_CountEffi(TrigEffiOrCountEffi),
+      .CounterMax(CounterMax),
       //Done Signal
-      .SCTest_Done(SCurve_Test_Done),
+      .SCTest_Done(SweepTestDone),
       .USB_FIFO_Empty(in_from_ext_fifo_empty),
+      //*** Sweep Acq
+      .MaxPackageNumber(MaxPackageNumber),
       /*----------------------------*/
       .LED(LED[3:0])
     );    
@@ -222,7 +241,7 @@ module FPGA_TOP(
     wire [15:0] in_from_ext_fifo_dout;
     wire out_to_ext_fifo_rd_en;
     wire out_to_Microroc_SC_Param_Load;
-    wire out_to_usb_Acq_Start_Stop;
+    wire UsbStartStop;
     usb_synchronous_slavefifo usb_cy7c68013A
     (
       .IFCLK(IFCLK),
@@ -236,7 +255,7 @@ module FPGA_TOP(
       .nPKTEND(usb_pktend),
       .FIFOADR(usb_fifoaddr),
       .FD_BUS(usb_fd),  
-      .Acq_Start_Stop(out_to_usb_Acq_Start_Stop),
+      .Acq_Start_Stop(UsbStartStop),
       .Ctr_rd_en(in_from_usb_Ctr_rd_en),              //fifo interface
       .ControlWord(in_from_usb_ControlWord),          //fifo interface
       .in_from_ext_fifo_dout(in_from_ext_fifo_dout),  //fifo interface
@@ -332,10 +351,10 @@ module FPGA_TOP(
       //.HoldGen_out_trigger2b()
     );*/
     //------Microroc_top instantiation--------------//
-    wire Config_Done;
+    wire MicrorocConfigDone;
     //Test Port
     wire Start_Readout_t;
-    wire Force_Ext_RAZ;
+    wire ForceExtRaz;
     wire [9:0] Microroc10BitDac0;
     wire [9:0] Microroc10BitDac1;
     wire [9:0] Microroc10BitDac2;
@@ -343,6 +362,10 @@ module FPGA_TOP(
     wire [63:0] MicrorocCTestChannel;
     wire MicrorocSCOrReadreg;
     wire MicrorocSCParameterLoad;
+    wire MicrorocAcqStartStop;
+    wire [15:0] MicrorocAcqData;
+    wire MicrorocAcqData_en;
+    wire UsbDataFifoFull;
     Microroc_top Microroc_u1
     (
       .Clk(Clk),
@@ -402,23 +425,23 @@ module FPGA_TOP(
       .PowPulsing_En(Microroc_powerpulsing_en),//1 enable, 0 disable
       .Sel_Readout_chn(Microroc_sel_readout_chn),//1 chn1, 0 chn2
       //------start_acq------------//
-      .Acq_start(Microroc_Acq_Start_Stop), //level or a pulse?
+      .Acq_start(MicrorocAcqStartStop), //level or a pulse?
       .AcqStart_time(Microroc_AcqStart_time),//Acquisition time, get it from USB, the default value is 8
       //------Hold gen interface-----//
       .Trig_Coincid(Microroc_Trig_Coincid),//2bit
       .Hold_delay(Microroc_Hold_Delay),//5bit //hold delay,maxium 800ns
       //------fifo interface-----//
-      .ext_fifo_full(usb_data_fifo_wr_full),
-      .parallel_data(Microroc_usb_data_fifo_wr_din),//16bit
-      .parallel_data_en(Microroc_usb_data_fifo_wr_en),
+      .ext_fifo_full(UsbDataFifoFull),
+      .parallel_data(MicrorocAcqData),//16bit
+      .parallel_data_en(MicrorocAcqData_en),
       //--------Trig_Gen interface---//
       .rst_cntb(Microroc_rst_cntb),
       .Raz_en(~Microroc_Internal_or_External_raz_chn),//modefied by wyu 20170309
-      .Force_RAZ(Force_Ext_RAZ),
+      .Force_RAZ(ForceExtRaz),
       .Trig_en(Microroc_trig_en),
       .Raz_mode(Microroc_External_RAZ_Mode),//2bit//modefied by wyu 20170309
       .External_RAZ_Delay_Time(Microroc_External_RAZ_Delay_Time),//new added by wyu 20170309
-      .Config_Done(Config_Done),
+      .Config_Done(MicrorocConfigDone),
       /*---Slow control and ReadReg---*/
       .SELECT(SELECT), //select = 1,slowcontrol register; select = 0,read register
       .SR_RSTB(SR_RSTB),//Selected Register Reset
@@ -464,13 +487,15 @@ module FPGA_TOP(
       .Start_Readout_t(Start_Readout_t)
     );
     /*------------ Sweep Test Instantiation --------------*/
+    wire [15:0] OutUsbExtFifoData;
+    wire OutUsbExtFifoData_en;
     Controller_Top Microroc_Control(
       .Clk(Clk),
       .Clk_5M(Clk_5M),
       .reset_n(reset_n),
       //*** Mode select
-      .ModeSelelct(),
-      .DacSelect(),
+      .ModeSelect(ModeSelect),
+      .DacSelect(DacSelect),
       //*** Microroc parameters
       .UsbMicroroc10BitDac0(Microroc_param_DAC0_Vth),
       .UsbMicroroc10BitDac1(Microroc_param_DAC1_Vth),
@@ -478,47 +503,47 @@ module FPGA_TOP(
       .OutMicroroc10BitDac0(Microroc10BitDac0),
       .OutMicroroc10BitDac1(Microroc10BitDac1),
       .OutMicroroc10BitDac2(Microroc10BitDac2),
-      .UsbMicrorocChannelMask(),
-      .OutMicrorocChannelMask(),
-      .UsbMicrorocCTestChannel(),
-      .OutMicrorocCTestChannel(),
-      .UsbMicrorocSCParameterLoad(),
-      .OutMicrorocSCParameterLoad(),
-      .UsbSCOrReadreg(),
-      .MicrorocSCOrReadreg(),
-      .MicrorocConfigDone(),
+      .UsbMicrorocChannelMask(UsbMicrorocChannelMask),
+      .OutMicrorocChannelMask(MicrorocChannelMask),
+      .UsbMicrorocCTestChannel(UsbMicrorocCTestChannel),
+      .OutMicrorocCTestChannel(MicrorocCTestChannel),
+      .UsbMicrorocSCParameterLoad(UsbMicrorocSCParameterLoad),
+      .OutMicrorocSCParameterLoad(MicrorocSCParameterLoad),
+      .UsbSCOrReadreg(UsbMicrorocSCOrReadreg),
+      .MicrorocSCOrReadreg(MicrorocSCOrReadreg),
+      .MicrorocConfigDone(MicrorocConfigDone),
       //*** Microroc acq and data
-      .MicrorocAcqStartStop(),
-      .MicrorocAcqData(),
-      .MicrorocAcqData_en(),
+      .MicrorocAcqStartStop(MicrorocAcqStartStop),
+      .MicrorocAcqData(MicrorocAcqData),
+      .MicrorocAcqData_en(MicrorocAcqData_en),
       //*** Usb interface
-      .nPKTEND(),
-      .UsbDataFifoFull(),
-      .OutUsbExtFifoData(),
-      .OutUsbExtFifoData_en(),
-      .OutUsbStartStop(),
+      .nPKTEND(usb_pktend),
+      .UsbDataFifoFull(UsbDataFifoFull),
+      .OutUsbExtFifoData(OutUsbExtFifoData),
+      .OutUsbExtFifoData_en(OutUsbExtFifoData_en),
+      .OutUsbStartStop(UsbStartStop),
       //*** Sweep test start signal
-      .NormalAcqStartStop(),
-      .SweepTestStartStop(),
+      .NormalAcqStartStop(UsbMicrorocAcqStartStop),
+      .SweepTestStartStop(SweepTestStartStop),
       //*** Done signal
-      .SweepTestDone(),
-      .DataTransmitDone(),
+      .SweepTestDone(SweepTestDone),
+      .DataTransmitDone(~usb_pktend),
       //*** Sweep test parameters
-      .StartDac(),
-      .EndDac(),
-      .MaxPackageNumber(),
-      .TrigEffiOrCountEffi(),
-      .SingleTestChannel(),
-      .SingleOr64Channel(),
-      .CTestOrInput(),
-      .CPT_MAX(),
-      .CounterMax(),
-      .ForceExtRaz(),
+      .StartDac(StartDac),
+      .EndDac(EndDac),
+      .MaxPackageNumber(MaxPackageNumber),
+      .TrigEffiOrCountEffi(TrigEffiOrCountEffi),
+      .SingleTestChannel(SingleTestChannel),
+      .SingleOr64Channel(SingleOr64Channel),
+      .CTestOrInput(CTestOrInput),
+      .CPT_MAX(CPT_MAX),
+      .CounterMax(CounterMax),
+      .ForceExtRaz(ForceExtRaz),
       //*** Pin
-      .CLK_EXT(),
-      .out_trigger0b(),
-      .out_trigger1b(),
-      .out_Trigger2b()
+      .CLK_EXT(CLK_EXT),
+      .out_trigger0b(OUT_TRIG0B),
+      .out_trigger1b(OUT_TRIG1B),
+      .out_Trigger2b(OUT_TRIG2B)
     );
     /*------------ S Curve Test Instantiation ------------*/
     // This aera is for S Curve test, including SCurve-Test top. 
@@ -560,16 +585,16 @@ module FPGA_TOP(
       .SCurve_Test_Done(SCurve_Test_Done),
       .Data_Transmit_Done(USB_Data_Transmit_Done)
     );*/
-    assign LED[5] = ~(SCTest_Start_Stop || SCurve_Test_Done);
+    assign LED[5] = ~(SweepTestStartStop || SweepTestDone);
     /*------------usb data fifo instantiation-------*/ 
     //per ASIC 1270 depth x 16bit, 4 ASIC 5080 depth
     usb_data_fifo usb_data_fifo_8192depth 
     (
       .rst(out_to_rst_usb_data_fifo || !reset_n), // input rst
       .wr_clk(~Clk),  // input wr_clk -----new
-      .wr_en(usb_data_fifo_wr_en),    // input wr_en  -----new
-      .din(usb_data_fifo_wr_din),     // input [15 : 0] din  --new
-      .full(usb_data_fifo_wr_full),   // output full     ----new
+      .wr_en(OutUsbExtFifoData_en),    // input wr_en  -----new
+      .din(OutUsbExtFifoData),     // input [15 : 0] din  --new
+      .full(UsbDataFifoFull),   // output full     ----new
 
       .rd_clk(~IFCLK),                 // input rd_clk
       .rd_en(out_to_ext_fifo_rd_en),  // input rd_en
@@ -580,7 +605,7 @@ module FPGA_TOP(
 //assignmeng
 assign TP[3] = START_ACQ;
 assign TP[2] = usb_data_fifo_wr_en;
-assign TP[1] = Config_Done;
+assign TP[1] = MicrorocConfigDone;
 assign TP[0] = DOUT1B&DOUT2B;
 //debug
 (*mark_debug = "true"*)wire usb_data_fifo_wr_en_debug;

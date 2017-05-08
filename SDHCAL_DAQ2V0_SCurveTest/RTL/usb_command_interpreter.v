@@ -22,13 +22,13 @@ module usb_command_interpreter(
       input IFCLK,
       input clk,
       input reset_n,
-      /*--------USB interface------------*/
+      //--- USB interface ---//
       input in_from_usb_Ctr_rd_en,
       input [15:0] in_from_usb_ControlWord,
       output reg Microroc_Acq_Start_Stop,
-      /*-------clear usb fifo------------*/
+      //--- clear usb fifo ---//
       output reg out_to_rst_usb_data_fifo, //asynchronized reset
-      //-------Microroc parameter--------//
+      //--- Microroc parameter ---//
       output reg Microroc_sc_or_read,
       output reg Microroc_param_load,
       output reg [2:0] Microroc_param_asic_num,
@@ -65,23 +65,32 @@ module usb_command_interpreter(
       output reg Microroc_RS_or_Discri,
       //new add by wyu 20170308, SC parameter 575  Select Channel Trigger selected by Read Register (0) or NOR64 output (1)
       output reg Microroc_NOR64_or_Disc,
-      //new add 20170308 done
       //*** Channel and Discri Mask
       // Add by wyu 20170504
       output reg [191:0] MicrorocChannelMask,
-      //*** S Curve Test Poart
-      output reg ACQ_or_SCTest,
+
+      //--- Sweep Test Port ---//
+      // Mode Select
+      output [1:0] ModeSelect,
+      output [1:0] DacSelect,
+      // Test Dac
+      output reg [9:0] StartDac,
+      output reg [9:0] EndDac,
+      //*** S Curve Test Port
       output reg Single_or_64Chn,
       output reg CTest_or_Input,
       output reg [5:0] SingleTest_Chn,
       output reg [15:0] CPT_MAX,
-      output reg SCTest_Start_Stop,
-      //*** Count Efficirncy
+      output reg SweepTestStartStop,
+      // Count Efficirncy
       output reg TrigEffi_or_CountEffi,
-      output reg [15:0] Counter_MAX,
-      input SCTest_Done,
+      output reg [15:0] CounterMax,
+      input SweepTestDone,
       input USB_FIFO_Empty,
-      //*** LED test
+      //*** Sweep Acq
+      output [15:0] MaxPackageNumber,
+      output [1:0] SelectDac,
+      //--- LED ---//
       output reg [3:0] LED
     );
 wire [15:0] USB_COMMAND;
@@ -551,7 +560,7 @@ always @(posedge clk or negedge reset_n) begin
     MicrorocChannelMask <= 192'b1;
   end
   else begin
-    case(State):
+    case(State)
       IDLE:begin
         if(fifo_rden && USB_COMMAND == 16'hAE10)begin
           MicrorocChannelMask <= 192'b1;
@@ -898,17 +907,18 @@ always @(posedge clk or negedge reset_n) begin
   else 
     ADG819_Addr <= ADG819_Addr;
 end
-/*------ S Curve Test Command E type ------*/
-// Choose ACQ or S Curve Test
+//--- S Curve Test Command E type ---//
+// Choose Mode
+// 00: Normal Acq
+// 01: S Curve test
+// 10: Sweep ACQ
 always @(posedge clk or negedge reset_n)begin
   if(~reset_n)
-    ACQ_or_SCTest <= 1'b1;//default ACQ
-  else if(fifo_rden && USB_COMMAND == 16'hE0A0)
-    ACQ_or_SCTest <= 1'b1;
-  else if(fifo_rden && USB_COMMAND == 16'hE0A1)
-    ACQ_or_SCTest <= 1'b0;
+    ModeSelect <= 2'b00;//default ACQ
+  else if(fifo_rden && USB_COMMAND[15:4] == 12'hE0A)
+    ModeSelect <= USB_COMMAND[1:0];
   else
-    ACQ_or_SCTest <= ACQ_or_SCTest;
+    ModeSelect <= ModeSelect;
 end
 // Choose Single channel test or 64 channel test
 always @(posedge clk or negedge reset_n)begin
@@ -943,6 +953,29 @@ always @(posedge clk or negedge reset_n) begin
     TrigEffi_or_CountEffi <= 1'b0;
   else
     TrigEffi_or_CountEffi <= TrigEffi_or_CountEffi;
+end
+
+//S Curve test Start Stop Signl
+always @(posedge clk or negedge reset_n) begin
+  if(~reset_n)
+    SweepTestStartStop <= 1'b0;
+  else if(fifo_rden && USB_COMMAND == 16'hE0F0)
+    SweepTestStartStop <= 1'b1;
+  else if(fifo_rden && USB_COMMAND == 16'hE0F1)
+    SweepTestStartStop <= 1'b0;
+  else if(USB_FIFO_Empty & SweepTestDone)
+    SweepTestStartStop <= 1'b0;
+  else
+    SweepTestStartStop <= SweepTestStartStop;
+end
+// Choose Sweep Acq Dac
+always @(posedge clk or negedge reset_n)begin
+  if(~reset_n)
+    DacSelect <= 2'b0;
+  else if(fifo_rden && USB_COMMAND == 12'hE00)
+    DacSelect <= USB_COMMAND[1:0];
+  else
+    DacSelect <= DacSelect;
 end
 // When single channel test, Choose which channel are selected. Note that when choose 64 channel test, this parameter is shield
 always @(posedge clk or negedge reset_n)begin
@@ -982,7 +1015,25 @@ always @(posedge clk or negedge reset_n)begin
       CPT_MAX <= CPT_MAX;
 end
 // Select Counter efficiency test time
-localparam [7:0] Counter_MAX_0_1s = 8'h00,
+// Lower 8-bits is start with E3
+always @ (posedge clk or negedge reset_n)begin
+  if(~reset_n)
+    CounterMax[7:0] <= 8'd0; 
+  else if(fifo_rden && USB_COMMAND[15:8] == 8'hE3)
+    CounterMax[7:0] <= USB_COMMAND[7:0];
+  else
+    CounterMax[7:0] <= CounterMax[7:0];
+end
+// Higher 8-bits is start with E4
+always @ (posedge clk or negedge reset_n) begin
+  if(~reset_n)
+    CounterMax[15:8] <= 8'd0;
+  else if(fifo_rden && USB_COMMAND[15:7] == 8'hE4)
+    CounterMax[15:8] <= USB_COMMAND[7:0];
+  else
+    CounterMax[15:8] <= CounterMax[15:8];
+end
+/*localparam [7:0] Counter_MAX_0_1s = 8'h00,
                   Counter_MAX_1s = 8'h01,
                   Counter_MAX_2s = 8'h02,
                   Counter_MAX_4s = 8'h03,
@@ -1008,19 +1059,51 @@ always @(posedge clk or negedge reset_n) begin
   end
   else
     Counter_MAX <= Counter_MAX;
-end
-//S Curve test Start Stop Signl
+end*/
+
+//*** StartDac and EndDac
+// E50X, E51Y, E52Z: {Z, Y, X} --> Start DAC
 always @(posedge clk or negedge reset_n) begin
   if(~reset_n)
-    SCTest_Start_Stop <= 1'b0;
-  else if(fifo_rden && USB_COMMAND == 16'hE0F0)
-    SCTest_Start_Stop <= 1'b1;
-  else if(fifo_rden && USB_COMMAND == 16'hE0F1)
-    SCTest_Start_Stop <= 1'b0;
-  else if(USB_FIFO_Empty & SCTest_Done)
-    SCTest_Start_Stop <= 1'b0;
+    StartDac <= 10'b0;
+  else if(fifo_rden && USB_COMMAND[15:4] == 12'hE50)
+    StartDac[3:0] <= USB_COMMAND[3:0];
+  else if(fifo_rded && USB_COMMAND[15:4] == 12'hE51)
+    StartDac[7:4] <= USB_COMMAND[3:0];
+  else if(fifo_rden && USB_COMMAND[15:4] == 12'hE52)
+    StartDac[9:8] <= USB_COMMAND[1:0];
   else
-    SCTest_Start_Stop <= SCTest_Start_Stop;
+    StartDac <= StartDac;
+end
+// E53X, E54Y, E55Z: {Z, Y, X} --> End DAC
+always @(posedge clk or negedge reset_n) begin
+  if(~reset_n)
+    EndDac <= 10'd1023;
+  else if(fifo_rden && USB_COMMAND[15:4] == 12'hE53)
+    EndDac[3:0] <= USB_COMMAND[3:0];
+  else if(fifo_rden && USB_COMMAND[15:4] == 12'hE54)
+    EndDac[7:4] <= USB_COMMAND[3:0];
+  else if(fifo_rden && USB_COMMAND[15:4] == 12'hE55)
+    EndDac[9:8] <= USB_COMMAND[1:0];
+end
+//*** Package Number
+// Lower 8-bits of package number is started with E6
+always @(posedge clk or negedge reset_n) begin
+  if(~reset_n)
+    MaxPackageNumber[7:0] <= 8'b0;
+  else if(fifo_rden && USB_COMMAND[15:8] == 8'hE6)
+    MaxPackageNumber[7:0] <= USB_COMMAND[7:0];
+  else
+    MaxPackageNumber[7:0] <= MaxPackageNumber[7:0];
+end
+// Higher 8-bits of package number is started with E7
+always @(posedge clk or negedge reset_n) begin
+  if(~reset_n)
+    MaxPackageNumber[15:8] <= 8'b0;
+  else if(fifo_rden && USB_COMMAND[15:8] == 8'hE7)
+    MaxPackageNumber[15:8] <= USB_COMMAND[7:0];
+  else
+    MaxPackageNumbet[15:8] <= USB_COMMAND[15:8];
 end
 //Swap the LSB and MSB
   function [9:0] Invert_10bit(input [9:0] num);
