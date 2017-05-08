@@ -76,7 +76,7 @@ module SCurve_Test_Control(
   localparam [63:0] SINGLE_CHN_PARAM_Ctest = 64'h0000_0000_0000_0001;
   localparam [63:0] CTest_CHN_PARAM_Input = 64'h0;
   localparam [191:0] DISCRIMINATOR_MASK = {189'b0, 3'b111};
-  reg [8:0] Discri_Mask_Shift;
+  reg [7:0] Discri_Mask_Shift;
   reg [191:0] All_Chn_Discri_Mask;
   reg [63:0] All_Chn_Param;
   reg [5:0] Test_Chn;
@@ -93,7 +93,7 @@ module SCurve_Test_Control(
       Microroc_CTest_Chn_Out <= 64'd0;
       usb_data_fifo_wr_din <= 16'd0;
       usb_data_fifo_wr_en <= 1'b0;
-      Actual_10bit_DAC_Code <= StartDac;
+      Actual_10bit_DAC_Code <= 10'b0;
       Microroc_10bit_DAC_Out <= 10'b0;
       SC_Param_Load <= 1'b0;
       SCurve_Test_Done <= 1'b0;

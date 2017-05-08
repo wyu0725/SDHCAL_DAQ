@@ -23,7 +23,6 @@
 module Switcher(
     // ModeSelect
     input [1:0] ModeSelect,
-    input [1:0] DacSelect,
     // --- SC Parameters--- //
     // 10-bits DAC
     input [9:0] UsbMicroroc10BitDac0,
@@ -32,46 +31,46 @@ module Switcher(
     input [9:0] SCTest10BitDac,
     input [9:0] SweepAcq10BitDac,
     input [1:0] SweepAcqDacSelect,
-    output [9:0] OutMicroroc10BitDac0,
-    output [9:0] OutMicroroc10BitDac1,
-    output [9:0] OutMicroroc10BitDac2,
+    output reg [9:0] OutMicroroc10BitDac0,
+    output reg [9:0] OutMicroroc10BitDac1,
+    output reg [9:0] OutMicroroc10BitDac2,
     // Channel Discriminator Mask
     input [191:0] UsbMicrorocChannelMask,
     //input [1:0] USBMicrorocDiscriMask,
     input [191:0] SCTestMicrorocChannelMask,
     //input [1:0] SCTestDiscriMask,
-    output [191:0] OutMicrorocChannelMask,
+    output reg [191:0] OutMicrorocChannelMask,
     //output [1:0] OutMicrorocDiscriMask,
     // CTest Channel
     input [63:0] UsbMicrorocCTestChannel,
     input [63:0] SCTestMicrorocCTestChannel,
-    output [63:0] OutMicrorocCTestChannel,
+    output reg [63:0] OutMicrorocCTestChannel,
     // SC Parameters Load
     input UsbMicrorocSCParameterLoad,
     input SCTestMicrorocSCParameterLoad,
     input SweepAcqMicrorocSCParameterLoad,
-    output OutMicrorocSCParameterLoad,
+    output reg OutMicrorocSCParameterLoad,
     // SC or Read Register Select
     input UsbSCOrReadreg,
-    output OutMicrorocSCOrReadreg,
+    output reg OutMicrorocSCOrReadreg,
     // Start Signel
     input UsbMicrorocAcqStartStop,
     input UsbSweepTestStartStop,
-    output OutSCTestStartStop,
-    output OutSweepAcqStartStop,
+    output reg OutSCTestStartStop,
+    output reg OutSweepAcqStartStop,
     // Done Signal
     input SCTestDone,
     input SweepAcqDone,
-    output SweepTestDone,
+    output reg SweepTestDone,
     //input DataTransmitDone,
     //output OutNormalAcqStartStop,
     // USB Start
     //input UsbMicrorocUsbStartStop,
     input SweepTestUsbStartStop,
-    output OutUsbStartStop,
+    output reg OutUsbStartStop,
     // Microroc ACQ Start
     input SweepAcqMicrorocAcqStartStop,
-    output MicrorocAcqStartStop,
+    output reg MicrorocAcqStartStop,
     // USB Data
     input [15:0] MicrorocAcqData,
     input MicrorocAcqData_en,
@@ -79,10 +78,10 @@ module Switcher(
     input SweepAcqData_en,
     input [15:0] SCTestData,
     input SCTestData_en,
-    output [15:0] UsbFifoData,
-    output UsbFifoData_en,
-    output [15:0] ParallelData,
-    output ParallelData_en
+    output reg [15:0] UsbFifoData,
+    output reg UsbFifoData_en,
+    output reg [15:0] ParallelData,
+    output reg ParallelData_en
     );
     // Mux4
     localparam [1:0] ACQ_MODE = 2'b00,
@@ -134,9 +133,9 @@ module Switcher(
           ParallelData_en = 1'b0;
         end
         SWEEP_ACQ_MODE:begin
-          OutMicroroc10BitDac0 = (DacSelect == DAC0_SELECTED) ? SweepAcq10BitDac : UsbMicroroc10BitDac0;
-          OutMicroroc10BitDac1 = (DacSelect == DAC1_SELECTED) ? SweepAcq10BitDac : UsbMicroroc10BitDac1;
-          OutMicroroc10BitDac2 = (DacSelect == DAC2_SELECTED) ? SweepAcq10BitDac : UsbMicroroc10BitDac2;
+          OutMicroroc10BitDac0 = (SweepAcqDacSelect == DAC0_SELECTED) ? SweepAcq10BitDac : UsbMicroroc10BitDac0;
+          OutMicroroc10BitDac1 = (SweepAcqDacSelect == DAC1_SELECTED) ? SweepAcq10BitDac : UsbMicroroc10BitDac1;
+          OutMicroroc10BitDac2 = (SweepAcqDacSelect == DAC2_SELECTED) ? SweepAcq10BitDac : UsbMicroroc10BitDac2;
           OutMicrorocChannelMask = UsbMicrorocChannelMask;
           //OutMicrorocDiscriMask = USBMicrorocDiscriMask;
           OutMicrorocCTestChannel = UsbMicrorocCTestChannel;

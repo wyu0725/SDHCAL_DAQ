@@ -71,8 +71,8 @@ module usb_command_interpreter(
 
       //--- Sweep Test Port ---//
       // Mode Select
-      output [1:0] ModeSelect,
-      output [1:0] DacSelect,
+      output reg [1:0] ModeSelect,
+      output reg [1:0] DacSelect,
       // Test Dac
       output reg [9:0] StartDac,
       output reg [9:0] EndDac,
@@ -88,8 +88,7 @@ module usb_command_interpreter(
       input SweepTestDone,
       input USB_FIFO_Empty,
       //*** Sweep Acq
-      output [15:0] MaxPackageNumber,
-      output [1:0] SelectDac,
+      output reg [15:0] MaxPackageNumber,
       //--- LED ---//
       output reg [3:0] LED
     );
@@ -528,7 +527,7 @@ always @ (posedge clk or negedge reset_n) begin
       4'd3:DiscriMask <= 3'b100;
       4'd4:DiscriMask <= 3'b011;
       4'd5:DiscriMask <= 3'b010;
-      4'd6:DiscriMsak <= 3'b001;
+      4'd6:DiscriMask <= 3'b001;
       4'd7:DiscriMask <= 3'b000;
       default:DiscriMask <= 3'b111;
     endcase
@@ -549,46 +548,46 @@ always @(posedge clk or negedge reset_n)begin
 end
 //*** Load mask or Unmask
 reg [191:0] SingleChannelMask;
-reg [1:0] State;
-localparam [1:0] IDLE,
-                 MASK,
-                 UNMASK;
+reg [1:0] MaskState;
+localparam [1:0] IDLE = 2'b00,
+                 MASK = 2'b01,
+                 UNMASK = 2'b10;
 always @(posedge clk or negedge reset_n) begin
   if(~reset_n) begin
-    State <= 2'b0;
+    MaskState <= 2'b0;
     SingleChannelMask <= 192'b1;
     MicrorocChannelMask <= 192'b1;
   end
   else begin
-    case(State)
+    case(MaskState)
       IDLE:begin
         if(fifo_rden && USB_COMMAND == 16'hAE10)begin
           MicrorocChannelMask <= 192'b1;
-          State <= IDLE;
+          MaskState <= IDLE;
         end
         else if(fifo_rden && USB_COMMAND == 16'hAE11) begin
           SingleChannelMask <= {189'b1,DiscriMask} << MaskShift;
-          State <= MASK;
+          MaskState <= MASK;
         end
         else if(fifo_rden && USB_COMMAND == 16'hAE12) begin
-          SingleChannelMask <= {189'b0,~DisCriMask} << MaskShift;
-          State <= UNMASK;
+          SingleChannelMask <= {189'b0,~DiscriMask} << MaskShift;
+          MaskState <= UNMASK;
         end
         else begin
           MicrorocChannelMask <= MicrorocChannelMask;
-          State <= IDLE;
+          MaskState <= IDLE;
         end
       end
       MASK:begin
         MicrorocChannelMask <= MicrorocChannelMask & SingleChannelMask;
-        State <= IDLE;
+        MaskState <= IDLE;
       end
       UNMASK:begin
         MicrorocChannelMask <= MicrorocChannelMask | SingleChannelMask;
       end
       default:begin
         MicrorocChannelMask <= MicrorocChannelMask;
-        State <= IDLE;
+        MaskState <= IDLE;
       end
     endcase
   end
@@ -972,7 +971,7 @@ end
 always @(posedge clk or negedge reset_n)begin
   if(~reset_n)
     DacSelect <= 2'b0;
-  else if(fifo_rden && USB_COMMAND == 12'hE00)
+  else if(fifo_rden && USB_COMMAND[15:4] == 12'hE00)
     DacSelect <= USB_COMMAND[1:0];
   else
     DacSelect <= DacSelect;
@@ -1068,7 +1067,7 @@ always @(posedge clk or negedge reset_n) begin
     StartDac <= 10'b0;
   else if(fifo_rden && USB_COMMAND[15:4] == 12'hE50)
     StartDac[3:0] <= USB_COMMAND[3:0];
-  else if(fifo_rded && USB_COMMAND[15:4] == 12'hE51)
+  else if(fifo_rden && USB_COMMAND[15:4] == 12'hE51)
     StartDac[7:4] <= USB_COMMAND[3:0];
   else if(fifo_rden && USB_COMMAND[15:4] == 12'hE52)
     StartDac[9:8] <= USB_COMMAND[1:0];
@@ -1103,7 +1102,7 @@ always @(posedge clk or negedge reset_n) begin
   else if(fifo_rden && USB_COMMAND[15:8] == 8'hE7)
     MaxPackageNumber[15:8] <= USB_COMMAND[7:0];
   else
-    MaxPackageNumbet[15:8] <= USB_COMMAND[15:8];
+    MaxPackageNumber[15:8] <= USB_COMMAND[15:8];
 end
 //Swap the LSB and MSB
   function [9:0] Invert_10bit(input [9:0] num);

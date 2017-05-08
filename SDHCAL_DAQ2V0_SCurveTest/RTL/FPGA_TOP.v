@@ -143,7 +143,7 @@ module FPGA_TOP(
     wire Microroc_OTAQ_en;
     wire Microroc_RS_or_Discri;
     wire Microroc_NOR64_or_Disc;
-    wire UsbMicrorocChannelMask;
+    wire [191:0] UsbMicrorocChannelMask;
     //--- Sweep Test ---//
     wire SweepTestStartStop;
     wire [1:0] ModeSelect;
@@ -230,7 +230,7 @@ module FPGA_TOP(
       .TrigEffi_or_CountEffi(TrigEffiOrCountEffi),
       .CounterMax(CounterMax),
       //Done Signal
-      .SCTest_Done(SweepTestDone),
+      .SweepTestDone(SweepTestDone),
       .USB_FIFO_Empty(in_from_ext_fifo_empty),
       //*** Sweep Acq
       .MaxPackageNumber(MaxPackageNumber),
@@ -543,7 +543,7 @@ module FPGA_TOP(
       .CLK_EXT(CLK_EXT),
       .out_trigger0b(OUT_TRIG0B),
       .out_trigger1b(OUT_TRIG1B),
-      .out_Trigger2b(OUT_TRIG2B)
+      .out_trigger2b(OUT_TRIG2B)
     );
     /*------------ S Curve Test Instantiation ------------*/
     // This aera is for S Curve test, including SCurve-Test top. 
@@ -604,33 +604,7 @@ module FPGA_TOP(
     
 //assignmeng
 assign TP[3] = START_ACQ;
-assign TP[2] = usb_data_fifo_wr_en;
+assign TP[2] = OutUsbExtFifoData_en;
 assign TP[1] = MicrorocConfigDone;
 assign TP[0] = DOUT1B&DOUT2B;
-//debug
-(*mark_debug = "true"*)wire usb_data_fifo_wr_en_debug;
-(*mark_debug = "true"*)wire[15:0] usb_data_fifo_wr_din_debug;
-assign usb_data_fifo_wr_en_debug = usb_data_fifo_wr_en;
-assign usb_data_fifo_wr_din = usb_data_fifo_wr_din;
-/*
-(*mark_debug = "true"*)wire START_ACQ_PIN;
-(*mark_debug = "true"*)wire RESET_B_PIN;
-(*mark_debug = "true"*)wire CHIPSATB_PIN;
-(*mark_debug = "true"*)wire START_READOUT1_PIN;
-(*mark_debug = "true"*)wire END_READOUT1_PIN;
-(*mark_debug = "true"*)wire TRANSMITON1B_PIN;
-(*mark_debug = "true"*)wire DOUT1B_PIN;
-(*mark_debug = "true"*)wire PWR_ON_D_PIN;
-(*mark_debug = "true"*)wire PWR_ON_A_PIN;
-(*mark_debug = "true"*)wire PWR_ON_DAC_PIN;
-assign START_ACQ_PIN = START_ACQ;
-assign RESET_B_PIN = RESET_B;
-assign CHIPSATB_PIN = CHIPSATB;
-assign START_READOUT1_PIN = START_READOUT1;
-assign END_READOUT1_PIN = END_READOUT1;
-assign TRANSMITON1B_PIN = TRANSMITON1B;
-assign DOUT1B_PIN = DOUT1B;
-assign PWR_ON_D_PIN = PWR_ON_D;
-assign PWR_ON_A_PIN = PWR_ON_A;
-assign PWR_ON_DAC_PIN = PWR_ON_DAC;*/
 endmodule

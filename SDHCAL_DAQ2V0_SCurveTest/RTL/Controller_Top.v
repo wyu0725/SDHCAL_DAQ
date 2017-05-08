@@ -61,12 +61,10 @@ module Controller_Top(
     input DataTransmitDone,
     // The following ports is set for SweepACQ and SCurve Test
     //input SweepStart,
-    input StartDac,
-    input EndDac,
-    //output SweepTestDone,
-    //input DataTransmitDone,
+    input [9:0] StartDac,
+    input [9:0] EndDac,
     // Sweep ACQ
-    input [15:0] MaxPakageNumber,
+    input [15:0] MaxPackageNumber,
     //SCurve Test
     input TrigEffiOrCountEffi,
     input [5:0] SingleTestChannel,
@@ -97,7 +95,6 @@ module Controller_Top(
     wire SCTestDone;
     wire SweepAcqDone;
     // Usb Start Stop
-    wire SweepTestUsbStartStop;
     // Microroc ACQ Start Stop
     wire SweepAcqMicrorocAcqStartStop;
     // Data
@@ -110,19 +107,19 @@ module Controller_Top(
     Switcher Switcher(
       // Mode Select
       .ModeSelect(ModeSelect),
-      .DacSelect(DacSelect),
       // 10-bit DAC
       .UsbMicroroc10BitDac0(UsbMicroroc10BitDac0),
       .UsbMicroroc10BitDac1(UsbMicroroc10BitDac1),
       .UsbMicroroc10BitDac2(UsbMicroroc10BitDac2),
-      .SCTest10BitDAC(SCTest10BitDac),
-      .SweepACQ10BitDac(SweepAcq10BitDac),
+      .SCTest10BitDac(SCTest10BitDac),
+      .SweepAcq10BitDac(SweepAcq10BitDac),
+      .SweepAcqDacSelect(DacSelect),
       .OutMicroroc10BitDac0(OutMicroroc10BitDac0),
       .OutMicroroc10BitDac1(OutMicroroc10BitDac1),
       .OutMicroroc10BitDac2(OutMicroroc10BitDac2),
       // Channel and Discriminator Mask
       .UsbMicrorocChannelMask(UsbMicrorocChannelMask),
-      .SCTestChannelMask(SCTestChannelMask),
+      .SCTestMicrorocChannelMask(SCTestChannelMask),
       .OutMicrorocChannelMask(OutMicrorocChannelMask),
       // CTest Channel
       .UsbMicrorocCTestChannel(UsbMicrorocCTestChannel),
@@ -130,12 +127,12 @@ module Controller_Top(
       .OutMicrorocCTestChannel(OutMicrorocCTestChannel),
       // SC Parameters Load
       .UsbMicrorocSCParameterLoad(UsbMicrorocSCParameterLoad),
-      .SCTestMicrorocSCParameterLoad(SCTestMicrorocSCparameterLoad),
+      .SCTestMicrorocSCParameterLoad(SCTestMicrorocSCParameterLoad),
       .SweepAcqMicrorocSCParameterLoad(SweepAcqSCParameterLoad),
       .OutMicrorocSCParameterLoad(OutMicrorocSCParameterLoad),
       // SC or readreg
       .UsbSCOrReadreg(UsbSCOrReadreg),
-      .OutMicrorocSCOrReadreg(OutMicrorocSCOrReadreg),
+      .OutMicrorocSCOrReadreg(MicrorocSCOrReadreg),
       // Start Signal
       .UsbMicrorocAcqStartStop(NormalAcqStartStop),
       .UsbSweepTestStartStop(SweepTestStartStop),
@@ -147,10 +144,10 @@ module Controller_Top(
       .SweepTestDone(SweepTestDone),
       // USB Start
       //.UsbMicreorocAcqStartStop(UsbMicrorocAcqStartStop),
-      .SweepTestUsbStartStop(SweepTestUsbStartStop),
+      .SweepTestUsbStartStop(SweepTestStartStop),
       .OutUsbStartStop(OutUsbStartStop),
       // Microroc ACQ Start
-      .SweepAcqMicrorocACQStartStop(SweepAcqMicrorocAcqStartStop),
+      .SweepAcqMicrorocAcqStartStop(SweepAcqMicrorocAcqStartStop),
       .MicrorocAcqStartStop(MicrorocAcqStartStop),
       // USB Data
       .MicrorocAcqData(MicrorocAcqData),
@@ -171,6 +168,7 @@ module Controller_Top(
       .SweepStart(SweepAcqStartStop),
       .SingleACQStart(SweepAcqMicrorocAcqStartStop),
       .ACQDone(SweepAcqDone),
+      .DataTransmitDone(DataTransmitDone),
       // Sweep ACQ Parameters
       .StartDAC0(StartDac),
       .EndDAC0(EndDac),
@@ -180,7 +178,7 @@ module Controller_Top(
       .ParallelData_en(ParallelData_en),
       // SC Parameters
       .OutDAC0(SweepAcq10BitDac),
-      .LoadSCParameters(SweepAcqSCParameterLoad),
+      .LoadSCParameter(SweepAcqSCParameterLoad),
       .MicrorocConfigDone(MicrorocConfigDone),
       // Data Out
       .SweepACQData(SweepAcqData),
@@ -203,21 +201,21 @@ module Controller_Top(
       .EndDac(EndDac),
       //--- USB Data FIFO Interface ---
       //.usb_data_fifo_full(),
-      .usb_data_fifo_wr_en(SCTestData),
-      .usb_data_fifo_wr_din(SCTestData_en),
+      .usb_data_fifo_wr_en(SCTestData_en),
+      .usb_data_fifo_wr_din(SCTestData),
       .usb_data_fifo_full(UsbDataFifoFull),
       //--- Microroc Config Interface ---
       .Microroc_Config_Done(MicrorocConfigDone),
-      .Microroc_CTest_Chn_Out(OutMicrorocCTestChannel),
+      .Microroc_CTest_Chn_Out(SCTestMicrorocCTestChannel),
       .Microroc_10bit_DAC_Out(SCTest10BitDac),
       .Microroc_Discriminator_Mask(SCTestChannelMask),
       .SC_Param_Load(SCTestMicrorocSCParameterLoad),
       .Force_Ext_RAZ(ForceExtRaz),
       //--- PIN ---
       .CLK_EXT(CLK_EXT),
-      .out_trigger0b(OUT_TRIG0B),
-      .out_trigger1b(OUT_TRIG1B),
-      .out_trigger2b(OUT_TRIG2B),
+      .out_trigger0b(out_trigger0b),
+      .out_trigger1b(out_trigger1b),
+      .out_trigger2b(out_trigger2b),
       //--- Done Indicator ---
       .SCurve_Test_Done(SCTestDone),
       .Data_Transmit_Done(DataTransmitDone)

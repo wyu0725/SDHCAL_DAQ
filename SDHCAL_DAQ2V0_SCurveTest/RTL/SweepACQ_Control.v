@@ -80,7 +80,7 @@ module SweepACQ_Control(
         OneDACDone <= 1'b0;
         ACQDone <= 1'b0;
         OutDAC0 <= 10'b0;
-        TestDAC0 <= StartDAC0;
+        TestDAC0 <= 10'b0;
         //MaskChannel <= 
         LoadSCParameter <= 1'b0;
         SweepACQData <= 16'b0;
