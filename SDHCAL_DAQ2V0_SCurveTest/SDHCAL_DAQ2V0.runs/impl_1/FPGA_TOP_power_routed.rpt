@@ -1,7 +1,7 @@
 Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2016.3 (win64) Build 1682563 Mon Oct 10 19:07:27 MDT 2016
-| Date             : Thu Apr 06 18:43:01 2017
+| Date             : Mon May 08 16:37:03 2017
 | Host             : WYU running 64-bit major release  (build 9200)
 | Command          : report_power -file FPGA_TOP_power_routed.rpt -pb FPGA_TOP_power_summary_routed.pb -rpx FPGA_TOP_power_routed.rpx
 | Design           : FPGA_TOP
@@ -30,7 +30,7 @@ Table of Contents
 ----------
 
 +--------------------------+-------+
-| Total On-Chip Power (W)  | 0.370 |
+| Total On-Chip Power (W)  | 0.371 |
 | Dynamic (W)              | 0.263 |
 | Device Static (W)        | 0.108 |
 | Total Off-Chip Power (W) | 0.005 |
@@ -50,19 +50,18 @@ Table of Contents
 +----------------+-----------+----------+-----------+-----------------+
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
-| Clocks         |     0.005 |        8 |       --- |             --- |
-| Slice Logic    |     0.003 |     5400 |       --- |             --- |
-|   LUT as Logic |     0.003 |     2361 |     63400 |            3.72 |
-|   Register     |    <0.001 |     2439 |    126800 |            1.92 |
-|   CARRY4       |    <0.001 |       61 |     15850 |            0.38 |
-|   F7/F8 Muxes  |    <0.001 |        4 |     63400 |           <0.01 |
-|   Others       |     0.000 |      130 |       --- |             --- |
-| Signals        |     0.003 |     3640 |       --- |             --- |
-| Block RAM      |     0.001 |      5.5 |       135 |            4.07 |
+| Clocks         |     0.006 |        8 |       --- |             --- |
+| Slice Logic    |     0.004 |     6455 |       --- |             --- |
+|   LUT as Logic |     0.003 |     2852 |     63400 |            4.50 |
+|   Register     |    <0.001 |     3036 |    126800 |            2.39 |
+|   CARRY4       |    <0.001 |       80 |     15850 |            0.50 |
+|   Others       |     0.000 |      147 |       --- |             --- |
+| Signals        |     0.004 |     4203 |       --- |             --- |
+| Block RAM      |     0.001 |        6 |       135 |            4.44 |
 | MMCM           |     0.086 |        1 |         6 |           16.67 |
-| I/O            |     0.164 |       78 |       285 |           27.37 |
+| I/O            |     0.163 |       78 |       285 |           27.37 |
 | Static Power   |     0.108 |          |           |                 |
-| Total          |     0.370 |          |           |                 |
+| Total          |     0.371 |          |           |                 |
 +----------------+-----------+----------+-----------+-----------------+
 
 
@@ -72,7 +71,7 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) |
 +-----------+-------------+-----------+-------------+------------+
-| Vccint    |       1.000 |     0.028 |       0.013 |      0.015 |
+| Vccint    |       1.000 |     0.030 |       0.014 |      0.016 |
 | Vccaux    |       1.800 |     0.066 |       0.048 |      0.018 |
 | Vcco33    |       3.300 |     0.007 |       0.003 |      0.004 |
 | Vcco25    |       2.500 |     0.067 |       0.063 |      0.004 |
@@ -146,44 +145,69 @@ Table of Contents
 | Name                                                                       | Power (W) |
 +----------------------------------------------------------------------------+-----------+
 | FPGA_TOP                                                                   |     0.263 |
-|   ACQ_or_SCTest_Switcher                                                   |    <0.001 |
 |   Clk_Gen                                                                  |     0.086 |
-|   Microroc_SCurveTest                                                      |     0.003 |
-|     SC_test_control                                                        |     0.001 |
-|     SC_test_single                                                         |    <0.001 |
-|       Trigger0                                                             |    <0.001 |
-|       Trigger1                                                             |    <0.001 |
-|       Trigger2                                                             |    <0.001 |
-|     scurve_data_fifo_16x16                                                 |    <0.001 |
-|       U0                                                                   |    <0.001 |
-|         inst_fifo_gen                                                      |    <0.001 |
-|           gconvfifo.rf                                                     |    <0.001 |
-|             grf.rf                                                         |    <0.001 |
-|               gntv_or_sync_fifo.gl0.rd                                     |    <0.001 |
-|                 grss.rsts                                                  |    <0.001 |
-|                 rpntr                                                      |    <0.001 |
-|               gntv_or_sync_fifo.gl0.wr                                     |    <0.001 |
-|                 gwss.wsts                                                  |    <0.001 |
-|                 wpntr                                                      |    <0.001 |
-|               gntv_or_sync_fifo.mem                                        |    <0.001 |
-|                 gbm.gbmg.gbmga.ngecc.bmg                                   |    <0.001 |
-|                   inst_blk_mem_gen                                         |    <0.001 |
-|                     gnbram.gnativebmg.native_blk_mem_gen                   |    <0.001 |
-|                       valid.cstr                                           |    <0.001 |
-|                         ramloop[0].ram.r                                   |    <0.001 |
-|                           prim_noinit.ram                                  |    <0.001 |
-|               rstblk                                                       |    <0.001 |
-|                 ngwrdrst.grst.g7serrst.gwrrd_rst_sync_stage[1].rrst_inst   |    <0.001 |
-|                 ngwrdrst.grst.g7serrst.gwrrd_rst_sync_stage[1].wrst_inst   |    <0.001 |
-|                 ngwrdrst.grst.g7serrst.gwrrd_rst_sync_stage[2].rrst_inst   |    <0.001 |
-|                 ngwrdrst.grst.g7serrst.gwrrd_rst_sync_stage[2].wrst_inst   |    <0.001 |
-|   Microroc_u1                                                              |     0.156 |
+|   Microroc_Control                                                         |     0.004 |
+|     Microroc_SCurveTest                                                    |     0.003 |
+|       SC_test_control                                                      |     0.002 |
+|       SC_test_single                                                       |    <0.001 |
+|         Trigger0                                                           |    <0.001 |
+|         Trigger1                                                           |    <0.001 |
+|         Trigger2                                                           |    <0.001 |
+|       scurve_data_fifo_16x16                                               |    <0.001 |
+|         U0                                                                 |    <0.001 |
+|           inst_fifo_gen                                                    |    <0.001 |
+|             gconvfifo.rf                                                   |    <0.001 |
+|               grf.rf                                                       |    <0.001 |
+|                 gntv_or_sync_fifo.gl0.rd                                   |    <0.001 |
+|                   grss.rsts                                                |    <0.001 |
+|                   rpntr                                                    |    <0.001 |
+|                 gntv_or_sync_fifo.gl0.wr                                   |    <0.001 |
+|                   gwss.wsts                                                |    <0.001 |
+|                   wpntr                                                    |    <0.001 |
+|                 gntv_or_sync_fifo.mem                                      |    <0.001 |
+|                   gbm.gbmg.gbmga.ngecc.bmg                                 |    <0.001 |
+|                     inst_blk_mem_gen                                       |    <0.001 |
+|                       gnbram.gnativebmg.native_blk_mem_gen                 |    <0.001 |
+|                         valid.cstr                                         |    <0.001 |
+|                           ramloop[0].ram.r                                 |    <0.001 |
+|                             prim_noinit.ram                                |    <0.001 |
+|                 rstblk                                                     |    <0.001 |
+|                   ngwrdrst.grst.g7serrst.gwrrd_rst_sync_stage[1].rrst_inst |    <0.001 |
+|                   ngwrdrst.grst.g7serrst.gwrrd_rst_sync_stage[1].wrst_inst |    <0.001 |
+|                   ngwrdrst.grst.g7serrst.gwrrd_rst_sync_stage[2].rrst_inst |    <0.001 |
+|                   ngwrdrst.grst.g7serrst.gwrrd_rst_sync_stage[2].wrst_inst |    <0.001 |
+|     SweepACQ                                                               |    <0.001 |
+|       SweepACQ_Control                                                     |    <0.001 |
+|       SweepACQ_DataFIFO16x128                                              |    <0.001 |
+|         U0                                                                 |    <0.001 |
+|           inst_fifo_gen                                                    |    <0.001 |
+|             gconvfifo.rf                                                   |    <0.001 |
+|               grf.rf                                                       |    <0.001 |
+|                 gntv_or_sync_fifo.gl0.rd                                   |    <0.001 |
+|                   grss.rsts                                                |    <0.001 |
+|                   rpntr                                                    |    <0.001 |
+|                 gntv_or_sync_fifo.gl0.wr                                   |    <0.001 |
+|                   gwss.wsts                                                |    <0.001 |
+|                   wpntr                                                    |    <0.001 |
+|                 gntv_or_sync_fifo.mem                                      |    <0.001 |
+|                   gbm.gbmg.gbmga.ngecc.bmg                                 |    <0.001 |
+|                     inst_blk_mem_gen                                       |    <0.001 |
+|                       gnbram.gnativebmg.native_blk_mem_gen                 |    <0.001 |
+|                         valid.cstr                                         |    <0.001 |
+|                           ramloop[0].ram.r                                 |    <0.001 |
+|                             prim_noinit.ram                                |    <0.001 |
+|                 rstblk                                                     |    <0.001 |
+|                   ngwrdrst.grst.g7serrst.gwrrd_rst_sync_stage[1].rrst_inst |    <0.001 |
+|                   ngwrdrst.grst.g7serrst.gwrrd_rst_sync_stage[1].wrst_inst |    <0.001 |
+|                   ngwrdrst.grst.g7serrst.gwrrd_rst_sync_stage[2].rrst_inst |    <0.001 |
+|                   ngwrdrst.grst.g7serrst.gwrrd_rst_sync_stage[2].wrst_inst |    <0.001 |
+|   Microroc_u1                                                              |     0.155 |
 |     AutoDAQ                                                                |    <0.001 |
 |     Hold_Gen                                                               |    <0.001 |
 |     RAM_Read                                                               |    <0.001 |
 |     SC_Readreg                                                             |     0.004 |
 |       BitShift                                                             |    <0.001 |
-|       Microroc_Param                                                       |     0.004 |
+|       Microroc_Param                                                       |     0.003 |
 |       param_store_fifo_16bitx256deep                                       |    <0.001 |
 |         U0                                                                 |    <0.001 |
 |           inst_fifo_gen                                                    |    <0.001 |
@@ -215,7 +239,7 @@ Table of Contents
 |       pulse_sync                                                           |    <0.001 |
 |     Trig_Gen                                                               |    <0.001 |
 |     Trig_Gen_en                                                            |    <0.001 |
-|   usb_control                                                              |     0.002 |
+|   usb_control                                                              |     0.004 |
 |     usbcmdfifo_16depth                                                     |     0.001 |
 |       U0                                                                   |     0.001 |
 |         inst_fifo_gen                                                      |     0.001 |

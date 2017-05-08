@@ -52,7 +52,7 @@ namespace USB_DAQ {
         
         #line 48 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.Label label;
+        internal System.Windows.Controls.Label lblMessage;
         
         #line default
         #line hidden
@@ -116,7 +116,7 @@ namespace USB_DAQ {
         
         #line 61 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.Label label1;
+        internal System.Windows.Controls.Label lblFileDirectory;
         
         #line default
         #line hidden
@@ -148,7 +148,7 @@ namespace USB_DAQ {
         
         #line 65 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.Label label2;
+        internal System.Windows.Controls.Label lblFileName;
         
         #line default
         #line hidden
@@ -180,7 +180,7 @@ namespace USB_DAQ {
         
         #line 72 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.GroupBox gbxSCurveTest;
+        internal System.Windows.Controls.GroupBox gbxMicrorocControl;
         
         #line default
         #line hidden
@@ -188,261 +188,13 @@ namespace USB_DAQ {
         
         #line 74 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.Label lblSing_or_Auto;
+        internal System.Windows.Controls.GroupBox gbxNormalAcq;
         
         #line default
         #line hidden
         
         
-        #line 81 "..\..\MainWindow.xaml"
-        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.Label lblCTest_or_Input;
-        
-        #line default
-        #line hidden
-        
-        
-        #line 88 "..\..\MainWindow.xaml"
-        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.Label lblCPT_MAX;
-        
-        #line default
-        #line hidden
-        
-        
-        #line 89 "..\..\MainWindow.xaml"
-        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.ComboBox cbxCPT_MAX;
-        
-        #line default
-        #line hidden
-        
-        
-        #line 98 "..\..\MainWindow.xaml"
-        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.Button btnSet_SCT_Param;
-        
-        #line default
-        #line hidden
-        
-        
-        #line 99 "..\..\MainWindow.xaml"
-        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.Button btnScurve_start;
-        
-        #line default
-        #line hidden
-        
-        
-        #line 100 "..\..\MainWindow.xaml"
-        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.Label lblSingleTest_Chn;
-        
-        #line default
-        #line hidden
-        
-        
-        #line 101 "..\..\MainWindow.xaml"
-        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.TextBox txtSingleTest_Chn;
-        
-        #line default
-        #line hidden
-        
-        
-        #line 102 "..\..\MainWindow.xaml"
-        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.Label lblTrigEffi_or_CountEffi;
-        
-        #line default
-        #line hidden
-        
-        
-        #line 109 "..\..\MainWindow.xaml"
-        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.Label lblCountTime;
-        
-        #line default
-        #line hidden
-        
-        
-        #line 110 "..\..\MainWindow.xaml"
-        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.ComboBox cbxCount_Time;
-        
-        #line default
-        #line hidden
-        
-        
-        #line 122 "..\..\MainWindow.xaml"
-        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.GroupBox gbx;
-        
-        #line default
-        #line hidden
-        
-        
-        #line 124 "..\..\MainWindow.xaml"
-        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.Label lblExternal_RAZ_Delay;
-        
-        #line default
-        #line hidden
-        
-        
-        #line 125 "..\..\MainWindow.xaml"
-        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.TextBox txtExternal_RAZ_Delay;
-        
-        #line default
-        #line hidden
-        
-        
-        #line 126 "..\..\MainWindow.xaml"
-        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.Button btnSet_External_RAZ_Delay;
-        
-        #line default
-        #line hidden
-        
-        
-        #line 127 "..\..\MainWindow.xaml"
-        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.Label lblRAZ_External;
-        
-        #line default
-        #line hidden
-        
-        
-        #line 128 "..\..\MainWindow.xaml"
-        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.ComboBox cbxRaz_mode;
-        
-        #line default
-        #line hidden
-        
-        
-        #line 134 "..\..\MainWindow.xaml"
-        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.Button btnSet_Raz_Width;
-        
-        #line default
-        #line hidden
-        
-        
-        #line 135 "..\..\MainWindow.xaml"
-        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.Label lblStartAcq_Time;
-        
-        #line default
-        #line hidden
-        
-        
-        #line 136 "..\..\MainWindow.xaml"
-        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.TextBox txtStartAcqTime;
-        
-        #line default
-        #line hidden
-        
-        
-        #line 137 "..\..\MainWindow.xaml"
-        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.Button btnSetAcqTime;
-        
-        #line default
-        #line hidden
-        
-        
-        #line 138 "..\..\MainWindow.xaml"
-        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.Label lblHold_Gen;
-        
-        #line default
-        #line hidden
-        
-        
-        #line 139 "..\..\MainWindow.xaml"
-        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.ComboBox cbxTrig_Coincid;
-        
-        #line default
-        #line hidden
-        
-        
-        #line 145 "..\..\MainWindow.xaml"
-        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.TextBox txtHold_delay;
-        
-        #line default
-        #line hidden
-        
-        
-        #line 146 "..\..\MainWindow.xaml"
-        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.Button btnSet_Hold;
-        
-        #line default
-        #line hidden
-        
-        
-        #line 147 "..\..\MainWindow.xaml"
-        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.Label lblPower_Pulsing;
-        
-        #line default
-        #line hidden
-        
-        
-        #line 152 "..\..\MainWindow.xaml"
-        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.Label lblOUT_TH;
-        
-        #line default
-        #line hidden
-        
-        
-        #line 153 "..\..\MainWindow.xaml"
-        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.ComboBox cbxOut_th;
-        
-        #line default
-        #line hidden
-        
-        
-        #line 159 "..\..\MainWindow.xaml"
-        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.Button btnOut_th_set;
-        
-        #line default
-        #line hidden
-        
-        
-        #line 160 "..\..\MainWindow.xaml"
-        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.Button btnAcqStart;
-        
-        #line default
-        #line hidden
-        
-        
-        #line 161 "..\..\MainWindow.xaml"
-        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.Button btnTRIG_EXT_EN;
-        
-        #line default
-        #line hidden
-        
-        
-        #line 162 "..\..\MainWindow.xaml"
-        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.Button btnReset_cntb;
-        
-        #line default
-        #line hidden
-        
-        
-        #line 163 "..\..\MainWindow.xaml"
+        #line 76 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lblDataRate;
         
@@ -450,15 +202,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 168 "..\..\MainWindow.xaml"
-        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.Button btnSlowACQ;
-        
-        #line default
-        #line hidden
-        
-        
-        #line 169 "..\..\MainWindow.xaml"
+        #line 81 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lblSlowACQDataNum;
         
@@ -466,7 +210,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 170 "..\..\MainWindow.xaml"
+        #line 82 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox txtSlowACQDataNum;
         
@@ -474,41 +218,265 @@ namespace USB_DAQ {
         #line hidden
         
         
+        #line 83 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.Button btnAcqStart;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 84 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.Button btnSlowACQ;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 87 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.GroupBox gbxSCurveTest;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 89 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.Label lblTrigEffi_or_CountEffi;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 96 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.Label lblSing_or_Auto;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 103 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.Label lblCTest_or_Input;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 110 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.Label lblCPT_MAX;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 111 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.ComboBox cbxCPT_MAX;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 120 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.Label lblCountTime;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 131 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.Label lblSingleTest_Chn;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 132 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.TextBox txtSingleTest_Chn;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 133 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.TextBox txtCountTime;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 136 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.Button btnScurve_start;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 137 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.GroupBox gbxSweepAcq;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 139 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.Label lblPackageNumber;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 140 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.TextBox txtPackageNumber;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 148 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.GroupBox gbxAcqParameter;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 150 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.Label lblExternal_RAZ_Delay;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 151 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.TextBox txtExternal_RAZ_Delay;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 152 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.Button btnSet_External_RAZ_Delay;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 153 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.Label lblRAZ_External;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 154 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.ComboBox cbxRaz_mode;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 160 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.Button btnSet_Raz_Width;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 161 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.Label lblStartAcq_Time;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 162 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.TextBox txtStartAcqTime;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 163 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.Button btnSetAcqTime;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 164 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.Label lblHold_Gen;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 165 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.ComboBox cbxTrig_Coincid;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 171 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.TextBox txtHold_delay;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 172 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.Button btnSet_Hold;
+        
+        #line default
+        #line hidden
+        
+        
         #line 173 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.GroupBox gbxSC_ReadReg;
+        internal System.Windows.Controls.Label lblPower_Pulsing;
         
         #line default
         #line hidden
         
         
-        #line 175 "..\..\MainWindow.xaml"
+        #line 178 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.Label lblASIC_Number;
+        internal System.Windows.Controls.Label lblOUT_TH;
         
         #line default
         #line hidden
         
         
-        #line 176 "..\..\MainWindow.xaml"
+        #line 179 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.ComboBox cbxASIC_Number;
-        
-        #line default
-        #line hidden
-        
-        
-        #line 182 "..\..\MainWindow.xaml"
-        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.Label lblHeader;
-        
-        #line default
-        #line hidden
-        
-        
-        #line 183 "..\..\MainWindow.xaml"
-        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.TextBox txtHeader;
+        internal System.Windows.Controls.ComboBox cbxOut_th;
         
         #line default
         #line hidden
@@ -516,7 +484,31 @@ namespace USB_DAQ {
         
         #line 185 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.Label Raz_Chn_Select;
+        internal System.Windows.Controls.Button btnOut_th_set;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 186 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.Button btnTRIG_EXT_EN;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 187 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.Button btnReset_cntb;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 190 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.GroupBox gbxSC_ReadReg;
         
         #line default
         #line hidden
@@ -524,7 +516,15 @@ namespace USB_DAQ {
         
         #line 192 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.Label lblChannel_Sel;
+        internal System.Windows.Controls.Label lblASIC_Number;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 193 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.ComboBox cbxASIC_Number;
         
         #line default
         #line hidden
@@ -532,7 +532,7 @@ namespace USB_DAQ {
         
         #line 199 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.Label lblASIC1;
+        internal System.Windows.Controls.Label lblHeader;
         
         #line default
         #line hidden
@@ -540,79 +540,31 @@ namespace USB_DAQ {
         
         #line 200 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.Label lblDAC0_VTH;
+        internal System.Windows.Controls.TextBox txtHeader;
         
         #line default
         #line hidden
         
         
-        #line 201 "..\..\MainWindow.xaml"
+        #line 202 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.TextBox txtDAC0_VTH_ASIC1;
+        internal System.Windows.Controls.Label Raz_Chn_Select;
         
         #line default
         #line hidden
         
         
-        #line 203 "..\..\MainWindow.xaml"
+        #line 209 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.Label lblDAC1_VTH;
+        internal System.Windows.Controls.Label lblChannel_Sel;
         
         #line default
         #line hidden
         
         
-        #line 204 "..\..\MainWindow.xaml"
+        #line 216 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.TextBox txtDAC1_VTH_ASIC1;
-        
-        #line default
-        #line hidden
-        
-        
-        #line 205 "..\..\MainWindow.xaml"
-        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.Label lblDAC2_VTH;
-        
-        #line default
-        #line hidden
-        
-        
-        #line 206 "..\..\MainWindow.xaml"
-        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.TextBox txtDAC2_VTH_ASIC1;
-        
-        #line default
-        #line hidden
-        
-        
-        #line 207 "..\..\MainWindow.xaml"
-        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.Label lblShaper_Output_Enable;
-        
-        #line default
-        #line hidden
-        
-        
-        #line 208 "..\..\MainWindow.xaml"
-        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.ComboBox cbxOut_sh_ASIC1;
-        
-        #line default
-        #line hidden
-        
-        
-        #line 212 "..\..\MainWindow.xaml"
-        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.Label lblOut_sh;
-        
-        #line default
-        #line hidden
-        
-        
-        #line 213 "..\..\MainWindow.xaml"
-        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.ComboBox cbxShaper_Output_Enable_ASIC1;
+        internal System.Windows.Controls.Label lblASIC1;
         
         #line default
         #line hidden
@@ -620,7 +572,7 @@ namespace USB_DAQ {
         
         #line 217 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.Label lblCTest;
+        internal System.Windows.Controls.Label lblDAC0_VTH;
         
         #line default
         #line hidden
@@ -628,15 +580,7 @@ namespace USB_DAQ {
         
         #line 218 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.TextBox txtCTest_ASIC1;
-        
-        #line default
-        #line hidden
-        
-        
-        #line 219 "..\..\MainWindow.xaml"
-        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.Label lblsw_hg;
+        internal System.Windows.Controls.TextBox txtDAC0_VTH_ASIC1;
         
         #line default
         #line hidden
@@ -644,31 +588,63 @@ namespace USB_DAQ {
         
         #line 220 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.ComboBox cbxsw_hg_ASIC1;
+        internal System.Windows.Controls.Label lblDAC1_VTH;
         
         #line default
         #line hidden
         
         
-        #line 226 "..\..\MainWindow.xaml"
+        #line 221 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.Label lblsw_lg;
+        internal System.Windows.Controls.TextBox txtDAC1_VTH_ASIC1;
         
         #line default
         #line hidden
         
         
-        #line 227 "..\..\MainWindow.xaml"
+        #line 222 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.ComboBox cbxsw_lg_ASIC1;
+        internal System.Windows.Controls.Label lblDAC2_VTH;
         
         #line default
         #line hidden
         
         
-        #line 233 "..\..\MainWindow.xaml"
+        #line 223 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.Label lblInternal_RAZ_Time;
+        internal System.Windows.Controls.TextBox txtDAC2_VTH_ASIC1;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 224 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.Label lblShaper_Output_Enable;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 225 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.ComboBox cbxOut_sh_ASIC1;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 229 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.Label lblOut_sh;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 230 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.ComboBox cbxShaper_Output_Enable_ASIC1;
         
         #line default
         #line hidden
@@ -676,31 +652,31 @@ namespace USB_DAQ {
         
         #line 234 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.ComboBox cbxInternal_RAZ_Time_ASIC1;
+        internal System.Windows.Controls.Label lblCTest;
         
         #line default
         #line hidden
         
         
-        #line 240 "..\..\MainWindow.xaml"
+        #line 235 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.Label lblRead_Reg;
+        internal System.Windows.Controls.TextBox txtCTest_ASIC1;
         
         #line default
         #line hidden
         
         
-        #line 241 "..\..\MainWindow.xaml"
+        #line 236 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.TextBox txtRead_reg_ASIC1;
+        internal System.Windows.Controls.Label lblsw_hg;
         
         #line default
         #line hidden
         
         
-        #line 242 "..\..\MainWindow.xaml"
+        #line 237 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.Label lblSc_or_Read;
+        internal System.Windows.Controls.ComboBox cbxsw_hg_ASIC1;
         
         #line default
         #line hidden
@@ -708,7 +684,7 @@ namespace USB_DAQ {
         
         #line 243 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.Button btnSC_or_ReadReg;
+        internal System.Windows.Controls.Label lblsw_lg;
         
         #line default
         #line hidden
@@ -716,55 +692,23 @@ namespace USB_DAQ {
         
         #line 244 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.Label lblASIC2;
+        internal System.Windows.Controls.ComboBox cbxsw_lg_ASIC1;
         
         #line default
         #line hidden
         
         
-        #line 245 "..\..\MainWindow.xaml"
+        #line 250 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.TextBox txtDAC0_VTH_ASIC2;
+        internal System.Windows.Controls.Label lblInternal_RAZ_Time;
         
         #line default
         #line hidden
         
         
-        #line 246 "..\..\MainWindow.xaml"
+        #line 251 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.TextBox txtDAC1_VTH_ASIC2;
-        
-        #line default
-        #line hidden
-        
-        
-        #line 247 "..\..\MainWindow.xaml"
-        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.TextBox txtDAC2_VTH_ASIC2;
-        
-        #line default
-        #line hidden
-        
-        
-        #line 248 "..\..\MainWindow.xaml"
-        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.ComboBox cbxOut_sh_ASIC2;
-        
-        #line default
-        #line hidden
-        
-        
-        #line 252 "..\..\MainWindow.xaml"
-        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.ComboBox cbxShaper_Output_Enable_ASIC2;
-        
-        #line default
-        #line hidden
-        
-        
-        #line 256 "..\..\MainWindow.xaml"
-        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.TextBox txtCTest_ASIC2;
+        internal System.Windows.Controls.ComboBox cbxInternal_RAZ_Time_ASIC1;
         
         #line default
         #line hidden
@@ -772,7 +716,47 @@ namespace USB_DAQ {
         
         #line 257 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.ComboBox cbxsw_hg_ASIC2;
+        internal System.Windows.Controls.Label lblRead_Reg;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 258 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.TextBox txtRead_reg_ASIC1;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 259 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.Label lblSc_or_Read;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 260 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.Button btnSC_or_ReadReg;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 261 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.Label lblASIC2;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 262 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.TextBox txtDAC0_VTH_ASIC2;
         
         #line default
         #line hidden
@@ -780,7 +764,23 @@ namespace USB_DAQ {
         
         #line 263 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.ComboBox cbxsw_lg_ASIC2;
+        internal System.Windows.Controls.TextBox txtDAC1_VTH_ASIC2;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 264 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.TextBox txtDAC2_VTH_ASIC2;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 265 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.ComboBox cbxOut_sh_ASIC2;
         
         #line default
         #line hidden
@@ -788,47 +788,23 @@ namespace USB_DAQ {
         
         #line 269 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.ComboBox cbxInternal_RAZ_Time_ASIC2;
+        internal System.Windows.Controls.ComboBox cbxShaper_Output_Enable_ASIC2;
         
         #line default
         #line hidden
         
         
-        #line 275 "..\..\MainWindow.xaml"
+        #line 273 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.TextBox txtRead_reg_ASIC2;
+        internal System.Windows.Controls.TextBox txtCTest_ASIC2;
         
         #line default
         #line hidden
         
         
-        #line 276 "..\..\MainWindow.xaml"
+        #line 274 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.Label lblASIC3;
-        
-        #line default
-        #line hidden
-        
-        
-        #line 277 "..\..\MainWindow.xaml"
-        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.TextBox txtDAC0_VTH_ASIC3;
-        
-        #line default
-        #line hidden
-        
-        
-        #line 278 "..\..\MainWindow.xaml"
-        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.TextBox txtDAC1_VTH_ASIC3;
-        
-        #line default
-        #line hidden
-        
-        
-        #line 279 "..\..\MainWindow.xaml"
-        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.TextBox txtDAC2_VTH_ASIC3;
+        internal System.Windows.Controls.ComboBox cbxsw_hg_ASIC2;
         
         #line default
         #line hidden
@@ -836,31 +812,39 @@ namespace USB_DAQ {
         
         #line 280 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.ComboBox cbxOut_sh_ASIC3;
+        internal System.Windows.Controls.ComboBox cbxsw_lg_ASIC2;
         
         #line default
         #line hidden
         
         
-        #line 284 "..\..\MainWindow.xaml"
+        #line 286 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.ComboBox cbxShaper_Output_Enable_ASIC3;
+        internal System.Windows.Controls.ComboBox cbxInternal_RAZ_Time_ASIC2;
         
         #line default
         #line hidden
         
         
-        #line 288 "..\..\MainWindow.xaml"
+        #line 292 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.TextBox txtCTest_ASIC3;
+        internal System.Windows.Controls.TextBox txtRead_reg_ASIC2;
         
         #line default
         #line hidden
         
         
-        #line 289 "..\..\MainWindow.xaml"
+        #line 293 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.ComboBox cbxsw_hg_ASIC3;
+        internal System.Windows.Controls.Label lblASIC3;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 294 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.TextBox txtDAC0_VTH_ASIC3;
         
         #line default
         #line hidden
@@ -868,7 +852,23 @@ namespace USB_DAQ {
         
         #line 295 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.ComboBox cbxsw_lg_ASIC3;
+        internal System.Windows.Controls.TextBox txtDAC1_VTH_ASIC3;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 296 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.TextBox txtDAC2_VTH_ASIC3;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 297 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.ComboBox cbxOut_sh_ASIC3;
         
         #line default
         #line hidden
@@ -876,47 +876,23 @@ namespace USB_DAQ {
         
         #line 301 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.ComboBox cbxInternal_RAZ_Time_ASIC3;
+        internal System.Windows.Controls.ComboBox cbxShaper_Output_Enable_ASIC3;
         
         #line default
         #line hidden
         
         
-        #line 307 "..\..\MainWindow.xaml"
+        #line 305 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.TextBox txtRead_reg_ASIC3;
+        internal System.Windows.Controls.TextBox txtCTest_ASIC3;
         
         #line default
         #line hidden
         
         
-        #line 308 "..\..\MainWindow.xaml"
+        #line 306 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.Label lblASIC4;
-        
-        #line default
-        #line hidden
-        
-        
-        #line 309 "..\..\MainWindow.xaml"
-        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.TextBox txtDAC0_VTH_ASIC4;
-        
-        #line default
-        #line hidden
-        
-        
-        #line 310 "..\..\MainWindow.xaml"
-        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.TextBox txtDAC1_VTH_ASIC4;
-        
-        #line default
-        #line hidden
-        
-        
-        #line 311 "..\..\MainWindow.xaml"
-        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.TextBox txtDAC2_VTH_ASIC4;
+        internal System.Windows.Controls.ComboBox cbxsw_hg_ASIC3;
         
         #line default
         #line hidden
@@ -924,31 +900,39 @@ namespace USB_DAQ {
         
         #line 312 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.ComboBox cbxOut_sh_ASIC4;
+        internal System.Windows.Controls.ComboBox cbxsw_lg_ASIC3;
         
         #line default
         #line hidden
         
         
-        #line 316 "..\..\MainWindow.xaml"
+        #line 318 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.ComboBox cbxShaper_Output_Enable_ASIC4;
+        internal System.Windows.Controls.ComboBox cbxInternal_RAZ_Time_ASIC3;
         
         #line default
         #line hidden
         
         
-        #line 320 "..\..\MainWindow.xaml"
+        #line 324 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.TextBox txtCTest_ASIC4;
+        internal System.Windows.Controls.TextBox txtRead_reg_ASIC3;
         
         #line default
         #line hidden
         
         
-        #line 321 "..\..\MainWindow.xaml"
+        #line 325 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.ComboBox cbxsw_hg_ASIC4;
+        internal System.Windows.Controls.Label lblASIC4;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 326 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.TextBox txtDAC0_VTH_ASIC4;
         
         #line default
         #line hidden
@@ -956,7 +940,23 @@ namespace USB_DAQ {
         
         #line 327 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.ComboBox cbxsw_lg_ASIC4;
+        internal System.Windows.Controls.TextBox txtDAC1_VTH_ASIC4;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 328 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.TextBox txtDAC2_VTH_ASIC4;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 329 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.ComboBox cbxOut_sh_ASIC4;
         
         #line default
         #line hidden
@@ -964,13 +964,45 @@ namespace USB_DAQ {
         
         #line 333 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.ComboBox cbxShaper_Output_Enable_ASIC4;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 337 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.TextBox txtCTest_ASIC4;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 338 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.ComboBox cbxsw_hg_ASIC4;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 344 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.ComboBox cbxsw_lg_ASIC4;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 350 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.ComboBox cbxInternal_RAZ_Time_ASIC4;
         
         #line default
         #line hidden
         
         
-        #line 339 "..\..\MainWindow.xaml"
+        #line 356 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox txtRead_reg_ASIC4;
         
@@ -978,7 +1010,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 340 "..\..\MainWindow.xaml"
+        #line 357 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl4bitDAC_Cali;
         
@@ -986,7 +1018,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 345 "..\..\MainWindow.xaml"
+        #line 362 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button btnChnCali;
         
@@ -994,7 +1026,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 347 "..\..\MainWindow.xaml"
+        #line 364 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.ComboBox cbxPedCali_ASIC1;
         
@@ -1002,7 +1034,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 352 "..\..\MainWindow.xaml"
+        #line 369 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.ComboBox cbxPedCali_ASIC2;
         
@@ -1010,7 +1042,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 357 "..\..\MainWindow.xaml"
+        #line 374 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.ComboBox cbxPedCali_ASIC3;
         
@@ -1018,7 +1050,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 362 "..\..\MainWindow.xaml"
+        #line 379 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.ComboBox cbxPedCali_ASIC4;
         
@@ -1026,7 +1058,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 378 "..\..\MainWindow.xaml"
+        #line 395 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lblACQ_or_SCTest;
         
@@ -1072,7 +1104,7 @@ namespace USB_DAQ {
             #line hidden
             return;
             case 2:
-            this.label = ((System.Windows.Controls.Label)(target));
+            this.lblMessage = ((System.Windows.Controls.Label)(target));
             return;
             case 3:
             this.gbxUSBStatus = ((System.Windows.Controls.GroupBox)(target));
@@ -1108,7 +1140,7 @@ namespace USB_DAQ {
             this.gbxFile = ((System.Windows.Controls.GroupBox)(target));
             return;
             case 10:
-            this.label1 = ((System.Windows.Controls.Label)(target));
+            this.lblFileDirectory = ((System.Windows.Controls.Label)(target));
             return;
             case 11:
             this.txtFileDir = ((System.Windows.Controls.TextBox)(target));
@@ -1132,7 +1164,7 @@ namespace USB_DAQ {
             #line hidden
             return;
             case 14:
-            this.label2 = ((System.Windows.Controls.Label)(target));
+            this.lblFileName = ((System.Windows.Controls.Label)(target));
             return;
             case 15:
             this.txtFileName = ((System.Windows.Controls.TextBox)(target));
@@ -1150,543 +1182,557 @@ namespace USB_DAQ {
             this.gbxMICROROC = ((System.Windows.Controls.GroupBox)(target));
             return;
             case 18:
-            this.gbxSCurveTest = ((System.Windows.Controls.GroupBox)(target));
+            this.gbxMicrorocControl = ((System.Windows.Controls.GroupBox)(target));
             return;
             case 19:
-            this.lblSing_or_Auto = ((System.Windows.Controls.Label)(target));
+            this.gbxNormalAcq = ((System.Windows.Controls.GroupBox)(target));
             return;
             case 20:
-            
-            #line 76 "..\..\MainWindow.xaml"
-            ((System.Windows.Controls.RadioButton)(target)).Checked += new System.Windows.RoutedEventHandler(this.Single_or_64Chn_Checked);
-            
-            #line default
-            #line hidden
+            this.lblDataRate = ((System.Windows.Controls.Label)(target));
             return;
             case 21:
             
-            #line 77 "..\..\MainWindow.xaml"
-            ((System.Windows.Controls.RadioButton)(target)).Checked += new System.Windows.RoutedEventHandler(this.Single_or_64Chn_Checked);
+            #line 78 "..\..\MainWindow.xaml"
+            ((System.Windows.Controls.RadioButton)(target)).Checked += new System.Windows.RoutedEventHandler(this.DataRateSelect_Checked);
             
             #line default
             #line hidden
             return;
             case 22:
-            this.lblCTest_or_Input = ((System.Windows.Controls.Label)(target));
+            
+            #line 79 "..\..\MainWindow.xaml"
+            ((System.Windows.Controls.RadioButton)(target)).Checked += new System.Windows.RoutedEventHandler(this.DataRateSelect_Checked);
+            
+            #line default
+            #line hidden
             return;
             case 23:
-            
-            #line 83 "..\..\MainWindow.xaml"
-            ((System.Windows.Controls.RadioButton)(target)).Checked += new System.Windows.RoutedEventHandler(this.CTest_or_Input_Checked);
-            
-            #line default
-            #line hidden
+            this.lblSlowACQDataNum = ((System.Windows.Controls.Label)(target));
             return;
             case 24:
-            
-            #line 84 "..\..\MainWindow.xaml"
-            ((System.Windows.Controls.RadioButton)(target)).Checked += new System.Windows.RoutedEventHandler(this.CTest_or_Input_Checked);
-            
-            #line default
-            #line hidden
+            this.txtSlowACQDataNum = ((System.Windows.Controls.TextBox)(target));
             return;
             case 25:
-            this.lblCPT_MAX = ((System.Windows.Controls.Label)(target));
+            this.btnAcqStart = ((System.Windows.Controls.Button)(target));
+            
+            #line 83 "..\..\MainWindow.xaml"
+            this.btnAcqStart.Click += new System.Windows.RoutedEventHandler(this.btnAcqStart_Click);
+            
+            #line default
+            #line hidden
             return;
             case 26:
-            this.cbxCPT_MAX = ((System.Windows.Controls.ComboBox)(target));
+            this.btnSlowACQ = ((System.Windows.Controls.Button)(target));
+            
+            #line 84 "..\..\MainWindow.xaml"
+            this.btnSlowACQ.Click += new System.Windows.RoutedEventHandler(this.btnSlowACQ_Click);
+            
+            #line default
+            #line hidden
             return;
             case 27:
-            this.btnSet_SCT_Param = ((System.Windows.Controls.Button)(target));
-            
-            #line 98 "..\..\MainWindow.xaml"
-            this.btnSet_SCT_Param.Click += new System.Windows.RoutedEventHandler(this.btnSet_SCT_Param_Click);
-            
-            #line default
-            #line hidden
+            this.gbxSCurveTest = ((System.Windows.Controls.GroupBox)(target));
             return;
             case 28:
-            this.btnScurve_start = ((System.Windows.Controls.Button)(target));
+            this.lblTrigEffi_or_CountEffi = ((System.Windows.Controls.Label)(target));
+            return;
+            case 29:
             
-            #line 99 "..\..\MainWindow.xaml"
-            this.btnScurve_start.Click += new System.Windows.RoutedEventHandler(this.btnScurve_start_Click);
+            #line 91 "..\..\MainWindow.xaml"
+            ((System.Windows.Controls.RadioButton)(target)).Checked += new System.Windows.RoutedEventHandler(this.Trig_or_Count_Checked);
             
             #line default
             #line hidden
             return;
-            case 29:
-            this.lblSingleTest_Chn = ((System.Windows.Controls.Label)(target));
-            return;
             case 30:
-            this.txtSingleTest_Chn = ((System.Windows.Controls.TextBox)(target));
+            
+            #line 92 "..\..\MainWindow.xaml"
+            ((System.Windows.Controls.RadioButton)(target)).Checked += new System.Windows.RoutedEventHandler(this.Trig_or_Count_Checked);
+            
+            #line default
+            #line hidden
             return;
             case 31:
-            this.lblTrigEffi_or_CountEffi = ((System.Windows.Controls.Label)(target));
+            this.lblSing_or_Auto = ((System.Windows.Controls.Label)(target));
             return;
             case 32:
             
-            #line 104 "..\..\MainWindow.xaml"
-            ((System.Windows.Controls.RadioButton)(target)).Checked += new System.Windows.RoutedEventHandler(this.Trig_or_Count_Checked);
+            #line 98 "..\..\MainWindow.xaml"
+            ((System.Windows.Controls.RadioButton)(target)).Checked += new System.Windows.RoutedEventHandler(this.Single_or_64Chn_Checked);
             
             #line default
             #line hidden
             return;
             case 33:
             
-            #line 105 "..\..\MainWindow.xaml"
-            ((System.Windows.Controls.RadioButton)(target)).Checked += new System.Windows.RoutedEventHandler(this.Trig_or_Count_Checked);
+            #line 99 "..\..\MainWindow.xaml"
+            ((System.Windows.Controls.RadioButton)(target)).Checked += new System.Windows.RoutedEventHandler(this.Single_or_64Chn_Checked);
             
             #line default
             #line hidden
             return;
             case 34:
-            this.lblCountTime = ((System.Windows.Controls.Label)(target));
+            this.lblCTest_or_Input = ((System.Windows.Controls.Label)(target));
             return;
             case 35:
-            this.cbxCount_Time = ((System.Windows.Controls.ComboBox)(target));
+            
+            #line 105 "..\..\MainWindow.xaml"
+            ((System.Windows.Controls.RadioButton)(target)).Checked += new System.Windows.RoutedEventHandler(this.CTest_or_Input_Checked);
+            
+            #line default
+            #line hidden
             return;
             case 36:
-            this.gbx = ((System.Windows.Controls.GroupBox)(target));
+            
+            #line 106 "..\..\MainWindow.xaml"
+            ((System.Windows.Controls.RadioButton)(target)).Checked += new System.Windows.RoutedEventHandler(this.CTest_or_Input_Checked);
+            
+            #line default
+            #line hidden
             return;
             case 37:
-            this.lblExternal_RAZ_Delay = ((System.Windows.Controls.Label)(target));
+            this.lblCPT_MAX = ((System.Windows.Controls.Label)(target));
             return;
             case 38:
-            this.txtExternal_RAZ_Delay = ((System.Windows.Controls.TextBox)(target));
+            this.cbxCPT_MAX = ((System.Windows.Controls.ComboBox)(target));
             return;
             case 39:
+            this.lblCountTime = ((System.Windows.Controls.Label)(target));
+            return;
+            case 40:
+            this.lblSingleTest_Chn = ((System.Windows.Controls.Label)(target));
+            return;
+            case 41:
+            this.txtSingleTest_Chn = ((System.Windows.Controls.TextBox)(target));
+            return;
+            case 42:
+            this.txtCountTime = ((System.Windows.Controls.TextBox)(target));
+            return;
+            case 43:
+            this.btnScurve_start = ((System.Windows.Controls.Button)(target));
+            
+            #line 136 "..\..\MainWindow.xaml"
+            this.btnScurve_start.Click += new System.Windows.RoutedEventHandler(this.btnScurve_start_Click);
+            
+            #line default
+            #line hidden
+            return;
+            case 44:
+            this.gbxSweepAcq = ((System.Windows.Controls.GroupBox)(target));
+            return;
+            case 45:
+            this.lblPackageNumber = ((System.Windows.Controls.Label)(target));
+            return;
+            case 46:
+            this.txtPackageNumber = ((System.Windows.Controls.TextBox)(target));
+            return;
+            case 47:
+            this.gbxAcqParameter = ((System.Windows.Controls.GroupBox)(target));
+            return;
+            case 48:
+            this.lblExternal_RAZ_Delay = ((System.Windows.Controls.Label)(target));
+            return;
+            case 49:
+            this.txtExternal_RAZ_Delay = ((System.Windows.Controls.TextBox)(target));
+            return;
+            case 50:
             this.btnSet_External_RAZ_Delay = ((System.Windows.Controls.Button)(target));
             
-            #line 126 "..\..\MainWindow.xaml"
+            #line 152 "..\..\MainWindow.xaml"
             this.btnSet_External_RAZ_Delay.Click += new System.Windows.RoutedEventHandler(this.btnSet_External_RAZ_Delay_Click);
             
             #line default
             #line hidden
             return;
-            case 40:
+            case 51:
             this.lblRAZ_External = ((System.Windows.Controls.Label)(target));
             return;
-            case 41:
+            case 52:
             this.cbxRaz_mode = ((System.Windows.Controls.ComboBox)(target));
             return;
-            case 42:
+            case 53:
             this.btnSet_Raz_Width = ((System.Windows.Controls.Button)(target));
             
-            #line 134 "..\..\MainWindow.xaml"
+            #line 160 "..\..\MainWindow.xaml"
             this.btnSet_Raz_Width.Click += new System.Windows.RoutedEventHandler(this.btnSet_Raz_Width_Click);
             
             #line default
             #line hidden
             return;
-            case 43:
+            case 54:
             this.lblStartAcq_Time = ((System.Windows.Controls.Label)(target));
             return;
-            case 44:
+            case 55:
             this.txtStartAcqTime = ((System.Windows.Controls.TextBox)(target));
             return;
-            case 45:
+            case 56:
             this.btnSetAcqTime = ((System.Windows.Controls.Button)(target));
             
-            #line 137 "..\..\MainWindow.xaml"
+            #line 163 "..\..\MainWindow.xaml"
             this.btnSetAcqTime.Click += new System.Windows.RoutedEventHandler(this.btnSetAcqTime_Click);
             
             #line default
             #line hidden
             return;
-            case 46:
+            case 57:
             this.lblHold_Gen = ((System.Windows.Controls.Label)(target));
             return;
-            case 47:
+            case 58:
             this.cbxTrig_Coincid = ((System.Windows.Controls.ComboBox)(target));
             return;
-            case 48:
+            case 59:
             this.txtHold_delay = ((System.Windows.Controls.TextBox)(target));
             return;
-            case 49:
+            case 60:
             this.btnSet_Hold = ((System.Windows.Controls.Button)(target));
             
-            #line 146 "..\..\MainWindow.xaml"
+            #line 172 "..\..\MainWindow.xaml"
             this.btnSet_Hold.Click += new System.Windows.RoutedEventHandler(this.btnSet_Hold_Click);
             
             #line default
             #line hidden
             return;
-            case 50:
+            case 61:
             this.lblPower_Pulsing = ((System.Windows.Controls.Label)(target));
             return;
-            case 51:
-            
-            #line 149 "..\..\MainWindow.xaml"
-            ((System.Windows.Controls.RadioButton)(target)).Checked += new System.Windows.RoutedEventHandler(this.PowerPulsing_Checked);
-            
-            #line default
-            #line hidden
-            return;
-            case 52:
-            
-            #line 150 "..\..\MainWindow.xaml"
-            ((System.Windows.Controls.RadioButton)(target)).Checked += new System.Windows.RoutedEventHandler(this.PowerPulsing_Checked);
-            
-            #line default
-            #line hidden
-            return;
-            case 53:
-            this.lblOUT_TH = ((System.Windows.Controls.Label)(target));
-            return;
-            case 54:
-            this.cbxOut_th = ((System.Windows.Controls.ComboBox)(target));
-            return;
-            case 55:
-            this.btnOut_th_set = ((System.Windows.Controls.Button)(target));
-            
-            #line 159 "..\..\MainWindow.xaml"
-            this.btnOut_th_set.Click += new System.Windows.RoutedEventHandler(this.btnOut_th_set_Click);
-            
-            #line default
-            #line hidden
-            return;
-            case 56:
-            this.btnAcqStart = ((System.Windows.Controls.Button)(target));
-            
-            #line 160 "..\..\MainWindow.xaml"
-            this.btnAcqStart.Click += new System.Windows.RoutedEventHandler(this.btnAcqStart_Click);
-            
-            #line default
-            #line hidden
-            return;
-            case 57:
-            this.btnTRIG_EXT_EN = ((System.Windows.Controls.Button)(target));
-            
-            #line 161 "..\..\MainWindow.xaml"
-            this.btnTRIG_EXT_EN.Click += new System.Windows.RoutedEventHandler(this.btnTRIG_EXT_EN_Click);
-            
-            #line default
-            #line hidden
-            return;
-            case 58:
-            this.btnReset_cntb = ((System.Windows.Controls.Button)(target));
-            
-            #line 162 "..\..\MainWindow.xaml"
-            this.btnReset_cntb.Click += new System.Windows.RoutedEventHandler(this.btnReset_cntb_Click);
-            
-            #line default
-            #line hidden
-            return;
-            case 59:
-            this.lblDataRate = ((System.Windows.Controls.Label)(target));
-            return;
-            case 60:
-            
-            #line 165 "..\..\MainWindow.xaml"
-            ((System.Windows.Controls.RadioButton)(target)).Checked += new System.Windows.RoutedEventHandler(this.DataRateSelect_Checked);
-            
-            #line default
-            #line hidden
-            return;
-            case 61:
-            
-            #line 166 "..\..\MainWindow.xaml"
-            ((System.Windows.Controls.RadioButton)(target)).Checked += new System.Windows.RoutedEventHandler(this.DataRateSelect_Checked);
-            
-            #line default
-            #line hidden
-            return;
             case 62:
-            this.btnSlowACQ = ((System.Windows.Controls.Button)(target));
             
-            #line 168 "..\..\MainWindow.xaml"
-            this.btnSlowACQ.Click += new System.Windows.RoutedEventHandler(this.btnSlowACQ_Click);
+            #line 175 "..\..\MainWindow.xaml"
+            ((System.Windows.Controls.RadioButton)(target)).Checked += new System.Windows.RoutedEventHandler(this.PowerPulsing_Checked);
             
             #line default
             #line hidden
             return;
             case 63:
-            this.lblSlowACQDataNum = ((System.Windows.Controls.Label)(target));
+            
+            #line 176 "..\..\MainWindow.xaml"
+            ((System.Windows.Controls.RadioButton)(target)).Checked += new System.Windows.RoutedEventHandler(this.PowerPulsing_Checked);
+            
+            #line default
+            #line hidden
             return;
             case 64:
-            this.txtSlowACQDataNum = ((System.Windows.Controls.TextBox)(target));
+            this.lblOUT_TH = ((System.Windows.Controls.Label)(target));
             return;
             case 65:
-            this.gbxSC_ReadReg = ((System.Windows.Controls.GroupBox)(target));
+            this.cbxOut_th = ((System.Windows.Controls.ComboBox)(target));
             return;
             case 66:
-            this.lblASIC_Number = ((System.Windows.Controls.Label)(target));
+            this.btnOut_th_set = ((System.Windows.Controls.Button)(target));
+            
+            #line 185 "..\..\MainWindow.xaml"
+            this.btnOut_th_set.Click += new System.Windows.RoutedEventHandler(this.btnOut_th_set_Click);
+            
+            #line default
+            #line hidden
             return;
             case 67:
-            this.cbxASIC_Number = ((System.Windows.Controls.ComboBox)(target));
+            this.btnTRIG_EXT_EN = ((System.Windows.Controls.Button)(target));
+            
+            #line 186 "..\..\MainWindow.xaml"
+            this.btnTRIG_EXT_EN.Click += new System.Windows.RoutedEventHandler(this.btnTRIG_EXT_EN_Click);
+            
+            #line default
+            #line hidden
             return;
             case 68:
-            this.lblHeader = ((System.Windows.Controls.Label)(target));
-            return;
-            case 69:
-            this.txtHeader = ((System.Windows.Controls.TextBox)(target));
-            return;
-            case 70:
-            this.Raz_Chn_Select = ((System.Windows.Controls.Label)(target));
-            return;
-            case 71:
+            this.btnReset_cntb = ((System.Windows.Controls.Button)(target));
             
             #line 187 "..\..\MainWindow.xaml"
-            ((System.Windows.Controls.RadioButton)(target)).Checked += new System.Windows.RoutedEventHandler(this.RAZ_Chn_Select_Checked);
+            this.btnReset_cntb.Click += new System.Windows.RoutedEventHandler(this.btnReset_cntb_Click);
             
             #line default
             #line hidden
+            return;
+            case 69:
+            this.gbxSC_ReadReg = ((System.Windows.Controls.GroupBox)(target));
+            return;
+            case 70:
+            this.lblASIC_Number = ((System.Windows.Controls.Label)(target));
+            return;
+            case 71:
+            this.cbxASIC_Number = ((System.Windows.Controls.ComboBox)(target));
             return;
             case 72:
-            
-            #line 188 "..\..\MainWindow.xaml"
-            ((System.Windows.Controls.RadioButton)(target)).Checked += new System.Windows.RoutedEventHandler(this.RAZ_Chn_Select_Checked);
-            
-            #line default
-            #line hidden
+            this.lblHeader = ((System.Windows.Controls.Label)(target));
             return;
             case 73:
-            this.lblChannel_Sel = ((System.Windows.Controls.Label)(target));
+            this.txtHeader = ((System.Windows.Controls.TextBox)(target));
             return;
             case 74:
-            
-            #line 194 "..\..\MainWindow.xaml"
-            ((System.Windows.Controls.RadioButton)(target)).Checked += new System.Windows.RoutedEventHandler(this.ChannelSelect_Checked);
-            
-            #line default
-            #line hidden
+            this.Raz_Chn_Select = ((System.Windows.Controls.Label)(target));
             return;
             case 75:
             
-            #line 195 "..\..\MainWindow.xaml"
-            ((System.Windows.Controls.RadioButton)(target)).Checked += new System.Windows.RoutedEventHandler(this.ChannelSelect_Checked);
+            #line 204 "..\..\MainWindow.xaml"
+            ((System.Windows.Controls.RadioButton)(target)).Checked += new System.Windows.RoutedEventHandler(this.RAZ_Chn_Select_Checked);
             
             #line default
             #line hidden
             return;
             case 76:
-            this.lblASIC1 = ((System.Windows.Controls.Label)(target));
+            
+            #line 205 "..\..\MainWindow.xaml"
+            ((System.Windows.Controls.RadioButton)(target)).Checked += new System.Windows.RoutedEventHandler(this.RAZ_Chn_Select_Checked);
+            
+            #line default
+            #line hidden
             return;
             case 77:
-            this.lblDAC0_VTH = ((System.Windows.Controls.Label)(target));
+            this.lblChannel_Sel = ((System.Windows.Controls.Label)(target));
             return;
             case 78:
-            this.txtDAC0_VTH_ASIC1 = ((System.Windows.Controls.TextBox)(target));
+            
+            #line 211 "..\..\MainWindow.xaml"
+            ((System.Windows.Controls.RadioButton)(target)).Checked += new System.Windows.RoutedEventHandler(this.ChannelSelect_Checked);
+            
+            #line default
+            #line hidden
             return;
             case 79:
-            this.lblDAC1_VTH = ((System.Windows.Controls.Label)(target));
+            
+            #line 212 "..\..\MainWindow.xaml"
+            ((System.Windows.Controls.RadioButton)(target)).Checked += new System.Windows.RoutedEventHandler(this.ChannelSelect_Checked);
+            
+            #line default
+            #line hidden
             return;
             case 80:
-            this.txtDAC1_VTH_ASIC1 = ((System.Windows.Controls.TextBox)(target));
+            this.lblASIC1 = ((System.Windows.Controls.Label)(target));
             return;
             case 81:
-            this.lblDAC2_VTH = ((System.Windows.Controls.Label)(target));
+            this.lblDAC0_VTH = ((System.Windows.Controls.Label)(target));
             return;
             case 82:
-            this.txtDAC2_VTH_ASIC1 = ((System.Windows.Controls.TextBox)(target));
+            this.txtDAC0_VTH_ASIC1 = ((System.Windows.Controls.TextBox)(target));
             return;
             case 83:
-            this.lblShaper_Output_Enable = ((System.Windows.Controls.Label)(target));
+            this.lblDAC1_VTH = ((System.Windows.Controls.Label)(target));
             return;
             case 84:
-            this.cbxOut_sh_ASIC1 = ((System.Windows.Controls.ComboBox)(target));
+            this.txtDAC1_VTH_ASIC1 = ((System.Windows.Controls.TextBox)(target));
             return;
             case 85:
-            this.lblOut_sh = ((System.Windows.Controls.Label)(target));
+            this.lblDAC2_VTH = ((System.Windows.Controls.Label)(target));
             return;
             case 86:
-            this.cbxShaper_Output_Enable_ASIC1 = ((System.Windows.Controls.ComboBox)(target));
+            this.txtDAC2_VTH_ASIC1 = ((System.Windows.Controls.TextBox)(target));
             return;
             case 87:
-            this.lblCTest = ((System.Windows.Controls.Label)(target));
+            this.lblShaper_Output_Enable = ((System.Windows.Controls.Label)(target));
             return;
             case 88:
-            this.txtCTest_ASIC1 = ((System.Windows.Controls.TextBox)(target));
+            this.cbxOut_sh_ASIC1 = ((System.Windows.Controls.ComboBox)(target));
             return;
             case 89:
-            this.lblsw_hg = ((System.Windows.Controls.Label)(target));
+            this.lblOut_sh = ((System.Windows.Controls.Label)(target));
             return;
             case 90:
-            this.cbxsw_hg_ASIC1 = ((System.Windows.Controls.ComboBox)(target));
+            this.cbxShaper_Output_Enable_ASIC1 = ((System.Windows.Controls.ComboBox)(target));
             return;
             case 91:
-            this.lblsw_lg = ((System.Windows.Controls.Label)(target));
+            this.lblCTest = ((System.Windows.Controls.Label)(target));
             return;
             case 92:
-            this.cbxsw_lg_ASIC1 = ((System.Windows.Controls.ComboBox)(target));
+            this.txtCTest_ASIC1 = ((System.Windows.Controls.TextBox)(target));
             return;
             case 93:
-            this.lblInternal_RAZ_Time = ((System.Windows.Controls.Label)(target));
+            this.lblsw_hg = ((System.Windows.Controls.Label)(target));
             return;
             case 94:
-            this.cbxInternal_RAZ_Time_ASIC1 = ((System.Windows.Controls.ComboBox)(target));
+            this.cbxsw_hg_ASIC1 = ((System.Windows.Controls.ComboBox)(target));
             return;
             case 95:
-            this.lblRead_Reg = ((System.Windows.Controls.Label)(target));
+            this.lblsw_lg = ((System.Windows.Controls.Label)(target));
             return;
             case 96:
-            this.txtRead_reg_ASIC1 = ((System.Windows.Controls.TextBox)(target));
+            this.cbxsw_lg_ASIC1 = ((System.Windows.Controls.ComboBox)(target));
             return;
             case 97:
-            this.lblSc_or_Read = ((System.Windows.Controls.Label)(target));
+            this.lblInternal_RAZ_Time = ((System.Windows.Controls.Label)(target));
             return;
             case 98:
+            this.cbxInternal_RAZ_Time_ASIC1 = ((System.Windows.Controls.ComboBox)(target));
+            return;
+            case 99:
+            this.lblRead_Reg = ((System.Windows.Controls.Label)(target));
+            return;
+            case 100:
+            this.txtRead_reg_ASIC1 = ((System.Windows.Controls.TextBox)(target));
+            return;
+            case 101:
+            this.lblSc_or_Read = ((System.Windows.Controls.Label)(target));
+            return;
+            case 102:
             this.btnSC_or_ReadReg = ((System.Windows.Controls.Button)(target));
             
-            #line 243 "..\..\MainWindow.xaml"
+            #line 260 "..\..\MainWindow.xaml"
             this.btnSC_or_ReadReg.Click += new System.Windows.RoutedEventHandler(this.btnSC_or_ReadReg_Click);
             
             #line default
             #line hidden
             return;
-            case 99:
+            case 103:
             this.lblASIC2 = ((System.Windows.Controls.Label)(target));
             return;
-            case 100:
+            case 104:
             this.txtDAC0_VTH_ASIC2 = ((System.Windows.Controls.TextBox)(target));
             return;
-            case 101:
+            case 105:
             this.txtDAC1_VTH_ASIC2 = ((System.Windows.Controls.TextBox)(target));
             return;
-            case 102:
+            case 106:
             this.txtDAC2_VTH_ASIC2 = ((System.Windows.Controls.TextBox)(target));
             return;
-            case 103:
+            case 107:
             this.cbxOut_sh_ASIC2 = ((System.Windows.Controls.ComboBox)(target));
             return;
-            case 104:
+            case 108:
             this.cbxShaper_Output_Enable_ASIC2 = ((System.Windows.Controls.ComboBox)(target));
             return;
-            case 105:
+            case 109:
             this.txtCTest_ASIC2 = ((System.Windows.Controls.TextBox)(target));
             return;
-            case 106:
+            case 110:
             this.cbxsw_hg_ASIC2 = ((System.Windows.Controls.ComboBox)(target));
             return;
-            case 107:
+            case 111:
             this.cbxsw_lg_ASIC2 = ((System.Windows.Controls.ComboBox)(target));
             return;
-            case 108:
+            case 112:
             this.cbxInternal_RAZ_Time_ASIC2 = ((System.Windows.Controls.ComboBox)(target));
             return;
-            case 109:
+            case 113:
             this.txtRead_reg_ASIC2 = ((System.Windows.Controls.TextBox)(target));
             return;
-            case 110:
+            case 114:
             this.lblASIC3 = ((System.Windows.Controls.Label)(target));
             return;
-            case 111:
+            case 115:
             this.txtDAC0_VTH_ASIC3 = ((System.Windows.Controls.TextBox)(target));
             return;
-            case 112:
+            case 116:
             this.txtDAC1_VTH_ASIC3 = ((System.Windows.Controls.TextBox)(target));
             return;
-            case 113:
+            case 117:
             this.txtDAC2_VTH_ASIC3 = ((System.Windows.Controls.TextBox)(target));
             return;
-            case 114:
+            case 118:
             this.cbxOut_sh_ASIC3 = ((System.Windows.Controls.ComboBox)(target));
             return;
-            case 115:
+            case 119:
             this.cbxShaper_Output_Enable_ASIC3 = ((System.Windows.Controls.ComboBox)(target));
             return;
-            case 116:
+            case 120:
             this.txtCTest_ASIC3 = ((System.Windows.Controls.TextBox)(target));
             return;
-            case 117:
+            case 121:
             this.cbxsw_hg_ASIC3 = ((System.Windows.Controls.ComboBox)(target));
             return;
-            case 118:
+            case 122:
             this.cbxsw_lg_ASIC3 = ((System.Windows.Controls.ComboBox)(target));
             return;
-            case 119:
+            case 123:
             this.cbxInternal_RAZ_Time_ASIC3 = ((System.Windows.Controls.ComboBox)(target));
             return;
-            case 120:
+            case 124:
             this.txtRead_reg_ASIC3 = ((System.Windows.Controls.TextBox)(target));
             return;
-            case 121:
+            case 125:
             this.lblASIC4 = ((System.Windows.Controls.Label)(target));
             return;
-            case 122:
+            case 126:
             this.txtDAC0_VTH_ASIC4 = ((System.Windows.Controls.TextBox)(target));
             return;
-            case 123:
+            case 127:
             this.txtDAC1_VTH_ASIC4 = ((System.Windows.Controls.TextBox)(target));
             return;
-            case 124:
+            case 128:
             this.txtDAC2_VTH_ASIC4 = ((System.Windows.Controls.TextBox)(target));
             return;
-            case 125:
+            case 129:
             this.cbxOut_sh_ASIC4 = ((System.Windows.Controls.ComboBox)(target));
             return;
-            case 126:
+            case 130:
             this.cbxShaper_Output_Enable_ASIC4 = ((System.Windows.Controls.ComboBox)(target));
             return;
-            case 127:
+            case 131:
             this.txtCTest_ASIC4 = ((System.Windows.Controls.TextBox)(target));
             return;
-            case 128:
+            case 132:
             this.cbxsw_hg_ASIC4 = ((System.Windows.Controls.ComboBox)(target));
             return;
-            case 129:
+            case 133:
             this.cbxsw_lg_ASIC4 = ((System.Windows.Controls.ComboBox)(target));
             return;
-            case 130:
+            case 134:
             this.cbxInternal_RAZ_Time_ASIC4 = ((System.Windows.Controls.ComboBox)(target));
             return;
-            case 131:
+            case 135:
             this.txtRead_reg_ASIC4 = ((System.Windows.Controls.TextBox)(target));
             return;
-            case 132:
+            case 136:
             this.lbl4bitDAC_Cali = ((System.Windows.Controls.Label)(target));
             return;
-            case 133:
+            case 137:
             this.btnChnCali = ((System.Windows.Controls.Button)(target));
             
-            #line 345 "..\..\MainWindow.xaml"
+            #line 362 "..\..\MainWindow.xaml"
             this.btnChnCali.Click += new System.Windows.RoutedEventHandler(this.btnChnCali_Click);
             
             #line default
             #line hidden
             return;
-            case 134:
+            case 138:
             this.cbxPedCali_ASIC1 = ((System.Windows.Controls.ComboBox)(target));
             return;
-            case 135:
+            case 139:
             this.cbxPedCali_ASIC2 = ((System.Windows.Controls.ComboBox)(target));
             return;
-            case 136:
+            case 140:
             this.cbxPedCali_ASIC3 = ((System.Windows.Controls.ComboBox)(target));
             return;
-            case 137:
+            case 141:
             this.cbxPedCali_ASIC4 = ((System.Windows.Controls.ComboBox)(target));
             return;
-            case 138:
+            case 142:
             
-            #line 374 "..\..\MainWindow.xaml"
+            #line 391 "..\..\MainWindow.xaml"
             ((System.Windows.Controls.RadioButton)(target)).Checked += new System.Windows.RoutedEventHandler(this.SC_or_Read_Checked);
             
             #line default
             #line hidden
             return;
-            case 139:
+            case 143:
             
-            #line 375 "..\..\MainWindow.xaml"
+            #line 392 "..\..\MainWindow.xaml"
             ((System.Windows.Controls.RadioButton)(target)).Checked += new System.Windows.RoutedEventHandler(this.SC_or_Read_Checked);
             
             #line default
             #line hidden
             return;
-            case 140:
+            case 144:
             this.lblACQ_or_SCTest = ((System.Windows.Controls.Label)(target));
             return;
-            case 141:
+            case 145:
             
-            #line 380 "..\..\MainWindow.xaml"
+            #line 397 "..\..\MainWindow.xaml"
             ((System.Windows.Controls.RadioButton)(target)).Checked += new System.Windows.RoutedEventHandler(this.ACQ_or_SCTest_Checked);
             
             #line default
             #line hidden
             return;
-            case 142:
+            case 146:
             
-            #line 381 "..\..\MainWindow.xaml"
+            #line 398 "..\..\MainWindow.xaml"
+            ((System.Windows.Controls.RadioButton)(target)).Checked += new System.Windows.RoutedEventHandler(this.ACQ_or_SCTest_Checked);
+            
+            #line default
+            #line hidden
+            return;
+            case 147:
+            
+            #line 399 "..\..\MainWindow.xaml"
             ((System.Windows.Controls.RadioButton)(target)).Checked += new System.Windows.RoutedEventHandler(this.ACQ_or_SCTest_Checked);
             
             #line default

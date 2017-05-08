@@ -3,8 +3,11 @@
 # 
 
 set_param simulator.modelsimInstallPath D:/Program%20Files/ModelSim/win64
+set_msg_config -id {Common 17-41} -limit 10000000
 set_msg_config -id {HDL 9-1061} -limit 100000
 set_msg_config -id {HDL 9-1654} -limit 100000
+set_msg_config -id {Synth 8-256} -limit 10000
+set_msg_config -id {Synth 8-638} -limit 10000
 set_msg_config  -ruleid {1}  -id {Synth 8-3917}  -string {{WARNING: [Synth 8-3917] design FPGA_TOP has port usb_slcs driven by constant 0}}  -suppress 
 set_msg_config  -ruleid {2}  -id {Synth 8-3917}  -string {{WARNING: [Synth 8-3917] design FPGA_TOP has port usb_fifoaddr[0] driven by constant 0}}  -suppress 
 set_msg_config  -ruleid {3}  -id {Project 1-486}  -string {{WARNING: [Project 1-486] Could not resolve non-primitive black box cell 'usb_cmd_fifo' instantiated as 'usb_control/usbcmdfifo_16depth' [D:/Xilinx_Vivado_workspace/SDHCAL_DAQ2V0/RTL/usb_command_interpreter.v:55]}}  -suppress 
@@ -32,11 +35,15 @@ add_files -quiet d:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/SDHCAL_DAQ2V0.
 set_property used_in_implementation false [get_files d:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/SDHCAL_DAQ2V0.srcs/sources_1/ip/usb_cmd_fifo/usb_cmd_fifo.dcp]
 read_verilog -library xil_defaultlib {
   D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/SCurve_Single_Input.v
+  D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/SweepACQ_Control.v
+  D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/SCurve_Test_Control.v
+  D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/SCurve_Single_Test.v
   D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/PULSESYNC.v
   D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/Param_Bitshift.v
   D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/Microroc_Parameters.v
-  D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/SCurve_Test_Control.v
-  D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/SCurve_Single_Test.v
+  D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/Switcher.v
+  D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/SweepACQ_Top.v
+  D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/SCurve_Test_Top.v
   D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/Trig_Gen.v
   D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/SlowControl_ReadReg.v
   D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/Redundancy.v
@@ -44,14 +51,17 @@ read_verilog -library xil_defaultlib {
   D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/Internal_Trig_Gen.v
   D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/Hold_Gen.v
   D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/DaqControl.v
-  D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/ACQ_or_SCTest_Switch.v
-  D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/SCurve_Test_Top.v
-  D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/usb_synchronous_slavefifo.v
   D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/usb_command_interpreter.v
+  D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/Controller_Top.v
+  D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/usb_synchronous_slavefifo.v
   D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/Microroc_top.v
   D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/Clk_Management.v
   D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/FPGA_TOP.v
 }
+read_ip -quiet D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/SDHCAL_DAQ2V0.srcs/sources_1/ip/SweepACQ_FIFO/SweepACQ_FIFO.xci
+set_property used_in_implementation false [get_files -all d:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/SDHCAL_DAQ2V0.srcs/sources_1/ip/SweepACQ_FIFO/SweepACQ_FIFO/SweepACQ_FIFO.xdc]
+set_property is_locked true [get_files D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/SDHCAL_DAQ2V0.srcs/sources_1/ip/SweepACQ_FIFO/SweepACQ_FIFO.xci]
+
 read_ip -quiet D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/SDHCAL_DAQ2V0.srcs/sources_1/ip/SCurve_Data_FIFO/SCurve_Data_FIFO.xci
 set_property used_in_implementation false [get_files -all d:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/SDHCAL_DAQ2V0.srcs/sources_1/ip/SCurve_Data_FIFO/SCurve_Data_FIFO/SCurve_Data_FIFO.xdc]
 set_property used_in_implementation false [get_files -all d:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/SDHCAL_DAQ2V0.srcs/sources_1/ip/SCurve_Data_FIFO/SCurve_Data_FIFO_ooc.xdc]

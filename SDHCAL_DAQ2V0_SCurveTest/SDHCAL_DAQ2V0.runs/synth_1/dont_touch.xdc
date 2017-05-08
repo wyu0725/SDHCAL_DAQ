@@ -3,11 +3,17 @@
 
 # XDC: D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/Constraints/SDHCAL_DAQ2V0.xdc
 
+# IP: ip/SweepACQ_FIFO/SweepACQ_FIFO.xci
+set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==SweepACQ_FIFO || ORIG_REF_NAME==SweepACQ_FIFO}]
+
 # IP: ip/SCurve_Data_FIFO/SCurve_Data_FIFO.xci
 set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==SCurve_Data_FIFO || ORIG_REF_NAME==SCurve_Data_FIFO}]
 
 # IP: ip/usb_data_fifo/usb_data_fifo.xci
 set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==usb_data_fifo || ORIG_REF_NAME==usb_data_fifo}]
+
+# XDC: ip/SweepACQ_FIFO/SweepACQ_FIFO/SweepACQ_FIFO.xdc
+set_property DONT_TOUCH TRUE [get_cells [split [join [get_cells -hier -filter {REF_NAME==SweepACQ_FIFO || ORIG_REF_NAME==SweepACQ_FIFO}] {/U0 }]/U0 ]]
 
 # XDC: ip/usb_data_fifo/usb_data_fifo/usb_data_fifo.xdc
 set_property DONT_TOUCH TRUE [get_cells [split [join [get_cells -hier -filter {REF_NAME==usb_data_fifo || ORIG_REF_NAME==usb_data_fifo}] {/U0 }]/U0 ]]

@@ -5,92 +5,92 @@
 
 + 控制命令
 
-+ F0F0:开始
++ ​
 
-+ F0F1:停止
-
-+ B00X:Led灯
++ ​
 
 + Microroc命令
 
 + A类：配置参数，设置好之后基本不需改动
 
-+ A0A0:输出SC参数
+  + A0A0:输出SC参数
 
-+ A0A1:输出Read Register参数
+  + A0A1:输出Read Register参数
 
-+ A0BX:Microroc片数
+  + A0BX:Microroc片数
 
-+ A0C0:High gain shaper 输出
+  + A0C0:High gain shaper 输出
 
-+ A0C1:Low gain shaper 输出
+  + A0C1:Low gain shaper 输出
 
-+ A0D0:Disable Selected shaper output OTA
+  + A0D0:Disable Selected shaper output OTA
 
-+ A0D1:Enable Selected shaper output OTA
+  + A0D1:Enable Selected shaper output OTA
 
-+ A1XX:使能XX通道Ctest
+  + A1XX:使能XX通道Ctest
 
-+ A2XX:选通XX通道Read register
+  + A2XX:选通XX通道Read register
 
-+ A3A0:Power pulse unenable
+  + A3A0:Power pulse unenable
 
-+ A3A1:Power pulse enable
+  + A3A1:Power pulse enable
 
-+ A4A0:select channel 2 to readout
+  + A4A0:select channel 2 to readout
 
-+ A4A1:select channel 1 to readout
+  + A4A1:select channel 1 to readout
 
-+ A5AX:
+  + A5AX:
 
-+ A6XX:
+  + A6XX:
 
-+ A7A1:清零Gray Counter
+  + A7A1:清零Gray Counter
 
-+ > 新添加的命令20170309
+  + > 新添加的命令20170309
 
-+ A8A0:Enable internal raz_chn and disable external raz_chn
+  + A8A0:Enable internal raz_chn and disable external raz_chn
 
-+ A8A1:Disable internal raz_chn and enable external raz_chn
+  + A8A1:Disable internal raz_chn and enable external raz_chn
 
-+ A8BX:X --> Internal RAZ mode select
+  + A8BX:X --> Internal RAZ mode select
 
-+ A8CX:X --> External RAZ mode select
+  + A8CX:X --> External RAZ mode select
 
-+ A8DX:X*25ns --> External RAZ delay time:delay time指的是trigger输出之后，多长时间之后FPGA才开始输出RAZ信号
+  + A8DX:X*25ns --> External RAZ delay time:delay time指的是trigger输出之后，多长时间之后FPGA才开始输出RAZ信号
 
-+ > 新添加的命令结束20170309
+  + > 新添加的命令结束20170309
 
-+ A9A0:External trigger unenable
+  + A9A0:External trigger unenable
 
-+ A9A1:External trigger enable
+  + A9A1:External trigger enable
 
-+ ABXX:XX id Chip ID
+  + ABXX:XX id Chip ID
 
-+ ACA0:SC336=> Select latched
+  + ACA0:SC336=> Select latched
 
-+ ACA1:SC336=>Select direct output
+  + ACA1:SC336=>Select direct output
 
-+ ACB0:SC575=>Select Channel Trigger selected by Read Register
+  + ACB0:SC575=>Select Channel Trigger selected by Read Register
 
-+ ACB1:SC575=>Select Channel Trigger selected by NOR64
+  + ACB1:SC575=>Select Channel Trigger selected by NOR64
 
-+ ADXX(未实现):Microroc Channel Mask channel
+  + ADXX(未实现):Microroc Channel Mask channel
 
-  + XX:{2'b00, Mask_or_UnMask, MaskChannel}
+    + XX:{2'b00, Mask_or_UnMask, MaskChannel}
 
-+ AE0X(未实现):Microroc Discriminator Mask Channel
+  + AE0X(未实现):Microroc Discriminator Mask Channel
 
-  + X:{1'b0, DiscriMask}
-  + DiscriMask:000, 001, 010, 011, 100, 101, 110, 111
+    + X:{1'b0, DiscriMask}
+    + DiscriMask:000, 001, 010, 011, 100, 101, 110, 111
 
-+ AE10:All channel unmask
+  + AE10:All channel unmask
 
-+ AE11:Channel mask
+  + AE11:Channel mask
 
-+ AE12:Channel unmask
+  + AE12:Channel unmask
 
 + B类：采集参数，可以调整
+
+  + B00X:Led灯
   + B1XX:XX为Start_Acq_Time的低八位
   + B2YY:YY为Start_Acq_Time的高八位，YYXX*25ns为Start_Acq的时间
   + B3XY: X:sw_hg<1:0>, sw_lg<1:0>
@@ -122,6 +122,10 @@
   + E0D1:选择计数率测试
   + E0F0:SCurve 测试开始命令
   + E0F1:SCurve测试结束命令
+  + E00X:X选择扫域DAC
+    + 00:DAC0
+    + 01:DAC1
+    + 10:DAC2
   + E1XX:XX为单通道测试时的通道号
   + E2XX:选择最大计数：
     + 00：200
@@ -132,15 +136,16 @@
     + 05：20000
     + 06：40000
     + 07：50000
-  + E3XX:选择计数率测试时间
-    + 00:0.1s
-    + 01:1s
-    + 02:2s
-    + 03:4s
-    + 04:5s
-    + 05:6s
-    + 06:8s
-    + 07:10s
+  + E3XX,E4YY:选择计数率测试时间,时间 = YYXX$\times$1ms
+  + E5XY:
+    + E50X, E51Y, E52Z: {Z, Y, X} --> Start DAC
+    + E53X, E54Y, E55Z: {Z, Y, X} --> End DAC
+  + E6XX,E7YY: 选择扫域采数最大的数据包个数
+
++ F类：开始停止命令
+
+  + F0F0:开始
+  + F0F1:停止
 
 + 1类：测试用10bit DAC码值
 
