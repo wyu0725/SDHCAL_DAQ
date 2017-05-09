@@ -1,4 +1,4 @@
-function [ Dac0Std, Dac1Std, Dac2Std ] = CaculateStd( ImportData, Channel_Number )
+function [ Dac0Std, Dac1Std, Dac2Std, Amp0, Amp1, Amp2 ] = CaculateStd( ImportData, Channel_Number )
 %UNTITLED3 此处显示有关此函数的摘要
 %   此处显示详细说明
     [~, ~, P0, T0, P1, T1, P2, T2] = ReadData(ImportData, 2 + Channel_Number*7169);
@@ -36,7 +36,39 @@ function [ Dac0Std, Dac1Std, Dac2Std ] = CaculateStd( ImportData, Channel_Number
     NewDac2 = (DacCode - MeanDac2).*(DacCode - MeanDac2);
     VarDac2 = NewDac2*DiffT2';
     Dac2Std = sqrt(VarDac2);
-
-
+    
+    Start0 = 1022;
+    End0 = 0;
+    Start1 = 1022;
+    End1 = 0;
+    Start2 = 1022;
+    End2 = 0;
+    for i = 1:1022
+        %DAC0
+        if((DiffT0(i) == 0) && (DiffT0(i+1) ~= 0))
+            Start0 = min(Start0,(2*i + 1)/2);
+        end
+        if((DiffT0(i) ~= 0) && (DiffT0(i+1) == 0))
+            End0 = max(End0,(2*i + 1)/2);
+        end
+        %DAC1
+        if((DiffT1(i) == 0) && (DiffT1(i+1) ~= 0))
+            Start1 = min(Start1,(2*i + 1)/2);
+        end
+        if((DiffT1(i) ~= 0) && (DiffT1(i+1) == 0))
+            End1 = max(End1,(2*i + 1)/2);
+        end
+        %DAC2
+        if((DiffT2(i) == 0) && (DiffT2(i+1) ~= 0))
+            Start2 = min(Start2,(2*i + 1)/2);
+        end
+        if((DiffT2(i) ~= 0) && (DiffT2(i+1) == 0))
+            End2 = max(End2,(2*i + 1)/2);
+        end
+    end
+    Amp0 = End0 - Start0;
+    Amp1 = End1 - Start1;
+    Amp2 = End2 - Start2;
+    
 end
 

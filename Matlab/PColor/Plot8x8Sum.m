@@ -230,12 +230,17 @@ WeightSum = (3*NewGreatThan1 + 20*NewGreatThan2 + 150*NewGreatThan3)/FiredCount;
 C3DWeight = zeros(8,8);   
 for i = 1:8
     for j = 1:8        
-        C3DWeight(i,j) = WeightSum((i - 1)*8 + j);
+        C3DWeight(i,j) = (WeightSum((i - 1)*8 + j));
     end
 end
 width = 1;
 figure;
+plot(WeightSum);
+ax = gca;
+ax.YScale = 'log';
+figure;
 bWeight = bar3(C3DWeight,width);
+set(gca,'ZScale','log')
 title('Average hitted charge')
 colormap(flipud(parula))
 colorbar;

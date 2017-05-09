@@ -19,13 +19,15 @@ Dac2StdWoCorrection = zeros(1,64);
 Dac0StdWiCorrection = zeros(1,64);
 Dac1StdWiCorrection = zeros(1,64);
 Dac2StdWiCorrection = zeros(1,64);
+Amp0Wo = zeros(1,64);
+Amp0Wi = zeros(1,64);
 for i = 0:1:63
     [DAC0_50Percent_woCorrect(i+1), DAC1_50Percent_woCorrect(i+1), DAC2_50Percent_woCorrect(i+1)] = SCurvePlotSingleChannel(ImportData_woCorrection, i ,0);
     [DiffDAC0_woCorrection(:,i+1),DiffDAC1_woCorrection(:,i+1),DiffDAC2_woCorrection(:,i+1)] = DiffSCurve(ImportData_woCorrection,i);
-    [Dac0StdWoCorrection(i+1), Dac1StdWoCorrection(i+1), Dac2StdWoCorrection(i+1)] = CaculateStd(ImportData_woCorrection,i);
+    [Dac0StdWoCorrection(i+1), Dac1StdWoCorrection(i+1), Dac2StdWoCorrection(i+1), Amp0Wo(i+1),~,~] = CaculateStd(ImportData_woCorrection,i);
     [DAC0_50Percent_wiCorrect_DC(i+1), DAC1_50Percent_wiCorrect_DC(i+1), DAC2_50Percent_wiCorrect_DC(i+1)] = SCurvePlotSingleChannel(ImportData_wiCorrection_DC, i ,3);
     [DiffDAC0_wiCorrection_DC(:,i+1),DiffDAC1_wiCorrection_DC(:,i+1),DiffDAC2_wiCorrection_DC(:,i+1)] = DiffSCurve(ImportData_wiCorrection_DC,i);
-    [Dac0StdWiCorrection(i+1), Dac1StdWiCorrection(i+1), Dac2StdWiCorrection(i+1)] = CaculateStd(ImportData_wiCorrection_DC,i);
+    [Dac0StdWiCorrection(i+1), Dac1StdWiCorrection(i+1), Dac2StdWiCorrection(i+1),Amp0Wi(i+1),~,~] = CaculateStd(ImportData_wiCorrection_DC,i);
 end
 for i = 1:1:6    
     figure(i)
@@ -150,9 +152,9 @@ ChannelNumber(61) = [];
 Dac0StdWoCorrection(61) = [];
 Dac0StdWiCorrection(61) = [];
 figure
-plot(ChannelNumber,Dac0StdWoCorrection);
+stairs(ChannelNumber,Dac0StdWoCorrection,'k');
 hold on;
-plot(ChannelNumber,Dac0StdWiCorrection);
+stairs(ChannelNumber,Dac0StdWiCorrection,'r');
 hold off;
 xlabel('Channel');
 ylabel('Std of differential-SCurve (DAC Code)');
@@ -162,9 +164,9 @@ title('\bf RMS of DAC0 (0fC)');
 Dac1StdWoCorrection(61) = [];
 Dac1StdWiCorrection(61) = [];
 figure
-plot(ChannelNumber,Dac1StdWoCorrection);
+stairs(ChannelNumber,Dac1StdWoCorrection,'k');
 hold on;
-plot(ChannelNumber,Dac1StdWiCorrection);
+stairs(ChannelNumber,Dac1StdWiCorrection,'r');
 hold off;
 xlabel('Channel');
 ylabel('Std of differential-SCurve (DAC Code)');
@@ -174,11 +176,37 @@ title('\bf RMS of DAC1 (0fC)');
 Dac2StdWoCorrection(61) = [];
 Dac2StdWiCorrection(61) = [];
 figure
-plot(ChannelNumber,Dac2StdWoCorrection);
+stairs(ChannelNumber,Dac2StdWoCorrection,'k');
 hold on;
-plot(ChannelNumber,Dac2StdWiCorrection);
+stairs(ChannelNumber,Dac2StdWiCorrection,'r');
 hold off;
 xlabel('Channel');
 ylabel('Std of differential-SCurve (DAC Code)');
 legend('Without HV','With HV');
 title('\bf RMS of DAC2 (0fC)');
+
+Amp0Wo(61) = [];
+Amp0Wi(61) = [];
+Amp0Wo_mV = Amp0Wo*2.43;
+Amp0Wi_mV = Amp0Wi*2.43;
+figure
+stairs(ChannelNumber,Amp0Wo_mV,'k');
+hold on;
+stairs(ChannelNumber,Amp0Wi_mV,'r');
+hold off;
+xlabel('Channel');
+ylabel('Amptitude of Noise (mV)');
+legend('Without HV', 'With HV');
+title('\bf Amptitude of Noise')
+
+Dac0StdWo_mV = Dac0StdWoCorrection*2.43;
+Dac0StdWi_mV = Dac0StdWiCorrection*2.43;
+figure
+stairs(ChannelNumber,Dac0StdWo_mV,'k');
+hold on;
+stairs(ChannelNumber,Dac0StdWi_mV,'r');
+hold off;
+xlabel('Channel');
+ylabel('Std of Noise (mV)');
+legend('Without HV','With HV');
+title('\bf RMS of Noise');
