@@ -774,6 +774,8 @@ namespace USB_DAQ
                     Header_Value = HexStringToByteArray(header_default);
                 }
                 #endregion
+                #region RAZ Select
+                #endregion
                 bool Is_DAC_Legal = false;
                 int DAC0_Value, DAC1_Value, DAC2_Value;
                 int ShaperOutput_Value;
@@ -968,7 +970,7 @@ namespace USB_DAQ
                     }
                     #endregion
                     #region 4bitDAC Cali
-                    /*TempHashTabel = CaliHashTable[i];
+                    TempHashTabel = CaliHashTable[i];
                     foreach(string str in TempHashTabel.Keys)
                     {
                         PedCali_Param = (byte[])TempHashTabel[str];
@@ -990,7 +992,7 @@ namespace USB_DAQ
                         txtReport.AppendText(details.ToString());
                     else
                         txtReport.AppendText("All channels without calibration\n");
-                        */
+                        
                     #endregion
                     #region Start Load
                     Command_Bytes = ConstCommandByteArray(0xD0, 0xA2);
@@ -1678,7 +1680,7 @@ namespace USB_DAQ
             }
         }
         //E0A0选择ACQ，E0A1选择Scurve
-        private void ACQ_or_SCTest_Checked(object sender, RoutedEventArgs e)
+        /*private void ACQ_or_SCTest_Checked(object sender, RoutedEventArgs e)
         {
             var botton = sender as RadioButton;
             bool bResult = false;
@@ -1712,7 +1714,7 @@ namespace USB_DAQ
                     MessageBox.Show("Set S Curve Test mode failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
-        }
+        }*/
         //E0B0选择单通道测试，E0B1选择64通道测试，这里决定要获取的数据长度
         private void Single_or_64Chn_Checked(object sender, RoutedEventArgs e)
         {
@@ -2220,6 +2222,131 @@ namespace USB_DAQ
             bw.Flush();
             bw.Dispose();
             bw.Close();
+        }
+        //E0A0 选择 Normal Acq，E0A1选择SCurve，E0A2选择 Sweep ACQ
+        private void ModeSelectChecked(object sender, RoutedEventArgs e)
+        {
+            var botton = sender as RadioButton;
+            bool bResult = false;
+            if (botton.Content.ToString() == "ACQ") //这里已经直接将通道都切换过去
+            {
+                gbxNormalAcq.IsEnabled = true;
+                //btnScurve_start.IsEnabled = false;
+                gbxSweepTest.IsEnabled = false;
+                byte[] bytes = ConstCommandByteArray(0xE0, 0xA0);
+                bResult = CommandSend(bytes, bytes.Length);
+                if (bResult)
+                {
+                    txtReport.AppendText("Select ACQ mode\n");
+                }
+                else
+                {
+                    MessageBox.Show("Set ACQ Mode Failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            else if (botton.Content.ToString() == "SCTest")
+            {
+                //btnAcqStart.IsEnabled = false;
+                //btnScurve_start.IsEnabled = true;
+                gbxNormalAcq.IsEnabled = false;
+                gbxSweepTest.IsEnabled = true;
+                gbxSCurveTest.IsEnabled = true;
+                gbxSweepAcq.IsEnabled = false;
+                byte[] bytes = ConstCommandByteArray(0xE0, 0xA1);
+                bResult = CommandSend(bytes, bytes.Length);
+                if (bResult)
+                {
+                    txtReport.AppendText("Select S Curve Test Mode");
+                }
+                else
+                {
+                    MessageBox.Show("Set S Curve Test mode failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            else if(botton.Content.ToString() == "SweepACQ")
+            {
+                gbxNormalAcq.IsEnabled = false;
+                gbxSweepTest.IsEnabled = true;
+                gbxSCurveTest.IsEnabled = false;
+                gbxSweepAcq.IsEnabled = true;
+                byte[] bytes = ConstCommandByteArray(0xE0, 0xA1);
+                bResult = CommandSend(bytes, bytes.Length);
+                if(bResult)
+                {
+                    txtReport.AppendText("Select Sweep Acq mode \n");
+                }
+                else
+                {
+                    MessageBox.Show("Set Sweep ACQ Test mode failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
+        private void btnSetMask_Click(object sender, RoutedEventArgs e)
+        {
+            bool bResult = false;
+            byte[] CommandBytes = new byte[2];
+            string report = null;
+            #region Mask or not
+            int MaskChoise = cbxMaskOrUnMask.SelectedIndex + 16;
+            CommandBytes = ConstCommandByteArray(0xAE, (byte)MaskChoise);
+            bResult = CommandSend(CommandBytes, CommandBytes.Length);
+            if (bResult)
+            {
+                report = string.Format("{0}", cbxMaskOrUnMask.Text);
+            }
+            else
+            {
+                MessageBox.Show("Set Mask Channel failure, please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            #endregion
+            #region Mask Channel
+            Regex rxInt = new Regex(rx_Integer);
+            bool IsChannelLegeal = rxInt.IsMatch(txtChannelMask.Text) && (int.Parse(txtChannelMask.Text) <= 64);
+            if(IsChannelLegeal)
+            {
+                int MaskChannel = short.Parse(txtChannelMask.Text) - 1;
+                CommandBytes = ConstCommandByteArray(0xAD, (byte)MaskChannel);
+                bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                if(bResult)
+                {
+                    if(MaskChoise != 16)
+                    {
+                        report = report + string.Format("Channel:{0}", MaskChannel + 1);
+                    }                    
+                    //txtReport.AppendText(report);
+                }
+                else
+                {
+                    MessageBox.Show("Set Mask Channel failure, please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Illegal Mask Channel, please re-type(Integer:0--64)", "Ilegal Input", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            #endregion
+            #region Discri Mask
+            int DiscriMask = cbxDiscriMask.SelectedIndex;
+            CommandBytes = ConstCommandByteArray(0xAE, (byte)DiscriMask);
+            bResult = CommandSend(CommandBytes, CommandBytes.Length);
+            if(bResult)
+            {
+                if(MaskChoise != 16)
+                {
+                    report = string.Format("{0}", cbxDiscriMask.Text);
+                }                
+                //txtReport.AppendText(report);
+            }
+            else
+            {
+                MessageBox.Show("Set Mask Discriminator failure, please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            #endregion
+            if(report != null)
+            {
+                txtReport.AppendText(report);
+            }
         }
         //control channel calibration
 
