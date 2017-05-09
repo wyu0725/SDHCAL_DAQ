@@ -113,7 +113,7 @@
 + E类：S曲线测试(还没有完成，这段代码目前在新的逻辑中)
   + E0A0:选择Normal ACQ
   + E0A1:选择S Curve Test
-  + E0A2(未实现):选择 Sweep ACQ
+  + E0A2:选择 Sweep ACQ
   + E0B0:选择单通道测试
   + E0B1:选择64通道测试
   + E0C0:单通道测试时从Ctest管脚输入信号
