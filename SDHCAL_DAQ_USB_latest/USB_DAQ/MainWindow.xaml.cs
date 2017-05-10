@@ -727,7 +727,7 @@ namespace USB_DAQ
             }
             else
             {
-                MessageBox.Show("set ASIC quantity failure, please check USB", //text
+                MessageBox.Show("Set ASIC quantity failure, please check USB", //text
                                  "USB Error",   //caption
                                  MessageBoxButton.OK,//button
                                  MessageBoxImage.Error);//icon
@@ -773,9 +773,7 @@ namespace USB_DAQ
                     string header_default = "A1";
                     Header_Value = HexStringToByteArray(header_default);
                 }
-                #endregion
-                #region RAZ Select
-                #endregion
+                #endregion                
                 bool Is_DAC_Legal = false;
                 int DAC0_Value, DAC1_Value, DAC2_Value;
                 int ShaperOutput_Value;
@@ -784,18 +782,63 @@ namespace USB_DAQ
                 int CTest_Value;
                 int SW_HG_Value, SW_LG_Value, SW_Value;
                 int InternalRazTime_Value;
-                byte[] Command_Bytes = new byte[2];
-                byte[] PedCali_Param;
-                byte PedCali_Byte1,PedCali_Byte2;
+                byte[] CommandBytes = new byte[2];
+                //byte[] PedCali_Param;
+                //byte PedCali_Byte1,PedCali_Byte2;
                 StringBuilder details = new StringBuilder();
-                NoSortHashtable TempHashTabel;
+                //NoSortHashtable TempHashTabel;
                 Header_Value[0] += (byte)ASIC_Number;
+                string DCCaliString, SCTCaliString;
+                byte[] CaliData = new byte[64];
+                //byte[] SCTCaliData = new byte[64];
+                string[] Chn = new string[64];
+                byte[] CommandHeader = new byte[64];
+                byte CaliByte1, CaliByte2;
+                for (int i = 0; i < 64; i++)
+                {
+                    Chn[i] = string.Format("Chn{0}", i);
+                    CommandHeader[i] = (byte)(0xC0 + i);
+                }
+                #region RAZ Select
+                int RazSelect = cbxRazSelect.SelectedIndex + 160;//0xA0
+                CommandBytes = ConstCommandByteArray(0xA8, (byte)RazSelect);
+                bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                if(bResult)
+                {
+                    string report = string.Format("Set Raz Mode: {0}\n", cbxRazSelect.Text);
+                    txtReport.AppendText(report);
+                }
+                else
+                {
+                    MessageBox.Show("Set Raz Mode failure, please check USB", //text
+                                 "USB Error",   //caption
+                                 MessageBoxButton.OK,//button
+                                 MessageBoxImage.Error);//icon
+                }
+                #endregion
+                #region Channel Select
+                int ChannelSelect = cbxChannelSelect.SelectedIndex + 160;//A0
+                CommandBytes = ConstCommandByteArray(0xA4, (byte)ChannelSelect);
+                bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                if(bResult)
+                {
+                    string report = string.Format("Set ReadOut {0}\n", cbxChannelSelect.Text);
+                    txtReport.AppendText(report);
+                }
+                else
+                {
+                    MessageBox.Show("Set Readout Channel failure, please check USB", //text
+                                 "USB Error",   //caption
+                                 MessageBoxButton.OK,//button
+                                 MessageBoxImage.Error);//icon
+                }
+                #endregion
                 for (int i = ASIC_Number;i >= 0; i--)
                 {
                     #region Header   
                     Header_Value[0] -= 1;
-                    Command_Bytes = ConstCommandByteArray(0xAB, Header_Value[0]);
-                    bResult = CommandSend(Command_Bytes, Command_Bytes.Length);
+                    CommandBytes = ConstCommandByteArray(0xAB, Header_Value[0]);
+                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
                     if (bResult)
                     {
                         string report = string.Format("Setting header: 0x{0}\n", txtHeader.Text.Trim());
@@ -817,8 +860,8 @@ namespace USB_DAQ
                         DAC1_Value = Int32.Parse(txtDAC1_VTH_ASIC[i].Text) + 50176;//0xC400
                         DAC2_Value = Int32.Parse(txtDAC2_VTH_ASIC[i].Text) + 51200;//0xC800
                         #region DAC0
-                        Command_Bytes = ConstCommandByteArray((byte)(DAC0_Value >> 8), (byte)DAC0_Value);
-                        bResult = CommandSend(Command_Bytes, Command_Bytes.Length);
+                        CommandBytes = ConstCommandByteArray((byte)(DAC0_Value >> 8), (byte)DAC0_Value);
+                        bResult = CommandSend(CommandBytes, CommandBytes.Length);
                         if (bResult)
                         {
                             string report = string.Format("Setting DAC0 VTH: {0}\n", txtDAC0_VTH_ASIC[i].Text);
@@ -834,8 +877,8 @@ namespace USB_DAQ
                         }
                         #endregion
                         #region DAC1
-                        Command_Bytes = ConstCommandByteArray((byte)(DAC1_Value >> 8), (byte)DAC1_Value);
-                        bResult = CommandSend(Command_Bytes, Command_Bytes.Length);
+                        CommandBytes = ConstCommandByteArray((byte)(DAC1_Value >> 8), (byte)DAC1_Value);
+                        bResult = CommandSend(CommandBytes, CommandBytes.Length);
                         if (bResult)
                         {
                             string report = string.Format("Setting DAC1 VTH: {0}\n", txtDAC1_VTH_ASIC[i].Text);
@@ -851,8 +894,8 @@ namespace USB_DAQ
                         }
                         #endregion
                         #region DAC2
-                        Command_Bytes = ConstCommandByteArray((byte)(DAC2_Value >> 8), (byte)DAC2_Value);
-                        bResult = CommandSend(Command_Bytes, Command_Bytes.Length);
+                        CommandBytes = ConstCommandByteArray((byte)(DAC2_Value >> 8), (byte)DAC2_Value);
+                        bResult = CommandSend(CommandBytes, CommandBytes.Length);
                         if (bResult)
                         {
                             string report = string.Format("Setting DAC2 VTH: {0}\n", txtDAC2_VTH_ASIC[i].Text);
@@ -878,8 +921,8 @@ namespace USB_DAQ
                     #endregion
                     #region Shaper Output
                     ShaperOutput_Value = cbxOut_sh_ASIC[i].SelectedIndex + 192;//C0
-                    Command_Bytes = ConstCommandByteArray(0xA0, (byte)ShaperOutput_Value);
-                    bResult = CommandSend(Command_Bytes, Command_Bytes.Length);
+                    CommandBytes = ConstCommandByteArray(0xA0, (byte)ShaperOutput_Value);
+                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
                     if (bResult)
                     {
                         string report = string.Format("Shape output: {0}\n", cbxOut_sh_ASIC[i].Text);
@@ -895,8 +938,8 @@ namespace USB_DAQ
                     #endregion
                     #region Shaper Output Enable
                     ShaperOutputEnable_Value = cbxShaper_Output_Enable_ASIC[i].SelectedIndex + 208;//0xD0
-                    Command_Bytes = ConstCommandByteArray(0xA0, (byte)ShaperOutputEnable_Value);
-                    bResult = CommandSend(Command_Bytes, Command_Bytes.Length);
+                    CommandBytes = ConstCommandByteArray(0xA0, (byte)ShaperOutputEnable_Value);
+                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
                     if (bResult)
                     {
                         string report = string.Format("You have {0} the shaper output", cbxShaper_Output_Enable_ASIC[i].Text);
@@ -912,8 +955,8 @@ namespace USB_DAQ
                     if(IsCTestLegal)
                     {
                         CTest_Value = Int32.Parse(txtCTest_ASIC[i].Text);//A1XX
-                        Command_Bytes = ConstCommandByteArray(0xA1, (byte)CTest_Value);
-                        bResult = CommandSend(Command_Bytes, Command_Bytes.Length);
+                        CommandBytes = ConstCommandByteArray(0xA1, (byte)CTest_Value);
+                        bResult = CommandSend(CommandBytes, CommandBytes.Length);
                         if (bResult)
                         {
                             string report = string.Format("Setting CTest channel: {0}\n", txtCTest_ASIC[i].Text);
@@ -940,8 +983,8 @@ namespace USB_DAQ
                     SW_HG_Value = cbxsw_hg_ASIC[i].SelectedIndex * 16;
                     SW_LG_Value = cbxsw_lg_ASIC[i].SelectedIndex;
                     SW_Value = SW_HG_Value + SW_LG_Value;
-                    Command_Bytes = ConstCommandByteArray(0xB3, (byte)SW_Value);
-                    bResult = CommandSend(Command_Bytes, Command_Bytes.Length);
+                    CommandBytes = ConstCommandByteArray(0xB3, (byte)SW_Value);
+                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
                     if (bResult)
                     {
                         string report = string.Format("Set sw_hg: {0}; sw_lg: {1}\n", cbxsw_hg_ASIC[i].Text, cbxsw_lg_ASIC[i].Text);
@@ -957,8 +1000,8 @@ namespace USB_DAQ
                     #endregion
                     #region Internal RAZ Time
                     InternalRazTime_Value = cbxInternal_RAZ_Time_ASIC[i].SelectedIndex + 176;//0xB0
-                    Command_Bytes = ConstCommandByteArray(0xA8, (byte)InternalRazTime_Value);
-                    bResult = CommandSend(Command_Bytes, Command_Bytes.Length);
+                    CommandBytes = ConstCommandByteArray(0xA8, (byte)InternalRazTime_Value);
+                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
                     if (bResult)
                     {
                         string report = string.Format("Internal RAZ Mode: {0} \n", cbxInternal_RAZ_Time_ASIC[i].Text);
@@ -970,14 +1013,70 @@ namespace USB_DAQ
                     }
                     #endregion
                     #region 4bitDAC Cali
-                    TempHashTabel = CaliHashTable[i];
+                    string DCCaliFileName, SCTCaliFileName;
+                    StreamReader DCCaliFile, SCTCaliFile;
+                    DCCaliFileName = string.Format("D:\\ExperimentsData\\test\\DCCali{0}.txt", i);
+                    SCTCaliFileName = string.Format("D:\\ExperimentsData\\test\\SCTCali{0}.txt", i);
+                    DCCaliFile = File.OpenText(DCCaliFileName);
+                    SCTCaliFile = File.OpenText(SCTCaliFileName);
+                    switch(cbxPedCali_ASIC[i].SelectedIndex)
+                    {
+                        case 0:
+                            for (int j = 0; j < 64; j++)
+                            {
+                                CaliData[j] = 0;
+                            }
+                            break;
+                        case 1:
+                            for (int j = 0; j < 64; j++)
+                            {
+                                DCCaliString = DCCaliFile.ReadLine();
+                                CaliData[j] = byte.Parse(DCCaliString);
+                            }                            
+                            break;
+                        case 2:
+                            for (int j = 0; j < 64; j++)
+                            {
+                                SCTCaliString = SCTCaliFile.ReadLine();
+                                CaliData[j] = byte.Parse(SCTCaliString);
+                            }
+                            break;
+                        default:
+                            for (int j = 0; j < 64; j++)
+                            {
+                                CaliData[j] = 0;
+                            }
+                            break;
+                    }
+                    for (int j = 0; j < 64; j++)
+                    {
+                        CaliByte1 = (byte)(CommandHeader[j] >> 4 + 0xC0);
+                        CaliByte2 = (byte)(CommandHeader[j] << 4 + CaliData[j]);
+                        CommandBytes = ConstCommandByteArray(CaliByte1, CaliByte2);
+                        bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                        if(bResult)
+                        {
+                            details.AppendFormat("{0},4-bitDAC:{1}\n", Chn[j], CaliData[j]);
+                        }
+                        else
+                        {
+                            MessageBox.Show("4bit-DAC Cali faliure. Please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                        Thread.Sleep(10);
+                    }
+                    if (cbxPedCali_ASIC[i].SelectedIndex == 0)
+                        txtReport.AppendText(details.ToString());
+                    else
+                        txtReport.AppendText("All channels without calibration\n");
+
+                    /*TempHashTabel = CaliHashTable[i];
                     foreach(string str in TempHashTabel.Keys)
                     {
                         PedCali_Param = (byte[])TempHashTabel[str];
                         PedCali_Byte1 = (byte)(PedCali_Param[0] >> 4 + 0xC0);
                         PedCali_Byte2 = (byte)(PedCali_Param[0] << 4 + PedCali_Param[1]);
-                        Command_Bytes = ConstCommandByteArray(PedCali_Byte1, PedCali_Byte2);
-                        bResult = CommandSend(Command_Bytes, Command_Bytes.Length);
+                        CommandBytes = ConstCommandByteArray(PedCali_Byte1, PedCali_Byte2);
+                        bResult = CommandSend(CommandBytes, CommandBytes.Length);
                         if(bResult)
                         {
                             details.AppendFormat("{0}, 4-bitDAC: {1}\n", str, PedCali_Param[1]);
@@ -991,12 +1090,11 @@ namespace USB_DAQ
                     if(cbxPedCali_ASIC[i].SelectedIndex == 0)
                         txtReport.AppendText(details.ToString());
                     else
-                        txtReport.AppendText("All channels without calibration\n");
-                        
+                        txtReport.AppendText("All channels without calibration\n");*/
                     #endregion
                     #region Start Load
-                    Command_Bytes = ConstCommandByteArray(0xD0, 0xA2);
-                    bResult = CommandSend(Command_Bytes, Command_Bytes.Length);
+                    CommandBytes = ConstCommandByteArray(0xD0, 0xA2);
+                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
                     if (bResult)
                     {
                         string report = string.Format("Load No.{0} ASIC parameter done!\n",i+1);
@@ -1285,7 +1383,6 @@ namespace USB_DAQ
                 #endregion
             }
             #endregion
-
             #region Old Code
             //---start load
             /*com_bytes = ConstCommandByteArray(0xD0, 0xA2);
@@ -1826,12 +1923,12 @@ namespace USB_DAQ
                 MessageBox.Show("Set S Curve test max count failure. Please check the USB\n", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             // Set Counter Time
-            int value_CounterTime = cbxCount_Time.SelectedIndex;
+            int value_CounterTime = txtCountTime.SelectedIndex;
             bytes = ConstCommandByteArray(0xE3, (byte)value_CounterTime);
             bResult = CommandSend(bytes, bytes.Length);
             if (bResult)
             {
-                string report = string.Format("Set the S Curve test max time to {0}\n", cbxCount_Time.Text);
+                string report = string.Format("Set the S Curve test max time to {0}\n", txtCountTime.Text);
                 txtReport.AppendText(report);
             }
             else
@@ -2076,7 +2173,7 @@ namespace USB_DAQ
             if(button.Content.ToString() == "Trig")
             {
                 cbxCPT_MAX.IsEnabled = true;
-                cbxCount_Time.IsEnabled = false;
+                txtCountTime.IsEnabled = false;
                 CommandBytes = ConstCommandByteArray(0xE0, 0xD0);
                 bResult = CommandSend(CommandBytes, CommandBytes.Length);
                 if (bResult)
@@ -2094,7 +2191,7 @@ namespace USB_DAQ
             }
             else if(button.Content.ToString() == "Count")
             {
-                cbxCount_Time.IsEnabled = true;
+                txtCountTime.IsEnabled = true;
                 cbxCPT_MAX.IsEnabled = false;
                 CommandBytes = ConstCommandByteArray(0xE0, 0xD1);
                 bResult = CommandSend(CommandBytes, CommandBytes.Length);

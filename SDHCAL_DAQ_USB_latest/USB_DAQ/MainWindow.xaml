@@ -214,7 +214,7 @@
                         <TextBox x:Name="txtHeader" HorizontalAlignment="Left" Height="20" Margin="100,30,0,0" TextWrapping="Wrap" Text="A1" VerticalAlignment="Top" Width="70"/>
 
                         <Label x:Name="Raz_Chn_Select" Content="RAZ Chn Select" HorizontalAlignment="Left" Margin="0,60,0,0" VerticalAlignment="Top" Width="100"/>
-                        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="100,60,0,0" VerticalAlignment="Top" Width="75">
+                        <ComboBox x:Name="cbxRazSelect" HorizontalAlignment="Left" Margin="100,60,0,0" VerticalAlignment="Top" Width="80" Height="24">
                             <ComboBoxItem Content="Internal" IsSelected="True"/>
                             <ComboBoxItem Content="External" />
                         </ComboBox>
@@ -223,9 +223,10 @@
                             <RadioButton GroupName="RAZ_Chn_Select1" Checked="RAZ_Chn_Select_Checked" Content="External"/>
                         </StackPanel>-->
                         <Label x:Name="lblChannel_Sel" Content="Channel select" HorizontalAlignment="Left" Margin="0,90,0,0" VerticalAlignment="Top" Height="24" Width="100"/>
-                        <ComboBox x:Name="comboBox1" HorizontalAlignment="Left" Margin="100,90,0,0" VerticalAlignment="Top" Width="75">
-                            <ComboBoxItem Content="Channel1" />
+                        <ComboBox x:Name="cbxChannelSelect" HorizontalAlignment="Left" Margin="100,90,0,0" VerticalAlignment="Top" Width="80" Height="24">
                             <ComboBoxItem Content="Channel2" />
+                            <ComboBoxItem Content="Channel1" IsSelected="True"/>
+                            
                         </ComboBox>
                         <!--<StackPanel HorizontalAlignment="Left" Height="30" Margin="100,90,0,0" VerticalAlignment="Top" Width="75">
                             <RadioButton GroupName="Chn_Select" Checked="ChannelSelect_Checked" Margin="0,0,-9,0" Content="Channel1"/>
