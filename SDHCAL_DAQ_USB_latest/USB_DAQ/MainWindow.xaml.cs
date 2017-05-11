@@ -37,7 +37,7 @@ namespace USB_DAQ
         private string filepath = null;//文件路径
         private static bool AcqStart = false; //采集标志
         private static bool Enabled_Ext_Trigger = false;
-        private static bool ScurveStart_En = false;
+        //private static bool ScurveStart_En = false;
         // private static bool SPopen = false; //串口是否打开
         // private SerialPort mySerialPort = new SerialPort();//新建串口
         private static int Packetcnt;
@@ -53,15 +53,22 @@ namespace USB_DAQ
         //private int wave_cnt;
         private CancellationTokenSource data_acq_cts = new CancellationTokenSource();
         private CancellationTokenSource file_write_cts = new CancellationTokenSource();
-        private const int Single_SCurve_Data_Length = 7171 * 2;
-        private const int AllChn_SCurve_Data_Length = 458818 * 2;
-        private const int SCurve_Package_Length = 512;
-        private static int Scurve_Data_Pkg;
-        private static int Scurve_Data_Remain;
-        //private NoSortHashtable hasht = new NoSortHashtable(); //排序之后的哈希表
-     
-        private NoSortHashtable[] CaliHashTable = new NoSortHashtable[4]{new NoSortHashtable(), new NoSortHashtable(), new NoSortHashtable(), new NoSortHashtable() };
+        //private const int Single_SCurve_Data_Length = 7171 * 2;
+        //private const int AllChn_SCurve_Data_Length = 458818 * 2;
+        //private const int SCurve_Package_Length = 512;
+        //private static int Scurve_Data_Pkg;
+        //private static int Scurve_Data_Remain;
+        //private NoSortHashtable hasht = new NoSortHashtable(); //排序之后的哈希表     
+        //private NoSortHashtable[] CaliHashTable = new NoSortHashtable[4]{new NoSortHashtable(), new NoSortHashtable(), new NoSortHashtable(), new NoSortHashtable() };
         private int SlowACQDataNumber = 100;
+        private int SlowDataRatePackageNumber;
+        private const int AcqMode = 0;
+        private const int SCTestMode = 1;
+        private const int SweepAcqMode = 2;
+        private int DataAcqMode = AcqMode;
+        private const int TrigMode = 0;
+        private const int CountMode = 1;
+        private int SCurveMode = TrigMode;
         
 
         //SC Parameter
@@ -1830,8 +1837,8 @@ namespace USB_DAQ
                     MessageBox.Show("Set S Curve single test mode failure. Please check the USB\n", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 //Scurve_data_length = 7171 * 2;//单通道产生这多字节的数据
-                Scurve_Data_Pkg = Single_SCurve_Data_Length / SCurve_Package_Length;
-                Scurve_Data_Remain = Single_SCurve_Data_Length % SCurve_Package_Length;
+                //Scurve_Data_Pkg = Single_SCurve_Data_Length / SCurve_Package_Length;
+                //Scurve_Data_Remain = Single_SCurve_Data_Length % SCurve_Package_Length;
             }
             else if (botton.Content.ToString() == "Auto")
             {
@@ -1846,8 +1853,8 @@ namespace USB_DAQ
                     MessageBox.Show("Set S Curve test in 64 channel mode failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 //Scurve_data_length = 458818 * 2;//64通道产生这么多字节的数据
-                Scurve_Data_Pkg = AllChn_SCurve_Data_Length / SCurve_Package_Length;
-                Scurve_Data_Remain = AllChn_SCurve_Data_Length % SCurve_Package_Length;
+                //Scurve_Data_Pkg = AllChn_SCurve_Data_Length / SCurve_Package_Length;
+                //Scurve_Data_Remain = AllChn_SCurve_Data_Length % SCurve_Package_Length;
             }
         }
         //E0C0:单通道测试时从CTest管脚输入,E0C1单通道测试从direct input输入
@@ -1883,9 +1890,9 @@ namespace USB_DAQ
             }
         }
 
-        private void btnSet_SCT_Param_Click(object sender, RoutedEventArgs e)
+        /*private void btnSet_SCT_Param_Click(object sender, RoutedEventArgs e)
         {
-            /*-------------- Set the single test channel -------------------*/
+            //***-------------- Set the single test channel -------------------
             Regex rx_int = new Regex(rx_Integer);
             bool Is_Single_Test_Chn_Legal = rx_int.IsMatch(txtSingleTest_Chn.Text) && (short.Parse(txtSingleTest_Chn.Text) <= 64);
             byte[] bytes = new byte[2];
@@ -1909,7 +1916,7 @@ namespace USB_DAQ
             {
                 MessageBox.Show("Ilegal input the channel must between 1 to 64\n", "Ilegal Input", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            /*---------------------- Set the max counter--------------------------*/
+            //***---------------------- Set the max counter
             int value_CPTMAX = cbxCPT_MAX.SelectedIndex;
             bytes = ConstCommandByteArray(0xE2, (byte)value_CPTMAX);
             bResult = CommandSend(bytes, bytes.Length);
@@ -1935,9 +1942,9 @@ namespace USB_DAQ
             {
                 MessageBox.Show("Set S Curve test max count failure. Please check the USB\n", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-        }
+        }*/
         //--Scurve测试开始E0F0,Scurve测试结束E0F1--//
-        private void btnScurve_start_Click(object sender, RoutedEventArgs e)
+        /*private void btnScurve_start_Click(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrEmpty(filepath.Trim()))
             {
@@ -1982,8 +1989,8 @@ namespace USB_DAQ
                     reports.AppendLine("Scurve Start failure");
                 txtReport.AppendText(reports.ToString());                               
             }
-        }
-        private void Get_ScurveResultCallBack()
+        }*/
+        /*private void Get_ScurveResultCallBack()
         {
             //DisplayPacketNum dp2 = new DisplayPacketNum((string s) => { ShowPacketNum(s); });
             //string report;
@@ -2000,15 +2007,15 @@ namespace USB_DAQ
                     Package_Count++;
                 }
             }
-            /*for (int i = 0; i < Scurve_data_pkg; i++)
+            /for (int i = 0; i < Scurve_data_pkg; i++)
             {
                 bResult = DataRecieve(bytes, bytes.Length);
                 if (bResult)
                 {
                     bw.Write(bytes); //接收成功写入文件,写文件很慢，没事可以等
                 }
-            }*/
-            /*byte[] test = new byte[512];
+            }
+            byte[] test = new byte[512];
             bResult = DataRecieve(test, test.Length);
             if (bResult)
             {
@@ -2019,16 +2026,16 @@ namespace USB_DAQ
             if (bResult)
             {
                  bw.Write(re_bytes); //接收成功写入文件
-            }*/
+            }
             //---------------------------------------//
             //bw.Flush();
             bw.Dispose();
             bw.Close();
             //report = string.Format("data stored in {0}\n", filepath);
             //Dispatcher.Invoke(dp2, report);
-        }
+        }*/
 
-        private void btnChnCali_Click(object sender, RoutedEventArgs e)
+        /*private void btnChnCali_Click(object sender, RoutedEventArgs e)
         {
             ComboBox[] cbxPedCali_ASIC = new ComboBox[4] { cbxPedCali_ASIC1, cbxPedCali_ASIC2, cbxPedCali_ASIC3, cbxPedCali_ASIC4 };
             string[] Chn = new string[64];
@@ -2075,7 +2082,7 @@ namespace USB_DAQ
                         }
                         #region Without Cali
 
-                        /*CaliHashTable[i].Add("Chn0", new byte[] { 0xC0, 0x00 });//chn0
+                        CaliHashTable[i].Add("Chn0", new byte[] { 0xC0, 0x00 });//chn0
                         CaliHashTable[i].Add("Chn1", new byte[] { 0xC1, 0x00 });//chn1
                         CaliHashTable[i].Add("Chn2", new byte[] { 0xC2, 0x00 });//chn2
                         CaliHashTable[i].Add("Chn3", new byte[] { 0xC3, 0x00 });//chn3
@@ -2138,7 +2145,7 @@ namespace USB_DAQ
                         CaliHashTable[i].Add("Chn60", new byte[] { 0xFC, 0x00 });//chn60
                         CaliHashTable[i].Add("Chn61", new byte[] { 0xFD, 0x00 });//chn61
                         CaliHashTable[i].Add("Chn62", new byte[] { 0xFE, 0x00 });//chn62
-                        CaliHashTable[i].Add("Chn63", new byte[] { 0xFF, 0x00 });//chn63*/
+                        CaliHashTable[i].Add("Chn63", new byte[] { 0xFF, 0x00 });//chn63
                         #endregion
                         break;
                     case 1:
@@ -2162,7 +2169,7 @@ namespace USB_DAQ
 
                 }
             }
-        }
+        }*/
 
         // Select Trigger efficiency test or counter efficiency test
         private void Trig_or_Count_Checked(object sender, RoutedEventArgs e)
@@ -2175,6 +2182,7 @@ namespace USB_DAQ
                 cbxCPT_MAX.IsEnabled = true;
                 txtCountTime.IsEnabled = false;
                 CommandBytes = ConstCommandByteArray(0xE0, 0xD0);
+                SCurveMode = TrigMode;
                 bResult = CommandSend(CommandBytes, CommandBytes.Length);
                 if (bResult)
                 {
@@ -2194,6 +2202,7 @@ namespace USB_DAQ
                 txtCountTime.IsEnabled = true;
                 cbxCPT_MAX.IsEnabled = false;
                 CommandBytes = ConstCommandByteArray(0xE0, 0xD1);
+                SCurveMode = CountMode;
                 bResult = CommandSend(CommandBytes, CommandBytes.Length);
                 if (bResult)
                 {
@@ -2263,8 +2272,9 @@ namespace USB_DAQ
                 }
                 else
                 {
-                    SlowACQDataNumber = 100;
+                    SlowACQDataNumber = 5120;
                 }
+                SlowDataRatePackageNumber = SlowACQDataNumber*20;
                 bool bResult = false;
                 byte[] cmd_ClrUSBFifo = ConstCommandByteArray(0xF0, 0xFA);
                 bResult = CommandSend(cmd_ClrUSBFifo, 2);//
@@ -2279,7 +2289,7 @@ namespace USB_DAQ
                 if(bResult)
                 {
                     reports.AppendLine("Slow data rate ACQ Start\n");
-                    Task SlowDataRateACQ = new Task(() => Get_SlowDataRateResultCallBack());
+                    Task SlowDataRateACQ = new Task(() => GetSlowDataRateResultCallBack());
                     SlowDataRateACQ.Start();
                     SlowDataRateACQ.Wait();
                     byte[] ACQStop = ConstCommandByteArray(0xF0, 0xF1);
@@ -2300,22 +2310,29 @@ namespace USB_DAQ
             }
         }
         // Slow data rate acquisition thread
-        private void Get_SlowDataRateResultCallBack()
+        private void GetSlowDataRateResultCallBack()
         {            
             bw = new BinaryWriter(File.Open(filepath, FileMode.Append));
             //private int SingleDataLength = 512;
             bool bResult = false;
             byte[] bytes = new byte[512];
-            int Package_Count = 0;
-            while(Package_Count < SlowACQDataNumber)
+            int PackageNumber = SlowDataRatePackageNumber / 512;
+            int RemainPackageNum = SlowDataRatePackageNumber % 512;
+            int PackageCount = 0;
+            while(PackageCount < PackageNumber)
             {
                 bResult = DataRecieve(bytes, bytes.Length);
                 if (bResult)
                 {
                     bw.Write(bytes);
-                    Package_Count++;
+                    PackageCount++;
                 }                
             }
+            byte[] RemainByte = new byte[RemainPackageNum];
+            do
+            {
+                bResult = DataRecieve(RemainByte, RemainByte.Length);
+            } while (!bResult);
             bw.Flush();
             bw.Dispose();
             bw.Close();
@@ -2330,6 +2347,7 @@ namespace USB_DAQ
                 gbxNormalAcq.IsEnabled = true;
                 //btnScurve_start.IsEnabled = false;
                 gbxSweepTest.IsEnabled = false;
+                DataAcqMode = AcqMode;
                 byte[] bytes = ConstCommandByteArray(0xE0, 0xA0);
                 bResult = CommandSend(bytes, bytes.Length);
                 if (bResult)
@@ -2349,6 +2367,7 @@ namespace USB_DAQ
                 gbxSweepTest.IsEnabled = true;
                 gbxSCurveTest.IsEnabled = true;
                 gbxSweepAcq.IsEnabled = false;
+                DataAcqMode = SCTestMode;
                 byte[] bytes = ConstCommandByteArray(0xE0, 0xA1);
                 bResult = CommandSend(bytes, bytes.Length);
                 if (bResult)
@@ -2366,6 +2385,7 @@ namespace USB_DAQ
                 gbxSweepTest.IsEnabled = true;
                 gbxSCurveTest.IsEnabled = false;
                 gbxSweepAcq.IsEnabled = true;
+                DataAcqMode = SweepAcqMode;
                 byte[] bytes = ConstCommandByteArray(0xE0, 0xA1);
                 bResult = CommandSend(bytes, bytes.Length);
                 if(bResult)
@@ -2444,6 +2464,133 @@ namespace USB_DAQ
             {
                 txtReport.AppendText(report);
             }
+        }
+
+        private void btnSweepTestStart_Click(object sender, RoutedEventArgs e)
+        {
+            byte[] CommandBytes = new byte[2];
+            bool bResult;
+            string report;
+            #region Start and End DAC
+            Regex rxInt = new Regex(rx_Integer);
+            bool IsDacLegal = rxInt.IsMatch(txtStartDac.Text) && rxInt.IsMatch(txtEndDac.Text) && (int.Parse(txtStartDac.Text) < 1023) && (int.Parse(txtEndDac.Text) <= 1023);
+            if(IsDacLegal)
+            {
+                #region Start DAC
+                uint StartDacValue = uint.Parse(txtStartDac.Text);                
+                uint StartDacValue1 = StartDacValue & 15;
+                uint StartDacValue2 = ((StartDacValue >> 4) & 15) + 16;
+                uint StartDacValue3 = ((StartDacValue >> 8) & 3) + 32;
+                CommandBytes = ConstCommandByteArray(0xE5, (byte)StartDacValue1);
+                bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                if(!bResult)
+                {
+                    MessageBox.Show("Set StartDAC failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                CommandBytes = ConstCommandByteArray(0xE5, (byte)StartDacValue2);
+                bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                if (!bResult)
+                {
+                    MessageBox.Show("Set StartDAC failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                CommandBytes = ConstCommandByteArray(0xE5, (byte)StartDacValue3);
+                bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                if(bResult)
+                {
+                    report = string.Format("Set StartDAC:{0}\n", StartDacValue);
+                    txtReport.AppendText(report);
+                }
+                else
+                {
+                    MessageBox.Show("Set StartDAC failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                #endregion
+                #region EndDAC
+                uint EndDacValue = uint.Parse(txtEndDac.Text);
+                uint EndDacValue1 = (EndDacValue & 15) + 48;
+                uint EndDacValue2 = ((EndDacValue >> 4) & 15) + 64;
+                uint EndDacValue3 = ((EndDacValue >> 8) & 3) + 80;
+                CommandBytes = ConstCommandByteArray(0xE5, (byte)EndDacValue1);
+                bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                if (!bResult)
+                {
+                    MessageBox.Show("Set EndDAC failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                CommandBytes = ConstCommandByteArray(0xE5, (byte)EndDacValue2);
+                bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                if (!bResult)
+                {
+                    MessageBox.Show("Set EndDAC failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                CommandBytes = ConstCommandByteArray(0xE5, (byte)EndDacValue3);
+                bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                if(bResult)
+                {
+                    report = string.Format("Set EndDAC:{0}", EndDacValue);
+                    txtReport.AppendText(report);
+                }
+                else
+                {
+                    MessageBox.Show("Set EndDAC failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                #endregion
+            }
+            else
+            {
+                MessageBox.Show("Ilegal input the StartDAC and EndDAC. The StartDAC should less than EndDAC\n", "Ilegal Input", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            #endregion
+            #region SCurve
+            if(DataAcqMode == SCTestMode)
+            {
+                #region Single Test Channel
+                bool IsSCurveChannelLegal = rxInt.IsMatch(txtSingleTest_Chn.Text) && (int.Parse(txtSingleTest_Chn.Text) <= 64);
+                if(IsSCurveChannelLegal)
+                {
+                    int SCurveChannelValue = int.Parse(txtSingleTest_Chn.Text) - 1;
+                    CommandBytes = ConstCommandByteArray(0xE1, (byte)SCurveChannelValue);
+                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                    if(bResult)
+                    {
+                        report = string.Format("Set single test channel:{0}", SCurveChannelValue + 1);
+                        txtReport.AppendText(report);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Set single test channel failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Ilegal input the channel must between 1 to 64\n", "Ilegal Input", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                #endregion
+                if(SCurveMode == TrigMode)
+                {
+                    int MaxCountValue = cbxCPT_MAX.SelectedIndex;
+                    CommandBytes = ConstCommandByteArray(0xE2, (byte)MaxCountValue);
+                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                    if(bResult)
+                    {
+                        report = string.Format("Set MAX count number {0}", cbxCPT_MAX.Text);
+                        txtReport.AppendText(report);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Set S Curve test max count failure. Please check the USB\n", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+                else
+                {
+
+                }
+            }
+            #endregion
+            else if(DataAcqMode == SweepAcqMode)
+            {
+
+            }
+
         }
         //control channel calibration
 

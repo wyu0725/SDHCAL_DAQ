@@ -63,7 +63,7 @@
                 <Button x:Name="btnDirCreate" Content="Create" HorizontalAlignment="Left" Margin="407,10,0,0" VerticalAlignment="Top" Width="58" Click="btnDirCreate_Click"/>
                 <Button x:Name="btnDirDelete" Content="Delete" HorizontalAlignment="Left" Margin="474,10,0,0" VerticalAlignment="Top" Width="56" Click="btnDirDelete_Click"/>
                 <Label x:Name="lblFileName" Content="File Name:" HorizontalAlignment="Left" Margin="3,34,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.225,0.56"/>
-                <TextBox x:Name="txtFileName" HorizontalAlignment="Left" Height="23" Margin="92,36,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+                <TextBox x:Name="txtFileName" HorizontalAlignment="Left" Height="23" Margin="92,36,0,0" TextWrapping="Wrap" Text=".dat" VerticalAlignment="Top" Width="120"/>
                 <Button x:Name="btnFileSave" Content="Save" HorizontalAlignment="Left" Margin="222,38,0,0" VerticalAlignment="Top" Width="54" Click="btnFileSave_Click"/>
             </Grid>
         </GroupBox>
@@ -79,7 +79,7 @@
                                     <RadioButton GroupName="DataRateSelect" Checked="DataRateSelect_Checked" Content="Slow"/>
                                 </StackPanel>
                                 <Label x:Name="lblSlowACQDataNum" Content="Data Number" HorizontalAlignment="Left" Margin="0,30,0,0" VerticalAlignment="Top" Width="90" Height="24"/>
-                                <TextBox x:Name="txtSlowACQDataNum" HorizontalAlignment="Left" Height="24" Margin="90,30,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="50"/>
+                                <TextBox x:Name="txtSlowACQDataNum" HorizontalAlignment="Left" Height="24" Margin="90,30,0,0" TextWrapping="Wrap" Text="5120" VerticalAlignment="Top" Width="50"/>
                                 <Button x:Name="btnAcqStart" Content="FastACQ" HorizontalAlignment="Left" Margin="0,60,0,0" VerticalAlignment="Top" Width="80" Height="24" Click="btnAcqStart_Click"/>
                                 <Button x:Name="btnSlowACQ" Content="SlowACQ" HorizontalAlignment="Left" Margin="0,90,0,0" VerticalAlignment="Top" Width="80" Height="24" Click="btnSlowACQ_Click"/>
                             </Grid>
@@ -152,7 +152,7 @@
                                 <Label x:Name="lblEndDac" Content="End DAC" HorizontalAlignment="Left" Margin="190,120,0,0" VerticalAlignment="Top" Height="24" Width="70" Grid.Column="2"/>
                                 <TextBox x:Name="txtStartDac" HorizontalAlignment="Left" Height="24" Margin="260,90,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="50" Grid.Column="2" />
                                 <TextBox x:Name="txtEndDac" HorizontalAlignment="Left" Height="24" Margin="260,120,0,0" TextWrapping="Wrap" Text="1023" VerticalAlignment="Top" Width="50" Grid.Column="2"/>
-                                <Button x:Name="btnScurve_start" Content="Sweep Test start" HorizontalAlignment="Left" Margin="190,150,0,0" VerticalAlignment="Top" Width="100" Height="24" Click="btnScurve_start_Click"/>
+                                <Button x:Name="btnSweepTestStart" Content="Sweep Test start" HorizontalAlignment="Left" Margin="190,150,0,0" VerticalAlignment="Top" Width="100" Height="24" Click="btnSweepTestStart_Click"/>
                             </Grid>
                         </GroupBox>
                         <!--<Button x:Name="btnSetParameter" Content="Button" HorizontalAlignment="Left" Margin="560,144,0,0" VerticalAlignment="Top" Width="75"/>-->
