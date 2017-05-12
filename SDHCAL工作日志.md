@@ -136,7 +136,7 @@
     + 05：20000
     + 06：40000
     + 07：50000
-  + E3XX,E4YY:选择计数率测试时间,时间 = YYXX$\times$1ms
+  + E3XX,E4YY:YYXX选择计数率测试时间,时间 = YYXX$\times$1ms
   + E5XY:
     + E50X, E51Y, E52Z: {Z, Y, X} --> Start DAC
     + E53X, E54Y, E55Z: {Z, Y, X} --> End DAC
