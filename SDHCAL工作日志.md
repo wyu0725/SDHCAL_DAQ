@@ -123,9 +123,9 @@
   + E0F0:SCurve 测试开始命令
   + E0F1:SCurve测试结束命令
   + E00X:X选择扫域DAC
-    + 00:DAC0
-    + 01:DAC1
-    + 10:DAC2
+    + 0:DAC0
+    + 1:DAC1
+    + 2:DAC2
   + E1XX:XX为单通道测试时的通道号
   + E2XX:选择最大计数：
     + 00：200
@@ -140,7 +140,7 @@
   + E5XY:
     + E50X, E51Y, E52Z: {Z, Y, X} --> Start DAC
     + E53X, E54Y, E55Z: {Z, Y, X} --> End DAC
-  + E6XX,E7YY: 选择扫域采数最大的数据包个数
+  + E6XX,E7YY: YYXX选择扫域采数最大的数据包个数
 
 + F类：开始停止命令
 
