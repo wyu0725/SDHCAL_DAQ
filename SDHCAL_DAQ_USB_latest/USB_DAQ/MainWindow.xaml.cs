@@ -1078,7 +1078,7 @@ namespace USB_DAQ
                         }
                         Thread.Sleep(10);
                     }
-                    if (cbxPedCali_ASIC[i].SelectedIndex == 0)
+                    if (cbxPedCali_ASIC[i].SelectedIndex != 0)
                         txtReport.AppendText(details.ToString());
                     else
                         txtReport.AppendText("All channels without calibration\n");
