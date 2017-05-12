@@ -92,23 +92,25 @@
                                         <StackPanel HorizontalAlignment="Left" Height="30" Margin="95,0,0,0" VerticalAlignment="Top" Width="60">
                                             <RadioButton GroupName="Trig_or_Count" Checked="Trig_or_Count_Checked" Content="Trig"/>
                                             <RadioButton GroupName="Trig_or_Count" Checked="Trig_or_Count_Checked" Content="Count"/>
-                                            <!--RadioButton x:Name="radioButton" Content="RadioButton"/>
-                    <RadioButton x:Name="radioButton1" Content="RadioButton"/-->
                                         </StackPanel>
                                         <Label x:Name="lblSing_or_Auto" Content="Single or Auto" HorizontalAlignment="Left" Margin="0,30,0,0" VerticalAlignment="Top" Height="24"/>
-                                        <StackPanel HorizontalAlignment="Left" Height="30" Margin="94,30,0,0" VerticalAlignment="Top" Width="60">
+                                        <ComboBox x:Name="cbxSingleOrAuto" HorizontalAlignment="Left" Margin="95,30,0,0" VerticalAlignment="Top" Width="65" Height="24">
+                                            <ComboBoxItem Content="Single" IsSelected="True"/>
+                                            <ComboBoxItem Content="Auto" />
+                                        </ComboBox>
+                                        <!--<StackPanel HorizontalAlignment="Left" Height="30" Margin="94,30,0,0" VerticalAlignment="Top" Width="60">
                                             <RadioButton GroupName="Single_or_64Chn" Checked="Single_or_64Chn_Checked" Content="Single"/>
                                             <RadioButton GroupName="Single_or_64Chn" Checked="Single_or_64Chn_Checked" Content="Auto"/>
-                                            <!--RadioButton x:Name="radioButton" Content="RadioButton"/>
-                    <RadioButton x:Name="radioButton1" Content="RadioButton"/-->
-                                        </StackPanel>
+                                        </StackPanel>-->
                                         <Label x:Name="lblCTest_or_Input" Content="CTest or Input" HorizontalAlignment="Left" Margin="0,60,0,0" VerticalAlignment="Top" Height="24" Width="92" />
-                                        <StackPanel HorizontalAlignment="Left" Height="30" Margin="94,60,0,-6" VerticalAlignment="Top" Width="60">
+                                        <ComboBox x:Name="cbxCTestOrInput" HorizontalAlignment="Left" Margin="95,60,0,0" VerticalAlignment="Top" Width="65" Height="24">
+                                            <ComboBoxItem Content="CTest" IsSelected="True"/>
+                                            <ComboBoxItem Content="Input" />
+                                        </ComboBox>
+                                        <!--<StackPanel HorizontalAlignment="Left" Height="30" Margin="94,60,0,-6" VerticalAlignment="Top" Width="60">
                                             <RadioButton GroupName="CTest_or_Input" Checked="CTest_or_Input_Checked" Content="CTest"/>
                                             <RadioButton GroupName="CTest_or_Input" Checked="CTest_or_Input_Checked" Content="Input"/>
-                                            <!--RadioButton x:Name="radioButton" Content="RadioButton"/>
-                    <RadioButton x:Name="radioButton1" Content="RadioButton"/-->
-                                        </StackPanel>
+                                        </StackPanel>-->                                    
                                         <Label x:Name="lblCPT_MAX" Content="Max count:" HorizontalAlignment="Left" Margin="0,90,0,0" VerticalAlignment="Top" Height="24"/>
                                         <ComboBox x:Name="cbxCPT_MAX" HorizontalAlignment="Left" Margin="95,90,0,0" VerticalAlignment="Top" Width="65">
                                             <ComboBoxItem Content= "200"/>
@@ -133,6 +135,7 @@
                                         <Label x:Name="lblSingleTest_Chn" Content="Single channel#:" HorizontalAlignment="Left" Margin="0,150,0,0" VerticalAlignment="Top" Height="25" RenderTransformOrigin="0.452,1.083" Width="100"/>
                                         <TextBox x:Name="txtSingleTest_Chn" HorizontalAlignment="Left" Height="24" Margin="100,150,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="65"/>
                                         <TextBox x:Name="txtCountTime" HorizontalAlignment="Left" Height="24" Margin="100,120,0,0" TextWrapping="Wrap" Text="1000" VerticalAlignment="Top" Width="60"/>
+                                        
                                     </Grid>
                                 </GroupBox>
                                 <GroupBox x:Name="gbxSweepAcq" Header="SweepAcq" HorizontalAlignment="Left" Margin="190,0,0,0" VerticalAlignment="Top" Height="89" Width="185">
