@@ -604,7 +604,7 @@ module FPGA_TOP(
     
 //assignmeng
 assign TP[3] = START_ACQ;
-assign TP[2] = OutUsbExtFifoData_en;
+assign TP[2] = UsbMicrorocAcqStartStop;
 assign TP[1] = MicrorocConfigDone;
-assign TP[0] = DOUT1B&DOUT2B;
+assign TP[0] = MicrorocAcqStartStop;
 endmodule

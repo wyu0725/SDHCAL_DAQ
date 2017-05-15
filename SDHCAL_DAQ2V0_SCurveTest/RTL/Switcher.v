@@ -88,10 +88,9 @@ module Switcher(
                      SCURVE_MODE = 2'b01,
                      SWEEP_ACQ_MODE = 2'b10;
                      //None = 2'b11;
-    localparam [1:0] NONE_DAC = 2'b00,
-                     DAC0_SELECTED = 2'b01,
-                     DAC1_SELECTED = 2'b10,
-                     DAC2_SELECTED = 2'b11;
+    localparam [1:0] DAC0_SELECTED = 2'b00,
+                     DAC1_SELECTED = 2'b01,
+                     DAC2_SELECTED = 2'b10;
     always @(*) begin
       case(ModeSelect)
         ACQ_MODE:begin
