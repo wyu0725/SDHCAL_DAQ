@@ -1,7 +1,7 @@
 Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2016.3 (win64) Build 1682563 Mon Oct 10 19:07:27 MDT 2016
-| Date             : Mon May 08 16:37:03 2017
+| Date             : Mon May 15 17:37:56 2017
 | Host             : WYU running 64-bit major release  (build 9200)
 | Command          : report_power -file FPGA_TOP_power_routed.rpt -pb FPGA_TOP_power_summary_routed.pb -rpx FPGA_TOP_power_routed.rpx
 | Design           : FPGA_TOP
@@ -51,12 +51,12 @@ Table of Contents
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
 | Clocks         |     0.006 |        8 |       --- |             --- |
-| Slice Logic    |     0.004 |     6455 |       --- |             --- |
-|   LUT as Logic |     0.003 |     2852 |     63400 |            4.50 |
+| Slice Logic    |     0.003 |     6451 |       --- |             --- |
+|   LUT as Logic |     0.003 |     2850 |     63400 |            4.50 |
 |   Register     |    <0.001 |     3036 |    126800 |            2.39 |
 |   CARRY4       |    <0.001 |       80 |     15850 |            0.50 |
 |   Others       |     0.000 |      147 |       --- |             --- |
-| Signals        |     0.004 |     4203 |       --- |             --- |
+| Signals        |     0.004 |     4201 |       --- |             --- |
 | Block RAM      |     0.001 |        6 |       135 |            4.44 |
 | MMCM           |     0.086 |        1 |         6 |           16.67 |
 | I/O            |     0.163 |       78 |       285 |           27.37 |
@@ -74,7 +74,7 @@ Table of Contents
 | Vccint    |       1.000 |     0.030 |       0.014 |      0.016 |
 | Vccaux    |       1.800 |     0.066 |       0.048 |      0.018 |
 | Vcco33    |       3.300 |     0.007 |       0.003 |      0.004 |
-| Vcco25    |       2.500 |     0.067 |       0.063 |      0.004 |
+| Vcco25    |       2.500 |     0.066 |       0.062 |      0.004 |
 | Vcco18    |       1.800 |     0.000 |       0.000 |      0.000 |
 | Vcco15    |       1.500 |     0.000 |       0.000 |      0.000 |
 | Vcco135   |       1.350 |     0.000 |       0.000 |      0.000 |
@@ -240,11 +240,11 @@ Table of Contents
 |     Trig_Gen                                                               |    <0.001 |
 |     Trig_Gen_en                                                            |    <0.001 |
 |   usb_control                                                              |     0.004 |
-|     usbcmdfifo_16depth                                                     |     0.001 |
-|       U0                                                                   |     0.001 |
-|         inst_fifo_gen                                                      |     0.001 |
-|           gconvfifo.rf                                                     |     0.001 |
-|             grf.rf                                                         |     0.001 |
+|     usbcmdfifo_16depth                                                     |     0.002 |
+|       U0                                                                   |     0.002 |
+|         inst_fifo_gen                                                      |     0.002 |
+|           gconvfifo.rf                                                     |     0.002 |
+|             grf.rf                                                         |     0.002 |
 |               gntv_or_sync_fifo.gcx.clkx                                   |    <0.001 |
 |                 gnxpm_cdc.gsync_stage[1].rd_stg_inst                       |    <0.001 |
 |                 gnxpm_cdc.gsync_stage[1].wr_stg_inst                       |    <0.001 |
@@ -269,11 +269,11 @@ Table of Contents
 |                 ngwrdrst.grst.g7serrst.gwrrd_rst_sync_stage[2].rrst_inst   |    <0.001 |
 |                 ngwrdrst.grst.g7serrst.gwrrd_rst_sync_stage[2].wrst_inst   |    <0.001 |
 |   usb_cy7c68013A                                                           |    <0.001 |
-|   usb_data_fifo_8192depth                                                  |     0.002 |
-|     U0                                                                     |     0.002 |
-|       inst_fifo_gen                                                        |     0.002 |
-|         gconvfifo.rf                                                       |     0.002 |
-|           grf.rf                                                           |     0.002 |
+|   usb_data_fifo_8192depth                                                  |     0.001 |
+|     U0                                                                     |     0.001 |
+|       inst_fifo_gen                                                        |     0.001 |
+|         gconvfifo.rf                                                       |     0.001 |
+|           grf.rf                                                           |     0.001 |
 |             gntv_or_sync_fifo.gcx.clkx                                     |    <0.001 |
 |               gnxpm_cdc.gsync_stage[1].rd_stg_inst                         |    <0.001 |
 |               gnxpm_cdc.gsync_stage[1].wr_stg_inst                         |    <0.001 |
