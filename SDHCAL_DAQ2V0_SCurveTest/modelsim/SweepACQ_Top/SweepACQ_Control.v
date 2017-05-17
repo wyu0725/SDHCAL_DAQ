@@ -28,6 +28,7 @@ module SweepACQ_Control(
     output reg SingleACQStart,
     output reg OneDACDone,
     output reg ACQDone,
+    input DataTransmitDone,
     // Sweep ACQ parameters
     input [9:0] StartDAC0,
     input [9:0] EndDAC0,
@@ -62,7 +63,8 @@ module SweepACQ_Control(
                      CHECK_ONE_DAC_DONE = 4'd15, //1111
                      CHECK_ALL_DONE = 4'd14,     //1110
                      TAIL_OUT = 4'd10,           //1010
-                     ALL_DONE = 4'd11;           //1011
+                     WAIT_DONE = 4'd11,          //1011
+                     ALL_DONE = 4'd9;           //1001
     reg [9:0] TestDAC0;
     reg [15:0] SCParamLoadDelayCount;
     localparam [15:0] SC_PARAM_LOAD_DELAY = 16'd40;//40_000
@@ -78,7 +80,7 @@ module SweepACQ_Control(
         OneDACDone <= 1'b0;
         ACQDone <= 1'b0;
         OutDAC0 <= 10'b0;
-        TestDAC0 <= StartDAC0;
+        TestDAC0 <= 10'b0;
         //MaskChannel <= 
         LoadSCParameter <= 1'b0;
         SweepACQData <= 16'b0;
@@ -209,10 +211,18 @@ module SweepACQ_Control(
             SweepACQData_en <= 1'b1;
             State <= ALL_DONE;
           end
-          ALL_DONE:begin
+          WAIT_DONE:begin
             ACQDone <= 1'b1;
             SweepACQData_en <= 1'b0;
-            State <= IDLE;
+            State <= ALL_DONE;
+          end
+          ALL_DONE:begin
+            if(DataTransmitDone) begin
+              ACQDone <= 1'b0;
+              State <= IDLE;
+            end
+            else
+              State <= ALL_DONE;
           end
           default: State <= IDLE;
         endcase

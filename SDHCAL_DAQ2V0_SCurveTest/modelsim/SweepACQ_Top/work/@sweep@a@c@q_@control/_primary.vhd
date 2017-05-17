@@ -8,6 +8,7 @@ entity SweepACQ_Control is
         SingleACQStart  : out    vl_logic;
         OneDACDone      : out    vl_logic;
         ACQDone         : out    vl_logic;
+        DataTransmitDone: in     vl_logic;
         StartDAC0       : in     vl_logic_vector(9 downto 0);
         EndDAC0         : in     vl_logic_vector(9 downto 0);
         MaxPackageNumber: in     vl_logic_vector(15 downto 0);

@@ -27,6 +27,7 @@ module SweepACQ_Top(
     input SweepStart,
     output SingleACQStart,
     output ACQDone,
+    input DataTransmitDone,
     // Sweep ACQ Parameters
     input [9:0] StartDAC0,
     input [9:0] EndDAC0,
@@ -71,6 +72,7 @@ module SweepACQ_Top(
       .SingleACQStart(SingleACQStart),
       .OneDACDone(rstExtFIFO),
       .ACQDone(ACQDone),
+      .DataTransmitDone(DataTransmitDone),
       // Sweep ACQ Parameters
       .StartDAC0(StartDAC0),
       .EndDAC0(EndDAC0),

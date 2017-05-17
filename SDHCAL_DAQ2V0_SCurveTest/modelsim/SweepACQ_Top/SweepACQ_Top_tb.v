@@ -6,6 +6,7 @@ reg reset_n;
 reg SweepStart;
 wire SingleACQStart;
 wire ACQDone;
+reg DataTransmitDone;
 // Sweep ACQ Parameters
 reg [9:0] StartDAC0;
 reg [9:0] EndDAC0;
@@ -27,6 +28,7 @@ SweepACQ_Top uut(
   .SweepStart(SweepStart),
   .SingleACQStart(SingleACQStart),
   .ACQDone(ACQDone),
+  .DataTransmitDone(DataTransmitDone),
   .StartDAC0(StartDAC0),
   .EndDAC0(EndDAC0),
   .MaxPackageNumber(MaxPackageNumber),
@@ -146,5 +148,14 @@ always @ (posedge clk or negedge reset_n) begin
       default:State <= IDLE;
     endcase
   end
+end
+// Generate DataTransmitDone Signal
+always @ (posedge clk or negedge reset_n) begin
+  if(~reset_n)
+    DataTransmitDone <= 1'b0;
+  else if(ACQDone)
+    DataTransmitDone <= 1'b1;
+  else
+    DataTransmitDone <= 1'b0;
 end
 endmodule
