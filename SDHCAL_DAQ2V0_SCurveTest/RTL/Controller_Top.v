@@ -128,7 +128,7 @@ module Controller_Top(
       // SC Parameters Load
       .UsbMicrorocSCParameterLoad(UsbMicrorocSCParameterLoad),
       .SCTestMicrorocSCParameterLoad(SCTestMicrorocSCParameterLoad),
-      .SweepAcqMicrorocSCParameterLoad(SweepAcqSCParameterLoad),
+      .SweepAcqMicrorocSCParameterLoad(SweepAcqMicrorocSCParameterLoad),
       .OutMicrorocSCParameterLoad(OutMicrorocSCParameterLoad),
       // SC or readreg
       .UsbSCOrReadreg(UsbSCOrReadreg),
@@ -178,7 +178,7 @@ module Controller_Top(
       .ParallelData_en(ParallelData_en),
       // SC Parameters
       .OutDAC0(SweepAcq10BitDac),
-      .LoadSCParameter(SweepAcqSCParameterLoad),
+      .LoadSCParameter(SweepAcqMicrorocSCParameterLoad),
       .MicrorocConfigDone(MicrorocConfigDone),
       // Data Out
       .SweepACQData(SweepAcqData),
