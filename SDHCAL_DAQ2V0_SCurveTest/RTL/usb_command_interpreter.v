@@ -597,7 +597,7 @@ end
 always @ (posedge clk , negedge reset_n) begin
   if(~reset_n)
     LED <= 4'b1111;
-  else if(fifo_rden && USB_COMMAND[15:4] == 12'hB00)
+  else if(fifo_rden && USB_COMMAND[15:4] == 12'h200)
     LED <= USB_COMMAND[3:0];
   else
     LED <= LED;
