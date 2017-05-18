@@ -45,8 +45,8 @@ initial begin
   clk = 1'b0;
   reset_n = 1'b0;
   SweepStart <= 1'b0;
-  StartDAC0 = 10'd500;
-  EndDAC0 = 10'd505;
+  StartDAC0 = 10'd475;
+  EndDAC0 = 10'd525;
   MaxPackageNumber = 16'd10;
   #(100)
   reset_n = 1'b1;
