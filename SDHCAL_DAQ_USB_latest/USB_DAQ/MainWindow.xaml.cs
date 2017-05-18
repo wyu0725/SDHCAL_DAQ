@@ -2395,7 +2395,7 @@ namespace USB_DAQ
                 gbxSCurveTest.IsEnabled = false;
                 gbxSweepAcq.IsEnabled = true;
                 DataAcqMode = SweepAcq;
-                byte[] bytes = ConstCommandByteArray(0xE0, 0xA1);
+                byte[] bytes = ConstCommandByteArray(0xE0, 0xA2);
                 bResult = CommandSend(bytes, bytes.Length);
                 if(bResult)
                 {
@@ -2482,7 +2482,7 @@ namespace USB_DAQ
             string report;
             #region Start and End DAC
             Regex rxInt = new Regex(rx_Integer);
-            bool IsDacLegal = rxInt.IsMatch(txtStartDac.Text) && rxInt.IsMatch(txtEndDac.Text) && (int.Parse(txtStartDac.Text) < 1023) && (int.Parse(txtEndDac.Text) <= 1023);
+            bool IsDacLegal = rxInt.IsMatch(txtStartDac.Text) && rxInt.IsMatch(txtEndDac.Text) && (int.Parse(txtStartDac.Text) < 1023) && (int.Parse(txtEndDac.Text) <= 1023) && (int.Parse(txtStartDac.Text) <= int.Parse(txtEndDac.Text));
             if(IsDacLegal)
             {
                 #region Start DAC
@@ -2859,7 +2859,7 @@ namespace USB_DAQ
                 bResult = CommandSend(CommandBytes, CommandBytes.Length);
                 if(!bResult)
                 {
-                    MessageBox.Show("Set count time failure. Please check the ", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Set count time failure. Please check the USB ", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 CommandBytes = ConstCommandByteArray(0xE7, (byte)(PackageNumberValue >> 8));
                 bResult = CommandSend(CommandBytes, CommandBytes.Length);
@@ -2870,7 +2870,7 @@ namespace USB_DAQ
                 }
                 else
                 {
-                    MessageBox.Show("Set count time failure. Please check the ", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Set count time failure. Please check the USB ", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 #endregion
                 #region Set Sweep Dac
