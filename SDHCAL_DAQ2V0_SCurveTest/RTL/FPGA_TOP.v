@@ -603,8 +603,8 @@ module FPGA_TOP(
     );
     
 //assignmeng
-assign TP[3] = START_ACQ;
-assign TP[2] = UsbMicrorocAcqStartStop;
+assign TP[3] = MicrorocSCParameterLoad;
+assign TP[2] = SweepTestStartStop;
 assign TP[1] = MicrorocConfigDone;
 assign TP[0] = MicrorocAcqStartStop;
 endmodule
