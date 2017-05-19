@@ -26,6 +26,7 @@ module SweepACQ_Top(
     // ACQ Control
     input SweepStart,
     output SingleACQStart,
+    output SingleDacDone,
     output ACQDone,
     input DataTransmitDone,
     // Sweep ACQ Parameters
@@ -100,5 +101,5 @@ module SweepACQ_Top(
       .full(SweepFifoFull),
       .empty(SweepFifoEmpty)
     );
-
+  assign SingleDacDone = rstExtFIFO;
 endmodule

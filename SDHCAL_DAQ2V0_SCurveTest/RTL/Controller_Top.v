@@ -45,6 +45,7 @@ module Controller_Top(
     input MicrorocConfigDone,
     // Microroc ACQ Control and Data
     output MicrorocAcqStartStop,
+    output MicrorocForceReset, // New add by wyu 20170519
     input [15:0] MicrorocAcqData,
     input MicrorocAcqData_en,
     // USB Interface
@@ -104,6 +105,7 @@ module Controller_Top(
     wire SweepAcqData_en;
     wire [15:0] SCTestData;
     wire SCTestData_en;
+    wire SweepAcqSingleDacDone;
     Switcher Switcher(
       // Mode Select
       .ModeSelect(ModeSelect),
@@ -149,6 +151,8 @@ module Controller_Top(
       // Microroc ACQ Start
       .SweepAcqMicrorocAcqStartStop(SweepAcqMicrorocAcqStartStop),
       .MicrorocAcqStartStop(MicrorocAcqStartStop),
+      .SweepAcqSingleDacDone(SweepAcqSingleDacDone),//New add by wyu 20170519
+      .OutMicrorocForceReset(MicrorocForceReset),//New add by wyu 20170519
       // USB Data
       .MicrorocAcqData(MicrorocAcqData),
       .MicrorocAcqData_en(MicrorocAcqData_en),
@@ -167,6 +171,7 @@ module Controller_Top(
       // ACQ Control
       .SweepStart(SweepAcqStartStop),
       .SingleACQStart(SweepAcqMicrorocAcqStartStop),
+      .SingleDacDone(SweepAcqSingleDacDone), //New add by wyu 20170519
       .ACQDone(SweepAcqDone),
       .DataTransmitDone(DataTransmitDone),
       // Sweep ACQ Parameters

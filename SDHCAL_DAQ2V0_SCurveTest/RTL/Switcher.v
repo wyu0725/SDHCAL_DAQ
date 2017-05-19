@@ -71,6 +71,8 @@ module Switcher(
     // Microroc ACQ Start
     input SweepAcqMicrorocAcqStartStop,
     output reg MicrorocAcqStartStop,
+    input SweepAcqSingleDacDone, // New add by wyu for Test
+    output reg OutMicrorocForceReset, // New add by wyu
     // USB Data
     input [15:0] MicrorocAcqData,
     input MicrorocAcqData_en,
@@ -107,6 +109,7 @@ module Switcher(
           //OutNormalAcqStartStop = UsbMicrorocAcqStartStop;
           OutUsbStartStop = UsbMicrorocAcqStartStop;
           MicrorocAcqStartStop = UsbMicrorocAcqStartStop;
+          OutMicrorocForceReset = 1'b0;
           UsbFifoData = MicrorocAcqData;
           UsbFifoData_en = MicrorocAcqData_en;
           ParallelData = 16'b0;
@@ -126,6 +129,7 @@ module Switcher(
           SweepTestDone = SCTestDone;
           OutUsbStartStop = SweepTestUsbStartStop;
           MicrorocAcqStartStop = 1'b0;
+          OutMicrorocForceReset = 1'b0;
           UsbFifoData = SCTestData;
           UsbFifoData_en = SCTestData_en;
           ParallelData = 16'b0;
@@ -145,6 +149,7 @@ module Switcher(
           SweepTestDone = SweepAcqDone;
           OutUsbStartStop = SweepTestUsbStartStop;
           MicrorocAcqStartStop = SweepAcqMicrorocAcqStartStop;
+          OutMicrorocForceReset = SweepAcqSingleDacDone;
           UsbFifoData = SweepAcqData;
           UsbFifoData_en = SweepAcqData_en;
           ParallelData = MicrorocAcqData;
@@ -164,6 +169,7 @@ module Switcher(
           SweepTestDone = 1'b0;
           OutUsbStartStop = UsbMicrorocAcqStartStop;
           MicrorocAcqStartStop = UsbMicrorocAcqStartStop;
+          OutMicrorocForceReset = 1'b0;
           UsbFifoData = MicrorocAcqData;
           UsbFifoData_en = MicrorocAcqData_en;
           ParallelData = 16'b0;

@@ -24,6 +24,7 @@ module Microroc_top(
       input Clk,
       input Clk_5M,
       input reset_n,
+      input MicrorocForceReset,// New add by wyu 20170519
       //--------Microroc slow control registers interaface----------//
       input sc_or_read, //slow control or read? 1 => read register
       input start_load,      //start load parameters
@@ -292,10 +293,12 @@ Redundancy Redundancy
    .TransmitOn1b(TRANSMITON1B),  //PIN
    .TransmitOn2b(TRANSMITON2B)  //PIN
 );
+wire ResetMicroroc_n;
+assign ResetMicroroc_n = reset_n & (~MicrorocForceReset);
 DaqControl AutoDAQ
 (
    .Clk(Clk),         //40M
-   .reset_n(reset_n),
+   .reset_n(ResetMicroroc_n),
    .start(Acq_start), //a pulse or a level?
    .End_Readout(End_Readout), //Digitial RAM end reading signal, Active H
    .Chipsatb(CHIPSATB),    //Chip is full, Active L, PIN
@@ -313,7 +316,7 @@ DaqControl AutoDAQ
 RamReadOut RAM_Read
 (
    .Clk(Clk),
-   .reset_n(reset_n),  
+   .reset_n(ResetMicroroc_n),  
    .Dout(Dout), //pin Active L
    .TransmitOn(TransmitOn),//pin  Active L
    //--fifo access-----------//

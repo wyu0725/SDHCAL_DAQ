@@ -366,11 +366,13 @@ module FPGA_TOP(
     wire [15:0] MicrorocAcqData;
     wire MicrorocAcqData_en;
     wire UsbDataFifoFull;
+    wire MicrorocForceReset;
     Microroc_top Microroc_u1
     (
       .Clk(Clk),
       .Clk_5M(Clk_5M),
       .reset_n(reset_n),
+      .MicrorocForceReset(MicrorocForceReset),// New add by wyu 20170519
       //--------Microroc slow control registers interaface----------//
       .sc_or_read(MicrorocSCOrReadreg),      //slow control or read? 1 => read register
       .start_load(MicrorocSCParameterLoad),      //start load parameters
@@ -514,6 +516,7 @@ module FPGA_TOP(
       .MicrorocConfigDone(MicrorocConfigDone),
       //*** Microroc acq and data
       .MicrorocAcqStartStop(MicrorocAcqStartStop),
+      .MicrorocForceReset(MicrorocForceReset), // New add by wyu 20170519
       .MicrorocAcqData(MicrorocAcqData),
       .MicrorocAcqData_en(MicrorocAcqData_en),
       //*** Usb interface

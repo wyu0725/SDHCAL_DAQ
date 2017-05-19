@@ -152,12 +152,10 @@ module SweepACQ_Control(
           end
           WAIT_ONCE_DATA:begin
             if(OneFire) begin
-              //FireDataCount <= FireDataCount + 1'b1;
               SweepACQFifoData_rden <= 1'b1;
               State <= GET_ONE_DATA;
             end
             else begin
-              FireDataCount <= FireDataCount;
               State <= WAIT_ONCE_DATA;
             end
           end
@@ -257,4 +255,14 @@ module SweepACQ_Control(
         DACInvert = {num[0], num[1], num[2], num[3], num[4], num[5], num[6], num[7], num[8], num[9]};
       end
     endfunction
+    // Debug
+    (*mark_debug = "true"*)wire [3:0] State_Debug;
+    assign State_Debug = State;
+    (*mark_debug = "true"*)wire [15:0] SweepAcqData_Debug;
+    assign SweepAcqData_Debug = SweepACQData;
+    (*mark_debug = "true"*)wire [15:0] FireDataCount_Debug;
+    assign FireDataCount_Debug = FireDataCount;
+    (*mark_debug = "true"*)wire [15:0] MaxPackageNumber_Debug;
+    assign MaxPackageNumber_Debug = MaxPackageNumber;
+
 endmodule
