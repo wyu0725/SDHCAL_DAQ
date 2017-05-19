@@ -27,11 +27,23 @@ module Internal_Trig_Gen(
   input Trig_en,
   output reg trig_en_i
 );
-always @ (posedge Clk, negedge reset_n)begin
+reg StartAcq_Internal1;
+reg StartAcq_Internal2;
+always @(posedge Clk or negedge reset_n) begin
+  if(~reset_n) begin
+    StartAcq_Internal1 <= 1'b0;
+    StartAcq_Internal2 <= 1'b0;
+  end
+  else begin
+    StartAcq_Internal1 <= start_acq;
+    StartAcq_Internal2 <= StartAcq_Internal1;
+  end
+end
+always @(posedge Clk, negedge reset_n)begin
   if(~reset_n)
     trig_en_i <= 1'b0;
-  else if(Trig_en && start_acq == 1'b1 && trig_en_i == 1'b0)
-    trig_en_i <= 1'b1;
+  else if(Trig_en)
+    trig_en_i <= StartAcq_Internal1 & (~StartAcq_Internal2);
   else 
     trig_en_i <= 1'b0;
 end
