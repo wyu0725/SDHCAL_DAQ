@@ -2337,11 +2337,16 @@ namespace USB_DAQ
                     PackageCount++;
                 }                
             }
-            byte[] RemainByte = new byte[RemainPackageNum];
+            bResult = false;
+            byte[] RemainByte = new byte[RemainPackageNum + 2];
+            /*
             do
             {
                 bResult = DataRecieve(RemainByte, RemainByte.Length);
             } while (!bResult);
+            */
+            while (!DataRecieve(RemainByte, RemainByte.Length));         
+            bw.Write(RemainByte);
             bw.Flush();
             bw.Dispose();
             bw.Close();
@@ -2897,7 +2902,7 @@ namespace USB_DAQ
                     txtReport.AppendText("USB fifo cleared");
                 else
                     txtReport.AppendText("fail to clear USB fifo");
-                byte[] RemainData = new byte[64];
+                byte[] RemainData = new byte[2048];
                 bResult = DataRecieve(RemainData, RemainData.Length);
                 #region Data ACQ
                 CommandBytes = ConstCommandByteArray(0xE0, 0xF0);
