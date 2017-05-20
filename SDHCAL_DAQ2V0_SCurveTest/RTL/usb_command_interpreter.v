@@ -558,7 +558,9 @@ always @(posedge clk or negedge reset_n) begin
     SingleChannelMask <= 192'b1;
     MicrorocChannelMask <= 192'b1;
   end
-  else begin
+  else
+    MicrorocChannelMask <= 192'b1;
+  /*else begin
     case(MaskState)
       IDLE:begin
         if(fifo_rden && USB_COMMAND == 16'hAE10)begin
@@ -590,7 +592,7 @@ always @(posedge clk or negedge reset_n) begin
         MaskState <= IDLE;
       end
     endcase
-  end
+  end*/
 end
 // B type command
 //led interface
@@ -1102,7 +1104,7 @@ always @(posedge clk or negedge reset_n) begin
   else if(fifo_rden && USB_COMMAND[15:8] == 8'hE7)
     MaxPackageNumber[15:8] <= USB_COMMAND[7:0];
   else
-    MaxPackageNumber[15:8] <= USB_COMMAND[15:8];
+    MaxPackageNumber[15:8] <= MaxPackageNumber[15:8];
 end
 //Swap the LSB and MSB
   function [9:0] Invert_10bit(input [9:0] num);

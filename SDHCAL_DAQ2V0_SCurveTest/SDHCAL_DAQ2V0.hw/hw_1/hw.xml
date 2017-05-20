@@ -10,17 +10,18 @@
       <Properties Property="PROGRAM.ADDRESS_RANGE" value="use_file"/>
       <Properties Property="PROGRAM.BLANK_CHECK" value="0"/>
       <Properties Property="PROGRAM.CFG_PROGRAM" value="1"/>
-      <Properties Property="PROGRAM.CHECKSUM" value="0"/>
+      <Properties Property="PROGRAM.CHECKSUM" value="1"/>
       <Properties Property="PROGRAM.ERASE" value="1"/>
-      <Properties Property="PROGRAM.FILES" value="MCS/FPGA_TOP_20170508wyu.mcs"/>
+      <Properties Property="PROGRAM.FILES" value="MCS/FPGA_TOP_20170520wyu1.mcs"/>
+      <Properties Property="PROGRAM.PRM_FILE" value="MCS/FPGA_TOP_20170520wyu1.prm"/>
       <Properties Property="PROGRAM.UNUSED_PIN_TERMINATION" value="pull-none"/>
       <Properties Property="PROGRAM.VERIFY" value="1"/>
     </Object>
   </ObjectList>
   <ObjectList object_type="hw_device" gui_info="">
     <Object name="xc7a100t_0" gui_info="">
-      <Properties Property="PROBES.FILE" value=""/>
-      <Properties Property="PROGRAM.HW_BITSTREAM" value=""/>
+      <Properties Property="PROBES.FILE" value="$_project_name_.runs/impl_1/debug_nets.ltx"/>
+      <Properties Property="PROGRAM.HW_BITSTREAM" value="$_project_name_.runs/impl_1/FPGA_TOP.bit"/>
       <Properties Property="PROGRAM.HW_CFGMEM_PART" value="n25q128-3.3v-spi-x1_x2_x4"/>
     </Object>
   </ObjectList>
@@ -30,13 +31,14 @@
       <Properties Property="CORE_REFRESH_RATE_MS" value="500"/>
     </Object>
     <Object name="u_ila_0" gui_info="">
-      <Properties Property="CONTROL.CAPTURE_MODE" value="BASIC"/>
+      <Properties Property="CONTROL.CAPTURE_MODE" value="ALWAYS"/>
       <Properties Property="CONTROL.TRIGGER_CONDITION" value="AND"/>
       <Properties Property="CONTROL.TRIGGER_POSITION" value="128"/>
       <Properties Property="CORE_REFRESH_RATE_MS" value="500"/>
     </Object>
   </ObjectList>
   <ObjectList object_type="hw_probe" gui_info="">
+    <Object name="Microroc_Control/SweepACQ/SweepACQ_Control/State_Debug[3:0]" gui_info="Trigger Setup=0"/>
     <Object name="Microroc_u1/AutoDAQ/Start_Acq_debug" gui_info=""/>
     <Object name="Microroc_u1/AutoDAQ/start_debug" gui_info="Trigger Setup=0"/>
     <Object name="Microroc_u1/RAM_Read/Dout_debug" gui_info="Capture Setup=0"/>
@@ -96,6 +98,193 @@
       </probeOptions>
       <nets>
         <net name="END_READOUT1_PIN"/>
+      </nets>
+    </probe>
+    <probe type="ila" busType="bus" source="netlist" spec="ILA_V2_RT">
+      <probeOptions Id="DebugProbeParams">
+        <Option Id="CAPTURE_COMPARE_VALUE" value="eq4&apos;hX"/>
+        <Option Id="COMPARE_VALUE.0" value="eq4&apos;hX"/>
+        <Option Id="DISPLAY_HINT" value=""/>
+        <Option Id="DISPLAY_VISIBILITY" value=""/>
+        <Option Id="HW_ILA" value="hw_ila_1"/>
+        <Option Id="MAP" value="probe0[3:0]"/>
+        <Option Id="NAME.CUSTOM" value=""/>
+        <Option Id="NAME.SELECT" value="Long"/>
+        <Option Id="SOURCE" value="netlist"/>
+        <Option Id="TRIGGER_COMPARE_VALUE" value="eq4&apos;hX"/>
+      </probeOptions>
+      <nets>
+        <net name="Microroc_Control/SweepACQ/SweepACQ_Control/DataReadCount_Debug[3]"/>
+        <net name="Microroc_Control/SweepACQ/SweepACQ_Control/DataReadCount_Debug[2]"/>
+        <net name="Microroc_Control/SweepACQ/SweepACQ_Control/DataReadCount_Debug[1]"/>
+        <net name="Microroc_Control/SweepACQ/SweepACQ_Control/DataReadCount_Debug[0]"/>
+      </nets>
+    </probe>
+    <probe type="ila" busType="bus" source="netlist" spec="ILA_V2_RT">
+      <probeOptions Id="DebugProbeParams">
+        <Option Id="CAPTURE_COMPARE_VALUE" value="eq16&apos;hXXXX"/>
+        <Option Id="COMPARE_VALUE.0" value="eq16&apos;hXXXX"/>
+        <Option Id="DISPLAY_HINT" value=""/>
+        <Option Id="DISPLAY_VISIBILITY" value=""/>
+        <Option Id="HW_ILA" value="hw_ila_1"/>
+        <Option Id="MAP" value="probe1[15:0]"/>
+        <Option Id="NAME.CUSTOM" value=""/>
+        <Option Id="NAME.SELECT" value="Long"/>
+        <Option Id="SOURCE" value="netlist"/>
+        <Option Id="TRIGGER_COMPARE_VALUE" value="eq16&apos;hXXXX"/>
+      </probeOptions>
+      <nets>
+        <net name="Microroc_Control/SweepACQ/SweepACQ_Control/FireDataCount_Debug[15]"/>
+        <net name="Microroc_Control/SweepACQ/SweepACQ_Control/FireDataCount_Debug[14]"/>
+        <net name="Microroc_Control/SweepACQ/SweepACQ_Control/FireDataCount_Debug[13]"/>
+        <net name="Microroc_Control/SweepACQ/SweepACQ_Control/FireDataCount_Debug[12]"/>
+        <net name="Microroc_Control/SweepACQ/SweepACQ_Control/FireDataCount_Debug[11]"/>
+        <net name="Microroc_Control/SweepACQ/SweepACQ_Control/FireDataCount_Debug[10]"/>
+        <net name="Microroc_Control/SweepACQ/SweepACQ_Control/FireDataCount_Debug[9]"/>
+        <net name="Microroc_Control/SweepACQ/SweepACQ_Control/FireDataCount_Debug[8]"/>
+        <net name="Microroc_Control/SweepACQ/SweepACQ_Control/FireDataCount_Debug[7]"/>
+        <net name="Microroc_Control/SweepACQ/SweepACQ_Control/FireDataCount_Debug[6]"/>
+        <net name="Microroc_Control/SweepACQ/SweepACQ_Control/FireDataCount_Debug[5]"/>
+        <net name="Microroc_Control/SweepACQ/SweepACQ_Control/FireDataCount_Debug[4]"/>
+        <net name="Microroc_Control/SweepACQ/SweepACQ_Control/FireDataCount_Debug[3]"/>
+        <net name="Microroc_Control/SweepACQ/SweepACQ_Control/FireDataCount_Debug[2]"/>
+        <net name="Microroc_Control/SweepACQ/SweepACQ_Control/FireDataCount_Debug[1]"/>
+        <net name="Microroc_Control/SweepACQ/SweepACQ_Control/FireDataCount_Debug[0]"/>
+      </nets>
+    </probe>
+    <probe type="ila" busType="bus" source="netlist" spec="ILA_V2_RT">
+      <probeOptions Id="DebugProbeParams">
+        <Option Id="CAPTURE_COMPARE_VALUE" value="eq16&apos;hXXXX"/>
+        <Option Id="COMPARE_VALUE.0" value="eq16&apos;hXXXX"/>
+        <Option Id="DISPLAY_HINT" value=""/>
+        <Option Id="DISPLAY_VISIBILITY" value=""/>
+        <Option Id="HW_ILA" value="hw_ila_1"/>
+        <Option Id="MAP" value="probe2[15:0]"/>
+        <Option Id="NAME.CUSTOM" value=""/>
+        <Option Id="NAME.SELECT" value="Long"/>
+        <Option Id="SOURCE" value="netlist"/>
+        <Option Id="TRIGGER_COMPARE_VALUE" value="eq16&apos;hXXXX"/>
+      </probeOptions>
+      <nets>
+        <net name="Microroc_Control/SweepACQ/SweepACQ_Control/MaxPackageNumber_Debug[15]"/>
+        <net name="Microroc_Control/SweepACQ/SweepACQ_Control/MaxPackageNumber_Debug[14]"/>
+        <net name="Microroc_Control/SweepACQ/SweepACQ_Control/MaxPackageNumber_Debug[13]"/>
+        <net name="Microroc_Control/SweepACQ/SweepACQ_Control/MaxPackageNumber_Debug[12]"/>
+        <net name="Microroc_Control/SweepACQ/SweepACQ_Control/MaxPackageNumber_Debug[11]"/>
+        <net name="Microroc_Control/SweepACQ/SweepACQ_Control/MaxPackageNumber_Debug[10]"/>
+        <net name="Microroc_Control/SweepACQ/SweepACQ_Control/MaxPackageNumber_Debug[9]"/>
+        <net name="Microroc_Control/SweepACQ/SweepACQ_Control/MaxPackageNumber_Debug[8]"/>
+        <net name="Microroc_Control/SweepACQ/SweepACQ_Control/MaxPackageNumber_Debug[7]"/>
+        <net name="Microroc_Control/SweepACQ/SweepACQ_Control/MaxPackageNumber_Debug[6]"/>
+        <net name="Microroc_Control/SweepACQ/SweepACQ_Control/MaxPackageNumber_Debug[5]"/>
+        <net name="Microroc_Control/SweepACQ/SweepACQ_Control/MaxPackageNumber_Debug[4]"/>
+        <net name="Microroc_Control/SweepACQ/SweepACQ_Control/MaxPackageNumber_Debug[3]"/>
+        <net name="Microroc_Control/SweepACQ/SweepACQ_Control/MaxPackageNumber_Debug[2]"/>
+        <net name="Microroc_Control/SweepACQ/SweepACQ_Control/MaxPackageNumber_Debug[1]"/>
+        <net name="Microroc_Control/SweepACQ/SweepACQ_Control/MaxPackageNumber_Debug[0]"/>
+      </nets>
+    </probe>
+    <probe type="ila" busType="net" source="netlist" spec="ILA_V2_RT">
+      <probeOptions Id="DebugProbeParams">
+        <Option Id="CAPTURE_COMPARE_VALUE" value="eq1&apos;bX"/>
+        <Option Id="COMPARE_VALUE.0" value="eq1&apos;bX"/>
+        <Option Id="DISPLAY_HINT" value=""/>
+        <Option Id="DISPLAY_VISIBILITY" value=""/>
+        <Option Id="HW_ILA" value="hw_ila_1"/>
+        <Option Id="MAP" value="probe5[0]"/>
+        <Option Id="NAME.CUSTOM" value=""/>
+        <Option Id="NAME.SELECT" value="Long"/>
+        <Option Id="SOURCE" value="netlist"/>
+        <Option Id="TRIGGER_COMPARE_VALUE" value="eq1&apos;bX"/>
+      </probeOptions>
+      <nets>
+        <net name="Microroc_Control/SweepACQ/SweepACQ_Control/SingleACQStart_Debug"/>
+      </nets>
+    </probe>
+    <probe type="ila" busType="bus" source="netlist" spec="ILA_V2_RT">
+      <probeOptions Id="DebugProbeParams">
+        <Option Id="CAPTURE_COMPARE_VALUE" value="eq4&apos;hX"/>
+        <Option Id="COMPARE_VALUE.0" value="eq4&apos;h7"/>
+        <Option Id="DISPLAY_HINT" value=""/>
+        <Option Id="DISPLAY_VISIBILITY" value=""/>
+        <Option Id="HW_ILA" value="hw_ila_1"/>
+        <Option Id="MAP" value="probe3[3:0]"/>
+        <Option Id="NAME.CUSTOM" value=""/>
+        <Option Id="NAME.SELECT" value="Long"/>
+        <Option Id="SOURCE" value="netlist"/>
+        <Option Id="TRIGGER_COMPARE_VALUE" value="eq4&apos;h7"/>
+      </probeOptions>
+      <nets>
+        <net name="Microroc_Control/SweepACQ/SweepACQ_Control/State_Debug[3]"/>
+        <net name="Microroc_Control/SweepACQ/SweepACQ_Control/State_Debug[2]"/>
+        <net name="Microroc_Control/SweepACQ/SweepACQ_Control/State_Debug[1]"/>
+        <net name="Microroc_Control/SweepACQ/SweepACQ_Control/State_Debug[0]"/>
+      </nets>
+    </probe>
+    <probe type="ila" busType="net" source="netlist" spec="ILA_V2_RT">
+      <probeOptions Id="DebugProbeParams">
+        <Option Id="CAPTURE_COMPARE_VALUE" value="eq1&apos;bX"/>
+        <Option Id="COMPARE_VALUE.0" value="eq1&apos;bX"/>
+        <Option Id="DISPLAY_HINT" value=""/>
+        <Option Id="DISPLAY_VISIBILITY" value=""/>
+        <Option Id="HW_ILA" value="hw_ila_1"/>
+        <Option Id="MAP" value="probe6[0]"/>
+        <Option Id="NAME.CUSTOM" value=""/>
+        <Option Id="NAME.SELECT" value="Long"/>
+        <Option Id="SOURCE" value="netlist"/>
+        <Option Id="TRIGGER_COMPARE_VALUE" value="eq1&apos;bX"/>
+      </probeOptions>
+      <nets>
+        <net name="Microroc_Control/SweepACQ/SweepACQ_Control/SweepACQData_en_Debug"/>
+      </nets>
+    </probe>
+    <probe type="ila" busType="bus" source="netlist" spec="ILA_V2_RT">
+      <probeOptions Id="DebugProbeParams">
+        <Option Id="CAPTURE_COMPARE_VALUE" value="eq16&apos;hXXXX"/>
+        <Option Id="COMPARE_VALUE.0" value="eq16&apos;hXXXX"/>
+        <Option Id="DISPLAY_HINT" value=""/>
+        <Option Id="DISPLAY_VISIBILITY" value=""/>
+        <Option Id="HW_ILA" value="hw_ila_1"/>
+        <Option Id="MAP" value="probe4[15:0]"/>
+        <Option Id="NAME.CUSTOM" value=""/>
+        <Option Id="NAME.SELECT" value="Long"/>
+        <Option Id="SOURCE" value="netlist"/>
+        <Option Id="TRIGGER_COMPARE_VALUE" value="eq16&apos;hXXXX"/>
+      </probeOptions>
+      <nets>
+        <net name="Microroc_Control/SweepACQ/SweepACQ_Control/SweepAcqData_Debug[15]"/>
+        <net name="Microroc_Control/SweepACQ/SweepACQ_Control/SweepAcqData_Debug[14]"/>
+        <net name="Microroc_Control/SweepACQ/SweepACQ_Control/SweepAcqData_Debug[13]"/>
+        <net name="Microroc_Control/SweepACQ/SweepACQ_Control/SweepAcqData_Debug[12]"/>
+        <net name="Microroc_Control/SweepACQ/SweepACQ_Control/SweepAcqData_Debug[11]"/>
+        <net name="Microroc_Control/SweepACQ/SweepACQ_Control/SweepAcqData_Debug[10]"/>
+        <net name="Microroc_Control/SweepACQ/SweepACQ_Control/SweepAcqData_Debug[9]"/>
+        <net name="Microroc_Control/SweepACQ/SweepACQ_Control/SweepAcqData_Debug[8]"/>
+        <net name="Microroc_Control/SweepACQ/SweepACQ_Control/SweepAcqData_Debug[7]"/>
+        <net name="Microroc_Control/SweepACQ/SweepACQ_Control/SweepAcqData_Debug[6]"/>
+        <net name="Microroc_Control/SweepACQ/SweepACQ_Control/SweepAcqData_Debug[5]"/>
+        <net name="Microroc_Control/SweepACQ/SweepACQ_Control/SweepAcqData_Debug[4]"/>
+        <net name="Microroc_Control/SweepACQ/SweepACQ_Control/SweepAcqData_Debug[3]"/>
+        <net name="Microroc_Control/SweepACQ/SweepACQ_Control/SweepAcqData_Debug[2]"/>
+        <net name="Microroc_Control/SweepACQ/SweepACQ_Control/SweepAcqData_Debug[1]"/>
+        <net name="Microroc_Control/SweepACQ/SweepACQ_Control/SweepAcqData_Debug[0]"/>
+      </nets>
+    </probe>
+    <probe type="ila" busType="net" source="netlist" spec="ILA_V2_RT">
+      <probeOptions Id="DebugProbeParams">
+        <Option Id="CAPTURE_COMPARE_VALUE" value="eq1&apos;bX"/>
+        <Option Id="COMPARE_VALUE.0" value="eq1&apos;bX"/>
+        <Option Id="DISPLAY_HINT" value=""/>
+        <Option Id="DISPLAY_VISIBILITY" value=""/>
+        <Option Id="HW_ILA" value="hw_ila_1"/>
+        <Option Id="MAP" value="probe7[0]"/>
+        <Option Id="NAME.CUSTOM" value=""/>
+        <Option Id="NAME.SELECT" value="Long"/>
+        <Option Id="SOURCE" value="netlist"/>
+        <Option Id="TRIGGER_COMPARE_VALUE" value="eq1&apos;bX"/>
+      </probeOptions>
+      <nets>
+        <net name="Microroc_Control/SweepACQ/SweepACQ_Control/SweepStart_Debug"/>
       </nets>
     </probe>
     <probe type="ila" busType="net" source="netlist" spec="ILA_V2_RT">

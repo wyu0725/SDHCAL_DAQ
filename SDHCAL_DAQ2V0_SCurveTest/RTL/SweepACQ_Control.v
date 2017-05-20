@@ -207,7 +207,7 @@ module SweepACQ_Control(
           end
           TAIL_OUT:begin
             SweepACQData_en <= 1'b1;
-            State <= ALL_DONE;
+            State <= WAIT_DONE;
           end
           WAIT_DONE:begin
             ACQDone <= 1'b1;
@@ -256,13 +256,21 @@ module SweepACQ_Control(
       end
     endfunction
     // Debug
-    (*mark_debug = "true"*)wire [3:0] State_Debug;
+    /*(*mark_debug = "true"*)wire [3:0] State_Debug;
     assign State_Debug = State;
     (*mark_debug = "true"*)wire [15:0] SweepAcqData_Debug;
     assign SweepAcqData_Debug = SweepACQData;
+    (*mark_debug = "true"*)wire SweepACQData_en_Debug;
+    assign SweepACQData_en_Debug = SweepACQData_en;
     (*mark_debug = "true"*)wire [15:0] FireDataCount_Debug;
     assign FireDataCount_Debug = FireDataCount;
+    (*mark_debug = "true"*)wire [3:0] DataReadCount_Debug;
+    assign DataReadCount_Debug = DataReadCount;
     (*mark_debug = "true"*)wire [15:0] MaxPackageNumber_Debug;
     assign MaxPackageNumber_Debug = MaxPackageNumber;
+    (*mark_debug = "true"*)wire SweepStart_Debug;
+    assign SweepStart_Debug = SweepStart;
+    (*mark_debug = "true"*)wire SingleACQStart_Debug;
+    assign SingleACQStart_Debug = SingleACQStart;*/
 
 endmodule
