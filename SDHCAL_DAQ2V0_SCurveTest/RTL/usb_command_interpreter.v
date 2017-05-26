@@ -1086,6 +1086,8 @@ always @(posedge clk or negedge reset_n) begin
     EndDac[7:4] <= USB_COMMAND[3:0];
   else if(fifo_rden && USB_COMMAND[15:4] == 12'hE55)
     EndDac[9:8] <= USB_COMMAND[1:0];
+  else
+    EndDac <= EndDac;
 end
 //*** Package Number
 // Lower 8-bits of package number is started with E6
