@@ -558,8 +558,6 @@ always @(posedge clk or negedge reset_n) begin
     SingleChannelMask <= {192{1'b1}};
     MicrorocChannelMask <= {192{1'b1}};
   end
-  else
-    MicrorocChannelMask <= {192{1'b1}};
   else begin
     case(MaskState)
       IDLE:begin

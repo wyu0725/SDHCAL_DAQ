@@ -2,12 +2,12 @@
 # Vivado v2016.3 (64-bit)
 # SW Build 1682563 on Mon Oct 10 19:07:27 MDT 2016
 # IP Build 1681267 on Mon Oct 10 21:28:31 MDT 2016
-# Start of session at: Sat May 20 20:50:21 2017
-# Process ID: 396
-# Current directory: D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/SDHCAL_DAQ2V0.runs/synth_1
+# Start of session at: Fri May 26 23:12:34 2017
+# Process ID: 10264
+# Current directory: D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/SDHCAL_DAQ2V0.runs/synth_1
 # Command line: vivado.exe -log FPGA_TOP.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source FPGA_TOP.tcl
-# Log file: D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/SDHCAL_DAQ2V0.runs/synth_1/FPGA_TOP.vds
-# Journal file: D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/SDHCAL_DAQ2V0.runs/synth_1\vivado.jou
+# Log file: D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/SDHCAL_DAQ2V0.runs/synth_1/FPGA_TOP.vds
+# Journal file: D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/SDHCAL_DAQ2V0.runs/synth_1\vivado.jou
 #-----------------------------------------------------------
 source FPGA_TOP.tcl -notrace
 Command: synth_design -top FPGA_TOP -part xc7a100tfgg484-2
@@ -15,12 +15,12 @@ Starting synth_design
 Attempting to get a license for feature 'Synthesis' and/or device 'xc7a100t'
 INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a100t'
 INFO: Launching helper process for spawning children vivado processes
-INFO: Helper process launched with PID 824 
+INFO: Helper process launched with PID 6768 
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:25 ; elapsed = 00:00:40 . Memory (MB): peak = 366.188 ; gain = 156.184
+Starting RTL Elaboration : Time (s): cpu = 00:00:20 ; elapsed = 00:00:23 . Memory (MB): peak = 363.582 ; gain = 154.066
 ---------------------------------------------------------------------------------
-INFO: [Synth 8-638] synthesizing module 'FPGA_TOP' [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/RTL/FPGA_TOP.v:23]
-INFO: [Synth 8-638] synthesizing module 'Clk_Management' [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/RTL/Clk_Management.v:23]
+INFO: [Synth 8-638] synthesizing module 'FPGA_TOP' [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/FPGA_TOP.v:23]
+INFO: [Synth 8-638] synthesizing module 'Clk_Management' [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/Clk_Management.v:23]
 INFO: [Synth 8-638] synthesizing module 'BUFG' [D:/Xilinx/Vivado/2016.3/scripts/rt/data/unisim_comp.v:607]
 INFO: [Synth 8-256] done synthesizing module 'BUFG' (1#1) [D:/Xilinx/Vivado/2016.3/scripts/rt/data/unisim_comp.v:607]
 INFO: [Synth 8-638] synthesizing module 'MMCME2_BASE' [D:/Xilinx/Vivado/2016.3/scripts/rt/data/unisim_comp.v:20534]
@@ -54,8 +54,8 @@ INFO: [Synth 8-638] synthesizing module 'MMCME2_BASE' [D:/Xilinx/Vivado/2016.3/s
 	Parameter REF_JITTER1 bound to: 0.000000 - type: float 
 	Parameter STARTUP_WAIT bound to: FALSE - type: string 
 INFO: [Synth 8-256] done synthesizing module 'MMCME2_BASE' (2#1) [D:/Xilinx/Vivado/2016.3/scripts/rt/data/unisim_comp.v:20534]
-INFO: [Synth 8-256] done synthesizing module 'Clk_Management' (3#1) [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/RTL/Clk_Management.v:23]
-INFO: [Synth 8-638] synthesizing module 'usb_command_interpreter' [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/RTL/usb_command_interpreter.v:21]
+INFO: [Synth 8-256] done synthesizing module 'Clk_Management' (3#1) [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/Clk_Management.v:23]
+INFO: [Synth 8-638] synthesizing module 'usb_command_interpreter' [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/usb_command_interpreter.v:21]
 	Parameter Idle bound to: 1'b0 
 	Parameter READ bound to: 1'b1 
 	Parameter IDLE bound to: 2'b00 
@@ -69,11 +69,11 @@ INFO: [Synth 8-638] synthesizing module 'usb_command_interpreter' [D:/Vivado_wor
 	Parameter CPT_MAX_20000 bound to: 8'b00000101 
 	Parameter CPT_MAX_40000 bound to: 8'b00000110 
 	Parameter CPT_MAX_50000 bound to: 8'b00000111 
-INFO: [Synth 8-638] synthesizing module 'usb_cmd_fifo' [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/SDHCAL_DAQ2V0.runs/synth_1/.Xil/Vivado-396-WYU/realtime/usb_cmd_fifo_stub.v:6]
-INFO: [Synth 8-256] done synthesizing module 'usb_cmd_fifo' (4#1) [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/SDHCAL_DAQ2V0.runs/synth_1/.Xil/Vivado-396-WYU/realtime/usb_cmd_fifo_stub.v:6]
-INFO: [Synth 8-226] default block is never used [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/RTL/usb_command_interpreter.v:123]
-INFO: [Synth 8-256] done synthesizing module 'usb_command_interpreter' (5#1) [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/RTL/usb_command_interpreter.v:21]
-INFO: [Synth 8-638] synthesizing module 'usb_synchronous_slavefifo' [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/RTL/usb_synchronous_slavefifo.v:26]
+INFO: [Synth 8-638] synthesizing module 'usb_cmd_fifo' [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/SDHCAL_DAQ2V0.runs/synth_1/.Xil/Vivado-10264-WYU/realtime/usb_cmd_fifo_stub.v:6]
+INFO: [Synth 8-256] done synthesizing module 'usb_cmd_fifo' (4#1) [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/SDHCAL_DAQ2V0.runs/synth_1/.Xil/Vivado-10264-WYU/realtime/usb_cmd_fifo_stub.v:6]
+INFO: [Synth 8-226] default block is never used [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/usb_command_interpreter.v:123]
+INFO: [Synth 8-256] done synthesizing module 'usb_command_interpreter' (5#1) [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/usb_command_interpreter.v:21]
+INFO: [Synth 8-638] synthesizing module 'usb_synchronous_slavefifo' [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/usb_synchronous_slavefifo.v:26]
 	Parameter EP6_ADDR bound to: 2'b10 
 	Parameter EP2_ADDR bound to: 2'b00 
 	Parameter Idle bound to: 3'b000 
@@ -82,10 +82,10 @@ INFO: [Synth 8-638] synthesizing module 'usb_synchronous_slavefifo' [D:/Vivado_w
 	Parameter WRITE bound to: 3'b011 
 	Parameter WRITE_PROCESS bound to: 3'b100 
 	Parameter PKTEND bound to: 3'b101 
-INFO: [Synth 8-256] done synthesizing module 'usb_synchronous_slavefifo' (6#1) [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/RTL/usb_synchronous_slavefifo.v:26]
-INFO: [Synth 8-638] synthesizing module 'Microroc_top' [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/RTL/Microroc_top.v:23]
-INFO: [Synth 8-638] synthesizing module 'SlowControl_ReadReg' [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/RTL/SlowControl_ReadReg.v:60]
-INFO: [Synth 8-638] synthesizing module 'Microroc_Parameters' [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/RTL/Microroc_Parameters.v:21]
+INFO: [Synth 8-256] done synthesizing module 'usb_synchronous_slavefifo' (6#1) [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/usb_synchronous_slavefifo.v:26]
+INFO: [Synth 8-638] synthesizing module 'Microroc_top' [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/Microroc_top.v:23]
+INFO: [Synth 8-638] synthesizing module 'SlowControl_ReadReg' [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/SlowControl_ReadReg.v:60]
+INFO: [Synth 8-638] synthesizing module 'Microroc_Parameters' [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/Microroc_Parameters.v:21]
 	Parameter SC_NUM bound to: 36 - type: integer 
 	Parameter RE_NUM bound to: 3 - type: integer 
 	Parameter Idle bound to: 4'b0000 
@@ -96,11 +96,11 @@ INFO: [Synth 8-638] synthesizing module 'Microroc_Parameters' [D:/Vivado_workspa
 	Parameter SC_PROCESS_LOOP bound to: 4'b0101 
 	Parameter SC_PROCESS_ASIC bound to: 4'b0110 
 	Parameter END_PROCESS bound to: 4'b0111 
-INFO: [Synth 8-226] default block is never used [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/RTL/Microroc_Parameters.v:169]
-INFO: [Synth 8-256] done synthesizing module 'Microroc_Parameters' (7#1) [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/RTL/Microroc_Parameters.v:21]
-INFO: [Synth 8-638] synthesizing module 'PULSESYNC' [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/RTL/PULSESYNC.v:23]
-INFO: [Synth 8-256] done synthesizing module 'PULSESYNC' (8#1) [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/RTL/PULSESYNC.v:23]
-INFO: [Synth 8-638] synthesizing module 'Param_Bitshift' [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/RTL/Param_Bitshift.v:28]
+INFO: [Synth 8-226] default block is never used [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/Microroc_Parameters.v:169]
+INFO: [Synth 8-256] done synthesizing module 'Microroc_Parameters' (7#1) [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/Microroc_Parameters.v:21]
+INFO: [Synth 8-638] synthesizing module 'PULSESYNC' [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/PULSESYNC.v:23]
+INFO: [Synth 8-256] done synthesizing module 'PULSESYNC' (8#1) [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/PULSESYNC.v:23]
+INFO: [Synth 8-638] synthesizing module 'Param_Bitshift' [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/Param_Bitshift.v:28]
 	Parameter Idle bound to: 3'b000 
 	Parameter READ_FIFO bound to: 3'b001 
 	Parameter DATA_LATENCY bound to: 3'b110 
@@ -108,13 +108,13 @@ INFO: [Synth 8-638] synthesizing module 'Param_Bitshift' [D:/Vivado_workspace/SD
 	Parameter LOOP bound to: 3'b011 
 	Parameter END_ONCE bound to: 3'b101 
 	Parameter END bound to: 3'b100 
-INFO: [Synth 8-256] done synthesizing module 'Param_Bitshift' (9#1) [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/RTL/Param_Bitshift.v:28]
-INFO: [Synth 8-638] synthesizing module 'param_store_fifo' [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/SDHCAL_DAQ2V0.runs/synth_1/.Xil/Vivado-396-WYU/realtime/param_store_fifo_stub.v:6]
-INFO: [Synth 8-256] done synthesizing module 'param_store_fifo' (10#1) [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/SDHCAL_DAQ2V0.runs/synth_1/.Xil/Vivado-396-WYU/realtime/param_store_fifo_stub.v:6]
-INFO: [Synth 8-256] done synthesizing module 'SlowControl_ReadReg' (11#1) [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/RTL/SlowControl_ReadReg.v:60]
-INFO: [Synth 8-638] synthesizing module 'Redundancy' [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/RTL/Redundancy.v:22]
-INFO: [Synth 8-256] done synthesizing module 'Redundancy' (12#1) [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/RTL/Redundancy.v:22]
-INFO: [Synth 8-638] synthesizing module 'DaqControl' [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/RTL/DaqControl.v:22]
+INFO: [Synth 8-256] done synthesizing module 'Param_Bitshift' (9#1) [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/Param_Bitshift.v:28]
+INFO: [Synth 8-638] synthesizing module 'param_store_fifo' [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/SDHCAL_DAQ2V0.runs/synth_1/.Xil/Vivado-10264-WYU/realtime/param_store_fifo_stub.v:6]
+INFO: [Synth 8-256] done synthesizing module 'param_store_fifo' (10#1) [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/SDHCAL_DAQ2V0.runs/synth_1/.Xil/Vivado-10264-WYU/realtime/param_store_fifo_stub.v:6]
+INFO: [Synth 8-256] done synthesizing module 'SlowControl_ReadReg' (11#1) [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/SlowControl_ReadReg.v:60]
+INFO: [Synth 8-638] synthesizing module 'Redundancy' [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/Redundancy.v:22]
+INFO: [Synth 8-256] done synthesizing module 'Redundancy' (12#1) [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/Redundancy.v:22]
+INFO: [Synth 8-638] synthesizing module 'DaqControl' [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/DaqControl.v:22]
 	Parameter Idle bound to: 4'b0000 
 	Parameter CHIPRESET bound to: 4'b0001 
 	Parameter POWOND bound to: 4'b0010 
@@ -127,36 +127,36 @@ INFO: [Synth 8-638] synthesizing module 'DaqControl' [D:/Vivado_workspace/SDHCAL
 	Parameter T_minPwrRst bound to: 8 - type: integer 
 	Parameter T_minRstStart bound to: 40 - type: integer 
 	Parameter T_minSro bound to: 16 - type: integer 
-INFO: [Synth 8-256] done synthesizing module 'DaqControl' (13#1) [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/RTL/DaqControl.v:22]
-INFO: [Synth 8-638] synthesizing module 'RamReadOut' [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/RTL/RamReadOut.v:22]
+INFO: [Synth 8-256] done synthesizing module 'DaqControl' (13#1) [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/DaqControl.v:22]
+INFO: [Synth 8-638] synthesizing module 'RamReadOut' [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/RamReadOut.v:22]
 	Parameter DATA_WIDTH bound to: 4'b1111 
-INFO: [Synth 8-256] done synthesizing module 'RamReadOut' (14#1) [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/RTL/RamReadOut.v:22]
-INFO: [Synth 8-638] synthesizing module 'Hold_Gen' [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/RTL/Hold_Gen.v:4]
+INFO: [Synth 8-256] done synthesizing module 'RamReadOut' (14#1) [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/RamReadOut.v:22]
+INFO: [Synth 8-638] synthesizing module 'Hold_Gen' [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/Hold_Gen.v:4]
 	Parameter Idle bound to: 2'b00 
 	Parameter DELAY bound to: 2'b01 
 	Parameter HOLDGEN bound to: 2'b10 
-INFO: [Synth 8-256] done synthesizing module 'Hold_Gen' (15#1) [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/RTL/Hold_Gen.v:4]
-INFO: [Synth 8-638] synthesizing module 'Internal_Trig_Gen' [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/RTL/Internal_Trig_Gen.v:23]
-INFO: [Synth 8-256] done synthesizing module 'Internal_Trig_Gen' (16#1) [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/RTL/Internal_Trig_Gen.v:23]
-INFO: [Synth 8-638] synthesizing module 'Trig_Gen' [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/RTL/Trig_Gen.v:1]
-INFO: [Synth 8-256] done synthesizing module 'Trig_Gen' (17#1) [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/RTL/Trig_Gen.v:1]
+INFO: [Synth 8-256] done synthesizing module 'Hold_Gen' (15#1) [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/Hold_Gen.v:4]
+INFO: [Synth 8-638] synthesizing module 'Internal_Trig_Gen' [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/Internal_Trig_Gen.v:23]
+INFO: [Synth 8-256] done synthesizing module 'Internal_Trig_Gen' (16#1) [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/Internal_Trig_Gen.v:23]
+INFO: [Synth 8-638] synthesizing module 'Trig_Gen' [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/Trig_Gen.v:1]
+INFO: [Synth 8-256] done synthesizing module 'Trig_Gen' (17#1) [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/Trig_Gen.v:1]
 INFO: [Synth 8-638] synthesizing module 'OBUFDS' [D:/Xilinx/Vivado/2016.3/scripts/rt/data/unisim_comp.v:21941]
 	Parameter CAPACITANCE bound to: DONT_CARE - type: string 
 	Parameter IOSTANDARD bound to: DEFAULT - type: string 
 	Parameter SLEW bound to: SLOW - type: string 
 INFO: [Synth 8-256] done synthesizing module 'OBUFDS' (18#1) [D:/Xilinx/Vivado/2016.3/scripts/rt/data/unisim_comp.v:21941]
-INFO: [Synth 8-256] done synthesizing module 'Microroc_top' (19#1) [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/RTL/Microroc_top.v:23]
-INFO: [Synth 8-638] synthesizing module 'Controller_Top' [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/RTL/Controller_Top.v:23]
-INFO: [Synth 8-638] synthesizing module 'Switcher' [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/RTL/Switcher.v:23]
+INFO: [Synth 8-256] done synthesizing module 'Microroc_top' (19#1) [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/Microroc_top.v:23]
+INFO: [Synth 8-638] synthesizing module 'Controller_Top' [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/Controller_Top.v:23]
+INFO: [Synth 8-638] synthesizing module 'Switcher' [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/Switcher.v:23]
 	Parameter ACQ_MODE bound to: 2'b00 
 	Parameter SCURVE_MODE bound to: 2'b01 
 	Parameter SWEEP_ACQ_MODE bound to: 2'b10 
 	Parameter DAC0_SELECTED bound to: 2'b00 
 	Parameter DAC1_SELECTED bound to: 2'b01 
 	Parameter DAC2_SELECTED bound to: 2'b10 
-INFO: [Synth 8-256] done synthesizing module 'Switcher' (20#1) [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/RTL/Switcher.v:23]
-INFO: [Synth 8-638] synthesizing module 'SweepACQ_Top' [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/RTL/SweepACQ_Top.v:23]
-INFO: [Synth 8-638] synthesizing module 'SweepACQ_Control' [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/RTL/SweepACQ_Control.v:23]
+INFO: [Synth 8-256] done synthesizing module 'Switcher' (20#1) [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/Switcher.v:23]
+INFO: [Synth 8-638] synthesizing module 'SweepACQ_Top' [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/SweepACQ_Top.v:23]
+INFO: [Synth 8-638] synthesizing module 'SweepACQ_Control' [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/SweepACQ_Control.v:23]
 	Parameter IDLE bound to: 4'b0000 
 	Parameter HEADER_OUT bound to: 4'b0001 
 	Parameter SC_PARAM_OUT bound to: 4'b0011 
@@ -175,8 +175,8 @@ INFO: [Synth 8-638] synthesizing module 'SweepACQ_Control' [D:/Vivado_workspace/
 	Parameter SC_PARAM_LOAD_DELAY bound to: 16'b1001110001000000 
 	Parameter DATA_READ_NUM bound to: 4'b1010 
 	Parameter ONE_FIRE_DATA_NUM bound to: 4'b1001 
-INFO: [Synth 8-256] done synthesizing module 'SweepACQ_Control' (21#1) [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/RTL/SweepACQ_Control.v:23]
-INFO: [Synth 8-638] synthesizing module 'SweepACQ_FIFO' [d:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/SDHCAL_DAQ2V0.srcs/sources_1/ip/SweepACQ_FIFO/synth/SweepACQ_FIFO.vhd:72]
+INFO: [Synth 8-256] done synthesizing module 'SweepACQ_Control' (21#1) [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/SweepACQ_Control.v:23]
+INFO: [Synth 8-638] synthesizing module 'SweepACQ_FIFO' [d:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/SDHCAL_DAQ2V0.srcs/sources_1/ip/SweepACQ_FIFO/synth/SweepACQ_FIFO.vhd:72]
 	Parameter C_COMMON_CLOCK bound to: 1 - type: integer 
 	Parameter C_SELECT_XPM bound to: 0 - type: integer 
 	Parameter C_COUNT_TYPE bound to: 0 - type: integer 
@@ -379,16 +379,16 @@ INFO: [Synth 8-638] synthesizing module 'SweepACQ_FIFO' [d:/Vivado_workspace/SDH
 	Parameter C_REG_SLICE_MODE_RACH bound to: 0 - type: integer 
 	Parameter C_REG_SLICE_MODE_RDCH bound to: 0 - type: integer 
 	Parameter C_REG_SLICE_MODE_AXIS bound to: 0 - type: integer 
-INFO: [Synth 8-3491] module 'fifo_generator_v13_1_2' declared at 'd:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/SDHCAL_DAQ2V0.srcs/sources_1/ip/SweepACQ_FIFO/hdl/fifo_generator_v13_1_vhsyn_rfs.vhd:38270' bound to instance 'U0' of component 'fifo_generator_v13_1_2' [d:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/SDHCAL_DAQ2V0.srcs/sources_1/ip/SweepACQ_FIFO/synth/SweepACQ_FIFO.vhd:538]
-INFO: [Synth 8-256] done synthesizing module 'SweepACQ_FIFO' (46#1) [d:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/SDHCAL_DAQ2V0.srcs/sources_1/ip/SweepACQ_FIFO/synth/SweepACQ_FIFO.vhd:72]
-INFO: [Synth 8-256] done synthesizing module 'SweepACQ_Top' (47#1) [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/RTL/SweepACQ_Top.v:23]
-INFO: [Synth 8-638] synthesizing module 'SCurve_Test_Top' [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/RTL/SCurve_Test_Top.v:23]
+INFO: [Synth 8-3491] module 'fifo_generator_v13_1_2' declared at 'd:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/SDHCAL_DAQ2V0.srcs/sources_1/ip/SweepACQ_FIFO/hdl/fifo_generator_v13_1_vhsyn_rfs.vhd:38270' bound to instance 'U0' of component 'fifo_generator_v13_1_2' [d:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/SDHCAL_DAQ2V0.srcs/sources_1/ip/SweepACQ_FIFO/synth/SweepACQ_FIFO.vhd:538]
+INFO: [Synth 8-256] done synthesizing module 'SweepACQ_FIFO' (46#1) [d:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/SDHCAL_DAQ2V0.srcs/sources_1/ip/SweepACQ_FIFO/synth/SweepACQ_FIFO.vhd:72]
+INFO: [Synth 8-256] done synthesizing module 'SweepACQ_Top' (47#1) [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/SweepACQ_Top.v:23]
+INFO: [Synth 8-638] synthesizing module 'SCurve_Test_Top' [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/SCurve_Test_Top.v:23]
 	Parameter Clock1K_Max bound to: 12'b010011100010 
-INFO: [Synth 8-5534] Detected attribute (* mark_debug = "true" *) [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/RTL/SCurve_Test_Top.v:169]
-INFO: [Synth 8-5534] Detected attribute (* mark_debug = "true" *) [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/RTL/SCurve_Test_Top.v:170]
-INFO: [Synth 8-5534] Detected attribute (* mark_debug = "true" *) [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/RTL/SCurve_Test_Top.v:171]
-INFO: [Synth 8-5534] Detected attribute (* mark_debug = "true" *) [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/RTL/SCurve_Test_Top.v:172]
-INFO: [Synth 8-638] synthesizing module 'SCurve_Test_Control' [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/RTL/SCurve_Test_Control.v:23]
+INFO: [Synth 8-5534] Detected attribute (* mark_debug = "true" *) [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/SCurve_Test_Top.v:169]
+INFO: [Synth 8-5534] Detected attribute (* mark_debug = "true" *) [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/SCurve_Test_Top.v:170]
+INFO: [Synth 8-5534] Detected attribute (* mark_debug = "true" *) [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/SCurve_Test_Top.v:171]
+INFO: [Synth 8-5534] Detected attribute (* mark_debug = "true" *) [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/SCurve_Test_Top.v:172]
+INFO: [Synth 8-638] synthesizing module 'SCurve_Test_Control' [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/SCurve_Test_Control.v:23]
 	Parameter IDLE bound to: 5'b00000 
 	Parameter HEADER_OUT bound to: 5'b00001 
 	Parameter OUT_TEST_CHN_AND_DISCRI_MASK_SC bound to: 5'b00010 
@@ -413,8 +413,8 @@ INFO: [Synth 8-638] synthesizing module 'SCurve_Test_Control' [D:/Vivado_workspa
 	Parameter CTest_CHN_PARAM_Input bound to: 64'b0000000000000000000000000000000000000000000000000000000000000000 
 	Parameter DISCRIMINATOR_MASK bound to: 192'b000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000111 
 	Parameter SC_PARAM_LOAD_DELAY bound to: 16'b1001110001000000 
-INFO: [Synth 8-256] done synthesizing module 'SCurve_Test_Control' (48#1) [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/RTL/SCurve_Test_Control.v:23]
-INFO: [Synth 8-638] synthesizing module 'SCurve_Single_Test' [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/RTL/SCurve_Single_Test.v:23]
+INFO: [Synth 8-256] done synthesizing module 'SCurve_Test_Control' (48#1) [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/SCurve_Test_Control.v:23]
+INFO: [Synth 8-638] synthesizing module 'SCurve_Single_Test' [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/SCurve_Single_Test.v:23]
 	Parameter IDLE bound to: 3'b000 
 	Parameter TEST_START bound to: 3'b001 
 	Parameter TEST_PROCESS bound to: 3'b010 
@@ -422,15 +422,15 @@ INFO: [Synth 8-638] synthesizing module 'SCurve_Single_Test' [D:/Vivado_workspac
 	Parameter DATA_OUT bound to: 3'b100 
 	Parameter DATA_OUT_ONCE bound to: 3'b101 
 	Parameter ALL_DONE bound to: 3'b110 
-INFO: [Synth 8-638] synthesizing module 'SCurve_Single_Input' [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/RTL/SCurve_Single_Input.v:27]
-INFO: [Synth 8-256] done synthesizing module 'SCurve_Single_Input' (49#1) [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/RTL/SCurve_Single_Input.v:27]
-INFO: [Synth 8-155] case statement is not full and has no default [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/RTL/SCurve_Single_Test.v:111]
-INFO: [Synth 8-256] done synthesizing module 'SCurve_Single_Test' (50#1) [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/RTL/SCurve_Single_Test.v:23]
-INFO: [Synth 8-638] synthesizing module 'SCurve_Data_FIFO' [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/SDHCAL_DAQ2V0.runs/synth_1/.Xil/Vivado-396-WYU/realtime/SCurve_Data_FIFO_stub.v:6]
-INFO: [Synth 8-256] done synthesizing module 'SCurve_Data_FIFO' (51#1) [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/SDHCAL_DAQ2V0.runs/synth_1/.Xil/Vivado-396-WYU/realtime/SCurve_Data_FIFO_stub.v:6]
-INFO: [Synth 8-256] done synthesizing module 'SCurve_Test_Top' (52#1) [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/RTL/SCurve_Test_Top.v:23]
-INFO: [Synth 8-256] done synthesizing module 'Controller_Top' (53#1) [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/RTL/Controller_Top.v:23]
-INFO: [Synth 8-638] synthesizing module 'usb_data_fifo' [d:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/SDHCAL_DAQ2V0.srcs/sources_1/ip/usb_data_fifo/synth/usb_data_fifo.vhd:73]
+INFO: [Synth 8-638] synthesizing module 'SCurve_Single_Input' [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/SCurve_Single_Input.v:27]
+INFO: [Synth 8-256] done synthesizing module 'SCurve_Single_Input' (49#1) [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/SCurve_Single_Input.v:27]
+INFO: [Synth 8-155] case statement is not full and has no default [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/SCurve_Single_Test.v:111]
+INFO: [Synth 8-256] done synthesizing module 'SCurve_Single_Test' (50#1) [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/SCurve_Single_Test.v:23]
+INFO: [Synth 8-638] synthesizing module 'SCurve_Data_FIFO' [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/SDHCAL_DAQ2V0.runs/synth_1/.Xil/Vivado-10264-WYU/realtime/SCurve_Data_FIFO_stub.v:6]
+INFO: [Synth 8-256] done synthesizing module 'SCurve_Data_FIFO' (51#1) [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/SDHCAL_DAQ2V0.runs/synth_1/.Xil/Vivado-10264-WYU/realtime/SCurve_Data_FIFO_stub.v:6]
+INFO: [Synth 8-256] done synthesizing module 'SCurve_Test_Top' (52#1) [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/SCurve_Test_Top.v:23]
+INFO: [Synth 8-256] done synthesizing module 'Controller_Top' (53#1) [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/Controller_Top.v:23]
+INFO: [Synth 8-638] synthesizing module 'usb_data_fifo' [d:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/SDHCAL_DAQ2V0.srcs/sources_1/ip/usb_data_fifo/synth/usb_data_fifo.vhd:73]
 	Parameter C_COMMON_CLOCK bound to: 0 - type: integer 
 	Parameter C_SELECT_XPM bound to: 0 - type: integer 
 	Parameter C_COUNT_TYPE bound to: 0 - type: integer 
@@ -633,9 +633,9 @@ INFO: [Synth 8-638] synthesizing module 'usb_data_fifo' [d:/Vivado_workspace/SDH
 	Parameter C_REG_SLICE_MODE_RACH bound to: 0 - type: integer 
 	Parameter C_REG_SLICE_MODE_RDCH bound to: 0 - type: integer 
 	Parameter C_REG_SLICE_MODE_AXIS bound to: 0 - type: integer 
-INFO: [Synth 8-3491] module 'fifo_generator_v13_1_2' declared at 'd:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/SDHCAL_DAQ2V0.srcs/sources_1/ip/SweepACQ_FIFO/hdl/fifo_generator_v13_1_vhsyn_rfs.vhd:38270' bound to instance 'U0' of component 'fifo_generator_v13_1_2' [d:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/SDHCAL_DAQ2V0.srcs/sources_1/ip/usb_data_fifo/synth/usb_data_fifo.vhd:540]
-INFO: [Synth 8-256] done synthesizing module 'usb_data_fifo' (59#1) [d:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/SDHCAL_DAQ2V0.srcs/sources_1/ip/usb_data_fifo/synth/usb_data_fifo.vhd:73]
-INFO: [Synth 8-256] done synthesizing module 'FPGA_TOP' (60#1) [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/RTL/FPGA_TOP.v:23]
+INFO: [Synth 8-3491] module 'fifo_generator_v13_1_2' declared at 'd:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/SDHCAL_DAQ2V0.srcs/sources_1/ip/SweepACQ_FIFO/hdl/fifo_generator_v13_1_vhsyn_rfs.vhd:38270' bound to instance 'U0' of component 'fifo_generator_v13_1_2' [d:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/SDHCAL_DAQ2V0.srcs/sources_1/ip/usb_data_fifo/synth/usb_data_fifo.vhd:540]
+INFO: [Synth 8-256] done synthesizing module 'usb_data_fifo' (59#1) [d:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/SDHCAL_DAQ2V0.srcs/sources_1/ip/usb_data_fifo/synth/usb_data_fifo.vhd:73]
+INFO: [Synth 8-256] done synthesizing module 'FPGA_TOP' (60#1) [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/FPGA_TOP.v:23]
 WARNING: [Synth 8-3331] design wr_status_flags_as has unconnected port WR_RST
 WARNING: [Synth 8-3331] design wr_status_flags_as has unconnected port SAFETY_CKT_WR_RST
 WARNING: [Synth 8-3331] design wr_status_flags_as has unconnected port WR_PNTR_PLUS3[12]
@@ -738,7 +738,7 @@ WARNING: [Synth 8-3331] design rd_logic__parameterized0 has unconnected port PRO
 WARNING: [Synth 8-3331] design rd_logic__parameterized0 has unconnected port PROG_EMPTY_THRESH[11]
 INFO: [Common 17-14] Message 'Synth 8-3331' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:02:07 ; elapsed = 00:02:29 . Memory (MB): peak = 611.660 ; gain = 401.656
+Finished RTL Elaboration : Time (s): cpu = 00:02:28 ; elapsed = 00:02:37 . Memory (MB): peak = 608.887 ; gain = 399.371
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -748,11 +748,11 @@ Report Check Netlist:
 |1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
 +------+------------------+-------+---------+-------+------------------+
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:02:07 ; elapsed = 00:02:29 . Memory (MB): peak = 611.660 ; gain = 401.656
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:02:29 ; elapsed = 00:02:38 . Memory (MB): peak = 608.887 ; gain = 399.371
 ---------------------------------------------------------------------------------
-WARNING: [Project 1-486] Could not resolve non-primitive black box cell 'SCurve_Data_FIFO' instantiated as 'Microroc_Control/Microroc_SCurveTest/scurve_data_fifo_16x16' [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/RTL/SCurve_Test_Top.v:158]
-WARNING: [Project 1-486] Could not resolve non-primitive black box cell 'param_store_fifo' instantiated as 'Microroc_u1/SC_Readreg/param_store_fifo_16bitx256deep' [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/RTL/SlowControl_ReadReg.v:283]
-WARNING: [Project 1-486] Could not resolve non-primitive black box cell 'usb_cmd_fifo' instantiated as 'usb_control/usbcmdfifo_16depth' [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/RTL/usb_command_interpreter.v:101]
+WARNING: [Project 1-486] Could not resolve non-primitive black box cell 'SCurve_Data_FIFO' instantiated as 'Microroc_Control/Microroc_SCurveTest/scurve_data_fifo_16x16' [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/SCurve_Test_Top.v:158]
+WARNING: [Project 1-486] Could not resolve non-primitive black box cell 'param_store_fifo' instantiated as 'Microroc_u1/SC_Readreg/param_store_fifo_16bitx256deep' [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/SlowControl_ReadReg.v:283]
+WARNING: [Project 1-486] Could not resolve non-primitive black box cell 'usb_cmd_fifo' instantiated as 'usb_control/usbcmdfifo_16depth' [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/usb_command_interpreter.v:101]
 INFO: [Netlist 29-17] Analyzing 62 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Device 21-403] Loading part xc7a100tfgg484-2
@@ -760,29 +760,29 @@ INFO: [Project 1-570] Preparing netlist for logic optimization
 
 Processing XDC Constraints
 Initializing timing engine
-Parsing XDC File [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/SDHCAL_DAQ2V0.runs/synth_1/.Xil/Vivado-396-WYU/dcp/param_store_fifo_in_context.xdc] for cell 'Microroc_u1/SC_Readreg/param_store_fifo_16bitx256deep'
-Finished Parsing XDC File [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/SDHCAL_DAQ2V0.runs/synth_1/.Xil/Vivado-396-WYU/dcp/param_store_fifo_in_context.xdc] for cell 'Microroc_u1/SC_Readreg/param_store_fifo_16bitx256deep'
-Parsing XDC File [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/SDHCAL_DAQ2V0.runs/synth_1/.Xil/Vivado-396-WYU/dcp_2/usb_cmd_fifo_in_context.xdc] for cell 'usb_control/usbcmdfifo_16depth'
-Finished Parsing XDC File [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/SDHCAL_DAQ2V0.runs/synth_1/.Xil/Vivado-396-WYU/dcp_2/usb_cmd_fifo_in_context.xdc] for cell 'usb_control/usbcmdfifo_16depth'
-Parsing XDC File [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/SDHCAL_DAQ2V0.runs/synth_1/.Xil/Vivado-396-WYU/dcp_3/SCurve_Data_FIFO_in_context.xdc] for cell 'Microroc_Control/Microroc_SCurveTest/scurve_data_fifo_16x16'
-Finished Parsing XDC File [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/SDHCAL_DAQ2V0.runs/synth_1/.Xil/Vivado-396-WYU/dcp_3/SCurve_Data_FIFO_in_context.xdc] for cell 'Microroc_Control/Microroc_SCurveTest/scurve_data_fifo_16x16'
-Parsing XDC File [d:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/SDHCAL_DAQ2V0.srcs/sources_1/ip/SweepACQ_FIFO/SweepACQ_FIFO/SweepACQ_FIFO.xdc] for cell 'Microroc_Control/SweepACQ/SweepACQ_DataFIFO16x128/U0'
-Finished Parsing XDC File [d:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/SDHCAL_DAQ2V0.srcs/sources_1/ip/SweepACQ_FIFO/SweepACQ_FIFO/SweepACQ_FIFO.xdc] for cell 'Microroc_Control/SweepACQ/SweepACQ_DataFIFO16x128/U0'
-Parsing XDC File [d:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/SDHCAL_DAQ2V0.srcs/sources_1/ip/usb_data_fifo/usb_data_fifo/usb_data_fifo.xdc] for cell 'usb_data_fifo_8192depth/U0'
-Finished Parsing XDC File [d:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/SDHCAL_DAQ2V0.srcs/sources_1/ip/usb_data_fifo/usb_data_fifo/usb_data_fifo.xdc] for cell 'usb_data_fifo_8192depth/U0'
-Parsing XDC File [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/Constraints/SDHCAL_DAQ2V0.xdc]
-INFO: [Constraints 18-483] create_clock: no pin(s)/port(s)/net(s) specified as objects, only virtual clock 'VIRTUAL_pll_5' will be created. If you don't want this, please specify pin(s)/ports(s)/net(s) as objects to the command. [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/Constraints/SDHCAL_DAQ2V0.xdc:183]
-INFO: [Timing 38-2] Deriving generated clocks [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/Constraints/SDHCAL_DAQ2V0.xdc:230]
-Finished Parsing XDC File [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/Constraints/SDHCAL_DAQ2V0.xdc]
-INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/Constraints/SDHCAL_DAQ2V0.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/FPGA_TOP_propImpl.xdc].
+Parsing XDC File [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/SDHCAL_DAQ2V0.runs/synth_1/.Xil/Vivado-10264-WYU/dcp/param_store_fifo_in_context.xdc] for cell 'Microroc_u1/SC_Readreg/param_store_fifo_16bitx256deep'
+Finished Parsing XDC File [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/SDHCAL_DAQ2V0.runs/synth_1/.Xil/Vivado-10264-WYU/dcp/param_store_fifo_in_context.xdc] for cell 'Microroc_u1/SC_Readreg/param_store_fifo_16bitx256deep'
+Parsing XDC File [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/SDHCAL_DAQ2V0.runs/synth_1/.Xil/Vivado-10264-WYU/dcp_2/usb_cmd_fifo_in_context.xdc] for cell 'usb_control/usbcmdfifo_16depth'
+Finished Parsing XDC File [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/SDHCAL_DAQ2V0.runs/synth_1/.Xil/Vivado-10264-WYU/dcp_2/usb_cmd_fifo_in_context.xdc] for cell 'usb_control/usbcmdfifo_16depth'
+Parsing XDC File [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/SDHCAL_DAQ2V0.runs/synth_1/.Xil/Vivado-10264-WYU/dcp_3/SCurve_Data_FIFO_in_context.xdc] for cell 'Microroc_Control/Microroc_SCurveTest/scurve_data_fifo_16x16'
+Finished Parsing XDC File [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/SDHCAL_DAQ2V0.runs/synth_1/.Xil/Vivado-10264-WYU/dcp_3/SCurve_Data_FIFO_in_context.xdc] for cell 'Microroc_Control/Microroc_SCurveTest/scurve_data_fifo_16x16'
+Parsing XDC File [d:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/SDHCAL_DAQ2V0.srcs/sources_1/ip/SweepACQ_FIFO/SweepACQ_FIFO/SweepACQ_FIFO.xdc] for cell 'Microroc_Control/SweepACQ/SweepACQ_DataFIFO16x128/U0'
+Finished Parsing XDC File [d:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/SDHCAL_DAQ2V0.srcs/sources_1/ip/SweepACQ_FIFO/SweepACQ_FIFO/SweepACQ_FIFO.xdc] for cell 'Microroc_Control/SweepACQ/SweepACQ_DataFIFO16x128/U0'
+Parsing XDC File [d:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/SDHCAL_DAQ2V0.srcs/sources_1/ip/usb_data_fifo/usb_data_fifo/usb_data_fifo.xdc] for cell 'usb_data_fifo_8192depth/U0'
+Finished Parsing XDC File [d:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/SDHCAL_DAQ2V0.srcs/sources_1/ip/usb_data_fifo/usb_data_fifo/usb_data_fifo.xdc] for cell 'usb_data_fifo_8192depth/U0'
+Parsing XDC File [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/Constraints/SDHCAL_DAQ2V0.xdc]
+INFO: [Constraints 18-483] create_clock: no pin(s)/port(s)/net(s) specified as objects, only virtual clock 'VIRTUAL_pll_5' will be created. If you don't want this, please specify pin(s)/ports(s)/net(s) as objects to the command. [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/Constraints/SDHCAL_DAQ2V0.xdc:183]
+INFO: [Timing 38-2] Deriving generated clocks [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/Constraints/SDHCAL_DAQ2V0.xdc:230]
+Finished Parsing XDC File [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/Constraints/SDHCAL_DAQ2V0.xdc]
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/Constraints/SDHCAL_DAQ2V0.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/FPGA_TOP_propImpl.xdc].
 Resolution: To avoid this warning, move constraints listed in [.Xil/FPGA_TOP_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
-Parsing XDC File [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/SDHCAL_DAQ2V0.runs/synth_1/dont_touch.xdc]
-Finished Parsing XDC File [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/SDHCAL_DAQ2V0.runs/synth_1/dont_touch.xdc]
-INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/SDHCAL_DAQ2V0.runs/synth_1/dont_touch.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/FPGA_TOP_propImpl.xdc].
+Parsing XDC File [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/SDHCAL_DAQ2V0.runs/synth_1/dont_touch.xdc]
+Finished Parsing XDC File [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/SDHCAL_DAQ2V0.runs/synth_1/dont_touch.xdc]
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/SDHCAL_DAQ2V0.runs/synth_1/dont_touch.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/FPGA_TOP_propImpl.xdc].
 Resolution: To avoid this warning, move constraints listed in [.Xil/FPGA_TOP_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
-Parsing XDC File [d:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/SDHCAL_DAQ2V0.srcs/sources_1/ip/usb_data_fifo/usb_data_fifo/usb_data_fifo_clocks.xdc] for cell 'usb_data_fifo_8192depth/U0'
-Finished Parsing XDC File [d:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/SDHCAL_DAQ2V0.srcs/sources_1/ip/usb_data_fifo/usb_data_fifo/usb_data_fifo_clocks.xdc] for cell 'usb_data_fifo_8192depth/U0'
-INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [d:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/SDHCAL_DAQ2V0.srcs/sources_1/ip/usb_data_fifo/usb_data_fifo/usb_data_fifo_clocks.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/FPGA_TOP_propImpl.xdc].
+Parsing XDC File [d:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/SDHCAL_DAQ2V0.srcs/sources_1/ip/usb_data_fifo/usb_data_fifo/usb_data_fifo_clocks.xdc] for cell 'usb_data_fifo_8192depth/U0'
+Finished Parsing XDC File [d:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/SDHCAL_DAQ2V0.srcs/sources_1/ip/usb_data_fifo/usb_data_fifo/usb_data_fifo_clocks.xdc] for cell 'usb_data_fifo_8192depth/U0'
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [d:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/SDHCAL_DAQ2V0.srcs/sources_1/ip/usb_data_fifo/usb_data_fifo/usb_data_fifo_clocks.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/FPGA_TOP_propImpl.xdc].
 Resolution: To avoid this warning, move constraints listed in [.Xil/FPGA_TOP_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
 Completed Processing XDC Constraints
 
@@ -791,29 +791,29 @@ INFO: [Project 1-111] Unisim Transformation Summary:
   MMCME2_BASE => MMCME2_ADV: 1 instances
   OBUFDS => OBUFDS: 4 instances
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.052 . Memory (MB): peak = 764.484 ; gain = 0.000
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.023 . Memory (MB): peak = 762.355 ; gain = 0.000
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:02:32 ; elapsed = 00:03:00 . Memory (MB): peak = 764.484 ; gain = 554.480
+Finished Constraint Validation : Time (s): cpu = 00:02:49 ; elapsed = 00:03:02 . Memory (MB): peak = 762.355 ; gain = 552.840
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7a100tfgg484-2
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:02:32 ; elapsed = 00:03:00 . Memory (MB): peak = 764.484 ; gain = 554.480
+Finished Loading Part and Timing Information : Time (s): cpu = 00:02:49 ; elapsed = 00:03:03 . Memory (MB): peak = 762.355 ; gain = 552.840
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
 ---------------------------------------------------------------------------------
-Applied set_property ASYNC_REG = true for usb_cy7c68013A/Acq_Start_Stop_sync1_reg. (constraint file  D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/Constraints/SDHCAL_DAQ2V0.xdc, line 150).
-Applied set_property ASYNC_REG = true for usb_cy7c68013A/Acq_Start_Stop_sync2_reg. (constraint file  D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/Constraints/SDHCAL_DAQ2V0.xdc, line 151).
-Applied set_property DONT_TOUCH = true for Microroc_Control/SweepACQ/SweepACQ_DataFIFO16x128/U0. (constraint file  D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/SDHCAL_DAQ2V0.runs/synth_1/dont_touch.xdc, line 16).
-Applied set_property DONT_TOUCH = true for usb_data_fifo_8192depth/U0. (constraint file  D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/SDHCAL_DAQ2V0.runs/synth_1/dont_touch.xdc, line 19).
+Applied set_property ASYNC_REG = true for usb_cy7c68013A/Acq_Start_Stop_sync1_reg. (constraint file  D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/Constraints/SDHCAL_DAQ2V0.xdc, line 150).
+Applied set_property ASYNC_REG = true for usb_cy7c68013A/Acq_Start_Stop_sync2_reg. (constraint file  D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/Constraints/SDHCAL_DAQ2V0.xdc, line 151).
+Applied set_property DONT_TOUCH = true for Microroc_Control/SweepACQ/SweepACQ_DataFIFO16x128/U0. (constraint file  D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/SDHCAL_DAQ2V0.runs/synth_1/dont_touch.xdc, line 16).
+Applied set_property DONT_TOUCH = true for usb_data_fifo_8192depth/U0. (constraint file  D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/SDHCAL_DAQ2V0.runs/synth_1/dont_touch.xdc, line 19).
 Applied set_property DONT_TOUCH = true for Microroc_Control/Microroc_SCurveTest/scurve_data_fifo_16x16. (constraint file  auto generated constraint, line ).
 Applied set_property DONT_TOUCH = true for Microroc_Control/SweepACQ/SweepACQ_DataFIFO16x128. (constraint file  auto generated constraint, line ).
 Applied set_property DONT_TOUCH = true for usb_data_fifo_8192depth. (constraint file  auto generated constraint, line ).
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:02:32 ; elapsed = 00:03:00 . Memory (MB): peak = 764.484 ; gain = 554.480
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:02:49 ; elapsed = 00:03:03 . Memory (MB): peak = 762.355 ; gain = 552.840
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[0]" won't be mapped to RAM because it is too sparse
 INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[1]" won't be mapped to RAM because it is too sparse
@@ -1049,7 +1049,7 @@ INFO: [Synth 8-3354] encoded FSM with state register 'State_reg' using encoding 
 ---------------------------------------------------------------------------------------------------
 INFO: [Synth 8-3354] encoded FSM with state register 'TEST_State_reg' using encoding 'sequential' in module 'SCurve_Single_Test'
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:02:37 ; elapsed = 00:03:06 . Memory (MB): peak = 764.484 ; gain = 554.480
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:02:57 ; elapsed = 00:03:12 . Memory (MB): peak = 762.355 ; gain = 552.840
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -1067,7 +1067,7 @@ Detailed RTL Component Info :
 	   2 Input     11 Bit       Adders := 2     
 	   2 Input     10 Bit       Adders := 2     
 	   2 Input      8 Bit       Adders := 2     
-	   3 Input      8 Bit       Adders := 1     
+	   3 Input      8 Bit       Adders := 2     
 	   2 Input      6 Bit       Adders := 4     
 	   2 Input      5 Bit       Adders := 1     
 	   2 Input      4 Bit       Adders := 6     
@@ -1090,7 +1090,7 @@ Detailed RTL Component Info :
 	                2 Bit    Wide XORs := 2     
 +---Registers : 
 	              592 Bit    Registers := 1     
-	              192 Bit    Registers := 3     
+	              192 Bit    Registers := 4     
 	               96 Bit    Registers := 1     
 	               64 Bit    Registers := 5     
 	               16 Bit    Registers := 13    
@@ -1098,17 +1098,18 @@ Detailed RTL Component Info :
 	               12 Bit    Registers := 1     
 	               11 Bit    Registers := 4     
 	               10 Bit    Registers := 9     
-	                8 Bit    Registers := 3     
+	                8 Bit    Registers := 4     
 	                6 Bit    Registers := 5     
 	                5 Bit    Registers := 2     
 	                4 Bit    Registers := 72    
-	                3 Bit    Registers := 9     
-	                2 Bit    Registers := 10    
+	                3 Bit    Registers := 10    
+	                2 Bit    Registers := 11    
 	                1 Bit    Registers := 127   
 +---Muxes : 
 	   8 Input    592 Bit        Muxes := 1     
+	   2 Input    192 Bit        Muxes := 3     
+	   5 Input    192 Bit        Muxes := 1     
 	   4 Input    192 Bit        Muxes := 1     
-	   2 Input    192 Bit        Muxes := 2     
 	  19 Input    192 Bit        Muxes := 2     
 	   7 Input     96 Bit        Muxes := 1     
 	  67 Input     64 Bit        Muxes := 1     
@@ -1140,20 +1141,22 @@ Detailed RTL Component Info :
 	  18 Input      4 Bit        Muxes := 1     
 	  15 Input      4 Bit        Muxes := 1     
 	  19 Input      4 Bit        Muxes := 1     
+	   2 Input      3 Bit        Muxes := 5     
+	   8 Input      3 Bit        Muxes := 1     
 	  12 Input      3 Bit        Muxes := 2     
-	   2 Input      3 Bit        Muxes := 4     
 	   7 Input      3 Bit        Muxes := 1     
 	  10 Input      3 Bit        Muxes := 1     
 	  11 Input      3 Bit        Muxes := 1     
+	   7 Input      2 Bit        Muxes := 1     
 	   2 Input      2 Bit        Muxes := 1     
 	   4 Input      2 Bit        Muxes := 1     
-	   2 Input      1 Bit        Muxes := 117   
+	   2 Input      1 Bit        Muxes := 118   
+	   4 Input      1 Bit        Muxes := 19    
 	   6 Input      1 Bit        Muxes := 2     
 	   8 Input      1 Bit        Muxes := 8     
 	   7 Input      1 Bit        Muxes := 22    
 	   9 Input      1 Bit        Muxes := 9     
 	   3 Input      1 Bit        Muxes := 4     
-	   4 Input      1 Bit        Muxes := 16    
 	  15 Input      1 Bit        Muxes := 18    
 	  19 Input      1 Bit        Muxes := 20    
 ---------------------------------------------------------------------------------
@@ -1167,25 +1170,32 @@ Module usb_command_interpreter
 Detailed RTL Component Info : 
 +---Adders : 
 	   2 Input      8 Bit       Adders := 1     
+	   3 Input      8 Bit       Adders := 1     
 +---Registers : 
-	              192 Bit    Registers := 1     
+	              192 Bit    Registers := 2     
 	               64 Bit    Registers := 2     
 	               16 Bit    Registers := 1     
 	               10 Bit    Registers := 5     
-	                8 Bit    Registers := 1     
+	                8 Bit    Registers := 2     
 	                6 Bit    Registers := 1     
 	                5 Bit    Registers := 1     
 	                4 Bit    Registers := 66    
-	                3 Bit    Registers := 1     
-	                2 Bit    Registers := 8     
+	                3 Bit    Registers := 2     
+	                2 Bit    Registers := 9     
 	                1 Bit    Registers := 20    
 +---Muxes : 
+	   2 Input    192 Bit        Muxes := 1     
+	   5 Input    192 Bit        Muxes := 1     
 	  67 Input     64 Bit        Muxes := 1     
 	   2 Input     64 Bit        Muxes := 1     
 	   2 Input     16 Bit        Muxes := 1     
 	   8 Input     16 Bit        Muxes := 1     
 	   2 Input     10 Bit        Muxes := 4     
-	   2 Input      1 Bit        Muxes := 83    
+	   2 Input      3 Bit        Muxes := 1     
+	   8 Input      3 Bit        Muxes := 1     
+	   7 Input      2 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 84    
+	   4 Input      1 Bit        Muxes := 3     
 Module usb_synchronous_slavefifo 
 Detailed RTL Component Info : 
 +---Registers : 
@@ -1543,10 +1553,10 @@ Finished Part Resource Summary
 ---------------------------------------------------------------------------------
 Start Cross Boundary and Area Optimization
 ---------------------------------------------------------------------------------
-INFO: [Synth 8-4471] merging register 'Trigger1/CLK_EXT_reg1_reg' into 'Trigger0/CLK_EXT_reg1_reg' [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/RTL/SCurve_Single_Input.v:44]
-INFO: [Synth 8-4471] merging register 'Trigger1/CLK_EXT_reg2_reg' into 'Trigger0/CLK_EXT_reg2_reg' [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/RTL/SCurve_Single_Input.v:45]
-INFO: [Synth 8-4471] merging register 'Trigger2/CLK_EXT_reg1_reg' into 'Trigger0/CLK_EXT_reg1_reg' [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/RTL/SCurve_Single_Input.v:44]
-INFO: [Synth 8-4471] merging register 'Trigger2/CLK_EXT_reg2_reg' into 'Trigger0/CLK_EXT_reg2_reg' [D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/RTL/SCurve_Single_Input.v:45]
+INFO: [Synth 8-4471] merging register 'Trigger1/CLK_EXT_reg1_reg' into 'Trigger0/CLK_EXT_reg1_reg' [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/SCurve_Single_Input.v:44]
+INFO: [Synth 8-4471] merging register 'Trigger1/CLK_EXT_reg2_reg' into 'Trigger0/CLK_EXT_reg2_reg' [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/SCurve_Single_Input.v:45]
+INFO: [Synth 8-4471] merging register 'Trigger2/CLK_EXT_reg1_reg' into 'Trigger0/CLK_EXT_reg1_reg' [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/SCurve_Single_Input.v:44]
+INFO: [Synth 8-4471] merging register 'Trigger2/CLK_EXT_reg2_reg' into 'Trigger0/CLK_EXT_reg2_reg' [D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/SCurve_Single_Input.v:45]
 INFO: [Synth 8-5546] ROM "Microroc_param_Ctest" won't be mapped to RAM because it is too sparse
 INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[0]" won't be mapped to RAM because it is too sparse
 INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[1]" won't be mapped to RAM because it is too sparse
@@ -1574,118 +1584,114 @@ INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[22]" won't be mapped to RAM 
 INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[23]" won't be mapped to RAM because it is too sparse
 INFO: [Synth 8-5546] ROM "Microroc_4Bit_DAC_chn_reg[24]" won't be mapped to RAM because it is too sparse
 INFO: [Common 17-14] Message 'Synth 8-5546' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
-INFO: [Synth 8-3333] propagating constant 1 across sequential element (usb_control/\MicrorocChannelMask_reg[0] )
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[1]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[2]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[3]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[4]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[5]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[6]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[7]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[8]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[9]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[10]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[11]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[12]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[13]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[14]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[15]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[16]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[17]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[18]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[19]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[20]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[21]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[22]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[23]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[24]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[25]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[26]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[27]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[28]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[29]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[30]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[31]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[32]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[33]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[34]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[35]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[36]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[37]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[38]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[39]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[40]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[41]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[42]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[43]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[44]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[45]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[46]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[47]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[48]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[49]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[50]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[51]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[52]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[53]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[54]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[55]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[56]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[57]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[58]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[59]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[60]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[61]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[62]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[63]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[64]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[65]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[66]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[67]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[68]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[69]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[70]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[71]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[72]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[73]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[74]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[75]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[76]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[77]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[78]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[79]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[80]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[81]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[82]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[83]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[84]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[85]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[86]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[87]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[88]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[89]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[90]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[91]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[92]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[93]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[94]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[95]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[96]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[97]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[98]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[99]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Synth 8-3886] merging instance 'usb_control/MicrorocChannelMask_reg[100]' (FDC) to 'usb_control/MicrorocChannelMask_reg[191]'
-INFO: [Common 17-14] Message 'Synth 8-3886' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
-INFO: [Synth 8-3333] propagating constant 0 across sequential element (usb_control/\MicrorocChannelMask_reg[191] )
+INFO: [Synth 8-3886] merging instance 'usb_control/CPT_MAX_reg[0]' (FDCE) to 'usb_control/CPT_MAX_reg[1]'
+INFO: [Synth 8-3886] merging instance 'usb_control/CPT_MAX_reg[1]' (FDCE) to 'usb_control/CPT_MAX_reg[2]'
 INFO: [Synth 8-3333] propagating constant 0 across sequential element (usb_control/\CPT_MAX_reg[2] )
 WARNING: [Synth 8-3332] Sequential element (Microroc_param_asic_num_reg[2]) is unused and will be removed from module usb_command_interpreter.
 WARNING: [Synth 8-3332] Sequential element (Microroc_param_asic_num_reg[1]) is unused and will be removed from module usb_command_interpreter.
 WARNING: [Synth 8-3332] Sequential element (Microroc_param_asic_num_reg[0]) is unused and will be removed from module usb_command_interpreter.
-WARNING: [Synth 8-3332] Sequential element (MicrorocChannelMask_reg[191]) is unused and will be removed from module usb_command_interpreter.
-WARNING: [Synth 8-3332] Sequential element (MicrorocChannelMask_reg[0]) is unused and will be removed from module usb_command_interpreter.
 WARNING: [Synth 8-3332] Sequential element (CPT_MAX_reg[2]) is unused and will be removed from module usb_command_interpreter.
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[0]' (FDPE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[2]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[1]' (FDPE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[2]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[3]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[5]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[4]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[5]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[6]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[8]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[7]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[8]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[9]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[11]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[10]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[11]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[12]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[14]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[13]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[14]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[15]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[17]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[16]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[17]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[18]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[20]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[19]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[20]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[21]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[23]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[22]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[23]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[24]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[26]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[25]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[26]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[27]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[29]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[28]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[29]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[30]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[32]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[31]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[32]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[33]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[35]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[34]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[35]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[36]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[38]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[37]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[38]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[39]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[41]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[40]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[41]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[42]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[44]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[43]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[44]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[45]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[47]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[46]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[47]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[48]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[50]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[49]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[50]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[51]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[53]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[52]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[53]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[54]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[56]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[55]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[56]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[57]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[59]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[58]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[59]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[60]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[62]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[61]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[62]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[63]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[65]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[64]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[65]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[66]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[68]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[67]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[68]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[69]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[71]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[70]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[71]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[72]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[74]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[73]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[74]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[75]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[77]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[76]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[77]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[78]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[80]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[79]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[80]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[81]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[83]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[82]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[83]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[84]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[86]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[85]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[86]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[87]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[89]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[88]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[89]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[90]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[92]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[91]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[92]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[93]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[95]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[94]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[95]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[96]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[98]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[97]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[98]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[99]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[101]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[100]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[101]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[102]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[104]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[103]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[104]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[105]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[107]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[106]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[107]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[108]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[110]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[109]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[110]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[111]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[113]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[112]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[113]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[114]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[116]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[115]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[116]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[117]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[119]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[118]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[119]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[120]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[122]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[121]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[122]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[123]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[125]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[124]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[125]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[126]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[128]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[127]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[128]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[129]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[131]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[130]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[131]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[132]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[134]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[133]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[134]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[135]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[137]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[136]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[137]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[138]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[140]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[139]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[140]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[141]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[143]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[142]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[143]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[144]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[146]'
+INFO: [Synth 8-3886] merging instance 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[145]' (FDCE) to 'Microroc_Control/Microroc_SCurveTest/SC_test_control/All_Chn_Discri_Mask_reg[146]'
+INFO: [Common 17-14] Message 'Synth 8-3886' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:03:13 ; elapsed = 00:03:44 . Memory (MB): peak = 764.484 ; gain = 554.480
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:03:55 ; elapsed = 00:04:13 . Memory (MB): peak = 762.355 ; gain = 552.840
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -1699,14 +1705,14 @@ Start Timing Optimization
 ---------------------------------------------------------------------------------
 Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
-INFO: [Synth 8-5578] Moved timing constraint from pin 'Microroc_Control/SweepACQ/SweepACQ_DataFIFO16x128/U0/rst' to pin 'Microroc_Control/i_9/i_37/O'
-INFO: [Synth 8-5578] Moved timing constraint from pin 'usb_data_fifo_8192depth/U0/rst' to pin 'i_18/i_0/O'
+INFO: [Synth 8-5578] Moved timing constraint from pin 'Microroc_Control/SweepACQ/SweepACQ_DataFIFO16x128/U0/rst' to pin 'i_56/i_698/O'
+INFO: [Synth 8-5578] Moved timing constraint from pin 'usb_data_fifo_8192depth/U0/rst' to pin 'i_56/i_204/O'
 INFO: [Synth 8-5819] Moved 2 constraints on hierarchical pins to their respective driving/loading pins
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:03:25 ; elapsed = 00:03:56 . Memory (MB): peak = 764.484 ; gain = 554.480
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:04:11 ; elapsed = 00:04:30 . Memory (MB): peak = 762.355 ; gain = 552.840
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:03:26 ; elapsed = 00:03:58 . Memory (MB): peak = 764.484 ; gain = 554.480
+Finished Timing Optimization : Time (s): cpu = 00:04:13 ; elapsed = 00:04:33 . Memory (MB): peak = 762.355 ; gain = 552.840
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -1718,7 +1724,7 @@ Report RTL Partitions:
 Start Technology Mapping
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:03:29 ; elapsed = 00:04:01 . Memory (MB): peak = 764.484 ; gain = 554.480
+Finished Technology Mapping : Time (s): cpu = 00:04:17 ; elapsed = 00:04:37 . Memory (MB): peak = 776.688 ; gain = 567.172
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -1742,7 +1748,7 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:03:30 ; elapsed = 00:04:02 . Memory (MB): peak = 764.484 ; gain = 554.480
+Finished IO Insertion : Time (s): cpu = 00:04:19 ; elapsed = 00:04:39 . Memory (MB): peak = 776.688 ; gain = 567.172
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -1755,7 +1761,7 @@ Report Check Netlist:
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:03:30 ; elapsed = 00:04:02 . Memory (MB): peak = 764.484 ; gain = 554.480
+Finished Renaming Generated Instances : Time (s): cpu = 00:04:19 ; elapsed = 00:04:39 . Memory (MB): peak = 776.688 ; gain = 567.172
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -1767,25 +1773,25 @@ Report RTL Partitions:
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:03:31 ; elapsed = 00:04:03 . Memory (MB): peak = 764.484 ; gain = 554.480
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:04:20 ; elapsed = 00:04:40 . Memory (MB): peak = 776.688 ; gain = 567.172
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:03:31 ; elapsed = 00:04:03 . Memory (MB): peak = 764.484 ; gain = 554.480
+Finished Renaming Generated Ports : Time (s): cpu = 00:04:20 ; elapsed = 00:04:40 . Memory (MB): peak = 776.688 ; gain = 567.172
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:03:31 ; elapsed = 00:04:03 . Memory (MB): peak = 764.484 ; gain = 554.480
+Finished Handling Custom Attributes : Time (s): cpu = 00:04:21 ; elapsed = 00:04:41 . Memory (MB): peak = 776.688 ; gain = 567.172
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:03:31 ; elapsed = 00:04:03 . Memory (MB): peak = 764.484 ; gain = 554.480
+Finished Renaming Generated Nets : Time (s): cpu = 00:04:21 ; elapsed = 00:04:41 . Memory (MB): peak = 776.688 ; gain = 567.172
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -1808,20 +1814,20 @@ Report Cell Usage:
 |2     |param_store_fifo |     1|
 |3     |usb_cmd_fifo     |     1|
 |4     |BUFG             |     3|
-|5     |CARRY4           |    70|
-|6     |LUT1             |   243|
-|7     |LUT2             |   240|
-|8     |LUT3             |   525|
-|9     |LUT4             |   370|
-|10    |LUT5             |   600|
-|11    |LUT6             |   765|
+|5     |CARRY4           |    72|
+|6     |LUT1             |   251|
+|7     |LUT2             |   269|
+|8     |LUT3             |   681|
+|9     |LUT4             |   447|
+|10    |LUT5             |   365|
+|11    |LUT6             |  1310|
 |12    |MMCME2_BASE      |     1|
 |13    |MUXCY            |    52|
 |14    |RAMB36E1         |     1|
 |15    |RAMB36E1_1       |     2|
 |16    |RAMB36E1_2       |     2|
-|17    |FDCE             |  2083|
-|18    |FDPE             |   289|
+|17    |FDCE             |  2099|
+|18    |FDPE             |   674|
 |19    |FDRE             |    49|
 |20    |IBUF             |    18|
 |21    |IOBUF            |    16|
@@ -1833,7 +1839,7 @@ Report Instance Areas:
 +------+-----------------------------------------------------------------------------+---------------------------------------------+------+
 |      |Instance                                                                     |Module                                       |Cells |
 +------+-----------------------------------------------------------------------------+---------------------------------------------+------+
-|1     |top                                                                          |                                             |  5423|
+|1     |top                                                                          |                                             |  6406|
 |2     |  usb_data_fifo_8192depth                                                    |usb_data_fifo                                |   365|
 |3     |    U0                                                                       |fifo_generator_v13_1_2__parameterized1       |   365|
 |4     |      inst_fifo_gen                                                          |fifo_generator_v13_1_2_synth__parameterized0 |   365|
@@ -1873,15 +1879,15 @@ Report Instance Areas:
 |38    |              \ngwrdrst.grst.g7serrst.gwrrd_rst_sync_stage[1].wrst_inst      |synchronizer_ff_9                            |     2|
 |39    |              \ngwrdrst.grst.g7serrst.gwrrd_rst_sync_stage[2].rrst_inst      |synchronizer_ff_10                           |     2|
 |40    |              \ngwrdrst.grst.g7serrst.gwrrd_rst_sync_stage[2].wrst_inst      |synchronizer_ff_11                           |     2|
-|41    |  Clk_Gen                                                                    |Clk_Management                               |    18|
-|42    |  Microroc_Control                                                           |Controller_Top                               |  2139|
+|41    |  Clk_Gen                                                                    |Clk_Management                               |    21|
+|42    |  Microroc_Control                                                           |Controller_Top                               |  2138|
 |43    |    Microroc_SCurveTest                                                      |SCurve_Test_Top                              |  1686|
 |44    |      SC_test_control                                                        |SCurve_Test_Control                          |  1087|
 |45    |      SC_test_single                                                         |SCurve_Single_Test                           |   531|
 |46    |        Trigger0                                                             |SCurve_Single_Input                          |   137|
 |47    |        Trigger1                                                             |SCurve_Single_Input_6                        |   131|
 |48    |        Trigger2                                                             |SCurve_Single_Input_7                        |   129|
-|49    |    SweepACQ                                                                 |SweepACQ_Top                                 |   453|
+|49    |    SweepACQ                                                                 |SweepACQ_Top                                 |   452|
 |50    |      SweepACQ_DataFIFO16x128                                                |SweepACQ_FIFO                                |   151|
 |51    |        U0                                                                   |fifo_generator_v13_1_2                       |   151|
 |52    |          inst_fifo_gen                                                      |fifo_generator_v13_1_2_synth                 |   151|
@@ -1909,28 +1915,28 @@ Report Instance Areas:
 |74    |                  \ngwrdrst.grst.g7serrst.gwrrd_rst_sync_stage[1].wrst_inst  |synchronizer_ff_0                            |     2|
 |75    |                  \ngwrdrst.grst.g7serrst.gwrrd_rst_sync_stage[2].rrst_inst  |synchronizer_ff_1                            |     2|
 |76    |                  \ngwrdrst.grst.g7serrst.gwrrd_rst_sync_stage[2].wrst_inst  |synchronizer_ff_2                            |     2|
-|77    |      SweepACQ_Control                                                       |SweepACQ_Control                             |   300|
-|78    |  Microroc_u1                                                                |Microroc_top                                 |  1479|
+|77    |      SweepACQ_Control                                                       |SweepACQ_Control                             |   299|
+|78    |  Microroc_u1                                                                |Microroc_top                                 |  1477|
 |79    |    AutoDAQ                                                                  |DaqControl                                   |   116|
-|80    |    Hold_Gen                                                                 |Hold_Gen                                     |    60|
-|81    |    RAM_Read                                                                 |RamReadOut                                   |    57|
+|80    |    Hold_Gen                                                                 |Hold_Gen                                     |    53|
+|81    |    RAM_Read                                                                 |RamReadOut                                   |    62|
 |82    |    SC_Readreg                                                               |SlowControl_ReadReg                          |  1202|
 |83    |      BitShift                                                               |Param_Bitshift                               |    75|
-|84    |      Microroc_Param                                                         |Microroc_Parameters                          |  1101|
-|85    |      pulse_sync                                                             |PULSESYNC                                    |     8|
+|84    |      Microroc_Param                                                         |Microroc_Parameters                          |  1102|
+|85    |      pulse_sync                                                             |PULSESYNC                                    |     7|
 |86    |    Trig_Gen                                                                 |Trig_Gen                                     |    36|
 |87    |    Trig_Gen_en                                                              |Internal_Trig_Gen                            |     4|
-|88    |  usb_control                                                                |usb_command_interpreter                      |  1297|
+|88    |  usb_control                                                                |usb_command_interpreter                      |  2280|
 |89    |  usb_cy7c68013A                                                             |usb_synchronous_slavefifo                    |    52|
 +------+-----------------------------------------------------------------------------+---------------------------------------------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:03:31 ; elapsed = 00:04:03 . Memory (MB): peak = 764.484 ; gain = 554.480
+Finished Writing Synthesis Report : Time (s): cpu = 00:04:21 ; elapsed = 00:04:42 . Memory (MB): peak = 776.688 ; gain = 567.172
 ---------------------------------------------------------------------------------
-Synthesis finished with 0 errors, 0 critical warnings and 985 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:01:03 ; elapsed = 00:03:03 . Memory (MB): peak = 764.484 ; gain = 321.320
-Synthesis Optimization Complete : Time (s): cpu = 00:03:31 ; elapsed = 00:04:03 . Memory (MB): peak = 764.484 ; gain = 554.480
+Synthesis finished with 0 errors, 0 critical warnings and 983 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:01:38 ; elapsed = 00:04:11 . Memory (MB): peak = 776.688 ; gain = 334.992
+Synthesis Optimization Complete : Time (s): cpu = 00:04:21 ; elapsed = 00:04:42 . Memory (MB): peak = 776.688 ; gain = 567.172
 INFO: [Project 1-571] Translating synthesized netlist
-INFO: [Netlist 29-17] Analyzing 166 Unisim elements for replacement
+INFO: [Netlist 29-17] Analyzing 168 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 2 inverter(s) to 8 load pin(s).
@@ -1942,9 +1948,9 @@ INFO: [Project 1-111] Unisim Transformation Summary:
   OBUFDS => OBUFDS_DUAL_BUF (INV, OBUFDS, OBUFDS): 4 instances
 
 INFO: [Common 17-83] Releasing license: Synthesis
-385 Infos, 109 Warnings, 0 Critical Warnings and 0 Errors encountered.
+383 Infos, 107 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:03:28 ; elapsed = 00:03:49 . Memory (MB): peak = 764.484 ; gain = 486.063
-INFO: [Common 17-1381] The checkpoint 'D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/SDHCAL_DAQ2V0.runs/synth_1/FPGA_TOP.dcp' has been generated.
-report_utilization: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.201 . Memory (MB): peak = 764.484 ; gain = 0.000
-INFO: [Common 17-206] Exiting Vivado at Sat May 20 20:54:32 2017...
+synth_design: Time (s): cpu = 00:04:16 ; elapsed = 00:04:35 . Memory (MB): peak = 776.688 ; gain = 498.848
+INFO: [Common 17-1381] The checkpoint 'D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/SDHCAL_DAQ2V0.runs/synth_1/FPGA_TOP.dcp' has been generated.
+report_utilization: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.119 . Memory (MB): peak = 776.688 ; gain = 0.000
+INFO: [Common 17-206] Exiting Vivado at Fri May 26 23:17:23 2017...

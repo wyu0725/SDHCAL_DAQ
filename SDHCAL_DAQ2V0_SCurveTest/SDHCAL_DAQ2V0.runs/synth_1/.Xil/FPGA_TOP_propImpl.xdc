@@ -1,5 +1,5 @@
-set_property SRC_FILE_INFO {cfile:D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/Constraints/SDHCAL_DAQ2V0.xdc rfile:../../../Constraints/SDHCAL_DAQ2V0.xdc id:1} [current_design]
-set_property SRC_FILE_INFO {cfile:d:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/SDHCAL_DAQ2V0.srcs/sources_1/ip/usb_data_fifo/usb_data_fifo/usb_data_fifo_clocks.xdc rfile:../../../SDHCAL_DAQ2V0.srcs/sources_1/ip/usb_data_fifo/usb_data_fifo/usb_data_fifo_clocks.xdc id:2 order:LATE scoped_inst:usb_data_fifo_8192depth/U0} [current_design]
+set_property SRC_FILE_INFO {cfile:D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/Constraints/SDHCAL_DAQ2V0.xdc rfile:../../../Constraints/SDHCAL_DAQ2V0.xdc id:1} [current_design]
+set_property SRC_FILE_INFO {cfile:d:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/SDHCAL_DAQ2V0.srcs/sources_1/ip/usb_data_fifo/usb_data_fifo/usb_data_fifo_clocks.xdc rfile:../../../SDHCAL_DAQ2V0.srcs/sources_1/ip/usb_data_fifo/usb_data_fifo/usb_data_fifo_clocks.xdc id:2 order:LATE scoped_inst:usb_data_fifo_8192depth/U0} [current_design]
 set_property src_info {type:XDC file:1 line:13 export:INPUT save:INPUT read:READ} [current_design]
 set_property PACKAGE_PIN Y11 [get_ports Clk_40M]
 set_property src_info {type:XDC file:1 line:15 export:INPUT save:INPUT read:READ} [current_design]
