@@ -555,20 +555,20 @@ localparam [1:0] IDLE = 2'b00,
 always @(posedge clk or negedge reset_n) begin
   if(~reset_n) begin
     MaskState <= 2'b0;
-    SingleChannelMask <= 192'b1;
-    MicrorocChannelMask <= 192'b1;
+    SingleChannelMask <= {192{1'b1}};
+    MicrorocChannelMask <= {192{1'b1}};
   end
   else
-    MicrorocChannelMask <= 192'b1;
-  /*else begin
+    MicrorocChannelMask <= {192{1'b1}};
+  else begin
     case(MaskState)
       IDLE:begin
         if(fifo_rden && USB_COMMAND == 16'hAE10)begin
-          MicrorocChannelMask <= 192'b1;
+          MicrorocChannelMask <= {192{1'b1}};
           MaskState <= IDLE;
         end
         else if(fifo_rden && USB_COMMAND == 16'hAE11) begin
-          SingleChannelMask <= {189'b1,DiscriMask} << MaskShift;
+          SingleChannelMask <= {{189{1'b1}},DiscriMask} << MaskShift;
           MaskState <= MASK;
         end
         else if(fifo_rden && USB_COMMAND == 16'hAE12) begin
@@ -592,7 +592,7 @@ always @(posedge clk or negedge reset_n) begin
         MaskState <= IDLE;
       end
     endcase
-  end*/
+  end
 end
 // B type command
 //led interface
