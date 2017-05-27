@@ -570,7 +570,7 @@ always @(posedge clk or negedge reset_n) begin
           MaskState <= MASK;
         end
         else if(fifo_rden && USB_COMMAND == 16'hAE12) begin
-          SingleChannelMask <= {189'b0,~DiscriMask} << MaskShift;
+          SingleChannelMask <= {189'b0, 3'b111} << MaskShift;
           MaskState <= UNMASK;
         end
         else begin
