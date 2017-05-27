@@ -2424,7 +2424,8 @@ namespace USB_DAQ
             bResult = CommandSend(CommandBytes, CommandBytes.Length);
             if (bResult)
             {
-                report = string.Format("{0}", cbxMaskOrUnMask.Text);
+                report = string.Format("{0} :", cbxMaskOrUnMask.Text);
+                txtReport.AppendText(report);
             }
             else
             {
@@ -2443,18 +2444,21 @@ namespace USB_DAQ
                 {
                     if(MaskChoise != 16)
                     {
-                        report = report + string.Format("Channel:{0}", MaskChannel + 1);
+                        report = string.Format("Channel:{0}", MaskChannel + 1);
+                        txtReport.AppendText(report);
                     }                    
                     //txtReport.AppendText(report);
                 }
                 else
                 {
                     MessageBox.Show("Set Mask Channel failure, please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
                 }
             }
             else
             {
                 MessageBox.Show("Illegal Mask Channel, please re-type(Integer:0--64)", "Ilegal Input", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
             }
             #endregion
             #region Discri Mask
@@ -2465,7 +2469,7 @@ namespace USB_DAQ
             {
                 if(MaskChoise != 16)
                 {
-                    report = string.Format("{0}", cbxDiscriMask.Text);
+                    report = string.Format("{0} \n", cbxDiscriMask.Text);
                 }                
                 //txtReport.AppendText(report);
             }
@@ -2474,6 +2478,7 @@ namespace USB_DAQ
                 MessageBox.Show("Set Mask Discriminator failure, please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             #endregion
+
             if(report != null)
             {
                 txtReport.AppendText(report);
