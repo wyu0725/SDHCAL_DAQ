@@ -26,6 +26,7 @@ module SweepACQ_Control(
     // ACQ Control
     input SweepStart,
     output reg SingleACQStart,
+    output reg ForceMicrorocAcqReset,
     output reg OneDACDone,
     output reg ACQDone,
     input DataTransmitDone,
@@ -47,7 +48,9 @@ module SweepACQ_Control(
     output reg SweepACQFifoData_rden,
     // Data Output
     output reg [15:0] SweepACQData,
-    output reg SweepACQData_en
+    output reg SweepACQData_en,
+    // Usb FIFO Full Signal
+    input UsbDataFifoFull
     );
     reg [3:0] State;
     localparam [3:0] IDLE = 4'd0,                //0000
@@ -141,12 +144,14 @@ module SweepACQ_Control(
             end
             else if(SCParamLoadDelayCount == SC_PARAM_LOAD_DELAY) begin
               SCParamLoadDelayCount <= 28'b0;
+              ForceMicrorocAcqReset <= 1'b1;
               State <= START_ACQ;
             end
             else
               State <= WAIT_LOAD_DONE;
           end
           START_ACQ:begin
+            ForceMicrorocAcqReset <= 1'b0;
             SingleACQStart <= 1'b1;
             State <= WAIT_ONCE_DATA;
           end
@@ -163,7 +168,13 @@ module SweepACQ_Control(
             SweepACQFifoData_rden <= 1'b0;
             SweepACQData_en <= 1'b0;
             //SweepACQData <= SweepACQFifoData;
-            State <= WAIT_FIFO_DATA;            
+            if(UsbDataFifoFull) begin
+              State <= GET_ONE_DATA;
+              SingleACQStart = 1'b0;
+            end
+            else begin
+              State <= WAIT_FIFO_DATA;
+            end
           end
           WAIT_FIFO_DATA:begin
             SweepACQData <= SweepACQFifoData;
@@ -183,7 +194,18 @@ module SweepACQ_Control(
           end
           CHECK_ONE_DAC_DONE:begin
             SweepACQData_en <= 1'b0;
-            if(FireDataCount < MaxPackageNumber - 1'b1) begin
+            if(FireDataCount >= MaxPackageNumber - 1'b1) begin
+            end
+            else if(SingleACQStart) begin
+              FireDataCount <= FireDataCount + 1'b1;
+              State <= WAIT_ONCE_DATA;
+            end
+            else begin
+              ForceMicrorocAcqReset <= 1'b1;
+              FireDataCount <= FireDataCount + 1'b1;
+              State <= START_ACQ;
+            end
+            /*if(FireDataCount < MaxPackageNumber - 1'b1) begin
               FireDataCount <= FireDataCount + 1'b1;
               State <= WAIT_ONCE_DATA;
             end
@@ -192,7 +214,7 @@ module SweepACQ_Control(
               SingleACQStart <= 1'b0;
               OneDACDone <= 1'b1;
               State <= CHECK_ALL_DONE;
-            end
+            end*/
           end
           CHECK_ALL_DONE:begin
             OneDACDone <= 1'b0;

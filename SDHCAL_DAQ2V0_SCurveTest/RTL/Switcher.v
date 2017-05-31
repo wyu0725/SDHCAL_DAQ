@@ -71,7 +71,8 @@ module Switcher(
     // Microroc ACQ Start
     input SweepAcqMicrorocAcqStartStop,
     output reg MicrorocAcqStartStop,
-    input SweepAcqSingleDacDone, // New add by wyu for Test
+    //input SweepAcqSingleDacDone, // New add by wyu for Test
+    input SweepAcqForceMicrorocAcqReset,
     output reg OutMicrorocForceReset, // New add by wyu
     // USB Data
     input [15:0] MicrorocAcqData,
@@ -149,7 +150,7 @@ module Switcher(
           SweepTestDone = SweepAcqDone;
           OutUsbStartStop = SweepTestUsbStartStop;
           MicrorocAcqStartStop = SweepAcqMicrorocAcqStartStop;
-          OutMicrorocForceReset = SweepAcqSingleDacDone;
+          OutMicrorocForceReset = SweepAcqForceMicrorocAcqReset;
           UsbFifoData = SweepAcqData;
           UsbFifoData_en = SweepAcqData_en;
           ParallelData = MicrorocAcqData;

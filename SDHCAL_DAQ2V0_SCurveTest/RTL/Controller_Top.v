@@ -105,7 +105,8 @@ module Controller_Top(
     wire SweepAcqData_en;
     wire [15:0] SCTestData;
     wire SCTestData_en;
-    wire SweepAcqSingleDacDone;
+    //wire SweepAcqSingleDacDone;
+    wire SweepAcqForceMicrorocAcqReset;
     Switcher Switcher(
       // Mode Select
       .ModeSelect(ModeSelect),
@@ -151,7 +152,8 @@ module Controller_Top(
       // Microroc ACQ Start
       .SweepAcqMicrorocAcqStartStop(SweepAcqMicrorocAcqStartStop),
       .MicrorocAcqStartStop(MicrorocAcqStartStop),
-      .SweepAcqSingleDacDone(SweepAcqSingleDacDone),//New add by wyu 20170519
+      //.SweepAcqSingleDacDone(SweepAcqSingleDacDone),//New add by wyu 20170519
+      .SweepAcqForceMicrorocAcqReset(SweepAcqForceMicrorocAcqReset),
       .OutMicrorocForceReset(MicrorocForceReset),//New add by wyu 20170519
       // USB Data
       .MicrorocAcqData(MicrorocAcqData),
@@ -171,7 +173,8 @@ module Controller_Top(
       // ACQ Control
       .SweepStart(SweepAcqStartStop),
       .SingleACQStart(SweepAcqMicrorocAcqStartStop),
-      .SingleDacDone(SweepAcqSingleDacDone), //New add by wyu 20170519
+      .ForceMicrorocAcqReset(),
+      //.SingleDacDone(SweepAcqSingleDacDone), //New add by wyu 20170519
       .ACQDone(SweepAcqDone),
       .DataTransmitDone(DataTransmitDone),
       // Sweep ACQ Parameters
@@ -187,7 +190,8 @@ module Controller_Top(
       .MicrorocConfigDone(MicrorocConfigDone),
       // Data Out
       .SweepACQData(SweepAcqData),
-      .SweepACQData_en(SweepAcqData_en)
+      .SweepACQData_en(SweepAcqData_en),
+      .UsbDataFifoFull(UsbDataFifoFull)
     );
     SCurve_Test_Top Microroc_SCurveTest(
       .Clk(Clk),
