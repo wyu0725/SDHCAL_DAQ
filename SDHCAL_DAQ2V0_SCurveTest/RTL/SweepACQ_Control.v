@@ -94,6 +94,7 @@ module SweepACQ_Control(
         SweepACQFifoData_rden <= 1'b0;
         //SweepACQFifoData_en <= 1'b0;
         ACQDone <= 1'b0;
+        ForceMicrorocAcqReset <= 1'b0;
         State <= IDLE;
       end
       else begin
@@ -113,6 +114,7 @@ module SweepACQ_Control(
               DataReadCount <= 4'b0;
               SweepACQFifoData_rden <= 1'b0;
               ACQDone <= 1'b0;
+              ForceMicrorocAcqReset <= 1'b0;
               State <= IDLE;
             end
             else begin

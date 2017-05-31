@@ -173,7 +173,7 @@ module Controller_Top(
       // ACQ Control
       .SweepStart(SweepAcqStartStop),
       .SingleACQStart(SweepAcqMicrorocAcqStartStop),
-      .ForceMicrorocAcqReset(),
+      .ForceMicrorocAcqReset(SweepAcqForceMicrorocAcqReset),
       //.SingleDacDone(SweepAcqSingleDacDone), //New add by wyu 20170519
       .ACQDone(SweepAcqDone),
       .DataTransmitDone(DataTransmitDone),
