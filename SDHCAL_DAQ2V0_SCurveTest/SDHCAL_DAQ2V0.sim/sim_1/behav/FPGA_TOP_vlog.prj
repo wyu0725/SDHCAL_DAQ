@@ -1,0 +1,35 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  "../../../RTL/SCurve_Single_Input.v"
+verilog xil_defaultlib  "../../../SDHCAL_DAQ2V0.srcs/sources_1/ip/param_store_fifo/sim/param_store_fifo.v"
+verilog xil_defaultlib  "../../../SDHCAL_DAQ2V0.srcs/sources_1/ip/SweepACQ_FIFO/sim/SweepACQ_FIFO.v"
+verilog xil_defaultlib  "../../../RTL/SweepACQ_Control.v"
+verilog xil_defaultlib  "../../../RTL/SCurve_Test_Control.v"
+verilog xil_defaultlib  "../../../RTL/SCurve_Single_Test.v"
+verilog xil_defaultlib  "../../../SDHCAL_DAQ2V0.srcs/sources_1/ip/SCurve_Data_FIFO/sim/SCurve_Data_FIFO.v"
+verilog xil_defaultlib  "../../../RTL/PULSESYNC.v"
+verilog xil_defaultlib  "../../../RTL/Param_Bitshift.v"
+verilog xil_defaultlib  "../../../RTL/Microroc_Parameters.v"
+verilog xil_defaultlib  "../../../SDHCAL_DAQ2V0.srcs/sources_1/ip/usb_cmd_fifo/sim/usb_cmd_fifo.v"
+verilog xil_defaultlib  "../../../RTL/Switcher.v"
+verilog xil_defaultlib  "../../../RTL/SweepACQ_Top.v"
+verilog xil_defaultlib  "../../../RTL/SCurve_Test_Top.v"
+verilog xil_defaultlib  "../../../RTL/Trig_Gen.v"
+verilog xil_defaultlib  "../../../RTL/SlowControl_ReadReg.v"
+verilog xil_defaultlib  "../../../RTL/Redundancy.v"
+verilog xil_defaultlib  "../../../RTL/RamReadOut.v"
+verilog xil_defaultlib  "../../../RTL/Internal_Trig_Gen.v"
+verilog xil_defaultlib  "../../../RTL/Hold_Gen.v"
+verilog xil_defaultlib  "../../../RTL/DaqControl.v"
+verilog xil_defaultlib  "../../../RTL/usb_command_interpreter.v"
+verilog xil_defaultlib  "../../../RTL/Controller_Top.v"
+verilog xil_defaultlib  "../../../RTL/usb_synchronous_slavefifo.v"
+verilog xil_defaultlib  "../../../RTL/Microroc_top.v"
+verilog xil_defaultlib  "../../../RTL/Clk_Management.v"
+verilog xil_defaultlib  "../../../SDHCAL_DAQ2V0.srcs/sources_1/ip/usb_data_fifo/sim/usb_data_fifo.v"
+verilog xil_defaultlib  "../../../RTL/FPGA_TOP.v"
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort
