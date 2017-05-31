@@ -1,7 +1,7 @@
 Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 -----------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2016.3 (win64) Build 1682563 Mon Oct 10 19:07:27 MDT 2016
-| Date         : Wed May 31 11:58:36 2017
+| Date         : Wed May 31 18:01:42 2017
 | Host         : WYU running 64-bit major release  (build 9200)
 | Command      : report_utilization -file FPGA_TOP_utilization_synth.rpt -pb FPGA_TOP_utilization_synth.pb
 | Design       : FPGA_TOP
@@ -30,13 +30,13 @@ Table of Contents
 +-------------------------+------+-------+-----------+-------+
 |        Site Type        | Used | Fixed | Available | Util% |
 +-------------------------+------+-------+-----------+-------+
-| Slice LUTs*             | 3023 |     0 |     63400 |  4.77 |
-|   LUT as Logic          | 3023 |     0 |     63400 |  4.77 |
+| Slice LUTs*             | 3003 |     0 |     63400 |  4.74 |
+|   LUT as Logic          | 3003 |     0 |     63400 |  4.74 |
 |   LUT as Memory         |    0 |     0 |     19000 |  0.00 |
-| Slice Registers         | 2834 |     0 |    126800 |  2.24 |
-|   Register as Flip Flop | 2834 |     0 |    126800 |  2.24 |
+| Slice Registers         | 2824 |     0 |    126800 |  2.23 |
+|   Register as Flip Flop | 2824 |     0 |    126800 |  2.23 |
 |   Register as Latch     |    0 |     0 |    126800 |  0.00 |
-| F7 Muxes                |    0 |     0 |     31700 |  0.00 |
+| F7 Muxes                |    1 |     0 |     31700 | <0.01 |
 | F8 Muxes                |    0 |     0 |     15850 |  0.00 |
 +-------------------------+------+-------+-----------+-------+
 * Warning! The Final LUT count, after physical optimizations and full implementation, is typically lower. Run opt_design after synthesis, if not already completed, for a more realistic count.
@@ -54,10 +54,10 @@ Table of Contents
 | 0     |            _ |         Set |            - |
 | 0     |            _ |       Reset |            - |
 | 0     |          Yes |           - |            - |
-| 674   |          Yes |           - |          Set |
-| 2111  |          Yes |           - |        Reset |
+| 673   |          Yes |           - |          Set |
+| 2101  |          Yes |           - |        Reset |
 | 0     |          Yes |         Set |            - |
-| 49    |          Yes |       Reset |            - |
+| 50    |          Yes |       Reset |            - |
 +-------+--------------+-------------+--------------+
 
 
@@ -150,16 +150,16 @@ Table of Contents
 +------------+------+---------------------+
 |  Ref Name  | Used | Functional Category |
 +------------+------+---------------------+
-| FDCE       | 2111 |        Flop & Latch |
-| LUT6       | 1342 |                 LUT |
-| FDPE       |  674 |        Flop & Latch |
-| LUT3       |  585 |                 LUT |
-| LUT5       |  449 |                 LUT |
-| LUT4       |  409 |                 LUT |
-| LUT2       |  265 |                 LUT |
+| FDCE       | 2101 |        Flop & Latch |
+| LUT6       | 1352 |                 LUT |
+| FDPE       |  673 |        Flop & Latch |
+| LUT3       |  581 |                 LUT |
+| LUT5       |  426 |                 LUT |
+| LUT4       |  393 |                 LUT |
+| LUT2       |  274 |                 LUT |
 | LUT1       |  264 |                 LUT |
-| CARRY4     |   91 |          CarryLogic |
-| FDRE       |   49 |        Flop & Latch |
+| CARRY4     |   89 |          CarryLogic |
+| FDRE       |   50 |        Flop & Latch |
 | OBUF       |   36 |                  IO |
 | IBUF       |   34 |                  IO |
 | OBUFT      |   16 |                  IO |
@@ -167,6 +167,7 @@ Table of Contents
 | RAMB36E1   |    5 |        Block Memory |
 | INV        |    4 |                 LUT |
 | BUFG       |    3 |               Clock |
+| MUXF7      |    1 |               MuxFx |
 | MMCME2_ADV |    1 |               Clock |
 +------------+------+---------------------+
 
