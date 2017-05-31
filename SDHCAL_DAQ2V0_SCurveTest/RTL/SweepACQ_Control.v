@@ -197,6 +197,10 @@ module SweepACQ_Control(
           CHECK_ONE_DAC_DONE:begin
             SweepACQData_en <= 1'b0;
             if(FireDataCount >= MaxPackageNumber - 1'b1) begin
+              FireDataCount <= 16'b0;
+              SingleACQStart <= 1'b0;
+              OneDACDone <= 1'b1;
+              State <= CHECK_ALL_DONE;
             end
             else if(SingleACQStart) begin
               FireDataCount <= FireDataCount + 1'b1;
