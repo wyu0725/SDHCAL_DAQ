@@ -26,6 +26,7 @@ module SweepACQ_Control(
     // ACQ Control
     input SweepStart,
     output reg SingleACQStart,
+    output reg ForceMicrorocAcqReset,
     output reg OneDACDone,
     output reg ACQDone,
     input DataTransmitDone,
@@ -47,7 +48,9 @@ module SweepACQ_Control(
     output reg SweepACQFifoData_rden,
     // Data Output
     output reg [15:0] SweepACQData,
-    output reg SweepACQData_en
+    output reg SweepACQData_en,
+    // Usb FIFO Full Signal
+    input UsbDataFifoFull
     );
     reg [3:0] State;
     localparam [3:0] IDLE = 4'd0,                //0000
@@ -66,8 +69,8 @@ module SweepACQ_Control(
                      WAIT_DONE = 4'd11,          //1011
                      ALL_DONE = 4'd9;           //1001
     reg [9:0] TestDAC0;
-    reg [15:0] SCParamLoadDelayCount;
-    localparam [15:0] SC_PARAM_LOAD_DELAY = 16'd40;//40_000
+    reg [27:0] SCParamLoadDelayCount;
+    localparam [27:0] SC_PARAM_LOAD_DELAY = 28'd40;//40_000
     reg OneFire;
     reg [15:0] FireDataCount;
     reg [3:0] DataReadCount;
@@ -86,11 +89,12 @@ module SweepACQ_Control(
         SweepACQData <= 16'b0;
         SweepACQData_en <= 1'b0;
         FireDataCount <= 16'b0;
-        SCParamLoadDelayCount <= 16'b0;
+        SCParamLoadDelayCount <= 28'b0;
         DataReadCount <= 4'b0;
         SweepACQFifoData_rden <= 1'b0;
         //SweepACQFifoData_en <= 1'b0;
         ACQDone <= 1'b0;
+        ForceMicrorocAcqReset <= 1'b0;
         State <= IDLE;
       end
       else begin
@@ -106,10 +110,11 @@ module SweepACQ_Control(
               SweepACQData <= 16'b0;
               SweepACQData <= 1'b0;
               FireDataCount <= 16'b0;
-              SCParamLoadDelayCount <= 16'b0;
+              SCParamLoadDelayCount <= 28'b0;
               DataReadCount <= 4'b0;
               SweepACQFifoData_rden <= 1'b0;
               ACQDone <= 1'b0;
+              ForceMicrorocAcqReset <= 1'b0;
               State <= IDLE;
             end
             else begin
@@ -135,29 +140,29 @@ module SweepACQ_Control(
           WAIT_LOAD_DONE:begin
             LoadSCParameter <= 1'b0;
             SweepACQData_en <= 1'b0;
-            if(MicrorocConfigDone || (SCParamLoadDelayCount != 16'd0 && SCParamLoadDelayCount < SC_PARAM_LOAD_DELAY)) begin
+            if(MicrorocConfigDone || (SCParamLoadDelayCount != 28'd0 && SCParamLoadDelayCount < SC_PARAM_LOAD_DELAY)) begin
               State <= WAIT_LOAD_DONE;
               SCParamLoadDelayCount <= SCParamLoadDelayCount + 1'b1;
             end
             else if(SCParamLoadDelayCount == SC_PARAM_LOAD_DELAY) begin
-              SCParamLoadDelayCount <= 16'b0;
+              SCParamLoadDelayCount <= 28'b0;
+              ForceMicrorocAcqReset <= 1'b1;
               State <= START_ACQ;
             end
             else
               State <= WAIT_LOAD_DONE;
           end
           START_ACQ:begin
+            ForceMicrorocAcqReset <= 1'b0;
             SingleACQStart <= 1'b1;
             State <= WAIT_ONCE_DATA;
           end
           WAIT_ONCE_DATA:begin
             if(OneFire) begin
-              //FireDataCount <= FireDataCount + 1'b1;
               SweepACQFifoData_rden <= 1'b1;
               State <= GET_ONE_DATA;
             end
             else begin
-              FireDataCount <= FireDataCount;
               State <= WAIT_ONCE_DATA;
             end
           end
@@ -165,7 +170,13 @@ module SweepACQ_Control(
             SweepACQFifoData_rden <= 1'b0;
             SweepACQData_en <= 1'b0;
             //SweepACQData <= SweepACQFifoData;
-            State <= WAIT_FIFO_DATA;            
+            if(UsbDataFifoFull) begin
+              State <= GET_ONE_DATA;
+              SingleACQStart = 1'b0;
+            end
+            else begin
+              State <= WAIT_FIFO_DATA;
+            end
           end
           WAIT_FIFO_DATA:begin
             SweepACQData <= SweepACQFifoData;
@@ -185,7 +196,22 @@ module SweepACQ_Control(
           end
           CHECK_ONE_DAC_DONE:begin
             SweepACQData_en <= 1'b0;
-            if(FireDataCount < MaxPackageNumber - 1'b1) begin
+            if(FireDataCount >= MaxPackageNumber - 1'b1) begin
+              FireDataCount <= 16'b0;
+              SingleACQStart <= 1'b0;
+              OneDACDone <= 1'b1;
+              State <= CHECK_ALL_DONE;
+            end
+            else if(SingleACQStart) begin
+              FireDataCount <= FireDataCount + 1'b1;
+              State <= WAIT_ONCE_DATA;
+            end
+            else begin
+              ForceMicrorocAcqReset <= 1'b1;
+              FireDataCount <= FireDataCount + 1'b1;
+              State <= START_ACQ;
+            end
+            /*if(FireDataCount < MaxPackageNumber - 1'b1) begin
               FireDataCount <= FireDataCount + 1'b1;
               State <= WAIT_ONCE_DATA;
             end
@@ -194,7 +220,7 @@ module SweepACQ_Control(
               SingleACQStart <= 1'b0;
               OneDACDone <= 1'b1;
               State <= CHECK_ALL_DONE;
-            end
+            end*/
           end
           CHECK_ALL_DONE:begin
             OneDACDone <= 1'b0;
@@ -209,7 +235,7 @@ module SweepACQ_Control(
           end
           TAIL_OUT:begin
             SweepACQData_en <= 1'b1;
-            State <= ALL_DONE;
+            State <= WAIT_DONE;
           end
           WAIT_DONE:begin
             ACQDone <= 1'b1;
@@ -257,4 +283,22 @@ module SweepACQ_Control(
         DACInvert = {num[0], num[1], num[2], num[3], num[4], num[5], num[6], num[7], num[8], num[9]};
       end
     endfunction
+    // Debug
+    /*(*mark_debug = "true"*)wire [3:0] State_Debug;
+    assign State_Debug = State;
+    (*mark_debug = "true"*)wire [15:0] SweepAcqData_Debug;
+    assign SweepAcqData_Debug = SweepACQData;
+    (*mark_debug = "true"*)wire SweepACQData_en_Debug;
+    assign SweepACQData_en_Debug = SweepACQData_en;
+    (*mark_debug = "true"*)wire [15:0] FireDataCount_Debug;
+    assign FireDataCount_Debug = FireDataCount;
+    (*mark_debug = "true"*)wire [3:0] DataReadCount_Debug;
+    assign DataReadCount_Debug = DataReadCount;
+    (*mark_debug = "true"*)wire [15:0] MaxPackageNumber_Debug;
+    assign MaxPackageNumber_Debug = MaxPackageNumber;
+    (*mark_debug = "true"*)wire SweepStart_Debug;
+    assign SweepStart_Debug = SweepStart;
+    (*mark_debug = "true"*)wire SingleACQStart_Debug;
+    assign SingleACQStart_Debug = SingleACQStart;*/
+
 endmodule

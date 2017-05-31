@@ -6,6 +6,7 @@ entity SweepACQ_Control is
         reset_n         : in     vl_logic;
         SweepStart      : in     vl_logic;
         SingleACQStart  : out    vl_logic;
+        ForceMicrorocAcqReset: out    vl_logic;
         OneDACDone      : out    vl_logic;
         ACQDone         : out    vl_logic;
         DataTransmitDone: in     vl_logic;
@@ -19,6 +20,7 @@ entity SweepACQ_Control is
         SweepACQFifoData: in     vl_logic_vector(15 downto 0);
         SweepACQFifoData_rden: out    vl_logic;
         SweepACQData    : out    vl_logic_vector(15 downto 0);
-        SweepACQData_en : out    vl_logic
+        SweepACQData_en : out    vl_logic;
+        UsbDataFifoFull : in     vl_logic
     );
 end SweepACQ_Control;

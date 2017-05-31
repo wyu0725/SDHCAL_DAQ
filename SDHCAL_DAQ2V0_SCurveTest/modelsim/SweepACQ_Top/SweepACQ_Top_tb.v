@@ -6,6 +6,7 @@ reg reset_n;
 reg SweepStart;
 wire SingleACQStart;
 wire ACQDone;
+wire ForceMicrorocAcqReset;
 reg DataTransmitDone;
 // Sweep ACQ Parameters
 reg [9:0] StartDAC0;
@@ -21,13 +22,15 @@ reg MicrorocConfigDone;
 // Data output
 wire [15:0] SweepACQData;
 wire SweepACQData_en;
+reg UsbDataFifoFull;
 //Instantialtion
 SweepACQ_Top uut(
   .Clk(clk),
   .reset_n(reset_n),
   .SweepStart(SweepStart),
   .SingleACQStart(SingleACQStart),
-  .ACQDone(ACQDone),
+  .ForceMicrorocAcqReset(ForceMicrorocAcqReset),
+  .ACQDone(ACQDone),  
   .DataTransmitDone(DataTransmitDone),
   .StartDAC0(StartDAC0),
   .EndDAC0(EndDAC0),
@@ -38,7 +41,8 @@ SweepACQ_Top uut(
   .LoadSCParameter(LoadSCParameter),
   .MicrorocConfigDone(MicrorocConfigDone),
   .SweepACQData(SweepACQData),
-  .SweepACQData_en(SweepACQData_en)
+  .SweepACQData_en(SweepACQData_en),
+  .UsbDataFifoFull(UsbDataFifoFull)
 );
 //Initial
 initial begin
@@ -48,12 +52,17 @@ initial begin
   StartDAC0 = 10'd475;
   EndDAC0 = 10'd525;
   MaxPackageNumber = 16'd10;
+  UsbDataFifoFull = 1'b0;
   #(100)
   reset_n = 1'b1;
   #(100)
   SweepStart = 1'b1;
   #(100)
   SweepStart = 1'b0;
+  #(23062);
+  UsbDataFifoFull = 1'b1;
+  #(100);
+  UsbDataFifoFull = 1'b0;
 end
 // Genarate Clk
 localparam High = 13;

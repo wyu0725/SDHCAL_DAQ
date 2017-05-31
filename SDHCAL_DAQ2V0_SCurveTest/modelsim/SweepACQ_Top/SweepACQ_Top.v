@@ -26,6 +26,8 @@ module SweepACQ_Top(
     // ACQ Control
     input SweepStart,
     output SingleACQStart,
+    output ForceMicrorocAcqReset,
+    //output SingleDacDone,
     output ACQDone,
     input DataTransmitDone,
     // Sweep ACQ Parameters
@@ -41,7 +43,9 @@ module SweepACQ_Top(
     input MicrorocConfigDone,
     //Data out
     output [15:0] SweepACQData,
-    output SweepACQData_en
+    output SweepACQData_en,
+    //Usb FIFO Full Signal
+    input UsbDataFifoFull
     );
     // Generate the Start Pulse
     wire SweepStart_Pulse;
@@ -58,8 +62,8 @@ module SweepACQ_Top(
       end
     end
     assign SweepStart_Pulse = SweepStart_reg1 && (~SweepStart_reg2);
-    //Instantiation SweepACQ Control
-    wire rstExtFIFO;
+    //Instantiation SweepACQ Control    
+    wire OneDacDone;
     wire [15:0] SweepFifoData;
     wire SweepFifoData_rden;
     wire SweepFifoFull;
@@ -70,7 +74,8 @@ module SweepACQ_Top(
       //ACQ Control
       .SweepStart(SweepStart_Pulse),
       .SingleACQStart(SingleACQStart),
-      .OneDACDone(rstExtFIFO),
+      .ForceMicrorocAcqReset(ForceMicrorocAcqReset),
+      .OneDACDone(OneDacDone),
       .ACQDone(ACQDone),
       .DataTransmitDone(DataTransmitDone),
       // Sweep ACQ Parameters
@@ -88,8 +93,12 @@ module SweepACQ_Top(
       .SweepACQFifoData_rden(SweepFifoData_rden),
       // Data Output
       .SweepACQData(SweepACQData),
-      .SweepACQData_en(SweepACQData_en)
+      .SweepACQData_en(SweepACQData_en),
+      // Usb FIFO Full Signal
+      .UsbDataFifoFull(UsbDataFifoFull)
     );
+    wire rstExtFIFO;
+    assign rstExtFIFO = OneDacDone | ForceMicrorocAcqReset;
     SweepACQ_FIFO SweepACQ_DataFIFO16x128(
       .clk(Clk),
       .rst(~reset_n | rstExtFIFO),
@@ -100,5 +109,5 @@ module SweepACQ_Top(
       .full(SweepFifoFull),
       .empty(SweepFifoEmpty)
     );
-
+  //assign SingleDacDone = rstExtFIFO;
 endmodule
