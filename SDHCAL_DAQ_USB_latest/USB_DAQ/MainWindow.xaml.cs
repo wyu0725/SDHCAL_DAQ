@@ -2418,23 +2418,10 @@ namespace USB_DAQ
             bool bResult = false;
             byte[] CommandBytes = new byte[2];
             string report = null;
-            #region Mask or not
             int MaskChoise = cbxMaskOrUnMask.SelectedIndex + 16;
-            CommandBytes = ConstCommandByteArray(0xAE, (byte)MaskChoise);
-            bResult = CommandSend(CommandBytes, CommandBytes.Length);
-            if (bResult)
-            {
-                report = string.Format("{0} :", cbxMaskOrUnMask.Text);
-                txtReport.AppendText(report);
-            }
-            else
-            {
-                MessageBox.Show("Set Mask Channel failure, please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            #endregion
             #region Mask Channel
             Regex rxInt = new Regex(rx_Integer);
-            bool IsChannelLegeal = rxInt.IsMatch(txtChannelMask.Text) && (int.Parse(txtChannelMask.Text) <= 64);
+            bool IsChannelLegeal = rxInt.IsMatch(txtChannelMask.Text) && (int.Parse(txtChannelMask.Text) <= 64 && (int.Parse(txtChannelMask.Text)) >= 1);
             if(IsChannelLegeal)
             {
                 int MaskChannel = short.Parse(txtChannelMask.Text) - 1;
@@ -2444,7 +2431,7 @@ namespace USB_DAQ
                 {
                     if(MaskChoise != 16)
                     {
-                        report = string.Format("Channel:{0}", MaskChannel + 1);
+                        report = string.Format("Channel{0}", MaskChannel + 1);
                         txtReport.AppendText(report);
                     }                    
                     //txtReport.AppendText(report);
@@ -2457,7 +2444,7 @@ namespace USB_DAQ
             }
             else
             {
-                MessageBox.Show("Illegal Mask Channel, please re-type(Integer:0--64)", "Ilegal Input", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Illegal Mask Channel, please re-type(Integer:1--64)", "Ilegal Input", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             #endregion
@@ -2470,19 +2457,27 @@ namespace USB_DAQ
                 if(MaskChoise != 16)
                 {
                     report = string.Format("{0} \n", cbxDiscriMask.Text);
+                    txtReport.AppendText(report);
                 }                
-                //txtReport.AppendText(report);
             }
             else
             {
                 MessageBox.Show("Set Mask Discriminator failure, please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             #endregion
-
-            if(report != null)
+            #region Mask or not            
+            CommandBytes = ConstCommandByteArray(0xAE, (byte)MaskChoise);
+            bResult = CommandSend(CommandBytes, CommandBytes.Length);
+            if (bResult)
             {
+                report = string.Format("{0} ", cbxMaskOrUnMask.Text);
                 txtReport.AppendText(report);
             }
+            else
+            {
+                MessageBox.Show("Set Mask Channel failure, please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            #endregion
         }
 
         private void btnSweepTestStart_Click(object sender, RoutedEventArgs e)
