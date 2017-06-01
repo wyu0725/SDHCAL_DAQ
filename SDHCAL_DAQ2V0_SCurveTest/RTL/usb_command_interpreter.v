@@ -584,6 +584,7 @@ always @(posedge clk or negedge reset_n) begin
       end
       UNMASK:begin
         MicrorocChannelMask <= MicrorocChannelMask | SingleChannelMask;
+        MaskState <= IDLE;
       end
       default:begin
         MicrorocChannelMask <= MicrorocChannelMask;
