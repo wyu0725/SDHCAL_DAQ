@@ -228,9 +228,10 @@
                         <Label x:Name="lblChannel_Sel" Content="Channel select" HorizontalAlignment="Left" Margin="0,90,0,0" VerticalAlignment="Top" Height="24" Width="100"/>
                         <ComboBox x:Name="cbxChannelSelect" HorizontalAlignment="Left" Margin="100,90,0,0" VerticalAlignment="Top" Width="80" Height="24">
                             <ComboBoxItem Content="Channel2" />
-                            <ComboBoxItem Content="Channel1" IsSelected="True"/>
-                            
+                            <ComboBoxItem Content="Channel1" IsSelected="True"/>                            
                         </ComboBox>
+                        <Label x:Name="lblRSOrDirect" Content="RS or Direct" HorizontalAlignment="Left" Margin="0,120,0,0" VerticalAlignment="Top" Width="100" Height="24" />
+                        
                         <!--<StackPanel HorizontalAlignment="Left" Height="30" Margin="100,90,0,0" VerticalAlignment="Top" Width="75">
                             <RadioButton GroupName="Chn_Select" Checked="ChannelSelect_Checked" Margin="0,0,-9,0" Content="Channel1"/>
                             <RadioButton GroupName="Chn_Select" Checked="ChannelSelect_Checked" Margin="0,0,-9,0" Content="Channel2"/>
@@ -243,7 +244,7 @@
 
 
 
-                        <GroupBox x:Name="gbxChannelMask" Header="Channel Mask" HorizontalAlignment="Left" Margin="0,150,0,0" VerticalAlignment="Top" Height="150" Width="180">
+                        <GroupBox x:Name="gbxChannelMask" Header="Channel Mask" HorizontalAlignment="Left" Margin="0,180,0,0" VerticalAlignment="Top" Height="150" Width="180">
                             <Grid Margin="0,0,0,0">
                                 <Label x:Name="lblChannelMask" Content="Mask Channel" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Height="24" Width="90"/>
                                 <TextBox x:Name="txtChannelMask" HorizontalAlignment="Left" Height="24" Margin="90,0,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="60"/>
@@ -457,6 +458,7 @@
             </Grid>
         </GroupBox>
         <GroupBox x:Name="gbxAsicStatus" Header="ASIC Status" HorizontalAlignment="Left" Margin="1072,126,0,0" VerticalAlignment="Top" Width="189" Height="634"/>
+        
         <!--GroupBox x:Name="gbxWaveform" Header="Waveform" HorizontalAlignment="Left" Margin="260,135,0,0" VerticalAlignment="Top" Height="343" Width="557">
             <Grid  Margin="0,0,0,0">
                 <Border Margin="0,1,0,42" Grid.Row="0" Background="#FF5F5A5A">
