@@ -982,3 +982,12 @@
   2. 停止MicrorocAcqStart，然后等待USB FIFO不满，然后写数，写完这一次击中的10个数之后，进入3
   3. 判断一个DAC码值采集的数据是否够了，若够，结束，不够进入4
   4. 复位Microroc AutoDaq和SweepAcq FIOF，然后重新开始MicrorocAcqStart
+
+  + 这样修改后还是有丢包
+  + 用1kHz的信号发生器就不会丢包
+
+
+
+## 2017/06/01
+
++ 为了方便测试，直接加入一条命令，临时Disable61通道
