@@ -730,7 +730,7 @@ namespace USB_DAQ
             #region Set ASIC Number
             /*----------------ASIC number and start load---------------------*/
             int ASIC_Number = cbxASIC_Number.SelectedIndex;
-            int value = ASIC_Number + 176 + 1;
+            int value = ASIC_Number + 176 + 1;//0xB0
             byte[] com_bytes = new byte[2];
             com_bytes = ConstCommandByteArray(0xA0, (byte)(value));
             bResult = CommandSend(com_bytes, com_bytes.Length);
@@ -801,13 +801,14 @@ namespace USB_DAQ
                 //byte PedCali_Byte1,PedCali_Byte2;
                 StringBuilder details = new StringBuilder();
                 //NoSortHashtable TempHashTabel;
-                Header_Value[0] += (byte)ASIC_Number;
+                Header_Value[0] += (byte)(ASIC_Number + 1);
                 string DCCaliString, SCTCaliString;
                 byte[] CaliData = new byte[64];
                 //byte[] SCTCaliData = new byte[64];
                 string[] Chn = new string[64];
                 byte[] CommandHeader = new byte[64];
                 byte CaliByte1, CaliByte2;
+                // *** Generate channel mask header
                 for (int i = 0; i < 64; i++)
                 {
                     Chn[i] = string.Format("Chn{0}", i);
