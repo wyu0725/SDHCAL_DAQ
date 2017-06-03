@@ -566,7 +566,7 @@ always @(posedge clk or negedge reset_n) begin
           MaskState <= IDLE;
         end
         else if(fifo_rden && USB_COMMAND == 16'hAE11) begin
-          SingleChannelMask <= {{189{1'b1}},DiscriMask} << MaskShift;
+          SingleChannelMask <= {{189{1'b1}},DiscriMask} << MaskShift | {DiscriMask,{189{1'b1}}} >> (192- MaskShift - 3);
           MaskState <= MASK;
         end
         else if(fifo_rden && USB_COMMAND == 16'hAE12) begin

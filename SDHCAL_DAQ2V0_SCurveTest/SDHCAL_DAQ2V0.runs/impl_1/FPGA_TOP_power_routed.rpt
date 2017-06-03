@@ -1,7 +1,7 @@
 Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2016.3 (win64) Build 1682563 Mon Oct 10 19:07:27 MDT 2016
-| Date             : Thu Jun 01 19:19:42 2017
+| Date             : Sat Jun 03 18:39:29 2017
 | Host             : WYU running 64-bit major release  (build 9200)
 | Command          : report_power -file FPGA_TOP_power_routed.rpt -pb FPGA_TOP_power_summary_routed.pb -rpx FPGA_TOP_power_routed.rpx
 | Design           : FPGA_TOP
@@ -51,12 +51,12 @@ Table of Contents
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
 | Clocks         |     0.006 |        8 |       --- |             --- |
-| Slice Logic    |     0.004 |     6584 |       --- |             --- |
-|   LUT as Logic |     0.003 |     2938 |     63400 |            4.63 |
-|   Register     |    <0.001 |     3068 |    126800 |            2.42 |
+| Slice Logic    |     0.004 |     7478 |       --- |             --- |
+|   LUT as Logic |     0.004 |     3771 |     63400 |            5.95 |
+|   Register     |    <0.001 |     3083 |    126800 |            2.43 |
 |   CARRY4       |    <0.001 |       91 |     15850 |            0.57 |
 |   Others       |     0.000 |      165 |       --- |             --- |
-| Signals        |     0.004 |     4279 |       --- |             --- |
+| Signals        |     0.004 |     5193 |       --- |             --- |
 | Block RAM      |     0.001 |      6.5 |       135 |            4.81 |
 | MMCM           |     0.086 |        1 |         6 |           16.67 |
 | I/O            |     0.164 |       78 |       285 |           27.37 |
@@ -71,7 +71,7 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) |
 +-----------+-------------+-----------+-------------+------------+
-| Vccint    |       1.000 |     0.030 |       0.014 |      0.016 |
+| Vccint    |       1.000 |     0.030 |       0.015 |      0.016 |
 | Vccaux    |       1.800 |     0.066 |       0.048 |      0.018 |
 | Vcco33    |       3.300 |     0.007 |       0.003 |      0.004 |
 | Vcco25    |       2.500 |     0.067 |       0.063 |      0.004 |
@@ -209,7 +209,7 @@ Table of Contents
 |     AutoDAQ                                                                |    <0.001 |
 |     Hold_Gen                                                               |    <0.001 |
 |     RAM_Read                                                               |    <0.001 |
-|     SC_Readreg                                                             |     0.003 |
+|     SC_Readreg                                                             |     0.004 |
 |       BitShift                                                             |    <0.001 |
 |       Microroc_Param                                                       |     0.003 |
 |       param_store_fifo_16bitx256deep                                       |    <0.001 |
@@ -243,12 +243,12 @@ Table of Contents
 |       pulse_sync                                                           |    <0.001 |
 |     Trig_Gen                                                               |    <0.001 |
 |     Trig_Gen_en                                                            |    <0.001 |
-|   usb_control                                                              |     0.004 |
-|     usbcmdfifo_16depth                                                     |     0.002 |
-|       U0                                                                   |     0.002 |
-|         inst_fifo_gen                                                      |     0.002 |
-|           gconvfifo.rf                                                     |     0.002 |
-|             grf.rf                                                         |     0.002 |
+|   usb_control                                                              |     0.005 |
+|     usbcmdfifo_16depth                                                     |     0.001 |
+|       U0                                                                   |     0.001 |
+|         inst_fifo_gen                                                      |     0.001 |
+|           gconvfifo.rf                                                     |     0.001 |
+|             grf.rf                                                         |     0.001 |
 |               gntv_or_sync_fifo.gcx.clkx                                   |    <0.001 |
 |                 gnxpm_cdc.gsync_stage[1].rd_stg_inst                       |    <0.001 |
 |                 gnxpm_cdc.gsync_stage[1].wr_stg_inst                       |    <0.001 |
