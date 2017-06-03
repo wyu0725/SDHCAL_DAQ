@@ -566,7 +566,7 @@ always @(posedge clk or negedge reset_n) begin
           MaskState <= IDLE;
         end
         else if(fifo_rden && USB_COMMAND == 16'hAE11) begin
-          SingleChannelMask <= {{189{1'b1}},DiscriMask} << MaskShift;
+          SingleChannelMask <= {{189{1'b1}},DiscriMask} << MaskShift | {DiscriMask,{189{1'b1}}} >> (192- MaskShift - 3);
           MaskState <= MASK;
         end
         else if(fifo_rden && USB_COMMAND == 16'hAE12) begin
@@ -1111,6 +1111,12 @@ end
   function [9:0] Invert_10bit(input [9:0] num);
     begin
       Invert_10bit = {num[0], num[1], num[2], num[3], num[4], num[5], num[6], num[7], num[8], num[9]};
+    end
+  endfunction
+  // Cyclic Shift
+  function [191:0] CyclicShift(input [191:0] Number, input [7:0] Shift);
+    begin
+      CyclicShift = {Number[191-Shift:0], Number[191:191 - Shift + 1]};
     end
   endfunction
 endmodule
