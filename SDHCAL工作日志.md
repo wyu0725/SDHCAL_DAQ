@@ -1011,5 +1011,59 @@
   + 1,2,4,5,6,7,9,10,13,14,17,18,21,22,25,26,29,30
 
 
-
 #### 用一个电容直接从Pad上注入电荷
+
+
+
+## 2017/06/03
+
+### 昨前天串扰问题解决
+
++ 信号发生器注入电荷时，信号不能够有负的，否则当信号为负的时候，会有电流流向注入的管脚，造成一个较大的假串扰
++ 实验室有一台信号发生器有问题，自带偏置
+
+### 串扰测试
+
++ 目前电子学串扰可以确定是由连接器造成的，连接器会在相邻的管脚上感应出电荷信号，但是不大
++ 从目前的分析来看，芯片本身的串扰是观测不到的，无论从CTest管脚还是输入管脚，这个问题留待明天仔细观察
+
+#### 阳极板注入电荷的串扰
+
+##### 示波器观察
+
++ 从A28Pad注入电荷，然后观察其周围Pad，Pad示意图如下
+
+  ![Pad示意图](http://ogs54iji1.bkt.clouddn.com/SDHCALPadA28.png-SDHCAL)
+
++ 各个Pad上看到的信号
+
+  + A20 -- Channel28![A20](http://ogs54iji1.bkt.clouddn.com/SDHCALR-ChanrgeInject_Y-Channel28WiChannel29Inject.jpg-SDHCAL)
+
+
+  + A36 -- Channel 30
+
+    ![A20](http://ogs54iji1.bkt.clouddn.com/SDHCALR-ChanrgeInject_Y-Channel30WiChannel29Inject.jpg-SDHCAL)
+
+  + A27 -- Channel21
+
+    ![A20](http://ogs54iji1.bkt.clouddn.com/SDHCALR-ChanrgeInject_Y-Channel21WiChannel29Inject.jpg-SDHCAL)
+
+  + A29 -- Channel 37
+
+    ![A20](http://ogs54iji1.bkt.clouddn.com/SDHCALR-ChanrgeInject_Y-Channel37WiChannel29Inject.jpg-SDHCAL)
+
+  + A12 -- Channel 31
+
+    ![A20](http://ogs54iji1.bkt.clouddn.com/SDHCALR-ChanrgeInject_Y-Channel31WiChannel29Inject.jpg-SDHCAL)
+
++ 不难看出，没有观察到相邻Pad的串扰，反而观察到相邻管脚的串扰
+
+### 仪器问题
+
++ 信号发生器有一台本色和具有偏置
++ 测试时，信号发生器和电源机箱必须插在同一个插线板上，保证共地
+
+### 其他问题
+
++ 连上阳极板后噪声比较大，考虑做一下屏蔽
+
