@@ -1113,10 +1113,4 @@ end
       Invert_10bit = {num[0], num[1], num[2], num[3], num[4], num[5], num[6], num[7], num[8], num[9]};
     end
   endfunction
-  // Cyclic Shift
-  function [191:0] CyclicShift(input [191:0] Number, input [7:0] Shift);
-    begin
-      CyclicShift = {Number[191-Shift:0], Number[191:191 - Shift + 1]};
-    end
-  endfunction
 endmodule
