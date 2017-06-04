@@ -407,6 +407,18 @@ namespace USB_DAQ
                     /*Modefied for the Microroc DAQ
                     byte value = (byte)cbxChn_Select.SelectedIndex;
                     byte[] cmd_AcqStart = ConstCommandByteArray(0xF0, value);*/
+                    byte[] CommandForceMicrorocReset = ConstCommandByteArray(0xF0,0xF2);
+                    bResult = CommandSend(CommandForceMicrorocReset, CommandForceMicrorocReset.Length);
+                    if(bResult)
+                    {
+                        reports.AppendLine("Microroc Reset");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Reset Microroc Failure", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+                    Thread.Sleep(10);
                     byte[] cmd_AcqStart = ConstCommandByteArray(0xF0, 0xF0);
                     bResult = CommandSend(cmd_AcqStart, 2);
                     if (bResult)
@@ -846,6 +858,34 @@ namespace USB_DAQ
                                  "USB Error",   //caption
                                  MessageBoxButton.OK,//button
                                  MessageBoxImage.Error);//icon
+                }
+                #endregion
+                #region RS Or Direct
+                int RSOrDirect = cbxRSOrDirect.SelectedIndex + 160;//A0
+                CommandBytes = ConstCommandByteArray(0xAC, (byte)RSOrDirect);
+                bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                if (bResult)
+                {
+                    string report = string.Format("Set {0} as trigger\n", cbxRSOrDirect.Text);
+                    txtReport.AppendText(report);
+                }
+                else
+                {
+                    MessageBox.Show("Set RS Or Direct failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                #endregion
+                #region ReadReg Or NOR64
+                int ReadRegOrNOR64 = cbxReadOrNOR64.SelectedIndex + 176;//0xB0
+                CommandBytes = ConstCommandByteArray(0xAC, (byte)ReadRegOrNOR64);
+                bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                if (bResult)
+                {
+                    string report = string.Format("Set trigger out by {0}\n", cbxReadOrNOR64.Text);
+                    txtReport.AppendText(report);
+                }
+                else
+                {
+                    MessageBox.Show("Set Readreg or NOR64 failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 #endregion
                 for (int i = ASIC_Number;i >= 0; i--)
@@ -2294,6 +2334,18 @@ namespace USB_DAQ
                     reports.AppendLine("fail to clear USB fifo");
                 byte[] bytes = new byte[2048];
                 bResult = DataRecieve(bytes, bytes.Length);//读空剩余在USB芯片里面的数据
+                byte[] CommandForceMicrorocReset = ConstCommandByteArray(0xF0, 0xF2);
+                bResult = CommandSend(CommandForceMicrorocReset, CommandForceMicrorocReset.Length);
+                if (bResult)
+                {
+                    reports.AppendLine("Microroc Reset");
+                }
+                else
+                {
+                    MessageBox.Show("Reset Microroc Failure", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                Thread.Sleep(10);
                 byte[] CmdSlowACQ = ConstCommandByteArray(0xF0, 0xF0);
                 bResult = CommandSend(CmdSlowACQ, CmdSlowACQ.Length);
                 if(bResult)

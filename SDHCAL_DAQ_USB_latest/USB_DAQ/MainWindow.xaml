@@ -231,7 +231,16 @@
                             <ComboBoxItem Content="Channel1" IsSelected="True"/>                            
                         </ComboBox>
                         <Label x:Name="lblRSOrDirect" Content="RS or Direct" HorizontalAlignment="Left" Margin="0,120,0,0" VerticalAlignment="Top" Width="100" Height="24" />
-                        
+                        <ComboBox x:Name="cbxRSOrDirect" HorizontalAlignment="Left" Margin="100,120,0,0" VerticalAlignment="Top" Width="80" Height="24">
+                            <ComboBoxItem Content="RS" IsSelected="True"/>
+                            <ComboBoxItem Content="Direct" />
+                        </ComboBox>
+                        <Label x:Name="lblReadOrNOR64" Content="Read or NOR64" HorizontalAlignment="Left" Margin="0,150,0,0" VerticalAlignment="Top" Width="100" Height="24" />
+                        <ComboBox x:Name="cbxReadOrNOR64" HorizontalAlignment="Left" Margin="100,150,0,0" VerticalAlignment="Top" Width="80" Height="24">
+                            <ComboBoxItem Content="ReadReg"/>
+                            <ComboBoxItem Content="NOR64"  IsSelected="True"/>
+                        </ComboBox>
+
                         <!--<StackPanel HorizontalAlignment="Left" Height="30" Margin="100,90,0,0" VerticalAlignment="Top" Width="75">
                             <RadioButton GroupName="Chn_Select" Checked="ChannelSelect_Checked" Margin="0,0,-9,0" Content="Channel1"/>
                             <RadioButton GroupName="Chn_Select" Checked="ChannelSelect_Checked" Margin="0,0,-9,0" Content="Channel2"/>
