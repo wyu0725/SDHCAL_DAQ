@@ -89,6 +89,8 @@ module usb_command_interpreter(
       input USB_FIFO_Empty,
       //*** Sweep Acq
       output reg [15:0] MaxPackageNumber,
+      //*** Reset Microroc AutoAcq and ReadRam module
+      output reg ForceMicrorocAcqReset,
       //--- LED ---//
       output reg [3:0] LED
     );
@@ -157,6 +159,15 @@ always @ (posedge clk , negedge reset_n) begin
     out_to_rst_usb_data_fifo <= 1'b1;
   else
     out_to_rst_usb_data_fifo <= 1'b0;
+end
+// Reset Microroc AutoAcq and ReadRam Module
+always @(posedge clk or negedge reset_n ) begin
+  if(~reset_n)
+    ForceMicrorocAcqReset <= 1'b0;
+  else if(fifo_rden && USBCOMMAND == 16'hF0F2)
+    ForceMicrorocAcqReset <= 1'b1;
+  else
+    ForceMicrorocAcqReset <= 1'b0;
 end
 //MICROROC command A type
 always @(posedge clk or negedge reset_n) begin

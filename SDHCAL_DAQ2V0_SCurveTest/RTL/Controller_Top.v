@@ -45,6 +45,7 @@ module Controller_Top(
     input MicrorocConfigDone,
     // Microroc ACQ Control and Data
     output MicrorocAcqStartStop,
+    input UsbForceMicrorocAcqReset,
     output MicrorocForceReset, // New add by wyu 20170519
     input [15:0] MicrorocAcqData,
     input MicrorocAcqData_en,
@@ -153,6 +154,7 @@ module Controller_Top(
       .SweepAcqMicrorocAcqStartStop(SweepAcqMicrorocAcqStartStop),
       .MicrorocAcqStartStop(MicrorocAcqStartStop),
       //.SweepAcqSingleDacDone(SweepAcqSingleDacDone),//New add by wyu 20170519
+      .UsbForceMicrorocAcqReset(UsbForceMicrorocAcqReset),
       .SweepAcqForceMicrorocAcqReset(SweepAcqForceMicrorocAcqReset),
       .OutMicrorocForceReset(MicrorocForceReset),//New add by wyu 20170519
       // USB Data

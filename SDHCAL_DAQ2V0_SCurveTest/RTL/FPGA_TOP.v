@@ -165,6 +165,7 @@ module FPGA_TOP(
     wire [9:0] EndDac;
     // Max package number
     wire [15:0] MaxPackageNumber;
+    wire UsbForceMicrorocAcqReset;
     usb_command_interpreter usb_control
     (
       .IFCLK(IFCLK),
@@ -234,6 +235,8 @@ module FPGA_TOP(
       .USB_FIFO_Empty(in_from_ext_fifo_empty),
       //*** Sweep Acq
       .MaxPackageNumber(MaxPackageNumber),
+      //*** Reset Microroc AutoAcq and ReadRam Module
+      .ForceMicrorocAcqReset(UsbForceMicrorocAcqReset),
       /*----------------------------*/
       .LED(LED[3:0])
     );    
@@ -516,6 +519,7 @@ module FPGA_TOP(
       .MicrorocConfigDone(MicrorocConfigDone),
       //*** Microroc acq and data
       .MicrorocAcqStartStop(MicrorocAcqStartStop),
+      .UsbForceMicrorocAcqReset(UsbForceMicrorocAcqReset),
       .MicrorocForceReset(MicrorocForceReset), // New add by wyu 20170519
       .MicrorocAcqData(MicrorocAcqData),
       .MicrorocAcqData_en(MicrorocAcqData_en),
