@@ -164,7 +164,7 @@ end
 always @(posedge clk or negedge reset_n ) begin
   if(~reset_n)
     ForceMicrorocAcqReset <= 1'b0;
-  else if(fifo_rden && USBCOMMAND == 16'hF0F2)
+  else if(fifo_rden && USB_COMMAND == 16'hF0F2)
     ForceMicrorocAcqReset <= 1'b1;
   else
     ForceMicrorocAcqReset <= 1'b0;
