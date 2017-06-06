@@ -6,27 +6,39 @@ answer = inputdlg(prompt);
 
 StartDac = str2double(answer(1));
 EndDac = str2double(answer(2));
-DacCount = EndDac - StartDac + 1;
 
 ImportDataBase = Importdata();
 Dac0_50PercentBase = zeros(1,64);
 Dac1_50PercentBase = zeros(1,64);
 Dac2_50PercentBase = zeros(1,64);
-
+DacCountBase = EndDac - StartDac + 1;
 ImportDataSignal = Importdata();
 Dac0_50PercentSignal = zeros(1,64);
 Dac1_50PercentSignal = zeros(1,64);
 Dac2_50PercentSignal = zeros(1,64);
-
+answer = inputdlg(prompt);
+StartDac = str2double(answer(1));
+EndDac = str2double(answer(2));
+DacCount = EndDac - StartDac + 1;
 for i = 0:1:63
-    [DacCode, Dac0_50PercentBase(i+1), Dac1_50PercentBase(i+1), Dac2_50PercentBase(i+1)] = SCurveCaculateWiDacRange(ImportDataBase, i, DacCount);
-    [DacCode1, Dac0_50PercentSignal(i+1), Dac1_50PercentSignal(i+1), Dac2_50PercentSignal(i+1)] = SCurveCaculateWiDacRange(ImportDataSignal, i, DacCount);
+    if(i == 28)
+        Dac0_50PercentBase(i) = 0;
+        Dac1_50PercentBase(i) = 0;
+        Dac2_50PercentBase(i) = 0;
+        Dac0_50PercentSignal(i) = 0;
+        Dac1_50PercentSignal(i) = 0;
+        Dac2_50PercentSignal(i) = 0;
+        continue;
+    end        
+    [DacCode, Dac0_50PercentBase(i+1), Dac1_50PercentBase(i+1), Dac2_50PercentBase(i+1)] = SCurveCaculateWiDacRange(ImportDataBase, i, DacCountBase, 1);
+    [DacCode1, Dac0_50PercentSignal(i+1), Dac1_50PercentSignal(i+1), Dac2_50PercentSignal(i+1)] = SCurveCaculateWiDacRange(ImportDataSignal, i, DacCount, 2);
 end
 
-Crosstalk = Dac0_50PercentBase - Dac0_50PercentSignal;
+Crosstalk = abs(Dac0_50PercentBase - Dac0_50PercentSignal);
+Crosstalk(2) = 0;
 Crosstalk(29) = 0;
-Crosstalk(22) = 1;
-Crosstalk(61) = 1;
+Crosstalk(22) = 0.1;
+Crosstalk(61) = 0.1;
 Amptitude = Crosstalk/4.25;
 figure;
 plot(Amptitude);

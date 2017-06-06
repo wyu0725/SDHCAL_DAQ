@@ -17,7 +17,11 @@ function [Start, Middle, End] = FindStartMidEndWiDacRange(Trig_Ratio, Percent, D
     end
     temp = 100;
     I_Start = ((Start - 2) > 0)*(Start - 2) + ((Start - 2) <= 0)*Start;
-    I_End = ((1023 - End) > 2)*(End + 2) + ((1023 - End) <= 2)*End;
+    I_End = ((Len - End) > 2)*(End + 2) + ((Len - End) <= 2)*End;
+%     if((I_Start - I_End) < 2)
+%         Middle = 0;
+%         return;
+%     end
     x_i = I_Start:I_End;
     y_i = Trig_Ratio(x_i);
     x_SI = I_Start:0.01:I_End;
