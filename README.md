@@ -1,9 +1,16 @@
-# SDHCAL_DAQ
+# SDHCAL_DAQ V2.0
+
 > 新的SDHCAL DAQ工程，从硬件、逻辑、上位机和数据处理方面记录工程
 
-# 硬件电路
+## 硬件电路
 
-# FPGA逻辑
+## FPGA逻辑
+
+### 时钟
+
++ 时钟使用MMCM( Mixed-Mode Clock Manager)产生
+
+
 
 ## Microroc芯片
 
@@ -27,6 +34,6 @@
 
 
 
-# 上位机
+## 上位机
 
-# 数据处理程序
+## 数据处理程序
