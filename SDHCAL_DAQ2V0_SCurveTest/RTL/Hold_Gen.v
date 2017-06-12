@@ -1,77 +1,50 @@
+`timescale 1ns / 1ps
 //They are 3 trigger outputs(OUT_TRIG0B, OUT_TRIG1B and OUT_TRIG2B ) worked in Read Register progress
 //Once  a channel is selected, they are the results of 3 corresponding discriminators. 
 //Any of them can be used for hold generation. Once the hold signal is generated, analogue output existed on "out_q" pin.
 module Hold_Gen
 (
-  input Clk,          //40MHz
+  input Clk,          //500MHz
   input reset_n,
-  input [1:0] Trig_Coincid,
-  input [4:0] Hold_delay,//hold delay,maxium 800ns
+  input Hold_en, // Enable Hold output
+  input [1:0] TrigCoincid,
+  input [8:0] HoldDelay,//hold delay,maxium 800ns
   input OUT_TRIG0B,   //active, low
   input OUT_TRIG1B,   //active, low
   input OUT_TRIG2B,   //active, low
   input Ext_TRIGB,    //active,low from SMA
-  //output RST_COUNTERB,//Reset Gray Counter 24bit counter BCID
-  //output TRIG_EXT,    //External trigger, Active rising edge
   output HOLD,         //Hold signal, Active high
   //Generate enable signal fro external raz_chn added by wyu 20170309
-  input External_RAZ_en,
-  input [3:0] External_RAZ_Delay_Time,
-  output reg Single_RAZ_en
+  input ExternalRaz_en,
+  input [9:0] ExternalRazDelayTime,
+  output reg SingleRaz_en
 );
 //synchronize the trigger input
-/*
-reg [3:0] out_trig;
-always @ (posedge Clk , negedge reset_n) begin
-  if(~reset_n)
-    out_trig <= 4'b1111;
-  else begin
-    out_trig[3] <= Ext_TRIGB;
-    out_trig[2] <= OUT_TRIG2B;
-    out_trig[1] <= OUT_TRIG1B;
-    out_trig[0] <= OUT_TRIG0B;
-  end
-end
-*/
 //trig coincidence
-reg trig;//active low
-reg trig1;
+reg TrigSync1;//active low
+reg TrigSync2;
 always @ (posedge Clk , negedge reset_n) begin
   if(~reset_n)begin
-    trig <= 1'b1;
-    trig1 <= 1'b1;
+    TrigSync1 <= 1'b1;
+    TrigSync2 <= 1'b1;
   end
   else begin
-    case(Trig_Coincid)
-      2'b00: trig <= OUT_TRIG0B;
-      2'b01: trig <= OUT_TRIG1B;
-      2'b10: trig <= OUT_TRIG2B;
-      2'b11: trig <= Ext_TRIGB;
+    case(TrigCoincid)
+      2'b00: TrigSync1 <= OUT_TRIG0B;
+      2'b01: TrigSync1 <= OUT_TRIG1B;
+      2'b10: TrigSync1 <= OUT_TRIG2B;
+      2'b11: TrigSync1 <= Ext_TRIGB;
     endcase
-    trig1 <= trig;
+    TrigSync2 <= TrigSync1;
   end
 end
-wire trig_fall = trig1 && !trig;
-//capture rising edge or falling edge
-/*
-reg [1:0] trig_sync;
-always @ (posedge Clk , negedge reset_n) begin
-  if(~reset_n) begin
-    trig_sync <= 2'b11;
-  end
-  else begin
-    trig_sync[0] <= trig;
-    trig_sync[1] <= trig_sync[0];
-  end
-end
-wire trig_fall = trig_sync[1] & !trig_sync[0];
-*/
+wire TrigFall = TrigSync2 && !TrigSync1;
 //hold generation, adjustable delay between trig and hold.
-//maxium delay 640ns = 26 clock cycle
-//hold width = 6400ns = 256 clock cycle
-reg [4:0] cnt;
-reg [7:0] hold_cnt;
-reg hold_sig;
+//maxium delay 640ns = 320 clock cycle
+//hold width = 6400ns = 3200 clock cycle
+reg [8:0] DelayCnt;
+reg [15:0] HoldCnt;
+reg Hold_r;
 reg [1:0] State;
 localparam [1:0] Idle = 2'b00,
                 DELAY = 2'b01,
@@ -79,78 +52,109 @@ localparam [1:0] Idle = 2'b00,
                 //END   = 2'b11
 always @ (posedge Clk , negedge reset_n) begin
   if(~reset_n) begin
-    cnt <= 5'b0;
-    hold_cnt <= 8'b0;
-    hold_sig <= 1'b0;
+    DelayCnt <= 9'b0;
+    HoldCnt <= 15'b0;
+    Hold_r <= 1'b0;
     State <= Idle;
   end
   else begin
     case(State)
       Idle:begin
-        if(trig_fall)
+        if(TrigFall && Hold_en)
           State <= DELAY;
         else
           State <= Idle;
       end
       DELAY:begin
-        if(cnt < Hold_delay)
-          cnt <= cnt + 1'b1;
+        if(DelayCnt < HoldDelay)
+          DelayCnt <= DelayCnt + 1'b1;
         else begin
-          cnt <= 5'b0;
+          DelayCnt <= 9'b0;
           State <= HOLDGEN;
-          hold_sig <= 1'b1;
+          Hold_r <= 1'b1;
         end
       end
       HOLDGEN:begin
-        if(hold_cnt < 8'hff)
-          hold_cnt <= hold_cnt + 1'b1;
+        if(HoldCnt < 16'd3200)
+          HoldCnt <= HoldCnt + 1'b1;
         else begin
-          hold_cnt <= 8'b0;
-          hold_sig <= 1'b0;
+          HoldCnt <= 16'b0;
+          Hold_r <= 1'b0;
           State <= Idle;
         end
       end
-     /* END:begin
-        State <= Idle;
-      end
-      */
       default:State <= Idle;
     endcase
   end
 end
-assign HOLD = hold_sig;
-/*--- Capture the falling edge of the three triggres ---*/
-wire trigger_and = OUT_TRIG0B & OUT_TRIG1B & OUT_TRIG2B;
-reg trigger_and_1;
-reg trigger_and_2;
+assign HOLD = Hold_r;
+//--- Capture the falling edge of the three triggres and generate External RAZ enable signal---//
+wire TrigAnd = OUT_TRIG0B & OUT_TRIG1B & OUT_TRIG2B;
+reg TrigAnd1;
+reg TrigAnd2;
 always @(posedge Clk or negedge reset_n) begin
   if(~reset_n) begin
-    trigger_and_1 <= 1'b1;
-    trigger_and_2 <= 1'b1;
+    TrigAnd1 <= 1'b1;
+    TrigAnd2 <= 1'b1;
   end
-  else if(External_RAZ_en)begin
-    trigger_and_1 <= trigger_and;
-    trigger_and_2 <= trigger_and_1;
+  else if(ExternalRaz_en)begin
+    TrigAnd1 <= TrigAnd;
+    TrigAnd2 <= TrigAnd1;
   end
   else begin
-    trigger_and_1 <= 1'b1;
-    trigger_and_2 <= 1'b1;
+    TrigAnd1 <= 1'b1;
+    TrigAnd2 <= 1'b1;
   end
 end
-wire trigger_and_fall = trigger_and_2 & (~trigger_and_1);
-reg [3:0]trigger_delay_cnt;
+wire TrigAndFall = TrigAnd2 & (~TrigAnd1);
+// *** Generate External RAZ enable signal
+reg [1:0] RazState;
+localparam [1:0] IDLE = 2'b00,
+                 RAZ_DELAY = 2'b01,
+                 RAZ_ENABLE = 2'b10;
+reg [9:0] ExternalRazDelayCount;
+reg [4:0] RazEnableCount;
 always @(posedge Clk or negedge reset_n) begin
   if(~reset_n) begin
-    trigger_delay_cnt <= 4'd0;
-    Single_RAZ_en <= 1'b0;
-  end
-  else if(trigger_and_fall || (trigger_delay_cnt != 4'd0 && trigger_delay_cnt <= External_RAZ_Delay_Time)) begin
-    trigger_delay_cnt <= trigger_delay_cnt + 1'b1;
-    Single_RAZ_en <= (trigger_delay_cnt == External_RAZ_Delay_Time);
+    ExternalRazDelayCount <= 10'd0;
+    RazEnableCount <= 5'b0;
+    SingleRaz_en <= 1'b0;
+    RazState <= IDLE;
   end
   else begin
-    trigger_delay_cnt <= 4'd0;
-    Single_RAZ_en <= 1'b0;
+    case(RazState)
+      IDLE:begin
+        if(TrigAndFall)begin
+          RazState <= RAZ_DELAY;
+        end
+        else begin
+          RazState <= IDLE;
+        end
+      end
+      RAZ_DELAY:begin
+        if(ExternalRazDelayCount < ExternalRazDelayTime)begin
+          RazState <= RAZ_DELAY;
+          ExternalRazDelayCount <= ExternalRazDelayCount + 1'b1;
+        end
+        else begin
+          RazState <= RAZ_ENABLE;
+          ExternalRazDelayCount <= 10'b0;
+          SingleRaz_en <= 1'b1;
+        end
+      end
+      RAZ_ENABLE:begin
+        if(RazEnableCount < 5'd16) begin // The width of SingleRaz_en must longer than one period of Clk, thus 25ns
+          RazState <= RAZ_ENABLE;
+          RazEnableCount <= RazEnableCount + 1'b1;
+        end
+        else begin
+          RazState <= IDLE;
+          RazEnableCount <= 5'b0;
+          SingleRaz_en <= 1'b0;
+        end
+      end
+      default:RazState <= IDLE;
+    endcase
   end
 end
 endmodule

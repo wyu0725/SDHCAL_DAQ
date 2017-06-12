@@ -45,6 +45,19 @@ end
 //
 reg Raz_chn_ext;
 reg [5:0] counter1;
+reg Raz_r1;
+reg Raz_r2;
+always @(posedge Clk or negedge reset_n) begin
+  if(~reset_n) begin
+    Raz_r1 <= 1'b0;
+    Raz_r2 <= 1'b0;
+  end
+  else begin
+    Raz_r1 <= Raz_en;
+    Raz_r2 <= Raz_r1;
+  end
+end
+wire RazEnableRise = Raz_r1 && (~Raz_r2);
 always @ (posedge Clk , negedge reset_n) begin
   if(~reset_n) begin
     Raz_chn_ext <= 1'b0;
@@ -53,7 +66,7 @@ always @ (posedge Clk , negedge reset_n) begin
   else if (Force_RAZ)begin
     Raz_chn_ext <= 1'b1;
   end
-  else if(Raz_en || (counter1 < DELAY_CONST && counter1 != 6'd0))begin
+  else if(RazEnableRise || (counter1 < DELAY_CONST && counter1 != 6'd0))begin
     Raz_chn_ext <= 1'b1;
     counter1 <= counter1 +1'b1;
   end

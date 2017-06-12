@@ -92,6 +92,7 @@ module FPGA_TOP(
     /*----Clock management instantiation----*/
     wire Clk;
     wire Clk_5M;
+    wire Clk_500M;
     wire IFCLK;
     wire reset_n;
     wire CLKGOOD;
@@ -102,6 +103,7 @@ module FPGA_TOP(
         .rst_n(rst_n),
         .Clk(Clk),        //40M global clock
         .Clk_5M(Clk_5M),  //5M slow clock
+        .Clk_500M(Clk_500M), // 500M Clock for out_trigger sync and hold generate
         .IFCLK(IFCLK),    //IFCLK domain 48M
         .usb_ifclk(usb_ifclk),
         .reset_n(reset_n),//golbal reset
@@ -166,6 +168,7 @@ module FPGA_TOP(
     // Max package number
     wire [15:0] MaxPackageNumber;
     wire UsbForceMicrorocAcqReset;
+    wire UsbMicrorocHold_en;
     usb_command_interpreter usb_control
     (
       .IFCLK(IFCLK),
@@ -187,7 +190,8 @@ module FPGA_TOP(
       .Microroc_powerpulsing_en(Microroc_powerpulsing_en),
       .Microroc_sel_readout_chn(Microroc_sel_readout_chn),
       .Microroc_Trig_Coincid(Microroc_Trig_Coincid),
-      .Microroc_Hold_Delay(Microroc_Hold_Delay),
+      .MicrorocHold_en(UsbMicrorocHold_en),
+      .MicrorocHoldDelay(Microroc_Hold_Delay),
       .Microroc_rst_cntb(Microroc_rst_cntb),
       //.Microroc_raz_en(Microroc_raz_en),      
       .Microroc_trig_en(Microroc_trig_en),
@@ -207,7 +211,7 @@ module FPGA_TOP(
       .Microroc_Internal_or_External_raz_chn(Microroc_Internal_or_External_raz_chn),
       .Microroc_Internal_RAZ_Mode(Microroc_Internal_RAZ_Mode),
       .Microroc_External_RAZ_Mode(Microroc_External_RAZ_Mode),
-      .Microroc_External_RAZ_Delay_Time(Microroc_External_RAZ_Delay_Time),
+      .MicrorocExternalRazDelayTime(Microroc_External_RAZ_Delay_Time),
       //.Microroc_Internal_raz_chn_en(Microroc_Internal_raz_chn_en),
       .Microroc_RS_or_Discri(Microroc_RS_or_Discri),
       .Microroc_NOR64_or_Disc(Microroc_NOR64_or_Disc),
@@ -433,6 +437,7 @@ module FPGA_TOP(
       .Acq_start(MicrorocAcqStartStop), //level or a pulse?
       .AcqStart_time(Microroc_AcqStart_time),//Acquisition time, get it from USB, the default value is 8
       //------Hold gen interface-----//
+      .Hold_en(UsbMicrorocHold_en),
       .Trig_Coincid(Microroc_Trig_Coincid),//2bit
       .Hold_delay(Microroc_Hold_Delay),//5bit //hold delay,maxium 800ns
       //------fifo interface-----//

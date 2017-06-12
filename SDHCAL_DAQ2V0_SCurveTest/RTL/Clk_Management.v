@@ -26,6 +26,7 @@ module Clk_Management(
     input rst_n,
     output Clk,
     output Clk_5M,
+    output Clk_500M,
     output IFCLK,     //usb ifclk domain
     output usb_ifclk, //out to usb chip
     output reset_n,
@@ -42,6 +43,7 @@ assign usb_ifclk = IFCLK;
 
 wire pll_40;
 wire pll_5;
+wire Pll_500M;
 wire feedback;
 wire LOCKED;
 
@@ -57,7 +59,8 @@ wire LOCKED;
       .CLKOUT4_DIVIDE(1),
       .CLKOUT5_DIVIDE(1),
       .CLKOUT6_DIVIDE(1),
-      .CLKOUT0_DIVIDE_F(1.0),    // Divide amount for CLKOUT0 (1.000-128.000).
+      .CLKOUT0_DIVIDE_F(1.28),    // Divide amount for CLKOUT0 (1.000-128.000).
+                                  // 40M * 16 / 1.28 = 500M
       // CLKOUT0_DUTY_CYCLE - CLKOUT6_DUTY_CYCLE: Duty cycle for each CLKOUT (0.01-0.99).
       .CLKOUT0_DUTY_CYCLE(0.5),
       .CLKOUT1_DUTY_CYCLE(0.5),
@@ -81,7 +84,7 @@ wire LOCKED;
    )
    MMCME2_BASE_inst (
       // Clock Outputs: 1-bit (each) output: User configurable clock outputs
-      .CLKOUT0(),     // 1-bit output: CLKOUT0
+      .CLKOUT0(Pll_500M),     // 1-bit output: CLKOUT0
       .CLKOUT0B(),   // 1-bit output: Inverted CLKOUT0
       .CLKOUT1(pll_40),     // 1-bit output: CLKOUT1
       .CLKOUT1B(),   // 1-bit output: Inverted CLKOUT1
@@ -120,4 +123,8 @@ wire LOCKED;
 	    .O(Clk_5M),
 	    .I(pll_5)
 	);
+  BUFG BUFG_Clk_500M(
+    .O(Clk_500M),
+    .I(Pll_500M)
+  );
 endmodule

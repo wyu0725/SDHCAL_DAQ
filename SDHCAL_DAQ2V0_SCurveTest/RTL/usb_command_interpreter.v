@@ -40,7 +40,8 @@ module usb_command_interpreter(
       output reg Microroc_powerpulsing_en,
       output reg Microroc_sel_readout_chn,
       output reg [1:0] Microroc_Trig_Coincid,
-      output reg [4:0] Microroc_Hold_Delay,
+      output reg MicrorocHold_en,
+      output reg [8:0] MicrorocHoldDelay,
       output reg Microroc_rst_cntb,
       //output reg Microroc_raz_en,
       output reg Microroc_trig_en,
@@ -60,7 +61,7 @@ module usb_command_interpreter(
       output reg Microroc_Internal_or_External_raz_chn,
       output reg [1:0] Microroc_Internal_RAZ_Mode,
       output reg [1:0] Microroc_External_RAZ_Mode,
-      output reg [3:0] Microroc_External_RAZ_Delay_Time,
+      output reg [9:0] MicrorocExternalRazDelayTime,
       //new add by wyu 20170308, SC parameter 336  Select latched (RS : 1) or direct output (trigger : 0)
       output reg Microroc_RS_or_Discri,
       //new add by wyu 20170308, SC parameter 575  Select Channel Trigger selected by Read Register (0) or NOR64 output (1)
@@ -400,14 +401,29 @@ always @(posedge clk or negedge reset_n) begin
   else 
     Microroc_Trig_Coincid <= Microroc_Trig_Coincid;
 end
+// *** Microroc hold enbale
+always @(posedge clk or negedge reset_n) begin
+  if(~reset_n)
+    MicrorocHold_en <= 1'b0;
+  else if(fifo_rden && USB_COMMAND == 16'hA5B0)
+    MicrorocHold_en <= 1'b0;
+  else if(fifo_rden && USB_COMMAND == 16'hA5B1)
+    MicrorocHold_en <= 1'b1;
+  else
+    MicrorocHold_en <= MicrorocHold_en;
+end
 //Microroc_Hold_Delay
 always @(posedge clk or negedge reset_n) begin
   if (~reset_n) 
-    Microroc_Hold_Delay <= 5'b0;
-  else if (fifo_rden && USB_COMMAND[15:8] == 8'hA6) 
-    Microroc_Hold_Delay <= USB_COMMAND[4:0];
+    MicrorocHoldDelay <= 9'b0;
+  else if(fifo_rden && USB_COMMAND[15:4] == 12'hA60) 
+    MicrorocHoldDelay[3:0] <= USB_COMMAND[3:0];
+  else if(fifo_rden && USB_COMMAND[15:4] == 12'hA61)
+    MicrorocHoldDelay[7:4] <= USB_COMMAND[3:0];
+  else if(fifo_rden && USB_COMMAND[15:4] == 12'hA62)
+    MicrorocHoldDelay[8] <= USB_COMMAND[0];
   else 
-    Microroc_Hold_Delay <= Microroc_Hold_Delay;
+    MicrorocHoldDelay <= MicrorocHoldDelay;
 end
 //Microroc_rst_cntb
 always @(posedge clk or negedge reset_n) begin
@@ -465,11 +481,15 @@ end
 //raz_chn to reset the trigger, the delay time is to decide which time the raz_chn is enable
 always @(posedge clk or negedge reset_n) begin
   if(~reset_n)
-    Microroc_External_RAZ_Delay_Time <= 4'd0;
+    MicrorocExternalRazDelayTime <= 10'd0;
   else if(fifo_rden && USB_COMMAND[15:4] == 12'hA8D)
-    Microroc_External_RAZ_Delay_Time <= USB_COMMAND[3:0];
+    MicrorocExternalRazDelayTime[3:0] <= USB_COMMAND[3:0];
+  else if(fifo_rden && USB_COMMAND[15:4] == 12'hA8E)
+    MicrorocExternalRazDelayTime[7:4] <= USB_COMMAND[3:0];
+  else if(fifo_rden && USB_COMMAND[15:4] == 12'hA8F)
+    MicrorocExternalRazDelayTime[9:8] <= USB_COMMAND[1:0];
   else
-    Microroc_External_RAZ_Delay_Time <= Microroc_External_RAZ_Delay_Time;
+    MicrorocExternalRazDelayTime <= MicrorocExternalRazDelayTime;
 end
 //Microroc_trig_en
 always @ (posedge clk or negedge reset_n) begin
