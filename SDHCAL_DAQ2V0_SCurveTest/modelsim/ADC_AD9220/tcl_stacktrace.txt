@@ -1,0 +1,38 @@
+Mon Jun 12 12:12:12 ?????? 2017
+Trace back: Region not found: "sim:/ADC_AD9220_tb/uut"
+    while executing
+"::environment [[$w GetData nameSpace] fullname $n]"
+    (procedure "SelectItem" line 5)
+    invoked from within
+"SelectItem .main_pane.structure C8uuwrMzU"
+    (in namespace inscope "::QStructure" script line 1)
+    invoked from within
+"namespace inscope ::QStructure {SelectItem .main_pane.structure C8uuwrMzU}"
+    ("uplevel" body line 1)
+    invoked from within
+"uplevel "#0" $cmd"
+    (object "::.main_pane.structure.interior.cs.body.struct" method "::vsimwidgets::Hierarchy::_evalCmd" body line 40)
+    invoked from within
+"_evalCmd $itk_option(-selectcommand) $node"
+    (object "::.main_pane.structure.interior.cs.body.struct" method "::vsimwidgets::Hierarchy::_select" body line 6)
+    invoked from within
+"_select $idx"
+    ("set" arm line 8)
+    invoked from within
+"switch -- $op {
+        clear {
+            $itk_component(tree) selection clear all
+            if {[info exists _selected]} {unset _selected}
+	    #..."
+    (object "::.main_pane.structure.interior.cs.body.struct" method "::vsimwidgets::Hierarchy::selection" body line 2)
+    invoked from within
+"vsimwidgets::Hierarchy::selection set $idx"
+    (object "::.main_pane.structure.interior.cs.body.struct" method "::vsimwidgets::Hierarchy::_button1" body line 56)
+    invoked from within
+"::.main_pane.structure.interior.cs.body.struct _button1 .main_pane.structure.interior.cs.body.struct.lwchildsite.clipper.canvas.sfchildsite.list 100 2..."
+    (in namespace inscope "::vsimwidgets::Hierarchy" script line 1)
+    invoked from within
+"namespace inscope ::vsimwidgets::Hierarchy {::.main_pane.structure.interior.cs.body.struct _button1 .main_pane.structure.interior.cs.body.struct.lwchi..."
+    (command bound to event)
+  <2: ::tkerror {Region not found: "sim:/ADC_AD9220_tb/uut"}
+  <1: ::bgerror {Region not found: "sim:/ADC_AD9220_tb/uut"}
