@@ -2390,16 +2390,24 @@ namespace USB_DAQ
                     PackageCount++;
                 }                
             }
-            bResult = false;
-            byte[] RemainByte = new byte[RemainPackageNum + 2];
-            /*
-            do
+            if (RemainPackageNum != 0)
             {
-                bResult = DataRecieve(RemainByte, RemainByte.Length);
-            } while (!bResult);
-            */
-            while (!DataRecieve(RemainByte, RemainByte.Length));         
-            bw.Write(RemainByte);
+                bResult = false;
+                byte[] RemainByte = new byte[512];
+                /*
+                do
+                {
+                    bResult = DataRecieve(RemainByte, RemainByte.Length);
+                } while (!bResult);
+                */
+                while (!DataRecieve(RemainByte, RemainByte.Length)) ;
+                byte[] RemainByteWrite = new byte[RemainPackageNum];
+                for (int i = 0; i < RemainPackageNum; i++)
+                {
+                    RemainByteWrite[i] = RemainByte[i];
+                }
+                bw.Write(RemainByteWrite);
+            }
             bw.Flush();
             bw.Dispose();
             bw.Close();
