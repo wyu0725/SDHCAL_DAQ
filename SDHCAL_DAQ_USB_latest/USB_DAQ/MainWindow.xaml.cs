@@ -1672,44 +1672,55 @@ namespace USB_DAQ
             bool Is_Hold_legal = rx_int.IsMatch(txtHold_delay.Text);
             if (Is_Hold_legal)
             {
-                int value = Int32.Parse(txtHold_delay.Text)/25 + 42496; //除以25ns
-                byte[] bytes = ConstCommandByteArray((byte)(value >> 8), (byte)(value));
-                bool bResult = CommandSend(bytes, bytes.Length);
-                if (bResult)
+                int DelayTime = Int32.Parse(txtHold_delay.Text)/2; //除以2ns
+                byte DelayTime1 = (byte)(DelayTime & 31);//31 = 0x1F
+                byte DelayTime2 = (byte)((DelayTime >> 4) & 47);//47 = 0x2F
+                byte DelayTime3 = (byte)((DelayTime >> 8) & 49);//49 = 0x31
+                byte[] CommandBytes = ConstCommandByteArray(0xA6, DelayTime1);
+                bool bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                if (!bResult)
                 {
-                    string report = string.Format("set Hold delay : {0}\n", txtHold_delay.Text);
+                    MessageBox.Show("Set Hold delay failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                CommandBytes = ConstCommandByteArray(0xA6, DelayTime2);
+                bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                if (!bResult)
+                {
+                    MessageBox.Show("Set Hold delay failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                CommandBytes = ConstCommandByteArray(0xA6, DelayTime3);
+                bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                if(bResult)
+                {
+                    string report = string.Format("Set Hold Delay Time:{0}ns\n", DelayTime * 2);
                     txtReport.AppendText(report);
                 }
                 else
                 {
-                    MessageBox.Show("set Hold delay failure, please check USB", //text
-                                     "USB Error",   //caption
-                                     MessageBoxButton.OK,//button
-                                     MessageBoxImage.Error);//icon
+                    MessageBox.Show("Set Hold delay failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
                 }
-                value = cbxTrig_Coincid.SelectedIndex + 42400; //这里不需要加1
-                bytes = ConstCommandByteArray((byte)(value >> 8), (byte)(value));
-                bResult = CommandSend(bytes, bytes.Length);
+                int TrigCoincid = cbxTrig_Coincid.SelectedIndex + 160;//160 = 0xA0
+                CommandBytes = ConstCommandByteArray(0xA5, (byte)TrigCoincid);
+                bResult = CommandSend(CommandBytes, CommandBytes.Length);
                 if (bResult)
                 {
-                    string report = string.Format("set Trigger Coincidence : {0}\n", cbxTrig_Coincid.Text);
+                    string report = string.Format("Set Trigger Coincidence : {0}\n", cbxTrig_Coincid.Text);
                     txtReport.AppendText(report);
                 }
                 else
                 {
-                    MessageBox.Show("set Trigger Coincid failure, please check USB", //text
-                                     "USB Error",   //caption
-                                     MessageBoxButton.OK,//button
-                                     MessageBoxImage.Error);//icon
+                    MessageBox.Show("set Trigger Coincid failure, please check USB","USB Error",MessageBoxButton.OK,MessageBoxImage.Error);
+                    return;
                 }
 
             }
             else
             {
-                MessageBox.Show("Illegal Hold delay, please re-type(Integer:0--650,step:25ns)", //text
-                                 "Illegal input",   //caption
-                                 MessageBoxButton.OK,//button
-                                 MessageBoxImage.Error);//icon
+                MessageBox.Show("Illegal Hold delay, please re-type(Integer:0--650,step:2ns)","Illegal input",MessageBoxButton.OK,MessageBoxImage.Error);
+                return;
             }
         }
         //Set StartAcq Time
@@ -1813,12 +1824,27 @@ namespace USB_DAQ
             bool Is_Time_Legel = rx_int.IsMatch(txtExternal_RAZ_Delay.Text);
             if(Is_Time_Legel)
             {
-                int value = Int16.Parse(txtExternal_RAZ_Delay.Text) / 25 + 208;//0xD0
-                byte[] bytes = ConstCommandByteArray(0xA8, (byte)value);
-                bool bResult = CommandSend(bytes, bytes.Length);
+                int ExternalRazDelay = Int16.Parse(txtExternal_RAZ_Delay.Text) / 2 ;//
+                byte ExternalRazDelay1 = (byte)(ExternalRazDelay & 15 + 208);//208 = 0xD0
+                byte ExternalRazDelay2 = (byte)((ExternalRazDelay >> 4) & 15 + 224);//224 = 0xE0
+                byte ExternalRazDelay3 = (byte)((ExternalRazDelay >> 8) & 3 + 240);//240 = 0xF0 
+                byte[] CommandBytes = ConstCommandByteArray(0xA8, ExternalRazDelay1);
+                bool bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                if(!bResult)
+                {
+                    MessageBox.Show("Set External RAZ Delay Time failure, please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                CommandBytes = ConstCommandByteArray(0xA8, ExternalRazDelay2);
+                bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                if (!bResult)
+                {
+                    MessageBox.Show("Set External RAZ Delay Time failure, please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                CommandBytes = ConstCommandByteArray(0xA8, ExternalRazDelay3);
+                bResult = CommandSend(CommandBytes, CommandBytes.Length);
                 if(bResult)
                 {
-                    string report = string.Format("Set External RAZ Delay Time {0}ns \n", txtExternal_RAZ_Delay.Text);
+                    string report = string.Format("Set External RAZ Delay Time {0}ns\n", txtExternal_RAZ_Delay.Text);
                     txtReport.AppendText(report);
                 }
                 else
@@ -1828,7 +1854,7 @@ namespace USB_DAQ
             }
             else
             {
-                MessageBox.Show("Illegal External RAZ Delay Time, please re-type(Integer:0--6375,step:25ns)", "Ilegal Input", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Illegal External RAZ Delay Time, please re-type(Integer:0--6375,step:2ns)", "Ilegal Input", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
         //E0A0选择ACQ，E0A1选择Scurve

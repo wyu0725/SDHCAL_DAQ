@@ -69,7 +69,7 @@
         </GroupBox>
         <GroupBox x:Name="gbxMICROROC" Header="MICROROC Control" HorizontalAlignment="Left" Margin="258,28,0,0" VerticalAlignment="Top" Height="732" Width="797">
             <Grid  Margin="0,0,0,0" >
-                <GroupBox x:Name="gbxMicrorocControl" Header="Microroc Control" HorizontalAlignment="Left" Margin="0,466,0,0" VerticalAlignment="Top" Height="250" Width="610">
+                <GroupBox x:Name="gbxMicrorocControl" Header="Microroc Control" HorizontalAlignment="Left" Margin="0,466,0,-6" VerticalAlignment="Top" Height="250" Width="775">
                     <Grid  Margin="0,0,0,0" >
                         <GroupBox x:Name="gbxNormalAcq" Header="Normal Acq" HorizontalAlignment="Left" VerticalAlignment="Top" Height="203" Width="155" Margin="0,0,0,0">
                             <Grid  Margin="0,0,0,0" >
@@ -110,7 +110,7 @@
                                         <!--<StackPanel HorizontalAlignment="Left" Height="30" Margin="94,60,0,-6" VerticalAlignment="Top" Width="60">
                                             <RadioButton GroupName="CTest_or_Input" Checked="CTest_or_Input_Checked" Content="CTest"/>
                                             <RadioButton GroupName="CTest_or_Input" Checked="CTest_or_Input_Checked" Content="Input"/>
-                                        </StackPanel>-->                                    
+                                        </StackPanel>-->
                                         <Label x:Name="lblCPT_MAX" Content="Max count:" HorizontalAlignment="Left" Margin="0,90,0,0" VerticalAlignment="Top" Height="24"/>
                                         <ComboBox x:Name="cbxCPT_MAX" HorizontalAlignment="Left" Margin="95,90,0,0" VerticalAlignment="Top" Width="65">
                                             <ComboBoxItem Content= "200"/>
@@ -135,7 +135,7 @@
                                         <Label x:Name="lblSingleTest_Chn" Content="Single channel#:" HorizontalAlignment="Left" Margin="0,150,0,0" VerticalAlignment="Top" Height="25" RenderTransformOrigin="0.452,1.083" Width="100"/>
                                         <TextBox x:Name="txtSingleTest_Chn" HorizontalAlignment="Left" Height="24" Margin="100,150,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="65"/>
                                         <TextBox x:Name="txtCountTime" HorizontalAlignment="Left" Height="24" Margin="100,120,0,0" TextWrapping="Wrap" Text="1000" VerticalAlignment="Top" Width="60"/>
-                                        
+
                                     </Grid>
                                 </GroupBox>
                                 <GroupBox x:Name="gbxSweepAcq" Header="SweepAcq" HorizontalAlignment="Left" Margin="190,0,0,0" VerticalAlignment="Top" Height="89" Width="185">
@@ -156,6 +156,14 @@
                                 <TextBox x:Name="txtStartDac" HorizontalAlignment="Left" Height="24" Margin="260,90,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="50" Grid.Column="2" />
                                 <TextBox x:Name="txtEndDac" HorizontalAlignment="Left" Height="24" Margin="260,120,0,0" TextWrapping="Wrap" Text="1023" VerticalAlignment="Top" Width="50" Grid.Column="2"/>
                                 <Button x:Name="btnSweepTestStart" Content="Sweep Test start" HorizontalAlignment="Left" Margin="190,150,0,0" VerticalAlignment="Top" Width="100" Height="24" Click="btnSweepTestStart_Click"/>
+                            </Grid>
+                        </GroupBox>
+                        <GroupBox x:Name="gbxAD9220" Header="AD9220" HorizontalAlignment="Left" Margin="560,0,0,0" VerticalAlignment="Top" Width="169" Height="80">
+                            <Grid Margin="0,0,0,0">
+                                <Label x:Name="lblStartDelay" Content="Start Delay" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Height="24" Width="75"/>
+                                <TextBox x:Name="txtStartDelay" HorizontalAlignment="Left" Height="24" Margin="75,0,0,0" TextWrapping="Wrap" Text="50" VerticalAlignment="Top" Width="50"/>
+                                <Button x:Name="btnStartAdc" Content="ADC Start" HorizontalAlignment="Left" Margin="0,30,0,0" VerticalAlignment="Top" Width="75" Height="24"/>
+
                             </Grid>
                         </GroupBox>
                         <!--<Button x:Name="btnSetParameter" Content="Button" HorizontalAlignment="Left" Margin="560,144,0,0" VerticalAlignment="Top" Width="75"/>-->
@@ -228,7 +236,7 @@
                         <Label x:Name="lblChannel_Sel" Content="Channel select" HorizontalAlignment="Left" Margin="0,90,0,0" VerticalAlignment="Top" Height="24" Width="100"/>
                         <ComboBox x:Name="cbxChannelSelect" HorizontalAlignment="Left" Margin="100,90,0,0" VerticalAlignment="Top" Width="80" Height="24">
                             <ComboBoxItem Content="Channel2" />
-                            <ComboBoxItem Content="Channel1" IsSelected="True"/>                            
+                            <ComboBoxItem Content="Channel1" IsSelected="True"/>
                         </ComboBox>
                         <Label x:Name="lblRSOrDirect" Content="RS or Direct" HorizontalAlignment="Left" Margin="0,120,0,0" VerticalAlignment="Top" Width="100" Height="24" />
                         <ComboBox x:Name="cbxRSOrDirect" HorizontalAlignment="Left" Margin="100,120,0,0" VerticalAlignment="Top" Width="80" Height="24">
@@ -449,16 +457,17 @@
                                 </ComboBox>
                             </Grid>
                         </GroupBox>
-                        
+
 
                     </Grid>
                 </GroupBox>
 
                 <Label x:Name="lblACQ_or_SCTest" Content="Mode Select" HorizontalAlignment="Left" VerticalAlignment="Top" Height="24" RenderTransformOrigin="4.713,0.917" Margin="610,396,0,0"/>
-                <StackPanel HorizontalAlignment="Left" Height="45" Margin="692,385,0,0" VerticalAlignment="Top" Width="90">
+                <StackPanel HorizontalAlignment="Left" Height="60" Margin="692,385,0,0" VerticalAlignment="Top" Width="90">
                     <RadioButton GroupName="ACQ_or_SCTest" Checked="ModeSelectChecked" Content="ACQ"/>
                     <RadioButton GroupName="ACQ_or_SCTest" Checked="ModeSelectChecked" Content="SCTest"/>
                     <RadioButton GroupName="ACQ_or_SCTest" Checked="ModeSelectChecked" Content="SweepACQ"/>
+                    <RadioButton GroupName="ACQ_or_SCTest" Checked="ModeSelectChecked" Content="AD9220"/>
                     <!--RadioButton x:Name="radioButton" Content="RadioButton"/>
                     <RadioButton x:Name="radioButton1" Content="RadioButton"/-->
                 </StackPanel>
@@ -467,7 +476,7 @@
             </Grid>
         </GroupBox>
         <GroupBox x:Name="gbxAsicStatus" Header="ASIC Status" HorizontalAlignment="Left" Margin="1072,126,0,0" VerticalAlignment="Top" Width="189" Height="634"/>
-        
+
         <!--GroupBox x:Name="gbxWaveform" Header="Waveform" HorizontalAlignment="Left" Margin="260,135,0,0" VerticalAlignment="Top" Height="343" Width="557">
             <Grid  Margin="0,0,0,0">
                 <Border Margin="0,1,0,42" Grid.Row="0" Background="#FF5F5A5A">
