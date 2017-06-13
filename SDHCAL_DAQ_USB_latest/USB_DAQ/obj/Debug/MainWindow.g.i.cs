@@ -1556,6 +1556,12 @@ namespace USB_DAQ {
             return;
             case 55:
             this.btnStartAdc = ((System.Windows.Controls.Button)(target));
+            
+            #line 165 "..\..\MainWindow.xaml"
+            this.btnStartAdc.Click += new System.Windows.RoutedEventHandler(this.btnStartAdc_Click);
+            
+            #line default
+            #line hidden
             return;
             case 56:
             this.gbxAcqParameter = ((System.Windows.Controls.GroupBox)(target));

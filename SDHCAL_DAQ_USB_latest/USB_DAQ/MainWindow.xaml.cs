@@ -3021,6 +3021,22 @@ namespace USB_DAQ
             #endregion
 
         }
+
+        private async void btnStartAdc_Click(object sender, RoutedEventArgs e)
+        {
+            Regex rxInt = new Regex(rx_Integer);
+            bool IsDelayLegeal = rxInt.IsMatch(txtStartDelay.Text) && (int.Parse(txtStartDelay.Text) < 400);
+            int AdcStartDelay;
+            if(IsDelayLegeal)
+            {
+                AdcStartDelay = int.Parse(txtStartDelay.Text) / 25;
+            }
+            else
+            {
+                AdcStartDelay = 2;
+            }
+            byte[] CommandBytes
+        }
         //control channel calibration
 
         #region Old Code for ChnCali
