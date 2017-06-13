@@ -85,13 +85,19 @@ module Switcher(
     output reg [15:0] UsbFifoData,
     output reg UsbFifoData_en,
     output reg [15:0] ParallelData,
-    output reg ParallelData_en
+    output reg ParallelData_en,
+    // ***ADC Control Port
+    input [15:0] AdcData,
+    input AdcData_en,
+    input UsbStartAdc,
+    output reg AdcStart,
+    output reg ForceAdcReset
     );
     // Mux4
     localparam [1:0] ACQ_MODE = 2'b00,
                      SCURVE_MODE = 2'b01,
-                     SWEEP_ACQ_MODE = 2'b10;
-                     //None = 2'b11;
+                     SWEEP_ACQ_MODE = 2'b10,
+                     ADC_CONTROL = 2'b11;
     localparam [1:0] DAC0_SELECTED = 2'b00,
                      DAC1_SELECTED = 2'b01,
                      DAC2_SELECTED = 2'b10;
@@ -108,7 +114,6 @@ module Switcher(
           OutSCTestStartStop = 1'b0;
           OutSweepAcqStartStop = 1'b0;
           SweepTestDone = 1'b0;
-          //OutNormalAcqStartStop = UsbMicrorocAcqStartStop;
           OutUsbStartStop = UsbMicrorocAcqStartStop;
           MicrorocAcqStartStop = UsbMicrorocAcqStartStop;
           OutMicrorocForceReset = UsbForceMicrorocAcqReset;
@@ -116,13 +121,14 @@ module Switcher(
           UsbFifoData_en = MicrorocAcqData_en;
           ParallelData = 16'b0;
           ParallelData_en = 1'b0;
+          AdcStart = 1'b0;
+          ForceAdcReset = 1'b0;
         end
         SCURVE_MODE:begin
           OutMicroroc10BitDac0 = SCTest10BitDac;
           OutMicroroc10BitDac1 = SCTest10BitDac;
           OutMicroroc10BitDac2 = SCTest10BitDac;
           OutMicrorocChannelMask = SCTestMicrorocChannelMask;
-          //OutMicrorocDiscriMask = SCTestMicrorocDiscriMask;
           OutMicrorocCTestChannel = SCTestMicrorocCTestChannel;
           OutMicrorocSCParameterLoad = SCTestMicrorocSCParameterLoad;
           OutMicrorocSCOrReadreg = 1'b0; //SC
@@ -136,13 +142,14 @@ module Switcher(
           UsbFifoData_en = SCTestData_en;
           ParallelData = 16'b0;
           ParallelData_en = 1'b0;
+          AdcStart = 1'b0;
+          ForceAdcReset = 1'b0;
         end
         SWEEP_ACQ_MODE:begin
           OutMicroroc10BitDac0 = (SweepAcqDacSelect == DAC0_SELECTED) ? SweepAcq10BitDac : UsbMicroroc10BitDac0;
           OutMicroroc10BitDac1 = (SweepAcqDacSelect == DAC1_SELECTED) ? SweepAcq10BitDac : UsbMicroroc10BitDac1;
           OutMicroroc10BitDac2 = (SweepAcqDacSelect == DAC2_SELECTED) ? SweepAcq10BitDac : UsbMicroroc10BitDac2;
           OutMicrorocChannelMask = UsbMicrorocChannelMask;
-          //OutMicrorocDiscriMask = USBMicrorocDiscriMask;
           OutMicrorocCTestChannel = UsbMicrorocCTestChannel;
           OutMicrorocSCParameterLoad = SweepAcqMicrorocSCParameterLoad;
           OutMicrorocSCOrReadreg = 1'b0; // SC
@@ -156,8 +163,31 @@ module Switcher(
           UsbFifoData_en = SweepAcqData_en;
           ParallelData = MicrorocAcqData;
           ParallelData_en = MicrorocAcqData_en;
+          AdcStart = 1'b0;
+          ForceAdcReset = 1'b0;
         end
-        default:begin
+        ADC_CONTROL:begin
+          OutMicroroc10BitDac0 = UsbMicroroc10BitDac0;
+          OutMicroroc10BitDac1 = UsbMicroroc10BitDac1;
+          OutMicroroc10BitDac2 = UsbMicroroc10BitDac2;
+          OutMicrorocChannelMask = UsbMicrorocChannelMask;
+          OutMicrorocCTestChannel = UsbMicrorocCTestChannel;
+          OutMicrorocSCParameterLoad = UsbMicrorocSCParameterLoad;
+          OutMicrorocSCOrReadreg = UsbSCOrReadreg;
+          OutSCTestStartStop = 1'b0;
+          OutSweepAcqStartStop = 1'b0;
+          SweepTestDone = 1'b0;
+          OutUsbStartStop = UsbStartAdc;
+          MicrorocAcqStartStop = 1'b0;
+          OutMicrorocForceReset = 1'b0;
+          UsbFifoData = AdcData;
+          UsbFifoData_en = AdcData_en;
+          ParallelData = 16'b0;
+          ParallelData_en = 1'b0;
+          AdcStart = UsbStartAdc;
+          ForceAdcReset = UsbForceMicrorocAcqReset;
+        end
+        /*default:begin
           OutMicroroc10BitDac0 = UsbMicroroc10BitDac0;
           OutMicroroc10BitDac1 = UsbMicroroc10BitDac1;
           OutMicroroc10BitDac2 = UsbMicroroc10BitDac2;
@@ -176,7 +206,7 @@ module Switcher(
           UsbFifoData_en = MicrorocAcqData_en;
           ParallelData = 16'b0;
           ParallelData_en = 1'b0;
-        end
+        end*/
       endcase
     end
 endmodule

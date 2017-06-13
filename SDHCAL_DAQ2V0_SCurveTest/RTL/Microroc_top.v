@@ -82,7 +82,7 @@ module Microroc_top(
       //------Hold gen interface-----//
       input Hold_en,
       input [1:0] Trig_Coincid,
-      input [4:0] Hold_delay,//hold delay,maxium 800ns
+      input [8:0] Hold_delay,//hold delay,maxium 800ns
       //------fifo interface-----//
       input ext_fifo_full,
       output [15:0] parallel_data,
@@ -93,7 +93,7 @@ module Microroc_top(
       input Force_RAZ,
       input Trig_en,
       input [1:0] Raz_mode,
-      input [3:0] External_RAZ_Delay_Time,//Set delay time for external raz mode
+      input [9:0] External_RAZ_Delay_Time,//Set delay time for external raz mode
       output Config_Done,
       /*---Slow control and ReadReg---*/
       output SELECT, //select = 1,slowcontrol register; select = 0,read register

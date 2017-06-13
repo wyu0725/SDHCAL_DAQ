@@ -19,8 +19,10 @@
 // so that the data is devided by 2. Then the data is sent to the USB FIFO. 
 // Dependencies: 
 // 
-// Revision:
+// Revision: 
 // Revision 0.01 - File Created
+// V1.0 File Completed 20170613 9:20
+// V1.1 Fiel Simlation Completed 20170613 9:20
 // Additional Comments:
 // 
 //////////////////////////////////////////////////////////////////////////////////
@@ -72,7 +74,7 @@ module AdcControl(
     localparam [2:0] IDLE = 3'b000,
                      START_ADC = 3'b001,
                      GET_ADC_DATA = 3'b011,
-                     CDATA = 3'b010,
+                     CHECK_ACQ_DONE = 3'b010,
                      DEVIDE_DATA = 3'b110,
                      OUT_DATA = 3'b111,
                      END = 3'b101;
@@ -92,10 +94,11 @@ module AdcControl(
         case(State)
           IDLE:begin
             if(StartAcq && HoldRising) begin
-              State <= START_ADC
+              State <= START_ADC;
               AdcStart <= 1'b0;              
               DataCount <= 5'b0;
-              SumData <= 16'b0;
+              InternalSumData <= 16'b0;
+              AdcStartDelayCount <= 4'b0;
             end
             else begin
               State <= IDLE;
@@ -117,11 +120,38 @@ module AdcControl(
           GET_ADC_DATA:begin
             if(AdcData_en) begin
               InternalSumData <= InternalSumData + AdcData;
-              State <= 
+              State <= CHECK_ACQ_DONE;
             end
+            else begin
+              InternalSumData <= InternalSumData;
+              State <= GET_ADC_DATA;
+            end
+          end
+          CHECK_ACQ_DONE:begin
+            if(DataCount < 5'd31) begin
+              DataCount <= DataCount + 1'b1;              
+              State <= GET_ADC_DATA;
+            end
+            else begin
+              DataCount <= 5'b0;
+              AdcStart <= 1'b0;
+              State <= DEVIDE_DATA;
+            end
+          end
+          DEVIDE_DATA:begin
+            InternalSumData <= InternalSumData >> 1'b1;
+            State <= OUT_DATA;
+          end
+          OUT_DATA:begin
+            SumData_en <= 1'b1;
+            State <= END;
+          end
+          END:begin
+            SumData_en <= 1'b0;
+            State <= IDLE;
           end
         endcase
       end
     end
-    assign SumData = InternalSumData[16:1];
+    assign SumData = InternalSumData[15:0];
 endmodule

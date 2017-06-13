@@ -75,13 +75,20 @@ module Controller_Top(
     input [15:0] CPT_MAX,
     input [15:0] CounterMax,
     output ForceExtRaz,
-      // Pin
+    // Pin
     input CLK_EXT,
     input out_trigger0b,
     input out_trigger1b,
-    input out_trigger2b
+    input out_trigger2b,
+    // *** ADC
+    input UsbStartAdc,
+    input Hold,
+    input [3:0] AdcStartDelay,
+    input [11:0] ADC_DATA,
+    input ADC_OTR,
+    output ADC_CLK
     );
-    // Switcher for ACQ, SweepACQ or SCurve Test
+    // ***Switcher for ACQ, SweepACQ or SCurve Test
     wire [9:0] SCTest10BitDac;
     wire [9:0] SweepAcq10BitDac;
     // Channel Mask
@@ -108,6 +115,11 @@ module Controller_Top(
     wire SCTestData_en;
     //wire SweepAcqSingleDacDone;
     wire SweepAcqForceMicrorocAcqReset;
+    // ADC Port
+    wire [15:0] AdcData;
+    wire AdcData_en;
+    wire AdcStart;
+    wire ForceAdcReset;
     Switcher Switcher(
       // Mode Select
       .ModeSelect(ModeSelect),
@@ -167,8 +179,15 @@ module Controller_Top(
       .UsbFifoData(OutUsbExtFifoData),
       .UsbFifoData_en(OutUsbExtFifoData_en),
       .ParallelData(ParallelData),
-      .ParallelData_en(ParallelData_en)
+      .ParallelData_en(ParallelData_en),
+      // ***ADC Control Port
+      .AdcData(AdcData),
+      .AdcData_en(AdcData_en),
+      .UsbStartAdc(UsbStartAdc),
+      .AdcStart(AdcStart),
+      .ForceAdcReset(ForceAdcReset)
     );
+    //--- SweepAcq Module ---//
     SweepACQ_Top SweepACQ(
       .Clk(Clk),
       .reset_n(reset_n),
@@ -195,6 +214,7 @@ module Controller_Top(
       .SweepACQData_en(SweepAcqData_en),
       .UsbDataFifoFull(UsbDataFifoFull)
     );
+    //--- S Curve Test ---//
     SCurve_Test_Top Microroc_SCurveTest(
       .Clk(Clk),
       .Clk_5M(Clk_5M),
@@ -230,5 +250,20 @@ module Controller_Top(
       //--- Done Indicator ---
       .SCurve_Test_Done(SCTestDone),
       .Data_Transmit_Done(DataTransmitDone)
+    );
+    //--- Adc Control ---//
+    wire AdcReset_n;
+    assign AdcReset_n = reset_n & (~ForceAdcReset);
+    AdcControl AD9220(
+      .Clk(Clk),
+      .reset_n(AdcReset_n),
+      .Hold(Hold),
+      .StartAcq(AdcStart),
+      .AdcStartDelay(AdcStartDelay),
+      .ADC_DATA(ADC_DATA),
+      .ADC_OTR(ADC_OTR),
+      .ADC_CLK(ADC_CLK),
+      .SumData(AdcData),
+      .SumData_en(AdcData_en)
     );
 endmodule

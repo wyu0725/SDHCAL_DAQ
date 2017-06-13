@@ -92,6 +92,9 @@ module usb_command_interpreter(
       output reg [15:0] MaxPackageNumber,
       //*** Reset Microroc AutoAcq and ReadRam module
       output reg ForceMicrorocAcqReset,
+      //*** ADC Control
+      output reg AdcStartAcq,
+      output reg [3:0] AdcStartDelayTime,
       //--- LED ---//
       output reg [3:0] LED
     );
@@ -1137,6 +1140,29 @@ always @(posedge clk or negedge reset_n) begin
     MaxPackageNumber[15:8] <= USB_COMMAND[7:0];
   else
     MaxPackageNumber[15:8] <= MaxPackageNumber[15:8];
+end
+// Adc Start Command 
+// E0F2:Start
+// E0F3:Stop
+always @(posedge clk or negedge reset_n) begin
+  if(~reset_n)
+    AdcStartAcq <= 1'b0;
+  else if(fifo_rden && USB_COMMAND == 16'hE0F2)
+    AdcStartAcq <= 1'b1;
+  else if(fifo_rden && USB_COMMAND == 16'hE0F3)
+    AdcStartAcq <= 1'b0;
+  else
+    AdcStartAcq <= AdcStartAcq;
+end
+// Adc Start Delay Time
+// E80X:
+always @(posedge clk or negedge reset_n) begin
+  if(~reset_n)
+    AdcStartDelayTime <= 4'b0;
+  else if(fifo_rden && USB_COMMAND[15:4] == 12'hE80)
+    AdcStartDelayTime <= USB_COMMAND[3:0];
+  else
+    AdcStartDelayTime <=  AdcStartDelayTime;
 end
 //Swap the LSB and MSB
   function [9:0] Invert_10bit(input [9:0] num);

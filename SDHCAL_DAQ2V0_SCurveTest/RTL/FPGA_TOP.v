@@ -84,6 +84,10 @@ module FPGA_TOP(
     output ADG819_Addr,  //multiplexer
     //----- CLK_EXT for S Curve Test
     input CLK_EXT,
+    //*** ADC
+    input [11:0] ADC_DATA,
+    input ADC_OTR,
+    output ADC_CLK,
     //------Test Point-----//
     output [3:0] TP,
     //----LED indicator---//   
@@ -127,13 +131,13 @@ module FPGA_TOP(
     wire Microroc_powerpulsing_en;//
     wire Microroc_sel_readout_chn;//
     wire [1:0] Microroc_Trig_Coincid;//
-    wire [4:0] Microroc_Hold_Delay;//
+    wire [8:0] MicrorocHoldDelay;//
     wire Microroc_rst_cntb;//
     //wire Microroc_raz_en;//
     wire Microroc_Internal_or_External_raz_chn;//new add 20170308
     wire [1:0] Microroc_Internal_RAZ_Mode;//new add 20170309
     wire [1:0] Microroc_External_RAZ_Mode;//new add 20170309
-    wire [3:0] Microroc_External_RAZ_Delay_Time;//new add 20170309
+    wire [9:0] MicrorocExternalRazDelayTime;//new add 20170309
     wire Microroc_trig_en;//
     //wire [1:0] Microroc_raz_mode;//
     wire [7:0] Microroc_param_header;
@@ -169,6 +173,8 @@ module FPGA_TOP(
     wire [15:0] MaxPackageNumber;
     wire UsbForceMicrorocAcqReset;
     wire UsbMicrorocHold_en;
+    wire UsbAdcStart;
+    wire [3:0] UsbAdcStartDelayTime;
     usb_command_interpreter usb_control
     (
       .IFCLK(IFCLK),
@@ -191,7 +197,7 @@ module FPGA_TOP(
       .Microroc_sel_readout_chn(Microroc_sel_readout_chn),
       .Microroc_Trig_Coincid(Microroc_Trig_Coincid),
       .MicrorocHold_en(UsbMicrorocHold_en),
-      .MicrorocHoldDelay(Microroc_Hold_Delay),
+      .MicrorocHoldDelay(MicrorocHoldDelay),
       .Microroc_rst_cntb(Microroc_rst_cntb),
       //.Microroc_raz_en(Microroc_raz_en),      
       .Microroc_trig_en(Microroc_trig_en),
@@ -211,7 +217,7 @@ module FPGA_TOP(
       .Microroc_Internal_or_External_raz_chn(Microroc_Internal_or_External_raz_chn),
       .Microroc_Internal_RAZ_Mode(Microroc_Internal_RAZ_Mode),
       .Microroc_External_RAZ_Mode(Microroc_External_RAZ_Mode),
-      .MicrorocExternalRazDelayTime(Microroc_External_RAZ_Delay_Time),
+      .MicrorocExternalRazDelayTime(MicrorocExternalRazDelayTime),
       //.Microroc_Internal_raz_chn_en(Microroc_Internal_raz_chn_en),
       .Microroc_RS_or_Discri(Microroc_RS_or_Discri),
       .Microroc_NOR64_or_Disc(Microroc_NOR64_or_Disc),
@@ -241,6 +247,9 @@ module FPGA_TOP(
       .MaxPackageNumber(MaxPackageNumber),
       //*** Reset Microroc AutoAcq and ReadRam Module
       .ForceMicrorocAcqReset(UsbForceMicrorocAcqReset),
+      //*** Adc Control
+      .AdcStartAcq(UsbAdcStart),
+      .AdcStartDelayTime(UsbAdcStartDelayTime),
       /*----------------------------*/
       .LED(LED[3:0])
     );    
@@ -378,6 +387,7 @@ module FPGA_TOP(
     (
       .Clk(Clk),
       .Clk_5M(Clk_5M),
+      .Clk_500M(Clk_500M),
       .reset_n(reset_n),
       .MicrorocForceReset(MicrorocForceReset),// New add by wyu 20170519
       //--------Microroc slow control registers interaface----------//
@@ -439,7 +449,7 @@ module FPGA_TOP(
       //------Hold gen interface-----//
       .Hold_en(UsbMicrorocHold_en),
       .Trig_Coincid(Microroc_Trig_Coincid),//2bit
-      .Hold_delay(Microroc_Hold_Delay),//5bit //hold delay,maxium 800ns
+      .Hold_delay(MicrorocHoldDelay),//5bit //hold delay,maxium 800ns
       //------fifo interface-----//
       .ext_fifo_full(UsbDataFifoFull),
       .parallel_data(MicrorocAcqData),//16bit
@@ -450,7 +460,7 @@ module FPGA_TOP(
       .Force_RAZ(ForceExtRaz),
       .Trig_en(Microroc_trig_en),
       .Raz_mode(Microroc_External_RAZ_Mode),//2bit//modefied by wyu 20170309
-      .External_RAZ_Delay_Time(Microroc_External_RAZ_Delay_Time),//new added by wyu 20170309
+      .External_RAZ_Delay_Time(MicrorocExternalRazDelayTime),//new added by wyu 20170309
       .Config_Done(MicrorocConfigDone),
       /*---Slow control and ReadReg---*/
       .SELECT(SELECT), //select = 1,slowcontrol register; select = 0,read register
@@ -499,6 +509,8 @@ module FPGA_TOP(
     /*------------ Sweep Test Instantiation --------------*/
     wire [15:0] OutUsbExtFifoData;
     wire OutUsbExtFifoData_en;
+    wire MicrorocHold;
+    assign MicrorocHold = HOLD;
     Controller_Top Microroc_Control(
       .Clk(Clk),
       .Clk_5M(Clk_5M),
@@ -555,7 +567,14 @@ module FPGA_TOP(
       .CLK_EXT(CLK_EXT),
       .out_trigger0b(OUT_TRIG0B),
       .out_trigger1b(OUT_TRIG1B),
-      .out_trigger2b(OUT_TRIG2B)
+      .out_trigger2b(OUT_TRIG2B),
+      //*** ADC
+      .UsbStartAdc(UsbAdcStart),
+      .Hold(MicrorocHold),
+      .AdcStartDelay(UsbAdcStartDelayTime),
+      .ADC_DATA(ADC_DATA),
+      .ADC_OTR(ADC_OTR),
+      .ADC_CLK(ADC_CLK)
     );
     /*------------ S Curve Test Instantiation ------------*/
     // This aera is for S Curve test, including SCurve-Test top. 

@@ -17,7 +17,28 @@ module ADC_AD9220
   output reg [11:0] data
 );
 //Generate ADC frequency a quarter of Clk, ADC_CLK = 10MHz
-reg [1:0] cnt;
+reg AdcClockCount;
+reg AdcClock_r;
+always @(posedge Clk or negedge reset_n) begin
+  if(~reset_n) begin
+    AdcClockCount <= 1'b0;
+    AdcClock_r <= 1'b0;
+  end
+  else if(~start) begin
+    AdcClockCount <= 1'b0;
+    AdcClock_r <= 1'b0;
+  end
+  else if(AdcClockCount == 1'b0) begin
+    AdcClock_r <= ~AdcClock_r;
+    AdcClockCount <= ~AdcClockCount;
+  end
+  else begin
+    AdcClock_r <= AdcClock_r;
+    AdcClockCount <= ~AdcClockCount;
+  end
+end
+assign ADC_CLK = AdcClock_r;
+/*reg [1:0] cnt;
 always @ (posedge Clk , negedge reset_n) begin
   if(~reset_n)
     cnt <= 2'b0;
@@ -27,7 +48,7 @@ always @ (posedge Clk , negedge reset_n) begin
   else
     cnt <= 2'b0;
 end
-assign ADC_CLK = cnt[1];
+assign ADC_CLK = cnt[1];*/
 reg [3:0] delay_cnt;
 reg [1:0] State;
 localparam [1:0] Idle = 2'b00,
@@ -44,7 +65,7 @@ always @ (posedge Clk , negedge reset_n) begin
     case(State)
       Idle:begin
         if(start) begin
-          if(delay_cnt < 4'd15) begin //first time Pipeline delay 3 clock cycles
+          if(delay_cnt < 4'd12) begin //first time Pipeline delay 3 clock cycles
             delay_cnt <= delay_cnt + 1'b1;
             State <= Idle;
           end
