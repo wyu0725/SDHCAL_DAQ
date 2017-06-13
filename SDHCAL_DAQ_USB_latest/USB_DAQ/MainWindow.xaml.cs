@@ -76,7 +76,7 @@ namespace USB_DAQ
         private const int HeaderLength = 1 * 2;//16-bits
         private const int ChannelLength = 1 * 2;//16-bits
         private const int TailLength = 1 * 2;//16-bits
-        
+        private static bool IsAdcStart = false;
 
         //SC Parameter
         
@@ -3024,18 +3024,107 @@ namespace USB_DAQ
 
         private async void btnStartAdc_Click(object sender, RoutedEventArgs e)
         {
-            Regex rxInt = new Regex(rx_Integer);
-            bool IsDelayLegeal = rxInt.IsMatch(txtStartDelay.Text) && (int.Parse(txtStartDelay.Text) < 400);
-            int AdcStartDelay;
-            if(IsDelayLegeal)
+            if (IsAdcStart)
             {
-                AdcStartDelay = int.Parse(txtStartDelay.Text) / 25;
+                #region Set ADC Delay
+                Regex rxInt = new Regex(rx_Integer);
+                bool IsDelayLegeal = rxInt.IsMatch(txtStartDelay.Text) && (int.Parse(txtStartDelay.Text) < 400);
+                int AdcStartDelay;
+                if (IsDelayLegeal)
+                {
+                    AdcStartDelay = int.Parse(txtStartDelay.Text) / 25;
+                }
+                else
+                {
+                    AdcStartDelay = 2;
+                }
+                byte[] CommandBytes = ConstCommandByteArray(0xA8, (byte)AdcStartDelay);
+                bool bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                if (bResult)
+                {
+                    string report = string.Format("Set ADC start delay :{0}ns\n", AdcStartDelay * 25);
+                    txtReport.AppendText(report);
+                }
+                else
+                {
+                    MessageBox.Show("Set ADC start delay failure, please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                #endregion
+                #region Set Hold Parameter
+                Regex rx_int = new Regex(rx_Integer);
+                bool Is_Hold_legal = rx_int.IsMatch(txtHold_delay.Text);
+                if (Is_Hold_legal)
+                {
+                    int DelayTime = Int32.Parse(txtHold_delay.Text) / 2; //除以2ns
+                    byte DelayTime1 = (byte)(DelayTime & 31);//31 = 0x1F
+                    byte DelayTime2 = (byte)((DelayTime >> 4) & 47);//47 = 0x2F
+                    byte DelayTime3 = (byte)((DelayTime >> 8) & 49);//49 = 0x31
+                    CommandBytes = ConstCommandByteArray(0xA6, DelayTime1);
+                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                    if (!bResult)
+                    {
+                        MessageBox.Show("Set Hold delay failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+                    CommandBytes = ConstCommandByteArray(0xA6, DelayTime2);
+                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                    if (!bResult)
+                    {
+                        MessageBox.Show("Set Hold delay failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+                    CommandBytes = ConstCommandByteArray(0xA6, DelayTime3);
+                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                    if (bResult)
+                    {
+                        string report = string.Format("Set Hold Delay Time:{0}ns\n", DelayTime * 2);
+                        txtReport.AppendText(report);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Set Hold delay failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+                    int TrigCoincid = cbxTrig_Coincid.SelectedIndex + 160;//160 = 0xA0
+                    CommandBytes = ConstCommandByteArray(0xA5, (byte)TrigCoincid);
+                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                    if (bResult)
+                    {
+                        string report = string.Format("Set Trigger Coincidence : {0}\n", cbxTrig_Coincid.Text);
+                        txtReport.AppendText(report);
+                    }
+                    else
+                    {
+                        MessageBox.Show("set Trigger Coincid failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+
+                }
+                else
+                {
+                    MessageBox.Show("Illegal Hold delay, please re-type(Integer:0--650,step:2ns)", "Illegal input", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                #endregion
+                #region Start Acq
+                CommandBytes = ConstCommandByteArray(0xE0, 0xF2);
+                bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                if (bResult)
+                {
+                    btnAcqStart.Content = "ADC Stop";
+                    btnAcqStart.Background = Brushes.Blue;
+                    IsAdcStart = true;
+                    await 
+                }
+
+                #endregion
             }
             else
             {
-                AdcStartDelay = 2;
+
             }
-            byte[] CommandBytes
+
         }
         //control channel calibration
 
