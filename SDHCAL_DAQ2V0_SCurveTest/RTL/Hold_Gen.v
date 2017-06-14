@@ -53,7 +53,7 @@ localparam [1:0] Idle = 2'b00,
 always @ (posedge Clk , negedge reset_n) begin
   if(~reset_n) begin
     DelayCnt <= 9'b0;
-    HoldCnt <= 15'b0;
+    HoldCnt <= 16'b0;
     Hold_r <= 1'b0;
     State <= Idle;
   end

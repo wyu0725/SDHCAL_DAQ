@@ -23,7 +23,7 @@
 module Microroc_top(
       input Clk,
       input Clk_5M,
-      input Clk_500M, // 500M Clock for trig sync and hold generate
+      input Clk_320M, // 400M Clock for trig sync and hold generate
       input reset_n,
       input MicrorocForceReset,// New add by wyu 20170519
       //--------Microroc slow control registers interaface----------//
@@ -329,7 +329,7 @@ RamReadOut RAM_Read
 wire Single_RAZ_en;
 Hold_Gen Hold_Gen
 (
-   .Clk(Clk_500M),          //500MHz
+   .Clk(Clk_320M),          //400MHz
    .reset_n(reset_n),
    .Hold_en(Hold_en),
    .TrigCoincid(Trig_Coincid),

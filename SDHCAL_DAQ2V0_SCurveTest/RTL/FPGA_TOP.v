@@ -96,7 +96,7 @@ module FPGA_TOP(
     /*----Clock management instantiation----*/
     wire Clk;
     wire Clk_5M;
-    wire Clk_500M;
+    wire Clk_320M;
     wire IFCLK;
     wire reset_n;
     wire CLKGOOD;
@@ -107,7 +107,7 @@ module FPGA_TOP(
         .rst_n(rst_n),
         .Clk(Clk),        //40M global clock
         .Clk_5M(Clk_5M),  //5M slow clock
-        .Clk_500M(Clk_500M), // 500M Clock for out_trigger sync and hold generate
+        .Clk_320M(Clk_320M), // 500M Clock for out_trigger sync and hold generate
         .IFCLK(IFCLK),    //IFCLK domain 48M
         .usb_ifclk(usb_ifclk),
         .reset_n(reset_n),//golbal reset
@@ -387,7 +387,7 @@ module FPGA_TOP(
     (
       .Clk(Clk),
       .Clk_5M(Clk_5M),
-      .Clk_500M(Clk_500M),
+      .Clk_320M(Clk_320M),
       .reset_n(reset_n),
       .MicrorocForceReset(MicrorocForceReset),// New add by wyu 20170519
       //--------Microroc slow control registers interaface----------//
