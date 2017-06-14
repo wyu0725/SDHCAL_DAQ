@@ -162,14 +162,6 @@ set_input_delay -clock [get_clocks Clk_40M] -min -add_delay 12.000 [get_ports EN
 set_input_delay -clock [get_clocks Clk_40M] -max -add_delay 18.000 [get_ports END_READOUT1]
 set_input_delay -clock [get_clocks Clk_40M] -min -add_delay 12.000 [get_ports END_READOUT2]
 set_input_delay -clock [get_clocks Clk_40M] -max -add_delay 18.000 [get_ports END_READOUT2]
-set_input_delay -clock [get_clocks Clk_40M] -min -add_delay 12.000 [get_ports EXT_TRIGB]
-set_input_delay -clock [get_clocks Clk_40M] -max -add_delay 18.000 [get_ports EXT_TRIGB]
-set_input_delay -clock [get_clocks Clk_40M] -min -add_delay 12.000 [get_ports OUT_TRIG0B]
-set_input_delay -clock [get_clocks Clk_40M] -max -add_delay 18.000 [get_ports OUT_TRIG0B]
-set_input_delay -clock [get_clocks Clk_40M] -min -add_delay 12.000 [get_ports OUT_TRIG1B]
-set_input_delay -clock [get_clocks Clk_40M] -max -add_delay 18.000 [get_ports OUT_TRIG1B]
-set_input_delay -clock [get_clocks Clk_40M] -min -add_delay 12.000 [get_ports OUT_TRIG2B]
-set_input_delay -clock [get_clocks Clk_40M] -max -add_delay 18.000 [get_ports OUT_TRIG2B]
 set_input_delay -clock [get_clocks Clk_40M] -min -add_delay 12.000 [get_ports TRANSMITON1B]
 set_input_delay -clock [get_clocks Clk_40M] -max -add_delay 18.000 [get_ports TRANSMITON1B]
 set_input_delay -clock [get_clocks Clk_40M] -min -add_delay 12.000 [get_ports TRANSMITON2B]
@@ -185,8 +177,6 @@ set_output_delay -clock [get_clocks Clk_40M] -min -add_delay 2.000 [get_ports {L
 set_output_delay -clock [get_clocks Clk_40M] -max -add_delay 12.000 [get_ports {LED[*]}]
 #set_output_delay -clock [get_clocks usb_clkout] -min -add_delay 2.000 [get_ports {usb_fd[*]}]
 #set_output_delay -clock [get_clocks usb_clkout] -max -add_delay 10.000 [get_ports {usb_fd[*]}]
-set_output_delay -clock [get_clocks Clk_40M] -min -add_delay 2.000 [get_ports HOLD]
-set_output_delay -clock [get_clocks Clk_40M] -max -add_delay 12.000 [get_ports HOLD]
 set_output_delay -clock [get_clocks Clk_40M] -min -add_delay 2.000 [get_ports PWR_ON_A]
 set_output_delay -clock [get_clocks Clk_40M] -max -add_delay 12.000 [get_ports PWR_ON_A]
 set_output_delay -clock [get_clocks Clk_40M] -min -add_delay 2.000 [get_ports PWR_ON_ADC]
@@ -293,5 +283,47 @@ set_property MARK_DEBUG false [get_nets {Microroc_Control/Microroc_SCurveTest/SC
 set_property MARK_DEBUG false [get_nets Microroc_Control/Microroc_SCurveTest/SCurve_Data_wr_en_debug]
 set_property MARK_DEBUG false [get_nets Microroc_Control/Microroc_SCurveTest/SCurve_Data_fifo_rd_en_debug]
 
+
+
+
+set_property IOSTANDARD LVCMOS33 [get_ports {ADC_DATA[11]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {ADC_DATA[10]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {ADC_DATA[9]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {ADC_DATA[8]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {ADC_DATA[7]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {ADC_DATA[6]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {ADC_DATA[5]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {ADC_DATA[4]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {ADC_DATA[3]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {ADC_DATA[2]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {ADC_DATA[1]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {ADC_DATA[0]}]
+set_property PACKAGE_PIN AA11 [get_ports {ADC_DATA[11]}]
+set_property PACKAGE_PIN AB12 [get_ports {ADC_DATA[10]}]
+set_property PACKAGE_PIN AB13 [get_ports {ADC_DATA[9]}]
+set_property PACKAGE_PIN AA13 [get_ports {ADC_DATA[8]}]
+set_property PACKAGE_PIN AA14 [get_ports {ADC_DATA[7]}]
+set_property PACKAGE_PIN AB15 [get_ports {ADC_DATA[6]}]
+set_property PACKAGE_PIN AA15 [get_ports {ADC_DATA[5]}]
+set_property PACKAGE_PIN AB16 [get_ports {ADC_DATA[4]}]
+set_property PACKAGE_PIN AA16 [get_ports {ADC_DATA[3]}]
+set_property PACKAGE_PIN AB17 [get_ports {ADC_DATA[2]}]
+set_property PACKAGE_PIN AB18 [get_ports {ADC_DATA[1]}]
+set_property PACKAGE_PIN AA18 [get_ports {ADC_DATA[0]}]
+set_property IOSTANDARD LVCMOS33 [get_ports ADC_CLK]
+set_property IOSTANDARD LVCMOS33 [get_ports ADC_OTR]
+set_property PACKAGE_PIN AA19 [get_ports ADC_CLK]
+set_property PACKAGE_PIN AB11 [get_ports ADC_OTR]
+
+
+create_clock -period 3.125 -name Clk_320M -waveform {0.000 1.563} [get_nets Clk_320M]
+set_output_delay -clock [get_clocks Clk_320M] -add_delay 0.000 [get_ports HOLD]
+
+set_input_delay -clock [get_clocks Clk_320M] -add_delay 0.000 [get_ports OUT_TRIG0B]
+set_input_delay -clock [get_clocks Clk_320M] -add_delay 0.000 [get_ports OUT_TRIG1B]
+set_input_delay -clock [get_clocks Clk_320M] -add_delay 0.000 [get_ports OUT_TRIG2B]
+
+
+set_input_delay -clock [get_clocks Clk_320M] -add_delay 0.000 [get_ports EXT_TRIGB]
 
 
