@@ -1,7 +1,7 @@
 Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 --------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2016.3 (win64) Build 1682563 Mon Oct 10 19:07:27 MDT 2016
-| Date         : Wed Jun 14 22:07:04 2017
+| Date         : Thu Jun 15 10:43:42 2017
 | Host         : WYU running 64-bit major release  (build 9200)
 | Command      : report_clock_utilization -file FPGA_TOP_clock_utilization_routed.rpt
 | Design       : FPGA_TOP
@@ -297,9 +297,9 @@ set_property LOC BUFGCTRL_X0Y0 [get_cells Clk_Gen/BUFG_gclk]
 set_property LOC BUFGCTRL_X0Y16 [get_cells Clk_Gen/BUFG_IFCLK]
 
 # Location of IO Primitives which is load of clock spine
-set_property LOC IOB_X0Y124 [get_cells Microroc_u1/OBUFDS_Clk5]
-set_property LOC IOB_X0Y132 [get_cells Microroc_u1/OBUFDS_Clk40]
 set_property LOC IOB_X1Y121 [get_cells usb_ifclk_OBUF_inst]
+set_property LOC IOB_X0Y132 [get_cells Microroc_u1/OBUFDS_Clk40]
+set_property LOC IOB_X0Y124 [get_cells Microroc_u1/OBUFDS_Clk5]
 
 # Location of clock ports
 set_property LOC IOB_X0Y28 [get_ports Clk_40M]

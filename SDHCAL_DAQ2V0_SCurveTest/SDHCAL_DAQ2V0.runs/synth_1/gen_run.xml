@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <GenRun Id="synth_1" LaunchPart="xc7a100tfgg484-2" LaunchTime="1497445959">
-  <File Type="RDS-PROPCONSTRS" Name="FPGA_TOP_drc_synth.rpt"/>
   <File Type="PA-TCL" Name="FPGA_TOP.tcl"/>
+  <File Type="RDS-PROPCONSTRS" Name="FPGA_TOP_drc_synth.rpt"/>
   <File Type="RDS-RDS" Name="FPGA_TOP.vds"/>
   <File Type="RDS-UTIL" Name="FPGA_TOP_utilization_synth.rpt"/>
   <File Type="RDS-UTIL-PB" Name="FPGA_TOP_utilization_synth.pb"/>
@@ -229,6 +229,6 @@
     <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2016"/>
     <Step Id="synth_design"/>
   </Strategy>
-  <BlockFileSet Type="BlockSrcs" Name="usb_cmd_fifo"/>
   <BlockFileSet Type="BlockSrcs" Name="param_store_fifo"/>
+  <BlockFileSet Type="BlockSrcs" Name="usb_cmd_fifo"/>
 </GenRun>
