@@ -9,6 +9,7 @@ module Hold_Gen
   input Hold_en, // Enable Hold output
   input [1:0] TrigCoincid,
   input [8:0] HoldDelay,//hold delay,maxium 800ns
+  input [15:0] HoldTime,
   input OUT_TRIG0B,   //active, low
   input OUT_TRIG1B,   //active, low
   input OUT_TRIG2B,   //active, low
