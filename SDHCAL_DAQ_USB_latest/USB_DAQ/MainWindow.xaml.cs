@@ -1717,10 +1717,10 @@ namespace USB_DAQ
             bool Is_Hold_legal = rx_int.IsMatch(txtHold_delay.Text);
             if (Is_Hold_legal)
             {
-                int DelayTime = Int32.Parse(txtHold_delay.Text)/2; //除以2ns
-                byte DelayTime1 = (byte)(DelayTime & 31);//31 = 0x1F
-                byte DelayTime2 = (byte)((DelayTime >> 4) & 47);//47 = 0x2F
-                byte DelayTime3 = (byte)((DelayTime >> 8) & 49);//49 = 0x31
+                int DelayTime = (int)(int.Parse(txtHold_delay.Text)/3.125); //除以3.125ns
+                byte DelayTime1 = (byte)(DelayTime & 15);//15 = 0xF
+                byte DelayTime2 = (byte)(((DelayTime >> 4) & 15) | 16);//16 = 0x10
+                byte DelayTime3 = (byte)(((DelayTime >> 8) & 1) | 32);//32 = 0x20
                 byte[] CommandBytes = ConstCommandByteArray(0xA6, DelayTime1);
                 bool bResult = CommandSend(CommandBytes, CommandBytes.Length);
                 if (!bResult)
@@ -3077,7 +3077,7 @@ namespace USB_DAQ
                 if (RemainPackageNum != 0)
                 {
                     bResult = false;
-                    byte[] RemainByte = new byte[512];
+                    byte[] RemainByte = new byte[2048];
                     while (!DataRecieve(RemainByte, RemainByte.Length) & IsSlowAcqStart) ;
                     byte[] RemainByteWrite = new byte[RemainPackageNum];
                     for (int i = 0; i < RemainPackageNum; i++)
