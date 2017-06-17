@@ -26,7 +26,9 @@ module TrigCoincid(
     input OUT_TRIG2B,
     input EXT_TRIGB,
     input [1:0] TrigCoincid,
-    output reg TrigOut
+    output reg TrigOut,
+    output TrigAnd,
+    output TrigOr
     );
     always @(*) begin
       case(TrigCoincid)
@@ -36,4 +38,6 @@ module TrigCoincid(
         2'b11: TrigOut = EXT_TRIGB;
       endcase
     end
+    assign TrigAnd = (~OUT_TRIG0B) && (~OUT_TRIG1B) && (~OUT_TRIG2B);
+    assign TigOr = (~OUT_TRIG0B) || (~OUT_TRIG1B) || (~OUT_TRIG2B);
 endmodule
