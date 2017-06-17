@@ -24,16 +24,25 @@
 module RazGen(
     input Clk,
     input reset_n,
+    input TrigIn,
     input ExternalRaz_en,
     input [3:0] ExternalRazDelayTime,
     output reg SingleRaz_en
     );
+    reg TridIn1;
+    reg TrigIn2;
     always @(posedge Clk or negedge reset_n) begin
       if(~reset_n) begin
+        TrigIn1 <= 1'b0;
+        TrigIn2 <= 1'b0;
       end
       else begin
+        TrigIn1 <= TrigIn;
+        TrigIn2 <= TrigIn1;
       end
     end
+    wire TrigInRise;
+    assign TrigInRise = ExternalRaz_en &&TrigIn1 && (~TrigIn2);
     // Generate the delayed enable signal
     reg [3:0] RazDelayCount;
     always @(posedge Clk or negedge reset_n) begin
