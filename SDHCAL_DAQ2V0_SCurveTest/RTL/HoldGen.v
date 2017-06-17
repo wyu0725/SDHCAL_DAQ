@@ -42,7 +42,7 @@ module HoldGen(
       end
     end
     wire TrigDelayed = TrigShift[HoldDelay];
-    wire ResetHold;
+    reg ResetHold;
     reg [15:0] HoldTimeCount;
     always @(posedge Clk or negedge reset_n) begin
       if(~reset_n) begin
@@ -55,14 +55,14 @@ module HoldGen(
       end
       else if((HoldTimeCount < HoldTime) && (HoldOut || HoldTimeCount != 0)) begin
         ResetHold <= 1'b0;
-        HoldTimeCount <= HoldDelayCount + 1'b1;
+        HoldTimeCount <= HoldTimeCount + 1'b1;
       end
       else begin
         ResetHold <= 1'b0;
         HoldTimeCount <= 16'b0;
       end
     end
-    assign HoldOut <= (HoldOut || TrigDelayed) && (~ResetHold);
+    assign HoldOut = Hold_en && (HoldOut || TrigDelayed) && (~ResetHold);
     /*reg TrigIn1;
     reg TrigIn2;
     always @(posedge Clk_320M or negedge reset_n) begin
