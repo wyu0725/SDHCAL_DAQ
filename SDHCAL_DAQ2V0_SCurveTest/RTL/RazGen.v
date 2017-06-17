@@ -29,7 +29,7 @@ module RazGen(
     input [3:0] ExternalRazDelayTime,
     output reg SingleRaz_en
     );
-    reg TridIn1;
+    reg TrigIn1;
     reg TrigIn2;
     always @(posedge Clk or negedge reset_n) begin
       if(~reset_n) begin
@@ -54,8 +54,8 @@ module RazGen(
         RazDelayCount <= 4'b0;
         SingleRaz_en <= 1'b1;
       end
-      else if(RazDelayuCount < ExternalRazDelayTime && (TrigAndRise || RazDelayCount != 4'b0)) begin
-        SignelRaz_en <= 1'b0;
+      else if(RazDelayCount < ExternalRazDelayTime && (TrigInRise || RazDelayCount != 4'b0)) begin
+        SingleRaz_en <= 1'b0;
         RazDelayCount <= RazDelayCount + 1'b1;
       end
       else begin
