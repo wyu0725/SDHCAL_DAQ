@@ -55,7 +55,7 @@ wire LOCKED;
       // CLKOUT0_DIVIDE - CLKOUT6_DIVIDE: Divide amount for each CLKOUT (1-128)
       .CLKOUT1_DIVIDE(16), //40M
       .CLKOUT2_DIVIDE(128),//5M
-      .CLKOUT3_DIVIDE(2),
+      .CLKOUT3_DIVIDE(4),
       .CLKOUT4_DIVIDE(1),
       .CLKOUT5_DIVIDE(1),
       .CLKOUT6_DIVIDE(1),
