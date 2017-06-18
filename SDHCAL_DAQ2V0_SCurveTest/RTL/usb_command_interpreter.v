@@ -39,9 +39,10 @@ module usb_command_interpreter(
       output reg [63:0] Microroc_param_Read_reg,
       output reg Microroc_powerpulsing_en,
       output reg Microroc_sel_readout_chn,
-      output reg [1:0] Microroc_Trig_Coincid,
+      output reg [1:0] MicrorocTrigCoincid,
       output reg MicrorocHold_en,
-      output reg [8:0] MicrorocHoldDelay,
+      output reg [7:0] MicrorocHoldDelay,
+      output reg [15:0] MicrorocHoldTime,
       output reg Microroc_rst_cntb,
       //output reg Microroc_raz_en,
       output reg Microroc_trig_en,
@@ -61,7 +62,7 @@ module usb_command_interpreter(
       output reg Microroc_Internal_or_External_raz_chn,
       output reg [1:0] Microroc_Internal_RAZ_Mode,
       output reg [1:0] Microroc_External_RAZ_Mode,
-      output reg [9:0] MicrorocExternalRazDelayTime,
+      output reg [3:0] MicrorocExternalRazDelayTime,
       //new add by wyu 20170308, SC parameter 336  Select latched (RS : 1) or direct output (trigger : 0)
       output reg Microroc_RS_or_Discri,
       //new add by wyu 20170308, SC parameter 575  Select Channel Trigger selected by Read Register (0) or NOR64 output (1)
@@ -398,11 +399,11 @@ end
 //Microroc_Trig_Coincid
 always @(posedge clk or negedge reset_n) begin
   if (~reset_n)
-    Microroc_Trig_Coincid <= 2'b00;
+    MicrorocTrigCoincid <= 2'b00;
   else if (fifo_rden && USB_COMMAND[15:4] == 12'hA5A)
-    Microroc_Trig_Coincid <= USB_COMMAND[1:0];
+    MicrorocTrigCoincid <= USB_COMMAND[1:0];
   else 
-    Microroc_Trig_Coincid <= Microroc_Trig_Coincid;
+    MicrorocTrigCoincid <= MicrorocTrigCoincid;
 end
 // *** Microroc hold enbale
 always @(posedge clk or negedge reset_n) begin
@@ -418,15 +419,28 @@ end
 //Microroc_Hold_Delay
 always @(posedge clk or negedge reset_n) begin
   if (~reset_n) 
-    MicrorocHoldDelay <= 9'b0;
+    MicrorocHoldDelay <= 8'b0;
   else if(fifo_rden && USB_COMMAND[15:4] == 12'hA60) 
     MicrorocHoldDelay[3:0] <= USB_COMMAND[3:0];
   else if(fifo_rden && USB_COMMAND[15:4] == 12'hA61)
     MicrorocHoldDelay[7:4] <= USB_COMMAND[3:0];
-  else if(fifo_rden && USB_COMMAND[15:4] == 12'hA62)
-    MicrorocHoldDelay[8] <= USB_COMMAND[0];
   else 
     MicrorocHoldDelay <= MicrorocHoldDelay;
+end
+// Hold Time
+always @(posedge clk or negedge reset_n) begin
+  if(~reset_n)
+    MicrorocHoldTime <= 16'b0;
+  else if(fifo_rden && USB_COMMAND[15:4] == 12'hA64)
+    MicrorocHoldTime[3:0] <= USB_COMMAND[3:0];
+  else if(fifo_rden && USB_COMMAND[15:4] == 12'hA65)
+    MicrorocHoldTime[7:4] <= USB_COMMAND[3:0];
+  else if(fifo_rden && USB_COMMAND[15:4] == 12'hA66)
+    MicrorocHoldTime[11:8] <= USB_COMMAND[3:0];
+  else if(fifo_rden && USB_COMMAND[15:4] == 12'hA67)
+    MicrorocHoldTime[15:12] <= USB_COMMAND[3:0];
+  else
+    MicrorocHoldTime <= MicrorocHoldTime;
 end
 //Microroc_rst_cntb
 always @(posedge clk or negedge reset_n) begin
@@ -487,10 +501,6 @@ always @(posedge clk or negedge reset_n) begin
     MicrorocExternalRazDelayTime <= 10'd0;
   else if(fifo_rden && USB_COMMAND[15:4] == 12'hA8D)
     MicrorocExternalRazDelayTime[3:0] <= USB_COMMAND[3:0];
-  else if(fifo_rden && USB_COMMAND[15:4] == 12'hA8E)
-    MicrorocExternalRazDelayTime[7:4] <= USB_COMMAND[3:0];
-  else if(fifo_rden && USB_COMMAND[15:4] == 12'hA8F)
-    MicrorocExternalRazDelayTime[9:8] <= USB_COMMAND[1:0];
   else
     MicrorocExternalRazDelayTime <= MicrorocExternalRazDelayTime;
 end

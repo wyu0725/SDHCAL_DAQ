@@ -113,8 +113,7 @@ module FPGA_TOP(
         .reset_n(reset_n),//golbal reset
         .CLKGOOD(CLKGOOD)  //clock good indicator
     );
-    assign LED[4] = !CLKGOOD;
-    //assign LED[5] = 1'b1;
+    assign LED[4] = !CLKGOOD; 
     /*--- usb_command_interpreter instantiation ---*/
     wire in_from_usb_Ctr_rd_en;
     wire [15:0] in_from_usb_ControlWord;    
@@ -130,14 +129,15 @@ module FPGA_TOP(
     wire [63:0] Microroc_param_Read_reg;//
     wire Microroc_powerpulsing_en;//
     wire Microroc_sel_readout_chn;//
-    wire [1:0] Microroc_Trig_Coincid;//
-    wire [8:0] MicrorocHoldDelay;//
+    wire [1:0] MicrorocTrigCoincid;//
+    wire [7:0] MicrorocHoldDelay;//
+    wire [15:0] MicrorocHoldTime;
     wire Microroc_rst_cntb;//
     //wire Microroc_raz_en;//
     wire Microroc_Internal_or_External_raz_chn;//new add 20170308
     wire [1:0] Microroc_Internal_RAZ_Mode;//new add 20170309
     wire [1:0] Microroc_External_RAZ_Mode;//new add 20170309
-    wire [9:0] MicrorocExternalRazDelayTime;//new add 20170309
+    wire [3:0] MicrorocExternalRazDelayTime;//new add 20170309
     wire Microroc_trig_en;//
     //wire [1:0] Microroc_raz_mode;//
     wire [7:0] Microroc_param_header;
@@ -195,9 +195,10 @@ module FPGA_TOP(
       .Microroc_param_Read_reg(Microroc_param_Read_reg),
       .Microroc_powerpulsing_en(Microroc_powerpulsing_en),
       .Microroc_sel_readout_chn(Microroc_sel_readout_chn),
-      .Microroc_Trig_Coincid(Microroc_Trig_Coincid),
+      .MicrorocTrigCoincid(MicrorocTrigCoincid),
       .MicrorocHold_en(UsbMicrorocHold_en),
       .MicrorocHoldDelay(MicrorocHoldDelay),
+      .MicrorocHoldTime(MicrorocHoldTime),
       .Microroc_rst_cntb(Microroc_rst_cntb),
       //.Microroc_raz_en(Microroc_raz_en),      
       .Microroc_trig_en(Microroc_trig_en),
@@ -366,6 +367,21 @@ module FPGA_TOP(
       //.HoldGen_out_trigger1b(),
       //.HoldGen_out_trigger2b()
     );*/
+
+       //--- Trig Coincide ---//
+    wire TrigAnd;
+    wire TrigOr;
+    wire TrigOut;
+    TrigCoincid TrigSelect(
+      .OUT_TRIG0B(OUT_TRIG0B),
+      .OUT_TRIG1B(OUT_TRIG1B),
+      .OUT_TRIG2B(OUT_TRIG2B),
+      .EXT_TRIGB(EXT_TRIGB),
+      .TrigCoincid(MicrorocTrigCoincid),
+      .TrigOut(TrigOut),
+      .TrigAnd(TrigAnd),
+      .TrigOr(TrigOr)
+    );
     //------Microroc_top instantiation--------------//
     wire MicrorocConfigDone;
     //Test Port
@@ -447,9 +463,15 @@ module FPGA_TOP(
       .Acq_start(MicrorocAcqStartStop), //level or a pulse?
       .AcqStart_time(Microroc_AcqStart_time),//Acquisition time, get it from USB, the default value is 8
       //------Hold gen interface-----//
+      .TrigCoincideIn(TrigOut),
+      .TrigAnd(TrigAnd),
+      .TrigOr(TrigOr),
       .Hold_en(UsbMicrorocHold_en),
-      .Trig_Coincid(Microroc_Trig_Coincid),//2bit
-      .Hold_delay(MicrorocHoldDelay),//5bit //hold delay,maxium 800ns
+      .HoldDelay(MicrorocHoldDelay),
+      .HoldTime(MicrorocHoldTime),
+      //.Hold_en(UsbMicrorocHold_en),
+      //.Trig_Coincid(Microroc_Trig_Coincid),//2bit
+      //.Hold_delay(MicrorocHoldDelay),//5bit //hold delay,maxium 800ns
       //------fifo interface-----//
       .ext_fifo_full(UsbDataFifoFull),
       .parallel_data(MicrorocAcqData),//16bit
@@ -460,7 +482,7 @@ module FPGA_TOP(
       .Force_RAZ(ForceExtRaz),
       .Trig_en(Microroc_trig_en),
       .Raz_mode(Microroc_External_RAZ_Mode),//2bit//modefied by wyu 20170309
-      .External_RAZ_Delay_Time(MicrorocExternalRazDelayTime),//new added by wyu 20170309
+      .ExternalRazDelayTime(MicrorocExternalRazDelayTime),//new added by wyu 20170309
       .Config_Done(MicrorocConfigDone),
       /*---Slow control and ReadReg---*/
       .SELECT(SELECT), //select = 1,slowcontrol register; select = 0,read register
@@ -487,10 +509,11 @@ module FPGA_TOP(
       .TRANSMITON1B(TRANSMITON1B),
       .TRANSMITON2B(TRANSMITON2B),
       //----hold gen---------//
-      .OUT_TRIG0B(OUT_TRIG0B),
+      /*.OUT_TRIG0B(OUT_TRIG0B),
       .OUT_TRIG1B(OUT_TRIG1B),
       .OUT_TRIG2B(OUT_TRIG2B),
       .EXT_TRIGB(EXT_TRIGB),//external pin
+      */
       .HOLD(HOLD),
       //--Trig gen---------------//
       .TRIG_EXT(TRIG_EXT),

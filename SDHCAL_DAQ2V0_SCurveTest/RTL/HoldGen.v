@@ -28,7 +28,7 @@ module HoldGen(
     input Hold_en,
     input [7:0] HoldDelay,
     input [15:0] HoldTime,
-    output HoldOut
+    output reg HoldOut
     );
     //reg [7:0] HoldDelayCount;
     reg [255:0] TrigShift;
@@ -62,7 +62,16 @@ module HoldGen(
         HoldTimeCount <= 16'b0;
       end
     end
-    assign HoldOut = Hold_en && (HoldOut || TrigDelayed) && (~ResetHold);
+    // 
+    always @(posedge TrigDelayed or negedge ResetHold) begin
+      if(~ResetHold)
+        HoldOut <= 1'b0;
+      else if(Hold_en)
+        HoldOut <= 1'b1;
+      else
+        HoldOut <= 1'b0;
+    end
+    //assign HoldOut = Hold_en && (HoldOut || TrigDelayed) && (~ResetHold);
     /*reg TrigIn1;
     reg TrigIn2;
     always @(posedge Clk_320M or negedge reset_n) begin

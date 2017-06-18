@@ -80,9 +80,13 @@ module Microroc_top(
       input Acq_start, //level or a pulse?
       input [15:0] AcqStart_time,  //Acquisition time, get from USB, default8
       //------Hold gen interface-----//
+      input TrigCoincideIn,
+      input TrigAnd,
+      input TrigOr,
       input Hold_en,
-      input [1:0] Trig_Coincid,
-      input [8:0] Hold_delay,//hold delay,maxium 800ns
+      //input [1:0] Trig_Coincid,
+      input [7:0] HoldDelay,//hold delay,maxium 800ns
+      input [15:0] HoldTime,
       //------fifo interface-----//
       input ext_fifo_full,
       output [15:0] parallel_data,
@@ -93,7 +97,7 @@ module Microroc_top(
       input Force_RAZ,
       input Trig_en,
       input [1:0] Raz_mode,
-      input [9:0] External_RAZ_Delay_Time,//Set delay time for external raz mode
+      input [3:0] ExternalRazDelayTime,//Set delay time for external raz mode
       output Config_Done,
       /*---Slow control and ReadReg---*/
       output SELECT, //select = 1,slowcontrol register; select = 0,read register
@@ -120,10 +124,11 @@ module Microroc_top(
       input TRANSMITON1B,
       input TRANSMITON2B,
       //----hold gen---------//
-      input OUT_TRIG0B,
+      /*input OUT_TRIG0B,
       input OUT_TRIG1B,
       input OUT_TRIG2B,
       input EXT_TRIGB,//external pin
+      */      
       output HOLD,
       //--Trig gen---------------//
       output TRIG_EXT,
@@ -326,23 +331,41 @@ RamReadOut RAM_Read
    .parallel_data(parallel_data),
    .parallel_data_en(parallel_data_en)
 );
-wire Single_RAZ_en;
-Hold_Gen Hold_Gen
-(
-   .Clk(Clk_320M),          //400MHz
-   .reset_n(reset_n),
-   .Hold_en(Hold_en),
-   .TrigCoincid(Trig_Coincid),
-   .HoldDelay(Hold_delay),//hold delay,maxium 800ns
-   .OUT_TRIG0B(OUT_TRIG0B),   //active, low
-   .OUT_TRIG1B(OUT_TRIG1B),   //active, low
-   .OUT_TRIG2B(OUT_TRIG2B),   //active, low
-   .Ext_TRIGB(EXT_TRIGB),    //active,low from SMA
-   .HOLD(HOLD),         //Hold signal, Active high
-   .ExternalRaz_en(Raz_en),//Gengerate the Single raz signal from the trigger falling edge. New add by wyu 20170309
-   .ExternalRazDelayTime(External_RAZ_Delay_Time),
-   .SingleRaz_en(Single_RAZ_en)
+HoldGen HoldGenerator(
+    .Clk(Clk),
+    .Clk_320M(Clk_320M),
+    .reset_n(reset_n),
+    .TrigIn(TrigCoincideIn),
+    .Hold_en(Hold_en),
+    .HoldDelay(HoldDelay),
+    .HoldTime(HoldTime),
+    .HoldOut(HOLD)
 );
+wire SingleRaz_en;
+RazGen RazGenerator(
+  .Clk(Clk),
+  .reset_n(reset_n),
+  .TrigIn(TrigOr),
+  .ExternalRaz_en(Raz_en),
+  .ExternalRazDelayTime(ExternalRazDelayTime),
+  .SingleRaz_en(SingleRaz_en)
+);
+/*HoldGen Hold_Gen
+(
+    .Clk(Clk_320M),          //400MHz
+    .reset_n(reset_n),
+    .Hold_en(Hold_en),
+    .TrigCoincid(Trig_Coincid),
+    .HoldDelay(Hold_delay),//hold delay,maxium 800ns
+    .OUT_TRIG0B(OUT_TRIG0B),   //active, low
+    .OUT_TRIG1B(OUT_TRIG1B),   //active, low
+    .OUT_TRIG2B(OUT_TRIG2B),   //active, low
+    .Ext_TRIGB(EXT_TRIGB),    //active,low from SMA
+    .HOLD(HOLD),         //Hold signal, Active high
+    .ExternalRaz_en(Raz_en),//Gengerate the Single raz signal from the trigger falling edge. New add by wyu 20170309
+    .ExternalRazDelayTime(External_RAZ_Delay_Time),
+    .SingleRaz_en(Single_RAZ_en)
+);*/
 
 wire Raz_chn;
 wire Val_evt;
@@ -360,7 +383,7 @@ Trig_Gen Trig_Gen
    .Clk(Clk),
    .reset_n(reset_n),
    .rst_cntb(rst_cntb),
-   .Raz_en(Single_RAZ_en),
+   .Raz_en(SingleRaz_en),
    .Force_RAZ(Force_RAZ),
    .Trig_en(Trig_en_i),//Modefied by wyu for RAM test
    .Raz_mode(Raz_mode),

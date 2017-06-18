@@ -43,7 +43,7 @@ assign usb_ifclk = IFCLK;
 
 wire pll_40;
 wire pll_5;
-wire Pll_320M;
+//wire Pll_320M;
 wire feedback;
 wire LOCKED;
 
@@ -55,11 +55,11 @@ wire LOCKED;
       // CLKOUT0_DIVIDE - CLKOUT6_DIVIDE: Divide amount for each CLKOUT (1-128)
       .CLKOUT1_DIVIDE(16), //40M
       .CLKOUT2_DIVIDE(128),//5M
-      .CLKOUT3_DIVIDE(1),
+      .CLKOUT3_DIVIDE(2),
       .CLKOUT4_DIVIDE(1),
       .CLKOUT5_DIVIDE(1),
       .CLKOUT6_DIVIDE(1),
-      .CLKOUT0_DIVIDE_F(2),    // Divide amount for CLKOUT0 (1.000-128.000).
+      .CLKOUT0_DIVIDE_F(1),    // Divide amount for CLKOUT0 (1.000-128.000).
                                   // 40M * 16 / 2 = 320M
       // CLKOUT0_DUTY_CYCLE - CLKOUT6_DUTY_CYCLE: Duty cycle for each CLKOUT (0.01-0.99).
       .CLKOUT0_DUTY_CYCLE(0.5),
@@ -84,13 +84,13 @@ wire LOCKED;
    )
    MMCME2_BASE_inst (
       // Clock Outputs: 1-bit (each) output: User configurable clock outputs
-      .CLKOUT0(Pll_320M),     // 1-bit output: CLKOUT0
+      .CLKOUT0(),     // 1-bit output: CLKOUT0
       .CLKOUT0B(),   // 1-bit output: Inverted CLKOUT0
       .CLKOUT1(pll_40),     // 1-bit output: CLKOUT1
       .CLKOUT1B(),   // 1-bit output: Inverted CLKOUT1
       .CLKOUT2(pll_5),     // 1-bit output: CLKOUT2
       .CLKOUT2B(),   // 1-bit output: Inverted CLKOUT2
-      .CLKOUT3(),     // 1-bit output: CLKOUT3
+      .CLKOUT3(Clk_320M),     // 1-bit output: CLKOUT3
       .CLKOUT3B(),   // 1-bit output: Inverted CLKOUT3
       .CLKOUT4(),     // 1-bit output: CLKOUT4
       .CLKOUT5(),     // 1-bit output: CLKOUT5
@@ -123,8 +123,11 @@ wire LOCKED;
 	    .O(Clk_5M),
 	    .I(pll_5)
 	);
-  BUFG BUFG_Clk_320M(
+  /*BUFG BUFG_Clk_320M(
     .O(Clk_320M),
     .I(Pll_320M)
-  );
+  );*/
+ //assign Clk = pll_40;
+ //assign Clk_5M = pll_5;
+ //assign Clk_320M = Pll_320M;
 endmodule

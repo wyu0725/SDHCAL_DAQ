@@ -39,5 +39,5 @@ module TrigCoincid(
       endcase
     end
     assign TrigAnd = (~OUT_TRIG0B) && (~OUT_TRIG1B) && (~OUT_TRIG2B);
-    assign TigOr = (~OUT_TRIG0B) || (~OUT_TRIG1B) || (~OUT_TRIG2B);
+    assign TrigOr = (~OUT_TRIG0B) || (~OUT_TRIG1B) || (~OUT_TRIG2B);
 endmodule
