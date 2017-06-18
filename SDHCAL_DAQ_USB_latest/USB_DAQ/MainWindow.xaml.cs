@@ -136,7 +136,7 @@ namespace USB_DAQ
                 btnTRIG_EXT_EN.IsEnabled = true;
                 btnSet_Raz_Width.IsEnabled = true;
                 btnSet_Hold.IsEnabled = true;
-                btnSetAcqTime.IsEnabled = true;
+                //btnSetAcqTime.IsEnabled = true;
                 btnOut_th_set.IsEnabled = true;
             }
             else
@@ -155,7 +155,7 @@ namespace USB_DAQ
                 btnTRIG_EXT_EN.IsEnabled = false;
                 btnSet_Raz_Width.IsEnabled = false;
                 btnSet_Hold.IsEnabled = false;
-                btnSetAcqTime.IsEnabled = false;
+                //btnSetAcqTime.IsEnabled = false;
                 btnOut_th_set.IsEnabled = false;
             }
         }
@@ -1721,7 +1721,7 @@ namespace USB_DAQ
             bool Is_Hold_legal = rx_int.IsMatch(txtHold_delay.Text) && int.Parse(txtHold_delay.Text) < 800;
             if (Is_Hold_legal)
             {
-                int DelayTime = (int)(int.Parse(txtHold_delay.Text)/3.125); //除以3.125ns
+                int DelayTime = (int)(int.Parse(txtHold_delay.Text)/6.25); //除以6.25ns
                 byte DelayTime1 = (byte)(DelayTime & 15);//15 = 0xF
                 byte DelayTime2 = (byte)(((DelayTime >> 4) & 15) | 16);//16 = 0x10
                 CommandBytes = ConstCommandByteArray(0xA6, DelayTime1);
@@ -1735,7 +1735,7 @@ namespace USB_DAQ
                 bResult = CommandSend(CommandBytes, CommandBytes.Length);
                 if(bResult)
                 {
-                    string report = string.Format("Set Hold Delay Time:{0}ns\n", DelayTime * 2);
+                    string report = string.Format("Set Hold Delay Time:{0}ns\n", DelayTime * 6.25);
                     txtReport.AppendText(report);
                 }
                 else
@@ -2091,7 +2091,7 @@ namespace USB_DAQ
                         SlowACQDataNumber = 5120;
                     }
                     SlowDataRatePackageNumber = SlowACQDataNumber * 20;
-                    #region Clear USB FIFO
+                    #region Clear USB FIFO and Reset Microroc
                     //bool bResult = false;
                     byte[] cmd_ClrUSBFifo = ConstCommandByteArray(0xF0, 0xFA);
                     bResult = CommandSend(cmd_ClrUSBFifo, 2);//
@@ -2128,8 +2128,7 @@ namespace USB_DAQ
                         //Task SlowDataRateACQ = new Task(() => GetSlowDataRateResultCallBack());
                         //SlowDataRateACQ.Start();
                         //SlowDataRateACQ.Wait();
-                        await Task.Run(() => GetSlowDataRateResultCallBack());
-                        
+                        await Task.Run(() => GetSlowDataRateResultCallBack());               
                         CmdSlowACQ = ConstCommandByteArray(0xF0, 0xF1);
                         bResult = CommandSend(CmdSlowACQ, CmdSlowACQ.Length);
                         if(bResult)
@@ -2317,6 +2316,7 @@ namespace USB_DAQ
 
         private async void btnSweepTestStart_Click(object sender, RoutedEventArgs e)
         {
+            #region Check File Legal
             if (filepath == null || string.IsNullOrEmpty(filepath.Trim()))
             {
                 MessageBox.Show("You should save the file first before Scurve start", //text
@@ -2324,6 +2324,7 @@ namespace USB_DAQ
                                    MessageBoxButton.OK, //button
                                     MessageBoxImage.Error);//icon     
             }
+            #endregion
             else
             {
                 byte[] CommandBytes = new byte[2];
@@ -2987,13 +2988,13 @@ namespace USB_DAQ
                     #endregion
                     #region Set Hold Parameter
                     Regex rx_int = new Regex(rx_Integer);
-                    bool Is_Hold_legal = rx_int.IsMatch(txtHold_delay.Text);
+                    #region Set Hold Delay
+                    bool Is_Hold_legal = rx_int.IsMatch(txtHold_delay.Text) && int.Parse(txtHold_delay.Text) < 800;
                     if (Is_Hold_legal)
                     {
-                        int DelayTime = Int32.Parse(txtHold_delay.Text) / 2; //除以2ns
-                        byte DelayTime1 = (byte)(DelayTime & 31);//31 = 0x1F
-                        byte DelayTime2 = (byte)((DelayTime >> 4) & 47);//47 = 0x2F
-                        byte DelayTime3 = (byte)((DelayTime >> 8) & 49);//49 = 0x31
+                        int DelayTime = (int)(int.Parse(txtHold_delay.Text) / 6.25); //除以6.25ns
+                        byte DelayTime1 = (byte)(DelayTime & 15);//15 = 0xF
+                        byte DelayTime2 = (byte)(((DelayTime >> 4) & 15) | 16);//16 = 0x10
                         CommandBytes = ConstCommandByteArray(0xA6, DelayTime1);
                         bResult = CommandSend(CommandBytes, CommandBytes.Length);
                         if (!bResult)
@@ -3003,16 +3004,9 @@ namespace USB_DAQ
                         }
                         CommandBytes = ConstCommandByteArray(0xA6, DelayTime2);
                         bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                        if (!bResult)
-                        {
-                            MessageBox.Show("Set Hold delay failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                            return;
-                        }
-                        CommandBytes = ConstCommandByteArray(0xA6, DelayTime3);
-                        bResult = CommandSend(CommandBytes, CommandBytes.Length);
                         if (bResult)
                         {
-                            string report = string.Format("Set Hold Delay Time:{0}ns\n", DelayTime * 2);
+                            string report = string.Format("Set Hold Delay Time:{0}ns\n", DelayTime * 6.25);
                             txtReport.AppendText(report);
                         }
                         else
@@ -3020,26 +3014,83 @@ namespace USB_DAQ
                             MessageBox.Show("Set Hold delay failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
                             return;
                         }
-                        int TrigCoincid = cbxTrig_Coincid.SelectedIndex + 160;//160 = 0xA0
-                        CommandBytes = ConstCommandByteArray(0xA5, (byte)TrigCoincid);
-                        bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                        if (bResult)
-                        {
-                            string report = string.Format("Set Trigger Coincidence : {0}\n", cbxTrig_Coincid.Text);
-                            txtReport.AppendText(report);
-                        }
-                        else
-                        {
-                            MessageBox.Show("set Trigger Coincid failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                            return;
-                        }
-
                     }
                     else
                     {
                         MessageBox.Show("Illegal Hold delay, please re-type(Integer:0--650,step:2ns)", "Illegal input", MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
                     }
+                    #endregion
+                    #region Set Trig Coincide
+                    int TrigCoincid = cbxTrig_Coincid.SelectedIndex + 160;//160 = 0xA0
+                    CommandBytes = ConstCommandByteArray(0xA5, (byte)TrigCoincid);
+                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                    if (bResult)
+                    {
+                        string report = string.Format("Set Trigger Coincidence : {0}\n", cbxTrig_Coincid.Text);
+                        txtReport.AppendText(report);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Set Trigger Coincid failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+                    #endregion
+                    #region Set Hold Time
+                    /*
+                        + 4Y:HoldTime[3:0]
+                        + 5Y:HoldTime[7:4]
+                        + 6Y:HoldTime[11:8]
+                        + 7Y:HoldTime[15:12]
+                     */
+                    bool IsHoldTimeLegal = rx_int.IsMatch(txtHoldTime.Text) && int.Parse(txtHoldTime.Text) < 10000;
+                    if (IsHoldTimeLegal)
+                    {
+                        int HoldTime = int.Parse(txtHoldTime.Text) / 25;
+                        int HoldTime1 = (HoldTime & 15) + 64;//0x40
+                        int HoldTime2 = ((HoldTime >> 4) & 15) + 80;//0x50
+                        int HoldTime3 = ((HoldTime >> 8) & 15) + 96;
+                        int HoldTime4 = ((HoldTime >> 12) & 15) + 112;
+                        CommandBytes = ConstCommandByteArray(0xA6, (byte)HoldTime1);
+                        bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                        if (!bResult)
+                        {
+                            MessageBox.Show("Set Hold Time failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                            return;
+                        }
+                        CommandBytes = ConstCommandByteArray(0xA6, (byte)HoldTime2);
+                        bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                        if (!bResult)
+                        {
+                            MessageBox.Show("Set Hold Time failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                            return;
+                        }
+                        CommandBytes = ConstCommandByteArray(0xA6, (byte)HoldTime3);
+                        bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                        if (!bResult)
+                        {
+                            MessageBox.Show("Set Hold Time failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                            return;
+                        }
+                        CommandBytes = ConstCommandByteArray(0xA6, (byte)HoldTime4);
+                        bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                        if (bResult)
+                        {
+                            string report = string.Format("Set Hold Time:{0}\n", HoldTime * 25);
+                            txtReport.AppendText(report);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Set Hold Time failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Illegal Hold Time, please re-type(Integer:0--10000,step:2ns)", "Illegal input", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+                    #endregion
                     #endregion
                     #region Start Acq
                     CommandBytes = ConstCommandByteArray(0xE0, 0xF2);
@@ -3131,7 +3182,7 @@ namespace USB_DAQ
                     }
                     bw.Write(RemainByteWrite);
                 }
-                IsSlowAcqStart = false;
+                //IsSlowAcqStart = false;
             }
             else if (DataAcqMode == Adc)
             {
