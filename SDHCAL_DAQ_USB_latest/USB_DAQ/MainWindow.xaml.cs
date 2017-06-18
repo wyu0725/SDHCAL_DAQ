@@ -380,49 +380,8 @@ namespace USB_DAQ
         */
         //data acquisition start
         private void btnAcqStart_Click(object sender, RoutedEventArgs e)
-        {
-            #region Set Start Acq Time
-            Regex rx_int = new Regex(rx_Integer);
-            bool Is_Time_legal = rx_int.IsMatch(txtStartAcqTime.Text);
-            if (Is_Time_legal)
-            {
-                int value = Int32.Parse(txtStartAcqTime.Text) / 25; //除以25ns 
-                byte[] bytes = ConstCommandByteArray(0xB2, (byte)(value >> 8));
-                bool bResult = CommandSend(bytes, bytes.Length);
-                if (!bResult)
-                {
-                    MessageBox.Show("Set StartAcq time failure, please check USB", //text
-                                     "USB Error",   //caption
-                                     MessageBoxButton.OK,//button
-                                     MessageBoxImage.Error);//icon
-                    return;
-                }
-                bytes = ConstCommandByteArray(0xB1, (byte)(value));
-                bResult = CommandSend(bytes, bytes.Length);
-                if (bResult)
-                {
-                    string report = string.Format("Set StartAcq time : {0}\n", txtStartAcqTime.Text);
-                    txtReport.AppendText(report);
-                }
-                else
-                {
-                    MessageBox.Show("Set StartAcq time failure, please check USB", //text
-                                     "USB Error",   //caption
-                                     MessageBoxButton.OK,//button
-                                     MessageBoxImage.Error);//icon
-                    return;
-                }
-            }
-            else
-            {
-                MessageBox.Show("Illegal StartAcq Time, please re-type(Integer:0--1638400,step:25ns)", //text
-                                 "Illegal input",   //caption
-                                 MessageBoxButton.OK,//button
-                                 MessageBoxImage.Error);//icon
-                return;
-            }
-            #endregion
-            if (string.IsNullOrEmpty(filepath.Trim()))
+        {            
+            if (filepath == null || string.IsNullOrEmpty(filepath.Trim()))
             {
                 MessageBox.Show("You should save the file first before acquisition start", //text
                                         "imformation", //caption
@@ -434,11 +393,53 @@ namespace USB_DAQ
                 StringBuilder reports = new StringBuilder();
                 if (!AcqStart) //Acquisition is not start then start acquisition
                 {
+                    bool bResult;
+                    #region Set Start Acq Time
+                    Regex rx_int = new Regex(rx_Integer);
+                    bool Is_Time_legal = rx_int.IsMatch(txtStartAcqTime.Text);
+                    if (Is_Time_legal)
+                    {
+                        int value = Int32.Parse(txtStartAcqTime.Text) / 25; //除以25ns 
+                        byte[] CmdBytes = ConstCommandByteArray(0xB2, (byte)(value >> 8));
+                        bResult = CommandSend(CmdBytes, CmdBytes.Length);
+                        if (!bResult)
+                        {
+                            MessageBox.Show("Set StartAcq time failure, please check USB", //text
+                                             "USB Error",   //caption
+                                             MessageBoxButton.OK,//button
+                                             MessageBoxImage.Error);//icon
+                            return;
+                        }
+                        CmdBytes = ConstCommandByteArray(0xB1, (byte)(value));
+                        bResult = CommandSend(CmdBytes, CmdBytes.Length);
+                        if (bResult)
+                        {
+                            string report = string.Format("Set StartAcq time : {0}\n", txtStartAcqTime.Text);
+                            txtReport.AppendText(report);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Set StartAcq time failure, please check USB", //text
+                                             "USB Error",   //caption
+                                             MessageBoxButton.OK,//button
+                                             MessageBoxImage.Error);//icon
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Illegal StartAcq Time, please re-type(Integer:0--1638400,step:25ns)", //text
+                                         "Illegal input",   //caption
+                                         MessageBoxButton.OK,//button
+                                         MessageBoxImage.Error);//icon
+                        return;
+                    }
+                    #endregion
                     AcqStart = true;
                     btnAcqStart.Content = "AcqAbort";
                     btnAcqStart.Background = Brushes.DeepPink;
                     threadbuffer.Clear();
-                    bool bResult = false;
+                    bResult = false;
                     byte[] cmd_ClrUSBFifo = ConstCommandByteArray(0xF0, 0xFA);
                     bResult = CommandSend(cmd_ClrUSBFifo, 2);//
                     if (bResult)
@@ -1713,29 +1714,24 @@ namespace USB_DAQ
         //hold generation
         private void btnSet_Hold_Click(object sender, RoutedEventArgs e)
         {
+            bool bResult;
+            byte[] CommandBytes = new byte[2];
             Regex rx_int = new Regex(rx_Integer);
-            bool Is_Hold_legal = rx_int.IsMatch(txtHold_delay.Text);
+            #region Set Hold Delay
+            bool Is_Hold_legal = rx_int.IsMatch(txtHold_delay.Text) && int.Parse(txtHold_delay.Text) < 800;
             if (Is_Hold_legal)
             {
                 int DelayTime = (int)(int.Parse(txtHold_delay.Text)/3.125); //除以3.125ns
                 byte DelayTime1 = (byte)(DelayTime & 15);//15 = 0xF
                 byte DelayTime2 = (byte)(((DelayTime >> 4) & 15) | 16);//16 = 0x10
-                byte DelayTime3 = (byte)(((DelayTime >> 8) & 1) | 32);//32 = 0x20
-                byte[] CommandBytes = ConstCommandByteArray(0xA6, DelayTime1);
-                bool bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                if (!bResult)
-                {
-                    MessageBox.Show("Set Hold delay failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return;
-                }
-                CommandBytes = ConstCommandByteArray(0xA6, DelayTime2);
+                CommandBytes = ConstCommandByteArray(0xA6, DelayTime1);
                 bResult = CommandSend(CommandBytes, CommandBytes.Length);
                 if (!bResult)
                 {
                     MessageBox.Show("Set Hold delay failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
-                CommandBytes = ConstCommandByteArray(0xA6, DelayTime3);
+                CommandBytes = ConstCommandByteArray(0xA6, DelayTime2);
                 bResult = CommandSend(CommandBytes, CommandBytes.Length);
                 if(bResult)
                 {
@@ -1746,27 +1742,84 @@ namespace USB_DAQ
                 {
                     MessageBox.Show("Set Hold delay failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
-                }
-                int TrigCoincid = cbxTrig_Coincid.SelectedIndex + 160;//160 = 0xA0
-                CommandBytes = ConstCommandByteArray(0xA5, (byte)TrigCoincid);
-                bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                if (bResult)
-                {
-                    string report = string.Format("Set Trigger Coincidence : {0}\n", cbxTrig_Coincid.Text);
-                    txtReport.AppendText(report);
-                }
-                else
-                {
-                    MessageBox.Show("set Trigger Coincid failure, please check USB","USB Error",MessageBoxButton.OK,MessageBoxImage.Error);
-                    return;
-                }
-
+                }                
             }
             else
             {
                 MessageBox.Show("Illegal Hold delay, please re-type(Integer:0--650,step:2ns)","Illegal input",MessageBoxButton.OK,MessageBoxImage.Error);
                 return;
             }
+            #endregion
+            #region Set Trig Coincide
+            int TrigCoincid = cbxTrig_Coincid.SelectedIndex + 160;//160 = 0xA0
+            CommandBytes = ConstCommandByteArray(0xA5, (byte)TrigCoincid);
+            bResult = CommandSend(CommandBytes, CommandBytes.Length);
+            if (bResult)
+            {
+                string report = string.Format("Set Trigger Coincidence : {0}\n", cbxTrig_Coincid.Text);
+                txtReport.AppendText(report);
+            }
+            else
+            {
+                MessageBox.Show("Set Trigger Coincid failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            #endregion
+            #region Set Hold Time
+            /*
+                + 4Y:HoldTime[3:0]
+                + 5Y:HoldTime[7:4]
+                + 6Y:HoldTime[11:8]
+                + 7Y:HoldTime[15:12]
+             */
+            bool IsHoldTimeLegal = rx_int.IsMatch(txtHoldTime.Text) && int.Parse(txtHoldTime.Text) < 10000;
+            if(IsHoldTimeLegal)
+            {
+                int HoldTime = int.Parse(txtHoldTime.Text) / 25;
+                int HoldTime1 = (HoldTime & 15) + 64;//0x40
+                int HoldTime2 = ((HoldTime >> 4) & 15) + 80;//0x50
+                int HoldTime3 = ((HoldTime >> 8) & 15) + 96;
+                int HoldTime4 = ((HoldTime >> 12) & 15) + 112;
+                CommandBytes = ConstCommandByteArray(0xA6, (byte)HoldTime1);
+                bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                if(!bResult)
+                {
+                    MessageBox.Show("Set Hold Time failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                CommandBytes = ConstCommandByteArray(0xA6, (byte)HoldTime2);
+                bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                if (!bResult)
+                {
+                    MessageBox.Show("Set Hold Time failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                CommandBytes = ConstCommandByteArray(0xA6, (byte)HoldTime3);
+                bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                if (!bResult)
+                {
+                    MessageBox.Show("Set Hold Time failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                CommandBytes = ConstCommandByteArray(0xA6, (byte)HoldTime4);
+                bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                if (bResult)
+                {
+                    string report = string.Format("Set Hold Time:{0}\n", HoldTime * 25);
+                    txtReport.AppendText(report);
+                }
+                else
+                {
+                    MessageBox.Show("Set Hold Time failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Illegal Hold Time, please re-type(Integer:0--10000,step:2ns)", "Illegal input", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            #endregion
         }
         //Set StartAcq Time
         private void btnSetAcqTime_Click(object sender, RoutedEventArgs e)
@@ -1866,40 +1919,26 @@ namespace USB_DAQ
         private void btnSet_External_RAZ_Delay_Click(object sender, RoutedEventArgs e)
         {
             Regex rx_int = new Regex(rx_Integer);
-            bool Is_Time_Legel = rx_int.IsMatch(txtExternal_RAZ_Delay.Text);
+            bool Is_Time_Legel = rx_int.IsMatch(txtExternal_RAZ_Delay.Text) && int.Parse(txtExternal_RAZ_Delay.Text) < 400;
             if(Is_Time_Legel)
             {
-                int ExternalRazDelay = Int16.Parse(txtExternal_RAZ_Delay.Text) / 2 ;//
-                byte ExternalRazDelay1 = (byte)(ExternalRazDelay & 15 + 208);//208 = 0xD0
-                byte ExternalRazDelay2 = (byte)((ExternalRazDelay >> 4) & 15 + 224);//224 = 0xE0
-                byte ExternalRazDelay3 = (byte)((ExternalRazDelay >> 8) & 3 + 240);//240 = 0xF0 
-                byte[] CommandBytes = ConstCommandByteArray(0xA8, ExternalRazDelay1);
+                int ExternalRazDelay = short.Parse(txtExternal_RAZ_Delay.Text) / 25 + 208;//208 = 0xD0
+                byte[] CommandBytes = new byte[2];
+                CommandBytes = ConstCommandByteArray(0xA8, (byte)ExternalRazDelay);
                 bool bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                if(!bResult)
-                {
-                    MessageBox.Show("Set External RAZ Delay Time failure, please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                CommandBytes = ConstCommandByteArray(0xA8, ExternalRazDelay2);
-                bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                if (!bResult)
-                {
-                    MessageBox.Show("Set External RAZ Delay Time failure, please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                CommandBytes = ConstCommandByteArray(0xA8, ExternalRazDelay3);
-                bResult = CommandSend(CommandBytes, CommandBytes.Length);
                 if(bResult)
                 {
-                    string report = string.Format("Set External RAZ Delay Time {0}ns\n", txtExternal_RAZ_Delay.Text);
-                    txtReport.AppendText(report);
+                    string report = string.Format("Set External RAZ Delay time:{0} ns\n", txtExternal_RAZ_Delay.Text);
                 }
                 else
                 {
-                    MessageBox.Show("Set External RAZ Delay Time failure, please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("select failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
+                
             }
             else
             {
-                MessageBox.Show("Illegal External RAZ Delay Time, please re-type(Integer:0--6375,step:2ns)", "Ilegal Input", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Illegal External RAZ Delay Time, please re-type(Integer:0--400ns,step:25ns)", "Ilegal Input", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
         
@@ -1985,7 +2024,7 @@ namespace USB_DAQ
         // Slow data rate ACQ
         private async void btnSlowACQ_Click(object sender, RoutedEventArgs e)
         {            
-            if (string.IsNullOrEmpty(filepath.Trim()))
+            if (filepath == null || string.IsNullOrEmpty(filepath.Trim()))
             {
                 MessageBox.Show("You should save the file first before Scurve start", //text
                                         "imformation", //caption
@@ -2278,595 +2317,626 @@ namespace USB_DAQ
 
         private async void btnSweepTestStart_Click(object sender, RoutedEventArgs e)
         {
-            byte[] CommandBytes = new byte[2];
-            bool bResult;
-            string report;
-            #region Start and End DAC
-            Regex rxInt = new Regex(rx_Integer);
-            bool IsDacLegal = rxInt.IsMatch(txtStartDac.Text) && rxInt.IsMatch(txtEndDac.Text) && (int.Parse(txtStartDac.Text) < 1023) && (int.Parse(txtEndDac.Text) <= 1023) && (int.Parse(txtStartDac.Text) <= int.Parse(txtEndDac.Text));
-            if(IsDacLegal)
+            if (filepath == null || string.IsNullOrEmpty(filepath.Trim()))
             {
-                #region Start DAC
-                uint StartDacValue = uint.Parse(txtStartDac.Text);                
-                uint StartDacValue1 = StartDacValue & 15;
-                uint StartDacValue2 = ((StartDacValue >> 4) & 15) + 16;
-                uint StartDacValue3 = ((StartDacValue >> 8) & 3) + 32;
-                CommandBytes = ConstCommandByteArray(0xE5, (byte)StartDacValue1);
-                bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                if(!bResult)
-                {
-                    MessageBox.Show("Set StartDAC failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                CommandBytes = ConstCommandByteArray(0xE5, (byte)StartDacValue2);
-                bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                if (!bResult)
-                {
-                    MessageBox.Show("Set StartDAC failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                CommandBytes = ConstCommandByteArray(0xE5, (byte)StartDacValue3);
-                bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                if(bResult)
-                {
-                    report = string.Format("Set StartDAC:{0}\n", StartDacValue);
-                    txtReport.AppendText(report);
-                }
-                else
-                {
-                    MessageBox.Show("Set StartDAC failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                #endregion
-                #region EndDAC
-                uint EndDacValue = uint.Parse(txtEndDac.Text);
-                uint EndDacValue1 = (EndDacValue & 15) + 48;
-                uint EndDacValue2 = ((EndDacValue >> 4) & 15) + 64;
-                uint EndDacValue3 = ((EndDacValue >> 8) & 3) + 80;
-                CommandBytes = ConstCommandByteArray(0xE5, (byte)EndDacValue1);
-                bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                if (!bResult)
-                {
-                    MessageBox.Show("Set EndDAC failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                CommandBytes = ConstCommandByteArray(0xE5, (byte)EndDacValue2);
-                bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                if (!bResult)
-                {
-                    MessageBox.Show("Set EndDAC failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                CommandBytes = ConstCommandByteArray(0xE5, (byte)EndDacValue3);
-                bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                if(bResult)
-                {
-                    report = string.Format("Set EndDAC:{0}", EndDacValue);
-                    txtReport.AppendText(report);
-                }
-                else
-                {
-                    MessageBox.Show("Set EndDAC failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                #endregion
+                MessageBox.Show("You should save the file first before Scurve start", //text
+                                        "imformation", //caption
+                                   MessageBoxButton.OK, //button
+                                    MessageBoxImage.Error);//icon     
             }
             else
             {
-                MessageBox.Show("Ilegal input the StartDAC and EndDAC. The StartDAC should less than EndDAC\n", "Ilegal Input", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-            #endregion            
-            int StartDac = int.Parse(txtStartDac.Text);
-            int EndDac = int.Parse(txtEndDac.Text);
-            #region SCurve
-            if (DataAcqMode == SCTest)
-            {
-                #region Set Single Test Channel
-                bool IsSCurveChannelLegal = rxInt.IsMatch(txtSingleTest_Chn.Text) && (int.Parse(txtSingleTest_Chn.Text) <= 64);
-                if(IsSCurveChannelLegal)
+                byte[] CommandBytes = new byte[2];
+                bool bResult;
+                string report;
+                #region Start and End DAC
+                Regex rxInt = new Regex(rx_Integer);
+                bool IsDacLegal = rxInt.IsMatch(txtStartDac.Text) && rxInt.IsMatch(txtEndDac.Text) && (int.Parse(txtStartDac.Text) < 1023) && (int.Parse(txtEndDac.Text) <= 1023) && (int.Parse(txtStartDac.Text) <= int.Parse(txtEndDac.Text));
+                if (IsDacLegal)
                 {
-                    int SCurveChannelValue = int.Parse(txtSingleTest_Chn.Text) - 1;
-                    CommandBytes = ConstCommandByteArray(0xE1, (byte)SCurveChannelValue);
-                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                    if(bResult)
-                    {
-                        report = string.Format("Set single test channel:{0}", SCurveChannelValue + 1);
-                        txtReport.AppendText(report);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Set single test channel failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Ilegal input the channel must between 1 to 64\n", "Ilegal Input", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                #endregion
-                #region Set Single or Auto
-                //E0B0:Single Channel
-                //E0B1:64 Channel
-                int SingleOrAutoValue = cbxSingleOrAuto.SelectedIndex + 176;//0xB0
-                CommandBytes = ConstCommandByteArray(0xE0, (byte)SingleOrAutoValue);
-                bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                if(bResult)
-                {
-                    report = string.Format("Choose {0} Mode\n", cbxSingleOrAuto.Text);
-                    txtReport.AppendText(report);
-                }
-                else
-                {
-                    MessageBox.Show("Set S Curve channel mode failure. Please check the USB\n", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                #endregion
-                #region Set CTest or Input
-                // E0C0:Signal input from CTest pin
-                // E0C1:Signal input from input pin
-                int CTestOrInputValue = cbxCTestOrInput.SelectedIndex + 192;//0xC0
-                CommandBytes = ConstCommandByteArray(0xE0, (byte)CTestOrInputValue);
-                bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                if(bResult)
-                {
-                    report = string.Format("Choose {0} Mode\n", cbxCTestOrInput.Text);
-                    txtReport.AppendText(report);
-                }
-                else
-                {
-                    MessageBox.Show("Set charge inject method failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                #endregion
-                #region Trig Mode
-                //--- Trig Mode ---//
-                if (SCurveMode == Trig)
-                {
-                    #region Set CPT_MAX
-                    //*** Send CPT_MAX
-                    int MaxCountValue = cbxCPT_MAX.SelectedIndex;
-                    CommandBytes = ConstCommandByteArray(0xE2, (byte)MaxCountValue);
-                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                    if(bResult)
-                    {
-                        report = string.Format("Set MAX count number {0}", cbxCPT_MAX.Text);
-                        txtReport.AppendText(report);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Set S Curve test max count failure. Please check the USB\n", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
-                    #endregion
-                    #region Single Channel Mode
-                    //--- Single Channel Test ---///
-                    if (cbxSingleOrAuto.SelectedIndex == SingleChannel)
-                    {
-                        if (!IsSlowAcqStart)
-                        {
-                            //*** Set Package Number
-                            SlowDataRatePackageNumber = HeaderLength + ChannelLength + (EndDac - StartDac + 1) * OneDacDataLength + TailLength;
-                            #region Clear USB FIFO
-                            //*** Clear USB FIFO
-                            byte[] ClearUSBFifo = ConstCommandByteArray(0xF0, 0xFA);
-                            bResult = CommandSend(ClearUSBFifo, ClearUSBFifo.Length);//
-                            if (bResult)
-                                txtReport.AppendText("USB fifo cleared");
-                            else
-                                txtReport.AppendText("fail to clear USB fifo");
-                            byte[] RemainData = new byte[2048];
-                            bResult = DataRecieve(RemainData, RemainData.Length);
-                            #endregion
-                            #region Data ACQ
-                            CommandBytes = ConstCommandByteArray(0xE0, 0xF0);
-                            bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                            if (bResult)
-                            {
-                                IsSlowAcqStart = true;
-                                txtReport.AppendText("SCurve Test Start\n");
-                                txtReport.AppendText("SCurve Test Continue\n");
-                                btnSweepTestStart.Content = "SCurve Test Stop";
-                                await Task.Run(() => GetSlowDataRateResultCallBack());                                
-                                //Task SCurveDataAcq = new Task(() => GetSlowDataRateResultCallBack());
-                                //SCurveDataAcq.Start();
-                                //SCurveDataAcq.Wait();
-                                CommandBytes = ConstCommandByteArray(0xE0, 0xF1);
-                                bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                                if (bResult)
-                                {
-                                    IsSlowAcqStart = false;
-                                    txtReport.AppendText("SCurve Test Done\n");
-                                    btnSweepTestStart.Content = "SCurve Test Start";
-                                }
-                                else
-                                {
-                                    txtReport.AppendText("SCurve Test Stop Failure\n");
-                                }
-                            }
-                            else
-                            {
-                                txtReport.AppendText("SCurve Stop Failure\n");
-                            }
-                            #endregion
-                        }
-                        else
-                        {
-                            IsSlowAcqStart = false;
-                            CommandBytes = ConstCommandByteArray(0xE0, 0xF1);
-                            bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                            if (bResult)
-                            {
-                                
-                                btnSweepTestStart.Content = "Sweep Test Start";
-                                txtReport.AppendText("SCurve Test Abort\n");
-                            }
-                            else
-                            {
-                                txtReport.AppendText("SCurve Test Stop Failure\n");
-                            }
-                        }
-                    }
-                    #endregion
-                    #region 64 Channel Mode
-                    //--- 64 Channel Test ---//
-                    else if (cbxSingleOrAuto.SelectedIndex == AllChannel)
-                    {
-                        if (!IsSlowAcqStart)
-                        {
-                            //*** Set Package Number
-                            SlowDataRatePackageNumber = HeaderLength + (ChannelLength + (EndDac - StartDac + 1) * OneDacDataLength) * 64 + TailLength;
-                            #region Clear USB FIFO
-                            //*** Clear USB FIFO
-                            byte[] ClearUSBFifo = ConstCommandByteArray(0xF0, 0xFA);
-                            bResult = CommandSend(ClearUSBFifo, ClearUSBFifo.Length);//
-                            if (bResult)
-                                txtReport.AppendText("USB fifo cleared");
-                            else
-                                txtReport.AppendText("fail to clear USB fifo");
-                            byte[] RemainData = new byte[2048];
-                            bResult = DataRecieve(RemainData, RemainData.Length);
-                            #endregion
-                            #region Data ACQ
-                            CommandBytes = ConstCommandByteArray(0xE0, 0xF0);
-                            bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                            if (bResult)
-                            {
-                                IsSlowAcqStart = true;
-                                txtReport.AppendText("SCurve Test Start\n");
-                                txtReport.AppendText("SCurve Test Continue\n");
-                                btnSweepTestStart.Content = "SCurve Test Stop";
-                                await Task.Run(() => GetSlowDataRateResultCallBack());                                
-                                //Task SCurveDataAcq = new Task(() => GetSlowDataRateResultCallBack());
-                                //SCurveDataAcq.Start();
-                                //SCurveDataAcq.Wait();
-                                CommandBytes = ConstCommandByteArray(0xE0, 0xF1);
-                                bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                                if (bResult)
-                                {
-                                    IsSlowAcqStart = false;
-                                    btnSweepTestStart.Content = "Sweep Test Start";
-                                    txtReport.AppendText("SCurve Test Stop\n");
-                                }
-                                else
-                                {
-                                    txtReport.AppendText("SCurve Test Stop Failure\n");
-                                }
-                            }
-                            else
-                            {
-                                txtReport.AppendText("SCurve Stop Failure\n");
-                            }
-                            #endregion
-                        }
-                        else
-                        {
-                            IsSlowAcqStart = false;
-                            CommandBytes = ConstCommandByteArray(0xE0, 0xF1);
-                            bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                            if (bResult)
-                            {                                
-                                btnSweepTestStart.Content = "Sweep Test Start";
-                                txtReport.AppendText("SCurve Test Stop\n");
-                            }
-                            else
-                            {
-                                txtReport.AppendText("SCurve Test Stop Failure\n");
-                            }
-                        }
-                    }
-                    #endregion
-                }
-                #endregion
-                #region Count Mode
-                else if (SCurveMode == Count)
-                {
-                    #region Set Count Time
-                    //*** Set Max Count Time
-                    bool IsCounterMaxLegal = rxInt.IsMatch(txtCountTime.Text) && (int.Parse(txtCountTime.Text) < 65535);
-                    if(IsCounterMaxLegal)
-                    {
-                        int CountTimeValue = int.Parse(txtCountTime.Text);
-                        CommandBytes = ConstCommandByteArray(0xE3, (byte)CountTimeValue);
-                        bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                        if(!bResult)
-                        {
-                            MessageBox.Show("Set count time failure. Please check the ", //text
-                                 "USB Error",   //caption
-                                 MessageBoxButton.OK,//button
-                                 MessageBoxImage.Error);//icon
-                        }
-                        CommandBytes = ConstCommandByteArray(0xE4, (byte)(CountTimeValue >> 8));
-                        bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                        if(bResult)
-                        {
-                            report = string.Format("Set count time:{0}", txtCountTime.Text);
-                            txtReport.AppendText(report);
-                        }
-                        else
-                        {
-                            MessageBox.Show("Set count time failure. Please check the ", //text
-                                 "USB Error",   //caption
-                                 MessageBoxButton.OK,//button
-                                 MessageBoxImage.Error);//icon
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("Illegal count time, please re-type(Integer:0--65536)", //text
-                                 "Illegal input",   //caption
-                                 MessageBoxButton.OK,//button
-                                 MessageBoxImage.Error);//icon
-                    }
-                    #endregion
-                    #region Single Channel Mode
-                    if (cbxSingleOrAuto.SelectedIndex == SingleChannel)
-                    {
-                        if (!IsSlowAcqStart)
-                        {
-                            //*** Set Package Number
-                            SlowDataRatePackageNumber = HeaderLength + ChannelLength + (EndDac - StartDac + 1) * OneDacDataLength + TailLength;
-                            #region Clear Usb FIFO
-                            //*** Clear USB FIFO
-                            byte[] ClearUSBFifo = ConstCommandByteArray(0xF0, 0xFA);
-                            bResult = CommandSend(ClearUSBFifo, ClearUSBFifo.Length);//
-                            if (bResult)
-                                txtReport.AppendText("USB fifo cleared");
-                            else
-                                txtReport.AppendText("fail to clear USB fifo");
-                            byte[] RemainData = new byte[2048];
-                            bResult = DataRecieve(RemainData, RemainData.Length);
-                            #endregion 
-                            #region Data ACQ
-                            CommandBytes = ConstCommandByteArray(0xE0, 0xF0);
-                            bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                            if (bResult)
-                            {
-                                
-                                IsSlowAcqStart = true;
-                                txtReport.AppendText("SCurve Test Start\n");
-                                txtReport.AppendText("SCurve Test Continue\n");
-                                btnSweepTestStart.Content = "SCurve Test Stop";
-                                await Task.Run(() => GetSlowDataRateResultCallBack());                                
-                                //Task SCurveDataAcq = new Task(() => GetSlowDataRateResultCallBack());
-                                //SCurveDataAcq.Start();
-                                //SCurveDataAcq.Wait();
-                                CommandBytes = ConstCommandByteArray(0xE0, 0xF1);
-                                bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                                if (bResult)
-                                {
-                                    IsSlowAcqStart = false;
-                                    btnSweepTestStart.Content = "Sweep Test Start";
-                                    txtReport.AppendText("SCurve Test Stop\n");
-                                }
-                                else
-                                {
-                                    txtReport.AppendText("SCurve Test Stop Failure\n");
-                                }
-                            }
-                            else
-                            {
-                                txtReport.AppendText("SCurve Stop Failure\n");
-                            }
-                            #endregion
-                        }
-                        else
-                        {
-                            IsSlowAcqStart = false;
-                            CommandBytes = ConstCommandByteArray(0xE0, 0xF1);
-                            bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                            if (bResult)
-                            {                                
-                                btnSweepTestStart.Content = "Sweep Test Start";
-                                txtReport.AppendText("SCurve Test Stop\n");
-                            }
-                            else
-                            {
-                                txtReport.AppendText("SCurve Test Stop Failure\n");
-                            }
-                        }
-                    }
-                    #endregion
-                    #region 64Channel Mode
-                    else if(cbxSingleOrAuto.SelectedIndex == AllChannel)
-                    {
-                        if (!IsSlowAcqStart)
-                        {
-                            //*** Set Package Number
-                            SlowDataRatePackageNumber = HeaderLength + (ChannelLength + (EndDac - StartDac + 1) * OneDacDataLength) * 64 + TailLength;
-                            #region Clear USB FIFO
-                            //*** Clear USB FIFO
-                            byte[] ClearUSBFifo = ConstCommandByteArray(0xF0, 0xFA);
-                            bResult = CommandSend(ClearUSBFifo, ClearUSBFifo.Length);//
-                            if (bResult)
-                                txtReport.AppendText("USB fifo cleared");
-                            else
-                                txtReport.AppendText("fail to clear USB fifo");
-                            byte[] RemainData = new byte[2048];
-                            bResult = DataRecieve(RemainData, RemainData.Length);
-                            #endregion
-                            #region Data ACQ
-                            CommandBytes = ConstCommandByteArray(0xE0, 0xF0);
-                            bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                            if (bResult)
-                            {
-                                IsSlowAcqStart = true;
-                                txtReport.AppendText("SCurve Test Start\n");
-                                btnSweepTestStart.Content = "Sweep Test Stop";
-                                txtReport.AppendText("SCurve Test Continue\n");
-                                await Task.Run(() => GetSlowDataRateResultCallBack());
-                                //Task SCurveDataAcq = new Task(() => GetSlowDataRateResultCallBack());
-                                //SCurveDataAcq.Start();
-                                //SCurveDataAcq.Wait();
-                                CommandBytes = ConstCommandByteArray(0xE0, 0xF1);
-                                bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                                if (bResult)
-                                {
-                                    IsSlowAcqStart = false;
-                                    txtReport.AppendText("SCurve Test Stop\n");
-                                }
-                                else
-                                {
-                                    txtReport.AppendText("SCurve Test Stop Failure\n");
-                                }
-                            }
-                            else
-                            {
-                                txtReport.AppendText("SCurve Stop Failure\n");
-                            }
-                            #endregion
-                        }
-                        else
-                        {
-                            IsSlowAcqStart = false;
-                            CommandBytes = ConstCommandByteArray(0xE0, 0xF1);
-                            bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                            if (bResult)
-                            {
-                                txtReport.AppendText("SCurve Test Stop\n");
-                            }
-                            else
-                            {
-                                txtReport.AppendText("SCurve Test Stop Failure\n");
-                            }
-                        }
-                    }
-                    #endregion
-                }
-                #endregion
-            }
-            #endregion
-            #region Sweep Acq
-            else if (DataAcqMode == SweepAcq)
-            {
-                if (!IsSlowAcqStart)
-                {
-                    #region Set Start Acq Time
-                    Regex rx_int = new Regex(rx_Integer);
-                    bool Is_Time_legal = rx_int.IsMatch(txtStartAcqTime.Text);
-                    if (Is_Time_legal)
-                    {
-                        int value = Int32.Parse(txtStartAcqTime.Text) / 25; //除以25ns 
-                        byte[] bytes = ConstCommandByteArray(0xB2, (byte)(value >> 8));
-                        bResult = CommandSend(bytes, bytes.Length);
-                        if (!bResult)
-                        {
-                            MessageBox.Show("Set StartAcq time failure, please check USB", //text
-                                             "USB Error",   //caption
-                                             MessageBoxButton.OK,//button
-                                             MessageBoxImage.Error);//icon
-                            return;
-                        }
-                        bytes = ConstCommandByteArray(0xB1, (byte)(value));
-                        bResult = CommandSend(bytes, bytes.Length);
-                        if (bResult)
-                        {
-                            report = string.Format("Set StartAcq time : {0}\n", txtStartAcqTime.Text);
-                            txtReport.AppendText(report);
-                        }
-                        else
-                        {
-                            MessageBox.Show("Set StartAcq time failure, please check USB", //text
-                                             "USB Error",   //caption
-                                             MessageBoxButton.OK,//button
-                                             MessageBoxImage.Error);//icon
-                            return;
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("Illegal StartAcq Time, please re-type(Integer:0--1638400,step:25ns)", //text
-                                         "Illegal input",   //caption
-                                         MessageBoxButton.OK,//button
-                                         MessageBoxImage.Error);//icon
-                        return;
-                    }
-                    #endregion
-                    #region Set Package Number
-                    bool IsPackageNumberLegal = rxInt.IsMatch(txtPackageNumber.Text) && (int.Parse(txtPackageNumber.Text) < 65535);
-                    int PackageNumberValue;
-                    if (IsPackageNumberLegal)
-                    {
-                        PackageNumberValue = int.Parse(txtPackageNumber.Text);
-                    }
-                    else
-                    {
-                        PackageNumberValue = 10000;
-                    }
-                    CommandBytes = ConstCommandByteArray(0xE6, (byte)PackageNumberValue);
+                    #region Start DAC
+                    uint StartDacValue = uint.Parse(txtStartDac.Text);
+                    uint StartDacValue1 = StartDacValue & 15;
+                    uint StartDacValue2 = ((StartDacValue >> 4) & 15) + 16;
+                    uint StartDacValue3 = ((StartDacValue >> 8) & 3) + 32;
+                    CommandBytes = ConstCommandByteArray(0xE5, (byte)StartDacValue1);
                     bResult = CommandSend(CommandBytes, CommandBytes.Length);
                     if (!bResult)
                     {
-                        MessageBox.Show("Set count time failure. Please check the USB ", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show("Set StartDAC failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
-                    CommandBytes = ConstCommandByteArray(0xE7, (byte)(PackageNumberValue >> 8));
+                    CommandBytes = ConstCommandByteArray(0xE5, (byte)StartDacValue2);
+                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                    if (!bResult)
+                    {
+                        MessageBox.Show("Set StartDAC failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    CommandBytes = ConstCommandByteArray(0xE5, (byte)StartDacValue3);
                     bResult = CommandSend(CommandBytes, CommandBytes.Length);
                     if (bResult)
                     {
-                        report = string.Format("Set sweep acq package number:{0}\n", txtPackageNumber.Text);
+                        report = string.Format("Set StartDAC:{0}\n", StartDacValue);
                         txtReport.AppendText(report);
                     }
                     else
                     {
-                        MessageBox.Show("Set count time failure. Please check the USB ", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show("Set StartDAC failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                     #endregion
-                    #region Set Sweep Dac
-                    int SweepDacSelectValue = cbxDacSelect.SelectedIndex;
-                    CommandBytes = ConstCommandByteArray(0xE0, (byte)(SweepDacSelectValue));
+                    #region EndDAC
+                    uint EndDacValue = uint.Parse(txtEndDac.Text);
+                    uint EndDacValue1 = (EndDacValue & 15) + 48;
+                    uint EndDacValue2 = ((EndDacValue >> 4) & 15) + 64;
+                    uint EndDacValue3 = ((EndDacValue >> 8) & 3) + 80;
+                    CommandBytes = ConstCommandByteArray(0xE5, (byte)EndDacValue1);
+                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                    if (!bResult)
+                    {
+                        MessageBox.Show("Set EndDAC failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    CommandBytes = ConstCommandByteArray(0xE5, (byte)EndDacValue2);
+                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                    if (!bResult)
+                    {
+                        MessageBox.Show("Set EndDAC failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    CommandBytes = ConstCommandByteArray(0xE5, (byte)EndDacValue3);
                     bResult = CommandSend(CommandBytes, CommandBytes.Length);
                     if (bResult)
                     {
-                        report = string.Format("Set {0} as sweep DAC\n", cbxDacSelect.Text);
+                        report = string.Format("Set EndDAC:{0}", EndDacValue);
                         txtReport.AppendText(report);
                     }
                     else
                     {
-                        MessageBox.Show("Set sweep DAC failure. Please check the ", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show("Set EndDAC failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                     #endregion
-                    #region Start Acq
-                    //*** Set Package Number
-                    SlowDataRatePackageNumber = HeaderLength + (2 + PackageNumberValue * 20) * (EndDac - StartDac + 1) + TailLength;
-                    #region Clear USB FIFO
-                    //*** Clear USB FIFO
-                    byte[] ClearUSBFifo = ConstCommandByteArray(0xF0, 0xFA);
-                    bResult = CommandSend(ClearUSBFifo, ClearUSBFifo.Length);//
-                    if (bResult)
-                        txtReport.AppendText("USB fifo cleared");
+                }
+                else
+                {
+                    MessageBox.Show("Ilegal input the StartDAC and EndDAC. The StartDAC should less than EndDAC\n", "Ilegal Input", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                #endregion
+                int StartDac = int.Parse(txtStartDac.Text);
+                int EndDac = int.Parse(txtEndDac.Text);
+                #region SCurve
+                if (DataAcqMode == SCTest)
+                {
+                    #region Set Single Test Channel
+                    bool IsSCurveChannelLegal = rxInt.IsMatch(txtSingleTest_Chn.Text) && (int.Parse(txtSingleTest_Chn.Text) <= 64);
+                    if (IsSCurveChannelLegal)
+                    {
+                        int SCurveChannelValue = int.Parse(txtSingleTest_Chn.Text) - 1;
+                        CommandBytes = ConstCommandByteArray(0xE1, (byte)SCurveChannelValue);
+                        bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                        if (bResult)
+                        {
+                            report = string.Format("Set single test channel:{0}", SCurveChannelValue + 1);
+                            txtReport.AppendText(report);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Set single test channel failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                    }
                     else
-                        txtReport.AppendText("fail to clear USB fifo");
-                    byte[] RemainData = new byte[2048];
-                    bResult = DataRecieve(RemainData, RemainData.Length);
+                    {
+                        MessageBox.Show("Ilegal input the channel must between 1 to 64\n", "Ilegal Input", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
                     #endregion
-                    #region Data ACQ
-                    CommandBytes = ConstCommandByteArray(0xE0, 0xF0);
+                    #region Set Single or Auto
+                    //E0B0:Single Channel
+                    //E0B1:64 Channel
+                    int SingleOrAutoValue = cbxSingleOrAuto.SelectedIndex + 176;//0xB0
+                    CommandBytes = ConstCommandByteArray(0xE0, (byte)SingleOrAutoValue);
                     bResult = CommandSend(CommandBytes, CommandBytes.Length);
                     if (bResult)
                     {
-                        txtReport.AppendText("Sweep Acq Test Start\n");
-                        txtReport.AppendText("Sweep Acq Continue\n");
-                        btnSweepTestStart.Content = "Sweep Test Stop";
-                        await Task.Run(() => GetSlowDataRateResultCallBack());
-                        btnSweepTestStart.Content = "Sweep Acq Start";                        
-                        //Task SCurveDataAcq = new Task(() => GetSlowDataRateResultCallBack());
-                        //SCurveDataAcq.Start();
-                        //SCurveDataAcq.Wait();
+                        report = string.Format("Choose {0} Mode\n", cbxSingleOrAuto.Text);
+                        txtReport.AppendText(report);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Set S Curve channel mode failure. Please check the USB\n", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    #endregion
+                    #region Set CTest or Input
+                    // E0C0:Signal input from CTest pin
+                    // E0C1:Signal input from input pin
+                    int CTestOrInputValue = cbxCTestOrInput.SelectedIndex + 192;//0xC0
+                    CommandBytes = ConstCommandByteArray(0xE0, (byte)CTestOrInputValue);
+                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                    if (bResult)
+                    {
+                        report = string.Format("Choose {0} Mode\n", cbxCTestOrInput.Text);
+                        txtReport.AppendText(report);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Set charge inject method failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    #endregion
+                    #region Trig Mode
+                    //--- Trig Mode ---//
+                    if (SCurveMode == Trig)
+                    {
+                        #region Set CPT_MAX
+                        //*** Send CPT_MAX
+                        int MaxCountValue = cbxCPT_MAX.SelectedIndex;
+                        CommandBytes = ConstCommandByteArray(0xE2, (byte)MaxCountValue);
+                        bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                        if (bResult)
+                        {
+                            report = string.Format("Set MAX count number {0}", cbxCPT_MAX.Text);
+                            txtReport.AppendText(report);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Set S Curve test max count failure. Please check the USB\n", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                        #endregion
+                        #region Single Channel Mode
+                        //--- Single Channel Test ---///
+                        if (cbxSingleOrAuto.SelectedIndex == SingleChannel)
+                        {
+                            if (!IsSlowAcqStart)
+                            {
+                                //*** Set Package Number
+                                SlowDataRatePackageNumber = HeaderLength + ChannelLength + (EndDac - StartDac + 1) * OneDacDataLength + TailLength;
+                                #region Clear USB FIFO
+                                //*** Clear USB FIFO
+                                byte[] ClearUSBFifo = ConstCommandByteArray(0xF0, 0xFA);
+                                bResult = CommandSend(ClearUSBFifo, ClearUSBFifo.Length);//
+                                if (bResult)
+                                    txtReport.AppendText("USB fifo cleared");
+                                else
+                                    txtReport.AppendText("fail to clear USB fifo");
+                                byte[] RemainData = new byte[2048];
+                                bResult = DataRecieve(RemainData, RemainData.Length);
+                                #endregion
+                                #region Data ACQ
+                                CommandBytes = ConstCommandByteArray(0xE0, 0xF0);
+                                bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                                if (bResult)
+                                {
+                                    IsSlowAcqStart = true;
+                                    txtReport.AppendText("SCurve Test Start\n");
+                                    txtReport.AppendText("SCurve Test Continue\n");
+                                    btnSweepTestStart.Content = "SCurve Test Stop";
+                                    await Task.Run(() => GetSlowDataRateResultCallBack());
+                                    //Task SCurveDataAcq = new Task(() => GetSlowDataRateResultCallBack());
+                                    //SCurveDataAcq.Start();
+                                    //SCurveDataAcq.Wait();
+                                    CommandBytes = ConstCommandByteArray(0xE0, 0xF1);
+                                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                                    if (bResult)
+                                    {
+                                        IsSlowAcqStart = false;
+                                        txtReport.AppendText("SCurve Test Done\n");
+                                        btnSweepTestStart.Content = "SCurve Test Start";
+                                    }
+                                    else
+                                    {
+                                        txtReport.AppendText("SCurve Test Stop Failure\n");
+                                    }
+                                }
+                                else
+                                {
+                                    txtReport.AppendText("SCurve Stop Failure\n");
+                                }
+                                #endregion
+                            }
+                            else
+                            {
+                                IsSlowAcqStart = false;
+                                CommandBytes = ConstCommandByteArray(0xE0, 0xF1);
+                                bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                                if (bResult)
+                                {
+
+                                    btnSweepTestStart.Content = "Sweep Test Start";
+                                    txtReport.AppendText("SCurve Test Abort\n");
+                                }
+                                else
+                                {
+                                    txtReport.AppendText("SCurve Test Stop Failure\n");
+                                }
+                            }
+                        }
+                        #endregion
+                        #region 64 Channel Mode
+                        //--- 64 Channel Test ---//
+                        else if (cbxSingleOrAuto.SelectedIndex == AllChannel)
+                        {
+                            if (!IsSlowAcqStart)
+                            {
+                                //*** Set Package Number
+                                SlowDataRatePackageNumber = HeaderLength + (ChannelLength + (EndDac - StartDac + 1) * OneDacDataLength) * 64 + TailLength;
+                                #region Clear USB FIFO
+                                //*** Clear USB FIFO
+                                byte[] ClearUSBFifo = ConstCommandByteArray(0xF0, 0xFA);
+                                bResult = CommandSend(ClearUSBFifo, ClearUSBFifo.Length);//
+                                if (bResult)
+                                    txtReport.AppendText("USB fifo cleared");
+                                else
+                                    txtReport.AppendText("fail to clear USB fifo");
+                                byte[] RemainData = new byte[2048];
+                                bResult = DataRecieve(RemainData, RemainData.Length);
+                                #endregion
+                                #region Data ACQ
+                                CommandBytes = ConstCommandByteArray(0xE0, 0xF0);
+                                bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                                if (bResult)
+                                {
+                                    IsSlowAcqStart = true;
+                                    txtReport.AppendText("SCurve Test Start\n");
+                                    txtReport.AppendText("SCurve Test Continue\n");
+                                    btnSweepTestStart.Content = "SCurve Test Stop";
+                                    await Task.Run(() => GetSlowDataRateResultCallBack());
+                                    //Task SCurveDataAcq = new Task(() => GetSlowDataRateResultCallBack());
+                                    //SCurveDataAcq.Start();
+                                    //SCurveDataAcq.Wait();
+                                    CommandBytes = ConstCommandByteArray(0xE0, 0xF1);
+                                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                                    if (bResult)
+                                    {
+                                        IsSlowAcqStart = false;
+                                        btnSweepTestStart.Content = "Sweep Test Start";
+                                        txtReport.AppendText("SCurve Test Stop\n");
+                                    }
+                                    else
+                                    {
+                                        txtReport.AppendText("SCurve Test Stop Failure\n");
+                                    }
+                                }
+                                else
+                                {
+                                    txtReport.AppendText("SCurve Stop Failure\n");
+                                }
+                                #endregion
+                            }
+                            else
+                            {
+                                IsSlowAcqStart = false;
+                                CommandBytes = ConstCommandByteArray(0xE0, 0xF1);
+                                bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                                if (bResult)
+                                {
+                                    btnSweepTestStart.Content = "Sweep Test Start";
+                                    txtReport.AppendText("SCurve Test Stop\n");
+                                }
+                                else
+                                {
+                                    txtReport.AppendText("SCurve Test Stop Failure\n");
+                                }
+                            }
+                        }
+                        #endregion
+                    }
+                    #endregion
+                    #region Count Mode
+                    else if (SCurveMode == Count)
+                    {
+                        #region Set Count Time
+                        //*** Set Max Count Time
+                        bool IsCounterMaxLegal = rxInt.IsMatch(txtCountTime.Text) && (int.Parse(txtCountTime.Text) < 65535);
+                        if (IsCounterMaxLegal)
+                        {
+                            int CountTimeValue = int.Parse(txtCountTime.Text);
+                            CommandBytes = ConstCommandByteArray(0xE3, (byte)CountTimeValue);
+                            bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                            if (!bResult)
+                            {
+                                MessageBox.Show("Set count time failure. Please check the ", //text
+                                     "USB Error",   //caption
+                                     MessageBoxButton.OK,//button
+                                     MessageBoxImage.Error);//icon
+                            }
+                            CommandBytes = ConstCommandByteArray(0xE4, (byte)(CountTimeValue >> 8));
+                            bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                            if (bResult)
+                            {
+                                report = string.Format("Set count time:{0}", txtCountTime.Text);
+                                txtReport.AppendText(report);
+                            }
+                            else
+                            {
+                                MessageBox.Show("Set count time failure. Please check the ", //text
+                                     "USB Error",   //caption
+                                     MessageBoxButton.OK,//button
+                                     MessageBoxImage.Error);//icon
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Illegal count time, please re-type(Integer:0--65536)", //text
+                                     "Illegal input",   //caption
+                                     MessageBoxButton.OK,//button
+                                     MessageBoxImage.Error);//icon
+                        }
+                        #endregion
+                        #region Single Channel Mode
+                        if (cbxSingleOrAuto.SelectedIndex == SingleChannel)
+                        {
+                            if (!IsSlowAcqStart)
+                            {
+                                //*** Set Package Number
+                                SlowDataRatePackageNumber = HeaderLength + ChannelLength + (EndDac - StartDac + 1) * OneDacDataLength + TailLength;
+                                #region Clear Usb FIFO
+                                //*** Clear USB FIFO
+                                byte[] ClearUSBFifo = ConstCommandByteArray(0xF0, 0xFA);
+                                bResult = CommandSend(ClearUSBFifo, ClearUSBFifo.Length);//
+                                if (bResult)
+                                    txtReport.AppendText("USB fifo cleared");
+                                else
+                                    txtReport.AppendText("fail to clear USB fifo");
+                                byte[] RemainData = new byte[2048];
+                                bResult = DataRecieve(RemainData, RemainData.Length);
+                                #endregion
+                                #region Data ACQ
+                                CommandBytes = ConstCommandByteArray(0xE0, 0xF0);
+                                bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                                if (bResult)
+                                {
+
+                                    IsSlowAcqStart = true;
+                                    txtReport.AppendText("SCurve Test Start\n");
+                                    txtReport.AppendText("SCurve Test Continue\n");
+                                    btnSweepTestStart.Content = "SCurve Test Stop";
+                                    await Task.Run(() => GetSlowDataRateResultCallBack());
+                                    //Task SCurveDataAcq = new Task(() => GetSlowDataRateResultCallBack());
+                                    //SCurveDataAcq.Start();
+                                    //SCurveDataAcq.Wait();
+                                    CommandBytes = ConstCommandByteArray(0xE0, 0xF1);
+                                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                                    if (bResult)
+                                    {
+                                        IsSlowAcqStart = false;
+                                        btnSweepTestStart.Content = "Sweep Test Start";
+                                        txtReport.AppendText("SCurve Test Stop\n");
+                                    }
+                                    else
+                                    {
+                                        txtReport.AppendText("SCurve Test Stop Failure\n");
+                                    }
+                                }
+                                else
+                                {
+                                    txtReport.AppendText("SCurve Stop Failure\n");
+                                }
+                                #endregion
+                            }
+                            else
+                            {
+                                IsSlowAcqStart = false;
+                                CommandBytes = ConstCommandByteArray(0xE0, 0xF1);
+                                bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                                if (bResult)
+                                {
+                                    btnSweepTestStart.Content = "Sweep Test Start";
+                                    txtReport.AppendText("SCurve Test Stop\n");
+                                }
+                                else
+                                {
+                                    txtReport.AppendText("SCurve Test Stop Failure\n");
+                                }
+                            }
+                        }
+                        #endregion
+                        #region 64Channel Mode
+                        else if (cbxSingleOrAuto.SelectedIndex == AllChannel)
+                        {
+                            if (!IsSlowAcqStart)
+                            {
+                                //*** Set Package Number
+                                SlowDataRatePackageNumber = HeaderLength + (ChannelLength + (EndDac - StartDac + 1) * OneDacDataLength) * 64 + TailLength;
+                                #region Clear USB FIFO
+                                //*** Clear USB FIFO
+                                byte[] ClearUSBFifo = ConstCommandByteArray(0xF0, 0xFA);
+                                bResult = CommandSend(ClearUSBFifo, ClearUSBFifo.Length);//
+                                if (bResult)
+                                    txtReport.AppendText("USB fifo cleared");
+                                else
+                                    txtReport.AppendText("fail to clear USB fifo");
+                                byte[] RemainData = new byte[2048];
+                                bResult = DataRecieve(RemainData, RemainData.Length);
+                                #endregion
+                                #region Data ACQ
+                                CommandBytes = ConstCommandByteArray(0xE0, 0xF0);
+                                bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                                if (bResult)
+                                {
+                                    IsSlowAcqStart = true;
+                                    txtReport.AppendText("SCurve Test Start\n");
+                                    btnSweepTestStart.Content = "Sweep Test Stop";
+                                    txtReport.AppendText("SCurve Test Continue\n");
+                                    await Task.Run(() => GetSlowDataRateResultCallBack());
+                                    //Task SCurveDataAcq = new Task(() => GetSlowDataRateResultCallBack());
+                                    //SCurveDataAcq.Start();
+                                    //SCurveDataAcq.Wait();
+                                    CommandBytes = ConstCommandByteArray(0xE0, 0xF1);
+                                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                                    if (bResult)
+                                    {
+                                        IsSlowAcqStart = false;
+                                        txtReport.AppendText("SCurve Test Stop\n");
+                                    }
+                                    else
+                                    {
+                                        txtReport.AppendText("SCurve Test Stop Failure\n");
+                                    }
+                                }
+                                else
+                                {
+                                    txtReport.AppendText("SCurve Stop Failure\n");
+                                }
+                                #endregion
+                            }
+                            else
+                            {
+                                IsSlowAcqStart = false;
+                                CommandBytes = ConstCommandByteArray(0xE0, 0xF1);
+                                bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                                if (bResult)
+                                {
+                                    txtReport.AppendText("SCurve Test Stop\n");
+                                }
+                                else
+                                {
+                                    txtReport.AppendText("SCurve Test Stop Failure\n");
+                                }
+                            }
+                        }
+                        #endregion
+                    }
+                    #endregion
+                }
+                #endregion
+                #region Sweep Acq
+                else if (DataAcqMode == SweepAcq)
+                {
+                    if (!IsSlowAcqStart)
+                    {
+                        #region Set Start Acq Time
+                        Regex rx_int = new Regex(rx_Integer);
+                        bool Is_Time_legal = rx_int.IsMatch(txtStartAcqTime.Text);
+                        if (Is_Time_legal)
+                        {
+                            int value = Int32.Parse(txtStartAcqTime.Text) / 25; //除以25ns 
+                            byte[] bytes = ConstCommandByteArray(0xB2, (byte)(value >> 8));
+                            bResult = CommandSend(bytes, bytes.Length);
+                            if (!bResult)
+                            {
+                                MessageBox.Show("Set StartAcq time failure, please check USB", //text
+                                                 "USB Error",   //caption
+                                                 MessageBoxButton.OK,//button
+                                                 MessageBoxImage.Error);//icon
+                                return;
+                            }
+                            bytes = ConstCommandByteArray(0xB1, (byte)(value));
+                            bResult = CommandSend(bytes, bytes.Length);
+                            if (bResult)
+                            {
+                                report = string.Format("Set StartAcq time : {0}\n", txtStartAcqTime.Text);
+                                txtReport.AppendText(report);
+                            }
+                            else
+                            {
+                                MessageBox.Show("Set StartAcq time failure, please check USB", //text
+                                                 "USB Error",   //caption
+                                                 MessageBoxButton.OK,//button
+                                                 MessageBoxImage.Error);//icon
+                                return;
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Illegal StartAcq Time, please re-type(Integer:0--1638400,step:25ns)", //text
+                                             "Illegal input",   //caption
+                                             MessageBoxButton.OK,//button
+                                             MessageBoxImage.Error);//icon
+                            return;
+                        }
+                        #endregion
+                        #region Set Package Number
+                        bool IsPackageNumberLegal = rxInt.IsMatch(txtPackageNumber.Text) && (int.Parse(txtPackageNumber.Text) < 65535);
+                        int PackageNumberValue;
+                        if (IsPackageNumberLegal)
+                        {
+                            PackageNumberValue = int.Parse(txtPackageNumber.Text);
+                        }
+                        else
+                        {
+                            PackageNumberValue = 10000;
+                        }
+                        CommandBytes = ConstCommandByteArray(0xE6, (byte)PackageNumberValue);
+                        bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                        if (!bResult)
+                        {
+                            MessageBox.Show("Set count time failure. Please check the USB ", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                        CommandBytes = ConstCommandByteArray(0xE7, (byte)(PackageNumberValue >> 8));
+                        bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                        if (bResult)
+                        {
+                            report = string.Format("Set sweep acq package number:{0}\n", txtPackageNumber.Text);
+                            txtReport.AppendText(report);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Set count time failure. Please check the USB ", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                        #endregion
+                        #region Set Sweep Dac
+                        int SweepDacSelectValue = cbxDacSelect.SelectedIndex;
+                        CommandBytes = ConstCommandByteArray(0xE0, (byte)(SweepDacSelectValue));
+                        bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                        if (bResult)
+                        {
+                            report = string.Format("Set {0} as sweep DAC\n", cbxDacSelect.Text);
+                            txtReport.AppendText(report);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Set sweep DAC failure. Please check the ", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                        #endregion
+                        #region Start Acq
+                        //*** Set Package Number
+                        SlowDataRatePackageNumber = HeaderLength + (2 + PackageNumberValue * 20) * (EndDac - StartDac + 1) + TailLength;
+                        #region Clear USB FIFO
+                        //*** Clear USB FIFO
+                        byte[] ClearUSBFifo = ConstCommandByteArray(0xF0, 0xFA);
+                        bResult = CommandSend(ClearUSBFifo, ClearUSBFifo.Length);//
+                        if (bResult)
+                            txtReport.AppendText("USB fifo cleared");
+                        else
+                            txtReport.AppendText("fail to clear USB fifo");
+                        byte[] RemainData = new byte[2048];
+                        bResult = DataRecieve(RemainData, RemainData.Length);
+                        #endregion
+                        #region Data ACQ
+                        CommandBytes = ConstCommandByteArray(0xE0, 0xF0);
+                        bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                        if (bResult)
+                        {
+                            txtReport.AppendText("Sweep Acq Test Start\n");
+                            txtReport.AppendText("Sweep Acq Continue\n");
+                            btnSweepTestStart.Content = "Sweep Test Stop";
+                            await Task.Run(() => GetSlowDataRateResultCallBack());
+                            btnSweepTestStart.Content = "Sweep Acq Start";
+                            //Task SCurveDataAcq = new Task(() => GetSlowDataRateResultCallBack());
+                            //SCurveDataAcq.Start();
+                            //SCurveDataAcq.Wait();
+                            CommandBytes = ConstCommandByteArray(0xE0, 0xF1);
+                            bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                            if (bResult)
+                            {
+                                IsSlowAcqStart = false;
+                                btnSweepTestStart.Content = "Sweep Test Start";
+                                txtReport.AppendText("Sweep Acq Test Stop\n");
+                            }
+                            else
+                            {
+                                txtReport.AppendText("Sweep Acq Test Stop Failure\n");
+                            }
+                        }
+                        else
+                        {
+                            txtReport.AppendText("Sweep Acq Stop Failure\n");
+                        }
+                        #endregion
+                        #endregion
+                    }
+                    else
+                    {
+                        IsSlowAcqStart = false;
                         CommandBytes = ConstCommandByteArray(0xE0, 0xF1);
                         bResult = CommandSend(CommandBytes, CommandBytes.Length);
                         if (bResult)
                         {
-                            IsSlowAcqStart = false;
                             btnSweepTestStart.Content = "Sweep Test Start";
                             txtReport.AppendText("Sweep Acq Test Stop\n");
                         }
@@ -2875,41 +2945,16 @@ namespace USB_DAQ
                             txtReport.AppendText("Sweep Acq Test Stop Failure\n");
                         }
                     }
-                    else
-                    {
-                        txtReport.AppendText("Sweep Acq Stop Failure\n");
-                    }
-                    #endregion
-                    #endregion
                 }
-                else
-                {
-                    IsSlowAcqStart = false;
-                    CommandBytes = ConstCommandByteArray(0xE0, 0xF1);
-                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                    if (bResult)
-                    {                        
-                        btnSweepTestStart.Content = "Sweep Test Start";
-                        txtReport.AppendText("Sweep Acq Test Stop\n");
-                    }
-                    else
-                    {
-                        txtReport.AppendText("Sweep Acq Test Stop Failure\n");
-                    }
-                }
+                #endregion
             }
-            #endregion
-
         }
 
         private async void btnStartAdc_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(filepath.Trim()))
+            if (filepath == null || string.IsNullOrEmpty(filepath.Trim()))
             {
-                MessageBox.Show("You should save the file first before Scurve start", //text
-                                        "imformation", //caption
-                                   MessageBoxButton.OK, //button
-                                    MessageBoxImage.Error);//icon     
+                MessageBox.Show("You should save the file first before Scurve start", "imformation", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             else
             {

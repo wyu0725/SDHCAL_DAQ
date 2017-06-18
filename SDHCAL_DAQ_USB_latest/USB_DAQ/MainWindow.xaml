@@ -171,7 +171,7 @@
                     </Grid>
 
                 </GroupBox>
-                <GroupBox x:Name="gbxAcqParameter" Header="ACQ Parameter" HorizontalAlignment="Left" Height="110" Margin="0,351,0,0" VerticalAlignment="Top" Width="610">
+                <GroupBox x:Name="gbxAcqParameter" Header="ACQ Parameter" HorizontalAlignment="Left" Height="110" Margin="0,350,0,0" VerticalAlignment="Top" Width="687">
                     <Grid Margin="0,0,0,0">
                         <Label x:Name="lblExternal_RAZ_Delay" Content="External RAZ Delay" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="120" Height="24"/>
                         <TextBox x:Name="txtExternal_RAZ_Delay" HorizontalAlignment="Left" Height="24" Margin="120,0,0,0" TextWrapping="Wrap" Text="200" VerticalAlignment="Top" Width="75"/>
@@ -186,31 +186,37 @@
                         <Button x:Name="btnSet_Raz_Width" Content="SET RAZ" HorizontalAlignment="Left" Margin="200,30,0,0" VerticalAlignment="Top" Width="76" Height="24" Click="btnSet_Raz_Width_Click"/>
                         <Label x:Name="lblStartAcq_Time" Content="StartAcq Time(ns)" HorizontalAlignment="Left" Margin="0,60,0,0" VerticalAlignment="Top" Width="120"/>
                         <TextBox x:Name="txtStartAcqTime" HorizontalAlignment="Left" Height="24" Margin="120,60,0,0" TextWrapping="Wrap" Text="40000" VerticalAlignment="Top" Width="75"/>
-                        <Button x:Name="btnSetAcqTime" Content="SET Time" HorizontalAlignment="Left" Margin="200,60,0,0" VerticalAlignment="Top" Width="75" Height="24" Click="btnSetAcqTime_Click"/>
+                        <!--Button x:Name="btnSetAcqTime" Content="SET Time" HorizontalAlignment="Left" Margin="200,60,0,0" VerticalAlignment="Top" Width="75" Height="24" Click="btnSetAcqTime_Click"/-->
                         <Label x:Name="lblHold_Gen" Content="Hold Gen" HorizontalAlignment="Left" Margin="280,0,0,0" VerticalAlignment="Top" Width="80"/>
-                        <ComboBox x:Name="cbxTrig_Coincid" HorizontalAlignment="Left" Margin="360,0,0,0" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.088,-0.048" Height="24">
+                        <ComboBox x:Name="cbxTrig_Coincid" HorizontalAlignment="Left" Margin="350,0,0,0" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.088,-0.048" Height="24">
                             <ComboBoxItem Content="OUT_TRIG0B" IsSelected="True"/>
                             <ComboBoxItem Content="OUT_TRIG1B"/>
                             <ComboBoxItem Content="OUT_TRIG2B"/>
                             <ComboBoxItem Content="EXT_TRIGB"/>
                         </ComboBox>
-                        <TextBox x:Name="txtHold_delay" HorizontalAlignment="Left" Height="24" Margin="465,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="50"/>
-                        <Button x:Name="btnSet_Hold" Content="SET HOLD" HorizontalAlignment="Left" Margin="520,0,-43,0" VerticalAlignment="Top" Width="76" Height="24" Click="btnSet_Hold_Click"/>
-                        <Label x:Name="lblPower_Pulsing" Content="Powerpulsing" HorizontalAlignment="Left" Margin="441,30,0,0" VerticalAlignment="Top" Height="24" Width="90"/>
-                        <StackPanel HorizontalAlignment="Left" Height="30" Margin="530,30,0,0" VerticalAlignment="Top" Width="70">
+                        <Label x:Name="lblHoldDelay" Content="Hold Delay(ns)" HorizontalAlignment="Left" Margin="450,0,0,0" VerticalAlignment="Top"/>
+                        <TextBox x:Name="txtHold_delay" HorizontalAlignment="Left" Height="24" Margin="540,0,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="50"/>
+                        <Label x:Name="lblHoldTime" Content="Hold Time(ns)" HorizontalAlignment="Left" Margin="450,30,0,0" VerticalAlignment="Top"/>
+                        <TextBox x:Name="txtHoldTime" HorizontalAlignment="Left" Height="24" Margin="540,30,0,0" TextWrapping="Wrap" Text="5000" VerticalAlignment="Top" Width="50" />
+                        <Button x:Name="btnSet_Hold" Content="SET HOLD" HorizontalAlignment="Left" Margin="595,30,0,0" VerticalAlignment="Top" Width="76" Height="24" Click="btnSet_Hold_Click"/>
+                        <Label x:Name="lblPower_Pulsing" Content="Powerpulsing" HorizontalAlignment="Left" Margin="440,60,0,0" VerticalAlignment="Top" Height="24" Width="90"/>
+                        <StackPanel HorizontalAlignment="Left" Height="30" Margin="530,60,0,0" VerticalAlignment="Top" Width="70">
                             <RadioButton GroupName="PP_En_Dis" Checked="PowerPulsing_Checked" Content="Enable"/>
                             <RadioButton GroupName="PP_En_Dis" Checked="PowerPulsing_Checked" Content="Disable"/>
                         </StackPanel>
-                        <Label x:Name="lblOUT_TH" Content="OUT TH:" HorizontalAlignment="Left" Margin="280,61,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.806,0.942" Height="24" Width="60"/>
-                        <ComboBox x:Name="cbxOut_th" HorizontalAlignment="Left" Margin="360,60,0,0" VerticalAlignment="Top" Width="75" Height="24">
+                        <Label x:Name="lblOUT_TH" Content="OUT TH:" HorizontalAlignment="Left" Margin="200,61,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.806,0.942" Height="24" Width="60"/>
+                        <ComboBox x:Name="cbxOut_th" HorizontalAlignment="Left" Margin="280,60,0,0" VerticalAlignment="Top" Width="75" Height="24">
                             <ComboBoxItem Content="ASIC 1" IsSelected="True"/>
                             <ComboBoxItem Content="ASIC 2"/>
                             <ComboBoxItem Content="ASIC 3"/>
                             <ComboBoxItem Content="ASIC 4"/>
                         </ComboBox>
-                        <Button x:Name="btnOut_th_set" Content="Set" HorizontalAlignment="Left" Margin="440,60,0,0" VerticalAlignment="Top" Width="75" Height="24" Click="btnOut_th_set_Click"/>
+                        <Button x:Name="btnOut_th_set" Content="Set" HorizontalAlignment="Left" Margin="360,60,0,0" VerticalAlignment="Top" Width="75" Height="24" Click="btnOut_th_set_Click"/>
                         <Button x:Name="btnTRIG_EXT_EN" Content="TRIG EXT" HorizontalAlignment="Left" Margin="280,30,0,0" VerticalAlignment="Top" Width="75" Height="24" Click="btnTRIG_EXT_EN_Click"/>
                         <Button x:Name="btnReset_cntb" Content="Reset cntb" HorizontalAlignment="Left" Margin="360,30,0,0" VerticalAlignment="Top" Width="76" Height="24" Click="btnReset_cntb_Click"/>
+                        
+
+
                     </Grid>
                 </GroupBox>
                 <GroupBox x:Name="gbxSC_ReadReg" Header="SC/ReadReg Control" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Height="346" Width="780">
@@ -463,7 +469,7 @@
                     </Grid>
                 </GroupBox>
 
-                <Label x:Name="lblACQ_or_SCTest" Content="Mode Select" HorizontalAlignment="Left" VerticalAlignment="Top" Height="24" RenderTransformOrigin="4.713,0.917" Margin="610,396,0,0"/>
+                <Label x:Name="lblACQ_or_SCTest" Content="Mode Select" HorizontalAlignment="Left" VerticalAlignment="Top" Height="24" RenderTransformOrigin="4.713,0.917" Margin="692,360,0,0"/>
                 <StackPanel HorizontalAlignment="Left" Height="60" Margin="692,385,0,0" VerticalAlignment="Top" Width="90">
                     <RadioButton GroupName="ACQ_or_SCTest" Checked="ModeSelectChecked" Content="ACQ"/>
                     <RadioButton GroupName="ACQ_or_SCTest" Checked="ModeSelectChecked" Content="SCTest"/>
