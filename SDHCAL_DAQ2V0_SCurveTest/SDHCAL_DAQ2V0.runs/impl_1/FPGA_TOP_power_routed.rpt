@@ -1,7 +1,7 @@
 Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2016.3 (win64) Build 1682563 Mon Oct 10 19:07:27 MDT 2016
-| Date             : Sun Jun 18 08:10:36 2017
+| Date             : Sun Jun 18 14:59:15 2017
 | Host             : WYU running 64-bit major release  (build 9200)
 | Command          : report_power -file FPGA_TOP_power_routed.rpt -pb FPGA_TOP_power_summary_routed.pb -rpx FPGA_TOP_power_routed.rpx
 | Design           : FPGA_TOP
@@ -30,8 +30,8 @@ Table of Contents
 ----------
 
 +--------------------------+-------+
-| Total On-Chip Power (W)  | 0.385 |
-| Dynamic (W)              | 0.277 |
+| Total On-Chip Power (W)  | 0.378 |
+| Dynamic (W)              | 0.270 |
 | Device Static (W)        | 0.108 |
 | Total Off-Chip Power (W) | 0.005 |
 | Effective TJA (C/W)      | 2.7   |
@@ -50,19 +50,19 @@ Table of Contents
 +----------------+-----------+----------+-----------+-----------------+
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
-| Clocks         |     0.014 |        9 |       --- |             --- |
-| Slice Logic    |     0.005 |     8064 |       --- |             --- |
-|   LUT as Logic |     0.004 |     3933 |     63400 |            6.20 |
+| Clocks         |     0.009 |        9 |       --- |             --- |
+| Slice Logic    |     0.004 |     8064 |       --- |             --- |
+|   LUT as Logic |     0.004 |     3935 |     63400 |            6.21 |
 |   Register     |    <0.001 |     3424 |    126800 |            2.70 |
 |   CARRY4       |    <0.001 |      104 |     15850 |            0.66 |
 |   F7/F8 Muxes  |    <0.001 |       51 |     63400 |            0.08 |
 |   Others       |     0.000 |      170 |       --- |             --- |
-| Signals        |     0.006 |     5637 |       --- |             --- |
+| Signals        |     0.005 |     5636 |       --- |             --- |
 | Block RAM      |     0.002 |      6.5 |       135 |            4.81 |
 | MMCM           |     0.087 |        1 |         6 |           16.67 |
-| I/O            |     0.164 |       91 |       285 |           31.93 |
+| I/O            |     0.163 |       91 |       285 |           31.93 |
 | Static Power   |     0.108 |          |           |                 |
-| Total          |     0.385 |          |           |                 |
+| Total          |     0.378 |          |           |                 |
 +----------------+-----------+----------+-----------+-----------------+
 
 
@@ -72,8 +72,8 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) |
 +-----------+-------------+-----------+-------------+------------+
-| Vccint    |       1.000 |     0.042 |       0.027 |      0.016 |
-| Vccaux    |       1.800 |     0.067 |       0.049 |      0.018 |
+| Vccint    |       1.000 |     0.036 |       0.020 |      0.016 |
+| Vccaux    |       1.800 |     0.067 |       0.048 |      0.018 |
 | Vcco33    |       3.300 |     0.007 |       0.003 |      0.004 |
 | Vcco25    |       2.500 |     0.067 |       0.063 |      0.004 |
 | Vcco18    |       1.800 |     0.000 |       0.000 |      0.000 |
@@ -128,7 +128,7 @@ Table of Contents
 +------------+------------------+-----------------+
 | Clock      | Domain           | Constraint (ns) |
 +------------+------------------+-----------------+
-| Clk_320M   | Clk_Gen/Clk_320M |             3.1 |
+| Clk_320M   | Clk_Gen/Clk_320M |             6.2 |
 | Clk_40M    | Clk_40M          |            25.0 |
 | feedback   | Clk_Gen/feedback |            25.0 |
 | pll_40     | Clk_Gen/pll_40   |            25.0 |
@@ -146,7 +146,7 @@ Table of Contents
 +----------------------------------------------------------------------------+-----------+
 | Name                                                                       | Power (W) |
 +----------------------------------------------------------------------------+-----------+
-| FPGA_TOP                                                                   |     0.277 |
+| FPGA_TOP                                                                   |     0.270 |
 |   Clk_Gen                                                                  |     0.087 |
 |   Microroc_Control                                                         |     0.004 |
 |     AD9220                                                                 |    <0.001 |
@@ -209,9 +209,9 @@ Table of Contents
 |                   ngwrdrst.grst.g7serrst.gwrrd_rst_sync_stage[1].wrst_inst |    <0.001 |
 |                   ngwrdrst.grst.g7serrst.gwrrd_rst_sync_stage[2].rrst_inst |    <0.001 |
 |                   ngwrdrst.grst.g7serrst.gwrrd_rst_sync_stage[2].wrst_inst |    <0.001 |
-|   Microroc_u1                                                              |     0.166 |
+|   Microroc_u1                                                              |     0.160 |
 |     AutoDAQ                                                                |    <0.001 |
-|     HoldGenerator                                                          |     0.010 |
+|     HoldGenerator                                                          |     0.004 |
 |     RAM_Read                                                               |    <0.001 |
 |     RazGenerator                                                           |    <0.001 |
 |     SC_Readreg                                                             |     0.004 |
