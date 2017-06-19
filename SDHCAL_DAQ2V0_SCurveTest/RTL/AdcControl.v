@@ -148,7 +148,7 @@ module AdcControl(
       end
     end
     assign Data = {3'b0,AdcOutRange,AdcData};
-    assign Data_en = AdcData_en;
+    assign Data_en = AdcData_en && AdcStart;
     /*
     // ***Adc Control
     reg [2:0] State;
