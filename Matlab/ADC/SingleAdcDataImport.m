@@ -16,7 +16,7 @@ for i = 1:1:HitNumber
     AdcData(i) = SumAdcData / AverageNumber;
 end
 AdcData = AdcData*5/4095;
-[AdcCount,Adc] = hist(AdcData,10);
+[AdcCount,Adc] = hist(AdcData,2000);
 FAdc = AdcCount/sum(AdcCount);
 Average = FAdc*Adc';
 Std = sqrt(FAdc*((Adc-Average).*(Adc-Average))');
