@@ -3140,6 +3140,21 @@ namespace USB_DAQ
                         return;
                     }
                     #endregion
+                    #region Set ADC Input
+                    int AdcInput = cbxAdcInput.SelectedIndex + 240;//240 = 0xF0
+                    CommandBytes = ConstCommandByteArray(0xD2, (byte)AdcInput);
+                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                    if(bResult)
+                    {
+                        string report = string.Format("Set ADC monitor {0}\n", cbxAdcInput.Text);
+                        txtReport.AppendText(report);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Set ADC Monitor failure, please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+                    #endregion
                     #region Start Acq
                     CommandBytes = ConstCommandByteArray(0xE0, 0xF2);
                     bResult = CommandSend(CommandBytes, CommandBytes.Length);

@@ -167,10 +167,13 @@
                                 </Grid.ColumnDefinitions>
                                 <Label x:Name="lblStartDelay" Content="Start Delay" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Height="24" Width="75" Grid.ColumnSpan="2"/>
                                 <TextBox x:Name="txtStartDelay" HorizontalAlignment="Left" Height="24" Margin="63,0,0,0" TextWrapping="Wrap" Text="50" VerticalAlignment="Top" Width="50" Grid.Column="1"/>
-                                <Button x:Name="btnStartAdc" Content="ADC Start" HorizontalAlignment="Left" Margin="0,70,0,0" Width="75" Click="btnStartAdc_Click" Height="24" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+                                <Button x:Name="btnStartAdc" Content="ADC Start" HorizontalAlignment="Left" Margin="50,60,0,0" Width="75" Click="btnStartAdc_Click" Height="24" VerticalAlignment="Top" Grid.ColumnSpan="2" Grid.Column="1"/>
                                 <Label x:Name="lblAcqTimes" Content="Acq Times" HorizontalAlignment="Left" Margin="0,30,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
                                 <TextBox x:Name="txtAdcAcqTimes" Grid.ColumnSpan="2" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="60,30,0,0" TextWrapping="Wrap" Text="32" VerticalAlignment="Top" Width="50"/>
-
+                                <ComboBox x:Name="cbxAdcInput" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="0,60,0,0" VerticalAlignment="Top" Width="60" Height="24">
+                                    <ComboBoxItem Content="Hold" IsSelected="True"/>
+                                    <ComboBoxItem Content="Power"/>
+                                </ComboBox>
                             </Grid>
                         </GroupBox>
                         <Button x:Name="btnTest" Content="TestAsync" HorizontalAlignment="Left" Margin="678,199,0,0" VerticalAlignment="Top" Width="75" Click="btnTest_Click"/>
@@ -206,7 +209,7 @@
                         <Label x:Name="lblHoldTime" Content="Hold Time(ns)" HorizontalAlignment="Left" Margin="450,30,0,0" VerticalAlignment="Top"/>
                         <TextBox x:Name="txtHoldTime" HorizontalAlignment="Left" Height="24" Margin="540,30,0,0" TextWrapping="Wrap" Text="5000" VerticalAlignment="Top" Width="50" />
                         <ComboBox x:Name="cbxHoldEnable" HorizontalAlignment="Left" Margin="595,0,0,0" VerticalAlignment="Top" Width="60">
-                            <ComboBoxItem Content="Disable" IsEnabled="True"/>
+                            <ComboBoxItem Content="Disable" IsSelected="True"/>
                             <ComboBoxItem Content="Enable"/>
                         </ComboBox>
                         <Button x:Name="btnSet_Hold" Content="SET HOLD" HorizontalAlignment="Left" Margin="595,30,0,0" VerticalAlignment="Top" Width="76" Height="24" Click="btnSet_Hold_Click"/>
