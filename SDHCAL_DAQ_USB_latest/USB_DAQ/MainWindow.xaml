@@ -71,7 +71,7 @@
             <Grid  Margin="0,0,0,0" >
                 <GroupBox x:Name="gbxMicrorocControl" Header="Microroc Control" HorizontalAlignment="Left" Margin="0,466,0,-6" VerticalAlignment="Top" Height="250" Width="775">
                     <Grid  Margin="0,0,0,0" >
-                        <GroupBox x:Name="gbxNormalAcq" Header="Normal Acq" HorizontalAlignment="Left" VerticalAlignment="Top" Height="203" Width="155" Margin="0,0,0,0">
+                        <GroupBox x:Name="gbxNormalAcq" Header="Normal Acq" HorizontalAlignment="Left" VerticalAlignment="Top" Height="146" Width="155" Margin="0,0,0,0">
                             <Grid  Margin="0,0,0,0" >
                                 <Label x:Name="lblDataRate" Content="Data Rate:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70" Margin="0,0,0,0" Height="24"/>
                                 <StackPanel HorizontalAlignment="Left" Height="30" Margin="90,0,0,0" VerticalAlignment="Top" Width="70">
@@ -158,15 +158,22 @@
                                 <Button x:Name="btnSweepTestStart" Content="Sweep Test start" HorizontalAlignment="Left" Margin="190,150,0,0" VerticalAlignment="Top" Width="100" Height="24" Click="btnSweepTestStart_Click"/>
                             </Grid>
                         </GroupBox>
-                        <GroupBox x:Name="gbxAD9220" Header="AD9220" HorizontalAlignment="Left" Margin="560,0,0,0" VerticalAlignment="Top" Width="169" Height="80">
+                        <GroupBox x:Name="gbxAD9220" Header="AD9220" HorizontalAlignment="Left" Margin="565,10,0,0" VerticalAlignment="Top" Width="155" Height="126">
                             <Grid Margin="0,0,0,0">
-                                <Label x:Name="lblStartDelay" Content="Start Delay" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Height="24" Width="75"/>
-                                <TextBox x:Name="txtStartDelay" HorizontalAlignment="Left" Height="24" Margin="75,0,0,0" TextWrapping="Wrap" Text="50" VerticalAlignment="Top" Width="50"/>
-                                <Button x:Name="btnStartAdc" Content="ADC Start" HorizontalAlignment="Left" Margin="0,30,0,0" Width="75" Click="btnStartAdc_Click" Height="24" VerticalAlignment="Top"/>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="12*"/>
+                                    <ColumnDefinition Width="119*"/>
+                                    <ColumnDefinition Width="12*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label x:Name="lblStartDelay" Content="Start Delay" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Height="24" Width="75" Grid.ColumnSpan="2"/>
+                                <TextBox x:Name="txtStartDelay" HorizontalAlignment="Left" Height="24" Margin="63,0,0,0" TextWrapping="Wrap" Text="50" VerticalAlignment="Top" Width="50" Grid.Column="1"/>
+                                <Button x:Name="btnStartAdc" Content="ADC Start" HorizontalAlignment="Left" Margin="0,70,0,0" Width="75" Click="btnStartAdc_Click" Height="24" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+                                <Label x:Name="lblAcqTimes" Content="Acq Times" HorizontalAlignment="Left" Margin="0,30,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+                                <TextBox x:Name="txtAdcAcqTimes" Grid.ColumnSpan="2" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="60,30,0,0" TextWrapping="Wrap" Text="32" VerticalAlignment="Top" Width="50"/>
 
                             </Grid>
                         </GroupBox>
-                        <Button x:Name="btnTest" Content="TestAsync" HorizontalAlignment="Left" Margin="565,116,0,0" VerticalAlignment="Top" Width="75" Click="btnTest_Click"/>
+                        <Button x:Name="btnTest" Content="TestAsync" HorizontalAlignment="Left" Margin="678,199,0,0" VerticalAlignment="Top" Width="75" Click="btnTest_Click"/>
                         <!--<Button x:Name="btnSetParameter" Content="Button" HorizontalAlignment="Left" Margin="560,144,0,0" VerticalAlignment="Top" Width="75"/>-->
                     </Grid>
 
@@ -198,6 +205,10 @@
                         <TextBox x:Name="txtHold_delay" HorizontalAlignment="Left" Height="24" Margin="540,0,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="50"/>
                         <Label x:Name="lblHoldTime" Content="Hold Time(ns)" HorizontalAlignment="Left" Margin="450,30,0,0" VerticalAlignment="Top"/>
                         <TextBox x:Name="txtHoldTime" HorizontalAlignment="Left" Height="24" Margin="540,30,0,0" TextWrapping="Wrap" Text="5000" VerticalAlignment="Top" Width="50" />
+                        <ComboBox x:Name="cbxHoldEnable" HorizontalAlignment="Left" Margin="595,0,0,0" VerticalAlignment="Top" Width="60">
+                            <ComboBoxItem Content="Disable" IsEnabled="True"/>
+                            <ComboBoxItem Content="Enable"/>
+                        </ComboBox>
                         <Button x:Name="btnSet_Hold" Content="SET HOLD" HorizontalAlignment="Left" Margin="595,30,0,0" VerticalAlignment="Top" Width="76" Height="24" Click="btnSet_Hold_Click"/>
                         <Label x:Name="lblPower_Pulsing" Content="Powerpulsing" HorizontalAlignment="Left" Margin="440,60,0,0" VerticalAlignment="Top" Height="24" Width="90"/>
                         <StackPanel HorizontalAlignment="Left" Height="30" Margin="530,60,0,0" VerticalAlignment="Top" Width="70">
@@ -214,7 +225,8 @@
                         <Button x:Name="btnOut_th_set" Content="Set" HorizontalAlignment="Left" Margin="360,60,0,0" VerticalAlignment="Top" Width="75" Height="24" Click="btnOut_th_set_Click"/>
                         <Button x:Name="btnTRIG_EXT_EN" Content="TRIG EXT" HorizontalAlignment="Left" Margin="280,30,0,0" VerticalAlignment="Top" Width="75" Height="24" Click="btnTRIG_EXT_EN_Click"/>
                         <Button x:Name="btnReset_cntb" Content="Reset cntb" HorizontalAlignment="Left" Margin="360,30,0,0" VerticalAlignment="Top" Width="76" Height="24" Click="btnReset_cntb_Click"/>
-                        
+
+
 
 
                     </Grid>

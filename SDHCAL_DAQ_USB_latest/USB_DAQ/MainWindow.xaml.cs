@@ -1820,6 +1820,21 @@ namespace USB_DAQ
                 return;
             }
             #endregion
+            #region Hold Enable
+            int HoldEnable = cbxHoldEnable.SelectedIndex + 176; // 176 = 0xB0
+            CommandBytes = ConstCommandByteArray(0xA5, (byte)HoldEnable);
+            bResult = CommandSend(CommandBytes, CommandBytes.Length);
+            if(bResult)
+            {
+                string report = string.Format("Hold {0}\n", cbxHoldEnable.Text);
+                txtReport.AppendText(report);
+            }
+            else
+            {
+                MessageBox.Show("Set Hold Time failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            #endregion
         }
         //Set StartAcq Time
         private void btnSetAcqTime_Click(object sender, RoutedEventArgs e)
@@ -3091,6 +3106,39 @@ namespace USB_DAQ
                         return;
                     }
                     #endregion
+                    #endregion
+                    #region Set Adc Data Number
+                    bool IsAdcDataNumberLegal = rxInt.IsMatch(txtAdcAcqTimes.Text) && int.Parse(txtAdcAcqTimes.Text) < 255;
+                    int AdcDataNumber;
+                    if(IsAdcDataNumberLegal)
+                    {
+                        AdcDataNumber = int.Parse(txtAdcAcqTimes.Text);
+                    }
+                    else
+                    {
+                        AdcDataNumber = 32;
+                    }
+                    int AdcDataNumber1 = (AdcDataNumber & 15) + 16;//0x10
+                    int AdcDataNumber2 = ((AdcDataNumber >> 4) & 15) + 32;//0x20
+                    CommandBytes = ConstCommandByteArray(0xE8, (byte)AdcDataNumber1);
+                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                    if(!bResult)
+                    {
+                        MessageBox.Show("Set ADC Data Times failure, please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+                    CommandBytes = ConstCommandByteArray(0xE8, (byte)AdcDataNumber2);
+                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                    if(bResult)
+                    {
+                        string report = string.Format("Set Adc Data Nmuber:{0}\n", AdcDataNumber);
+                        txtReport.AppendText(report);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Set ADC Data Times failure, please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
                     #endregion
                     #region Start Acq
                     CommandBytes = ConstCommandByteArray(0xE0, 0xF2);
