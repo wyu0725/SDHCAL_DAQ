@@ -3161,8 +3161,8 @@ namespace USB_DAQ
                     bResult = true;
                     if (bResult)
                     {
-                        btnAcqStart.Content = "ADC Stop";
-                        btnAcqStart.Background = Brushes.Blue;
+                        btnStartAdc.Content = "ADC Stop";
+                        btnStartAdc.Background = Brushes.Blue;
                         IsAdcStart = true;
                         await Task.Run(() => GetSlowDataRateResultCallBack());
                         CommandBytes = ConstCommandByteArray(0xE0, 0xF3);
@@ -3198,8 +3198,8 @@ namespace USB_DAQ
                     if (bResult)
                     {
                         IsAdcStart = false;
-                        btnAcqStart.Background = Brushes.Green;
-                        btnAcqStart.Content = "ADC Start";
+                        btnStartAdc.Background = Brushes.Green;
+                        btnStartAdc.Content = "ADC Start";
                         txtReport.AppendText("ADC Abort\n");
                     }
                     else
