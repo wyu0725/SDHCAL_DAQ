@@ -138,7 +138,16 @@ module AdcControl(
         AdcDataCount <= AdcDataCount + 1'b1;
       end
     end
-    assign Data = {3'b0,ADC_OTR,AdcData};
+    reg AdcOutRange;
+    always @(posedge Clk or negedge reset_n) begin
+      if(~reset_n) begin
+        AdcOutRange <= 1'b0;
+      end
+      else begin
+        AdcOutRange <= ADC_OTR;
+      end
+    end
+    assign Data = {3'b0,AdcOutRange,AdcData};
     assign Data_en = AdcData_en;
     /*
     // ***Adc Control
