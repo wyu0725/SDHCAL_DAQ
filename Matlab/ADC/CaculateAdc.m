@@ -13,6 +13,8 @@ function [ Average,Std ] = CaculateAdc(HitNumber, AverageNumber )
     end
     
     [AdcCount,Adc] = hist(AdcData,10);
+    hist(AdcData,10);
+    hold on;
     FAdc = AdcCount/sum(AdcCount);
     Average = FAdc*Adc';
     Std = sqrt(FAdc*((Adc-Average).*(Adc-Average))');
