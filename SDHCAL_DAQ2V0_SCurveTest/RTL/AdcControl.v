@@ -72,32 +72,40 @@ module AdcControl(
     assign HoldRising = Hold_reg1 && (~Hold_reg2);
     wire HoldFalling;
     assign HoldFalling = (~Hold_reg1) && Hold_reg2;
-    reg [1:0] State;
-    localparam [1:0] IDLE = 2'b00,
-                     START_ADC = 2'b01,
-                     WAIT_DATA = 2'b10,
-                     DONE = 2'b11;
+    reg [2:0] State;
+    localparam [2:0] IDLE = 3'd0,
+                     START_ADC = 3'd1,
+                     DATA_DISCARD = 3'd2,
+                     WAIT_DATA = 3'd3,
+                     DONE = 3'd4;
     reg [7:0] AdcDataCount;
     reg ResetCount_n;
+    reg DataOutput_en;
+    reg [1:0] DataDiscardCount;
+    reg DataDiscardCount_en;
     reg [3:0] AdcStartDelayCount;
     always @(posedge Clk or negedge reset_n) begin
       if(~reset_n) begin
         State <= IDLE;
-        //AdcDataCount <= 8'b0;
         AdcStartDelayCount <= 4'b0;
         AdcStart <= 1'b0;
         ResetCount_n <= 1'b0;
+        DataOutput_en <= 1'b0;
+        DataDiscardCount_en <= 1'b0;
       end
       else begin
         case(State)
           IDLE:begin
             if(StartAcq && HoldRising) begin
               State <= START_ADC;
-              //AdcDataCount <= 8'b0;
             end
             else begin
               State <= IDLE;
-              //AdcDataCount <= 8'b0;
+              AdcStartDelayCount <= 4'b0;
+              AdcStart <= 1'b0;
+              ResetCount_n <= 1'b0;
+              DataOutput_en <= 1'b0;
+              DataDiscardCount_en <= 1'b0;
             end
           end
           START_ADC:begin
@@ -107,10 +115,22 @@ module AdcControl(
               AdcStart <= 1'b0;
             end
             else begin
-              State <= WAIT_DATA;
+              State <= DATA_DISCARD;
               AdcStartDelayCount <= 4'b0;
               AdcStart <= 1'b1;
               ResetCount_n <= 1'b1;
+              DataDiscardCount_en <= 1'b1;
+            end
+          end
+          DATA_DISCARD:begin
+            if(DataDiscardCount < 2'd3 && Hold_reg1) begin
+              State <= DATA_DISCARD;
+              DataOutput_en <= 1'b0;
+            end
+            else begin
+              State <= WAIT_DATA;
+              DataDiscardCount_en <= 1'b0;
+              DataOutput_en <= 1'b1;
             end
           end
           WAIT_DATA:begin
@@ -121,22 +141,39 @@ module AdcControl(
               State <= DONE;
               AdcStart <= 1'b0;
               ResetCount_n <= 1'b0;
+              DataOutput_en <= 1'b0;
             end
           end
           DONE:begin
             ResetCount_n <= 1'b1;
             State <= IDLE;
           end
+          default:State <= IDLE;
         endcase
       end
     end
+    // Adc Data Abort Counter
+    always @(posedge AdcData_en or negedge ResetCount_n) begin
+      if(~ResetCount_n) begin
+        DataDiscardCount <= 2'b0;
+      end
+      else if(DataDiscardCount_en) begin
+        DataDiscardCount <= DataDiscardCount + 1'b1;
+      end
+      else begin
+        DataDiscardCount <= DataDiscardCount;
+      end
+    end
+    //Adc Data Count
     always @(posedge AdcData_en or negedge ResetCount_n) begin
       if(~ResetCount_n) begin
         AdcDataCount <= 8'b0;
       end
-      else begin
+      else if(DataOutput_en) begin
         AdcDataCount <= AdcDataCount + 1'b1;
       end
+      else
+        AdcDataCount <= AdcDataCount;
     end
     reg AdcOutRange;
     always @(posedge Clk or negedge reset_n) begin
@@ -148,7 +185,7 @@ module AdcControl(
       end
     end
     assign Data = {3'b0,AdcOutRange,AdcData};
-    assign Data_en = AdcData_en && AdcStart;
+    assign Data_en = DataOutput_en && AdcData_en;
     /*
     // ***Adc Control
     reg [2:0] State;
