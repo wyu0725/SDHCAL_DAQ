@@ -9,6 +9,7 @@
 ### 时钟
 
 + 时钟使用MMCM( Mixed-Mode Clock Manager)产生
++ 7系列FPGA芯片时钟手册
 
 
 
