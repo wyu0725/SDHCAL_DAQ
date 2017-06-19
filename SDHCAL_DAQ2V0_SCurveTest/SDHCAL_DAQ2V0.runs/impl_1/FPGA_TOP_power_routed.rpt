@@ -1,7 +1,7 @@
 Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2016.3 (win64) Build 1682563 Mon Oct 10 19:07:27 MDT 2016
-| Date             : Mon Jun 19 16:50:43 2017
+| Date             : Mon Jun 19 18:12:27 2017
 | Host             : WYU running 64-bit major release  (build 9200)
 | Command          : report_power -file FPGA_TOP_power_routed.rpt -pb FPGA_TOP_power_summary_routed.pb -rpx FPGA_TOP_power_routed.rpx
 | Design           : FPGA_TOP
@@ -30,8 +30,8 @@ Table of Contents
 ----------
 
 +--------------------------+-------+
-| Total On-Chip Power (W)  | 0.379 |
-| Dynamic (W)              | 0.271 |
+| Total On-Chip Power (W)  | 0.378 |
+| Dynamic (W)              | 0.270 |
 | Device Static (W)        | 0.108 |
 | Total Off-Chip Power (W) | 0.005 |
 | Effective TJA (C/W)      | 2.7   |
@@ -51,18 +51,18 @@ Table of Contents
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
 | Clocks         |     0.010 |        9 |       --- |             --- |
-| Slice Logic    |     0.004 |     8043 |       --- |             --- |
-|   LUT as Logic |     0.004 |     3909 |     63400 |            6.17 |
-|   Register     |    <0.001 |     3422 |    126800 |            2.70 |
+| Slice Logic    |     0.004 |     8063 |       --- |             --- |
+|   LUT as Logic |     0.004 |     3925 |     63400 |            6.19 |
+|   Register     |    <0.001 |     3427 |    126800 |            2.70 |
 |   CARRY4       |    <0.001 |      100 |     15850 |            0.63 |
 |   F7/F8 Muxes  |    <0.001 |       51 |     63400 |            0.08 |
 |   Others       |     0.000 |      171 |       --- |             --- |
-| Signals        |     0.005 |     5616 |       --- |             --- |
+| Signals        |     0.005 |     5632 |       --- |             --- |
 | Block RAM      |     0.002 |      6.5 |       135 |            4.81 |
 | MMCM           |     0.087 |        1 |         6 |           16.67 |
 | I/O            |     0.164 |       92 |       285 |           32.28 |
 | Static Power   |     0.108 |          |           |                 |
-| Total          |     0.379 |          |           |                 |
+| Total          |     0.378 |          |           |                 |
 +----------------+-----------+----------+-----------+-----------------+
 
 
@@ -72,7 +72,7 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) |
 +-----------+-------------+-----------+-------------+------------+
-| Vccint    |       1.000 |     0.037 |       0.021 |      0.016 |
+| Vccint    |       1.000 |     0.036 |       0.021 |      0.016 |
 | Vccaux    |       1.800 |     0.067 |       0.048 |      0.018 |
 | Vcco33    |       3.300 |     0.007 |       0.003 |      0.004 |
 | Vcco25    |       2.500 |     0.067 |       0.063 |      0.004 |
@@ -146,7 +146,7 @@ Table of Contents
 +----------------------------------------------------------------------------+-----------+
 | Name                                                                       | Power (W) |
 +----------------------------------------------------------------------------+-----------+
-| FPGA_TOP                                                                   |     0.271 |
+| FPGA_TOP                                                                   |     0.270 |
 |   Clk_Gen                                                                  |     0.087 |
 |   Microroc_Control                                                         |     0.004 |
 |     AD9220                                                                 |    <0.001 |
@@ -209,12 +209,12 @@ Table of Contents
 |                   ngwrdrst.grst.g7serrst.gwrrd_rst_sync_stage[1].wrst_inst |    <0.001 |
 |                   ngwrdrst.grst.g7serrst.gwrrd_rst_sync_stage[2].rrst_inst |    <0.001 |
 |                   ngwrdrst.grst.g7serrst.gwrrd_rst_sync_stage[2].wrst_inst |    <0.001 |
-|   Microroc_u1                                                              |     0.161 |
+|   Microroc_u1                                                              |     0.160 |
 |     AutoDAQ                                                                |    <0.001 |
 |     HoldGenerator                                                          |     0.005 |
 |     RAM_Read                                                               |    <0.001 |
 |     RazGenerator                                                           |    <0.001 |
-|     SC_Readreg                                                             |     0.004 |
+|     SC_Readreg                                                             |     0.003 |
 |       BitShift                                                             |    <0.001 |
 |       Microroc_Param                                                       |     0.003 |
 |       param_store_fifo_16bitx256deep                                       |    <0.001 |
