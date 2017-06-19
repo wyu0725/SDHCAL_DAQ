@@ -96,6 +96,7 @@ module usb_command_interpreter(
       //*** ADC Control
       output reg AdcStartAcq,
       output reg [3:0] AdcStartDelayTime,
+      output reg [7:0] AdcDataNumber,
       //--- LED ---//
       output reg [3:0] LED
     );
@@ -498,7 +499,7 @@ end
 //raz_chn to reset the trigger, the delay time is to decide which time the raz_chn is enable
 always @(posedge clk or negedge reset_n) begin
   if(~reset_n)
-    MicrorocExternalRazDelayTime <= 10'd0;
+    MicrorocExternalRazDelayTime <= 4'd4;
   else if(fifo_rden && USB_COMMAND[15:4] == 12'hA8D)
     MicrorocExternalRazDelayTime[3:0] <= USB_COMMAND[3:0];
   else
@@ -1072,7 +1073,7 @@ end
 always @ (posedge clk or negedge reset_n) begin
   if(~reset_n)
     CounterMax[15:8] <= 8'd0;
-  else if(fifo_rden && USB_COMMAND[15:7] == 8'hE4)
+  else if(fifo_rden && USB_COMMAND[15:8] == 8'hE4)
     CounterMax[15:8] <= USB_COMMAND[7:0];
   else
     CounterMax[15:8] <= CounterMax[15:8];
@@ -1173,6 +1174,19 @@ always @(posedge clk or negedge reset_n) begin
     AdcStartDelayTime <= USB_COMMAND[3:0];
   else
     AdcStartDelayTime <=  AdcStartDelayTime;
+end
+// Adc data number
+// + E81X:AdcDataNumber[3:0]
+// + E82X:AdcDataNumber[7:4]
+always @(posedge clk or negedge reset_n) begin
+  if(~reset_n)
+    AdcDataNumber <= 8'b0;
+  else if(fifo_rden && USB_COMMAND[15:4] == 12'hE81)
+    AdcDataNumber[3:0] <= USB_COMMAND[3:0];
+  else if(fifo_rden && USB_COMMAND[15:4] == 12'hE82)
+    AdcDataNumber[7:4] <= USB_COMMAND[3:0];
+  else
+    AdcDataNumber <= AdcDataNumber;
 end
 //Swap the LSB and MSB
   function [9:0] Invert_10bit(input [9:0] num);

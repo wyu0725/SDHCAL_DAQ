@@ -14,15 +14,15 @@
 // ADC and the max sample rate is 10MHz. The output latency is 3 clock period,
 // and time clock to output is 8ns. In this module we don't provide the
 // function that the sample rate can be changed
-// In this module we choose 10MHz Sample rate and sampled 32 time when the
-// hold is comming then sum the data to a 17-bit register and then left shift the register, 
-// so that the data is devided by 2. Then the data is sent to the USB FIFO. 
+// In this module we choose 10MHz Sample rate. When acquisition, the hold
+// signal start the ADC and the convertion time is decided by the user. 
 // Dependencies: 
 // 
 // Revision: 
 // Revision 0.01 - File Created
 // V1.0 File Completed 20170613 9:20
 // V1.1 Fiel Simlation Completed 20170613 9:20
+// V2.0 Change average into conversion directly
 // Additional Comments:
 // 
 //////////////////////////////////////////////////////////////////////////////////
@@ -34,11 +34,12 @@ module AdcControl(
     input Hold,
     input StartAcq,
     input [3:0] AdcStartDelay,
+    input [7:0] AdcDataNumber,
     input [11:0] ADC_DATA,
     input ADC_OTR,
     output ADC_CLK,
-    output [15:0] SumData,
-    output reg SumData_en
+    output [15:0] Data,
+    output Data_en
     );
     // ***Instantiate the Adc Module
     reg AdcStart;
@@ -69,6 +70,77 @@ module AdcControl(
     end
     wire HoldRising;
     assign HoldRising = Hold_reg1 && (~Hold_reg2);
+    wire HoldFalling;
+    assign HoldFalling = (~Hold_reg1) && Hold_reg2;
+    reg [1:0] State;
+    localparam [1:0] IDLE = 2'b00,
+                     START_ADC = 2'b01,
+                     WAIT_DATA = 2'b10,
+                     DONE = 2'b11;
+    reg [7:0] AdcDataCount;
+    reg ResetCount_n;
+    reg [3:0] AdcStartDelayCount;
+    always @(posedge Clk or negedge reset_n) begin
+      if(~reset_n) begin
+        State <= IDLE;
+        //AdcDataCount <= 8'b0;
+        AdcStartDelayCount <= 4'b0;
+        AdcStart <= 1'b0;
+        ResetCount_n <= 1'b0;
+      end
+      else begin
+        case(State)
+          IDLE:begin
+            if(StartAcq && HoldRising) begin
+              State <= START_ADC;
+              //AdcDataCount <= 8'b0;
+            end
+            else begin
+              State <= IDLE;
+              //AdcDataCount <= 8'b0;
+            end
+          end
+          START_ADC:begin
+            if(AdcStartDelayCount < AdcStartDelay) begin
+              State <= START_ADC;
+              AdcStartDelayCount <= AdcStartDelayCount + 1'b1;
+              AdcStart <= 1'b0;
+            end
+            else begin
+              State <= WAIT_DATA;
+              AdcStartDelayCount <= 4'b0;
+              AdcStart <= 1'b1;
+              ResetCount_n <= 1'b1;
+            end
+          end
+          WAIT_DATA:begin
+            if(AdcDataCount < AdcDataNumber && Hold_reg1) begin
+              State <= WAIT_DATA;
+            end
+            else begin
+              State <= DONE;
+              AdcStart <= 1'b0;
+              ResetCount_n <= 1'b0;
+            end
+          end
+          DONE:begin
+            ResetCount_n <= 1'b1;
+            State <= IDLE;
+          end
+        endcase
+      end
+    end
+    always @(posedge AdcData_en or negedge ResetCount_n) begin
+      if(~ResetCount_n) begin
+        AdcDataCount <= 8'b0;
+      end
+      else begin
+        AdcDataCount <= AdcDataCount + 1'b1;
+      end
+    end
+    assign Data = {3'b0,ADC_OTR,AdcData};
+    assign Data_en = AdcData_en;
+    /*
     // ***Adc Control
     reg [2:0] State;
     localparam [2:0] IDLE = 3'b000,
@@ -152,6 +224,6 @@ module AdcControl(
           end
         endcase
       end
-    end
-    assign SumData = InternalSumData[15:0];
+    end*/
+    //assign SumData = InternalSumData[15:0];
 endmodule

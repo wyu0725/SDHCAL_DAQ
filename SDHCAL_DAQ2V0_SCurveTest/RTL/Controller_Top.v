@@ -84,6 +84,7 @@ module Controller_Top(
     input UsbStartAdc,
     input Hold,
     input [3:0] AdcStartDelay,
+    input [7:0] AdcDataNumber,
     input [11:0] ADC_DATA,
     input ADC_OTR,
     output ADC_CLK
@@ -260,10 +261,11 @@ module Controller_Top(
       .Hold(Hold),
       .StartAcq(AdcStart),
       .AdcStartDelay(AdcStartDelay),
+      .AdcDataNumber(AdcDataNumber),
       .ADC_DATA(ADC_DATA),
       .ADC_OTR(ADC_OTR),
       .ADC_CLK(ADC_CLK),
-      .SumData(AdcData),
-      .SumData_en(AdcData_en)
+      .Data(AdcData),
+      .Data_en(AdcData_en)
     );
 endmodule

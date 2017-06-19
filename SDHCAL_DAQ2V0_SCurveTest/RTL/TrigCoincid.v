@@ -21,6 +21,8 @@
 
 
 module TrigCoincid(
+    input Clk,
+    input reset_n,
     input OUT_TRIG0B,
     input OUT_TRIG1B,
     input OUT_TRIG2B,
@@ -30,14 +32,32 @@ module TrigCoincid(
     output TrigAnd,
     output TrigOr
     );
+    reg InternalTrigger0;
+    reg InternalTrigger1;
+    reg InternalTrigger2;
+    reg TriggerExternal;
+    always @(posedge Clk or negedge reset_n) begin
+      if(~reset_n) begin
+        InternalTrigger0 <= 1'b0;
+        InternalTrigger1 <= 1'b0;
+        InternalTrigger2 <= 1'b0;
+        TriggerExternal <= 1'b0;
+      end
+      else begin
+        InternalTrigger0 <= ~OUT_TRIG0B;
+        InternalTrigger1 <= ~OUT_TRIG1B;
+        InternalTrigger2 <= ~OUT_TRIG2B;
+        TriggerExternal <= EXT_TRIGB;
+      end
+    end
     always @(*) begin
       case(TrigCoincid)
-        2'b00: TrigOut = ~OUT_TRIG0B;
-        2'b01: TrigOut = ~OUT_TRIG1B;
-        2'b10: TrigOut = ~OUT_TRIG2B;
-        2'b11: TrigOut = EXT_TRIGB;
+        2'b00: TrigOut = InternalTrigger0;
+        2'b01: TrigOut = InternalTrigger1;
+        2'b10: TrigOut = InternalTrigger2;
+        2'b11: TrigOut = TriggerExternal;
       endcase
     end
-    assign TrigAnd = (~OUT_TRIG0B) && (~OUT_TRIG1B) && (~OUT_TRIG2B);
-    assign TrigOr = (~OUT_TRIG0B) || (~OUT_TRIG1B) || (~OUT_TRIG2B);
+    assign TrigAnd = InternalTrigger0 && InternalTrigger1 && InternalTrigger2;
+    assign TrigOr = InternalTrigger0 || InternalTrigger1 || InternalTrigger2;
 endmodule

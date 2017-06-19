@@ -175,6 +175,7 @@ module FPGA_TOP(
     wire UsbMicrorocHold_en;
     wire UsbAdcStart;
     wire [3:0] UsbAdcStartDelayTime;
+    wire [7:0] UsbAdcDataNumber;
     usb_command_interpreter usb_control
     (
       .IFCLK(IFCLK),
@@ -251,6 +252,7 @@ module FPGA_TOP(
       //*** Adc Control
       .AdcStartAcq(UsbAdcStart),
       .AdcStartDelayTime(UsbAdcStartDelayTime),
+      .AdcDataNumber(UsbAdcDataNumber),
       /*----------------------------*/
       .LED(LED[3:0])
     );    
@@ -373,6 +375,8 @@ module FPGA_TOP(
     wire TrigOr;
     wire TrigOut;
     TrigCoincid TrigSelect(
+      .Clk(Clk_320M),
+      .reset_n(reset_n),
       .OUT_TRIG0B(OUT_TRIG0B),
       .OUT_TRIG1B(OUT_TRIG1B),
       .OUT_TRIG2B(OUT_TRIG2B),
@@ -595,6 +599,7 @@ module FPGA_TOP(
       .UsbStartAdc(UsbAdcStart),
       .Hold(MicrorocHold),
       .AdcStartDelay(UsbAdcStartDelayTime),
+      .AdcDataNumber(UsbAdcDataNumber),
       .ADC_DATA(ADC_DATA),
       .ADC_OTR(ADC_OTR),
       .ADC_CLK(ADC_CLK)

@@ -42,7 +42,7 @@ module RazGen(
       end
     end
     wire TrigInRise;
-    assign TrigInRise = ExternalRaz_en &&TrigIn1 && (~TrigIn2);
+    assign TrigInRise = ExternalRaz_en && TrigIn1 && (~TrigIn2);
     // Generate the delayed enable signal
     reg [3:0] RazDelayCount;
     always @(posedge Clk or negedge reset_n) begin
