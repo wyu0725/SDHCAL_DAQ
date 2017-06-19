@@ -944,7 +944,7 @@ end
 //Choose whether out_T&H or power comsumption connected to ADC. 'D2F0':0 'D2F1':1
 always @(posedge clk or negedge reset_n) begin
   if (~reset_n)
-    ADG819_Addr <= 1'b1; //default:out_T&H 
+    ADG819_Addr <= 1'b0; //default:out_T&H 
   else if (fifo_rden && USB_COMMAND == 16'hD2F0)
     ADG819_Addr <= 1'b0;
   else if (fifo_rden && USB_COMMAND == 16'hD2F1)
