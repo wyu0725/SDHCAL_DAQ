@@ -1,9 +1,9 @@
-prompt = {'Input the hit number','Input the average number','DataNumber'};
+prompt = {'Input the average number','DataNumber'};
 DlgTitle = 'Input the acq parameter';
 answer = inputdlg(prompt,DlgTitle);
-HitNumber = str2double(answer(1));
-AverageNumber = str2double(answer(2));
-DataNumber = str2double(answer(3));
+% HitNumber = str2double(answer(1));
+AverageNumber = str2double(answer(1));
+DataNumber = str2double(answer(2));
 Charge = zeros(DataNumber,1);
 AverageAdc = zeros(DataNumber,1);
 StdAdc = zeros(DataNumber,1);
@@ -12,5 +12,28 @@ ChargeTitle = 'InputCharge and select file';
 for i = 1:1:DataNumber
     ChargeAnswer = inputdlg(PromptCharge,ChargeTitle);
     Charge(i) = str2double(ChargeAnswer);
-    [AverageAdc(i),StdAdc(i)] = CaculateAdc(HitNumber,AverageNumber);
+    [AverageAdc(i),StdAdc(i)] = CaculateAdc(AverageNumber);
 end
+figure;
+plot(Charge,AverageAdc,'o-')
+AdcVoltage = AverageAdc * 5 / 4095;
+figure;
+plot(Charge,AdcVoltage,'o-')
+ChargeLinear = Charge(1:9);
+AdcLinear = AverageAdc(1:9);
+
+% Caculate Linear
+Charge1 = Charge(1:9);
+AdcVoltage1 = AdcVoltage(1:9);
+p1 = polyfit(Charge1,AdcVoltage1,1);
+x1 = linspace(min(Charge1),max(Charge1)+50);
+y1 = polyval(p1,x1);
+figure;
+plot(x1,y1);
+Charge2 = Charge(9:11);
+AdcVoltage2 = AdcVoltage(9:11);
+p2 = polyfit(Charge2,AdcVoltage2,1);
+x2 = linspace(min(Charge2)-50,max(Charge2));
+y2 = polyval(p2,x2);
+figure;
+plot(x2,y2);

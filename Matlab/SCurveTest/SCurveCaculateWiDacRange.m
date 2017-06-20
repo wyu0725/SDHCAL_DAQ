@@ -14,6 +14,11 @@ function [ DacCode, DAC_Percent0, DAC_Percent1, DAC_Percent2 ] = SCurveCaculateW
 %     DAC_Percent0 = 0;
 %     DAC_Percent1 = 0;
 %     DAC_Percent2 = 0;
+% DAC_Percent0 = 0;
+% 
+% DAC_Percent1 = 0;
+% 
+% DAC_Percent2 = 0;
     
     figure(1+FigureId)
     plot(Trig_Ratio0);

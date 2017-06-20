@@ -21,7 +21,7 @@ StartDac = str2double(answer(1));
 EndDac = str2double(answer(2));
 DacCount = EndDac - StartDac + 1;
 for i = 0:1:63
-    if(i == 28)
+    if(i == 36)
         Dac0_50PercentBase(i) = 0;
         Dac1_50PercentBase(i) = 0;
         Dac2_50PercentBase(i) = 0;
@@ -29,7 +29,16 @@ for i = 0:1:63
         Dac1_50PercentSignal(i) = 0;
         Dac2_50PercentSignal(i) = 0;
         continue;
-    end        
+    end    
+    if(i == 29)
+        Dac0_50PercentBase(i) = 0;
+        Dac1_50PercentBase(i) = 0;
+        Dac2_50PercentBase(i) = 0;
+        Dac0_50PercentSignal(i) = 0;
+        Dac1_50PercentSignal(i) = 0;
+        Dac2_50PercentSignal(i) = 0;
+        continue;
+    end    
     [DacCode, Dac0_50PercentBase(i+1), Dac1_50PercentBase(i+1), Dac2_50PercentBase(i+1)] = SCurveCaculateWiDacRange(ImportDataBase, i, DacCountBase, 1);
     [DacCode1, Dac0_50PercentSignal(i+1), Dac1_50PercentSignal(i+1), Dac2_50PercentSignal(i+1)] = SCurveCaculateWiDacRange(ImportDataSignal, i, DacCount, 2);
 end

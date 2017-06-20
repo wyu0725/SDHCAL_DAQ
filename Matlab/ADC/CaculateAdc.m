@@ -1,7 +1,8 @@
-function [ Average,Std ] = CaculateAdc(HitNumber, AverageNumber )
+function [ Average,Std ] = CaculateAdc(AverageNumber )
 %UNTITLED2 此处显示有关此函数的摘要
 %   此处显示详细说明
     InitialData = ImportData();
+    HitNumber = floor(length(InitialData)/AverageNumber);
     AdcData = zeros(HitNumber,1);
     for i = 1:1:HitNumber
         SumAdcData = 0;
