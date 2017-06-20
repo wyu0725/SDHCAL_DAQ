@@ -16,9 +16,15 @@ for i = 1:1:HitNumber
     end
     AdcData(i) = SumAdcData / AverageNumber;
 end
-AdcData1 = 2.14599629357 -  AdcData*5/4095;
+AdcData1 = 2.1465201465201465201465201465201 -  AdcData*5/4095;
 % AdcData1 = AdcData;
-[AdcCount,Adc] = hist(AdcData1,2000);
+[AdcCount,Adc] = hist(AdcData1,10);
+[xData,yData] = createFit(Adc,AdcCount);
+x = linspace(min(Adc),max(Adc));
+a1 = xData.a1;
+b1 = xData.b1;
+c1 = xData.c1;
+y = a1*exp(-((x - b1)./c1).^2);
 figure;
 hist(AdcData1,2000);
 AdcData2 = AdcData*5/4095;
