@@ -1,10 +1,11 @@
 InitialData = ImportData();
-prompt = {'Input the hit number','Input the average number','Input the charge'};
+prompt = {'Input the average number','Input the charge'};
 DlgTitle = 'Input the acq parameter';
 answer = inputdlg(prompt,DlgTitle);
-HitNumber = str2double(answer(1));
-AverageNumber = str2double(answer(2));
-Charge = str2double(answer(3));
+
+AverageNumber = str2double(answer(1));
+Charge = str2double(answer(2));
+HitNumber = floor(length(InitialData)/AverageNumber);
 
 AdcData = zeros(HitNumber,1);
 for i = 1:1:HitNumber
@@ -15,8 +16,18 @@ for i = 1:1:HitNumber
     end
     AdcData(i) = SumAdcData / AverageNumber;
 end
-AdcData = AdcData*5/4095;
-[AdcCount,Adc] = hist(AdcData,2000);
+AdcData1 = 2.14599629357 -  AdcData*5/4095;
+% AdcData1 = AdcData;
+[AdcCount,Adc] = hist(AdcData1,2000);
+figure;
+hist(AdcData1,2000);
+AdcData2 = AdcData*5/4095;
+AdcCharge = zeros(HitNumber,1);
+for i = 1:1:HitNumber
+    AdcCharge(i) = Voltage2Charge(AdcData2(i));
+end
+figure;
+hist(AdcCharge,2000);
 FAdc = AdcCount/sum(AdcCount);
 Average = FAdc*Adc';
 Std = sqrt(FAdc*((Adc-Average).*(Adc-Average))');
