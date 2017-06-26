@@ -1,10 +1,10 @@
-function [InitialData,filename] = ImportData(i)
+function [InitialData,filename] = ImportAdcDataAll(PathName,FileHeader,i)
 %%% This function inport the *.dat file with UI interface
 % The data is imported in ubit2 structure
 % [FileName,PathName,FilterIndex] = uigetfile('*.dat','Select the file');
-File_str = 'A';
+% File_str = 'A';
 Ca_str = '.dat';
-filename = [File_str,num2str(i),Ca_str];
+filename = [PathName,FileHeader,num2str(i),Ca_str];
 % if FilterIndex
 %     filename = [PathName FileName];
     [fid,~] = fopen(filename,'r');

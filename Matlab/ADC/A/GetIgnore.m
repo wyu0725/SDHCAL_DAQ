@@ -1,4 +1,4 @@
-function [IgnoreChannel] = GetIgnore( )
+function [IgnoreChannel,PathName] = GetIgnore( )
 %UNTITLED 此处显示有关此函数的摘要
 %   此处显示详细说明
     [FileName,PathName,FilterIndex] = uigetfile('*.txt','Select the file');
