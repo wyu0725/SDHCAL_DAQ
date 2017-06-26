@@ -1,0 +1,19 @@
+prompt = 'Inputn the average number';
+DlgTitle = 'Input';
+answer = inputdlg(prompt, DlgTitle);
+AverageNumber = str2double(answer(1));
+% A, B, C, D, E, F, G, H, J, K, L, M, N, P
+A = zeros(64,1);
+B = zeros(64,1);
+C = zeros(64,1);
+D = zeros(64,1);
+E = zeros(64,1);
+F = zeros(64,1);
+G = zeros(64,1);
+H = zeros(64,1);
+J = zeros(64,1);
+K = zeros(64,1);
+L = zeros(64,1);
+M = zeros(64,1);
+N = zeros(64,1);
+P = zeros(64,1);
