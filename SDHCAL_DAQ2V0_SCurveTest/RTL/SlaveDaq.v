@@ -16,6 +16,11 @@
 // In this module the START_ACQ is started asynchronous and disabled
 // synchronous, when one acq done the digital part of the ASIC should be
 // reset. And this module send a done signal.
+// As for the RESET_B signal, to my understanding, the Reset_b
+// signal is only used for reset the digital part of the
+// ASIC, especially the LVDS recevier, before power on.
+// There is no need to reset the ASIC as there is no
+// power down after one acquisition.
 // 
 // Dependencies: 
 // 
@@ -101,11 +106,7 @@ module SlaveDaq(
                      WAIT_READ = 4'd6,
                      START_READOUT = 4'd7,
                      WAIT_READ_DONE = 4'd8,
-                     //RESET_ASIC = 4'd9, // To my understanding, the Reset_b
-                     // signal is only used for reset the digital part of the
-                     // ASIC, especially the LVDS recevier, before power on.
-                     // There is no need to reset the ASIC as there is no
-                     // power down after one acquisition.
+                     //RESET_ASIC = 4'd9, // There is no need to reset ASIC
                      ONCE_END = 4'd10,
                      ALL_DONE = 4'd11;
     reg [3:0] State;
