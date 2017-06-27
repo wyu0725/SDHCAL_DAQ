@@ -130,13 +130,14 @@ always @ (posedge Clk , negedge reset_n) begin
       end
       ACQUISITION:begin
         if(delay_cnt < T_acquisition) begin//T_acquisition = 8//send from USB, default 8
-          delay_cnt <= delay_cnt + 1'b1;
+          //delay_cnt <= delay_cnt + 1'b1;
           if(Chip_full) begin //chip full during acquisition
             State <= WAIT;
             delay_cnt <= 16'b0;
             Start_Acq <= 1'b0;
           end
           else
+            delay_cnt <= delay_cnt + 1'b1;
             State <= ACQUISITION;
         end
         else begin
