@@ -161,17 +161,18 @@ module SlaveDaq(
               AcqEnable <= 1'b1;
               ResetStartAcq_n <= 1'b1;
               State <= WAIT_START;
+            end
           end
           WAIT_START:begin
-            if(SingleAcqStart && ModuleStart) begin
-              State <= START_ACQ;
-            end
-            else if(ModuleStart) begin
-              State <= WAIT_START;
-            end
-            else begin
+            if(~ModuleStart) begin
               AcqEnable <= 1'b0;
               State <= ALL_DONE;
+            end
+            else if(SingleAcqStart) begin
+              State <= START_ACQ;
+            end
+            else begin
+              State <= WAIT_START;
             end
           end
           START_ACQ:begin
@@ -225,6 +226,7 @@ module SlaveDaq(
               State <= ONCE_END;
             end
             else begin
+              OnceEnd <= 1'b0;
               DelayCount <= 16'b0;
               State <= WAIT_START;
             end
@@ -244,19 +246,19 @@ module SlaveDaq(
       if(~ResetStartAcq_n)
         START_ACQ <= 1'b0;
       else if(AcqEnable)
-        START_ACQ <= 1'b1
+        START_ACQ <= 1'b1;
       else
         START_ACQ <= 1'b0;
     end
     //*** Power On Control
     always @(State) begin
-      if(State == )
+      if(State == POWER_ON || State == POWER_ON || State == RELEASE || State == WAIT_START || State == START_ACQ || State == WAIT_READ || State == START_READOUT || State == WAIT_READ_OUT || State == WAIT_READ_DONE || State == ONCE_END)
         POWER_ON_D = 1'b1;
       else
         POWER_ON_D = 1'b0;
     end
     always @(State) begin
-      if(State == ) begin
+      if(State == CHIP_RESET || State == POWER_ON || State == POWER_ON || State == RELEASE || State == WAIT_START || State == START_ACQ || State == WAIT_READ || State == START_READOUT || State == WAIT_READ_OUT || State == WAIT_READ_DONE || State == ONCE_END) begin
         POWER_ON_A = 1'b1;
         POWEWR_ON_DAC = 1'b1;
       end
