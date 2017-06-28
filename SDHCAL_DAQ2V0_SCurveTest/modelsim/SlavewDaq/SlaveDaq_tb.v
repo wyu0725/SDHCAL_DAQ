@@ -18,22 +18,22 @@ module SlaveDaq_tb;
     wire OnceEnd;
     // Instantiation uut
     SlaveDaq uut(
-      .Clk(),
-      .reset_n(),
-      .ModuleStart(),
-      .AcqStart(),
-      .EndReadout(),
-      .CHIPSATB(),
-      .AcquisitionTime(),
-      .EndHoldTime(),
-      .RESET_B(),
-      .START_ACQ(),
-      .StartReadout(),
-      .PWR_ON_A(),
-      .PWR_ON_D(),
-      .PWR_ON_ADC(),
-      .OPWR_ON_DAC(),
-      .OnceEnd()
+      .Clk(Clk),
+      .reset_n(reset_n),
+      .ModuleStart(ModuleStart),
+      .AcqStart(AcqStart),
+      .EndReadout(EndReadout),
+      .CHIPSATB(CHIPSATB),
+      .AcquisitionTime(AcquisitionTime),
+      .EndHoldTime(EndHoldTime),
+      .RESET_B(RESET_B),
+      .START_ACQ(START_ACQ),
+      .StartReadout(StartReadout),
+      .PWR_ON_A(PWR_ON_A),
+      .PWR_ON_D(PWR_ON_D),
+      .PWR_ON_ADC(PWR_ON_ADC),
+      .PWR_ON_DAC(PWR_ON_DAC),
+      .OnceEnd(OnceEnd)
     );
     // initial the module
     initial begin
@@ -43,7 +43,7 @@ module SlaveDaq_tb;
       AcqStart = 1'b0;
       //EndReadout = 1'b0;
       //CHIPSATB = 1'b1;
-      AcquisitionTime = 16'd40;
+      AcquisitionTime = 16'd63;
       EndHoldTime = 16'd20;
       #(100);
       reset_n = 1'b1;      
@@ -53,10 +53,12 @@ module SlaveDaq_tb;
       AcqStart = 1'b0;
       #100;
       ModuleStart = 1'b1;
-      #133;
+      #1633;
       AcqStart = 1'b1;
       #45;
       AcqStart = 1'b0;
+      #10000;
+      ModuleStart <= 1'b0;
     end
     reg [5:0] StartCount;
     reg [1:0] StartState;
@@ -71,13 +73,13 @@ module SlaveDaq_tb;
         StartState <= IDLE;
       end
       else begin
-        case(StartState):
+        case(StartState)
           IDLE:begin
             if(START_ACQ) begin
-              State <= START;
+              StartState <= START;
             end
             else
-              State <= IDLE;
+              StartState <= IDLE;
           end
           START:begin
             if(StartCount < 6'd60 && START_ACQ) begin
@@ -85,7 +87,7 @@ module SlaveDaq_tb;
               StartState <= START;
             end
             else begin
-              State <= CHIP_FULL;
+              StartState <= CHIP_FULL;
               StartCount <= 6'b0;
               CHIPSATB <= 1'b0;
             end
@@ -111,13 +113,24 @@ module SlaveDaq_tb;
         EndReadout <= 1'b0;
         ReadCount <= 6'b0;
       end
+      else if(ReadCount == 6'd60) begin
+        ReadCount <= 6'b0;
+        EndReadout <= 1'b1;
+      end
       else if(StartReadout || (ReadCount != 0 && ReadCount < 6'd60)) begin
         ReadCount <= ReadCount + 1'b1;
-        EndReadout <= 1'b1;
+        EndReadout <= 1'b0;
       end
       else begin
         ReadCount <= 6'b0;
         EndReadout <= 1'b0;
       end
+    end
+    //*** Generate the Clock
+    localparam HighTime = 12;
+    localparam LowTime = 13;
+    always begin
+      #(HighTime) Clk = ~Clk;
+      #(LowTime) Clk = ~Clk;
     end
 endmodule
