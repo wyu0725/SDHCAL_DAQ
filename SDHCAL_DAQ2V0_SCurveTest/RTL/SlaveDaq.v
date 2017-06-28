@@ -38,7 +38,7 @@ module SlaveDaq(
     input AcqStart,                 // External start trigger
     input EndReadout,               // Digitial RAM end reading signal. Active H
     input CHIPSATB,                 // Chip is full, active L
-    input [15:0] AcquitionTime,     // Send from USB, default 8
+    input [15:0] AcquisitionTime,     // Send from USB, default 8
     input [15:0] EndHoldTime,
     output reg RESET_B,             //Reset ASIC digital part
     output reg START_ACQ,           //Start & maintain acquisition, Active H
@@ -79,7 +79,7 @@ module SlaveDaq(
       end
     end
     wire EndRead;
-    assign EndRead = (~EndReadout_r1) && EndReadout_r2;
+    assign EndRead = (~EndReadout_r1) && EndReadout_r2;// Falling edge
     //*** DAQ Control
     // Synchronize the External trigger
     reg AcqStart_r1;
@@ -102,7 +102,7 @@ module SlaveDaq(
                      POWER_ON = 4'd2,
                      RELEASE = 4'd3,
                      WAIT_START = 4'd4,
-                     START_ACQ = 4'd5,
+                     START_ACQUISITION = 4'd5,
                      WAIT_READ = 4'd6,
                      START_READOUT = 4'd7,
                      WAIT_READ_DONE = 4'd8,
@@ -118,7 +118,7 @@ module SlaveDaq(
     always @(posedge Clk or negedge reset_n) begin
       if(~reset_n) begin
         State <= IDLE;
-        RsetStartAcq_n <= 1'b1;
+        ResetStartAcq_n <= 1'b1;
         AcqEnable <= 1'b0;
         RESET_B <= 1'b1;
         StartReadout <= 1'b0;
@@ -127,7 +127,7 @@ module SlaveDaq(
       end
       else begin
         case(State)
-          ILDE:begin
+          IDLE:begin
             if(ModuleStart) begin
               RESET_B <= 1'b0;
               ResetStartAcq_n <= 1'b0;
@@ -169,13 +169,13 @@ module SlaveDaq(
               State <= ALL_DONE;
             end
             else if(SingleAcqStart) begin
-              State <= START_ACQ;
+              State <= START_ACQUISITION;
             end
             else begin
               State <= WAIT_START;
             end
           end
-          START_ACQ:begin
+          START_ACQUISITION:begin
             if(DelayCount >= AcquisitionTime) begin
               State <= WAIT_READ;
               DelayCount <= 16'b0;
@@ -188,7 +188,7 @@ module SlaveDaq(
             end
             else begin
               DelayCount <= DelayCount + 1'b1;
-              State <= START_ACQ;
+              State <= START_ACQUISITION;
             end
           end
           WAIT_READ:begin
@@ -212,7 +212,7 @@ module SlaveDaq(
             end
           end
           WAIT_READ_DONE:begin
-            if(ReadEnd) begin
+            if(EndReadout) begin
               OnceEnd <= 1'b1;
               State <= ONCE_END;
             end
@@ -232,7 +232,7 @@ module SlaveDaq(
             end
           end
           ALL_DONE:begin
-            ResetStartAcq <= 1'b1;
+            ResetStartAcq_n <= 1'b1;
             State <= IDLE;
           end
           default:begin
@@ -252,20 +252,20 @@ module SlaveDaq(
     end
     //*** Power On Control
     always @(State) begin
-      if(State == POWER_ON || State == POWER_ON || State == RELEASE || State == WAIT_START || State == START_ACQ || State == WAIT_READ || State == START_READOUT || State == WAIT_READ_OUT || State == WAIT_READ_DONE || State == ONCE_END)
-        POWER_ON_D = 1'b1;
+      if(State == POWER_ON || State == POWER_ON || State == RELEASE || State == WAIT_START || State == START_ACQUISITION || State == WAIT_READ || State == START_READOUT || State == WAIT_READ || State == WAIT_READ_DONE || State == ONCE_END)
+        PWR_ON_D = 1'b1;
       else
-        POWER_ON_D = 1'b0;
+        PWR_ON_D = 1'b0;
     end
     always @(State) begin
-      if(State == CHIP_RESET || State == POWER_ON || State == POWER_ON || State == RELEASE || State == WAIT_START || State == START_ACQ || State == WAIT_READ || State == START_READOUT || State == WAIT_READ_OUT || State == WAIT_READ_DONE || State == ONCE_END) begin
-        POWER_ON_A = 1'b1;
-        POWEWR_ON_DAC = 1'b1;
+      if(State == CHIP_RESET || State == POWER_ON || State == POWER_ON || State == RELEASE || State == WAIT_START || State == START_ACQUISITION || State == WAIT_READ || State == START_READOUT || State == WAIT_READ || State == WAIT_READ_DONE || State == ONCE_END) begin
+        PWR_ON_A = 1'b1;
+        PWR_ON_DAC = 1'b1;
       end
       else begin
-        POWER_ON_A = 1'b0;
-        POWER_ON_DAC = 1'b0;
+        PWR_ON_A = 1'b0;
+        PWR_ON_DAC = 1'b0;
       end
     end
-    assign POWER_ON_ADC = 1'b0;
+    assign PWR_ON_ADC = 1'b0;
 endmodule
