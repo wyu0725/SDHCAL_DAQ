@@ -48,7 +48,8 @@ module SlaveDaq(
     output PWR_ON_ADC,              //Slow shaper Power Pulsing Control, active H
     output reg PWR_ON_DAC,          //DAC Power Pulsing Control, Active H
     output reg OnceEnd,
-    output reg AllDone              //Acquisition Stop
+    output reg AllDone,             //Acquisition Stop
+    input DataTransmitDone
     );
     // Synchronize the external CHIPSATB signal
     reg ChipSatB_r1, ChipSatB_r2;
@@ -125,6 +126,7 @@ module SlaveDaq(
         StartReadout <= 1'b0;
         DelayCount <= 16'b0;
         OnceEnd <= 1'b0;
+        AllDone <= 1'b0;
       end
       else begin
         case(State)
@@ -167,6 +169,7 @@ module SlaveDaq(
           WAIT_START:begin
             if(~ModuleStart) begin
               AcqEnable <= 1'b0;
+              AllDone <= 1'b1;
               State <= ALL_DONE;
             end
             else if(SingleAcqStart) begin
@@ -233,8 +236,14 @@ module SlaveDaq(
             end
           end
           ALL_DONE:begin
-            ResetStartAcq_n <= 1'b1;
-            State <= IDLE;
+            if(DataTransmitDone) begin
+              ResetStartAcq_n <= 1'b1;
+              AllDone <= 1'b0;
+              State <= IDLE;
+            end
+            else begin
+              State <= AllDone;
+            end
           end
           default:begin
             State <= IDLE;
