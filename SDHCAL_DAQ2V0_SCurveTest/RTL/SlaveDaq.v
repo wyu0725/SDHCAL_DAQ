@@ -47,7 +47,8 @@ module SlaveDaq(
     output reg PWR_ON_D,            //Digital Power Pulsing control, active H
     output PWR_ON_ADC,              //Slow shaper Power Pulsing Control, active H
     output reg PWR_ON_DAC,          //DAC Power Pulsing Control, Active H
-    output reg OnceEnd
+    output reg OnceEnd,
+    output reg AllDone              //Acquisition Stop
     );
     // Synchronize the external CHIPSATB signal
     reg ChipSatB_r1, ChipSatB_r2;
