@@ -1,7 +1,7 @@
 Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 -----------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2016.3 (win64) Build 1682563 Mon Oct 10 19:07:27 MDT 2016
-| Date         : Mon Jun 19 18:12:23 2017
+| Date         : Thu Jun 29 20:36:01 2017
 | Host         : WYU running 64-bit major release  (build 9200)
 | Command      : report_methodology -file FPGA_TOP_methodology_drc_routed.rpt -rpx FPGA_TOP_methodology_drc_routed.rpx
 | Design       : FPGA_TOP
@@ -23,7 +23,7 @@ Table of Contents
           Floorplan: design_1
       Design limits: <entire design considered>
              Max violations: <unlimited>
-             Violations found: 56
+             Violations found: 59
 +-----------+----------+------------------------------------------------------+------------+
 | Rule      | Severity | Description                                          | Violations |
 +-----------+----------+------------------------------------------------------+------------+
@@ -31,8 +31,8 @@ Table of Contents
 | TIMING-6  | Warning  | No common primary clock between related clocks       | 2          |
 | TIMING-9  | Warning  | Unknown CDC Logic                                    | 1          |
 | TIMING-14 | Warning  | LUT on the clock tree                                | 2          |
-| TIMING-17 | Warning  | Non-clocked sequential cell                          | 11         |
-| TIMING-18 | Warning  | Missing input or output delay                        | 28         |
+| TIMING-17 | Warning  | Non-clocked sequential cell                          | 13         |
+| TIMING-18 | Warning  | Missing input or output delay                        | 29         |
 | TIMING-24 | Warning  | Overridden Max delay datapath only                   | 4          |
 | TIMING-28 | Warning  | Auto-derived clock referenced by a timing constraint | 2          |
 | XDCH-2    | Warning  | Same min and max delay values on IO port             | 5          |
@@ -123,6 +123,16 @@ Related violations: <none>
 TIMING-17#11 Warning
 Non-clocked sequential cell  
 The clock pin Microroc_u1/HoldGenerator/HoldOut_reg/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#12 Warning
+Non-clocked sequential cell  
+The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/START_ACQ_reg/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#13 Warning
+Non-clocked sequential cell  
+The clock pin Microroc_u1/MicrorocDaq/SlaveDaq_UsbStartStop_reg/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-18#1 Warning
@@ -263,6 +273,11 @@ Related violations: <none>
 TIMING-18#28 Warning
 Missing input or output delay  
 An output delay is missing on TP[3] relative to clock(s) Clk_40M VIRTUAL_pll_5 
+Related violations: <none>
+
+TIMING-18#29 Warning
+Missing input or output delay  
+An output delay is missing on TRIGGER_OUT relative to clock(s) Clk_40M 
 Related violations: <none>
 
 TIMING-24#1 Warning

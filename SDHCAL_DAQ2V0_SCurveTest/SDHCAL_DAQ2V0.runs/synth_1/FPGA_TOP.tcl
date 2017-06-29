@@ -32,30 +32,33 @@ add_files -quiet d:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/SDHCAL_DAQ2V0.
 set_property used_in_implementation false [get_files d:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/SDHCAL_DAQ2V0.srcs/sources_1/ip/usb_cmd_fifo/usb_cmd_fifo.dcp]
 read_verilog -library xil_defaultlib {
   D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/SCurve_Single_Input.v
+  D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/SlaveDaq.v
+  D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/PULSESYNC.v
+  D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/Param_Bitshift.v
+  D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/Microroc_Parameters.v
+  D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/DaqSwitcher.v
+  D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/AutoDaq.v
   D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/ADC_AD9220.v
   D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/SweepACQ_Control.v
   D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/SCurve_Test_Control.v
   D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/SCurve_Single_Test.v
-  D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/PULSESYNC.v
-  D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/Param_Bitshift.v
-  D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/Microroc_Parameters.v
+  D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/Trig_Gen.v
+  D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/SlowControl_ReadReg.v
+  D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/Redundancy.v
   D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/RazGen.v
+  D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/RamReadOut.v
+  D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/Internal_Trig_Gen.v
   D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/HoldGen.v
+  D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/DaqControl.v
   D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/AdcControl.v
   D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/Switcher.v
   D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/SweepACQ_Top.v
   D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/SCurve_Test_Top.v
-  D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/Trig_Gen.v
-  D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/SlowControl_ReadReg.v
-  D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/Redundancy.v
-  D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/RamReadOut.v
-  D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/Internal_Trig_Gen.v
-  D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/DaqControl.v
-  D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/TrigCoincid.v
   D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/usb_command_interpreter.v
+  D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/Microroc_top.v
+  D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/TrigCoincid.v
   D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/Controller_Top.v
   D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/usb_synchronous_slavefifo.v
-  D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/Microroc_top.v
   D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/Clk_Management.v
   D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/RTL/FPGA_TOP.v
 }
