@@ -392,8 +392,8 @@ module FPGA_TOP(
       .TrigCoincid(MicrorocTrigCoincid),
       .TrigOut(TrigOut),
       .TrigAnd(TrigAnd),
-      .TrigOr(TrigOr)
-      .ExternalTriggerSyncOut(ExternalTrigger),
+      .TrigOr(TrigOr),
+      .ExternalTriggerSyncOut(ExternalTrigger)
     );
     //------Microroc_top instantiation--------------//
     wire MicrorocConfigDone;
