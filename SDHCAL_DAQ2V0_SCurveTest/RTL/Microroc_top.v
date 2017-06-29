@@ -151,7 +151,7 @@ module Microroc_top(
       //---Test port---//
       output Start_Readout_t
     );
-assign Start_Readout_t = Start_Readout;
+assign Start_Readout_t = StartReadout;
 //submodules instantiation
 SlowControl_ReadReg SC_Readreg
 (
