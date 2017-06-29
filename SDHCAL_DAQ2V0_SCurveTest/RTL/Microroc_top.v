@@ -302,7 +302,7 @@ Redundancy Redundancy
 );
 wire ResetMicroroc_n;
 assign ResetMicroroc_n = reset_n & (~MicrorocForceReset);
-DaqControl AutoDAQ
+DaqControl MicrorocDaq
 (
    .Clk(Clk),         //40M
    .reset_n(ResetMicroroc_n),
