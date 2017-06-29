@@ -94,7 +94,7 @@ module Microroc_top(
       //------fifo interface-----//
       input ext_fifo_full,
       input UsbFifoEmpty,
-      input nPKEEND,
+      input nPKTEND,
       output [15:0] parallel_data,
       output parallel_data_en,
       //--------Trig_Gen interface---//
