@@ -71,17 +71,27 @@
             <Grid  Margin="0,0,0,0" >
                 <GroupBox x:Name="gbxMicrorocControl" Header="Microroc Control" HorizontalAlignment="Left" Margin="0,466,0,-6" VerticalAlignment="Top" Height="250" Width="775">
                     <Grid  Margin="0,0,0,0" >
-                        <GroupBox x:Name="gbxNormalAcq" Header="Normal Acq" HorizontalAlignment="Left" VerticalAlignment="Top" Height="146" Width="155" Margin="0,0,0,0">
+                        <GroupBox x:Name="gbxNormalAcq" Header="Normal Acq" HorizontalAlignment="Left" VerticalAlignment="Top" Height="228" Width="155" Margin="0,0,0,0">
                             <Grid  Margin="0,0,0,0" >
-                                <Label x:Name="lblDataRate" Content="Data Rate:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70" Margin="0,0,0,0" Height="24"/>
-                                <StackPanel HorizontalAlignment="Left" Height="30" Margin="90,0,0,0" VerticalAlignment="Top" Width="70">
+                                <Label x:Name="lblDaqMode" Content="DAQ Mode:" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Height="24" Width="80"/>
+                                <StackPanel HorizontalAlignment="Left" Height="38" Margin="80,0,0,0" VerticalAlignment="Top" Width="60">
+                                    <RadioButton GroupName="DaqModeSelect" Checked="DaqModeSelect_Checked" Content="Auto"/>
+                                    <RadioButton GroupName="DaqModeSelect" Checked="DaqModeSelect_Checked" Content="Slave"/>
+                                </StackPanel>
+                                <Label x:Name="lblDataRate" Content="Data Rate:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70" Margin="0,30,0,0" Height="24"/>
+                                <StackPanel HorizontalAlignment="Left" Height="30" Margin="80,30,0,0" VerticalAlignment="Top" Width="70">
                                     <RadioButton GroupName="DataRateSelect" Checked="DataRateSelect_Checked" Content="Fast"/>
                                     <RadioButton GroupName="DataRateSelect" Checked="DataRateSelect_Checked" Content="Slow"/>
                                 </StackPanel>
-                                <Label x:Name="lblSlowACQDataNum" Content="Data Number" HorizontalAlignment="Left" Margin="0,30,0,0" VerticalAlignment="Top" Width="90" Height="24"/>
-                                <TextBox x:Name="txtSlowACQDataNum" HorizontalAlignment="Left" Height="24" Margin="90,30,0,0" TextWrapping="Wrap" Text="5120" VerticalAlignment="Top" Width="50"/>
-                                <Button x:Name="btnAcqStart" Content="FastACQ" HorizontalAlignment="Left" Margin="0,60,0,0" VerticalAlignment="Top" Width="80" Height="24" Click="btnAcqStart_Click"/>
-                                <Button x:Name="btnSlowACQ" Content="SlowACQ" HorizontalAlignment="Left" Margin="0,90,0,0" VerticalAlignment="Top" Width="80" Height="24" Click="btnSlowACQ_Click"/>
+                                <Label x:Name="lblSlowACQDataNum" Content="Data Number" HorizontalAlignment="Left" Margin="0,60,0,0" VerticalAlignment="Top" Width="90" Height="24"/>
+                                <TextBox x:Name="txtSlowACQDataNum" HorizontalAlignment="Left" Height="24" Margin="90,60,0,0" TextWrapping="Wrap" Text="5120" VerticalAlignment="Top" Width="50"/>
+                                <Label x:Name="lblEndHoltTime" Content="End Time(ns):" HorizontalAlignment="Left" Margin="0,90,0,0" VerticalAlignment="Top" Height="24" Width="90"/>
+                                <TextBox x:Name="txtEndHoldTime" HorizontalAlignment="Left" Height="24" Margin="90,92,0,0" TextWrapping="Wrap" Text="500" VerticalAlignment="Top" Width="50"/>
+                                <Button x:Name="btnAcqStart" Content="FastACQ" HorizontalAlignment="Left" Margin="0,150,0,0" VerticalAlignment="Top" Width="80" Height="24" Click="btnAcqStart_Click"/>
+                                <Button x:Name="btnSlowACQ" Content="SlowACQ" HorizontalAlignment="Left" Margin="0,180,0,0" VerticalAlignment="Top" Width="80" Height="24" Click="btnSlowACQ_Click"/>
+                                
+
+
                             </Grid>
                         </GroupBox>
                         <GroupBox x:Name="gbxSweepTest" Header="SweepTest" HorizontalAlignment="Left" Margin="160,0,0,0" VerticalAlignment="Top" Height="228" Width="400">
@@ -498,6 +508,7 @@
             </Grid>
         </GroupBox>
         <GroupBox x:Name="gbxAsicStatus" Header="ASIC Status" HorizontalAlignment="Left" Margin="1072,126,0,0" VerticalAlignment="Top" Width="189" Height="634"/>
+        
 
         <!--GroupBox x:Name="gbxWaveform" Header="Waveform" HorizontalAlignment="Left" Margin="260,135,0,0" VerticalAlignment="Top" Height="343" Width="557">
             <Grid  Margin="0,0,0,0">
