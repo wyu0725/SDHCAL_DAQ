@@ -233,7 +233,7 @@ module FPGA_TOP(
       //--- Sweep Test Port ---//
       //Mode Select
       .ModeSelect(ModeSelect),
-      .DacSelect(DacSelect),
+      .DacSelect(UsbDacSelect),
       //Test Dac
       .StartDac(StartDac),
       .EndDac(EndDac),
@@ -412,6 +412,7 @@ module FPGA_TOP(
     wire MicrorocAcqData_en;
     wire UsbDataFifoFull;
     wire MicrorocForceReset;
+    wire MicrorocAcqUsbStartStop;
     Microroc_top Microroc_u1
     (
       .Clk(Clk),
@@ -475,6 +476,7 @@ module FPGA_TOP(
       //------start_acq------------//
       .DaqSelect(UsbDaqSelect),
       .Acq_start(MicrorocAcqStartStop), //level or a pulse?
+      .UsbStartStop(MicrorocAcqUsbStartStop),
       .AcqStart_time(Microroc_AcqStart_time),//Acquisition time, get it from USB, the default value is 8
       .EndHoldTime(UsbEndHoldTime),
       .ExternalTrigger(ExternalTrigger),
@@ -587,6 +589,7 @@ module FPGA_TOP(
       .UsbDataFifoFull(UsbDataFifoFull),
       .OutUsbExtFifoData(OutUsbExtFifoData),
       .OutUsbExtFifoData_en(OutUsbExtFifoData_en),
+      .MicrorocAcqUsbStartStop(MicrorocAcqUsbStartStop),
       .OutUsbStartStop(UsbStartStop),
       //*** Sweep test start signal
       .NormalAcqStartStop(UsbMicrorocAcqStartStop),

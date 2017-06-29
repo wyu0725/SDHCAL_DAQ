@@ -54,6 +54,7 @@ module Controller_Top(
     input UsbDataFifoFull,
     output [15:0] OutUsbExtFifoData,
     output OutUsbExtFifoData_en,
+    input MicrorocAcqUsbStartStop,
     output OutUsbStartStop,
     // Sweep Test Start Signal
     input NormalAcqStartStop,
@@ -160,7 +161,7 @@ module Controller_Top(
       .SweepAcqDone(SweepAcqDone),
       .SweepTestDone(SweepTestDone),
       // USB Start
-      //.UsbMicreorocAcqStartStop(UsbMicrorocAcqStartStop),
+      .MicreorocAcqUsbStartStop(MicrorocAcqUsbStartStop),
       .SweepTestUsbStartStop(SweepTestStartStop),
       .OutUsbStartStop(OutUsbStartStop),
       // Microroc ACQ Start

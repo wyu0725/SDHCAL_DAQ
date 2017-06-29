@@ -65,7 +65,7 @@ module Switcher(
     //input DataTransmitDone,
     //output OutNormalAcqStartStop,
     // USB Start
-    //input UsbMicrorocUsbStartStop,
+    input MicrorocAcqUsbStartStop,
     input SweepTestUsbStartStop,
     output reg OutUsbStartStop,
     // Microroc ACQ Start
@@ -114,7 +114,7 @@ module Switcher(
           OutSCTestStartStop = 1'b0;
           OutSweepAcqStartStop = 1'b0;
           SweepTestDone = 1'b0;
-          OutUsbStartStop = UsbMicrorocAcqStartStop;
+          OutUsbStartStop = MicrorocAcqUsbStartStop;
           MicrorocAcqStartStop = UsbMicrorocAcqStartStop;
           OutMicrorocForceReset = UsbForceMicrorocAcqReset;
           UsbFifoData = MicrorocAcqData;

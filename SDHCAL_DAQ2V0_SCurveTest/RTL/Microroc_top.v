@@ -79,6 +79,7 @@ module Microroc_top(
       //------start_acq------------//
       input DaqSelect,
       input Acq_start, //level or a pulse?
+      output UsbStartStop,
       input [15:0] AcqStart_time,  //Acquisition time, get from USB, default8
       input [15:0] EndHoldTime,
       input ExternalTrigger,
@@ -322,10 +323,10 @@ DaqControl MicrorocDaq
     .CHIPSATB(CHIPSATB),
     .RESET_B(RESET_B),
     .START_ACQ(START_ACQ),
-    .PWR_ON_A(PWR_ON_A),
-    .PWR_ON_D(PWR_ON_D),
-    .PWR_ON_ADC(PWR_ON_ADC),
-    .PWR_ON_DAC(PWR_ON_DAC),
+    .PWR_ON_A(Pwr_on_a),
+    .PWR_ON_D(Pwr_on_d),
+    .PWR_ON_ADC(Pwr_on_adc),
+    .PWR_ON_DAC(Pwr_on_dac),
     .AcquisitionTime(AcqStart_time),
     .EndHoldTime(EndHoldTime),
     .OnceEnd(OnceEnd),
