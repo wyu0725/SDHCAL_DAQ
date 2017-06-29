@@ -232,6 +232,7 @@ module SlaveDaq(
             else begin
               OnceEnd <= 1'b0;
               DelayCount <= 16'b0;
+              ResetStartAcq_n <= 1'b1;
               State <= WAIT_START;
             end
           end
@@ -242,7 +243,7 @@ module SlaveDaq(
               State <= IDLE;
             end
             else begin
-              State <= AllDone;
+              State <= ALL_DONE;
             end
           end
           default:begin

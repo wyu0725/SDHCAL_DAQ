@@ -81,7 +81,7 @@ module DaqControl(
     wire SingleStart;
     wire AutoDaq_UsbStartStop;
     reg SlaveDaq_UsbStartStop;
-    DaqSwitcher DaqSelect(
+    DaqSwitcher DaqModeSelect(
       .DaqSelect(DaqSelect),
       //Power pulsing control
       .AutoDaq_PWR_ON_A(AutoDaq_PWR_ON_A),
@@ -103,6 +103,9 @@ module DaqControl(
       .AutoDaq_START_ACQ(AutoDaq_START_ACQ),
       .SlaveDaq_START_ACQ(SlaveDaq_START_ACQ),
       .START_ACQ(START_ACQ),
+      .CHIPSATB(CHIPSATB),
+      .AutoDaq_CHIPSATB(AutoDaq_CHIPSATB),
+      .SlaveDaq_CHIPSATB(SlaveDaq_CHIPSATB),
       // Start Signal
       .UsbAcqStart(UsbAcqStart),
       .AutoDaq_Start(AutoDaq_Start),
@@ -117,7 +120,7 @@ module DaqControl(
       // Done signal
       .AutoDaq_OnceEnd(AutoDaq_OnceEnd),
       .SlaveDaq_OnceEnd(SlaveDaq_OnceEnd),
-      .OnceEnd(OnmceEnd),
+      .OnceEnd(OnceEnd),
       .AutoDaq_AllDone(AutoDaq_AllDone),
       .SlaveDaq_AllDone(SlaveDaq_AllDone),
       .AllDone(AllDone),
@@ -149,6 +152,7 @@ module DaqControl(
       .Pwr_on_dac(AutoDaq_PWR_ON_DAC),//DAC Power Pulsing Control, Active H
       .Once_end(AutoDaq_OnceEnd) //a pulse
     );
+    assign AutoDaq_AllDone = 1'b0;
     SlaveDaq SlaveDaqControl(
       .Clk(Clk),
       .reset_n(reset_n),

@@ -42,6 +42,9 @@ module DaqSwitcher(
     input AutoDaq_START_ACQ,
     input SlaveDaq_START_ACQ,
     output START_ACQ,
+    input CHIPSATB,
+    output AutoDaq_CHIPSATB,
+    output SlaveDaq_CHIPSATB,
     // StartAcqSignal
     input UsbAcqStart,
     output AutoDaq_Start,
@@ -77,6 +80,8 @@ module DaqSwitcher(
     assign PWR_ON_DAC = DaqSelect ? AutoDaq_PWR_ON_DAC : SlaveDaq_PWR_ON_DAC;
     assign RESET_B = DaqSelect ? AutoDaq_RESET_B : SlaveDaq_RESET_B;
     assign START_ACQ = DaqSelect ? AutoDaq_START_ACQ : SlaveDaq_START_ACQ;
+    assign AutoDaq_CHIPSATB = DaqSelect ? CHIPSATB : 1'b1;
+    assign SlaveDaq_CHIPSATB = DaqSelect ? 1'b1 : CHIPSATB;
     assign AutoDaq_Start = DaqSelect ? UsbAcqStart : 1'b0;
     assign SlaveDaq_Start = DaqSelect ? 1'b0 : UsbAcqStart;
     assign StartReadout = DaqSelect ? AutoDaq_StartReadout : SlaveDaq_StartReadout;
@@ -85,7 +90,7 @@ module DaqSwitcher(
     assign OnceEnd = DaqSelect ? AutoDaq_OnceEnd : SlaveDaq_OnceEnd;
     assign AllDone = DaqSelect ? AutoDaq_AllDone : SlaveDaq_AllDone;
     assign AutoDaq_DataTransmitDone = DaqSelect ? DataTransmitDone : 1'b0;
-    assign AutoDaq_DataTransmitDone = DaqSelect ? 1'b0 : DataTransmitDone;
+    assign SlaveDaq_DataTransmitDone = DaqSelect ? 1'b0 : DataTransmitDone;
     assign SingleStart = DaqSelect ? 1'b0 : ExternalTrigger;
     assign UsbStartStop = DaqSelect ? AutoDaq_UsbStartStop : SlaveDaq_UsbStartStop;
 endmodule
