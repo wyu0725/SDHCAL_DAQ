@@ -233,7 +233,7 @@ module FPGA_TOP(
       //--- Sweep Test Port ---//
       //Mode Select
       .ModeSelect(ModeSelect),
-      .DacSelect(UsbDacSelect),
+      .DacSelect(DacSelect),
       //Test Dac
       .StartDac(StartDac),
       .EndDac(EndDac),
@@ -259,7 +259,7 @@ module FPGA_TOP(
       .AdcDataNumber(UsbAdcDataNumber),
       //*** SlaveDaq
       .EndHoldTime(UsbEndHoldTime),
-      .DaqSelect(UsbSelect),
+      .DaqSelect(UsbDaqSelect),
       /*----------------------------*/
       .LED(LED[3:0])
     );    

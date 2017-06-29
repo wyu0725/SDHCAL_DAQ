@@ -161,7 +161,7 @@ module Controller_Top(
       .SweepAcqDone(SweepAcqDone),
       .SweepTestDone(SweepTestDone),
       // USB Start
-      .MicreorocAcqUsbStartStop(MicrorocAcqUsbStartStop),
+      .MicrorocAcqUsbStartStop(MicrorocAcqUsbStartStop),
       .SweepTestUsbStartStop(SweepTestStartStop),
       .OutUsbStartStop(OutUsbStartStop),
       // Microroc ACQ Start
