@@ -77,8 +77,12 @@ module Microroc_top(
       input PowPulsing_En,//1 enable, 0 disable
       input Sel_Readout_chn,//1 chn1, 0 chn2
       //------start_acq------------//
+      input DaqSelect,
       input Acq_start, //level or a pulse?
       input [15:0] AcqStart_time,  //Acquisition time, get from USB, default8
+      input [15:0] EndHoldTime,
+      input ExternalTrigger,
+      output OnceEnd,
       //------Hold gen interface-----//
       input TrigCoincideIn,
       input TrigAnd,
@@ -89,6 +93,8 @@ module Microroc_top(
       input [15:0] HoldTime,
       //------fifo interface-----//
       input ext_fifo_full,
+      input UsbFifoEmpty,
+      input nPKEEND,
       output [15:0] parallel_data,
       output parallel_data_en,
       //--------Trig_Gen interface---//
@@ -268,8 +274,8 @@ wire Pwr_on_d;
 wire Pwr_on_a;
 wire Pwr_on_adc;
 wire Pwr_on_dac;
-wire Start_Readout;
-wire End_Readout;
+wire StartReadout;
+wire EndReadout;
 wire Dout;
 wire TransmitOn;
 Redundancy Redundancy
@@ -281,8 +287,8 @@ Redundancy Redundancy
    .Pwr_on_a(Pwr_on_a),  //from DaqControl
    .Pwr_on_adc(Pwr_on_adc),//from DaqControl
    .Pwr_on_dac(Pwr_on_dac),//from DaqControl
-   .Start_Readout(Start_Readout), //from DaqControl
-   .End_Readout(End_Readout),   //out to DaqControl
+   .Start_Readout(StartReadout), //from DaqControl
+   .End_Readout(EndReadout),   //out to DaqControl
 
    .Dout(Dout),         //out to Ramreadout
    .TransmitOn(TransmitOn),   //out to Ramreadout
@@ -302,22 +308,31 @@ Redundancy Redundancy
 );
 wire ResetMicroroc_n;
 assign ResetMicroroc_n = reset_n & (~MicrorocForceReset);
+wire DataTransmitDone;
+assign DataTransmitDone = ~nPKTEND;
 DaqControl MicrorocDaq
 (
-   .Clk(Clk),         //40M
-   .reset_n(ResetMicroroc_n),
-   .start(Acq_start), //a pulse or a level?
-   .End_Readout(End_Readout), //Digitial RAM end reading signal, Active H
-   .Chipsatb(CHIPSATB),    //Chip is full, Active L, PIN
-   .T_acquisition(AcqStart_time),//Get from USB, default 8
-   .Reset_b(RESET_B),      //Reset ASIC digital part, PIN
-   .Start_Acq(START_ACQ),  //Start & maintain acquisition, Active H,PIN
-   .Start_Readout(Start_Readout),//Digital RAM start reading signal
-   .Pwr_on_a(Pwr_on_a),  //Analogue Part Power Pulsing control, active H
-   .Pwr_on_d(Pwr_on_d),  //Digital Power Pulsing control, active H
-   .Pwr_on_adc(Pwr_on_adc),//Slow shaper Power Pulsing Control, active H
-   .Pwr_on_dac(Pwr_on_dac),//DAC Power Pulsing Control, Active H
-   .Once_end() //a pulse
+    .Clk(Clk),         //40M
+    .reset_n(ResetMicroroc_n),
+    .DaqSelect(DaqSelect),
+    .UsbAcqStart(Acq_start),
+    .UsbStartStop(UsbStartStop),
+    .EndReadout(EndReadout),
+    .StartReadout(StartReadout),
+    .CHIPSATB(CHIPSATB),
+    .RESET_B(RESET_B),
+    .START_ACQ(START_ACQ),
+    .PWR_ON_A(PWR_ON_A),
+    .PWR_ON_D(PWR_ON_D),
+    .PWR_ON_ADC(PWR_ON_ADC),
+    .PWR_ON_DAC(PWR_ON_DAC),
+    .AcquisitionTime(AcqStart_time),
+    .EndHoldTime(EndHoldTime),
+    .OnceEnd(OnceEnd),
+    .AllDone(AllDone),
+    .DataTransmitDone(DataTransmitDone),
+    .UsbFifoEmpty(UsbFifoEmpty),
+    .ExternalTrigger(ExternalTrigger)
 );
 
 RamReadOut RAM_Read

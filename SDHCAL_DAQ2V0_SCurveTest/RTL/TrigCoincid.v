@@ -30,7 +30,8 @@ module TrigCoincid(
     input [1:0] TrigCoincid,
     output reg TrigOut,
     output TrigAnd,
-    output TrigOr
+    output TrigOr,
+    output ExternalTriggerSyncOut
     );
     reg InternalTrigger0;
     reg InternalTrigger1;
@@ -60,4 +61,5 @@ module TrigCoincid(
     end
     assign TrigAnd = InternalTrigger0 && InternalTrigger1 && InternalTrigger2;
     assign TrigOr = InternalTrigger0 || InternalTrigger1 || InternalTrigger2;
+    assign ExternalTriggerSyncOut = TriggerExternal;
 endmodule

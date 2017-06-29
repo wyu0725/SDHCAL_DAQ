@@ -97,6 +97,9 @@ module usb_command_interpreter(
       output reg AdcStartAcq,
       output reg [3:0] AdcStartDelayTime,
       output reg [7:0] AdcDataNumber,
+      //*** Slave DAQ
+      output reg [15:0] EndHoldTime,
+      output reg DaqSelect,
       //--- LED ---//
       output reg [3:0] LED
     );
@@ -952,6 +955,20 @@ always @(posedge clk or negedge reset_n) begin
   else 
     ADG819_Addr <= ADG819_Addr;
 end
+// DaqMode Select
+// + E000:AutoDaq
+// + E001:SlaveDaq
+always @(posedge clk or negedge reset_n) begin
+  if(~reset_n)
+    DaqSelect <= 1'b1;
+  else if(fifo_rden && USB_COMMAND == 16'hE000)
+    DaqSelect <= 1'b1;
+  else if(fifo_rden && USB_COMMAND == 16'hE001)
+    DaqSelect <= 1'b0;
+  else
+    DaqSelect <= DaqSelect;
+end
+
 //--- S Curve Test Command E type ---//
 // Choose Mode
 // 00: Normal Acq
@@ -1187,6 +1204,21 @@ always @(posedge clk or negedge reset_n) begin
     AdcDataNumber[7:4] <= USB_COMMAND[3:0];
   else
     AdcDataNumber <= AdcDataNumber;
+end
+// E84W,E85X,E86Y,E87Z:ZYXW*25ns = OnceEndTime
+always @(posedge clk or negedge reset_n) begin
+  if(~reset_n)
+    EndHoldTime <= 16'd20;
+  else if(fifo_rden && USB_COMMAND[15:4] == 12'hE84)
+    EndHoldTime[3:0] <= USB_COMMAND[3:0];
+  else if(fifo_rden && USB_COMMAND[15:4] == 12'hE85)
+    EndHoldTime[7:4] <= USB_COMMAND[3:0];
+  else if(fifo_rden && USB_COMMAND[15:4] == 12'hE86)
+    EndHoldTime[11:8] <= USB_COMMAND[3:0];
+  else if(fifo_rden && USB_COMMAND[15:4] == 12'hE87)
+    EndHoldTime[15:12] <= USB_COMMAND[3:0];
+  else
+    EndHoldTime <= EndHoldTime;
 end
 //Swap the LSB and MSB
   function [9:0] Invert_10bit(input [9:0] num);

@@ -88,6 +88,8 @@ module FPGA_TOP(
     input [11:0] ADC_DATA,
     input ADC_OTR,
     output ADC_CLK,
+    //*** Trigger output
+    output TRIGGER_OUT,
     //------Test Point-----//
     output [3:0] TP,
     //----LED indicator---//   
@@ -176,6 +178,8 @@ module FPGA_TOP(
     wire UsbAdcStart;
     wire [3:0] UsbAdcStartDelayTime;
     wire [7:0] UsbAdcDataNumber;
+    wire [15:0] UsbEndHoldTime;
+    wire UsbDaqSelect;
     usb_command_interpreter usb_control
     (
       .IFCLK(IFCLK),
@@ -253,6 +257,9 @@ module FPGA_TOP(
       .AdcStartAcq(UsbAdcStart),
       .AdcStartDelayTime(UsbAdcStartDelayTime),
       .AdcDataNumber(UsbAdcDataNumber),
+      //*** SlaveDaq
+      .EndHoldTime(UsbEndHoldTime),
+      .DaqSelect(UsbSelect),
       /*----------------------------*/
       .LED(LED[3:0])
     );    
@@ -374,6 +381,7 @@ module FPGA_TOP(
     wire TrigAnd;
     wire TrigOr;
     wire TrigOut;
+    wire ExternalTrigger;
     TrigCoincid TrigSelect(
       .Clk(Clk_320M),
       .reset_n(reset_n),
@@ -385,6 +393,7 @@ module FPGA_TOP(
       .TrigOut(TrigOut),
       .TrigAnd(TrigAnd),
       .TrigOr(TrigOr)
+      .ExternalTriggerSyncOut(ExternalTrigger),
     );
     //------Microroc_top instantiation--------------//
     wire MicrorocConfigDone;
@@ -464,8 +473,12 @@ module FPGA_TOP(
       .PowPulsing_En(Microroc_powerpulsing_en),//1 enable, 0 disable
       .Sel_Readout_chn(Microroc_sel_readout_chn),//1 chn1, 0 chn2
       //------start_acq------------//
+      .DaqSelect(UsbDaqSelect),
       .Acq_start(MicrorocAcqStartStop), //level or a pulse?
       .AcqStart_time(Microroc_AcqStart_time),//Acquisition time, get it from USB, the default value is 8
+      .EndHoldTime(UsbEndHoldTime),
+      .ExternalTrigger(ExternalTrigger),
+      .OnceEnd(TRIGGER_OUT),
       //------Hold gen interface-----//
       .TrigCoincideIn(TrigOut),
       .TrigAnd(TrigAnd),
@@ -478,6 +491,8 @@ module FPGA_TOP(
       //.Hold_delay(MicrorocHoldDelay),//5bit //hold delay,maxium 800ns
       //------fifo interface-----//
       .ext_fifo_full(UsbDataFifoFull),
+      .UsbFifoEmpty(in_from_ext_fifo_empty),
+      .nPKTEND(usb_pktend),
       .parallel_data(MicrorocAcqData),//16bit
       .parallel_data_en(MicrorocAcqData_en),
       //--------Trig_Gen interface---//
