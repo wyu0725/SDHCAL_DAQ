@@ -73,6 +73,8 @@ module DaqControl_tb;
       DaqSelect = 1'b1;
       #100;
       UsbAcqStart = 1'b1;
+      #10000;
+      UsbAcqStart = 1'b0;
     end
     reg [5:0] StartCount;
     reg [1:0] StartState;
