@@ -335,3 +335,6 @@ set_input_delay -clock [get_clocks Clk_40M] -max -add_delay 18.000 [get_ports AD
 set_input_delay -clock [get_clocks Clk_40M] -min -add_delay 12.000 [get_ports ADC_OTR]
 
 
+
+set_property PACKAGE_PIN R18 [get_ports TRIGGER_OUT]
+set_property IOSTANDARD LVCMOS33 [get_ports TRIGGER_OUT]

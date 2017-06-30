@@ -1,7 +1,7 @@
 Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 ------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2016.3 (win64) Build 1682563 Mon Oct 10 19:07:27 MDT 2016
-| Date         : Thu Jun 29 20:33:56 2017
+| Date         : Fri Jun 30 14:39:41 2017
 | Host         : WYU running 64-bit major release  (build 9200)
 | Command      : report_drc -file FPGA_TOP_drc_opted.rpt
 | Design       : FPGA_TOP
@@ -20,34 +20,22 @@ Table of Contents
 1. REPORT SUMMARY
 -----------------
             Netlist: netlist
-          Floorplan: design_1
+          Floorplan: checkpoint_FPGA_TOP
       Design limits: <entire design considered>
            Ruledeck: default
              Max violations: <unlimited>
-             Violations found: 48
-+-------------+------------------+-------------------------------------------------------------+------------+
-| Rule        | Severity         | Description                                                 | Violations |
-+-------------+------------------+-------------------------------------------------------------+------------+
-| NSTD-1      | Critical Warning | Unspecified I/O Standard                                    | 1          |
-| UCIO-1      | Critical Warning | Unconstrained Logical Port                                  | 1          |
-| CHECK-3     | Warning          | Report rule limit reached                                   | 2          |
-| PLHOLDVIO-2 | Warning          | Non-Optimal connections which could lead to hold violations | 4          |
-| REQP-1839   | Warning          | RAMB36 async control check                                  | 20         |
-| REQP-1840   | Warning          | RAMB18 async control check                                  | 20         |
-+-------------+------------------+-------------------------------------------------------------+------------+
+             Violations found: 46
++-------------+----------+-------------------------------------------------------------+------------+
+| Rule        | Severity | Description                                                 | Violations |
++-------------+----------+-------------------------------------------------------------+------------+
+| CHECK-3     | Warning  | Report rule limit reached                                   | 2          |
+| PLHOLDVIO-2 | Warning  | Non-Optimal connections which could lead to hold violations | 4          |
+| REQP-1839   | Warning  | RAMB36 async control check                                  | 20         |
+| REQP-1840   | Warning  | RAMB18 async control check                                  | 20         |
++-------------+----------+-------------------------------------------------------------+------------+
 
 2. REPORT DETAILS
 -----------------
-NSTD-1#1 Critical Warning
-Unspecified I/O Standard  
-1 out of 93 logical ports use I/O standard (IOSTANDARD) value 'DEFAULT', instead of a user assigned specific value. This may cause I/O contention or incompatibility with the board power or connectivity affecting performance, signal integrity or in extreme cases cause damage to the device or the components to which it is connected. To correct this violation, specify all I/O standards. This design will fail to generate a bitstream unless all logical ports have a user specified I/O standard value defined. To allow bitstream creation with unspecified I/O standard values (not recommended), use this command: set_property SEVERITY {Warning} [get_drc_checks NSTD-1].  NOTE: When using the Vivado Runs infrastructure (e.g. launch_runs Tcl command), add this command to a .tcl file and add that file as a pre-hook for write_bitstream step for the implementation run. Problem ports: TRIGGER_OUT.
-Related violations: <none>
-
-UCIO-1#1 Critical Warning
-Unconstrained Logical Port  
-1 out of 93 logical ports have no user assigned specific location constraint (LOC). This may cause I/O contention or incompatibility with the board power or connectivity affecting performance, signal integrity or in extreme cases cause damage to the device or the components to which it is connected. To correct this violation, specify all pin locations. This design will fail to generate a bitstream unless all logical ports have a user specified site LOC constraint defined.  To allow bitstream creation with unspecified pin locations (not recommended), use this command: set_property SEVERITY {Warning} [get_drc_checks UCIO-1].  NOTE: When using the Vivado Runs infrastructure (e.g. launch_runs Tcl command), add this command to a .tcl file and add that file as a pre-hook for write_bitstream step for the implementation run.  Problem ports: TRIGGER_OUT.
-Related violations: <none>
-
 CHECK-3#1 Warning
 Report rule limit reached  
 REQP-1839 rule limit reached: 20 violations have been found.
@@ -86,11 +74,11 @@ Related violations: <none>
 PLHOLDVIO-2#4 Warning
 Non-Optimal connections which could lead to hold violations  
 A LUT usbcmdfifo_16depth_i_3 is driving clock pin of 20 cells. This could lead to large hold time violations. First few involved cells are:
-    usb_data_fifo_8192depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.wr_rst_reg_reg[0] {FDPE}
-    usb_data_fifo_8192depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.wr_rst_reg_reg[1] {FDPE}
-    usb_data_fifo_8192depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.wr_rst_reg_reg[2] {FDPE}
-    usb_data_fifo_8192depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwas.wsts/ram_full_fb_i_reg {FDCE}
-    usb_data_fifo_8192depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwas.wsts/ram_full_i_reg {FDCE}
+    Microroc_Control/Microroc_SCurveTest/scurve_data_fifo_16x16/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_full_i_reg {FDPE}
+    Microroc_Control/Microroc_SCurveTest/scurve_data_fifo_16x16/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_full_fb_i_reg {FDPE}
+    Microroc_Control/Microroc_SCurveTest/scurve_data_fifo_16x16/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.wr_rst_reg_reg[2] {FDPE}
+    Microroc_Control/Microroc_SCurveTest/scurve_data_fifo_16x16/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.wr_rst_reg_reg[1] {FDPE}
+    Microroc_Control/Microroc_SCurveTest/scurve_data_fifo_16x16/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.wr_rst_reg_reg[0] {FDPE}
 
 Related violations: <none>
 
