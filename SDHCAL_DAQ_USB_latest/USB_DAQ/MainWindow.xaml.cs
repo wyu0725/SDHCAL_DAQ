@@ -67,6 +67,9 @@ namespace USB_DAQ
         private const int SweepAcq = 2;
         private const int Adc = 3;
         private int DataAcqMode = Acq;
+        private const int AutoDaq = 0;
+        private const int SlaveDaq = 1;
+        private int DaqMode = AutoDaq;
         private const int Trig = 0;
         private const int Count = 1;
         private int SCurveMode = Trig;
@@ -434,6 +437,61 @@ namespace USB_DAQ
                                          MessageBoxImage.Error);//icon
                         return;
                     }
+                    #endregion
+                    #region Set End Hold Time
+                    if (DaqMode == SlaveDaq)
+                    {
+                        byte[] CommandBytes = new byte[2];
+                        bool IsEndHoldTimeLegal = rx_int.IsMatch(txtEndHoldTime.Text) && (int.Parse(txtEndHoldTime.Text) < 65536);
+                        if(IsEndHoldTimeLegal)
+                        {
+                            int EndHoldTime = int.Parse(txtEndHoldTime.Text);
+                            int EndHoldTime1 = (EndHoldTime & 15) + 64;//0x40
+                            int EndHoldTime2 = ((EndHoldTime >> 4) & 15) + 80;//0x50
+                            int EndHoldTime3 = ((EndHoldTime >> 8) & 15) + 96;//0x60
+                            int EndHoldTime4 = ((EndHoldTime >> 12) & 15) + 112;//0x70
+                            CommandBytes = ConstCommandByteArray(0xE8, (byte)EndHoldTime1);
+                            bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                            if(!bResult)
+                            {
+                                MessageBox.Show("Set End Hold Time Failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                return;
+                            }
+                            CommandBytes = ConstCommandByteArray(0xE8, (byte)EndHoldTime2);
+                            bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                            if (!bResult)
+                            {
+                                MessageBox.Show("Set End Hold Time Failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                return;
+                            }
+                            CommandBytes = ConstCommandByteArray(0xE0, (byte)EndHoldTime3);
+                            bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                            if (!bResult)
+                            {
+                                MessageBox.Show("Set End Hold Time Failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                return;
+                            }
+                            CommandBytes = ConstCommandByteArray(0xE0, (byte)EndHoldTime4);
+                            bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                            if (bResult)
+                            {
+                                string report = string.Format("Set End Signal Time:{0}\n", EndHoldTime);
+                                txtReport.AppendText(report);
+                            }
+                            else
+                            {
+                                MessageBox.Show("Set End Hold Time Failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                return;
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Illegal End Signal Hold Time, please re-type(Integer:0--1638400,step:25ns)", //text
+                                         "Illegal input",   //caption
+                                         MessageBoxButton.OK,//button
+                                         MessageBoxImage.Error);//icon
+                        }
+                    }                    
                     #endregion
                     AcqStart = true;
                     btnAcqStart.Content = "AcqAbort";
@@ -2093,6 +2151,61 @@ namespace USB_DAQ
                         return;
                     }
                     #endregion
+                    #region Set End Hold Time
+                    if (DaqMode == SlaveDaq)
+                    {
+                        byte[] CommandBytes = new byte[2];
+                        bool IsEndHoldTimeLegal = rx_int.IsMatch(txtEndHoldTime.Text) && (int.Parse(txtEndHoldTime.Text) < 65536);
+                        if (IsEndHoldTimeLegal)
+                        {
+                            int EndHoldTime = int.Parse(txtEndHoldTime.Text);
+                            int EndHoldTime1 = (EndHoldTime & 15) + 64;//0x40
+                            int EndHoldTime2 = ((EndHoldTime >> 4) & 15) + 80;//0x50
+                            int EndHoldTime3 = ((EndHoldTime >> 8) & 15) + 96;//0x60
+                            int EndHoldTime4 = ((EndHoldTime >> 12) & 15) + 112;//0x70
+                            CommandBytes = ConstCommandByteArray(0xE8, (byte)EndHoldTime1);
+                            bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                            if (!bResult)
+                            {
+                                MessageBox.Show("Set End Hold Time Failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                return;
+                            }
+                            CommandBytes = ConstCommandByteArray(0xE8, (byte)EndHoldTime2);
+                            bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                            if (!bResult)
+                            {
+                                MessageBox.Show("Set End Hold Time Failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                return;
+                            }
+                            CommandBytes = ConstCommandByteArray(0xE0, (byte)EndHoldTime3);
+                            bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                            if (!bResult)
+                            {
+                                MessageBox.Show("Set End Hold Time Failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                return;
+                            }
+                            CommandBytes = ConstCommandByteArray(0xE0, (byte)EndHoldTime4);
+                            bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                            if (bResult)
+                            {
+                                string report = string.Format("Set End Signal Time:{0}\n", EndHoldTime);
+                                txtReport.AppendText(report);
+                            }
+                            else
+                            {
+                                MessageBox.Show("Set End Hold Time Failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                return;
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Illegal End Signal Hold Time, please re-type(Integer:0--1638400,step:25ns)", //text
+                                         "Illegal input",   //caption
+                                         MessageBoxButton.OK,//button
+                                         MessageBoxImage.Error);//icon
+                        }
+                    }
+                    #endregion
                     //Regex rx_int = new Regex(rx_Integer);
                     bool Is_DataNum_Legal = rx_int.IsMatch(txtSlowACQDataNum.Text);
                     
@@ -3204,7 +3317,7 @@ namespace USB_DAQ
                     }
                     else
                     {
-                        MessageBox.Show("ADC Stop failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        txtReport.AppendText("Stop ADC Failure 1st time \n");
                         return;
                     }
                     #endregion
@@ -3263,9 +3376,38 @@ namespace USB_DAQ
             bw.Close();
         }
 
+
+
+        private void DaqModeSelect_Checked(object sender, RoutedEventArgs e)
+        {
+            var button = sender as RadioButton;
+            bool bResult = false;
+            byte[] CommandBytes = new byte[2];
+            if(button.Content.ToString() == "Auto")
+            {
+                DaqMode = AutoDaq;
+                txtEndHoldTime.IsEnabled = false;
+            }
+            else if(button.Content.ToString() == "Slave")
+            {
+                DaqMode = SlaveDaq;
+                txtEndHoldTime.IsEnabled = true;
+            }
+            CommandBytes = ConstCommandByteArray(0xE0, (byte)DaqMode);
+            bResult = CommandSend(CommandBytes, CommandBytes.Length);
+            if(bResult)
+            {
+                string report = string.Format("Set DAQ Mode: {0} DAQ\n", button.Content.ToString());
+                txtReport.AppendText(report);
+            }
+            else
+            {
+                MessageBox.Show("Set DAQ Mode failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
         private async void btnTest_Click(object sender, RoutedEventArgs e)
         {
-            if(!IsTestStart)
+            if (!IsTestStart)
             {
                 IsTestStart = true;
                 btnTest.Content = "Test Stop";
@@ -3286,14 +3428,14 @@ namespace USB_DAQ
         {
             int BigCount = 0;
             int BigBigCount = 0;
-            while(IsTestStart && BigBigCount < 10000)
+            while (IsTestStart && BigBigCount < 10000)
             {
                 BigCount = BigCount + 1;
                 if (BigCount == 10000)
                 {
                     //txtReport.AppendText("10000\n");
                 }
-                if(BigCount == 100000)
+                if (BigCount == 100000)
                 {
                     BigCount = 0;
                     BigBigCount += 1;
