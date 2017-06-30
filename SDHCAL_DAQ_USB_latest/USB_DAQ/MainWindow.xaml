@@ -43,20 +43,21 @@
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="193*"/>
+            <ColumnDefinition Width="1093*"/>
         </Grid.ColumnDefinitions>
         <Label x:Name="lblMessage" Content="Message" HorizontalAlignment="Left" Margin="97,10,0,0" VerticalAlignment="Top"/>
-        <GroupBox x:Name="gbxUSBStatus" Header="USB Status" HorizontalAlignment="Left" Margin="1072,28,0,0" VerticalAlignment="Top" Height="57" Width="189">
+        <GroupBox x:Name="gbxUSBStatus" Header="USB Status" HorizontalAlignment="Left" Margin="879,28,0,0" VerticalAlignment="Top" Height="57" Width="189" Grid.Column="1">
             <Label x:Name="usb_status" Content="USB device not connected" HorizontalAlignment="Left" Height="24" Margin="9,2,0,0" VerticalAlignment="Top" Width="160" Background="Transparent" />
         </GroupBox>
-        <Button x:Name="btnCommandSend" Content="CommandSend" HorizontalAlignment="Left" Margin= "1160,98,0,0" VerticalAlignment="Top" Width="102" Height="22" Click="btnCommandSend_Click"/>
-        <TextBox x:Name="txtCommand" HorizontalAlignment="Left" Height="22" Margin="1072,99,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="78" IsEnabled="False"/>
+        <Button x:Name="btnCommandSend" Content="CommandSend" HorizontalAlignment="Left" Margin= "967,98,0,0" VerticalAlignment="Top" Width="102" Height="22" Click="btnCommandSend_Click" Grid.Column="1"/>
+        <TextBox x:Name="txtCommand" HorizontalAlignment="Left" Height="22" Margin="879,99,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="78" IsEnabled="False" Grid.Column="1"/>
         <TextBox x:Name="txtReport" HorizontalAlignment="Left" Height="724" Margin="22,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="212" IsReadOnlyCaretVisible="True" IsUndoEnabled="False" IsReadOnly="True"
                  ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto"
-                 ScrollViewer.CanContentScroll="True">
+                 ScrollViewer.CanContentScroll="True" Grid.ColumnSpan="2">
         </TextBox>
         <Button x:Name="btnClearReport" Content="Clear" HorizontalAlignment="Left" Margin="85,779,0,0" VerticalAlignment="Top" Width="73" Click="btnClearReport_Click" Height="21"/>
-        <GroupBox x:Name="gbxFile" Header="File operations" HorizontalAlignment="Left" Height="85" Margin="258,765,0,0" VerticalAlignment="Top" Width="556">
+        <GroupBox x:Name="gbxFile" Header="File operations" HorizontalAlignment="Left" Height="85" Margin="65,765,0,0" VerticalAlignment="Top" Width="556" Grid.Column="1">
             <Grid Margin="0,0,0,0">
                 <Label x:Name="lblFileDirectory" Content="File Directory:" HorizontalAlignment="Left" Margin="3,5,0,0" VerticalAlignment="Top"/>
                 <TextBox x:Name="txtFileDir" HorizontalAlignment="Left" Height="23" Margin="93,9,0,0" TextWrapping="Wrap" Text="D:\ExperimentsData\test" VerticalAlignment="Top" Width="302"/>
@@ -67,7 +68,7 @@
                 <Button x:Name="btnFileSave" Content="Save" HorizontalAlignment="Left" Margin="222,38,0,0" VerticalAlignment="Top" Width="54" Click="btnFileSave_Click"/>
             </Grid>
         </GroupBox>
-        <GroupBox x:Name="gbxMICROROC" Header="MICROROC Control" HorizontalAlignment="Left" Margin="258,28,0,0" VerticalAlignment="Top" Height="732" Width="797">
+        <GroupBox x:Name="gbxMICROROC" Header="MICROROC Control" HorizontalAlignment="Left" Margin="65,28,0,0" VerticalAlignment="Top" Height="732" Width="797" Grid.Column="1">
             <Grid  Margin="0,0,0,0" >
                 <GroupBox x:Name="gbxMicrorocControl" Header="Microroc Control" HorizontalAlignment="Left" Margin="0,466,0,-6" VerticalAlignment="Top" Height="250" Width="775">
                     <Grid  Margin="0,0,0,0" >
@@ -504,8 +505,8 @@
 
             </Grid>
         </GroupBox>
-        <GroupBox x:Name="gbxAsicStatus" Header="ASIC Status" HorizontalAlignment="Left" Margin="1072,126,0,0" VerticalAlignment="Top" Width="189" Height="634"/>
-        
+        <GroupBox x:Name="gbxAsicStatus" Header="ASIC Status" HorizontalAlignment="Left" Margin="879,126,0,0" VerticalAlignment="Top" Width="189" Height="634" Grid.Column="1"/>
+
 
         <!--GroupBox x:Name="gbxWaveform" Header="Waveform" HorizontalAlignment="Left" Margin="260,135,0,0" VerticalAlignment="Top" Height="343" Width="557">
             <Grid  Margin="0,0,0,0">

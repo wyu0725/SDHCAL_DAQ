@@ -3334,30 +3334,48 @@ namespace USB_DAQ
             byte[] DataReceiveBytes = new byte[2048];
             if (DataAcqMode == Acq || DataAcqMode == SweepAcq || DataAcqMode == SCTest)
             {
-                int PackageNumber = SlowDataRatePackageNumber / 2048;
-                int RemainPackageNum = SlowDataRatePackageNumber % 2048;
-                int PackageCount = 0;
-                while (PackageCount < PackageNumber & IsSlowAcqStart)
+                #region The Max Data Number is Set
+                if (SlowDataRatePackageNumber != 0)
                 {
-                    bResult = DataRecieve(DataReceiveBytes, DataReceiveBytes.Length);
-                    if (bResult)
+                    int PackageNumber = SlowDataRatePackageNumber / 2048;
+                    int RemainPackageNum = SlowDataRatePackageNumber % 2048;
+                    int PackageCount = 0;
+                    while (PackageCount < PackageNumber & IsSlowAcqStart)
                     {
-                        bw.Write(DataReceiveBytes);
-                        PackageCount++;
+                        bResult = DataRecieve(DataReceiveBytes, DataReceiveBytes.Length);
+                        if (bResult)
+                        {
+                            bw.Write(DataReceiveBytes);
+                            PackageCount++;
+                        }
+                    }
+                    if (RemainPackageNum != 0)
+                    {
+                        bResult = false;
+                        byte[] RemainByte = new byte[2048];
+                        while (!DataRecieve(RemainByte, RemainByte.Length) & IsSlowAcqStart) ;
+                        byte[] RemainByteWrite = new byte[RemainPackageNum];
+                        for (int i = 0; i < RemainPackageNum; i++)
+                        {
+                            RemainByteWrite[i] = RemainByte[i];
+                        }
+                        bw.Write(RemainByteWrite);
                     }
                 }
-                if (RemainPackageNum != 0)
+                #endregion
+                #region The Max Data Number is not set and work in consist mode
+                else
                 {
-                    bResult = false;
-                    byte[] RemainByte = new byte[2048];
-                    while (!DataRecieve(RemainByte, RemainByte.Length) & IsSlowAcqStart) ;
-                    byte[] RemainByteWrite = new byte[RemainPackageNum];
-                    for (int i = 0; i < RemainPackageNum; i++)
+                    while (IsSlowAcqStart)
                     {
-                        RemainByteWrite[i] = RemainByte[i];
+                        bResult = DataRecieve(DataReceiveBytes, DataReceiveBytes.Length);
+                        if (bResult)
+                        {
+                            bw.Write(DataReceiveBytes);
+                        }
                     }
-                    bw.Write(RemainByteWrite);
                 }
+                #endregion
                 //IsSlowAcqStart = false;
             }
             else if (DataAcqMode == Adc)
