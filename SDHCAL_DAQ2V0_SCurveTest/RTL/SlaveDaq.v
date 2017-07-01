@@ -361,4 +361,6 @@ module SlaveDaq(
         SlaveDaqData_en = MicrorocData_en;
       end
     end
+    (*mark_debug = "true"*)wire [15:0] SlaveDaqData_debug;
+    assign SlaveDaqData_debug = SlaveDaqData;
 endmodule
