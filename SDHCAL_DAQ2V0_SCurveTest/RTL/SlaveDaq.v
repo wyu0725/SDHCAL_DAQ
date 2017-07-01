@@ -49,6 +49,11 @@ module SlaveDaq(
     output reg PWR_ON_DAC,          //DAC Power Pulsing Control, Active H
     output reg OnceEnd,
     output reg AllDone,             //Acquisition Stop
+    // DataTransmit
+    input [15:0] MicrorocData,
+    input MicrorocData_en,
+    output reg [15:0] SlaveDaqData,
+    output reg SlaveDaqData_en,
     input DataTransmitDone
     );
     // Synchronize the external CHIPSATB signal
@@ -109,14 +114,21 @@ module SlaveDaq(
                      START_READOUT = 4'd7,
                      WAIT_READ_DONE = 4'd8,
                      //RESET_ASIC = 4'd9, // There is no need to reset ASIC
-                     ONCE_END = 4'd10,
-                     ALL_DONE = 4'd11;
+                     ONCE_END = 4'd9,
+                     OUT_TAIL = 4'd10,
+                     OUT_COUNT1 = 4'd11,
+                     OUT_COUNT2 = 4'd12,
+                     ALL_DONE = 4'd13;
     reg [3:0] State;
     localparam TimeMinPowerReset = 8;//Time to wake up clock LVDS receivers 200ns
     localparam TimeMinResetStart = 40;//4 SlowClock ticks + 4 FastClock ticks (internal management) 1us
     localparam TimeMinSro = 16;//Time to wake up clock LVDS receivers 400ns
     reg ResetStartAcq_n;
     reg AcqEnable;
+    reg TrigCount_en;
+    reg ResetTrigCount_n;
+    reg [23:0] TrigCounter;
+    reg InternalData_en;
     always @(posedge Clk or negedge reset_n) begin
       if(~reset_n) begin
         State <= IDLE;
@@ -127,6 +139,9 @@ module SlaveDaq(
         DelayCount <= 16'b0;
         OnceEnd <= 1'b0;
         AllDone <= 1'b0;
+        ResetTrigCount_n <= 1'b1;
+        InternalData_en <= 1'b0;
+        TrigCount_en <= 1'b0;
       end
       else begin
         case(State)
@@ -135,6 +150,7 @@ module SlaveDaq(
               RESET_B <= 1'b0;
               ResetStartAcq_n <= 1'b0;
               State <= CHIP_RESET;
+              ResetTrigCount_n <= 1'b0;
             end
             else
               State <= IDLE;
@@ -163,14 +179,17 @@ module SlaveDaq(
               DelayCount <= 16'b0;
               AcqEnable <= 1'b1;
               ResetStartAcq_n <= 1'b1;
+              ResetTrigCount_n <= 1'b1;
+              TrigCount_en <= 1'b1;
               State <= WAIT_START;
             end
           end
           WAIT_START:begin
             if(~ModuleStart) begin
               AcqEnable <= 1'b0;
-              AllDone <= 1'b1;
-              State <= ALL_DONE;
+              //AllDone <= 1'b1;
+              State <= OUT_TAIL;
+              TrigCount_en <= 1'b0;
             end
             else if(SingleAcqStart) begin
               State <= START_ACQUISITION;
@@ -236,6 +255,43 @@ module SlaveDaq(
               State <= WAIT_START;
             end
           end
+          OUT_TAIL:begin
+            if(DelayCount < 16'd1) begin
+              DelayCount <= DelayCount + 1'b1;
+              InternalData_en <= 1'b1;
+              State <= OUT_TAIL;
+            end
+            else begin
+              DelayCount <= 16'b0;
+              InternalData_en <= 1'b0;
+              State <= OUT_COUNT1;
+            end
+          end
+          OUT_COUNT1:begin
+            if(DelayCount < 16'd1) begin
+              DelayCount <= DelayCount + 1'b1;
+              InternalData_en <= 1'b1;
+              State <= OUT_COUNT1;
+            end
+            else begin
+              DelayCount <= 16'b0;
+              InternalData_en <= 1'b0;
+              State <= OUT_COUNT2;
+            end
+          end
+          OUT_COUNT2:begin
+            if(DelayCount < 16'd1) begin
+              DelayCount <= DelayCount + 1'b1;
+              InternalData_en <= 1'b1;
+              State <= OUT_COUNT2;
+            end
+            else begin
+              DelayCount <= 16'b0;
+              InternalData_en <= 1'b0;
+              State <= ALL_DONE;
+              AllDone <= 1'b1;
+            end
+          end
           ALL_DONE:begin
             if(DataTransmitDone) begin
               ResetStartAcq_n <= 1'b1;
@@ -261,6 +317,14 @@ module SlaveDaq(
       else
         START_ACQ <= 1'b0;
     end
+    always @(posedge AcqStart or negedge ResetTrigCount_n) begin
+      if(~ResetTrigCount_n) 
+        TrigCounter <= 24'b0;
+      else if(TrigCount_en)
+        TrigCounter <= TrigCounter + 1'b1;
+      else
+        TrigCounter <= TrigCounter;
+    end
     //*** Power On Control
     always @(State) begin
       if(State == POWER_ON || State == POWER_ON || State == RELEASE || State == WAIT_START || State == START_ACQUISITION || State == WAIT_READ || State == START_READOUT || State == WAIT_READ || State == WAIT_READ_DONE || State == ONCE_END)
@@ -279,4 +343,22 @@ module SlaveDaq(
       end
     end
     assign PWR_ON_ADC = 1'b0;
+    always @(*) begin
+      if(State == OUT_TAIL) begin
+        SlaveDaqData = 16'hFF45;
+        SlaveDaqData_en = InternalData_en;
+      end
+      else if(State == OUT_COUNT1) begin
+        SlaveDaqData = {8'hCC,TrigCounter[23:16]};
+        SlaveDaqData_en <= InternalData_en;
+      end
+      else if(State == OUT_COUNT2) begin
+        SlaveDaqData = TrigCounter[15:0];
+        SlaveDaqData_en <= InternalData_en;
+      end
+      else begin
+        SlaveDaqData = MicrorocData;
+        SlaveDaqData_en = MicrorocData_en;
+      end
+    end
 endmodule

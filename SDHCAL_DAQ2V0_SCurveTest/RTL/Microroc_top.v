@@ -311,6 +311,8 @@ wire ResetMicroroc_n;
 assign ResetMicroroc_n = reset_n & (~MicrorocForceReset);
 wire DataTransmitDone;
 assign DataTransmitDone = ~nPKTEND;
+wire [15:0] MicrorocData;
+wire MicrorocData_en;
 DaqControl MicrorocDaq
 (
     .Clk(Clk),         //40M
@@ -333,6 +335,10 @@ DaqControl MicrorocDaq
     .AllDone(AllDone),
     .DataTransmitDone(DataTransmitDone),
     .UsbFifoEmpty(UsbFifoEmpty),
+    .MicrorocData(MicrorocData),//Acquired data
+    .MicrorocData_en(MicrorocData_en),
+    .DaqData(parallel_data),//Data output
+    .DaqData_en(parallel_data_en),
     .ExternalTrigger(ExternalTrigger)
 );
 
@@ -344,8 +350,8 @@ RamReadOut RAM_Read
    .TransmitOn(TransmitOn),//pin  Active L
    //--fifo access-----------//
    .ext_fifo_full(ext_fifo_full),
-   .parallel_data(parallel_data),
-   .parallel_data_en(parallel_data_en)
+   .parallel_data(MicrorocData),
+   .parallel_data_en(MicrorocData_en)
 );
 HoldGen HoldGenerator(
     .Clk(Clk),
