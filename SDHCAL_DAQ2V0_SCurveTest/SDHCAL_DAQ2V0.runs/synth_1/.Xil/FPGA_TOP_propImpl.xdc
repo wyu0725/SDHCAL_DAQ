@@ -176,6 +176,8 @@ set_property src_info {type:XDC file:1 line:315 export:INPUT save:INPUT read:REA
 set_property PACKAGE_PIN AA19 [get_ports ADC_CLK]
 set_property src_info {type:XDC file:1 line:316 export:INPUT save:INPUT read:READ} [current_design]
 set_property PACKAGE_PIN AB11 [get_ports ADC_OTR]
+set_property src_info {type:XDC file:1 line:339 export:INPUT save:INPUT read:READ} [current_design]
+set_property PACKAGE_PIN R18 [get_ports TRIGGER_OUT]
 set_property src_info {type:SCOPED_XDC file:2 line:62 export:INPUT save:INPUT read:READ} [current_design]
 set_max_delay -from [get_cells inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gcx.clkx/*rd_pntr_gc_reg[*]] -to [get_cells inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gcx.clkx/*gsync_stage[1].wr_stg_inst/Q_reg_reg[*]] -datapath_only [get_property -min PERIOD [get_clocks -of_objects [get_pins usb_data_fifo_8192depth/U0/rd_clk]]]
 set_property src_info {type:SCOPED_XDC file:2 line:65 export:INPUT save:INPUT read:READ} [current_design]
