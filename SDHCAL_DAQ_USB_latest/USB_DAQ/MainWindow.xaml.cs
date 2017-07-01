@@ -3331,14 +3331,14 @@ namespace USB_DAQ
             bw = new BinaryWriter(File.Open(filepath, FileMode.Append));
             //private int SingleDataLength = 512;
             bool bResult = false;
-            byte[] DataReceiveBytes = new byte[2048];
+            byte[] DataReceiveBytes = new byte[512];
             if (DataAcqMode == Acq || DataAcqMode == SweepAcq || DataAcqMode == SCTest)
             {
                 #region The Max Data Number is Set
                 if (SlowDataRatePackageNumber != 0)
                 {
-                    int PackageNumber = SlowDataRatePackageNumber / 2048;
-                    int RemainPackageNum = SlowDataRatePackageNumber % 2048;
+                    int PackageNumber = SlowDataRatePackageNumber / 512;
+                    int RemainPackageNum = SlowDataRatePackageNumber % 512;
                     int PackageCount = 0;
                     while (PackageCount < PackageNumber & IsSlowAcqStart)
                     {
@@ -3387,6 +3387,15 @@ namespace USB_DAQ
                     {
                         bw.Write(DataReceiveBytes);
                     }
+                }
+            }
+            byte[] EndFrame = new byte[512];
+            for (int j = 0; j < 16; j++)
+            {
+                bResult = DataRecieve(EndFrame, EndFrame.Length);
+                if (bResult)
+                {
+                    bw.Write(EndFrame);
                 }
             }
             bw.Flush();
