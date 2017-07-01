@@ -72,16 +72,7 @@ module DaqSwitcher(
     //Usb Start Stop
     input AutoDaq_UsbStartStop,
     input SlaveDaq_UsbStartStop,
-    output UsbStartStop,
-    //Data Transmit
-    input [15:0] MicrorocData,
-    input MicrorocData_en,
-    input [15:0] SlaveDaqData,
-    input SlaveDaqData_en,
-    output [15:0] DataToSlaveDaq,
-    output DataToSlaveDaq_en,
-    output [15:0] AcquiredData,
-    output AcquiredData_en
+    output UsbStartStop
     );
     assign PWR_ON_A = DaqSelect ? AutoDaq_PWR_ON_A : SlaveDaq_PWR_ON_A;
     assign PWR_ON_D = DaqSelect ? AutoDaq_PWR_ON_D : SlaveDaq_PWR_ON_D;
@@ -102,8 +93,4 @@ module DaqSwitcher(
     assign SlaveDaq_DataTransmitDone = DaqSelect ? 1'b0 : DataTransmitDone;
     assign SingleStart = DaqSelect ? 1'b0 : ExternalTrigger;
     assign UsbStartStop = DaqSelect ? AutoDaq_UsbStartStop : SlaveDaq_UsbStartStop;
-    assign AcquiredData = DaqSelect ? MicrorocData : SlaveDaqData;
-    assign AcquiredData_en = DaqSelect ? MicrorocData_en : SlaveDaqData_en;
-    assign DataToSlaveDaq = DaqSelect ? 16'd0 : MicrorocData;
-    assign DataToSlaveDaq_en = DaqSelect ? 1'b0 : MicrorocData_en;
 endmodule

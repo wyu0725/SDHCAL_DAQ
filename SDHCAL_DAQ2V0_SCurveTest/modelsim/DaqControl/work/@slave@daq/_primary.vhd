@@ -19,6 +19,10 @@ entity SlaveDaq is
         PWR_ON_DAC      : out    vl_logic;
         OnceEnd         : out    vl_logic;
         AllDone         : out    vl_logic;
+        MicrorocData    : in     vl_logic_vector(15 downto 0);
+        MicrorocData_en : in     vl_logic;
+        SlaveDaqData    : out    vl_logic_vector(15 downto 0);
+        SlaveDaqData_en : out    vl_logic;
         DataTransmitDone: in     vl_logic
     );
 end SlaveDaq;

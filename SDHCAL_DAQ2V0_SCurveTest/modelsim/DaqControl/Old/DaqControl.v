@@ -49,11 +49,6 @@ module DaqControl(
     output AllDone,
     input DataTransmitDone,
     input UsbFifoEmpty,
-    //Acquire Data
-    input [15:0] MicrorocData,
-    input MicrorocData_en,
-    output [15:0] DaqData,
-    output DaqData_en,
     // External trigger
     input ExternalTrigger
     );
@@ -86,10 +81,6 @@ module DaqControl(
     wire SingleStart;
     wire AutoDaq_UsbStartStop;
     reg SlaveDaq_UsbStartStop;
-    wire [15:0] SlaveDaqData;
-    wire SlaveDaqData_en;
-    wire [15:0] DataToSlaveDaq;
-    wire DataToSlaveDaq_en;
     DaqSwitcher DaqModeSelect(
       .DaqSelect(DaqSelect),
       //Power pulsing control
@@ -141,16 +132,7 @@ module DaqControl(
       .SingleStart(SingleStart),
       .AutoDaq_UsbStartStop(AutoDaq_UsbStartStop),
       .SlaveDaq_UsbStartStop(SlaveDaq_UsbStartStop),
-      .UsbStartStop(UsbStartStop),
-      // Data Transmit
-      .MicrorocData(MicrorocData),
-      .MicrorocData_en(MicrorocData_en),
-      .SlaveDaqData(SlaveDaqData),
-      .SlaveDaqData_en(SlaveDaqData_en),
-      .DataToSlaveDaq(DataToSlaveDaq),
-      .DataToSlaveDaq_en(DataToSlaveDaq_en),
-      .AcquiredData(DaqData),
-      .AcquiredData_en(DaqData_en)
+      .UsbStartStop(UsbStartStop)
     );
     
     AutoDaq AutoDaqControl
@@ -189,11 +171,6 @@ module DaqControl(
       .PWR_ON_DAC(SlaveDaq_PWR_ON_DAC),
       .OnceEnd(SlaveDaq_OnceEnd),
       .AllDone(SlaveDaq_AllDone),
-      // Data Transmit
-      .MicrorocData(DataToSlaveDaq),
-      .MicrorocData_en(DataToSlaveDaq_en),
-      .SlaveDaqData(SlaveDaqData),
-      .SlaveDaqData_en(SlaveDaqData_en),
       .DataTransmitDone(SlaveDaq_DataTransmitDone)
     );
     // Generate the USB start and stop

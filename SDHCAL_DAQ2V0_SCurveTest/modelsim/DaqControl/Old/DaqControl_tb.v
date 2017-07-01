@@ -20,10 +20,6 @@ module DaqControl_tb;
     wire AllDone;
     reg DataTransmitDone;
     reg UsbFifoEmpty;
-    reg [15:0] MicrorocData;
-    reg MicrorocData_en;
-    wire [15:0] DaqData;
-    wire DaqData_en;
     reg ExternalTrigger;
     DaqControl uut(
       .Clk(Clk),
@@ -46,10 +42,6 @@ module DaqControl_tb;
       .AllDone(AllDone),
       .DataTransmitDone(DataTransmitDone),
       .UsbFifoEmpty(UsbFifoEmpty),
-      .MicrorocData(MicrorocData),
-      .MicrorocData_en(MicrorocData_en),
-      .DaqData(DaqData),
-      .DaqData_en(DaqData_en),
       .ExternalTrigger(ExternalTrigger)
     );
     initial begin
@@ -132,49 +124,12 @@ module DaqControl_tb;
       end
     end
     reg [5:0] ReadCount;
-    reg [1:0] ReadState;
-    localparam [1:0] READ_IDLE = 2'b00,
-                     GET_DATA = 2'b01,
-                     OUT_DATA = 2'b10;
     always @(posedge Clk or negedge reset_n) begin
       if(~reset_n) begin
         EndReadout <= 1'b0;
         ReadCount <= 6'b0;
-        MicrorocData <= 16'b0;
-        MicrorocData_en <= 1'b0;
-        ReadState <= READ_IDLE;
       end
-      else begin
-        case(ReadState)
-          READ_IDLE:begin
-            EndReadout <= 1'b0;
-            if(StartReadout) begin
-              ReadState <= GET_DATA;
-            end
-            else
-              ReadState <= READ_IDLE;
-          end
-          GET_DATA:begin
-            MicrorocData_en <= 1'b0;
-            if(ReadCount < 6'd9) begin
-              MicrorocData <= MicrorocData + 1'b1;
-              ReadCount <= ReadCount + 1'b1;
-              ReadState <= OUT_DATA;
-            end
-            else begin
-              EndReadout <= 1'b1;
-              MicrorocData <= 16'b0;
-              ReadCount <= 6'd0;
-              ReadState <= READ_IDLE;
-            end
-          end
-          OUT_DATA:begin
-            ReadState <= GET_DATA;
-            MicrorocData_en <= 1'b1;
-          end
-        endcase
-      end
-      /*else if(ReadCount == 6'd60) begin
+      else if(ReadCount == 6'd60) begin
         ReadCount <= 6'b0;
         EndReadout <= 1'b1;
       end
@@ -186,7 +141,6 @@ module DaqControl_tb;
         ReadCount <= 6'b0;
         EndReadout <= 1'b0;
       end
-      */
     end
     always @(posedge Clk or negedge reset_n) begin
       if(~reset_n) begin

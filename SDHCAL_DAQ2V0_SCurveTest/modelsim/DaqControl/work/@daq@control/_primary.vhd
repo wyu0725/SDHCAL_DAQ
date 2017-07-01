@@ -22,6 +22,10 @@ entity DaqControl is
         AllDone         : out    vl_logic;
         DataTransmitDone: in     vl_logic;
         UsbFifoEmpty    : in     vl_logic;
+        MicrorocData    : in     vl_logic_vector(15 downto 0);
+        MicrorocData_en : in     vl_logic;
+        DaqData         : out    vl_logic_vector(15 downto 0);
+        DaqData_en      : out    vl_logic;
         ExternalTrigger : in     vl_logic
     );
 end DaqControl;

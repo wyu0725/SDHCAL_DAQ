@@ -46,6 +46,14 @@ entity DaqSwitcher is
         SingleStart     : out    vl_logic;
         AutoDaq_UsbStartStop: in     vl_logic;
         SlaveDaq_UsbStartStop: in     vl_logic;
-        UsbStartStop    : out    vl_logic
+        UsbStartStop    : out    vl_logic;
+        MicrorocData    : in     vl_logic_vector(15 downto 0);
+        MicrorocData_en : in     vl_logic;
+        SlaveDaqData    : in     vl_logic_vector(15 downto 0);
+        SlaveDaqData_en : in     vl_logic;
+        DataToSlaveDaq  : out    vl_logic_vector(15 downto 0);
+        DataToSlaveDaq_en: out    vl_logic;
+        AcquiredData    : out    vl_logic_vector(15 downto 0);
+        AcquiredData_en : out    vl_logic
     );
 end DaqSwitcher;
