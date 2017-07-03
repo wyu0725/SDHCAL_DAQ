@@ -181,6 +181,7 @@ module FPGA_TOP(
     wire [15:0] UsbEndHoldTime;
     wire UsbDaqSelect;
     wire [3:0] UsbTriggerDelay;
+    wire UsbUnmaskAllChannel;
     usb_command_interpreter usb_control
     (
       .IFCLK(IFCLK),
@@ -245,6 +246,7 @@ module FPGA_TOP(
       .CPT_MAX(CPT_MAX),
       .TriggerDelay(UsbTriggerDelay),
       .SweepTestStartStop(SweepTestStartStop),
+      .UnmaskAllChannel(UsbUnmaskAllChannel),
       //Count Efficiency
       .TrigEffi_or_CountEffi(TrigEffiOrCountEffi),
       .CounterMax(CounterMax),
@@ -610,6 +612,8 @@ module FPGA_TOP(
       .CPT_MAX(CPT_MAX),
       .CounterMax(CounterMax),
       .TriggerDelay(UsbTriggerDelay),
+      .AsicNumber(Microroc_param_asic_num),
+      .UnmaskAllChannel(UsbUnmaskAllChannel),
       .ForceExtRaz(ForceExtRaz),
       //*** Pin
       .CLK_EXT(CLK_EXT),

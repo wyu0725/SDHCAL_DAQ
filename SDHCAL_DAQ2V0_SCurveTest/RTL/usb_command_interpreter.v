@@ -85,6 +85,7 @@ module usb_command_interpreter(
       output reg [15:0] CPT_MAX,
       output reg [3:0] TriggerDelay,
       output reg SweepTestStartStop,
+      output reg UnmaskAllChannel,
       // Count Efficirncy
       output reg TrigEffi_or_CountEffi,
       output reg [15:0] CounterMax,
@@ -1228,6 +1229,16 @@ always @(posedge clk or negedge reset_n) begin
     TriggerDelay <= USB_COMMAND[3:0];
   else
     TriggerDelay <= TriggerDelay;
+end
+always @(posedge clk or negedge reset_n) begin
+  if(~reset_n)
+    UnmaskAllChannel <= 1'b0;
+  else if(fifo_rden && USB_COMMAND == 16'hE910)
+    UnmaskAllChannel <= 1'b0;
+  else if(fifo_rden && USB_COMMAND == 16'hE911)
+    UnmaskAllChannel <= 1'b1;
+  else
+    UnmaskAllChannel <= UnmaskAllChannel;
 end
 //Swap the LSB and MSB
   function [9:0] Invert_10bit(input [9:0] num);

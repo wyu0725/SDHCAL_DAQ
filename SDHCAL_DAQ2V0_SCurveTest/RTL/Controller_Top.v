@@ -76,6 +76,8 @@ module Controller_Top(
     input [15:0] CPT_MAX,
     input [15:0] CounterMax,
     input [3:0] TriggerDelay,
+    input [2:0] AsicNumber,
+    input UnmaskAllChannel,
     output ForceExtRaz,
     // Pin
     input CLK_EXT,
@@ -234,6 +236,8 @@ module Controller_Top(
       .StartDac(StartDac),
       .EndDac(EndDac),
       .TriggerDelay(TriggerDelay),
+      .AsicNumber(AsicNumber),
+      .UnmaskAllChannel(UnmaskAllChannel),
       //--- USB Data FIFO Interface ---
       //.usb_data_fifo_full(),
       .usb_data_fifo_wr_en(SCTestData_en),

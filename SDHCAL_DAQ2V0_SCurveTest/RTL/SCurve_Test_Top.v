@@ -36,6 +36,8 @@ module SCurve_Test_Top(
     input [9:0] StartDac,
     input [9:0] EndDac,
     input [3:0] TriggerDelay,
+    input [2:0] AsicNumber,
+    input UnmaskAllChannel,
     /*--- USB Data FIFO Interface ---*/
     //input usb_data_fifo_full,
     output usb_data_fifo_wr_en,
@@ -122,6 +124,8 @@ module SCurve_Test_Top(
       .Ctest_or_Input(Ctest_or_Input),//Add by wyu 20170307. When single channel test, this parameter can choose the charge inject from Ctest pin or the input pin
       .StartDac(StartDac),
       .EndDac(EndDac),
+      .AsicNumber(AsicNumber),
+      .UnmaskAllChannel(UnmaskAllChannel),
       /*--- Microroc SC Parameter Interface ---*/
       .Microroc_CTest_Chn_Out(Microroc_CTest_Chn_Out),
       .Microroc_10bit_DAC_Out(Microroc_10bit_DAC_Out),

@@ -57,20 +57,30 @@ module SCurve_Single_Input(
   //Catch the falling edge of trigger
   reg trigger_reg1;
   reg trigger_reg2;
+  wire Enable_Count_T;
+  wire Trigger_delay;
+  reg [15:0] TriggerShift;
+  always @(posedge Clk or negedge reset_n) begin
+    if(~reset_n)
+      TriggerShift <= {16{1'b1}};
+    else
+      TriggerShift <= {TriggerShift[14:0],Trigger};
+  end
+  assign Trigger_delay = TriggerShift[TriggerDelay];
   always @(posedge Clk or negedge reset_n)begin
     if(~reset_n)begin
       trigger_reg1 <= 1'b1;
       trigger_reg2 <= 1'b1;
     end
     else begin
-      trigger_reg1 <= TrigEffi_or_CountEffi ? ((Trigger && trigger_reg1) || (~Enable_Count_T)) : Trigger;
+      trigger_reg1 <= TrigEffi_or_CountEffi ? ((Trigger_delay && trigger_reg1) || (~Enable_Count_T)) : Trigger_delay;
       trigger_reg2 <= trigger_reg1;
     end
   end
   wire Trigger_Falling;
   assign Trigger_Falling = (~trigger_reg1)&trigger_reg2;
   //Set the trigger delayed
-  reg [3:0] TriggerDelayCount;
+  /*reg [3:0] TriggerDelayCount;
   reg TriggerFalling_delay;
   always @(posedge Clk or negedge reset_n) begin
     if(~reset_n) begin
@@ -89,10 +99,10 @@ module SCurve_Single_Input(
       TriggerFalling_delay <= 1'b0;
       TriggerDelayCount <= 4'd0;
     end
-  end
+  end*/
   //Generate Enable Count signal
   wire Enable_Count_P;
-  wire Enable_Count_T;
+  
   assign Enable_Count_P = Test_Start & (reset_n) & (~CPT_DONE);
   assign Enable_Count_T = TrigEffi_or_CountEffi ? (Enable_Count_P & CLK_EXT) : Enable_Count_P;
   //Count PUSLE
@@ -112,7 +122,7 @@ module SCurve_Single_Input(
       CPT_TRIGGER <= 16'b0;
     else if(~Enable_Count_T)
       CPT_TRIGGER <= CPT_TRIGGER;
-    else if(TriggerFalling_delay)
+    else if(Trigger_Falling)
       CPT_TRIGGER <= CPT_TRIGGER + 1'b1;
     else
       CPT_TRIGGER <= CPT_TRIGGER;

@@ -6,6 +6,7 @@ reg Trigger;
 reg CLK_EXT;
 reg Test_Start;
 reg [15:0] CPT_MAX;
+reg [3:0] TriggerDelay;
 wire [15:0] CPT_PULSE;
 wire [15:0] CPT_TRIGGER;
 wire CPT_DONE;
@@ -13,12 +14,14 @@ wire CPT_DONE;
 SCurve_Single_Input uut(
   .Clk(clk),
   .reset_n(reset_n),
+  .TrigEffi_or_CountEffi(1'b1),
   .Trigger(Trigger),
   .CLK_EXT(CLK_EXT),
   .Test_Start(Test_Start),
   .CPT_MAX(CPT_MAX),
+  .TriggerDelay(TriggerDelay),
   .CPT_PULSE(CPT_PULSE),
-  .CPT_TRIGGER(TRIGGER),
+  .CPT_TRIGGER(CPT_TRIGGER),
   .CPT_DONE(CPT_DONE)
 );
 //initial the tb
@@ -27,6 +30,7 @@ initial begin
   reset_n = 1'b0;
   Trigger = 1'b1;
   Test_Start = 1'b0;
+  TriggerDelay = 4'd5;
   CPT_MAX = 16'd1000;
   #100;
   reset_n = 1'b1;
@@ -84,7 +88,7 @@ end
 reg [6:0] Trigger_Cnt;
 always @(posedge clk_n or negedge reset_n)begin
   if(~reset_n)begin
-    Trigger_Cnt <= 7'b0;
+    Trigger_Cnt <= 7'd40;
     Trigger <= 1'b1;
   end
   else if(Trigger_Cnt == 7'd80)begin

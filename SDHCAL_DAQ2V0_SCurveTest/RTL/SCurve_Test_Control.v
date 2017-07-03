@@ -36,6 +36,8 @@ module SCurve_Test_Control(
     input Ctest_or_Input,//Add by wyu 20170307. When single channel test, this parameter can choose the charge inject from Ctest pin or the input pin
     input [9:0] StartDac,
     input [9:0] EndDac,
+    input [2:0] AsicNumber,
+    input UnmaskAllChannel,
     /*--- Microroc SC Parameter Interface ---*/  
     output reg [63:0] Microroc_CTest_Chn_Out,
     output reg [9:0] Microroc_10bit_DAC_Out,
@@ -84,6 +86,7 @@ module SCurve_Test_Control(
   reg [15:0] SC_Param_Load_Cnt;
   localparam [15:0] SC_PARAM_LOAD_DELAY = 16'd40_000;
   reg [3:0] Wait_Tail_Cnt;
+  reg [2:0] LoadAsicNumberCount;
   always @(posedge Clk or negedge reset_n)begin
     if(~reset_n)begin
       All_Chn_Param <= 64'h0000_0000_0000_0001;
@@ -103,6 +106,7 @@ module SCurve_Test_Control(
       SC_Param_Load_Cnt <= 16'b0;
       Wait_Tail_Cnt <= 4'b0;
       Force_Ext_RAZ <= 1'b0;
+      LoadAsicNumberCount <= 3'b0;
       State <= IDLE;
     end
     else begin
@@ -124,6 +128,7 @@ module SCurve_Test_Control(
             Microroc_Discriminator_Mask <= {192{1'b1}};
             SC_Param_Load_Cnt <= 16'b0;
             Wait_Tail_Cnt <= 4'b0;
+            LoadAsicNumberCount <= 3'b0;
             State <= IDLE;
           end
           else begin
@@ -139,7 +144,13 @@ module SCurve_Test_Control(
         end
         OUT_TEST_CHN_AND_DISCRI_MASK_SC:begin
           usb_data_fifo_wr_en <= 1'b0;
-          if(Single_or_64Chn) begin //Select single channel test and the charge is injected from CTest pin
+          if(UnmaskAllChannel) begin
+            Microroc_CTest_Chn_Out <= (SINGLE_CHN_PARAM_Ctest << SingleTest_Chn);
+            usb_data_fifo_wr_din <= 16'h43ff;
+            Microroc_Discriminator_Mask <= {192{1'b1}};
+            State <= OUT_TEST_CHN_USB;
+          end
+          else if(Single_or_64Chn) begin //Select single channel test and the charge is injected from CTest pin
             Microroc_CTest_Chn_Out <= Ctest_or_Input ? (SINGLE_CHN_PARAM_Ctest << SingleTest_Chn) : CTest_CHN_PARAM_Input;
             usb_data_fifo_wr_din <= {8'h43, 2'b00, SingleTest_Chn};//0x43 in ascii is C   
             Microroc_Discriminator_Mask <= (DISCRIMINATOR_MASK << Discri_Mask_Shift);
@@ -182,9 +193,17 @@ module SCurve_Test_Control(
         end
         LOAD_SC_PARAM:begin
           usb_data_fifo_wr_en <= 1'b0;
-          SC_Param_Load <= 1'b1;
-          Force_Ext_RAZ <= 1'b1;
-          State <= WAIT_LOAD_SC_PARAM_DONE;
+          if(LoadAsicNumberCount < AsicNumber) begin
+            SC_Param_Load <= 1'b1;
+            Force_Ext_RAZ <= 1'b1;
+            LoadAsicNumberCount <= LoadAsicNumberCount + 1'b1;
+            State <= WAIT_LOAD_SC_PARAM_DONE;
+          end
+          else
+          begin
+            LoadAsicNumberCount <= 3'b0;
+            State <= START_SCURVE_TEST;
+          end
         end
         WAIT_LOAD_SC_PARAM_DONE:begin
           SC_Param_Load <= 1'b0;
@@ -195,7 +214,7 @@ module SCurve_Test_Control(
           else if(SC_Param_Load_Cnt == SC_PARAM_LOAD_DELAY)begin            
             Force_Ext_RAZ <= 1'b0;
             SC_Param_Load_Cnt <= 16'b0;
-            State <= START_SCURVE_TEST;
+            State <= LOAD_SC_PARAM;
           end
           else
             State <= WAIT_LOAD_SC_PARAM_DONE;

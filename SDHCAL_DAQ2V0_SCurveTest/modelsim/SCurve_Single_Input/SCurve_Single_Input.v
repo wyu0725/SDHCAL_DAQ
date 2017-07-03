@@ -27,22 +27,16 @@
 module SCurve_Single_Input(
     input Clk,
     input reset_n,
+    input TrigEffi_or_CountEffi,
     input Trigger,
     input CLK_EXT,
     input Test_Start,
     input [15:0] CPT_MAX,
+    input [3:0] TriggerDelay,
     output reg [15:0] CPT_PULSE,
     output reg [15:0] CPT_TRIGGER,
     output reg CPT_DONE
   );
-  //sync the CLK_EXT
-  reg CLK_EXT_sync;
-  always @(posedge Clk or negedge reset_n)begin
-    if(~reset_n)
-      CLK_EXT_sync <= 1'b0;
-    else
-      CLK_EXT_sync <= CLK_EXT;
-  end
   //Catch the rising edge of CLK_EXT
   reg CLK_EXT_reg1;
   reg CLK_EXT_reg2;
@@ -58,39 +52,59 @@ module SCurve_Single_Input(
   end
   wire CLK_EXT_rising;
   assign CLK_EXT_rising = CLK_EXT_reg1&(~CLK_EXT_reg2);
-  //Generate Enable Count signal
-  reg Enable_Count_P;
-  reg Enable_Count_T;
-  always @(posedge Clk or negedge reset_n)begin
-    if(~reset_n) begin
-      Enable_Count_P <= 1'b0;
-      Enable_Count_T <= 1'b0;
-    end
-    else if(Test_Start)begin
-      Enable_Count_P <= 1'b1 & (~CPT_DONE);
-      Enable_Count_T <= CLK_EXT_sync & (~CPT_DONE);
-    end
-    else begin
-      Enable_Count_P <= 1'b0;
-      Enable_Count_T <= 1'b0;
-    end
-  end
+  wire CLK_EXT_falling;
+  assign CLK_EXT_falling = (~CLK_EXT_reg1)&CLK_EXT_reg2;
   //Catch the falling edge of trigger
   reg trigger_reg1;
   reg trigger_reg2;
+  wire Enable_Count_T;
+  wire Trigger_delay;
+  reg [15:0] TriggerShift;
+  always @(posedge Clk or negedge reset_n) begin
+    if(~reset_n)
+      TriggerShift <= {16{1'b1}};
+    else
+      TriggerShift <= {TriggerShift[14:0],Trigger};
+  end
+  assign Trigger_delay = TriggerShift[TriggerDelay];
   always @(posedge Clk or negedge reset_n)begin
     if(~reset_n)begin
       trigger_reg1 <= 1'b1;
       trigger_reg2 <= 1'b1;
     end
     else begin
-      trigger_reg1 <= (Trigger && trigger_reg1) || (~Enable_Count_T);
+      trigger_reg1 <= TrigEffi_or_CountEffi ? ((Trigger_delay && trigger_reg1) || (~Enable_Count_T)) : Trigger_delay;
       trigger_reg2 <= trigger_reg1;
     end
   end
   wire Trigger_Falling;
-  assign Trigger_Falling = (~trigger_reg1)&trigger_reg2; 
+  assign Trigger_Falling = (~trigger_reg1)&trigger_reg2;
+  //Set the trigger delayed
+  /*reg [3:0] TriggerDelayCount;
+  reg TriggerFalling_delay;
+  always @(posedge Clk or negedge reset_n) begin
+    if(~reset_n) begin
+      TriggerDelayCount <= 4'd0;
+      TriggerFalling_delay <= 1'b0;
+    end
+    else if(TriggerDelayCount == TriggerDelay) begin
+      TriggerFalling_delay <= 1'b1;
+      TriggerDelayCount <= 4'd0;
+    end
+    else if(Trigger_Falling || (TriggerDelayCount != 4'd0 && TriggerDelayCount < TriggerDelay)) begin
+      TriggerFalling_delay <= 1'b0;
+      TriggerDelayCount <= TriggerDelayCount + 1'b1;
+    end
+    else begin
+      TriggerFalling_delay <= 1'b0;
+      TriggerDelayCount <= 4'd0;
+    end
+  end*/
+  //Generate Enable Count signal
+  wire Enable_Count_P;
   
+  assign Enable_Count_P = Test_Start & (reset_n) & (~CPT_DONE);
+  assign Enable_Count_T = TrigEffi_or_CountEffi ? (Enable_Count_P & CLK_EXT) : Enable_Count_P;
   //Count PUSLE
   always @(posedge Clk or negedge reset_n)begin
     if(~reset_n)
@@ -124,13 +138,26 @@ module SCurve_Single_Input(
     else
       CPT_Full <= 1'b0;
   end
-  wire CLK_EXT_sync_n = ~CLK_EXT_sync;
-  always @(posedge CLK_EXT_sync_n or negedge reset_n)begin
+  // When the CPT_PULSE is full (CPT_Full is enable), the Enable_Count_T
+  // signal should not disable. Because at the rising edge, CPT_Full is
+  // enbale, at the same time there could come a trigger.
+  /*------  这种方式会报一个错误，CLE_EXT不是从专用时钟管脚输入的------*/
+  /*wire CLK_EXT_n = ~CLK_EXT;
+  always @(posedge CLK_EXT_n or negedge reset_n)begin
     if(~reset_n)
       CPT_DONE <= 1'b0;
     else if(CPT_Full)
       CPT_DONE <= 1'b1;
     else
       CPT_DONE <= 1'b0;
+  end*/
+ always @(posedge Clk or negedge reset_n) begin
+  if(~reset_n) begin
+    CPT_DONE <= 1'b0;
   end
+  else if(CLK_EXT_falling & CPT_Full)
+    CPT_DONE <= 1'b1;
+  else
+    CPT_DONE <= 1'b0;
+ end
 endmodule

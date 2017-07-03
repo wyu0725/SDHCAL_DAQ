@@ -1,7 +1,7 @@
 Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2016.3 (win64) Build 1682563 Mon Oct 10 19:07:27 MDT 2016
-| Date             : Mon Jul 03 11:14:40 2017
+| Date             : Mon Jul 03 20:44:16 2017
 | Host             : WYU running 64-bit major release  (build 9200)
 | Command          : report_power -file FPGA_TOP_power_routed.rpt -pb FPGA_TOP_power_summary_routed.pb -rpx FPGA_TOP_power_routed.rpx
 | Design           : FPGA_TOP
@@ -51,13 +51,13 @@ Table of Contents
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
 | Clocks         |     0.010 |        9 |       --- |             --- |
-| Slice Logic    |     0.005 |     8492 |       --- |             --- |
-|   LUT as Logic |     0.004 |     4184 |     63400 |            6.60 |
-|   Register     |    <0.001 |     3544 |    126800 |            2.79 |
+| Slice Logic    |     0.005 |     8494 |       --- |             --- |
+|   LUT as Logic |     0.004 |     4125 |     63400 |            6.51 |
+|   Register     |    <0.001 |     3584 |    126800 |            2.83 |
 |   CARRY4       |    <0.001 |      114 |     15850 |            0.72 |
-|   F7/F8 Muxes  |    <0.001 |       51 |     63400 |            0.08 |
+|   F7/F8 Muxes  |    <0.001 |       57 |     63400 |            0.09 |
 |   Others       |     0.000 |      174 |       --- |             --- |
-| Signals        |     0.006 |     5990 |       --- |             --- |
+| Signals        |     0.006 |     5983 |       --- |             --- |
 | Block RAM      |     0.001 |      6.5 |       135 |            4.81 |
 | MMCM           |     0.087 |        1 |         6 |           16.67 |
 | I/O            |     0.164 |       93 |       285 |           32.63 |
@@ -72,7 +72,7 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) |
 +-----------+-------------+-----------+-------------+------------+
-| Vccint    |       1.000 |     0.038 |       0.023 |      0.016 |
+| Vccint    |       1.000 |     0.038 |       0.022 |      0.016 |
 | Vccaux    |       1.800 |     0.067 |       0.048 |      0.018 |
 | Vcco33    |       3.300 |     0.007 |       0.003 |      0.004 |
 | Vcco25    |       2.500 |     0.067 |       0.063 |      0.004 |

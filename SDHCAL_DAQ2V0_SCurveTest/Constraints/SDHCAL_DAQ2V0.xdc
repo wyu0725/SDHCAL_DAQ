@@ -194,7 +194,7 @@ set_output_delay -clock [get_clocks Clk_40M] -max -add_delay 12.000 [get_ports R
 set_output_delay -clock [get_clocks Clk_40M] -min -add_delay 2.000 [get_ports RST_COUNTERB]
 set_output_delay -clock [get_clocks Clk_40M] -max -add_delay 12.000 [get_ports RST_COUNTERB]
 set_output_delay -clock [get_clocks Clk_40M] -min -add_delay 2.000 [get_ports SELECT]
-set_output_delay -clock [get_clocks Clk_40M] -max -add_delay 12.000 [get_ports SELECT]
+set_output_delay -clock [get_clocks Clk_40M] -max -add_delay 8.000 [get_ports SELECT]
 set_output_delay -clock [get_clocks VIRTUAL_pll_5] -min -add_delay 6.000 [get_ports SR_CK]
 set_output_delay -clock [get_clocks VIRTUAL_pll_5] -max -add_delay 100.000 [get_ports SR_CK]
 set_output_delay -clock [get_clocks VIRTUAL_pll_5] -min -add_delay 6.000 [get_ports SR_IN]
@@ -338,6 +338,10 @@ set_input_delay -clock [get_clocks Clk_40M] -min -add_delay 12.000 [get_ports AD
 
 set_property PACKAGE_PIN R18 [get_ports TRIGGER_OUT]
 set_property IOSTANDARD LVCMOS33 [get_ports TRIGGER_OUT]
+
+
+
+
 
 
 
