@@ -325,6 +325,14 @@ module SlaveDaq(
       else
         TrigCounter <= TrigCounter;
     end
+    //*** Synchronise
+    reg [23:0] TrigCounter_sync;
+    always @(posedge Clk or negedge reset_n) begin
+      if(~reset_n)
+        TrigCounter_sync <= 24'b0;
+      else
+        TrigCounter_sync <= TrigCounter;
+    end
     //*** Power On Control
     always @(State) begin
       if(State == POWER_ON || State == POWER_ON || State == RELEASE || State == WAIT_START || State == START_ACQUISITION || State == WAIT_READ || State == START_READOUT || State == WAIT_READ || State == WAIT_READ_DONE || State == ONCE_END)
@@ -349,11 +357,11 @@ module SlaveDaq(
         SlaveDaqData_en <= InternalData_en;
       end
       else if(State == OUT_COUNT1) begin
-        SlaveDaqData <= {8'hCC,TrigCounter[23:16]};
+        SlaveDaqData <= {8'hCC,TrigCounter_sync[23:16]};
         SlaveDaqData_en <= InternalData_en;
       end
       else if(State == OUT_COUNT2) begin
-        SlaveDaqData <= TrigCounter[15:0];
+        SlaveDaqData <= TrigCounter_sync[15:0];
         SlaveDaqData_en <= InternalData_en;
       end
       else begin

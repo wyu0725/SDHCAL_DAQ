@@ -1,7 +1,7 @@
 Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 -----------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2016.3 (win64) Build 1682563 Mon Oct 10 19:07:27 MDT 2016
-| Date         : Sun Jul 02 17:12:26 2017
+| Date         : Sun Jul 02 20:56:03 2017
 | Host         : WYU running 64-bit major release  (build 9200)
 | Command      : report_utilization -file FPGA_TOP_utilization_synth.rpt -pb FPGA_TOP_utilization_synth.pb
 | Design       : FPGA_TOP
@@ -33,8 +33,8 @@ Table of Contents
 | Slice LUTs*             | 4298 |     0 |     63400 |  6.78 |
 |   LUT as Logic          | 4298 |     0 |     63400 |  6.78 |
 |   LUT as Memory         |    0 |     0 |     19000 |  0.00 |
-| Slice Registers         | 3266 |     0 |    126800 |  2.58 |
-|   Register as Flip Flop | 3266 |     0 |    126800 |  2.58 |
+| Slice Registers         | 3290 |     0 |    126800 |  2.59 |
+|   Register as Flip Flop | 3290 |     0 |    126800 |  2.59 |
 |   Register as Latch     |    0 |     0 |    126800 |  0.00 |
 | F7 Muxes                |   34 |     0 |     31700 |  0.11 |
 | F8 Muxes                |   17 |     0 |     15850 |  0.11 |
@@ -55,7 +55,7 @@ Table of Contents
 | 0     |            _ |       Reset |            - |
 | 0     |          Yes |           - |            - |
 | 680   |          Yes |           - |          Set |
-| 2537  |          Yes |           - |        Reset |
+| 2561  |          Yes |           - |        Reset |
 | 0     |          Yes |         Set |            - |
 | 49    |          Yes |       Reset |            - |
 +-------+--------------+-------------+--------------+
@@ -150,7 +150,7 @@ Table of Contents
 +------------+------+---------------------+
 |  Ref Name  | Used | Functional Category |
 +------------+------+---------------------+
-| FDCE       | 2537 |        Flop & Latch |
+| FDCE       | 2561 |        Flop & Latch |
 | LUT6       | 2100 |                 LUT |
 | LUT5       |  818 |                 LUT |
 | FDPE       |  680 |        Flop & Latch |
