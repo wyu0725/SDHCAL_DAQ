@@ -75,6 +75,7 @@ module Controller_Top(
     input CTestOrInput,
     input [15:0] CPT_MAX,
     input [15:0] CounterMax,
+    input [3:0] TriggerDelay,
     output ForceExtRaz,
     // Pin
     input CLK_EXT,
@@ -232,6 +233,7 @@ module Controller_Top(
       .Counter_MAX(CounterMax),
       .StartDac(StartDac),
       .EndDac(EndDac),
+      .TriggerDelay(TriggerDelay),
       //--- USB Data FIFO Interface ---
       //.usb_data_fifo_full(),
       .usb_data_fifo_wr_en(SCTestData_en),

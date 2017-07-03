@@ -83,6 +83,7 @@ module usb_command_interpreter(
       output reg CTest_or_Input,
       output reg [5:0] SingleTest_Chn,
       output reg [15:0] CPT_MAX,
+      output reg [3:0] TriggerDelay,
       output reg SweepTestStartStop,
       // Count Efficirncy
       output reg TrigEffi_or_CountEffi,
@@ -1219,6 +1220,14 @@ always @(posedge clk or negedge reset_n) begin
     EndHoldTime[15:12] <= USB_COMMAND[3:0];
   else
     EndHoldTime <= EndHoldTime;
+end
+always @(posedge clk or negedge reset_n) begin
+  if(~reset_n)
+    TriggerDelay <= 4'd0;
+  else if(fifo_rden && USB_COMMAND[15:4] == 12'hE90)
+    TriggerDelay <= USB_COMMAND[3:0];
+  else
+    TriggerDelay <= TriggerDelay;
 end
 //Swap the LSB and MSB
   function [9:0] Invert_10bit(input [9:0] num);

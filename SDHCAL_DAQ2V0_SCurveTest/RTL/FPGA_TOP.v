@@ -180,6 +180,7 @@ module FPGA_TOP(
     wire [7:0] UsbAdcDataNumber;
     wire [15:0] UsbEndHoldTime;
     wire UsbDaqSelect;
+    wire [3:0] UsbTriggerDelay;
     usb_command_interpreter usb_control
     (
       .IFCLK(IFCLK),
@@ -242,6 +243,7 @@ module FPGA_TOP(
       .CTest_or_Input(CTestOrInput),
       .SingleTest_Chn(SingleTestChannel),
       .CPT_MAX(CPT_MAX),
+      .TriggerDelay(UsbTriggerDelay),
       .SweepTestStartStop(SweepTestStartStop),
       //Count Efficiency
       .TrigEffi_or_CountEffi(TrigEffiOrCountEffi),
@@ -607,6 +609,7 @@ module FPGA_TOP(
       .CTestOrInput(CTestOrInput),
       .CPT_MAX(CPT_MAX),
       .CounterMax(CounterMax),
+      .TriggerDelay(UsbTriggerDelay),
       .ForceExtRaz(ForceExtRaz),
       //*** Pin
       .CLK_EXT(CLK_EXT),

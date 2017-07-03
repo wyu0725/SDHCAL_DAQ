@@ -35,6 +35,7 @@ module SCurve_Test_Top(
     input [15:0] Counter_MAX,
     input [9:0] StartDac,
     input [9:0] EndDac,
+    input [3:0] TriggerDelay,
     /*--- USB Data FIFO Interface ---*/
     //input usb_data_fifo_full,
     output usb_data_fifo_wr_en,
@@ -149,6 +150,7 @@ module SCurve_Test_Top(
       .out_trigger2b(out_trigger2b),
       .SCurve_Test_Start(Single_Test_Start),
       .CPT_MAX(CPT_MAX_Gen),
+      .TriggerDelay(TriggerDelay),
       .SCurve_Data(SCurve_Data),
       .SCurve_Data_wr_en(SCurve_Data_wr_en),
       .One_Channel_Done(Single_Test_Done)

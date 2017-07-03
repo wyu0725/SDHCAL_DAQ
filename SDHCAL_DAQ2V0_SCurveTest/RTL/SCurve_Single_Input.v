@@ -32,6 +32,7 @@ module SCurve_Single_Input(
     input CLK_EXT,
     input Test_Start,
     input [15:0] CPT_MAX,
+    input [3:0] TriggerDelay,
     output reg [15:0] CPT_PULSE,
     output reg [15:0] CPT_TRIGGER,
     output reg CPT_DONE
@@ -67,7 +68,28 @@ module SCurve_Single_Input(
     end
   end
   wire Trigger_Falling;
-  assign Trigger_Falling = (~trigger_reg1)&trigger_reg2; 
+  assign Trigger_Falling = (~trigger_reg1)&trigger_reg2;
+  //Set the trigger delayed
+  reg [3:0] TriggerDelayCount;
+  reg TriggerFalling_delay;
+  always @(posedge Clk or negedge reset_n) begin
+    if(~reset_n) begin
+      TriggerDelayCount <= 4'd0;
+      TriggerFalling_delay <= 1'b0;
+    end
+    else if(TriggerDelayCount == TriggerDelay) begin
+      TriggerFalling_delay <= 1'b1;
+      TriggerDelayCount <= 4'd0;
+    end
+    else if(Trigger_Falling || (TriggerDelayCount != 4'd0 && TriggerDelayCount < TriggerDelay)) begin
+      TriggerFalling_delay <= 1'b0;
+      TriggerDelayCount <= TriggerDelayCount + 1'b1;
+    end
+    else begin
+      TriggerFalling_delay <= 1'b0;
+      TriggerDelayCount <= 4'd0;
+    end
+  end
   //Generate Enable Count signal
   wire Enable_Count_P;
   wire Enable_Count_T;
@@ -90,7 +112,7 @@ module SCurve_Single_Input(
       CPT_TRIGGER <= 16'b0;
     else if(~Enable_Count_T)
       CPT_TRIGGER <= CPT_TRIGGER;
-    else if(Trigger_Falling)
+    else if(TriggerFalling_delay)
       CPT_TRIGGER <= CPT_TRIGGER + 1'b1;
     else
       CPT_TRIGGER <= CPT_TRIGGER;

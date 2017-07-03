@@ -30,6 +30,7 @@ module SCurve_Single_Test(
     input out_trigger2b,
     input SCurve_Test_Start,
     input [15:0] CPT_MAX,
+    input [3:0] TriggerDelay,
 
     output reg [15:0] SCurve_Data,
     output reg SCurve_Data_wr_en,
@@ -55,6 +56,7 @@ module SCurve_Single_Test(
       .CLK_EXT(CLK_EXT),
       .Test_Start(Single_Chn_Test_Start),
       .CPT_MAX(CPT_MAX),
+      .TriggerDelay(TriggerDelay),
       .CPT_PULSE(CPT_PULSE_trigger0),
       .CPT_TRIGGER(CPT_TRIGGER0),
       .CPT_DONE(CPT_DONE_trigger0)
@@ -67,6 +69,7 @@ module SCurve_Single_Test(
       .CLK_EXT(CLK_EXT),
       .Test_Start(Single_Chn_Test_Start),
       .CPT_MAX(CPT_MAX),
+      .TriggerDelay(TriggerDelay),
       .CPT_PULSE(CPT_PULSE_trigger1),
       .CPT_TRIGGER(CPT_TRIGGER1),
       .CPT_DONE(CPT_DONE_trigger1)
@@ -79,6 +82,7 @@ module SCurve_Single_Test(
       .CLK_EXT(CLK_EXT),
       .Test_Start(Single_Chn_Test_Start),
       .CPT_MAX(CPT_MAX),
+      .TriggerDelay(TriggerDelay),
       .CPT_PULSE(CPT_PULSE_trigger2),
       .CPT_TRIGGER(CPT_TRIGGER2),
       .CPT_DONE(CPT_DONE_trigger2)
