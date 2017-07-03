@@ -164,6 +164,10 @@
                                 <TextBox x:Name="txtStartDac" HorizontalAlignment="Left" Height="24" Margin="260,90,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="50" Grid.Column="2" />
                                 <TextBox x:Name="txtEndDac" HorizontalAlignment="Left" Height="24" Margin="260,120,0,0" TextWrapping="Wrap" Text="1023" VerticalAlignment="Top" Width="50" Grid.Column="2"/>
                                 <Button x:Name="btnSweepTestStart" Content="Sweep Test start" HorizontalAlignment="Left" Margin="190,150,0,0" VerticalAlignment="Top" Width="100" Height="24" Click="btnSweepTestStart_Click"/>
+                                <ComboBox x:Name="cbxUnmaskAllChannel" HorizontalAlignment="Left" Margin="320,90,0,0" VerticalAlignment="Top" Width="60" >
+                                    <ComboBoxItem Content="Mask" IsSelected="True"/>
+                                    <ComboBoxItem Content="Unmask"/>
+                                </ComboBox>
                             </Grid>
                         </GroupBox>
                         <GroupBox x:Name="gbxAD9220" Header="AD9220" HorizontalAlignment="Left" Margin="565,10,0,0" VerticalAlignment="Top" Width="155" Height="126">
@@ -222,10 +226,11 @@
                         </ComboBox>
                         <Button x:Name="btnSet_Hold" Content="SET HOLD" HorizontalAlignment="Left" Margin="595,30,0,0" VerticalAlignment="Top" Width="76" Height="24" Click="btnSet_Hold_Click"/>
                         <Label x:Name="lblPower_Pulsing" Content="Powerpulsing" HorizontalAlignment="Left" Margin="603,60,0,0" VerticalAlignment="Top" Height="24" Width="90"/>
-                        <StackPanel HorizontalAlignment="Left" Height="30" Margin="693,55,0,0" VerticalAlignment="Top" Width="70">
+                        <StackPanel HorizontalAlignment="Left" Height="30" Margin="693,60,0,0" VerticalAlignment="Top" Width="70">
                             <RadioButton GroupName="PP_En_Dis" Checked="PowerPulsing_Checked" Content="Enable"/>
                             <RadioButton GroupName="PP_En_Dis" Checked="PowerPulsing_Checked" Content="Disable"/>
                         </StackPanel>
+                        
                         <Label x:Name="lblOUT_TH" Content="OUT TH:" HorizontalAlignment="Left" Margin="200,61,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.806,0.942" Height="24" Width="60"/>
                         <ComboBox x:Name="cbxOut_th" HorizontalAlignment="Left" Margin="280,60,0,0" VerticalAlignment="Top" Width="75" Height="24">
                             <ComboBoxItem Content="ASIC 1" IsSelected="True"/>

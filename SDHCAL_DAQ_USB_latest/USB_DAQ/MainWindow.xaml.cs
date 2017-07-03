@@ -2611,6 +2611,21 @@ namespace USB_DAQ
                         return;
                     }
                     #endregion
+                    #region Set Unmask
+                    int UnmaskAllChannel = cbxUnmaskAllChannel.SelectedIndex + 16;//0x10;
+                    CommandBytes = ConstCommandByteArray(0xE9, (byte)UnmaskAllChannel);
+                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                    if(bResult)
+                    {
+                        report = string.Format("Set All channel {0}\n", cbxUnmaskAllChannel.Text);
+                        txtReport.AppendText(report);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Set Trigger Delay failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+                    #endregion
                     #region Trig Mode
                     //--- Trig Mode ---//
                     if (SCurveMode == Trig)
