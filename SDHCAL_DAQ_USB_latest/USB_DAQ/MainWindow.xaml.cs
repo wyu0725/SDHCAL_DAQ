@@ -2532,7 +2532,7 @@ namespace USB_DAQ
                 int EndDac = int.Parse(txtEndDac.Text);
                 #region SCurve
                 if (DataAcqMode == SCTest)
-                {
+                {                    
                     #region Set Single Test Channel
                     bool IsSCurveChannelLegal = rxInt.IsMatch(txtSingleTest_Chn.Text) && (int.Parse(txtSingleTest_Chn.Text) <= 64);
                     if (IsSCurveChannelLegal)
@@ -2585,6 +2585,30 @@ namespace USB_DAQ
                     else
                     {
                         MessageBox.Show("Set charge inject method failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    #endregion
+                    #region Set Trigger Delay
+                    bool IsTriggerDelayLegal = rxInt.IsMatch(txtTriggerDelay.Text) && int.Parse(txtTriggerDelay.Text) < 400;
+                    int TriggerDelayValue;
+                    if (IsTriggerDelayLegal)
+                    {
+                        TriggerDelayValue = int.Parse(txtTriggerDelay.Text) / 25;
+                    }
+                    else
+                    {
+                        TriggerDelayValue = 0;
+                    }
+                    CommandBytes = ConstCommandByteArray(0xE9, (byte)TriggerDelayValue);
+                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                    if(bResult)
+                    {
+                        report = string.Format("Set Trigger Delay {0}\n", TriggerDelayValue * 25);
+                        txtReport.AppendText(report);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Set Trigger Delay failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
                     }
                     #endregion
                     #region Trig Mode

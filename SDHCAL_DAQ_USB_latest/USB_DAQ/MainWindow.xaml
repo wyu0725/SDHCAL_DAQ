@@ -189,7 +189,7 @@
                     </Grid>
 
                 </GroupBox>
-                <GroupBox x:Name="gbxAcqParameter" Header="ACQ Parameter" HorizontalAlignment="Left" Height="110" Margin="0,350,0,0" VerticalAlignment="Top" Width="687">
+                <GroupBox x:Name="gbxAcqParameter" Header="ACQ Parameter" HorizontalAlignment="Left" Height="110" Margin="0,350,0,0" VerticalAlignment="Top" Width="775">
                     <Grid Margin="0,0,0,0">
                         <Label x:Name="lblExternal_RAZ_Delay" Content="External RAZ Delay" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="120" Height="24"/>
                         <TextBox x:Name="txtExternal_RAZ_Delay" HorizontalAlignment="Left" Height="24" Margin="120,0,0,0" TextWrapping="Wrap" Text="200" VerticalAlignment="Top" Width="75"/>
@@ -221,8 +221,8 @@
                             <ComboBoxItem Content="Enable"/>
                         </ComboBox>
                         <Button x:Name="btnSet_Hold" Content="SET HOLD" HorizontalAlignment="Left" Margin="595,30,0,0" VerticalAlignment="Top" Width="76" Height="24" Click="btnSet_Hold_Click"/>
-                        <Label x:Name="lblPower_Pulsing" Content="Powerpulsing" HorizontalAlignment="Left" Margin="440,60,0,0" VerticalAlignment="Top" Height="24" Width="90"/>
-                        <StackPanel HorizontalAlignment="Left" Height="30" Margin="530,60,0,0" VerticalAlignment="Top" Width="70">
+                        <Label x:Name="lblPower_Pulsing" Content="Powerpulsing" HorizontalAlignment="Left" Margin="603,60,0,0" VerticalAlignment="Top" Height="24" Width="90"/>
+                        <StackPanel HorizontalAlignment="Left" Height="30" Margin="693,55,0,0" VerticalAlignment="Top" Width="70">
                             <RadioButton GroupName="PP_En_Dis" Checked="PowerPulsing_Checked" Content="Enable"/>
                             <RadioButton GroupName="PP_En_Dis" Checked="PowerPulsing_Checked" Content="Disable"/>
                         </StackPanel>
@@ -236,6 +236,8 @@
                         <Button x:Name="btnOut_th_set" Content="Set" HorizontalAlignment="Left" Margin="360,60,0,0" VerticalAlignment="Top" Width="75" Height="24" Click="btnOut_th_set_Click"/>
                         <Button x:Name="btnTRIG_EXT_EN" Content="TRIG EXT" HorizontalAlignment="Left" Margin="280,30,0,0" VerticalAlignment="Top" Width="75" Height="24" Click="btnTRIG_EXT_EN_Click"/>
                         <Button x:Name="btnReset_cntb" Content="Reset cntb" HorizontalAlignment="Left" Margin="360,30,0,0" VerticalAlignment="Top" Width="76" Height="24" Click="btnReset_cntb_Click"/>
+                        <Label x:Name="lblTriggerDelay" Content="TriggerDelay" HorizontalAlignment="Left" Margin="450,60,0,0" VerticalAlignment="Top"/>
+                        <TextBox x:Name="txtTriggerDelay" HorizontalAlignment="Left" Height="24" Margin="540,60,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="60"/>
 
 
 
@@ -487,20 +489,20 @@
                                 </ComboBox>
                             </Grid>
                         </GroupBox>
+                        <Label x:Name="lblACQ_or_SCTest" Content="Mode Select" HorizontalAlignment="Left" VerticalAlignment="Top" Height="24" RenderTransformOrigin="4.713,0.917" Margin="670,220,0,0"/>
+                        <StackPanel HorizontalAlignment="Left" Height="60" Margin="675,249,0,0" VerticalAlignment="Top" Width="90">
+                            <RadioButton GroupName="ACQ_or_SCTest" Checked="ModeSelectChecked" Content="ACQ"/>
+                            <RadioButton GroupName="ACQ_or_SCTest" Checked="ModeSelectChecked" Content="SCTest"/>
+                            <RadioButton GroupName="ACQ_or_SCTest" Checked="ModeSelectChecked" Content="SweepACQ"/>
+                            <RadioButton GroupName="ACQ_or_SCTest" Checked="ModeSelectChecked" Content="AD9220"/>
+                            <!--RadioButton x:Name="radioButton" Content="RadioButton"/>
+                    <RadioButton x:Name="radioButton1" Content="RadioButton"/-->
+                        </StackPanel>
 
 
                     </Grid>
                 </GroupBox>
-
-                <Label x:Name="lblACQ_or_SCTest" Content="Mode Select" HorizontalAlignment="Left" VerticalAlignment="Top" Height="24" RenderTransformOrigin="4.713,0.917" Margin="692,360,0,0"/>
-                <StackPanel HorizontalAlignment="Left" Height="60" Margin="692,385,0,0" VerticalAlignment="Top" Width="90">
-                    <RadioButton GroupName="ACQ_or_SCTest" Checked="ModeSelectChecked" Content="ACQ"/>
-                    <RadioButton GroupName="ACQ_or_SCTest" Checked="ModeSelectChecked" Content="SCTest"/>
-                    <RadioButton GroupName="ACQ_or_SCTest" Checked="ModeSelectChecked" Content="SweepACQ"/>
-                    <RadioButton GroupName="ACQ_or_SCTest" Checked="ModeSelectChecked" Content="AD9220"/>
-                    <!--RadioButton x:Name="radioButton" Content="RadioButton"/>
-                    <RadioButton x:Name="radioButton1" Content="RadioButton"/-->
-                </StackPanel>
+                
 
 
             </Grid>
