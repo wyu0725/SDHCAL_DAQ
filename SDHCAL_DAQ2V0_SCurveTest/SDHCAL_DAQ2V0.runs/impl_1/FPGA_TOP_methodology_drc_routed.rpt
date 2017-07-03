@@ -1,0 +1,468 @@
+Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
+-----------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2016.3 (win64) Build 1682563 Mon Oct 10 19:07:27 MDT 2016
+| Date         : Mon Jul 03 08:53:50 2017
+| Host         : WYU running 64-bit major release  (build 9200)
+| Command      : report_methodology -file FPGA_TOP_methodology_drc_routed.rpt -rpx FPGA_TOP_methodology_drc_routed.rpx
+| Design       : FPGA_TOP
+| Device       : xc7a100tfgg484-2
+| Speed File   : -2
+| Design State : Routed
+-----------------------------------------------------------------------------------------------------------------------
+
+Report Methodology
+
+Table of Contents
+-----------------
+1. REPORT SUMMARY
+2. REPORT DETAILS
+
+1. REPORT SUMMARY
+-----------------
+            Netlist: netlist
+          Floorplan: design_1
+      Design limits: <entire design considered>
+             Max violations: <unlimited>
+             Violations found: 83
++-----------+----------+------------------------------------------------------+------------+
+| Rule      | Severity | Description                                          | Violations |
++-----------+----------+------------------------------------------------------+------------+
+| TIMING-3  | Warning  | Invalid primary clock on Clock Modifying Block       | 1          |
+| TIMING-6  | Warning  | No common primary clock between related clocks       | 2          |
+| TIMING-9  | Warning  | Unknown CDC Logic                                    | 1          |
+| TIMING-14 | Warning  | LUT on the clock tree                                | 2          |
+| TIMING-17 | Warning  | Non-clocked sequential cell                          | 37         |
+| TIMING-18 | Warning  | Missing input or output delay                        | 29         |
+| TIMING-24 | Warning  | Overridden Max delay datapath only                   | 4          |
+| TIMING-28 | Warning  | Auto-derived clock referenced by a timing constraint | 2          |
+| XDCH-2    | Warning  | Same min and max delay values on IO port             | 5          |
++-----------+----------+------------------------------------------------------+------------+
+
+2. REPORT DETAILS
+-----------------
+TIMING-3#1 Warning
+Invalid primary clock on Clock Modifying Block  
+A primary clock Clk_320M is created on the output pin or net Clk_Gen/MMCME2_BASE_inst/CLKOUT3 of a Clock Modifying Block
+Related violations: <none>
+
+TIMING-6#1 Warning
+No common primary clock between related clocks  
+The clocks Clk_320M and pll_40 are related (timed together) but they have no common primary clock. The design could fail in hardware. To find a timing path between these clocks, run the following command: report_timing -from [get_clocks Clk_320M] -to [get_clocks pll_40]
+Related violations: <none>
+
+TIMING-6#2 Warning
+No common primary clock between related clocks  
+The clocks pll_40 and Clk_320M are related (timed together) but they have no common primary clock. The design could fail in hardware. To find a timing path between these clocks, run the following command: report_timing -from [get_clocks pll_40] -to [get_clocks Clk_320M]
+Related violations: <none>
+
+TIMING-9#1 Warning
+Unknown CDC Logic  
+One or more asynchronous Clock Domain Crossing has been detected between 2 clock domains through a set_false_path or a set_clock_groups or set_max_delay -datapath_only constraint but no double-registers logic synchronizer has been found on the side of the capture clock. It is recommended to run report_cdc for a complete and detailed CDC coverage
+Related violations: <none>
+
+TIMING-14#1 Warning
+LUT on the clock tree  
+The LUT usbcmdfifo_16depth_i_2 has been found on the clock tree. Run opt_design to optimize the clock trees, then re-run report_methodology. If LUT(s) are still present in the clock trees, modify the RTL or the synthesis options accordingly to move the clock gating logic to dedicated clock enable resources. Keep in mind that post-opt_design database cannot be used for pin-planning tasks
+Related violations: <none>
+
+TIMING-14#2 Warning
+LUT on the clock tree  
+The LUT usbcmdfifo_16depth_i_3 has been found on the clock tree. Run opt_design to optimize the clock trees, then re-run report_methodology. If LUT(s) are still present in the clock trees, modify the RTL or the synthesis options accordingly to move the clock gating logic to dedicated clock enable resources. Keep in mind that post-opt_design database cannot be used for pin-planning tasks
+Related violations: <none>
+
+TIMING-17#1 Warning
+Non-clocked sequential cell  
+The clock pin Microroc_Control/AD9220/AdcDataCount_reg[0]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#2 Warning
+Non-clocked sequential cell  
+The clock pin Microroc_Control/AD9220/AdcDataCount_reg[1]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#3 Warning
+Non-clocked sequential cell  
+The clock pin Microroc_Control/AD9220/AdcDataCount_reg[2]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#4 Warning
+Non-clocked sequential cell  
+The clock pin Microroc_Control/AD9220/AdcDataCount_reg[3]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#5 Warning
+Non-clocked sequential cell  
+The clock pin Microroc_Control/AD9220/AdcDataCount_reg[4]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#6 Warning
+Non-clocked sequential cell  
+The clock pin Microroc_Control/AD9220/AdcDataCount_reg[5]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#7 Warning
+Non-clocked sequential cell  
+The clock pin Microroc_Control/AD9220/AdcDataCount_reg[6]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#8 Warning
+Non-clocked sequential cell  
+The clock pin Microroc_Control/AD9220/AdcDataCount_reg[7]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#9 Warning
+Non-clocked sequential cell  
+The clock pin Microroc_Control/AD9220/DataDiscardCount_reg[0]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#10 Warning
+Non-clocked sequential cell  
+The clock pin Microroc_Control/AD9220/DataDiscardCount_reg[1]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#11 Warning
+Non-clocked sequential cell  
+The clock pin Microroc_u1/HoldGenerator/HoldOut_reg/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#12 Warning
+Non-clocked sequential cell  
+The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/START_ACQ_reg/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#13 Warning
+Non-clocked sequential cell  
+The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[0]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#14 Warning
+Non-clocked sequential cell  
+The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[10]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#15 Warning
+Non-clocked sequential cell  
+The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[11]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#16 Warning
+Non-clocked sequential cell  
+The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[12]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#17 Warning
+Non-clocked sequential cell  
+The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[13]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#18 Warning
+Non-clocked sequential cell  
+The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[14]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#19 Warning
+Non-clocked sequential cell  
+The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[15]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#20 Warning
+Non-clocked sequential cell  
+The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[16]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#21 Warning
+Non-clocked sequential cell  
+The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[17]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#22 Warning
+Non-clocked sequential cell  
+The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[18]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#23 Warning
+Non-clocked sequential cell  
+The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[19]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#24 Warning
+Non-clocked sequential cell  
+The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[1]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#25 Warning
+Non-clocked sequential cell  
+The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[20]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#26 Warning
+Non-clocked sequential cell  
+The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[21]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#27 Warning
+Non-clocked sequential cell  
+The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[22]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#28 Warning
+Non-clocked sequential cell  
+The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[23]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#29 Warning
+Non-clocked sequential cell  
+The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[2]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#30 Warning
+Non-clocked sequential cell  
+The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[3]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#31 Warning
+Non-clocked sequential cell  
+The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[4]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#32 Warning
+Non-clocked sequential cell  
+The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[5]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#33 Warning
+Non-clocked sequential cell  
+The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[6]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#34 Warning
+Non-clocked sequential cell  
+The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[7]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#35 Warning
+Non-clocked sequential cell  
+The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[8]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#36 Warning
+Non-clocked sequential cell  
+The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[9]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#37 Warning
+Non-clocked sequential cell  
+The clock pin Microroc_u1/MicrorocDaq/SlaveDaq_UsbStartStop_reg/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-18#1 Warning
+Missing input or output delay  
+An input delay is missing on CLK_EXT relative to clock(s) Clk_40M 
+Related violations: <none>
+
+TIMING-18#2 Warning
+Missing input or output delay  
+An input delay is missing on OUT_TRIG0B relative to clock(s) Clk_40M 
+Related violations: <none>
+
+TIMING-18#3 Warning
+Missing input or output delay  
+An input delay is missing on OUT_TRIG1B relative to clock(s) Clk_40M 
+Related violations: <none>
+
+TIMING-18#4 Warning
+Missing input or output delay  
+An input delay is missing on OUT_TRIG2B relative to clock(s) Clk_40M 
+Related violations: <none>
+
+TIMING-18#5 Warning
+Missing input or output delay  
+An input delay is missing on usb_fd[0] relative to clock(s) usb_clkout 
+Related violations: <none>
+
+TIMING-18#6 Warning
+Missing input or output delay  
+An input delay is missing on usb_fd[10] relative to clock(s) usb_clkout 
+Related violations: <none>
+
+TIMING-18#7 Warning
+Missing input or output delay  
+An input delay is missing on usb_fd[11] relative to clock(s) usb_clkout 
+Related violations: <none>
+
+TIMING-18#8 Warning
+Missing input or output delay  
+An input delay is missing on usb_fd[12] relative to clock(s) usb_clkout 
+Related violations: <none>
+
+TIMING-18#9 Warning
+Missing input or output delay  
+An input delay is missing on usb_fd[13] relative to clock(s) usb_clkout 
+Related violations: <none>
+
+TIMING-18#10 Warning
+Missing input or output delay  
+An input delay is missing on usb_fd[14] relative to clock(s) usb_clkout 
+Related violations: <none>
+
+TIMING-18#11 Warning
+Missing input or output delay  
+An input delay is missing on usb_fd[15] relative to clock(s) usb_clkout 
+Related violations: <none>
+
+TIMING-18#12 Warning
+Missing input or output delay  
+An input delay is missing on usb_fd[1] relative to clock(s) usb_clkout 
+Related violations: <none>
+
+TIMING-18#13 Warning
+Missing input or output delay  
+An input delay is missing on usb_fd[2] relative to clock(s) usb_clkout 
+Related violations: <none>
+
+TIMING-18#14 Warning
+Missing input or output delay  
+An input delay is missing on usb_fd[3] relative to clock(s) usb_clkout 
+Related violations: <none>
+
+TIMING-18#15 Warning
+Missing input or output delay  
+An input delay is missing on usb_fd[4] relative to clock(s) usb_clkout 
+Related violations: <none>
+
+TIMING-18#16 Warning
+Missing input or output delay  
+An input delay is missing on usb_fd[5] relative to clock(s) usb_clkout 
+Related violations: <none>
+
+TIMING-18#17 Warning
+Missing input or output delay  
+An input delay is missing on usb_fd[6] relative to clock(s) usb_clkout 
+Related violations: <none>
+
+TIMING-18#18 Warning
+Missing input or output delay  
+An input delay is missing on usb_fd[7] relative to clock(s) usb_clkout 
+Related violations: <none>
+
+TIMING-18#19 Warning
+Missing input or output delay  
+An input delay is missing on usb_fd[8] relative to clock(s) usb_clkout 
+Related violations: <none>
+
+TIMING-18#20 Warning
+Missing input or output delay  
+An input delay is missing on usb_fd[9] relative to clock(s) usb_clkout 
+Related violations: <none>
+
+TIMING-18#21 Warning
+Missing input or output delay  
+An output delay is missing on ADC_CLK relative to clock(s) Clk_40M 
+Related violations: <none>
+
+TIMING-18#22 Warning
+Missing input or output delay  
+An output delay is missing on ADG804_Addr[0] relative to clock(s) Clk_40M 
+Related violations: <none>
+
+TIMING-18#23 Warning
+Missing input or output delay  
+An output delay is missing on ADG804_Addr[1] relative to clock(s) Clk_40M 
+Related violations: <none>
+
+TIMING-18#24 Warning
+Missing input or output delay  
+An output delay is missing on ADG819_Addr relative to clock(s) Clk_40M 
+Related violations: <none>
+
+TIMING-18#25 Warning
+Missing input or output delay  
+An output delay is missing on TP[0] relative to clock(s) Clk_40M VIRTUAL_pll_5 
+Related violations: <none>
+
+TIMING-18#26 Warning
+Missing input or output delay  
+An output delay is missing on TP[1] relative to clock(s) Clk_40M VIRTUAL_pll_5 
+Related violations: <none>
+
+TIMING-18#27 Warning
+Missing input or output delay  
+An output delay is missing on TP[2] relative to clock(s) Clk_40M VIRTUAL_pll_5 
+Related violations: <none>
+
+TIMING-18#28 Warning
+Missing input or output delay  
+An output delay is missing on TP[3] relative to clock(s) Clk_40M VIRTUAL_pll_5 
+Related violations: <none>
+
+TIMING-18#29 Warning
+Missing input or output delay  
+An output delay is missing on TRIGGER_OUT relative to clock(s) Clk_40M 
+Related violations: <none>
+
+TIMING-24#1 Warning
+Overridden Max delay datapath only  
+A set_clock_groups or a set_false path (see constraint position 79 in the Timing Constraints window in Vivado IDE) between clocks pll_40 and usb_clkout overrides a set_max_delay -datapath_only (position 92). It is not recommended to override a set_max_delay -datapath_only constraint. Replace the set_clock_groups or set_false_path between clocks with point-to-point set_false_path constraints
+Related violations: <none>
+
+TIMING-24#2 Warning
+Overridden Max delay datapath only  
+A set_clock_groups or a set_false path (see constraint position 79 in the Timing Constraints window in Vivado IDE) between clocks pll_40 and usb_clkout overrides a set_max_delay -datapath_only (position 98). It is not recommended to override a set_max_delay -datapath_only constraint. Replace the set_clock_groups or set_false_path between clocks with point-to-point set_false_path constraints
+Related violations: <none>
+
+TIMING-24#3 Warning
+Overridden Max delay datapath only  
+A set_clock_groups or a set_false path (see constraint position 79 in the Timing Constraints window in Vivado IDE) between clocks usb_clkout and pll_40 overrides a set_max_delay -datapath_only (position 100). It is not recommended to override a set_max_delay -datapath_only constraint. Replace the set_clock_groups or set_false_path between clocks with point-to-point set_false_path constraints
+Related violations: <none>
+
+TIMING-24#4 Warning
+Overridden Max delay datapath only  
+A set_clock_groups or a set_false path (see constraint position 79 in the Timing Constraints window in Vivado IDE) between clocks usb_clkout and pll_40 overrides a set_max_delay -datapath_only (position 90). It is not recommended to override a set_max_delay -datapath_only constraint. Replace the set_clock_groups or set_false_path between clocks with point-to-point set_false_path constraints
+Related violations: <none>
+
+TIMING-28#1 Warning
+Auto-derived clock referenced by a timing constraint  
+The auto-derived clock pll_40 is referenced by name inside timing constraint (see constraint position 78 in the Timing Constraint window in Vivado IDE). It is recommended to reference an auto-derived clock by the pin name attached to the clock: get_clocks -of_objects [get_pins Clk_Gen/MMCME2_BASE_inst/CLKOUT1]
+Related violations: <none>
+
+TIMING-28#2 Warning
+Auto-derived clock referenced by a timing constraint  
+The auto-derived clock pll_40 is referenced by name inside timing constraint (see constraint position 79 in the Timing Constraint window in Vivado IDE). It is recommended to reference an auto-derived clock by the pin name attached to the clock: get_clocks -of_objects [get_pins Clk_Gen/MMCME2_BASE_inst/CLKOUT1]
+Related violations: <none>
+
+XDCH-2#1 Warning
+Same min and max delay values on IO port  
+The same input delay of 0.000 ns has been defined on port 'EXT_TRIGB' relative to clock Clk_320M for both max and min. Make sure this reflects the design intent.
+set_input_delay -clock [get_clocks Clk_320M] -add_delay 0.000 [get_ports EXT_TRIGB]
+D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/Constraints/SDHCAL_DAQ2V0.xdc (Line: 327)
+Related violations: <none>
+
+XDCH-2#2 Warning
+Same min and max delay values on IO port  
+The same input delay of 0.000 ns has been defined on port 'OUT_TRIG0B' relative to clock Clk_320M for both max and min. Make sure this reflects the design intent.
+set_input_delay -clock [get_clocks Clk_320M] -add_delay 0.000 [get_ports OUT_TRIG0B]
+D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/Constraints/SDHCAL_DAQ2V0.xdc (Line: 322)
+Related violations: <none>
+
+XDCH-2#3 Warning
+Same min and max delay values on IO port  
+The same input delay of 0.000 ns has been defined on port 'OUT_TRIG1B' relative to clock Clk_320M for both max and min. Make sure this reflects the design intent.
+set_input_delay -clock [get_clocks Clk_320M] -add_delay 0.000 [get_ports OUT_TRIG1B]
+D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/Constraints/SDHCAL_DAQ2V0.xdc (Line: 323)
+Related violations: <none>
+
+XDCH-2#4 Warning
+Same min and max delay values on IO port  
+The same input delay of 0.000 ns has been defined on port 'OUT_TRIG2B' relative to clock Clk_320M for both max and min. Make sure this reflects the design intent.
+set_input_delay -clock [get_clocks Clk_320M] -add_delay 0.000 [get_ports OUT_TRIG2B]
+D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/Constraints/SDHCAL_DAQ2V0.xdc (Line: 324)
+Related violations: <none>
+
+XDCH-2#5 Warning
+Same min and max delay values on IO port  
+The same output delay of 0.000 ns has been defined on port 'HOLD' relative to clock Clk_320M for both max and min. Make sure this reflects the design intent.
+set_output_delay -clock [get_clocks Clk_320M] -add_delay 0.000 [get_ports HOLD]
+D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/Constraints/SDHCAL_DAQ2V0.xdc (Line: 320)
+Related violations: <none>
+
+
