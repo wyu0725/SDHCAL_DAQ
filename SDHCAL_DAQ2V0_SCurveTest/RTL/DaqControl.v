@@ -41,6 +41,9 @@ module DaqControl(
     output PWR_ON_D,
     output PWR_ON_ADC,
     output PWR_ON_DAC,
+    // Force Raz Signal
+    input SCurveForceExternalRaz,
+    output ForceExternalRaz,
     // Parameters
     input [15:0] AcquisitionTime,
     input [15:0] EndHoldTime,
@@ -90,6 +93,7 @@ module DaqControl(
     wire SlaveDaqData_en;
     wire [15:0] DataToSlaveDaq;
     wire DataToSlaveDaq_en;
+    wire SlaveDaqForceExternalRaz;
     DaqSwitcher DaqModeSelect(
       .DaqSelect(DaqSelect),
       //Power pulsing control
@@ -115,6 +119,10 @@ module DaqControl(
       .CHIPSATB(CHIPSATB),
       .AutoDaq_CHIPSATB(AutoDaq_CHIPSATB),
       .SlaveDaq_CHIPSATB(SlaveDaq_CHIPSATB),
+      // Force External Raz
+      .SCurve_ForceExternalRaz(SCurveForceExternalRaz),
+      .SlaveDaq_ForceExternalRaz(SlaveDaqForceExternalRaz),
+      .ForceExternalRaz(ForceExternalRaz),
       // Start Signal
       .UsbAcqStart(UsbAcqStart),
       .AutoDaq_Start(AutoDaq_Start),
@@ -182,6 +190,7 @@ module DaqControl(
       .EndHoldTime(EndHoldTime),
       .RESET_B(SlaveDaq_RESET_B),
       .START_ACQ(SlaveDaq_START_ACQ),
+      .ForceExternalRaz(SlaveDaqForceExternalRaz),
       .StartReadout(SlaveDaq_StartReadout),
       .PWR_ON_A(SlaveDaq_PWR_ON_A),
       .PWR_ON_D(SlaveDaq_PWR_ON_D),

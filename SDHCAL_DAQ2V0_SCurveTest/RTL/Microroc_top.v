@@ -101,7 +101,7 @@ module Microroc_top(
       //--------Trig_Gen interface---//
       input rst_cntb,
       input Raz_en,
-      input Force_RAZ,
+      input SCurveForceExternalRaz,
       input Trig_en,
       input [1:0] Raz_mode,
       input [3:0] ExternalRazDelayTime,//Set delay time for external raz mode
@@ -313,6 +313,7 @@ wire DataTransmitDone;
 assign DataTransmitDone = ~nPKTEND;
 wire [15:0] MicrorocData;
 wire MicrorocData_en;
+wire ForceExternalRaz;
 DaqControl MicrorocDaq
 (
     .Clk(Clk),         //40M
@@ -329,6 +330,8 @@ DaqControl MicrorocDaq
     .PWR_ON_D(Pwr_on_d),
     .PWR_ON_ADC(Pwr_on_adc),
     .PWR_ON_DAC(Pwr_on_dac),
+    .SCurveForceExternalRaz(SCurveForceExternalRaz),
+    .ForceExternalRaz(ForceExternalRaz),
     .AcquisitionTime(AcqStart_time),
     .EndHoldTime(EndHoldTime),
     .OnceEnd(OnceEnd),
@@ -406,7 +409,7 @@ Trig_Gen Trig_Gen
    .reset_n(reset_n),
    .rst_cntb(rst_cntb),
    .Raz_en(SingleRaz_en),
-   .Force_RAZ(Force_RAZ),
+   .Force_RAZ(ForceExternalRaz),
    .Trig_en(Trig_en_i),//Modefied by wyu for RAM test
    .Raz_mode(Raz_mode),
    .Raz_chn(Raz_chn), //the width of the pulse must be changed according to the chosen peaking time to avoid "re-triggering"

@@ -12,15 +12,15 @@
       <Properties Property="PROGRAM.CFG_PROGRAM" value="1"/>
       <Properties Property="PROGRAM.CHECKSUM" value="1"/>
       <Properties Property="PROGRAM.ERASE" value="1"/>
-      <Properties Property="PROGRAM.FILES" value="MCS/FPGA_TOP_20170703wyu1V6.mcs"/>
-      <Properties Property="PROGRAM.PRM_FILE" value="MCS/FPGA_TOP_20170703wyu1V6.prm"/>
+      <Properties Property="PROGRAM.FILES" value="MCS/FPGA_TOP_20170704wyu1V1.mcs"/>
+      <Properties Property="PROGRAM.PRM_FILE" value="MCS/FPGA_TOP_20170704wyu1V1.prm"/>
       <Properties Property="PROGRAM.UNUSED_PIN_TERMINATION" value="pull-none"/>
       <Properties Property="PROGRAM.VERIFY" value="1"/>
     </Object>
   </ObjectList>
   <ObjectList object_type="hw_device" gui_info="">
     <Object name="xc7a100t_0" gui_info="">
-      <Properties Property="PROBES.FILE" value=""/>
+      <Properties Property="PROBES.FILE" value="$_project_name_.runs/impl_1/debug_nets.ltx"/>
       <Properties Property="PROGRAM.HW_BITSTREAM" value=""/>
       <Properties Property="PROGRAM.HW_CFGMEM_PART" value="n25q128-3.3v-spi-x1_x2_x4"/>
     </Object>
@@ -461,11 +461,28 @@
     <probe type="ila" busType="net" source="netlist" spec="ILA_V2_RT">
       <probeOptions Id="DebugProbeParams">
         <Option Id="CAPTURE_COMPARE_VALUE" value="eq1&apos;bX"/>
+        <Option Id="COMPARE_VALUE.0" value="eq1&apos;bX"/>
+        <Option Id="DISPLAY_HINT" value=""/>
+        <Option Id="DISPLAY_VISIBILITY" value=""/>
+        <Option Id="HW_ILA" value="hw_ila_1"/>
+        <Option Id="MAP" value="probe4[0]"/>
+        <Option Id="NAME.CUSTOM" value=""/>
+        <Option Id="NAME.SELECT" value="Long"/>
+        <Option Id="SOURCE" value="netlist"/>
+        <Option Id="TRIGGER_COMPARE_VALUE" value="eq1&apos;bX"/>
+      </probeOptions>
+      <nets>
+        <net name="Microroc_u1/MicrorocDaq/SlaveDaqControl/InternalData_en_i_1_n_0"/>
+      </nets>
+    </probe>
+    <probe type="ila" busType="net" source="netlist" spec="ILA_V2_RT">
+      <probeOptions Id="DebugProbeParams">
+        <Option Id="CAPTURE_COMPARE_VALUE" value="eq1&apos;bX"/>
         <Option Id="COMPARE_VALUE.0" value="eq1&apos;bR"/>
         <Option Id="DISPLAY_HINT" value=""/>
         <Option Id="DISPLAY_VISIBILITY" value=""/>
         <Option Id="HW_ILA" value="hw_ila_1"/>
-        <Option Id="MAP" value="probe1[0]"/>
+        <Option Id="MAP" value="probe5[0]"/>
         <Option Id="NAME.CUSTOM" value=""/>
         <Option Id="NAME.SELECT" value="Long"/>
         <Option Id="SOURCE" value="netlist"/>
@@ -473,6 +490,54 @@
       </probeOptions>
       <nets>
         <net name="Microroc_u1/MicrorocDaq/SlaveDaqControl/InternalData_en_reg_n_0"/>
+      </nets>
+    </probe>
+    <probe type="ila" busType="bus" source="netlist" spec="ILA_V2_RT">
+      <probeOptions Id="DebugProbeParams">
+        <Option Id="CAPTURE_COMPARE_VALUE" value="eq2&apos;hX"/>
+        <Option Id="COMPARE_VALUE.0" value="eq2&apos;hX"/>
+        <Option Id="DISPLAY_HINT" value=""/>
+        <Option Id="DISPLAY_VISIBILITY" value=""/>
+        <Option Id="HW_ILA" value="hw_ila_1"/>
+        <Option Id="MAP" value="probe0[1:0]"/>
+        <Option Id="NAME.CUSTOM" value=""/>
+        <Option Id="NAME.SELECT" value="Long"/>
+        <Option Id="SOURCE" value="netlist"/>
+        <Option Id="TRIGGER_COMPARE_VALUE" value="eq2&apos;hX"/>
+      </probeOptions>
+      <nets>
+        <net name="Microroc_u1/MicrorocDaq/SlaveDaqControl/MicrorocData[1]"/>
+        <net name="Microroc_u1/MicrorocDaq/SlaveDaqControl/MicrorocData[0]"/>
+      </nets>
+    </probe>
+    <probe type="ila" busType="bus" source="netlist" spec="ILA_V2_RT">
+      <probeOptions Id="DebugProbeParams">
+        <Option Id="CAPTURE_COMPARE_VALUE" value="eq14&apos;hXXXX"/>
+        <Option Id="COMPARE_VALUE.0" value="eq14&apos;hXXXX"/>
+        <Option Id="DISPLAY_HINT" value=""/>
+        <Option Id="DISPLAY_VISIBILITY" value=""/>
+        <Option Id="HW_ILA" value="hw_ila_1"/>
+        <Option Id="MAP" value="probe1[13:0]"/>
+        <Option Id="NAME.CUSTOM" value=""/>
+        <Option Id="NAME.SELECT" value="Long"/>
+        <Option Id="SOURCE" value="netlist"/>
+        <Option Id="TRIGGER_COMPARE_VALUE" value="eq14&apos;hXXXX"/>
+      </probeOptions>
+      <nets>
+        <net name="Microroc_u1/MicrorocDaq/SlaveDaqControl/SlaveDaqData[13]"/>
+        <net name="Microroc_u1/MicrorocDaq/SlaveDaqControl/SlaveDaqData[12]"/>
+        <net name="Microroc_u1/MicrorocDaq/SlaveDaqControl/SlaveDaqData[11]"/>
+        <net name="Microroc_u1/MicrorocDaq/SlaveDaqControl/SlaveDaqData[10]"/>
+        <net name="Microroc_u1/MicrorocDaq/SlaveDaqControl/SlaveDaqData[9]"/>
+        <net name="Microroc_u1/MicrorocDaq/SlaveDaqControl/SlaveDaqData[8]"/>
+        <net name="Microroc_u1/MicrorocDaq/SlaveDaqControl/SlaveDaqData[7]"/>
+        <net name="Microroc_u1/MicrorocDaq/SlaveDaqControl/SlaveDaqData[6]"/>
+        <net name="Microroc_u1/MicrorocDaq/SlaveDaqControl/SlaveDaqData[5]"/>
+        <net name="Microroc_u1/MicrorocDaq/SlaveDaqControl/SlaveDaqData[4]"/>
+        <net name="Microroc_u1/MicrorocDaq/SlaveDaqControl/SlaveDaqData[3]"/>
+        <net name="Microroc_u1/MicrorocDaq/SlaveDaqControl/SlaveDaqData[2]"/>
+        <net name="Microroc_u1/MicrorocDaq/SlaveDaqControl/SlaveDaqData[1]"/>
+        <net name="Microroc_u1/MicrorocDaq/SlaveDaqControl/SlaveDaqData[0]"/>
       </nets>
     </probe>
     <probe type="ila" busType="net" source="netlist" spec="ILA_V2_RT">
@@ -513,6 +578,76 @@
         <net name="Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[2]"/>
         <net name="Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[1]"/>
         <net name="Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[0]"/>
+      </nets>
+    </probe>
+    <probe type="ila" busType="bus" source="netlist" spec="ILA_V2_RT">
+      <probeOptions Id="DebugProbeParams">
+        <Option Id="CAPTURE_COMPARE_VALUE" value="eq24&apos;hXX_XXXX"/>
+        <Option Id="COMPARE_VALUE.0" value="eq24&apos;hXX_XXXX"/>
+        <Option Id="DISPLAY_HINT" value=""/>
+        <Option Id="DISPLAY_VISIBILITY" value=""/>
+        <Option Id="HW_ILA" value="hw_ila_1"/>
+        <Option Id="MAP" value="probe2[23:0]"/>
+        <Option Id="NAME.CUSTOM" value=""/>
+        <Option Id="NAME.SELECT" value="Long"/>
+        <Option Id="SOURCE" value="netlist"/>
+        <Option Id="TRIGGER_COMPARE_VALUE" value="eq24&apos;hXX_XXXX"/>
+      </probeOptions>
+      <nets>
+        <net name="Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_sync[23]"/>
+        <net name="Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_sync[22]"/>
+        <net name="Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_sync[21]"/>
+        <net name="Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_sync[20]"/>
+        <net name="Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_sync[19]"/>
+        <net name="Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_sync[18]"/>
+        <net name="Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_sync[17]"/>
+        <net name="Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_sync[16]"/>
+        <net name="Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_sync[15]"/>
+        <net name="Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_sync[14]"/>
+        <net name="Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_sync[13]"/>
+        <net name="Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_sync[12]"/>
+        <net name="Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_sync[11]"/>
+        <net name="Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_sync[10]"/>
+        <net name="Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_sync[9]"/>
+        <net name="Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_sync[8]"/>
+        <net name="Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_sync[7]"/>
+        <net name="Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_sync[6]"/>
+        <net name="Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_sync[5]"/>
+        <net name="Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_sync[4]"/>
+        <net name="Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_sync[3]"/>
+        <net name="Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_sync[2]"/>
+        <net name="Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_sync[1]"/>
+        <net name="Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_sync[0]"/>
+      </nets>
+    </probe>
+    <probe type="ila" busType="bus" source="netlist" spec="ILA_V2_RT">
+      <probeOptions Id="DebugProbeParams">
+        <Option Id="CAPTURE_COMPARE_VALUE" value="eq14&apos;hXXXX"/>
+        <Option Id="COMPARE_VALUE.0" value="eq14&apos;hXXXX"/>
+        <Option Id="DISPLAY_HINT" value=""/>
+        <Option Id="DISPLAY_VISIBILITY" value=""/>
+        <Option Id="HW_ILA" value="hw_ila_1"/>
+        <Option Id="MAP" value="probe3[13:0]"/>
+        <Option Id="NAME.CUSTOM" value=""/>
+        <Option Id="NAME.SELECT" value="Long"/>
+        <Option Id="SOURCE" value="netlist"/>
+        <Option Id="TRIGGER_COMPARE_VALUE" value="eq14&apos;hXXXX"/>
+      </probeOptions>
+      <nets>
+        <net name="Microroc_u1/MicrorocDaq/SlaveDaqControl/parallel_data_reg[13][13]"/>
+        <net name="Microroc_u1/MicrorocDaq/SlaveDaqControl/parallel_data_reg[13][12]"/>
+        <net name="Microroc_u1/MicrorocDaq/SlaveDaqControl/parallel_data_reg[13][11]"/>
+        <net name="Microroc_u1/MicrorocDaq/SlaveDaqControl/parallel_data_reg[13][10]"/>
+        <net name="Microroc_u1/MicrorocDaq/SlaveDaqControl/parallel_data_reg[13][9]"/>
+        <net name="Microroc_u1/MicrorocDaq/SlaveDaqControl/parallel_data_reg[13][8]"/>
+        <net name="Microroc_u1/MicrorocDaq/SlaveDaqControl/parallel_data_reg[13][7]"/>
+        <net name="Microroc_u1/MicrorocDaq/SlaveDaqControl/parallel_data_reg[13][6]"/>
+        <net name="Microroc_u1/MicrorocDaq/SlaveDaqControl/parallel_data_reg[13][5]"/>
+        <net name="Microroc_u1/MicrorocDaq/SlaveDaqControl/parallel_data_reg[13][4]"/>
+        <net name="Microroc_u1/MicrorocDaq/SlaveDaqControl/parallel_data_reg[13][3]"/>
+        <net name="Microroc_u1/MicrorocDaq/SlaveDaqControl/parallel_data_reg[13][2]"/>
+        <net name="Microroc_u1/MicrorocDaq/SlaveDaqControl/parallel_data_reg[13][1]"/>
+        <net name="Microroc_u1/MicrorocDaq/SlaveDaqControl/parallel_data_reg[13][0]"/>
       </nets>
     </probe>
     <probe type="ila" busType="net" source="netlist" spec="ILA_V2_RT">

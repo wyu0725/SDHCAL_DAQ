@@ -78,6 +78,7 @@ module usb_command_interpreter(
       // Test Dac
       output reg [9:0] StartDac,
       output reg [9:0] EndDac,
+      output reg [9:0] AdcInterval,
       //*** S Curve Test Port
       output reg Single_or_64Chn,
       output reg CTest_or_Input,
@@ -1151,6 +1152,19 @@ always @(posedge clk or negedge reset_n) begin
     EndDac[9:8] <= USB_COMMAND[1:0];
   else
     EndDac <= EndDac;
+end
+// E56X, E57Y, E58Z:{Z, Y, X} --> ADC Interval
+always @(posedge clk or negedge reset_n) begin
+  if(~reset_n)
+    AdcInterval <= 10'd1;
+  else if(fifo_rden && USB_COMMAND[15:4] == 12'hE56)
+    AdcInterval[3:0] <= USB_COMMAND[3:0];
+  else if(fifo_rden && USB_COMMAND[15:4] == 12'hE57)
+    AdcInterval[7:4] <= USB_COMMAND[3:0];
+  else if(fifo_rden && USB_COMMAND[15:4] == 12'hE58)
+    AdcInterval[9:8] <= USB_COMMAND[1:0];
+  else
+    AdcInterval <= AdcInterval;
 end
 //*** Package Number
 // Lower 8-bits of package number is started with E6

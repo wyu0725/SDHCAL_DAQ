@@ -45,6 +45,10 @@ module DaqSwitcher(
     input CHIPSATB,
     output AutoDaq_CHIPSATB,
     output SlaveDaq_CHIPSATB,
+    // External force
+    input SCurve_ForceExternalRaz,
+    input SlaveDaq_ForceExternalRaz,
+    output ForceExternalRaz,
     // StartAcqSignal
     input UsbAcqStart,
     output AutoDaq_Start,
@@ -106,4 +110,5 @@ module DaqSwitcher(
     assign AcquiredData_en = DaqSelect ? MicrorocData_en : SlaveDaqData_en;
     assign DataToSlaveDaq = DaqSelect ? 16'd0 : MicrorocData;
     assign DataToSlaveDaq_en = DaqSelect ? 1'b0 : MicrorocData_en;
+    assign ForceExternalRaz = DaqSelect ? SCurve_ForceExternalRaz : SlaveDaq_ForceExternalRaz;
 endmodule

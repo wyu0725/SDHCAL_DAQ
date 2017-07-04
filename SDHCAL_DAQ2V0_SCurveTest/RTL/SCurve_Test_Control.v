@@ -36,6 +36,7 @@ module SCurve_Test_Control(
     input Ctest_or_Input,//Add by wyu 20170307. When single channel test, this parameter can choose the charge inject from Ctest pin or the input pin
     input [9:0] StartDac,
     input [9:0] EndDac,
+    input [9:0] AdcInterval,
     input [2:0] AsicNumber,
     input UnmaskAllChannel,
     /*--- Microroc SC Parameter Interface ---*/  
@@ -258,7 +259,7 @@ module SCurve_Test_Control(
             State <= CHECK_ALL_DONE;
           end
           else begin
-            Actual_10bit_DAC_Code <= Actual_10bit_DAC_Code + 1'b1;
+            Actual_10bit_DAC_Code <= Actual_10bit_DAC_Code + AdcInterval;
             State <= OUT_DAC_CODE_SC;
           end
         end

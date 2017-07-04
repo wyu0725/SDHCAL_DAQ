@@ -42,6 +42,7 @@ module SlaveDaq(
     input [15:0] EndHoldTime,
     output reg RESET_B,             //Reset ASIC digital part
     output reg START_ACQ,           //Start & maintain acquisition, Active H
+    output reg ForceExternalRaz,    //Active H, When the start does not come, force externalRaz
     output reg StartReadout,        //Digital RAM start reading signal
     output reg PWR_ON_A,            //Analogue Part Power Pulsing control, active H
     output reg PWR_ON_D,            //Digital Power Pulsing control, active H
@@ -310,12 +311,18 @@ module SlaveDaq(
     end
     // Generate the START_ACQ signal
     always @(posedge AcqStart or negedge ResetStartAcq_n) begin
-      if(~ResetStartAcq_n)
+      if(~ResetStartAcq_n) begin
         START_ACQ <= 1'b0;
-      else if(AcqEnable)
+        ForceExternalRaz <= 1'b1;
+      end
+      else if(AcqEnable) begin
         START_ACQ <= 1'b1;
-      else
+        ForceExternalRaz <= 1'b0;
+      end
+      else begin
         START_ACQ <= 1'b0;
+        ForceExternalRaz <= 1'b1;
+      end
     end
     always @(posedge AcqStart or negedge ResetTrigCount_n) begin
       if(~ResetTrigCount_n) 

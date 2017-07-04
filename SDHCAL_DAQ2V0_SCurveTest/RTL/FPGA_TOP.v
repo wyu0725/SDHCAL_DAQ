@@ -182,6 +182,7 @@ module FPGA_TOP(
     wire UsbDaqSelect;
     wire [3:0] UsbTriggerDelay;
     wire UsbUnmaskAllChannel;
+    wire [9:0] UsbAdcInterval;
     usb_command_interpreter usb_control
     (
       .IFCLK(IFCLK),
@@ -239,6 +240,7 @@ module FPGA_TOP(
       //Test Dac
       .StartDac(StartDac),
       .EndDac(EndDac),
+      .AdcInterval(UsbAdcInterval),
       //*** S Curve test port
       .Single_or_64Chn(SingleOr64Channel),
       .CTest_or_Input(CTestOrInput),
@@ -504,7 +506,7 @@ module FPGA_TOP(
       //--------Trig_Gen interface---//
       .rst_cntb(Microroc_rst_cntb),
       .Raz_en(~Microroc_Internal_or_External_raz_chn),//modefied by wyu 20170309
-      .Force_RAZ(ForceExtRaz),
+      .SCurveForceExternalRaz(ForceExtRaz),
       .Trig_en(Microroc_trig_en),
       .Raz_mode(Microroc_External_RAZ_Mode),//2bit//modefied by wyu 20170309
       .ExternalRazDelayTime(MicrorocExternalRazDelayTime),//new added by wyu 20170309
@@ -604,6 +606,7 @@ module FPGA_TOP(
       //*** Sweep test parameters
       .StartDac(StartDac),
       .EndDac(EndDac),
+      .AdcInterval(UsbAdcInterval),
       .MaxPackageNumber(MaxPackageNumber),
       .TrigEffiOrCountEffi(TrigEffiOrCountEffi),
       .SingleTestChannel(SingleTestChannel),

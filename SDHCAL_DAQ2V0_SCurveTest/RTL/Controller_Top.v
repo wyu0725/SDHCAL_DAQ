@@ -66,6 +66,7 @@ module Controller_Top(
     //input SweepStart,
     input [9:0] StartDac,
     input [9:0] EndDac,
+    input [9:0] AdcInterval,
     // Sweep ACQ
     input [15:0] MaxPackageNumber,
     //SCurve Test
@@ -235,6 +236,7 @@ module Controller_Top(
       .Counter_MAX(CounterMax),
       .StartDac(StartDac),
       .EndDac(EndDac),
+      .AdcInterval(AdcInterval),
       .TriggerDelay(TriggerDelay),
       .AsicNumber(AsicNumber),
       .UnmaskAllChannel(UnmaskAllChannel),
