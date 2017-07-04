@@ -24,7 +24,7 @@ for k=1:1:PadNumber
         for n=1:1:30
             %a2(k);
             if(isequal(Header(k),MappingData(m,n)))
-                PadAmplitude(m,n)=Voltage2Charge(a3(k));
+                PadAmplitude(m,n)=Peak(k);
                 counts=counts+1;
             end
         end
@@ -46,14 +46,15 @@ end
 colorbar;
 figure;
 ChargePeak = zeros(PeakNumber,1);
-for i = 1:1:PeakNumber
-    ChargePeak(i) = Voltage2Charge(ValuePeak(i));
-end
-hist(ChargePeak,50);
-MeanCharge = mean(ChargePeak);
-StdCharge = std(ChargePeak);
-UniCharge = StdCharge / MeanCharge;
-xlabel('Charge(fC)');
+% for i = 1:1:PeakNumber
+%     ChargePeak(i) = Voltage2Charge(ValuePeak(i));
+% end
+hist(ValuePeak,50);
+% MeanCharge = mean(ChargePeak);
+% StdCharge = std(ChargePeak);
+% UniCharge = StdCharge / MeanCharge;
+xlabel('Amplitude(V)');
 ylabel('Count');
-TestInfo = sprintf('Mean:%1.4f(fC)\n Std:%1.4f(fC)\n $\\frac{Std}{Mean}$:%2.4f(fC)\n',MeanCharge,StdCharge,UniCharge);
-text('Interpreter','latex','Position',[250 20],'String',TestInfo);
+% TestInfo = sprintf('Mean:%1.4f(fC)\n Std:%1.4f(fC)\n $\\frac{Std}{Mean}$:%2.4f(fC)\n',MeanCharge,StdCharge,UniCharge);
+TestInfo = sprintf('Mean:%1.4f(V)\n Std:%1.4f(V)\n $\\frac{Std}{Mean}:%2.4f$\n',MeanPeak,StdPeak,UniformPeak);
+text('Interpreter','latex','Position',[0.5 20],'String',TestInfo);
