@@ -2326,11 +2326,22 @@ namespace USB_DAQ
                 gbxSweepAcq.IsEnabled = false;
                 gbxAD9220.IsEnabled = false;
                 DataAcqMode = SCTest;
+
                 byte[] bytes = ConstCommandByteArray(0xE0, 0xA1);
                 bResult = CommandSend(bytes, bytes.Length);
                 if (bResult)
                 {
                     txtReport.AppendText("Select S Curve Test Mode");
+                }
+                else
+                {
+                    MessageBox.Show("Set S Curve Test mode failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                bytes = ConstCommandByteArray(0xE0, 0x00);
+                bResult = CommandSend(bytes, bytes.Length);
+                if(bResult)
+                {
+                    txtReport.AppendText("External Raz Release \n");
                 }
                 else
                 {
@@ -2355,6 +2366,16 @@ namespace USB_DAQ
                 {
                     MessageBox.Show("Set Sweep ACQ Test mode failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
+                bytes = ConstCommandByteArray(0xE0, 0x00);
+                bResult = CommandSend(bytes, bytes.Length);
+                if (bResult)
+                {
+                    txtReport.AppendText("External Raz Release \n");
+                }
+                else
+                {
+                    MessageBox.Show("Set Sweep ACQ Test mode failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
             else if(botton.Content.ToString() == "AD9220")
             {
@@ -2367,6 +2388,16 @@ namespace USB_DAQ
                 if(bResult)
                 {
                     txtReport.AppendText("Select AD9220\n");
+                }
+                else
+                {
+                    MessageBox.Show("Set AD9220 mode failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                byte[] bytes = ConstCommandByteArray(0xE0, 0x00);
+                bResult = CommandSend(bytes, bytes.Length);
+                if (bResult)
+                {
+                    txtReport.AppendText("External Raz Release \n");
                 }
                 else
                 {
@@ -2502,23 +2533,26 @@ namespace USB_DAQ
                     if (!bResult)
                     {
                         MessageBox.Show("Set EndDAC failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
                     }
                     CommandBytes = ConstCommandByteArray(0xE5, (byte)EndDacValue2);
                     bResult = CommandSend(CommandBytes, CommandBytes.Length);
                     if (!bResult)
                     {
                         MessageBox.Show("Set EndDAC failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
                     }
                     CommandBytes = ConstCommandByteArray(0xE5, (byte)EndDacValue3);
                     bResult = CommandSend(CommandBytes, CommandBytes.Length);
                     if (bResult)
                     {
-                        report = string.Format("Set EndDAC:{0}", EndDacValue);
+                        report = string.Format("Set EndDAC:{0}\n", EndDacValue);
                         txtReport.AppendText(report);
                     }
                     else
                     {
                         MessageBox.Show("Set EndDAC failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
                     }
                     #endregion
                 }
@@ -2528,8 +2562,51 @@ namespace USB_DAQ
                     return;
                 }
                 #endregion
+                #region Set AdcInterval
+                bool IsAdcIntervalLegal = rxInt.IsMatch(txtAdcInterval.Text) && (int.Parse(txtAdcInterval.Text) < 1023);
+                if(IsAdcIntervalLegal)
+                {
+                    int AdcIntervalValue = int.Parse(txtAdcInterval.Text);
+                    int AdcIntervalValue1 = (AdcIntervalValue & 15) + 96;
+                    int AdcIntervalValue2 = ((AdcIntervalValue >> 4) & 15) + 112;
+                    int AdcIntervalValue3 = ((AdcIntervalValue >> 8) & 3) + 128;
+                    CommandBytes = ConstCommandByteArray(0xE5, (byte)AdcIntervalValue1);
+                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                    if(!bResult)
+                    {
+                        MessageBox.Show("Set Adc Interval failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+                    CommandBytes = ConstCommandByteArray(0xE5, (byte)AdcIntervalValue2);
+                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                    if (!bResult)
+                    {
+                        MessageBox.Show("Set Adc Interval failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+                    CommandBytes = ConstCommandByteArray(0xE5, (byte)AdcIntervalValue3);
+                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                    if (!bResult)
+                    {
+                        MessageBox.Show("Set Adc Interval failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+                    else
+                    {
+                        report = string.Format("Set Adc Interval:{0}\n", AdcIntervalValue);
+                        txtReport.AppendText(report);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Ilegal input the ADC Interval. The StartDAC should less than EndDAC\n", "Ilegal Input", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
+                #endregion
                 int StartDac = int.Parse(txtStartDac.Text);
                 int EndDac = int.Parse(txtEndDac.Text);
+                int AdcInterval = int.Parse(txtAdcInterval.Text);
                 #region SCurve
                 if (DataAcqMode == SCTest)
                 {                    
@@ -2652,7 +2729,7 @@ namespace USB_DAQ
                             if (!IsSlowAcqStart)
                             {
                                 //*** Set Package Number
-                                SlowDataRatePackageNumber = HeaderLength + ChannelLength + (EndDac - StartDac + 1) * OneDacDataLength + TailLength;
+                                SlowDataRatePackageNumber = HeaderLength + ChannelLength + ((EndDac - StartDac) / AdcInterval + 1) * OneDacDataLength + TailLength;
                                 #region Clear USB FIFO
                                 //*** Clear USB FIFO
                                 byte[] ClearUSBFifo = ConstCommandByteArray(0xF0, 0xFA);
@@ -2721,7 +2798,7 @@ namespace USB_DAQ
                             if (!IsSlowAcqStart)
                             {
                                 //*** Set Package Number
-                                SlowDataRatePackageNumber = HeaderLength + (ChannelLength + (EndDac - StartDac + 1) * OneDacDataLength) * 64 + TailLength;
+                                SlowDataRatePackageNumber = HeaderLength + (ChannelLength + ((EndDac - StartDac) / AdcInterval + 1)  * OneDacDataLength) * 64 + TailLength;
                                 #region Clear USB FIFO
                                 //*** Clear USB FIFO
                                 byte[] ClearUSBFifo = ConstCommandByteArray(0xF0, 0xFA);
@@ -2831,7 +2908,7 @@ namespace USB_DAQ
                             if (!IsSlowAcqStart)
                             {
                                 //*** Set Package Number
-                                SlowDataRatePackageNumber = HeaderLength + ChannelLength + (EndDac - StartDac + 1) * OneDacDataLength + TailLength;
+                                SlowDataRatePackageNumber = HeaderLength + ChannelLength + ((EndDac - StartDac) / AdcInterval + 1) * OneDacDataLength + TailLength;
                                 #region Clear Usb FIFO
                                 //*** Clear USB FIFO
                                 byte[] ClearUSBFifo = ConstCommandByteArray(0xF0, 0xFA);
@@ -2899,7 +2976,7 @@ namespace USB_DAQ
                             if (!IsSlowAcqStart)
                             {
                                 //*** Set Package Number
-                                SlowDataRatePackageNumber = HeaderLength + (ChannelLength + (EndDac - StartDac + 1) * OneDacDataLength) * 64 + TailLength;
+                                SlowDataRatePackageNumber = HeaderLength + (ChannelLength + ((EndDac - StartDac) / AdcInterval + 1) * OneDacDataLength) * 64 + TailLength;
                                 #region Clear USB FIFO
                                 //*** Clear USB FIFO
                                 byte[] ClearUSBFifo = ConstCommandByteArray(0xF0, 0xFA);
@@ -3053,7 +3130,7 @@ namespace USB_DAQ
                         #endregion
                         #region Start Acq
                         //*** Set Package Number
-                        SlowDataRatePackageNumber = HeaderLength + (2 + PackageNumberValue * 20) * (EndDac - StartDac + 1) + TailLength;
+                        SlowDataRatePackageNumber = HeaderLength + (2 + PackageNumberValue * 20) * ((EndDac - StartDac) / AdcInterval + 1) + TailLength;
                         #region Clear USB FIFO
                         //*** Clear USB FIFO
                         byte[] ClearUSBFifo = ConstCommandByteArray(0xF0, 0xFA);
