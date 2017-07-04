@@ -37,3 +37,20 @@ x2 = linspace(min(Charge2)-50,max(Charge2));
 y2 = polyval(p2,x2);
 figure;
 plot(x2,y2);
+
+ShaperOutput = AdcVoltage(1) - AdcVoltage;
+ShaperOutput1 = ShaperOutput(1:9);
+p3 = polyfit(Charge1,ShaperOutput1,1);
+y3 = polyval(p3,x1);
+figure;
+plot(x1,y3);
+hold on;
+plot(Charge1, ShaperOutput1,'o');
+
+ShaperOutput2 = ShaperOutput(9:11);
+p4 = polyfit(Charge2,ShaperOutput2,1);
+y4 = polyval(p4,x2);
+figure;
+plot(x2,y4);
+hold on;
+plot(Charge2,ShaperOutput2,'o')
