@@ -3384,6 +3384,21 @@ namespace USB_DAQ
                         return;
                     }
                     #endregion
+                    #region Set Adc Start Mode
+                    /*int AdcStartModeValue = cbxAdcStartMode.SelectedIndex + 128;//0x80
+                    CommandBytes = ConstCommandByteArray(0xE8, (byte)AdcStartModeValue);
+                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                    if (bResult)
+                    {
+                        string report = string.Format("Select ADC Start{0}\n", cbxAdcStartMode.Text);
+                        txtReport.AppendText(report);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Set ADC Start Mode failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    */
+                    #endregion
                     #region Start Acq
                     CommandBytes = ConstCommandByteArray(0xE0, 0xF2);
                     bResult = CommandSend(CommandBytes, CommandBytes.Length);
@@ -3590,5 +3605,23 @@ namespace USB_DAQ
             //return BigCount;
             //return Task.Run(() => txtReport.AppendText("TestDone"));
         }
+
+        /*private void cbxAdcStartMode_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            byte[] CommandBytes = new byte[2];
+            bool bResult = false;
+            int AdcStartModeValue = cbxAdcStartMode.SelectedIndex + 128;//0x80
+            CommandBytes = ConstCommandByteArray(0xE8, (byte)AdcStartModeValue);
+            bResult = CommandSend(CommandBytes, CommandBytes.Length);
+            if(bResult)
+            {
+                string report = string.Format("Select ADC Start{0}\n", cbxAdcStartMode.Text);
+                txtReport.AppendText(report);
+            }
+            else
+            {
+                MessageBox.Show("Set ADC Start Mode failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }*/
     }
 }
