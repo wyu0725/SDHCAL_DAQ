@@ -12,8 +12,8 @@
       <Properties Property="PROGRAM.CFG_PROGRAM" value="1"/>
       <Properties Property="PROGRAM.CHECKSUM" value="1"/>
       <Properties Property="PROGRAM.ERASE" value="1"/>
-      <Properties Property="PROGRAM.FILES" value="MCS/FPGA_TOP_20170704wyu1V1.mcs"/>
-      <Properties Property="PROGRAM.PRM_FILE" value="MCS/FPGA_TOP_20170704wyu1V1.prm"/>
+      <Properties Property="PROGRAM.FILES" value="MCS/FPGA_TOP_20170705wyu1V1.mcs"/>
+      <Properties Property="PROGRAM.PRM_FILE" value="MCS/FPGA_TOP_20170705wyu1V1.prm"/>
       <Properties Property="PROGRAM.UNUSED_PIN_TERMINATION" value="pull-none"/>
       <Properties Property="PROGRAM.VERIFY" value="1"/>
     </Object>
@@ -492,7 +492,7 @@
         <net name="Microroc_u1/MicrorocDaq/SlaveDaqControl/InternalData_en_reg_n_0"/>
       </nets>
     </probe>
-    <probe type="ila" busType="bus" source="netlist" spec="ILA_V2_RT">
+    <probe type="ila" busType="net" source="netlist" spec="ILA_V2_RT">
       <probeOptions Id="DebugProbeParams">
         <Option Id="CAPTURE_COMPARE_VALUE" value="eq2&apos;hX"/>
         <Option Id="COMPARE_VALUE.0" value="eq2&apos;hX"/>
@@ -510,7 +510,7 @@
         <net name="Microroc_u1/MicrorocDaq/SlaveDaqControl/MicrorocData[0]"/>
       </nets>
     </probe>
-    <probe type="ila" busType="bus" source="netlist" spec="ILA_V2_RT">
+    <probe type="ila" busType="net" source="netlist" spec="ILA_V2_RT">
       <probeOptions Id="DebugProbeParams">
         <Option Id="CAPTURE_COMPARE_VALUE" value="eq14&apos;hXXXX"/>
         <Option Id="COMPARE_VALUE.0" value="eq14&apos;hXXXX"/>
@@ -580,7 +580,7 @@
         <net name="Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[0]"/>
       </nets>
     </probe>
-    <probe type="ila" busType="bus" source="netlist" spec="ILA_V2_RT">
+    <probe type="ila" busType="net" source="netlist" spec="ILA_V2_RT">
       <probeOptions Id="DebugProbeParams">
         <Option Id="CAPTURE_COMPARE_VALUE" value="eq24&apos;hXX_XXXX"/>
         <Option Id="COMPARE_VALUE.0" value="eq24&apos;hXX_XXXX"/>
@@ -620,7 +620,7 @@
         <net name="Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_sync[0]"/>
       </nets>
     </probe>
-    <probe type="ila" busType="bus" source="netlist" spec="ILA_V2_RT">
+    <probe type="ila" busType="net" source="netlist" spec="ILA_V2_RT">
       <probeOptions Id="DebugProbeParams">
         <Option Id="CAPTURE_COMPARE_VALUE" value="eq14&apos;hXXXX"/>
         <Option Id="COMPARE_VALUE.0" value="eq14&apos;hXXXX"/>
