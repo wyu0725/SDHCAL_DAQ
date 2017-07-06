@@ -886,6 +886,7 @@ namespace USB_DAQ
                 ComboBox[] cbxInternal_RAZ_Time_ASIC = new ComboBox[4] { cbxInternal_RAZ_Time_ASIC1, cbxInternal_RAZ_Time_ASIC2, cbxInternal_RAZ_Time_ASIC3, cbxInternal_RAZ_Time_ASIC4 };
                 // 4-bit DAC Cali
                 ComboBox[] cbxPedCali_ASIC = new ComboBox[4] { cbxPedCali_ASIC1, cbxPedCali_ASIC2, cbxPedCali_ASIC3, cbxPedCali_ASIC4 };
+                TextBox[] txtMaskFile = new TextBox[4] { txtMaskFile_ASIC1, txtMaskFile_ASIC2, txtMaskFile_ASIC3, txtMaskFile_ASIC4 };
                 #endregion
                 Regex rx_int = new Regex(rx_Integer);
                 Regex rx_b = new Regex(rx_Byte);
@@ -1250,6 +1251,49 @@ namespace USB_DAQ
                         txtReport.AppendText(details.ToString());
                     else
                         txtReport.AppendText("All channels without calibration\n");*/
+                    #endregion
+                    #region Set ChannelMask
+                    if (txtMaskFile[i].Text != "No")
+                    {
+                        string FileName = txtMaskFile[i].Text;
+                        string MaskFileName;
+                        string MaskChannelString;
+                        StreamReader MaskFile;
+                        MaskFileName = string.Format("D:\\ExperimentsData\\test\\{0}", FileName);
+                        MaskFile = File.OpenText(MaskFileName);
+                        MaskChannelString = MaskFile.ReadLine();
+                        while (MaskChannelString != null)
+                        {
+                            int MaskChannel = int.Parse(MaskChannelString) - 1;
+                            CommandBytes = ConstCommandByteArray(0xAD, (byte)MaskChannel);
+                            bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                            if(!bResult)
+                            {
+                                MessageBox.Show("Set Mask Channel faliure. Please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                return;
+                            }                            
+                            CommandBytes = ConstCommandByteArray(0xAE, 0x07);
+                            bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                            if(!bResult)
+                            {
+                                MessageBox.Show("Set Mask Channel faliure. Please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                return;
+                            }
+                            CommandBytes = ConstCommandByteArray(0xAE, 0x11);
+                            bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                            if(bResult)
+                            {
+                                string report = string.Format("Set ASIC{0} Mask Channel{1}\n", i, MaskChannel + 1);
+                                txtReport.AppendText(report);
+                            }
+                            else
+                            {
+                                MessageBox.Show("Set Mask Channel faliure. Please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                return;
+                            }
+                            MaskChannelString = MaskFile.ReadLine();
+                        }
+                    }
                     #endregion
                     #region Start Load
                     CommandBytes = ConstCommandByteArray(0xD0, 0xA2);
