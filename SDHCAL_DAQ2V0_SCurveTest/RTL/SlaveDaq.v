@@ -364,7 +364,8 @@ module SlaveDaq(
         SlaveDaqData_en <= InternalData_en;
       end
       else if(State == OUT_COUNT1) begin
-        SlaveDaqData <= {8'hCC,TrigCounter_sync[23:16]};
+        //SlaveDaqData <= {8'hCC,TrigCounter_sync[23:16]};
+        SlaveDaqData <= 16'hCCDD;
         SlaveDaqData_en <= InternalData_en;
       end
       else if(State == OUT_COUNT2) begin
@@ -372,7 +373,8 @@ module SlaveDaq(
         SlaveDaqData_en <= InternalData_en;
       end
       else begin
-        SlaveDaqData <= MicrorocData;
+        //SlaveDaqData <= MicrorocData;
+        SlaveDaqData <= 16'hAABB;
         SlaveDaqData_en <= MicrorocData_en;
       end
     end
