@@ -66,6 +66,7 @@ namespace USB_DAQ
         private const int SCTest = 1;
         private const int SweepAcq = 2;
         private const int Adc = 3;
+        private const int Efficiency = 4;
         private int DataAcqMode = Acq;
         private const int AutoDaq = 0;
         private const int SlaveDaq = 1;
@@ -2460,6 +2461,36 @@ namespace USB_DAQ
                     MessageBox.Show("Set AD9220 mode failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
+            else if(botton.Content.ToString() == "Efficiency")
+            {
+                gbxNormalAcq.IsEnabled = false;
+                gbxSweepTest.IsEnabled = true;
+                gbxSCurveTest.IsEnabled = true;
+                gbxSweepAcq.IsEnabled = false;
+                gbxAD9220.IsEnabled = false;
+                btnSweepTestStart.IsEnabled = true;
+                DataAcqMode = Efficiency;
+                byte[] CommandBytes = ConstCommandByteArray(0xE0, 0xA4);
+                bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                if (bResult)
+                {
+                    txtReport.AppendText("Select AD9220\n");
+                }
+                else
+                {
+                    MessageBox.Show("Set Efficiency mode failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                byte[] bytes = ConstCommandByteArray(0xE0, 0x00);
+                bResult = CommandSend(bytes, bytes.Length);
+                if (bResult)
+                {
+                    txtReport.AppendText("External Raz Release \n");
+                }
+                else
+                {
+                    MessageBox.Show("Set Efficiency mode failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
         }
 
         private void btnSetMask_Click(object sender, RoutedEventArgs e)
@@ -3203,6 +3234,7 @@ namespace USB_DAQ
                         bResult = CommandSend(CommandBytes, CommandBytes.Length);
                         if (bResult)
                         {
+                            IsSlowAcqStart = true;
                             txtReport.AppendText("Sweep Acq Test Start\n");
                             txtReport.AppendText("Sweep Acq Continue\n");
                             btnSweepTestStart.Content = "Sweep Test Stop";
@@ -3229,6 +3261,112 @@ namespace USB_DAQ
                             txtReport.AppendText("Sweep Acq Stop Failure\n");
                         }
                         #endregion
+                        #endregion
+                    }
+                    else
+                    {
+                        IsSlowAcqStart = false;
+                        CommandBytes = ConstCommandByteArray(0xE0, 0xF1);
+                        bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                        if (bResult)
+                        {
+                            btnSweepTestStart.Content = "Sweep Test Start";
+                            txtReport.AppendText("Sweep Acq Test Stop\n");
+                        }
+                        else
+                        {
+                            txtReport.AppendText("Sweep Acq Test Stop Failure\n");
+                        }
+                    }
+                }
+                #endregion
+                #region Efficiency
+                else if(DataAcqMode == Efficiency)
+                {
+                    if(!IsSlowAcqStart)
+                    {
+                        #region Set CPT_MAX
+                        //*** Send CPT_MAX
+                        int MaxCountValue = cbxCPT_MAX.SelectedIndex;
+                        CommandBytes = ConstCommandByteArray(0xE2, (byte)MaxCountValue);
+                        bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                        if (bResult)
+                        {
+                            report = string.Format("Set MAX count number {0}", cbxCPT_MAX.Text);
+                            txtReport.AppendText(report);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Set S Curve test max count failure. Please check the USB\n", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                        #endregion
+                        #region Set Trigger Delay
+                        bool IsTriggerDelayLegal = rxInt.IsMatch(txtTriggerDelay.Text) && int.Parse(txtTriggerDelay.Text) < 400;
+                        int TriggerDelayValue;
+                        if (IsTriggerDelayLegal)
+                        {
+                            TriggerDelayValue = int.Parse(txtTriggerDelay.Text) / 25;
+                        }
+                        else
+                        {
+                            TriggerDelayValue = 0;
+                        }
+                        CommandBytes = ConstCommandByteArray(0xE9, (byte)TriggerDelayValue);
+                        bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                        if (bResult)
+                        {
+                            report = string.Format("Set Trigger Delay {0}\n", TriggerDelayValue * 25);
+                            txtReport.AppendText(report);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Set Trigger Delay failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                            return;
+                        }
+                        #endregion
+                        SlowDataRatePackageNumber = 7 * 2;
+                        #region Clear USB FIFO
+                        //*** Clear USB FIFO
+                        byte[] ClearUSBFifo = ConstCommandByteArray(0xF0, 0xFA);
+                        bResult = CommandSend(ClearUSBFifo, ClearUSBFifo.Length);//
+                        if (bResult)
+                            txtReport.AppendText("USB fifo cleared");
+                        else
+                            txtReport.AppendText("fail to clear USB fifo");
+                        byte[] RemainData = new byte[2048];
+                        bResult = DataRecieve(RemainData, RemainData.Length);
+                        #endregion
+                        #region Data ACQ
+                        CommandBytes = ConstCommandByteArray(0xE0, 0xF0);
+                        bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                        if (bResult)
+                        {
+                            IsSlowAcqStart = true;
+                            txtReport.AppendText("Sweep Acq Test Start\n");
+                            txtReport.AppendText("Sweep Acq Continue\n");
+                            btnSweepTestStart.Content = "Sweep Test Stop";
+                            await Task.Run(() => GetSlowDataRateResultCallBack());
+                            btnSweepTestStart.Content = "Sweep Acq Start";
+                            //Task SCurveDataAcq = new Task(() => GetSlowDataRateResultCallBack());
+                            //SCurveDataAcq.Start();
+                            //SCurveDataAcq.Wait();
+                            CommandBytes = ConstCommandByteArray(0xE0, 0xF1);
+                            bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                            if (bResult)
+                            {
+                                IsSlowAcqStart = false;
+                                btnSweepTestStart.Content = "Sweep Test Start";
+                                txtReport.AppendText("Sweep Acq Test Stop\n");
+                            }
+                            else
+                            {
+                                txtReport.AppendText("Sweep Acq Test Stop Failure\n");
+                            }
+                        }
+                        else
+                        {
+                            txtReport.AppendText("Sweep Acq Stop Failure\n");
+                        }
                         #endregion
                     }
                     else
@@ -3519,7 +3657,7 @@ namespace USB_DAQ
             //private int SingleDataLength = 512;
             bool bResult = false;
             byte[] DataReceiveBytes = new byte[512];
-            if (DataAcqMode == Acq || DataAcqMode == SweepAcq || DataAcqMode == SCTest)
+            if (DataAcqMode == Acq || DataAcqMode == SweepAcq || DataAcqMode == SCTest || DataAcqMode == Efficiency)
             {
                 #region The Max Data Number is Set
                 if (SlowDataRatePackageNumber != 0)
