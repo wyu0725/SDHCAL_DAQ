@@ -1253,6 +1253,18 @@ namespace USB_DAQ
                         txtReport.AppendText("All channels without calibration\n");*/
                     #endregion
                     #region Set ChannelMask
+                    // Clear the forer mask information
+                    CommandBytes = ConstCommandByteArray(0xAE, 0x10);
+                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                    if(bResult)
+                    {
+                        txtReport.AppendText("Mask Clear\n");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Set Mask Channel faliure. Please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
                     if (txtMaskFile[i].Text != "No")
                     {
                         string FileName = txtMaskFile[i].Text;
