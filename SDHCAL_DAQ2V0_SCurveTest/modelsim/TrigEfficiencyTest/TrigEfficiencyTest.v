@@ -160,6 +160,7 @@ module TrigEfficiencyTest(
 	          TestState <= DATA_OUT;
 	        end
 	        DATA_OUT:begin
+            TrigEfficiencyData_en <= 1'b0;
 	          if(DataOutCount <= 3'd5) begin
 	            DataOutCount <= DataOutCount + 1'b1;
 	            TrigEfficiencyData <= CPT_DATA[95:80];
@@ -171,6 +172,11 @@ module TrigEfficiencyTest(
 	            TestState <= ALL_DONE;
 	          end
 	        end
+          DATA_OUT_ONCE:begin
+            TrigEfficiencyData_en <= 1'b1;
+            CPT_DATA <= CPT_DATA << 16;
+            TestState <= DATA_OUT;
+          end
 	        ALL_DONE:begin
 	          if(DataTransmitDone) begin
 	            TestDone <= 1'b0;
