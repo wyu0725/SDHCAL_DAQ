@@ -154,7 +154,7 @@ module FPGA_TOP(
     wire [191:0] UsbMicrorocChannelMask;
     //--- Sweep Test ---//
     wire SweepTestStartStop;
-    wire [1:0] ModeSelect;
+    wire [2:0] ModeSelect;
     wire [1:0] DacSelect;
     //*** S Curve Test Port
     wire ACQ_or_SCTest;

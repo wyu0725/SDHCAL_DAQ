@@ -25,7 +25,7 @@ module Controller_Top(
     input Clk_5M,
     input reset_n,
     // Mode Select
-    input [1:0] ModeSelect,
+    input [2:0] ModeSelect,
     input [1:0] DacSelect,
     // Microroc SC Parameter
     input [9:0] UsbMicroroc10BitDac0,
@@ -126,6 +126,11 @@ module Controller_Top(
     wire AdcData_en;
     wire AdcStart;
     wire ForceAdcReset;
+    // GEM Efficiency
+    wire [15:0] GemEfficiencyData;
+    wire GemEfficiencyData_en;
+    wire GemEfficiencyTestDone;
+    wire GemEfficiencyTestStart;
     Switcher Switcher(
       // Mode Select
       .ModeSelect(ModeSelect),
@@ -191,7 +196,12 @@ module Controller_Top(
       .AdcData_en(AdcData_en),
       .UsbStartAdc(UsbStartAdc),
       .AdcStart(AdcStart),
-      .ForceAdcReset(ForceAdcReset)
+      .ForceAdcReset(ForceAdcReset),
+      // ***Gem Efficiency
+      .GemEfficiencyData(GemEfficiencyData),
+      .GemEfficiencyData_en(GemEfficiencyData_en),
+      .GemEfficiencyTestDone(GemEfficiencyTestDone),
+      .GemEfficiencyTestStart(GemEfficiencyTestStart)
     );
     //--- SweepAcq Module ---//
     SweepACQ_Top SweepACQ(
@@ -276,5 +286,21 @@ module Controller_Top(
       .ADC_CLK(ADC_CLK),
       .Data(AdcData),
       .Data_en(AdcData_en)
+    ); 
+    //--- Trig Efficiency Test for detector ---//
+    TrigEfficiencyTest TestGemEfficiency(
+      .Clk(Clk),
+      .reset_n(reset_n),
+      .CLK_EXT(CLK_EXT),
+      .OUT_TRIGGER0B(out_trigger0b),
+      .OUT_TRIGGER1B(out_trigger1b),
+      .OUT_TRIGGER2B(out_trigger2b),
+      .Start(GemEfficiencyTestStart),
+      .CPT_MAX(CPT_MAX),
+      .TriggerDelay(TriggerDelay),
+      .TrigEfficiencyData(GemEfficiencyData),
+      .TrigEfficiencyData_en(GemEfficiencyData_en),
+      .TestDone(GemEfficiencyTestDone),
+      .DataTransmitDone(DataTransmitDone)
     );
 endmodule

@@ -73,7 +73,7 @@ module usb_command_interpreter(
 
       //--- Sweep Test Port ---//
       // Mode Select
-      output reg [1:0] ModeSelect,
+      output reg [2:0] ModeSelect,
       output reg [1:0] DacSelect,
       // Test Dac
       output reg [9:0] StartDac,
@@ -979,9 +979,9 @@ end
 // 10: Sweep ACQ
 always @(posedge clk or negedge reset_n)begin
   if(~reset_n)
-    ModeSelect <= 2'b00;//default ACQ
+    ModeSelect <= 3'b000;//default ACQ
   else if(fifo_rden && USB_COMMAND[15:4] == 12'hE0A)
-    ModeSelect <= USB_COMMAND[1:0];
+    ModeSelect <= USB_COMMAND[2:0];
   else
     ModeSelect <= ModeSelect;
 end

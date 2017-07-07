@@ -22,7 +22,7 @@
 
 module Switcher(
     // ModeSelect
-    input [1:0] ModeSelect,
+    input [2:0] ModeSelect,
     // --- SC Parameters--- //
     // 10-bits DAC
     input [9:0] UsbMicroroc10BitDac0,
@@ -91,13 +91,19 @@ module Switcher(
     input AdcData_en,
     input UsbStartAdc,
     output reg AdcStart,
-    output reg ForceAdcReset
+    output reg ForceAdcReset,
+    // *** GEM Efficiency
+    input [15:0] GemEfficiencyData,
+    input GemEfficiencyData_en,
+    input GemEfficiencyTestDone,
+    output reg GemEfficiencyTestStart
     );
     // Mux4
-    localparam [1:0] ACQ_MODE = 2'b00,
-                     SCURVE_MODE = 2'b01,
-                     SWEEP_ACQ_MODE = 2'b10,
-                     ADC_CONTROL = 2'b11;
+    localparam [2:0] ACQ_MODE = 3'b000,
+                     SCURVE_MODE = 3'b001,
+                     SWEEP_ACQ_MODE = 3'b010,
+                     ADC_CONTROL = 3'b011,
+                     GEM_EFFICIENCY = 3'b100;
     localparam [1:0] DAC0_SELECTED = 2'b00,
                      DAC1_SELECTED = 2'b01,
                      DAC2_SELECTED = 2'b10;
@@ -123,6 +129,7 @@ module Switcher(
           ParallelData_en = 1'b0;
           AdcStart = 1'b0;
           ForceAdcReset = 1'b0;
+          GemEfficiencyTestStart = 1'b0;
         end
         SCURVE_MODE:begin
           OutMicroroc10BitDac0 = SCTest10BitDac;
@@ -144,6 +151,7 @@ module Switcher(
           ParallelData_en = 1'b0;
           AdcStart = 1'b0;
           ForceAdcReset = 1'b0;
+          GemEfficiencyTestStart = 1'b0;
         end
         SWEEP_ACQ_MODE:begin
           OutMicroroc10BitDac0 = (SweepAcqDacSelect == DAC0_SELECTED) ? SweepAcq10BitDac : UsbMicroroc10BitDac0;
@@ -165,6 +173,7 @@ module Switcher(
           ParallelData_en = MicrorocAcqData_en;
           AdcStart = 1'b0;
           ForceAdcReset = 1'b0;
+          GemEfficiencyTestStart = 1'b0;
         end
         ADC_CONTROL:begin
           OutMicroroc10BitDac0 = UsbMicroroc10BitDac0;
@@ -186,27 +195,52 @@ module Switcher(
           ParallelData_en = 1'b0;
           AdcStart = UsbStartAdc;
           ForceAdcReset = UsbForceMicrorocAcqReset;
+          GemEfficiencyTestStart = 1'b0;
         end
-        /*default:begin
+        GEM_EFFICIENCY:begin
           OutMicroroc10BitDac0 = UsbMicroroc10BitDac0;
           OutMicroroc10BitDac1 = UsbMicroroc10BitDac1;
           OutMicroroc10BitDac2 = UsbMicroroc10BitDac2;
           OutMicrorocChannelMask = UsbMicrorocChannelMask;
-          //OutMicrorocDiscriMask = USBMicrorocDiscriMask;
+          OutMicrorocCTestChannel = UsbMicrorocCTestChannel;
+          OutMicrorocSCParameterLoad = UsbMicrorocSCParameterLoad;
+          OutMicrorocSCOrReadreg = UsbSCOrReadreg;
+          OutSCTestStartStop = 1'b0;
+          OutSweepAcqStartStop = 1'b0;
+          SweepTestDone = GemEfficiencyTestDone;
+          OutUsbStartStop = SweepTestUsbStartStop;
+          MicrorocAcqStartStop = 1'b0;
+          OutMicrorocForceReset = 1'b0;
+          UsbFifoData = GemEfficiencyData;
+          UsbFifoData_en = GemEfficiencyData_en;
+          ParallelData = 16'b0;
+          ParallelData_en = 1'b0;
+          AdcStart = 1'b0;
+          ForceAdcReset = 1'b0;
+          GemEfficiencyTestStart = UsbSweepTestStartStop;
+        end
+        default:begin
+          OutMicroroc10BitDac0 = UsbMicroroc10BitDac0;
+          OutMicroroc10BitDac1 = UsbMicroroc10BitDac1;
+          OutMicroroc10BitDac2 = UsbMicroroc10BitDac2;
+          OutMicrorocChannelMask = UsbMicrorocChannelMask;
           OutMicrorocCTestChannel = UsbMicrorocCTestChannel;
           OutMicrorocSCParameterLoad = UsbMicrorocSCParameterLoad;
           OutMicrorocSCOrReadreg = UsbSCOrReadreg;
           OutSCTestStartStop = 1'b0;
           OutSweepAcqStartStop = 1'b0;
           SweepTestDone = 1'b0;
-          OutUsbStartStop = UsbMicrorocAcqStartStop;
+          OutUsbStartStop = MicrorocAcqUsbStartStop;
           MicrorocAcqStartStop = UsbMicrorocAcqStartStop;
           OutMicrorocForceReset = UsbForceMicrorocAcqReset;
           UsbFifoData = MicrorocAcqData;
           UsbFifoData_en = MicrorocAcqData_en;
           ParallelData = 16'b0;
           ParallelData_en = 1'b0;
-        end*/
+          AdcStart = 1'b0;
+          ForceAdcReset = 1'b0;
+          GemEfficiencyTestStart = 1'b0;
+        end
       endcase
     end
 endmodule
