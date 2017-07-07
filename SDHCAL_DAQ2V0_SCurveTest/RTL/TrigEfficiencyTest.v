@@ -31,10 +31,10 @@ module TrigEfficiencyTest(
     input OUT_TRIGGER2B,
     input Start,
     input [15:0] CPT_MAX,
-    input TriggerDelay,
-    output [15:0] TrigEfficiencyData,
-    output TrigEfficiencyData_en,
-    output TestDone,
+    input [3:0] TriggerDelay,
+    output reg [15:0] TrigEfficiencyData,
+    output reg TrigEfficiencyData_en,
+    output reg TestDone,
     input DataTransmitDone
     );
     reg ResetSingleTest_n;
@@ -52,7 +52,7 @@ module TrigEfficiencyTest(
       .Clk(Clk),
       .reset_n(ResetSingleTest_n),
       .TrigEffi_or_CountEffi(1'b1),
-      .Trigger(OUT_TRIGGER0),
+      .Trigger(OUT_TRIGGER0B),
       .CLK_EXT(CLK_EXT),
       .Test_Start(SingleTestStart),
       .CPT_MAX(CPT_MAX),
@@ -65,7 +65,7 @@ module TrigEfficiencyTest(
       .Clk(Clk),
       .reset_n(ResetSingleTest_n),
       .TrigEffi_or_CountEffi(1'b1),
-      .Trigger(OUT_TRIGGER1),
+      .Trigger(OUT_TRIGGER1B),
       .CLK_EXT(CLK_EXT),
       .Test_Start(SingleTestStart),
       .CPT_MAX(CPT_MAX),
@@ -78,7 +78,7 @@ module TrigEfficiencyTest(
       .Clk(Clk),
       .reset_n(ResetSingleTest_n),
       .TrigEffi_or_CountEffi(1'b1),
-      .Trigger(OUT_TRIGGER2),
+      .Trigger(OUT_TRIGGER2B),
       .CLK_EXT(CLK_EXT),
       .Test_Start(SingleTestStart),
       .CPT_MAX(CPT_MAX),
@@ -124,7 +124,7 @@ module TrigEfficiencyTest(
 	            TestState <= IDLE;
 	          end
 	          else begin
-	            ResetSingleTest <= 1'b1;
+	            ResetSingleTest_n <= 1'b1;
 	            TestDone <= 1'b0;
 	            TrigEfficiencyData <= 16'h4343;
 	            TestState <= OUT_HEADER;
@@ -139,7 +139,7 @@ module TrigEfficiencyTest(
 	          else begin
 	            TrigEfficiencyData_en <= 1'b0;
 	            DataOutCount <= 3'b0;
-	            TestState <= TESTSTART;
+	            TestState <= TEST_START;
 	          end
 	        end
 	        TEST_START:begin
@@ -160,6 +160,7 @@ module TrigEfficiencyTest(
 	          TestState <= DATA_OUT;
 	        end
 	        DATA_OUT:begin
+            TrigEfficiencyData_en <= 1'b0;
 	          if(DataOutCount <= 3'd5) begin
 	            DataOutCount <= DataOutCount + 1'b1;
 	            TrigEfficiencyData <= CPT_DATA[95:80];
@@ -167,13 +168,18 @@ module TrigEfficiencyTest(
 	          end
 	          else begin
 	            DataOutCount <= 3'd0;
-	            SingleTestDone <= 1'b1;
+	            TestDone <= 1'b1;
 	            TestState <= ALL_DONE;
 	          end
 	        end
+          DATA_OUT_ONCE:begin
+            TrigEfficiencyData_en <= 1'b1;
+            CPT_DATA <= CPT_DATA << 16;
+            TestState <= DATA_OUT;
+          end
 	        ALL_DONE:begin
 	          if(DataTransmitDone) begin
-	            ASingleTestDone <= 1'b0;
+	            TestDone <= 1'b0;
 	            TestState <= IDLE;
 	          end
 	          else
