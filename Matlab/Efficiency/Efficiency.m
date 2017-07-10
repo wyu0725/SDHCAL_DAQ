@@ -1,6 +1,6 @@
 % 导入数据及设定数据包个数
 InitialData = ImportData();
-PackageNumber = 3000;
+PackageNumber = 9000;
 % 读回芯片的编号Header Brunch ID BCID和数据ASICChannelData
 Header = zeros(PackageNumber, 1);
 BCIDGray = zeros(PackageNumber, 1);
@@ -46,7 +46,7 @@ PadA = zeros(PackageNumber, 64);
 PadB = zeros(PackageNumber, 64);
 PadN = zeros(PackageNumber, 64);
 PadP = zeros(PackageNumber, 64);
-PadData = zeros(PackageNumber, 15, 18);
+PadData = zeros(PackageNumber, 18, 15);
 [AConnectorChannel,APadChannel] = GetMapping('Mapping_A.txt');
 [BConnectorChannel,PadBChannel] = GetMapping('Mapping_B.txt');
 [NConnectorChannel,PadNChannel] = GetMapping('Mapping_N.txt');
@@ -63,41 +63,43 @@ end
 Hit3Over1 = 0;
 Hit3Over2 = 0;
 Hit3Over3 = 0;
-PadData1 = zeros(100,15,18);
+PadData1 = zeros(100,18,15);
 Over1 = 0;
 Over2 = 0;
 Over3 = 0;
+Hit3 = 0;
 Crosstalk = 0;
 for i = 1:1:PackageNumber
     a = 1;
-    for j = 1:1:15
-        for k = 1:1:18
+    for j = 1:1:18
+        for k = 1:1:15
             if(PadData(i,j,k) == 3)
+                Hit3 = Hit3 + 1;
                 if((j > 1 && PadData(i,j-1,k) == 1) ...,
-                        || (j < 15 && PadData(i,j + 1,k) == 1) ...,
+                        || (j < 18 && PadData(i,j + 1,k) == 1) ...,
                         || (k > 1 && PadData(i,j,k - 1) == 1) ...,
-                        || (k < 18 && PadData(i,j,k + 1) == 1))
+                        || (k < 15 && PadData(i,j,k + 1) == 1))
                     Hit3Over1 = Hit3Over1 + 1;
                     Over1 = [Over1 i];
                 end
                 if((j > 1 && PadData(i,j-1,k) == 2) ...,
-                        || (j < 15 && PadData(i,j + 1,k) == 2) ...,
+                        || (j < 18 && PadData(i,j + 1,k) == 2) ...,
                         || (k > 1 && PadData(i,j,k - 1) == 2) ...,
-                        || (k < 18 && PadData(i,j,k + 1) == 2))
+                        || (k < 15 && PadData(i,j,k + 1) == 2))
                     Hit3Over2 = Hit3Over2 + 1;
                     Over2 = [Over2 i];
                 end
                 if((j > 1 && PadData(i,j-1,k) == 3) ...,
-                        || (j < 15 && PadData(i,j + 1,k) == 3) ...,
+                        || (j < 18 && PadData(i,j + 1,k) == 3) ...,
                         || (k > 1 && PadData(i,j,k - 1) == 3) ...,
-                        || (k < 18 && PadData(i,j,k + 1) == 3))
+                        || (k < 15 && PadData(i,j,k + 1) == 3))
                     Hit3Over3 = Hit3Over3 + 1;
                     Over3 = [Over3 i];
                 end    
                 if((j > 1 && PadData(i,j-1,k) ~= 0) ...,
-                        || (j < 15 && PadData(i,j + 1,k) ~= 0) ...,
+                        || (j < 18 && PadData(i,j + 1,k) ~= 0) ...,
                         || (k > 1 && PadData(i,j,k - 1) ~= 0) ...,
-                        || (k < 18 && PadData(i,j,k + 1) ~= 0))
+                        || (k < 15 && PadData(i,j,k + 1) ~= 0))
                     Crosstalk = Crosstalk + a;
                     a = 0  ;                  
                 end  
@@ -108,11 +110,14 @@ end
 Over1(1) = [];
 Over2(1) = [];
 Over3(1) = [];
-for i = 1:1:length(Over3)
+Over3New = unique(Over3);
+for i = 1:1:length(Over3New)
     figure;
-    PlotData = zeros(15,18);
-    PlotData(:) = PadData(Over3(i),:,:);
+    PlotData = zeros(18,15);
+    PlotData(:) = PadData(Over3New(i),:,:);
     b = bar3(PlotData);
+    TitleString = sprintf('%d',Over3New(i));
+    title(TitleString);
     colormap(flipud(parula))
     colorbar;
     for k = 1:length(b)
@@ -123,7 +128,7 @@ for i = 1:1:length(Over3)
 end
 for i = 1:1:length(Over2)
     figure;
-    PlotData = zeros(15,18);
+    PlotData = zeros(18,15);
     PlotData(:) = PadData(Over2(i),:,:);
     b = bar3(PlotData);
     colormap(flipud(parula))
@@ -209,5 +214,5 @@ for k = 1:length(b3)
    b3(k).CData = zdata;
    b3(k).FaceColor = 'interp';
 end
-% M = 2^24;
-% BCIDBin = gray2bin(BCIDGray,'qam',M);
+M = 2^24;
+BCIDBin = gray2bin(BCIDGray,'qam',M);

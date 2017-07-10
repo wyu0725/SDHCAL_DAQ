@@ -5,9 +5,9 @@ function [ Pad ] = PadMapping4ASIC( MapData, A, B, N, P)
 % A~P: Data of 14 pad : format double 64x1
 % Pad: Data of the 30*30 pad
 %   此处显示详细说明
-    Pad= zeros(15, 18);
-    for i = 1:1:15
-        for j = 1:1:18
+    Pad= zeros(18, 15);
+    for i = 1:1:18
+        for j = 1:1:15
             mapdata = char(MapData(i,j));
             MapDataLength = length(mapdata);
             MapDataHeader = mapdata(1);
