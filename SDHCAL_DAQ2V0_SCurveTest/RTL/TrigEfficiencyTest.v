@@ -108,6 +108,7 @@ module TrigEfficiencyTest(
         TrigEfficiencyData <= 16'b0;
         TrigEfficiencyData_en <= 1'b0;
         TestDone <= 1'b0;
+        DataOutCount <= 3'd0;
         TestState <= IDLE;
       end
       else begin

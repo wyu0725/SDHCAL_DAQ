@@ -116,10 +116,12 @@ module SlaveDaq(
                      WAIT_READ_DONE = 4'd8,
                      //RESET_ASIC = 4'd9, // There is no need to reset ASIC
                      ONCE_END = 4'd9,
-                     OUT_TAIL = 4'd10,
-                     OUT_COUNT1 = 4'd11,
-                     OUT_COUNT2 = 4'd12,
-                     ALL_DONE = 4'd13;
+                     END_DATA = 4'd10,
+                     OUT_TAIL = 4'd11,
+                     OUT_COUNT1 = 4'd12,
+                     OUT_COUNT2 = 4'd13,
+                     OUT_COUNT3 = 4'd14,
+                     ALL_DONE = 4'd15;
     reg [3:0] State;
     localparam TimeMinPowerReset = 8;//Time to wake up clock LVDS receivers 200ns
     localparam TimeMinResetStart = 40;//4 SlowClock ticks + 4 FastClock ticks (internal management) 1us
@@ -189,7 +191,7 @@ module SlaveDaq(
             if(~ModuleStart) begin
               AcqEnable <= 1'b0;
               //AllDone <= 1'b1;
-              State <= OUT_TAIL;
+              State <= END_DATA;
               TrigCount_en <= 1'b0;
             end
             else if(SingleAcqStart) begin
@@ -256,6 +258,10 @@ module SlaveDaq(
               State <= WAIT_START;
             end
           end
+          END_DATA:begin
+            State <= OUT_TAIL;
+            InternalData_en <= 1'b0;
+          end
           OUT_TAIL:begin
             if(DelayCount < 16'd1) begin
               DelayCount <= DelayCount + 1'b1;
@@ -285,6 +291,18 @@ module SlaveDaq(
               DelayCount <= DelayCount + 1'b1;
               InternalData_en <= 1'b1;
               State <= OUT_COUNT2;
+            end
+            else begin
+              DelayCount <= 16'b0;
+              InternalData_en <= 1'b0;
+              State <= OUT_COUNT3;
+            end
+          end
+          OUT_COUNT3:begin
+            if(DelayCount < 16'd1) begin
+              DelayCount <= DelayCount + 1'b1;
+              InternalData_en <= 1'b1;
+              State <= OUT_COUNT3;
             end
             else begin
               DelayCount <= 16'b0;
@@ -359,23 +377,31 @@ module SlaveDaq(
     end
     assign PWR_ON_ADC = 1'b0;
     always @(*) begin
-      if(State == OUT_TAIL) begin
-        SlaveDaqData <= 16'hFF45;
-        SlaveDaqData_en <= InternalData_en;
+      if(State == END_DATA) begin
+        SlaveDaqData = 16'h0000;
+        SlaveDaqData_en = InternalData_en;
+      end
+      else if(State == OUT_TAIL) begin
+        SlaveDaqData = 16'hFF45;
+        SlaveDaqData_en = InternalData_en;
       end
       else if(State == OUT_COUNT1) begin
         //SlaveDaqData <= {8'hCC,TrigCounter_sync[23:16]};
-        SlaveDaqData <= 16'hCCDD;
-        SlaveDaqData_en <= InternalData_en;
+        SlaveDaqData = {8'hCC,TrigCounter_sync[23:16]};
+        SlaveDaqData_en = InternalData_en;
       end
       else if(State == OUT_COUNT2) begin
-        SlaveDaqData <= TrigCounter_sync[15:0];
-        SlaveDaqData_en <= InternalData_en;
+        SlaveDaqData = TrigCounter_sync[15:0];
+        SlaveDaqData_en = InternalData_en;
+      end
+      else if(State == OUT_COUNT3) begin
+        SlaveDaqData = 16'h45FF;
+        SlaveDaqData_en = InternalData_en;
       end
       else begin
         //SlaveDaqData <= MicrorocData;
-        SlaveDaqData <= 16'hAABB;
-        SlaveDaqData_en <= MicrorocData_en;
+        SlaveDaqData = MicrorocData;
+        SlaveDaqData_en = MicrorocData_en;
       end
     end
     /*(*mark_debug = "true"*)wire [15:0] SlaveDaqData_debug;
