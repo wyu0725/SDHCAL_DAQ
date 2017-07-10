@@ -1145,4 +1145,17 @@
 
        ![过阈信号到触发信号之间的延迟](http://ogs54iji1.bkt.clouddn.com/SDHCALB-COFF_BR-PMT_Y-TRIGTTL2.jpg-SDHCAL)
 
-     + 光电倍增管和GEM探测器的相对位置示意图如下
+  2. 第二个方法是利用符合信号作为触发，开始Microroc采数，从采回的数据里面分析数据包个数和总的触发数，其框图如下所示
+
+     ![过阈信号到触发信号之间的延迟](http://ogs54iji1.bkt.clouddn.com/SDHCALSlaveDaqSchemetic.jpg-SDHCAL)
+
+     + 利用这样的办法同时还可以分析读回的数据，确定宇宙线击中的位置，用于分析串扰
+
+
+
+## 2017/07/10
+
+### 芯片采购
+
++ Microroc没有了，有一款推荐的芯片叫GEMROC，不知道能不能用
+  + We don't have anymore MICROROC chips, however, Weeroc company has a licensed version of this chip called GEMROC which is packaged in QFP160 (not TQFP), but we don't have a testboard to test them.

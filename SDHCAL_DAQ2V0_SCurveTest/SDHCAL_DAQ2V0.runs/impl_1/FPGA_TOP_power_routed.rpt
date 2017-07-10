@@ -1,7 +1,7 @@
 Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2016.3 (win64) Build 1682563 Mon Oct 10 19:07:27 MDT 2016
-| Date             : Fri Jul 07 17:04:28 2017
+| Date             : Mon Jul 10 15:07:34 2017
 | Host             : WYU running 64-bit major release  (build 9200)
 | Command          : report_power -file FPGA_TOP_power_routed.rpt -pb FPGA_TOP_power_summary_routed.pb -rpx FPGA_TOP_power_routed.rpx
 | Design           : FPGA_TOP
@@ -51,16 +51,16 @@ Table of Contents
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
 | Clocks         |     0.011 |        9 |       --- |             --- |
-| Slice Logic    |     0.005 |     9071 |       --- |             --- |
-|   LUT as Logic |     0.004 |     4306 |     63400 |            6.79 |
-|   Register     |    <0.001 |     3860 |    126800 |            3.04 |
-|   CARRY4       |    <0.001 |      145 |     15850 |            0.91 |
-|   F7/F8 Muxes  |    <0.001 |      103 |     63400 |            0.16 |
-|   Others       |     0.000 |      182 |       --- |             --- |
-| Signals        |     0.006 |     6271 |       --- |             --- |
+| Slice Logic    |     0.005 |     9054 |       --- |             --- |
+|   LUT as Logic |     0.004 |     4309 |     63400 |            6.80 |
+|   Register     |    <0.001 |     3876 |    126800 |            3.06 |
+|   CARRY4       |    <0.001 |      147 |     15850 |            0.93 |
+|   F7/F8 Muxes  |    <0.001 |       69 |     63400 |            0.11 |
+|   Others       |     0.000 |      181 |       --- |             --- |
+| Signals        |     0.006 |     6324 |       --- |             --- |
 | Block RAM      |     0.001 |      6.5 |       135 |            4.81 |
 | MMCM           |     0.087 |        1 |         6 |           16.67 |
-| I/O            |     0.165 |       93 |       285 |           32.63 |
+| I/O            |     0.164 |       93 |       285 |           32.63 |
 | Static Power   |     0.108 |          |           |                 |
 | Total          |     0.381 |          |           |                 |
 +----------------+-----------+----------+-----------+-----------------+
@@ -214,8 +214,8 @@ Table of Contents
 |       Trigger1                                                             |    <0.001 |
 |       Trigger2                                                             |    <0.001 |
 |   Microroc_u1                                                              |     0.162 |
-|     HoldGenerator                                                          |     0.005 |
-|     MicrorocDaq                                                            |     0.001 |
+|     HoldGenerator                                                          |     0.006 |
+|     MicrorocDaq                                                            |    <0.001 |
 |       AutoDaqControl                                                       |    <0.001 |
 |       SlaveDaqControl                                                      |    <0.001 |
 |     RAM_Read                                                               |    <0.001 |
@@ -255,7 +255,7 @@ Table of Contents
 |     Trig_Gen                                                               |    <0.001 |
 |     Trig_Gen_en                                                            |    <0.001 |
 |   TrigSelect                                                               |    <0.001 |
-|   usb_control                                                              |     0.005 |
+|   usb_control                                                              |     0.004 |
 |     usbcmdfifo_16depth                                                     |     0.002 |
 |       U0                                                                   |     0.002 |
 |         inst_fifo_gen                                                      |     0.002 |
@@ -285,11 +285,11 @@ Table of Contents
 |                 ngwrdrst.grst.g7serrst.gwrrd_rst_sync_stage[2].rrst_inst   |    <0.001 |
 |                 ngwrdrst.grst.g7serrst.gwrrd_rst_sync_stage[2].wrst_inst   |    <0.001 |
 |   usb_cy7c68013A                                                           |    <0.001 |
-|   usb_data_fifo_8192depth                                                  |     0.001 |
-|     U0                                                                     |     0.001 |
-|       inst_fifo_gen                                                        |     0.001 |
-|         gconvfifo.rf                                                       |     0.001 |
-|           grf.rf                                                           |     0.001 |
+|   usb_data_fifo_8192depth                                                  |     0.002 |
+|     U0                                                                     |     0.002 |
+|       inst_fifo_gen                                                        |     0.002 |
+|         gconvfifo.rf                                                       |     0.002 |
+|           grf.rf                                                           |     0.002 |
 |             gntv_or_sync_fifo.gcx.clkx                                     |    <0.001 |
 |               gnxpm_cdc.gsync_stage[1].rd_stg_inst                         |    <0.001 |
 |               gnxpm_cdc.gsync_stage[1].wr_stg_inst                         |    <0.001 |
