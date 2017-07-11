@@ -2361,6 +2361,7 @@ namespace USB_DAQ
                 //btnScurve_start.IsEnabled = false;
                 gbxSweepTest.IsEnabled = false;
                 gbxAD9220.IsEnabled = false;
+                btnSC_or_ReadReg.IsEnabled = true;
                 DataAcqMode = Acq;
                 byte[] bytes = ConstCommandByteArray(0xE0, 0xA0);
                 bResult = CommandSend(bytes, bytes.Length);
@@ -2382,6 +2383,7 @@ namespace USB_DAQ
                 gbxSCurveTest.IsEnabled = true;
                 gbxSweepAcq.IsEnabled = false;
                 gbxAD9220.IsEnabled = false;
+                btnSC_or_ReadReg.IsEnabled = false;
                 DataAcqMode = SCTest;
 
                 byte[] bytes = ConstCommandByteArray(0xE0, 0xA1);
@@ -2412,6 +2414,7 @@ namespace USB_DAQ
                 gbxSCurveTest.IsEnabled = false;
                 gbxSweepAcq.IsEnabled = true;
                 gbxAD9220.IsEnabled = false;
+                btnSC_or_ReadReg.IsEnabled = false;
                 DataAcqMode = SweepAcq;
                 byte[] bytes = ConstCommandByteArray(0xE0, 0xA2);
                 bResult = CommandSend(bytes, bytes.Length);
@@ -2439,6 +2442,7 @@ namespace USB_DAQ
                 gbxNormalAcq.IsEnabled = false;
                 gbxSweepTest.IsEnabled = false;
                 gbxAD9220.IsEnabled = true;
+                btnSC_or_ReadReg.IsEnabled = true;
                 DataAcqMode = Adc;
                 byte[] CommandBytes = ConstCommandByteArray(0xE0, 0xA3);
                 bResult = CommandSend(CommandBytes, CommandBytes.Length);
@@ -2469,6 +2473,7 @@ namespace USB_DAQ
                 gbxSweepAcq.IsEnabled = false;
                 gbxAD9220.IsEnabled = false;
                 btnSweepTestStart.IsEnabled = true;
+                btnSC_or_ReadReg.IsEnabled = true;
                 DataAcqMode = Efficiency;
                 byte[] CommandBytes = ConstCommandByteArray(0xE0, 0xA4);
                 bResult = CommandSend(CommandBytes, CommandBytes.Length);
