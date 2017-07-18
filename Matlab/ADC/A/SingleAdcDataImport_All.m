@@ -7,7 +7,7 @@ prompt = {'Input the average number'};
  AverageNumber = str2double(answer);
  Locs=zeros(1,FNum);
  L=zeros(1,FNum);
- [IgnoreChannel, PathName] = GetIgnore();
+%  [IgnoreChannel, PathName] = GetIgnore();
  for k=1:1:FNum
      if(CheckIgnore(k,IgnoreChannel) == 1)
          continue;
