@@ -1159,3 +1159,8 @@
 
 + Microroc没有了，有一款推荐的芯片叫GEMROC，不知道能不能用
   + We don't have anymore MICROROC chips, however, Weeroc company has a licensed version of this chip called GEMROC which is packaged in QFP160 (not TQFP), but we don't have a testboard to test them.
+
+
+
+## 2017/07/19
+
