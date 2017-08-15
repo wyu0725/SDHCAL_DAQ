@@ -10,10 +10,83 @@
     (File ".\sdhcalfeb.dsn"
       (Type "Schematic Design"))
     (BuildFileAddedOrDeleted "x")
-    (CompileFileAddedOrDeleted "x"))
+    (CompileFileAddedOrDeleted "x")
+    (Board_sim_option "VHDL_flow"))
   (Folder "Outputs")
   (Folder "Referenced Projects")
   (PartMRUSelector
+    (OFFPAGELEFT-L
+      (LibraryName "C:\CADENCE\SPB_16.6\TOOLS\CAPTURE\LIBRARY\CAPSYM.OLB")
+      (DeviceIndex "0"))
+    (AD8062_MSOP
+      (FullPartName "AD8062_MSOP.Normal")
+      (LibraryName
+         "D:\CADENCE_WORKSPACE\CADENCE LIBRARY\CAPTURE LIBRARY\MY_SCH_LIBRARY.OLB")
+      (DeviceIndex "0"))
+    (GND
+      (LibraryName
+         "D:\PROFESSIONAL_SOFTWARES\CADENCE\SPB_16.6\TOOLS\CAPTURE\LIBRARY\CAPSYM.OLB")
+      (DeviceIndex "0"))
+    (TS5A3116
+      (FullPartName "TS5A3116.Normal")
+      (LibraryName
+         "D:\CADENCE_WORKSPACE\CADENCE LIBRARY\CAPTURE LIBRARY\MY_SCH_LIBRARY.OLB")
+      (DeviceIndex "0"))
+    (LM6142_SOIC
+      (FullPartName "LM6142_SOIC.Normal")
+      (LibraryName
+         "D:\CADENCE_WORKSPACE\CADENCE LIBRARY\CAPTURE LIBRARY\MY_SCH_LIBRARY.OLB")
+      (DeviceIndex "0"))
+    (REF3212
+      (FullPartName "REF3212.Normal")
+      (LibraryName
+         "D:\CADENCE_WORKSPACE\CADENCE LIBRARY\CAPTURE LIBRARY\MY_SCH_LIBRARY.OLB")
+      (DeviceIndex "0"))
+    (TLV5618_SOIC
+      (FullPartName "TLV5618_SOIC.Normal")
+      (LibraryName
+         "D:\CADENCE_WORKSPACE\CADENCE LIBRARY\CAPTURE LIBRARY\MY_SCH_LIBRARY.OLB")
+      (DeviceIndex "0"))
+    (ADG708
+      (FullPartName "ADG708.Normal")
+      (LibraryName
+         "D:\CADENCE_WORKSPACE\CADENCE LIBRARY\CAPTURE LIBRARY\MY_SCH_LIBRARY.OLB")
+      (DeviceIndex "0"))
+    (SN74LV21A
+      (FullPartName "SN74LV21A.Normal")
+      (LibraryName
+         "D:\CADENCE_WORKSPACE\CADENCE LIBRARY\CAPTURE LIBRARY\MY_SCH_LIBRARY.OLB")
+      (DeviceIndex "0"))
+    (SN74LVC1T45
+      (FullPartName "SN74LVC1T45.Normal")
+      (LibraryName
+         "D:\CADENCE_WORKSPACE\CADENCE LIBRARY\CAPTURE LIBRARY\MY_SCH_LIBRARY.OLB")
+      (DeviceIndex "0"))
+    (SN74LV08A
+      (FullPartName "SN74LV08A.Normal")
+      (LibraryName
+         "D:\CADENCE_WORKSPACE\CADENCE LIBRARY\CAPTURE LIBRARY\MY_SCH_LIBRARY.OLB")
+      (DeviceIndex "0"))
+    (SMA_SMD
+      (FullPartName "SMA_SMD.Normal")
+      (LibraryName
+         "D:\CADENCE_WORKSPACE\CADENCE LIBRARY\CAPTURE LIBRARY\MY_SCH_LIBRARY.OLB")
+      (DeviceIndex "0"))
+    (ADG704
+      (FullPartName "ADG704.Normal")
+      (LibraryName
+         "D:\CADENCE_WORKSPACE\CADENCE LIBRARY\CAPTURE LIBRARY\MY_SCH_LIBRARY.OLB")
+      (DeviceIndex "0"))
+    (74ACT11244
+      (FullPartName "74ACT11244.Normal")
+      (LibraryName
+         "D:\CADENCE_WORKSPACE\CADENCE LIBRARY\CAPTURE LIBRARY\MY_SCH_LIBRARY.OLB")
+      (DeviceIndex "1"))
+    (DS91M125
+      (FullPartName "DS91M125.Normal")
+      (LibraryName
+         "D:\CADENCE_WORKSPACE\CADENCE LIBRARY\CAPTURE LIBRARY\MY_SCH_LIBRARY.OLB")
+      (DeviceIndex "0"))
     (NUP4114UPXV6
       (FullPartName "NUP4114UPXV6.Normal")
       (LibraryName
@@ -42,13 +115,31 @@
          "ASIC_A1")
       (Path "Design Resources"
          "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCalFEB\Capture\sdhcalfeb.dsn"
-         "Interface To DIF")
+         "ASIC_A2")
+      (Path "Design Resources"
+         "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCalFEB\Capture\sdhcalfeb.dsn"
+         "ASIC_E")
+      (Path "Design Resources"
+         "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCalFEB\Capture\sdhcalfeb.dsn"
+         "Calibration")
+      (Path "Design Resources"
+         "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCalFEB\Capture\sdhcalfeb.dsn"
+         "Interface To DAQ")
       (Path "Design Resources"
          "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCalFEB\Capture\sdhcalfeb.dsn"
          "Pad Array")
+      (Path "Design Resources"
+         "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCalFEB\Capture\sdhcalfeb.dsn"
+         "Power")
+      (Path "Design Resources"
+         "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCalFEB\Capture\sdhcalfeb.dsn"
+         "Design Cache")
       (Path "Design Resources" "Library")
       (Path "Design Resources" "Library"
-         "d:\cadence_workspace\cadence library\capture library\my_sch_library.olb"))
+         "d:\cadence_workspace\cadence library\capture library\my_sch_library.olb")
+      (Select "Design Resources"
+         "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCalFEB\Capture\sdhcalfeb.dsn"
+         "Interface To DAQ" "LVCMOS Driver"))
     (HierarchyView)
     (Doc
       (Type "COrCapturePMDoc")
@@ -58,53 +149,13 @@
     (Doc
       (Type "COrSchematicDoc")
       (Frame
-        (Placement "44 0 1 -1 -1 -8 -31 182 1818 182 642")
-        (Scroll "-355 0")
-        (Zoom "76"))
-      (Path
-         "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCALFEB\CAPTURE\SDHCALFEB.DSN")
-      (Schematic "ASIC_A1")
-      (Page "Analog Input"))
-    (Doc
-      (Type "COrSchematicDoc")
-      (Frame
-        (Placement "44 2 3 -1 -1 -8 -31 208 1844 208 668")
-        (Scroll "-180 0")
-        (Zoom "100"))
-      (Path
-         "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCALFEB\CAPTURE\SDHCALFEB.DSN")
-      (Schematic "ASIC_A1")
-      (Page "Chip"))
-    (Doc
-      (Type "COrSchematicDoc")
-      (Frame
-        (Placement "44 0 1 -1 -1 -8 -31 52 1395 52 512")
-        (Scroll "-208 0")
-        (Zoom "76"))
-      (Path
-         "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCALFEB\CAPTURE\SDHCALFEB.DSN")
-      (Schematic "Pad Array")
-      (Page "Pad Array 1"))
-    (Doc
-      (Type "COrSchematicDoc")
-      (Frame
-        (Placement "44 0 1 -1 -1 -8 -31 78 1421 78 538")
-        (Scroll "-68 40")
-        (Zoom "100"))
-      (Path
-         "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCALFEB\CAPTURE\SDHCALFEB.DSN")
-      (Schematic "Pad Array")
-      (Page "Pad Array 2"))
-    (Doc
-      (Type "COrSchematicDoc")
-      (Frame
         (Placement "44 0 1 -1 -1 -8 -31 104 1447 104 564")
-        (Scroll "-68 0")
-        (Zoom "100"))
+        (Scroll "0 1162")
+        (Zoom "216"))
       (Path
          "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCALFEB\CAPTURE\SDHCALFEB.DSN")
-      (Schematic "Pad Array")
-      (Page "Pad Array 3"))
+      (Schematic "Interface To DAQ")
+      (Page "Interface To DAQ"))
     (Doc
       (Type "COrSchematicDoc")
       (Frame
@@ -113,5 +164,26 @@
         (Zoom "100"))
       (Path
          "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCALFEB\CAPTURE\SDHCALFEB.DSN")
-      (Schematic "Pad Array")
-      (Page "Pad Array 4"))))
+      (Schematic "Interface To DAQ")
+      (Page "LVDS Buffer"))
+    (Doc
+      (Type "COrSchematicDoc")
+      (Frame
+        (Placement "44 0 1 -1 -1 -8 -31 156 1499 156 616")
+        (Scroll "256 220")
+        (Zoom "108"))
+      (Path
+         "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCALFEB\CAPTURE\SDHCALFEB.DSN")
+      (Schematic "Interface To DAQ")
+      (Page "Switcher"))
+    (Doc
+      (Type "COrSchematicDoc")
+      (Frame
+        (Placement "44 2 3 -1 -1 -8 -31 182 1525 182 642")
+        (Scroll "-63 0")
+        (Zoom "100"))
+      (Path
+         "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCALFEB\CAPTURE\SDHCALFEB.DSN")
+      (Schematic "Interface To DAQ")
+      (Page "LVCMOS Driver")))
+  (MPSSessionName "wyu08"))
