@@ -13,8 +13,8 @@
     (CompileFileAddedOrDeleted "x")
     (Board_sim_option "VHDL_flow")
     (DRC_Scope "0")
-    (DRC_Action "0")
-    (DRC_Create_Warnings "FALSE")
+    (DRC_Action "1")
+    (DRC_Create_Warnings "TRUE")
     (DRC_View_Output "FALSE")
     (DRC_Preserved_Waived "FALSE")
     (DRC_Run_Electrical_Rules "TRUE")
@@ -155,13 +155,13 @@
          "TOP")
       (Path "Design Resources"
          "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCalFEB\Capture\sdhcalfeb.dsn"
-         "ASIC_A1")
+         "ASIC_D1")
+      (Path "Design Resources"
+         "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCalFEB\Capture\sdhcalfeb.dsn"
+         "ASIC_D2")
       (Path "Design Resources"
          "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCalFEB\Capture\sdhcalfeb.dsn"
          "ASIC_E")
-      (Path "Design Resources"
-         "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCalFEB\Capture\sdhcalfeb.dsn"
-         "Calibration")
       (Path "Design Resources"
          "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCalFEB\Capture\sdhcalfeb.dsn"
          "Interface To DAQ")
@@ -170,37 +170,64 @@
          "Pad Array")
       (Path "Design Resources"
          "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCalFEB\Capture\sdhcalfeb.dsn"
-         "Design Cache")
-      (Path "Design Resources" "Library")
-      (Path "Design Resources" "Library"
-         "d:\cadence_workspace\cadence library\capture library\my_sch_library.olb")
-      (Path "Outputs")
-      (Select "Design Resources"
-         "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCalFEB\Capture\sdhcalfeb.dsn"
-         "ASIC_A1" "Chip"))
+         "Power")
+      (Path "Outputs"))
     (HierarchyView)
     (Doc
       (Type "COrCapturePMDoc")
       (Frame
-        (Placement "44 0 1 -1 -1 -8 -31 0 200 0 421"))
+        (Placement "44 2 3 -1 -1 -8 -31 0 200 0 421"))
       (Tab 0))
     (Doc
       (Type "COrSchematicDoc")
       (Frame
-        (Placement "44 0 1 -1 -1 -8 -31 78 1714 78 538")
-        (Scroll "-355 0")
-        (Zoom "76")
-        (Occurrence "/"))
+        (Placement "44 0 1 -1 -1 -8 -31 104 1740 104 564")
+        (Scroll "0 707")
+        (Zoom "100")
+        (Occurrence "/Interface To DAQ"))
       (Path
          "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCALFEB\CAPTURE\SDHCALFEB.DSN")
-      (Schematic "TOP")
-      (Page "Top View"))
+      (Schematic "Interface To DAQ")
+      (Page "Interface To DAQ"))
     (Doc
       (Type "COrSchematicDoc")
       (Frame
-        (Placement "44 0 1 -1 -1 -8 -31 104 1740 104 564")
-        (Scroll "-355 0")
-        (Zoom "38")
+        (Placement "44 0 1 -1 -1 -8 -31 130 1766 130 590")
+        (Scroll "-214 0")
+        (Zoom "100")
+        (Occurrence "/Interface To DAQ"))
+      (Path
+         "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCALFEB\CAPTURE\SDHCALFEB.DSN")
+      (Schematic "Interface To DAQ")
+      (Page "LVCMOS Driver"))
+    (Doc
+      (Type "COrSchematicDoc")
+      (Frame
+        (Placement "44 0 1 -1 -1 -8 -31 156 1792 156 616")
+        (Scroll "-214 180")
+        (Zoom "100")
+        (Occurrence "/Interface To DAQ"))
+      (Path
+         "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCALFEB\CAPTURE\SDHCALFEB.DSN")
+      (Schematic "Interface To DAQ")
+      (Page "LVDS Buffer"))
+    (Doc
+      (Type "COrSchematicDoc")
+      (Frame
+        (Placement "44 0 1 -1 -1 -8 -31 182 1818 182 642")
+        (Scroll "0 371")
+        (Zoom "100")
+        (Occurrence "/Interface To DAQ"))
+      (Path
+         "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCALFEB\CAPTURE\SDHCALFEB.DSN")
+      (Schematic "Interface To DAQ")
+      (Page "Switcher"))
+    (Doc
+      (Type "COrSchematicDoc")
+      (Frame
+        (Placement "44 0 1 -1 -1 -8 -31 78 1766 78 406")
+        (Scroll "3447 1963")
+        (Zoom "168")
         (Occurrence "/"))
       (Path
          "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCALFEB\CAPTURE\SDHCALFEB.DSN")
@@ -209,63 +236,11 @@
     (Doc
       (Type "COrSchematicDoc")
       (Frame
-        (Placement "44 0 1 -1 -1 -8 -31 130 1766 130 590")
-        (Scroll "-115 14")
-        (Zoom "90")
-        (Occurrence "/ASIC_A1"))
+        (Placement "44 0 1 -1 -1 -8 -31 26 1714 26 354")
+        (Scroll "-509 0")
+        (Zoom "54"))
       (Path
          "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCALFEB\CAPTURE\SDHCALFEB.DSN")
-      (Schematic "ASIC_A1")
-      (Page "Analog Input"))
-    (Doc
-      (Type "COrSchematicDoc")
-      (Frame
-        (Placement "44 2 3 -1 -1 -8 -31 156 1792 156 616")
-        (Scroll "282 0")
-        (Zoom "200")
-        (Occurrence "/ASIC_A1"))
-      (Path
-         "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCALFEB\CAPTURE\SDHCALFEB.DSN")
-      (Schematic "ASIC_A1")
-      (Page "Chip"))
-    (Doc
-      (Type "COrSchematicDoc")
-      (Frame
-        (Placement "44 0 1 -1 -1 -8 -31 26 1714 26 390")
-        (Scroll "-240 180")
-        (Zoom "100"))
-      (Path
-         "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCALFEB\CAPTURE\SDHCALFEB.DSN")
-      (Schematic "Calibration")
-      (Page "Auto Calibration"))
-    (Doc
-      (Type "COrSchematicDoc")
-      (Frame
-        (Placement "44 0 1 -1 -1 -8 -31 104 1792 104 468")
-        (Scroll "-240 200")
-        (Zoom "100"))
-      (Path
-         "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCALFEB\CAPTURE\SDHCALFEB.DSN")
-      (Schematic "Power")
-      (Page "Analog Power"))
-    (Doc
-      (Type "COrSchematicDoc")
-      (Frame
-        (Placement "44 0 1 -1 -1 -8 -31 130 1818 130 494")
-        (Scroll "-240 128")
-        (Zoom "100"))
-      (Path
-         "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCALFEB\CAPTURE\SDHCALFEB.DSN")
-      (Schematic "Pad Array")
-      (Page "Pad Array 1"))
-    (Doc
-      (Type "COrSchematicDoc")
-      (Frame
-        (Placement "44 0 1 -1 -1 -8 -31 156 1844 156 520")
-        (Scroll "0 671")
-        (Zoom "100"))
-      (Path
-         "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCALFEB\CAPTURE\SDHCALFEB.DSN")
-      (Schematic "Interface To DAQ")
-      (Page "Interface To DAQ")))
+      (Schematic "ASIC_E")
+      (Page "ASIC_E_Reserved")))
   (MPSSessionName "wyu08"))
