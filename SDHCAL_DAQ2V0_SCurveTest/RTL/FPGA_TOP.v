@@ -2,21 +2,21 @@
 //////////////////////////////////////////////////////////////////////////////////
 // Company: University of Science and Technology of China
 // Engineer: Junbin Zhang
-// 
+//
 // Create Date: 11/14/2016 10:34:45 AM
 // Design Name: SDHCAL_DAQ2V0
 // Module Name: FPGA_TOP
-// Project Name: 
+// Project Name:
 // Target Devices: XC7A100TFGG484
 // Tool Versions: Vivado 2016.3
 // Description: top level of the whole project
-// 
-// Dependencies: 
-// 
+//
+// Dependencies:
+//
 // Revision:
 // Revision 0.01 - File Created
 // Additional Comments:
-// 
+//
 //////////////////////////////////////////////////////////////////////////////////
 
 
@@ -43,7 +43,7 @@ module FPGA_TOP(
     input END_READOUT1,
     input END_READOUT2,
     //----RAM readout------//
-    input DOUT1B, 
+    input DOUT1B,
     input DOUT2B,
     input TRANSMITON1B,
     input TRANSMITON2B,
@@ -92,7 +92,7 @@ module FPGA_TOP(
     output TRIGGER_OUT,
     //------Test Point-----//
     output [3:0] TP,
-    //----LED indicator---//   
+    //----LED indicator---//
     output [5:0] LED
     );
     /*----Clock management instantiation----*/
@@ -115,12 +115,12 @@ module FPGA_TOP(
         .reset_n(reset_n),//golbal reset
         .CLKGOOD(CLKGOOD)  //clock good indicator
     );
-    assign LED[4] = !CLKGOOD; 
+    assign LED[4] = !CLKGOOD;
     /*--- usb_command_interpreter instantiation ---*/
     wire in_from_usb_Ctr_rd_en;
-    wire [15:0] in_from_usb_ControlWord;    
+    wire [15:0] in_from_usb_ControlWord;
     wire out_to_rst_usb_data_fifo;
-    //Microroc 
+    //Microroc
     wire UsbMicrorocSCOrReadreg;//
     wire UsbMicrorocSCParameterLoad;//
     wire [2:0] Microroc_param_asic_num;//
@@ -183,6 +183,18 @@ module FPGA_TOP(
     wire [3:0] UsbTriggerDelay;
     wire UsbUnmaskAllChannel;
     wire [9:0] UsbAdcInterval;
+    // Add This part for powerpulsing test. There are 12 kinds of powerpulsing
+    // parameters, which are divided into 9 groups. Control these 9 groups
+    // parameters to test the power consumption of Microroc.
+    wire PreAmpPowerPulsing_en;
+    wire ShaperPowerPulsing_en;
+    wire WidlarPowerPulsing_en;
+    wire Dac4BitPowerPulsing_en;
+    wire OTAqPowerPulsing_en;
+    wire DiscriminatorPowerPulsing_en;
+    wire VbgPowerPowerPulsing_en;
+    wire Dac10BitPowerPulsing_en;
+    wire LvdsPowerPulsing_en;
     usb_command_interpreter usb_control
     (
       .IFCLK(IFCLK),
@@ -208,7 +220,7 @@ module FPGA_TOP(
       .MicrorocHoldDelay(MicrorocHoldDelay),
       .MicrorocHoldTime(MicrorocHoldTime),
       .Microroc_rst_cntb(Microroc_rst_cntb),
-      //.Microroc_raz_en(Microroc_raz_en),      
+      //.Microroc_raz_en(Microroc_raz_en),
       .Microroc_trig_en(Microroc_trig_en),
       //.Microroc_raz_mode(Microroc_raz_mode),
       .Microroc_param_header(Microroc_param_header),
@@ -219,7 +231,7 @@ module FPGA_TOP(
       .Microroc_HG_or_LG_shaper_output(Microroc_HG_or_LG_shaper_output),
       .Microroc_OTAQ_en(Microroc_OTAQ_en),
       //.TP(TP[1:0]),
-      .ADG804_Addr(ADG804_Addr), 
+      .ADG804_Addr(ADG804_Addr),
       .ADG819_Addr(ADG819_Addr),
       .TP(),
       //new add by wyu 20170308
@@ -233,6 +245,16 @@ module FPGA_TOP(
       //new add 20170308 done
       // Channel Mask
       .MicrorocChannelMask(UsbMicrorocChannelMask),
+      // PowerPulsing enable control
+      .PreAmpPowerPulsing_en(PreAmpPowerPulsing_en),
+      .ShaperPowerPulsing_en(ShaperPowerPulsing_en),
+      .WidlarPowerPulsing_en(WidlarPowerPulsing_en),
+      .Dac4BitPowerPulsing_en(Dac4BitPowerPulsing_en),
+      .OTAqPowerPulsing_en(OTAqPowerPulsing_en),
+      .DiscriminatorPowerPulsing_en(DiscriminatorPowerPulsing_en),
+      .VbgPowerPowerPulsing_en(VbgPowerPowerPulsing_en),
+      .Dac10BitPowerPulsing_en(Dac10BitPowerPulsing_en),
+      .LvdsPowerPulsing_en(LvdsPowerPulsing_en),
       //--- Sweep Test Port ---//
       //Mode Select
       .ModeSelect(ModeSelect),
@@ -268,7 +290,7 @@ module FPGA_TOP(
       .DaqSelect(UsbDaqSelect),
       /*----------------------------*/
       .LED(LED[3:0])
-    );    
+    );
     /*-----------USB2.0 instantiation------------*/
     wire [15:0] in_from_ext_fifo_dout;
     wire out_to_ext_fifo_rd_en;
@@ -286,7 +308,7 @@ module FPGA_TOP(
       .nSLWR(usb_slwr),
       .nPKTEND(usb_pktend),
       .FIFOADR(usb_fifoaddr),
-      .FD_BUS(usb_fd),  
+      .FD_BUS(usb_fd),
       .Acq_Start_Stop(UsbStartStop),
       .Ctr_rd_en(in_from_usb_Ctr_rd_en),              //fifo interface
       .ControlWord(in_from_usb_ControlWord),          //fifo interface
@@ -294,7 +316,7 @@ module FPGA_TOP(
       .in_from_ext_fifo_empty(in_from_ext_fifo_empty),//fifo interface
       .out_to_ext_fifo_rd_en(out_to_ext_fifo_rd_en)   //fifo interface
     );
-    
+
 
     /*
     //USB FIFO data
@@ -317,8 +339,8 @@ module FPGA_TOP(
     wire SCTest_SC_Param_Load;
     wire USB_Data_Transmit_Done;
     wire Microroc_sc_or_read;*/
-    
-    
+
+
     //3 triggers
     /*wire SCTest_out_trigger0b;
     wire SCTest_out_trigger1b;
@@ -441,7 +463,7 @@ module FPGA_TOP(
                                                 //the raz_chn width should be
                                                 //set in the SC param
       .Ck_mux(1'b1),                 //bypass synchronous powerondigital
-      .Sc_on(1'b0),                  //enable clocks LVDS Receriver power pulsing ------?
+      .Sc_on(LvdsPowerPulsing_en),                  //enable clocks LVDS Receriver power pulsing ------?
       .Raz_chn_ext_validation(~Microroc_Internal_or_External_raz_chn), // Modefied by wyu 20170308, this parameter should be set by usb
       .Raz_chn_int_validation(Microroc_Internal_or_External_raz_chn), // Modefied by wyu 20170308, this parameter should be set by usb
       .Trig_ext_validation(1'b1),    //enable external trigger signal
@@ -452,27 +474,27 @@ module FPGA_TOP(
       .DAC1_Vth(Microroc10BitDac1),  //10-bit triple DAC voltage threshold
       .DAC0_Vth(Microroc10BitDac0),  //10-bit triple DAC voltage threshold
       .En_dac(1'b1),                 //enable dac
-      .En_dac_pp(1'b1),              //enable dac for power pulsing
+      .En_dac_pp(Dac10BitPowerPulsing_en),              //enable dac for power pulsing
       .En_bg(1'b1),                  //enable bandgap
-      .En_bg_pp(1'b1),               //enable bandgap for powerpulsing
+      .En_bg_pp(VbgPowerPowerPulsing_en),               //enable bandgap for powerpulsing
       .header(Microroc_param_header),                //header
       .Chn_discri_mask(MicrorocChannelMask), //no channel discriminators mask
       .Rs_or_discri(Microroc_RS_or_Discri),           //select latched or directly output // Modefied by wyu 20170308, this parameter should be set by usb
-      .En_discri1_pp(1'b1),          //enable disc1 powerpulsing if disc0 enabled  /enable
-      .En_discri2_pp(1'b1),          //enable disc2 powerpulsing if disc0 enabled  /enable
-      .En_discri0_pp(1'b1),          //enable disc0 powerpulsing  /enable
-      .En_otaq_pp(1'b1),             //enable otaq for power pulsing
+      .En_discri1_pp(DiscriminatorPowerPulsing_en),          //enable disc1 powerpulsing if disc0 enabled  /enable
+      .En_discri2_pp(DiscriminatorPowerPulsing_en),          //enable disc2 powerpulsing if disc0 enabled  /enable
+      .En_discri0_pp(DiscriminatorPowerPulsing_en),          //enable disc0 powerpulsing  /enable
+      .En_otaq_pp(OTAqPowerPulsing_en),             //enable otaq for power pulsing
       .En_otaq(Microroc_OTAQ_en),                //enable selected charge outputs
-      .En_dac4bit_pp(1'b1),          //enable 4-bit DAC for powerpulsing  /enable
+      .En_dac4bit_pp(Dac4BitPowerPulsing_en),          //enable 4-bit DAC for powerpulsing  /enable
       .Chn_adjust(Microroc_4Bit_DAC),           //4-bit DAC adjustment per channel-----?
       .Sw_hg(Microroc_sw_hg),                 //switch high gain shaper
       .Va_shlg_read(Microroc_HG_or_LG_shaper_output),           //valid low gain shaper for read 1-->on
-      .En_widlar_pp(1'b1),           //enable widlar for power pulsing, --> off //I don't know what is widlar, modefy it for test
+      .En_widlar_pp(WidlarPowerPulsing_en),           //enable widlar for power pulsing, --> off //I don't know what is widlar, modefy it for test
       .Sw_lg(Microroc_sw_lg),                 //swich low gain shaper
-      .En_shlg_pp(1'b1),             //enable shaper low gain power pulsing  /enable
-      .En_shhg_pp(1'b1),             //enable shaper high gain power pulsing  /enable
+      .En_shlg_pp(ShaperPowerPulsing_en),             //enable shaper low gain power pulsing  /enable
+      .En_shhg_pp(ShaperPowerPulsing_en),             //enable shaper high gain power pulsing  /enable
       .En_gbst(1'b1),                //enable gain boost
-      .En_Preamp_pp(1'b1),           //enable preamplifier power pulsing /enable
+      .En_Preamp_pp(PreAmpPowerPulsing_en),           //enable preamplifier power pulsing /enable
       .Ctest(MicrorocCTestChannel),  //enable test capacitor from chn 0-63
       //--64bit read register-//
       .Read_reg(Microroc_param_Read_reg), //read register
@@ -531,7 +553,7 @@ module FPGA_TOP(
       .END_READOUT1(END_READOUT1),
       .END_READOUT2(END_READOUT2),
       //----RAM readout------//
-      .DOUT1B(DOUT1B), 
+      .DOUT1B(DOUT1B),
       .DOUT2B(DOUT2B),
       .TRANSMITON1B(TRANSMITON1B),
       .TRANSMITON2B(TRANSMITON2B),
@@ -633,11 +655,11 @@ module FPGA_TOP(
       .ADC_CLK(ADC_CLK)
     );
     /*------------ S Curve Test Instantiation ------------*/
-    // This aera is for S Curve test, including SCurve-Test top. 
-    // This module is added by wyu 20170310, 
-    // 
-    
-    //SCurve Test Top instantion    
+    // This aera is for S Curve test, including SCurve-Test top.
+    // This module is added by wyu 20170310,
+    //
+
+    //SCurve Test Top instantion
     /*SCurve_Test_Top Microroc_SCurveTest(
       .Clk(Clk),
       .Clk_5M(Clk_5M),
@@ -673,9 +695,9 @@ module FPGA_TOP(
       .Data_Transmit_Done(USB_Data_Transmit_Done)
     );*/
     assign LED[5] = ~(SweepTestStartStop || SweepTestDone);
-    /*------------usb data fifo instantiation-------*/ 
+    /*------------usb data fifo instantiation-------*/
     //per ASIC 1270 depth x 16bit, 4 ASIC 5080 depth
-    usb_data_fifo usb_data_fifo_8192depth 
+    usb_data_fifo usb_data_fifo_8192depth
     (
       .rst(out_to_rst_usb_data_fifo || !reset_n), // input rst
       .wr_clk(~Clk),  // input wr_clk -----new
@@ -688,7 +710,7 @@ module FPGA_TOP(
       .dout(in_from_ext_fifo_dout),   // output [15 : 0] dout
       .empty(in_from_ext_fifo_empty)  // output empty
     );
-    
+
 //assignmeng
 assign TP[3] = MicrorocSCParameterLoad;
 assign TP[2] = SweepTestStartStop;
