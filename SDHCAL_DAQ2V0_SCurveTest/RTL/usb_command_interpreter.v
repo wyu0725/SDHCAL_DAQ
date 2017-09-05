@@ -273,7 +273,65 @@ module usb_command_interpreter(
 	always @(posedge clk or negedge reset_n) begin
 		if(~reset_n)
 			Dac4BitPowerPulsing_en <= 1'b0;
-		else if(posedge )
+		else if(fifo_rden && USB_COMMAND == 16'hA0E6)
+			Dac4BitPowerPulsing_en <= 1'b0;
+		else if(fifo_rden && USB_COMMAND == 16'hA0E7)
+			Dac4BitPowerPulsing_en <= 1'b0;
+		else
+			Dac4BitPowerPulsing_en <= Dac4BitPowerPulsing_en;
+	end
+	// OTAq PowerPulsing Enable
+	always @(posedge clk or negedge reset_n) begin
+		if(~reset_n)
+			OTAqPowerPulsing_en <= 1'b0;
+		else if(fifo_rden && USB_COMMAND == 16'hA0E8)
+			OTAqPowerPulsing_en <= 1'b0;
+		else if(fifo_rden && USB_COMMAND == 16'hA0E9)
+			OTAqPowerPulsing_en <= 1'b1;
+		else
+			OTAqPowerPulsing_en <= OTAqPowerPulsing_en;
+	end
+	// Discriminator PowerPulsing control
+	always @(posedge clk or negedge reset_n) begin
+		if(~reset_n)
+			DiscriminatorPowerPulsing_en <= 1'b0;
+		else if(fifo_rden && USB_COMMAND == 16'hA0EA)
+			DiscriminatorPowerPulsing_en <= 1'b0;
+		else if(fifo_rden && USB_COMMAND == 16'hA0EB)
+			DiscriminatorPowerPulsing_en <= 1'b1;
+		else 
+			DiscriminatorPowerPulsing_en <= DiscriminatorPowerPulsing_en;
+	end
+	// V_bg PowerPulsing control
+	always @(posedge clk or negedge reset_n) begin
+		if(~reset_n)
+			VbgPowerPowerPulsing_en <= 1'b0;
+		else if(fifo_rden && USB_COMMAND == 16'hA0EC)
+			VbgPowerPowerPulsing_en <= 1'b0;
+		else if(fifo_rden && USB_COMMAND == 16'hA0ED)
+			VbgPowerPowerPulsing_en <= 1'b1;
+		else
+			VbgPowerPowerPulsing_en <= VbgPowerPowerPulsing_en;
+	end
+	// 10 bit DAC PowerPulsing control
+	always @(posedge clk or negedge reset_n) begin
+		if(~reset_n && USB_COMMAND == 16'hA0EE)
+			Dac10BitPowerPulsing_en <= 1'b0;
+		else if(fifo_rden && USB_COMMAND == 16'hA0EF)
+			Dac10BitPowerPulsing_en <= 1'b1;
+		else
+			Dac10BitPowerPulsing_en <= Dac10BitPowerPulsing_en;
+	end
+	// LVDS PowerPulsing control
+	always @(posedge clk or negedge reset_n) begin
+		if(~reset_n)
+			LvdsPowerPulsing_en <= 1'b0;
+		else if(fifo_rden && USB_COMMAND == 16'hA0F0)
+			LvdsPowerPulsing_en <= 1'b0;
+		else if(fifo_rden && USB_COMMAND == 16'hA0F1)
+			LvdsPowerPulsing_en <= 1'b1;
+		else
+			LvdsPowerPulsing_en <= LvdsPowerPulsing_en;
 	end
 	//Ctest
 	always @(posedge clk or negedge reset_n) begin
