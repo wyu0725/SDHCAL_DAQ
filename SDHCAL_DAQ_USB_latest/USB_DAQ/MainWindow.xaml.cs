@@ -992,7 +992,146 @@ namespace USB_DAQ
                 else
                 {
                     MessageBox.Show("Set Readreg or NOR64 failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
                 }
+                #endregion
+                #region PowerPulsing Control
+                int PowerPulsingBase = 0xA0E0;
+                #region PreAmp
+                int PowerPulsingValue = PowerPulsingBase + cbxPreAmpPP.SelectedIndex;
+                CommandBytes = ConstCommandByteArray((byte)(PowerPulsingValue >> 8), (byte)PowerPulsingValue);
+                bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                if(bResult)
+                {
+                    string report = string.Format("Set Pre Amp PowerPulsing: {0}\n", cbxPreAmpPP.Text);
+                    txtReport.AppendText(report);
+                }
+                else
+                {
+                    MessageBox.Show("Set PreAmp Power Pulsing failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                #endregion
+                #region Shaper
+                PowerPulsingValue = PowerPulsingBase + cbxShaperPP.SelectedIndex + 2;
+                CommandBytes = ConstCommandByteArray((byte)(PowerPulsingValue >> 8), (byte)PowerPulsingValue);
+                bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                if (bResult)
+                {
+                    string report = string.Format("Set Shaper PowerPulsing: {0}\n", cbxPreAmpPP.Text);
+                    txtReport.AppendText(report);
+                }
+                else
+                {
+                    MessageBox.Show("Set Shaper Power Pulsing failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                #endregion
+                #region Wildar
+                PowerPulsingValue = PowerPulsingBase + cbxWidlarPP.SelectedIndex + 4;
+                CommandBytes = ConstCommandByteArray((byte)(PowerPulsingValue >> 8), (byte)PowerPulsingValue);
+                bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                if (bResult)
+                {
+                    string report = string.Format("Set Widlar PowerPulsing: {0}\n", cbxPreAmpPP.Text);
+                    txtReport.AppendText(report);
+                }
+                else
+                {
+                    MessageBox.Show("Set Widlar PowerPulsing failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                #endregion
+                #region 4-bit DAC
+                PowerPulsingValue = PowerPulsingBase + cbxDac4BitPP.SelectedIndex + 6;
+                CommandBytes = ConstCommandByteArray((byte)(PowerPulsingValue >> 8), (byte)PowerPulsingValue);
+                bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                if (bResult)
+                {
+                    string report = string.Format("Set 4-bit DAC PowerPulsing: {0}\n", cbxPreAmpPP.Text);
+                    txtReport.AppendText(report);
+                }
+                else
+                {
+                    MessageBox.Show("Set 4-bit DAC PowerPulsing failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                #endregion
+                #region OTAq
+                PowerPulsingValue = PowerPulsingBase + cbxOTAqPP.SelectedIndex + 8;
+                CommandBytes = ConstCommandByteArray((byte)(PowerPulsingValue >> 8), (byte)PowerPulsingValue);
+                bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                if (bResult)
+                {
+                    string report = string.Format("Set OTAq PowerPulsing: {0}\n", cbxPreAmpPP.Text);
+                    txtReport.AppendText(report);
+                }
+                else
+                {
+                    MessageBox.Show("Set OTAq PowerPulsing failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                #endregion
+                #region Discriminator
+                PowerPulsingValue = PowerPulsingBase + cbxDiscriPP.SelectedIndex + 10;
+                CommandBytes = ConstCommandByteArray((byte)(PowerPulsingValue >> 8), (byte)PowerPulsingValue);
+                bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                if (bResult)
+                {
+                    string report = string.Format("Set Discriminator PowerPulsing: {0}\n", cbxPreAmpPP.Text);
+                    txtReport.AppendText(report);
+                }
+                else
+                {
+                    MessageBox.Show("Set Discriminator PowerPulsing failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                #endregion
+                #region V_bg
+                PowerPulsingValue = PowerPulsingBase + cbxVbgPP.SelectedIndex + 12;
+                CommandBytes = ConstCommandByteArray((byte)(PowerPulsingValue >> 8), (byte)PowerPulsingValue);
+                bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                if (bResult)
+                {
+                    string report = string.Format("Set V_bg PowerPulsing: {0}\n", cbxPreAmpPP.Text);
+                    txtReport.AppendText(report);
+                }
+                else
+                {
+                    MessageBox.Show("Set V_bg PowerPulsing failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                #endregion
+                #region 10bit DAC
+                PowerPulsingValue = PowerPulsingBase + cbxDac10BitPP.SelectedIndex + 14;
+                CommandBytes = ConstCommandByteArray((byte)(PowerPulsingValue >> 8), (byte)PowerPulsingValue);
+                bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                if (bResult)
+                {
+                    string report = string.Format("Set 10-bit DAC PowerPulsing: {0}\n", cbxPreAmpPP.Text);
+                    txtReport.AppendText(report);
+                }
+                else
+                {
+                    MessageBox.Show("Set 10-bit DAC PowerPulsing failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                #endregion
+                #region LVDS
+                PowerPulsingValue = PowerPulsingBase + cbxLvdsPP.SelectedIndex + 16;
+                CommandBytes = ConstCommandByteArray((byte)(PowerPulsingValue >> 8), (byte)PowerPulsingValue);
+                bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                if (bResult)
+                {
+                    string report = string.Format("Set LVDS PowerPulsing: {0}\n", cbxPreAmpPP.Text);
+                    txtReport.AppendText(report);
+                }
+                else
+                {
+                    MessageBox.Show("Set LVDS PowerPulsing failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                #endregion
                 #endregion
                 for (int i = ASIC_Number;i >= 0; i--)
                 {
@@ -2498,7 +2637,7 @@ namespace USB_DAQ
             }
         }
 
-        private void btnSetMask_Click(object sender, RoutedEventArgs e)
+        /*private void btnSetMask_Click(object sender, RoutedEventArgs e)
         {
             bool bResult = false;
             byte[] CommandBytes = new byte[2];
@@ -2563,7 +2702,7 @@ namespace USB_DAQ
                 MessageBox.Show("Set Mask Channel failure, please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             #endregion
-        }
+        }*/
 
         private async void btnSweepTestStart_Click(object sender, RoutedEventArgs e)
         {
