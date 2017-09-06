@@ -265,7 +265,7 @@ module usb_command_interpreter(
 		else if(fifo_rden && USB_COMMAND == 16'hA0E4)
 			WidlarPowerPulsing_en <= 1'b0;
 		else if(fifo_rden && USB_COMMAND == 16'hA0E5)
-			WidlarPowerPulsing_en <= 1'b0;
+			WidlarPowerPulsing_en <= 1'b1;
 		else
 			WidlarPowerPulsing_en <= WidlarPowerPulsing_en;
 	end
@@ -276,7 +276,7 @@ module usb_command_interpreter(
 		else if(fifo_rden && USB_COMMAND == 16'hA0E6)
 			Dac4BitPowerPulsing_en <= 1'b0;
 		else if(fifo_rden && USB_COMMAND == 16'hA0E7)
-			Dac4BitPowerPulsing_en <= 1'b0;
+			Dac4BitPowerPulsing_en <= 1'b1;
 		else
 			Dac4BitPowerPulsing_en <= Dac4BitPowerPulsing_en;
 	end
@@ -315,7 +315,9 @@ module usb_command_interpreter(
 	end
 	// 10 bit DAC PowerPulsing control
 	always @(posedge clk or negedge reset_n) begin
-		if(~reset_n && USB_COMMAND == 16'hA0EE)
+		if(~reset_n)
+			Dac10BitPowerPulsing_en <= 1'b0;
+		else if(fifo_rden && USB_COMMAND == 16'hA0EE)
 			Dac10BitPowerPulsing_en <= 1'b0;
 		else if(fifo_rden && USB_COMMAND == 16'hA0EF)
 			Dac10BitPowerPulsing_en <= 1'b1;

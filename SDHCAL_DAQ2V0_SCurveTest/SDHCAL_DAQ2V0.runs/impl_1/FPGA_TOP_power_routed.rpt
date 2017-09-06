@@ -1,7 +1,7 @@
 Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2016.3 (win64) Build 1682563 Mon Oct 10 19:07:27 MDT 2016
-| Date             : Mon Jul 10 15:07:34 2017
+| Date             : Tue Sep 05 09:40:00 2017
 | Host             : WYU running 64-bit major release  (build 9200)
 | Command          : report_power -file FPGA_TOP_power_routed.rpt -pb FPGA_TOP_power_summary_routed.pb -rpx FPGA_TOP_power_routed.rpx
 | Design           : FPGA_TOP
@@ -30,8 +30,8 @@ Table of Contents
 ----------
 
 +--------------------------+-------+
-| Total On-Chip Power (W)  | 0.381 |
-| Dynamic (W)              | 0.273 |
+| Total On-Chip Power (W)  | 0.380 |
+| Dynamic (W)              | 0.272 |
 | Device Static (W)        | 0.108 |
 | Total Off-Chip Power (W) | 0.005 |
 | Effective TJA (C/W)      | 2.7   |
@@ -50,19 +50,19 @@ Table of Contents
 +----------------+-----------+----------+-----------+-----------------+
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
-| Clocks         |     0.011 |        9 |       --- |             --- |
-| Slice Logic    |     0.005 |     9054 |       --- |             --- |
-|   LUT as Logic |     0.004 |     4309 |     63400 |            6.80 |
-|   Register     |    <0.001 |     3876 |    126800 |            3.06 |
+| Clocks         |     0.010 |        9 |       --- |             --- |
+| Slice Logic    |     0.005 |     9073 |       --- |             --- |
+|   LUT as Logic |     0.004 |     4319 |     63400 |            6.81 |
+|   Register     |    <0.001 |     3885 |    126800 |            3.06 |
 |   CARRY4       |    <0.001 |      147 |     15850 |            0.93 |
 |   F7/F8 Muxes  |    <0.001 |       69 |     63400 |            0.11 |
 |   Others       |     0.000 |      181 |       --- |             --- |
-| Signals        |     0.006 |     6324 |       --- |             --- |
+| Signals        |     0.006 |     6328 |       --- |             --- |
 | Block RAM      |     0.001 |      6.5 |       135 |            4.81 |
 | MMCM           |     0.087 |        1 |         6 |           16.67 |
 | I/O            |     0.164 |       93 |       285 |           32.63 |
 | Static Power   |     0.108 |          |           |                 |
-| Total          |     0.381 |          |           |                 |
+| Total          |     0.380 |          |           |                 |
 +----------------+-----------+----------+-----------+-----------------+
 
 
@@ -72,9 +72,9 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) |
 +-----------+-------------+-----------+-------------+------------+
-| Vccint    |       1.000 |     0.038 |       0.023 |      0.016 |
+| Vccint    |       1.000 |     0.037 |       0.022 |      0.016 |
 | Vccaux    |       1.800 |     0.067 |       0.048 |      0.018 |
-| Vcco33    |       3.300 |     0.008 |       0.004 |      0.004 |
+| Vcco33    |       3.300 |     0.007 |       0.003 |      0.004 |
 | Vcco25    |       2.500 |     0.067 |       0.063 |      0.004 |
 | Vcco18    |       1.800 |     0.000 |       0.000 |      0.000 |
 | Vcco15    |       1.500 |     0.000 |       0.000 |      0.000 |
@@ -146,7 +146,7 @@ Table of Contents
 +----------------------------------------------------------------------------+-----------+
 | Name                                                                       | Power (W) |
 +----------------------------------------------------------------------------+-----------+
-| FPGA_TOP                                                                   |     0.273 |
+| FPGA_TOP                                                                   |     0.272 |
 |   Clk_Gen                                                                  |     0.087 |
 |   Microroc_Control                                                         |     0.004 |
 |     AD9220                                                                 |    <0.001 |
@@ -214,7 +214,7 @@ Table of Contents
 |       Trigger1                                                             |    <0.001 |
 |       Trigger2                                                             |    <0.001 |
 |   Microroc_u1                                                              |     0.162 |
-|     HoldGenerator                                                          |     0.006 |
+|     HoldGenerator                                                          |     0.005 |
 |     MicrorocDaq                                                            |    <0.001 |
 |       AutoDaqControl                                                       |    <0.001 |
 |       SlaveDaqControl                                                      |    <0.001 |
