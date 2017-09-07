@@ -1,10 +1,18 @@
 # SDHCAL_DAQ V2.0
 
 > 新的SDHCAL DAQ工程，从硬件、逻辑、上位机和数据处理方面记录工程
+>
+> V 1.1 2017/07/21完成上位机说明和测试说明
 
-## 硬件电路
+## 硬件电路(待写)
 
-## FPGA逻辑
+>  硬件电路由3部分组成，探测器阳极板、Microroc前端板和DAQ板
+
+### DAQ板
+
+实物图如下![DAQBoard](D:\MyProject\SDHCAL_DAQ\QSunSync\DAQBoard.jpg)
+
+## FPGA逻辑(待写)
 
 ### 时钟
 
@@ -12,8 +20,7 @@
 + 7系列FPGA芯片时钟手册
 
 
-
-## Microroc芯片
+## Microroc芯片(待写)
 
 ### 芯片简介
 
@@ -185,8 +192,9 @@
 + hold或者Power：选择Hold即可
 
 
-
 ## Microroc 上位机测试使用说明
+
+> 下文提到的Trig In和CLK_EXT参见本文开头的DAQ板的实物图，Trig In管脚是给Slave DAQ使用的，即外触发给出之后才开始采数，CLK_EXT是给S曲线测试和宇宙线效率使用的
 
 ### Auto DAQ
 
@@ -199,26 +207,54 @@
 2. 设定External RAZ Delay和External RAZ Time
 3. 设定合适的StartAcq Time
 4. 选择Data Number
-5. 开始采数
+5. 将外触发连在DAQ板的TrigIn对应的SMA上
+6. 开始采数
 
 ### SCTest
+
+> SCTest是S Curve Test的缩写，即S曲线测试，S曲线是指芯片触发率随阈值变化的曲线，在S曲线测试中包含两种模式，一种是电子学S曲线测试，即在给定时刻输入一个电荷量，然后向FPGA送一个触发信号，然FPGA计数，同时FPGA计Microroc比较器信号是否过阈，这样可以得到给定阈值下的触发率，改变阈值继续测触发率，得到触发率vs阈值曲线；二是探测器计数率vs阈值曲线测试，即在指定时间段内计Microroc比较器过阈次数，目前时间段最短可以设为1ms最长可以设为65s，然后改变阈值，继续在相同时间段内计Microroc过阈次数，得到计数率vs阈值曲线
 
 1. RAZ Chn Select选择External，Powerpulsing选择Disasble
 2. 设定External RAZ Delay和External RAZ Time
 3. 设定合适的Trigger Delay
-4. 选择Trig模式还是Count模式
-5. 选择Single还是Auto模式，若是进行宇宙线扫域测试，请选择Single
+4. 选择Trig模式(触发率)还是Count模式(计数率)
+5. 选择Single还是Auto模式，Single模式是对单一通道扫阈，Auto是对64通道扫阈。若是进行宇宙线扫域测试，请选择Single，选择Single模式的理由参见第10条
 6. 选择信号从CTest输入还是从Input管脚输入，若是与探测器相关的测试，请选择Input
 7. 设定Max count或者Count Time
-8. 设定Single channel
+8. 设定Single channel，注：即使选择Auto模式也要填写Single channel 否则会报错
 9. 设定Start DAC和End DAC以及扫域DAC的间隔
-10. Mask或者Unmask，要是进行宇宙线扫域测试，请选择Unmask
-11. 存文件开始采数
+10. Mask或者Unmask，Mask的意思是处理被测试的通道之外其他通道都被屏蔽了，这样得到的结果才是该通道的结果，Unmask的意思是所有的测试通道都不屏蔽，这样的 目的是为了将64通道的触发输出连在一起。要是进行宇宙线扫域测试，请选择Unmask，选择Unmask后即将64通道的触发输出连在一次，这样在第5条选择Single模式后，相当于是64通道的扫阈，若在第五条中选择了Auto，又在这里选择了Unmask，那么相当于对64通道扫阈64次，费时费力没有意义。
+11. 将外部的触发信号连在DAQ板的CLK_EXT对应的SMA管脚上
+12. 存文件开始采数
 
 ### Sweep Acq
 
 暂时不用
 
 ### AD9220
+
+> AD9220是用ADC来采集峰保信号，Microroc的成型输出可以在外部给的一个Hold信号的作用下，将hold信号给出时刻的成形输出的电压值保持下来，但是请注意，这个保持并不是完全时刻对应的，在实测过程中发现hold信号有一个15ns左右的裕量，即hold信号在这个裕量范围内峰保值基本不变。
+
+1. RAZ Chn Select选择External，Powerpulsing选择Disasble
+2. 设定External RAZ Delay和External RAZ Time
+3. 设定Hold Delay和Hold Time并将Hold Delay后面的选项框选择为Enable
+4. 然后在AD9200的参数框中将StartDelay填为500，即在Hold信号给出500ns之后再使用ADC采数
+5. 在AD9220的参数框中将Acq Times填为32，即一次Hold信号给出之后ADC采多少次数，ADC的采样率是10M，即每次采样间隔为0.1μs，采32次为3.2μs，减小ADC测量带来的误差
+6. 存文件
+7. 点击ADC Start
+8. 由于程序存在bug(目前还没有找到)，在停止采数之后会报一个error，忽视即可
+
+### Efficiency
+
+> Efficiency是用来测宇宙线效率的程序，程序需要设定最大的计数，然后在不改变SC参数的条件下开始采数
+
+1. RAZ Chn Select选择External，Powerpulsing选择Disasble
+2. 设定External RAZ Delay和External RAZ Time
+3. 设定合适的Trigger Delay
+4. 选择Trig模式
+5. 设定CPT_MAX
+6. 存文件
+7. 将外触发送给CLK_EXT管脚
+8. 开始采数
 
 ## 数据处理程序
