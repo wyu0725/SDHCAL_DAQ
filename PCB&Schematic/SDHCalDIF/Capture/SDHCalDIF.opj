@@ -58,22 +58,35 @@
          "USB2.0")
       (Path "Design Resources" "Library")
       (Path "Design Resources" "Library"
-         "d:\cadence_workspace\cadence library\capture library\my_sch_library.olb"))
+         "d:\cadence_workspace\cadence library\capture library\my_sch_library.olb")
+      (Select "Design Resources"
+         "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCALDIF\Capture\sdhcaldif.dsn"
+         "Interface" "InterfaceToDAQ"))
     (HierarchyView)
     (Doc
       (Type "COrCapturePMDoc")
       (Frame
-        (Placement "44 2 3 -1 -1 -8 -31 0 200 0 421"))
+        (Placement "44 0 1 -1 -1 -8 -31 0 200 0 421"))
       (Tab 0))
     (Doc
       (Type "COrSchematicDoc")
       (Frame
         (Placement "44 0 1 -1 -1 -8 -31 130 1473 130 590")
-        (Scroll "-63 90")
+        (Scroll "-63 0")
         (Zoom "100")
         (Occurrence "/"))
       (Path
          "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCALDIF\CAPTURE\SDHCALDIF.DSN")
       (Schematic "Top")
-      (Page "Design Info")))
+      (Page "Design Info"))
+    (Doc
+      (Type "COrSchematicDoc")
+      (Frame
+        (Placement "44 2 3 -1 -1 -8 -31 78 1714 78 538")
+        (Scroll "0 0")
+        (Zoom "200"))
+      (Path
+         "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCALDIF\CAPTURE\SDHCALDIF.DSN")
+      (Schematic "Interface")
+      (Page "InterfaceToDAQ")))
   (MPSSessionName "wyu08"))
