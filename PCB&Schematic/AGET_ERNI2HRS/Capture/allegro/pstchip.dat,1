@@ -1,5 +1,5 @@
 FILE_TYPE=LIBRARY_PARTS;
-{ Using PSTWRITER 16.6.0 d001Sep-11-2017 at 17:11:12}
+{ Using PSTWRITER 16.6.0 d001Sep-11-2017 at 15:07:42}
 primitive 'CONN_1_ERNI154744FEMALECONNECTO';
   pin
     'A1':
@@ -280,6 +280,21 @@ primitive 'RESISTOR_SR0603_1M';
     PART_NAME='Resistor';
     JEDEC_TYPE='SR0603';
     VALUE='1M';
+  end_body;
+end_primitive;
+primitive 'R_SR0603_0';
+  pin
+    '1':
+      PIN_NUMBER='(1)';
+      PINUSE='UNSPEC';
+    '2':
+      PIN_NUMBER='(2)';
+      PINUSE='UNSPEC';
+  end_pin;
+  body
+    PART_NAME='R';
+    JEDEC_TYPE='SR0603';
+    VALUE='0';
   end_body;
 end_primitive;
 primitive 'R_SR0603_X';
