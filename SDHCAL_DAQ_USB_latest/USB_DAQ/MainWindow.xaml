@@ -41,6 +41,7 @@
             <GradientStop Color="#FFEDFFFB" Offset="1"/>
         </RadialGradientBrush>
     </Window.Resources>
+    
     <Grid Name="TotalGrid" ScrollViewer.VerticalScrollBarVisibility="Visible" Height="Auto">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="15*"/>
@@ -296,8 +297,8 @@
                             <RadioButton GroupName="Chn_Select" Checked="ChannelSelect_Checked" Margin="0,0,-9,0" Content="Channel1"/>
                             <RadioButton GroupName="Chn_Select" Checked="ChannelSelect_Checked" Margin="0,0,-9,0" Content="Channel2"/>
                         </StackPanel>-->
-                        <Label x:Name="lblSc_or_Read" Content="SC or Read:" HorizontalAlignment="Left" Margin="665,68,0,0" VerticalAlignment="Top" Width="100" Height="24"/>
-                        <StackPanel HorizontalAlignment="Left" Height="31" Margin="670,92,0,0" VerticalAlignment="Top" Width="75">
+                        <Label x:Name="lblSc_or_Read" Content="SC or Read:" HorizontalAlignment="Left" Margin="573,288,0,0" VerticalAlignment="Top" Width="100" Height="24"/>
+                        <StackPanel HorizontalAlignment="Left" Height="31" Margin="585,312,0,0" VerticalAlignment="Top" Width="75">
                             <RadioButton GroupName="SC_or_Read" Checked="SC_or_Read_Checked" Margin="-2,0,-7,0" Content="SC"/>
                             <RadioButton GroupName="SC_or_Read" Checked="SC_or_Read_Checked" Margin="-2,0,-7,0" Content="ReadReg"/>
                         </StackPanel>
@@ -329,7 +330,7 @@
                             </Grid>
                         </GroupBox>
                         -->
-                        <Button x:Name="btnSC_or_ReadReg" Content="Load Param" HorizontalAlignment="Left" Margin="675,0,0,0" VerticalAlignment="Top" Width="84" Height="24" Click="btnSC_or_ReadReg_Click"/>
+                        <Button x:Name="btnSC_or_ReadReg" Content="Load Param" HorizontalAlignment="Left" Margin="573,259,0,0" VerticalAlignment="Top" Width="84" Height="24" Click="btnSC_or_ReadReg_Click"/>
                         <GroupBox x:Name="gbxAsicParam" Header="ASIC Parameters" HorizontalAlignment="Left" Margin="180,0,0,0" VerticalAlignment="Top" Width="320" Height="353">
                             <Grid Margin="0,0,0,0" Name="ASICParam" ScrollViewer.VerticalScrollBarVisibility="Auto" Height="331" VerticalAlignment="Bottom">
                                 <Label x:Name="lblDAC0_VTH" Content="DAC0 VTH:" HorizontalAlignment="Left" Margin="0,25,0,0" VerticalAlignment="Top" Height="24" Width="75"/>
@@ -343,7 +344,7 @@
                                 <Label x:Name="lblInternal_RAZ_Time" Content="Internal RAZ time" HorizontalAlignment="Left" Margin="0,225,0,0" VerticalAlignment="Top" Width="110" Height="24"/>
                                 <Label x:Name="lblRead_Reg" Content="ReadRegister:" HorizontalAlignment="Left" Margin="0,275,0,0" VerticalAlignment="Top" Height="24" Width="90"/>
                                 <Label x:Name="lblMaskFile" Content="Mask File" HorizontalAlignment="Left" Margin="0,300,0,0" VerticalAlignment="Top"/>
-                                <TabControl x:Name="tbcAsicParameter" HorizontalAlignment="Left" Margin="120,0,0,0" VerticalAlignment="Top" Width="190" Height="325">
+                                <TabControl x:Name="tbcAsicParameter" HorizontalAlignment="Left" Margin="120,0,0,0" VerticalAlignment="Top" Width="250" Height="325">
                                     <TabItem Header="ASIC1">
                                         <Grid Margin="0,0,0,0">
                                             <Grid.ColumnDefinitions>
@@ -669,8 +670,8 @@
 
                             </Grid>
                         </GroupBox>
-                        <Label x:Name="lblACQ_or_SCTest" Content="Mode Select" HorizontalAlignment="Left" VerticalAlignment="Top" Height="24" RenderTransformOrigin="4.713,0.917" Margin="670,220,0,0"/>
-                        <StackPanel HorizontalAlignment="Left" Height="75" Margin="675,249,0,0" VerticalAlignment="Top" Width="90">
+                        <Label x:Name="lblACQ_or_SCTest" Content="Mode Select" HorizontalAlignment="Left" VerticalAlignment="Top" Height="24" RenderTransformOrigin="4.713,0.917" Margin="675,249,0,0"/>
+                        <StackPanel HorizontalAlignment="Left" Height="75" Margin="678,278,0,0" VerticalAlignment="Top" Width="90">
                             <RadioButton GroupName="ACQ_or_SCTest" Checked="ModeSelectChecked" Content="ACQ"/>
                             <RadioButton GroupName="ACQ_or_SCTest" Checked="ModeSelectChecked" Content="SCTest"/>
                             <RadioButton GroupName="ACQ_or_SCTest" Checked="ModeSelectChecked" Content="SweepACQ"/>
@@ -679,7 +680,7 @@
                             <!--RadioButton x:Name="radioButton" Content="RadioButton"/>
                     <RadioButton x:Name="radioButton1" Content="RadioButton"/-->
                         </StackPanel>
-                        <GroupBox x:Name="gbxPowerPulsing" Header="Power Pulsing" HorizontalAlignment="Left" Margin="500,0,0,0" VerticalAlignment="Top" Height="250" Width="160">
+                        <GroupBox x:Name="gbxPowerPulsing" Header="Power Pulsing" HorizontalAlignment="Left" Margin="597,0,0,0" VerticalAlignment="Top" Height="250" Width="160">
                             <Grid Margin="0,0,0,0">
                                 <Label x:Name="lblPreAmpPP" Content="PraAmp" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Height="25" Width="75"/>
                                 <Label x:Name="lblShaperPP" Content="Shaper" HorizontalAlignment="Left" Margin="0,25,0,0" VerticalAlignment="Top" Height="25" Width="75"/>
