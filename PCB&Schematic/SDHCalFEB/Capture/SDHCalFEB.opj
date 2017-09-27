@@ -246,12 +246,13 @@
          "d:\cadence_workspace\cadence library\capture library\my_sch_library.olb")
       (Path "Outputs")
       (Select "Design Resources"
-         "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCalFEB\Capture\sdhcalfeb.dsn"))
+         "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCalFEB\Capture\sdhcalfeb.dsn"
+         "ASIC_A1" "Chip"))
     (HierarchyView)
     (Doc
       (Type "COrCapturePMDoc")
       (Frame
-        (Placement "44 2 3 -1 -1 -8 -31 0 200 0 421"))
+        (Placement "44 0 1 -1 -1 -8 -31 0 200 0 421"))
       (Tab 0))
     (Doc
       (Type "COrSchematicDoc")
@@ -263,6 +264,28 @@
       (Path
          "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCALFEB\CAPTURE\SDHCALFEB.DSN")
       (Schematic "TOP")
-      (Page "Top Each")))
+      (Page "Top Each"))
+    (Doc
+      (Type "COrSchematicDoc")
+      (Frame
+        (Placement "44 0 1 -1 -1 -8 -31 26 1421 26 354")
+        (Scroll "0 0")
+        (Zoom "100")
+        (Occurrence "/Interface To DAQ"))
+      (Path
+         "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCALFEB\CAPTURE\SDHCALFEB.DSN")
+      (Schematic "Interface To DAQ")
+      (Page "Interface To DAQ"))
+    (Doc
+      (Type "COrSchematicDoc")
+      (Frame
+        (Placement "44 2 3 -1 -1 -8 -31 52 1447 52 380")
+        (Scroll "810 576")
+        (Zoom "200")
+        (Occurrence "/ASIC_A1"))
+      (Path
+         "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCALFEB\CAPTURE\SDHCALFEB.DSN")
+      (Schematic "ASIC_A1")
+      (Page "Chip")))
   (MPSSessionName "wyu08")
   (ISPCBBASICLICENSE "false"))
