@@ -1,1 +1,1 @@
-Pads_Readout_Array.brd
+SDHCalFEB.brd

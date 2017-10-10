@@ -63,10 +63,37 @@
     (Annotate_type "Default")
     (width_pages "100")
     (width_start "80")
-    (width_End "80"))
+    (width_End "80")
+    ("Create Allegro Netlist" "TRUE")
+    ("Allegro Netlist Directory"
+       "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCALFEB\CAPTURE\ALLEGRO")
+    ("View Allegro Netlist Files" "FALSE")
+    ("Allegro Netlist Create DCF File" "FALSE")
+    ("Update Allegro Board" "FALSE")
+    ("Allegro Netlist Output Board File" "allegro\SDHCALFEB.brd")
+    ("Allegro Netlist Remove Etch" "FALSE")
+    ("Allegro Netlist Place Changed Component" "ALWAYS_REPLACE")
+    ("Allegro Netlist Open Board in Allegro" "ALLEGRO")
+    ("Allegro Setup Backup Versions" "3")
+    ("Allegro Setup Output Warnings" "TRUE")
+    ("Allegro Setup Ignore Constraints" "FALSE")
+    ("Allegro Setup Part Type Length" "31")
+    ("Allegro Netlist Combine Property String" "PCB Footprint")
+    ("Allegro Netlist Ignore Fixed Property" "FALSE")
+    ("Allegro Netlist User Defined Property" "FALSE")
+    (Netlist_TAB "0"))
   (Folder "Outputs"
     (File ".\sdhcalfeb.drc"
-      (Type "Report")))
+      (Type "Report"))
+    (File ".\allegro\pstxnet.dat"
+      (Type "Report")
+      (DisplayName "pstxnet.dat"))
+    (File ".\allegro\pstxprt.dat"
+      (Type "Report")
+      (DisplayName "pstxprt.dat"))
+    (File ".\allegro\pstchip.dat"
+      (Type "Report")
+      (DisplayName "pstchip.dat")))
   (Folder "Referenced Projects")
   (PartMRUSelector
     (TestPadGnd
@@ -237,6 +264,9 @@
          "Calibration")
       (Path "Design Resources"
          "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCalFEB\Capture\sdhcalfeb.dsn"
+         "Pad Array")
+      (Path "Design Resources"
+         "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCalFEB\Capture\sdhcalfeb.dsn"
          "Power")
       (Path "Design Resources"
          "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCalFEB\Capture\sdhcalfeb.dsn"
@@ -247,7 +277,7 @@
       (Path "Outputs")
       (Select "Design Resources"
          "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCalFEB\Capture\sdhcalfeb.dsn"
-         "ASIC_A1" "Chip"))
+         "Pad Array" "Pad Array 4"))
     (HierarchyView)
     (Doc
       (Type "COrCapturePMDoc")
@@ -279,13 +309,24 @@
     (Doc
       (Type "COrSchematicDoc")
       (Frame
-        (Placement "44 2 3 -1 -1 -8 -31 52 1447 52 380")
-        (Scroll "810 576")
+        (Placement "44 0 1 -1 -1 -8 -31 52 1447 52 380")
+        (Scroll "517 576")
         (Zoom "200")
         (Occurrence "/ASIC_A1"))
       (Path
          "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCALFEB\CAPTURE\SDHCALFEB.DSN")
       (Schematic "ASIC_A1")
-      (Page "Chip")))
+      (Page "Chip"))
+    (Doc
+      (Type "COrSchematicDoc")
+      (Frame
+        (Placement "44 2 3 -1 -1 -8 -31 208 1844 208 668")
+        (Scroll "-84 0")
+        (Zoom "100")
+        (Occurrence "/Pad Array"))
+      (Path
+         "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCALFEB\CAPTURE\SDHCALFEB.DSN")
+      (Schematic "Pad Array")
+      (Page "Pad Array 4")))
   (MPSSessionName "wyu08")
   (ISPCBBASICLICENSE "false"))
