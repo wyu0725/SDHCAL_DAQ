@@ -76,7 +76,20 @@
     ("Allegro Netlist Combine Property String" "PCB Footprint")
     ("Allegro Netlist Ignore Fixed Property" "FALSE")
     ("Allegro Netlist User Defined Property" "FALSE")
-    (Netlist_TAB "0"))
+    (Netlist_TAB "0")
+    (BOM_Scope "0")
+    (BOM_Mode "0")
+    (BOM_Report_File
+       "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\AGET_ERNI2HRS\CAPTURE\AGET_ERNI2HRS.BOM")
+    (BOM_Merge_Include "FALSE")
+    (BOM_Property_Combine_7.0 "{Item}\t{Quantity}\t{Reference}\t{Value}")
+    (BOM_Header "Item\tQuantity\tReference\tPart")
+    (BOM_Include_File
+       "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\AGET_ERNI2HRS\CAPTURE\AGET_ERNI2HRS.INC")
+    (BOM_Include_File_Combine_7.0 "{Item}\t{Quantity}\t{Reference}\t{Value}")
+    (BOM_One_Part_Per_Line "FALSE")
+    (Open_BOM_in_Excel "TRUE")
+    (BOM_View_Output "FALSE"))
   (Folder "Outputs"
     (File ".\aget_erni2hrs.drc"
       (Type "Report"))
@@ -88,7 +101,9 @@
       (DisplayName "pstxprt.dat"))
     (File ".\allegro\pstchip.dat"
       (Type "Report")
-      (DisplayName "pstchip.dat")))
+      (DisplayName "pstchip.dat"))
+    (File ".\aget_erni2hrs.bom"
+      (Type "Report")))
   (Folder "Referenced Projects")
   (PartMRUSelector)
   (GlobalState
@@ -99,7 +114,9 @@
       (Path "Design Resources"
          "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\AGET_ERNI2HRS\Capture\aget_erni2hrs.dsn"
          "AGET_ERNI2HRS")
-      (Path "Outputs"))
+      (Path "Outputs")
+      (Select "Design Resources"
+         "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\AGET_ERNI2HRS\Capture\aget_erni2hrs.dsn"))
     (HierarchyView)
     (Doc
       (Type "COrCapturePMDoc")
