@@ -3859,7 +3859,7 @@ namespace USB_DAQ
                 }
             }
             byte[] EndFrame = new byte[512];
-            for (int j = 0; j < 16; j++)
+            for (int j = 0; j < 32; j++)
             {
                 bResult = DataRecieve(EndFrame, EndFrame.Length);
                 if (bResult)
