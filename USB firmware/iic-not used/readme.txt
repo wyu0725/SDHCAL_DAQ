@@ -1,0 +1,3 @@
+如果ifclk由fpga输出给USB芯片则烧写fpga_ifclk.iic
+如果ifclk由USB芯片输出给FPGA则烧写usb_ifclk.iic
+04b51005.iic是沈的改的VID和PID,在dscr.a51文件中修改
