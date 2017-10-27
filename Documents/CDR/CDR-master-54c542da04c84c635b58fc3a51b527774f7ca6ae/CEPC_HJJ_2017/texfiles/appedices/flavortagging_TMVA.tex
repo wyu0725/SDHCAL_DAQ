@@ -1,0 +1,22 @@
+\section{TMVA in the application of flavor tagging}
+To distinguish signal and background, the TMVA has been done using the BDT method\cite{BDT}. Signal and the $\ffbar\Hboson$ background are used to train the BDT. The input variables are shown in Figure 1.The distribution of BDT is shown in Figure 2.\par
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=15cm,height=8cm]{inputvar.eps}
+  \includegraphics[width=5cm,height=4cm]{inputvar2.eps}
+  \caption{The input variables}
+\end{figure}
+In  Figure 1, the variable Hmass is the invariant mass of the Higgs jets which are regarded as the Higgs decay product by minimizing the $\chi^2$; Zmass is the invariant mass of the other two jets, Z jets; Hjetsangle is the cosine of the Higgs jets' intersection angle; Zjetsangle is the cosine of the Z jets' intersection angle.\par
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=11cm,height=8cm]{distribution.eps}
+  \caption{The BDT distribution}
+\end{figure}
+It's obvious that if we execute cut $BDT>0.04$, we will get a ideal significance. However, we cannot do this because we will loss many events of the gg channel, which can be seen in Figure 3.\par
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=11cm,height=8cm]{gg_bkg.eps}
+  \caption{The BDT of gg distribution}
+\end{figure}
+So a new thinking occurs: we can train 3 kinds of BDT to distinguish 3 kinds of signal respectively. The branch ratio will obtained by carry out the template fit of BDT. This will be the next step.
+\clearpage

@@ -1,0 +1,392 @@
+\chapter{Detector magnet system}
+\label{Chapter:Magnet}
+
+
+\section{General Design Considerations}
+The CEPC detector magnet system is designed to provide an axial magnetic field over the tracking volume, a diameter 6.8 m over a length of 8.05 m, particle detectors within this volume will measure the trajectories of charged tracks emerging from the collisions. Based on the study of the compensating magnet of CEPC, a 3 T central field of detector superconducting solenoid is more reality to construct the CEPC compensation solenoid which making full cancelation to avoid disturbance to the beam with technologies to be developed in coming years, comparing the 3.5 T solenoidal field proposed in pre-CDR.
+
+
+This chapter contains all the activities related to the design of field distribution, solenoid coil, specific superconductor, cryogenics, quench protection and power supply, and the yoke.
+In this report, for the first time, we explored the possibility of using HTS to build CEPC detector magnet. Benefit from the development of high Tc superconductor in recent years, the advantages by using YBCO winding is higher operating temperature, better stability to resist transient disturbances when operating the magnet.
+
+
+We also discussed on the choice between iron yoke design and dual solenoid scenario. The baseline design iron yoke consists of barrel yoke and end yoke. It has three main functions: first is shielding the magnetic field; second is providing the install space for the muon detector which sandwiched between the iron plates; in addition, the yoke serves as the main mechanical structure of the CEPC detector. However, the second one which called active shielding design has been widely used in for commercial MRI magnets, this scenario will not use iron yoke, and it has large impact on muon detector design.
+%
+\section{The Magnetic Field Requirements and Design}
+\subsection{Main parameters}
+The CEPC solenoid main parameters are given in Table 6.1. The 7.6 m long CEPC detector coil is composed of 5 modules. This batches the construction easiness and risks including superconducting wire selection, fabrication of the external support, winding and impregnation, transport and handling. The design enables the possibility to use shorter unit lengths of superconducting conductor (1.65 km) and join them in known positions and in low field regions, on the outer radius of the solenoid. The difference compared to PreCDR is that the central magnetic field changes from 3.5 T to 3 T. The geometry size is the same with 3.5 T design, as shown in Fig. 8.1.
+\begin{table}[!h]
+	\centering
+	\begin{tabular}{c|c|c|c}
+		\hline
+		The solenoid central field (T) & 3 & Working current (kA) & 15779 \\
+		\hline
+		Maximum field on conductor (T) & 3.485 & Total ampere-turns of the solenoid (MAt) & 20.323 \\
+		\hline
+		Coil inner radius (mm) & 3600 & Inductance (H) & 10.46 \\
+		\hline
+		Coil outer radius (mm) & 3900 & Stored energy (GJ) & 1.3 \\
+		\hline
+		Coil length (mm) & 7600 & Cable length (km) & 30.35 \\
+		\hline
+	\end{tabular}
+	\caption{main parameters of the solenoid coil}
+	\label{tab:structure}
+\end{table}
+%
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.36]{Figures/Magnet/21}
+\caption{2D layout of CEPC magnet (mm)}
+\label{fig:21}
+\end{figure}
+%
+  There are five modules of the coil. Each module contains 4 layers. The end two modules contain 44 turns per layer. Table 6.2 shows the coil parameters.
+  \begin{table}[!h]
+	\centering
+	\begin{tabular}{c|c|c}
+		\hline
+		Coil number & layers & Turns per layer \\
+		\hline
+		1 & 4 & 44 \\
+		\hline
+		2 & 4 & 78 \\
+		\hline
+		3 & 4 & 78 \\
+		\hline
+		4 & 4 & 78 \\
+		\hline
+        5 & 4 & 44 \\
+		\hline
+	\end{tabular}
+	\caption{ coil parameters}
+	\label{tab:structure}
+\end{table}
+\subsection{Magnetic field design}
+ In the calculation we use the cable as Fig. 6.2. In the center is the NbTi Rutherford cable, and then is the pure aluminum stabilizer and aluminum alloy reinforcement. The figure shows the parameters of the cable. This model has been used for magnetic field calculation, stress analysis of the coil and quench analysis of the magnet.
+Fig. 6.3 shows the magnetic field map of the magnet. The central field is 3 T, the maximum magnet field is 3.5 T. Figure 6.4 gives the main component BZ of the field along the beam axis. Figure 6.5 show the Magnetic flux line distribution of the magnet.
+The non-uniformity of Tracking Volume (diameter 3.62m, length 4.7m) is 9.11$\%$. Figure 6.6 show the magnetic field distribution of the Tracking Volume.
+$$B_p=\left.\frac{Bmax-Bmin}{Bcenter}\right.=9.11\%$$
+%
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.36]{Figures/Magnet/22}
+\caption{sketch figure of cable cross section}
+\label{fig:22}
+\end{figure}
+%
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.36]{Figures/Magnet/23}
+\caption{ Field map of the magnet (T)}
+\label{fig:23}
+\end{figure}
+%
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.36]{Figures/Magnet/24}
+\caption{The calculated magnetic field Bz along the detector axis}
+\label{fig:24}
+\end{figure}
+%
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.36]{Figures/Magnet/25}
+\caption{Magnetic flux line distribution of the magnet}
+\label{fig:25}
+\end{figure}
+%
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.36]{Figures/Magnet/26}
+\caption{The magnetic field distribution of TV}
+\label{fig:26}
+\end{figure}
+The maximum magnetic field on the cable is 3.5 T on the pure aluminum stabilizer. This can be seen in Fig. 6.7 The magnetic field distribution on NbTi Rutherford cable is shown in Fig. 6.8. The maximum field on the NbTi cable is about 3.485 T. Fig. 6.9 shows the magnetic field distribution on the yoke.
+%
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.36]{Figures/Magnet/27}
+\caption{Magnetic field distribution on the center model cable}
+\label{fig:27}
+\end{figure}
+%
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.36]{Figures/Magnet/28}
+\caption{Magnetic field distribution on the center NbTi cable}
+\label{fig:28}
+\end{figure}
+%
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.36]{Figures/Magnet/29}
+\caption{Magnetic field distribution on the yoke}
+\label{fig:29}
+\end{figure}
+The stray field of the detector magnet is show in Table 6.3 and Fig. 6.10. They give the stray field range of 50 Gs and 100 Gs.
+\begin{table}[!h]
+	\centering
+	\begin{tabular}{c|c}
+		\hline
+		Stray field & 3 T \\
+		\hline
+		50Gs R direction & 13.6 m \\
+		\hline
+		50Gs Z direction & 15.8 m \\
+		\hline
+		100Gs R direction & 10 m \\
+		\hline
+		100Gs Z direction & 11.6 m \\
+		\hline
+	\end{tabular}
+	\caption{ coil parameters}
+	\label{tab:structure}
+\end{table}
+%
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.36]{Figures/Magnet/210}
+\caption{Magnetic field distribution on the yoke}
+\label{fig:210}
+\end{figure}
+\subsection{Coil mechanical analysis}
+Introduction:
+There are two kind of stress act on the coil: thermal mechanical force caused by inconsistent of the material expansion coefficient and magnetic force. The cable used is shown in Fig.6.2. The stress analysis is divided into two conditions: coil at 4.2 K; coil energized: 4.2 K, 15779 A, 3 T. A magnetic FEA was performed to calculate the thermal mechanical force and Lorentz force. 2-D axisymmetric mechanical analyses are carried out according to the coil. In the model there are some approximations have been made: the barrel yoke and end-cap yokes are transformed into cylinders; the hole of the chimney in the barrel has been neglected; the current (15779 A) in the winding has been modelled as uniformly distributed in the Rutherford cable. The thickness of the support is 50 mm, it＊s the same with al-alloy used in the cable.
+The properties of the different materials are given in Table 6.4 and Table 6.5. Table 6.4 gives the properties of every material used in the FEA. Table 6.5 shows mean integral thermal expansion coefficients used in the FEA.
+\begin{table}[!h]
+	\centering
+	\begin{tabular}{c|c|c|c}
+		\hline
+		Material & Temperature(K) & Young＊s Modulus (GPa) & Poisson＊s ratio \\
+		\hline
+		Al & 4.2 & 0.8 & 0.49 \\
+		\hline
+		Al-Alloy & 4.2 & 77.7 & 0.327 \\
+		\hline
+		Sc strand & 4.2 & 130 & 0.3 \\
+		\hline
+		Fiber glass epoxy & 4.2 & 12.5 & 0.21 \\
+		\hline
+	\end{tabular}
+	\caption{Material properties used in the FEA}
+	\label{tab:structure}
+\end{table}
+
+\begin{table}[!h]
+	\centering
+	\begin{tabular}{c|c}
+		\hline
+		Material & Mean integral thermal expansion coefficient 293K〞4.2K \\
+		\hline
+		Aluminum & 14.23e-6 \\
+		\hline
+		Al-alloy & 14.16e-6 \\
+		\hline
+		Sc strand & 8.79e-6 \\
+		\hline
+		Fiber glass epoxy & 25.5e-6 \\
+		\hline
+	\end{tabular}
+	\caption{ Mean integral thermal expansion coefficients used in the FEA}
+	\label{tab:structure}
+\end{table}
+The mechanical FE model:
+  The coil has been simulated with an elasto-plastic 2-D axisymmetric FE model. Fig.6.11 shows the coil with aligned turns. Different materials are shown with different colors. Fig.6.12 shows the mesh grid distribution of the model.
+%
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.36]{Figures/Magnet/211}
+\caption{Magnetic field distribution on the yoke}
+\label{fig:212}
+\end{figure}
+Stress FEA results:
+The Von Mises criterion has been used for all ductile materials present in the winding. A summary of the results is given in Table 6.6 and Table 6.7. From Fig.6.13 to Fig. 6.18 show the Von Mises of every part of coil when in the load cases of the coil at 4.2 K and energized. It seems that cool down gives the largest contribution to the stress field in SC cable and aluminum alloy, the effect of magnetic force seems to be relatively small.
+\begin{table}[!h]
+	\centering
+	\begin{tabular}{c|p{4cm}|p{4cm}|p{4cm}}
+		\hline
+		Material & Von Mises stress MPa End coil & Von Mises stress MPa Middle coil & Von Mises stress MPa Central coil \\
+		\hline
+		\multicolumn{4}{|c|}{Coil at 4.2 K} \\
+		\hline
+		Pure Aluminum & 0-7.2 & 0-6.8 & 0-7 \\
+		\hline
+		SC cable & 189-205 & 190-201 & 189-200 \\
+		\hline
+		Al alloy & 2.2-44 & 5-39 & 5-43 \\
+		\hline
+        \multicolumn{4}{|c|}{Coil at 4.2 K, energized} \\
+		\hline
+		Pure Aluminum & 0-9.3 & 0-8.5 & 0-9.3 \\
+		\hline
+		SC cable & 85-142 & 62-95 & 66-106 \\
+		\hline
+		Al alloy & 40-94 & 74-103 & 65-103 \\
+		\hline
+	\end{tabular}
+	\caption{ Maximum Von Mises of conductors}
+	\label{tab:structure}
+\end{table}
+%
+\begin{table}[!h]
+	\centering
+	\begin{tabular}{c|p{4cm}|p{4cm}|p{4cm}}
+		\hline
+		 & End coil & Middle coil & Central coil \\
+		\hline
+		\multicolumn{4}{|c|}{Coil at 4.2 K} \\
+		\hline
+		Von Mises(MPa) & 21-60 & 19-59 & 21-59 \\
+		\hline
+		Shear Stress(MPa) & 1.2 & 8.8 & 1.3 \\
+		\hline
+        \multicolumn{4}{|c|}{Coil at 4.2 K, energized} \\
+		\hline
+		Von Mises(MPa) & 29-85 & 30-84 & 29-79 \\
+		\hline
+		Shear Stress(MPa) & 12.4 & 9.0 & 13.1 \\
+		\hline
+	\end{tabular}
+	\caption{ Shear stress and Von Mises of the insulation}
+	\label{tab:structure}
+\end{table}
+%
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.36]{Figures/Magnet/213}
+\caption{Coil at 4.2 K, Von Mises distribution of the end coil SC cable}
+\label{fig:213}
+\end{figure}
+%
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.36]{Figures/Magnet/214}
+\caption{Coil at 4.2 K, Von Mises distribution of the end coil pure Aluminum}
+\label{fig:214}
+\end{figure}
+%
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.36]{Figures/Magnet/215}
+\caption{ Coil at 4.2 K, Von Mises distribution of the end coil Aluminum alloy}
+\label{fig:215}
+\end{figure}
+%
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.36]{Figures/Magnet/216}
+\caption{ 6.16 Coil at 4.2 K, energized, Von Mises distribution of the central coil SC cable}
+\label{fig:216}
+\end{figure}
+%
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.36]{Figures/Magnet/217}
+\caption{Coil at 4.2 K, energized, Von Mises distribution of the central coil pure Aluminum}
+\label{fig:217}
+\end{figure}
+%
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.36]{Figures/Magnet/218}
+\caption{Coil at 4.2 K, energized, Von Mises distribution of the central coil aluminum alloy}
+\label{fig:218}
+\end{figure}
+\subsection{Preliminary quench analysis}
+
+
+Introduction: CEPC coil quench protection system, as shown in Fig. 6.19, is based on a dump resistor concept. During a fast dump the power dissipated in it, effectively contributes to driving the whole winding to a normal state. The quench calculation is based on Finite Volume Method (FVM). Use Matlab to simulate the quench propagation in the coilsㄛanalyses the hot point temperature and the terminal voltage with timeㄝIn the analysisㄛthe coils are just divided into four layers. The inductance is 10.4 H. The operating current is 15779A. The insulation between layers is 1 mm thickness, and between turns is 0.5 mm thickness.
+    Two different scenarios have been considered: normal external fast dumping and failure of the protection system. The quench starts at the end of first layer, given the temperature of 9 K. Three conditions of dump resistorㄩ1, the protection system failure, Rp=0; 2, Rp=0.05次; 3, Rp=0.1次.
+%
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.36]{Figures/Magnet/219}
+\caption{Equivalent electrical circuit of the quench protection of CEPC}
+\label{fig:219}
+\end{figure}
+
+
+Calculation processㄩAll the materials we used are: G-10 CRㄗFiberglass Epoxyㄘ, 1100 pure aluminumㄛ6061-T6 aluminum alloyㄛOFHC Copper RRR=100, NbTi. The curves of the magnet parameters under these three conditions are given in the figures below. Current, resistance, hot temperature and voltage of the magnet are shown. Table 6.8 give the summary of the quench calculation.
+%
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.36]{Figures/Magnet/220}
+\caption{Comparison of the current profile with protection system failure and with different fast dump resistors}
+\label{fig:220}
+\end{figure}
+%
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.36]{Figures/Magnet/221}
+\caption{Comparison of the coil resistance profile with protection system failure and with different fast dump resistors}
+\label{fig:221}
+\end{figure}
+%
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.36]{Figures/Magnet/222}
+\caption{Comparison of temperature profile with protection system failure and with different fast dump resistors}
+\label{fig:222}
+\end{figure}
+%
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.36]{Figures/Magnet/223}
+\caption{Comparison of the coil voltage profile with protection system failure and with different fast dump resistors}
+\label{fig:223}
+\end{figure}
+%
+\begin{table}[!h]
+	\centering
+	\begin{tabular}{p{4cm}|p{4cm}|p{4cm}|p{4cm}}
+		\hline
+		Fast dump resistance Rp & 0 次 & 0.05 次 & 0.1 次 \\
+		\hline
+		Average final coil temperature & 136 K & 113K & 96K \\
+		\hline
+		Effective time constant(the current is I=I0/e=6833A) & 90s & 80s & 68s \\
+		\hline
+		Magnet final resistance & 0.25 次 & 0.19 次 & 0.15 次 \\
+		\hline
+        Max voltage & 2323 V & 1478 V & 946 V \\
+		\hline
+        Extracted energy & 0 & 8.27e8 J & 1.279e9 J \\
+		\hline
+        Extracted energy ratio & 0 & 46\% & 71\% \\
+		\hline
+	\end{tabular}
+	\caption{ Influence of Rp on quench characteristics}
+	\label{tab:structure}
+\end{table}
+\section{HTS/LTS Superconductor Options}
+\section{Solenoid Coil Design}
+
+
+
+
+
+
+
+
+
+
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.32] {Figures/Magnet/7p_L_HL_CC.pdf}
+\includegraphics[scale=0.80] {Figures/Magnet/fig_HCfit10.pdf}
+\caption{Top: The 7 parameter fit, and comparison with the HL-LHC, discussed in detail in Chapter~\ref{Chapter:Higgs}. The projections for CEPC at 250 GeV with 5~ab$^{-1}$ integrated luminosity are shown. The CEPC results without combination with HL-LHC input are  shown with dashed edges. The LHC projections for an integrated luminosity of 300 fb$^{-1}$ are shown in dashed edges. Bottom: Comparison between the LHC and several benchmark luminosities of the CEPC. }
+\label{fig:7param}
+\end{figure}
+\section{HTS/LTS Superconductor Options}
+\section{Solenoid Coil Design}
+\section{Magnet Cryogenics Design}
+\section{Quench Protection and Power supply}
+\section{Iron Yoke Design}
+\section{Dual Solenoid Scenario}
+
+
+\bibliographystyle{Style/atlasnote} %% plain.bst
+\bibliography{Chapters/Magnet} %% bsample.bib
+

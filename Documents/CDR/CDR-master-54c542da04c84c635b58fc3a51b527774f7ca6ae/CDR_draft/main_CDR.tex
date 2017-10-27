@@ -1,0 +1,127 @@
+\documentclass{Style/wileysev}
+\usepackage[square, comma, sort&compress, numbers]{natbib}
+\usepackage{Style/atlasphysics}
+\usepackage{Style/w-bookps}
+\usepackage{graphicx}
+\usepackage[sectionbib]{chapterbib}
+\usepackage{answers}
+\usepackage{mathrsfs}
+\usepackage{amsmath}
+\usepackage{multirow}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{placeins}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{epstopdf}
+\usepackage{subfigure}
+\usepackage{bm}
+\usepackage{longtable}
+\usepackage{lineno}
+\usepackage{booktabs}
+\usepackage{xcolor,colortbl}
+\usepackage{pifont}
+\usepackage{slashed}
+\usepackage[LGR,T1]{fontenc}
+%\usepackage{CJK}
+%\usepackage{tikzset}
+%\tikzset{
+%    photon/.style={decorate, decoration={snake}, draw=black},
+%    wino/.style={draw=redwine},
+%    electron/.style={draw=black, postaction={decorate},
+%        decoration={markings,mark=at position .55 with {\arrow[draw=black]{>}}}},
+%    scalar/.style={draw=black, dashed,postaction={decorate},
+%        decoration={markings,mark=at position .55 with {\arrow[draw=black]{>}}}},
+%    gluon/.style={decorate, draw=black,
+%        decoration={coil,amplitude=4pt, segment length=5pt}}
+%}
+
+\setcounter{secnumdepth}{3}
+
+
+\setcounter{tocdepth}{2}
+
+
+\graphicspath{{figures/}}
+\newcommand{\BibTeX}{{\sc Bib\TeX}}
+
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue,
+  pdftitle={},
+  pdfauthor={Yaquan et al}
+  pdfpagemode={UseOutlines},
+  bookmarksopen=true,bookmarksnumbered=true,pdfstartview={Fit}
+}
+
+\oddsidemargin = -22pt
+\evensidemargin = -22pt
+
+%\voffset 25pt
+
+
+%\setpagewiselinenumbers
+%\linenumbers
+
+%%wm: uncomment the following line to work on a single chapter.
+%\includeonly{Chapters/SiTracker}
+
+
+\begin{document}
+%\begin{CJK*}{GBK}{song}
+\booktitle{\centering{\fontsize{50}{56}\selectfont{\normalfont{CEPC-SPPC}}}} 
+\subtitle{\fontsize{27}{32}\selectfont{\normalfont{\textit{Conceptual Design Report}}} \\ \vspace{30pt}
+\fontsize{26}{32}\selectfont{\normalfont{Volume I - Physics \& Detector}} \\ \vspace{260pt}
+\huge{\normalfont{The CEPC-SPPC Study Group}} \\ \vspace{18pt}
+\huge{\normalfont{March 2018}} \\
+\vspace{-720pt}
+\hfill \Large{\fontfamily{phv}\selectfont{IHEP-CEPC-DR-2018-XX}} \\ \vspace{15pt}
+\hfill \Large{\fontfamily{phv}\selectfont{IHEP-EP-2018-XX}} \\ \vspace{15pt}
+\hfill \Large{\fontfamily{phv}\selectfont{IHEP-TH-2018-XX}} 
+}
+
+\authors{}
+\offprintinfo{}{}
+
+
+\titlepage
+
+
+%\input{Chapters/AuthorList}
+
+
+
+
+\begin{acknowledgments}
+The CEPC-SPPC Conceptual Design Report (CDR) was prepared and written by the CEPC-SppC Study Group. The study was organised and led by scientists from the Institute of High Energy Physics (IHEP) of the Chinese Academy of Sciences (CAS), and from many universities and other institutes in China and abroad. The study was partially supported ...
+
+
+...
+
+\end{acknowledgments}
+
+
+
+%\begin{authorlist}
+%\end{authorlist}
+
+\tableofcontents
+
+\include{Chapters/Introduction}
+\include{Chapters/Theory}
+\include{Chapters/ExperimentalConditions}
+\include{Chapters/Vertex}
+\include{Chapters/SiTracker}
+\include{Chapters/TrackingSystem}
+\include{Chapters/Calorimetry}
+\include{Chapters/Magnet}
+\include{Chapters/Muon}
+\include{Chapters/ReadoutDAQ}
+\include{Chapters/MDI}
+\include{Chapters/Performance}
+
+\include{Chapters/FuturePlan}
+
+%\end{CJK*}
+\end{document}
+

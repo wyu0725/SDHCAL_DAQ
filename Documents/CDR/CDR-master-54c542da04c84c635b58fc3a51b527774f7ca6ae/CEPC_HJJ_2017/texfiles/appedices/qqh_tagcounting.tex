@@ -1,0 +1,42 @@
+\section{Tag counting method in the application of flavor tagging}
+The tag counting method is implemented in B-tagging calibration using $\ttbar$ events in ATLAS 
+experiment\cite{ATLAS_CSC}. Mathematically it can also used to reversly to resolve the fraction of events with various components. \par
+The tag counting method is based on:
+\begin{equation}\label{for:tagcounting}
+<N_n> = (L\times\sum\limits_{c=1}^s(\sigma_c \times A_{c,\mathrm{pre-tag}}))\times\sum\limits_{i,j,k}F_{ijk}\sum\limits_{i^\prime+j^\prime+k^\prime=n}C^{i^\prime}_i\epsilon_b^{i^\prime} (1-\epsilon_b)^{i-i^\prime}C^{j^\prime}_j\epsilon_c^{j^\prime} (1-\epsilon_c)^{j-j^\prime}C^{k^\prime}_k\epsilon_l^{k^\prime} (1-\epsilon_l)^{k-k^\prime}
+\end{equation}
+in which $<N_n>$ is the expected observed events number with $n$ jets passing b-tagging; $L$ is integral luminosity and $\sigma_c$ and $A_{c,\mathrm{pre-tag}}$ are the cross section and acceptance before applying the flavor tagging for channel $c$;factor $F_{ijk}$ is defined as the fraction of events with $i$ b-jets, $j$ c-jets and $k$ light jets;  $C^{i^\prime}_i$ is the arragement number: $\dfrac{i!}{i^\prime!(i-i^\prime)!}$; the prime subscript corresponding to the tagged jets of given flavor; and $\epsilon_b$,$\epsilon_c$ and $\epsilon_l$ stand for average the tagging efficiency for b, c and light jets.\par
+By requiring 4 jets in final states, there are 15 $F_{ijk}$ to determine\footnote{There are 14 independent $F$ values due to the normalization relation $\sum\limits_{i,j,k}F_{ijk}=1$}. In $\Zzero\Hboson\to \qqbar + bb/cc/gg$ sample, the $F_{ijk}$ are listed in table \ref{tab:fijk}. It can be seen that $F_{400}$, $F_{202}$ and $F_{220}$ are signficantly larger than the others thus they have higher priority to be determined.  We can construct a log-likelihood via:
+\begin{equation}\label{for:tagcounting_likelihood}
+\log{L} = \sum\limits_{i=0}^4 Possion(<N_i>,N_{i,observed})
+\end{equation}
+By minimizing $-\log{L}$, one can get the number of $F_{ijk}$ of interest. Moreover, tagging efficiency like $\epsilon_b$ can also be set as free parameters for fitting.
+
+\begin{table}[!htpb]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|}\hline
+               & $N_{cjets}=4$ & $N_{cjets}=3$ & $N_{cjets}=2$ & $N_{cjets}=1$ & $N_{cjets}=0$ \\ \hline 
+ $N_{bjets}=4$ &    -          &      -        &      -        &      -        &   0.186  \\ \hline
+ $N_{bjets}=3$ &    -          &      -        &      -        &     0.0192    &   0.0846 \\ \hline
+ $N_{bjets}=2$ &    -          &      -        &     0.125     &3.9$\times10^{-5}$& 0.04232 \\ \hline
+ $N_{bjets}=1$ &    -          & 6.75$\times10^{-3}$&6.90$\times10^{-6}$& 0    &   0.026  \\ \hline
+ $N_{bjets}=0$ &7.02$\times10^{-3}$&4.08$\times10^{-3}$&0.0343 &6.71$\times10^{-3}$ & 0.0777\\ \hline   
+
+\end{tabular}
+ \caption{$F_{ijk}$ in $\Zzero\Hboson\to \qqbar + bb/cc/gg$ sample.}
+ \label{tab:fijk}
+\end{table}
+
+Before applying the fit to get $F_{ijk}$, we did an input/output test in $\Hboson\Zzero\to \qqbar \bbbar/\ccbar/gg$ sample. The tagging efficiency was calculated from all the jets in the sample, then we compare $N_n$ from formula \ref{for:tagcounting} and $N_{n,observed}$. The result is listed in table \ref{tab:tagcounting_io}. Serious deviation was found especially for $F_2$ and $F_3$. This might be due to the average tagging efficiency is not independant to the flavor components, thus formula one can not be validated. 
+\begin{table}
+\centering
+\begin{tabular}{|c|c|c|c|c|c|}\hline
+            &   $F_0$     &    $F_1$     &   $F_2$      &    $F_3$       &    $F_4$    \\ \hline
+$N_{n,observed}$       
+            &    0.136    &   0.221      &   0.475      &     0.096      &     0.072   \\ \hline
+$<N_n>$     &    0.142    &   0.252      &   0.386      &     0.156      &     0.064   \\ \hline              
+\end{tabular}
+\caption{The obvserved and calculated(according to formula \ref{for:tagcounting}) event number with cerntain tagged jets multiplicity. $F_i$ is defined as the fraction of events with $i$ jets tagged.}
+\label{tab:tagcounting_io}
+\end{table}
+\clearpage

@@ -1,0 +1,197 @@
+Title:
+It is a bit too long and I would suggest:
+
+“Measurements of the decay branching fractions of H->bb/cc/gg at the CEPC”
+
+I noticed that you use “branch ration” a few times in the text, but that is not precise.
+It should be “branching fraction” throughout the text.
+
+
+Abstract:
+
+Please delete the “A couple of remark ….. as author.”
+
+Suggest rephrase the abstract as the following:
+
+“A study on the measurements of $H\to \bbbar /\ccbar/gg$ decay branching fractions is presented in this section. 
+Here we consider the Higgs boson production in association with a $Z$ boson, where $Z$ is reconstructed in the $\nu\bar{\nu}$, $\ell\ell$, and $q\bar{q}$ final states. An integrated luminosity of 5000 fb$^{-1}$ is assumed in the analysis, corresponding to 10 years data taking with a nominal luminosity of \ten{2}{34} $\lumiunit$ at the CEPC. The results presented here are based on a combination of cut based event selection and a multi-variable template fitting method.  The expected statistical uncertainties of the measurements are estimated using toy Monte-Carlo tests. Several potentially dominant systematic uncertainties of the measurements are also evaluated. The study shows that the branching fraction measurements of the Higgs boson decaying to $\bpair$, $\cpair/$ and $\gpair$ can reach a precision of \percent{0.2}, \percent{2} and \percent{3}, respectively. 
+
+
+L19: “the fundamental particles list in the standard model“ => the final piece of the standard model (SM)
+
+L20 higgs -> Higgs, 
+    lead  -> crucial 
+
+L21 add a space between “BEH” and “(Brout…)”
+
+L22 [3,4] Add a citation to the 3rd Higgs mechanism paper 
+
+     http://inspirehep.net/record/12292?ln=en
+
+     also change “…[3,4]” => …[3,4], often referred as the Higgs mechanism” 
+
+     “The higgs mechanism …. invariant way … 246 GeV.” 
+
+     => “The Higgs mechanism allows the $\Wboson$, $\Zboson$, quarks and charged leptons to be massive while keeping the $SU(2)_L \times U(1)_Y$ gauge invariance. The masses of the SM fermions ($m_{f_i}$) in the SM are proportional to their Yukawa couplings ($h_i$) to the Higgs field: $m_{f_i} = {vh_i}/{\sqrt{2}}$, where $v\approx 246\GeV$ is the vacuum expectation value of the Higgs field (VEV).”
+
+
+L26 - L30, suggest to rephrase as following:
+
+“Measuring the Yukawa couplings between the Higgs boson and the SM fermions is essential to understand the origin of the fermions' masses and the details of the EWSB. The dominant direct Higgs boson decays into fermionic final states are $\H\to \bpair$, $\Hboson\to\cpair$ and $\Hboson\to\taupair$, the decay branching fractions of which are estimated to be 
+57\,\%, 4\,\% and 3\,\%, respectively. In addition, the Higgs boson can decay to a gluon pair mediated by heavy quark loops.
+The large Yukawa coupling between the Higgs boson and the top quark leads to a considerably large decay branching fraction of 
+$\Hboson\to\gpair$ that is estimated to be about \percent{9}. “
+
+
+L31 “Until now, … experimentally”
+
+    => “Until now, the LHC is the only collider to directly study the Higgs mechanism.”
+
+L31 - 35:
+
+    Both ATLAS and CMS have 4 sigma measurement of H->tautau. You need add those information in. Also ATLAS
+    just report a 3 sigma evidence of H->bb and reported in EPS (ongoing), see:  
+       https://atlas.web.cern.ch/Atlas/GROUPS/PHYSICS/CONFNOTES/ATLAS-CONF-2017-041/
+    You want to add those information in as well. You also want to comment on incapability for KHC to measure H->gg,cc etc
+
+L36 - 41:
+
+    Suggest to rephrase as the following and combined it with the previous paragraph
+
+    “On the other hand, with much fewer background events and well defined initial and final states, the proposed Circular Electron Positron Collider (CEPC)~\cite{CEPC_preCDR} will have the capability to carry out precision measurements of many Higgs decay modes that are inaccessible at the LHC.”
+
+L42 - 47: suggest =>
+
+“The studies presented in this note demonstrate the capability to perform precision measurements of the Higgs boson decay branching fraction in the $\bpair$, $\cpair$ and $\gpair$ final states at the CEPC. We consider the Higgs boson production in association with a $Z$ boson, where $Z$ is reconstructed in the $\nu\bar{\nu}$, $\ell\ell$, and $q\bar{q}$ final states.
+This note is organized as follows: Section II gives a brief introduction of the CEPC and MC samples used in the analysis. 
+….. (please rewrite the rest text as the current ones are inconsistent with the actual structure) …”
+
+     
+**************
+Starting from 2nd section, my comments will focus on the physics for now
+**************
+
+L49 - L59
+
+It would be better to combine them as a single section “CEPC experiment”
+
+Assuming you want to publish it as an individual paper, then you need some brief
+description of the subsystem of CEPC detector model you used in the analysis. It does not need
+to be long, a single paragraph is enough. You also want to explain the detector coordinate system
+used in the analysis. Eg: using eta (like hadron collider ) or just polar angle ….
+
+L69: Durham-like algorithm: please explain it a little bit (eg: give the definition/value of distance 
+parameter used in the algorithm). This is not a commonly used jet algorithm in these days so it warrants
+sone clarification.
+
+L80: “vertex information is missing from reconstruct
+“
+
+reconstruct -> reconstruction. I assume in this case, the geometrical center of the detector is used as the
+collision point. If so, please explain it explicitly in the text.
+
+Sec 2.3:
+
+Do you assume 100% off for tracking, e/mu ID …? Please describe it in the text.
+
+For fast simulation, how do you reconstruct jet before smearing? I assume you used the truth particles.
+Then is there any selection cuts for that (minimum pT … ) Again, add the information in.
+
+Sec 3: It would be more appropriate to use name “Event selection”
+
+Sec 3.1: You need to describe the complete selections used in the text rather than asking reader to figure out from the table. Such as pT cut of track and jets …. Also you need explicitly define all the variables (recoils mass, y23, y34 …) in the text. The same comments also apply to 3.2 and 3.3. In general, you need to define every math symbol/notation in the journal paper when they are first introduced.
+
+L96: maximum the signal significance => maximize the signal significance.
+
+Also explicitly describe how you do it (Eg, maximize s/sqrt{B} for example …)
+
+
+Table 1 and 2: round to whole numbers.
+The table is fine if they are in the support note. For publication, they are not necessary and a simple summary on event yield (signal, bg) after all the selection criteria is enough.
+ 
+
+Fig 2, and 3:
+
+Make them bigger (typically a square canvas works best for most journals). Increase the size of label, legend. Fix typos in the axis labels. also move the legend inside the figure. Also move index (a) … (d) inside the figs instead of using latex.
+
+Similar to my comments on table, the plots here are useful for support note, but for future journal draft, consider only showing variable distributions that emphasize the signal to bg ratio after applying all event selection criteria.
+
+
+L105: So unlike other channel, W-fusion Higgs production will be counted as the signal? Clarify it in the text.
+
+L109: define PFO
+
+Fig 3 and 4: similar comments as the ones for Fig 1 & 2.
+
+L119 - L122: What is the value used to cut BDT and its corresponding signal off and bg rejection?
+Add to the text.
+
+Fig 5: remove shade background, explain the plots in the caption.
+Instead of using the plots provided by TMVA, you should remake them using CEPC style/format.
+
+Table 3: 
+
+Round the number. Also rotate the table for 90 degree so that it fit with the same text fonts.
+Again, a very useful table for internal note but not needed for publication.
+
+Fig 7: see my comments on Fig 1 & 2.
+
+L137 - 146:
+
+The description is not very clear. I think I understand what you did after reading it several times.
+You treat each event as a ZH candidate to calculate \chi^2_HZ, then treat it as a WW candidate to compute 
+\chi^2_WW. Please rephrase the text to make it easier for readers to digest.
+
+L139: “\sigma_H  .. are the width ….”
+
+You don’t have reconstructed width at event-by-event basis. It has to be the expected resolution (width) from signal MC ??
+Please clarify.
+
+Eq 2: fix typo
+
+Table 4: see my comments n table 3. 
+
+L151: “A yah-value ..” ???
+
+Fig 9: See my comments on Fig 5.
+
+Sec 4.1: what is the rejection to gluon jet? Is there a reference on b tagging to cite?
+Is the tagger output from 0-1 and the one used as L_b1 and L_b2 …?
+
+L162: Add definition of L_b1, L_b2 ….
+
+L168 - L172: Did you use the RooFit or define your own LH to use Minuit. It seems to latter to me based on the description. If so, 
+why don’t use RooFit, which is much more powerful (plots, normalization …) It also allows you easily estimate the error due to the statistical uncertainty of the template (need toys). The definition of the LH here is slightly different from LH used in RooFit, but it won’t make any difference for the fitting.
+
+Also what is the correlation between XB and XC? If small, can we use factorization for fit? This allow projection plots so that readers can easily see each component of the fit.
+
+L178: “is equal to $L\times ..$ “ =>
+
+This is wrong. You have to take into account the acceptance and selection efficiency!
+
+I also have problem to apply such a constraint, as this use the theoretical input which is exactly something we want to test using the precision measurement. This constraint is also one of the reason you can extract H->gg as it is inferred from H->bb,cc using theory constraint. See my later comments. I am not sure your analysis method is capable to measure H->gg branching fraction experimentally.
+
+L179: The shape of background ….” and Fig 13:
+
+Do you allow the background normalization to float in the fit?  
+I assume you did. If so, then do you allow normalization of each background component to be float or you fixed their ratio?
+If you fix their rate, again you are using the theory constraint (not desired)
+
+If you compare Fig 13 (d) and Fig 12 (l), it would be very difficult to distinguish H->gg and W/Z->qq/gg etc if you don’t use theory constraints. You would have similar problems in other final states if you don’t fix the ratio of each bg component contributions.
+
+For an analysis like yours, people typically use the kinematic information (Eg: m_{jj}) to experimentally determine each background contribution. Why not do that?
+
+Sec 7:
+
+Your study is really only part of the branching fraction measurement. You need to know the number of H from recoils mass distribution.
+Do you have any plan to add it?
+
+
+
+
+
+
+
+
+
+     

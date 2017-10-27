@@ -1,0 +1,183 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% This is a template CEPC Paper that contains suggestions and hints on
+% how to get your note in a form that minimizes the amount of work
+% needed to get it approved by the collaboration - assuming that the
+% physics is OK!
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\documentclass[11pt,a4paper]{cepcnote}
+\documentclass[coverpage]{cepcnote} 
+\graphicspath{{figures/}}
+\usepackage{cepcphysics}
+\usepackage{subfigure}
+\usepackage{mathrsfs}
+\usepackage{authblk}
+\usepackage{amsmath, amssymb}
+\usepackage{slashed}
+\usepackage{multirow}
+\usepackage{lineno}
+%\newcommand{\bslash}{\ensuremath{\backslash}}
+\def\Slash#1{\!\not\!\! #1}             % Feynman dagger for upper case
+\def\slash#1{\!\not\! #1}               % Feynman dagger for lower case
+\newcommand{\etmiss}{\ensuremath{\slashed{E}_T}} %added by baiyu
+\newcommand{\emiss}{\ensuremath{\slashed{E}}}    %added by baiyu
+\newcommand{\mmiss}{\ensuremath{\slashed{M}}}    %added by baiyu
+\newcommand{\mmissquare}{\ensuremath{\slashed{M}^2}} %added by baiyu
+
+\newcommand{\minitab}[2][l]{\begin{tabular}{#1}#2\end{tabular}}  %added by baiyu
+\renewcommand{\multirowsetup}{\centering}       %added by baiyu
+\newcommand{\tabincell}[2]{\begin{tabular}{@{}#1@{}}#2\end{tabular}} %added by baiyu
+
+%font size
+\newcommand{\zhonghao}{\fontsize{10pt}{\baselineskip}\selectfont}
+\newcommand{\chuhao}{\fontsize{8pt}{\baselineskip}\selectfont}
+\newcommand{\xiaochuhao}{\fontsize{5.4pt}{\baselineskip}\selectfont}
+\newcommand{\xiaohao}{\fontsize{5.0pt}{\baselineskip}\selectfont}
+
+%%% commands Alex
+\newcommand{\inmath}[1]{\ensuremath{#1}\xspace}
+%\newcommand{\eg}{e.\,g.\@\xspace}
+%\newcommand{\Eg}{E.\,g.\@\xspace}
+%\newcommand{\ie}{ie\@ifnextchar.{}{.\@}}
+%\newcommand{\Ie}{I.\,e.\@\xspace}
+\newcommand{\percent}[1]{{#1}\,\%}
+\newcommand{\todo}[1]{{\color{red}TODO: #1}}
+\newcommand{\metx}{\inmath{\met}}
+\newcommand{\meffx}{\inmath{m_\text{eff}}}
+\newcommand{\mttwox}{\inmath{m_\text{T2}}}
+\newcommand{\summtx}{\inmath{m_T(\lepton_1) + m_T(\lepton_2)}}
+\newcommand{\mctx}{\inmath{m_\text{CT}}}
+\newcommand{\Wjetsx}{$W$~+ jets\xspace}
+\newcommand{\Zjetsx}{$Z$~+ jets\xspace}
+\newcommand{\ttbarx}{\ttbar\xspace}
+\newcommand{\ptx}{\pt\xspace}
+\newcommand{\Table}[1]{Table~\ref{#1}\xspace}
+\newcommand{\Fig}[1]{Figure~\ref{#1}\xspace}
+%\newcommand{\GeV}[1]{\unit[#1]{GeV}\xspace} % I made sure no one is using \GeV before adding this line
+\newcommand{\ifbx}[1]{\unit[#1]{\ifb}\xspace}
+\newcommand{\eighttev}{\inmath{\sqrt{s} = \unit[8]{TeV}}}
+\newcommand{\com}{\inmath{\sqrt{s} = \unit[250]{GeV}}}
+\newcommand{\lumiunit}{\ensuremath{\mathrm{cm}^{-2}\mathrm{s}^{-1}}
+}
+\makeatletter
+\DeclareRobustCommand*{\trigger}[1]{%
+  \begingroup\@activeus\scantokens{#1\endinput}\endgroup}
+\begingroup\lccode`\~=`\_\relax
+   \lowercase{\endgroup\def\@activeus{\catcode`\_=\active \let~\_}}
+\makeatother
+\newcommand{\neutralinon  }[1]{\inmath{\widetilde{\chi}_{#1}^0}}
+\newcommand{\charginon    }[1]{\inmath{\widetilde{\chi}_{#1}^\pm}}
+\newcommand{\taupll       }{tau~+ light lepton\xspace}
+\newcommand{\lepton       }{\ensuremath{\ell}}
+\newcommand{\nnh          }{\ensuremath{\nu \bar{\nu} H} }
+\newcommand{\llh          }{\ensuremath{l^{+}l^{-}H}}
+\newcommand{\eeh          }{\ensuremath{e^{+}e^{-}H}}
+\newcommand{\mmh          }{\ensuremath{\mu^{+}\mu^{-}H}}
+\newcommand{\tautauh      }{\ensuremath{\tau^{+}\tau^{-}H}}
+\newcommand{\qqh          }{\ensuremath{q\bar{q}H}}
+\newcommand{\bpair           }{\ensuremath{b\bar{b}}}
+\newcommand{\cpair           }{\ensuremath{c\bar{c}}}
+\newcommand{\gpair           }{\ensuremath{gg}}
+\newcommand{\qpair           }{\ensuremath{q\bar{q}}}
+\newcommand{\leppair           }{\ensuremath{l^{+}l^{-}}}
+\newcommand{\leppm             }{\ensuremath{l^{\pm}}}
+\newcommand{\lepmp             }{\ensuremath{l^{\mp}}}
+\newcommand{\elpair           }{\ensuremath{e^{+}e^{-}}}
+\newcommand{\elpm             }{\ensuremath{e^{\pm}}}
+\newcommand{\elmp             }{\ensuremath{e^{\mp}}}
+\newcommand{\mupair           }{\ensuremath{\mu^{+}\mu^{-}}}
+\newcommand{\mupm             }{\ensuremath{\mu^{\pm}}}
+\newcommand{\mump             }{\ensuremath{\mu^{\mp}}} 
+\newcommand{\taupair           }{\ensuremath{\tau^{+}\tau^{-}}}
+\newcommand{\taupm             }{\ensuremath{\tau^{\pm}}}
+\newcommand{\taump             }{\ensuremath{\tau^{\mp}}}
+%\newcommand{\ten          }[1]{\cdot 10^{#1}}
+\newcommand{\ten           }[2]{\ensuremath{{#1}\times 10^{#2}}}
+%%%
+
+% Shorthand for \phantom to use in tables
+\newcommand{\pho}{\phantom{0}}
+\newcommand{\bslash}{\ensuremath{\backslash}}
+\newcommand{\BibTeX}{{\sc Bib\TeX}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Preamble
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\title{ Higgs Mass and Cross-section Measurement at CEPC }
+\title{Measurement of $H\to \bpair /\cpair /\gpair$ Branch Ration from $ZH$ Production with  $\nnh$, $\llh$ and $\qqh$  Final States in CEPC Experiment}
+%\title{A template for CEPC papers}
+\author{CEPC Workgroup}
+\mail  {baiy@seu.edu.cn}
+%\draftversion{1.0}
+\cepcnote{CEPC\_ANA\_HIG\_2016\_XXX}
+\abstracttext{
+  
+%  This is a template CEPC paper. It contains the structure, style
+%  files and hints on how to produce a paper for which a minimum amount
+%  of time is necessary to spend on typographic details. This template
+%  can be found on the web pages of the CEPC Collaboration. 
+%  You can find some \LaTeX{} technical detail about the
+%  template in the Appendix of this paper.
+  A couple of remarks about the paper front page:
+  \begin{itemize}
+
+  \item {\bf Title:} Measurement of $Hboson\to \bpair /\cpair /\gpair$ Branch Ration from $ZH$ Production with \nnh, \llh and \qqh  Final States in CEPC Experiment
+  \item {\bf Author list:} it will be provided by the CEPC Collaboration,
+    and will be made available on their website. On the
+    front page, you should name ``The CEPC Collaboration'' as
+    author.
+
+  \item {\bf Abstract:}
+  A study on the measurement on $Hboson\to \bbbar /\ccbar/gg$ branch ratio, one of the benchmark measurements in CEPC experiment, is presented here. In the scenario concerned, the Higgs boson are produced associated with a Z boson,
+  and subsequently undergo hadronic decay, while the $Zboson$ decays to neutrino pair, charged lepton pair or quark pair.  
+
+%  This analysis，in complementary with the measurement on other states of ZH production, can be used to derive the Yakawa coupling, one of the key properties to understand the Electroweak symmetry breaking mechanism. \par
+   An integral luminosity of 5000 fb$^{-1}$ is assumed to estimate the signal and background yielding, corresponding to 10 years running of CEPC with nominal luminosity at \ten{2}{34} $\lumiunit$. A cut based analysis is applied to each analysis, combined with multi-variable method. The flavor information in final states 
+   are extracted by fitting each flavor components according to their templates. A Toy Monte-Carlo test was done to evaluate the statistic uncertainty. 
+   They systematic uncertainty was also disccussed and estimated.
+   We conclude the measurement of $\Hboson \to \bpair/\cpair/\gpair$ reach the precision \percent{0.2}, \percent{2} and \percent{3}. 
+   %A cut based analysis gives xxx signal events and xxx.xxx background events. The flavor components was distinguished using a template fit method. In addition study of various of technics such as TMVA, tag counting are on going.
+%    it should also be clear, descriptive, and
+%    concise. It should ideally be one paragraph long, and certainly no
+%    more than half a page. It should stand on its own and, similarly,
+%    the main text of the paper should not depend on it. The abstract
+%    should state: what was the measurement; where was it done and with
+%    what dataset/luminosity; what method was used; what are the
+%    primary results and main conclusions.  Citations in an abstract
+%    should be avoided. If only Monte Carlo data are used in the
+%    publication, this fact should be stated explicitly in the
+%    abstract.  
+    
+  \end{itemize}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% This is where the document really begins
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\linenumbers
+\tableofcontents
+\clearpage
+
+\input{texfiles/Introduction}
+\input{texfiles/CEPC_MC}
+\input{texfiles/event_selection}
+\input{texfiles/templatefit}
+\input{texfiles/validation}
+\input{texfiles/results}
+\input{texfiles/summary}
+
+\clearpage
+\pagebreak
+\newpage
+
+%\input{texfiles/appendix}
+
+\bibliographystyle{cepcBibStyleWoTitle}
+\bibliography{instructions}
+
+\end{document}

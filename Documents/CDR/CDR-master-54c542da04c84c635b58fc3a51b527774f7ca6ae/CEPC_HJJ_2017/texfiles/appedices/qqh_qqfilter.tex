@@ -1,0 +1,33 @@
+\section{Event filter for $\qqbar$ events}
+ The $\qqbar$ process frequently happen with additional gluon radiated from primary quarks, and form one or more jets, rising the probablity of passing the event selection. This fact can be demonstrate by comparing the $y_{34}$ value distribution of the $\qqbar$ events with and without hard gluon radiation, see figure\ref{fig:y34_filter}. When a quark emit a gluon with $p_T>$20 GeV, outside of a $\Delta R=$0.7 cone from the residule quark after emission, and carry more than 25\% of the energy of the quark before emssion, a hard gluon radiation is tagged to this event. Gluon radiation is also considered by looking for if there is quarks from gluon. The emitted gluon and the quarks from gluon radiation are put in a parton list, in which the candidates as the source of jets before hadronization. A parton in the list is assumed to be the origin of a jet if it has energy larger than 20 GeV. Thus the parton multiplicity in terms of jets can be larger than the primary parton multiplicity.\par
+ 
+ 
+Due to the huge cross section of $\qqbar$ events(about 50 pb in total), generating such backgrounds yielding comparable equivalent integral luminosity as that for other backgrounds (~ 5000 fb$^{-1}$) is beyond reality. However most of the $\qqbar$ events passing the selection are those with hard gluon radiation, as shown in table \ref{tab:filter}, so one can make a filter in generation level to reject the events without hard gluon radiation. 
+ 
+
+\begin{figure}[!htpb]\label{fig:fit_data}
+\centering
+    \includegraphics[width=0.65\textwidth]{figures/y34_compare.eps}
+\caption{ $y_{34}$ distribution of events with different parton multiplicity in $\qqbar$ sample}
+\label{fig:y34_filter}
+\end{figure}
+
+In addition, we have \emiss cut and $\qqbar$ has a high rate to emit a high energy photon very close to the beam direction and has a large chance to escape from detection. By requring the missing energy (of the $\qqbar$ system) smaller than a threshold can further reduce the statistics needed to be simulated. The combined filter is applied in the $\qqbar$ full simulation.
+
+\begin{table}[!htpb]
+\centering
+\begin{tabular}{|c|c|c|c|}\hline
+   NParton     &    $\leq 2$     &   3      &    4       \\ \hline
+ Event Yields  &    202.75M      &  38.01M  &  5.44M     \\ \hline
+ \emiss$\leq$ 85 GeV
+               &    85.38M       &  21.23M  &  4.06M     \\ \hline
+ \tabincell{c}{Jet quality\\ $y_｛34｝\leq$0.02}
+              & \tabincell{c}{37.2k  \\4.18\%}
+                                 & \tabincell{c}{233.1k \\26.18\%}
+                                            &  \tabincell{c}{619.8k \\ 69.64\%} \\ \hline
+\end{tabular}
+\caption{The event yields of $\qqbar$ events with 2,3 and 4 partons before and after filter. The filter has efficiency around 10\% and 95\% of events passing the event selection are those which pass the filter.}
+\label{tab:filter}
+\end{table}
+
+\clearpage

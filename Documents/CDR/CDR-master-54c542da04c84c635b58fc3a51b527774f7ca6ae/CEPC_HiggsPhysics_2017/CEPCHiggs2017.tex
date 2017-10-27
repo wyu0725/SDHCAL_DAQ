@@ -1,0 +1,142 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% This is a template ATLAS Paper that contains suggestions and hints on
+% how to get your note in a form that minimizes the amount of work
+% needed to get it approved by the collaboration - assuming that the
+% physics is OK!
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[a4paper,11pt]{article}
+\pdfoutput=1 % if your are submitting a pdflatex (i.e. if you have
+             % images in pdf, png or jpg format)
+
+\usepackage{jheppub} % for details on the use of the package, please
+                     % see the JHEP-author-manual
+
+\usepackage[T1]{fontenc} % if needed
+
+
+
+%\section{Some examples and best-practices}
+%\label{sec:intro}
+
+
+%\documentclass[11pt,a4paper]{style/atlasnote}
+\graphicspath{{figures/}}
+%%\usepackage{subfigure}
+\usepackage{mathrsfs}
+\usepackage{amsmath}
+
+\usepackage{multirow}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{placeins}
+\usepackage{soul} %Used for strikeout.
+\usepackage{tabularx}
+\usepackage{array}
+
+\usepackage{epstopdf}
+\usepackage{subfigure}
+\usepackage{lineno}
+%\usepackage{subfig}
+\usepackage{longtable}
+%\usepackage{authblk,colortbl}
+\input{tex/var_defs}
+
+% 
+%  The lines below activate blue links in the produced pdf file:
+%  Any figure, section or reference becomes clickable.
+%  Some (old) latex configurations might have issues with this
+%  in which case you can uncomment the lines. But it works on
+%  pretty much all ``modern'' systems, incluidng lxplus if setting
+%  up athena. For example after asetup 17.2.7   (added by Dag)
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue,
+  pdftitle={CepC Higgs couplings prospects},
+  pdfauthor={Yaquan et al}
+  pdfpagemode={UseOutlines},
+  bookmarksopen=true,bookmarksnumbered=true,pdfstartview={Fit}
+}
+
+
+% version
+%\draftversion{0.5}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Preamble
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\title{Search for the production of the standard model Higgs boson\\
+%  via vector boson fusion in $\bm{\lumifullnew{}}$ proton-proton data at 8~TeV\\ using a multivariate analysis}
+\title{Precision Higgs Physics at the CEPC}
+
+
+%% %simple case: 2 authors, same institution
+%% \author{A. Uthor}
+%% \author{and A. Nother Author}
+%% \affiliation{Institution,\\Address, Country}
+
+% more complex case: 4 authors, 3 institutions, 2 footnotes
+\author[a,b,1]{F. Irst,\note{Corresponding author.}}
+\author[c]{Jin Wang}
+\author[a,2]{T. Hird\note{Also at Some University.}}
+\author[a,2]{and Fourth}
+\date{\today}
+
+\affiliation[a]{One University,\\some-street, Country}
+\affiliation[b]{Another University,\\different-address, Country}
+\affiliation[c]{A School for Advanced Studies,\\some-location,
+  Country}
+
+% e-mail addresses: one for each author, in the same order as the
+% authors
+\emailAdd{first@one.univ}
+\emailAdd{second@asas.edu}
+\emailAdd{third@one.univ}
+\emailAdd{fourth@one.univ}
+
+%\draftversion{1.0}
+      
+\abstract{{\color{red} Version 0.101}\\
+The recent discovery of a Higgs boson with its mass around 125 GeV by the ATLAS and CMS Collaborations has provided the first insight into the scalar sector of the Standard Model and beyond. The particle will be the subject of extensive studies of the ongoing LHC program. A lepton collider Higgs factory has been proposed as a logical next step beyond the LHC to measure the properties and study potential new physics associated with the Higgs boson. The Circular Electron Positron Collider~(CEPC) is one of such proposed Higgs factories. The CEPC is an $e^+e^-$ circular collider with a center-of-mass energy of $\sim 240-250$ GeV in a tunnel of 50~km or longer in circumference proposed by China. It will be followed by a Super Proton-Proton Collider (SPPC) in the same tunnel with an energy $70-100$~TeV. In this paper, we examine physics cases of and estimate precision achievable at the CEPC as a Higgs factory.}
+
+\begin{document}
+\maketitle
+\flushbottom
+
+\linenumbers
+\clearpage
+
+%\input{tex/notes}
+
+\input{tex/01_higgs} % Editor? Writer? Checker?
+\input{tex/02_instrument} %
+\input{tex/03_samples} %
+\input{tex/04_xsection} %
+\input{tex/05_channels} %
+\input{tex/06_br} %
+\input{tex/07_coupling} %
+\input{tex/08_conclusion} %
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Bibliography
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\bibliographystyle{style/atlasnote}
+\bibliography{CEPCHiggs2017}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Technical Aspects
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+
+%\appendix
+%\input{tex/appendix_fig}
+
+%\part*{Appendices}
+%\addcontentsline{toc}{part}{Appendices}
+
+
+\end{document}

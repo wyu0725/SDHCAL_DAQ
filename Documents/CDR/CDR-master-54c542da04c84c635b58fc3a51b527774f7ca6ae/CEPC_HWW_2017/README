@@ -1,0 +1,33 @@
+---------------------------------------------------------------------
+A Latex template classe to typeset CEPC Notes
+---------------------------------------------------------------------
+
+All the instruction you need are in instructions.pdf. You can produce
+yourself the document (and thus test that your Latex setup is working)
+by doing:
+
+  latex instructions
+  bibtex instructions
+  latex instructions
+  latex instructions
+  dvipdf instructions
+
+or alternatively
+
+  pdflatex instructions
+  bibtex instructions
+  pdflatex instructions
+  pdflatex instructions
+
+Or you could simpy type 'make' :-)
+
+You will find a couple of additianal in the directory you can find useful:
+
+- cepcphysics.sty: it contains some useful newcommands and definitions;
+
+- emptynote.tex: it contains the minimal setup to start typing you
+  paper using the cepcnote.cls class. Customize it at you own needs.
+
+Enjoym and send commments, suggestion and bugs to li.gang@mail.ihep.ac.cn 
+
+-- Gang LI 2014/03/19

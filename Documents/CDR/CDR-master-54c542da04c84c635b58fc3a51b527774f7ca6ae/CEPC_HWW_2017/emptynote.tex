@@ -1,0 +1,81 @@
+%\documentclass{cepcnote} 
+
+%\documentclass[usetikz]{cepcnote} % the 'usetikz' option loads tikz.sty in the proper place, 
+                                   % avoiding conflicts with graphicx.sty.
+                                   % Don't know what tikz.st is? Just ignore this line! :-)
+
+\documentclass[coverpage]{cepcnote} % the 'coverpage' option loads the CEPC Cover Page package 
+                                      % ans makes sure that the cover page is generated before the
+                                      % note title page. Make sure that the latest version of
+                                      % of 'cepccover.sty. is installed on your system!
+
+%\usepackage{graphicx} % This is already loaded by the cepcnote class
+                       % Just use it to include your plots!
+
+%\usepackage{cepcphysics} % Contains useful shortcuts. Uncomment to use
+                           % See instruction.pdf for details
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%           Title page             % 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\skipbeforetitle{100pt}
+
+% Title
+\title{Measurement of Higgs to WW at CEPC}
+
+% Author
+%if not given, typesets ``The CEPC collaboration''
+%\author{The CEPC Collaboration}
+
+% if multiple authors/affiliations are needed, use the authblk package
+\usepackage{authblk}
+\renewcommand\Authands{, } % avoid ``. and'' for last author
+\renewcommand\Affilfont{\itshape\small} % affiliation formatting
+
+\author[a]{LIAO Libo}
+\author[b]{LI Gang}
+\author[b]{RUAN Manqi}
+
+\affil[a]{Hangzhou Normal University}
+\affil[b]{Institute of High Energy Physics}
+
+% Date: if not given, uses current date
+%\date{\today}
+
+% Draft version: if given, adds draft version on front page, a
+% 'DRAFT' box on top of each other page, and line numbers to easy
+% commenting. Comment or remove in final version.
+\draftversion{1.0}
+
+% Journal: adds a 
+\journal{Phys. Lett. B} 
+
+% Abstract
+\abstracttext{
+  Based on a Monte Carlo sample with planed lumonisity of 5ab^{-1}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%            Content               % 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+% Test of tikz.sty loadin in cepcnote.cls. Use 'usetkiz' option in documentclass declaration:
+% e.g. \documentclass[usetikz]{cepcnote}
+% \input{tikz-test}
+
+\section{Introduction}
+
+{\color{red} Place your content here}
+
+\section{Results}
+
+Place your content here
+
+\section{Conclusion}
+
+Place your content here
+
+\end{document}

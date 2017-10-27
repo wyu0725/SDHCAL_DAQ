@@ -1,0 +1,183 @@
+\chapter{Tracking system}
+\label{Chapter:TrackingSystem}
+
+
+%This~\cite{cepc_website} is an example with plots, please edit ...
+%
+%\begin{figure}[h!]
+%\centering
+%\includegraphics[scale=0.36]{Figures/TrackingSystem/main_theme}
+%\caption{A sketch of two of the central goals of the CEPC and SPPC. The CEPC will probe whether the Higgs is truly ``elementary", with a resolution up to a hundred times more powerful than the LHC. The SPPC will see, for the first time, a fundamentally new dynamical process --- the self-interaction of an elementary particle --- uniquely associated with the Higgs.}
+%\label{fig:main_theme}
+%\end{figure}
+%
+\section{TPC tracker detector}
+In CEPC, the significant benchmark signals for higgs mass precise measurement is the ZH events where the Z decays to $\mu\mu$ or ee, whose branch ratios are both around 3.3$\%$ and momentum spreads from 20GeV to 80GeV. The inner tracking system for the CEPC detector should be sensitive in momentum measurement to charged particles, which transverse momentum ranged from 0 to 80GeV, with an accuracy compatible to the beam energy uncertainty of the accelerator.
+
+The tracking system are expected to affect the flying of the tracks as less as possible, which require it to be as light as possible. The particle ID ability is one of the feasibility of the tracking system, however for such energetic tracks, the classic method, such as dE/dx, TOF are not reliable. The Cherenkov detector or Transition radiation detector can be used to combine with tracking for the both feasibilities, as what ATLAS experiment has done.To satisfy the requirement above, some candidate detectors can be considered. The multi-cell drift chamber based on wires is one of the candidates. The ions produced by the charged tracks drift inside a drifting cell configured by sensing wire and ground wires. The drift distance is quite small, which help to reduce the diffusion of the ions and achieve a good position resolution based on the drifting time. The advantage of this kind of detector is that the dead time is very short, however the wire tension require a very strong support structure of the detector which bring high mass in the forward region. The precise positioning of the wires are also complex in the mechanical manufacture. For the material budget of the DC, we see that a helium gas combining with wires achieve $1\%$ $X_0$, which is similar as the gas use in STAR TPC ($1.17\%$). However the inner skin or the out skin of the DC consume much more material, e.g. the inner skin of the MDC detector in BES3 corresponds to 0.45 $X_0$. Considering the cost, the performance and the complexity of the technique, TPC could be as our a good option for the tracker system.
+
+Time Projection Chambers (TPCs) have been extensively studied and used in many fields, especially in particle physics experiments, including STAR and ALICE. Their low material budget and excellent pattern recognition capability make them ideal for three dimensional tracking and identification of charged particles. They are also the only type of electronically read gaseous detector delivering direct three-dimensional track information. However, there has always been a critical problem with TPCs, especially in high background conditions, the space charge distortion due to the accumulation of positive ions in the drift volume.
+
+Due to their large mass, positive ions move slowly under the action of electric field in the drift volume of the TPC. The continuously superimposed ions in the drift volume of the TPC may affect the drift behaviour of electrons from a later track. The majority of ions inside the drift volume are backflowing ions from the amplification region of the TPC readout devices. It is thus of great importance to limit ion backflow (IBF) from the amplification region.
+
+\subsection{Baseline design and mechanics}
+
+\subsubsection{TPC detector geometry}
+The expected TPC used in the CEPC detector works in a quite different environment than STAR and Alice experiment. The charge tracks multiplicity in CEPC is much less than STAR and Alice, however the momentum of the charged tracks in CEPC is much larger than STAR/Alice.
+To precisely measure the momentum of the hard tracks, the tracker need to
+
+\begin{enumerate}
+\item	Sensitive to the track segment as long as possible.
+\item	Stronger enough magnetic field for track bending.
+\item	As good as possible position resolution of the track measurement.
+\end{enumerate}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.75\textwidth]{figures/TrackingSystem/TPC_img5.jpg}
+\caption{\label{fig:img5} Sketch of the TPC structure.}
+\end{figure}
+
+A large TPC construction has been approved to be possible in Alice/STAR. A 2-Tesla B-field has been used in ATLAS tracker and 4-Tesla B-field in CMS tracker, to measure the tracks which momentum is similar as expected in CEPC. The significant advantage for TPC is that the position resolution will be improved by strong B-field, as well, because the B-field helps to reduce the diffusion of the drifting electrons. The TPC is expected to be 460cm long and 360cm in diameter. The endcap is made of by GEM detector and divided into $2\!\times\!16$ divisions.  The schematic view of the end plate is shown below.
+
+The mechanical structure of the TPC consists of a field cage, which is made with advanced composite materials, and two readout end-plates that are self-contained including the gas amplification, readout electronics, supply voltage, and cooling. It will be challenging to design and build the TPC support structure with relatively light material, and at the same time very rigid. It is required to maintain accuracy, robustness in all directions, and stability over long time periods. As the field cage is not strong enough due to the limited material budget, the end-plates become the only choice, where the support structure connects to. In current stage of design, how the TPC end-plate should be supported is not fixed yet. A promising solution is to suspend from the solenoid, in which a number of spokes run radically along the faces of the calorimeter to the TPC end-plates. Bearing is not the most challenging issue. Main efforts should be put on the system accessibility and robustness against various accidental movements, especially in the longitudinal direction. It is not decided yet in current stage design, but the inner and outer silicon trackers might be supported by the TPC field cage. Although with no severe conceptual issues, this additional load requires a stiffer structure and additional material budget.
+
+In addition, the choice of supporting material is also limited by other requirements. It should be non-magnetic, vibration absorbing, with low thermal-expansion coefficient, and the ability to achieve a position accuracy of 100~$\mu$m level. Currently the carbon fibre enforced composite is the leading candidate of consideration.
+
+\begin{enumerate}
+
+\item Chamber
+
+Large-scale TPC's chamber have been successfully employed in several collider experiments. TPC chambers are typically cylindrical and operate under the atmospheric pressure with the working gas filled inside. Chambers in high magnetic field close to the centre of the magnet, usually have a higher occupancy due to the curling low-energy tracks. Access for cables and services is limited in this region. Hence the material budget of stations inside the magnet is kept as low as possible. In the active area, the added the material due to the filled gas should be less than 1\%$X_0$.
+
+The chambers are attached to the end-plate from the inside to minimise the dead area between neighbouring chambers. Special mounting technique is required to allow rotation and tilting of the chambers. It will be even more challenging to mount and support the CEPC TPC chambers of larger size.
+
+
+
+\item  Field cage
+
+The CEPC TPC detector will be a large cylinder with an outer diameter of 3.6~m and a total length about 4.7~m. Lightweight cylindrical inner and outer composite walls hold field and forming strips, which are attached to a resistor divider chain network. The resistors must be no-magnetic. A central cathode will be held at approximately 50~kV when the drift field is 300~V/cm, with the end-plates and the other outer surfaces of the TPC at ground potential. Therefore the composite walls must self-stand the large potential of the central cathode. The mirror narrow strips will be arranged between the inner and outer walls to keep the electron field uniform in over the whole active TPC volume.
+
+
+
+\item  End-plate
+
+To obtain high position resolution, every end-plate is subdivided into many independent MPGD detector modules (Thin GEM or Resistive Micromegas detector), which can provide nearly full coverage of the end-plate. Power cables, electronic connectors, cooling pipes, PCB boards and support brackets wall are also mounted on the end-plate.
+
+In case the detector modules are damaged by the discharge or spark, they can be replaced and the end-plate should be kept stable during the replacement. In addition, the end-plate needs to built from lightweight material, not compromise the jet energy resolution in the forward region, but should be still sufficiently rigid to achieve stable positioning of the detector modules with a position accuracy better than 50~$\mu$m.The material budget of the mechanical structure accounts for 8\%$X_0$. Additional materials for the readout planes, front-end electronics and cooling are estimated to be 7\%$X_0$, and power cables and the connector up to 10\%$X_0$.
+\end{enumerate}
+
+\subsubsection{Operation gas and high voltage}
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.98\textwidth]{figures/TrackingSystem/TPC_gas_vol.jpg}
+\caption{\label{fig:gas_vol} The drift velocity in different gas mixture.}
+\end{figure}
+
+
+In given the working gas and the electric field, the drift velocity of electron could be determined with Eq.~\ref{eq:gas:1}
+
+\begin{equation}
+\label{eq:gas:1}
+\mu_e=f(\frac{E}{P})
+\end{equation}
+
+\noindent where $E$ denotes the electric field vector, $P$ the gas pressure and $\mu_e$ the electron drift velocity. After reaching saturation (nearly maximum), the electron drift velocity depends slightly on the electric field. Fig.~\ref{fig:gas_vol} shows that the drift velocity obtained in different mixture gases. For the CEPC TPC detector, it is required to be sensitive to as long as possible track segment. The working gas should be selected in such way to achieve high velocity in low drift field to lower the high voltage in all of the drift length, and small transverse diffusion in the magnetic field to decrease the electron cluster size on the readout pads.
+
+
+The gas mixture of Ar/CF$_4$/iC$_4$H$_{10}$ (95\%/3\%/2\%) have been used for the Large Prototype of TPC Detector for the ILD TPC and the TPC chamber for the T2K experiment. The saturated drift velocity of the mixed gas reaches nearly 8~cm/$\mu$s in a drift field of ~300~V/cm.  In addition, the gas has a large parameter of $\omega\tau$ (same as the Eq.~\ref{eq:gas:1})  and transverse diffusion coefficient of 30~$\mu$m/$\sqrt{\mathrm{cm}}$ in the drift field of 300~V/cm. In the $B$-field, a reasonable transverse diffusion coefficient could be realised at 100~V/cm of the drift field. The bunch spacing at the CEPC is $\sim 3.6~\mu$s. The working gas has an higher saturated drift velocity than the T2K mixed gas should be considered. In addition, the gas amplification needs to achieve approximately 6000 and the signal attenuation of the electron attachment should be kept below $1\%/m$.
+\subsubsection{Electronics readout for TPC}
+
+TBD
+
+\subsection{Simulation and estimation for the key issues}
+\subsubsection{Occupancy requirement of Higgs and Z pole run}
+
+Using an sample of 9 thousand fully simulated $Z\to qq$ events at center of mass energy of $91. 2$ GeV, we studied the voxel occupancy and the local charge density of the CEPC TPC at $Z$ pole operation for future circular electron positron colliders, with an instant luminosity of $2\times 10^{34}$ to $2\times 10^{36}$ $cm^{-2}$ $s^{-1}$.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.70\textwidth]{figures/TrackingSystem/distortion.jpg}
+\caption{\label{fig:distortion} Distortion as a function of electron initial r position with different parameters.}
+\end{figure}
+
+
+Given the fact that the beam bunch is evenly distributed along the accelerator circumference,
+the voxel occupancy is extremely low ($1.4\times 10^{-5}/1.4\times 10^{-7}$ for the inner most layer and $3.4 \times 10^{-6}/3.4 \times 10^{-8}$ for average) and poses no pressure for the TPC usage. The distortion on TPC hit positions induced by the ion charges is estimated with dedicated
+program and calculation. At instant luminosity of $1 \times 10^{36}$ and an ionback flow control of percent level, the distortion can be as large as 10 mm at the inner most TPC layer at the CEPC conceptual detector geometry, which is two orders of magnitude larger than the intrinsic TPC spatial resolution.
+A few approaches are proposed to reduce the effects caused by distortion:
+\begin{enumerate}
+\item Ion back flow control technology; the ion back flow should be controlled to per mille level, in other word, only $1-10$ back flow ions is allowed for each primary ionization.
+\item Dedicated distortion correction algorithm, for the inner most layers, which should result in a mitigation of the hit position distortion by 1 order of magnitude.
+\item Adequate track finding algorithm that could link the TPC track fragments to vertex tracks at high efficiency and purity.
+\end{enumerate}
+
+Taking all of these approaches account, the distortion can be mitigated by approximately 2
+orders of magnitude. To conclude, the pad occupancy and distortion stress no pressure to CEPC
+and if the above items can be achieved, the usage of TPC is also a feasible option at FCC-ee.
+
+\subsubsection{Distortion of Ions backflow in drift length}
+Early TPCs were equipped with multi-wire tional chambers (MWPCs) as gas amplification devices. The IBF ratio in a standard MWPC is $30-40\%$ so a gating grid is essential to prevent ions from  reaching the drift volume. In the presence of a trigger, the gating grid switches to the open state to allow ionization electrons to travel into the gas amplification region.
+After a maximum drift time of about 100 $\mu s$ (depending on the drift length, electric field and gas mixture), the gating grid is closed to prevent positive ions from drifting back into the drift volume. Since it must remain closed until the ions have been collected on the grid wires, the ionization electrons are also blocked during this time and the dead time consequently increases.
+
+Triggered operation of a gating grid will therefore lead to loss of data. Thus, the TPC at the proposed circular collider will have to be operated continuously and the backflow of ions must be minimized without the use of a gating grid.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.65\textwidth]{figures/TrackingSystem/TPC_distortion.jpg}
+\caption{\label{fig:TPC_distortion} Evaluation of track distortions due to space charge effects of positive ions.}
+\end{figure}
+
+
+
+\subsection{feasibility study of the TPC detector module and calibration system}
+\subsubsection{Continuous IBF detector module}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.65\textwidth]{figures/TrackingSystem/TPC_IBF_det.jpg}
+\caption{\label{fig:TPC_IBF_det} Schematic diagram of the detector module.}
+\end{figure}
+
+TPC readout with micro-pattern gaseous detectors (MPGDs), especially Gas Electron Multipliers (GEM)and micro-mesh gaseous structures (Micromegas), is very attractive, because the IBF of those detectors is intrinsically low, usually around a few percent. GEM detectors have been extensively proved in the last decade to be the prime candidate, as they offer excellent results for spatial resolution and low IBF. Several GEM foils can be cascaded, allowing multilayer GEM detectors to be operated at an overall gas gain above $10^4$ in the presence of highly ionized particles. Micromegas is another kind of MPGD that is likely to be used as endcap detectors for the TPC readout. It is a parallel plate device, composed of a very thin metallic micromesh which
+separates the detector region into drift and amplification volumes. The IBF of this detector is equal to the inverse of the field ratio between the amplification and the drift electric fields. Low IBF therefore favours high gain. However, high gain will make it particularly vulnerable
+to sparking. The idea of combining GEM with Micromegas was first proposed with the goal of reducing the spark rate of Micromegas detectors. Preamplification using GEMa also extends the maximum achievable gain, so there have also been studies on gaseous photomultipliers with this hybrid configuration.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.80\textwidth]{figures/TrackingSystem/TPC_IBF_dig.jpg}
+\caption{\label{fig:TPC_IBF_dig} Result of the IBF TPC detector module.}
+\end{figure}
+
+To fulfill the physics goals of the future circular collider, a TPC with excellent performance is required. MPGDs with outstanding single-point accuracy and excellent multi-track resolution are needed. We have proposed and investigated the performance of a novel configuration detector module: a combination of GEM and a Micromegas. The detector will be called GEM-MM for
+short throughout this paper. The aim of this study is to suppress IBF continually by eliminating the gating grid. The design concept and some preliminary results of the detector module are described as following.
+
+A new concept of avalanche ion backflow reduction for a future MPGD readout based TPC, and a prototype has been developed. It is a hybrid structure with one GEM foil cascaded above the Micromegas detector. Tests of this detector have been carried out with an 55Fe X-ray source
+in $Ar/CO_2(90/10)$ gas mixture. The preamplification effect of GEM foil has been demonstrated in the energy spectrum measurement. With the novel hybrid structure, the effective gain of the GEM can be measured even when it is relatively low. The energy resolution of this hybrid structure gaseous detector is measured to be $27\%$(FWHM). The gain properties of this device were measured. A gain up to about 5000 can be achieved without any obvious discharge behaviour. The currents on the anode and drift cathode were measured precisely with an electro-meter. Out experimental measurements show that IBF can be reduced down to $0.19\%$ at a gain of about $5000$.
+
+\subsubsection{Laser calibration and alignment system}
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.80\textwidth]{figures/TrackingSystem/TPC_laser_dig.jpg}
+\caption{\label{fig:TPC_laser_dig} Schematic diagram of the detector module with the laser system.}
+\end{figure}
+
+
+\section{Full-silicon tracker detector}
+\input{Chapters/FullSilicon.tex}
+
+\section{Drift chamber tracker detector}
+
+
+%\begin{figure}[h!]
+%\centering
+%\includegraphics[scale=0.32] {Figures/TrackingSystem/7p_L_HL_CC.pdf}
+%\includegraphics[scale=0.80] {Figures/TrackingSystem/fig_HCfit10.pdf}
+%\caption{Top: The 7 parameter fit, and comparison with the HL-LHC, discussed in detail in %Chapter~\ref{Chapter:Higgs}. The projections for CEPC at 250 GeV with 5~ab$^{-1}$ integrated %luminosity are shown. The CEPC results without combination with HL-LHC input are  shown with dashed edges. The LHC projections for an integrated luminosity of 300 fb$^{-1}$ are shown in dashed edges. Bottom: Comparison between the LHC and several benchmark luminosities of the CEPC. }
+%\label{fig:7param}
+%\end{figure}
+
+
+\bibliographystyle{Style/atlasnote} %% plain.bst
+\bibliography{Chapters/TrackingSystem} %% bsample.bib
+
