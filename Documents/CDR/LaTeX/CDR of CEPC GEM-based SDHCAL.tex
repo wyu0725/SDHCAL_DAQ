@@ -1,0 +1,95 @@
+% \iffalse meta-comment
+%
+% Copyright 1993 1994 1995 1996 1997 1998 1999 2000 2001
+% The LaTeX3 Project and any individual authors listed elsewhere
+% in this file. 
+% 
+% This file is part of the LaTeX base system.
+% -------------------------------------------
+% 
+% It may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.2
+% of this license or (at your option) any later version.
+% The latest version of this license is in
+%    http://www.latex-project.org/lppl.txt
+% and version 1.2 or later is part of all distributions of LaTeX 
+% version 1999/12/01 or later.
+% 
+% The list of all files belonging to the LaTeX base distribution is
+% given in the file `manifest.txt'. See also `legal.txt' for additional
+% information.
+% 
+% \fi
+% Filename: usrguide.tex
+
+%\NeedsTeXFormat{LaTeX2e}[1995/12/01]
+\documentclass{article}
+
+\usepackage[UTF8]{ctex}
+\usepackage[siunitx]{circuitikz}
+\usepackage{tikz}
+
+\title{GEM-Based SDHCAL}
+
+\author{Yu Wang}
+
+\date{\today}
+
+
+\begin{document}
+
+\maketitle
+
+% \tableofcontents
+
+\section{Readout ASIC}
+To read out the GEM-based SDHCAL, we chose an ASIC called MICROROC (MICRO-mesh gaseous structure Read-Out Chip), developed at IN2P3 by OMEGA/LAL and LAPP microelectronics groups. The MICROROC is a 64-channel mixed-signal integrated circuit based on 350nm SiGe technology. Each channel of the MICROROC chip is made of a very low noise fixed gain charge preamplifier optimized for a detector capacitance of 80 pF and able to handle a dynamic range from 1fC to 500fC, two different adjustable shapers (A high gain shaper for small signal and a low gain shaper for large signal), three comparators for tri-threshold readout and a random access memory used as a digital buffer. Other blocks, like 10-bit DAC, configuration register, bandgap voltage reference, LVDS receiver are shared by 64 channels.
+\subsection{Analog Part of Microroc}
+The analog part of Mi
+
+\section{调研}
+调研中发现，窄脉冲大电流LED驱动电路主要以储能电容瞬间放电的方式来完成LED的电流驱动。总结窄脉冲LED电流驱动电路的方式有如下两种：能量压缩、高带宽跨导放大。
+\subsection{能量压缩驱动}
+
+\begin{center}
+\begin{circuitikz} \draw
+ (0,0) to [R=10<\Mohm>] (0,2) -- (0,3)
+ to [C=100<\pF>] (1,3)
+
+;\end{circuitikz}
+\end{center}
+\begin{thebibliography}{1}
+
+\bibitem{A-W:GMS94}
+Michel Goossens, Frank Mittelbach and Alexander Samarin.
+\newblock {\em The {\LaTeX} Companion}.
+\newblock Addison-Wesley, Reading, Massachusetts, 1994.
+
+
+\bibitem{A-W:GRM97}
+Michel Goossens, Sebastian Rahtz and Frank Mittelbach.
+\newblock {\em The {\LaTeX} Graphics Companion}.
+\newblock Addison-Wesley, Reading, Massachusetts, 1997.
+
+
+\bibitem{A-W:GR99}
+Michel Goossens and Sebastian Rahtz.
+\newblock {\em The {\LaTeX} Web Companion}.
+\newblock Addison-Wesley, Reading, Massachusetts, 1999.
+
+
+\bibitem{A-W:DEK91}
+Donald~E. Knuth.
+\newblock {\em The \TeX book}.
+\newblock Addison-Wesley, Reading, Massachusetts, 1986.
+\newblock Revised to cover \TeX3, 1991.
+
+
+\bibitem{A-W:LLa94}
+Leslie Lamport.
+\newblock {\em {\LaTeX:} A Document Preparation System}.
+\newblock Addison-Wesley, Reading, Massachusetts, second edition, 1994.
+
+\end{thebibliography}
+
+\end{document}
