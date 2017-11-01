@@ -1,0 +1,18 @@
+\documentclass{article}
+
+\usepackage{graphicx}
+\usepackage{tikz}
+
+\begin{document}
+\begin{tikzpicture}
+\draw (0em,1em) node(image)[anchor=west]{\includegraphics[width=.25\textwidth]{bertrand_russell.jpg}};%
+\draw (image.east) node(title)[anchor=west]{
+\begin{minipage}{\textwidth}
+Euclid's construction starts with ``referencing'' Proposition~I for
+the construction of the point~$D$. Now, while we could simply repeat the
+construction, it seems a bit bothersome that one has to draw all these
+circles and do all these complicated constructions.
+\end{minipage}
+};
+\end{tikzpicture}
+\end{document}
