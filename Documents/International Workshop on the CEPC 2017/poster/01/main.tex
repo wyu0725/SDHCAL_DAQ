@@ -126,11 +126,25 @@ The structure of the analog part is shown below:
 \headerbox{GEM Detector}{name=GEM,column=0,below=Microroc}{
 
 \begin{tikzpicture}
-\draw (0em,0em) node(ImageGEMHole)[anchor=west]{\includegraphics[width=.35\textwidth]{figures/GEMHole.jpg}};%
-
-\draw[thick] (ImageGEMHole.south west) ++(0em,-1em) -- ++(20em,0em);
-\draw (ImageGEMHole.south) +(0em,-4em) node(ImageSelfStretch)[anchor=north]{\includegraphics[width=0.35\textwidth]{figures/SelfStreching.png}};
-\draw (ImageSelfStretch.east) node(TextGEMHole)[anchor=west]{
+\draw (0em,0em) node(ImageGEMHole)[anchor=west]{\includegraphics[width=.4\textwidth]{figures/GEMHole.jpg}};%
+\draw (ImageGEMHole.east) node(TextSelfStretch)[anchor=west]{
+\begin{minipage}{0.6\textwidth}
+	\begin{enumerate}
+	\item Cu:t = 5$\mu$m
+	\vspace{-0.3cm}
+	\item Kapton:T = 50$\mu$m
+	\vspace{-0.3cm}
+	\item Diameter: d = 60$\mu$m
+	\vspace{-0.3cm}
+	\item D = 80$\mu$m
+	\vspace{-0.3cm}
+	\item pitch: 140$\mu$m
+	\end{enumerate}
+\end{minipage}
+};
+\draw[thick] (ImageGEMHole.south west) ++(0em,-1em) -- ++(20.5em,0em);
+\draw (ImageGEMHole.south) +(0em,-3.5em) node(ImageSelfStretch)[anchor=north]{\includegraphics[width=0.4\textwidth]{figures/SelfStreching.png}};
+\draw (ImageSelfStretch.east) node(TextSelfStretch)[anchor=west]{
 \begin{minipage}{0.6\textwidth}
 \begin{enumerate}
 \item Assembling process is easy and fast
@@ -143,6 +157,9 @@ The structure of the analog part is shown below:
 \end{enumerate}
 \end{minipage}
 };
+\draw[thick] (ImageSelfStretch.south west) ++(0em,-2.5em) -- ++(20.5em,0em);
+\draw (ImageSelfStretch.south) +(1em,-3.5em) node(ImageGEMDetector)[anchor=north]{\includegraphics[height=0.3\textwidth]{figures/GEMDetector.jpg}};
+\draw (ImageGEMDetector.east) +(1em,0em) node(ImageStructureOfGEM)[anchor=west]{\includegraphics[height=0.3\textwidth]{figures/StructureOfGEM.jpg}};
 \end{tikzpicture}
 }
 
@@ -236,12 +253,13 @@ Total Conclusion
 %	ACKNOWLEDGEMENTS
 %----------------------------------------------------------------------------------------
 
-\headerbox{Acknowledgements}{name=acknowledgements,column=0,below=conclusion, above=bottom,span=3}{
+\headerbox{Acknowledgements}{name=acknowledgements,column=0,below=GEM, above=bottom,span=3}{
 \smaller 
 This study was supported by National Key Programme for S\&T Research and Development (Grant NO.: 2016YFA0400400). Thanks to St\'ephane CALLIER and Christophe de LA TAILLE at OMEGA - IN2P3/CNRS for helpful discussions and useful suggestions
 } 
 
 
+Auther email:wyu0725@mail.ustc.edu.cn
 \end{poster}
 
 \end{document}
