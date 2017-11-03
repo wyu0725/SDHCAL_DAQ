@@ -68,32 +68,30 @@ background=user,
 headerborder=open, % Change to closed for a line under the content box headers
 boxshade=plain
 }
-{\includegraphics[scale=0.3]{CEPCLogo.jpg}}
+{\includegraphics[width=0.1\textwidth]{figures/CEPCLogoTransparent.png}}
 %
 %----------------------------------------------------------------------------------------
 %	TITLE AND AUTHOR NAME
 %----------------------------------------------------------------------------------------
 %
-{ \bf  \huge {Status of design and development of CEPC-DHCAL readout electronics} } % Poster title
-{\vspace{0.3em} \smaller Yu Wang$^{1,2}$, Daojin Hong$^{1,2}$, Jianbei Liu$^{1,2}$, Shubin Liu$^{1,2}$, Changqing Feng\'c$^{1,2}$, Yi Zhou$^{1,2}$   \\  % Author names
+{ \bf  \huge {Status of Design and Development of CEPC-DHCAL Prototype Readout Electronics} } % Poster title
+{\vspace{0.3em} \smaller Yu Wang$^{1,2}$, Shubin Liu$^{1,2}$, Daojin Hong$^{1,2}$, Jianbei Liu$^{1,2}$, Changqing Feng$^{1,2}$, Yi Zhou$^{1,2}$ \\  % Author names
   
-\smaller $^1$\it {University of Science and Technology of China} \\ $^2$\it{State Key Laboratory of Particle Detection and Electronics} } % Author email addresses
-{\includegraphics[scale=0.2]{ustcblue.jpg}} % University/lab logo
+\smaller $^1$\it {University of Science and Technology of China} \\ $^2$\it{State Key Laboratory of Particle Detection and Electronics (USTC)} } % Author email addresses
+{\includegraphics[width=0.1\textwidth]{figures/USTCBlueTransparent.png}} % University/lab logo
 
 %----------------------------------------------------------------------------------------
 %	INTRODUCTION
 %----------------------------------------------------------------------------------------
 \headerbox{Introduction}{name=introduction,column=0,row=0, span=3}{
 \begin{itemize} 
-	\item The goal of this research is to provide a feasible readout scheme for CEPC DHCAl. 
-	\vspace{-0.2cm}
-	\item As the active detector element of sampling calorimeter has finely segmented readout pads of $1\times1cm^2$, it's a real challenge to access huge mount data from calorimeter.
+	\item The goal of this research is to provide a feasible readout scheme for CEPC DHCAL. As the readout channels might be $4\times10^5/m^3$, the readout scheme must be carefully designed.
 	\vspace{-0.2cm}
 	%\item In PFA-based calorimeters, simulation results suggest that for readout segments as small as $1cm^2$, simple hit counting is already a good energy measurement for hadrons, so called DHCAL. A more general calorimeter with multi-threshold readout (e.g. 3 thresholds) records more detailed hit information and has better energy for jet energy above 40GeV, a so-called Semi-Digital Hadron Calorimeter (SDHCAL)
 	%\vspace{-0.2cm}
-	\item In our research, a double layer GEM using self-stretching technique has been used. It consists of 3mm drift gap, 1mm transfer gap and 1mm induction gap and the effective area is $30\times30cm^2$with $1\times1cm^2$ readout pads.
+	\item A double layer GEM using self-stretching technique has been used. It consists of 3$mm$ drift gap, 1mm transfer gap and 1mm induction gap and the effective area is $30\times30cm^2$with $1\times1cm^2$ readout pads.
 	\vspace{-0.2cm}
-	\item The chip choosen to readout is a tri-thresholds ASIC called MICROROC (MICRO-mesh gaseous structure Read-Out Chip)
+	\item The chip chosen to readout is a tri-thresholds ASIC called MICROROC (MICRO-mesh gaseous structure Read-Out Chip) and the dynamic range is $2fC\sim500fC$ with the RMS noise 0.35$fC$. The system is designed to be a universal scheme for both ECAL and HCAL.
 \end{itemize}
 }
 
@@ -102,51 +100,37 @@ boxshade=plain
 %	CALIBRATION
 %----------------------------------------------------------------------------------------
 
-\headerbox{MICROROC ASIC}{name=Microroc,column=0,below=introduction}{
-MICROROC is a 64-channel Semi-Digital readout chip, developed at IN2P3 by OMEGA/LAL. The package of MICROROC chip is TQFP which means the thickness is about 1.4mm. %The flowing picture shows the MICROROC chip.
-\vspace{-0.2cm}
-%\begin{center}
-%\includegraphics[scale=0.08]{figures/MicrorocChip.jpg}
-%\end{center}
-Each channel of the MICROROC chip has:
-\begin{itemize}
-	\item A very low noise charge preamplifier, able to handle a dynamic range from 1 fC to 500fC
-	\vspace{-0.3cm}
-	\item Two different adjustable shaper. A high gain shaper for small signal and a low gain shaper for large signal
-	\vspace{-0.3cm}
-	\item Three comparators for tri-thresholds readout
-	\vspace{-0.3cm}
-	\item A random access memory used as a digital buffer
-\end{itemize}
-The structure of the analog part is shown below:
-\begin{center}
-\includegraphics[scale=0.3]{figures/MicrorocStructureTransparent.png}
-\end{center}
-}
-\headerbox{GEM Detector}{name=GEM,column=0,below=Microroc}{
-
+\headerbox{GEM Detector}{name=GEM,column=0,below=introduction}{
 \begin{tikzpicture}
+% Draw the GEM Hole Picture and text %
 \draw (0em,0em) node(ImageGEMHole)[anchor=west]{\includegraphics[width=.4\textwidth]{figures/GEMHole.jpg}};%
 \draw (ImageGEMHole.east) node(TextSelfStretch)[anchor=west]{
 \begin{minipage}{0.6\textwidth}
-	\begin{enumerate}
-	\item Cu:t = 5$\mu$m
+	\begin{itemize}
+	\item Cu: t = 5$\mu m$
 	\vspace{-0.3cm}
-	\item Kapton:T = 50$\mu$m
+	\item Kapton: T = 50$\mu m$
 	\vspace{-0.3cm}
-	\item Diameter: d = 60$\mu$m
+	\item Diameter: d = 60$\mu m$
 	\vspace{-0.3cm}
-	\item D = 80$\mu$m
+	\item D = 80$\mu m$
 	\vspace{-0.3cm}
-	\item pitch: 140$\mu$m
-	\end{enumerate}
+	\item Pitch: 140$\mu m$
+	\end{itemize}
 \end{minipage}
 };
-\draw[thick] (ImageGEMHole.south west) ++(0em,-1em) -- ++(20.5em,0em);
+% Draw a line %
+%\draw[thick] (ImageGEMHole.south west) ++(0em,-1em) -- ++(20.5em,0em);
+% Draw the GEM Structure %
+%\draw (ImageGEMHole.south) +(0em,-1.5em) node(ImageStructureOfGEM)[anchor=north]{\includegraphics[width=0.4\textwidth]{figures/StructureOfGEM.jpg}};
+
+% Draw a line %
+%\draw[thick] (ImageStructureOfGEM.south west) ++(0em,-1em) -- ++(20.5em,0em);
+% Draw the SelfStretching %
 \draw (ImageGEMHole.south) +(0em,-3.5em) node(ImageSelfStretch)[anchor=north]{\includegraphics[width=0.4\textwidth]{figures/SelfStreching.png}};
 \draw (ImageSelfStretch.east) node(TextSelfStretch)[anchor=west]{
 \begin{minipage}{0.6\textwidth}
-\begin{enumerate}
+\begin{itemize}
 \item Assembling process is easy and fast
 \vspace{-0.3cm}
 \item No dead area inside the active area
@@ -154,31 +138,70 @@ The structure of the analog part is shown below:
 \item Uniform gas flow
 \vspace{-0.3cm}
 \item Detachable
-\end{enumerate}
+\end{itemize}
 \end{minipage}
 };
-\draw[thick] (ImageSelfStretch.south west) ++(0em,-2.5em) -- ++(20.5em,0em);
-\draw (ImageSelfStretch.south) +(1em,-3.5em) node(ImageGEMDetector)[anchor=north]{\includegraphics[height=0.3\textwidth]{figures/GEMDetector.jpg}};
-\draw (ImageGEMDetector.east) +(1em,0em) node(ImageStructureOfGEM)[anchor=west]{\includegraphics[height=0.3\textwidth]{figures/StructureOfGEM.jpg}};
+%\draw[thick] (ImageSelfStretch.south west) ++(0em,-2.5em) -- ++(20.5em,0em);
+\draw (ImageSelfStretch.south) +(0em,-3.5em) node(ImageGEMDetector)[anchor=north]{\includegraphics[width=0.4\textwidth]{figures/GEMDetector.jpg}};
+\draw (ImageGEMDetector.east) node(TextGEMDetector)[anchor=west]{
+\begin{minipage}{0.6\textwidth}
+\begin{flushleft}
+\begin{itemize}
+\item Effective zone: $30\times30cm^2$
+\vspace{-0.3cm}
+\item Drift gap: 3$mm$
+\vspace{-0.3cm}
+\item Transfer gap: 1$mm$
+\vspace{-0.3cm}
+\item Induction gap: 1$mm$
+\end{itemize}
+\end{flushleft}
+\end{minipage}
+};
 \end{tikzpicture}
+\vspace{-0.5cm}
 }
-
+\headerbox{MICROROC ASIC}{name=Microroc,column=0,below=GEM}{
+MICROROC is a 64-channel Semi-Digital readout chip, developed at IN2P3 by OMEGA/LAL. The package of MICROROC chip is TQFP which means the thickness is about 1.4$mm$.\\
+%The flowing picture shows the MICROROC chip.
+%\begin{center}
+%\includegraphics[scale=0.08]{figures/MicrorocChip.jpg}
+%\end{center}
+Each channel of the MICROROC chip has:
+\begin{itemize}
+	\item A very low noise charge preamplifier, able to handle a dynamic range from $1fC$ to $500fC$.
+	\vspace{-0.2cm}
+	\item Two different adjustable shaper. A high gain shaper for small signal and a low gain shaper for large signal.
+	\vspace{-0.2cm}
+	\item Three comparators for tri-thresholds readout.
+	\vspace{-0.2cm}
+	\item A random access memory used as a digital buffer.
+\end{itemize}
+The structure of the analog part is shown below:
+\begin{center}
+\includegraphics[width=0.8\textwidth]{figures/MicrorocStructureTransparent.png}
+\end{center}
+The peaking time of the shaper can be adjusted via slow control parameters and the output of two shapers can be selected to a pin for test.
+}
 
 %----------------------------------------------------------------------------------------
 %	OTHER INSTRUMENTATION
 %----------------------------------------------------------------------------------------
 \headerbox{Readout System Structure}{name=ReadoutSystemStructure,span=2,column=1,row=1, below=introduction}{ % To reduce this block to 1 column width, remove 'span=2'
-The readout system is developed on SRS(Scalable Readout System), which means users can reuse the same system just changing the front-end board.The whole system includes flowing parts:
+The readout system is developed on SRS(Scalable Readout System), which means users can reuse the same system just changing the front-end board.The whole system includes following parts:
+\vspace{-0.3cm}
 \begin{itemize}
-	\item FEB(Front-End Board):Combination of detector and readout ASIC
-	\vspace{-0.2cm}
-	\item DIF(Detector InterFace):Control the ASIC and read back data
-	\vspace{-0.2cm}
-	\item DAQ:Distribute clock and command. Gather data from DIF
+	\item FEB(Front-End Board): Combination of detector and readout ASIC.
+	\vspace{-0.3cm}
+	\item DIF(Detector InterFace): Control the ASIC and read back data.
+	\vspace{-0.3cm}
+	\item DAQ: Distribute clock and command. Gather data from DIF.
 \end{itemize}
-The system structure of the hole system is shown below
+\vspace{-0.3cm}
+The structure of the whole system is shown below:
+\vspace{-0.3cm}
 \begin{center}
-\includegraphics[scale=0.6]{figures/ReadoutStructureTransparent.png}
+\includegraphics[width=0.6\textwidth]{figures/ReadoutStructureTransparent.png}
 \end{center}
 
 }
@@ -191,18 +214,21 @@ The system structure of the hole system is shown below
 A "Phase I" design is completed to verify the readout structure and test the performance of MICROROC. The front-end ASIC is separated from the detector plane. The system shown below contains the GEM detector, FEB and DIF.\\
 \vspace{-0.5cm}
 \begin{center}
-\includegraphics[height=2.5cm]{figures/ReadOutPlane.jpg} \includegraphics[height=2.5cm]{figures/PhaseIDesign.jpg}
+\includegraphics[height=2.7cm]{figures/PhaseIDesignTransparent.png}
+\end{center}
+We have a full test of the whole system, including pedestal, calibration, uniform of the GEM and Cosmic-Ray test. The following pictures show the result.\\
+\vspace{-0.5cm}
+\begin{center}
+\includegraphics[height=5.5cm]{figures/TestResultTransparent.png}
 \end{center}
 
 }
-
-
 
 %----------------------------------------------------------------------------------------
 %	MEASUREMENT SETUP
 %----------------------------------------------------------------------------------------
 \headerbox{Next Step}{name=NextStep,span=2,column=1,below=FirstStageDesignAndTest}{ 
-
+ We project to mount the MICROROC chip on the back side of the readout plane, utilizing blind buried via technology. This action would reduce the dead area of the detector. A 10-layer PCB with 3 ground plane and 2 power plane will guarantee good signal integrity and low crosstalk.  
 }
 
 
@@ -210,25 +236,12 @@ A "Phase I" design is completed to verify the readout structure and test the per
 %	CONCLUSION
 %----------------------------------------------------------------------------------------
 \headerbox{Conclusion}{name=conclusion,column=1,below=NextStep,span=2}{
-Total Conclusion
-\vspace{-0.2cm}
 \begin{itemize} 
-\item d
+\item The readout structure is effective and it's able to be used in future design. 
 \vspace{-0.2cm}
-\item c
+\item MICROROC can work well with the detector and it's a good choose to readout large area detector.
 \vspace{-0.2cm}
-\item b
-\vspace{-0.2cm}
-\item a
-\item d
-\vspace{-0.2cm}
-\item c
-\vspace{-0.2cm}
-\item b
-\vspace{-0.2cm}
-\item a
-
-
+\item Include the readout plane and readout ASIC, the FEB can be made within 3$mm$.
 \end{itemize}
 }
 
@@ -253,13 +266,11 @@ Total Conclusion
 %	ACKNOWLEDGEMENTS
 %----------------------------------------------------------------------------------------
 
-\headerbox{Acknowledgements}{name=acknowledgements,column=0,below=GEM, above=bottom,span=3}{
+\headerbox{Acknowledgements}{name=acknowledgements,column=0,below=conclusion,above=bottom,span=3}{
 \smaller 
-This study was supported by National Key Programme for S\&T Research and Development (Grant NO.: 2016YFA0400400). Thanks to St\'ephane CALLIER and Christophe de LA TAILLE at OMEGA - IN2P3/CNRS for helpful discussions and useful suggestions
+This study was supported by National Key Programme for S\&T Research and Development (Grant NO.: 2016YFA0400400) and National Science Natural Science Foundation of China (Grant No.11635007). Thanks to St\'ephane CALLIER and Christophe de LA TAILLE at OMEGA - IN2P3/CNRS for helpful discussions and useful suggestions.
 } 
 
-
-Auther email:wyu0725@mail.ustc.edu.cn
 \end{poster}
 
 \end{document}
