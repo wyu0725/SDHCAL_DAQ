@@ -207,15 +207,15 @@
 \setsansfont{Myriad Pro} %  (\textsf)
 \setmonofont{Inconsolata}%Palatino Linotype
 %-中文字体设置-%
-\RequirePackage{xeCJK}
-\setCJKmainfont[BoldFont={黑体},ItalicFont={楷体}]{HYShuSongYiJ}%方正书宋_GBK Adobe Song Std L华文中宋
+\RequirePackage{xeCJK}%
+\setCJKmainfont[BoldFont={黑体},ItalicFont={楷体}]{华文中宋}%方正书宋_GBK Adobe Song Std L华文中宋
 \setCJKsansfont[BoldFont={黑体}]{方正中等线简体}
 \setCJKmonofont{方正中等线简体}
 \XeTeXlinebreaklocale "zh"
 \XeTeXlinebreakskip = 0pt plus 1pt
 
 \setCJKfamilyfont{new}{方正苏新诗柳楷简体}
-\setCJKfamilyfont{note}{方正启体简体}
+\setCJKfamilyfont{note}{微软雅黑}
 \newfontfamily\gara{Adobe Garamond Pro}
 
 %% 定理\引理\定义样式设置
