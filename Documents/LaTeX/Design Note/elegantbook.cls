@@ -3,9 +3,10 @@
 %% Copyright 2013-2019 ElegantLaTeX (ElegantLaTeX2e@gmail.com)
 %%
 %% This work may be distributed and/or modified freely
-%% available at http://elegantlatex.tk/download/ 
+%% available at http://elegantlatex.tk/download/
 %% and  http://ddswhu.com/download/
 % %
+%% Last Modification 2014-2-3
 %%%%%%%%%%%%%%%%%%%%%
 % % !Mode:: "TeX:UTF-8"
 \NeedsTeXFormat{LaTeX2e}
@@ -40,32 +41,45 @@
 
 % ----- Handle Colors -----
 %% 章节以及页脚图形
-\newcommand*{\base}[1]{
- \def\@base{\includegraphics[scale=0.3]{#1}
- }
-}
+
 \RequirePackage{xcolor}
 \ifdefstring{\ELEGANT@color}{green}{
   \definecolor{main}{RGB}{0,120,2}%
   \definecolor{seco}{RGB}{230,90,7}%
   \definecolor{thid}{RGB}{0,160,152}%
-  \base{greenbase.pdf}%
+%  \base{greenbase.pdf}%
 }{\relax}
 
 \ifdefstring{\ELEGANT@color}{cyan}{
   \definecolor{main}{RGB}{0,175,152}%
   \definecolor{seco}{RGB}{239,126,30}%
   \definecolor{thid}{RGB}{120,8,13}%
-  \base{cyanbase.pdf}%
+ % \base{cyanbase.pdf}%
 }{\relax}
 
 \ifdefstring{\ELEGANT@color}{blue}{
   \definecolor{main}{RGB}{20,50,104}%
   \definecolor{seco}{RGB}{180,50,131}%
   \definecolor{thid}{RGB}{7,127,128}%
-  \base{bluebase.pdf}%
+ % \base{bluebase.pdf}%
 }{\relax}
 
+\AtBeginDocument{
+\input{base.tex}
+}
+
+\providecommand{\base}{
+\begin{tikzpicture}[scale=0.3]
+\triz{0}{0}
+\ellz{128}
+\intz{149}
+\ellz{170}
+\intz{191}
+\ellz{212}
+\triz{341}{180}
+\end{tikzpicture}}
+%\newcommand*{\base}{
+%}
 
 % ----- Handle Math option -----
 \ifELEGANT@mathpazo
@@ -84,8 +98,6 @@
 \newtoks\version
 \newtoks\enend
 \newtoks\zhend
-
-
 
 %%数学字体宏包
 
@@ -113,6 +125,7 @@
 }
 
 
+
 %% 页面设置
 
 \RequirePackage{hyperref}
@@ -125,33 +138,31 @@
 }
 
 \hypersetup{
- breaklinks,
- unicode,                
- bookmarksnumbered  =true,
- bookmarksopen      =true, 
- pdfsubject         =\@author \@title Book,
- pdfkeywords        ={ElegantBook},
- pdfcreator         ={XeLaTeX with ElegantBook class},
- colorlinks,
- linkcolor          =main,
- plainpages         =false,
- pdfstartview       =FitH,
- pdfborder={0 0 0},
- linktocpage
- }
+			breaklinks,
+                   unicode,
+			bookmarksnumbered=true,
+			bookmarksopen=true,
+			pdfsubject=\@author \@title Book,
+			pdfkeywords={ElegantBook},
+			pdfcreator={XeLaTeX with ElegantBook class},
+			colorlinks,
+			linkcolor=main,
+			plainpages=false,
+			pdfstartview=FitH,
+			pdfborder={0 0 0},
+			linktocpage
+}
 
 \RequirePackage{geometry}
 \geometry{
-    a4paper,
-   left=27mm,  %% or inner=23mm
-   right=27mm, %% or outer=18mm
-   top=25.4mm, bottom=25.4mm,
-   headheight=2.17cm,
-   headsep=4mm,
-   footskip=12mm
+			a4paper,
+			left=27mm,  %% or inner=23mm
+			right=27mm, %% or outer=18mm
+			top=25.4mm, bottom=25.4mm,
+			headheight=2.17cm,
+			headsep=4mm,
+			footskip=12mm
 }
-
-
 
 %%   章节设置
 \RequirePackage[center,pagestyles]{titlesec}
@@ -159,7 +170,8 @@
 \renewcommand{\chaptername}{第 \thechapter 章}
 
 \titleformat{\chapter}[\style]{\bfseries}
-{\filcenter\LARGE\enspace\bfseries{\color{main}\chaptername}\enspace}{1pt}{\bfseries\color{main}\LARGE\filcenter}[\filcenter\@base]
+{\filcenter\LARGE\enspace\bfseries{\color{main}\chaptername}\enspace}{1pt}{\bfseries\color{main}\LARGE\filcenter}[\filcenter\base]
+
 
 \titleformat{\section}[hang]{\sffamily}
 {\hspace{-2.45em}\Large\bfseries{\color{main}\thesection}\enspace}{1pt}{\color{main}\Large\bfseries\filright}
@@ -185,19 +197,18 @@
 \RequirePackage{caption}
 \captionsetup{labelfont = bf}
 
-
 %%字体设置
 \RequirePackage{fontenc}
 \RequirePackage[no-math,cm-default]{fontspec}
-\defaultfontfeatures{Mapping=tex-text} 
+\defaultfontfeatures{Mapping=tex-text}
 \RequirePackage{xunicode}
-\RequirePackage{xltxtra} 
+\RequirePackage{xltxtra}
 \setmainfont[Ligatures=TeX]{Minion Pro} %  (\textrm)
 \setsansfont{Myriad Pro} %  (\textsf)
 \setmonofont{Inconsolata}%Palatino Linotype
 %-中文字体设置-%
 \RequirePackage{xeCJK}
-\setCJKmainfont[BoldFont={黑体},ItalicFont={楷体}]{华文中宋}%方正书宋_GBK Adobe Song Std L
+\setCJKmainfont[BoldFont={黑体},ItalicFont={楷体}]{HYShuSongYiJ}%方正书宋_GBK Adobe Song Std L华文中宋
 \setCJKsansfont[BoldFont={黑体}]{方正中等线简体}
 \setCJKmonofont{方正中等线简体}
 \XeTeXlinebreaklocale "zh"
@@ -216,24 +227,24 @@
 \definecolor{bablue}{RGB}{248,248,248}
 
 %define the style of tikz newthemsty
-\tikzstyle{newthemsty} 
+\tikzstyle{newthemsty}
           =[draw=main, fill=blue!10,very thick,rectangle,
            rounded corners, inner sep=10pt, inner ysep=20pt]
 \tikzstyle{newthemstytitle}
           =[fill=main, text=blue!10]
 
-\tikzstyle{newdefinitionsty} 
+\tikzstyle{newdefinitionsty}
           =[draw=seco, fill=yellow!20,very thick,rectangle,
            rounded corners, inner sep=10pt, inner ysep=20pt,
            text=black,fill opacity=0.9]
-\tikzstyle{newdefinitionstytitle} 
+\tikzstyle{newdefinitionstytitle}
          =[fill=seco, text=white]
-         
-\tikzstyle{newpropositionsty} 
+
+\tikzstyle{newpropositionsty}
           =[draw=thid, fill=bablue,very thick,rectangle,
            rounded corners, inner sep=10pt, inner ysep=20pt,
            text=black,fill opacity=0.9]
-\tikzstyle{newpropositionstytitle} 
+\tikzstyle{newpropositionstytitle}
          =[fill=thid, text=white]
 
 %%define the "newthem" environment
@@ -353,7 +364,7 @@
 \fancyhead[EL,OR]{\color{main}--\thepage/\pageref{LastPage}--}
 \fancyhead[ER]{\color{main}\em\nouppercase\leftmark{}}
 \fancyhead[OL]{\color{main}\em\nouppercase\rightmark}
-\fancyfoot[c]{\@base}
+\fancyfoot[c]{\base}
 \renewcommand{\headrule}{\color{main}\hrule width\textwidth}
 \pagestyle{fancy}
 
