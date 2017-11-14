@@ -9,7 +9,7 @@
 \enend{Design Note}
 \version{1.0}
 \myquote{Victory won\rq t come to us unless we go to it.}
-\logo{logo.pdf}
+\logo{USTCBlueTransparent.png}
 \cover{cover.pdf}
 
 %green color
@@ -32,12 +32,20 @@
 
 \begin{document}
 \maketitle
+\frontmatter
+\chapter*{Foreword}
+This note is used to record the design process of MICROROC ASIC, together with the hardware and software design.\\
+I will write this note carefully and as accuracy as I can, nevertheless there might remain some errors. If you find errors in this note, please let me konw. My email address is \href{wyu0725@mail.ustc.edu.cn}{wyu0725@mail.ustc.edu.cn}.\\
+Thanks to St\'ephane CALLIER and Christophe de LA TAILLE at OMEGA - IN2P3/CNRS for helpful discussions and useful suggestions.\\
+The templete is downlowned from \href{http://elegantlatex.tk}{http://elegantlatex.tk}. I would like to thanks the author's selfless work.
 \tableofcontents
+
 \mainmatter
-\chapter{ElegantBook 模板的由来}
+\chapter{Introduction to the design}
+\chapter{MICROROC ASIC}
 
-只有当自己想去做一件事的时候才能把事情做好！
-
+MICRORC (MICRO-mesh gaseous structure Read-Out Chip) is a 64-channel readout chip developed at IN2P3 by OMEGA/LAL. \\
+This ASIC is designed for MICRO MEsh GAseous Structure (MICROMEGAS) and Gas Electron Multipliers (GEM). These two detectors are excellent candidates for the active part of Digital Hadronic CALorimeter (DHCAL)
 \section{ElegantNote 的前世今生}
 
 写 ElegantNote 模板的初衷是为了简化我在写笔记中的工作，因为我不会写类文件和包文件，所以，最当初是想拜托小L做出一个华丽，清爽的 \LaTeX{} 模板，最好是类文件，而且因为这样可以简化导言区复杂的内容。后来，和小L一拍即合，遂开始一起做Elegant\LaTeX{}的设计。

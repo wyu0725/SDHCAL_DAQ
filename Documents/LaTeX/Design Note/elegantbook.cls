@@ -215,7 +215,7 @@
 \XeTeXlinebreakskip = 0pt plus 1pt
 
 \setCJKfamilyfont{new}{方正苏新诗柳楷简体}
-\setCJKfamilyfont{note}{微软雅黑}
+\setCJKfamilyfont{note}{华文中宋}
 \newfontfamily\gara{Adobe Garamond Pro}
 
 %% 定理\引理\定义样式设置
