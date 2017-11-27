@@ -1,12 +1,13 @@
 %%% Calibration the ASIC
 Channel = 1:1:64;
 Channel(61) = [];
-promptDataNumber = {'Input the start charge','Input the end charge', 'Input the charge interval'};
+promptDataNumber = {'Input the start charge','Input the end charge', 'Input the charge interval', 'Input the DAC Range'};
 dlgDataNumber = 'Input data info';
 answer = inputdlg(promptDataNumber,dlgDataNumber);
 StartCharge = str2double(answer(1));
 EndCharge = str2double(answer(2));
 ChargeInterval = str2double(answer(3));
+DacRange = str2double(answer(4));
 Charge = StartCharge:ChargeInterval:EndCharge;
 DataNumber = (EndCharge - StartCharge)/ChargeInterval + 1;
 CurrentPath = pwd;
@@ -15,7 +16,7 @@ CalibrationDataDac1 = zeros(DataNumber, 64);
 CalibrationDataDac2 = zeros(DataNumber, 64);
 for i = 1:1:DataNumber
     % Read Data Back
-    filename = sprintf('%s\\64_Chn_%dfC_CTest_DC.dat',CurrentPath,(i-1)*20);
+    filename = sprintf('%s\\CalibrationNew\\%dfC_64Chn.dat',CurrentPath,(i-1)*ChargeInterval);
     [fid,~] = fopen(filename,'r');
     if fid <= 0
         % There was an error--tell user
@@ -30,7 +31,7 @@ for i = 1:1:DataNumber
         fclose(fid);%close file
     end
     for j = 0:1:63
-        [CalibrationDataDac0(i, j+1), CalibrationDataDac1(i, j+1), CalibrationDataDac2(i, j+1)] = SingleChannelTrigEfficiency(InitialData, j);
+        [CalibrationDataDac0(i, j+1), CalibrationDataDac1(i, j+1), CalibrationDataDac2(i, j+1)] = SingleChannelTrigEfficiency(InitialData, j, DacRange);
     end
 end
 %%% Linearfit and plot
