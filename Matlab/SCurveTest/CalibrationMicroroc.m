@@ -1,13 +1,15 @@
 %%% Calibration the ASIC
 Channel = 1:1:64;
 Channel(61) = [];
-promptDataNumber = {'Input the start charge','Input the end charge', 'Input the charge interval', 'Input the DAC Range'};
+promptDataNumber = {'Input the start charge','Input the end charge', 'Input the charge interval', 'Input the DAC Range', 'Input Linear range(fC)'};
 dlgDataNumber = 'Input data info';
 answer = inputdlg(promptDataNumber,dlgDataNumber);
 StartCharge = str2double(answer(1));
 EndCharge = str2double(answer(2));
 ChargeInterval = str2double(answer(3));
 DacRange = str2double(answer(4));
+LinearCharge = str2double(answer(5));
+LinearRange = (LinearCharge - StartCharge)/ChargeInterval + 1;
 Charge = StartCharge:ChargeInterval:EndCharge;
 DataNumber = (EndCharge - StartCharge)/ChargeInterval + 1;
 CurrentPath = pwd;
@@ -16,7 +18,7 @@ CalibrationDataDac1 = zeros(DataNumber, 64);
 CalibrationDataDac2 = zeros(DataNumber, 64);
 for i = 1:1:DataNumber
     % Read Data Back
-    filename = sprintf('%s\\CalibrationNew\\%dfC_64Chn.dat',CurrentPath,(i-1)*ChargeInterval);
+    filename = sprintf('%s\\Calibration20171128\\%dfC_64Chn_2.dat',CurrentPath,(i-1)*ChargeInterval);
     [fid,~] = fopen(filename,'r');
     if fid <= 0
         % There was an error--tell user
@@ -40,8 +42,8 @@ pDac0 = zeros(64,2);
 figure;
 for i = 1:1:64
     ChannelData = CalibrationDataDac0(:,i);
-    ChannelDataFit = ChannelData(1:8);
-    ChargeFit = Charge(1:8);
+    ChannelDataFit = ChannelData(1:LinearRange);
+    ChargeFit = Charge(1:LinearRange);
     if(i == 61)
         continue;
     end
@@ -54,10 +56,14 @@ end
  xlabel('\bf Charge')
 ylabel('\bf DAC Code')
 title('\bf 64通道高增益成形刻度曲线')
-text('String','DAC Code = p \times Charge + b','Position',[300 500],'HorizontalAlignment','center');
+% text('String','DAC Code = p \times Charge + b','Position',[300 500],'HorizontalAlignment','center');
 figure;
 pDac0(61,:) = [];
 plot(Channel,pDac0(:,1));
+title('\bf 高增益成形增益和通道关系')
+xlabel('Channel')
+ylabel('Gain (DAC Unit/fC)')
+legend('High Gain shaper')
 figure;
 plot(Channel,pDac0(:,2));
 meanPDac0 = mean(pDac0(:,1));
@@ -78,15 +84,24 @@ ay = [0 0];
 plot(ax,ay,'r')
 hold off;
 % DAC1
+pDac1 = zeros(64,2);
 figure;
 for i = 1:1:64
     ChannelData = CalibrationDataDac1(:,i);
+    ChannelDataFit = ChannelData(1:LinearRange);
+    ChargeFit = Charge(1:LinearRange);
     if(i == 61)
         continue;
     end
-    plot(Charge,ChannelData);
+    [~,pDac1(i,:),x,y] = SelfLinearFit(ChargeFit, ChannelDataFit'); 
+    plot(Charge,ChannelData,'*');
+    hold on;
+    plot(x,y);
     hold on;
 end
+ xlabel('\bf Charge')
+ylabel('\bf DAC Code')
+title('\bf 高增益成形刻度曲线DAC1')
 % DAC2
 figure;
 for i = 1:1:64
