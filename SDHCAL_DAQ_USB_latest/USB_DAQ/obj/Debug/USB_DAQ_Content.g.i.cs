@@ -8,9 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("nationalinstruments.common.dll")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("nationalinstruments.mstudioclm.dll")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("nationalinstruments.nilmclientdll.dll")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("nationalinstruments.visans.dll")]
 
 
