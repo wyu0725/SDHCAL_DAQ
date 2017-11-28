@@ -3901,25 +3901,7 @@ namespace USB_DAQ
                 MessageBox.Show("Set DAQ Mode failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-        private async void btnTest_Click(object sender, RoutedEventArgs e)
-        {
-            if (!IsTestStart)
-            {
-                IsTestStart = true;
-                btnTest.Content = "Test Stop";
-                await Task.Run(() => TestCount());
-                //BigCountTest.Start();
-                //TestCount();
-                txtReport.AppendText("Test Done\n");
-                btnTest.Content = "TestSync";
-            }
-            else
-            {
-                IsTestStart = false;
-                btnTest.Content = "TestSync";
-                txtReport.AppendText("Test Abort\n");
-            }
-        }
+        
         private void TestCount()
         {
             int BigCount = 0;
@@ -3942,6 +3924,17 @@ namespace USB_DAQ
             //txtReport.AppendText(report);
             //return BigCount;
             //return Task.Run(() => txtReport.AppendText("TestDone"));
+        }
+
+
+        private void TabItem_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void tbiMicrorocAcq_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            txtReport.AppendText("Microroc Acq");
         }
 
         /*private void cbxAdcStartMode_SelectionChanged(object sender, SelectionChangedEventArgs e)

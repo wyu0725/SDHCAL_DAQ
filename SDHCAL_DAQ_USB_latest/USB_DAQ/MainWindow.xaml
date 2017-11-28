@@ -75,8 +75,8 @@
         </GroupBox>
         <GroupBox x:Name="gbxMICROROC" Header="MICROROC Control" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Height="500" Width="797" Grid.Column="4" Grid.ColumnSpan="2">
             <Grid  Margin="0,0,0,0" >
-                <TabControl x:Name="tbcAsicStatus1" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="785" Height="500">
-                    <TabItem Header="MICROROC ACQ">
+                <TabControl x:Name="tbcMicrorocControl" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="785" Height="500">
+                    <TabItem Name="tbiMicrorocAcq" Header="MICROROC ACQ" Margin="0,0,0,0" MouseLeftButtonUp="tbiMicrorocAcq_MouseLeftButtonUp">
                         <Grid Margin="0,0,0,0">
                             <GroupBox x:Name="gbxSC_ReadReg" Header="SC/ReadReg Control" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Height="463" Width="614">
                                 <Grid Margin="0,0,0,0">
@@ -90,17 +90,13 @@
                                     <Label x:Name="lblHeader" Content="Start Header:" HorizontalAlignment="Left" Margin="0,30,0,0" VerticalAlignment="Top" Height="24" Width="90"/>
                                     <TextBox x:Name="txtHeader" HorizontalAlignment="Left" Height="20" Margin="100,30,0,0" TextWrapping="Wrap" Text="A1" VerticalAlignment="Top" Width="70"/>
 
-                                    <Label x:Name="Raz_Chn_Select" Content="RAZ Chn Select" HorizontalAlignment="Left" Margin="0,60,0,0" VerticalAlignment="Top" Width="100"/>
-                                    <ComboBox x:Name="cbxRazSelect" HorizontalAlignment="Left" Margin="100,60,0,0" VerticalAlignment="Top" Width="80" Height="24">
-                                        <ComboBoxItem Content="Internal" IsSelected="True"/>
-                                        <ComboBoxItem Content="External" />
-                                    </ComboBox>
+
                                     <!--<StackPanel HorizontalAlignment="Left" Height="30" Margin="100,60,0,0" VerticalAlignment="Top" Width="75">
                             <RadioButton GroupName="RAZ_Chn_Select1" Checked="RAZ_Chn_Select_Checked" Content="Internal"/>
                             <RadioButton GroupName="RAZ_Chn_Select1" Checked="RAZ_Chn_Select_Checked" Content="External"/>
                         </StackPanel>-->
-                                    <Label x:Name="lblChannel_Sel" Content="Channel select" HorizontalAlignment="Left" Margin="0,90,0,0" VerticalAlignment="Top" Height="24" Width="100"/>
-                                    <ComboBox x:Name="cbxChannelSelect" HorizontalAlignment="Left" Margin="100,90,0,0" VerticalAlignment="Top" Width="80" Height="24">
+                                    <Label x:Name="lblChannel_Sel" Content="Channel select" HorizontalAlignment="Left" Margin="0,60,0,0" VerticalAlignment="Top" Height="24" Width="100"/>
+                                    <ComboBox x:Name="cbxChannelSelect" HorizontalAlignment="Left" Margin="100,60,0,0" VerticalAlignment="Top" Width="80" Height="24">
                                         <ComboBoxItem Content="Channel2" />
                                         <ComboBoxItem Content="Channel1" IsSelected="True"/>
                                     </ComboBox>
@@ -192,7 +188,7 @@
                                                             <ComboBoxItem Content="500ns"/>
                                                             <ComboBoxItem Content="1us" IsSelected="True"/>
                                                         </ComboBox>
-                                                        <ComboBox x:Name="cbxPedCali_ASIC1" HorizontalAlignment="Left" Margin="0,225,0,0" VerticalAlignment="Top" Width="85" Height="24" Grid.ColumnSpan="2">
+                                                        <ComboBox x:Name="cbxPedCali_ASIC1" HorizontalAlignment="Left" Margin="0,225,0,0" VerticalAlignment="Top" Width="110" Height="24" Grid.ColumnSpan="2">
                                                             <ComboBoxItem Content= "Without Cali" IsSelected ="True"/>
                                                             <ComboBoxItem Content= "DC Cali"/>
                                                             <ComboBoxItem Content= "SCurve Cali" />
@@ -234,7 +230,7 @@
                                                             <ComboBoxItem Content="500ns"/>
                                                             <ComboBoxItem Content="1us" IsSelected="True"/>
                                                         </ComboBox>
-                                                        <ComboBox x:Name="cbxPedCali_ASIC2" HorizontalAlignment="Left" Margin="0,225,0,0" VerticalAlignment="Top" Width="85" Height="24">
+                                                        <ComboBox x:Name="cbxPedCali_ASIC2" HorizontalAlignment="Left" Margin="0,225,0,0" VerticalAlignment="Top" Width="110" Height="24">
                                                             <ComboBoxItem Content= "Without Cali" IsSelected ="True"/>
                                                             <ComboBoxItem Content= "DC Cali"/>
                                                             <ComboBoxItem Content= "SCurve Cali" />
@@ -275,7 +271,7 @@
                                                             <ComboBoxItem Content="500ns"/>
                                                             <ComboBoxItem Content="1us" IsSelected="True"/>
                                                         </ComboBox>
-                                                        <ComboBox x:Name="cbxPedCali_ASIC3" HorizontalAlignment="Left" Margin="0,225,0,0" VerticalAlignment="Top" Width="85" Height="24">
+                                                        <ComboBox x:Name="cbxPedCali_ASIC3" HorizontalAlignment="Left" Margin="0,225,0,0" VerticalAlignment="Top" Width="110" Height="24">
                                                             <ComboBoxItem Content= "Without Cali" IsSelected ="True"/>
                                                             <ComboBoxItem Content= "DC Cali"/>
                                                             <ComboBoxItem Content= "SCurve Cali" />
@@ -316,7 +312,7 @@
                                                             <ComboBoxItem Content="500ns"/>
                                                             <ComboBoxItem Content="1us" IsSelected="True"/>
                                                         </ComboBox>
-                                                        <ComboBox x:Name="cbxPedCali_ASIC4" HorizontalAlignment="Left" Margin="0,225,0,0" VerticalAlignment="Top" Width="85" Height="24">
+                                                        <ComboBox x:Name="cbxPedCali_ASIC4" HorizontalAlignment="Left" Margin="0,225,0,0" VerticalAlignment="Top" Width="110" Height="24">
                                                             <ComboBoxItem Content= "Without Cali" IsSelected ="True"/>
                                                             <ComboBoxItem Content= "DC Cali" />
                                                             <ComboBoxItem Content= "SCurve Cali" />
@@ -480,6 +476,7 @@
 
                                         </Grid>
                                     </GroupBox>
+                                    <!--
                                     <Label x:Name="lblACQ_or_SCTest" Content="Mode Select" HorizontalAlignment="Left" VerticalAlignment="Top" Height="24" RenderTransformOrigin="4.713,0.917" Margin="0,220,0,0"/>
                                     <StackPanel HorizontalAlignment="Left" Height="75" Margin="0,250,0,0" VerticalAlignment="Top" Width="90">
                                         <RadioButton GroupName="ACQ_or_SCTest" Checked="ModeSelectChecked" Content="ACQ"/>
@@ -487,12 +484,13 @@
                                         <RadioButton GroupName="ACQ_or_SCTest" Checked="ModeSelectChecked" Content="SweepACQ"/>
                                         <RadioButton GroupName="ACQ_or_SCTest" Checked="ModeSelectChecked" Content="AD9220"/>
                                         <RadioButton GroupName="ACQ_or_SCTest" Checked="ModeSelectChecked" Content="Efficiency"/>
-                                        <!--RadioButton x:Name="radioButton" Content="RadioButton"/>
-                    <RadioButton x:Name="radioButton1" Content="RadioButton"/-->
+                                        
                                     </StackPanel>
-                                    <Button x:Name="btnTRIG_EXT_EN" Content="TRIG EXT" HorizontalAlignment="Left" Margin="15,195,0,0" VerticalAlignment="Top" Width="75" Height="24" Click="btnTRIG_EXT_EN_Click"/>
+                                    -->
                                 </Grid>
                             </GroupBox>
+                            <Label x:Name="lblStartAcq_Time" Content="StartAcq Time(ns)" HorizontalAlignment="Left" Margin="619,28,0,0" VerticalAlignment="Top" Width="120"/>
+                            <TextBox x:Name="txtStartAcqTime" HorizontalAlignment="Left" Height="24" Margin="694,77,0,0" TextWrapping="Wrap" Text="40000" VerticalAlignment="Top" Width="75"/>
                             <GroupBox x:Name="gbxNormalAcq" Header="Normal Acq" HorizontalAlignment="Left" VerticalAlignment="Top" Height="228" Width="155" Margin="624,158,0,0">
                                 <Grid  Margin="0,0,0,0" >
                                     <Label x:Name="lblDaqMode" Content="DAQ Mode:" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Height="24" Width="80"/>
@@ -513,9 +511,10 @@
                                     <Button x:Name="btnSlowACQ" Content="SlowACQ" HorizontalAlignment="Left" Margin="0,180,0,0" VerticalAlignment="Top" Width="80" Height="24" Click="btnSlowACQ_Click"/>
                                 </Grid>
                             </GroupBox>
+                            <Button x:Name="btnTRIG_EXT_EN" Content="TRIG EXT" HorizontalAlignment="Left" Margin="664,415,0,0" VerticalAlignment="Top" Width="75" Height="24" Click="btnTRIG_EXT_EN_Click"/>
                         </Grid>
                     </TabItem>
-                    <TabItem Header="SC Test">
+                    <TabItem Header="SC Test" Height="21" VerticalAlignment="Bottom">
                         <Grid Margin="0,0,0,0">
                             <GroupBox x:Name="gbxAcqParameter" Header="ACQ Parameter" HorizontalAlignment="Left" Height="110" Margin="0,0,0,0" VerticalAlignment="Top" Width="775">
                                 <Grid Margin="0,0,0,0">
@@ -530,8 +529,7 @@
                                         <ComboBoxItem Content="1000 ns" IsSelected="True"/>
                                     </ComboBox>
                                     <Button x:Name="btnSet_Raz_Width" Content="SET RAZ" HorizontalAlignment="Left" Margin="200,30,0,0" VerticalAlignment="Top" Width="76" Height="24" Click="btnSet_Raz_Width_Click"/>
-                                    <Label x:Name="lblStartAcq_Time" Content="StartAcq Time(ns)" HorizontalAlignment="Left" Margin="0,60,0,0" VerticalAlignment="Top" Width="120"/>
-                                    <TextBox x:Name="txtStartAcqTime" HorizontalAlignment="Left" Height="24" Margin="120,60,0,0" TextWrapping="Wrap" Text="40000" VerticalAlignment="Top" Width="75"/>
+
                                     <!--Button x:Name="btnSetAcqTime" Content="SET Time" HorizontalAlignment="Left" Margin="200,60,0,0" VerticalAlignment="Top" Width="75" Height="24" Click="btnSetAcqTime_Click"/-->
                                     <Label x:Name="lblHold_Gen" Content="Hold Gen" HorizontalAlignment="Left" Margin="280,0,0,0" VerticalAlignment="Top" Width="80"/>
                                     <ComboBox x:Name="cbxTrig_Coincid" HorizontalAlignment="Left" Margin="350,0,0,0" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.088,-0.048" Height="24">
@@ -733,6 +731,11 @@
                                     </ComboBox>
                                 </Grid>
                             </GroupBox>
+                            <Label x:Name="Raz_Chn_Select" Content="RAZ Chn Select" HorizontalAlignment="Left" Margin="0,90,0,0" VerticalAlignment="Top" Width="100"/>
+                            <ComboBox x:Name="cbxRazSelect" HorizontalAlignment="Left" Margin="100,90,0,0" VerticalAlignment="Top" Width="80" Height="24">
+                                <ComboBoxItem Content="Internal" IsSelected="True"/>
+                                <ComboBoxItem Content="External" />
+                            </ComboBox>
                             <Label x:Name="lblRSOrDirect" Content="RS or Direct" HorizontalAlignment="Left" Margin="0,120,0,0" VerticalAlignment="Top" Width="100" Height="24" />
                             <ComboBox x:Name="cbxRSOrDirect" HorizontalAlignment="Left" Margin="100,120,0,0" VerticalAlignment="Top" Width="80" Height="24">
                                 <ComboBoxItem Content="RS" IsSelected="True"/>
