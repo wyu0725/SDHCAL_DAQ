@@ -52,11 +52,14 @@
             <ColumnDefinition Width="953*"/>
         </Grid.ColumnDefinitions>
         <Label x:Name="lblMessage" Content="Message" HorizontalAlignment="Left" Margin="61,10,0,0" VerticalAlignment="Top" Grid.Column="2"/>
-        <GroupBox x:Name="gbxUSBStatus" Header="USB Status" HorizontalAlignment="Left" Margin="739,28,0,0" VerticalAlignment="Top" Height="57" Width="189" Grid.Column="5">
-            <Label x:Name="usb_status" Content="USB device not connected" HorizontalAlignment="Left" Height="24" Margin="9,2,0,0" VerticalAlignment="Top" Width="160" Background="Transparent" />
+        <GroupBox x:Name="gbxUSBStatus" Header="USB Status" HorizontalAlignment="Left" Margin="739,28,0,0" VerticalAlignment="Top" Height="80" Width="189" Grid.Column="5">
+            <Grid Margin="0,0,0,0">
+                <Label x:Name="usb_status" Content="USB device not connected" HorizontalAlignment="Left" Height="24" Margin="9,0,0,0" VerticalAlignment="Top" Width="160" Background="Transparent" />
+                <Label x:Name="lblAFG3252Status" Content="AFG3252 not connected" HorizontalAlignment="Left" Height="24" Margin="9,25,0,0" VerticalAlignment="Top" Width="160" Background="Transparent" />
+            </Grid>            
         </GroupBox>
-        <Button x:Name="btnCommandSend" Content="CommandSend" HorizontalAlignment="Left" Margin= "827,98,0,0" VerticalAlignment="Top" Width="102" Height="22" Click="btnCommandSend_Click" Grid.Column="5"/>
-        <TextBox x:Name="txtCommand" HorizontalAlignment="Left" Height="22" Margin="739,99,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="78" IsEnabled="False" Grid.Column="5"/>
+        <Button x:Name="btnCommandSend" Content="CommandSend" HorizontalAlignment="Left" Margin= "827,150,0,0" VerticalAlignment="Top" Width="102" Height="22" Click="btnCommandSend_Click" Grid.Column="5"/>
+        <TextBox x:Name="txtCommand" HorizontalAlignment="Left" Height="22" Margin="739,150,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="78" IsEnabled="False" Grid.Column="5"/>
         <TextBox x:Name="txtReport" HorizontalAlignment="Left" Height="464" Margin="7,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="212" IsReadOnlyCaretVisible="True" IsUndoEnabled="False" IsReadOnly="True"
                  ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto"
                  ScrollViewer.CanContentScroll="True" Grid.ColumnSpan="3" Grid.Column="1">
@@ -514,7 +517,7 @@
                             <Button x:Name="btnTRIG_EXT_EN" Content="TRIG EXT" HorizontalAlignment="Left" Margin="664,415,0,0" VerticalAlignment="Top" Width="75" Height="24" Click="btnTRIG_EXT_EN_Click"/>
                         </Grid>
                     </TabItem>
-                    <TabItem Header="SC Test" Height="21" VerticalAlignment="Bottom">
+                    <TabItem Name="tbiSCTest" Header="SC Test" Height="21" VerticalAlignment="Bottom">
                         <Grid Margin="0,0,0,0">
                             <GroupBox x:Name="gbxAcqParameter" Header="ACQ Parameter" HorizontalAlignment="Left" Height="110" Margin="0,0,0,0" VerticalAlignment="Top" Width="775">
                                 <Grid Margin="0,0,0,0">
@@ -644,7 +647,7 @@
                             </GroupBox>
                         </Grid>
                     </TabItem>
-                    <TabItem Header="AD9220">
+                    <TabItem Name="tbiAD9220" Header="AD9220">
                         <Grid Margin="0,0,0,0">
                             <GroupBox x:Name="gbxAD9220" Header="AD9220" HorizontalAlignment="Left" Margin="308,132,0,0" VerticalAlignment="Top" Width="156" Height="154">
                                 <Grid Margin="0,0,0,0">
@@ -671,11 +674,94 @@
                             </GroupBox>
                         </Grid>
                     </TabItem>
-                    <TabItem Header="AFG3252">
+                    <TabItem Name="tbiAFG3252" Header="AFG3252">
                         <Grid Margin="0,0,0,0">
+                            <Label x:Name="lblAFG3252Command" Content="AFG3252 Command" HorizontalAlignment="Left" Margin="0,425,0,0" VerticalAlignment="Top" Width="130" Height="24"/>
+                            <TextBox x:Name="tbxAFG3252Command" HorizontalAlignment="Left" Margin="130,425,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="300" Height="24"/>
+                            <Button x:Name="btnAFG3252Command" Content="Command Send" HorizontalAlignment="Left" Margin="430,426,0,0" VerticalAlignment="Top" Width="100" Height="24" Click="btnAFG3252Command_Click"/>
+                            <Label x:Name="lblAFG3252Ch1" Content="Ch1" Margin="160,0,0,0" Height="24" Width="35" VerticalAlignment="Top" HorizontalAlignment="Left" />
+                            <Button x:Name="btnAFG3252Ch1OnOrOff" Content="Off" HorizontalAlignment="Left" Margin="195,0,0,0" VerticalAlignment="Top" Width="30" Height="24" Background="Gray" Click="btnAFG3252Ch1OnOrOff_Click"/>
+                            <Label x:Name="lblAFG3252Ch2" Content="Ch2" Margin="250,0,0,0" Height="24" Width="35" VerticalAlignment="Top" HorizontalAlignment="Left" />
+                            <Button x:Name="btnAFG3252Ch2OnOrOff" Content="Off" HorizontalAlignment="Left" Margin="285,0,0,0" VerticalAlignment="Top" Width="30" Height="24" Background="Gray" Click="btnAFG3252Ch2OnOrOff_Click"/>
+                            <Label x:Name="lblAFG3252FunctionSet" Content="Function Set" HorizontalAlignment="Left" Margin="0,30,0,0" VerticalAlignment="Top" Height="24" Width="90"/>
+                            <ComboBox x:Name="cbxAFG3252FunctionSetCh1" HorizontalAlignment="Left" Margin="150,30,0,0" VerticalAlignment="Top" Width="60" Height="24" SelectionChanged="cbxAFG3252FunctionSetCh1_SelectionChanged">
+                                <ComboBoxItem Content="Sine" IsSelected="True"/>
+                                <ComboBoxItem Content="Square"/>
+                                <ComboBoxItem Content="Ramp"/>
+                                <ComboBoxItem Content="Pulse"/>
+                                <ComboBoxItem Content="Arb"/>
+                            </ComboBox>
+                            <ComboBox x:Name="cbxAFG3252FunctionSetCh2" HorizontalAlignment="Left" Margin="240,30,0,0" VerticalAlignment="Top" Width="60" Height="24" SelectionChanged="cbxAFG3252FunctionSetCh2_SelectionChanged">
+                                <ComboBoxItem Content="Sine" IsSelected="True"/>
+                                <ComboBoxItem Content="Square"/>
+                                <ComboBoxItem Content="Ramp"/>
+                                <ComboBoxItem Content="Pulse"/>
+                                <ComboBoxItem Content="Arb"/>
+                            </ComboBox>
+                            <Label x:Name="lblAFG3252FrequencySet" Content="Frequency" HorizontalAlignment="Left" Margin="0,60,0,0" VerticalAlignment="Top" Height="24" Width="90"/>
+                            <TextBox x:Name="tbxAFG3252FrequencySetCh1" HorizontalAlignment="Left" Height="24" Margin="150,60,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="60"/>
+                            <TextBox x:Name="tbxAFG3252FrequencySetCh2" HorizontalAlignment="Left" Height="24" Margin="240,60,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="60"/>
+                            <ComboBox x:Name="cbxAFG3252FrequencyUnitSet" HorizontalAlignment="Left" Margin="300,60,0,0" VerticalAlignment="Top" Width="60" Height="24">
+                                <ComboBoxItem Content="Hz"/>
+                                <ComboBoxItem Content="kHz" IsSelected="True"/>
+                                <ComboBoxItem Content="MHz"/>
+                            </ComboBox>
+                            <Label x:Name="lblAFG3252FrequencyCopy" Content="Frequency Ch1 = Ch2" HorizontalAlignment="Left" Margin="0,90,0,0" VerticalAlignment="Top" Height="24" Width="140"/>
+                            <ComboBox x:Name="cbxAFG3252FrequencyCopy" HorizontalAlignment="Left" Margin="150,90,0,0" VerticalAlignment="Top" Width="60" Height="24" SelectionChanged="cbxAFG3252FrequencyCopy_SelectionChanged">
+                                <ComboBoxItem Content="Off" IsSelected="True"/>
+                                <ComboBoxItem Content="On"/>
+                            </ComboBox>
+                            <TabControl x:Name="tbcAFG3252VoltageSet" TabStripPlacement="Left" HorizontalAlignment="Left" Margin="0,120,0,0" VerticalAlignment="Top" Width="300" Height="60">
+                                <TabItem Name="tbiAFG3252Amplitude" Header="Apmlitude" Height="28" MouseLeftButtonUp="tbiAFG3252Amplitude_MouseLeftButtonUp">
+                                    <Grid Margin="0,0,0,0">
+                                        <Label x:Name="lblAFG3252Amplitude" Content="Amplitude" HorizontalAlignment="Left" Height="24" Width="70" Margin="0,0,0,30"/>
+                                        <TextBox x:Name="tbxAFG3252AmplitudeCh1" HorizontalAlignment="Left" Height="24" Margin="70,0,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="60"/>
+                                        <TextBox x:Name="tbxAFG3252AmplitudeCh2" HorizontalAlignment="Left" Height="24" Margin="160,0,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="60"/>
+                                        <Label x:Name="lblAFG3252Offset" Content="Offset" HorizontalAlignment="Left" Height="24" Width="70" Margin="0,30,0,0"/>
+                                        <TextBox x:Name="tbxAFG3252OffsetCh1" HorizontalAlignment="Left" Height="24" Margin="70,30,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="60"/>
+                                        <TextBox x:Name="tbxAFG3252OffsetCh2" HorizontalAlignment="Left" Height="24" Margin="160,30,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="60"/>
+                                    </Grid>
+                                </TabItem>
+                                <TabItem Name="tbiAFG3252Level" Header="Level" Height="28" MouseLeftButtonUp="tbiAFG3252Level_MouseLeftButtonUp">
+                                    <Grid Margin="0,0,0,0">
+                                        <Label x:Name="lblAFG3252HighLevel" Content="High Level" HorizontalAlignment="Left" Height="24" Width="70" Margin="0,0,0,30"/>
+                                        <TextBox x:Name="tbxAFG3252HighLevelCh1" HorizontalAlignment="Left" Height="24" Margin="70,0,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="60"/>
+                                        <TextBox x:Name="tbxAFG3252HighLevelCh2" HorizontalAlignment="Left" Height="24" Margin="160,0,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="60"/>
+                                        <Label x:Name="lblAFG3252LowLevel" Content="Low Level" HorizontalAlignment="Left" Height="24" Width="70" Margin="0,30,0,0"/>
+                                        <TextBox x:Name="tbxAFG3252LowLevelCh1" HorizontalAlignment="Left" Height="24" Margin="70,30,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="60"/>
+                                        <TextBox x:Name="tbxAFG3252LowLevelCh2" HorizontalAlignment="Left" Height="24" Margin="160,30,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="60"/>
+                                    </Grid>
+                                </TabItem>                                
+                            </TabControl>
+                            <ComboBox x:Name="cbxAFG3252VoltageUnitSet" HorizontalAlignment="Left" Margin="300,135,0,0" VerticalAlignment="Top" Width="50" Height="24">
+                                <ComboBoxItem Content="mV" IsSelected="True"/>
+                                <ComboBoxItem Content="V"/>
+                            </ComboBox>
+                            <GroupBox x:Name="gbxAFG3252PulseParameters" Header="Pulse" Height="120" Width="360" Margin="0,180,0,0" VerticalAlignment="Top" HorizontalAlignment="Left">
+                                <Grid Margin="0,0,0,0">
+                                    <Label x:Name="lblAFG3252PulseLaeding" Content="Leading" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Height="24" Width="90"/>
+                                    <TextBox x:Name="tbxAFG3252PulseLeadingCh1" HorizontalAlignment="Left" Height="24" Margin="140,0,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="60"/>
+                                    <TextBox x:Name="tbxAFG3252PulseLeadingCh2" HorizontalAlignment="Left" Height="24" Margin="230,0,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="60"/>
+                                    <Label x:Name="lblAFG3252PulseTrailing" Content="Trailing" HorizontalAlignment="Left" Margin="0,30,0,0" VerticalAlignment="Top" Height="24" Width="90"/>
+                                    <TextBox x:Name="tbxAFG3252PulseTrailingCh1" HorizontalAlignment="Left" Height="24" Margin="140,30,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="60"/>
+                                    <TextBox x:Name="tbxAFG3252PulseTrailingCh2" HorizontalAlignment="Left" Height="24" Margin="230,30,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="60"/>
+                                    <Label x:Name="lblAFG3252PulseDelay" Content="Delay" HorizontalAlignment="Left" Margin="0,60,0,0" VerticalAlignment="Top" Height="24" Width="90"/>
+                                    <TextBox x:Name="tbxAFG3252PulseDelayCh1" HorizontalAlignment="Left" Height="24" Margin="140,60,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="60"/>
+                                    <TextBox x:Name="tbxAFG3252PulseDelayCh2" HorizontalAlignment="Left" Height="24" Margin="230,60,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="60"/>
+                                    <ComboBox x:Name="cbxAFG3252PulseTimeUnitSet" HorizontalAlignment="Left" Margin="300,30,0,0" VerticalAlignment="Top" Width="40" Height="24">
+                                        <ComboBoxItem Content="ns"/>
+                                        <ComboBoxItem Content="us" IsSelected="True"/>
+                                        <ComboBoxItem Content="ms"/>
+                                        <ComboBoxItem Content="s"/>
+                                    </ComboBox>
+                                </Grid>
+                            </GroupBox>
+                            <Button x:Name="btnAFG3252Config" Content="AFG3252 Config" HorizontalAlignment="Left" Margin="240,300,0,0" VerticalAlignment="Top" Width="120" Height="24" Click="btnAFG3252Config_Click"/>
+                            
+
                         </Grid>
                     </TabItem>
-                    <TabItem Header="ASIC Test Parameters">
+                    <TabItem Name="tbiTestParam" Header="ASIC Test Parameters">
                         <Grid Margin="0,0,0,0">
                             <Label x:Name="lblPower_Pulsing" Content="Powerpulsing" HorizontalAlignment="Left" Margin="0,60,0,0" VerticalAlignment="Top" Height="24" Width="90"/>
                             <StackPanel HorizontalAlignment="Left" Height="30" Margin="90,60,0,0" VerticalAlignment="Top" Width="70">
@@ -751,7 +837,7 @@
                 </TabControl>
             </Grid>
         </GroupBox>
-        <GroupBox x:Name="gbxAsicStatus" Header="ASIC Status" HorizontalAlignment="Left" Margin="739,126,0,0" VerticalAlignment="Top" Width="200" Height="300" Grid.Column="5">
+        <GroupBox x:Name="gbxAsicStatus" Header="ASIC Status" HorizontalAlignment="Left" Margin="739,309,0,0" VerticalAlignment="Top" Width="200" Height="300" Grid.Column="5">
             <TabControl x:Name="tbcAsicStatus" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="185" Height="300">
                 <TabItem Header="ASIC1">
                 </TabItem>
@@ -764,6 +850,8 @@
             </TabControl>
 
         </GroupBox>
+        <Button x:Name="btnAFG3252Connect" Content="Connect AFG3252" Grid.Column="5" HorizontalAlignment="Left" Margin="750,120,0,0" VerticalAlignment="Top" Width="100" Height="24" Click="btnAFG3252Connect_Click"/>
+        <Button x:Name="btnAFG3252DisConnect" Content="Button" Grid.Column="5" HorizontalAlignment="Left" Margin="790,211,0,0" VerticalAlignment="Top" Width="75" Click="btnAFG3252DisConnect_Click"/>
 
 
 

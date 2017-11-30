@@ -15,6 +15,8 @@ using Microsoft.Research.DynamicDataDisplay;//new add 20151023
 using Microsoft.Research.DynamicDataDisplay.DataSources;//new add 20151023
 using Microsoft.Research.DynamicDataDisplay.PointMarkers;//new add 20151024
 using System.IO.Ports;
+using System.Runtime.InteropServices;
+using System.Windows.Interop;
 //using System.Collections.ObjectModel;//new add 20150823
 //using Target7_NEWDAQ.DataModel;      //new add 20150823
 namespace USB_DAQ
@@ -33,7 +35,7 @@ namespace USB_DAQ
         private string rx_Command = @"\b[0-9a-fA-F]{4}\b";//match 16 bit Hex
         private string rx_Byte = @"\b[0-9a-fA-F]{2}\b";//match 8 bit Hex
         private string rx_Integer = @"^\d+$";   //匹配非负 整数
-        //private string rx_Float = @"^\d+(\.\d{1,3})?$";//小数可有可无最多3位小数 
+        private string rx_Double = @"^\d+(\.\d{1,6})?$";//小数可有可无最多6位小数 
         private string filepath = null;//文件路径
         private static bool AcqStart = false; //采集标志
         private static bool Enabled_Ext_Trigger = false;
@@ -86,6 +88,11 @@ namespace USB_DAQ
 
         private static bool IsTestStart = false;
 
+        private const string AFG3252Descr = "USB[0-9]::0x0699::0x034E::C[0-9]+::INSTR";
+        private const string AFG3252VidPid = "VID_0699&PID_034E";
+        private AFG3252 MyAFG3252 = new AFG3252(AFG3252Descr);
+        private bool AFG3252Attach = false;
+        private bool AmplitudeOrLevel = true;
         //SC Parameter
         
         
@@ -100,6 +107,7 @@ namespace USB_DAQ
             usbDevices.DeviceAttached += new EventHandler(usbDevices_DeviceAttached);
             usbDevices.DeviceRemoved += new EventHandler(usbDevices_DeviceRemoved);
             RefreshDevice();
+            Afg3252Refresh();
             //cbxAverage_Points.SelectedIndex = 0;
             //Initial_SerialPort();
         }
@@ -3902,31 +3910,6 @@ namespace USB_DAQ
             }
         }
         
-        private void TestCount()
-        {
-            int BigCount = 0;
-            int BigBigCount = 0;
-            while (IsTestStart && BigBigCount < 10000)
-            {
-                BigCount = BigCount + 1;
-                if (BigCount == 10000)
-                {
-                    //txtReport.AppendText("10000\n");
-                }
-                if (BigCount == 100000)
-                {
-                    BigCount = 0;
-                    BigBigCount += 1;
-                }
-            }
-            IsTestStart = false;
-            string report = string.Format("Count :{0}", BigCount);
-            //txtReport.AppendText(report);
-            //return BigCount;
-            //return Task.Run(() => txtReport.AppendText("TestDone"));
-        }
-
-
         private void TabItem_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
 
@@ -3936,6 +3919,641 @@ namespace USB_DAQ
         {
             txtReport.AppendText("Microroc Acq");
         }
+
+        private void btnAFG3252Connect_Click(object sender, RoutedEventArgs e)
+        {
+            
+            /*else
+            {
+                lblAFG3252Status.Content = "AFG3252 not connected";
+                lblAFG3252Status.Foreground = Brushes.DeepPink;
+                btnAFG3252Command.Background = Brushes.LightGray;
+                btnAFG3252Command.IsEnabled = false;
+                tbxAFG3252Command.IsEnabled = false;
+            }*/
+        }
+
+        private void btnAFG3252Command_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                MyAFG3252.Write(tbxAFG3252Command.Text);
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show(exp.Message);
+            }
+        }
+
+        private void btnAFG3252DisConnect_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+        private void Afg3252Refresh()
+        {
+            if(MyAFG3252.session == null)
+            {
+                if (MyAFG3252.Initial())
+                {
+                    lblAFG3252Status.Content = "AFG3252 connected";
+                    lblAFG3252Status.Foreground = Brushes.Green;
+                    btnAFG3252Command.Background = Brushes.ForestGreen;
+                    btnAFG3252Command.IsEnabled = true;
+                    tbxAFG3252Command.IsEnabled = true;
+                    txtReport.AppendText("AFG3252 connect successfully \n");
+                }
+                else
+                {
+                    lblAFG3252Status.Content = "AFG3252 not connected";
+                    lblAFG3252Status.Foreground = Brushes.DeepPink;
+                    btnAFG3252Command.Background = Brushes.LightGray;
+                    btnAFG3252Command.IsEnabled = false;
+                    tbxAFG3252Command.IsEnabled = false;
+                }
+            }
+        }
+        private void Afg3252Attach()
+        {
+            if (MyAFG3252.Initial())
+            {
+                lblAFG3252Status.Content = "AFG3252 connected";
+                lblAFG3252Status.Foreground = Brushes.Green;
+                btnAFG3252Command.Background = Brushes.ForestGreen;
+                btnAFG3252Command.IsEnabled = true;
+                tbxAFG3252Command.IsEnabled = true;
+                txtReport.AppendText("AFG3252 connect successfully \n");
+            }
+            else
+            {
+                lblAFG3252Status.Content = "AFG3252 not connected";
+                lblAFG3252Status.Foreground = Brushes.DeepPink;
+                btnAFG3252Command.Background = Brushes.LightGray;
+                btnAFG3252Command.IsEnabled = false;
+                tbxAFG3252Command.IsEnabled = false;
+            }
+        }
+        private void Afg3252Detach()
+        {
+            if (MyAFG3252.session != null)
+            {
+                MyAFG3252.Close();
+                lblAFG3252Status.Content = "AFG3252 not connected";
+                lblAFG3252Status.Foreground = Brushes.DeepPink;
+                btnAFG3252Command.Background = Brushes.LightGray;
+                btnAFG3252Command.IsEnabled = false;
+                tbxAFG3252Command.IsEnabled = false;
+            }
+        }
+        protected override void OnSourceInitialized(EventArgs e)
+        {
+            base.OnSourceInitialized(e);
+
+            // Adds the windows message processing hook and registers USB device add/removal notification.
+            HwndSource source = HwndSource.FromHwnd(new WindowInteropHelper(this).Handle);
+            if (source != null)
+            {
+                IntPtr windowHandle = source.Handle;
+                source.AddHook(HwndHandler);
+                UsbNotification.RegisterUsbDeviceNotification(windowHandle);
+            }
+        }
+
+        private IntPtr HwndHandler(IntPtr hwnd, int msg, IntPtr wparam, IntPtr lparam, ref bool handled)
+        {
+            
+            if (msg == UsbNotification.WmDevicechange)
+            {
+                //UsbName ppp = new UsbName();
+                //IntPtr pnt = Marshal.AllocHGlobal(Marshal.SizeOf(ppp));
+                //Marshal.StructureToPtr(ppp, lparam, false);
+                UsbName anotherP = new UsbName();
+                string DeviceName;
+                switch ((int)wparam)
+                {
+                    case UsbNotification.DbtDeviceremovecomplete:
+                        {
+                            anotherP = (UsbName)Marshal.PtrToStructure(lparam, typeof(UsbName));
+                            DeviceName = anotherP.dbcc_name;
+                            string[] DeviceNameInternal = DeviceName.Split('#');
+                            if(DeviceNameInternal.Length >= 2 && DeviceNameInternal[1] == AFG3252VidPid)
+                            {
+                                Afg3252Detach();
+                            }                            
+                        }
+                        //Usb_DeviceRemoved(); // this is where you do your magic
+                        break;
+                    case UsbNotification.DbtDevicearrival:
+                        {
+                            anotherP = (UsbName)Marshal.PtrToStructure(lparam, typeof(UsbName));
+                            DeviceName = anotherP.dbcc_name;
+                            string[] DeviceNameInternal = DeviceName.Split('#');
+                            if (DeviceNameInternal.Length >= 2 && DeviceNameInternal[1] == AFG3252VidPid)
+                            {
+                                Afg3252Attach();
+                            }
+                        }
+                        //Usb_DeviceAdded(); // this is where you do your magic
+                        break;
+                }
+            }
+
+            handled = false;
+            //Thread.Sleep(1000);
+            return IntPtr.Zero;
+        }
+
+        
+
+        [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
+        public struct UsbName
+        {
+            public int dbcc_size;
+            public int dbcc_devicetype;
+            public int dbcc_reserved;
+            public Guid dbcc_classguid;
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 255)]
+            public string dbcc_name;
+        }
+
+        private void cbxAFG3252FunctionSetCh1_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(MyAFG3252.session != null)
+            {
+                SetAfg3252Channel1FunctionShape();
+            }
+        }
+
+        private void cbxAFG3252FunctionSetCh2_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(MyAFG3252.session != null)
+            {
+                SetAfg3252Channel2FunctionShape();
+            }
+        }
+        private void SetAfg3252Channel1FunctionShape()
+        {
+            switch (cbxAFG3252FunctionSetCh1.SelectedIndex)
+            {
+                case 0: //sine
+                    {
+                        gbxAFG3252PulseParameters.IsEnabled = false;
+                        bool bResult = MyAFG3252.FunctionShapeSet(1, AFG3252.ShapeSinusoid);
+                        if (bResult)
+                        {
+                            string report;
+                            report = string.Format("Set AFG3252 channel1 shape:{0}\n", AFG3252.ShapeSinusoid);
+                            txtReport.AppendText(report);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Set AFG3252 Function shape fail.", "AFG3252 Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                        break;
+                    }
+                case 1: //Square
+                    {
+                        gbxAFG3252PulseParameters.IsEnabled = false;
+                        bool bResult = MyAFG3252.FunctionShapeSet(1, AFG3252.ShapeSQUare);
+                        if (bResult)
+                        {
+                            string report;
+                            report = string.Format("Set AFG3252 channel1 shape:{0}\n", AFG3252.ShapeSQUare);
+                            txtReport.AppendText(report);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Set AFG3252 Function shape fail.", "AFG3252 Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                        break;
+                    }
+                case 2: //Ramp
+                    {
+                        gbxAFG3252PulseParameters.IsEnabled = false;
+                        bool bResult = MyAFG3252.FunctionShapeSet(1, AFG3252.ShapeRamp);
+                        if (bResult)
+                        {
+                            string report;
+                            report = string.Format("Set AFG3252 channel1 shape:{0}\n", AFG3252.ShapeRamp);
+                            txtReport.AppendText(report);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Set AFG3252 Function shape fail.", "AFG3252 Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                        break;
+                    }
+                case 3: //Pulse
+                    {
+                        gbxAFG3252PulseParameters.IsEnabled = true;
+                        bool bResult = MyAFG3252.FunctionShapeSet(1, AFG3252.ShapePulse);
+                        if (bResult)
+                        {
+                            string report;
+                            report = string.Format("Set AFG3252 channel1 shape:{0}\n", AFG3252.ShapePulse);
+                            txtReport.AppendText(report);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Set AFG3252 Function shape fail.", "AFG3252 Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                        break;
+                    }
+                default:
+                    {
+                        gbxAFG3252PulseParameters.IsEnabled = false;
+                        txtReport.AppendText("Function wait to be developed\n");
+                        break;
+                    }
+            }
+        }
+        private void SetAfg3252Channel2FunctionShape()
+        {
+            switch (cbxAFG3252FunctionSetCh2.SelectedIndex)
+            {
+                case 0: //sine
+                    {
+                        gbxAFG3252PulseParameters.IsEnabled = false;
+                        bool bResult = MyAFG3252.FunctionShapeSet(2, AFG3252.ShapeSinusoid);
+                        if (bResult)
+                        {
+                            string report;
+                            report = string.Format("Set AFG3252 channel2 shape:{0}\n", AFG3252.ShapeSinusoid);
+                            txtReport.AppendText(report);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Set AFG3252 Function shape fail.", "AFG3252 Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                        break;
+                    }
+                case 1: //Square
+                    {
+                        gbxAFG3252PulseParameters.IsEnabled = false;
+                        bool bResult = MyAFG3252.FunctionShapeSet(2, AFG3252.ShapeSQUare);
+                        if (bResult)
+                        {
+                            string report;
+                            report = string.Format("Set AFG3252 channel2 shape:{0}\n", AFG3252.ShapeSQUare);
+                            txtReport.AppendText(report);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Set AFG3252 Function shape fail.", "AFG3252 Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                        break;
+                    }
+                case 2: //Ramp
+                    {
+                        gbxAFG3252PulseParameters.IsEnabled = false;
+                        bool bResult = MyAFG3252.FunctionShapeSet(2, AFG3252.ShapeRamp);
+                        if (bResult)
+                        {
+                            string report;
+                            report = string.Format("Set AFG3252 channel2 shape:{0}\n", AFG3252.ShapeRamp);
+                            txtReport.AppendText(report);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Set AFG3252 Function shape fail.", "AFG3252 Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                        break;
+                    }
+                case 3: //Pulse
+                    {
+                        gbxAFG3252PulseParameters.IsEnabled = true;
+                        bool bResult = MyAFG3252.FunctionShapeSet(2, AFG3252.ShapePulse);
+                        if (bResult)
+                        {
+                            string report;
+                            report = string.Format("Set AFG3252 channel2 shape:{0}\n", AFG3252.ShapePulse);
+                            txtReport.AppendText(report);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Set AFG3252 Function shape fail.", "AFG3252 Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                        break;
+                    }
+                default:
+                    {
+                        gbxAFG3252PulseParameters.IsEnabled = false;
+                        txtReport.AppendText("Function wait to be developed\n");
+                        break;
+                    }
+            }
+        }
+        private void cbxAFG3252FrequencyCopy_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(MyAFG3252.session !=null)
+            {
+                SetAfg3252FrequencyCopy();
+            }
+        }
+        private void SetAfg3252FrequencyCopy()
+        {
+            switch (cbxAFG3252FrequencyCopy.SelectedIndex)
+            {
+                case 0: //off
+                    {
+                        bool bResult = MyAFG3252.SetFrequencyCopy(1, "OFF");
+                        if (bResult)
+                        {
+                            txtReport.AppendText("Disable AFG3252 Frequency channel1 = channel2\n");
+                        }
+                        break;
+                    }
+                case 1: //on
+                    {
+                        bool bResult = MyAFG3252.SetFrequencyCopy(1, "ON");
+                        if (bResult)
+                        {
+                            txtReport.AppendText("Set AFG3252 Frequency channel1 = channel2\n");
+                        }
+                        break;
+                    }
+            }
+        }
+
+        private void tbiAFG3252Amplitude_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            AmplitudeOrLevel = true;
+            Regex rx_double = new Regex(rx_Double);
+            bool IsLevelLegeal = rx_double.IsMatch(tbxAFG3252HighLevelCh1.Text)
+                                && rx_double.IsMatch(tbxAFG3252HighLevelCh2.Text)
+                                && rx_double.IsMatch(tbxAFG3252LowLevelCh1.Text)
+                                && rx_double.IsMatch(tbxAFG3252LowLevelCh2.Text);
+            if(IsLevelLegeal)
+            {
+                double Ch1HighLevel = int.Parse(tbxAFG3252HighLevelCh1.Text);
+                double Ch2HighLevel = int.Parse(tbxAFG3252HighLevelCh2.Text);
+                double Ch1LowLevel = int.Parse(tbxAFG3252LowLevelCh1.Text);
+                double Ch2LowLevel = int.Parse(tbxAFG3252LowLevelCh2.Text);
+                double Ch1Amplitude = Ch1HighLevel - Ch1LowLevel;
+                double Ch1Offset = (Ch1HighLevel + Ch1LowLevel) / 2.0;
+                double Ch2Amplitude = Ch2HighLevel - Ch2LowLevel;
+                double Ch2Offset = (Ch2HighLevel + Ch2LowLevel) / 2.0;
+                tbxAFG3252AmplitudeCh1.Text = Ch1Amplitude.ToString();
+                tbxAFG3252OffsetCh1.Text = Ch1Offset.ToString();
+                tbxAFG3252AmplitudeCh2.Text = Ch2Amplitude.ToString();
+                tbxAFG3252OffsetCh2.Text = Ch2Offset.ToString();
+            }
+        }
+
+        private void tbiAFG3252Level_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            AmplitudeOrLevel = false;
+            Regex rx_double = new Regex(rx_Double);
+            bool IsLevelLegeal = rx_double.IsMatch(tbxAFG3252AmplitudeCh1.Text)
+                                && rx_double.IsMatch(tbxAFG3252AmplitudeCh2.Text)
+                                && rx_double.IsMatch(tbxAFG3252OffsetCh1.Text)
+                                && rx_double.IsMatch(tbxAFG3252OffsetCh2.Text);
+            if (IsLevelLegeal)
+            {
+                double Ch1Amplitude = int.Parse(tbxAFG3252AmplitudeCh1.Text);
+                double Ch2Amplitude = int.Parse(tbxAFG3252AmplitudeCh2.Text);
+                double Ch1Offset = int.Parse(tbxAFG3252OffsetCh1.Text);
+                double Ch2Offset = int.Parse(tbxAFG3252OffsetCh2.Text);
+                double Ch1HighLevel = Ch1Offset + (Ch1Amplitude / 2.0);
+                double Ch1LowLevel = Ch1Offset - (Ch1Amplitude / 2.0);
+                double Ch2HighLevel = Ch2Offset + (Ch2Amplitude / 2.0);
+                double Ch2LowLevel = Ch2Offset - (Ch2Amplitude / 2.0);
+                tbxAFG3252HighLevelCh1.Text = Ch1HighLevel.ToString();
+                tbxAFG3252HighLevelCh2.Text = Ch2HighLevel.ToString();
+                tbxAFG3252LowLevelCh1.Text = Ch1LowLevel.ToString();
+                tbxAFG3252LowLevelCh2.Text = Ch2LowLevel.ToString();
+            }
+        }
+        private void SetAfg3252VoltageAmplitude()
+        {
+            Regex rx_double = new Regex(rx_Double);
+            bool IsLevelLegeal = rx_double.IsMatch(tbxAFG3252HighLevelCh1.Text)
+                                && rx_double.IsMatch(tbxAFG3252HighLevelCh2.Text)
+                                && rx_double.IsMatch(tbxAFG3252LowLevelCh1.Text)
+                                && rx_double.IsMatch(tbxAFG3252LowLevelCh2.Text);
+            if (IsLevelLegeal)
+            {
+                string AmplitudeUnit;
+                switch(cbxAFG3252VoltageUnitSet.SelectedIndex)
+                {
+                    case 0:
+                        {
+                            AmplitudeUnit = AFG3252.VoltageUnitMV;
+                            break;
+                        }
+                    case 1:
+                        {
+                            AmplitudeUnit = AFG3252.VoltageUnitV;
+                            break;
+                        }
+                    default:
+                        {
+                            AmplitudeUnit = AFG3252.VoltageUnitMV;
+                            break;
+                        }
+                }
+                double Ch1Amplitude = int.Parse(tbxAFG3252AmplitudeCh1.Text);
+                double Ch1Offset = int.Parse(tbxAFG3252OffsetCh1.Text);
+                double Ch2Amplitude = int.Parse(tbxAFG3252AmplitudeCh2.Text);
+                double Ch2Offset = int.Parse(tbxAFG3252OffsetCh2.Text);
+                bool bResult;
+                bResult = MyAFG3252.SetVoltageAmplitude(1, Ch1Amplitude, AmplitudeUnit, AFG3252.VoltageUnitVpp);
+                if(!bResult)
+                {
+                    MessageBox.Show("Set Voltage Error", "AFG3252 Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                bResult = MyAFG3252.SetVoltageAmplitude(2, Ch2Amplitude, AmplitudeUnit, AFG3252.VoltageUnitVpp);
+                if (!bResult)
+                {
+                    MessageBox.Show("Set Voltage Error", "AFG3252 Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                bResult = MyAFG3252.SetVoltageOffset(1, Ch1Offset, AmplitudeUnit);
+                if (!bResult)
+                {
+                    MessageBox.Show("Set Offset Error", "AFG3252 Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                bResult = MyAFG3252.SetVoltageOffset(2, Ch2Offset, AmplitudeUnit);
+                if(bResult)
+                {
+                    string report = string.Format("Set Channel1: Amplitude:{0}{2} Offset{1}{2}\n", Ch1Amplitude, Ch1Offset, AmplitudeUnit);
+                    txtReport.AppendText(report);
+                    report = string.Format("Set Channel2: Amplitude:{0}{2} Offset{1}{2}\n", Ch2Amplitude, Ch2Offset, AmplitudeUnit);
+                    txtReport.AppendText(report);
+
+                }
+            }
+        }
+        private void btnAFG3252Ch1OnOrOff_Click(object sender, RoutedEventArgs e)
+        {
+            if(btnAFG3252Ch1OnOrOff.Content.ToString() == "Off")
+            {
+                btnAFG3252Ch1OnOrOff.Background = Brushes.Green;
+                btnAFG3252Ch1OnOrOff.Content = "On";
+                MyAFG3252.OpenOutput(1);
+                txtReport.AppendText("AFG3252 Channel1 On\n");
+            }
+            else if(btnAFG3252Ch1OnOrOff.Content.ToString() == "On")
+            {
+                btnAFG3252Ch1OnOrOff.Background = Brushes.Gray;
+                btnAFG3252Ch1OnOrOff.Content = "Off";
+                MyAFG3252.CloseOutput(1);
+                txtReport.AppendText("AFG3252 Channel1 Off\n");
+            }            
+        }
+
+        private void btnAFG3252Ch2OnOrOff_Click(object sender, RoutedEventArgs e)
+        {
+            if (btnAFG3252Ch2OnOrOff.Content.ToString() == "Off")
+            {
+                btnAFG3252Ch2OnOrOff.Background = Brushes.Green;
+                btnAFG3252Ch2OnOrOff.Content = "On";
+                MyAFG3252.OpenOutput(2);
+                txtReport.AppendText("AFG3252 Channel2 On\n");
+            }
+            else if (btnAFG3252Ch2OnOrOff.Content.ToString() == "On")
+            {
+                btnAFG3252Ch2OnOrOff.Background = Brushes.Gray;
+                btnAFG3252Ch2OnOrOff.Content = "Off";
+                MyAFG3252.CloseOutput(2);
+                txtReport.AppendText("AFG3252 Channel2 Off\n");
+            }
+        }
+        private void SetAfg3252Ch1Frequency()
+        {
+            Regex rx_double = new Regex(rx_Double);
+            bool IsFrequencyLegal = rx_double.IsMatch(tbxAFG3252FrequencySetCh1.Text);
+            if (IsFrequencyLegal)
+            {
+                double Frequency = double.Parse(tbxAFG3252FrequencySetCh1.Text);
+                string FrequencyUnit;
+                switch (cbxAFG3252FrequencyUnitSet.SelectedIndex)
+                {
+                    case 0:
+                        {
+                            FrequencyUnit = AFG3252.FrequencyUnitHz;
+                            break;
+                        }
+                    case 1:
+                        {
+                            FrequencyUnit = AFG3252.FrequencyUnitKHz;
+                            break;
+                        }
+                    case 2:
+                        {
+                            FrequencyUnit = AFG3252.FrequencyUnitMHz;
+                            break;
+                        }
+                    default:
+                        {
+                            FrequencyUnit = AFG3252.FrequencyUnitKHz;
+                            break;
+                        }
+                }
+                bool bResult = MyAFG3252.SetFrequencyFixed(1, Frequency, FrequencyUnit);
+                if (bResult)
+                {
+                    string report = string.Format("Set Channel1 frequency: {0}{1}\n", Frequency, FrequencyUnit);
+                    txtReport.AppendText(report);
+                }
+                else
+                {
+                    MessageBox.Show("Set Channel1 Frequency failed", "AFG3252 Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Illegal frequency","Illegal Input",MessageBoxButton.OK,MessageBoxImage.Error);
+            }
+            
+        }
+        private void SetAfg3252Ch2Frequency()
+        {
+            Regex rx_double = new Regex(rx_Double);
+            bool IsFrequencyLegal = rx_double.IsMatch(tbxAFG3252FrequencySetCh2.Text);
+            if (IsFrequencyLegal)
+            {
+                double Frequency = double.Parse(tbxAFG3252FrequencySetCh2.Text);
+                string FrequencyUnit;
+                switch (cbxAFG3252FrequencyUnitSet.SelectedIndex)
+                {
+                    case 0:
+                        {
+                            FrequencyUnit = AFG3252.FrequencyUnitHz;
+                            break;
+                        }
+                    case 1:
+                        {
+                            FrequencyUnit = AFG3252.FrequencyUnitKHz;
+                            break;
+                        }
+                    case 2:
+                        {
+                            FrequencyUnit = AFG3252.FrequencyUnitMHz;
+                            break;
+                        }
+                    default:
+                        {
+                            FrequencyUnit = AFG3252.FrequencyUnitKHz;
+                            break;
+                        }
+                }
+                bool bResult = MyAFG3252.SetFrequencyFixed(2, Frequency, FrequencyUnit);
+                if (bResult)
+                {
+                    string report = string.Format("Set Channel2 frequency: {0}{1}\n", Frequency, FrequencyUnit);
+                    txtReport.AppendText(report);
+                }
+                else
+                {
+                    MessageBox.Show("Set Channel2 Frequency failed", "AFG3252 Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Illegal frequency", "Illegal Input", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+        }
+        private void btnAFG3252Config_Click(object sender, RoutedEventArgs e)
+        {
+            #region On or Off
+            if(btnAFG3252Ch1OnOrOff.Content.ToString() == "Off")
+            {
+                MyAFG3252.CloseOutput(1);
+                txtReport.AppendText("AFG3252 Channel1 Off\n");
+            }
+            if (btnAFG3252Ch1OnOrOff.Content.ToString() == "On")
+            {
+                MyAFG3252.OpenOutput(1);
+                txtReport.AppendText("AFG3252 Channel1 On\n");
+            }
+            if (btnAFG3252Ch2OnOrOff.Content.ToString() == "Off")
+            {
+                MyAFG3252.CloseOutput(2);
+                txtReport.AppendText("AFG3252 Channel2 Off\n");
+            }
+            if (btnAFG3252Ch2OnOrOff.Content.ToString() == "On")
+            {
+                MyAFG3252.OpenOutput(2);
+                txtReport.AppendText("AFG3252 Channel2 On\n");
+            }
+            #endregion
+            #region Set Function shape
+            SetAfg3252Channel1FunctionShape();
+            SetAfg3252Channel1FunctionShape();
+            #endregion
+            #region Set Frequency
+            SetAfg3252FrequencyCopy();
+            SetAfg3252Ch1Frequency();
+            SetAfg3252Ch2Frequency();
+            #endregion
+            #region Voltage Level
+            
+            #endregion
+        }
+
+
+
+
 
         /*private void cbxAdcStartMode_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
