@@ -4326,11 +4326,11 @@ namespace USB_DAQ
         private void SetAfg3252VoltageAmplitude()
         {
             Regex rx_double = new Regex(rx_Double);
-            bool IsLevelLegeal = rx_double.IsMatch(tbxAFG3252HighLevelCh1.Text)
-                                && rx_double.IsMatch(tbxAFG3252HighLevelCh2.Text)
-                                && rx_double.IsMatch(tbxAFG3252LowLevelCh1.Text)
-                                && rx_double.IsMatch(tbxAFG3252LowLevelCh2.Text);
-            if (IsLevelLegeal)
+            bool IsAmplitudeLegeal = rx_double.IsMatch(tbxAFG3252AmplitudeCh1.Text)
+                                && rx_double.IsMatch(tbxAFG3252AmplitudeCh2.Text)
+                                && rx_double.IsMatch(tbxAFG3252OffsetCh1.Text)
+                                && rx_double.IsMatch(tbxAFG3252OffsetCh2.Text);
+            if (IsAmplitudeLegeal)
             {
                 string AmplitudeUnit;
                 switch(cbxAFG3252VoltageUnitSet.SelectedIndex)
@@ -4351,10 +4351,10 @@ namespace USB_DAQ
                             break;
                         }
                 }
-                double Ch1Amplitude = int.Parse(tbxAFG3252AmplitudeCh1.Text);
-                double Ch1Offset = int.Parse(tbxAFG3252OffsetCh1.Text);
-                double Ch2Amplitude = int.Parse(tbxAFG3252AmplitudeCh2.Text);
-                double Ch2Offset = int.Parse(tbxAFG3252OffsetCh2.Text);
+                double Ch1Amplitude = double.Parse(tbxAFG3252AmplitudeCh1.Text);
+                double Ch1Offset = double.Parse(tbxAFG3252OffsetCh1.Text);
+                double Ch2Amplitude = double.Parse(tbxAFG3252AmplitudeCh2.Text);
+                double Ch2Offset = double.Parse(tbxAFG3252OffsetCh2.Text);
                 bool bResult;
                 bResult = MyAFG3252.SetVoltageAmplitude(1, Ch1Amplitude, AmplitudeUnit, AFG3252.VoltageUnitVpp);
                 if(!bResult)
@@ -4378,8 +4378,80 @@ namespace USB_DAQ
                     txtReport.AppendText(report);
                     report = string.Format("Set Channel2: Amplitude:{0}{2} Offset{1}{2}\n", Ch2Amplitude, Ch2Offset, AmplitudeUnit);
                     txtReport.AppendText(report);
-
                 }
+                else
+                {
+                    MessageBox.Show("Set Offset Error", "AFG3252 Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Illegal Voltage", "Illegal Input", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+        private void SetAfg3252VoltageLevel()
+        {
+            Regex rx_double = new Regex(rx_Double);
+            bool IsLevelLegeal = rx_double.IsMatch(tbxAFG3252HighLevelCh1.Text)
+                                && rx_double.IsMatch(tbxAFG3252HighLevelCh2.Text)
+                                && rx_double.IsMatch(tbxAFG3252LowLevelCh1.Text)
+                                && rx_double.IsMatch(tbxAFG3252LowLevelCh2.Text);
+            if(IsLevelLegeal)
+            {
+                string AmplitudeUnit;
+                switch (cbxAFG3252VoltageUnitSet.SelectedIndex)
+                {
+                    case 0:
+                        {
+                            AmplitudeUnit = AFG3252.VoltageUnitMV;
+                            break;
+                        }
+                    case 1:
+                        {
+                            AmplitudeUnit = AFG3252.VoltageUnitV;
+                            break;
+                        }
+                    default:
+                        {
+                            AmplitudeUnit = AFG3252.VoltageUnitMV;
+                            break;
+                        }
+                }
+                double Ch1HighLevel = double.Parse(tbxAFG3252HighLevelCh1.Text);
+                double Ch2HighLevel = double.Parse(tbxAFG3252HighLevelCh2.Text);
+                double Ch1LowLevel = double.Parse(tbxAFG3252LowLevelCh1.Text);
+                double Ch2LowLevel = double.Parse(tbxAFG3252LowLevelCh2.Text);
+                bool bResult;
+                bResult = MyAFG3252.SetVoltageHigh(1, Ch1HighLevel, AmplitudeUnit);
+                if(!bResult)
+                {
+                    MessageBox.Show("Set Channel1 High Level Error", "AFG3252 Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                bResult = MyAFG3252.SetVoltageHigh(1, Ch2HighLevel, AmplitudeUnit);
+                if (!bResult)
+                {
+                    MessageBox.Show("Set Channel2 High Level Error", "AFG3252 Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                bResult = MyAFG3252.SetVoltageLow(1, Ch1LowLevel, AmplitudeUnit);
+                if (!bResult)
+                {
+                    MessageBox.Show("Set Channel1 Low Level Error", "AFG3252 Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                bResult = MyAFG3252.SetVoltageLow(2, Ch2LowLevel, AmplitudeUnit);
+                if(bResult)
+                {
+                    string report = string.Format("Set channel1 high level:{0}{2}, low level:{1}{2}", Ch1HighLevel, Ch1LowLevel, AmplitudeUnit);
+                    txtReport.AppendText(report);
+                    report = string.Format("Set channel2 high level:{0}{2}, low level:{1}{2}", Ch2HighLevel, Ch2LowLevel, AmplitudeUnit);
+                }
+                else
+                {
+                    MessageBox.Show("Set Channel2 Low Level Error", "AFG3252 Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Illegal Voltage", "Illegal Input", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
         private void btnAFG3252Ch1OnOrOff_Click(object sender, RoutedEventArgs e)
@@ -4513,6 +4585,10 @@ namespace USB_DAQ
             }
 
         }
+        private void SetAfg3252Leading()
+        {
+            Regex rx_double = new Regex(rx_Double);
+        }
         private void btnAFG3252Config_Click(object sender, RoutedEventArgs e)
         {
             #region On or Off
@@ -4547,7 +4623,14 @@ namespace USB_DAQ
             SetAfg3252Ch2Frequency();
             #endregion
             #region Voltage Level
-            
+            if (AmplitudeOrLevel)
+            {
+                SetAfg3252VoltageAmplitude();
+            }
+            else
+            {
+                SetAfg3252VoltageLevel();
+            }
             #endregion
         }
 
