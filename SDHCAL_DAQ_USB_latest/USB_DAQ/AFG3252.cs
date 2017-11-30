@@ -151,7 +151,7 @@ namespace USB_DAQ
         public bool SetFrequencyCopy(int Channel, string Status)
         {
             string FrequencyCommand;
-            FrequencyCommand = string.Format("SOURce{1}:FREQuency:CONCurrent:STATe {2}", Channel, Status);
+            FrequencyCommand = string.Format("SOURce{0}:FREQuency:CONCurrent:STATe {1}", Channel, Status);
             return Write(FrequencyCommand);
         }
         #endregion
