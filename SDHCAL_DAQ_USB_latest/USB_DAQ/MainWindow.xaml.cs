@@ -35,7 +35,7 @@ namespace USB_DAQ
         private string rx_Command = @"\b[0-9a-fA-F]{4}\b";//match 16 bit Hex
         private string rx_Byte = @"\b[0-9a-fA-F]{2}\b";//match 8 bit Hex
         private string rx_Integer = @"^\d+$";   //匹配非负 整数
-        private string rx_Double = @"^\d+(\.\d{1,6})?$";//小数可有可无最多6位小数 
+        private string rx_Double = @"^-?\d+(\.\d{1,6})?$";//小数可有可无最多6位小数 
         private string filepath = null;//文件路径
         private static bool AcqStart = false; //采集标志
         private static bool Enabled_Ext_Trigger = false;
@@ -851,6 +851,10 @@ namespace USB_DAQ
         }
         private void btnSC_or_ReadReg_Click(object sender, RoutedEventArgs e)
         {
+            MicrorocSetSlowControl();
+        }
+        private void MicrorocSetSlowControl()
+        {
             bool bResult = false;
             #region Set ASIC Number
             /*----------------ASIC number and start load---------------------*/
@@ -944,7 +948,7 @@ namespace USB_DAQ
                 int RazSelect = cbxRazSelect.SelectedIndex + 160;//0xA0
                 CommandBytes = ConstCommandByteArray(0xA8, (byte)RazSelect);
                 bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                if(bResult)
+                if (bResult)
                 {
                     string report = string.Format("Set Raz Mode: {0}\n", cbxRazSelect.Text);
                     txtReport.AppendText(report);
@@ -961,7 +965,7 @@ namespace USB_DAQ
                 int ChannelSelect = cbxChannelSelect.SelectedIndex + 160;//A0
                 CommandBytes = ConstCommandByteArray(0xA4, (byte)ChannelSelect);
                 bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                if(bResult)
+                if (bResult)
                 {
                     string report = string.Format("Set ReadOut {0}\n", cbxChannelSelect.Text);
                     txtReport.AppendText(report);
@@ -1009,7 +1013,7 @@ namespace USB_DAQ
                 int PowerPulsingValue = PowerPulsingBase + cbxPreAmpPP.SelectedIndex;
                 CommandBytes = ConstCommandByteArray((byte)(PowerPulsingValue >> 8), (byte)PowerPulsingValue);
                 bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                if(bResult)
+                if (bResult)
                 {
                     string report = string.Format("Set Pre Amp PowerPulsing: {0}\n", cbxPreAmpPP.Text);
                     txtReport.AppendText(report);
@@ -1141,7 +1145,7 @@ namespace USB_DAQ
                 }
                 #endregion
                 #endregion
-                for (int i = ASIC_Number;i >= 0; i--)
+                for (int i = ASIC_Number; i >= 0; i--)
                 {
                     #region Header   
                     Header_Value[0] -= 1;
@@ -1162,7 +1166,7 @@ namespace USB_DAQ
                     #endregion
                     #region 10-bit DAC
                     Is_DAC_Legal = rx_int.IsMatch(txtDAC0_VTH_ASIC[i].Text) && rx_int.IsMatch(txtDAC1_VTH_ASIC[i].Text) && rx_int.IsMatch(txtDAC2_VTH_ASIC[i].Text);
-                    if(Is_DAC_Legal)
+                    if (Is_DAC_Legal)
                     {
                         DAC0_Value = Int32.Parse(txtDAC0_VTH_ASIC[i].Text) + 49152;//0xC000
                         DAC1_Value = Int32.Parse(txtDAC1_VTH_ASIC[i].Text) + 50176;//0xC400
@@ -1260,7 +1264,7 @@ namespace USB_DAQ
                     #endregion
                     #region CTest Channel
                     IsCTestLegal = rx_int.IsMatch(txtCTest_ASIC[i].Text);
-                    if(IsCTestLegal)
+                    if (IsCTestLegal)
                     {
                         CTest_Value = Int32.Parse(txtCTest_ASIC[i].Text);//A1XX
                         CommandBytes = ConstCommandByteArray(0xA1, (byte)CTest_Value);
@@ -1327,7 +1331,7 @@ namespace USB_DAQ
                     SCTCaliFileName = string.Format("D:\\ExperimentsData\\test\\SCTCali{0}.txt", i);
                     DCCaliFile = File.OpenText(DCCaliFileName);
                     SCTCaliFile = File.OpenText(SCTCaliFileName);
-                    switch(cbxPedCali_ASIC[i].SelectedIndex)
+                    switch (cbxPedCali_ASIC[i].SelectedIndex)
                     {
                         case 0:
                             for (int j = 0; j < 64; j++)
@@ -1340,7 +1344,7 @@ namespace USB_DAQ
                             {
                                 DCCaliString = DCCaliFile.ReadLine();
                                 CaliData[j] = byte.Parse(DCCaliString);
-                            }                            
+                            }
                             break;
                         case 2:
                             for (int j = 0; j < 64; j++)
@@ -1362,7 +1366,7 @@ namespace USB_DAQ
                         CaliByte2 = (byte)(CommandHeader[j] << 4 + CaliData[j]);
                         CommandBytes = ConstCommandByteArray(CaliByte1, CaliByte2);
                         bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                        if(bResult)
+                        if (bResult)
                         {
                             details.AppendFormat("{0},4-bitDAC:{1}\n", Chn[j], CaliData[j]);
                         }
@@ -1404,7 +1408,7 @@ namespace USB_DAQ
                     // Clear the forer mask information
                     CommandBytes = ConstCommandByteArray(0xAE, 0x10);
                     bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                    if(bResult)
+                    if (bResult)
                     {
                         txtReport.AppendText("Mask Clear\n");
                     }
@@ -1427,21 +1431,21 @@ namespace USB_DAQ
                             int MaskChannel = int.Parse(MaskChannelString) - 1;
                             CommandBytes = ConstCommandByteArray(0xAD, (byte)MaskChannel);
                             bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                            if(!bResult)
+                            if (!bResult)
                             {
                                 MessageBox.Show("Set Mask Channel faliure. Please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
                                 return;
-                            }                            
+                            }
                             CommandBytes = ConstCommandByteArray(0xAE, 0x07);
                             bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                            if(!bResult)
+                            if (!bResult)
                             {
                                 MessageBox.Show("Set Mask Channel faliure. Please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
                                 return;
                             }
                             CommandBytes = ConstCommandByteArray(0xAE, 0x11);
                             bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                            if(bResult)
+                            if (bResult)
                             {
                                 string report = string.Format("Set ASIC{0} Mask Channel{1}\n", i, MaskChannel + 1);
                                 txtReport.AppendText(report);
@@ -1460,7 +1464,7 @@ namespace USB_DAQ
                     bResult = CommandSend(CommandBytes, CommandBytes.Length);
                     if (bResult)
                     {
-                        string report = string.Format("Load No.{0} ASIC parameter done!\n",i+1);
+                        string report = string.Format("Load No.{0} ASIC parameter done!\n", i + 1);
                         txtReport.AppendText(report);
                     }
                     else
@@ -1668,11 +1672,11 @@ namespace USB_DAQ
                 bool Is_ReadReg_legal = false;
                 int ReadReg_Value;
                 byte[] Command_Bytes = new byte[2];
-                for(int i = ASIC_Number;i>= 0; i--)
+                for (int i = ASIC_Number; i >= 0; i--)
                 {
                     #region Set ReadReg
                     Is_ReadReg_legal = rx_int.IsMatch(txtRead_reg_ASIC[i].Text);
-                    if(Is_ReadReg_legal)
+                    if (Is_ReadReg_legal)
                     {
                         ReadReg_Value = Int32.Parse(txtRead_reg_ASIC[i].Text) + 41472;//0xA200
                         Command_Bytes = ConstCommandByteArray((byte)(ReadReg_Value >> 8), (byte)ReadReg_Value);
@@ -1716,7 +1720,7 @@ namespace USB_DAQ
                     #endregion
                     //Sleep 100ms to wait load done
                     Thread.Sleep(100);
-                }                
+                }
                 #region Old Code
                 /*if (Is_ReadReg_legal)
                 {
@@ -1772,38 +1776,46 @@ namespace USB_DAQ
             bool bResult = false;
             if (button.Content.ToString() == "Enable")
             {
-                byte[] bytes = ConstCommandByteArray(0xA3, 0xA1);
-                //bResult = false;
-                bResult = CommandSend(bytes, bytes.Length);
-                if (bResult)
-                {
-                    txtReport.AppendText("PowerPulsing Enabed\n");
-                }
-                else
-                {
-                    // txtReport.AppendText("select failure, please check USB\n");
-                    MessageBox.Show("Powerpulsing set failed, please check USB", //text
-                                     "USB Error",   //caption
-                                     MessageBoxButton.OK,//button
-                                     MessageBoxImage.Error);//icon
-                }
+                MicrorocPowerPulsingEnable();
             }
             else if (button.Content.ToString() == "Disable")
             {
-                byte[] bytes = ConstCommandByteArray(0xA3, 0xA0);
-                //bResult = false;
-                bResult = CommandSend(bytes, bytes.Length);
-                if (bResult)
-                {
-                    txtReport.AppendText("PowerPulsing Disabled\n");
-                }
-                else
-                {
-                    MessageBox.Show("Powerpulsing set failed, please check USB", //text
-                                     "USB Error",   //caption
-                                     MessageBoxButton.OK,//button
-                                     MessageBoxImage.Error);//icon
-                }
+                MicrorocPowerPulsingDisable();
+            }
+        }
+        private void MicrorocPowerPulsingEnable()
+        {
+            byte[] bytes = ConstCommandByteArray(0xA3, 0xA1);
+            //bResult = false;
+            bool bResult = CommandSend(bytes, bytes.Length);
+            if (bResult)
+            {
+                txtReport.AppendText("PowerPulsing Enabed\n");
+            }
+            else
+            {
+                // txtReport.AppendText("select failure, please check USB\n");
+                MessageBox.Show("Powerpulsing set failed, please check USB", //text
+                                 "USB Error",   //caption
+                                 MessageBoxButton.OK,//button
+                                 MessageBoxImage.Error);//icon
+            }
+        }
+        private void MicrorocPowerPulsingDisable()
+        {
+            byte[] bytes = ConstCommandByteArray(0xA3, 0xA0);
+            //bResult = false;
+            bool bResult = CommandSend(bytes, bytes.Length);
+            if (bResult)
+            {
+                txtReport.AppendText("PowerPulsing Disabled\n");
+            }
+            else
+            {
+                MessageBox.Show("Powerpulsing set failed, please check USB", //text
+                                 "USB Error",   //caption
+                                 MessageBoxButton.OK,//button
+                                 MessageBoxImage.Error);//icon
             }
         }
         //ChannelSelect_Checked
@@ -3891,11 +3903,198 @@ namespace USB_DAQ
             {
                 DaqMode = AutoDaq;
                 txtEndHoldTime.IsEnabled = false;
+                btnSlowACQ.Content = "SlowACQ";
+                btnSC_or_ReadReg.IsEnabled = true;
+                #region Set External RAZ
+                int RazSelect = 160;//0xA0
+                CommandBytes = ConstCommandByteArray(0xA8, (byte)RazSelect);
+                bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                if (bResult)
+                {
+                    txtReport.AppendText("Set Raz Mode:External");
+                }
+                else
+                {
+                    MessageBox.Show("Set Raz Mode failure, please check USB", //text
+                                 "USB Error",   //caption
+                                 MessageBoxButton.OK,//button
+                                 MessageBoxImage.Error);//icon
+                }
+                #endregion
             }
             else if(button.Content.ToString() == "Slave")
             {
                 DaqMode = SlaveDaq;
+                txtSlowACQDataNum.Text = "0";
+                btnSlowACQ.Content = "Cosmic Ray Test";
                 txtEndHoldTime.IsEnabled = true;
+                btnSC_or_ReadReg.IsEnabled = false;
+                #region DAC VTH
+                Regex rx_int = new Regex(rx_Integer);
+                bool Is_DAC_Legal = rx_int.IsMatch(txtDAC0_VTH_ASIC1.Text) && rx_int.IsMatch(txtDAC1_VTH_ASIC1.Text) && rx_int.IsMatch(txtDAC2_VTH_ASIC1.Text);
+                if (Is_DAC_Legal)
+                {
+                    int DAC0_Value = Int32.Parse(txtDAC0_VTH_ASIC1.Text) + 49152;//0xC000
+                    int DAC1_Value = Int32.Parse(txtDAC1_VTH_ASIC1.Text) + 50176;//0xC400
+                    int DAC2_Value = Int32.Parse(txtDAC2_VTH_ASIC1.Text) + 51200;//0xC800
+                    #region DAC0
+                    CommandBytes = ConstCommandByteArray((byte)(DAC0_Value >> 8), (byte)DAC0_Value);
+                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                    if (bResult)
+                    {
+                        string report = string.Format("Setting DAC0 VTH: {0}\n", txtDAC0_VTH_ASIC1.Text);
+                        txtReport.AppendText(report);
+                    }
+                    else
+                    {
+                        //txtReport.AppendText("set DAC0 failure, please check USB\n");
+                        MessageBox.Show("Set DAC0 failure. Please check USB", //text
+                                         "USB Error",   //caption
+                                         MessageBoxButton.OK,//button
+                                         MessageBoxImage.Error);//icon
+                    }
+                    #endregion
+                    #region DAC1
+                    CommandBytes = ConstCommandByteArray((byte)(DAC1_Value >> 8), (byte)DAC1_Value);
+                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                    if (bResult)
+                    {
+                        string report = string.Format("Setting DAC1 VTH: {0}\n", txtDAC1_VTH_ASIC1.Text);
+                        txtReport.AppendText(report);
+                    }
+                    else
+                    {
+                        //txtReport.AppendText("set DAC0 failure, please check USB\n");
+                        MessageBox.Show("Set DAC1 failure. Please check USB", //text
+                                         "USB Error",   //caption
+                                         MessageBoxButton.OK,//button
+                                         MessageBoxImage.Error);//icon
+                    }
+                    #endregion
+                    #region DAC2
+                    CommandBytes = ConstCommandByteArray((byte)(DAC2_Value >> 8), (byte)DAC2_Value);
+                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                    if (bResult)
+                    {
+                        string report = string.Format("Setting DAC2 VTH: {0}\n", txtDAC2_VTH_ASIC1.Text);
+                        txtReport.AppendText(report);
+                    }
+                    else
+                    {
+                        //txtReport.AppendText("set DAC0 failure, please check USB\n");
+                        MessageBox.Show("Set DAC0 failure. Please check USB", //text
+                                         "USB Error",   //caption
+                                         MessageBoxButton.OK,//button
+                                         MessageBoxImage.Error);//icon
+                    }
+                    #endregion
+                }
+                else
+                {
+                    MessageBox.Show("DAC value is illegal,please re-type(Integer:0--1023)", //text
+                "Illegal input",   //caption
+                MessageBoxButton.OK,//button
+                MessageBoxImage.Error);//icon
+                }
+                #endregion
+                #region Set Start Acq Time
+                bool Is_Time_legal = rx_int.IsMatch(txtStartAcqTime.Text);
+                if (Is_Time_legal)
+                {
+                    int value1 = Int32.Parse(txtStartAcqTime.Text) / 25; //除以25ns 
+                    byte[] CmdBytes = ConstCommandByteArray(0xB2, (byte)(value1 >> 8));
+                    bResult = CommandSend(CmdBytes, CmdBytes.Length);
+                    if (!bResult)
+                    {
+                        MessageBox.Show("Set StartAcq time failure, please check USB", //text
+                                         "USB Error",   //caption
+                                         MessageBoxButton.OK,//button
+                                         MessageBoxImage.Error);//icon
+                        return;
+                    }
+                    CmdBytes = ConstCommandByteArray(0xB1, (byte)(value1));
+                    bResult = CommandSend(CmdBytes, CmdBytes.Length);
+                    if (bResult)
+                    {
+                        string report = string.Format("Set StartAcq time : {0}\n", txtStartAcqTime.Text);
+                        txtReport.AppendText(report);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Set StartAcq time failure, please check USB", //text
+                                         "USB Error",   //caption
+                                         MessageBoxButton.OK,//button
+                                         MessageBoxImage.Error);//icon
+                        return;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Illegal StartAcq Time, please re-type(Integer:0--1638400,step:25ns)", //text
+                                     "Illegal input",   //caption
+                                     MessageBoxButton.OK,//button
+                                     MessageBoxImage.Error);//icon
+                    return;
+                }
+                #endregion
+                #region Set External RAZ
+                int RazSelect = 161;//0xA1
+                CommandBytes = ConstCommandByteArray(0xA8, (byte)RazSelect);
+                bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                if (bResult)
+                {
+                    txtReport.AppendText("Set Raz Mode:External");
+                }
+                else
+                {
+                    MessageBox.Show("Set Raz Mode failure, please check USB", //text
+                                 "USB Error",   //caption
+                                 MessageBoxButton.OK,//button
+                                 MessageBoxImage.Error);//icon
+                }
+                #endregion
+                #region Set External RAZ Delay
+                bool Is_Time_Legel = rx_int.IsMatch(txtExternal_RAZ_Delay.Text) && int.Parse(txtExternal_RAZ_Delay.Text) < 400;
+                if (Is_Time_Legel)
+                {
+                    int ExternalRazDelay = short.Parse(txtExternal_RAZ_Delay.Text) / 25 + 208;//208 = 0xD0
+                    CommandBytes = new byte[2];
+                    CommandBytes = ConstCommandByteArray(0xA8, (byte)ExternalRazDelay);
+                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                    if (bResult)
+                    {
+                        string report = string.Format("Set External RAZ Delay time:{0} ns\n", txtExternal_RAZ_Delay.Text);
+                    }
+                    else
+                    {
+                        MessageBox.Show("select failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+
+                }
+                else
+                {
+                    MessageBox.Show("Illegal External RAZ Delay Time, please re-type(Integer:0--400ns,step:25ns)", "Ilegal Input", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                #endregion
+                #region Set External RAZ Time
+                int value = cbxRaz_mode.SelectedIndex + 192;//0xC0
+                byte[] bytes = new byte[2];
+                bytes = ConstCommandByteArray(0xA8, (byte)(value));
+                bResult = CommandSend(bytes, bytes.Length);
+                if (bResult)
+                {
+                    string report = string.Format("External RAZ Width : {0}\n", cbxRaz_mode.Text);
+                    txtReport.AppendText(report);
+                }
+                else
+                {
+                    MessageBox.Show("set Raz width failure, please check USB", //text
+                                     "USB Error",   //caption
+                                     MessageBoxButton.OK,//button
+                                     MessageBoxImage.Error);//icon
+                }
+                #endregion
+                MicrorocPowerPulsingDisable();
             }
             CommandBytes = ConstCommandByteArray(0xE0, (byte)DaqMode);
             bResult = CommandSend(CommandBytes, CommandBytes.Length);
@@ -3908,8 +4107,9 @@ namespace USB_DAQ
             {
                 MessageBox.Show("Set DAQ Mode failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            
         }
-        
+
         private void TabItem_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
 
@@ -3918,19 +4118,6 @@ namespace USB_DAQ
         private void tbiMicrorocAcq_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             txtReport.AppendText("Microroc Acq");
-        }
-
-        private void btnAFG3252Connect_Click(object sender, RoutedEventArgs e)
-        {
-            
-            /*else
-            {
-                lblAFG3252Status.Content = "AFG3252 not connected";
-                lblAFG3252Status.Foreground = Brushes.DeepPink;
-                btnAFG3252Command.Background = Brushes.LightGray;
-                btnAFG3252Command.IsEnabled = false;
-                tbxAFG3252Command.IsEnabled = false;
-            }*/
         }
 
         private void btnAFG3252Command_Click(object sender, RoutedEventArgs e)
@@ -3945,10 +4132,6 @@ namespace USB_DAQ
             }
         }
 
-        private void btnAFG3252DisConnect_Click(object sender, RoutedEventArgs e)
-        {
-            
-        }
         private void Afg3252Refresh()
         {
             if(MyAFG3252.session == null)
@@ -4332,12 +4515,18 @@ namespace USB_DAQ
                                 && rx_double.IsMatch(tbxAFG3252OffsetCh2.Text);
             if (IsAmplitudeLegeal)
             {
+                double Ch1Amplitude = double.Parse(tbxAFG3252AmplitudeCh1.Text);
+                double Ch1Offset = double.Parse(tbxAFG3252OffsetCh1.Text);
+                double Ch2Amplitude = double.Parse(tbxAFG3252AmplitudeCh2.Text);
+                double Ch2Offset = double.Parse(tbxAFG3252OffsetCh2.Text);
                 string AmplitudeUnit;
                 switch(cbxAFG3252VoltageUnitSet.SelectedIndex)
                 {
                     case 0:
                         {
                             AmplitudeUnit = AFG3252.VoltageUnitMV;
+                            Ch1Amplitude = Ch1Amplitude / 1000.0;
+                            Ch2Amplitude = Ch2Amplitude / 1000.0;
                             break;
                         }
                     case 1:
@@ -4348,20 +4537,19 @@ namespace USB_DAQ
                     default:
                         {
                             AmplitudeUnit = AFG3252.VoltageUnitMV;
+                            Ch1Amplitude = Ch1Amplitude / 1000.0;
+                            Ch2Amplitude = Ch2Amplitude / 1000.0;
                             break;
                         }
                 }
-                double Ch1Amplitude = double.Parse(tbxAFG3252AmplitudeCh1.Text);
-                double Ch1Offset = double.Parse(tbxAFG3252OffsetCh1.Text);
-                double Ch2Amplitude = double.Parse(tbxAFG3252AmplitudeCh2.Text);
-                double Ch2Offset = double.Parse(tbxAFG3252OffsetCh2.Text);
+                
                 bool bResult;
-                bResult = MyAFG3252.SetVoltageAmplitude(1, Ch1Amplitude, AmplitudeUnit, AFG3252.VoltageUnitVpp);
+                bResult = MyAFG3252.SetVoltageAmplitude(1, Ch1Amplitude, AFG3252.VoltageUnitVpp);
                 if(!bResult)
                 {
                     MessageBox.Show("Set Voltage Error", "AFG3252 Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-                bResult = MyAFG3252.SetVoltageAmplitude(2, Ch2Amplitude, AmplitudeUnit, AFG3252.VoltageUnitVpp);
+                bResult = MyAFG3252.SetVoltageAmplitude(2, Ch2Amplitude, AFG3252.VoltageUnitVpp);
                 if (!bResult)
                 {
                     MessageBox.Show("Set Voltage Error", "AFG3252 Error", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -4427,7 +4615,7 @@ namespace USB_DAQ
                 {
                     MessageBox.Show("Set Channel1 High Level Error", "AFG3252 Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-                bResult = MyAFG3252.SetVoltageHigh(1, Ch2HighLevel, AmplitudeUnit);
+                bResult = MyAFG3252.SetVoltageHigh(2, Ch2HighLevel, AmplitudeUnit);
                 if (!bResult)
                 {
                     MessageBox.Show("Set Channel2 High Level Error", "AFG3252 Error", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -4585,9 +4773,175 @@ namespace USB_DAQ
             }
 
         }
-        private void SetAfg3252Leading()
+        private void SetAfg3252PulseParameter()
         {
             Regex rx_double = new Regex(rx_Double);
+            #region Leading
+            bool IsPulseParameterLegal = rx_double.IsMatch(tbxAFG3252PulseLeadingCh1.Text) && rx_double.IsMatch(tbxAFG3252PulseLeadingCh2.Text);
+            if (IsPulseParameterLegal)
+            {
+                string Unit;
+                switch (cbxAFG3252LeadingUnitSet.SelectedIndex)
+                {
+                    case 0:
+                        {
+                            Unit = "ns";
+                            break;
+                        }
+                    case 1:
+                        {
+                            Unit = "us";
+                            break;
+                        }
+                    case 2:
+                        {
+                            Unit = "ms";
+                            break;
+                        }
+                    case 3:
+                        {
+                            Unit = "s";
+                            break;
+                        }
+                    default:
+                        {
+                            Unit = "us";
+                            break;
+                        }
+                }
+                double Ch1Leading = double.Parse(tbxAFG3252PulseLeadingCh1.Text);
+                double Ch2Leading = double.Parse(tbxAFG3252PulseLeadingCh2.Text);
+                bool bResult = MyAFG3252.SetPulseLeading(1, Ch1Leading, Unit);
+                if(!bResult)
+                {
+                    MessageBox.Show("Set Channel1 Leading failing", "AFG3252 Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                bResult = MyAFG3252.SetPulseLeading(2, Ch2Leading, Unit);
+                if (!bResult)
+                {
+                    MessageBox.Show("Set Channel2 Leading failing", "AFG3252 Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Illegal Input, the pulse parameter should be double", "Illegal Input", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            #endregion
+            #region Trailing
+            IsPulseParameterLegal = rx_double.IsMatch(tbxAFG3252PulseTrailingCh1.Text) && rx_double.IsMatch(tbxAFG3252PulseTrailingCh2.Text);
+            if(IsPulseParameterLegal)
+            {
+                string Unit;
+                switch (cbxAFG3252TrailingUnitSet.SelectedIndex)
+                {
+                    case 0:
+                        {
+                            Unit = "ns";
+                            break;
+                        }
+                    case 1:
+                        {
+                            Unit = "us";
+                            break;
+                        }
+                    case 2:
+                        {
+                            Unit = "ms";
+                            break;
+                        }
+                    case 3:
+                        {
+                            Unit = "s";
+                            break;
+                        }
+                    default:
+                        {
+                            Unit = "ns";
+                            break;
+                        }
+                }
+                double Ch1Trailing = double.Parse(tbxAFG3252PulseTrailingCh1.Text);
+                double Ch2Trailing = double.Parse(tbxAFG3252PulseTrailingCh2.Text);
+                bool bResult = MyAFG3252.SetPulseTrailing(1, Ch1Trailing, Unit);
+                if (!bResult)
+                {
+                    MessageBox.Show("Set Channel1 Trailing failing", "AFG3252 Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                bResult = MyAFG3252.SetPulseTrailing(2, Ch2Trailing, Unit);
+                if (!bResult)
+                {
+                    MessageBox.Show("Set Channel2 Trailing failing", "AFG3252 Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Illegal Input, the pulse parameter should be double", "Illegal Input", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            #endregion
+            #region Delay
+            IsPulseParameterLegal = rx_double.IsMatch(tbxAFG3252PulseDelayCh1.Text) && rx_double.IsMatch(tbxAFG3252PulseDelayCh2.Text);
+            if(IsPulseParameterLegal)
+            {
+                string Unit;
+                switch (cbxAFG3252DelayTimeUnitSet.SelectedIndex)
+                {
+                    case 0:
+                        {
+                            Unit = "ns";
+                            break;
+                        }
+                    case 1:
+                        {
+                            Unit = "us";
+                            break;
+                        }
+                    case 2:
+                        {
+                            Unit = "ms";
+                            break;
+                        }
+                    case 3:
+                        {
+                            Unit = "s";
+                            break;
+                        }
+                    default:
+                        {
+                            Unit = "us";
+                            break;
+                        }
+                }
+                double Ch1Delay = double.Parse(tbxAFG3252PulseDelayCh1.Text);
+                double Ch2Delay = double.Parse(tbxAFG3252PulseDelayCh2.Text);
+                bool bResult = MyAFG3252.SetPulseDelay(1, Ch1Delay, Unit);
+                if(!bResult)
+                {
+                    MessageBox.Show("Set Channel1 Delay failing", "AFG3252 Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                bResult = MyAFG3252.SetPulseDelay(2, Ch2Delay, Unit);
+                if (bResult)
+                {
+                    txtReport.AppendText("Set Pulse Parameter successfully");
+                }
+                else
+                {
+                    MessageBox.Show("Set Channel2 Delay failing", "AFG3252 Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Illegal Input, the pulse parameter should be double", "Illegal Input", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            #endregion
         }
         private void btnAFG3252Config_Click(object sender, RoutedEventArgs e)
         {
@@ -4630,6 +4984,12 @@ namespace USB_DAQ
             else
             {
                 SetAfg3252VoltageLevel();
+            }
+            #endregion
+            #region Pulse Parameter
+            if(cbxAFG3252FunctionSetCh1.SelectedIndex == 3)
+            {
+                SetAfg3252PulseParameter();
             }
             #endregion
         }

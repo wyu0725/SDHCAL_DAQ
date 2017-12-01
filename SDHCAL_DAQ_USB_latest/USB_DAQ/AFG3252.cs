@@ -127,12 +127,12 @@ namespace USB_DAQ
             VoltageCommand = string.Format("SOURce{0}:VOLTage:UNIT {1}", Channel, Unit);
             return Write(VoltageCommand);
         }
-        public bool SetVoltageAmplitude(int Channel, double Voltage, string Unit, string UnitMode)
+        public bool SetVoltageAmplitude(int Channel, double Voltage, string UnitMode)
         {
             if (SetVoltageUnit(Channel, UnitMode))
             {
                 string VoltageCommand;
-                VoltageCommand = string.Format("SOURce{0}:VOLTage:LEVel:IMMediate:AMPL {1}{2}", Channel, Voltage, Unit);
+                VoltageCommand = string.Format("SOURce{0}:VOLTage:LEVel:IMMediate:AMPLitude {1}", Channel, Voltage);
                 return Write(VoltageCommand);
             }
             else
@@ -191,13 +191,13 @@ namespace USB_DAQ
         public bool SetPulseLeading(int Channel, double Leading, string Unit)
         {
             string PulseCommand;
-            PulseCommand = string.Format("SOURce{0}:PULSe:TRAMsition:LEADing {1}{2}", Channel, Leading, Unit);
+            PulseCommand = string.Format("SOURce{0}:PULSe:TRANsition:LEADing {1}{2}", Channel, Leading, Unit);
             return Write(PulseCommand);
         }
         public bool SetPulseTrailing(int Channel, double Trailing, string Unit)
         {
             string PulseCommand;
-            PulseCommand = string.Format("SOURce{0}:PULSe:TRAMsition:TRAiling {1}{2}", Channel, Trailing, Unit);
+            PulseCommand = string.Format("SOURce{0}:PULSe:TRANsition:TRAiling {1}{2}", Channel, Trailing, Unit);
             return Write(PulseCommand);
         }
         #endregion
