@@ -269,8 +269,15 @@ namespace USB_DAQ
         //data recieve method
         private bool DataRecieve(byte[] InData, int xferLen)
         {
-            bool bResult;
-            bResult = BulkInEndPt.XferData(ref InData, ref xferLen, true);
+            bool bResult = false;
+            if(myDevice != null)
+            {
+                bResult = BulkInEndPt.XferData(ref InData, ref xferLen, true);
+            }
+            else
+            {
+                MessageBox.Show("USB Error");//弹出还是不弹出错误信息？不弹出错误信息可能会丢包，弹出的话采集就会中断
+            }
             return bResult;
         }
         //Create file directory
@@ -1773,7 +1780,6 @@ namespace USB_DAQ
             //Get Radiobutton reference
             var button = sender as RadioButton;
             //Display button content as title
-            bool bResult = false;
             if (button.Content.ToString() == "Enable")
             {
                 MicrorocPowerPulsingEnable();
@@ -2424,7 +2430,6 @@ namespace USB_DAQ
                     #endregion
                     //Regex rx_int = new Regex(rx_Integer);
                     bool Is_DataNum_Legal = rx_int.IsMatch(txtSlowACQDataNum.Text);
-                    
                     if (Is_DataNum_Legal)
                     {
                         SlowACQDataNumber = Int16.Parse(txtSlowACQDataNum.Text);
@@ -3892,8 +3897,6 @@ namespace USB_DAQ
             bw.Close();
         }
 
-
-
         private void DaqModeSelect_Checked(object sender, RoutedEventArgs e)
         {
             var button = sender as RadioButton;
@@ -3934,9 +3937,9 @@ namespace USB_DAQ
                 bool Is_DAC_Legal = rx_int.IsMatch(txtDAC0_VTH_ASIC1.Text) && rx_int.IsMatch(txtDAC1_VTH_ASIC1.Text) && rx_int.IsMatch(txtDAC2_VTH_ASIC1.Text);
                 if (Is_DAC_Legal)
                 {
-                    int DAC0_Value = Int32.Parse(txtDAC0_VTH_ASIC1.Text) + 49152;//0xC000
-                    int DAC1_Value = Int32.Parse(txtDAC1_VTH_ASIC1.Text) + 50176;//0xC400
-                    int DAC2_Value = Int32.Parse(txtDAC2_VTH_ASIC1.Text) + 51200;//0xC800
+                    int DAC0_Value = int.Parse(txtDAC0_VTH_ASIC1.Text) + 49152;//0xC000
+                    int DAC1_Value = int.Parse(txtDAC1_VTH_ASIC1.Text) + 50176;//0xC400
+                    int DAC2_Value = int.Parse(txtDAC2_VTH_ASIC1.Text) + 51200;//0xC800
                     #region DAC0
                     CommandBytes = ConstCommandByteArray((byte)(DAC0_Value >> 8), (byte)DAC0_Value);
                     bResult = CommandSend(CommandBytes, CommandBytes.Length);
@@ -4209,14 +4212,14 @@ namespace USB_DAQ
                 //UsbName ppp = new UsbName();
                 //IntPtr pnt = Marshal.AllocHGlobal(Marshal.SizeOf(ppp));
                 //Marshal.StructureToPtr(ppp, lparam, false);
-                UsbName anotherP = new UsbName();
+                UsbName UsbDevice = new UsbName();
                 string DeviceName;
                 switch ((int)wparam)
                 {
                     case UsbNotification.DbtDeviceremovecomplete:
                         {
-                            anotherP = (UsbName)Marshal.PtrToStructure(lparam, typeof(UsbName));
-                            DeviceName = anotherP.dbcc_name;
+                            UsbDevice = (UsbName)Marshal.PtrToStructure(lparam, typeof(UsbName));
+                            DeviceName = UsbDevice.dbcc_name;
                             string[] DeviceNameInternal = DeviceName.Split('#');
                             if(DeviceNameInternal.Length >= 2 && DeviceNameInternal[1] == AFG3252VidPid)
                             {
@@ -4227,8 +4230,8 @@ namespace USB_DAQ
                         break;
                     case UsbNotification.DbtDevicearrival:
                         {
-                            anotherP = (UsbName)Marshal.PtrToStructure(lparam, typeof(UsbName));
-                            DeviceName = anotherP.dbcc_name;
+                            UsbDevice = (UsbName)Marshal.PtrToStructure(lparam, typeof(UsbName));
+                            DeviceName = UsbDevice.dbcc_name;
                             string[] DeviceNameInternal = DeviceName.Split('#');
                             if (DeviceNameInternal.Length >= 2 && DeviceNameInternal[1] == AFG3252VidPid)
                             {
@@ -4244,9 +4247,6 @@ namespace USB_DAQ
             //Thread.Sleep(1000);
             return IntPtr.Zero;
         }
-
-        
-
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
         public struct UsbName
         {
@@ -4273,6 +4273,7 @@ namespace USB_DAQ
                 SetAfg3252Channel2FunctionShape();
             }
         }
+
         private void SetAfg3252Channel1FunctionShape()
         {
             switch (cbxAFG3252FunctionSetCh1.SelectedIndex)
@@ -4456,7 +4457,6 @@ namespace USB_DAQ
                     }
             }
         }
-
         private void tbiAFG3252Amplitude_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             AmplitudeOrLevel = true;
@@ -4481,7 +4481,6 @@ namespace USB_DAQ
                 tbxAFG3252OffsetCh2.Text = Ch2Offset.ToString();
             }
         }
-
         private void tbiAFG3252Level_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             AmplitudeOrLevel = false;
@@ -4659,7 +4658,6 @@ namespace USB_DAQ
                 txtReport.AppendText("AFG3252 Channel1 Off\n");
             }            
         }
-
         private void btnAFG3252Ch2OnOrOff_Click(object sender, RoutedEventArgs e)
         {
             if (btnAFG3252Ch2OnOrOff.Content.ToString() == "Off")
@@ -4993,10 +4991,6 @@ namespace USB_DAQ
             }
             #endregion
         }
-
-
-
-
 
         /*private void cbxAdcStartMode_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
