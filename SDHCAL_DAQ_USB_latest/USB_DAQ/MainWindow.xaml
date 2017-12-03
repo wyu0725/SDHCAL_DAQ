@@ -486,7 +486,7 @@
                             <GroupBox x:Name="gbxNormalAcq" Header="Normal Acq" HorizontalAlignment="Left" VerticalAlignment="Top" Height="228" Width="155" Margin="550,0,0,0">
                                 <Grid  Margin="0,0,0,0" >
                                     <Label x:Name="lblDaqMode" Content="DAQ Mode:" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Height="24" Width="80"/>
-                                    <StackPanel HorizontalAlignment="Left" Height="38" Margin="80,0,0,0" VerticalAlignment="Top" Width="60">
+                                    <StackPanel HorizontalAlignment="Left" Height="30" Margin="80,0,0,0" VerticalAlignment="Top" Width="60">
                                         <RadioButton GroupName="DaqModeSelect" Checked="DaqModeSelect_Checked" Content="Auto"/>
                                         <RadioButton GroupName="DaqModeSelect" Checked="DaqModeSelect_Checked" Content="Slave"/>
                                     </StackPanel>
@@ -503,7 +503,7 @@
                                     <Button x:Name="btnSlowACQ" Content="SlowACQ" HorizontalAlignment="Left" Margin="0,180,0,0" VerticalAlignment="Top" Width="130" Height="24" Click="btnSlowACQ_Click"/>
                                 </Grid>
                             </GroupBox>
-                            
+                            <Button x:Name="btnReset_cntb" Content="Reset cntb" HorizontalAlignment="Left" Margin="0,400,0,0" VerticalAlignment="Top" Width="76" Height="24" Click="btnReset_cntb_Click"/>
                         </Grid>
                     </TabItem>
                     <TabItem Name="tbiSCTest" Header="SC Test" Height="21" VerticalAlignment="Bottom">
@@ -550,7 +550,7 @@
                                     </ComboBox>
                                     <Button x:Name="btnOut_th_set" Content="Set" HorizontalAlignment="Left" Margin="360,60,0,0" VerticalAlignment="Top" Width="75" Height="24" Click="btnOut_th_set_Click"/>
 
-                                    <Button x:Name="btnReset_cntb" Content="Reset cntb" HorizontalAlignment="Left" Margin="360,30,0,0" VerticalAlignment="Top" Width="76" Height="24" Click="btnReset_cntb_Click"/>
+                                    
                                     <Label x:Name="lblTriggerDelay" Content="TriggerDelay" HorizontalAlignment="Left" Margin="450,60,0,0" VerticalAlignment="Top"/>
                                     <TextBox x:Name="txtTriggerDelay" HorizontalAlignment="Left" Height="24" Margin="540,60,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="60"/>
                                 </Grid>
@@ -785,40 +785,40 @@
                                     <Label x:Name="lblDac10BitPP" Content="10-bit DAC" HorizontalAlignment="Left" Margin="0,175,0,0" VerticalAlignment="Top" Height="25" Width="75"/>
                                     <Label x:Name="lblLvdsPP" Content="LVDS" HorizontalAlignment="Left" Margin="0,200,0,0" VerticalAlignment="Top" Height="25" Width="75"/>
                                     <ComboBox x:Name="cbxPreAmpPP" HorizontalAlignment="Left" Margin="75,0,0,0" VerticalAlignment="Top" Width="70" Height="24">
-                                        <ComboBoxItem Content= "Disable" IsSelected ="True"/>
-                                        <ComboBoxItem Content= "Enable" />
+                                        <ComboBoxItem Content= "Disable"/>
+                                        <ComboBoxItem Content= "Enable" IsSelected ="True"/>
                                     </ComboBox>
                                     <ComboBox x:Name="cbxShaperPP" HorizontalAlignment="Left" Margin="75,25,0,0" VerticalAlignment="Top" Width="70" Height="24">
-                                        <ComboBoxItem Content= "Disable" IsSelected ="True"/>
-                                        <ComboBoxItem Content= "Enable" />
+                                        <ComboBoxItem Content= "Disable"/>
+                                        <ComboBoxItem Content= "Enable" IsSelected ="True"/>
                                     </ComboBox>
                                     <ComboBox x:Name="cbxWidlarPP" HorizontalAlignment="Left" Margin="75,50,0,0" VerticalAlignment="Top" Width="70" Height="24">
-                                        <ComboBoxItem Content= "Disable" IsSelected ="True"/>
-                                        <ComboBoxItem Content= "Enable" />
+                                        <ComboBoxItem Content= "Disable"/>
+                                        <ComboBoxItem Content= "Enable" IsSelected ="True" />
                                     </ComboBox>
                                     <ComboBox x:Name="cbxDac4BitPP" HorizontalAlignment="Left" Margin="75,75,0,0" VerticalAlignment="Top" Width="70" Height="24">
-                                        <ComboBoxItem Content= "Disable" IsSelected ="True"/>
-                                        <ComboBoxItem Content= "Enable" />
+                                        <ComboBoxItem Content= "Disable"/>
+                                        <ComboBoxItem Content= "Enable" IsSelected ="True"/>
                                     </ComboBox>
                                     <ComboBox x:Name="cbxOTAqPP" HorizontalAlignment="Left" Margin="75,100,0,0" VerticalAlignment="Top" Width="70" Height="24">
-                                        <ComboBoxItem Content= "Disable" IsSelected ="True"/>
-                                        <ComboBoxItem Content= "Enable" />
+                                        <ComboBoxItem Content= "Disable"/>
+                                        <ComboBoxItem Content= "Enable" IsSelected ="True" />
                                     </ComboBox>
                                     <ComboBox x:Name="cbxDiscriPP" HorizontalAlignment="Left" Margin="75,125,0,0" VerticalAlignment="Top" Width="70" Height="24">
-                                        <ComboBoxItem Content= "Disable" IsSelected ="True"/>
-                                        <ComboBoxItem Content= "Enable" />
+                                        <ComboBoxItem Content= "Disable"/>
+                                        <ComboBoxItem Content= "Enable" IsSelected ="True"/>
                                     </ComboBox>
                                     <ComboBox x:Name="cbxVbgPP" HorizontalAlignment="Left" Margin="75,150,0,0" VerticalAlignment="Top" Width="70" Height="24">
-                                        <ComboBoxItem Content= "Disable" IsSelected ="True"/>
-                                        <ComboBoxItem Content= "Enable" />
+                                        <ComboBoxItem Content= "Disable"/>
+                                        <ComboBoxItem Content= "Enable" IsSelected ="True"/>
                                     </ComboBox>
                                     <ComboBox x:Name="cbxDac10BitPP" HorizontalAlignment="Left" Margin="75,175,0,0" VerticalAlignment="Top" Width="70" Height="24">
-                                        <ComboBoxItem Content= "Disable" IsSelected ="True"/>
-                                        <ComboBoxItem Content= "Enable" />
+                                        <ComboBoxItem Content= "Disable"/>
+                                        <ComboBoxItem Content= "Enable" IsSelected ="True"/>
                                     </ComboBox>
                                     <ComboBox x:Name="cbxLvdsPP" HorizontalAlignment="Left" Margin="75,200,0,0" VerticalAlignment="Top" Width="70" Height="24">
-                                        <ComboBoxItem Content= "Disable" IsSelected ="True"/>
-                                        <ComboBoxItem Content= "Enable" />
+                                        <ComboBoxItem Content= "Disable"/>
+                                        <ComboBoxItem Content= "Enable" IsSelected ="True"/>
                                     </ComboBox>
                                 </Grid>
                             </GroupBox>
