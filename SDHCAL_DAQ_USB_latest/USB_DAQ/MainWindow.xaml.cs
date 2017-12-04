@@ -4098,6 +4098,22 @@ namespace USB_DAQ
                 }
                 #endregion
                 MicrorocPowerPulsingDisable();
+                #region Start Load
+                CommandBytes = ConstCommandByteArray(0xD0, 0xA2);
+                bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                if (bResult)
+                {
+                    txtReport.AppendText("Load ASIC parameter done!\n");
+                }
+                else
+                {
+                    MessageBox.Show("Load parameter failure, please check USB", //text
+                                     "USB Error",   //caption
+                                     MessageBoxButton.OK,//button
+                                     MessageBoxImage.Error);//icon
+                }
+                #endregion
+
             }
             CommandBytes = ConstCommandByteArray(0xE0, (byte)DaqMode);
             bResult = CommandSend(CommandBytes, CommandBytes.Length);
