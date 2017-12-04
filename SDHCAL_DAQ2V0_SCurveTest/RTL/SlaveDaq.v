@@ -105,24 +105,26 @@ module SlaveDaq(
     wire SingleAcqStart;
     assign SingleAcqStart = AcqStart_r1 && (~AcqStart_r2);
     reg [15:0] DelayCount;
-    localparam [3:0] IDLE = 4'd0,
-                     CHIP_RESET = 4'd1,
-                     POWER_ON = 4'd2,
-                     RELEASE = 4'd3,
-                     WAIT_START = 4'd4,
-                     START_ACQUISITION = 4'd5,
-                     WAIT_READ = 4'd6,
-                     START_READOUT = 4'd7,
-                     WAIT_READ_DONE = 4'd8,
+    localparam [4:0] IDLE = 5'd0,
+                     CHIP_RESET = 5'd1,
+                     POWER_ON = 5'd2,
+                     RELEASE = 5'd3,
+                     WAIT_START = 5'd4,
+                     START_ACQUISITION = 5'd5,
+                     WAIT_READ = 5'd6,
+                     START_READOUT = 5'd7,
+                     WAIT_READ_DONE = 5'd8,
                      //RESET_ASIC = 4'd9, // There is no need to reset ASIC
-                     ONCE_END = 4'd9,
-                     END_DATA = 4'd10,
-                     OUT_TAIL = 4'd11,
-                     OUT_COUNT1 = 4'd12,
-                     OUT_COUNT2 = 4'd13,
-                     OUT_COUNT3 = 4'd14,
-                     ALL_DONE = 4'd15;
-    reg [3:0] State;
+                     ONCE_END = 5'd9,
+										 WAIT_DATA_END =5'd10,
+ 										 END_DATA = 5'd11,	
+                     OUT_TAIL = 5'd12,
+                     OUT_COUNT1 = 5'd13,
+                     OUT_COUNT2 = 5'd14,
+                     OUT_COUNT3 = 5'd15,
+                     ALL_DONE = 5'd16;
+    reg [4:0] State;
+		reg [11:0] DataEndCount;
     localparam TimeMinPowerReset = 8;//Time to wake up clock LVDS receivers 200ns
     localparam TimeMinResetStart = 40;//4 SlowClock ticks + 4 FastClock ticks (internal management) 1us
     localparam TimeMinSro = 16;//Time to wake up clock LVDS receivers 400ns
@@ -145,6 +147,7 @@ module SlaveDaq(
         ResetTrigCount_n <= 1'b1;
         InternalData_en <= 1'b0;
         TrigCount_en <= 1'b0;
+				DataEndCount <= 12'b0;
       end
       else begin
         case(State)
@@ -188,10 +191,11 @@ module SlaveDaq(
             end
           end
           WAIT_START:begin
-            if(~ModuleStart) begin
+						if(~ModuleStart) begin
               AcqEnable <= 1'b0;
               //AllDone <= 1'b1;
-              State <= END_DATA;
+              State <= WAIT_DATA_END;
+							DataEndCount <= 12'b0;
               TrigCount_en <= 1'b0;
             end
             else if(SingleAcqStart) begin
@@ -230,13 +234,13 @@ module SlaveDaq(
             if(DelayCount < TimeMinSro) begin
               DelayCount <= DelayCount + 1'b1;
               State <= START_READOUT;
-            end
+						end
             else begin
               DelayCount <= 16'b0;
               StartReadout <= 1'b0;
               State <= WAIT_READ_DONE;
             end
-          end
+					end
           WAIT_READ_DONE:begin
             if(EndReadout) begin
               OnceEnd <= 1'b1;
@@ -258,6 +262,16 @@ module SlaveDaq(
               State <= WAIT_START;
             end
           end
+					WAIT_DATA_END:begin
+						if(DataEndCount < 12'd1600) begin
+							DataEndCount <= DataEndCount + 1'b1;
+							State <= WAIT_DATA_END;
+						end
+						else begin
+							State <= END_DATA;
+							DataEndCount <= 12'b0;
+						end
+					end
           END_DATA:begin
             State <= OUT_TAIL;
             InternalData_en <= 1'b0;
