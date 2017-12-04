@@ -192,12 +192,12 @@
                                                             <ComboBoxItem Content="1us" IsSelected="True"/>
                                                         </ComboBox>
                                                         <ComboBox x:Name="cbxPedCali_ASIC1" HorizontalAlignment="Left" Margin="0,225,0,0" VerticalAlignment="Top" Width="110" Height="24" Grid.ColumnSpan="2">
-                                                            <ComboBoxItem Content= "Without Cali" IsSelected ="True"/>
-                                                            <ComboBoxItem Content= "DC Cali"/>
+                                                            <ComboBoxItem Content= "Without Cali"/>
+                                                            <ComboBoxItem Content= "DC Cali" IsSelected ="True"/>
                                                             <ComboBoxItem Content= "SCurve Cali" />
                                                         </ComboBox>
                                                         <TextBox x:Name="txtRead_reg_ASIC1" HorizontalAlignment="Left" Height="24" Margin="0,250,0,-1" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="50"/>
-                                                        <TextBox x:Name="txtMaskFile_ASIC1" HorizontalAlignment="Left" Height="23" Margin="0,275,0,-25" TextWrapping="Wrap" Text="No" VerticalAlignment="Top" Width="80" Grid.ColumnSpan="2"/>
+                                                        <TextBox x:Name="txtMaskFile_ASIC1" HorizontalAlignment="Left" Height="23" Margin="0,275,0,-25" TextWrapping="Wrap" Text="ASIC1.txt" VerticalAlignment="Top" Width="80" Grid.ColumnSpan="2"/>
                                                     </Grid>
                                                 </TabItem>
                                                 <TabItem Header="ASIC2">
@@ -488,7 +488,7 @@
                                     <Label x:Name="lblDaqMode" Content="DAQ Mode:" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Height="24" Width="80"/>
                                     <StackPanel HorizontalAlignment="Left" Height="30" Margin="80,0,0,0" VerticalAlignment="Top" Width="60">
                                         <RadioButton GroupName="DaqModeSelect" Checked="DaqModeSelect_Checked" Content="Auto"/>
-                                        <RadioButton GroupName="DaqModeSelect" Checked="DaqModeSelect_Checked" Content="Slave"/>
+                                        <RadioButton GroupName="DaqModeSelect" Checked="DaqModeSelect_Checked" Content="Slave" HorizontalAlignment="Right" Width="60"/>
                                     </StackPanel>
                                     <Label x:Name="lblDataRate" Content="Data Rate:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70" Margin="0,30,0,0" Height="24"/>
                                     <StackPanel HorizontalAlignment="Left" Height="30" Margin="80,30,0,0" VerticalAlignment="Top" Width="70">

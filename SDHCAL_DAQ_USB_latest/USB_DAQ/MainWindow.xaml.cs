@@ -141,7 +141,7 @@ namespace USB_DAQ
                 BulkOutEndPt = myDevice.EndPointOf(0x02) as CyBulkEndPoint; //EP2
                 BulkInEndPt = myDevice.EndPointOf(0x86) as CyBulkEndPoint;  //EP6
                 BulkInEndPt.XferSize = BulkInEndPt.MaxPktSize * 8;//4KB = 512bytes*8,4096
-                BulkInEndPt.TimeOut = 100;
+                BulkInEndPt.TimeOut = 10;
 
                 btnSC_or_ReadReg.IsEnabled = true;
                 btnReset_cntb.IsEnabled = true;
@@ -270,13 +270,21 @@ namespace USB_DAQ
         private bool DataRecieve(byte[] InData, int xferLen)
         {
             bool bResult = false;
-            if(myDevice != null)
+            /*if(myDevice != null)
             {
                 bResult = BulkInEndPt.XferData(ref InData, ref xferLen, true);
             }
             else
             {
                 MessageBox.Show("USB Error");//弹出还是不弹出错误信息？不弹出错误信息可能会丢包，弹出的话采集就会中断
+            }*/
+            try
+            {
+                bResult = BulkInEndPt.XferData(ref InData, ref xferLen, true);
+            }
+            catch(Exception exp)
+            {
+                MessageBox.Show(exp.Message);
             }
             return bResult;
         }
