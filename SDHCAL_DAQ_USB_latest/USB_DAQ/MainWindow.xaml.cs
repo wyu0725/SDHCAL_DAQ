@@ -3530,8 +3530,7 @@ namespace USB_DAQ
                             CommandBytes = ConstCommandByteArray(0xE0, 0xF1);
                             bResult = CommandSend(CommandBytes, CommandBytes.Length);
                             if (bResult)
-                            {
-                                IsSlowAcqStart = false;
+                            {                                
                                 btnSweepTestStart.Content = "Sweep Test Start";
                                 txtReport.AppendText("Sweep Acq Test Stop\n");
                             }
@@ -3539,6 +3538,8 @@ namespace USB_DAQ
                             {
                                 txtReport.AppendText("Sweep Acq Test Stop Failure\n");
                             }
+                            Thread.Sleep(10);
+                            IsSlowAcqStart = false;                            
                         }
                         else
                         {
@@ -4009,6 +4010,7 @@ namespace USB_DAQ
                 }
                 #endregion
                 #region Set Start Acq Time
+                txtStartAcqTime.Text = "1500";
                 bool Is_Time_legal = rx_int.IsMatch(txtStartAcqTime.Text);
                 if (Is_Time_legal)
                 {
