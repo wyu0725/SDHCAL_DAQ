@@ -18,7 +18,7 @@ CalibrationDataDac1 = zeros(DataNumber, 64);
 CalibrationDataDac2 = zeros(DataNumber, 64);
 for i = 1:1:DataNumber
     % Read Data Back
-    filename = sprintf('%s\\Calibration20171128\\%dfC_64Chn_2.dat',CurrentPath,(i-1)*ChargeInterval);
+    filename = sprintf('%s\\CalibrationSmallSignal\\%dfC_64Chn.dat',CurrentPath,(i-1)*ChargeInterval);
     [fid,~] = fopen(filename,'r');
     if fid <= 0
         % There was an error--tell user
