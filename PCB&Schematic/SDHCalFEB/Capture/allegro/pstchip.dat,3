@@ -1,5 +1,5 @@
 FILE_TYPE=LIBRARY_PARTS;
-{ Using PSTWRITER 16.6.0 d001Dec-12-2017 at 10:31:07}
+{ Using PSTWRITER 16.6.0 d001Dec-13-2017 at 09:19:11}
 primitive 'CAPACITOR NP_SC0603_10NF';
   pin
     '1':
@@ -30,7 +30,7 @@ primitive 'CAPACITOR NP_SC0603_10PF 1%';
     VALUE='10pF 1%';
   end_body;
 end_primitive;
-primitive 'CAPACITOR NP_SC0603_0.1UF';
+primitive 'CAPACITOR NP_SC0402_0.1UF';
   pin
     '1':
       PIN_NUMBER='(1)';
@@ -41,7 +41,7 @@ primitive 'CAPACITOR NP_SC0603_0.1UF';
   end_pin;
   body
     PART_NAME='Capacitor np';
-    JEDEC_TYPE='SC0603';
+    JEDEC_TYPE='SC0402';
     VALUE='0.1uF';
   end_body;
 end_primitive;
@@ -58,6 +58,21 @@ primitive 'CAPACITOR POL_STC3528_10UF';
     PART_NAME='Capacitor pol';
     JEDEC_TYPE='STC3528';
     VALUE='10uF';
+  end_body;
+end_primitive;
+primitive 'CAPACITOR NP_SC0603_0.1UF';
+  pin
+    '1':
+      PIN_NUMBER='(1)';
+      PINUSE='UNSPEC';
+    '2':
+      PIN_NUMBER='(2)';
+      PINUSE='UNSPEC';
+  end_pin;
+  body
+    PART_NAME='Capacitor np';
+    JEDEC_TYPE='SC0603';
+    VALUE='0.1uF';
   end_body;
 end_primitive;
 primitive 'CAPACITOR NP_SC0603_0.47UF';
@@ -133,21 +148,6 @@ primitive 'C_SC0805_47UF';
     PART_NAME='C';
     JEDEC_TYPE='SC0805';
     VALUE='47uF';
-  end_body;
-end_primitive;
-primitive 'CAPACITOR NP_SC0402_0.1UF';
-  pin
-    '1':
-      PIN_NUMBER='(1)';
-      PINUSE='UNSPEC';
-    '2':
-      PIN_NUMBER='(2)';
-      PINUSE='UNSPEC';
-  end_pin;
-  body
-    PART_NAME='Capacitor np';
-    JEDEC_TYPE='SC0402';
-    VALUE='0.1uF';
   end_body;
 end_primitive;
 primitive 'LED_SD0805_GREEN';
