@@ -116,8 +116,8 @@ module SlaveDaq(
                      WAIT_READ_DONE = 5'd8,
                      //RESET_ASIC = 4'd9, // There is no need to reset ASIC
                      ONCE_END = 5'd9,
-										 WAIT_DATA_END =5'd10,
- 										 END_DATA = 5'd11,	
+					 WAIT_DATA_END =5'd10,
+ 					 END_DATA = 5'd11,	
                      OUT_TAIL = 5'd12,
                      OUT_COUNT1 = 5'd13,
                      OUT_COUNT2 = 5'd14,
@@ -134,6 +134,9 @@ module SlaveDaq(
     reg ResetTrigCount_n;
     reg [23:0] TrigCounter;
     reg InternalData_en;
+	// MicrorocHit high indicates a hit come and should add TrigID to the data
+	reg MicrorocHit;
+  	reg ResetMicrorocHit;	
     always @(posedge Clk or negedge reset_n) begin
       if(~reset_n) begin
         State <= IDLE;
@@ -147,7 +150,8 @@ module SlaveDaq(
         ResetTrigCount_n <= 1'b1;
         InternalData_en <= 1'b0;
         TrigCount_en <= 1'b0;
-				DataEndCount <= 12'b0;
+		DataEndCount <= 12'b0;
+		ResetMicrorocHit <= 1'b1;
       end
       else begin
         case(State)
@@ -189,16 +193,17 @@ module SlaveDaq(
               TrigCount_en <= 1'b1;
               State <= WAIT_START;
             end
-          end
+		  end
           WAIT_START:begin
-						if(~ModuleStart) begin
+			if(~ModuleStart) begin
               AcqEnable <= 1'b0;
               //AllDone <= 1'b1;
               State <= WAIT_DATA_END;
 							DataEndCount <= 12'b0;
               TrigCount_en <= 1'b0;
             end
-            else if(SingleAcqStart) begin
+			else if(SingleAcqStart) begin
+			  ResetMicrorocHit <= 1'b1;
               State <= START_ACQUISITION;
             end
             else begin
@@ -372,6 +377,13 @@ module SlaveDaq(
       else
         TrigCounter_sync <= TrigCounter;
     end
+  // *** Monitor if Microroc id hit
+  	always @(posedge MicrorocData_en or negedge ResetMicrorocHit) begin
+		if(~ResetMicrorocHit)
+		  	MicrorocHit <= 1'b0;
+	  	else
+			MicrorocHit <= 1'b1;
+	end
     //*** Power On Control
     always @(State) begin
       if(State == POWER_ON || State == POWER_ON || State == RELEASE || State == WAIT_START || State == START_ACQUISITION || State == WAIT_READ || State == START_READOUT || State == WAIT_READ || State == WAIT_READ_DONE || State == ONCE_END)
