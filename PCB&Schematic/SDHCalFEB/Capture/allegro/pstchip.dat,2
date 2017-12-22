@@ -1,5 +1,5 @@
 FILE_TYPE=LIBRARY_PARTS;
-{ Using PSTWRITER 16.6.0 d001Dec-20-2017 at 16:05:39}
+{ Using PSTWRITER 16.6.0 d001Dec-21-2017 at 16:07:00}
 primitive 'CAPACITOR NP_SC0603_10NF';
   pin
     '1':
@@ -3349,6 +3349,21 @@ primitive 'RESISTOR_SR0603_10K';
     VALUE='10k';
   end_body;
 end_primitive;
+primitive 'RESISTOR_SR0402_100';
+  pin
+    '1':
+      PIN_NUMBER='(1)';
+      PINUSE='UNSPEC';
+    '2':
+      PIN_NUMBER='(2)';
+      PINUSE='UNSPEC';
+  end_pin;
+  body
+    PART_NAME='Resistor';
+    JEDEC_TYPE='SR0402';
+    VALUE='100';
+  end_body;
+end_primitive;
 primitive 'RESISTOR_SR0603_1K';
   pin
     '1':
@@ -3467,21 +3482,6 @@ primitive 'RESISTOR_SR0603_1.5K';
     PART_NAME='Resistor';
     JEDEC_TYPE='SR0603';
     VALUE='1.5k';
-  end_body;
-end_primitive;
-primitive 'RESISTOR_SR0402_100';
-  pin
-    '1':
-      PIN_NUMBER='(1)';
-      PINUSE='UNSPEC';
-    '2':
-      PIN_NUMBER='(2)';
-      PINUSE='UNSPEC';
-  end_pin;
-  body
-    PART_NAME='Resistor';
-    JEDEC_TYPE='SR0402';
-    VALUE='100';
   end_body;
 end_primitive;
 primitive 'TESTPADGND_TESTPADGND_TEST PAD';
