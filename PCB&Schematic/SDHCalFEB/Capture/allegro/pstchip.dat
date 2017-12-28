@@ -1,5 +1,5 @@
 FILE_TYPE=LIBRARY_PARTS;
-{ Using PSTWRITER 16.6.0 d001Dec-27-2017 at 16:28:29}
+{ Using PSTWRITER 16.6.0 d001Dec-28-2017 at 17:39:34}
 primitive 'CAPACITOR NP_SC0603_10NF';
   pin
     '1':
@@ -4607,6 +4607,30 @@ primitive 'TPS7A85_0_TPS7A85_TPS7A85';
     PART_NAME='TPS7A85_0';
     JEDEC_TYPE='tps7a85';
     VALUE='TPS7A85';
+  end_body;
+end_primitive;
+primitive 'ADA4891-4_ADA4891-4-TSSOP_ADA48';
+  pin
+    '+IN':
+      PIN_NUMBER='(3,5,10,12)';
+      INPUT_LOAD='(*)';
+    '-IN':
+      PIN_NUMBER='(2,6,9,13)';
+      INPUT_LOAD='(*)';
+    'OUT':
+      PIN_NUMBER='(1,7,8,14)';
+      OUTPUT_LOAD='(*)';
+    '+VS':
+      PIN_NUMBER='(4,0,0,0)';
+      PINUSE='POWER';
+    '-VS':
+      PIN_NUMBER='(11,0,0,0)';
+      PINUSE='POWER';
+  end_pin;
+  body
+    PART_NAME='ADA4891-4';
+    JEDEC_TYPE='ADA4891-4-TSSOP';
+    VALUE='ADA4891-4';
   end_body;
 end_primitive;
 END.
