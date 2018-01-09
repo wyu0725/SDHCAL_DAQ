@@ -1,5 +1,5 @@
 FILE_TYPE=LIBRARY_PARTS;
-{ Using PSTWRITER 16.6.0 d001Dec-29-2017 at 17:13:58}
+{ Using PSTWRITER 16.6.0 d001Jan-08-2018 at 08:48:03}
 primitive 'CAPACITOR NP_SC0603_10NF';
   pin
     '1':
@@ -562,6 +562,18 @@ primitive 'INDUCTOR_SL1812_10UH';
     PART_NAME='Inductor';
     JEDEC_TYPE='SL1812';
     VALUE='10uH';
+  end_body;
+end_primitive;
+primitive 'MECH_HOLE_3MM_PLATED_MECH_HOLE_';
+  pin
+    'HOLE':
+      PIN_NUMBER='(1)';
+      PINUSE='UNSPEC';
+  end_pin;
+  body
+    PART_NAME='MECH_HOLE_3MM_Plated';
+    JEDEC_TYPE='MECH_HOLE_3_2MM_Plated';
+    VALUE='MECH_HOLE_3MM';
   end_body;
 end_primitive;
 primitive 'PAD30X30V2_PADREADOUTARRAY1V1_(';

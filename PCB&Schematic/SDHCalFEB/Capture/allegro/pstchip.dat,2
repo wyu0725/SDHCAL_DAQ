@@ -1,5 +1,5 @@
 FILE_TYPE=LIBRARY_PARTS;
-{ Using PSTWRITER 16.6.0 d001Dec-30-2017 at 10:09:37}
+{ Using PSTWRITER 16.6.0 d001Jan-09-2018 at 09:13:10}
 primitive 'CAPACITOR NP_SC0603_10NF';
   pin
     '1':
@@ -163,6 +163,18 @@ primitive 'LED_SD0805_GREEN';
     PART_NAME='LED';
     JEDEC_TYPE='SD0805';
     VALUE='Green';
+  end_body;
+end_primitive;
+primitive 'GEMGNDPAD_GEMGNDPAD_GEMGNDPAD';
+  pin
+    '1':
+      PIN_NUMBER='(1)';
+      PINUSE='UNSPEC';
+  end_pin;
+  body
+    PART_NAME='GemGndPad';
+    JEDEC_TYPE='GemGndPad';
+    VALUE='GemGndPad';
   end_body;
 end_primitive;
 primitive 'LEMO_SMA_SMD_SMA_SMD';
