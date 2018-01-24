@@ -81,7 +81,21 @@
     ("Allegro Netlist Combine Property String" "PCB Footprint")
     ("Allegro Netlist Ignore Fixed Property" "FALSE")
     ("Allegro Netlist User Defined Property" "FALSE")
-    (Netlist_TAB "0"))
+    (Netlist_TAB "0")
+    (BOM_Scope "0")
+    (BOM_Mode "0")
+    (BOM_Report_File
+       "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCALFEB\CAPTURE\SDHCALFEB.BOM")
+    (BOM_Merge_Include "FALSE")
+    (BOM_Property_Combine_7.0
+       "{Item}\t{Quantity}\t{Reference}\t{Value}\t{PCB Footprint}")
+    (BOM_Header "Item\tQuantity\tReference\tPart\tFootprint")
+    (BOM_Include_File
+       "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCALFEB\CAPTURE\SDHCALFEB.INC")
+    (BOM_Include_File_Combine_7.0 "{Item}\t{Quantity}\t{Reference}\t{Value}")
+    (BOM_One_Part_Per_Line "FALSE")
+    (Open_BOM_in_Excel "TRUE")
+    (BOM_View_Output "FALSE"))
   (Folder "Outputs"
     (File ".\sdhcalfeb.drc"
       (Type "Report"))
@@ -99,6 +113,8 @@
     (File ".\pad30x30v2.tcl"
       (Type "Report"))
     (File ".\pad30x30v2.csv"
+      (Type "Report"))
+    (File ".\sdhcalfeb.bom"
       (Type "Report")))
   (Folder "Referenced Projects")
   (PartMRUSelector
@@ -294,8 +310,7 @@
          "d:\cadence_workspace\cadence library\capture library\my_sch_library.olb")
       (Path "Outputs")
       (Select "Design Resources"
-         "d:\myproject\sdhcal_daq\pcb&schematic\sdhcalfeb\capture\sdhcalfeb.dsn"
-         "ASIC_A1" "Analog Input"))
+         "d:\myproject\sdhcal_daq\pcb&schematic\sdhcalfeb\capture\sdhcalfeb.dsn"))
     (HierarchyView)
     (Doc
       (Type "COrCapturePMDoc")
@@ -327,8 +342,8 @@
     (Doc
       (Type "COrSchematicDoc")
       (Frame
-        (Placement "44 2 3 -1 -1 -8 -31 208 1844 208 668")
-        (Scroll "-689 -9")
+        (Placement "44 0 1 -1 -1 -8 -31 208 1844 208 668")
+        (Scroll "-577 0")
         (Zoom "19")
         (Occurrence "/"))
       (Path
@@ -339,12 +354,210 @@
       (Type "COrSchematicDoc")
       (Frame
         (Placement "44 0 1 -1 -1 -8 -31 0 1636 0 460")
-        (Scroll "-39 220")
+        (Scroll "-39 0")
         (Zoom "100")
         (Occurrence "/ASIC_A1"))
       (Path
          "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCALFEB\CAPTURE\SDHCALFEB.DSN")
       (Schematic "ASIC_A1")
-      (Page "Analog Input")))
+      (Page "Analog Input"))
+    (Doc
+      (Type "COrSchematicDoc")
+      (Frame
+        (Placement "44 0 1 -1 -1 -8 -31 156 1792 156 616")
+        (Scroll "-39 0")
+        (Zoom "100")
+        (Occurrence "/ASIC_A2"))
+      (Path
+         "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCALFEB\CAPTURE\SDHCALFEB.DSN")
+      (Schematic "ASIC_A2")
+      (Page "Analog Input"))
+    (Doc
+      (Type "COrSchematicDoc")
+      (Frame
+        (Placement "44 0 1 -1 -1 -8 -31 26 1714 26 354")
+        (Scroll "0 796")
+        (Zoom "200")
+        (Occurrence "/Power"))
+      (Path
+         "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCALFEB\CAPTURE\SDHCALFEB.DSN")
+      (Schematic "Power")
+      (Page "Analog Power"))
+    (Doc
+      (Type "COrSchematicDoc")
+      (Frame
+        (Placement "44 0 1 -1 -1 -8 -31 52 1740 52 380")
+        (Scroll "0 523")
+        (Zoom "100")
+        (Occurrence "/Interface To DAQ"))
+      (Path
+         "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCALFEB\CAPTURE\SDHCALFEB.DSN")
+      (Schematic "Interface To DAQ")
+      (Page "Interface To DAQ"))
+    (Doc
+      (Type "COrSchematicDoc")
+      (Frame
+        (Placement "44 0 1 -1 -1 -8 -31 78 1766 78 406")
+        (Scroll "516 573")
+        (Zoom "100")
+        (Occurrence "/Interface To DAQ"))
+      (Path
+         "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCALFEB\CAPTURE\SDHCALFEB.DSN")
+      (Schematic "Interface To DAQ")
+      (Page "Switcher"))
+    (Doc
+      (Type "COrSchematicDoc")
+      (Frame
+        (Placement "44 0 1 -1 -1 -8 -31 78 1766 78 406")
+        (Scroll "1096 1693")
+        (Zoom "200")
+        (Occurrence "/Pad Array"))
+      (Path
+         "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCALFEB\CAPTURE\SDHCALFEB.DSN")
+      (Schematic "Pad Array")
+      (Page "Pad Array 4"))
+    (Doc
+      (Type "COrSchematicDoc")
+      (Frame
+        (Placement "44 0 1 -1 -1 -8 -31 182 1818 182 642")
+        (Scroll "-214 0")
+        (Zoom "100")
+        (Occurrence "/ASIC_A3"))
+      (Path
+         "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCALFEB\CAPTURE\SDHCALFEB.DSN")
+      (Schematic "ASIC_A3")
+      (Page "Chip"))
+    (Doc
+      (Type "COrSchematicDoc")
+      (Frame
+        (Placement "44 0 1 -1 -1 -8 -31 208 1844 208 668")
+        (Scroll "-214 15")
+        (Zoom "100")
+        (Occurrence "/Interface To DAQ"))
+      (Path
+         "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCALFEB\CAPTURE\SDHCALFEB.DSN")
+      (Schematic "Interface To DAQ")
+      (Page "LVDS Buffer"))
+    (Doc
+      (Type "COrSchematicDoc")
+      (Frame
+        (Placement "44 0 1 -1 -1 -8 -31 0 1636 0 460")
+        (Scroll "-214 0")
+        (Zoom "100")
+        (Occurrence "/ASIC_A1"))
+      (Path
+         "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCALFEB\CAPTURE\SDHCALFEB.DSN")
+      (Schematic "ASIC_A1")
+      (Page "Chip"))
+    (Doc
+      (Type "COrSchematicDoc")
+      (Frame
+        (Placement "44 0 1 -1 -1 -8 -31 26 1662 26 486")
+        (Scroll "-97 105")
+        (Zoom "100")
+        (Occurrence "/ASIC_A4"))
+      (Path
+         "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCALFEB\CAPTURE\SDHCALFEB.DSN")
+      (Schematic "ASIC_A4")
+      (Page "Chip"))
+    (Doc
+      (Type "COrSchematicDoc")
+      (Frame
+        (Placement "44 0 1 -1 -1 -8 -31 52 1688 52 512")
+        (Scroll "-214 0")
+        (Zoom "100")
+        (Occurrence "/ASIC_A2"))
+      (Path
+         "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCALFEB\CAPTURE\SDHCALFEB.DSN")
+      (Schematic "ASIC_A2")
+      (Page "Chip"))
+    (Doc
+      (Type "COrSchematicDoc")
+      (Frame
+        (Placement "44 0 1 -1 -1 -8 -31 78 1714 78 538")
+        (Scroll "-214 0")
+        (Zoom "100")
+        (Occurrence "/ASIC_B2"))
+      (Path
+         "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCALFEB\CAPTURE\SDHCALFEB.DSN")
+      (Schematic "ASIC_B2")
+      (Page "Chip"))
+    (Doc
+      (Type "COrSchematicDoc")
+      (Frame
+        (Placement "44 0 1 -1 -1 -8 -31 104 1740 104 564")
+        (Scroll "-214 0")
+        (Zoom "100")
+        (Occurrence "/ASIC_B1"))
+      (Path
+         "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCALFEB\CAPTURE\SDHCALFEB.DSN")
+      (Schematic "ASIC_B1")
+      (Page "Chip"))
+    (Doc
+      (Type "COrSchematicDoc")
+      (Frame
+        (Placement "44 0 1 -1 -1 -8 -31 130 1766 130 590")
+        (Scroll "-214 0")
+        (Zoom "100")
+        (Occurrence "/ASIC_B3"))
+      (Path
+         "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCALFEB\CAPTURE\SDHCALFEB.DSN")
+      (Schematic "ASIC_B3")
+      (Page "Chip"))
+    (Doc
+      (Type "COrSchematicDoc")
+      (Frame
+        (Placement "44 0 1 -1 -1 -8 -31 156 1792 156 616")
+        (Scroll "-97 150")
+        (Zoom "100")
+        (Occurrence "/ASIC_B4"))
+      (Path
+         "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCALFEB\CAPTURE\SDHCALFEB.DSN")
+      (Schematic "ASIC_B4")
+      (Page "Chip"))
+    (Doc
+      (Type "COrSchematicDoc")
+      (Frame
+        (Placement "44 0 1 -1 -1 -8 -31 182 1818 182 642")
+        (Scroll "-97 0")
+        (Zoom "100")
+        (Occurrence "/ASIC_D1"))
+      (Path
+         "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCALFEB\CAPTURE\SDHCALFEB.DSN")
+      (Schematic "ASIC_D1")
+      (Page "Chip"))
+    (Doc
+      (Type "COrSchematicDoc")
+      (Frame
+        (Placement "44 0 1 -1 -1 -8 -31 208 1844 208 668")
+        (Scroll "-97 0")
+        (Zoom "100")
+        (Occurrence "/ASIC_D3"))
+      (Path
+         "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCALFEB\CAPTURE\SDHCALFEB.DSN")
+      (Schematic "ASIC_D3")
+      (Page "Chip"))
+    (Doc
+      (Type "COrSchematicDoc")
+      (Frame
+        (Placement "44 0 1 -1 -1 -8 -31 0 1636 0 460")
+        (Scroll "-97 0")
+        (Zoom "100")
+        (Occurrence "/ASIC_D2"))
+      (Path
+         "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCALFEB\CAPTURE\SDHCALFEB.DSN")
+      (Schematic "ASIC_D2")
+      (Page "Chip"))
+    (Doc
+      (Type "COrSchematicDoc")
+      (Frame
+        (Placement "44 2 3 -1 -1 -8 -31 26 1662 26 486")
+        (Scroll "-209 0")
+        (Zoom "100")
+        (Occurrence "/ASIC_D4"))
+      (Path
+         "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCALFEB\CAPTURE\SDHCALFEB.DSN")
+      (Schematic "ASIC_D4")
+      (Page "Chip")))
   (MPSSessionName "wyu08")
   (ISPCBBASICLICENSE "false"))
