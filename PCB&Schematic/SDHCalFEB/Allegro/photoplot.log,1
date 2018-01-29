@@ -4,7 +4,7 @@
 (                                                                     )
 (    Drawing          : SDHCalFEB.brd                                 )
 (    Software Version : 16.6S025                                      )
-(    Date/Time        : Fri Jan 26 09:55:43 2018                      )
+(    Date/Time        : Mon Jan 29 16:32:14 2018                      )
 (                                                                     )
 (---------------------------------------------------------------------)
 
@@ -13,23 +13,17 @@
 
 
 
-
- Can't open parameter file ... using default values:
-     DEVICE-TYPE        GERBER6X00
-     G-CODES            NO
-     STATIONS-PER-WHEEL 24
-     FILM-SIZE          24000 16000
-     COORDINATES        ABSOLUTE
-     OUTPUT-UNITS       INCHES
-     FORMAT             5.3
-     ABORT-ON-ERROR     abort film & continue
-     SUPPRESS-LEAD-ZEROES     YES
-     SUPPRESS-TRAIL-ZEROES    NO
-     OPTIMIZE           YES
-     SUPPRESS-EQUAL     YES
-     SCALE              1.0
-
-
+Results from parameter file ...
+    DEVICE-TYPE           GERBER_RS274X
+    OUTPUT-UNITS          INCHES
+    FILM-SIZE             2400000 1600000
+    FORMAT                2.5
+    ABORT-ON-ERROR        NO
+    SCALE                 1
+    SUPPRESS-LEAD-ZEROES  YES
+    SUPPRESS-TRAIL-ZEROES NO
+    SUPPRESS-EQUAL        YES
+    UNDEF-APT-CONT        NO
 
 
 ================================================================
@@ -197,7 +191,7 @@ negative shape outline will be determined by Board Outline
   CIRCLE     0.17600                                  DARK 
   CIRCLE     0.23622                                  DARK 
 
-     art02 created with warnings
+     art02 created.
 
 
 ================================================================
@@ -257,9 +251,6 @@ negative shape outline will be determined by Board Outline
   Suppress unconnected internal pads  NO
   Draw holes only                     NO
 
-    WARNING: Film contains objects with associated DRCs (6).
-           In the design editor view this film and enable visibility for the
-           associated DRC layer. Verify the DRCs are approved exceptions to your rules.
 
 
   APERTURES USED:
@@ -277,7 +268,7 @@ negative shape outline will be determined by Board Outline
   CIRCLE     0.17600                                  DARK 
   CIRCLE     0.23622                                  DARK 
 
-     art04 created with warnings
+     art04 created.
 
 
 ================================================================
@@ -314,7 +305,7 @@ negative shape outline will be determined by Board Outline
   CIRCLE     0.17600                                  DARK 
   CIRCLE     0.23622                                  DARK 
 
-     art05 created with warnings
+     art05 created.
 
 
 ================================================================
@@ -359,7 +350,7 @@ negative shape outline will be determined by Board Outline
   RECTANGLE  0.06000     x 0.12500      90.000 NO     DARK 
   RECTANGLE  0.08000     x 0.09000      90.000 NO     DARK 
 
-     art10 created with warnings
+     art10 created.
 
 
 ================================================================
@@ -388,6 +379,7 @@ negative shape outline will be determined by Board Outline
   CIRCLE     0.07090                                  DARK 
   CIRCLE     0.12000                                  DARK 
   CIRCLE     0.17600                                  DARK 
+  CIRCLE     0.24600                                  DARK 
   SQUARE     0.03350                     0.000 NO     DARK 
   SQUARE     0.04400                     0.000 NO     DARK 
   SQUARE     0.07000                     0.000 NO     DARK 
@@ -438,7 +430,7 @@ negative shape outline will be determined by Board Outline
   OBLONG     0.01500     x 0.03700       0.000 NO     DARK 
   OBLONG     0.01500     x 0.03700      90.000 NO     DARK 
 
-     soldtop created with warnings
+     soldtop created.
 
 
 ================================================================
@@ -468,6 +460,7 @@ negative shape outline will be determined by Board Outline
   CIRCLE     0.09000                                  DARK 
   CIRCLE     0.12000                                  DARK 
   CIRCLE     0.17600                                  DARK 
+  CIRCLE     0.24600                                  DARK 
   SQUARE     0.12000                     0.000 NO     DARK 
   SQUARE     0.38189                     0.000 NO     DARK 
   RECTANGLE  0.03800     x 0.04000       0.000 NO     DARK 
@@ -477,7 +470,7 @@ negative shape outline will be determined by Board Outline
   RECTANGLE  0.07000     x 0.13500      90.000 NO     DARK 
   RECTANGLE  0.09000     x 0.10000      90.000 NO     DARK 
 
-     soldbottom created with warnings
+     soldbottom created.
 
 
 ================================================================
@@ -511,7 +504,7 @@ negative shape outline will be determined by Board Outline
   CIRCLE     0.00800                                  DARK 
   CIRCLE     0.01968                                  DARK 
 
-     silktop created with warnings
+     silktop created.
 
 
 ================================================================
@@ -543,7 +536,7 @@ negative shape outline will be determined by Board Outline
   CIRCLE     0.00787                                  DARK 
   CIRCLE     0.00800                                  DARK 
 
-     silkbottom created with warnings
+     silkbottom created.
 
 
 ================================================================
@@ -620,7 +613,7 @@ negative shape outline will be determined by Board Outline
   OBLONG     0.01000     x 0.03200       0.000 NO     DARK 
   OBLONG     0.01000     x 0.03200      90.000 NO     DARK 
 
-     pastetop created with warnings
+     pastetop created.
 
 
 ================================================================
@@ -657,7 +650,7 @@ negative shape outline will be determined by Board Outline
   RECTANGLE  0.06000     x 0.12500      90.000 NO     DARK 
   RECTANGLE  0.08000     x 0.09000      90.000 NO     DARK 
 
-     pastebottom created with warnings
+     pastebottom created.
 
 
 ================================================================
@@ -778,7 +771,7 @@ negative shape outline will be determined by Board Outline
   OBLONG     0.01000     x 0.03200       0.000 NO     DARK 
   OBLONG     0.01000     x 0.03200      90.000 NO     DARK 
 
-     adtop created with warnings
+     adtop created.
 
 
 ================================================================
@@ -822,7 +815,7 @@ negative shape outline will be determined by Board Outline
   RECTANGLE  0.06000     x 0.12500      90.000 NO     DARK 
   RECTANGLE  0.08000     x 0.09000      90.000 NO     DARK 
 
-     adbottom created with warnings
+     adbottom created.
 
 
 ================================================================
@@ -895,7 +888,7 @@ negative shape outline will be determined by Board Outline
   CIRCLE     0.17600                                  DARK 
   CIRCLE     0.23622                                  DARK 
 
-     art08 created with warnings
+     art08 created.
 
 
 ================================================================
@@ -931,29 +924,29 @@ negative shape outline will be determined by Board Outline
   CIRCLE     0.17600                                  DARK 
   CIRCLE     0.23622                                  DARK 
 
-     art09 created with warnings
+     art09 created.
 
 
 ------------------------------------------------------
  SUMMARY:
         art01 created with warnings
         plane03 created with warnings
-        art02 created with warnings
+        art02 created.
         plane07 created with warnings
-        art04 created with warnings
-        art05 created with warnings
-        art10 created with warnings
-        soldtop created with warnings
-        soldbottom created with warnings
-        silktop created with warnings
-        silkbottom created with warnings
-        pastetop created with warnings
-        pastebottom created with warnings
+        art04 created.
+        art05 created.
+        art10 created.
+        soldtop created.
+        soldbottom created.
+        silktop created.
+        silkbottom created.
+        pastetop created.
+        pastebottom created.
         drill created with warnings
-        adtop created with warnings
-        adbottom created with warnings
+        adtop created.
+        adbottom created.
         plane06 created with warnings
-        art08 created with warnings
-        art09 created with warnings
+        art08 created.
+        art09 created.
 
  ARTWORK had warnings

@@ -1,5 +1,5 @@
 FILE_TYPE=LIBRARY_PARTS;
-{ Using PSTWRITER 16.6.0 d001Jan-24-2018 at 11:28:18}
+{ Using PSTWRITER 16.6.0 d001Jan-29-2018 at 11:03:24}
 primitive 'CAPACITOR NP_SC0603_10NF';
   pin
     '1':
@@ -135,7 +135,7 @@ primitive 'CAP NP_SC1206_47UF';
     VALUE='47uF';
   end_body;
 end_primitive;
-primitive 'C_SC0805_47UF';
+primitive 'C_SC1206_47UF';
   pin
     '1':
       PIN_NUMBER='(1)';
@@ -146,7 +146,7 @@ primitive 'C_SC0805_47UF';
   end_pin;
   body
     PART_NAME='C';
-    JEDEC_TYPE='SC0805';
+    JEDEC_TYPE='SC1206';
     VALUE='47uF';
   end_body;
 end_primitive;
@@ -199,54 +199,6 @@ primitive 'LEMO_SMA_SMD_SMA_SMD';
     PART_NAME='LEMO';
     JEDEC_TYPE='SMA_SMD';
     VALUE='SMA_SMD';
-  end_body;
-end_primitive;
-primitive 'LEMO_SMA_SMD_SMA SMD';
-  pin
-    '1':
-      PIN_NUMBER='(1)';
-      PINUSE='UNSPEC';
-    '2':
-      PIN_NUMBER='(2)';
-      PINUSE='UNSPEC';
-    '3':
-      PIN_NUMBER='(3)';
-      PINUSE='UNSPEC';
-    '4':
-      PIN_NUMBER='(4)';
-      PINUSE='UNSPEC';
-    '5':
-      PIN_NUMBER='(5)';
-      PINUSE='UNSPEC';
-  end_pin;
-  body
-    PART_NAME='LEMO';
-    JEDEC_TYPE='SMA_SMD';
-    VALUE='SMA SMD';
-  end_body;
-end_primitive;
-primitive 'LEMO_SMA_SMD_SMASMD';
-  pin
-    '1':
-      PIN_NUMBER='(1)';
-      PINUSE='UNSPEC';
-    '2':
-      PIN_NUMBER='(2)';
-      PINUSE='UNSPEC';
-    '3':
-      PIN_NUMBER='(3)';
-      PINUSE='UNSPEC';
-    '4':
-      PIN_NUMBER='(4)';
-      PINUSE='UNSPEC';
-    '5':
-      PIN_NUMBER='(5)';
-      PINUSE='UNSPEC';
-  end_pin;
-  body
-    PART_NAME='LEMO';
-    JEDEC_TYPE='SMA_SMD';
-    VALUE='SMASMD';
   end_body;
 end_primitive;
 primitive 'CONN_1_ERNI154744FEMALECONNECTO';
@@ -514,30 +466,6 @@ primitive 'CONN_1_ERNI154744FEMALECONNECTO';
     PART_NAME='CONN_1';
     JEDEC_TYPE='ERNI154744FemaleConnector';
     VALUE='CONN';
-  end_body;
-end_primitive;
-primitive 'LEMO_SMA_SMD_SMA';
-  pin
-    '1':
-      PIN_NUMBER='(1)';
-      PINUSE='UNSPEC';
-    '2':
-      PIN_NUMBER='(2)';
-      PINUSE='UNSPEC';
-    '3':
-      PIN_NUMBER='(3)';
-      PINUSE='UNSPEC';
-    '4':
-      PIN_NUMBER='(4)';
-      PINUSE='UNSPEC';
-    '5':
-      PIN_NUMBER='(5)';
-      PINUSE='UNSPEC';
-  end_pin;
-  body
-    PART_NAME='LEMO';
-    JEDEC_TYPE='SMA_SMD';
-    VALUE='SMA';
   end_body;
 end_primitive;
 primitive '4 HEADER_SIP-4P-156_DC JACK';
