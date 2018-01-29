@@ -1,29 +1,12 @@
 #-----------------------------------------------------------
-# Vivado v2016.3 (64-bit)
-# SW Build 1682563 on Mon Oct 10 19:07:27 MDT 2016
-# IP Build 1681267 on Mon Oct 10 21:28:31 MDT 2016
-# Start of session at: Sat May 20 19:58:56 2017
-# Process ID: 2568
-# Current directory: D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1
-# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent10904 D:\Vivado_workspace\SDHCAL_DAQ2V0_SCurveTest_20170520_1\SDHCAL_DAQ2V0.xpr
-# Log file: D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/vivado.log
-# Journal file: D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1\vivado.jou
+# Vivado v2017.2 (64-bit)
+# SW Build 1909853 on Thu Jun 15 18:39:09 MDT 2017
+# IP Build 1909766 on Thu Jun 15 19:58:00 MDT 2017
+# Start of session at: Mon Jan 29 09:29:03 2018
+# Process ID: 629868
+# Current directory: D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent998552 D:\MyProject\SDHCAL_DAQ\SDHCAL_DAQ2V0_SCurveTest\SDHCAL_DAQ2V0.xpr
+# Log file: D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/vivado.log
+# Journal file: D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest\vivado.jou
 #-----------------------------------------------------------
 start_gui
-open_project D:/Vivado_workspace/SDHCAL_DAQ2V0_SCurveTest_20170520_1/SDHCAL_DAQ2V0.xpr
-reset_run synth_1
-launch_runs synth_1 -jobs 2
-wait_on_run synth_1
-open_run synth_1 -name synth_1
-reset_run synth_1
-launch_runs impl_1 -to_step write_bitstream -jobs 2
-wait_on_run impl_1
-write_cfgmem  -format mcs -size 16 -interface SPIx4 -loadbit "up 0x00000000 D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/SDHCAL_DAQ2V0.runs/impl_1/FPGA_TOP.bit " -checksum -disablebitswap -file "D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/MCS/FPGA_TOP_20170520wyu1.mcs"
-reset_run impl_1 -prev_step 
-launch_runs impl_1 -to_step write_bitstream -jobs 2
-wait_on_run impl_1
-write_cfgmem  -format mcs -size 16 -interface SPIx4 -loadbit "up 0x00000000 D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/SDHCAL_DAQ2V0.runs/impl_1/FPGA_TOP.bit " -checksum -disablebitswap -file "D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/MCS/FPGA_TOP_20170520wyu2.mcs"
-reset_run synth_1
-launch_runs impl_1 -to_step write_bitstream -jobs 2
-wait_on_run impl_1
-write_cfgmem  -format mcs -size 16 -interface SPIx4 -loadbit "up 0x00000000 D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/SDHCAL_DAQ2V0.runs/impl_1/FPGA_TOP.bit " -checksum -disablebitswap -file "D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/MCS/FPGA_TOP_20170520wyu3.mcs"
