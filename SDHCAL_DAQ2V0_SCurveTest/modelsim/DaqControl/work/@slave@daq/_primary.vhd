@@ -12,6 +12,7 @@ entity SlaveDaq is
         EndHoldTime     : in     vl_logic_vector(15 downto 0);
         RESET_B         : out    vl_logic;
         START_ACQ       : out    vl_logic;
+        ForceExternalRaz: out    vl_logic;
         StartReadout    : out    vl_logic;
         PWR_ON_A        : out    vl_logic;
         PWR_ON_D        : out    vl_logic;

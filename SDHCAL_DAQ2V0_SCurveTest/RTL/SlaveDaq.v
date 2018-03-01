@@ -288,7 +288,7 @@ module SlaveDaq(
 					end
 				end
 				OUT_TRIG_ID2:begin
-					if(DelayCount <= 16'b1) begin
+					if(DelayCount < 16'b1) begin
 						DelayCount <= DelayCount + 1'b1;
 						InternalData_en <= 1'b1;
 						State <= OUT_TRIG_ID2;
@@ -443,7 +443,7 @@ module SlaveDaq(
 			SlaveDaqData = TrigCounter_sync[15:0];
 			SlaveDaqData_en = InternalData_en;
 		end
-		if(State == END_DATA) begin
+		else if(State == END_DATA) begin
 			SlaveDaqData = 16'h0000;
 			SlaveDaqData_en = InternalData_en;
 		end

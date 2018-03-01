@@ -1,7 +1,7 @@
 Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 -----------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2016.3 (win64) Build 1682563 Mon Oct 10 19:07:27 MDT 2016
-| Date         : Mon Dec 04 10:11:23 2017
+| Date         : Thu Mar 01 20:18:07 2018
 | Host         : WYU running 64-bit major release  (build 9200)
 | Command      : report_methodology -file FPGA_TOP_methodology_drc_routed.rpt -rpx FPGA_TOP_methodology_drc_routed.rpx
 | Design       : FPGA_TOP
@@ -23,7 +23,7 @@ Table of Contents
           Floorplan: design_1
       Design limits: <entire design considered>
              Max violations: <unlimited>
-             Violations found: 84
+             Violations found: 85
 +-----------+----------+------------------------------------------------------+------------+
 | Rule      | Severity | Description                                          | Violations |
 +-----------+----------+------------------------------------------------------+------------+
@@ -31,7 +31,7 @@ Table of Contents
 | TIMING-6  | Warning  | No common primary clock between related clocks       | 2          |
 | TIMING-9  | Warning  | Unknown CDC Logic                                    | 1          |
 | TIMING-14 | Warning  | LUT on the clock tree                                | 2          |
-| TIMING-17 | Warning  | Non-clocked sequential cell                          | 38         |
+| TIMING-17 | Warning  | Non-clocked sequential cell                          | 39         |
 | TIMING-18 | Warning  | Missing input or output delay                        | 29         |
 | TIMING-24 | Warning  | Overridden Max delay datapath only                   | 4          |
 | TIMING-28 | Warning  | Auto-derived clock referenced by a timing constraint | 2          |
@@ -132,130 +132,135 @@ Related violations: <none>
 
 TIMING-17#13 Warning
 Non-clocked sequential cell  
-The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/START_ACQ_reg/C is not reached by a timing clock
+The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/MicrorocHit_reg/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#14 Warning
 Non-clocked sequential cell  
-The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[0]/C is not reached by a timing clock
+The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/START_ACQ_reg/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#15 Warning
 Non-clocked sequential cell  
-The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[10]/C is not reached by a timing clock
+The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[0]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#16 Warning
 Non-clocked sequential cell  
-The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[11]/C is not reached by a timing clock
+The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[10]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#17 Warning
 Non-clocked sequential cell  
-The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[12]/C is not reached by a timing clock
+The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[11]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#18 Warning
 Non-clocked sequential cell  
-The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[13]/C is not reached by a timing clock
+The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[12]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#19 Warning
 Non-clocked sequential cell  
-The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[14]/C is not reached by a timing clock
+The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[13]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#20 Warning
 Non-clocked sequential cell  
-The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[15]/C is not reached by a timing clock
+The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[14]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#21 Warning
 Non-clocked sequential cell  
-The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[16]/C is not reached by a timing clock
+The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[15]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#22 Warning
 Non-clocked sequential cell  
-The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[17]/C is not reached by a timing clock
+The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[16]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#23 Warning
 Non-clocked sequential cell  
-The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[18]/C is not reached by a timing clock
+The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[17]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#24 Warning
 Non-clocked sequential cell  
-The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[19]/C is not reached by a timing clock
+The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[18]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#25 Warning
 Non-clocked sequential cell  
-The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[1]/C is not reached by a timing clock
+The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[19]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#26 Warning
 Non-clocked sequential cell  
-The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[20]/C is not reached by a timing clock
+The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[1]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#27 Warning
 Non-clocked sequential cell  
-The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[21]/C is not reached by a timing clock
+The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[20]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#28 Warning
 Non-clocked sequential cell  
-The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[22]/C is not reached by a timing clock
+The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[21]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#29 Warning
 Non-clocked sequential cell  
-The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[23]/C is not reached by a timing clock
+The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[22]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#30 Warning
 Non-clocked sequential cell  
-The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[2]/C is not reached by a timing clock
+The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[23]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#31 Warning
 Non-clocked sequential cell  
-The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[3]/C is not reached by a timing clock
+The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[2]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#32 Warning
 Non-clocked sequential cell  
-The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[4]/C is not reached by a timing clock
+The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[3]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#33 Warning
 Non-clocked sequential cell  
-The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[5]/C is not reached by a timing clock
+The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[4]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#34 Warning
 Non-clocked sequential cell  
-The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[6]/C is not reached by a timing clock
+The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[5]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#35 Warning
 Non-clocked sequential cell  
-The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[7]/C is not reached by a timing clock
+The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[6]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#36 Warning
 Non-clocked sequential cell  
-The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[8]/C is not reached by a timing clock
+The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[7]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#37 Warning
 Non-clocked sequential cell  
-The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[9]/C is not reached by a timing clock
+The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[8]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#38 Warning
+Non-clocked sequential cell  
+The clock pin Microroc_u1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[9]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#39 Warning
 Non-clocked sequential cell  
 The clock pin Microroc_u1/MicrorocDaq/SlaveDaq_UsbStartStop_reg/C is not reached by a timing clock
 Related violations: <none>
