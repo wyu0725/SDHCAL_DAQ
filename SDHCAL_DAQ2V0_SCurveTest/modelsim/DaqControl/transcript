@@ -1,0 +1,51 @@
+# Compile of AutoDaq.v was successful.
+# Compile of DaqControl.v was successful.
+# Compile of DaqControl_tb.v was successful.
+# Compile of DaqSwitcher.v was successful.
+# Compile of SlaveDaq.v was successful.
+# 5 compiles, 0 failed with no errors. 
+vsim -gui -novopt work.DaqControl_tb
+# vsim -gui -novopt work.DaqControl_tb 
+# Refreshing D:\MyProject\SDHCAL_DAQ\SDHCAL_DAQ2V0_SCurveTest\modelsim\DaqControl\work.DaqControl_tb
+# Loading work.DaqControl_tb
+# Refreshing D:\MyProject\SDHCAL_DAQ\SDHCAL_DAQ2V0_SCurveTest\modelsim\DaqControl\work.DaqControl
+# Loading work.DaqControl
+# Refreshing D:\MyProject\SDHCAL_DAQ\SDHCAL_DAQ2V0_SCurveTest\modelsim\DaqControl\work.DaqSwitcher
+# Loading work.DaqSwitcher
+# Refreshing D:\MyProject\SDHCAL_DAQ\SDHCAL_DAQ2V0_SCurveTest\modelsim\DaqControl\work.AutoDaq
+# Loading work.AutoDaq
+# Refreshing D:\MyProject\SDHCAL_DAQ\SDHCAL_DAQ2V0_SCurveTest\modelsim\DaqControl\work.SlaveDaq
+# Loading work.SlaveDaq
+# ** Warning: (vsim-3017) D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/modelsim/DaqControl/DaqControl.v(198): [TFMPC] - Too few port connections. Expected 23, found 22.
+#         Region: /DaqControl_tb/uut/SlaveDaqControl
+# ** Warning: (vsim-3722) D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/modelsim/DaqControl/DaqControl.v(198): [TFMPC] - Missing connection for port 'ForceExternalRaz'.
+add wave sim:/DaqControl_tb/uut/*
+run
+run
+run
+run
+run
+run
+add wave sim:/DaqControl_tb/uut/*
+add wave sim:/DaqControl_tb/uut/SlaveDaqControl/*
+# Break key hit 
+restart
+# ** Warning: (vsim-3017) D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/modelsim/DaqControl/DaqControl.v(198): [TFMPC] - Too few port connections. Expected 23, found 22.
+#         Region: /DaqControl_tb/uut/SlaveDaqControl
+# ** Warning: (vsim-3722) D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/modelsim/DaqControl/DaqControl.v(198): [TFMPC] - Missing connection for port 'ForceExternalRaz'.
+run
+quit -sim
+# Compile of SlaveDaq.v was successful.
+vsim -gui -novopt work.DaqControl_tb
+# vsim -gui -novopt work.DaqControl_tb 
+# Loading work.DaqControl_tb
+# Loading work.DaqControl
+# Loading work.DaqSwitcher
+# Loading work.AutoDaq
+# Refreshing D:\MyProject\SDHCAL_DAQ\SDHCAL_DAQ2V0_SCurveTest\modelsim\DaqControl\work.SlaveDaq
+# Loading work.SlaveDaq
+# ** Warning: (vsim-3017) D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/modelsim/DaqControl/DaqControl.v(198): [TFMPC] - Too few port connections. Expected 23, found 22.
+#         Region: /DaqControl_tb/uut/SlaveDaqControl
+# ** Warning: (vsim-3722) D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/modelsim/DaqControl/DaqControl.v(198): [TFMPC] - Missing connection for port 'ForceExternalRaz'.
+add wave sim:/DaqControl_tb/uut/*
+run

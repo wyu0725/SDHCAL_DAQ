@@ -28,8 +28,8 @@ namespace USB_DAQ
     {
         private USBDeviceList usbDevices;
         private CyUSBDevice myDevice;
-        private CyBulkEndPoint BulkInEndPt;
-        private CyBulkEndPoint BulkOutEndPt;
+        private static CyBulkEndPoint BulkInEndPt;
+        private static CyBulkEndPoint BulkOutEndPt;
         private const int VID = 0x04B4;
         private const int PID = 0x1004;
         private string rx_Command = @"\b[0-9a-fA-F]{4}\b";//match 16 bit Hex
@@ -253,7 +253,7 @@ namespace USB_DAQ
             return buffer;
         }
         //Command send method
-        private bool CommandSend(byte[] OutData, int xferLen)
+        public static bool CommandSend(byte[] OutData, int xferLen)
         {
             bool bResult = false;
             if (BulkInEndPt == null)
