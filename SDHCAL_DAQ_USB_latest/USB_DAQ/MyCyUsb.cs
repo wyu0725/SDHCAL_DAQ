@@ -61,6 +61,13 @@ namespace USB_DAQ
             }
             return buffer;
         }
+        public byte[] ConstCommandByteArray(int Command)
+        {
+            byte[] buffer = new byte[2];
+            buffer[1] = (byte)Command;
+            buffer[0] = (byte)(Command >> 8);
+            return buffer;
+        }
         public bool CommandSend(byte[] OutData, int xferLen)
         {
             bool bResult = false;
@@ -73,6 +80,10 @@ namespace USB_DAQ
                 bResult = BulkOutEndPt.XferData(ref OutData, ref xferLen);
             }
             return bResult;
+        }
+        public bool CommandSend(byte[] OutData)
+        {
+            return CommandSend(OutData, OutData.Length);
         }
         public bool DataRecieve(byte[] InData, int xferLen)
         {
