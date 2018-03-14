@@ -22,7 +22,7 @@ namespace USB_DAQ
         }
         private int PID { get; set; }
         private int VID { get; set; }
-        private USBDeviceList usbDevices = new USBDeviceList(CyConst.DEVICES_CYUSB);
+        public USBDeviceList usbDevices = new USBDeviceList(CyConst.DEVICES_CYUSB);
         private CyUSBDevice myDevice;
         private CyBulkEndPoint BulkInEndPt;
         private CyBulkEndPoint BulkOutEndPt;
@@ -64,8 +64,8 @@ namespace USB_DAQ
         public byte[] ConstCommandByteArray(int Command)
         {
             byte[] buffer = new byte[2];
-            buffer[1] = (byte)Command;
-            buffer[0] = (byte)(Command >> 8);
+            buffer[0] = (byte)Command;
+            buffer[1] = (byte)(Command >> 8);
             return buffer;
         }
         public bool CommandSend(byte[] OutData, int xferLen)
