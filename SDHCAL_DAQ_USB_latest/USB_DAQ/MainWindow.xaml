@@ -838,8 +838,12 @@
                                 <ComboBoxItem Content="NOR64"  IsSelected="True"/>
                             </ComboBox>
                             <Button x:Name="btnTRIG_EXT_EN" Content="TRIG EXT" HorizontalAlignment="Left" Margin="0,400,0,0" VerticalAlignment="Top" Width="75" Height="24" Click="btnTRIG_EXT_EN_Click"/>
+                            <TextBox x:Name="txtTestLed" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="185,337,0,0" TextWrapping="Wrap" Text="7" VerticalAlignment="Top" Width="120"/>
+                            <Button x:Name="TestLed" Content="LED" Grid.Column="1" HorizontalAlignment="Left" Margin="305,341,0,0" VerticalAlignment="Top" Width="75" Click="TestLed_Click"/>
+
                         </Grid>
                     </TabItem>
+                    
                 </TabControl>
             </Grid>
         </GroupBox>
