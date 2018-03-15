@@ -183,6 +183,13 @@ namespace USB_DAQ
             byte[] CommandBytes = usbInterface.ConstCommandByteArray(Nor64OrSingleValue);
             return usbInterface.CommandSend(CommandBytes, CommandBytes.Length);
         }
+        /// <summary>
+        /// Set power pulsing in SC. 0 for disable and 1 for enable
+        /// </summary>
+        /// <param name="PowerPulsing"></param>
+        /// <param name="PowerPulsingIndex"></param>
+        /// <param name="usbInterface"></param>
+        /// <returns></returns>
         public bool SetPowerPulsing(int PowerPulsing, int PowerPulsingIndex, MyCyUsb usbInterface)
         {
             int PowerPulsingValue = HexToInt(CommandHeader.PowerPulsiungHeader) + PowerPulsingIndex + PowerPulsing;
@@ -248,6 +255,12 @@ namespace USB_DAQ
                 return false;
             }
         }
+        /// <summary>
+        /// True for enable and false for diasbale
+        /// </summary>
+        /// <param name="Enable"></param>
+        /// <param name="usbInterface"></param>
+        /// <returns></returns>
         public bool PowerPulsingCheck(bool Enable, MyCyUsb usbInterface)
         {
             int PowerPulsingCheckValue = HexToInt(CommandHeader.PowerPulsingEnableHeader) + Convert.ToInt16(Enable);
@@ -488,6 +501,205 @@ namespace USB_DAQ
         {
             int ReadRegOrSCValue = HexToInt(CommandHeader.SlowControlOrReadRegisterHeader) + Convert.ToInt16(ReadRegOrSC);
             return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(ReadRegOrSCValue));
+        }
+        public bool SetChannelCalibration(MyCyUsb usbInterface, params byte[] CalibrationData)
+        {
+            byte[] ChannelCaliCommandHeader = GenerateCaliCommandHeader();
+            byte CaliByte1, CaliByte2;
+            byte[] CommandBytes = new byte[2];
+            bool bResult;
+            for (int j = 0; j < 64; j++)
+            {
+                CaliByte1 = (byte)(ChannelCaliCommandHeader[j] >> 4 + 0xC0);
+                CaliByte2 = (byte)(ChannelCaliCommandHeader[j] << 4 + CalibrationData[j]);
+                CommandBytes = usbInterface.ConstCommandByteArray(CaliByte1, CaliByte2);
+                bResult = usbInterface.CommandSend(CommandBytes);
+                if(!bResult)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+        private byte[] GenerateCaliCommandHeader()
+        {
+            string[] Chn = new string[64];
+            byte[] ChannelCaliCommandHeader = new byte[64];
+            for (int i = 0; i < 64; i++)
+            {
+                Chn[i] = string.Format("Chn{0}", i);
+                ChannelCaliCommandHeader[i] = (byte)(0xC0 + i);
+            }
+            return ChannelCaliCommandHeader;
+        }
+        /// <summary>
+        /// 0: Unmask all channels, 1: Mask selected cahnnel, 2: Unmask selected channel
+        /// </summary>
+        /// <param name="MaskParameter"></param>
+        /// <param name="usbInterface"></param>
+        /// <returns></returns>
+        public bool SelectMaskOrUnmask(int MaskParameter, MyCyUsb usbInterface)
+        {
+            int MaskOrUnmaskValue = HexToInt(CommandHeader.SelectMaskOrUnmaskHeader) + MaskParameter;
+            return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(MaskOrUnmaskValue));
+        }
+        public bool SetMaskChannel(int MaskChannel, MyCyUsb usbInterface)
+        {
+            int MaskChannelValue = HexToInt(CommandHeader.MaskChannelHeader) + MaskChannel;
+            return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(MaskChannelValue));
+        }
+        /// <summary>
+        /// 0: None, 1: Discri1, 2: Discri1, 3: Discri0,1, 4: Discri2, 5: Discri0,2 6: Discri1,2 7: Discri0,1,2
+        /// </summary>
+        /// <param name="MaskDiscri"></param>
+        /// <param name="usbInterface"></param>
+        /// <returns></returns>
+        public bool SelectMaskDiscriminator(int MaskDiscri, MyCyUsb usbInterface)
+        {
+            int MaskDiscriValue = HexToInt(CommandHeader.SelectMaskDiscriminatorHeader) + MaskDiscri;
+            return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(MaskDiscriValue));
+        }
+        public bool SelectOperationMode(int OperationMode, MyCyUsb usbInterface)
+        {
+            int OperationModeValue = OperationMode + HexToInt(CommandHeader.OperationModeHeader);
+            return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(OperationModeValue));
+        }
+        /// <summary>
+        /// False for AutoDaq, true for SlaveDaq
+        /// </summary>
+        /// <param name="AcquisitionMode"></param>
+        /// <param name="usbInterface"></param>
+        /// <returns></returns>
+        public bool SelectAcquisitionMode(bool AcquisitionMode, MyCyUsb usbInterface)
+        {
+            int AcquisitionModeValue = Convert.ToInt16(AcquisitionMode) + HexToInt(CommandHeader.AcquisitionModeHeader);
+            return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(AcquisitionModeValue));
+        }
+        private bool SetSCTestStartDacCode(int StartDac, MyCyUsb usbInterface)
+        {
+            int StartDacValue1 = StartDac & 15 + HexToInt(CommandHeader.SCTestStartDacHeader1);
+            int StartDacValue2 = ((StartDac >> 4) & 15) + HexToInt(CommandHeader.SCTestStartDacHeader2);
+            int StartDacValue3 = ((StartDac >> 8) & 3) + HexToInt(CommandHeader.SCTestStartDacHeader3);
+            bool bResult = usbInterface.CommandSend(usbInterface.ConstCommandByteArray(StartDacValue1));
+            if (!bResult)
+            {
+                return false;
+            }
+            bResult = usbInterface.CommandSend(usbInterface.ConstCommandByteArray(StartDacValue2));
+            if (!bResult)
+            {
+                return false;
+            }
+            return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(StartDacValue3));
+        }
+        private bool SetSCTestStopDacCode(int EndDac, MyCyUsb usbInterface)
+        {
+            int EndDacValue1 = (EndDac & 15) + HexToInt(CommandHeader.SCTestStopDacHeader1);
+            int EndDacValue2 = ((EndDac >> 4) & 15) + HexToInt(CommandHeader.SCTestStopDacHeader2);
+            int EndDacValue3 = ((EndDac >> 8) & 3) + HexToInt(CommandHeader.SCTestStopDacHeader3);
+            bool bResult = usbInterface.CommandSend(usbInterface.ConstCommandByteArray(EndDacValue1));
+            if(!bResult)
+            {
+                return false;
+            }
+            bResult = usbInterface.CommandSend(usbInterface.ConstCommandByteArray(EndDacValue2));
+            if(!bResult)
+            {
+                return false;
+            }
+            return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(EndDacValue3));
+        }
+        public bool SetSCTestStartAndStopDacCode(string StartDac, string StopDac, MyCyUsb usbInterface, out bool IllegalInput)
+        {
+            if(CheckIntegerLegal(StartDac) 
+                && CheckIntegerLegal(StopDac) 
+                && int.Parse(StartDac) < 1023 
+                && int.Parse(StopDac) < 1024 
+                && int.Parse(StartDac) < int.Parse(StopDac))
+            {
+                IllegalInput = false;
+                return SetSCTestStartDacCode(int.Parse(StartDac), usbInterface) && SetSCTestStopDacCode(int.Parse(StopDac), usbInterface);
+            }
+            else
+            {
+                IllegalInput = true;
+                return false;
+            }
+        }
+        public bool SetSCTestDacInterval(string DacInterval, MyCyUsb usbInterface, out bool IllegalInput)
+        {
+            if(CheckIntegerLegal(DacInterval) && int.Parse(DacInterval) < 1023)
+            {
+                IllegalInput = false;
+                int DacIntervalValue = int.Parse(DacInterval);
+                int DacIntervalValue1 = (DacIntervalValue & 15) + HexToInt(CommandHeader.SCTestStopDacInterval1);
+                int DacIntervalValue2 = ((DacIntervalValue >> 4) & 15) + HexToInt(CommandHeader.SCTestStopDacInterval2);
+                int DacIntervalValue3 = ((DacIntervalValue >> 8) & 3) + HexToInt(CommandHeader.SCTestStopDacInterval3);
+                bool bResult = usbInterface.CommandSend(usbInterface.ConstCommandByteArray(DacIntervalValue1));
+                if(!bResult)
+                {
+                    return false;
+                }
+                bResult = usbInterface.CommandSend(usbInterface.ConstCommandByteArray(DacIntervalValue2));
+                if(!bResult)
+                {
+                    return false;
+                }
+                return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(DacIntervalValue3));
+            }
+            else
+            {
+                IllegalInput = true;
+                return false;
+            }
+        }
+        public bool SetSCTestSingleChannelNumber(string SCTestChannel, MyCyUsb usbInterface, out bool IllegalInput)
+        {
+            if(CheckIntegerLegal(SCTestChannel) && int.Parse(SCTestChannel) < 65)
+            {
+                IllegalInput = false;
+                int SCTestChannelValue = int.Parse(SCTestChannel) - 1 + HexToInt(CommandHeader.SCTestSingleChannelNumberHeader);
+                return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(SCTestChannelValue));
+            }
+            else
+            {
+                IllegalInput = true;
+                return false;
+            }
+        }
+        public bool SelectSCTestSingleOrAllChannel(int SingleOrAllChannel, MyCyUsb usbInterface)
+        {
+            int SingleOrAllChannelValue = SingleOrAllChannel + HexToInt(CommandHeader.SCTestSingleOrAllChannelHeader);
+            return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(SingleOrAllChannelValue));
+        }
+        public bool SelectSCTestSignalCTestOrInput(int CTestOrInput, MyCyUsb usbInterface)
+        {
+            int CTestOrInputValue = CTestOrInput + HexToInt(CommandHeader.SCTestSignalCTestOrInputHeader);
+            return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(CTestOrInputValue));
+        }
+        public bool SetTriggerDelayTime(string TriggerDelayTime, MyCyUsb usbInterface, out bool IllegalInput)
+        {
+            if(CheckIntegerLegal(TriggerDelayTime) && int.Parse(TriggerDelayTime) < 400)
+            {
+                IllegalInput = false;
+                int TriggerDelayTimeValue = int.Parse(TriggerDelayTime) / 25 + HexToInt(CommandHeader.TriggerDelayTimeHeader);
+                return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(TriggerDelayTimeValue));
+            }
+            else
+            {
+                IllegalInput = true;
+                return false;
+            }
+        }
+        public bool SetSCTestChannelMaskMode(int ChannelMaskMode, MyCyUsb usbInterface)
+        {
+            int ChannelMaskModeValue = ChannelMaskMode + HexToInt(CommandHeader.SCTestChannelMaskModeHeader);
+            return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(ChannelMaskModeValue));
+        }
+        public bool SelectSCTestTrigMaxCount(int TrigMaxCount, MyCyUsb usbInterface)
+        {
+            int TrigMaxCountValue = TrigMaxCount + HexToInt(CommandHeader.SCTestTrigMaxCountHeader);
+            return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(TrigMaxCountValue));
         }
     }
 }
