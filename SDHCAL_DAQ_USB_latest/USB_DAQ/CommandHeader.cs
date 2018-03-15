@@ -29,6 +29,9 @@ namespace USB_DAQ
         public const string AsicHeader = "AB00";
         public const string LatchedOrDirectHeader = "ACA0";
         public const string Nor64OrSingleHeader = "ACB0";
+        public const string MaskChannelHeader = "AD00";
+        public const string SelectMaskDiscriminatorHeader = "AE00";
+        public const string SelectMaskOrUnmaskHeader = "AE10";
         public const string LedHeader = "B000";
         public const string AcquisitionTimeHeader_LowBits = "B100";
         public const string AcquisitionTimeHeader_HighBits = "B200";
@@ -38,11 +41,28 @@ namespace USB_DAQ
         public const string Dac2Header = "C800";
         public const string LoadSlowControlParameter = "D0A2";
         public const string HoldOutputHeader = "D1B0";
+        public const string AcquisitionModeHeader = "E000";
+        public const string OperationModeHeader = "E0A0";
+        public const string SCTestSingleOrAllChannelHeader = "E0B0";
+        public const string SCTestSignalCTestOrInputHeader = "E0C0";
         public const string TrigOrCounterModeHeader = "E0D0";
+        public const string SCTestSingleChannelNumberHeader = "E100";
+        public const string SCTestTrigMaxCountHeader = "E200";
+        public const string SCTestStartDacHeader1 = "E500";
+        public const string SCTestStartDacHeader2 = "E510";
+        public const string SCTestStartDacHeader3 = "E520";
+        public const string SCTestStopDacHeader1 = "E530";
+        public const string SCTestStopDacHeader2 = "E540";
+        public const string SCTestStopDacHeader3 = "E550";
+        public const string SCTestStopDacInterval1 = "E560";
+        public const string SCTestStopDacInterval2 = "E570";
+        public const string SCTestStopDacInterval3 = "E580";
         public const string EndHoldTimeHeader1 = "E840";
         public const string EndHoldTimeHeader2 = "E850";
         public const string EndHoldTimeHeader3 = "E860";
         public const string EndHoldTimeHeader4 = "E870";
+        public const string TriggerDelayTimeHeader = "E900";
+        public const string SCTestChannelMaskModeHeader = "E910";
         public const string StartAcquisitionCommand = "F0F0";
         public const string StopAcquisitionCommand = "F0F1";
         public const string ResetMicrorocCommand = "F0F2";
@@ -56,5 +76,10 @@ namespace USB_DAQ
         public const int VbgPowerPulsingIndex = 12;
         public const int Dac10BitPowerPulsingIndex = 14;
         public const int LvdsPowerPulsingIndex = 16;
+        public const int AcqModeIndex = 0;
+        public const int SCurveTestModeIndex = 1;
+        public const int SweepAcqModeIndex = 2;
+        public const int AdcModeIndex = 3;
+        public const int EfficiencyModeIndex = 4;
     }
 }
