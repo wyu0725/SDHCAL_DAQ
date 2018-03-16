@@ -83,20 +83,18 @@ namespace USB_DAQ
         /// <returns>True stands for command issued correctly</returns>
         public bool Set10BitDac0(string Dac0, MyCyUsb usbInterface, out bool IllegalInput)
         {
-            if(CheckIntegerLegal(Dac0))
+            if(CheckIntegerLegal(Dac0) && int.Parse(Dac0) < 1024)
             {
-
+                IllegalInput = false;
                 int Dac0Value = int.Parse(Dac0) + HexToInt(CommandHeader.Dac0Header);
                 byte[] CommandBytes = usbInterface.ConstCommandByteArray(Dac0Value);
                 bool bResult = usbInterface.CommandSend(CommandBytes, CommandBytes.Length);
                 if (bResult)
                 {
-                    IllegalInput = false;
                     return true;
                 }
                 else
                 {
-                    IllegalInput = false;
                     return false;
                 }
             }
@@ -108,7 +106,7 @@ namespace USB_DAQ
         }
         public bool Set10BitDac1(string Dac1, MyCyUsb usbInterface, out bool IllegalInput)
         {
-            if (CheckIntegerLegal(Dac1))
+            if (CheckIntegerLegal(Dac1) && int.Parse(Dac1) < 1024)
             {
                 IllegalInput = false;
                 int Dac1Value = int.Parse(Dac1) + HexToInt(CommandHeader.Dac1Header);
@@ -131,7 +129,7 @@ namespace USB_DAQ
         }
         public bool Set10BitDac2(string Dac2, MyCyUsb usbInterface, out bool IllegalInput)
         {
-            if (CheckIntegerLegal(Dac2))
+            if (CheckIntegerLegal(Dac2) && int.Parse(Dac2) < 1024)
             {
                 IllegalInput = false;
                 int Dac2Value = int.Parse(Dac2) + HexToInt(CommandHeader.Dac2Header);
@@ -455,7 +453,7 @@ namespace USB_DAQ
             {
                 byte[] ClearBytes = new byte[2048];
                 bResult = usbInterface.DataRecieve(ClearBytes, ClearBytes.Length);
-                return bResult;
+                return true;
             }
             else
             {
@@ -700,6 +698,116 @@ namespace USB_DAQ
         {
             int TrigMaxCountValue = TrigMaxCount + HexToInt(CommandHeader.SCTestTrigMaxCountHeader);
             return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(TrigMaxCountValue));
+        }
+        public bool StartSCTest(MyCyUsb usbInterface)
+        {
+            return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(HexToInt(CommandHeader.StartSCTestCommand)));
+        }
+        public bool StopSCTest(MyCyUsb usbInterface)
+        {
+            return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(HexToInt(CommandHeader.StopSCTestCommand)));
+        }
+        public bool StartAdc(MyCyUsb usbInterface)
+        {
+            return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(HexToInt(CommandHeader.StartAdcCommand)));
+        }
+        public bool StopAdc(MyCyUsb usbInterface)
+        {
+            return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(HexToInt(CommandHeader.StopAdcCommand)));
+        }
+        /// <summary>
+        /// Max Count time 65536*1ms
+        /// </summary>
+        /// <param name="CountTime"></param>
+        /// <param name="usbInterface"></param>
+        /// <param name="IllegalInput"></param>
+        /// <returns></returns>
+        public bool SetSCTestCountModeTime(string CountTime, MyCyUsb usbInterface, out bool IllegalInput)
+        {
+            if(CheckIntegerLegal(CountTime) && int.Parse(CountTime) < 65536)
+            {
+                IllegalInput = false;
+                int CountTimeValue = int.Parse(CountTime);
+                int CountTimeValue1 = (byte)CountTimeValue + HexToInt(CommandHeader.SCTestCountModeTimeHeader1);
+                int CountTimeValue2 = (byte)(CountTimeValue >> 8) + HexToInt(CommandHeader.SCTestCountModeTimeHeader2);
+                bool bResult = usbInterface.CommandSend(usbInterface.ConstCommandByteArray(CountTimeValue1));
+                if (!bResult)
+                {
+                    return false;
+                }
+                return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(CountTimeValue2));
+            }
+            else
+            {
+                IllegalInput = true;
+                return false;
+            }
+        }
+        public bool SetSweepAcqMaxCount(string MaxCount, MyCyUsb usbInterface, out bool IllegalInput)
+        {
+            if(CheckIntegerLegal(MaxCount))
+            {
+                IllegalInput = false;
+                int MaxCountValue = int.Parse(MaxCount);
+                int MaxCountValue1 = (byte)MaxCountValue + HexToInt(CommandHeader.SweepAcqMaxCountHeader1);
+                int MaxCountValue2 = (byte)MaxCountValue + HexToInt(CommandHeader.SweepAcqMaxCountHeader2);
+                bool bResult = usbInterface.CommandSend(usbInterface.ConstCommandByteArray(MaxCountValue1));
+                if(!bResult)
+                {
+                    return false;
+                }
+                return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(MaxCountValue2));
+            }
+            else
+            {
+                IllegalInput = true;
+                return false;
+            }
+        }
+        public bool SelectSweepAcqDac(int SelectedDac, MyCyUsb usbInterface)
+        {
+            int SelectedDacValue = SelectedDac + HexToInt(CommandHeader.SweepAcqDacSelectHeader);
+            return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(SelectedDacValue));
+        }
+        public bool SetAdcStartDelayTime(string DelayTime, MyCyUsb usbInterface, out bool IllegalInput)
+        {
+            if(CheckIntegerLegal(DelayTime) && int.Parse(DelayTime) < 400)
+            {
+                IllegalInput = false;
+                int DelayTimeValue = int.Parse(DelayTime) / 25 + HexToInt(CommandHeader.AdcStartDelayTimeHeader);
+                return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(DelayTimeValue));
+            }
+            else
+            {
+                IllegalInput = true;
+                return false;
+            }
+        }
+        public bool SetAdcDataNumberPerHit(string DataNumber,MyCyUsb usbInterface, out bool IllegalInput)
+        {
+            if(CheckIntegerLegal(DataNumber) && int.Parse(DataNumber) < 255)
+            {
+                IllegalInput = false;
+                int DataNumberValue = int.Parse(DataNumber);
+                int DataNumberValue1 = DataNumberValue & 0xF + HexToInt(CommandHeader.AdcDataNumberPerHitHeader1);
+                int DataNumberValue2 = (DataNumberValue >> 4) & 0xF + HexToInt(CommandHeader.AdcDataNumberPerHitHeader2);
+                bool bResult = usbInterface.CommandSend(usbInterface.ConstCommandByteArray(DataNumberValue1));
+                if(!bResult)
+                {
+                    return false;
+                }
+                return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(DataNumberValue2));
+            }
+            else
+            {
+                IllegalInput = true;
+                return false;
+            }
+        }
+        public bool SelectAdcMonitorHoldOrTemp(int TempOrHold, MyCyUsb usbInterface)
+        {
+            int TempOrHoldValue = TempOrHold + HexToInt(CommandHeader.MonitorHoldOrTemp);
+            return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(TempOrHoldValue));
         }
     }
 }

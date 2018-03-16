@@ -1146,7 +1146,7 @@ end*/
 	always @(posedge clk or negedge reset_n)begin
 		if(~reset_n)
 			DacSelect <= 2'b0;
-		else if(fifo_rden && USB_COMMAND[15:4] == 12'hE00)
+		else if(fifo_rden && USB_COMMAND[15:4] == 12'hE01)
 			DacSelect <= USB_COMMAND[1:0];
 		else
 			DacSelect <= DacSelect;
