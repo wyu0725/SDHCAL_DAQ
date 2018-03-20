@@ -1,7 +1,7 @@
 Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 ------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2016.3 (win64) Build 1682563 Mon Oct 10 19:07:27 MDT 2016
-| Date         : Mon Mar 19 14:48:46 2018
+| Date         : Tue Mar 20 18:15:02 2018
 | Host         : WYU running 64-bit major release  (build 9200)
 | Command      : report_drc -file FPGA_TOP_drc_opted.rpt
 | Design       : FPGA_TOP
@@ -20,17 +20,17 @@ Table of Contents
 1. REPORT SUMMARY
 -----------------
             Netlist: netlist
-          Floorplan: design_1
+          Floorplan: checkpoint_FPGA_TOP
       Design limits: <entire design considered>
            Ruledeck: default
              Max violations: <unlimited>
-             Violations found: 50
+             Violations found: 52
 +-------------+----------+-------------------------------------------------------------+------------+
 | Rule        | Severity | Description                                                 | Violations |
 +-------------+----------+-------------------------------------------------------------+------------+
 | CHECK-3     | Warning  | Report rule limit reached                                   | 2          |
 | IOSR-1      | Warning  | IOB set reset sharing                                       | 3          |
-| PLHOLDVIO-2 | Warning  | Non-Optimal connections which could lead to hold violations | 5          |
+| PLHOLDVIO-2 | Warning  | Non-Optimal connections which could lead to hold violations | 7          |
 | REQP-1839   | Warning  | RAMB36 async control check                                  | 20         |
 | REQP-1840   | Warning  | RAMB18 async control check                                  | 20         |
 +-------------+----------+-------------------------------------------------------------+------------+
@@ -64,12 +64,19 @@ Related violations: <none>
 
 PLHOLDVIO-2#1 Warning
 Non-Optimal connections which could lead to hold violations  
+A LUT Microroc_Control/SweepACQ/SweepACQ_Control/SlaveDaq_UsbStartStop_i_1 is driving clock pin of 1 cells. This could lead to large hold time violations. First few involved cells are:
+    Microroc_u1/MicrorocDaq/SlaveDaq_UsbStartStop_reg {FDCE}
+
+Related violations: <none>
+
+PLHOLDVIO-2#2 Warning
+Non-Optimal connections which could lead to hold violations  
 A LUT Microroc_u1/RAM_Read/MicrorocHit_i_1 is driving clock pin of 1 cells. This could lead to large hold time violations. First few involved cells are:
     Microroc_u1/MicrorocDaq/SlaveDaqControl/MicrorocHit_reg {FDCE}
 
 Related violations: <none>
 
-PLHOLDVIO-2#2 Warning
+PLHOLDVIO-2#3 Warning
 Non-Optimal connections which could lead to hold violations  
 A LUT TrigSelect/AcqStart_r1_i_1 is driving clock pin of 26 cells. This could lead to large hold time violations. First few involved cells are:
     Microroc_u1/MicrorocDaq/SlaveDaqControl/ForceExternalRaz_reg {FDPE}
@@ -80,32 +87,47 @@ A LUT TrigSelect/AcqStart_r1_i_1 is driving clock pin of 26 cells. This could le
 
 Related violations: <none>
 
-PLHOLDVIO-2#3 Warning
-Non-Optimal connections which could lead to hold violations  
-A LUT usb_control/SlaveDaq_UsbStartStop_i_1 is driving clock pin of 1 cells. This could lead to large hold time violations. First few involved cells are:
-    Microroc_u1/MicrorocDaq/SlaveDaq_UsbStartStop_reg {FDCE}
-
-Related violations: <none>
-
 PLHOLDVIO-2#4 Warning
 Non-Optimal connections which could lead to hold violations  
-A LUT usbcmdfifo_16depth_i_2 is driving clock pin of 10 cells. This could lead to large hold time violations. First few involved cells are:
-    usb_data_fifo_8192depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_i_reg {FDPE}
-    usb_data_fifo_8192depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_fb_i_reg {FDPE}
-    usb_data_fifo_8192depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.rd_rst_reg_reg[1] {FDPE}
-    usb_data_fifo_8192depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.rd_rst_reg_reg[0] {FDPE}
-    usb_data_fifo_8192depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.rd_rst_reg_reg[2] {FDPE}
+A LUT scurve_data_fifo_16x16_i_1 is driving clock pin of 15 cells. This could lead to large hold time violations. First few involved cells are:
+    Microroc_Control/Microroc_SCurveTest/scurve_data_fifo_16x16/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_full_i_reg {FDPE}
+    Microroc_Control/Microroc_SCurveTest/scurve_data_fifo_16x16/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_full_fb_i_reg {FDPE}
+    Microroc_Control/Microroc_SCurveTest/scurve_data_fifo_16x16/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.wr_rst_reg_reg[2] {FDPE}
+    Microroc_Control/Microroc_SCurveTest/scurve_data_fifo_16x16/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.wr_rst_reg_reg[1] {FDPE}
+    Microroc_Control/Microroc_SCurveTest/scurve_data_fifo_16x16/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.wr_rst_reg_reg[0] {FDPE}
 
 Related violations: <none>
 
 PLHOLDVIO-2#5 Warning
 Non-Optimal connections which could lead to hold violations  
-A LUT usbcmdfifo_16depth_i_3 is driving clock pin of 20 cells. This could lead to large hold time violations. First few involved cells are:
-    usb_data_fifo_8192depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.wr_rst_reg_reg[0] {FDPE}
-    usb_data_fifo_8192depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.wr_rst_reg_reg[1] {FDPE}
-    usb_data_fifo_8192depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.wr_rst_reg_reg[2] {FDPE}
-    usb_data_fifo_8192depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwas.wsts/ram_full_fb_i_reg {FDCE}
-    usb_data_fifo_8192depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwas.wsts/ram_full_i_reg {FDCE}
+A LUT usb_control/usbcmdfifo_16depth_i_1 is driving clock pin of 5 cells. This could lead to large hold time violations. First few involved cells are:
+    usb_control/usbcmdfifo_16depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.wr_rst_reg_reg[0] {FDPE}
+    usb_control/usbcmdfifo_16depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.wr_rst_reg_reg[1] {FDPE}
+    usb_control/usbcmdfifo_16depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.wr_rst_reg_reg[2] {FDPE}
+    usb_control/usbcmdfifo_16depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwas.wsts/ram_full_fb_i_reg {FDCE}
+    usb_control/usbcmdfifo_16depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwas.wsts/ram_full_i_reg {FDCE}
+
+Related violations: <none>
+
+PLHOLDVIO-2#6 Warning
+Non-Optimal connections which could lead to hold violations  
+A LUT usb_control/usbcmdfifo_16depth_i_2 is driving clock pin of 5 cells. This could lead to large hold time violations. First few involved cells are:
+    usb_control/usbcmdfifo_16depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_fb_i_reg {FDPE}
+    usb_control/usbcmdfifo_16depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_i_reg {FDPE}
+    usb_control/usbcmdfifo_16depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.rd_rst_reg_reg[0] {FDPE}
+    usb_control/usbcmdfifo_16depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.rd_rst_reg_reg[1] {FDPE}
+    usb_control/usbcmdfifo_16depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.rd_rst_reg_reg[2] {FDPE}
+
+Related violations: <none>
+
+PLHOLDVIO-2#7 Warning
+Non-Optimal connections which could lead to hold violations  
+A LUT usb_data_fifo_8192depth_i_2 is driving clock pin of 5 cells. This could lead to large hold time violations. First few involved cells are:
+    usb_data_fifo_8192depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_i_reg {FDPE}
+    usb_data_fifo_8192depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_fb_i_reg {FDPE}
+    usb_data_fifo_8192depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.rd_rst_reg_reg[1] {FDPE}
+    usb_data_fifo_8192depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.rd_rst_reg_reg[0] {FDPE}
+    usb_data_fifo_8192depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.rd_rst_reg_reg[2] {FDPE}
 
 Related violations: <none>
 

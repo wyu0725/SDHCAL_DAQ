@@ -716,5 +716,7 @@ assign TP[3] = MicrorocSCParameterLoad;
 assign TP[2] = MicrorocForceReset;
 assign TP[1] = MicrorocConfigDone;
 assign TP[0] = MicrorocAcqStartStop;
+			(*mark_debug = "true"*)wire[2:0] ModeSelectDebug;
+			assign ModeSelectDebug = ModeSelect;
 endmodule
 //Test
