@@ -514,8 +514,8 @@ namespace USB_DAQ
             bool bResult;
             for (int j = 0; j < 64; j++)
             {
-                CaliByte1 = (byte)(ChannelCaliCommandHeader[j] >> 4 + 0xC0);
-                CaliByte2 = (byte)(ChannelCaliCommandHeader[j] << 4 + CalibrationData[j]);
+                CaliByte1 = (byte)((ChannelCaliCommandHeader[j] >> 4) + 0xC0);
+                CaliByte2 = (byte)((ChannelCaliCommandHeader[j] << 4) + CalibrationData[j]);
                 CommandBytes = usbInterface.ConstCommandByteArray(CaliByte1, CaliByte2);
                 bResult = usbInterface.CommandSend(CommandBytes);
                 if(!bResult)
