@@ -1,7 +1,7 @@
 Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2016.3 (win64) Build 1682563 Mon Oct 10 19:07:27 MDT 2016
-| Date             : Thu Mar 01 20:18:12 2018
+| Date             : Mon Mar 19 14:50:41 2018
 | Host             : WYU running 64-bit major release  (build 9200)
 | Command          : report_power -file FPGA_TOP_power_routed.rpt -pb FPGA_TOP_power_summary_routed.pb -rpx FPGA_TOP_power_routed.rpx
 | Design           : FPGA_TOP
@@ -31,7 +31,7 @@ Table of Contents
 
 +--------------------------+-------+
 | Total On-Chip Power (W)  | 0.380 |
-| Dynamic (W)              | 0.272 |
+| Dynamic (W)              | 0.273 |
 | Device Static (W)        | 0.108 |
 | Total Off-Chip Power (W) | 0.005 |
 | Effective TJA (C/W)      | 2.7   |
@@ -50,14 +50,14 @@ Table of Contents
 +----------------+-----------+----------+-----------+-----------------+
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
-| Clocks         |     0.010 |        9 |       --- |             --- |
-| Slice Logic    |     0.005 |     9093 |       --- |             --- |
-|   LUT as Logic |     0.004 |     4327 |     63400 |            6.82 |
+| Clocks         |     0.011 |        9 |       --- |             --- |
+| Slice Logic    |     0.005 |     9095 |       --- |             --- |
+|   LUT as Logic |     0.004 |     4325 |     63400 |            6.82 |
 |   Register     |    <0.001 |     3900 |    126800 |            3.08 |
 |   CARRY4       |    <0.001 |      150 |     15850 |            0.95 |
 |   F7/F8 Muxes  |    <0.001 |       66 |     63400 |            0.10 |
 |   Others       |     0.000 |      181 |       --- |             --- |
-| Signals        |     0.006 |     6354 |       --- |             --- |
+| Signals        |     0.005 |     6349 |       --- |             --- |
 | Block RAM      |     0.001 |      6.5 |       135 |            4.81 |
 | MMCM           |     0.087 |        1 |         6 |           16.67 |
 | I/O            |     0.164 |       93 |       285 |           32.63 |
@@ -72,7 +72,7 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) |
 +-----------+-------------+-----------+-------------+------------+
-| Vccint    |       1.000 |     0.037 |       0.022 |      0.016 |
+| Vccint    |       1.000 |     0.038 |       0.023 |      0.016 |
 | Vccaux    |       1.800 |     0.067 |       0.048 |      0.018 |
 | Vcco33    |       3.300 |     0.007 |       0.003 |      0.004 |
 | Vcco25    |       2.500 |     0.067 |       0.063 |      0.004 |
@@ -146,7 +146,7 @@ Table of Contents
 +----------------------------------------------------------------------------+-----------+
 | Name                                                                       | Power (W) |
 +----------------------------------------------------------------------------+-----------+
-| FPGA_TOP                                                                   |     0.272 |
+| FPGA_TOP                                                                   |     0.273 |
 |   Clk_Gen                                                                  |     0.087 |
 |   Microroc_Control                                                         |     0.004 |
 |     AD9220                                                                 |    <0.001 |
@@ -214,7 +214,7 @@ Table of Contents
 |       Trigger1                                                             |    <0.001 |
 |       Trigger2                                                             |    <0.001 |
 |   Microroc_u1                                                              |     0.162 |
-|     HoldGenerator                                                          |     0.005 |
+|     HoldGenerator                                                          |     0.006 |
 |     MicrorocDaq                                                            |    <0.001 |
 |       AutoDaqControl                                                       |    <0.001 |
 |       SlaveDaqControl                                                      |    <0.001 |
@@ -255,7 +255,7 @@ Table of Contents
 |     Trig_Gen                                                               |    <0.001 |
 |     Trig_Gen_en                                                            |    <0.001 |
 |   TrigSelect                                                               |    <0.001 |
-|   usb_control                                                              |     0.004 |
+|   usb_control                                                              |     0.005 |
 |     usbcmdfifo_16depth                                                     |     0.002 |
 |       U0                                                                   |     0.002 |
 |         inst_fifo_gen                                                      |     0.002 |

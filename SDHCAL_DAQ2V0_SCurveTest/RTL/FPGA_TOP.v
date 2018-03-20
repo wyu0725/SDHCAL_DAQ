@@ -713,7 +713,7 @@ module FPGA_TOP(
 
 //assignmeng
 assign TP[3] = MicrorocSCParameterLoad;
-assign TP[2] = SweepTestStartStop;
+assign TP[2] = MicrorocForceReset;
 assign TP[1] = MicrorocConfigDone;
 assign TP[0] = MicrorocAcqStartStop;
 endmodule
