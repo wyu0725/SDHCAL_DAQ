@@ -74,8 +74,11 @@ namespace USB_DAQ
 
         private static bool IsTestStart = false;
 
-        private const string AFG3252Descr = "USB[0-9]::0x0699::0x034E::C[0-9]+::INSTR";
-        private const string AFG3252VidPid = "VID_0699&PID_034E";
+        //private const string AFG3252Descr = "USB[0-9]::0x0699::0x034E::C[0-9]+::INSTR";
+        //private const string AFG3252VidPid = "VID_0699&PID_034E";
+
+        private const string AFG3252Descr = "USB[0-9]::0x0699::0x0345::C[0-9]+::INSTR";
+        private const string AFG3252VidPid = "VID_0699&PID_0345";
         private AFG3252 MyAFG3252 = new AFG3252(AFG3252Descr);
         private bool AFG3252Attach = false;
         private bool AmplitudeOrLevel = true;
@@ -3080,7 +3083,7 @@ namespace USB_DAQ
                 txtEndHoldTime.IsEnabled = false;
                 btnSlowACQ.Content = "SlowACQ";
                 btnSC_or_ReadReg.IsEnabled = true;
-                #region Set External RAZ
+                #region Set Internal RAZ
                 bResult = MicrorocChain1.SelectRazChannel(0, MyUsbDevice1);
                 if (bResult)
                 {
@@ -3095,6 +3098,16 @@ namespace USB_DAQ
                     return;
                 }
                 #endregion
+                bResult = MicrorocChain1.SelectAcquisitionMode(false, MyUsbDevice1);
+                if (bResult)
+                {
+                    string report = string.Format("Set DAQ Mode: {0} DAQ\n", button.Content.ToString());
+                    txtReport.AppendText(report);
+                }
+                else
+                {
+                    MessageBox.Show("Set DAQ Mode failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
             else if(button.Content.ToString() == "Slave")
             {
@@ -3242,25 +3255,20 @@ namespace USB_DAQ
                                      MessageBoxImage.Error);//icon
                 }
                 #endregion
+                #region Select Daq Mode
+                bResult = MicrorocChain1.SelectAcquisitionMode(true, MyUsbDevice1);
+                if (bResult)
+                {
+                    string report = string.Format("Set DAQ Mode: {0} DAQ\n", button.Content.ToString());
+                    txtReport.AppendText(report);
+                }
+                else
+                {
+                    MessageBox.Show("Set DAQ Mode failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                #endregion
 
             }
-            bResult = MicrorocChain1.SelectAcquisitionMode(true, MyUsbDevice1);
-            if(bResult)
-            {
-                string report = string.Format("Set DAQ Mode: {0} DAQ\n", button.Content.ToString());
-                txtReport.AppendText(report);
-            }
-            else
-            {
-                MessageBox.Show("Set DAQ Mode failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            
-        }
-
-
-        private void tbiMicrorocAcq_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            txtReport.AppendText("Microroc Acq");
         }
 
         private void btnAFG3252Command_Click(object sender, RoutedEventArgs e)
@@ -4147,6 +4155,165 @@ namespace USB_DAQ
             else
             {
                 MessageBox.Show("USB Connect Error", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void tbiMicrorocAcq_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            txtReport.Text = "";
+        }
+
+        private void tbiSCTest_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            txtReport.Text = "";
+            bool bResult = MicrorocChain1.SelectOperationMode(CommandHeader.SCurveTestModeIndex, MyUsbDevice1);
+            if (bResult)
+            {
+                txtReport.AppendText("SCurve Test Mode\n");
+                StateIndicator.OperationModeSelect = StateIndicator.OperationMode.SCTest;
+                MicrorocPowerPulsingDisable();
+                #region Select External Raz
+                bResult = MicrorocChain1.SelectRazChannel(1, MyUsbDevice1);
+                if(bResult)
+                {
+                    txtReport.AppendText("Select External RAZ\n");
+                }
+                else
+                { }
+                #endregion
+            }
+            else
+            {
+                MessageBox.Show("Select SCurve Test mode failure. Please check the USB cable and re-click SCTest", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void tbiAD9220_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            bool bResult = MicrorocChain1.SelectOperationMode(CommandHeader.AdcModeIndex, MyUsbDevice1);
+            if(bResult)
+            {
+                txtReport.AppendText("ADC Mode\n");
+                StateIndicator.OperationModeSelect = StateIndicator.OperationMode.ADC;
+                MicrorocPowerPulsingDisable();
+                #region Set trigger out Read
+                bResult = MicrorocChain1.SelectTrigOutNor64OrSingle(0, MyUsbDevice1);
+                if(bResult)
+                {
+                    txtReport.AppendText("Set trigger out: Read register\n");
+                }
+                else
+                {
+                    MessageBox.Show("Set trigger out failure. Please check the USB cable", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                #endregion
+                #region Set external RAZ Delay
+                bool IllegalInput;
+                bResult = MicrorocChain1.SetExternalRazDelayTime("200", MyUsbDevice1, out IllegalInput);
+                if(bResult)
+                {
+                    txtReport.AppendText("Set External RAZ delay time: 200ns\n");
+                }
+                else
+                {
+                    MessageBox.Show("Set External RAZ delay time failure. Please check the USB cable", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                #endregion
+                #region Set External RAZ Time
+                bResult = MicrorocChain1.SetExternalRazWidth(3, MyUsbDevice1);
+                if(bResult)
+                {
+                    txtReport.AppendText("Set External RAZ time: 100ns\n");
+                }
+                else
+                {
+                    MessageBox.Show("Set external RAZ time failure. Please check the USB cable", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                #endregion
+                #region Slow Control Load
+                bResult = MicrorocChain1.LoadSlowControlParameter(MyUsbDevice1);
+                if (bResult)
+                {
+                    txtReport.AppendText("Load Slow Control successful\n");
+                }
+                else
+                {
+                    MessageBox.Show("Load SC parameter failure. Olease check the USB cable", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                #endregion
+            }
+            else
+            {
+                MessageBox.Show("Select AD9220 test mode failure. Please check the USB cable and re-click the AD9220", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void tbiSweepAcq_MouseRightButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            bool bResult = MicrorocChain1.SelectOperationMode(CommandHeader.SweepAcqModeIndex, MyUsbDevice1);
+            if(bResult)
+            {
+                txtReport.AppendText("Sweep ACQ Mode Select\n");
+                StateIndicator.OperationModeSelect = StateIndicator.OperationMode.SweepAcq;
+            }
+            else
+            {
+                MessageBox.Show("Select Sweep ACQ Test mode failure. Please check the USB cable and re-click Sweep ACQ", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void tbmNormalAcq_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            bool bResult = MicrorocChain1.SelectOperationMode(CommandHeader.AcqModeIndex, MyUsbDevice1);
+            if (bResult)
+            {
+                txtReport.AppendText("Normal ACQ\n");
+                StateIndicator.OperationModeSelect = StateIndicator.OperationMode.SCTest;
+                MicrorocPowerPulsingEnable();
+                #region Select Internal RAZ
+                bResult = MicrorocChain1.SelectRazChannel(0, MyUsbDevice1);
+                if(bResult)
+                {
+                    txtReport.AppendText("Internal RAZ\n");
+                }
+                else
+                {
+                    MessageBox.Show("Set internal RAZ failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                #endregion
+                #region Select NOR64
+                bResult = MicrorocChain1.SelectTrigOutNor64OrSingle(1, MyUsbDevice1);
+                if(bResult)
+                {
+                    txtReport.AppendText("Select trigger out NOR64");
+                }
+                else
+                {
+                    MessageBox.Show("Set trigger out failure. Olease check USB cable", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                #endregion
+                #region Slow Control Load
+                bResult = MicrorocChain1.LoadSlowControlParameter(MyUsbDevice1);
+                if(bResult)
+                {
+                    txtReport.AppendText("Load Slow Control successful\n");
+                }
+                else
+                {
+                    MessageBox.Show("Load SC parameter failure. Olease check the USB cable", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                #endregion
+            }
+            else
+            {
+                MessageBox.Show("Select Normal ACQ mode failure. Please check the USB cable and re-click Normal ACQ", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

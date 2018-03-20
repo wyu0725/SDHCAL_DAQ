@@ -65,7 +65,7 @@ namespace USB_DAQ
         public bool SetAsicHeader(int AsicHeader, MyCyUsb usbInterface)
         {
             int HeaderValue = HexToInt(CommandHeader.AsicHeader) + AsicHeader;
-            byte[] CommandBytes = usbInterface.ConstCommandByteArray(AsicHeader);
+            byte[] CommandBytes = usbInterface.ConstCommandByteArray(HeaderValue);
             bool bResult = usbInterface.CommandSend(CommandBytes, CommandBytes.Length);
             return bResult;
         }
@@ -175,6 +175,12 @@ namespace USB_DAQ
             byte[] CommandBytes = usbInterface.ConstCommandByteArray(LatchedOrDirectedValue);
             return usbInterface.CommandSend(CommandBytes, CommandBytes.Length);
         }
+        /// <summary>
+        /// 1: NOR 64   0: Single
+        /// </summary>
+        /// <param name="Nor64OrSingle"></param>
+        /// <param name="usbInterface"></param>
+        /// <returns></returns>
         public bool SelectTrigOutNor64OrSingle(int Nor64OrSingle, MyCyUsb usbInterface)
         {
             int Nor64OrSingleValue = HexToInt(CommandHeader.Nor64OrSingleHeader) + Nor64OrSingle;
