@@ -92,12 +92,6 @@
                                     </ComboBox>
                                     <Label x:Name="lblHeader" Content="Start Header:" HorizontalAlignment="Left" Margin="0,30,0,0" VerticalAlignment="Top" Height="24" Width="90"/>
                                     <TextBox x:Name="txtHeader" HorizontalAlignment="Left" Height="20" Margin="100,30,0,0" TextWrapping="Wrap" Text="A1" VerticalAlignment="Top" Width="70"/>
-
-
-                                    <!--<StackPanel HorizontalAlignment="Left" Height="30" Margin="100,60,0,0" VerticalAlignment="Top" Width="75">
-                            <RadioButton GroupName="RAZ_Chn_Select1" Checked="RAZ_Chn_Select_Checked" Content="Internal"/>
-                            <RadioButton GroupName="RAZ_Chn_Select1" Checked="RAZ_Chn_Select_Checked" Content="External"/>
-                        </StackPanel>-->
                                     <Label x:Name="lblChannel_Sel" Content="Channel select" HorizontalAlignment="Left" Margin="0,60,0,0" VerticalAlignment="Top" Height="24" Width="100"/>
                                     <ComboBox x:Name="cbxChannelSelect" HorizontalAlignment="Left" Margin="100,60,0,0" VerticalAlignment="Top" Width="80" Height="24">
                                         <ComboBoxItem Content="Channel2" />
@@ -720,10 +714,10 @@
                                     <Grid Margin="0,0,0,0">
                                         <Label x:Name="lblAFG3252Amplitude" Content="Amplitude" HorizontalAlignment="Left" Height="24" Width="70" Margin="0,0,0,30"/>
                                         <TextBox x:Name="tbxAFG3252AmplitudeCh1" HorizontalAlignment="Left" Height="24" Margin="70,0,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="60"/>
-                                        <TextBox x:Name="tbxAFG3252AmplitudeCh2" HorizontalAlignment="Left" Height="24" Margin="160,0,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="60"/>
+                                        <TextBox x:Name="tbxAFG3252AmplitudeCh2" HorizontalAlignment="Left" Height="24" Margin="160,0,0,0" TextWrapping="Wrap" Text="3300" VerticalAlignment="Top" Width="60"/>
                                         <Label x:Name="lblAFG3252Offset" Content="Offset" HorizontalAlignment="Left" Height="24" Width="70" Margin="0,30,0,0"/>
-                                        <TextBox x:Name="tbxAFG3252OffsetCh1" HorizontalAlignment="Left" Height="24" Margin="70,30,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="60"/>
-                                        <TextBox x:Name="tbxAFG3252OffsetCh2" HorizontalAlignment="Left" Height="24" Margin="160,30,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="60"/>
+                                        <TextBox x:Name="tbxAFG3252OffsetCh1" HorizontalAlignment="Left" Height="24" Margin="70,30,0,0" TextWrapping="Wrap" Text="50" VerticalAlignment="Top" Width="60"/>
+                                        <TextBox x:Name="tbxAFG3252OffsetCh2" HorizontalAlignment="Left" Height="24" Margin="160,30,0,0" TextWrapping="Wrap" Text="1650" VerticalAlignment="Top" Width="60"/>
                                     </Grid>
                                 </TabItem>
                                 <TabItem Name="tbiAFG3252Level" Header="Level" Height="28" MouseLeftButtonUp="tbiAFG3252Level_MouseLeftButtonUp">
@@ -763,7 +757,7 @@
                                     </ComboBox>
                                     <Label x:Name="lblAFG3252PulseDelay" Content="Delay" HorizontalAlignment="Left" Margin="0,60,0,0" VerticalAlignment="Top" Height="24" Width="90"/>
                                     <TextBox x:Name="tbxAFG3252PulseDelayCh1" HorizontalAlignment="Left" Height="24" Margin="140,60,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="60"/>
-                                    <TextBox x:Name="tbxAFG3252PulseDelayCh2" HorizontalAlignment="Left" Height="24" Margin="230,60,0,0" TextWrapping="Wrap" Text="8.90625" VerticalAlignment="Top" Width="60"/>
+                                    <TextBox x:Name="tbxAFG3252PulseDelayCh2" HorizontalAlignment="Left" Height="24" Margin="230,60,0,0" TextWrapping="Wrap" Text="8.90.625" VerticalAlignment="Top" Width="60"/>
                                     <ComboBox x:Name="cbxAFG3252DelayTimeUnitSet" HorizontalAlignment="Left" Margin="300,60,0,0" VerticalAlignment="Top" Width="40" Height="24">
                                         <ComboBoxItem Content="ns"/>
                                         <ComboBoxItem Content="us" IsSelected="True"/>
@@ -779,12 +773,8 @@
                     </TabItem>
                     <TabItem Name="tbiTestParam" Header="ASIC Test Parameters">
                         <Grid Margin="0,0,0,0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="87*"/>
-                                <ColumnDefinition Width="692*"/>
-                            </Grid.ColumnDefinitions>
                             <Label x:Name="lblPower_Pulsing" Content="Powerpulsing" HorizontalAlignment="Left" Margin="0,60,0,0" VerticalAlignment="Top" Height="24" Width="90" Grid.ColumnSpan="2"/>
-                            <StackPanel HorizontalAlignment="Left" Height="30" Margin="3,60,0,0" VerticalAlignment="Top" Width="70" Grid.Column="1">
+                            <StackPanel HorizontalAlignment="Left" Height="30" Margin="100,60,0,0" VerticalAlignment="Top" Width="70" Grid.Column="1">
                                 <RadioButton GroupName="PP_En_Dis" Checked="PowerPulsing_Checked" Content="Enable"/>
                                 <RadioButton GroupName="PP_En_Dis" Checked="PowerPulsing_Checked" Content="Disable" HorizontalAlignment="Right" Width="70"/>
                             </StackPanel>
@@ -838,23 +828,24 @@
                                 </Grid>
                             </GroupBox>
                             <Label x:Name="Raz_Chn_Select" Content="RAZ Chn Select" HorizontalAlignment="Left" Margin="0,90,0,0" VerticalAlignment="Top" Width="100" Grid.ColumnSpan="2"/>
-                            <ComboBox x:Name="cbxRazSelect" HorizontalAlignment="Left" Margin="13,90,0,0" VerticalAlignment="Top" Width="80" Height="24" Grid.Column="1">
+                            <ComboBox x:Name="cbxRazSelect" HorizontalAlignment="Left" Margin="100,90,0,0" VerticalAlignment="Top" Width="80" Height="24" Grid.Column="1">
                                 <ComboBoxItem Content="Internal" IsSelected="True"/>
                                 <ComboBoxItem Content="External" />
                             </ComboBox>
                             <Label x:Name="lblRSOrDirect" Content="RS or Direct" HorizontalAlignment="Left" Margin="0,120,0,0" VerticalAlignment="Top" Width="100" Height="24" Grid.ColumnSpan="2" />
-                            <ComboBox x:Name="cbxRSOrDirect" HorizontalAlignment="Left" Margin="13,120,0,0" VerticalAlignment="Top" Width="80" Height="24" Grid.Column="1">
+                            <ComboBox x:Name="cbxRSOrDirect" HorizontalAlignment="Left" Margin="100,120,0,0" VerticalAlignment="Top" Width="80" Height="24" Grid.Column="1">
                                 <ComboBoxItem Content="RS" IsSelected="True"/>
                                 <ComboBoxItem Content="Direct" />
                             </ComboBox>
                             <Label x:Name="lblReadOrNOR64" Content="Read or NOR64" HorizontalAlignment="Left" Margin="0,150,0,0" VerticalAlignment="Top" Width="100" Height="24" Grid.ColumnSpan="2" />
-                            <ComboBox x:Name="cbxReadOrNOR64" HorizontalAlignment="Left" Margin="13,150,0,0" VerticalAlignment="Top" Width="80" Height="24" Grid.Column="1">
+                            <ComboBox x:Name="cbxReadOrNOR64" HorizontalAlignment="Left" Margin="100,150,0,0" VerticalAlignment="Top" Width="80" Height="24" Grid.Column="1">
                                 <ComboBoxItem Content="ReadReg"/>
                                 <ComboBoxItem Content="NOR64"  IsSelected="True"/>
                             </ComboBox>
                             <Button x:Name="btnTRIG_EXT_EN" Content="TRIG EXT" HorizontalAlignment="Left" Margin="0,400,0,0" VerticalAlignment="Top" Width="75" Height="24" Click="btnTRIG_EXT_EN_Click"/>
                             <TextBox x:Name="txtTestLed" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="185,337,0,0" TextWrapping="Wrap" Text="7" VerticalAlignment="Top" Width="120"/>
                             <Button x:Name="TestLed" Content="LED" Grid.Column="1" HorizontalAlignment="Left" Margin="305,341,0,0" VerticalAlignment="Top" Width="75" Click="TestLed_Click"/>
+                            <Button x:Name="btnTestSlowControlSend" Content="SC Param Load" HorizontalAlignment="Left" Margin="232,235,0,0" VerticalAlignment="Top" Width="100" Height="24" Click="btnTestSlowControlSend_Click"/>
 
                         </Grid>
                     </TabItem>

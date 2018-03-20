@@ -41,7 +41,7 @@ namespace USB_DAQ
         public const string Dac2Header = "C800";
         public const string LoadSlowControlParameter = "D0A2";
         public const string HoldOutputHeader = "D1B0";
-        public const string MonitorHoldOrTemp = "D1F0";
+        public const string MonitorHoldOrTemp = "D2F0";
         public const string AcquisitionModeHeader = "E000";
         public const string SweepAcqDacSelectHeader = "E010";
         public const string OperationModeHeader = "E0A0";

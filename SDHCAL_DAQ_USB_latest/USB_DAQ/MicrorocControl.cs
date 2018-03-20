@@ -581,7 +581,7 @@ namespace USB_DAQ
         }
         private bool SetSCTestStartDacCode(int StartDac, MyCyUsb usbInterface)
         {
-            int StartDacValue1 = StartDac & 15 + HexToInt(CommandHeader.SCTestStartDacHeader1);
+            int StartDacValue1 = (StartDac & 15) + HexToInt(CommandHeader.SCTestStartDacHeader1);
             int StartDacValue2 = ((StartDac >> 4) & 15) + HexToInt(CommandHeader.SCTestStartDacHeader2);
             int StartDacValue3 = ((StartDac >> 8) & 3) + HexToInt(CommandHeader.SCTestStartDacHeader3);
             bool bResult = usbInterface.CommandSend(usbInterface.ConstCommandByteArray(StartDacValue1));

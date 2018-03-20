@@ -832,22 +832,6 @@ namespace USB_DAQ
                 HeaderValue += (byte)(AsicNumber + 1);
                 string DCCaliString, SCTCaliString;
                 byte[] CaliData = new byte[64];
-                #region RAZ Select
-                bResult = MicrorocChain1.SelectRazChannel(cbxRazSelect.SelectedIndex, MyUsbDevice1);
-                if (bResult)
-                {
-                    string report = string.Format("Set Raz Mode: {0}\n", cbxRazSelect.Text);
-                    txtReport.AppendText(report);
-                }
-                else
-                {
-                    MessageBox.Show("Set Raz Mode failure, please check USB", //text
-                                 "USB Error",   //caption
-                                 MessageBoxButton.OK,//button
-                                 MessageBoxImage.Error);//icon
-                    return;
-                }
-                #endregion
                 #region Readout channel select
                 bResult = MicrorocChain1.SelectReadoutChannel(cbxChannelSelect.SelectedIndex, MyUsbDevice1);
                 if (bResult)
@@ -877,23 +861,9 @@ namespace USB_DAQ
                     return;
                 }
                 #endregion
-                #region ReadReg Or NOR64
-                bResult = MicrorocChain1.SelectTrigOutNor64OrSingle(cbxReadOrNOR64.SelectedIndex, MyUsbDevice1);
-                if (bResult)
-                {
-                    string report = string.Format("Set trigger out by {0}\n", cbxReadOrNOR64.Text);
-                    txtReport.AppendText(report);
-                }
-                else
-                {
-                    MessageBox.Show("Set Readreg or NOR64 failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return;
-                }
-                #endregion
+                
                 #region PowerPulsing Control
                 #region PreAmp
-
-
                 bResult = MicrorocChain1.SetPowerPulsing(cbxPreAmpPP.SelectedIndex, CommandHeader.PreAmpPowerPulsingIndex, MyUsbDevice1);
                 if (bResult)
                 {
@@ -1995,7 +1965,8 @@ namespace USB_DAQ
                     }
                     #endregion
                     Thread.Sleep(10);
-                    bResult = MicrorocChain1.StartAcquisition(MyUsbDevice1);
+                    //bResult = MicrorocChain1.StartAcquisition(MyUsbDevice1);
+                    bResult = true;
                     if (bResult)
                     {
                         StateIndicator.SlowAcqStart = true;
@@ -4160,27 +4131,79 @@ namespace USB_DAQ
 
         private void tbiMicrorocAcq_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            txtReport.Text = "";
+            txtReport.AppendText("Microroc ACQ\n\n");
         }
 
         private void tbiSCTest_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            txtReport.Text = "";
-            bool bResult = MicrorocChain1.SelectOperationMode(CommandHeader.SCurveTestModeIndex, MyUsbDevice1);
+            //txtReport.Text = "";
+            bool bResult;
+            MicrorocPowerPulsingDisable();
+            #region Select External Raz
+            bResult = MicrorocChain1.SelectRazChannel(1, MyUsbDevice1);
+            if (bResult)
+            {
+                txtReport.AppendText("Select External RAZ\n");
+            }
+            else
+            {
+                MessageBox.Show("Select Internal RAZ failure. Please check the USB cable", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            #endregion
+            #region Select trigger out NOR64
+            bResult = MicrorocChain1.SelectTrigOutNor64OrSingle(1, MyUsbDevice1);
+            if (bResult)
+            {
+                txtReport.AppendText("Select trigger out NOR64\n");
+            }
+            else
+            {
+                MessageBox.Show("Set trigger out failure. Olease check USB cable", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            #endregion
+            #region Set external RAZ Delay
+            bool IllegalInput;
+            bResult = MicrorocChain1.SetExternalRazDelayTime("200", MyUsbDevice1, out IllegalInput);
+            if (bResult)
+            {
+                txtReport.AppendText("Set External RAZ delay time: 200ns\n");
+            }
+            else
+            {
+                MessageBox.Show("Set External RAZ delay time failure. Please check the USB cable", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            #endregion
+            #region Set External RAZ Time
+            bResult = MicrorocChain1.SetExternalRazWidth(3, MyUsbDevice1);
+            if (bResult)
+            {
+                txtReport.AppendText("Set External RAZ time: 1000ns\n");
+            }
+            else
+            {
+                MessageBox.Show("Set external RAZ time failure. Please check the USB cable", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            #endregion
+            #region Slow Control Load
+            bResult = MicrorocChain1.LoadSlowControlParameter(MyUsbDevice1);
+            if (bResult)
+            {
+                txtReport.AppendText("Load Slow Control successful\n");
+            }
+            else
+            {
+                MessageBox.Show("Load SC parameter failure. Olease check the USB cable", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            #endregion
+            bResult = MicrorocChain1.SelectOperationMode(CommandHeader.SCurveTestModeIndex, MyUsbDevice1);
             if (bResult)
             {
                 txtReport.AppendText("SCurve Test Mode\n");
                 StateIndicator.OperationModeSelect = StateIndicator.OperationMode.SCTest;
-                MicrorocPowerPulsingDisable();
-                #region Select External Raz
-                bResult = MicrorocChain1.SelectRazChannel(1, MyUsbDevice1);
-                if(bResult)
-                {
-                    txtReport.AppendText("Select External RAZ\n");
-                }
-                else
-                { }
-                #endregion
             }
             else
             {
@@ -4190,12 +4213,24 @@ namespace USB_DAQ
 
         private void tbiAD9220_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
+            txtReport.Text = "";
             bool bResult = MicrorocChain1.SelectOperationMode(CommandHeader.AdcModeIndex, MyUsbDevice1);
             if(bResult)
             {
                 txtReport.AppendText("ADC Mode\n");
                 StateIndicator.OperationModeSelect = StateIndicator.OperationMode.ADC;
                 MicrorocPowerPulsingDisable();
+                #region Select External Raz
+                bResult = MicrorocChain1.SelectRazChannel(1, MyUsbDevice1);
+                if (bResult)
+                {
+                    txtReport.AppendText("Select External RAZ\n");
+                }
+                else
+                {
+                    MessageBox.Show("Select Internal RAZ failure. Please check the USB cable", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                #endregion
                 #region Set trigger out Read
                 bResult = MicrorocChain1.SelectTrigOutNor64OrSingle(0, MyUsbDevice1);
                 if(bResult)
@@ -4225,7 +4260,7 @@ namespace USB_DAQ
                 bResult = MicrorocChain1.SetExternalRazWidth(3, MyUsbDevice1);
                 if(bResult)
                 {
-                    txtReport.AppendText("Set External RAZ time: 100ns\n");
+                    txtReport.AppendText("Set External RAZ time: 1000ns\n");
                 }
                 else
                 {
@@ -4254,6 +4289,7 @@ namespace USB_DAQ
 
         private void tbiSweepAcq_MouseRightButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
+            txtReport.Text = "";
             bool bResult = MicrorocChain1.SelectOperationMode(CommandHeader.SweepAcqModeIndex, MyUsbDevice1);
             if(bResult)
             {
@@ -4268,6 +4304,7 @@ namespace USB_DAQ
 
         private void tbmNormalAcq_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
+            txtReport.Text = "";
             bool bResult = MicrorocChain1.SelectOperationMode(CommandHeader.AcqModeIndex, MyUsbDevice1);
             if (bResult)
             {
@@ -4286,11 +4323,11 @@ namespace USB_DAQ
                     return;
                 }
                 #endregion
-                #region Select NOR64
+                #region Select trigger out NOR64
                 bResult = MicrorocChain1.SelectTrigOutNor64OrSingle(1, MyUsbDevice1);
                 if(bResult)
                 {
-                    txtReport.AppendText("Select trigger out NOR64");
+                    txtReport.AppendText("Select trigger out NOR64\n");
                 }
                 else
                 {
@@ -4315,6 +4352,40 @@ namespace USB_DAQ
             {
                 MessageBox.Show("Select Normal ACQ mode failure. Please check the USB cable and re-click Normal ACQ", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private void btnTestSlowControlSend_Click(object sender, RoutedEventArgs e)
+        {
+            bool bResult;
+            #region RAZ Select
+            bResult = MicrorocChain1.SelectRazChannel(cbxRazSelect.SelectedIndex, MyUsbDevice1);
+            if (bResult)
+            {
+                string report = string.Format("Set Raz Mode: {0}\n", cbxRazSelect.Text);
+                txtReport.AppendText(report);
+            }
+            else
+            {
+                MessageBox.Show("Set Raz Mode failure, please check USB", //text
+                             "USB Error",   //caption
+                             MessageBoxButton.OK,//button
+                             MessageBoxImage.Error);//icon
+                return;
+            }
+            #endregion
+            #region ReadReg Or NOR64
+            bResult = MicrorocChain1.SelectTrigOutNor64OrSingle(cbxReadOrNOR64.SelectedIndex, MyUsbDevice1);
+            if (bResult)
+            {
+                string report = string.Format("Set trigger out by {0}\n", cbxReadOrNOR64.Text);
+                txtReport.AppendText(report);
+            }
+            else
+            {
+                MessageBox.Show("Set Readreg or NOR64 failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            #endregion
         }
 
         /*private void cbxAdcStartMode_SelectionChanged(object sender, SelectionChangedEventArgs e)
