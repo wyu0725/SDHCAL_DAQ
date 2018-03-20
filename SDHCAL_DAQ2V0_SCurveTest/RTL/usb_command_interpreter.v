@@ -1371,4 +1371,6 @@ end*/
 	endfunction
 	(*mark_debug = "true"*)wire[15:0] UsbCommandDebug;
 	assign UsbCommandDebug = USB_COMMAND;
+	(*mark_debug = "true"*)wire ComamndFifoReadEnDebug;
+	assign ComamndFifoReadEnDebug = fifo_rden;
 endmodule
