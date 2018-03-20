@@ -436,7 +436,7 @@ module SlaveDaq(
 	assign PWR_ON_ADC = 1'b0;
 	always @(*) begin
 		if(State == OUT_TRIG_ID1) begin
-			SlaveDaqData = {8'hAA, TrigCounter_sync[23:16]};
+			SlaveDaqData = {8'hF1, TrigCounter_sync[23:16]};
 			SlaveDaqData_en = InternalData_en;
 		end
 		else if(State == OUT_TRIG_ID2) begin
