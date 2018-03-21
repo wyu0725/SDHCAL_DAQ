@@ -16,6 +16,8 @@ namespace USB_DAQ
         public static int SlowAcqDataNumber = 100;
         public static int SlowDataRatePackageNumber;
 
+        public static bool FileSaved = false;
+
         public enum SCurveMode
         {
             Trig,
