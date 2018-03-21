@@ -36,13 +36,26 @@
   (GlobalState
     (FileView
       (Path "Design Resources")
-      (Path "Design Resources" ".\sdhcaldif.dsn")
-      (Path "Design Resources" ".\sdhcaldif.dsn" "FPGA")
+      (Path "Design Resources"
+         "d:\myproject\sdhcal_daq\pcb&schematic\sdhcaldif\capture\sdhcaldif.dsn")
+      (Path "Design Resources"
+         "d:\myproject\sdhcal_daq\pcb&schematic\sdhcaldif\capture\sdhcaldif.dsn"
+         "FPGA")
+      (Path "Design Resources"
+         "d:\myproject\sdhcal_daq\pcb&schematic\sdhcaldif\capture\sdhcaldif.dsn"
+         "Power")
+      (Path "Design Resources"
+         "d:\myproject\sdhcal_daq\pcb&schematic\sdhcaldif\capture\sdhcaldif.dsn"
+         "USB2.0")
+      (Path "Design Resources"
+         "d:\myproject\sdhcal_daq\pcb&schematic\sdhcaldif\capture\sdhcaldif.dsn"
+         "Design Cache")
       (Path "Design Resources" "Library")
       (Path "Design Resources" "Library"
          "d:\cadence_workspace\cadence library\capture library\my_sch_library.olb")
-      (Select "Design Resources" "Library"
-         "d:\cadence_workspace\cadence library\capture library\my_sch_library.olb"))
+      (Select "Design Resources"
+         "d:\myproject\sdhcal_daq\pcb&schematic\sdhcaldif\capture\sdhcaldif.dsn"
+         "Power" "Power On Control"))
     (HierarchyView)
     (Doc
       (Type "COrCapturePMDoc")
@@ -53,7 +66,7 @@
       (Type "COrSchematicDoc")
       (Frame
         (Placement "44 0 1 -1 -1 -8 -31 130 1473 130 590")
-        (Scroll "-63 100")
+        (Scroll "-63 0")
         (Zoom "100")
         (Occurrence "/"))
       (Path
@@ -79,5 +92,25 @@
       (Path
          "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCALDIF\CAPTURE\SDHCALDIF.DSN")
       (Schematic "FPGA")
-      (Page "A7_Power")))
+      (Page "A7_Power"))
+    (Doc
+      (Type "COrSchematicDoc")
+      (Frame
+        (Placement "44 2 3 -1 -1 -8 -31 130 1766 130 590")
+        (Scroll "-321 190")
+        (Zoom "100"))
+      (Path
+         "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCALDIF\CAPTURE\SDHCALDIF.DSN")
+      (Schematic "Power")
+      (Page "Power On Board"))
+    (Doc
+      (Type "COrSchematicDoc")
+      (Frame
+        (Placement "44 0 1 -1 -1 -8 -31 156 1792 156 616")
+        (Scroll "-214 10")
+        (Zoom "100"))
+      (Path
+         "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCALDIF\CAPTURE\SDHCALDIF.DSN")
+      (Schematic "Power")
+      (Page "Power On Control")))
   (MPSSessionName "wyu08"))
