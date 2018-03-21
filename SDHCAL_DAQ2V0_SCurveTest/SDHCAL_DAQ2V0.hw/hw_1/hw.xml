@@ -4,7 +4,7 @@
 <!-- Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.        -->
 
 <hwsession version="1" minor="2">
-  <device name="xc7a100t_0" gui_info=""/>
+  <device name="xc7a100t_0" gui_info="dashboard1=hw_ila_1[xc7a100t_0/hw_ila_1/Settings=ILA_SETTINGS_1;xc7a100t_0/hw_ila_1/Trigger Setup=ILA_TRIGGER_1;xc7a100t_0/hw_ila_1/Capture Setup=ILA_CAPTURE_1;xc7a100t_0/hw_ila_1/Status=ILA_STATUS_1;xc7a100t_0/hw_ila_1/Waveform=ILA_WAVE_1;]"/>
   <ObjectList object_type="hw_cfgmem" gui_info="">
     <Object name="" gui_info="">
       <Properties Property="PROGRAM.ADDRESS_RANGE" value="use_file"/>
@@ -38,12 +38,15 @@
     </Object>
   </ObjectList>
   <ObjectList object_type="hw_probe" gui_info="">
+    <Object name="Microroc_Control/Microroc_SCurveTest/SC_test_control/SCParamLoadDebug" gui_info=""/>
+    <Object name="Microroc_Control/Microroc_SCurveTest/SC_test_control/SCTestStateDebug[4:0]" gui_info=""/>
     <Object name="Microroc_Control/SweepACQ/SweepACQ_Control/State_Debug[3:0]" gui_info="Trigger Setup=0"/>
     <Object name="Microroc_u1/AutoDAQ/Start_Acq_debug" gui_info=""/>
     <Object name="Microroc_u1/AutoDAQ/start_debug" gui_info="Trigger Setup=0"/>
     <Object name="Microroc_u1/MicrorocDaq/SlaveDaqControl/InternalData_en_reg_n_0" gui_info="Trigger Setup=0"/>
     <Object name="Microroc_u1/RAM_Read/Dout_debug" gui_info="Capture Setup=0"/>
     <Object name="Microroc_u1/RAM_Read/TransmitOn_debug" gui_info="Capture Setup=1"/>
+    <Object name="ModeSelectDebug[2:0]" gui_info=""/>
     <Object name="usb_control/ComamndFifoReadEnDebug" gui_info="Trigger Setup=0"/>
     <Object name="usb_cy7c68013A/nSLWR_debug" gui_info="Trigger Setup=0"/>
   </ObjectList>
