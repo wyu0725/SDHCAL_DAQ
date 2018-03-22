@@ -17,6 +17,7 @@ using Microsoft.Research.DynamicDataDisplay.PointMarkers;//new add 20151024
 using System.IO.Ports;
 using System.Runtime.InteropServices;
 using System.Windows.Interop;
+using System.Diagnostics;
 //using System.Collections.ObjectModel;//new add 20150823
 //using Target7_NEWDAQ.DataModel;      //new add 20150823
 namespace USB_DAQ
@@ -396,6 +397,7 @@ namespace USB_DAQ
                 txtReport.AppendText(report.ToString());
                 StateIndicator.FileSaved = true;
                 fs.Close();
+                txtFileName.Text = DefaultFileName;
                 return true;
             }
             else
@@ -404,25 +406,6 @@ namespace USB_DAQ
                 return false;
             }
         }
-        //set average points
-        /*
-        private void btnAverage_Points_Click(object sender, RoutedEventArgs e)
-        {
-            string report;
-            byte value = (byte)cbxAverage_Points.SelectedIndex;
-            byte[] ave_points = ConstCommandByteArray(0xC0, value);
-            bool bResult = CommandSend(ave_points, ave_points.Length);
-            if (bResult)
-            {
-                report = string.Format("Select {0} averaging for each chn\n", cbxAverage_Points.Text.Trim());
-            }
-            else
-            {
-                report = string.Format("Fail to select average points\n");
-            }
-            txtReport.AppendText(report.ToString());
-        }
-        */
         //data acquisition start
         private void btnAcqStart_Click(object sender, RoutedEventArgs e)
         {            
@@ -2032,6 +2015,7 @@ namespace USB_DAQ
                     {
                         btnSlowACQ.Content = "Slow ACQ";
                         StateIndicator.SlowAcqStart = false;
+                        StateIndicator.FileSaved = false;
                         txtReport.AppendText("Slow data rate Acq Stop\n");
                     }
                     else
@@ -2540,6 +2524,7 @@ namespace USB_DAQ
                 }
                 #endregion
                 #region Data ACQ
+                Thread.Sleep(100);
                 bResult = MicrorocChain1.StartSCTest(MyUsbDevice1);
                 if (bResult)
                 {
@@ -2781,17 +2766,22 @@ namespace USB_DAQ
                 {
                     int PackageNumber = StateIndicator.SlowDataRatePackageNumber / 512;
                     int RemainPackageNum = StateIndicator.SlowDataRatePackageNumber % 512;
+                    int TotalPackageNumber = RemainPackageNum == 0 ? PackageNumber : (PackageNumber + 1);
                     int PackageCount = 0;
-                    while (PackageCount < PackageNumber & StateIndicator.SlowAcqStart)
+                    while (PackageCount < TotalPackageNumber & StateIndicator.SlowAcqStart)
                     {
+                        //Stopwatch sw = new Stopwatch();
+                        //sw.Start();
                         bResult = usbInterface.DataRecieve(DataReceiveBytes, DataReceiveBytes.Length);
+                        //sw.Stop();
+
                         if (bResult)
                         {
                             bw.Write(DataReceiveBytes);
                             PackageCount++;
                         }
                     }
-                    if (RemainPackageNum != 0)
+                    /*if (RemainPackageNum != 0)
                     {
                         bResult = false;
                         byte[] RemainByte = new byte[2048];
@@ -2802,7 +2792,7 @@ namespace USB_DAQ
                             RemainByteWrite[i] = RemainByte[i];
                         }
                         bw.Write(RemainByteWrite);
-                    }
+                    }*/
                 }
                 #endregion
                 #region The Max Data Number is not set and work in consist mode
@@ -2831,7 +2821,7 @@ namespace USB_DAQ
                     }
                 }
             }
-            byte[] EndFrame = new byte[512];
+            /*byte[] EndFrame = new byte[512];
             for (int j = 0; j < 32; j++)
             {
                 bResult = usbInterface.DataRecieve(EndFrame, EndFrame.Length);
@@ -2839,7 +2829,7 @@ namespace USB_DAQ
                 {
                     bw.Write(EndFrame);
                 }
-            }
+            }*/
             bw.Flush();
             bw.Dispose();
             bw.Close();
@@ -3890,9 +3880,9 @@ namespace USB_DAQ
             SetAfg3252Channel1FunctionShape();
             #endregion
             #region Set Frequency
-            SetAfg3252FrequencyCopy();
             SetAfg3252Ch1Frequency();
             SetAfg3252Ch2Frequency();
+            SetAfg3252FrequencyCopy();
             #endregion
             #region Voltage Level
             if (AmplitudeOrLevel)
@@ -4232,23 +4222,5 @@ namespace USB_DAQ
                 MessageBox.Show("Save file failure. Please save the file manual", "File Save Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
-        /*private void cbxAdcStartMode_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            byte[] CommandBytes = new byte[2];
-            bool bResult = false;
-            int AdcStartModeValue = cbxAdcStartMode.SelectedIndex + 128;//0x80
-            CommandBytes = ConstCommandByteArray(0xE8, (byte)AdcStartModeValue);
-            bResult = CommandSend(CommandBytes, CommandBytes.Length);
-            if(bResult)
-            {
-                string report = string.Format("Select ADC Start{0}\n", cbxAdcStartMode.Text);
-                txtReport.AppendText(report);
-            }
-            else
-            {
-                MessageBox.Show("Set ADC Start Mode failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }*/
     }
 }
