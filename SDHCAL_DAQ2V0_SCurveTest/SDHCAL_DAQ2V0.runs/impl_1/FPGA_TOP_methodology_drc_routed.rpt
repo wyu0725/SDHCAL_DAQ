@@ -1,7 +1,7 @@
 Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 -----------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2016.3 (win64) Build 1682563 Mon Oct 10 19:07:27 MDT 2016
-| Date         : Tue Mar 20 18:18:13 2018
+| Date         : Thu Mar 22 15:53:00 2018
 | Host         : WYU running 64-bit major release  (build 9200)
 | Command      : report_methodology -file FPGA_TOP_methodology_drc_routed.rpt -rpx FPGA_TOP_methodology_drc_routed.rpx
 | Design       : FPGA_TOP
@@ -23,55 +23,24 @@ Table of Contents
           Floorplan: checkpoint_FPGA_TOP
       Design limits: <entire design considered>
              Max violations: <unlimited>
-             Violations found: 94
+             Violations found: 88
 +-----------+----------+------------------------------------------------------+------------+
 | Rule      | Severity | Description                                          | Violations |
 +-----------+----------+------------------------------------------------------+------------+
-| PDRC-190  | Warning  | Suboptimally placed synchronized register chain      | 6          |
 | TIMING-3  | Warning  | Invalid primary clock on Clock Modifying Block       | 1          |
 | TIMING-6  | Warning  | No common primary clock between related clocks       | 2          |
 | TIMING-9  | Warning  | Unknown CDC Logic                                    | 1          |
 | TIMING-14 | Warning  | LUT on the clock tree                                | 4          |
+| TIMING-16 | Warning  | Large setup violation                                | 1          |
 | TIMING-17 | Warning  | Non-clocked sequential cell                          | 39         |
 | TIMING-18 | Warning  | Missing input or output delay                        | 29         |
 | TIMING-24 | Warning  | Overridden Max delay datapath only                   | 4          |
 | TIMING-28 | Warning  | Auto-derived clock referenced by a timing constraint | 2          |
-| XDCB-1    | Warning  | Runtime intensive exceptions                         | 1          |
 | XDCH-2    | Warning  | Same min and max delay values on IO port             | 5          |
 +-----------+----------+------------------------------------------------------+------------+
 
 2. REPORT DETAILS
 -----------------
-PDRC-190#1 Warning
-Suboptimally placed synchronized register chain  
-The FDCE cell dbg_hub/inst/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD4/shift_reg_in_reg[12] in site SLICE_X57Y76 is part of a synchronized register chain that is suboptimally placed as the load FDCE cell dbg_hub/inst/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD4/shift_reg_in_reg[11] is not placed in the same (SLICE) site.
-Related violations: <none>
-
-PDRC-190#2 Warning
-Suboptimally placed synchronized register chain  
-The FDCE cell dbg_hub/inst/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD4/shift_reg_in_reg[20] in site SLICE_X57Y75 is part of a synchronized register chain that is suboptimally placed as the load FDCE cell dbg_hub/inst/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD4/shift_reg_in_reg[19] is not placed in the same (SLICE) site.
-Related violations: <none>
-
-PDRC-190#3 Warning
-Suboptimally placed synchronized register chain  
-The FDCE cell dbg_hub/inst/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD4/shift_reg_in_reg[4] in site SLICE_X57Y77 is part of a synchronized register chain that is suboptimally placed as the load FDCE cell dbg_hub/inst/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD4/shift_reg_in_reg[3] is not placed in the same (SLICE) site.
-Related violations: <none>
-
-PDRC-190#4 Warning
-Suboptimally placed synchronized register chain  
-The FDCE cell dbg_hub/inst/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD5/shift_reg_in_reg[10] in site SLICE_X58Y82 is part of a synchronized register chain that is suboptimally placed as the load FDCE cell dbg_hub/inst/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD5/shift_reg_in_reg[9] is not placed in the same (SLICE) site.
-Related violations: <none>
-
-PDRC-190#5 Warning
-Suboptimally placed synchronized register chain  
-The FDCE cell dbg_hub/inst/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD5/shift_reg_in_reg[2] in site SLICE_X58Y83 is part of a synchronized register chain that is suboptimally placed as the load FDCE cell dbg_hub/inst/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD5/shift_reg_in_reg[1] is not placed in the same (SLICE) site.
-Related violations: <none>
-
-PDRC-190#6 Warning
-Suboptimally placed synchronized register chain  
-The FDCE cell dbg_hub/inst/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD7_CTL/shift_reg_in_reg[0] in site SLICE_X52Y77 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell dbg_hub/inst/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD7_STAT/stat_reg_reg[0] is not placed in the same (SLICE) site.
-Related violations: <none>
-
 TIMING-3#1 Warning
 Invalid primary clock on Clock Modifying Block  
 A primary clock Clk_320M is created on the output pin or net Clk_Gen/MMCME2_BASE_inst/CLKOUT3 of a Clock Modifying Block
@@ -110,6 +79,11 @@ Related violations: <none>
 TIMING-14#4 Warning
 LUT on the clock tree  
 The LUT usb_data_fifo_8192depth_i_2 has been found on the clock tree. Run opt_design to optimize the clock trees, then re-run report_methodology. If LUT(s) are still present in the clock trees, modify the RTL or the synthesis options accordingly to move the clock gating logic to dedicated clock enable resources. Keep in mind that post-opt_design database cannot be used for pin-planning tasks
+Related violations: <none>
+
+TIMING-16#1 Warning
+Large setup violation  
+There is a large setup violation of -1.929 ns between OUT_TRIG2B (clocked by Clk_320M) and Microroc_Control/TestGemEfficiency/Trigger2/TriggerShift_reg[0]/D (clocked by pll_40). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-17#1 Warning
@@ -480,14 +454,6 @@ Related violations: <none>
 TIMING-28#2 Warning
 Auto-derived clock referenced by a timing constraint  
 The auto-derived clock pll_40 is referenced by name inside timing constraint (see constraint position 79 in the Timing Constraint window in Vivado IDE). It is recommended to reference an auto-derived clock by the pin name attached to the clock: get_clocks -of_objects [get_pins Clk_Gen/MMCME2_BASE_inst/CLKOUT1]
-Related violations: <none>
-
-XDCB-1#1 Warning
-Runtime intensive exceptions  
-The following constraint contains more than 1000 objects. To preserve runtime and memory performance, it is recommended to include minimum number of objects. Check whether this list can be simplified.
--from = expands to 1064 design objects. 
-set_false_path -from [get_pins -hierarchical -filter {NAME =~ *allx_typeA_match_detection.ltlib_v1_0_0_allx_typeA_inst/DUT/I_WHOLE_SLICE.G_SLICE_IDX[*...
-d:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/SDHCAL_DAQ2V0.runs/impl_1/.Xil/Vivado-19700-WYU/u_ila_0_CV.0/out/ila.xdc (Line: 35)
 Related violations: <none>
 
 XDCH-2#1 Warning
