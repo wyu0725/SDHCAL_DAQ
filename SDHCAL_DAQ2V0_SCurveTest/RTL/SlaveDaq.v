@@ -153,7 +153,7 @@ module SlaveDaq(
 			InternalData_en <= 1'b0;
 			TrigCount_en <= 1'b0;
 			DataEndCount <= 12'b0;
-			ResetMicrorocHit <= 1'b1;
+			ResetMicrorocHit <= 1'b0;
 		end
 		else begin
 			case(State)
@@ -163,6 +163,7 @@ module SlaveDaq(
 						ResetStartAcq_n <= 1'b0;
 						State <= CHIP_RESET;
 						ResetTrigCount_n <= 1'b0;
+						ResetMicrorocHit <= 1'b1;
 					end
 					else
 						State <= IDLE;
@@ -266,6 +267,7 @@ module SlaveDaq(
 						OnceEnd <= 1'b0;
 						DelayCount <= 16'b0;
 						ResetStartAcq_n <= 1'b1;
+						ResetMicrorocHit <= 1'b0;
 						State <= OUT_TRIG_ID1;
 					end
 					else begin
