@@ -37,7 +37,7 @@ namespace USB_DAQ
             {
                 BulkInEndPt = myDevice.EndPointOf(0x86) as CyBulkEndPoint;
                 BulkInEndPt.XferSize = BulkInEndPt.MaxPktSize * 8;
-                BulkInEndPt.TimeOut = 10;
+                BulkInEndPt.TimeOut = 500;
                 BulkOutEndPt = myDevice.EndPointOf(0x02) as CyBulkEndPoint;
                 return true;
             }
