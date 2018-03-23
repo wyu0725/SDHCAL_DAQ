@@ -78,7 +78,7 @@
         </GroupBox>
         <GroupBox x:Name="gbxMICROROC" Header="MICROROC Control" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Height="500" Width="797" Grid.Column="4" Grid.ColumnSpan="2">
             <Grid  Margin="0,0,0,0" >
-                <TabControl x:Name="tbcMicrorocControl" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="785" Height="500">
+                <TabControl x:Name="tbcMicrorocControl" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="785" Height="500" >
                     <TabItem Name="tbiMicrorocAcq" Header="MICROROC ACQ" Margin="0,0,0,0" MouseLeftButtonUp="tbiMicrorocAcq_MouseLeftButtonUp">
                         <Grid Margin="0,0,0,0">
                             <GroupBox x:Name="gbxSC_ReadReg" Header="ASIC Parameter" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Height="400" Width="550">
@@ -562,13 +562,13 @@
                     </TabItem>
                     <TabItem Name="tbiSCTest" Header="SC Test" Height="24" VerticalAlignment="Bottom" MouseLeftButtonUp="tbiSCTest_MouseLeftButtonUp" >
                         <Grid Margin="0,0,0,0">
-                            <GroupBox x:Name="gbxAcqParameter" Header="ACQ Parameter" HorizontalAlignment="Left" Height="110" Margin="0,0,0,0" VerticalAlignment="Top" Width="775">
+                            <GroupBox x:Name="gbxExternalRazParameter" Header="External RAZ Parameter" HorizontalAlignment="Left" Height="80" Margin="400,0,0,0" VerticalAlignment="Top" Width="300">
                                 <Grid Margin="0,0,0,0">
                                     <Label x:Name="lblExternal_RAZ_Delay" Content="External RAZ Delay" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="120" Height="24"/>
                                     <TextBox x:Name="txtExternal_RAZ_Delay" HorizontalAlignment="Left" Height="24" Margin="120,0,0,0" TextWrapping="Wrap" Text="200" VerticalAlignment="Top" Width="75"/>
                                     <Button x:Name="btnSet_External_RAZ_Delay" Content="Set Delay" HorizontalAlignment="Left" Margin="200,0,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="btnSet_External_RAZ_Delay_Click" RenderTransformOrigin="-0.213,0.652"/>
                                     <Label x:Name="lblRAZ_External" Content="External RAZ Time" HorizontalAlignment="Left" Margin="0,30,0,0" VerticalAlignment="Top" Width="120"/>
-                                    <ComboBox x:Name="cbxRaz_mode" HorizontalAlignment="Left" Margin="120,30,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.088,-0.048">
+                                    <ComboBox x:Name="cbxRaz_mode" HorizontalAlignment="Left" Margin="120,30,0,0" VerticalAlignment="Top" Width="75" Height="24">
                                         <ComboBoxItem Content="75 ns"/>
                                         <ComboBoxItem Content="250 ns"/>
                                         <ComboBoxItem Content="500 ns"/>
@@ -586,7 +586,7 @@
 
                                 </Grid>
                             </GroupBox>
-                            <GroupBox x:Name="gbxSweepTest" Header="SweepTest" HorizontalAlignment="Left" Margin="163,235,0,0" VerticalAlignment="Top" Height="228" Width="400">
+                            <GroupBox x:Name="gbxSweepTest" Header="SweepTest" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Height="230" Width="400">
                                 <Grid Margin="0,0,0,0">
                                     <GroupBox x:Name="gbxSCurveTest" Header="SCurveTest" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Height="203" Width="185" Grid.ColumnSpan="3">
                                         <Grid Margin="0,0,0,0">
@@ -665,6 +665,38 @@
                                     <TextBox x:Name="txtAdcInterval" HorizontalAlignment="Left" Height="24" Margin="320,120,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="60"/>
                                 </Grid>
                             </GroupBox>
+                            <GroupBox x:Name="gbxAutoCalibration" Header="Auto Calibration" HorizontalAlignment="Left" Margin="0,230,0,0" VerticalAlignment="Top" Height="200" Width="400">
+                                <Grid Margin="0,0,0,0">
+                                    <Label x:Name="lblACStartCharge" Content="Start Charge:" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Height="25" Width="100"/>
+                                    <TextBox x:Name="tbxACStartCharge" HorizontalAlignment="Left" Height="25" Margin="100,0,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="70"/>
+                                    <Label x:Name="lblACEndCharge" Content="End Charge:" HorizontalAlignment="Left" Margin="0,30,0,0" VerticalAlignment="Top" Height="25" Width="100"/>
+                                    <TextBox x:Name="tbxACEndCharge" HorizontalAlignment="Left" Height="25" Margin="100,30,0,0" TextWrapping="Wrap" Text="140" VerticalAlignment="Top" Width="70"/>
+                                    <Label x:Name="lblACChargeStep" Content="Charge Step:" HorizontalAlignment="Left" Margin="0,60,0,0" VerticalAlignment="Top" Height="25" Width="100"/>
+                                    <TextBox x:Name="tbxACChargeStep" HorizontalAlignment="Left" Height="25" Margin="100,60,0,0" TextWrapping="Wrap" Text="10" VerticalAlignment="Top" Width="70"/>
+                                    <Label x:Name="lblACCountMax" Content="Max count:" HorizontalAlignment="Left" Margin="0,90,0,0" VerticalAlignment="Top" Height="24"/>
+                                    <ComboBox x:Name="cbxACCountMax" HorizontalAlignment="Left" Margin="100,90,0,0" VerticalAlignment="Top" Width="70">
+                                        <ComboBoxItem Content= "200"/>
+                                        <ComboBoxItem Content= "1000"/>
+                                        <ComboBoxItem Content= "2000"/>
+                                        <ComboBoxItem Content= "5000" IsSelected= "True"/>
+                                        <ComboBoxItem Content= "10000" />
+                                        <ComboBoxItem Content= "20000"/>
+                                        <ComboBoxItem Content= "50000"/>
+                                    </ComboBox>
+                                    <Label x:Name="lblACSingleOrAuto" Content="Single or Auto:" HorizontalAlignment="Left" Margin="0,120,0,0" VerticalAlignment="Top" Height="24"/>
+                                    <ComboBox x:Name="cbxACSingleOrAuto" HorizontalAlignment="Left" Margin="100,120,0,0" VerticalAlignment="Top" Width="65" Height="24">
+                                        <ComboBoxItem Content="Single" />
+                                        <ComboBoxItem Content="Auto" IsSelected="True"/>
+                                    </ComboBox>
+                                    <Label x:Name="lblACSingleTestChannel" Content="Single channel#:" HorizontalAlignment="Left" Margin="0,150,0,0" VerticalAlignment="Top" Height="25" RenderTransformOrigin="0.452,1.083" Width="100"/>
+                                    <TextBox x:Name="txtACSingleTestChannel" HorizontalAlignment="Left" Height="24" Margin="100,150,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="65"/>
+                                    <Button x:Name="btnAutoCalibrationInitial" Content="Initial Test" HorizontalAlignment="Left" Margin="200,0,0,0" VerticalAlignment="Top" Width="100" Height="25" Click="btnAutoCalibrationInitial_Click"/>
+                                    <Button x:Name="btnAutoCalibrationStart" Content="Calibration Start" HorizontalAlignment="Left" Margin="200,30,0,0" VerticalAlignment="Top" Width="100" Height="25" Click="btnAutoCalibrationStart_Click"/>
+                                    <Button x:Name="btnTestFileSave" Content="Button" HorizontalAlignment="Left" Margin="200,71,0,0" VerticalAlignment="Top" Width="75" Click="btnTestFileSave_Click"/>
+
+                                </Grid>
+                            </GroupBox>
+
                         </Grid>
                     </TabItem>
                     <TabItem Name="tbiAFG3252" Header="AFG3252">

@@ -3929,7 +3929,13 @@ namespace USB_DAQ
 
         private void tbiSCTest_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            //txtReport.Text = "";
+            txtReport.Text = "";
+            btnAutoCalibrationStart.IsEnabled = false;
+            btnAutoCalibrationInitial.Background = Brushes.AliceBlue;
+            SetSCurveTestParameter();    
+        }
+        private void SetSCurveTestParameter()
+        {
             bool bResult;
             MicrorocPowerPulsingDisable();
             #region Select External Raz
@@ -3995,7 +4001,7 @@ namespace USB_DAQ
             #endregion
             #region Release External RAZ
             bResult = MicrorocChain1.SelectAcquisitionMode(false, MyUsbDevice1);
-            if(bResult)
+            if (bResult)
             {
                 txtReport.AppendText("Release External RAZ\n");
             }
@@ -4016,7 +4022,6 @@ namespace USB_DAQ
                 MessageBox.Show("Select SCurve Test mode failure. Please check the USB cable and re-click SCTest", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
         private void tbiAD9220_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             txtReport.Text = "";
@@ -4222,12 +4227,13 @@ namespace USB_DAQ
                 MessageBox.Show("Save file failure. Please save the file manual", "File Save Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-        private void CalibrationStart(int InitialCharge, int FinalCharge, int ChargeStep)
+        private void CalibrationInitial()
         {
             bool bResult;
             string report;
+            #region Set frequency 100kHz
             bResult = AutoCalibration.SetTestFrequency(MyAFG3252, out report);
-            if(bResult)
+            if (bResult)
             {
                 txtReport.AppendText(report);
             }
@@ -4236,6 +4242,139 @@ namespace USB_DAQ
                 MessageBox.Show("Set test frequency failure. Please check the USB", "AFG3252 Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
+            #endregion
+            #region Set test shape: Pulse
+            bResult = AutoCalibration.SetTestShape(MyAFG3252, out report);
+            if (bResult)
+            {
+                txtReport.AppendText(report);
+            }
+            else
+            {
+                MessageBox.Show("Set test shape failure. Please check the USB", "AFG3252 Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            #endregion
+            #region Set channel2 voltage level LVCMOS
+            bResult = AutoCalibration.SetChannel2Voltage(MyAFG3252, out report);
+            if (bResult)
+            {
+                txtReport.AppendText(report);
+            }
+            else
+            {
+                MessageBox.Show("Set EXT_CLK failure. Please check the USB", "AFG3252 Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            #endregion
+            #region Set channel1 low level at 0V
+            bResult = MyAFG3252.SetVoltageLow(1, 0, AFG3252.VoltageUnitV);
+            if(!bResult)
+            {
+                MessageBox.Show("Initial AFG3252 failure. Please check the USB cable", "AFG3252 Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            #endregion
+            #region Set output on
+            bResult = MyAFG3252.OpenOutput();
+            if(bResult)
+            {
+                txtReport.AppendText("AFG3252 ON\n");
+            }
+            else
+            {
+                MessageBox.Show("Set output on failure. Please check the USB cable", "AFG3252 Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            #endregion
+            #region Create test path
+            CreateSCTestFolder();
+            #endregion
+            #region Set Slow Control
+            bResult = MicrorocChain1.SelectOperationMode(CommandHeader.AcqModeIndex, MyUsbDevice1);
+            if(!bResult)
+            {
+                MessageBox.Show("Please check the USB cable of DIF", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            MicrorocChain1.SelectSlowControlOrReadRegister(true, MyUsbDevice1);
+            MicrorocSetSlowControl();
+            MicrorocChain1.SelectSlowControlOrReadRegister(false, MyUsbDevice1);
+            MicrorocSetSlowControl();
+            #endregion
+            SetSCurveTestParameter();
+        }
+        /*private bool SingleChannelCalibration(double TestCharge, int TestSW, bool TestShaper, bool DacMode)
+        {
+
+        }*/
+        private bool CreateSCTestFolder()
+        {
+            string DefaultPath = @"D:\ExperimentsData\test";
+            string DefaultSubPath = DateTime.Now.ToString();
+            DefaultSubPath = DefaultSubPath.Replace("/", "_");
+            DefaultSubPath = DefaultSubPath.Replace(":", "_");
+            DefaultSubPath = DefaultSubPath.Replace(" ", "_");
+            string TestFolder = Path.Combine(DefaultPath, "SCurveTest", DefaultSubPath);
+            if (!Directory.Exists(TestFolder))//路径不存在
+            {
+                string path = String.Format("File Directory {0} Created\n", TestFolder);
+                Directory.CreateDirectory(TestFolder);
+                txtReport.AppendText(path);
+                txtFileDir.Text = TestFolder;
+                return true;
+            }
+            else
+            {
+                MessageBox.Show("The File Directory already exits", //text
+                                "Created failure",   //caption
+                                MessageBoxButton.OK,//button
+                                MessageBoxImage.Warning);//icon
+                return false;
+            }
+        }
+        private bool SaveSCTestFile(double TestCharge)
+        {
+            string TestFileName = string.Format("SCTest{0}fC.dat", TestCharge);
+            filepath = Path.Combine(txtFileDir.Text, TestFileName);
+            FileStream fs = null;
+            if (!File.Exists(filepath))
+            {
+                fs = File.Create(filepath);
+                string report = String.Format("File:{0} Created\n", filepath);
+                txtReport.AppendText(report.ToString());
+                StateIndicator.FileSaved = true;
+                fs.Close();
+                txtFileName.Text = TestFileName;
+                return true;
+            }
+            else
+            {
+                MessageBox.Show("Save file failure. Please save the file manual", "File Save Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+        }
+
+
+        private void btnAutoCalibrationStart_Click(object sender, RoutedEventArgs e)
+        {
+            btnAutoCalibrationStart.Background = Brushes.Red;
+            btnAutoCalibrationStart.Content = "Calibration Abort";
+            //测试完按钮不可按
+            btnAutoCalibrationStart.IsEnabled = false;
+        }
+
+        private void btnAutoCalibrationInitial_Click(object sender, RoutedEventArgs e)
+        {
+            //CalibrationInitial();
+            btnAutoCalibrationStart.IsEnabled = true;
+            btnAutoCalibrationStart.Background = Brushes.Green;
+            btnAutoCalibrationStart.Content = "Calibration Start";
+            btnAutoCalibrationInitial.Background = Brushes.SlateGray;
+        }
+
+        private void btnTestFileSave_Click(object sender, RoutedEventArgs e)
+        {
+            CreateSCTestFolder();
+            SaveSCTestFile(20);
         }
     }
 }
