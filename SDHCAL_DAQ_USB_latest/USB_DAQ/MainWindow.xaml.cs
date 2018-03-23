@@ -4222,5 +4222,20 @@ namespace USB_DAQ
                 MessageBox.Show("Save file failure. Please save the file manual", "File Save Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+        private void CalibrationStart(int InitialCharge, int FinalCharge, int ChargeStep)
+        {
+            bool bResult;
+            string report;
+            bResult = AutoCalibration.SetTestFrequency(MyAFG3252, out report);
+            if(bResult)
+            {
+                txtReport.AppendText(report);
+            }
+            else
+            {
+                MessageBox.Show("Set test frequency failure. Please check the USB", "AFG3252 Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+        }
     }
 }
