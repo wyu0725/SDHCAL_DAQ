@@ -4302,10 +4302,10 @@ namespace USB_DAQ
             #endregion
             SetSCurveTestParameter();
         }
-        /*private bool SingleChannelCalibration(double TestCharge, int TestSW, bool TestShaper, bool DacMode)
+        private bool SingleChannelCalibration(double TestCharge, int TestSW, bool TestShaper, bool DacMode)
         {
 
-        }*/
+        }
         private bool CreateSCTestFolder()
         {
             string DefaultPath = @"D:\ExperimentsData\test";
@@ -4364,11 +4364,11 @@ namespace USB_DAQ
 
         private void btnAutoCalibrationInitial_Click(object sender, RoutedEventArgs e)
         {
-            //CalibrationInitial();
+            CalibrationInitial();
             btnAutoCalibrationStart.IsEnabled = true;
             btnAutoCalibrationStart.Background = Brushes.Green;
             btnAutoCalibrationStart.Content = "Calibration Start";
-            btnAutoCalibrationInitial.Background = Brushes.SlateGray;
+            btnAutoCalibrationInitial.Background = ;
         }
 
         private void btnTestFileSave_Click(object sender, RoutedEventArgs e)
