@@ -18,7 +18,7 @@ CalibrationDataDac1 = zeros(DataNumber, 64);
 CalibrationDataDac2 = zeros(DataNumber, 64);
 for i = 1:1:DataNumber
     % Read Data Back
-    filename = sprintf('%s\\CalibrationSmallSignal\\%dfC_64Chn.dat',CurrentPath,(i-1)*ChargeInterval);
+    filename = sprintf('%s\\SCurveTest20180323\\AllChannel%dfC.dat',CurrentPath,(i-1)*ChargeInterval);
     [fid,~] = fopen(filename,'r');
     if fid <= 0
         % There was an error--tell user
@@ -55,7 +55,7 @@ for i = 1:1:64
 end
  xlabel('\bf Charge')
 ylabel('\bf DAC Code')
-title('\bf 64通道高增益成形刻度曲线')
+title('\bf 64通道高增益成形刻度曲线(DAC0)')
 % text('String','DAC Code = p \times Charge + b','Position',[300 500],'HorizontalAlignment','center');
 figure;
 pDac0(61,:) = [];
@@ -73,7 +73,7 @@ devPDac0 = pDac0 - meanPDac0(:,1);
 figure;
 stairs(Channel, devPDac0(:,1));
 axis([0 65,-0.1 0.1])
-textDac0 = sprintf('$\\frac{\\vert Max(p) - Mean(p)\\vert}{Mean(p)}$ = %1.4f %%',UniformPDac0*100);
+textDac0 = sprintf('$\\frac{\\vert Max(p) - Mean(p)\\vert}{Mean(p)}$ = %1.4f',UniformPDac0*100);
 text('String',textDac0,'HorizontalAlignment','center','Position',[32 0.05],'Interpreter','latex');
 xlabel('\bf Channel')
 ylabel('\bf $\frac{\vert Max(p) - Mean(p)\vert}{Mean(p)}$','Interpreter','latex')
