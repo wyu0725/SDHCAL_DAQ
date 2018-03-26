@@ -481,7 +481,7 @@
 
                             <Button x:Name="btnReset_cntb" Content="Reset cntb" HorizontalAlignment="Left" Margin="0,400,0,0" VerticalAlignment="Top" Width="76" Height="24" Click="btnReset_cntb_Click"/>
                             <TabControl x:Name="tbcOperationMode" Height="400" Margin="550,0,0,0" VerticalAlignment="Top" Width="200">
-                                <TabItem Name="tbmNormalAcq" Header="Normal ACQ" Height ="24" Margin="-2,-1,-2,1" VerticalAlignment="Bottom" MouseLeftButtonUp="tbmNormalAcq_MouseLeftButtonUp">
+                                <TabItem Name="tbmNormalAcq" Header="Normal ACQ"  MouseLeftButtonUp="tbmNormalAcq_MouseLeftButtonUp">
                                     <Grid Margin="0,0,0,0">
                                         <GroupBox x:Name="gbxNormalAcq" Header="Normal Acq" HorizontalAlignment="Left" VerticalAlignment="Top" Height="228" Width="155" Margin="0,0,0,0">
                                             <Grid  Margin="0,0,0,0" >
@@ -505,7 +505,7 @@
                                         </GroupBox>
                                     </Grid>
                                 </TabItem>
-                                <TabItem Name="tbiAD9220" Header="AD9220" Margin="0,0" Height="24" VerticalAlignment="Bottom" MouseLeftButtonUp="tbiAD9220_MouseLeftButtonUp">
+                                <TabItem Name="tbiAD9220" Header="AD9220" MouseLeftButtonUp="tbiAD9220_MouseLeftButtonUp">
                                     <Grid Margin="0,0,0,0">
                                         <Label x:Name="lblHold_Gen" Content="Hold Gen" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="80"/>
                                         <ComboBox x:Name="cbxTrig_Coincid" HorizontalAlignment="Left" Margin="100,0,0,0" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.088,-0.048" Height="24">
@@ -553,7 +553,7 @@
                                         </GroupBox>
                                     </Grid>
                                 </TabItem>
-                                <TabItem Name="tbiSweepAcq" Header="Sweep ACQ" Height="24" VerticalAlignment="Top" MouseRightButtonUp="tbiSweepAcq_MouseRightButtonUp">
+                                <TabItem Name="tbiSweepAcq" Header="Sweep ACQ" MouseRightButtonUp="tbiSweepAcq_MouseRightButtonUp">
                                     <Grid Margin="0,0,0,0">
                                     </Grid>
                                 </TabItem>

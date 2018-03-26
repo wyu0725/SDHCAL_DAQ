@@ -2001,6 +2001,15 @@ namespace USB_DAQ
                 #endregion
                 Thread.Sleep(10);
                 #region DAQ
+                bResult = MicrorocChain1.ResetCounterB(MyUsbDevice1);
+                if(bResult)
+                {
+                    txtReport.AppendText("Reset grey counter successfully\n");
+                }
+                else
+                {
+                    MessageBox.Show("Please check the USB cable", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
                 bResult = MicrorocChain1.StartAcquisition(MyUsbDevice1);
                 //bResult = true;
                 if (bResult)
@@ -3004,6 +3013,15 @@ namespace USB_DAQ
                 #endregion
                 MicrorocPowerPulsingDisable();
                 #region Start Load
+                bResult = MicrorocChain1.SelectSlowControlOrReadRegister(false, MyUsbDevice1);
+                if(bResult)
+                {
+                    txtReport.AppendText("Start load slow control parameters\n");
+                }
+                else
+                {
+                    MessageBox.Show("Please check the USB cable","USB Error",MessageBoxButton.OK,MessageBoxImage.Error);
+                }
                 bResult = MicrorocChain1.LoadSlowControlParameter(MyUsbDevice1);
                 if (bResult)
                 {
@@ -4302,10 +4320,10 @@ namespace USB_DAQ
             #endregion
             SetSCurveTestParameter();
         }
-        private bool SingleChannelCalibration(double TestCharge, int TestSW, bool TestShaper, bool DacMode)
+        /*private bool SingleChannelCalibration(double TestCharge, int TestSW, bool TestShaper, bool DacMode)
         {
 
-        }
+        }*/
         private bool CreateSCTestFolder()
         {
             string DefaultPath = @"D:\ExperimentsData\test";
@@ -4368,7 +4386,7 @@ namespace USB_DAQ
             btnAutoCalibrationStart.IsEnabled = true;
             btnAutoCalibrationStart.Background = Brushes.Green;
             btnAutoCalibrationStart.Content = "Calibration Start";
-            btnAutoCalibrationInitial.Background = ;
+            btnAutoCalibrationInitial.Background = Brushes.DimGray;
         }
 
         private void btnTestFileSave_Click(object sender, RoutedEventArgs e)
