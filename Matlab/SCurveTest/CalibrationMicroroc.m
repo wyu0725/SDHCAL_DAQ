@@ -73,7 +73,7 @@ devPDac0 = pDac0 - meanPDac0(:,1);
 figure;
 stairs(Channel, devPDac0(:,1));
 axis([0 65,-0.1 0.1])
-textDac0 = sprintf('$\\frac{\\vert Max(p) - Mean(p)\\vert}{Mean(p)}$ = %1.4f',UniformPDac0*100);
+textDac0 = sprintf('$\\frac{\\vert Max(p) - Mean(p)\\vert}{Mean(p)}$ = %1.4f \\%%',UniformPDac0*100);
 text('String',textDac0,'HorizontalAlignment','center','Position',[32 0.05],'Interpreter','latex');
 xlabel('\bf Channel')
 ylabel('\bf $\frac{\vert Max(p) - Mean(p)\vert}{Mean(p)}$','Interpreter','latex')
