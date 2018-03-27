@@ -1,7 +1,7 @@
 Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 -----------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2016.3 (win64) Build 1682563 Mon Oct 10 19:07:27 MDT 2016
-| Date         : Thu Mar 22 15:53:00 2018
+| Date         : Tue Mar 27 14:47:38 2018
 | Host         : WYU running 64-bit major release  (build 9200)
 | Command      : report_methodology -file FPGA_TOP_methodology_drc_routed.rpt -rpx FPGA_TOP_methodology_drc_routed.rpx
 | Design       : FPGA_TOP
@@ -23,7 +23,7 @@ Table of Contents
           Floorplan: checkpoint_FPGA_TOP
       Design limits: <entire design considered>
              Max violations: <unlimited>
-             Violations found: 88
+             Violations found: 87
 +-----------+----------+------------------------------------------------------+------------+
 | Rule      | Severity | Description                                          | Violations |
 +-----------+----------+------------------------------------------------------+------------+
@@ -31,7 +31,6 @@ Table of Contents
 | TIMING-6  | Warning  | No common primary clock between related clocks       | 2          |
 | TIMING-9  | Warning  | Unknown CDC Logic                                    | 1          |
 | TIMING-14 | Warning  | LUT on the clock tree                                | 4          |
-| TIMING-16 | Warning  | Large setup violation                                | 1          |
 | TIMING-17 | Warning  | Non-clocked sequential cell                          | 39         |
 | TIMING-18 | Warning  | Missing input or output delay                        | 29         |
 | TIMING-24 | Warning  | Overridden Max delay datapath only                   | 4          |
@@ -79,11 +78,6 @@ Related violations: <none>
 TIMING-14#4 Warning
 LUT on the clock tree  
 The LUT usb_data_fifo_8192depth_i_2 has been found on the clock tree. Run opt_design to optimize the clock trees, then re-run report_methodology. If LUT(s) are still present in the clock trees, modify the RTL or the synthesis options accordingly to move the clock gating logic to dedicated clock enable resources. Keep in mind that post-opt_design database cannot be used for pin-planning tasks
-Related violations: <none>
-
-TIMING-16#1 Warning
-Large setup violation  
-There is a large setup violation of -1.929 ns between OUT_TRIG2B (clocked by Clk_320M) and Microroc_Control/TestGemEfficiency/Trigger2/TriggerShift_reg[0]/D (clocked by pll_40). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-17#1 Warning
@@ -460,35 +454,35 @@ XDCH-2#1 Warning
 Same min and max delay values on IO port  
 The same input delay of 0.000 ns has been defined on port 'EXT_TRIGB' relative to clock Clk_320M for both max and min. Make sure this reflects the design intent.
 set_input_delay -clock [get_clocks Clk_320M] -add_delay 0.000 [get_ports EXT_TRIGB]
-D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/Constraints/SDHCAL_DAQ2V0.xdc (Line: 327)
+D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/Constraints/SDHCAL_DAQ2V0.xdc (Line: 293)
 Related violations: <none>
 
 XDCH-2#2 Warning
 Same min and max delay values on IO port  
 The same input delay of 0.000 ns has been defined on port 'OUT_TRIG0B' relative to clock Clk_320M for both max and min. Make sure this reflects the design intent.
 set_input_delay -clock [get_clocks Clk_320M] -add_delay 0.000 [get_ports OUT_TRIG0B]
-D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/Constraints/SDHCAL_DAQ2V0.xdc (Line: 322)
+D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/Constraints/SDHCAL_DAQ2V0.xdc (Line: 288)
 Related violations: <none>
 
 XDCH-2#3 Warning
 Same min and max delay values on IO port  
 The same input delay of 0.000 ns has been defined on port 'OUT_TRIG1B' relative to clock Clk_320M for both max and min. Make sure this reflects the design intent.
 set_input_delay -clock [get_clocks Clk_320M] -add_delay 0.000 [get_ports OUT_TRIG1B]
-D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/Constraints/SDHCAL_DAQ2V0.xdc (Line: 323)
+D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/Constraints/SDHCAL_DAQ2V0.xdc (Line: 289)
 Related violations: <none>
 
 XDCH-2#4 Warning
 Same min and max delay values on IO port  
 The same input delay of 0.000 ns has been defined on port 'OUT_TRIG2B' relative to clock Clk_320M for both max and min. Make sure this reflects the design intent.
 set_input_delay -clock [get_clocks Clk_320M] -add_delay 0.000 [get_ports OUT_TRIG2B]
-D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/Constraints/SDHCAL_DAQ2V0.xdc (Line: 324)
+D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/Constraints/SDHCAL_DAQ2V0.xdc (Line: 290)
 Related violations: <none>
 
 XDCH-2#5 Warning
 Same min and max delay values on IO port  
 The same output delay of 0.000 ns has been defined on port 'HOLD' relative to clock Clk_320M for both max and min. Make sure this reflects the design intent.
 set_output_delay -clock [get_clocks Clk_320M] -add_delay 0.000 [get_ports HOLD]
-D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/Constraints/SDHCAL_DAQ2V0.xdc (Line: 320)
+D:/MyProject/SDHCAL_DAQ/SDHCAL_DAQ2V0_SCurveTest/Constraints/SDHCAL_DAQ2V0.xdc (Line: 286)
 Related violations: <none>
 
 

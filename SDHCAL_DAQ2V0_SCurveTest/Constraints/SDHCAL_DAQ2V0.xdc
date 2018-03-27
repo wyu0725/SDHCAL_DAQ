@@ -247,41 +247,7 @@ set_property IOSTANDARD LVCMOS33 [get_ports CLK_EXT]
 
 
 
-set_property MARK_DEBUG false [get_nets {Microroc_Control/Microroc_SCurveTest/SCurve_Data_debug[10]}]
-set_property MARK_DEBUG false [get_nets {Microroc_Control/Microroc_SCurveTest/SCurve_Data_debug[4]}]
-set_property MARK_DEBUG false [get_nets {Microroc_Control/Microroc_SCurveTest/SCurve_Data_debug[3]}]
-set_property MARK_DEBUG false [get_nets {Microroc_Control/Microroc_SCurveTest/SCurve_Data_debug[6]}]
-set_property MARK_DEBUG false [get_nets {Microroc_Control/Microroc_SCurveTest/SCurve_Data_debug[9]}]
-set_property MARK_DEBUG false [get_nets {Microroc_Control/Microroc_SCurveTest/SCurve_Data_debug[1]}]
-set_property MARK_DEBUG false [get_nets {Microroc_Control/Microroc_SCurveTest/SCurve_Data_debug[7]}]
-set_property MARK_DEBUG false [get_nets {Microroc_Control/Microroc_SCurveTest/SCurve_Data_debug[0]}]
-set_property MARK_DEBUG false [get_nets {Microroc_Control/Microroc_SCurveTest/SCurve_Data_debug[8]}]
-set_property MARK_DEBUG false [get_nets {Microroc_Control/Microroc_SCurveTest/SCurve_Data_debug[11]}]
-set_property MARK_DEBUG false [get_nets {Microroc_Control/Microroc_SCurveTest/SCurve_Data_debug[12]}]
-set_property MARK_DEBUG false [get_nets {Microroc_Control/Microroc_SCurveTest/SCurve_Data_debug[15]}]
-set_property MARK_DEBUG false [get_nets {Microroc_Control/Microroc_SCurveTest/SCurve_Data_debug[14]}]
-set_property MARK_DEBUG false [get_nets {Microroc_Control/Microroc_SCurveTest/SCurve_Data_debug[13]}]
-set_property MARK_DEBUG false [get_nets {Microroc_Control/Microroc_SCurveTest/SCurve_Data_debug[2]}]
-set_property MARK_DEBUG false [get_nets {Microroc_Control/Microroc_SCurveTest/SCurve_Data_debug[5]}]
-set_property MARK_DEBUG false [get_nets {Microroc_Control/Microroc_SCurveTest/SCurve_Data_fifo_din_debug[0]}]
-set_property MARK_DEBUG false [get_nets {Microroc_Control/Microroc_SCurveTest/SCurve_Data_fifo_din_debug[4]}]
-set_property MARK_DEBUG false [get_nets {Microroc_Control/Microroc_SCurveTest/SCurve_Data_fifo_din_debug[9]}]
-set_property MARK_DEBUG false [get_nets {Microroc_Control/Microroc_SCurveTest/SCurve_Data_fifo_din_debug[10]}]
-set_property MARK_DEBUG false [get_nets {Microroc_Control/Microroc_SCurveTest/SCurve_Data_fifo_din_debug[1]}]
-set_property MARK_DEBUG false [get_nets {Microroc_Control/Microroc_SCurveTest/SCurve_Data_fifo_din_debug[13]}]
-set_property MARK_DEBUG false [get_nets {Microroc_Control/Microroc_SCurveTest/SCurve_Data_fifo_din_debug[14]}]
-set_property MARK_DEBUG false [get_nets {Microroc_Control/Microroc_SCurveTest/SCurve_Data_fifo_din_debug[12]}]
-set_property MARK_DEBUG false [get_nets {Microroc_Control/Microroc_SCurveTest/SCurve_Data_fifo_din_debug[15]}]
-set_property MARK_DEBUG false [get_nets {Microroc_Control/Microroc_SCurveTest/SCurve_Data_fifo_din_debug[11]}]
-set_property MARK_DEBUG false [get_nets {Microroc_Control/Microroc_SCurveTest/SCurve_Data_fifo_din_debug[3]}]
-set_property MARK_DEBUG false [get_nets {Microroc_Control/Microroc_SCurveTest/SCurve_Data_fifo_din_debug[8]}]
-set_property MARK_DEBUG false [get_nets {Microroc_Control/Microroc_SCurveTest/SCurve_Data_fifo_din_debug[6]}]
-set_property MARK_DEBUG false [get_nets {Microroc_Control/Microroc_SCurveTest/SCurve_Data_fifo_din_debug[5]}]
-set_property MARK_DEBUG false [get_nets {Microroc_Control/Microroc_SCurveTest/SCurve_Data_fifo_din_debug[7]}]
-set_property MARK_DEBUG false [get_nets {Microroc_Control/Microroc_SCurveTest/SCurve_Data_fifo_din_debug[2]}]
 
-set_property MARK_DEBUG false [get_nets Microroc_Control/Microroc_SCurveTest/SCurve_Data_wr_en_debug]
-set_property MARK_DEBUG false [get_nets Microroc_Control/Microroc_SCurveTest/SCurve_Data_fifo_rd_en_debug]
 
 
 
@@ -341,7 +307,6 @@ set_property IOSTANDARD LVCMOS33 [get_ports TRIGGER_OUT]
 
 
 
-
-
-
-
+set_property MARK_DEBUG false [get_nets {ModeSelectDebug[1]}]
+set_property MARK_DEBUG false [get_nets {ModeSelectDebug[0]}]
+set_property MARK_DEBUG false [get_nets {ModeSelectDebug[2]}]

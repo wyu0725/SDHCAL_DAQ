@@ -1,7 +1,7 @@
 Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 ------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2016.3 (win64) Build 1682563 Mon Oct 10 19:07:27 MDT 2016
-| Date         : Thu Mar 22 15:50:56 2018
+| Date         : Tue Mar 27 14:45:54 2018
 | Host         : WYU running 64-bit major release  (build 9200)
 | Command      : report_drc -file FPGA_TOP_drc_opted.rpt
 | Design       : FPGA_TOP
@@ -90,11 +90,11 @@ Related violations: <none>
 PLHOLDVIO-2#4 Warning
 Non-Optimal connections which could lead to hold violations  
 A LUT scurve_data_fifo_16x16_i_1 is driving clock pin of 15 cells. This could lead to large hold time violations. First few involved cells are:
-    Microroc_Control/Microroc_SCurveTest/scurve_data_fifo_16x16/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_full_i_reg {FDPE}
-    Microroc_Control/Microroc_SCurveTest/scurve_data_fifo_16x16/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_full_fb_i_reg {FDPE}
-    Microroc_Control/Microroc_SCurveTest/scurve_data_fifo_16x16/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.wr_rst_reg_reg[2] {FDPE}
-    Microroc_Control/Microroc_SCurveTest/scurve_data_fifo_16x16/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.wr_rst_reg_reg[1] {FDPE}
-    Microroc_Control/Microroc_SCurveTest/scurve_data_fifo_16x16/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.wr_rst_reg_reg[0] {FDPE}
+    Microroc_Control/Microroc_SCurveTest/scurve_data_fifo_16x16/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/grss.rsts/ram_empty_fb_i_reg {FDPE}
+    Microroc_Control/Microroc_SCurveTest/scurve_data_fifo_16x16/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/grss.rsts/ram_empty_i_reg {FDPE}
+    Microroc_Control/Microroc_SCurveTest/scurve_data_fifo_16x16/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.rd_rst_reg_reg[0] {FDPE}
+    Microroc_Control/Microroc_SCurveTest/scurve_data_fifo_16x16/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.rd_rst_reg_reg[1] {FDPE}
+    Microroc_Control/Microroc_SCurveTest/scurve_data_fifo_16x16/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.rd_rst_reg_reg[2] {FDPE}
 
 Related violations: <none>
 
