@@ -1,5 +1,5 @@
-function [ Average,Std ] = CaculateAdc(AverageNumber )
-%UNTITLED2 此处显示有关此函数的摘要
+function [ Average,Std ] = CaculateAdc(AverageNumber, HistNumber)
+%CaculateAdc AverageNumber是多少个点将ADC的数据平均一次 HistNumber是为调用hist
 %   此处显示详细说明
     InitialData = ImportData();
     HitNumber = floor(length(InitialData)/AverageNumber);
@@ -13,8 +13,8 @@ function [ Average,Std ] = CaculateAdc(AverageNumber )
         AdcData(i) = SumAdcData / AverageNumber;
     end
     
-    [AdcCount,Adc] = hist(AdcData,10);
-    hist(AdcData,10);
+    [AdcCount,Adc] = hist(AdcData,HistNumber);
+    h = histogram(AdcData,10);
     hold on;
     FAdc = AdcCount/sum(AdcCount);
     Average = FAdc*Adc';

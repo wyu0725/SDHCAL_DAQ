@@ -12,7 +12,7 @@ ChargeTitle = 'InputCharge and select file';
 for i = 1:1:DataNumber
     ChargeAnswer = inputdlg(PromptCharge,ChargeTitle);
     Charge(i) = str2double(ChargeAnswer);
-    [AverageAdc(i),StdAdc(i)] = CaculateAdc(AverageNumber);
+    [AverageAdc(i),StdAdc(i)] = CaculateAdc(AverageNumber, 10);
 end
 figure;
 plot(Charge,AverageAdc,'o-')
