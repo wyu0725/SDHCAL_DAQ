@@ -1743,7 +1743,7 @@ namespace USB_DAQ
             }
             #endregion
             #region Set Hold Time
-            bResult = MicrorocChain1.SetEndHoldTime(txtHoldTime.Text, MyUsbDevice1, out IllegalInput);
+            bResult = MicrorocChain1.SetHoldTime(txtHoldTime.Text, MyUsbDevice1, out IllegalInput);
             if (bResult)
             {
                 string report = string.Format("Set Hold Time:{0}\n", txtHoldTime.Text);
@@ -1763,7 +1763,7 @@ namespace USB_DAQ
             }
             #endregion
             #region Hold Enable
-            bResult = MicrorocChain1.EnableHold(true, MyUsbDevice1);
+            bResult = MicrorocChain1.EnableHold(cbxHoldEnable.SelectedIndex == 1, MyUsbDevice1);
             if(bResult)
             {
                 string report = string.Format("Hold {0}\n", cbxHoldEnable.Text);
@@ -2709,6 +2709,15 @@ namespace USB_DAQ
                 */
                 #endregion
                 #region Start Acq
+                bResult = MicrorocChain1.ClearUsbFifo(MyUsbDevice1);
+                if(bResult)
+                {
+                    txtReport.AppendText("Clear USB FIFO\n");
+                }
+                else
+                {
+                    MessageBox.Show("Please check the USB cable", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
                 bResult = MicrorocChain1.StartAdc(MyUsbDevice1);
                 if (bResult)
                 {
@@ -2724,6 +2733,7 @@ namespace USB_DAQ
                         btnAcqStart.Content = "ADC Start";
                         txtReport.AppendText("ADC Stopped\n");
                     }
+                    else
                     {
                         MessageBox.Show("ADC Stop failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
@@ -4099,6 +4109,15 @@ namespace USB_DAQ
                 }
                 #endregion
                 #region Slow Control Load
+                bResult = MicrorocChain1.SelectSlowControlOrReadRegister(false, MyUsbDevice1);
+                if(bResult)
+                {
+                    txtReport.AppendText("Start load slow control parameter\n");
+                }
+                else
+                {
+                    MessageBox.Show("Please check the USB cable", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
                 bResult = MicrorocChain1.LoadSlowControlParameter(MyUsbDevice1);
                 if (bResult)
                 {
