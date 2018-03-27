@@ -795,8 +795,8 @@ namespace USB_DAQ
             {
                 IllegalInput = false;
                 int DataNumberValue = int.Parse(DataNumber);
-                int DataNumberValue1 = DataNumberValue & 0xF + HexToInt(CommandHeader.AdcDataNumberPerHitHeader1);
-                int DataNumberValue2 = (DataNumberValue >> 4) & 0xF + HexToInt(CommandHeader.AdcDataNumberPerHitHeader2);
+                int DataNumberValue1 = (DataNumberValue & 0xF) + HexToInt(CommandHeader.AdcDataNumberPerHitHeader1);
+                int DataNumberValue2 = ((DataNumberValue >> 4) & 0xF) + HexToInt(CommandHeader.AdcDataNumberPerHitHeader2);
                 bool bResult = usbInterface.CommandSend(usbInterface.ConstCommandByteArray(DataNumberValue1));
                 if(!bResult)
                 {
