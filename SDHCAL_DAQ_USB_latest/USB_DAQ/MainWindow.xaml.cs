@@ -83,6 +83,7 @@ namespace USB_DAQ
         private AFG3252 MyAFG3252 = new AFG3252(AFG3252Descr);
         private bool AFG3252Attach = false;
         private bool AmplitudeOrLevel = true;
+        string CurrentPath = Environment.CurrentDirectory;
         //SC Parameter
 
 
@@ -1174,8 +1175,10 @@ namespace USB_DAQ
                     #region 4bitDAC Cali
                     string DCCaliFileName, SCTCaliFileName;
                     StreamReader DCCaliFile, SCTCaliFile;
-                    DCCaliFileName = string.Format("D:\\ExperimentsData\\test\\DCCali{0}.txt", i);
-                    SCTCaliFileName = string.Format("D:\\ExperimentsData\\test\\SCTCali{0}.txt", i);
+                    DCCaliFileName = string.Format("DCCali{0}.txt", i);
+                    SCTCaliFileName = string.Format("SCTCali{0}.txt", i);
+                    DCCaliFileName = Path.Combine(CurrentPath, DCCaliFileName);
+                    SCTCaliFileName = Path.Combine(CurrentPath, SCTCaliFileName);
                     DCCaliFile = File.OpenText(DCCaliFileName);
                     SCTCaliFile = File.OpenText(SCTCaliFileName);
                     switch (cbxPedCali_ASIC[i].SelectedIndex)
@@ -1265,36 +1268,39 @@ namespace USB_DAQ
                         string MaskFileName;
                         string MaskChannelString;
                         StreamReader MaskFile;
-                        MaskFileName = string.Format("D:\\ExperimentsData\\test\\{0}", FileName);
-                        MaskFile = File.OpenText(MaskFileName);
-                        MaskChannelString = MaskFile.ReadLine();
-                        while (MaskChannelString != null)
+                        MaskFileName = Path.Combine(CurrentPath, FileName);
+                        if (File.Exists(MaskFileName))
                         {
-                            int MaskChannel = int.Parse(MaskChannelString) - 1;
-                            bResult = MicrorocChain1.SetMaskChannel(MaskChannel, MyUsbDevice1);
-                            if (!bResult)
-                            {
-                                MessageBox.Show("Set Mask Channel faliure. Please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                                return;
-                            }
-                            bResult = MicrorocChain1.SelectMaskDiscriminator(7, MyUsbDevice1);
-                            if (!bResult)
-                            {
-                                MessageBox.Show("Set Mask Channel faliure. Please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                                return;
-                            }
-                            bResult = MicrorocChain1.SelectMaskOrUnmask(1, MyUsbDevice1);
-                            if (bResult)
-                            {
-                                string report = string.Format("Set ASIC{0} Mask Channel{1}\n", i, MaskChannel + 1);
-                                txtReport.AppendText(report);
-                            }
-                            else
-                            {
-                                MessageBox.Show("Set Mask Channel faliure. Please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                                return;
-                            }
+                            MaskFile = File.OpenText(MaskFileName);
                             MaskChannelString = MaskFile.ReadLine();
+                            while (MaskChannelString != null)
+                            {
+                                int MaskChannel = int.Parse(MaskChannelString) - 1;
+                                bResult = MicrorocChain1.SetMaskChannel(MaskChannel, MyUsbDevice1);
+                                if (!bResult)
+                                {
+                                    MessageBox.Show("Set Mask Channel faliure. Please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                    return;
+                                }
+                                bResult = MicrorocChain1.SelectMaskDiscriminator(7, MyUsbDevice1);
+                                if (!bResult)
+                                {
+                                    MessageBox.Show("Set Mask Channel faliure. Please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                    return;
+                                }
+                                bResult = MicrorocChain1.SelectMaskOrUnmask(1, MyUsbDevice1);
+                                if (bResult)
+                                {
+                                    string report = string.Format("Set ASIC{0} Mask Channel{1}\n", i, MaskChannel + 1);
+                                    txtReport.AppendText(report);
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Set Mask Channel faliure. Please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                    return;
+                                }
+                                MaskChannelString = MaskFile.ReadLine();
+                            }
                         }
                     }
                     #endregion
@@ -4241,7 +4247,8 @@ namespace USB_DAQ
 
         private void btnShowCurrentPath_Click(object sender, RoutedEventArgs e)
         {
-            string CurrentPath = Environment.CurrentDirectory;
+            
+            txtReport.AppendText(CurrentPath);
             string DefaultDicrectory = @txtFileDir.Text;
             string DefaultFileName = DateTime.Now.ToString();
             DefaultFileName = DefaultFileName.Replace("/", "_");
@@ -4412,6 +4419,11 @@ namespace USB_DAQ
         {
             CreateSCTestFolder();
             SaveSCTestFile(20);
+        }
+
+        private void btnHelp_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start(AppDomain.CurrentDomain.BaseDirectory + "Help/Help.html");
         }
     }
 }
