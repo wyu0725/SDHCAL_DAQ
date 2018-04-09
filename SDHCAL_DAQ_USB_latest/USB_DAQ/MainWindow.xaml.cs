@@ -2766,7 +2766,7 @@ namespace USB_DAQ
                 }
                 else
                 {
-                    txtReport.AppendText("Stop ADC Failure 1st time \n");
+                    txtReport.AppendText("Stop ADC Failure \n");
                     return;
                 }
                 #endregion
@@ -4423,7 +4423,7 @@ namespace USB_DAQ
 
         private void btnHelp_Click(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Process.Start(AppDomain.CurrentDomain.BaseDirectory + "Help/Help.html");
+            Process.Start(AppDomain.CurrentDomain.BaseDirectory + "Help/Help.html");
         }
     }
 }
