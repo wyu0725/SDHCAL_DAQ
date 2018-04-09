@@ -93,6 +93,11 @@
       (LibraryName
          "D:\CADENCE_WORKSPACE\CADENCE LIBRARY\CAPTURE LIBRARY\MY_SCH_LIBRARY.OLB")
       (DeviceIndex "0"))
+    ("T POINT A"
+      (FullPartName "T POINT A.Normal")
+      (LibraryName
+         "D:\CADENCE_WORKSPACE\CADENCE LIBRARY\CAPTURE LIBRARY\BGO_FEE_DAQ.OLB")
+      (DeviceIndex "0"))
     ("Pin 2"
       (FullPartName "Pin 2.Normal")
       (LibraryName
@@ -155,19 +160,33 @@
          "d:\cadence_workspace\cadence library\capture library\my_capturelibrary.olb")
       (Path "Design Resources" "Library"
          "d:\cadence_workspace\cadence library\capture library\my_sch_library.olb")
-      (Path "Outputs"))
+      (Path "Outputs")
+      (Select "Design Resources" "Library"
+         "d:\cadence_workspace\cadence library\capture library\my_sch_library.olb"
+         "SW DIP9"))
     (HierarchyView)
     (Doc
       (Type "COrCapturePMDoc")
       (Frame
-        (Placement "44 2 3 -1 -1 -8 -31 0 200 0 421"))
+        (Placement "44 0 1 -1 -1 -8 -31 0 200 0 421"))
       (Tab 0))
     (Doc
       (Type "COrSchematicDoc")
       (Frame
         (Placement "44 0 1 -1 -1 -8 -31 26 1662 26 486")
-        (Scroll "0 135")
-        (Zoom "152")
+        (Scroll "1663 1066")
+        (Zoom "172")
+        (Occurrence "/"))
+      (Path
+         "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCALDIF\CAPTURE\SDHCALDIF.DSN")
+      (Schematic "Top")
+      (Page "Top Each"))
+    (Doc
+      (Type "COrSchematicDoc")
+      (Frame
+        (Placement "44 0 1 -1 -1 -8 -31 78 1714 78 538")
+        (Scroll "-209 0")
+        (Zoom "100")
         (Occurrence "/A7 FPGA"))
       (Path
          "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCALDIF\CAPTURE\SDHCALDIF.DSN")
@@ -176,8 +195,8 @@
     (Doc
       (Type "COrSchematicDoc")
       (Frame
-        (Placement "44 0 1 -1 -1 -8 -31 52 1688 52 512")
-        (Scroll "-97 346")
+        (Placement "44 0 1 -1 -1 -8 -31 104 1740 104 564")
+        (Scroll "-97 0")
         (Zoom "100")
         (Occurrence "/A7 FPGA"))
       (Path
@@ -187,8 +206,8 @@
     (Doc
       (Type "COrSchematicDoc")
       (Frame
-        (Placement "44 0 1 -1 -1 -8 -31 78 1714 78 538")
-        (Scroll "-97 346")
+        (Placement "44 0 1 -1 -1 -8 -31 130 1766 130 590")
+        (Scroll "-97 0")
         (Zoom "100")
         (Occurrence "/A7 FPGA"))
       (Path
@@ -198,9 +217,9 @@
     (Doc
       (Type "COrSchematicDoc")
       (Frame
-        (Placement "44 0 1 -1 -1 -8 -31 104 1740 104 564")
-        (Scroll "0 604")
-        (Zoom "126")
+        (Placement "44 0 1 -1 -1 -8 -31 156 1792 156 616")
+        (Scroll "170 1430")
+        (Zoom "240")
         (Occurrence "/A7 FPGA"))
       (Path
          "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCALDIF\CAPTURE\SDHCALDIF.DSN")
@@ -209,8 +228,8 @@
     (Doc
       (Type "COrSchematicDoc")
       (Frame
-        (Placement "44 0 1 -1 -1 -8 -31 130 1766 130 590")
-        (Scroll "-214 140")
+        (Placement "44 0 1 -1 -1 -8 -31 182 1818 182 642")
+        (Scroll "-214 0")
         (Zoom "100")
         (Occurrence "/A7 FPGA"))
       (Path
@@ -220,12 +239,122 @@
     (Doc
       (Type "COrSchematicDoc")
       (Frame
-        (Placement "44 0 1 -1 -1 -8 -31 156 1792 156 616")
-        (Scroll "-309 74")
+        (Placement "44 0 1 -1 -1 -8 -31 208 1844 208 668")
+        (Scroll "-309 0")
         (Zoom "100")
         (Occurrence "/A7 FPGA"))
       (Path
          "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCALDIF\CAPTURE\SDHCALDIF.DSN")
       (Schematic "FPGA")
-      (Page "A7_Configuration")))
+      (Page "A7_Configuration"))
+    (Doc
+      (Type "COrSchematicDoc")
+      (Frame
+        (Placement "44 0 1 -1 -1 -8 -31 0 1636 0 460")
+        (Scroll "-214 0")
+        (Zoom "100")
+        (Occurrence "/A7 FPGA"))
+      (Path
+         "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCALDIF\CAPTURE\SDHCALDIF.DSN")
+      (Schematic "FPGA")
+      (Page "A7_GTP"))
+    (Doc
+      (Type "COrSchematicDoc")
+      (Frame
+        (Placement "44 0 1 -1 -1 -8 -31 26 1662 26 486")
+        (Scroll "-214 0")
+        (Zoom "100")
+        (Occurrence "/A7 FPGA"))
+      (Path
+         "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCALDIF\CAPTURE\SDHCALDIF.DSN")
+      (Schematic "FPGA")
+      (Page "A7_Power"))
+    (Doc
+      (Type "COrSchematicDoc")
+      (Frame
+        (Placement "44 0 1 -1 -1 -8 -31 52 1688 52 512")
+        (Scroll "88 0")
+        (Zoom "102")
+        (Occurrence "/Interface To DAQ"))
+      (Path
+         "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCALDIF\CAPTURE\SDHCALDIF.DSN")
+      (Schematic "InterfaceToDAQ")
+      (Page "InterfaceToDAQ"))
+    (Doc
+      (Type "COrSchematicDoc")
+      (Frame
+        (Placement "44 0 1 -1 -1 -8 -31 78 1714 78 538")
+        (Scroll "-214 0")
+        (Zoom "100")
+        (Occurrence "/Interface To FEB"))
+      (Path
+         "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCALDIF\CAPTURE\SDHCALDIF.DSN")
+      (Schematic "InterfaceToFEB")
+      (Page "ADC"))
+    (Doc
+      (Type "COrSchematicDoc")
+      (Frame
+        (Placement "44 0 1 -1 -1 -8 -31 104 1740 104 564")
+        (Scroll "88 6")
+        (Zoom "102")
+        (Occurrence "/Interface To FEB"))
+      (Path
+         "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCALDIF\CAPTURE\SDHCALDIF.DSN")
+      (Schematic "InterfaceToFEB")
+      (Page "InterfaceToFEB"))
+    (Doc
+      (Type "COrSchematicDoc")
+      (Frame
+        (Placement "44 0 1 -1 -1 -8 -31 130 1766 130 590")
+        (Scroll "-378 0")
+        (Zoom "72")
+        (Occurrence "/Power"))
+      (Path
+         "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCALDIF\CAPTURE\SDHCALDIF.DSN")
+      (Schematic "Power")
+      (Page "Analog Powerr"))
+    (Doc
+      (Type "COrSchematicDoc")
+      (Frame
+        (Placement "44 0 1 -1 -1 -8 -31 208 1844 208 638")
+        (Scroll "-373 0")
+        (Zoom "72")
+        (Occurrence "/Power"))
+      (Path
+         "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCALDIF\CAPTURE\SDHCALDIF.DSN")
+      (Schematic "Power")
+      (Page "Digital Power"))
+    (Doc
+      (Type "COrSchematicDoc")
+      (Frame
+        (Placement "44 0 1 -1 -1 -8 -31 52 1688 52 482")
+        (Scroll "-373 0")
+        (Zoom "72")
+        (Occurrence "/SFP"))
+      (Path
+         "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCALDIF\CAPTURE\SDHCALDIF.DSN")
+      (Schematic "SFP")
+      (Page "SFP"))
+    (Doc
+      (Type "COrSchematicDoc")
+      (Frame
+        (Placement "44 0 1 -1 -1 -8 -31 78 1714 78 508")
+        (Scroll "-378 0")
+        (Zoom "72")
+        (Occurrence "/SFP"))
+      (Path
+         "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCALDIF\CAPTURE\SDHCALDIF.DSN")
+      (Schematic "SFP")
+      (Page "SFP Regular IO"))
+    (Doc
+      (Type "COrSchematicDoc")
+      (Frame
+        (Placement "44 2 3 -1 -1 -8 -31 104 1740 104 534")
+        (Scroll "0 397")
+        (Zoom "348")
+        (Occurrence "/USB 2.0"))
+      (Path
+         "D:\MYPROJECT\SDHCAL_DAQ\PCB&SCHEMATIC\SDHCALDIF\CAPTURE\SDHCALDIF.DSN")
+      (Schematic "USB2.0")
+      (Page "USB2.0")))
   (MPSSessionName "wyu08"))
