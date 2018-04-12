@@ -1,0 +1,95 @@
+(---------------------------------------------------------------------)
+(                                                                     )
+(    Allegro Netrev Import Logic                                      )
+(                                                                     )
+(    Drawing          : SDHCalDIF.brd                                 )
+(    Software Version : 16.6S025                                      )
+(    Date/Time        : Wed Apr 11 16:19:49 2018                      )
+(                                                                     )
+(---------------------------------------------------------------------)
+
+
+------ Directives ------------
+
+Ripup etch:                  No
+Ripup delete first segment:  No
+Ripup retain bondwire:       No
+Ripup symbols:               Always
+Missing symbol has error:    No
+DRC update:                  Yes
+Schematic directory:         'D:/MyProject/SDHCAL_DAQ/PCB&Schematic/SDHCalDIF/Capture/allegro'
+Design Directory:            '.'
+Old design name:             'D:/MyProject/SDHCAL_DAQ/PCB&Schematic/SDHCalDIF/Allegro/SDHCalDIF.brd'
+New design name:             'D:/MyProject/SDHCAL_DAQ/PCB&Schematic/SDHCalDIF/Allegro/SDHCalDIF.brd'
+
+CmdLine: netrev -$ -i D:/MyProject/SDHCAL_DAQ/PCB&Schematic/SDHCalDIF/Capture/allegro -y 1 -q netrev_constraint_report.xml D:/MyProject/SDHCAL_DAQ/PCB&Schematic/SDHCalDIF/Allegro/#Taaaaah07576.tmp
+
+------ Preparing to read pst files ------
+
+Starting to read D:/MyProject/SDHCAL_DAQ/PCB&Schematic/SDHCalDIF/Capture/allegro/pstchip.dat 
+   Finished reading D:/MyProject/SDHCAL_DAQ/PCB&Schematic/SDHCalDIF/Capture/allegro/pstchip.dat (00:00:00.04)
+Starting to read D:/MyProject/SDHCAL_DAQ/PCB&Schematic/SDHCalDIF/Capture/allegro/pstxprt.dat 
+   Finished reading D:/MyProject/SDHCAL_DAQ/PCB&Schematic/SDHCalDIF/Capture/allegro/pstxprt.dat (00:00:00.02)
+Starting to read D:/MyProject/SDHCAL_DAQ/PCB&Schematic/SDHCalDIF/Capture/allegro/pstxnet.dat 
+   Finished reading D:/MyProject/SDHCAL_DAQ/PCB&Schematic/SDHCalDIF/Capture/allegro/pstxnet.dat (00:00:00.02)
+
+------ Oversights/Warnings/Errors ------
+
+
+------ Library Paths ------
+MODULEPATH =  . 
+           D:/Cadence/SPB_16.6/share/local/pcb/modules 
+
+PSMPATH =  . 
+           symbols 
+           .. 
+           ../symbols 
+           D:/Cadence/SPB_16.6/share/local/pcb/symbols 
+           D:/Cadence/SPB_16.6/share/pcb/pcb_lib/symbols 
+           D:/Cadence/SPB_16.6/share/pcb/allegrolib/symbols 
+           D:/Cadence_workspace/Cadence Library/Allegro Library/Allegro Library/BGO_FEE_Library/ 
+           D:/Cadence_workspace/Cadence Library/Allegro Library/Allegro Library/FEE_DAQ_Library/ 
+
+PADPATH =  D:/Cadence_workspace/Cadence Library/Allegro Library/Allegro Library/BGO_FEE_Library/ 
+           . 
+           symbols 
+           .. 
+           ../symbols 
+           D:/Cadence/SPB_16.6/share/local/pcb/padstacks 
+           D:/Cadence/SPB_16.6/share/pcb/pcb_lib/symbols 
+           D:/Cadence/SPB_16.6/share/pcb/allegrolib/symbols 
+           D:/Cadence_workspace/Cadence Library/Allegro Library/Allegro Library/DAQ_CARD_Library/pad/ 
+           D:/Cadence_workspace/Cadence Library/Allegro Library/Allegro Library/FEE_DAQ_Library/ 
+
+
+------ Summary Statistics ------
+
+
+netrev run on Apr 11 16:19:49 2018
+   DESIGN NAME : 'SDHCALDIF'
+   PACKAGING ON Jan 13 2014 18:46:08
+
+   COMPILE 'logic'
+   CHECK_PIN_NAMES OFF
+   CROSS_REFERENCE OFF
+   FEEDBACK OFF
+   INCREMENTAL OFF
+   INTERFACE_TYPE PHYSICAL
+   MAX_ERRORS 500
+   MERGE_MINIMUM 5
+   NET_NAME_CHARS '#%&()*+-./:=>?@[]^_`|'
+   NET_NAME_LENGTH 24
+   OVERSIGHTS ON
+   REPLACE_CHECK OFF
+   SINGLE_NODE_NETS ON
+   SPLIT_MINIMUM 0
+   SUPPRESS   20
+   WARNINGS ON
+
+ No error detected
+ No oversight detected
+ No warning detected
+
+cpu time      0:01:07
+elapsed time  0:00:01
+
