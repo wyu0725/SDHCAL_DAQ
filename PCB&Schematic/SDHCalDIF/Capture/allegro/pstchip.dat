@@ -1,5 +1,5 @@
 FILE_TYPE=LIBRARY_PARTS;
-{ Using PSTWRITER 16.6.0 d001Apr-16-2018 at 18:35:19}
+{ Using PSTWRITER 16.6.0 d001Apr-17-2018 at 18:32:41}
 primitive 'BUTTON_INDC2-200-M_BUTTON';
   pin
     '1':
@@ -1276,6 +1276,21 @@ primitive 'RESISTOR_SR0603_2.2K';
     PART_NAME='Resistor';
     JEDEC_TYPE='SR0603';
     VALUE='2.2k';
+  end_body;
+end_primitive;
+primitive 'RESISTOR_SR0402_0';
+  pin
+    '1':
+      PIN_NUMBER='(1)';
+      PINUSE='UNSPEC';
+    '2':
+      PIN_NUMBER='(2)';
+      PINUSE='UNSPEC';
+  end_pin;
+  body
+    PART_NAME='RESISTOR';
+    JEDEC_TYPE='SR0402';
+    VALUE='0';
   end_body;
 end_primitive;
 primitive 'R_SR0603_33';
