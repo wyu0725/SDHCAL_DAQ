@@ -1,5 +1,5 @@
 FILE_TYPE=LIBRARY_PARTS;
-{ Using PSTWRITER 16.6.0 d001Apr-17-2018 at 18:23:22}
+{ Using PSTWRITER 16.6.0 d001Apr-18-2018 at 18:26:39}
 primitive 'BUTTON_INDC2-200-M_BUTTON';
   pin
     '1':
@@ -268,6 +268,36 @@ primitive 'CAPACITOR NP_SC0603_12P';
     PART_NAME='Capacitor np';
     JEDEC_TYPE='SC0603';
     VALUE='12p';
+  end_body;
+end_primitive;
+primitive 'C NP_SC0603_100N';
+  pin
+    '1':
+      PIN_NUMBER='(1)';
+      PINUSE='UNSPEC';
+    '2':
+      PIN_NUMBER='(2)';
+      PINUSE='UNSPEC';
+  end_pin;
+  body
+    PART_NAME='C NP';
+    JEDEC_TYPE='SC0603';
+    VALUE='100n';
+  end_body;
+end_primitive;
+primitive 'C NP_SC0603_470N';
+  pin
+    '1':
+      PIN_NUMBER='(1)';
+      PINUSE='UNSPEC';
+    '2':
+      PIN_NUMBER='(2)';
+      PINUSE='UNSPEC';
+  end_pin;
+  body
+    PART_NAME='C NP';
+    JEDEC_TYPE='SC0603';
+    VALUE='470n';
   end_body;
 end_primitive;
 primitive 'CAPACITOR NP_SC0603_1U';
@@ -1291,6 +1321,21 @@ primitive 'RESISTOR_SR0402_0';
     PART_NAME='RESISTOR';
     JEDEC_TYPE='SR0402';
     VALUE='0';
+  end_body;
+end_primitive;
+primitive 'RESISTOR_SR0402_1K';
+  pin
+    '1':
+      PIN_NUMBER='(1)';
+      PINUSE='UNSPEC';
+    '2':
+      PIN_NUMBER='(2)';
+      PINUSE='UNSPEC';
+  end_pin;
+  body
+    PART_NAME='RESISTOR';
+    JEDEC_TYPE='SR0402';
+    VALUE='1k';
   end_body;
 end_primitive;
 primitive 'R_SR0603_33';
@@ -2630,6 +2675,114 @@ primitive '24LC64_DIP8-100-300_24LC64';
     PART_NAME='24LC64';
     JEDEC_TYPE='DIP8-100-300';
     VALUE='24LC64';
+  end_body;
+end_primitive;
+primitive 'ADN2815_USB3320_QFN32_ADN2815';
+  pin
+    'VCC#1':
+      PIN_NUMBER='(1)';
+      PINUSE='POWER';
+    'VCC#2':
+      PIN_NUMBER='(2)';
+      PINUSE='POWER';
+    'VREF':
+      PIN_NUMBER='(3)';
+      PINUSE='POWER';
+    'NIN':
+      PIN_NUMBER='(4)';
+      PINUSE='UNSPEC';
+    'PIN':
+      PIN_NUMBER='(5)';
+      PINUSE='UNSPEC';
+    'NC1':
+      PIN_NUMBER='(6)';
+      PINUSE='UNSPEC';
+    'NC2':
+      PIN_NUMBER='(7)';
+      PINUSE='UNSPEC';
+    'VEE#8':
+      PIN_NUMBER='(8)';
+      PINUSE='POWER';
+    'NC3':
+      PIN_NUMBER='(9)';
+      PINUSE='UNSPEC';
+    'REFCLKP':
+      PIN_NUMBER='(10)';
+      PINUSE='UNSPEC';
+    'REFCLKN':
+      PIN_NUMBER='(11)';
+      PINUSE='UNSPEC';
+    'VCC#12':
+      PIN_NUMBER='(12)';
+      PINUSE='POWER';
+    'VEE#13':
+      PIN_NUMBER='(13)';
+      PINUSE='POWER';
+    'CF2':
+      PIN_NUMBER='(14)';
+      PINUSE='UNSPEC';
+    'CF1':
+      PIN_NUMBER='(15)';
+      PINUSE='UNSPEC';
+    'LOL':
+      PIN_NUMBER='(16)';
+      PINUSE='UNSPEC';
+    'VEE#17':
+      PIN_NUMBER='(17)';
+      PINUSE='POWER';
+    'VCC#18':
+      PIN_NUMBER='(18)';
+      PINUSE='POWER';
+    'SADDR5':
+      PIN_NUMBER='(19)';
+      PINUSE='UNSPEC';
+    'SCK':
+      PIN_NUMBER='(20)';
+      PINUSE='UNSPEC';
+    'SDA':
+      PIN_NUMBER='(21)';
+      PINUSE='UNSPEC';
+    'NC4':
+      PIN_NUMBER='(22)';
+      PINUSE='UNSPEC';
+    'VEE#23':
+      PIN_NUMBER='(23)';
+      PINUSE='POWER';
+    'VCC#24':
+      PIN_NUMBER='(24)';
+      PINUSE='POWER';
+    'CLKOUTN':
+      PIN_NUMBER='(25)';
+      PINUSE='UNSPEC';
+    'CLKOUTP':
+      PIN_NUMBER='(26)';
+      PINUSE='UNSPEC';
+    'SQUELCH':
+      PIN_NUMBER='(27)';
+      PINUSE='UNSPEC';
+    'DATAOUTN':
+      PIN_NUMBER='(28)';
+      PINUSE='UNSPEC';
+    'DATAOUTP':
+      PIN_NUMBER='(29)';
+      PINUSE='UNSPEC';
+    'VEE#30':
+      PIN_NUMBER='(30)';
+      PINUSE='POWER';
+    'VCC#31':
+      PIN_NUMBER='(31)';
+      PINUSE='POWER';
+    'VCC#32':
+      PIN_NUMBER='(32)';
+      PINUSE='POWER';
+    'EP':
+      PIN_NUMBER='(33)';
+      PINUSE='POWER';
+  end_pin;
+  body
+    PART_NAME='ADN2815';
+    JEDEC_TYPE='USB3320_QFN32';
+    VALUE='ADN2815';
   end_body;
 end_primitive;
 primitive 'XC7A100TFGG484_ARTIX-7-FGG484_(';

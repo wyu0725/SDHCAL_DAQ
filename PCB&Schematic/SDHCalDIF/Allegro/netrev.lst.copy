@@ -1,10 +1,11 @@
+<HTML><HEAD><STYLE TYPE="text/css">.errorMessage { color:darkred; font-weight:bold; font-style:italic; text-decoration:underline; }</STYLE></HEAD><BODY><PRE>
 (---------------------------------------------------------------------)
 (                                                                     )
 (    Allegro Netrev Import Logic                                      )
 (                                                                     )
 (    Drawing          : SDHCalDIF.brd                                 )
 (    Software Version : 16.6S025                                      )
-(    Date/Time        : Wed Apr 18 18:50:59 2018                      )
+(    Date/Time        : Wed Apr 18 18:23:22 2018                      )
 (                                                                     )
 (---------------------------------------------------------------------)
 
@@ -22,12 +23,12 @@ Design Directory:            '.'
 Old design name:             'D:/MyProject/SDHCAL_DAQ/PCB&Schematic/SDHCalDIF/Allegro/SDHCalDIF.brd'
 New design name:             'D:/MyProject/SDHCAL_DAQ/PCB&Schematic/SDHCalDIF/Allegro/SDHCalDIF.brd'
 
-CmdLine: netrev -$ -i D:/MyProject/SDHCAL_DAQ/PCB&Schematic/SDHCalDIF/Capture/allegro -y 1 -q netrev_constraint_report.xml D:/MyProject/SDHCAL_DAQ/PCB&Schematic/SDHCalDIF/Allegro/#Taaaabg05804.tmp
+CmdLine: netrev -$ -i D:/MyProject/SDHCAL_DAQ/PCB&Schematic/SDHCalDIF/Capture/allegro -y 1 -q netrev_constraint_report.xml D:/MyProject/SDHCAL_DAQ/PCB&Schematic/SDHCalDIF/Allegro/#Taaaaaw05804.tmp
 
 ------ Preparing to read pst files ------
 
 Starting to read D:/MyProject/SDHCAL_DAQ/PCB&Schematic/SDHCalDIF/Capture/allegro/pstchip.dat 
-   Finished reading D:/MyProject/SDHCAL_DAQ/PCB&Schematic/SDHCalDIF/Capture/allegro/pstchip.dat (00:00:00.04)
+   Finished reading D:/MyProject/SDHCAL_DAQ/PCB&Schematic/SDHCalDIF/Capture/allegro/pstchip.dat (00:00:00.05)
 Starting to read D:/MyProject/SDHCAL_DAQ/PCB&Schematic/SDHCalDIF/Capture/allegro/pstxprt.dat 
    Finished reading D:/MyProject/SDHCAL_DAQ/PCB&Schematic/SDHCalDIF/Capture/allegro/pstxprt.dat (00:00:00.02)
 Starting to read D:/MyProject/SDHCAL_DAQ/PCB&Schematic/SDHCalDIF/Capture/allegro/pstxnet.dat 
@@ -35,6 +36,10 @@ Starting to read D:/MyProject/SDHCAL_DAQ/PCB&Schematic/SDHCalDIF/Capture/allegro
 
 ------ Oversights/Warnings/Errors ------
 
+
+#1   <span onMouseOver="showPopup('SPMHNI-192');" onMouseOut="hidePopup();" class="errorMessage" >WARNING(SPMHNI-192)</span>: Device/Symbol check warning detected. [help]
+
+<span onMouseOver="showPopup('SPMHNI-337');" onMouseOut="hidePopup();" class="errorMessage" >WARNING(SPMHNI-337)</span>: Unable to load symbol 'USB3320_QFN32 {RefDes U25}' for device 'ADN2815_USB3320_QFN32_ADN2815': WARNING(SPMHUT-127): Could not find padstack REC10X34. [help]
 
 ------ Library Paths ------
 MODULEPATH =  . 
@@ -65,7 +70,7 @@ PADPATH =  D:/Cadence_workspace/Cadence Library/Allegro Library/Allegro Library/
 ------ Summary Statistics ------
 
 
-netrev run on Apr 18 18:50:59 2018
+netrev run on Apr 18 18:23:22 2018
    DESIGN NAME : 'SDHCALDIF'
    PACKAGING ON Jan 13 2014 18:46:08
 
@@ -88,8 +93,15 @@ netrev run on Apr 18 18:50:59 2018
 
  No error detected
  No oversight detected
- No warning detected
+  1 warnings detected
 
-cpu time      0:01:05
+cpu time      0:01:08
 elapsed time  0:00:00
 
+</PRE>
+<SCRIPT LANGUAGE="JavaScript">var oPopup = window.createPopup();oPopup.document.bgColor="bisque";function showPopup(id){var v = document.getElementById(id);oPopup.document.body.innerHTML = v.innerHTML;var popupBody = oPopup.document.body;oPopup.show(0, 0, 300, 0);var realHeight = popupBody.scrollHeight;oPopup.hide();oPopup.show(15, 15, 300, realHeight, event.srcElement);}function hidePopup(){oPopup.hide();}</SCRIPT><DIV STYLE="display:none;"><DIV ID="SPMHNI-192"><DIV><B>SPMHNI-192:</B><BR>This is a general warning that is normally paired with another message.
+Check the secondary message for more detail.</DIV></DIV><DIV ID="SPMHNI-337"><DIV><B>SPMHNI-337:</B><BR>Indicates that your PSMPATH or PADPATH is not set correctly to find
+all your footprints or padstacks. If only a few of these messages are seen
+you may need to create new footprints or padstacks.
+During logic import, this is a warning and unless errors were reported during
+import the design has been updated with all logic changes.</DIV></DIV></DIV</BODY></HTML>
