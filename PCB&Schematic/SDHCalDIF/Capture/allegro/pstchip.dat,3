@@ -1,5 +1,5 @@
 FILE_TYPE=LIBRARY_PARTS;
-{ Using PSTWRITER 16.6.0 d001Apr-18-2018 at 18:26:39}
+{ Using PSTWRITER 16.6.0 d001Apr-19-2018 at 17:06:43}
 primitive 'BUTTON_INDC2-200-M_BUTTON';
   pin
     '1':
@@ -270,7 +270,7 @@ primitive 'CAPACITOR NP_SC0603_12P';
     VALUE='12p';
   end_body;
 end_primitive;
-primitive 'C NP_SC0603_100N';
+primitive 'C NP_SC0402_100N';
   pin
     '1':
       PIN_NUMBER='(1)';
@@ -281,7 +281,7 @@ primitive 'C NP_SC0603_100N';
   end_pin;
   body
     PART_NAME='C NP';
-    JEDEC_TYPE='SC0603';
+    JEDEC_TYPE='SC0402';
     VALUE='100n';
   end_body;
 end_primitive;
@@ -298,6 +298,36 @@ primitive 'C NP_SC0603_470N';
     PART_NAME='C NP';
     JEDEC_TYPE='SC0603';
     VALUE='470n';
+  end_body;
+end_primitive;
+primitive 'C NP_SC0603_100N';
+  pin
+    '1':
+      PIN_NUMBER='(1)';
+      PINUSE='UNSPEC';
+    '2':
+      PIN_NUMBER='(2)';
+      PINUSE='UNSPEC';
+  end_pin;
+  body
+    PART_NAME='C NP';
+    JEDEC_TYPE='SC0603';
+    VALUE='100n';
+  end_body;
+end_primitive;
+primitive 'CAPACITOR NP_SC0402_100N';
+  pin
+    '1':
+      PIN_NUMBER='(1)';
+      PINUSE='UNSPEC';
+    '2':
+      PIN_NUMBER='(2)';
+      PINUSE='UNSPEC';
+  end_pin;
+  body
+    PART_NAME='Capacitor np';
+    JEDEC_TYPE='SC0402';
+    VALUE='100n';
   end_body;
 end_primitive;
 primitive 'CAPACITOR NP_SC0603_1U';
@@ -328,21 +358,6 @@ primitive 'CAPACITOR NP_SC0603_10N';
     PART_NAME='Capacitor np';
     JEDEC_TYPE='SC0603';
     VALUE='10n';
-  end_body;
-end_primitive;
-primitive 'CAPACITOR NP_SC0402_100N';
-  pin
-    '1':
-      PIN_NUMBER='(1)';
-      PINUSE='UNSPEC';
-    '2':
-      PIN_NUMBER='(2)';
-      PINUSE='UNSPEC';
-  end_pin;
-  body
-    PART_NAME='Capacitor np';
-    JEDEC_TYPE='SC0402';
-    VALUE='100n';
   end_body;
 end_primitive;
 primitive 'CAPACITOR NP_SC0603_47U';
@@ -1338,6 +1353,66 @@ primitive 'RESISTOR_SR0402_1K';
     VALUE='1k';
   end_body;
 end_primitive;
+primitive 'RESISTOR_SR0603_220';
+  pin
+    '1':
+      PIN_NUMBER='(1)';
+      PINUSE='UNSPEC';
+    '2':
+      PIN_NUMBER='(2)';
+      PINUSE='UNSPEC';
+  end_pin;
+  body
+    PART_NAME='RESISTOR';
+    JEDEC_TYPE='SR0603';
+    VALUE='220';
+  end_body;
+end_primitive;
+primitive 'RESISTOR_SR0603_47';
+  pin
+    '1':
+      PIN_NUMBER='(1)';
+      PINUSE='UNSPEC';
+    '2':
+      PIN_NUMBER='(2)';
+      PINUSE='UNSPEC';
+  end_pin;
+  body
+    PART_NAME='RESISTOR';
+    JEDEC_TYPE='SR0603';
+    VALUE='47';
+  end_body;
+end_primitive;
+primitive 'RESISTOR_SR0603_15';
+  pin
+    '1':
+      PIN_NUMBER='(1)';
+      PINUSE='UNSPEC';
+    '2':
+      PIN_NUMBER='(2)';
+      PINUSE='UNSPEC';
+  end_pin;
+  body
+    PART_NAME='RESISTOR';
+    JEDEC_TYPE='SR0603';
+    VALUE='15';
+  end_body;
+end_primitive;
+primitive 'RESISTOR_SR0402_100';
+  pin
+    '1':
+      PIN_NUMBER='(1)';
+      PINUSE='UNSPEC';
+    '2':
+      PIN_NUMBER='(2)';
+      PINUSE='UNSPEC';
+  end_pin;
+  body
+    PART_NAME='RESISTOR';
+    JEDEC_TYPE='SR0402';
+    VALUE='100';
+  end_body;
+end_primitive;
 primitive 'R_SR0603_33';
   pin
     '1':
@@ -1366,51 +1441,6 @@ primitive 'RESISTOR_SR0603_33';
     PART_NAME='Resistor';
     JEDEC_TYPE='SR0603';
     VALUE='33';
-  end_body;
-end_primitive;
-primitive 'RESISTOR_SR0603_220';
-  pin
-    '1':
-      PIN_NUMBER='(1)';
-      PINUSE='UNSPEC';
-    '2':
-      PIN_NUMBER='(2)';
-      PINUSE='UNSPEC';
-  end_pin;
-  body
-    PART_NAME='Resistor';
-    JEDEC_TYPE='SR0603';
-    VALUE='220';
-  end_body;
-end_primitive;
-primitive 'RESISTOR_SR0603_100';
-  pin
-    '1':
-      PIN_NUMBER='(1)';
-      PINUSE='UNSPEC';
-    '2':
-      PIN_NUMBER='(2)';
-      PINUSE='UNSPEC';
-  end_pin;
-  body
-    PART_NAME='Resistor';
-    JEDEC_TYPE='SR0603';
-    VALUE='100';
-  end_body;
-end_primitive;
-primitive 'RESISTOR_SR0402_100';
-  pin
-    '1':
-      PIN_NUMBER='(1)';
-      PINUSE='UNSPEC';
-    '2':
-      PIN_NUMBER='(2)';
-      PINUSE='UNSPEC';
-  end_pin;
-  body
-    PART_NAME='RESISTOR';
-    JEDEC_TYPE='SR0402';
-    VALUE='100';
   end_body;
 end_primitive;
 primitive 'RESISTOR_SR0603_1.5K';
