@@ -1,5 +1,5 @@
 FILE_TYPE=LIBRARY_PARTS;
-{ Using PSTWRITER 16.6.0 d001Apr-20-2018 at 17:00:14}
+{ Using PSTWRITER 16.6.0 d001Apr-23-2018 at 15:21:25}
 primitive 'BUTTON_INDC2-200-M_BUTTON';
   pin
     '1':
@@ -1590,6 +1590,18 @@ primitive 'T POINT A_TP_40MIL_ADC_OTR';
     VALUE='ADC_OTR';
   end_body;
 end_primitive;
+primitive 'T POINT A_TP_40MIL_GND';
+  pin
+    'TP':
+      PIN_NUMBER='(1)';
+      PINUSE='UNSPEC';
+  end_pin;
+  body
+    PART_NAME='T POINT A';
+    JEDEC_TYPE='tp_40mil';
+    VALUE='GND';
+  end_body;
+end_primitive;
 primitive 'T POINT A_TP_40MIL_OUTTRIG2B';
   pin
     'TP':
@@ -1626,7 +1638,7 @@ primitive 'T POINT A_TP_40MIL_OUTTRIG0B';
     VALUE='OutTrig0b';
   end_body;
 end_primitive;
-primitive 'T POINT A_TP_40MIL_STARTACQ_A';
+primitive 'T POINT A_TP_40MIL_VCC1.0VD';
   pin
     'TP':
       PIN_NUMBER='(1)';
@@ -1635,10 +1647,10 @@ primitive 'T POINT A_TP_40MIL_STARTACQ_A';
   body
     PART_NAME='T POINT A';
     JEDEC_TYPE='tp_40mil';
-    VALUE='StartAcq_A';
+    VALUE='VCC1.0VD';
   end_body;
 end_primitive;
-primitive 'T POINT A_TP_40MIL_STARTACQ_B';
+primitive 'T POINT A_TP_40MIL_VCC1.8VD';
   pin
     'TP':
       PIN_NUMBER='(1)';
@@ -1647,10 +1659,10 @@ primitive 'T POINT A_TP_40MIL_STARTACQ_B';
   body
     PART_NAME='T POINT A';
     JEDEC_TYPE='tp_40mil';
-    VALUE='StartAcq_B';
+    VALUE='VCC1.8VD';
   end_body;
 end_primitive;
-primitive 'T POINT A_TP_40MIL_STARTACQ_C';
+primitive 'T POINT A_TP_40MIL_VCC3.3VD';
   pin
     'TP':
       PIN_NUMBER='(1)';
@@ -1659,10 +1671,10 @@ primitive 'T POINT A_TP_40MIL_STARTACQ_C';
   body
     PART_NAME='T POINT A';
     JEDEC_TYPE='tp_40mil';
-    VALUE='StartAcq_C';
+    VALUE='VCC3.3VD';
   end_body;
 end_primitive;
-primitive 'T POINT A_TP_40MIL_STARTACQ_D';
+primitive 'T POINT A_TP_40MIL_VCC2.5VD';
   pin
     'TP':
       PIN_NUMBER='(1)';
@@ -1671,19 +1683,7 @@ primitive 'T POINT A_TP_40MIL_STARTACQ_D';
   body
     PART_NAME='T POINT A';
     JEDEC_TYPE='tp_40mil';
-    VALUE='StartAcq_D';
-  end_body;
-end_primitive;
-primitive 'T POINT A_TP_40MIL_STARTACQ_E';
-  pin
-    'TP':
-      PIN_NUMBER='(1)';
-      PINUSE='UNSPEC';
-  end_pin;
-  body
-    PART_NAME='T POINT A';
-    JEDEC_TYPE='tp_40mil';
-    VALUE='StartAcq_E';
+    VALUE='VCC2.5VD';
   end_body;
 end_primitive;
 primitive 'SN74LVC1T45_SN74LVC1T45-DBV_SN7';
