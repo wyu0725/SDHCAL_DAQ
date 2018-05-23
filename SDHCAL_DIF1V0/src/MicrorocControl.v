@@ -30,6 +30,7 @@ module MicrorocControl(
     input MicrorocReset,
     input SlowControlOrReadScopeSelect,
     input ParameterLoadStart,
+	output PartameterLoadDone,
 	//*** Slow Contro Parameter, from MSB to LSB. These parameter is out from
 		//the same secquence, pulsed by the SlowClock.
 	input [1:0] DataoutChannelSelect,// Default: 11 Valid
@@ -78,6 +79,8 @@ module MicrorocControl(
 	//*** Redundancy
 	input PowerPulsingPinEnable,
 	input ReadoutChannelSelect,
+	//*** Trigger In
+	input TriggerIn,
 	//*** Pins
 	// Slow control and ReadScope 
 	output SELECT, //select = 1,slowcontrol register; select = 0,read register
@@ -110,10 +113,10 @@ module MicrorocControl(
     output VAL_EVTP,
     output VAL_EVTN,
     output RST_COUNTERB,
-    // clk gen 
+    // Clk gen 
     output CK_40P,
     output CK_40N,
     output CK_5P,
-    output CK_5N,
+    output CK_5N
     );
 endmodule
