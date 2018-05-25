@@ -28,8 +28,8 @@ module SlowControlAndReadScopeSet(
 	input SlowControlOrReadScopeSelect,
 	input ParameterLoadStart,
 	output PartameterLoadDone,
-                                              // *** Slow Contro Parameter, from MSB to LSB. These parameter is out from
-                                              // the same secquence, pulsed by the SlowClock.
+	// *** Slow Contro Parameter, from MSB to LSB. These parameter is out from
+	// the same secquence, pulsed by the SlowClock.
 	input [1:0] DataoutChannelSelect,         // Default: 11 Valid
 	input [1:0] TransmitOnChannelSelect,      // Default: 11 Valid
 	input ChipSatbEnable,                     // Default: 1 Valid
@@ -72,7 +72,7 @@ module SlowControlAndReadScopeSet(
 	input PreAmplifierPPEnable,               // Default: 0
 	input [63:0] CTestChannel,
 	input [63:0] ReadScopeChannel,
-                                              // *** Pins
+	// *** Pins
 	output SELECT,                            // select = 1,slowcontrol register; select = 0,read register
 	output SR_RSTB,                           // Selected Register Reset
 	output SR_CK,                             // Selected Register Clock
@@ -85,15 +85,18 @@ module SlowControlAndReadScopeSet(
 	wire ConfigFifoEmpty;
 
 	ConfigParameterFIFO ConfigParameter (
-		.clk  (Clk),                                                 // input wire clk
-		.srst (~reset_n),                                            // input wire srst
-		.din  (ConfigFifoDataIn),                                    // input wire [15 : 0] din
-		.wr_en(ConfigFifoWriteEn),                                   // input wire wr_en
-		.rd_en(ConfigFifoReadEn),                                    // input wire rd_en
-		.dout (ConfigFifoDataOut),                                   // output wire [15 : 0] dout
-		.full (),                                                    // output wire full
-		.empty(ConfigFifoEmpty)                                      // output wire empty
-        );
+		.rst(~reset_n),                  // input wire rst
+		.wr_clk(Clk),            // input wire wr_clk
+		.rd_clk(~SlowClock),            // input wire rd_clk
+		.din(ConfigFifoDataIn),                  // input wire [15 : 0] din
+		.wr_en(ConfigFifoWriteEn),              // input wire wr_en
+		.rd_en(ConfigFifoReadEn),              // input wire rd_en
+		.dout(ConfigFifoDataOut),                // output wire [15 : 0] dout
+		.full(),                // output wire full
+		.empty(ConfigFifoEmpty),              // output wire empty
+		.wr_rst_busy(),  // output wire wr_rst_busy
+		.rd_rst_busy()  // output wire rd_rst_busy
+		);
 	wire ConfigParameterGeneratorDone;
 	ParameterGenerator ParameterGen (
 		.Clk                         (Clk),
@@ -101,9 +104,8 @@ module SlowControlAndReadScopeSet(
 		.SlowClock                   (SlowClock),                    // Slow clock for MICROROC, typically 5M. It is worth to try 10M clock
 		.SlowControlOrReadScopeSelect(SlowControlOrReadScopeSelect),
 		.ParameterLoadStart          (ParameterLoadStart),
-		.PartameterLoadDone          (PartameterLoadDone),
-        // *** Slow Contro Parameter, from MSB to LSB. These parameter is out from
-            // the same secquence, pulsed by the SlowClock.
+		// *** Slow Contro Parameter, from MSB to LSB. These parameter is out from
+		// the same secquence, pulsed by the SlowClock.
 		.DataoutChannelSelect        (DataoutChannelSelect),         // Default: 11 Valid
 		.TransmitOnChannelSelect     (TransmitOnChannelSelect),      // Default: 11 Valid
 		.ChipSatbEnable              (ChipSatbEnable),               // Default: 1 Valid
@@ -173,4 +175,5 @@ module SlowControlAndReadScopeSet(
 		.SerialDataout(SR_IN),
 		.BitShiftDone(PartameterLoadDone)
 		);
+	assign SELECT = SlowControlOrReadScopeSelect;
 endmodule

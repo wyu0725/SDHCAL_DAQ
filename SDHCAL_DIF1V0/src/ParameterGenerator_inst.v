@@ -4,9 +4,8 @@ ParameterGenerator inst_name (
     .SlowClock                   (), // Slow clock for MICROROC, typically 5M. It is worth to try 10M clock
     .SlowControlOrReadScopeSelect(),
     .ParameterLoadStart          (),
-	.PartameterLoadDone          (),
-                                     // *** Slow Contro Parameter, from MSB to LSB. These parameter is out from
-                                     // the same secquence, pulsed by the SlowClock.
+    // *** Slow Contro Parameter, from MSB to LSB. These parameter is out from
+        // the same secquence, pulsed by the SlowClock.
 	.DataoutChannelSelect        (), // Default: 11 Valid
 	.TransmitOnChannelSelect     (), // Default: 11 Valid
 	.ChipSatbEnable              (), // Default: 1 Valid

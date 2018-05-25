@@ -47,17 +47,17 @@ module BitShiftOut(
 	reg [1:0] SerialClockCount;
 	always @ (posedge Clk5M or negedge reset_n) begin
 		if(~reset_n)
-			SerialClockCount <= 2'b01;
+			SerialClockCount <= 2'b00;
 		else if(ShiftStart_i) 
 			SerialClockCount <= SerialClockCount + 1'b1;
 		else
-			SerialClockCount <= 2'b01;
+			SerialClockCount <= 2'b00;
 	end
 	//--- Serialization out ---//
 	reg SerialClockEnable;
 	assign SerialClock = SerialClockEnable & SerialClockCount[1];
 	reg [2:0] DelayCount;
-	reg [3:0] ShiftDataCount;
+	reg [4:0] ShiftDataCount;
 	reg [15:0] ShiftData;
 	reg [2:0] CurrentState;
 	reg [2:0] NextState;
@@ -68,7 +68,8 @@ module BitShiftOut(
 					GET_DATA = 3'd3,
 					DATA_OUT = 3'd4,
 					END_ONCE = 3'd5,
-					DONE = 3'd6;
+					WAIT = 3'd6,
+					DONE = 3'd7;
 	always @ (posedge Clk5M or negedge reset_n) begin
 		if(~reset_n)
 			CurrentState <= Idle;
@@ -98,10 +99,16 @@ module BitShiftOut(
 			end
 			GET_DATA: NextState = DATA_OUT;
 			DATA_OUT: begin
-				if(ShiftDataCount < 4'd15)
-					NextState = DATA_OUT;
+				if(ShiftDataCount < 5'd16)
+					NextState = WAIT;
 				else
 					NextState = END_ONCE;
+			end
+			WAIT: begin
+				if(DelayCount < 3'd2)
+					NextState = WAIT;
+				else
+					NextState = DATA_OUT;
 			end
 			END_ONCE: NextState = READ_FIFO;
 			DONE: NextState = Idle;
@@ -110,7 +117,7 @@ module BitShiftOut(
 	end
 	always @ (posedge Clk5M or negedge reset_n) begin
 		if(~reset_n) begin
-			ShiftDataCount <= 4'd0;
+			ShiftDataCount <= 5'd0;
 			DelayCount <= 3'd0;
 			ExternalFifoReadEn <= 1'b0;
 			ShiftData <= 16'b0;
@@ -123,7 +130,7 @@ module BitShiftOut(
 		else begin
 			case(CurrentState)
 				Idle: begin
-					ShiftDataCount <= 4'd0;
+					ShiftDataCount <= 5'd0;
 					DelayCount <= 3'd0;
 					ExternalFifoReadEn <= 1'b0;
 					ShiftData <= 16'b0;
@@ -140,24 +147,22 @@ module BitShiftOut(
 					ExternalFifoReadEn <= 1'b1;
 				end
 				GET_DATA: begin
+					ExternalFifoReadEn <= 1'b0;
 					ShiftData <= ExternalFifoDataIn;
 				end
 				DATA_OUT: begin
 					SerialClockEnable <= 1'b1;
 					SerialDataout <= ShiftData[15];
-					if(DelayCount < 3'd3) begin
-						DelayCount <= DelayCount + 1'b1;
-					end
-					else begin
-						DelayCount <= 3'd0;
-						if(ShiftDataCount < 4'd15) begin
-							ShiftDataCount <= ShiftDataCount + 1'b1;
-							ShiftData <= ShiftData << 1'b1;
-						end
-					end
+					DelayCount <= 3'd0;
+					//if(ShiftDataCount < 5'd15) begin
+						ShiftDataCount <= ShiftDataCount + 1'b1;
+						ShiftData <= ShiftData << 1'b1;
+					//end
 				end
+				WAIT:DelayCount <= DelayCount + 1'b1;
+
 				END_ONCE:begin
-					ShiftDataCount <= 4'b0;
+					ShiftDataCount <= 5'b0;
 					SerialClockEnable <= 1'b0;
 				end
 				DONE: begin

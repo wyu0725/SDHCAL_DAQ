@@ -26,7 +26,6 @@ module ParameterGenerator(
 	input SlowClock,// Slow clock for MICROROC, typically 5M. It is worth to try 10M clock
 	input SlowControlOrReadScopeSelect,
 	input ParameterLoadStart,
-	output reg PartameterLoadDone,
 	//*** Slow Contro Parameter, from MSB to LSB. These parameter is out from
 	//the same secquence, pulsed by the SlowClock.
 	input [1:0] DataoutChannelSelect,// Default: 11 Valid
@@ -77,7 +76,7 @@ module ParameterGenerator(
 	//*** Parameter generate done. Indicate the bitshift start 
 	output reg ParameterDone
 	);
-	wire [591:0] SlowControlParameters;
+	wire [592:1] SlowControlParameters;
 	assign SlowControlParameters[592:591] = DataoutChannelSelect;               //enable dout1b and dout2b
 	assign SlowControlParameters[590:589] = TransmitOnChannelSelect;         //enable transmiton1b and transmiton2b
 	assign SlowControlParameters[588]     = ChipSatbEnable;           //enable chipsatb
@@ -132,12 +131,11 @@ module ParameterGenerator(
 	reg [591:0] SlowControlParameter_Shift;
 	reg [63:0] ReadScopeParameter_Shift;
 	reg [5:0] ShiftCount;
-	reg ParameterOutDone;
 	reg [2:0] CurrentState;
 	reg [2:0] NextState;
 
-	localparam SlowControlParameterNumber = 37 - 1; // 592/16=37
-	localparam ReadScopeParameterNumber = 4 - 1; // 64/16=4
+	localparam [5:0] SlowControlParameterNumber = 6'd36; // 592/16=37
+	localparam [5:0] ReadScopeParameterNumber = 6'd3; // 64/16=4
 	localparam [2:0] Idle = 3'd0,
 					READ_PROCESS = 3'd1,
 					READ_PROCESS_LOOP = 3'd2,
@@ -150,8 +148,7 @@ module ParameterGenerator(
 		else
 			CurrentState <= NextState;
 	end
-	always @ (posedge CurrentState) begin
-		NextState = Idle;
+	always @ (*) begin
 		case(CurrentState)
 			Idle: begin
 				if(ParameterLoadStart) begin
@@ -173,7 +170,7 @@ module ParameterGenerator(
 				end 
 			end
 			SC_PROCESS: NextState = SC_PROCESS_LOOP;
-			READ_PROCESS_LOOP: begin
+			SC_PROCESS_LOOP: begin
 				if(ShiftCount < SlowControlParameterNumber) begin 
 					NextState = SC_PROCESS;
 				end
@@ -182,20 +179,23 @@ module ParameterGenerator(
 				end 
 			end
 			END_PROCESS: NextState = Idle;
+			default: NextState = Idle;
 		endcase
 	end
 	always @ (posedge Clk or negedge reset_n) begin
 		if(~reset_n) begin
-			PartameterLoadDone <= 1'b0;
 			ExternalFifoWriteEn <= 1'b0;
 			ExternalFifoData <= 16'b0;
+			ShiftCount <= 5'd0;
+			ParameterDone <= 1'b0;
 		end
 		else begin
 			case(CurrentState)
 				Idle: begin
-					PartameterLoadDone <= 1'b0;
 					SlowControlParameter_Shift <= SlowControlParameters;
 					ReadScopeParameter_Shift <= ReadScopeChannel;
+					ShiftCount <= 6'd0;
+					ParameterDone <= 1'b0;
 				end
 				READ_PROCESS: begin
 					ExternalFifoWriteEn <= 1'b1;
@@ -208,7 +208,7 @@ module ParameterGenerator(
 				end
 				SC_PROCESS: begin
 					ExternalFifoWriteEn <= 1'b1;
-					ExternalFifoData <= SlowControlParameter_Shift[581 -: 16];
+					ExternalFifoData <= SlowControlParameter_Shift[591 -: 16];
 				end
 				SC_PROCESS_LOOP: begin
 					ExternalFifoWriteEn <= 1'b0;
