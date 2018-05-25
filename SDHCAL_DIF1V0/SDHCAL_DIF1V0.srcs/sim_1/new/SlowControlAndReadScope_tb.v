@@ -1,4 +1,4 @@
-`timescale 1ns / 1ps
+`timescale 1ns / 1ns
 //////////////////////////////////////////////////////////////////////////////////
 // Company:
 // Engineer:
@@ -76,7 +76,6 @@ module SlowControlAndReadScope_tb();
 	wire SR_RSTB;
 	wire SR_CK;
 	wire SR_IN;
-	wire MicrorocConfigDone;
 
 	SlowControlAndReadScopeSet uut (
 		.Clk                         (Clk),
@@ -188,7 +187,13 @@ module SlowControlAndReadScope_tb();
 		ReadScopeChannel = {32{2'b01}};
 		#100;
 		reset_n = 1'b1;
-		#1000;
+		#10000;
+		ParameterLoadStart = 1'b1;
+		#25;
+		ParameterLoadStart = 1'b0;
+		#600_000;
+		SlowControlOrReadScopeSelect = 1'b1;
+		#100;
 		ParameterLoadStart = 1'b1;
 		#25;
 		ParameterLoadStart = 1'b0;
