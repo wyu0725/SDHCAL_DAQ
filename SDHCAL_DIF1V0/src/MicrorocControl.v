@@ -119,4 +119,7 @@ module MicrorocControl(
     output CK_5P,
     output CK_5N
     );
+	SlowControlAndReadScopeSet SlowControlAndReadScope(
+		
+		);
 endmodule

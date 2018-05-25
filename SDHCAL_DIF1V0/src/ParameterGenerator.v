@@ -24,10 +24,9 @@ module ParameterGenerator(
 	input Clk,
 	input reset_n,
 	input SlowClock,// Slow clock for MICROROC, typically 5M. It is worth to try 10M clock
-	input MicrorocReset,
 	input SlowControlOrReadScopeSelect,
 	input ParameterLoadStart,
-	output PartameterLoadDone,
+	output reg PartameterLoadDone,
 	//*** Slow Contro Parameter, from MSB to LSB. These parameter is out from
 	//the same secquence, pulsed by the SlowClock.
 	input [1:0] DataoutChannelSelect,// Default: 11 Valid
@@ -73,10 +72,10 @@ module ParameterGenerator(
 	input [63:0] CTestChannel,
 	input [63:0] ReadScopeChannel,
 	//*** FIFO interface
-	output ExternalFifoWriteEn,
-	output [15:0] ExternalFifoData,
+	output reg ExternalFifoWriteEn,
+	output reg [15:0] ExternalFifoData,
 	//*** Parameter generate done. Indicate the bitshift start 
-	output ParameterDone
+	output reg ParameterDone
 	);
 	wire [591:0] SlowControlParameters;
 	assign SlowControlParameters[592:591] = DataoutChannelSelect;               //enable dout1b and dout2b
@@ -95,9 +94,6 @@ module ParameterGenerator(
 	assign SlowControlParameters[576]     = TriggerNor64OrDirectSelect;            //Select Channel Trigger selected by Read Register(0) or NOR64 output(1)
 	assign SlowControlParameters[575]     = TriggerOutputEnable;           //Enable trigger out
 	assign SlowControlParameters[574:572] = TriggerToWriteSelect;                 //select Trigger to write to memory
-	//Reverse high bit and low
-	//bit,the top level should
-	//also reverse.
 	//--------Triple DAC-----------------//
 	assign SlowControlParameters[571:562] = Dac2Vth;              //10-bit Triple DAC voltage threshold
 	assign SlowControlParameters[561:552] = Dac1Vth;
@@ -122,15 +118,10 @@ module ParameterGenerator(
 	assign SlowControlParameters[330:75]  = ChannelAdjust;            //channel 4-bit DAC adjustment
 	//-------------BIAS-----------------//
 	assign SlowControlParameters[74:73]   = HighGainShaperFeedbackSelect;                 //switch high gain shaper
-	//Reverse high bit and low
-	//bit,the top level should
 	//also reverse.
 	assign SlowControlParameters[72]      = ShaperOutLowGainOrHighGain;          //valid low gain shaper for read  --default: 1 => on
 	assign SlowControlParameters[71]      = WidlarPPEnable;          //enable widlar for power pulsing --default: 0 => off
 	assign SlowControlParameters[70:69]   = LowGainShaperFeedbackSelect;                 //switch low gain shaper
-	//Reverse high bit and low
-	//bit,the top level should
-	//also reverse.
 	assign SlowControlParameters[68]      = LowGainShaperPPEnable;            //enable shaper low gain power pulsing --default: 0 => off
 	assign SlowControlParameters[67]      = HighGainShaperPPEnable;            //enable shaper high gain power pulsing --default:0 => off
 	assign SlowControlParameters[66]      = GainBoostEnable;               //enable gain boost----default:1 => on
@@ -142,9 +133,10 @@ module ParameterGenerator(
 	reg [63:0] ReadScopeParameter_Shift;
 	reg [5:0] ShiftCount;
 	reg ParameterOutDone;
-	reg [2:0] State;
+	reg [2:0] CurrentState;
+	reg [2:0] NextState;
 
-	localparam SlocControlParameterNumber = 37 - 1; // 592/16=37
+	localparam SlowControlParameterNumber = 37 - 1; // 592/16=37
 	localparam ReadScopeParameterNumber = 4 - 1; // 64/16=4
 	localparam [2:0] Idle = 3'd0,
 					READ_PROCESS = 3'd1,
@@ -152,12 +144,81 @@ module ParameterGenerator(
 					SC_PROCESS = 3'd3,
 					SC_PROCESS_LOOP = 3'd4,
 					END_PROCESS = 3'd5;
-	always @ (posedge Clk) begin
-		case (State)
+	always @ (posedge Clk or negedge reset_n) begin
+		if(~reset_n)
+			CurrentState <= Idle;
+		else
+			CurrentState <= NextState;
+	end
+	always @ (posedge CurrentState) begin
+		NextState = Idle;
+		case(CurrentState)
 			Idle: begin
-				
+				if(ParameterLoadStart) begin
+					if(SlowControlOrReadScopeSelect) begin
+						NextState = READ_PROCESS;
+					end
+					else begin
+						NextState = SC_PROCESS;
+					end
+				end
 			end
+			READ_PROCESS: NextState = READ_PROCESS_LOOP;
+			READ_PROCESS_LOOP: begin
+				if(ShiftCount < ReadScopeParameterNumber) begin
+					NextState = READ_PROCESS;
+				end
+				else begin
+					NextState = END_PROCESS;
+				end 
+			end
+			SC_PROCESS: NextState = SC_PROCESS_LOOP;
+			READ_PROCESS_LOOP: begin
+				if(ShiftCount < SlowControlParameterNumber) begin 
+					NextState = SC_PROCESS;
+				end
+				else begin
+					NextState = END_PROCESS;
+				end 
+			end
+			END_PROCESS: NextState = Idle;
 		endcase
 	end
-
+	always @ (posedge Clk or negedge reset_n) begin
+		if(~reset_n) begin
+			PartameterLoadDone <= 1'b0;
+			ExternalFifoWriteEn <= 1'b0;
+			ExternalFifoData <= 16'b0;
+		end
+		else begin
+			case(CurrentState)
+				Idle: begin
+					PartameterLoadDone <= 1'b0;
+					SlowControlParameter_Shift <= SlowControlParameters;
+					ReadScopeParameter_Shift <= ReadScopeChannel;
+				end
+				READ_PROCESS: begin
+					ExternalFifoWriteEn <= 1'b1;
+					ExternalFifoData <= ReadScopeChannel[63-:16];
+				end
+				READ_PROCESS_LOOP: begin
+					ExternalFifoWriteEn <= 1'b0;
+					ReadScopeParameter_Shift <= ReadScopeParameter_Shift << 16;
+					ShiftCount <= ShiftCount + 1'b1;
+				end
+				SC_PROCESS: begin
+					ExternalFifoWriteEn <= 1'b1;
+					ExternalFifoData <= SlowControlParameter_Shift[581 -: 16];
+				end
+				SC_PROCESS_LOOP: begin
+					ExternalFifoWriteEn <= 1'b0;
+					SlowControlParameter_Shift <= SlowControlParameter_Shift << 16;
+					ShiftCount <= ShiftCount + 1'b1;
+				end
+				END_PROCESS: begin
+					ParameterDone <= 1'b1;
+				end
+			endcase
+		end
+	end
 endmodule
