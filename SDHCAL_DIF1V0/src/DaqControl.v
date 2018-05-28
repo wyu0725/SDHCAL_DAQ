@@ -3,12 +3,12 @@
 // Company: USTC 
 // Engineer: Yu Wang
 // 
-// Create Date: 2017/06/29 14:26:40
-// Design Name: SDHCAL_DAQ2V0
+// Create Date: 2018/05/28 14:26:40
+// Design Name: SDHCAL DIF 1V0 
 // Module Name: DaqControl
-// Project Name: SDHCAL_DAQ2V0
+// Project Name: SDHCAL DIF 1V0
 // Target Devices: XC7A100TFGG484-2L
-// Tool Versions: Vivado 16.3
+// Tool Versions: Vivado 2018.1
 // Description: This module is used for controlling the Microroc DAQ. The DAQ
 // has 2 models, Auto DAQ and Slave DAQ. The AutoDaq start the DAQ process
 // auto and use the power pulsing mode. The SlaveDaq start the DAQ module when 

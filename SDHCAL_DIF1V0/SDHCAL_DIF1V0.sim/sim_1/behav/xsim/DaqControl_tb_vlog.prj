@@ -1,0 +1,13 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  \
+"../../../../src/AutoDaq.v" \
+"../../../../src/DaqControl.v" \
+"../../../../src/DaqSwitcher.v" \
+"../../../../src/SlaveDaq.v" \
+"../../../../SDHCAL_DIF1V0.srcs/sim_1/new/DaqControl_tb.v" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort

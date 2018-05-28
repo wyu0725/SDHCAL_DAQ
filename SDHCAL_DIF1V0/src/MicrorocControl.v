@@ -27,10 +27,13 @@ module MicrorocControl(
 	input Clk,
 	input reset_n,
 	input SlowClock,                          // Slow clock for MICROROC, typically 5M. It is worth to try 10M clock
+	input Clk5M,							  // Clock for Microroc Configuration. If SlowClock is 5M, this clock shoudl be same as SlowClock
+	input SyncClk,							  // This clock is a fast clock to synchronous the TriggerIn signal to generate the hold signal
+	// The 'jitter' of the hold signal depends on the peroid of this signal
 	input MicrorocReset,
 	input SlowControlOrReadScopeSelect,
 	input ParameterLoadStart,
-	output PartameterLoadDone,
+	output ParameterLoadDone,
 	// *** Slow Contro Parameter, from MSB to LSB. These parameter is out from
 	// the same secquence, pulsed by the SlowClock.
 	input [1:0] DataoutChannelSelect,         // Default: 11 Valid
@@ -80,7 +83,22 @@ module MicrorocControl(
 	input PowerPulsingPinEnable,
 	input ReadoutChannelSelect,
 	// *** Trigger In
+	input TimeStampReset,
 	input TriggerIn,
+	input [1:0] RazMode,
+	input SCurveForceExternalRaz,
+	input [3:0] ExternalRazDelayTime,
+	// *** Dataout interface
+	output [15:0] ExternalFifoData,
+	output ExternalFifoWriteEn,
+	input nPKTEND,
+	input ExternalFifoFull,
+	input ExternalFifoEmpty,
+	// AcqControl
+	input DaqSelet,
+	input AcqStart,
+	output UsbStartStop,
+	input [15:0] AcquisitionStartTime,
 	// *** Pins
 	// Slow control and ReadScope
 	output SELECT,                            // select = 1,slowcontrol register; select = 0,read register
@@ -107,6 +125,7 @@ module MicrorocControl(
 	input TRANSMITON1B,
 	input TRANSMITON2B,
 	// Trig gen
+	output HOLD,
 	output TRIG_EXT,
 	output RAZ_CHNP,
 	output RAZ_CHNN,
@@ -121,86 +140,178 @@ module MicrorocControl(
 	);
 
 	SlowControlAndReadScopeSet SlowControlAndReadScope(
-
+		.Clk                         (Clk),
+		.reset_n                     (reset_n),
+		.SlowClock                   (Clk5M),                    // Slow clock for MICROROC, typically 5M. It is worth to try 10M clock
+		.MicrorocReset               (MicrorocReset),
+		.SlowControlOrReadScopeSelect(SlowControlOrReadScopeSelect),
+		.ParameterLoadStart          (ParameterLoadStart),
+		.ParameterLoadDone          (ParameterLoadDone),
+		// *** Slow Contro Parameter, from MSB to LSB. These parameter is out from
+		// the same secquence, pulsed by the SlowClock.
+		.DataoutChannelSelect        (DataoutChannelSelect),         // Default: 11 Valid
+		.TransmitOnChannelSelect     (TransmitOnChannelSelect),      // Default: 11 Valid
+		.ChipSatbEnable              (ChipSatbEnable),               // Default: 1 Valid
+		.StartReadoutchannelSelect   (StartReadoutchannelSelect),    // Default: 1 StartReadout1
+		.EndReadoutChannelSelect     (EndReadoutChannelSelect),      // Default: 1 EndReadout1
+		.NC                          (NC),
+		.InternalRazSignalLength     (InternalRazSignalLength),      // 00: 75ns, 01: 250ns, 10: 500ns, 11: 1us Default: 11
+		.CkMux                       (CkMux),                        // Bypass Synchronous PowerOnDigital for SRo, CK5, CK40 Default: 1 bypass POD
+		.LvdsReceiverPPEnable        (LvdsReceiverPPEnable),         // Default:0 Disable
+		.ExternalRazSignalEnable     (ExternalRazSignalEnable),      // Default: 0 Disable
+		.InternalRazSignalEnable     (InternalRazSignalEnable),      // Default: 1 Enable
+		.ExternalTriggerEnable       (ExternalTriggerEnable),        // Default: 1 Enable
+		.TriggerNor64OrDirectSelect  (TriggerNor64OrDirectSelect),   // Default: 1 Nor64
+		.TriggerOutputEnable         (TriggerOutputEnable),          // Default: 1 Enable
+		.TriggerToWriteSelect        (TriggerToWriteSelect),         // Default: 111 all
+		.Dac2Vth                     (Dac2Vth),                      // MSB->LSB
+		.Dac1Vth                     (Dac1Vth),
+		.Dac0Vth                     (Dac0Vth),
+		.DacEnable                   (DacEnable),
+		.DacPPEnable                 (DacPPEnable),
+		.BandGapEnable               (BandGapEnable),
+		.BandGapPPEnable             (BandGapPPEnable),
+		.ChipID                      (ChipID),
+		.ChannelDiscriminatorMask    (ChannelDiscriminatorMask),     // MSB correspones to Channel 63
+		.LatchedOrDirectOutput       (LatchedOrDirectOutput),        // Default: 1 Latched
+		.Discriminator1PPEnable      (Discriminator1PPEnable),
+		.Discriminator2PPEnable      (Discriminator2PPEnable),
+		.Discriminator0PPEnable      (Discriminator0PPEnable),
+		.OTAqPPEnable                (OTAqPPEnable),
+		.OTAqEnable                  (OTAqEnable),
+		.Dac4bitPPEnable             (Dac4bitPPEnable),
+		.ChannelAdjust               (ChannelAdjust),                // MSB to LSB from channel0 to channel 63
+		.HighGainShaperFeedbackSelect(HighGainShaperFeedbackSelect), // Default: 10
+		.ShaperOutLowGainOrHighGain  (ShaperOutLowGainOrHighGain),   // Default: 0 High gain
+		.WidlarPPEnable              (WidlarPPEnable),               // Default: 0 Disable
+		.LowGainShaperFeedbackSelect (LowGainShaperFeedbackSelect),  // Default: 101
+		.LowGainShaperPPEnable       (LowGainShaperPPEnable),        // Default: 0
+		.HighGainShaperPPEnable      (HighGainShaperPPEnable),       // Default: 0
+		.GainBoostEnable             (GainBoostEnable),              // Default: 1
+		.PreAmplifierPPEnable        (PreAmplifierPPEnable),         // Default: 0
+		.CTestChannel                (CTestChannel),
+		.ReadScopeChannel            (ReadScopeChannel),
+		// *** Pins
+		.SELECT                      (SELECT),                       // select = 1,slowcontrol register; select = 0,read register
+		.SR_RSTB                     (SR_RSTB),                      // Selected Register Reset
+		.SR_CK                       (SR_CK),                        // Selected Register Clock
+		.SR_IN                       (SR_IN)                         // Selected Register Input
 		);
+
 	wire StartReadout;
 	wire EndReadout;
 	wire AsicDataout;
 	Redundancy ReadOutChannelSelect (
 		.ReadoutChannelSelect(ReadoutChannelSelect),
 		//*** Readout control
-		.StartReadout        (),
-		.EndReadout          (),
-		.Dout                (),
-		.TransmitOn          (),
+		.StartReadout        (StartReadout),
+		.EndReadout          (EndReadout),
+		.Dout                (AsicDataout),
+		.TransmitOn          (TransmitOn),
 		//*** Pins
-		.START_READOUT1      (),
-		.START_READOUT2      (),
-		.END_READOUT1        (),
-		.END_READOUT2        (),
-
-		.DOUT1B              (),
-		.DOUT2B              (),
-		.TRANSMIION1B        (),
-		.TRANSMITON2B        ()
+		// Readout
+		.START_READOUT1      (START_READOUT1),
+		.START_READOUT2      (START_READOUT2),
+		.END_READOUT1        (END_READOUT1),
+		.END_READOUT2        (END_READOUT2),
+		// Data
+		.DOUT1B              (DOUT1B),
+		.DOUT2B              (DOUT2B),
+		.TRANSMITON1B        (TRANSMITON1B),
+		.TRANSMITON2B        (TRANSMITON2B)
 		);
+
+	wire ReadDone;
+	wire MicrorocDataEnable;
+	wire [15:0] MicrorocData;
 	AsicRamReadout ReadOnChipRam(
 		.ReadClk            (SlowClock),
 		.reset_n            (reset_n),
-		.AsicDin            (),
-		.TransmitOn         (),
-		.ExternalFifoData   (),
-		.ExternalFifoWriteEn(),
-		.ReadDone           ()
+		.AsicDin            (AsicDataout),
+		.TransmitOn         (TransmitOn),
+		.ExternalFifoData   (MicorocData),
+		.ExternalFifoWriteEn(MicrorocDataEnable),
+		.ReadDone           (ReadDone)
 		);
+
 	ExternalRazGenerate ExternalRazGen(
-		.Clk(),
-		.reset_n(),
-		.TriggerIn(),
-		.ExternalRaz_en(),
-		.ExternalRazDelayTime(),
-		.RazMode(),
-		.ForceRaz(),
-		.RAZ_CHN()
+		.Clk                 (Clk),
+		.reset_n             (reset_n),
+		.TriggerIn           (TriggerIn),
+		.ExternalRaz_en      (ExternalRaz_en),
+		.ExternalRazDelayTime(ExternalRazDelayTime),
+		.RazMode             (RazMode),
+		.ForceRaz            (),
+		.RAZ_CHN             ()
 		);
+
 	HoldGenerate HoldGen(
-		.Clk(),
-		.SyncClk(),
-		.reset_n(),
-		.TrigIn(),
-		.Hold_en(),
+		.Clk      (),
+		.SyncClk  (),
+		.reset_n  (),
+		.TrigIn   (),
+		.Hold_en  (),
 		.HoldDelay(),
-		.HoldTime(),
-		.HoldOut()
+		.HoldTime (),
+		.HoldOut  ()
 		);
+
+	wire PowerOnAnalog;
+	wire PowerOnDigital;
+	wire PowerOnDac;
+	wire PowerOnAdc;
+	wire DataTransmitDone;
+	assign DataTransmitDone = ~nPKTEND;
 	DaqControl MicrorocDaq
 	(
-		.Clk(Clk),         //40M
-		.reset_n(ResetMicroroc_n),
-		.DaqSelect(DaqSelect),
-		.UsbAcqStart(Acq_start),
-		.UsbStartStop(UsbStartStop),
-		.EndReadout(EndReadout),
-		.StartReadout(StartReadout),
-		.CHIPSATB(CHIPSATB),
-		.RESET_B(RESET_B),
-		.START_ACQ(START_ACQ),
-		.PWR_ON_A(Pwr_on_a),
-		.PWR_ON_D(Pwr_on_d),
-		.PWR_ON_ADC(Pwr_on_adc),
-		.PWR_ON_DAC(Pwr_on_dac),
+		.Clk                   (Clk),         //40M
+		.reset_n               (ResetMicroroc_n),
+		.DaqSelect             (DaqSelect),
+		.UsbAcqStart           (Acq_start),
+		.UsbStartStop          (UsbStartStop),
+		.EndReadout            (EndReadout),
+		.StartReadout          (StartReadout),
+		.CHIPSATB              (CHIPSATB),
+		.RESET_B               (RESET_B),
+		.START_ACQ             (START_ACQ),
+		.PWR_ON_A              (PowerOnAnalog),
+		.PWR_ON_D              (PowerOnDigital),
+		.PWR_ON_ADC            (PowerOnAdc),
+		.PWR_ON_DAC            (PowerOnDac),
 		.SCurveForceExternalRaz(SCurveForceExternalRaz),
-		.ForceExternalRaz(ForceExternalRaz),
-		.AcquisitionTime(AcqStart_time),
-		.EndHoldTime(EndHoldTime),
-		.OnceEnd(OnceEnd),
-		.AllDone(AllDone),
-		.DataTransmitDone(DataTransmitDone),
-		.UsbFifoEmpty(UsbFifoEmpty),
-		.MicrorocData(MicrorocData),//Acquired data
-		.MicrorocData_en(MicrorocData_en),
-		.DaqData(parallel_data),//Data output
-		.DaqData_en(parallel_data_en),
-		.ExternalTrigger(ExternalTrigger)
+		.ForceExternalRaz      (ForceExternalRaz),
+		.AcquisitionTime       (AcquisitionStartTime),
+		.EndHoldTime           (EndHoldTime),
+		.OnceEnd               (OnceEnd),
+		.AllDone               (AllDone),
+		.DataTransmitDone      (DataTransmitDone),
+		.UsbFifoEmpty          (UsbFifoEmpty),
+		.MicrorocData          (MicrorocData),//Acquired data
+		.MicrorocData_en       (MicrorocDataEnable),
+		.DaqData               (parallel_data),//Data output
+		.DaqData_en            (parallel_data_en),
+		.ExternalTrigger       (ExternalTrigger)
+		);
+
+	PowerOnControl PowerPulsingEnable (
+		.PowerPulsingPinEnable(PowerPulsingPinEnable),
+		.PowerOnAnalog        (),
+		.PowerOnDigital       (),
+		.PowerOnAdc           (),
+		.PowerOnDac           (),
+		.PWR_ON_A             (),
+		.PWR_ON_D             (),
+		.PWR_ON_ADC           (),
+		.PWR_ON_DAC           ()
+		);
+
+	TimeStampSyncAndDataTrigger TimeStampSyncAndTrigger (
+		.Clk              (),
+		.reset_n          (),
+		.TimeStampReset   (),
+		.RST_COUNTERB     (),
+		.DataTrigger      (),
+		.DataTriggerEnable(),
+		.TriggerExt       ()
 		);
 endmodule

@@ -124,7 +124,8 @@ module SlaveDaq(
 	OUT_COUNT1 = 5'd15,
 	OUT_COUNT2 = 5'd16,
 	OUT_COUNT3 = 5'd17,
-	ALL_DONE = 5'd18;
+	FIFO_LATENCY = 5'd18, // It seems that the USB FIFO has write latency, stay at this state in 2 clock peroids. 
+	ALL_DONE = 5'd19;
 	reg [4:0] State;
 	reg [11:0] DataEndCount;
 	localparam TimeMinPowerReset = 8;//Time to wake up clock LVDS receivers 200ns
@@ -360,8 +361,18 @@ module SlaveDaq(
 					else begin
 						DelayCount <= 16'b0;
 						InternalData_en <= 1'b0;
-						State <= ALL_DONE;
+						State <= FIFO_LATENCY;
 						AllDone <= 1'b1;
+					end
+				end
+				FIFO_LATENCY: begin
+					if(DelayCount < 16'd1) begin
+						DelayCount <= DelayCount + 1'b1;
+						State <= FIFO_LATENCY;
+					end
+					else begin
+						DelayCount <= 16'b0;
+						State <= ALL_DONE;
 					end
 				end
 				ALL_DONE:begin
