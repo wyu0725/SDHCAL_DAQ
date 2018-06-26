@@ -31,7 +31,7 @@ module ParameterGenerator(
 	input [1:0] DataoutChannelSelect,// Default: 11 Valid
 	input [1:0] TransmitOnChannelSelect,// Default: 11 Valid
 	input ChipSatbEnable,// Default: 1 Valid
-	input StartReadoutchannelSelect, // Default: 1 StartReadout1
+	input StartReadoutChannelSelect, // Default: 1 StartReadout1
 	input EndReadoutChannelSelect, // Default: 1 EndReadout1
 	input [1:0] NC,
 	input [1:0] InternalRazSignalLength,// 00: 75ns, 01: 250ns, 10: 500ns, 11: 1us Default: 11
@@ -80,7 +80,7 @@ module ParameterGenerator(
 	assign SlowControlParameters[592:591] = DataoutChannelSelect;               //enable dout1b and dout2b
 	assign SlowControlParameters[590:589] = TransmitOnChannelSelect;         //enable transmiton1b and transmiton2b
 	assign SlowControlParameters[588]     = ChipSatbEnable;           //enable chipsatb
-	assign SlowControlParameters[587]     = StartReadoutchannelSelect;      //select startreadout 1 or 2
+	assign SlowControlParameters[587]     = StartReadoutChannelSelect;      //select startreadout 1 or 2
 	assign SlowControlParameters[586]     = EndReadoutChannelSelect;        //select endreadout 1 or 2
 	assign SlowControlParameters[585:584] = NC;                 //NC
 	assign SlowControlParameters[583:582] = InternalRazSignalLength;               //select raz_chn_width and mux raz_chn width

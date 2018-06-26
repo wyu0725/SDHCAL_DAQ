@@ -39,7 +39,7 @@ module MicrorocControl(
 	input [1:0] DataoutChannelSelect,         // Default: 11 Valid
 	input [1:0] TransmitOnChannelSelect,      // Default: 11 Valid
 	input ChipSatbEnable,                     // Default: 1 Valid
-	input StartReadoutchannelSelect,          // Default: 1 StartReadout1
+	input StartReadoutChannelSelect,          // Default: 1 StartReadout1
 	input EndReadoutChannelSelect,            // Default: 1 EndReadout1
 	input [1:0] NC,
 	input [1:0] InternalRazSignalLength,      // 00: 75ns, 01: 250ns, 10: 500ns, 11: 1us Default: 11
@@ -152,7 +152,7 @@ module MicrorocControl(
 		.DataoutChannelSelect        (DataoutChannelSelect),         // Default: 11 Valid
 		.TransmitOnChannelSelect     (TransmitOnChannelSelect),      // Default: 11 Valid
 		.ChipSatbEnable              (ChipSatbEnable),               // Default: 1 Valid
-		.StartReadoutchannelSelect   (StartReadoutchannelSelect),    // Default: 1 StartReadout1
+		.StartReadoutChannelSelect   (StartReadoutChannelSelect),    // Default: 1 StartReadout1
 		.EndReadoutChannelSelect     (EndReadoutChannelSelect),      // Default: 1 EndReadout1
 		.NC                          (NC),
 		.InternalRazSignalLength     (InternalRazSignalLength),      // 00: 75ns, 01: 250ns, 10: 500ns, 11: 1us Default: 11
