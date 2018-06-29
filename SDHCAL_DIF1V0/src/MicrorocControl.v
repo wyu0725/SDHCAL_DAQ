@@ -54,9 +54,9 @@ module MicrorocControl(
 	input [9:0] Dac2Vth,                      // MSB->LSB
 	input [9:0] Dac1Vth,
 	input [9:0] Dac0Vth,
-	input DacEnable,
+	input DacEnable,//Default: 1 Enable
 	input DacPPEnable,
-	input BandGapEnable,
+	input BandGapEnable,//Default: 1 Enable
 	input BandGapPPEnable,
 	input [7:0] ChipID,
 	input [191:0] ChannelDiscriminatorMask,   // MSB correspones to Channel 63

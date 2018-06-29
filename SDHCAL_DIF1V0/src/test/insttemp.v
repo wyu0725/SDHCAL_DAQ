@@ -1,0 +1,2 @@
+//instance: 
+CommandInterpreter uut (/*autoinst*/);

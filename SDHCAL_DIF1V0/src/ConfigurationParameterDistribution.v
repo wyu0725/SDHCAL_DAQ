@@ -53,7 +53,6 @@ module ConfigurationParameterDistribution(
 	output reg [ASIC_CHAIN_NUMBER - 1:0] MicrorocLatchedOrDirectOutput,
 	output reg [ASIC_CHAIN_NUMBER - 1:0] MicrorocDisciminator2PPEnable,
 	output reg [ASIC_CHAIN_NUMBER - 1:0] MicrorocDisciminator1PPEnable,
-	output reg [ASIC_CHAIN_NUMBER - 1:0] MicrorocDisciminator0PPEnable,
-	output reg 
+	output reg [ASIC_CHAIN_NUMBER - 1:0] MicrorocDisciminator0PPEnable
     );
 endmodule
