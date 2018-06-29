@@ -26,7 +26,7 @@ vlog -work fifo_generator_v13_2_2 -64 -incr \
 "../../../ipstatic/hdl/fifo_generator_v13_2_rfs.v" \
 
 vlog -work xil_defaultlib -64 -incr \
-"../../../../SDHCAL_DIF1V0.srcs/sources_1/ip/CommandFifo/sim/CommandFifo.v" \
+"../../../ip/CommandFifo/sim/CommandFifo.v" \
 
 vlog -work xil_defaultlib \
 "glbl.v"
