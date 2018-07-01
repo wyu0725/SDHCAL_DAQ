@@ -143,12 +143,12 @@ module CommandInterpreter(
 	output reg [1:0] TriggerCoincidence,
 	output reg [7:0] HoldDelay,
 	output reg [15:0] HoldTime,
-	output reg HoldEnable
+	output reg HoldEnable,
 	// Slave DAQ
 	output reg [15:0] EndHoldTime,
 	output reg DaqSelect,
 	// LED
-	output reg [7:0] LED
+	output reg [3:0] LED
 	);
 
 	// Command FIFO interface
@@ -896,10 +896,69 @@ module CommandInterpreter(
 	CommandDecoder CounterMaxSet11to8(/*autoinst*/);
 	CommandDecoder CounterMaxSet15to12(/*autoinst*/);
 
-	// SweepAcqMaxPackageNumberSet 16bits
+	// SweepAcqMaxPackageNumberSet 16bit
+	// SweepAcqMaxPackageNumberSet[3:0] E158
+	// SweepAcqMaxPackageNumberSet[7:4] E168
+	// SweepAcqMaxPackageNumberSet[11:8] E173
+	// SweepAcqMaxPackageNumberSet[15:12] E181
+	CommandDecoder SweepAcqMaxPackageNumberSet3to0(/*autoinst*/);
+	CommandDecoder SweepAcqMaxPackageNumberSet7to4(/*autoinst*/);
+	CommandDecoder SweepAcqMaxPackageNumberSet11to8(/*autoinst*/);
+	CommandDecoder SweepAcqMaxPackageNumberSet15to12(/*autoinst*/);
+
+	// Reset Microroc 1bit, default E190, pulse
+	CommandDecoder ResetMicrorocAcq(/*autoinst*/);
+
+	// ADC Start Stop 1bit, default F0B0
+	CommandDecoder ExternalAdcStartStop(/*autoinst*/);
+
+	//AdcStartDelayTimeSet 4bit, default E2A8
+	CommandDecoder AdcStartDelayTimeSet(/*autoinst*/);
+
+	// AdcDataNumberSet 8bit, 
+	// AdcDataNumberSet[3:0] E2B0
+	// AdcDataNumberSet[7:4] E2C2
+	CommandDecoder AdcDataNumberSet3to0(/*autoinst*/);
+	CommandDecoder AdcDataNumberSet7to4(/*autoinst*/);
+
+	// TriggerCoincidenceSet 2bits, default E2D0
+	CommandDecoder TriggerCoincidenceSet(/*autoinst*/);
+
+	// HoldDelaySet 8bits
+	// HoldDelaySet[3:0] E2E6
+	// HoldDelaySet[7:4] E2F1
+	CommandDecoder HoldDelaySet3to0(/*autoinst*/);
+	CommandDecoder HoldDelaySet7to4(/*autoinst*/);
+
+	// HoldTimeSet 16bits
+	// HoldTimeSet[3:0] E208
+	// HoldTimeSet[7:4] E21C
+	// HoldTimeSet[11:8] E220
+	// HoldTimeSet[15:12] E230
+	CommandDecoder HoldTimeSet3to0(/*autoinst*/);
+	CommandDecoder HoldTimeSet7to4(/*autoinst*/);
+	CommandDecoder HoldTimeSet11to8(/*autoinst*/);
+	CommandDecoder HoldTimeSet15to12(/*autoinst*/);
+
+	// HoldEnable 1bit, default E240
+	CommandDecoder HoldEnableSet(/*autoinst*/);
+
+	// Slave DAQ
+	// EndHoldTimeSet 15bits
+	// EndHoldTimeSet[3:0] E254
+	// EndHoldTimeSet[7:4] E261
+	// EndHoldTimeSet[11:8] E270
+	// EndHoldTimeSet[15:12] E280
+	CommandDecoder EndHoldTimeSet3to0(/*autoinst*/);
+	CommandDecoder EndHoldTimeSet7to4(/*autoinst*/);
+	CommandDecoder EndHoldTimeSet11to8(/*autoinst*/);
+	CommandDecoder EndHoldTimeSet15to12(/*autoinst*/);
 		
-	//ASIC Chain select default 
-	
+	// ASIC Chain select 4bit, default B0A0
+	CommandDecoder AsicChainSelect(/*autoinst*/);
+
+	// LED 4bits, default B000
+	CommandDecoder LightLed(/*autoinst*/);	
 	
 
 	//Swap the LSB and MSB
