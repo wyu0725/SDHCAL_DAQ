@@ -1,22 +1,22 @@
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
+// Company:
+// Engineer:
+//
 // Create Date: 2018/06/27 17:20:45
-// Design Name: 
+// Design Name:
 // Module Name: CommandDecoder_tb
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
+// Project Name:
+// Target Devices:
+// Tool Versions:
+// Description:
+//
+// Dependencies:
+//
 // Revision:
 // Revision 0.01 - File Created
 // Additional Comments:
-// 
+//
 //////////////////////////////////////////////////////////////////////////////////
 
 
@@ -24,42 +24,45 @@ module CommandDecoder_tb();
 	localparam COMMAND_WIDTH = 0;
 	reg Clk;
 	reg reset_n;
-	reg CommandEn;
-	reg [15:0] CommandWord;
-	reg [COMMAND_WIDTH:0] DefaultValue;
+	reg CommandFifoReadEn;
+	reg [15:0] COMMAND_WORD;
 	wire [COMMAND_WIDTH:0] CommandOut;
+	wire CommandOut_r;
+	assign CommandOut_r = CommandOut;
+
+	//instance: ../../../src/CommandDecoder.v
 	CommandDecoder
 	#(
-		.COMMAND_WIDTH(0) ,
-		.COMMAND_ADDRESS(16'hF0F) 
+		.LEVEL_OR_PULSE(1'b0),
+		.COMMAND_WIDTH(COMMAND_WIDTH),
+		.COMMAND_ADDRESS_AND_DEFAULT(16'hF0F0)
 	)
-	uut (
-	.Clk(Clk),
-	.reset_n(reset_n),
-	.CommandEn(CommandEn),
-	.CommandWord(CommandWord),
-	.DefaultValue(DefaultValue),
-	.CommandOut(CommandOut)
-	);
+	uut(
+		.Clk(Clk),
+		.reset_n(reset_n),
+		.CommandFifoReadEn(CommandFifoReadEn),
+		.COMMAND_WORD(COMMAND_WORD),
+		// input [COMMAND_WIDTH:0] DefaultValue,
+		.CommandOut(CommandOut)
+		);
 
 	initial begin
 		Clk = 1'b0;
 		reset_n = 1'b0;
-		CommandEn = 1'b0;
-		CommandWord = 16'b0;
-		DefaultValue = 3'b0;
+		CommandFifoReadEn = 1'b0;
+		COMMAND_WORD = 16'b0;
 		#110;
 		reset_n = 1'b1;
 		#1003;
-		CommandEn = 1'b1;
-		CommandWord = 16'hAAF2;
+		CommandFifoReadEn = 1'b1;
+		COMMAND_WORD = 16'hAAF2;
 		#25;
-		CommandEn = 1'b0;
+		CommandFifoReadEn = 1'b0;
 		#1000;
-		CommandWord = 16'hF0F2;
-		CommandEn = 1'b1;
+		COMMAND_WORD = 16'hF0FF;
+		CommandFifoReadEn = 1'b1;
 		#25;
-		CommandEn = 1'b0;
+		CommandFifoReadEn = 1'b0;
 	end
 	localparam Low = 13;
 	localparam High = 12;
