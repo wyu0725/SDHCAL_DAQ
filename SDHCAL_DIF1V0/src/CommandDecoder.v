@@ -33,7 +33,7 @@ module CommandDecoder
 	#(
 		parameter LEVEL_OR_PULSE = 1'b1,
 		parameter [1:0] COMMAND_WIDTH = 2'b0,
-		parameter [15:0] COMMAND_ADDRESS_AND_DEFAULT = 12'hFFF
+		parameter [15:0] COMMAND_ADDRESS_AND_DEFAULT = 16'hFFFF
 	)
 	(
 	input Clk,
@@ -46,7 +46,7 @@ module CommandDecoder
 
 	always @ (posedge Clk or negedge reset_n) begin
 		if(~reset_n)
-			CommandOut <= DefaultValue;
+			CommandOut <= COMMAND_ADDRESS_AND_DEFAULT[COMMAND_WIDTH:0];
 		else if(CommandFifoReadEn && COMMAND_WORD[15:4] == COMMAND_ADDRESS_AND_DEFAULT[15:4])
 			CommandOut <= COMMAND_WORD[COMMAND_WIDTH:0];
 		else
