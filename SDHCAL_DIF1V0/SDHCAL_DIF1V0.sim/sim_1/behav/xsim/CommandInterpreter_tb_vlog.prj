@@ -1,0 +1,12 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  \
+"../../../../SDHCAL_DIF1V0.ip_user_files/ip/CommandFifo/sim/CommandFifo.v" \
+"../../../../src/CommandDecoder.v" \
+"../../../../src/CommandInterpreter.v" \
+"../../../../SDHCAL_DIF1V0.srcs/sim_1/new/CommandInterpreter_tb.v" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort
