@@ -45,6 +45,7 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 
+`include "CommandParameter.v"
 
 module CommandInterpreter(
   input Clk,
@@ -60,97 +61,95 @@ module CommandInterpreter(
   //  the max ASIC chain is set to 16
   //*** Microorc Parameter
   // MICROROC slow control parameter
-  output reg MicrorocSlowControlOrReadScopeSelect,
-  output reg MicrorocParameterLoadStart,
-  output reg [1:0] MicrorocDataoutChannelSelect,
-  output reg [1:0] MicrorocTransmitOnChannelSelect,
+  output wire MicrorocSlowControlOrReadScopeSelect,
+  output MicrorocParameterLoadStart,
+  output [1:0] MicrorocDataoutChannelSelect,
+  output [1:0] MicrorocTransmitOnChannelSelect,
   // ChipSatbEnable
-  output reg MicrorocStartReadoutChannelSelect,
-  output reg MicrorocEndReadoutChannelSelect,
+  output MicrorocStartReadoutChannelSelect,
+  output MicrorocEndReadoutChannelSelect,
   // [1:0] NC
-  output reg [1:0] MicrorocInternalRazSignalLength,
-  output reg MicrorocCkMux,
-  output reg MicrorocLvdsReceiverPPEnable,
-  output reg MicrorocExternalRazSignalEnable,
-  output reg MicrorocInternalRazSignalEnable,
-  output reg MicrorocExternalTriggerEnable,
-  output reg MicrorocTriggerNor64OrDirectSelect,
-  output reg MicrorocTriggerOutputEnable,
-  output reg [2:0] MicrorocTriggerToWriteSelect,
-  output reg [9:0] MicrorocDac2Vth,
-  output reg [9:0] MicrorocDac1Vth,
-  output reg [9:0] MicrorocDac0Vth,
-  output reg MicrorocDacEnable,
-  output reg MicrorocDacPPEnable,
-  output reg MicrorocBandGapEnable,
-  output reg MicrorocBandGapPPEnable,
-  output reg [7:0] MicrorocChipID,
+  output [1:0] MicrorocInternalRazSignalLength,
+  output MicrorocCkMux,
+  output MicrorocLvdsReceiverPPEnable,
+  output MicrorocExternalRazSignalEnable,
+  output MicrorocInternalRazSignalEnable,
+  output MicrorocExternalTriggerEnable,
+  output MicrorocTriggerNor64OrDirectSelect,
+  output MicrorocTriggerOutputEnable,
+  output [2:0] MicrorocTriggerToWriteSelect,
+  output [9:0] MicrorocDac2Vth,
+  output [9:0] MicrorocDac1Vth,
+  output [9:0] MicrorocDac0Vth,
+  output MicrorocDacEnable,
+  output MicrorocDacPPEnable,
+  output MicrorocBandGapEnable,
+  output MicrorocBandGapPPEnable,
+  output [7:0] MicrorocChipID,
   output reg [191:0] MicrorocChannelDiscriminatorMask,
-  output reg MicrorocLatchedOrDirectOutput,
-  output reg MicrorocDiscriminator2PPEnable,
-  output reg MicrorocDisriminator1PPEnable,
-  output reg MicrorocDiscriminator0PPEnable,
-  output reg MicrorocOTAqPPEnable,
-  output reg MicrorocOTAqEnable,
-  output reg MicrorocDac4bitPPEnable,
+  output MicrorocLatchedOrDirectOutput,
+  output MicrorocDiscriminator2PPEnable,
+  output MicrorocDiscriminator1PPEnable,
+  output MicrorocDiscriminator0PPEnable,
+  output MicrorocOTAqPPEnable,
+  output MicrorocOTAqEnable,
+  output MicrorocDac4bitPPEnable,
   output [255:0] ChannelAdjust,
-  output reg [1:0] MicrorocHighGainShaperFeedbackSelect,
-  output reg MicrorocShaperOutLowGainOrHighGain,
-  output reg MicrorocWidlarPPEnable,
-  output reg [1:0] MicrorocLowGainShaperFeedbackSelect,
-  output reg MicrorocLowGainShaperPPEnable,
-  output reg MicrorocHighGainShaperPPEnable,
-  output reg MicrorocGainBoostEnable,
-  output reg MicororcPreAmplifierPPEnable,
+  output [1:0] MicrorocHighGainShaperFeedbackSelect,
+  output MicrorocShaperOutLowGainOrHighGain,
+  output MicrorocWidlarPPEnable,
+  output [1:0] MicrorocLowGainShaperFeedbackSelect,
+  output MicrorocLowGainShaperPPEnable,
+  output MicrorocHighGainShaperPPEnable,
+  output MicrorocGainBoostEnable,
+  output MicrorocPreAmplifierPPEnable,
   output reg [63:0] MicrorocCTestChannel,
   output reg [63:0] MicrorocReadScopeChannel,
-  output reg MicrorocReadoutChannelSelect,// To redundancy module
-  output reg [1:0] MicrorocExternalRazMode,
-  output reg [3:0] MicrorocExternalRazDelayTime,
+  output MicrorocReadRedundancy,// To redundancy module
+  output [1:0] MicrorocExternalRazMode,
+  output [3:0] MicrorocExternalRazDelayTime,
 
   // Microroc Control
-  output reg MicrorocResetTimeStamp,
-
-
+  output MicrorocResetTimeStamp,
 
   //*** Acquisition Control
   // Mode Select
-  output reg [3:0] ModeSelect,
-  output reg [1:0] DacSelect,
+  output [3:0] ModeSelect,
+  output [1:0] DacSelect,
   // Sweep Dac parameter
-  output reg [9:0] StartDac,
-  output reg [9:0] EndDac,
-  output reg [9:0] DacStep,
+  output [9:0] StartDac,
+  output [9:0] EndDac,
+  output [9:0] DacStep,
   // SCurve Test Port
-  output reg SingleOr64Channel,
-  output reg CTestOrInput,
-  output reg [5:0] SingleTestChannel,
-  output reg [15:0] TriggerCountMax,
-  output reg [3:0] TriggerDelay,
+  output SingleOr64Channel,
+  output CTestOrInput,
+  output [5:0] SingleTestChannel,
+  output [15:0] TriggerCountMax,
+  output [3:0] TriggerDelay,
   output reg SweepTestStartStop,
-  output reg UnmaskAllChannel,
+  output UnmaskAllChannel,
   // Count Efficiency
-  output reg TriggerEfficiencyOrCountEfficiency,
-  output reg [15:0] CounterMax,
+  output TriggerEfficiencyOrCountEfficiency,
+  output [15:0] CounterMax,
   input SweepTestDone,
   input UsbFifoEmpty,
   // Sweep Acq
-  output reg [15:0] SweepAcqMaxPackageNumber,
+  output [15:0] SweepAcqMaxPackageNumber,
   // Reset Microroc
-  output reg ForceMicrorocAcqReset,
+  output ForceMicrorocAcqReset,
   // ADC Control
-  output reg AdcStartStop,
-  output reg [3:0] AdcStartDelayTime,
-  output reg [7:0] AdcDataNumber,
-  output reg [1:0] TriggerCoincidence,
-  output reg [7:0] HoldDelay,
-  output reg [15:0] HoldTime,
-  output reg HoldEnable,
+  output AdcStartStop,
+  output [3:0] AdcStartDelayTime,
+  output [7:0] AdcDataNumber,
+  output [1:0] TriggerCoincidence,
+  output [7:0] HoldDelay,
+  output [15:0] HoldTime,
+  output HoldEnable,
   // Slave DAQ
-  output reg [15:0] EndHoldTime,
-  output reg DaqSelect,
+  output [15:0] EndHoldTime,
+  output DaqSelect,
   // LED
-  output reg [3:0] LED
+  output [3:0] LED
   );
 
   // Command FIFO interface
@@ -162,17 +161,17 @@ module CommandInterpreter(
   wire FifoReady;
   assign FifoReady = !FifoReadResetBusy & !FifoReadResetBusy;
   CommandFifo CommandFifo32Depth (
-    .rst(!reset_n),                  // input wire rst
-    .wr_clk(IFClk),            // input wire wr_clk
-    .rd_clk(Clk),            // input wire rd_clk
-    .din(CommandWord),                  // input wire [15 : 0] din
-    .wr_en(CommandWordEn),              // input wire wr_en
-    .rd_en(CommandFifoReadEn),              // input wire rd_en
-    .dout(COMMAND_WORD),                // output wire [15 : 0] dout
-    .full(),                // output wire full
-    .empty(CommandFifoEmpty),              // output wire empty
-    .wr_rst_busy(FifoWriteResetBusy),  // output wire wr_rst_busy
-    .rd_rst_busy(FifoReadResetBusy)  // output wire rd_rst_busy
+    .rst(!reset_n),                   // input wire rst
+    .wr_clk(IFCLK),                   // input wire wr_clk
+    .rd_clk(Clk),                     // input wire rd_clk
+    .din(CommandWord),                // input wire [15 : 0] din
+    .wr_en(CommandWordEn),            // input wire wr_en
+    .rd_en(CommandFifoReadEn),        // input wire rd_en
+    .dout(COMMAND_WORD),              // output wire [15 : 0] dout
+    .full(),                          // output wire full
+    .empty(CommandFifoEmpty),         // output wire empty
+    .wr_rst_busy(FifoWriteResetBusy), // output wire wr_rst_busy
+    .rd_rst_busy(FifoReadResetBusy)   // output wire rd_rst_busy
     );
 
   //*** Read command
@@ -202,7 +201,13 @@ module CommandInterpreter(
       endcase
     end
   end
-
+    reg CommandFifoReadEnDelayed;
+  always @ (posedge Clk or negedge reset_n) begin
+    if(~reset_n)
+      CommandFifoReadEnDelayed <= 1'b0;
+    else
+      CommandFifoReadEnDelayed <= CommandFifoReadEn;
+  end
   //*** Microroc Control Parameter
   // Slow Control or Read Scope, default A0A0
   CommandDecoder
@@ -214,7 +219,7 @@ module CommandInterpreter(
   SlowControlOrReadScopeSelect(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
     .CommandOut(MicrorocSlowControlOrReadScopeSelect)
@@ -230,7 +235,7 @@ module CommandInterpreter(
   DataoutChannelSelect(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
     .CommandOut(MicrorocDataoutChannelSelect)
@@ -246,7 +251,7 @@ module CommandInterpreter(
   TransmitOnChannelSelect(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
     .CommandOut(MicrorocTransmitOnChannelSelect)
@@ -262,7 +267,7 @@ module CommandInterpreter(
   StartReadoutChannelSelect(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
     .CommandOut(MicrorocStartReadoutChannelSelect)
@@ -278,7 +283,7 @@ module CommandInterpreter(
   EndReadoutChannelSelect(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
     .CommandOut(MicrorocEndReadoutChannelSelect)
@@ -294,7 +299,7 @@ module CommandInterpreter(
   InternalRazSignalLenth(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
     .CommandOut(MicrorocInternalRazSignalLength)
@@ -310,7 +315,7 @@ module CommandInterpreter(
   CkMux(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
     .CommandOut(MicrorocCkMux)
@@ -326,7 +331,7 @@ module CommandInterpreter(
   ExternalRazSignalEnable(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
     .CommandOut(MicrorocExternalRazSignalEnable)
@@ -342,7 +347,7 @@ module CommandInterpreter(
   InternalRazSignalEnable(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
     .CommandOut(MicrorocInternalRazSignalEnable)
@@ -353,12 +358,12 @@ module CommandInterpreter(
   #(
     .LEVEL_OR_PULSE(1'b1),
     .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(ExternalTriggerEnable_CAND)
+    .COMMAND_ADDRESS_AND_DEFAULT(`ExternalTriggerEnable_CAND)
   )
   ExternalTriggerEnable(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
     .CommandOut(MicrorocExternalTriggerEnable)
@@ -369,12 +374,12 @@ module CommandInterpreter(
   #(
     .LEVEL_OR_PULSE(1'b1),
     .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(TriggerNor64OrDirectSelect_CAND)
+    .COMMAND_ADDRESS_AND_DEFAULT(`TriggerNor64OrDirectSelect_CAND)
   )
   TriggerNor64OrDirectSelect(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
     .CommandOut(MicrorocTriggerNor64OrDirectSelect)
@@ -385,188 +390,192 @@ module CommandInterpreter(
   #(
     .LEVEL_OR_PULSE(1'b1),
     .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_ADDRESS_AND_DEFAULT(`TriggerOutputEnable_CAND)
   )
   TriggerOutputEnable(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(MicrorocTriggerOutputEnable)
     );
 
   // TriggerToWriteSelect 3bits, default A087
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
-    .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_WIDTH(2'd2),
+    .COMMAND_ADDRESS_AND_DEFAULT(`TriggerToWriteSelect_CAND)
   )
   TriggerToWriteSelect(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(MicrorocTriggerToWriteSelect)
     );
 
   // Dac2Vth 10bits
   // Dac2Vth[3:0], default C060
   // Dac2Vth[7:4], default C070
   // Dac2Vth[9:8], default C080
+  wire [9:0] Dac2VthInternal;
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
-    .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_WIDTH(2'd3),
+    .COMMAND_ADDRESS_AND_DEFAULT(`Dac2Vth3to0_CAND)
   )
   Dac2Vth3to0(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(Dac2VthInternal[3:0])
     );
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
-    .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_WIDTH(2'd3),
+    .COMMAND_ADDRESS_AND_DEFAULT(`Dac2Vth7to4_CAND)
   )
   Dac2Vth7to4(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(Dac2VthInternal[7:4])
     );
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
-    .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_WIDTH(2'd1),
+    .COMMAND_ADDRESS_AND_DEFAULT(`Dac2Vth9to8_CAND)
   )
   Dac2Vth9to8(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(Dac2VthInternal[9:8])
     );
-
+  assign MicrorocDac2Vth = Invert10bit(Dac2VthInternal);
   // Dac1Vth 10bits
   // Dac1Vth[3:0], default C030
   // Dac1Vth[7:4], default C040
   // Dac1Vth[9:8], default C050
+  wire [9:0] Dac1VthInternal;
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
-    .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_WIDTH(2'd3),
+    .COMMAND_ADDRESS_AND_DEFAULT(`Dac1Vth3to0_CAND)
   )
   Dac1Vth3to0(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(Dac1VthInternal[3:0])
     );
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
-    .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_WIDTH(2'd3),
+    .COMMAND_ADDRESS_AND_DEFAULT(`Dac1Vth7to4_CAND)
   )
   Dac1Vth7to4(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(Dac1VthInternal[7:4])
     );
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
-    .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_WIDTH(2'b1),
+    .COMMAND_ADDRESS_AND_DEFAULT(`Dac1Vth9to8_CAND)
   )
   Dac1Vth9to8(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(Dac1VthInternal[9:8])
     );
-
+  assign MicrorocDac1Vth = Invert10bit(Dac1VthInternal);
   // Dac0Vth 10bits
   // Dac0Vth[3:0], default C000
   // Dac0Vth[7:4], default C010
   // Dac0Vth[9:8], default C020
+  wire [9:0] Dac0VthInternal;
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
-    .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_WIDTH(2'd3),
+    .COMMAND_ADDRESS_AND_DEFAULT(`Dac0Vth3to0_CAND)
   )
   Dac0Vth3to0(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(Dac0VthInternal[3:0])
     );
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
-    .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_WIDTH(2'd3),
+    .COMMAND_ADDRESS_AND_DEFAULT(`Dac0Vth7to4_CAND)
   )
   Dac0Vth7to4(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(Dac0VthInternal[7:4])
     );
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
-    .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_WIDTH(2'b1),
+    .COMMAND_ADDRESS_AND_DEFAULT(`Dac0Vth9to8_CAND)
   )
   Dac0Vth9to8(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(Dac0VthInternal[9:8])
     );
+  assign MicrorocDac0Vth = Invert10bit(Dac0VthInternal);
 
   // DacEnable 1bit, default A091
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
     .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_ADDRESS_AND_DEFAULT(`DacEnable_CAND)
   )
   DacEnable(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(MicrorocDacEnable)
     );
 
   // BandGapEnable 1bit, default A1A1
@@ -574,15 +583,15 @@ module CommandInterpreter(
   #(
     .LEVEL_OR_PULSE(1'b1),
     .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_ADDRESS_AND_DEFAULT(`BandGapEnable_CAND)
   )
   BandGapEnable(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(MicrorocBandGapEnable)
     );
 
   // ChipID 8bits
@@ -591,30 +600,30 @@ module CommandInterpreter(
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
-    .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_WIDTH(2'd3),
+    .COMMAND_ADDRESS_AND_DEFAULT(`ChipID3to0_CAND)
   )
   ChipID3to0(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(MicrorocChipID[3:0])
     );
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
-    .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_WIDTH(2'd3),
+    .COMMAND_ADDRESS_AND_DEFAULT(`ChipID7to4_CAND)
   )
   ChipID7to4(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(MicrorocChipID[7:4])
     );
 
   //////////////////////////////////////////////////////////////
@@ -643,67 +652,67 @@ module CommandInterpreter(
   //
   ////////////////////////////////////////////////////////////////
   reg [7:0] MaskShift;
-  reg [5:0] MaskChannel;
+  wire [5:0] MaskChannel;
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
-    .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_WIDTH(2'd3),
+    .COMMAND_ADDRESS_AND_DEFAULT(`MaskChannel3to0_CAND)
   )
   MaskChannel3to0(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(MaskChannel[3:0])
     );
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
-    .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_WIDTH(2'd1),
+    .COMMAND_ADDRESS_AND_DEFAULT(`MaskChannel5to4_CAND)
   )
   MaskChannel5to4(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(MaskChannel[5:4])
     );
 
-  reg [2:0] DiscriMask;
+  wire [2:0] DiscriMask;
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
-    .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_WIDTH(2'd2),
+    .COMMAND_ADDRESS_AND_DEFAULT(`DiscriMask_CAND)
   )
   DiscriMaskSet(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(DiscriMask)
     );
 
-  reg [1:0] MaskOrUnmask;
+  wire [1:0] MaskOrUnmask;
   // Pulse signal
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
-    .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_WIDTH(2'd2),
+    .COMMAND_ADDRESS_AND_DEFAULT(`MaskSet_CAND)
   )
   MaskSet(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(MaskOrUnmask)
     );
 
   always @ (posedge Clk or reset_n) begin
@@ -728,15 +737,15 @@ module CommandInterpreter(
     else begin
       case(MaskState)
         IDLE:begin
-          if(MaskOrUnmask == A2C0) begin
+          if(MaskOrUnmask == 16'hA2C0) begin
             MicrorocChannelDiscriminatorMask <= MicrorocChannelDiscriminatorMask;
             MaskState <= IDLE;
           end
-          else if(MaskOrUnmask == A2C1) begin
+          else if(MaskOrUnmask == 16'hA2C1) begin
             SingleChannelMask <= {{189{1'b1}},DiscriMask} << MaskShift | {DiscriMask,{189{1'b1}}} >> (192- MaskShift - 3);
             MaskState <= MASK;
           end
-          else if(MaskOrUnmask == A2C2) begin
+          else if(MaskOrUnmask == 16'hA2C2) begin
             SingleChannelMask <= {189'b0, 3'b111} << MaskShift;
             MaskState <= UNMASK;
           end
@@ -769,15 +778,15 @@ module CommandInterpreter(
   #(
     .LEVEL_OR_PULSE(1'b1),
     .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_ADDRESS_AND_DEFAULT(`LatchedOrDirectOutput_CAND)
   )
   LatchedOrDirectOutput(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(MicrorocLatchedOrDirectOutput)
     );
 
   // OTAqEnable 1bit, A111
@@ -785,22 +794,22 @@ module CommandInterpreter(
   #(
     .LEVEL_OR_PULSE(1'b1),
     .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_ADDRESS_AND_DEFAULT(`OTAqEnable_CAND)
   )
   OTAqEnable(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(MicrorocOTAqEnable)
     );
 
   //4-bit DAC set. 4-bit DAC is used to adjust the Vref_hg,
   //Vref_hg = Vref+sh - 728*DAC_Code(uV), while Vref_sh = 2.2V
   //The MSB of the 4-bit DAC burst out first
   reg [3:0] Dac4bit[0:63];
-  always @ (posedge clk or negedge reset_n)begin
+  always @ (posedge Clk or negedge reset_n)begin
     if(~reset_n) begin
       Dac4bit[0] <= 4'b0;
       Dac4bit[1] <= 4'b0;
@@ -867,11 +876,11 @@ module CommandInterpreter(
       Dac4bit[62] <= 4'b0;
       Dac4bit[63] <= 4'b0;
     end
-    else if(fifo_rden && (USB_COMMAND[15:8] == 8'hCC
-      || USB_COMMAND[15:8] == 8'hCD
-      || USB_COMMAND[15:8] == 8'hCE
-      || USB_COMMAND[15:8] == 8'hCF))
-      Dac4bit[USB_COMMAND[11:4] - 8'd192] <= USB_COMMAND[3:0];
+    else if(CommandFifoReadEnDelayed && (COMMAND_WORD[15:8] == 8'hCC
+      || COMMAND_WORD[15:8] == 8'hCD
+      || COMMAND_WORD[15:8] == 8'hCE
+      || COMMAND_WORD[15:8] == 8'hCF))
+      Dac4bit[COMMAND_WORD[11:4] - 8'd192] <= COMMAND_WORD[3:0];
     else begin
       Dac4bit[0] <= Dac4bit[0];
       Dac4bit[1] <= Dac4bit[1];
@@ -1010,16 +1019,16 @@ module CommandInterpreter(
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
-    .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_WIDTH(2'd1),
+    .COMMAND_ADDRESS_AND_DEFAULT(`HighGainShaperFeedbackSelect_CAND)
   )
   HighGainShaperFeedbackSelect(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut({MicrorocHighGainShaperFeedbackSelect[0], MicrorocHighGainShaperFeedbackSelect[1]})
     );
 
   // ShaperOutLowGainOrHighGain 1bit, default A130
@@ -1027,80 +1036,79 @@ module CommandInterpreter(
   #(
     .LEVEL_OR_PULSE(1'b1),
     .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_ADDRESS_AND_DEFAULT(`ShaperOutLowGainOrHighGain_CAND)
   )
   ShaperOutLowGainOrHighGain(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(MicrorocShaperOutLowGainOrHighGain)
     );
 
   // LowGainShaperFeedbackSelect 2bits, default A142, invert
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
-    .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_WIDTH(2'b1),
+    .COMMAND_ADDRESS_AND_DEFAULT(`LowGainShaperFeedbackSelect_CAND)
   )
   LowGainShaperFeedbackSelect(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut({MicrorocLowGainShaperFeedbackSelect[0], MicrorocLowGainShaperFeedbackSelect[1]})
     );
 
   // GainBoostEnable 1bit, default A051
-  CommandDecoder
-  #(
-    .LEVEL_OR_PULSE(1'b1),
-    .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
-  )
-  GainBoostEnable(
-    .Clk(Clk),
-    .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
-    .COMMAND_WORD(COMMAND_WORD),
-    // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
-    );
-
+CommandDecoder
+	#(
+		.LEVEL_OR_PULSE(1'b1),
+		.COMMAND_WIDTH(2'b0),
+		.COMMAND_ADDRESS_AND_DEFAULT(`GainBoostEnable_CAND)
+	)
+GainBoostEnable(
+	.Clk(Clk),
+	.reset_n(reset_n),
+	.CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
+	.COMMAND_WORD(COMMAND_WORD),
+	// input [COMMAND_WIDTH:0] DefaultValue,
+	.CommandOut(MicrorocGainBoostEnable)
+	);
   // CTestChannel 64bit, need decode
   // CTestChannel[3:0] default A16X
   // CTestChannel[7:4] default A17X
-  reg [7:0] CTestChannel;
+  wire [7:0] CTestChannel;
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
-    .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_WIDTH(2'd3),
+    .COMMAND_ADDRESS_AND_DEFAULT(`CTestChannel3to0_CAND)
   )
   CTestChannel3to0(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(CTestChannel[3:0])
     );
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
-    .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_WIDTH(2'd3),
+    .COMMAND_ADDRESS_AND_DEFAULT(`CTestChannel7to4_CAND)
   )
   CTestChannel7to4(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(CTestChannel[7:4])
     );
 
   always @(*) begin
@@ -1182,34 +1190,34 @@ module CommandInterpreter(
   // ReadScopeChannel
   // ReadScopeChannel[3:0], default A18X
   // ReadScopeChannel[7:4], default A19X
-  reg [7:0] ReadScopeChannel;
+  wire [7:0] ReadScopeChannel;
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
-    .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_WIDTH(2'd3),
+    .COMMAND_ADDRESS_AND_DEFAULT(`ReadScopeChannel3to0_CAND)
   )
   ReadScopeChannel3to0(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(ReadScopeChannel[3:0])
     );
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
-    .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_WIDTH(2'd3),
+    .COMMAND_ADDRESS_AND_DEFAULT(`ReadScopeChannel7to4_CAND)
   )
   ReadScopeChannel7to4(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(ReadScopeChannel[7:4])
     );
   always @ (*) begin
     if(~reset_n)
@@ -1292,150 +1300,154 @@ module CommandInterpreter(
   #(
     .LEVEL_OR_PULSE(1'b1),
     .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_ADDRESS_AND_DEFAULT(`LvdsReceiverPPEnable_CAND)
   )
   LvdsReceiverPPEnable(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(MicrorocLvdsReceiverPPEnable)
     );
   // DacPPEnable default A2F0
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
     .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_ADDRESS_AND_DEFAULT(`DacPPEnable_CAND)
   )
   DacPPEnable(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(MicrorocDacPPEnable)
     );
   // BandGapPPEnable default A200
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
     .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_ADDRESS_AND_DEFAULT(`BandGapPPEnable_CAND)
   )
-  BandGapEnable(
+  BandGapPPEnable(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(MicrorocBandGapPPEnable)
     );
   // DiscriminatorPPEnable default A210
+  wire DiscriminatorPPEnableInternal;
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
     .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_ADDRESS_AND_DEFAULT(`DiscriminatorPPEnable_CAND)
   )
   DiscriminatorPPEnable(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(DiscriminatorPPEnableInternal)
     );
+  assign MicrorocDiscriminator0PPEnable = DiscriminatorPPEnableInternal;
+  assign MicrorocDiscriminator1PPEnable = DiscriminatorPPEnableInternal;
+  assign MicrorocDiscriminator2PPEnable = DiscriminatorPPEnableInternal;
   // OTAqPPEnable default A220
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
     .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_ADDRESS_AND_DEFAULT(`OTAqPPEnable_CAND)
   )
   OTAqPPEnable(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(MicrorocOTAqPPEnable)
     );
   // Dac4bitPPEnable default A230
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
     .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_ADDRESS_AND_DEFAULT(`Dac4bitPPEnable_CAND)
   )
   Dac4bitPPEnable(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(MicrorocDac4bitPPEnable)
     );
   // WidlarPPEnable default A240
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
     .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_ADDRESS_AND_DEFAULT(`WidlarPPEnable_CAND)
   )
   WidlarPPEnable(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(MicrorocWidlarPPEnable)
     );
   // LowGainShaperPPEnable default A250
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
     .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_ADDRESS_AND_DEFAULT(`LowGainShaperPPEnable_CAND)
   )
   LowGainShaperPPEnable(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(MicrorocLowGainShaperPPEnable)
     );
   // HighGainShaperPPEnable default A260
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
     .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_ADDRESS_AND_DEFAULT(`HighGainShaperPPEnable_CAND)
   )
   HighGainShaperPPEnable(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(MicrorocHighGainShaperPPEnable)
     );
   // PreAmplifierPPEnable default A270
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
     .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_ADDRESS_AND_DEFAULT(`PreAmplifierPPEnable_CAND)
   )
   PreAmplifierPPEnable(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(MicrorocPreAmplifierPPEnable)
     );
 
   // ReadoutChannelSelect 1bit, default A281
@@ -1443,63 +1455,63 @@ module CommandInterpreter(
   #(
     .LEVEL_OR_PULSE(1'b1),
     .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_ADDRESS_AND_DEFAULT(`ReadoutChannelSelect_CAND)
   )
   ReadoutchannelSelect(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(MicrorocReadRedundancy)
     );
 
   // ExternalRazMode 2bits, default A29X
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
-    .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_WIDTH(2'b1),
+    .COMMAND_ADDRESS_AND_DEFAULT(`ExternalRazModeSelect_CAND)
   )
   ExternalRazMode(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(MicrorocExternalRazMode)
     );
 
   // ExternalRazDelayTime 4bits, default A3A7
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
-    .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_WIDTH(2'd3),
+    .COMMAND_ADDRESS_AND_DEFAULT(`ExternalRazDelayTime_CAND)
   )
   ExternalRazDelayTime(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(MicrorocExternalRazDelayTime)
     );
 
   // ParameterLoadStart 1bit, default D0A0, pulse
   CommandDecoder
   #(
-    .LEVEL_OR_PULSE(1'b1),
+    .LEVEL_OR_PULSE(1'b0),
     .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_ADDRESS_AND_DEFAULT(`ParameterLoadStart_CAND)
   )
   ParameterLoadStart(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(MicrorocParameterLoadStart)
     );
 
   //*** Test Command
@@ -1508,32 +1520,32 @@ module CommandInterpreter(
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
-    .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_WIDTH(2'd3),
+    .COMMAND_ADDRESS_AND_DEFAULT(`RunningModeSelect_CAND)
   )
   RunningModeSelect(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(ModeSelect)
     );
 
   // SweepDacSelect 2bits, default E0B0
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
-    .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_WIDTH(2'b1),
+    .COMMAND_ADDRESS_AND_DEFAULT(`SweepDacSelect_CAND)
   )
   SweepDacSelect(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(DacSelect)
     );
 
   // SweepDacStartValue 10bits
@@ -1543,44 +1555,44 @@ module CommandInterpreter(
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
-    .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_WIDTH(2'd3),
+    .COMMAND_ADDRESS_AND_DEFAULT(`SweepDacStartValue3to0_CAND)
   )
   SweepDacStartValue3to0(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(StartDac[3:0])
     );
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
-    .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_WIDTH(2'd3),
+    .COMMAND_ADDRESS_AND_DEFAULT(`SweepDacStartValue7to4_CAND)
   )
   SweepDacStartValue7to4(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(StartDac[7:4])
     );
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
-    .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_WIDTH(2'd1),
+    .COMMAND_ADDRESS_AND_DEFAULT(`SweepDacStartValue9to8_CAND)
   )
   SweepDacStartValue9to8(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(StartDac[9:8])
     );
 
   // SweepDacEndValue
@@ -1590,44 +1602,44 @@ module CommandInterpreter(
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
-    .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_WIDTH(2'd3),
+    .COMMAND_ADDRESS_AND_DEFAULT(`SweepDacEndValue3to0_CAND)
   )
   SweepDacEndValue3to0(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(EndDac[3:0])
     );
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
-    .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_WIDTH(2'd3),
+    .COMMAND_ADDRESS_AND_DEFAULT(`SweepDacEndValue7to4_CAND)
   )
   SweepDacEndValue7to4(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(EndDac[7:4])
     );
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
-    .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_WIDTH(2'd1),
+    .COMMAND_ADDRESS_AND_DEFAULT(`SweepDacEndValue9to8_CAND)
   )
   SweepDacEndValue9to8(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(EndDac[9:8])
     );
 
   // SweepDacStepValue
@@ -1637,44 +1649,44 @@ module CommandInterpreter(
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
-    .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_WIDTH(2'd3),
+    .COMMAND_ADDRESS_AND_DEFAULT(`SweepDacStepValue3to0_CAND)
   )
   SweepDacStepValue3to0(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(DacStep[3:0])
     );
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
-    .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_WIDTH(2'd3),
+    .COMMAND_ADDRESS_AND_DEFAULT(`SweepDacStepValue7to4_CAND)
   )
   SweepDacStepValue7to4(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(DacStep[7:4])
     );
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
-    .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_WIDTH(2'b1),
+    .COMMAND_ADDRESS_AND_DEFAULT(`SweepDacStepValue9to8_CAND)
   )
   SweepDacStepValue9to8(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(DacStep[9:8])
     );
 
   //*** SCurve Test
@@ -1683,15 +1695,15 @@ module CommandInterpreter(
   #(
     .LEVEL_OR_PULSE(1'b1),
     .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_ADDRESS_AND_DEFAULT(`SingleOr64ChannelSelect_CAND)
   )
   SingleOr64ChannelSelect(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(SingleOr64Channel)
     );
 
   // CTestOrInputSelect 1bit, default E061
@@ -1699,15 +1711,15 @@ module CommandInterpreter(
   #(
     .LEVEL_OR_PULSE(1'b1),
     .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_ADDRESS_AND_DEFAULT(`CTestOrInputSelect_CAND)
   )
   CTestOrInputSelect(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(CTestOrInput)
     );
 
   // SingleTestChannelSet 6bits
@@ -1716,30 +1728,30 @@ module CommandInterpreter(
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
-    .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_WIDTH(2'd3),
+    .COMMAND_ADDRESS_AND_DEFAULT(`SingleTestChannelSet3to0_CAND)
   )
   SingleTestChannelSet3to0(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(SingleTestChannel[3:0])
     );
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
-    .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_WIDTH(2'd1),
+    .COMMAND_ADDRESS_AND_DEFAULT(`SingleTestChannelSet5to4_CAND)
   )
   SingleTestChannelSet5to4(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(SingleTestChannel[5:4])
     );
 
   // TriggerCountMaxSet
@@ -1750,116 +1762,115 @@ module CommandInterpreter(
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
-    .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_WIDTH(2'd3),
+    .COMMAND_ADDRESS_AND_DEFAULT(`TriggerCountMaxSet3to0_CAND)
   )
   TriggerCountMaxSet3to0(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(TriggerCountMax[3:0])
     );
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
-    .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_WIDTH(2'd3),
+    .COMMAND_ADDRESS_AND_DEFAULT(`TriggerCountMaxSet7to4_CAND)
   )
   TriggerCountMaxSet7to4(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(TriggerCountMax[7:4])
     );
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
-    .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_WIDTH(2'd3),
+    .COMMAND_ADDRESS_AND_DEFAULT(`TriggerCountMaxSet11to8_CAND)
   )
   TriggerCountMaxSet11to8(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(TriggerCountMax[11:8])
     );
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
-    .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_WIDTH(2'd3),
+    .COMMAND_ADDRESS_AND_DEFAULT(`TriggerCountMaxSet15to12_CAND)
   )
   TriggerCountMaxSet15to12(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(TriggerCountMax[15:12])
     );
 
   // TriggerDelaySet 4bits, default E1E3
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
-    .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_WIDTH(2'd3),
+    .COMMAND_ADDRESS_AND_DEFAULT(`TriggerDelaySet_CAND)
   )
   TriggerDelaySet(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(TriggerDelay)
     );
 
   // SweepTestStartStop 1bit, default F0A0
-  reg SweepTestStartStop_reg;
+  wire SweepTestStartStopInternal;
   always @ (posedge Clk or negedge reset_n) begin
     if(~reset_n)
       SweepTestStartStop <= 1'b0;
     else if(UsbFifoEmpty && SweepTestDone)
       SweepTestStartStop <= 1'b0;
     else
-      SweepTestStartStop <= SweepTestStartStop_reg;
+      SweepTestStartStop <= SweepTestStartStopInternal;
   end
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
     .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_ADDRESS_AND_DEFAULT(`SweepTestStartStop_CAND)
   )
   SweepTestStartStopSet(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(SweepTestStartStopInternal)
     );
-
 
   // UnmaskAllChannelSet 1bit, default E1F0
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
     .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_ADDRESS_AND_DEFAULT(`UnmaskAllChannelSet_CAND)
   )
   UnmaskAllChannelSet(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(UnmaskAllChannel)
     );
 
   // TriggerEfficiencyOrCountEfficiencySet 1bit, default E101
@@ -1867,15 +1878,15 @@ module CommandInterpreter(
   #(
     .LEVEL_OR_PULSE(1'b1),
     .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_ADDRESS_AND_DEFAULT(`TriggerEfficiencyOrCountEfficiencySet_CAND)
   )
   TriggerEfficiencyOrCountEfficiencySet(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(TriggerEfficiencyOrCountEfficiency)
     );
 
   // CounterMaxSet 16bits
@@ -1886,58 +1897,58 @@ module CommandInterpreter(
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
-    .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_WIDTH(2'd3),
+    .COMMAND_ADDRESS_AND_DEFAULT(`CounterMaxSet3to0_CAND)
   )
   CounterMaxSet3to0(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(CounterMax[3:0])
     );
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
-    .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_WIDTH(2'd3),
+    .COMMAND_ADDRESS_AND_DEFAULT(`CounterMaxSet7to4_CAND)
   )
   CounterMaxSet7to4(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(CounterMax[7:4])
     );
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
-    .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_WIDTH(2'd3),
+    .COMMAND_ADDRESS_AND_DEFAULT(`CounterMaxSet11to8_CAND)
   )
   CounterMaxSet11to8(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(CounterMax[11:8])
     );
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
-    .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_WIDTH(2'd3),
+    .COMMAND_ADDRESS_AND_DEFAULT(`CounterMaxSet15to12_CAND)
   )
   CounterMaxSet15to12(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(CounterMax[15:12])
     );
 
   // SweepAcqMaxPackageNumberSet 16bit
@@ -1948,74 +1959,74 @@ module CommandInterpreter(
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
-    .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_WIDTH(2'd3),
+    .COMMAND_ADDRESS_AND_DEFAULT(`SweepAcqMaxPackageNumberSet3to0_CAND)
   )
   SweepAcqMaxPackageNumberSet3to0(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(SweepAcqMaxPackageNumber[3:0])
     );
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
-    .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_WIDTH(2'd3),
+    .COMMAND_ADDRESS_AND_DEFAULT(`SweepAcqMaxPackageNumberSet7to4_CAND)
   )
   SweepAcqMaxPackageNumberSet7to4(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(SweepAcqMaxPackageNumber[7:4])
     );
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
-    .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_WIDTH(2'd3),
+    .COMMAND_ADDRESS_AND_DEFAULT(`SweepAcqMaxPackageNumberSet11to8_CAND)
   )
   SweepAcqMaxPackageNumberSet11to8(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(SweepAcqMaxPackageNumber[11:8])
     );
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
-    .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_WIDTH(2'd3),
+    .COMMAND_ADDRESS_AND_DEFAULT(`SweepAcqMaxPackageNumberSet15to12_CAND)
   )
   SweepAcqMaxPackageNumberSet15to12(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(SweepAcqMaxPackageNumber[15:12])
     );
 
   // Reset Microroc 1bit, default E190, pulse
   CommandDecoder
   #(
-    .LEVEL_OR_PULSE(1'b1),
+    .LEVEL_OR_PULSE(1'b0),
     .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_ADDRESS_AND_DEFAULT(`ResetMicrorocAcq_CAND)
   )
   ResetMicrorocAcq(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(ForceMicrorocAcqReset)
     );
 
   // ADC Start Stop 1bit, default F0B0
@@ -2023,31 +2034,31 @@ module CommandInterpreter(
   #(
     .LEVEL_OR_PULSE(1'b1),
     .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_ADDRESS_AND_DEFAULT(`ExternalAdcStartStop_CAND)
   )
   ExternalAdcStartStop(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(AdcStartStop)
     );
 
   //AdcStartDelayTimeSet 4bit, default E2A8
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
-    .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_WIDTH(2'd3),
+    .COMMAND_ADDRESS_AND_DEFAULT(`AdcStartDelayTimeSet_CAND)
   )
   AdcStartDelayTimeSet(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(AdcStartDelayTime)
     );
 
   // AdcDataNumberSet 8bit,
@@ -2056,46 +2067,46 @@ module CommandInterpreter(
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
-    .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_WIDTH(2'd3),
+    .COMMAND_ADDRESS_AND_DEFAULT(`AdcDataNumberSet3to0_CAND)
   )
   AdcDataNumberSet3to0(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(AdcDataNumber[3:0])
     );
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
-    .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_WIDTH(2'd3),
+    .COMMAND_ADDRESS_AND_DEFAULT(`AdcDataNumberSet7to4_CAND)
   )
   AdcDataNumberSet7to4(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(AdcDataNumber[7:4])
     );
 
   // TriggerCoincidenceSet 2bits, default E2D0
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
-    .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_WIDTH(2'b1),
+    .COMMAND_ADDRESS_AND_DEFAULT(`TriggerCoincidenceSet_CAND)
   )
   TriggerCoincidenceSet(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(TriggerCoincidence)
     );
 
   // HoldDelaySet 8bits
@@ -2104,30 +2115,30 @@ module CommandInterpreter(
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
-    .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_WIDTH(2'd3),
+    .COMMAND_ADDRESS_AND_DEFAULT(`HoldDelaySet3to0_CAND)
   )
   HoldDelaySet3to0(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(HoldDelay[3:0])
     );
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
-    .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_WIDTH(2'd3),
+    .COMMAND_ADDRESS_AND_DEFAULT(`HoldDelaySet7to4_CAND)
   )
   HoldDelaySet7to4(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(HoldDelay[7:4])
     );
 
   // HoldTimeSet 16bits
@@ -2138,58 +2149,58 @@ module CommandInterpreter(
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
-    .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_WIDTH(2'd3),
+    .COMMAND_ADDRESS_AND_DEFAULT(`HoldTimeSet3to0_CAND)
   )
   HoldTimeSet3to0(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(HoldTime[3:0])
     );
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
-    .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_WIDTH(2'd3),
+    .COMMAND_ADDRESS_AND_DEFAULT(`HoldTimeSet7to4_CAND)
   )
   HoldTimeSet7to4(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(HoldTime[7:4])
     );
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
-    .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_WIDTH(2'd3),
+    .COMMAND_ADDRESS_AND_DEFAULT(`HoldTimeSet11to8_CAND)
   )
   HoldTimeSet11to8(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(HoldTime[11:8])
     );
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
-    .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_WIDTH(2'd3),
+    .COMMAND_ADDRESS_AND_DEFAULT(`HoldTimeSet15to12_CAND)
   )
   HoldTimeSet15to12(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(HoldTime[15:12])
     );
 
   // HoldEnable 1bit, default E240
@@ -2197,15 +2208,15 @@ module CommandInterpreter(
   #(
     .LEVEL_OR_PULSE(1'b1),
     .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_ADDRESS_AND_DEFAULT(`HoldEnableSet_CAND)
   )
   HoldEnableSet(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(HoldEnable)
     );
 
   // Slave DAQ
@@ -2217,90 +2228,154 @@ module CommandInterpreter(
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
-    .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_WIDTH(2'd3),
+    .COMMAND_ADDRESS_AND_DEFAULT(`EndHoldTimeSet3to0_CAND)
   )
   EndHoldTimeSet3to0(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(EndHoldTime[3:0])
     );
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
-    .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_WIDTH(2'd3),
+    .COMMAND_ADDRESS_AND_DEFAULT(`EndHoldTimeSet7to4_CAND)
   )
   EndHoldTimeSet7to4(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(EndHoldTime[7:4])
     );
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
-    .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_WIDTH(2'd3),
+    .COMMAND_ADDRESS_AND_DEFAULT(`EndHoldTimeSet11to8_CAND)
   )
   EndHoldTimeSet11to8(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(EndHoldTime[11:8])
     );
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
-    .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_WIDTH(2'd3),
+    .COMMAND_ADDRESS_AND_DEFAULT(`EndHoldTimeSet15to12_CAND)
   )
   EndHoldTimeSet15to12(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(EndHoldTime[15:12])
     );
 
   // ASIC Chain select 4bit, default B0A0
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
-    .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_WIDTH(2'd3),
+    .COMMAND_ADDRESS_AND_DEFAULT(`AsicChainSelectSet_CAND)
   )
   AsicChainSelectSet(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(AsicChainSelect)
     );
+  
+  // AcquisitionStartStopSet 1bit, default F0F0
+CommandDecoder
+	#(
+		.LEVEL_OR_PULSE(1'b1),
+		.COMMAND_WIDTH(2'b0),
+		.COMMAND_ADDRESS_AND_DEFAULT(`AcquisitionStartStop_CAND)
+	)
+AcquisitionStartStopSet(
+	.Clk(Clk),
+	.reset_n(reset_n),
+	.CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
+	.COMMAND_WORD(COMMAND_WORD),
+	// input [COMMAND_WIDTH:0] DefaultValue,
+	.CommandOut(AcquisitionStartStop)
+	);
+
+  // DataFifoReset 1bit, default F1A0, pulse
+CommandDecoder
+	#(
+		.LEVEL_OR_PULSE(1'b0),
+		.COMMAND_WIDTH(2'b0),
+		.COMMAND_ADDRESS_AND_DEFAULT(`ResetDataFifo_CAND)
+	)
+DataFifoReset(
+	.Clk(Clk),
+	.reset_n(reset_n),
+	.CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
+	.COMMAND_WORD(COMMAND_WORD),
+	// input [COMMAND_WIDTH:0] DefaultValue,
+	.CommandOut(ResetDataFifo)
+	);
+
+  // TimeStampReset 1bit, default A3B0, pulse
+CommandDecoder
+	#(
+		.LEVEL_OR_PULSE(1'b0),
+		.COMMAND_WIDTH(2'b0),
+		.COMMAND_ADDRESS_AND_DEFAULT(`ResetTimeStamp_CAND)
+	)
+TimeStampReset(
+	.Clk(Clk),
+	.reset_n(reset_n),
+	.CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
+	.COMMAND_WORD(COMMAND_WORD),
+	// input [COMMAND_WIDTH:0] DefaultValue,
+	.CommandOut(MicrorocResetTimeStamp)
+	);
+
+  // DaqModeSelect 1bit, default E290
+CommandDecoder
+	#(
+		.LEVEL_OR_PULSE(1'b1),
+		.COMMAND_WIDTH(2'b0),
+		.COMMAND_ADDRESS_AND_DEFAULT(`DaqSelect_CAND)
+	)
+DaqModeSelect(
+	.Clk(Clk),
+	.reset_n(reset_n),
+	.CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
+	.COMMAND_WORD(COMMAND_WORD),
+	// input [COMMAND_WIDTH:0] DefaultValue,
+	.CommandOut(DaqSelect)
+	);
 
   // LED 4bits, default B000
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
-    .COMMAND_WIDTH(2'b0),
-    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+    .COMMAND_WIDTH(2'd3),
+    .COMMAND_ADDRESS_AND_DEFAULT(`LightLed_CAND)
   )
   LightLed(
     .Clk(Clk),
     .reset_n(reset_n),
-    .CommandFifoReadEn(CommandFifoReadEn),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(CommandOut)
+    .CommandOut(LED)
     );
 
 
@@ -2308,6 +2383,11 @@ module CommandInterpreter(
   function [3:0] Invert4bit(input [3:0] num);
     begin
       Invert4bit = {num[0], num[1], num[2], num[3]};
+    end
+  endfunction
+  function [3:0] Invert10bit(input [9:0] num);
+    begin
+      Invert10bit = {num[0], num[1], num[2], num[3], num[4], num[5], num[6], num[7], num[8], num[9]};
     end
   endfunction
 endmodule
