@@ -42,6 +42,15 @@
 `define ReadoutChannelSelect_CAND                  16'hA281
 `define ExternalRazModeSelect_CAND                 16'hA293
 `define ExternalRazDelayTime_CAND                  16'hA3A7
+`define Dac0Vth3to0_CAND                           16'hC000
+`define Dac0Vth7to4_CAND                           16'hC010
+`define Dac0Vth9to8_CAND                           16'hC020
+`define Dac1Vth3to0_CAND                           16'hC030
+`define Dac1Vth7to4_CAND                           16'hC040
+`define Dac1Vth9to8_CAND                           16'hC050
+`define Dac2Vth3to0_CAND                           16'hC060
+`define Dac2Vth7to4_CAND                           16'hC070
+`define Dac2Vth9to8_CAND                           16'hC080
 `define ParameterLoadStart_CAND                    16'hD0A0
 `define RunningModeSelect_CAND                     16'hE0A0
 `define SweepDacSelect_CAND                        16'hE0B0
@@ -93,3 +102,7 @@
 `define EndHoldTimeSet15to12_CAND                  16'hE280
 `define AsicChainSelectSet_CAND                    16'hB0A0
 `define LightLed_CAND                              16'hB000
+`define AcquisitionStartStop_CAND 16'hF0F0
+`define ResetDataFifo_CAND 16'hF1A0
+`define ResetTimeStamp_CAND 16'hA3B0
+`define DaqSelect_CAND 16'hE290
