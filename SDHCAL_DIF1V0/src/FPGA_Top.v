@@ -38,11 +38,10 @@ module FPGA_Top(
 	input Clk40M,
 	input rst_n
 	);
-	MicrorocControl MicrorocChain1(
-		);
-	MicrorocControl MicrorocChain2(
-	
-		);
+	MicrorocControl MicrorocChain0(/*autoisnt*/);
+	MicrorocControl MicrorocChain1(/*autoinst*/);
+  MicrorocControl MicrorocChain2(/*autoinst*/);
+  MicrorocControl MicrorocChain3(/*autoinst*/);
 	/*-----------USB2.0 instantiation------------*/
     wire [15:0] in_from_ext_fifo_dout;
     wire out_to_ext_fifo_rd_en;
@@ -68,4 +67,7 @@ module FPGA_Top(
       .in_from_ext_fifo_empty(in_from_ext_fifo_empty),//fifo interface
       .out_to_ext_fifo_rd_en(out_to_ext_fifo_rd_en)   //fifo interface
     );
+  CommandInterpreter Command(/*autoinst*/);
+  ConfigurationParameterDistribution ConfigurationSelect(/*autoinst*/);
+  AcquisitionControl Acquisition(/*autoinst*/);
 endmodule

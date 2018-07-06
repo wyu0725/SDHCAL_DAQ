@@ -5,8 +5,21 @@
 !_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
 !_TAG_PROGRAM_URL	https://ctags.io/	/official site/
 !_TAG_PROGRAM_VERSION	0.0.0	/35c89c8f/
+ACQ	ADC_AD9220.v	/^                ACQ   = 2'b01,$/;"	c	language:Verilog	module:ADC_AD9220
 ACQUISITION	AutoDaq.v	/^            ACQUISITION = 4'd4,$/;"	c	language:Verilog	module:AutoDaq
+ADC_AD9220	ADC_AD9220.v	/^module ADC_AD9220$/;"	m	language:Verilog
+ADC_CLK	ADC_AD9220.v	/^  output ADC_CLK,$/;"	p	language:Verilog	module:ADC_AD9220
+ADC_CLK	AdcControl.v	/^    output ADC_CLK,$/;"	p	language:Verilog	module:AdcControl
+ADC_DATA	ADC_AD9220.v	/^  input [11:0] ADC_DATA,$/;"	p	language:Verilog	module:ADC_AD9220
+ADC_DATA	AdcControl.v	/^    input [11:0] ADC_DATA,$/;"	p	language:Verilog	module:AdcControl
+ADC_OTR	ADC_AD9220.v	/^  input ADC_OTR,\/\/An out-of-range condition exists then the analog input voltage is beyond the/;"	p	language:Verilog	module:ADC_AD9220
+ADC_OTR	AdcControl.v	/^    input ADC_OTR,$/;"	p	language:Verilog	module:AdcControl
+ALL_DISCRIMINATOR_MASK	SCurve_Test_Control.v	/^  localparam [191:0] ALL_DISCRIMINATOR_MASK          = 192'b0;$/;"	c	language:Verilog	module:SCurve_Test_Control
+ALL_DONE	SCurve_Single_Test.v	/^                     ALL_DONE = 3'd6;$/;"	c	language:Verilog	module:SCurve_Single_Test
+ALL_DONE	SCurve_Test_Control.v	/^  ALL_DONE                        = 5'd19;$/;"	c	language:Verilog	module:SCurve_Test_Control
 ALL_DONE	SlaveDaq.v	/^	ALL_DONE = 5'd19;$/;"	c	language:Verilog	module:SlaveDaq
+ASIC_CHAIN_NUMBER	ConfigurationParameterDistribution.v	/^    parameter [3:0] ASIC_CHAIN_NUMBER = 4'd4$/;"	c	language:Verilog	module:ConfigurationParameterDistribution
+ASIC_CHAIN_SELECT	ConfigurationParameterDistribution.v	/^  wire [1:0] ASIC_CHAIN_SELECT = AsicChainSelect[1:0];$/;"	n	language:Verilog	module:ConfigurationParameterDistribution
 AcqEnable	SlaveDaq.v	/^	reg AcqEnable;$/;"	r	language:Verilog	module:SlaveDaq
 AcqStart	MicrorocControl.v	/^	input AcqStart,$/;"	p	language:Verilog	module:MicrorocControl
 AcqStart	SlaveDaq.v	/^	input AcqStart,                 \/\/ External start trigger$/;"	p	language:Verilog	module:SlaveDaq
@@ -17,27 +30,46 @@ Acq_Start_Stop_sync1	usb_synchronous_slavefifo.v	/^    reg Acq_Start_Stop_sync1 
 Acq_Start_Stop_sync2	usb_synchronous_slavefifo.v	/^    reg Acq_Start_Stop_sync2 = 1'b0;$/;"	r	language:Verilog	module:usb_synchronous_slavefifo
 AcquiredData	DaqSwitcher.v	/^    output [15:0] AcquiredData,$/;"	p	language:Verilog	module:DaqSwitcher
 AcquiredData_en	DaqSwitcher.v	/^    output AcquiredData_en$/;"	p	language:Verilog	module:DaqSwitcher
+AcquisitionControl	AcquisitionControl.v	/^module AcquisitionControl($/;"	m	language:Verilog
 AcquisitionStartStop	CommandInterpreter.v	/^  output AcquisitionStartStop,$/;"	p	language:Verilog	module:CommandInterpreter
-AcquisitionStartStop_CAND	CommandParameter.v	/^`define AcquisitionStartStop_CAND 16'hF0F0$/;"	c	language:Verilog
+AcquisitionStartStop_CAND	CommandParameter.v	/^`define AcquisitionStartStop_CAND                  16'hF0F0$/;"	c	language:Verilog
 AcquisitionStartTime	MicrorocControl.v	/^	input [15:0] AcquisitionStartTime,$/;"	p	language:Verilog	module:MicrorocControl
+AcquisitionSwitcher	AcquisitionSwitcher.v	/^module AcquisitionSwitcher($/;"	m	language:Verilog
 AcquisitionTime	DaqControl.v	/^    input [15:0] AcquisitionTime,$/;"	p	language:Verilog	module:DaqControl
 AcquisitionTime	SlaveDaq.v	/^	input [15:0] AcquisitionTime,     \/\/ Send from USB, default 8$/;"	p	language:Verilog	module:SlaveDaq
+Actual_10bit_DAC_Code	SCurve_Test_Control.v	/^  reg [9:0]   Actual_10bit_DAC_Code;\/\/In SC param the LSB of 10bit DAC code come first, so it'/;"	r	language:Verilog	module:SCurve_Test_Control
+AdcClockCount	ADC_AD9220.v	/^reg AdcClockCount;$/;"	r	language:Verilog	module:ADC_AD9220
+AdcClock_r	ADC_AD9220.v	/^reg AdcClock_r;$/;"	r	language:Verilog	module:ADC_AD9220
+AdcControl	AdcControl.v	/^module AdcControl($/;"	m	language:Verilog
+AdcData	AdcControl.v	/^    wire [11:0] AdcData;$/;"	n	language:Verilog	module:AdcControl
+AdcDataCount	AdcControl.v	/^    reg [7:0] AdcDataCount;$/;"	r	language:Verilog	module:AdcControl
+AdcDataNumber	AdcControl.v	/^    input [7:0] AdcDataNumber,$/;"	p	language:Verilog	module:AdcControl
 AdcDataNumber	CommandInterpreter.v	/^  output [7:0] AdcDataNumber,$/;"	p	language:Verilog	module:CommandInterpreter
 AdcDataNumberSet3to0_CAND	CommandParameter.v	/^`define AdcDataNumberSet3to0_CAND                  16'hE2B0$/;"	c	language:Verilog
 AdcDataNumberSet7to4_CAND	CommandParameter.v	/^`define AdcDataNumberSet7to4_CAND                  16'hE2C2$/;"	c	language:Verilog
+AdcData_en	AdcControl.v	/^    wire AdcData_en;$/;"	n	language:Verilog	module:AdcControl
+AdcOutRange	AdcControl.v	/^    reg AdcOutRange;$/;"	r	language:Verilog	module:AdcControl
+AdcStart	AdcControl.v	/^    reg AdcStart;$/;"	r	language:Verilog	module:AdcControl
+AdcStartDelay	AdcControl.v	/^    input [3:0] AdcStartDelay,$/;"	p	language:Verilog	module:AdcControl
+AdcStartDelayCount	AdcControl.v	/^    reg [3:0] AdcStartDelayCount;$/;"	r	language:Verilog	module:AdcControl
 AdcStartDelayTime	CommandInterpreter.v	/^  output [3:0] AdcStartDelayTime,$/;"	p	language:Verilog	module:CommandInterpreter
 AdcStartDelayTimeSet_CAND	CommandParameter.v	/^`define AdcStartDelayTimeSet_CAND                  16'hE2A8$/;"	c	language:Verilog
 AdcStartStop	CommandInterpreter.v	/^  output AdcStartStop,$/;"	p	language:Verilog	module:CommandInterpreter
 AllDone	DaqControl.v	/^    output AllDone,$/;"	p	language:Verilog	module:DaqControl
 AllDone	DaqSwitcher.v	/^    output AllDone,$/;"	p	language:Verilog	module:DaqSwitcher
 AllDone	SlaveDaq.v	/^	output reg AllDone,             \/\/Acquisition Stop$/;"	p	language:Verilog	module:SlaveDaq
+All_Chn_Discri_Mask	SCurve_Test_Control.v	/^  reg [191:0] All_Chn_Discri_Mask;$/;"	r	language:Verilog	module:SCurve_Test_Control
+All_Chn_Param	SCurve_Test_Control.v	/^  reg [63:0]  All_Chn_Param;$/;"	r	language:Verilog	module:SCurve_Test_Control
 AsicChainSelect	CommandInterpreter.v	/^  output [3:0] AsicChainSelect, \/\/ Considering the expand board in the future,$/;"	p	language:Verilog	module:CommandInterpreter
+AsicChainSelect	ConfigurationParameterDistribution.v	/^    input [3:0] AsicChainSelect,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
 AsicChainSelectSet_CAND	CommandParameter.v	/^`define AsicChainSelectSet_CAND                    16'hB0A0$/;"	c	language:Verilog
 AsicDatain_r	AsicRamReadout.v	/^	reg AsicDatain_r;$/;"	r	language:Verilog	module:AsicRamReadout
 AsicDatain_r1	AsicRamReadout.v	/^	reg AsicDatain_r1;$/;"	r	language:Verilog	module:AsicRamReadout
 AsicDatain_r2	AsicRamReadout.v	/^	reg AsicDatain_r2;$/;"	r	language:Verilog	module:AsicRamReadout
 AsicDataout	MicrorocControl.v	/^	wire AsicDataout;$/;"	n	language:Verilog	module:MicrorocControl
 AsicDin	AsicRamReadout.v	/^	input AsicDin,$/;"	p	language:Verilog	module:AsicRamReadout
+AsicNumber	SCurve_Test_Control.v	/^  input [2:0]                                 AsicNumber,$/;"	p	language:Verilog	module:SCurve_Test_Control
+AsicNumber	SCurve_Test_Top.v	/^  input [2:0] AsicNumber,$/;"	p	language:Verilog	module:SCurve_Test_Top
 AsicRamReadout	AsicRamReadout.v	/^module AsicRamReadout($/;"	m	language:Verilog
 AutoDaq	AutoDaq.v	/^module AutoDaq$/;"	m	language:Verilog
 AutoDaq_AllDone	DaqControl.v	/^    wire AutoDaq_AllDone;$/;"	n	language:Verilog	module:DaqControl
@@ -79,6 +111,8 @@ BitShiftDone	BitShiftOut.v	/^	output reg BitShiftDone$/;"	p	language:Verilog	mod
 BitShiftOut	BitShiftOut.v	/^module BitShiftOut($/;"	m	language:Verilog
 BitShiftOutStart	BitShiftOut.v	/^	input BitShiftOutStart,$/;"	p	language:Verilog	module:BitShiftOut
 BitShiftOutStart	SlowControlAndReadScopeSet.v	/^	wire BitShiftOutStart;$/;"	n	language:Verilog	module:SlowControlAndReadScopeSet
+CHECK_ALL_DONE	SCurve_Test_Control.v	/^  CHECK_ALL_DONE                  = 5'd15,$/;"	c	language:Verilog	module:SCurve_Test_Control
+CHECK_CHN_DONE	SCurve_Test_Control.v	/^  CHECK_CHN_DONE                  = 5'd14,$/;"	c	language:Verilog	module:SCurve_Test_Control
 CHIPRESET	AutoDaq.v	/^            CHIPRESET = 4'd1,$/;"	c	language:Verilog	module:AutoDaq
 CHIPSATB	DaqControl.v	/^    input CHIPSATB,$/;"	p	language:Verilog	module:DaqControl
 CHIPSATB	DaqSwitcher.v	/^    input CHIPSATB,$/;"	p	language:Verilog	module:DaqSwitcher
@@ -89,6 +123,14 @@ CK_40N	MicrorocControl.v	/^	output CK_40N,$/;"	p	language:Verilog	module:Microro
 CK_40P	MicrorocControl.v	/^	output CK_40P,$/;"	p	language:Verilog	module:MicrorocControl
 CK_5N	MicrorocControl.v	/^	output CK_5N$/;"	p	language:Verilog	module:MicrorocControl
 CK_5P	MicrorocControl.v	/^	output CK_5P,$/;"	p	language:Verilog	module:MicrorocControl
+CLK_EXT	SCurve_Single_Input.v	/^    input CLK_EXT,$/;"	p	language:Verilog	module:SCurve_Single_Input
+CLK_EXT	SCurve_Single_Test.v	/^    input CLK_EXT,$/;"	p	language:Verilog	module:SCurve_Single_Test
+CLK_EXT	SCurve_Test_Top.v	/^  input CLK_EXT,$/;"	p	language:Verilog	module:SCurve_Test_Top
+CLK_EXT_Gen	SCurve_Test_Top.v	/^  wire CLK_EXT_Gen;$/;"	n	language:Verilog	module:SCurve_Test_Top
+CLK_EXT_falling	SCurve_Single_Input.v	/^  wire CLK_EXT_falling;$/;"	n	language:Verilog	module:SCurve_Single_Input
+CLK_EXT_reg1	SCurve_Single_Input.v	/^  reg CLK_EXT_reg1;$/;"	r	language:Verilog	module:SCurve_Single_Input
+CLK_EXT_reg2	SCurve_Single_Input.v	/^  reg CLK_EXT_reg2;$/;"	r	language:Verilog	module:SCurve_Single_Input
+CLK_EXT_rising	SCurve_Single_Input.v	/^  wire CLK_EXT_rising;$/;"	n	language:Verilog	module:SCurve_Single_Input
 COMMAND_ADDRESS_AND_DEFAULT	CommandDecoder.v	/^		parameter [15:0] COMMAND_ADDRESS_AND_DEFAULT = 16'hFFFF$/;"	c	language:Verilog	module:CommandDecoder
 COMMAND_ADDRESS_AND_DEFAULT	CommandDecoder_beforeInst.v	/^		parameter [15:0] COMMAND_ADDRESS_AND_DEFAULT = 16'hFFFF$/;"	c	language:Verilog	module:CommandDecoder
 COMMAND_WIDTH	CommandDecoder.v	/^		parameter [1:0] COMMAND_WIDTH = 2'b0,$/;"	c	language:Verilog	module:CommandDecoder
@@ -96,6 +138,25 @@ COMMAND_WIDTH	CommandDecoder_beforeInst.v	/^		parameter [1:0] COMMAND_WIDTH = 2'
 COMMAND_WORD	CommandDecoder.v	/^	input [15:0] COMMAND_WORD,$/;"	p	language:Verilog	module:CommandDecoder
 COMMAND_WORD	CommandDecoder_beforeInst.v	/^	input [15:0] COMMAND_WORD,$/;"	p	language:Verilog	module:CommandDecoder
 COMMAND_WORD	CommandInterpreter.v	/^  wire [15:0] COMMAND_WORD;$/;"	n	language:Verilog	module:CommandInterpreter
+CPT_All_Done	SCurve_Single_Test.v	/^    wire CPT_All_Done;$/;"	n	language:Verilog	module:SCurve_Single_Test
+CPT_DATA	SCurve_Single_Test.v	/^    reg [95:0] CPT_DATA;$/;"	r	language:Verilog	module:SCurve_Single_Test
+CPT_DONE	SCurve_Single_Input.v	/^    output reg CPT_DONE$/;"	p	language:Verilog	module:SCurve_Single_Input
+CPT_DONE_trigger0	SCurve_Single_Test.v	/^    wire CPT_DONE_trigger0;$/;"	n	language:Verilog	module:SCurve_Single_Test
+CPT_DONE_trigger1	SCurve_Single_Test.v	/^    wire CPT_DONE_trigger1;$/;"	n	language:Verilog	module:SCurve_Single_Test
+CPT_DONE_trigger2	SCurve_Single_Test.v	/^    wire CPT_DONE_trigger2;    $/;"	n	language:Verilog	module:SCurve_Single_Test
+CPT_Full	SCurve_Single_Input.v	/^  reg CPT_Full;$/;"	r	language:Verilog	module:SCurve_Single_Input
+CPT_MAX	SCurve_Single_Input.v	/^    input [15:0] CPT_MAX,$/;"	p	language:Verilog	module:SCurve_Single_Input
+CPT_MAX	SCurve_Single_Test.v	/^    input [15:0] CPT_MAX,$/;"	p	language:Verilog	module:SCurve_Single_Test
+CPT_MAX	SCurve_Test_Top.v	/^  input [15:0] CPT_MAX,$/;"	p	language:Verilog	module:SCurve_Test_Top
+CPT_MAX_Gen	SCurve_Test_Top.v	/^  wire [15:0] CPT_MAX_Gen;$/;"	n	language:Verilog	module:SCurve_Test_Top
+CPT_PULSE	SCurve_Single_Input.v	/^    output reg [15:0] CPT_PULSE,$/;"	p	language:Verilog	module:SCurve_Single_Input
+CPT_PULSE_trigger0	SCurve_Single_Test.v	/^    wire [15:0] CPT_PULSE_trigger0;$/;"	n	language:Verilog	module:SCurve_Single_Test
+CPT_PULSE_trigger1	SCurve_Single_Test.v	/^    wire [15:0] CPT_PULSE_trigger1;$/;"	n	language:Verilog	module:SCurve_Single_Test
+CPT_PULSE_trigger2	SCurve_Single_Test.v	/^    wire [15:0] CPT_PULSE_trigger2;$/;"	n	language:Verilog	module:SCurve_Single_Test
+CPT_TRIGGER	SCurve_Single_Input.v	/^    output reg [15:0] CPT_TRIGGER,$/;"	p	language:Verilog	module:SCurve_Single_Input
+CPT_TRIGGER0	SCurve_Single_Test.v	/^    wire [15:0] CPT_TRIGGER0;$/;"	n	language:Verilog	module:SCurve_Single_Test
+CPT_TRIGGER1	SCurve_Single_Test.v	/^    wire [15:0] CPT_TRIGGER1;$/;"	n	language:Verilog	module:SCurve_Single_Test
+CPT_TRIGGER2	SCurve_Single_Test.v	/^    wire [15:0] CPT_TRIGGER2;$/;"	n	language:Verilog	module:SCurve_Single_Test
 CTestChannel	CommandInterpreter.v	/^  wire [7:0] CTestChannel;$/;"	n	language:Verilog	module:CommandInterpreter
 CTestChannel	MicrorocControl.v	/^	input [63:0] CTestChannel,$/;"	p	language:Verilog	module:MicrorocControl
 CTestChannel	ParameterGenerator.v	/^	input [63:0] CTestChannel,$/;"	p	language:Verilog	module:ParameterGenerator
@@ -104,10 +165,13 @@ CTestChannel3to0_CAND	CommandParameter.v	/^`define CTestChannel3to0_CAND        
 CTestChannel7to4_CAND	CommandParameter.v	/^`define CTestChannel7to4_CAND                      16'hA170$/;"	c	language:Verilog
 CTestOrInput	CommandInterpreter.v	/^  output CTestOrInput,$/;"	p	language:Verilog	module:CommandInterpreter
 CTestOrInputSelect_CAND	CommandParameter.v	/^`define CTestOrInputSelect_CAND                    16'hE061$/;"	c	language:Verilog
+CTest_CHN_PARAM_Input	SCurve_Test_Control.v	/^  localparam [63:0] CTest_CHN_PARAM_Input            = 64'h0;$/;"	c	language:Verilog	module:SCurve_Test_Control
 ChannelAdjust	CommandInterpreter.v	/^  output [255:0] ChannelAdjust,$/;"	p	language:Verilog	module:CommandInterpreter
 ChannelAdjust	MicrorocControl.v	/^	input [255:0] ChannelAdjust,              \/\/ MSB to LSB from channel0 to channel 63$/;"	p	language:Verilog	module:MicrorocControl
 ChannelAdjust	ParameterGenerator.v	/^	input [255:0] ChannelAdjust,\/\/ MSB to LSB from channel0 to channel 63$/;"	p	language:Verilog	module:ParameterGenerator
 ChannelAdjust	SlowControlAndReadScopeSet.v	/^	input [255:0] ChannelAdjust,              \/\/ MSB to LSB from channel0 to channel 63$/;"	p	language:Verilog	module:SlowControlAndReadScopeSet
+ChannelAdjust_Input	ConfigurationParameterDistribution.v	/^    input [255:0] ChannelAdjust_Input,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+ChannelAdjust_Output	ConfigurationParameterDistribution.v	/^    output reg [256*ASIC_CHAIN_NUMBER - 1:0] ChannelAdjust_Output,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
 ChannelDiscriminatorMask	MicrorocControl.v	/^	input [191:0] ChannelDiscriminatorMask,   \/\/ MSB correspones to Channel 63$/;"	p	language:Verilog	module:MicrorocControl
 ChannelDiscriminatorMask	ParameterGenerator.v	/^	input [191:0] ChannelDiscriminatorMask,\/\/ MSB correspones to Channel 63$/;"	p	language:Verilog	module:ParameterGenerator
 ChannelDiscriminatorMask	SlowControlAndReadScopeSet.v	/^	input [191:0] ChannelDiscriminatorMask,   \/\/ MSB correspones to Channel 63$/;"	p	language:Verilog	module:SlowControlAndReadScopeSet
@@ -130,6 +194,8 @@ CkMux	MicrorocControl.v	/^	input CkMux,                              \/\/ Bypass
 CkMux	ParameterGenerator.v	/^	input CkMux,\/\/ Bypass Synchronous PowerOnDigital for SRo, CK5, CK40 Default: 1 bypass POD$/;"	p	language:Verilog	module:ParameterGenerator
 CkMux	SlowControlAndReadScopeSet.v	/^	input CkMux,                              \/\/ Bypass Synchronous PowerOnDigital for SRo, CK5, /;"	p	language:Verilog	module:SlowControlAndReadScopeSet
 CkMux_CAND	CommandParameter.v	/^`define CkMux_CAND                                 16'hA001$/;"	c	language:Verilog
+Clk	ADC_AD9220.v	/^  input Clk,$/;"	p	language:Verilog	module:ADC_AD9220
+Clk	AdcControl.v	/^    input Clk,$/;"	p	language:Verilog	module:AdcControl
 Clk	AutoDaq.v	/^  input Clk,         \/\/40M$/;"	p	language:Verilog	module:AutoDaq
 Clk	CommandDecoder.v	/^	input Clk,$/;"	p	language:Verilog	module:CommandDecoder
 Clk	CommandDecoder_beforeInst.v	/^	input Clk,$/;"	p	language:Verilog	module:CommandDecoder
@@ -140,6 +206,10 @@ Clk	ExternalRazGenerate.v	/^	input Clk,$/;"	p	language:Verilog	module:ExternalRa
 Clk	HoldGenerate.v	/^	input Clk,$/;"	p	language:Verilog	module:HoldGenerate
 Clk	MicrorocControl.v	/^	input Clk,$/;"	p	language:Verilog	module:MicrorocControl
 Clk	ParameterGenerator.v	/^	input Clk,$/;"	p	language:Verilog	module:ParameterGenerator
+Clk	SCurve_Single_Input.v	/^    input Clk,$/;"	p	language:Verilog	module:SCurve_Single_Input
+Clk	SCurve_Single_Test.v	/^    input Clk,$/;"	p	language:Verilog	module:SCurve_Single_Test
+Clk	SCurve_Test_Control.v	/^  input                                       Clk,$/;"	p	language:Verilog	module:SCurve_Test_Control
+Clk	SCurve_Test_Top.v	/^  input Clk,$/;"	p	language:Verilog	module:SCurve_Test_Top
 Clk	SlaveDaq.v	/^	input Clk,$/;"	p	language:Verilog	module:SlaveDaq
 Clk	SlowControlAndReadScopeSet.v	/^	input Clk,$/;"	p	language:Verilog	module:SlowControlAndReadScopeSet
 Clk	TimeStampSyncAndDataTrigger.v	/^	input Clk,$/;"	p	language:Verilog	module:TimeStampSyncAndDataTrigger
@@ -148,6 +218,10 @@ Clk5M	BitShiftOut.v	/^	input Clk5M,$/;"	p	language:Verilog	module:BitShiftOut
 Clk5M	MicrorocControl.v	/^	input Clk5M,							  \/\/ Clock for Microroc Configuration. If SlowClock is 5M, this clock shou/;"	p	language:Verilog	module:MicrorocControl
 ClkDestination	PulseSynchronous.v	/^    input ClkDestination,$/;"	p	language:Verilog	module:PulseSynchronous
 ClkSource	PulseSynchronous.v	/^    input ClkSource,$/;"	p	language:Verilog	module:PulseSynchronous
+Clk_1K	SCurve_Test_Top.v	/^  reg Clk_1K;$/;"	r	language:Verilog	module:SCurve_Test_Top
+Clk_5M	SCurve_Test_Top.v	/^  input Clk_5M,\/\/ Use 5M clock to generate 1k clock$/;"	p	language:Verilog	module:SCurve_Test_Top
+Clock1K_Cnt	SCurve_Test_Top.v	/^  reg [11:0] Clock1K_Cnt;$/;"	r	language:Verilog	module:SCurve_Test_Top
+Clock1K_Max	SCurve_Test_Top.v	/^  localparam [11:0] Clock1K_Max = 12'd1250;$/;"	c	language:Verilog	module:SCurve_Test_Top
 CommandDecoder	CommandDecoder.v	/^module CommandDecoder$/;"	m	language:Verilog
 CommandDecoder	CommandDecoder_beforeInst.v	/^module CommandDecoder$/;"	m	language:Verilog
 CommandFifoEmpty	CommandInterpreter.v	/^  wire CommandFifoEmpty;$/;"	n	language:Verilog	module:CommandInterpreter
@@ -166,20 +240,29 @@ ConfigFifoEmpty	SlowControlAndReadScopeSet.v	/^	wire ConfigFifoEmpty;$/;"	n	lang
 ConfigFifoReadEn	SlowControlAndReadScopeSet.v	/^	wire ConfigFifoReadEn;$/;"	n	language:Verilog	module:SlowControlAndReadScopeSet
 ConfigFifoWriteEn	SlowControlAndReadScopeSet.v	/^	wire ConfigFifoWriteEn;$/;"	n	language:Verilog	module:SlowControlAndReadScopeSet
 ConfigParameterGeneratorDone	SlowControlAndReadScopeSet.v	/^	wire ConfigParameterGeneratorDone;$/;"	n	language:Verilog	module:SlowControlAndReadScopeSet
-ConfigurationParameterDistribution	ConfigurationParameterDistribution.v	/^module ConfigurationParameterDistribution($/;"	m	language:Verilog
+ConfigurationParameterDistribution	ConfigurationParameterDistribution.v	/^module ConfigurationParameterDistribution$/;"	m	language:Verilog
 ControlWord	usb_synchronous_slavefifo.v	/^    output reg [15:0] ControlWord,$/;"	p	language:Verilog	module:usb_synchronous_slavefifo
 CounterMax	CommandInterpreter.v	/^  output [15:0] CounterMax,$/;"	p	language:Verilog	module:CommandInterpreter
 CounterMaxSet11to8_CAND	CommandParameter.v	/^`define CounterMaxSet11to8_CAND                    16'hE133$/;"	c	language:Verilog
 CounterMaxSet15to12_CAND	CommandParameter.v	/^`define CounterMaxSet15to12_CAND                   16'hE141$/;"	c	language:Verilog
 CounterMaxSet3to0_CAND	CommandParameter.v	/^`define CounterMaxSet3to0_CAND                     16'hE118$/;"	c	language:Verilog
 CounterMaxSet7to4_CAND	CommandParameter.v	/^`define CounterMaxSet7to4_CAND                     16'hE128$/;"	c	language:Verilog
+Counter_MAX	SCurve_Test_Top.v	/^  input [15:0] Counter_MAX,$/;"	p	language:Verilog	module:SCurve_Test_Top
+Ctest_or_Input	SCurve_Test_Control.v	/^  input                                       Ctest_or_Input,\/\/Add by wyu 20170307. When singl/;"	p	language:Verilog	module:SCurve_Test_Control
+Ctest_or_Input	SCurve_Test_Top.v	/^  input Ctest_or_Input, \/\/Add by wyu 20170307. When single channel test, this parameter can ch/;"	p	language:Verilog	module:SCurve_Test_Top
 Ctr_rd_en	usb_synchronous_slavefifo.v	/^    output reg Ctr_rd_en,$/;"	p	language:Verilog	module:usb_synchronous_slavefifo
 CurrentState	AsicRamReadout.v	/^	reg [1:0] CurrentState;$/;"	r	language:Verilog	module:AsicRamReadout
 CurrentState	BitShiftOut.v	/^	reg [2:0] CurrentState;$/;"	r	language:Verilog	module:BitShiftOut
 CurrentState	ParameterGenerator.v	/^	reg [2:0] CurrentState;$/;"	r	language:Verilog	module:ParameterGenerator
+DATA_DISCARD	AdcControl.v	/^                     DATA_DISCARD = 3'd2,$/;"	c	language:Verilog	module:AdcControl
 DATA_OUT	BitShiftOut.v	/^					DATA_OUT = 3'd4,$/;"	c	language:Verilog	module:BitShiftOut
+DATA_OUT	SCurve_Single_Test.v	/^                     DATA_OUT = 3'd4,$/;"	c	language:Verilog	module:SCurve_Single_Test
+DATA_OUT_ONCE	SCurve_Single_Test.v	/^                     DATA_OUT_ONCE = 3'd5,$/;"	c	language:Verilog	module:SCurve_Single_Test
 DATA_WIDTH	AsicRamReadout.v	/^	localparam DATA_WIDTH = 4'd15;$/;"	c	language:Verilog	module:AsicRamReadout
 DELAY_CONST	ExternalRazGenerate.v	/^	reg [5:0] DELAY_CONST;$/;"	r	language:Verilog	module:ExternalRazGenerate
+DISCRIMINATOR_MASK	SCurve_Test_Control.v	/^  localparam [191:0] DISCRIMINATOR_MASK              = {189'b0, 3'b111};$/;"	c	language:Verilog	module:SCurve_Test_Control
+DISCRIMINATOR_MASK_FILTER	SCurve_Test_Control.v	/^  DISCRIMINATOR_MASK_FILTER       = 5'd6,$/;"	c	language:Verilog	module:SCurve_Test_Control
+DONE	AdcControl.v	/^                     DONE = 3'd4;$/;"	c	language:Verilog	module:AdcControl
 DONE	AsicRamReadout.v	/^	DONE  = 2'b10;$/;"	c	language:Verilog	module:AsicRamReadout
 DONE	BitShiftOut.v	/^					DONE = 3'd7;$/;"	c	language:Verilog	module:BitShiftOut
 DOUT1B	MicrorocControl.v	/^	input DOUT1B,$/;"	p	language:Verilog	module:MicrorocControl
@@ -222,18 +305,24 @@ DacPPEnable	SlowControlAndReadScopeSet.v	/^	input DacPPEnable,$/;"	p	language:Ve
 DacPPEnable_CAND	CommandParameter.v	/^`define DacPPEnable_CAND                           16'hA2F0$/;"	c	language:Verilog
 DacSelect	CommandInterpreter.v	/^  output [1:0] DacSelect,$/;"	p	language:Verilog	module:CommandInterpreter
 DacStep	CommandInterpreter.v	/^  output [9:0] DacStep,$/;"	p	language:Verilog	module:CommandInterpreter
+DacStep	SCurve_Test_Control.v	/^  input [9:0]                                 DacStep,$/;"	p	language:Verilog	module:SCurve_Test_Control
+DacStep	SCurve_Test_Top.v	/^  input [9:0] DacStep,$/;"	p	language:Verilog	module:SCurve_Test_Top
 DaqControl	DaqControl.v	/^module DaqControl($/;"	m	language:Verilog
 DaqData	DaqControl.v	/^    output [15:0] DaqData,$/;"	p	language:Verilog	module:DaqControl
 DaqData_en	DaqControl.v	/^    output DaqData_en,$/;"	p	language:Verilog	module:DaqControl
 DaqSelect	CommandInterpreter.v	/^  output DaqSelect,$/;"	p	language:Verilog	module:CommandInterpreter
 DaqSelect	DaqControl.v	/^    input DaqSelect,$/;"	p	language:Verilog	module:DaqControl
 DaqSelect	DaqSwitcher.v	/^    input DaqSelect,$/;"	p	language:Verilog	module:DaqSwitcher
-DaqSelect_CAND	CommandParameter.v	/^`define DaqSelect_CAND 16'hE290$/;"	c	language:Verilog
+DaqSelect_CAND	CommandParameter.v	/^`define DaqSelect_CAND                             16'hE290$/;"	c	language:Verilog
 DaqSelet	MicrorocControl.v	/^	input DaqSelet,$/;"	p	language:Verilog	module:MicrorocControl
 DaqSwitcher	DaqSwitcher.v	/^module DaqSwitcher($/;"	m	language:Verilog
+Data	AdcControl.v	/^    output [15:0] Data,$/;"	p	language:Verilog	module:AdcControl
 DataCount	AsicRamReadout.v	/^	reg [3:0] DataCount;$/;"	r	language:Verilog	module:AsicRamReadout
+DataDiscardCount	AdcControl.v	/^    reg [1:0] DataDiscardCount;$/;"	r	language:Verilog	module:AdcControl
+DataDiscardCount_en	AdcControl.v	/^    reg DataDiscardCount_en;$/;"	r	language:Verilog	module:AdcControl
 DataEndCount	SlaveDaq.v	/^	reg [11:0] DataEndCount;$/;"	r	language:Verilog	module:SlaveDaq
 DataFull	AsicRamReadout.v	/^	wire DataFull;$/;"	n	language:Verilog	module:AsicRamReadout
+DataOutput_en	AdcControl.v	/^    reg DataOutput_en;$/;"	r	language:Verilog	module:AdcControl
 DataToSlaveDaq	DaqControl.v	/^    wire [15:0] DataToSlaveDaq;$/;"	n	language:Verilog	module:DaqControl
 DataToSlaveDaq	DaqSwitcher.v	/^    output [15:0] DataToSlaveDaq,$/;"	p	language:Verilog	module:DaqSwitcher
 DataToSlaveDaq_en	DaqControl.v	/^    wire DataToSlaveDaq_en;$/;"	n	language:Verilog	module:DaqControl
@@ -244,6 +333,9 @@ DataTransmitDone	MicrorocControl.v	/^	wire DataTransmitDone;$/;"	n	language:Veri
 DataTransmitDone	SlaveDaq.v	/^	input DataTransmitDone$/;"	p	language:Verilog	module:SlaveDaq
 DataTrigger	TimeStampSyncAndDataTrigger.v	/^	input DataTrigger,$/;"	p	language:Verilog	module:TimeStampSyncAndDataTrigger
 DataTriggerEnable	TimeStampSyncAndDataTrigger.v	/^	input DataTriggerEnable,$/;"	p	language:Verilog	module:TimeStampSyncAndDataTrigger
+Data_Transmit_Done	SCurve_Test_Control.v	/^  input                                       Data_Transmit_Done$/;"	p	language:Verilog	module:SCurve_Test_Control
+Data_Transmit_Done	SCurve_Test_Top.v	/^  input Data_Transmit_Done$/;"	p	language:Verilog	module:SCurve_Test_Top
+Data_en	AdcControl.v	/^    output Data_en$/;"	p	language:Verilog	module:AdcControl
 DataoutChannelSelect	MicrorocControl.v	/^	input [1:0] DataoutChannelSelect,         \/\/ Default: 11 Valid$/;"	p	language:Verilog	module:MicrorocControl
 DataoutChannelSelect	ParameterGenerator.v	/^	input [1:0] DataoutChannelSelect,\/\/ Default: 11 Valid$/;"	p	language:Verilog	module:ParameterGenerator
 DataoutChannelSelect	SlowControlAndReadScopeSet.v	/^	input [1:0] DataoutChannelSelect,         \/\/ Default: 11 Valid$/;"	p	language:Verilog	module:SlowControlAndReadScopeSet
@@ -252,6 +344,7 @@ DelayCount	BitShiftOut.v	/^	reg [2:0] DelayCount;$/;"	r	language:Verilog	module:
 DelayCount	SlaveDaq.v	/^	reg [15:0] DelayCount;$/;"	r	language:Verilog	module:SlaveDaq
 DiscriMask	CommandInterpreter.v	/^  wire [2:0] DiscriMask;$/;"	n	language:Verilog	module:CommandInterpreter
 DiscriMask_CAND	CommandParameter.v	/^`define DiscriMask_CAND                            16'hA2C7$/;"	c	language:Verilog
+Discri_Mask_Shift	SCurve_Test_Control.v	/^  reg [7:0]   Discri_Mask_Shift;$/;"	r	language:Verilog	module:SCurve_Test_Control
 Discriminator0PPEnable	MicrorocControl.v	/^	input Discriminator0PPEnable,$/;"	p	language:Verilog	module:MicrorocControl
 Discriminator0PPEnable	ParameterGenerator.v	/^	input Discriminator0PPEnable,$/;"	p	language:Verilog	module:ParameterGenerator
 Discriminator0PPEnable	SlowControlAndReadScopeSet.v	/^	input Discriminator0PPEnable,$/;"	p	language:Verilog	module:SlowControlAndReadScopeSet
@@ -274,7 +367,11 @@ END_READOUT2	MicrorocControl.v	/^	input END_READOUT2,$/;"	p	language:Verilog	mod
 END_READOUT2	Redundancy.v	/^	input END_READOUT2,$/;"	p	language:Verilog	module:Redundancy
 EP2_ADDR	usb_synchronous_slavefifo.v	/^    localparam EP2_ADDR = 2'b00;$/;"	c	language:Verilog	module:usb_synchronous_slavefifo
 EP6_ADDR	usb_synchronous_slavefifo.v	/^    localparam EP6_ADDR = 2'b10;$/;"	c	language:Verilog	module:usb_synchronous_slavefifo
+Enable_Count_P	SCurve_Single_Input.v	/^  wire Enable_Count_P;$/;"	n	language:Verilog	module:SCurve_Single_Input
+Enable_Count_T	SCurve_Single_Input.v	/^  wire Enable_Count_T;$/;"	n	language:Verilog	module:SCurve_Single_Input
 EndDac	CommandInterpreter.v	/^  output [9:0] EndDac,$/;"	p	language:Verilog	module:CommandInterpreter
+EndDac	SCurve_Test_Control.v	/^  input [9:0]                                 EndDac,$/;"	p	language:Verilog	module:SCurve_Test_Control
+EndDac	SCurve_Test_Top.v	/^  input [9:0] EndDac,$/;"	p	language:Verilog	module:SCurve_Test_Top
 EndHoldTime	CommandInterpreter.v	/^  output [15:0] EndHoldTime,$/;"	p	language:Verilog	module:CommandInterpreter
 EndHoldTime	DaqControl.v	/^    input [15:0] EndHoldTime,$/;"	p	language:Verilog	module:DaqControl
 EndHoldTime	SlaveDaq.v	/^	input [15:0] EndHoldTime,$/;"	p	language:Verilog	module:SlaveDaq
@@ -341,11 +438,15 @@ ForceExternalRaz	DaqSwitcher.v	/^    output ForceExternalRaz,$/;"	p	language:Ver
 ForceExternalRaz	SlaveDaq.v	/^	output reg ForceExternalRaz,    \/\/Active H, When the start does not come, force externalRaz$/;"	p	language:Verilog	module:SlaveDaq
 ForceMicrorocAcqReset	CommandInterpreter.v	/^  output ForceMicrorocAcqReset,$/;"	p	language:Verilog	module:CommandInterpreter
 ForceRaz	ExternalRazGenerate.v	/^	input ForceRaz,$/;"	p	language:Verilog	module:ExternalRazGenerate
+Force_Ext_RAZ	SCurve_Test_Control.v	/^  output reg                                  Force_Ext_RAZ,$/;"	p	language:Verilog	module:SCurve_Test_Control
+Force_Ext_RAZ	SCurve_Test_Top.v	/^  output Force_Ext_RAZ,$/;"	p	language:Verilog	module:SCurve_Test_Top
 GET_DATA	BitShiftOut.v	/^					GET_DATA = 3'd3,$/;"	c	language:Verilog	module:BitShiftOut
+GET_TRIGGER_DATA	SCurve_Test_Control.v	/^  GET_TRIGGER_DATA                = 5'd12,$/;"	c	language:Verilog	module:SCurve_Test_Control
 GainBoostEnable	MicrorocControl.v	/^	input GainBoostEnable,                    \/\/ Default: 1$/;"	p	language:Verilog	module:MicrorocControl
 GainBoostEnable	ParameterGenerator.v	/^	input GainBoostEnable, \/\/ Default: 1$/;"	p	language:Verilog	module:ParameterGenerator
 GainBoostEnable	SlowControlAndReadScopeSet.v	/^	input GainBoostEnable,                    \/\/ Default: 1$/;"	p	language:Verilog	module:SlowControlAndReadScopeSet
 GainBoostEnable_CAND	CommandParameter.v	/^`define GainBoostEnable_CAND                       16'hA151$/;"	c	language:Verilog
+HEADER_OUT	SCurve_Test_Control.v	/^  HEADER_OUT                      = 5'd1,$/;"	c	language:Verilog	module:SCurve_Test_Control
 HOLD	MicrorocControl.v	/^	output HOLD,$/;"	p	language:Verilog	module:MicrorocControl
 HighGainShaperFeedbackSelect	MicrorocControl.v	/^	input [1:0] HighGainShaperFeedbackSelect, \/\/ Default: 10$/;"	p	language:Verilog	module:MicrorocControl
 HighGainShaperFeedbackSelect	ParameterGenerator.v	/^	input [1:0] HighGainShaperFeedbackSelect, \/\/ Default: 10$/;"	p	language:Verilog	module:ParameterGenerator
@@ -355,14 +456,17 @@ HighGainShaperPPEnable	MicrorocControl.v	/^	input HighGainShaperPPEnable,       
 HighGainShaperPPEnable	ParameterGenerator.v	/^	input HighGainShaperPPEnable, \/\/ Default: 0$/;"	p	language:Verilog	module:ParameterGenerator
 HighGainShaperPPEnable	SlowControlAndReadScopeSet.v	/^	input HighGainShaperPPEnable,             \/\/ Default: 0$/;"	p	language:Verilog	module:SlowControlAndReadScopeSet
 HighGainShaperPPEnable_CAND	CommandParameter.v	/^`define HighGainShaperPPEnable_CAND                16'hA260$/;"	c	language:Verilog
+Hold	AdcControl.v	/^    input Hold,$/;"	p	language:Verilog	module:AdcControl
 HoldDelay	CommandInterpreter.v	/^  output [7:0] HoldDelay,$/;"	p	language:Verilog	module:CommandInterpreter
 HoldDelay	HoldGenerate.v	/^	input [7:0] HoldDelay,$/;"	p	language:Verilog	module:HoldGenerate
 HoldDelaySet3to0_CAND	CommandParameter.v	/^`define HoldDelaySet3to0_CAND                      16'hE2E6$/;"	c	language:Verilog
 HoldDelaySet7to4_CAND	CommandParameter.v	/^`define HoldDelaySet7to4_CAND                      16'hE2F1$/;"	c	language:Verilog
 HoldEnable	CommandInterpreter.v	/^  output HoldEnable,$/;"	p	language:Verilog	module:CommandInterpreter
 HoldEnableSet_CAND	CommandParameter.v	/^`define HoldEnableSet_CAND                         16'hE240$/;"	c	language:Verilog
+HoldFalling	AdcControl.v	/^    wire HoldFalling;$/;"	n	language:Verilog	module:AdcControl
 HoldGenerate	HoldGenerate.v	/^module HoldGenerate($/;"	m	language:Verilog
 HoldOut	HoldGenerate.v	/^	output reg HoldOut$/;"	p	language:Verilog	module:HoldGenerate
+HoldRising	AdcControl.v	/^    wire HoldRising;$/;"	n	language:Verilog	module:AdcControl
 HoldTime	CommandInterpreter.v	/^  output [15:0] HoldTime,$/;"	p	language:Verilog	module:CommandInterpreter
 HoldTime	HoldGenerate.v	/^	input [15:0] HoldTime,$/;"	p	language:Verilog	module:HoldGenerate
 HoldTimeCount	HoldGenerate.v	/^	reg [15:0] HoldTimeCount;$/;"	r	language:Verilog	module:HoldGenerate
@@ -371,10 +475,16 @@ HoldTimeSet15to12_CAND	CommandParameter.v	/^`define HoldTimeSet15to12_CAND      
 HoldTimeSet3to0_CAND	CommandParameter.v	/^`define HoldTimeSet3to0_CAND                       16'hE208$/;"	c	language:Verilog
 HoldTimeSet7to4_CAND	CommandParameter.v	/^`define HoldTimeSet7to4_CAND                       16'hE21C$/;"	c	language:Verilog
 Hold_en	HoldGenerate.v	/^	input Hold_en,$/;"	p	language:Verilog	module:HoldGenerate
+Hold_reg1	AdcControl.v	/^    reg Hold_reg1;$/;"	r	language:Verilog	module:AdcControl
+Hold_reg2	AdcControl.v	/^    reg Hold_reg2;$/;"	r	language:Verilog	module:AdcControl
+IDLE	AdcControl.v	/^    localparam [2:0] IDLE = 3'd0,$/;"	c	language:Verilog	module:AdcControl
 IDLE	CommandInterpreter.v	/^  localparam [1:0]  IDLE       = 2'b00,$/;"	c	language:Verilog	module:CommandInterpreter
+IDLE	SCurve_Single_Test.v	/^    localparam [2:0] IDLE = 3'd0,$/;"	c	language:Verilog	module:SCurve_Single_Test
+IDLE	SCurve_Test_Control.v	/^  localparam [4:0] IDLE                            = 5'd0,$/;"	c	language:Verilog	module:SCurve_Test_Control
 IDLE	SlaveDaq.v	/^	localparam [4:0] IDLE = 5'd0,$/;"	c	language:Verilog	module:SlaveDaq
 IFCLK	CommandInterpreter.v	/^  input IFCLK,$/;"	p	language:Verilog	module:CommandInterpreter
 IFCLK	usb_synchronous_slavefifo.v	/^    input IFCLK,$/;"	p	language:Verilog	module:usb_synchronous_slavefifo
+Idle	ADC_AD9220.v	/^localparam [1:0] Idle = 2'b00,$/;"	c	language:Verilog	module:ADC_AD9220
 Idle	AsicRamReadout.v	/^	localparam [1:0] Idle = 2'b00,$/;"	c	language:Verilog	module:AsicRamReadout
 Idle	AutoDaq.v	/^localparam [3:0] Idle = 4'd0,$/;"	c	language:Verilog	module:AutoDaq
 Idle	BitShiftOut.v	/^	localparam [2:0] Idle = 3'd0,$/;"	c	language:Verilog	module:BitShiftOut
@@ -390,16 +500,19 @@ InternalRazSignalLength	MicrorocControl.v	/^	input [1:0] InternalRazSignalLength
 InternalRazSignalLength	ParameterGenerator.v	/^	input [1:0] InternalRazSignalLength,\/\/ 00: 75ns, 01: 250ns, 10: 500ns, 11: 1us Default: 11$/;"	p	language:Verilog	module:ParameterGenerator
 InternalRazSignalLength	SlowControlAndReadScopeSet.v	/^	input [1:0] InternalRazSignalLength,      \/\/ 00: 75ns, 01: 250ns, 10: 500ns, 11: 1us Default:/;"	p	language:Verilog	module:SlowControlAndReadScopeSet
 InternalRazSignalLength_CAND	CommandParameter.v	/^`define InternalRazSignalLength_CAND               16'hA0F3$/;"	c	language:Verilog
-Invert10bit	CommandInterpreter.v	/^  function [3:0] Invert10bit(input [9:0] num);$/;"	f	language:Verilog	module:CommandInterpreter
+Invert	SCurve_Test_Control.v	/^  function [9:0] Invert(input [9:0] num);$/;"	f	language:Verilog	module:SCurve_Test_Control
+Invert10bit	CommandInterpreter.v	/^  function [9:0] Invert10bit(input [9:0] num);$/;"	f	language:Verilog	module:CommandInterpreter
 Invert4bit	CommandInterpreter.v	/^  function [3:0] Invert4bit(input [3:0] num);$/;"	f	language:Verilog	module:CommandInterpreter
 LED	CommandInterpreter.v	/^  output [3:0] LED$/;"	p	language:Verilog	module:CommandInterpreter
 LEVEL_OR_PULSE	CommandDecoder.v	/^		parameter LEVEL_OR_PULSE = 1'b1,$/;"	c	language:Verilog	module:CommandDecoder
 LEVEL_OR_PULSE	CommandDecoder_beforeInst.v	/^		parameter LEVEL_OR_PULSE = 1'b1,$/;"	c	language:Verilog	module:CommandDecoder
+LOAD_SC_PARAM	SCurve_Test_Control.v	/^  LOAD_SC_PARAM                   = 5'd7,$/;"	c	language:Verilog	module:SCurve_Test_Control
 LatchedOrDirectOutput	MicrorocControl.v	/^	input LatchedOrDirectOutput,              \/\/ Default: 1 Latched$/;"	p	language:Verilog	module:MicrorocControl
 LatchedOrDirectOutput	ParameterGenerator.v	/^	input LatchedOrDirectOutput, \/\/ Default: 1 Latched$/;"	p	language:Verilog	module:ParameterGenerator
 LatchedOrDirectOutput	SlowControlAndReadScopeSet.v	/^	input LatchedOrDirectOutput,              \/\/ Default: 1 Latched$/;"	p	language:Verilog	module:SlowControlAndReadScopeSet
 LatchedOrDirectOutput_CAND	CommandParameter.v	/^`define LatchedOrDirectOutput_CAND                 16'hA101$/;"	c	language:Verilog
 LightLed_CAND	CommandParameter.v	/^`define LightLed_CAND                              16'hB000$/;"	c	language:Verilog
+LoadAsicNumberCount	SCurve_Test_Control.v	/^  reg [2:0]   LoadAsicNumberCount;$/;"	r	language:Verilog	module:SCurve_Test_Control
 LowGainShaperFeedbackSelect	MicrorocControl.v	/^	input [1:0] LowGainShaperFeedbackSelect,  \/\/ Default: 10$/;"	p	language:Verilog	module:MicrorocControl
 LowGainShaperFeedbackSelect	ParameterGenerator.v	/^	input [1:0] LowGainShaperFeedbackSelect, \/\/ Default: 101$/;"	p	language:Verilog	module:ParameterGenerator
 LowGainShaperFeedbackSelect	SlowControlAndReadScopeSet.v	/^	input [1:0] LowGainShaperFeedbackSelect,  \/\/ Default: 101$/;"	p	language:Verilog	module:SlowControlAndReadScopeSet
@@ -422,28 +535,42 @@ MaskSet_CAND	CommandParameter.v	/^`define MaskSet_CAND                          
 MaskShift	CommandInterpreter.v	/^  reg [7:0] MaskShift;$/;"	r	language:Verilog	module:CommandInterpreter
 MaskState	CommandInterpreter.v	/^  reg [1:0] MaskState;$/;"	r	language:Verilog	module:CommandInterpreter
 MicrorocBandGapEnable	CommandInterpreter.v	/^  output MicrorocBandGapEnable,$/;"	p	language:Verilog	module:CommandInterpreter
-MicrorocBandGapEnable	ConfigurationParameterDistribution.v	/^	output reg [ASIC_CHAIN_NUMBER - 1:0] MicrorocBandGapEnable,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocBandGapEnable_Input	ConfigurationParameterDistribution.v	/^    input MicrorocBandGapEnable_Input,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocBandGapEnable_Output	ConfigurationParameterDistribution.v	/^    output reg [ASIC_CHAIN_NUMBER - 1:0] MicrorocBandGapEnable_Output,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
 MicrorocBandGapPPEnable	CommandInterpreter.v	/^  output MicrorocBandGapPPEnable,$/;"	p	language:Verilog	module:CommandInterpreter
-MicrorocBandGapPPEnable	ConfigurationParameterDistribution.v	/^	output reg [ASIC_CHAIN_NUMBER - 1:0] MicrorocBandGapPPEnable,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocBandGapPPEnable_Input	ConfigurationParameterDistribution.v	/^    input MicrorocBandGapPPEnable_Input,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocBandGapPPEnable_Output	ConfigurationParameterDistribution.v	/^    output reg [ASIC_CHAIN_NUMBER - 1:0] MicrorocBandGapPPEnable_Output,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
 MicrorocCTestChannel	CommandInterpreter.v	/^  output reg [63:0] MicrorocCTestChannel,$/;"	p	language:Verilog	module:CommandInterpreter
+MicrorocCTestChannel_Input	ConfigurationParameterDistribution.v	/^    input [63:0] MicrorocCTestChannel_Input,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocCTestChannel_Output	ConfigurationParameterDistribution.v	/^    output reg [64*ASIC_CHAIN_NUMBER - 1:0] MicrorocCTestChannel_Output,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
 MicrorocChannelDiscriminatorMask	CommandInterpreter.v	/^  output reg [191:0] MicrorocChannelDiscriminatorMask,$/;"	p	language:Verilog	module:CommandInterpreter
-MicrorocChannelDiscriminatorMask	ConfigurationParameterDistribution.v	/^	output reg [192*ASIC_CHAIN_NUMBER - 1:0] MicrorocChannelDiscriminatorMask,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocChannelDiscriminatorMask_Input	ConfigurationParameterDistribution.v	/^    input [191:0] MicrorocChannelDiscriminatorMask_Input,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocChannelDiscriminatorMask_Output	ConfigurationParameterDistribution.v	/^    output reg [192*ASIC_CHAIN_NUMBER - 1:0] MicrorocChannelDiscriminatorMask_Output,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
 MicrorocChipID	CommandInterpreter.v	/^  output [7:0] MicrorocChipID,$/;"	p	language:Verilog	module:CommandInterpreter
-MicrorocChipID	ConfigurationParameterDistribution.v	/^	output reg [8*ASIC_CHAIN_NUMBER - 1:0] MicrorocChipID,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocChipID_Input	ConfigurationParameterDistribution.v	/^    input [7:0] MicrorocChipID_Input,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocChipID_Output	ConfigurationParameterDistribution.v	/^    output reg [8*ASIC_CHAIN_NUMBER - 1:0] MicrorocChipID_Output,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
 MicrorocCkMux	CommandInterpreter.v	/^  output MicrorocCkMux,$/;"	p	language:Verilog	module:CommandInterpreter
-MicrorocCkMux	ConfigurationParameterDistribution.v	/^	output reg [ASIC_CHAIN_NUMBER - 1:0] MicrorocCkMux,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocCkMux_Input	ConfigurationParameterDistribution.v	/^    input MicrorocCkMux_Input,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocCkMux_Output	ConfigurationParameterDistribution.v	/^    output reg [ASIC_CHAIN_NUMBER - 1:0] MicrorocCkMux_Output,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
 MicrorocControl	MicrorocControl.v	/^module MicrorocControl($/;"	m	language:Verilog
 MicrorocDac0Vth	CommandInterpreter.v	/^  output [9:0] MicrorocDac0Vth,$/;"	p	language:Verilog	module:CommandInterpreter
-MicrorocDac0Vth	ConfigurationParameterDistribution.v	/^	output reg [10*ASIC_CHAIN_NUMBER - 1:0] MicrorocDac0Vth,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocDac0Vth_Input	ConfigurationParameterDistribution.v	/^    input [9:0] MicrorocDac0Vth_Input,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocDac0Vth_Output	ConfigurationParameterDistribution.v	/^    output reg [10*ASIC_CHAIN_NUMBER - 1:0] MicrorocDac0Vth_Output,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
 MicrorocDac1Vth	CommandInterpreter.v	/^  output [9:0] MicrorocDac1Vth,$/;"	p	language:Verilog	module:CommandInterpreter
-MicrorocDac1Vth	ConfigurationParameterDistribution.v	/^	output reg [10*ASIC_CHAIN_NUMBER - 1:0] MicrorocDac1Vth,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocDac1Vth_Input	ConfigurationParameterDistribution.v	/^    input [9:0] MicrorocDac1Vth_Input,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocDac1Vth_Output	ConfigurationParameterDistribution.v	/^    output reg [10*ASIC_CHAIN_NUMBER - 1:0] MicrorocDac1Vth_Output,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
 MicrorocDac2Vth	CommandInterpreter.v	/^  output [9:0] MicrorocDac2Vth,$/;"	p	language:Verilog	module:CommandInterpreter
-MicrorocDac2Vth	ConfigurationParameterDistribution.v	/^	output reg [10*ASIC_CHAIN_NUMBER - 1:0] MicrorocDac2Vth,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocDac2Vth_Input	ConfigurationParameterDistribution.v	/^    input [9:0] MicrorocDac2Vth_Input,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocDac2Vth_Output	ConfigurationParameterDistribution.v	/^    output reg [10*ASIC_CHAIN_NUMBER - 1:0] MicrorocDac2Vth_Output,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
 MicrorocDac4bitPPEnable	CommandInterpreter.v	/^  output MicrorocDac4bitPPEnable,$/;"	p	language:Verilog	module:CommandInterpreter
+MicrorocDac4bitPPEnable_Input	ConfigurationParameterDistribution.v	/^    input MicrorocDac4bitPPEnable_Input,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocDac4bitPPEnable_Output	ConfigurationParameterDistribution.v	/^    output reg [ASIC_CHAIN_NUMBER - 1:0] MicrorocDac4bitPPEnable_Output,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
 MicrorocDacEnable	CommandInterpreter.v	/^  output MicrorocDacEnable,$/;"	p	language:Verilog	module:CommandInterpreter
-MicrorocDacEnable	ConfigurationParameterDistribution.v	/^	output reg [ASIC_CHAIN_NUMBER - 1:0] MicrorocDacEnable,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocDacEnable_Input	ConfigurationParameterDistribution.v	/^    input MicrorocDacEnable_Input,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocDacEnable_Output	ConfigurationParameterDistribution.v	/^    output reg [ASIC_CHAIN_NUMBER - 1:0] MicrorocDacEnable_Output,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
 MicrorocDacPPEnable	CommandInterpreter.v	/^  output MicrorocDacPPEnable,$/;"	p	language:Verilog	module:CommandInterpreter
-MicrorocDacPPEnable	ConfigurationParameterDistribution.v	/^	output reg [ASIC_CHAIN_NUMBER - 1:0] MicrorocDacPPEnable,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocDacPPEnable_Input	ConfigurationParameterDistribution.v	/^    input MicrorocDacPPEnable_Input,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocDacPPEnable_Output	ConfigurationParameterDistribution.v	/^    output reg [ASIC_CHAIN_NUMBER - 1:0] MicrorocDacPPEnable_Output,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
 MicrorocData	DaqControl.v	/^    input [15:0] MicrorocData,$/;"	p	language:Verilog	module:DaqControl
 MicrorocData	DaqSwitcher.v	/^    input [15:0] MicrorocData,$/;"	p	language:Verilog	module:DaqSwitcher
 MicrorocData	MicrorocControl.v	/^	wire [15:0] MicrorocData;$/;"	n	language:Verilog	module:MicrorocControl
@@ -453,59 +580,116 @@ MicrorocData_en	DaqControl.v	/^    input MicrorocData_en,$/;"	p	language:Verilog
 MicrorocData_en	DaqSwitcher.v	/^    input MicrorocData_en,$/;"	p	language:Verilog	module:DaqSwitcher
 MicrorocData_en	SlaveDaq.v	/^	input MicrorocData_en,$/;"	p	language:Verilog	module:SlaveDaq
 MicrorocDataoutChannelSelect	CommandInterpreter.v	/^  output [1:0] MicrorocDataoutChannelSelect,$/;"	p	language:Verilog	module:CommandInterpreter
-MicrorocDataoutChannelSelect	ConfigurationParameterDistribution.v	/^	output reg [2*ASIC_CHAIN_NUMBER - 1:0] MicrorocDataoutChannelSelect,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
-MicrorocDisciminator0PPEnable	ConfigurationParameterDistribution.v	/^	output reg [ASIC_CHAIN_NUMBER - 1:0] MicrorocDisciminator0PPEnable$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
-MicrorocDisciminator1PPEnable	ConfigurationParameterDistribution.v	/^	output reg [ASIC_CHAIN_NUMBER - 1:0] MicrorocDisciminator1PPEnable,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
-MicrorocDisciminator2PPEnable	ConfigurationParameterDistribution.v	/^	output reg [ASIC_CHAIN_NUMBER - 1:0] MicrorocDisciminator2PPEnable,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocDataoutChannelSelect_Input	ConfigurationParameterDistribution.v	/^    input [1:0] MicrorocDataoutChannelSelect_Input,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocDataoutChannelSelect_Output	ConfigurationParameterDistribution.v	/^    output reg [2*ASIC_CHAIN_NUMBER - 1:0] MicrorocDataoutChannelSelect_Output,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
 MicrorocDiscriminator0PPEnable	CommandInterpreter.v	/^  output MicrorocDiscriminator0PPEnable,$/;"	p	language:Verilog	module:CommandInterpreter
+MicrorocDiscriminator0PPEnable_Input	ConfigurationParameterDistribution.v	/^    input MicrorocDiscriminator0PPEnable_Input,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocDiscriminator0PPEnable_Output	ConfigurationParameterDistribution.v	/^    output reg [ASIC_CHAIN_NUMBER - 1:0] MicrorocDiscriminator0PPEnable_Output,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
 MicrorocDiscriminator1PPEnable	CommandInterpreter.v	/^  output MicrorocDiscriminator1PPEnable,$/;"	p	language:Verilog	module:CommandInterpreter
+MicrorocDiscriminator1PPEnable_Input	ConfigurationParameterDistribution.v	/^    input MicrorocDiscriminator1PPEnable_Input,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocDiscriminator1PPEnable_Output	ConfigurationParameterDistribution.v	/^    output reg [ASIC_CHAIN_NUMBER - 1:0] MicrorocDiscriminator1PPEnable_Output,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
 MicrorocDiscriminator2PPEnable	CommandInterpreter.v	/^  output MicrorocDiscriminator2PPEnable,$/;"	p	language:Verilog	module:CommandInterpreter
+MicrorocDiscriminator2PPEnable_Input	ConfigurationParameterDistribution.v	/^    input MicrorocDiscriminator2PPEnable_Input,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocDiscriminator2PPEnable_Output	ConfigurationParameterDistribution.v	/^    output reg [ASIC_CHAIN_NUMBER - 1:0] MicrorocDiscriminator2PPEnable_Output,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocDiscriminatorMaskInternal	SCurve_Test_Control.v	/^  reg [191:0] MicrorocDiscriminatorMaskInternal;$/;"	r	language:Verilog	module:SCurve_Test_Control
 MicrorocEndReadoutChannelSelect	CommandInterpreter.v	/^  output MicrorocEndReadoutChannelSelect,$/;"	p	language:Verilog	module:CommandInterpreter
-MicrorocEndReadoutChannelSelect	ConfigurationParameterDistribution.v	/^	output reg [ASIC_CHAIN_NUMBER - 1:0] MicrorocEndReadoutChannelSelect,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocEndReadoutChannelSelect_Input	ConfigurationParameterDistribution.v	/^    input MicrorocEndReadoutChannelSelect_Input,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocEndReadoutChannelSelect_Output	ConfigurationParameterDistribution.v	/^    output reg [ASIC_CHAIN_NUMBER - 1:0] MicrorocEndReadoutChannelSelect_Output,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
 MicrorocExternalRazDelayTime	CommandInterpreter.v	/^  output [3:0] MicrorocExternalRazDelayTime,$/;"	p	language:Verilog	module:CommandInterpreter
+MicrorocExternalRazDelayTime_Input	ConfigurationParameterDistribution.v	/^    input [3:0] MicrorocExternalRazDelayTime_Input,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocExternalRazDelayTime_Output	ConfigurationParameterDistribution.v	/^    output reg [4*ASIC_CHAIN_NUMBER - 1:0] MicrorocExternalRazDelayTime_Output,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
 MicrorocExternalRazMode	CommandInterpreter.v	/^  output [1:0] MicrorocExternalRazMode,$/;"	p	language:Verilog	module:CommandInterpreter
+MicrorocExternalRazMode_Input	ConfigurationParameterDistribution.v	/^    input [1:0] MicrorocExternalRazMode_Input,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocExternalRazMode_Output	ConfigurationParameterDistribution.v	/^    output reg [2*ASIC_CHAIN_NUMBER - 1:0] MicrorocExternalRazMode_Output,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
 MicrorocExternalRazSignalEnable	CommandInterpreter.v	/^  output MicrorocExternalRazSignalEnable,$/;"	p	language:Verilog	module:CommandInterpreter
-MicrorocExternalRazSignalEnable	ConfigurationParameterDistribution.v	/^	output reg [ASIC_CHAIN_NUMBER - 1:0] MicrorocExternalRazSignalEnable,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocExternalRazSignalEnable_Input	ConfigurationParameterDistribution.v	/^    input MicrorocExternalRazSignalEnable_Input,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocExternalRazSignalEnable_Output	ConfigurationParameterDistribution.v	/^    output reg [ASIC_CHAIN_NUMBER - 1:0] MicrorocExternalRazSignalEnable_Output,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
 MicrorocExternalTriggerEnable	CommandInterpreter.v	/^  output MicrorocExternalTriggerEnable,$/;"	p	language:Verilog	module:CommandInterpreter
-MicrorocExternalTriggerEnable	ConfigurationParameterDistribution.v	/^	output reg [ASIC_CHAIN_NUMBER - 1:0] MicrorocExternalTriggerEnable,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocExternalTriggerEnable_Input	ConfigurationParameterDistribution.v	/^    input MicrorocExternalTriggerEnable_Input,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocExternalTriggerEnable_Output	ConfigurationParameterDistribution.v	/^    output reg [ASIC_CHAIN_NUMBER - 1:0] MicrorocExternalTriggerEnable_Output,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
 MicrorocGainBoostEnable	CommandInterpreter.v	/^  output MicrorocGainBoostEnable,$/;"	p	language:Verilog	module:CommandInterpreter
+MicrorocGainBoostEnable_Input	ConfigurationParameterDistribution.v	/^    input MicrorocGainBoostEnable_Input,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocGainBoostEnable_Output	ConfigurationParameterDistribution.v	/^    output reg [ASIC_CHAIN_NUMBER - 1:0] MicrorocGainBoostEnable_Output,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
 MicrorocHighGainShaperFeedbackSelect	CommandInterpreter.v	/^  output [1:0] MicrorocHighGainShaperFeedbackSelect,$/;"	p	language:Verilog	module:CommandInterpreter
+MicrorocHighGainShaperFeedbackSelect_Input	ConfigurationParameterDistribution.v	/^    input [1:0] MicrorocHighGainShaperFeedbackSelect_Input,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocHighGainShaperFeedbackSelect_Output	ConfigurationParameterDistribution.v	/^    output reg [2*ASIC_CHAIN_NUMBER - 1:0] MicrorocHighGainShaperFeedbackSelect_Output,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
 MicrorocHighGainShaperPPEnable	CommandInterpreter.v	/^  output MicrorocHighGainShaperPPEnable,$/;"	p	language:Verilog	module:CommandInterpreter
+MicrorocHighGainShaperPPEnable_Input	ConfigurationParameterDistribution.v	/^    input MicrorocHighGainShaperPPEnable_Input,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocHighGainShaperPPEnable_Output	ConfigurationParameterDistribution.v	/^    output reg [ASIC_CHAIN_NUMBER - 1:0] MicrorocHighGainShaperPPEnable_Output,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
 MicrorocHit	SlaveDaq.v	/^	reg MicrorocHit;$/;"	r	language:Verilog	module:SlaveDaq
 MicrorocInternalRazSignalEnable	CommandInterpreter.v	/^  output MicrorocInternalRazSignalEnable,$/;"	p	language:Verilog	module:CommandInterpreter
-MicrorocInternalRazSignalEnable	ConfigurationParameterDistribution.v	/^	output reg [ASIC_CHAIN_NUMBER - 1:0] MicrorocInternalRazSignalEnable,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocInternalRazSignalEnable_Input	ConfigurationParameterDistribution.v	/^    input MicrorocInternalRazSignalEnable_Input,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocInternalRazSignalEnable_Output	ConfigurationParameterDistribution.v	/^    output reg [ASIC_CHAIN_NUMBER - 1:0] MicrorocInternalRazSignalEnable_Output,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
 MicrorocInternalRazSignalLength	CommandInterpreter.v	/^  output [1:0] MicrorocInternalRazSignalLength,$/;"	p	language:Verilog	module:CommandInterpreter
-MicrorocInternalRazSignalLength	ConfigurationParameterDistribution.v	/^	output reg [2*ASIC_CHAIN_NUMBER - 1:0] MicrorocInternalRazSignalLength,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocInternalRazSignalLength_Input	ConfigurationParameterDistribution.v	/^    input [1:0] MicrorocInternalRazSignalLength_Input,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocInternalRazSignalLength_Output	ConfigurationParameterDistribution.v	/^    output reg [2*ASIC_CHAIN_NUMBER - 1:0] MicrorocInternalRazSignalLength_Output,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
 MicrorocLatchedOrDirectOutput	CommandInterpreter.v	/^  output MicrorocLatchedOrDirectOutput,$/;"	p	language:Verilog	module:CommandInterpreter
-MicrorocLatchedOrDirectOutput	ConfigurationParameterDistribution.v	/^	output reg [ASIC_CHAIN_NUMBER - 1:0] MicrorocLatchedOrDirectOutput,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocLatchedOrDirectOutput_Input	ConfigurationParameterDistribution.v	/^    input MicrorocLatchedOrDirectOutput_Input,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocLatchedOrDirectOutput_Output	ConfigurationParameterDistribution.v	/^    output reg [ASIC_CHAIN_NUMBER - 1:0] MicrorocLatchedOrDirectOutput_Output,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
 MicrorocLowGainShaperFeedbackSelect	CommandInterpreter.v	/^  output [1:0] MicrorocLowGainShaperFeedbackSelect,$/;"	p	language:Verilog	module:CommandInterpreter
+MicrorocLowGainShaperFeedbackSelect_Input	ConfigurationParameterDistribution.v	/^    input [1:0] MicrorocLowGainShaperFeedbackSelect_Input,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocLowGainShaperFeedbackSelect_Output	ConfigurationParameterDistribution.v	/^    output reg [2*ASIC_CHAIN_NUMBER - 1:0] MicrorocLowGainShaperFeedbackSelect_Output,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
 MicrorocLowGainShaperPPEnable	CommandInterpreter.v	/^  output MicrorocLowGainShaperPPEnable,$/;"	p	language:Verilog	module:CommandInterpreter
+MicrorocLowGainShaperPPEnable_Input	ConfigurationParameterDistribution.v	/^    input MicrorocLowGainShaperPPEnable_Input,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocLowGainShaperPPEnable_Output	ConfigurationParameterDistribution.v	/^    output reg [ASIC_CHAIN_NUMBER - 1:0] MicrorocLowGainShaperPPEnable_Output,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
 MicrorocLvdsReceiverPPEnable	CommandInterpreter.v	/^  output MicrorocLvdsReceiverPPEnable,$/;"	p	language:Verilog	module:CommandInterpreter
-MicrorocLvdsReceiverPPEnable	ConfigurationParameterDistribution.v	/^	output reg [ASIC_CHAIN_NUMBER - 1:0] MicrorocLvdsReceiverPPEnable,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocLvdsReceiverPPEnable_Input	ConfigurationParameterDistribution.v	/^    input MicrorocLvdsReceiverPPEnable_Input,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocLvdsReceiverPPEnable_Output	ConfigurationParameterDistribution.v	/^    output reg [ASIC_CHAIN_NUMBER - 1:0] MicrorocLvdsReceiverPPEnable_Output,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
 MicrorocOTAqEnable	CommandInterpreter.v	/^  output MicrorocOTAqEnable,$/;"	p	language:Verilog	module:CommandInterpreter
+MicrorocOTAqEnable_Input	ConfigurationParameterDistribution.v	/^    input MicrorocOTAqEnable_Input,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocOTAqEnable_Output	ConfigurationParameterDistribution.v	/^    output reg [ASIC_CHAIN_NUMBER - 1:0] MicrorocOTAqEnable_Output,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
 MicrorocOTAqPPEnable	CommandInterpreter.v	/^  output MicrorocOTAqPPEnable,$/;"	p	language:Verilog	module:CommandInterpreter
+MicrorocOTAqPPEnable_Input	ConfigurationParameterDistribution.v	/^    input MicrorocOTAqPPEnable_Input,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocOTAqPPEnable_Output	ConfigurationParameterDistribution.v	/^    output reg [ASIC_CHAIN_NUMBER - 1:0] MicrorocOTAqPPEnable_Output,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
 MicrorocParameterLoadStart	CommandInterpreter.v	/^  output MicrorocParameterLoadStart,$/;"	p	language:Verilog	module:CommandInterpreter
-MicrorocParameterLoadStart	ConfigurationParameterDistribution.v	/^	output reg [ASIC_CHAIN_NUMBER - 1:0] MicrorocParameterLoadStart,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocParameterLoadStart_Input	ConfigurationParameterDistribution.v	/^    input MicrorocParameterLoadStart_Input,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocParameterLoadStart_Output	ConfigurationParameterDistribution.v	/^    output reg [ASIC_CHAIN_NUMBER - 1:0] MicrorocParameterLoadStart_Output,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
 MicrorocPreAmplifierPPEnable	CommandInterpreter.v	/^  output MicrorocPreAmplifierPPEnable,$/;"	p	language:Verilog	module:CommandInterpreter
+MicrorocPreAmplifierPPEnable_Input	ConfigurationParameterDistribution.v	/^    input MicrorocPreAmplifierPPEnable_Input,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocPreAmplifierPPEnable_Output	ConfigurationParameterDistribution.v	/^    output reg [ASIC_CHAIN_NUMBER - 1:0] MicrorocPreAmplifierPPEnable_Output,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
 MicrorocReadRedundancy	CommandInterpreter.v	/^  output MicrorocReadRedundancy,\/\/ To redundancy module$/;"	p	language:Verilog	module:CommandInterpreter
+MicrorocReadRedundancy_Input	ConfigurationParameterDistribution.v	/^    input MicrorocReadRedundancy_Input,\/\/ To redundancy module$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocReadRedundancy_Output	ConfigurationParameterDistribution.v	/^    output reg [ASIC_CHAIN_NUMBER - 1:0] MicrorocReadRedundancy_Output,\/\/ To redundancy module$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
 MicrorocReadScopeChannel	CommandInterpreter.v	/^  output reg [63:0] MicrorocReadScopeChannel,$/;"	p	language:Verilog	module:CommandInterpreter
+MicrorocReadScopeChannel_Input	ConfigurationParameterDistribution.v	/^    input [63:0] MicrorocReadScopeChannel_Input,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocReadScopeChannel_Output	ConfigurationParameterDistribution.v	/^    output reg [64*ASIC_CHAIN_NUMBER - 1:0] MicrorocReadScopeChannel_Output,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
 MicrorocReset	MicrorocControl.v	/^	input MicrorocReset,$/;"	p	language:Verilog	module:MicrorocControl
 MicrorocReset	SlowControlAndReadScopeSet.v	/^	input MicrorocReset,$/;"	p	language:Verilog	module:SlowControlAndReadScopeSet
 MicrorocResetTimeStamp	CommandInterpreter.v	/^  output MicrorocResetTimeStamp,$/;"	p	language:Verilog	module:CommandInterpreter
+MicrorocResetTimeStamp_Input	ConfigurationParameterDistribution.v	/^    input MicrorocResetTimeStamp_Input,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocResetTimeStamp_Output	ConfigurationParameterDistribution.v	/^    output reg [ASIC_CHAIN_NUMBER - 1:0] MicrorocResetTimeStamp_Output$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
 MicrorocShaperOutLowGainOrHighGain	CommandInterpreter.v	/^  output MicrorocShaperOutLowGainOrHighGain,$/;"	p	language:Verilog	module:CommandInterpreter
-MicrorocSlowControlOrReadScopeSelect	CommandInterpreter.v	/^  output wire MicrorocSlowControlOrReadScopeSelect,$/;"	p	language:Verilog	module:CommandInterpreter
-MicrorocSlowOrReadScopeSelect	ConfigurationParameterDistribution.v	/^	output reg [ASIC_CHAIN_NUMBER - 1:0] MicrorocSlowOrReadScopeSelect,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocShaperOutLowGainOrHighGain_Input	ConfigurationParameterDistribution.v	/^    input MicrorocShaperOutLowGainOrHighGain_Input,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocShaperOutLowGainOrHighGain_Output	ConfigurationParameterDistribution.v	/^    output reg [ASIC_CHAIN_NUMBER - 1:0] MicrorocShaperOutLowGainOrHighGain_Output,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocSlowControlOrReadScopeSelect	CommandInterpreter.v	/^  output MicrorocSlowControlOrReadScopeSelect,$/;"	p	language:Verilog	module:CommandInterpreter
+MicrorocSlowControlOrReadScopeSelect_Input	ConfigurationParameterDistribution.v	/^    input MicrorocSlowControlOrReadScopeSelect_Input,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocSlowControlOrReadScopeSelect_Output	ConfigurationParameterDistribution.v	/^    output reg [ASIC_CHAIN_NUMBER - 1:0] MicrorocSlowControlOrReadScopeSelect_Output,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
 MicrorocStartReadoutChannelSelect	CommandInterpreter.v	/^  output MicrorocStartReadoutChannelSelect,$/;"	p	language:Verilog	module:CommandInterpreter
-MicrorocStartReadoutChannelSelect	ConfigurationParameterDistribution.v	/^	output reg [ASIC_CHAIN_NUMBER - 1:0] MicrorocStartReadoutChannelSelect,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocStartReadoutChannelSelect_Input	ConfigurationParameterDistribution.v	/^    input MicrorocStartReadoutChannelSelect_Input,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocStartReadoutChannelSelect_Output	ConfigurationParameterDistribution.v	/^    output reg [ASIC_CHAIN_NUMBER - 1:0] MicrorocStartReadoutChannelSelect_Output,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
 MicrorocTransmitOnChannelSelect	CommandInterpreter.v	/^  output [1:0] MicrorocTransmitOnChannelSelect,$/;"	p	language:Verilog	module:CommandInterpreter
-MicrorocTransmitOnChannelSelect	ConfigurationParameterDistribution.v	/^	output reg [2*ASIC_CHAIN_NUMBER - 1:0] MicrorocTransmitOnChannelSelect,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocTransmitOnChannelSelect_Input	ConfigurationParameterDistribution.v	/^    input [1:0] MicrorocTransmitOnChannelSelect_Input,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocTransmitOnChannelSelect_Output	ConfigurationParameterDistribution.v	/^    output reg [2*ASIC_CHAIN_NUMBER - 1:0] MicrorocTransmitOnChannelSelect_Output,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
 MicrorocTriggerNor64OrDirectSelect	CommandInterpreter.v	/^  output MicrorocTriggerNor64OrDirectSelect,$/;"	p	language:Verilog	module:CommandInterpreter
-MicrorocTriggerNor64OrDirectSelect	ConfigurationParameterDistribution.v	/^	output reg [ASIC_CHAIN_NUMBER - 1:0] MicrorocTriggerNor64OrDirectSelect,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocTriggerNor64OrDirectSelect_Input	ConfigurationParameterDistribution.v	/^    input MicrorocTriggerNor64OrDirectSelect_Input,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocTriggerNor64OrDirectSelect_Output	ConfigurationParameterDistribution.v	/^    output reg [ASIC_CHAIN_NUMBER - 1:0] MicrorocTriggerNor64OrDirectSelect_Output,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
 MicrorocTriggerOutputEnable	CommandInterpreter.v	/^  output MicrorocTriggerOutputEnable,$/;"	p	language:Verilog	module:CommandInterpreter
-MicrorocTriggerOutputEnable	ConfigurationParameterDistribution.v	/^	output reg [ASIC_CHAIN_NUMBER - 1:0] MicrorocTriggerOutputEnable,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocTriggerOutputEnable_Input	ConfigurationParameterDistribution.v	/^    input MicrorocTriggerOutputEnable_Input,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocTriggerOutputEnable_Output	ConfigurationParameterDistribution.v	/^    output reg [ASIC_CHAIN_NUMBER - 1:0] MicrorocTriggerOutputEnable_Output,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
 MicrorocTriggerToWriteSelect	CommandInterpreter.v	/^  output [2:0] MicrorocTriggerToWriteSelect,$/;"	p	language:Verilog	module:CommandInterpreter
-MicrorocTriggerToWriteSelect	ConfigurationParameterDistribution.v	/^	output reg [3*ASIC_CHAIN_NUMBER - 1:0] MicrorocTriggerToWriteSelect,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocTriggerToWriteSelect_Input	ConfigurationParameterDistribution.v	/^    input [2:0] MicrorocTriggerToWriteSelect_Input,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocTriggerToWriteSelect_Output	ConfigurationParameterDistribution.v	/^    output reg [3*ASIC_CHAIN_NUMBER - 1:0] MicrorocTriggerToWriteSelect_Output,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
 MicrorocWidlarPPEnable	CommandInterpreter.v	/^  output MicrorocWidlarPPEnable,$/;"	p	language:Verilog	module:CommandInterpreter
+MicrorocWidlarPPEnable_Input	ConfigurationParameterDistribution.v	/^    input MicrorocWidlarPPEnable_Input,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+MicrorocWidlarPPEnable_Output	ConfigurationParameterDistribution.v	/^    output reg [ASIC_CHAIN_NUMBER - 1:0] MicrorocWidlarPPEnable_Output,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
+Microroc_10bit_DAC_Out	SCurve_Test_Control.v	/^  output reg [9:0]                            Microroc_10bit_DAC_Out,$/;"	p	language:Verilog	module:SCurve_Test_Control
+Microroc_10bit_DAC_Out	SCurve_Test_Top.v	/^  output [9:0] Microroc_10bit_DAC_Out,$/;"	p	language:Verilog	module:SCurve_Test_Top
+Microroc_CTest_Chn_Out	SCurve_Test_Control.v	/^  output reg [63:0]                           Microroc_CTest_Chn_Out,$/;"	p	language:Verilog	module:SCurve_Test_Control
+Microroc_CTest_Chn_Out	SCurve_Test_Top.v	/^  output [63:0] Microroc_CTest_Chn_Out,$/;"	p	language:Verilog	module:SCurve_Test_Top
+Microroc_Config_Done	SCurve_Test_Control.v	/^  input                                       Microroc_Config_Done,$/;"	p	language:Verilog	module:SCurve_Test_Control
+Microroc_Config_Done	SCurve_Test_Top.v	/^  input Microroc_Config_Done,$/;"	p	language:Verilog	module:SCurve_Test_Top
+Microroc_Discriminator_Mask	SCurve_Test_Control.v	/^  output reg [191:0]                          Microroc_Discriminator_Mask,$/;"	p	language:Verilog	module:SCurve_Test_Control
+Microroc_Discriminator_Mask	SCurve_Test_Top.v	/^  output [191:0] Microroc_Discriminator_Mask,$/;"	p	language:Verilog	module:SCurve_Test_Top
 ModeSelect	CommandInterpreter.v	/^  output [3:0] ModeSelect,$/;"	p	language:Verilog	module:CommandInterpreter
 ModuleStart	SlaveDaq.v	/^	input ModuleStart,              \/\/Module start signal, from USB$/;"	p	language:Verilog	module:SlaveDaq
 NC	MicrorocControl.v	/^	input [1:0] NC,$/;"	p	language:Verilog	module:MicrorocControl
@@ -526,16 +710,24 @@ OTAqPPEnable_CAND	CommandParameter.v	/^`define OTAqPPEnable_CAND                
 OUT_COUNT1	SlaveDaq.v	/^	OUT_COUNT1 = 5'd15,$/;"	c	language:Verilog	module:SlaveDaq
 OUT_COUNT2	SlaveDaq.v	/^	OUT_COUNT2 = 5'd16,$/;"	c	language:Verilog	module:SlaveDaq
 OUT_COUNT3	SlaveDaq.v	/^	OUT_COUNT3 = 5'd17,$/;"	c	language:Verilog	module:SlaveDaq
+OUT_DAC_CODE_SC	SCurve_Test_Control.v	/^  OUT_DAC_CODE_SC                 = 5'd4,$/;"	c	language:Verilog	module:SCurve_Test_Control
+OUT_DAC_CODE_USB	SCurve_Test_Control.v	/^  OUT_DAC_CODE_USB                = 5'd5,$/;"	c	language:Verilog	module:SCurve_Test_Control
 OUT_TAIL	SlaveDaq.v	/^	OUT_TAIL = 5'd14,$/;"	c	language:Verilog	module:SlaveDaq
+OUT_TEST_CHN_AND_DISCRI_MASK_SC	SCurve_Test_Control.v	/^  OUT_TEST_CHN_AND_DISCRI_MASK_SC = 5'd2,$/;"	c	language:Verilog	module:SCurve_Test_Control
+OUT_TEST_CHN_USB	SCurve_Test_Control.v	/^  OUT_TEST_CHN_USB                = 5'd3,$/;"	c	language:Verilog	module:SCurve_Test_Control
+OUT_TRIGGER_DATA	SCurve_Test_Control.v	/^  OUT_TRIGGER_DATA                = 5'd13,$/;"	c	language:Verilog	module:SCurve_Test_Control
 OUT_TRIG_ID1	SlaveDaq.v	/^	OUT_TRIG_ID1 = 5'd10,$/;"	c	language:Verilog	module:SlaveDaq
 OUT_TRIG_ID2	SlaveDaq.v	/^	OUT_TRIG_ID2 = 5'd11,$/;"	c	language:Verilog	module:SlaveDaq
 OnceEnd	DaqControl.v	/^    output OnceEnd,$/;"	p	language:Verilog	module:DaqControl
 OnceEnd	DaqSwitcher.v	/^    output OnceEnd,$/;"	p	language:Verilog	module:DaqSwitcher
 OnceEnd	SlaveDaq.v	/^	output reg OnceEnd,$/;"	p	language:Verilog	module:SlaveDaq
 Once_end	AutoDaq.v	/^  output reg Once_end$/;"	p	language:Verilog	module:AutoDaq
+One_Channel_Done	SCurve_Single_Test.v	/^    output reg One_Channel_Done$/;"	p	language:Verilog	module:SCurve_Single_Test
+PERIOD	ADC_AD9220.v	/^                PERIOD= 2'b10;$/;"	c	language:Verilog	module:ADC_AD9220
 PKTEND	usb_synchronous_slavefifo.v	/^                     PKTEND = 3'd5;$/;"	c	language:Verilog	module:usb_synchronous_slavefifo
 POWER_ON	SlaveDaq.v	/^	POWER_ON = 5'd2,$/;"	c	language:Verilog	module:SlaveDaq
 POWOND	AutoDaq.v	/^            POWOND    = 4'd2,$/;"	c	language:Verilog	module:AutoDaq
+PROCESS_SCURVE_TEST	SCurve_Test_Control.v	/^  PROCESS_SCURVE_TEST             = 5'd10,$/;"	c	language:Verilog	module:SCurve_Test_Control
 PWR_ON_A	DaqControl.v	/^    output PWR_ON_A,$/;"	p	language:Verilog	module:DaqControl
 PWR_ON_A	DaqSwitcher.v	/^    output PWR_ON_A,$/;"	p	language:Verilog	module:DaqSwitcher
 PWR_ON_A	MicrorocControl.v	/^	output PWR_ON_A,$/;"	p	language:Verilog	module:MicrorocControl
@@ -630,25 +822,49 @@ ReadoutChannelSelect	MicrorocControl.v	/^	input ReadoutChannelSelect,$/;"	p	lang
 ReadoutChannelSelect	Redundancy.v	/^	input ReadoutChannelSelect,$/;"	p	language:Verilog	module:Redundancy
 ReadoutChannelSelect_CAND	CommandParameter.v	/^`define ReadoutChannelSelect_CAND                  16'hA281$/;"	c	language:Verilog
 Redundancy	Redundancy.v	/^module Redundancy($/;"	m	language:Verilog
+ResetCount_n	AdcControl.v	/^    reg ResetCount_n;$/;"	r	language:Verilog	module:AdcControl
 ResetCounter	TimeStampSyncAndDataTrigger.v	/^	reg [5:0] ResetCounter;$/;"	r	language:Verilog	module:TimeStampSyncAndDataTrigger
 ResetDataFifo	CommandInterpreter.v	/^  output ResetDataFifo,$/;"	p	language:Verilog	module:CommandInterpreter
-ResetDataFifo_CAND	CommandParameter.v	/^`define ResetDataFifo_CAND 16'hF1A0$/;"	c	language:Verilog
+ResetDataFifo_CAND	CommandParameter.v	/^`define ResetDataFifo_CAND                         16'hF1A0$/;"	c	language:Verilog
 ResetDataTrigger	TimeStampSyncAndDataTrigger.v	/^	reg ResetDataTrigger;$/;"	r	language:Verilog	module:TimeStampSyncAndDataTrigger
 ResetHold_n	HoldGenerate.v	/^	reg ResetHold_n;$/;"	r	language:Verilog	module:HoldGenerate
 ResetMicrorocAcq_CAND	CommandParameter.v	/^`define ResetMicrorocAcq_CAND                      16'hE190$/;"	c	language:Verilog
 ResetMicrorocHit	SlaveDaq.v	/^	reg ResetMicrorocHit;	$/;"	r	language:Verilog	module:SlaveDaq
 ResetStartAcq_n	SlaveDaq.v	/^	reg ResetStartAcq_n;$/;"	r	language:Verilog	module:SlaveDaq
-ResetTimeStamp_CAND	CommandParameter.v	/^`define ResetTimeStamp_CAND 16'hA3B0$/;"	c	language:Verilog
+ResetTimeStamp_CAND	CommandParameter.v	/^`define ResetTimeStamp_CAND                        16'hA3B0$/;"	c	language:Verilog
 ResetTrigCount_n	SlaveDaq.v	/^	reg ResetTrigCount_n;$/;"	r	language:Verilog	module:SlaveDaq
 Reset_b	AutoDaq.v	/^  output reg Reset_b,\/\/Reset ASIC digital part$/;"	p	language:Verilog	module:AutoDaq
 RunningModeSelect_CAND	CommandParameter.v	/^`define RunningModeSelect_CAND                     16'hE0A0$/;"	c	language:Verilog
+SCURVE_TEST_HEADER	SCurve_Test_Control.v	/^  localparam [15:0] SCURVE_TEST_HEADER               = 16'h5343;\/\/In ASCII 53 = S,43 = C.0x534/;"	c	language:Verilog	module:SCurve_Test_Control
+SC_PARAM_LOAD_DELAY	SCurve_Test_Control.v	/^  localparam [15:0] SC_PARAM_LOAD_DELAY              = 16'd40_000;$/;"	c	language:Verilog	module:SCurve_Test_Control
 SC_PROCESS	ParameterGenerator.v	/^					SC_PROCESS = 3'd3,$/;"	c	language:Verilog	module:ParameterGenerator
 SC_PROCESS_LOOP	ParameterGenerator.v	/^					SC_PROCESS_LOOP = 3'd4,$/;"	c	language:Verilog	module:ParameterGenerator
+SC_Param_Load	SCurve_Test_Control.v	/^  output reg                                  SC_Param_Load,$/;"	p	language:Verilog	module:SCurve_Test_Control
+SC_Param_Load	SCurve_Test_Top.v	/^  output SC_Param_Load,$/;"	p	language:Verilog	module:SCurve_Test_Top
+SC_Param_Load_Cnt	SCurve_Test_Control.v	/^  reg [15:0]  SC_Param_Load_Cnt;$/;"	r	language:Verilog	module:SCurve_Test_Control
 SCurveForceExternalRaz	DaqControl.v	/^    input SCurveForceExternalRaz,$/;"	p	language:Verilog	module:DaqControl
 SCurveForceExternalRaz	MicrorocControl.v	/^	input SCurveForceExternalRaz,$/;"	p	language:Verilog	module:MicrorocControl
+SCurve_Data	SCurve_Single_Test.v	/^    output reg [15:0] SCurve_Data,$/;"	p	language:Verilog	module:SCurve_Single_Test
+SCurve_Data	SCurve_Test_Top.v	/^  wire [15:0] SCurve_Data;$/;"	n	language:Verilog	module:SCurve_Test_Top
+SCurve_Data_fifo_din	SCurve_Test_Control.v	/^  input [15:0]                                SCurve_Data_fifo_din,$/;"	p	language:Verilog	module:SCurve_Test_Control
+SCurve_Data_fifo_din	SCurve_Test_Top.v	/^  wire [15:0] SCurve_Data_fifo_din;$/;"	n	language:Verilog	module:SCurve_Test_Top
+SCurve_Data_fifo_empty	SCurve_Test_Control.v	/^  input                                       SCurve_Data_fifo_empty,$/;"	p	language:Verilog	module:SCurve_Test_Control
+SCurve_Data_fifo_empty	SCurve_Test_Top.v	/^  wire SCurve_Data_fifo_empty;$/;"	n	language:Verilog	module:SCurve_Test_Top
+SCurve_Data_fifo_rd_en	SCurve_Test_Control.v	/^  output reg                                  SCurve_Data_fifo_rd_en,$/;"	p	language:Verilog	module:SCurve_Test_Control
+SCurve_Data_fifo_rd_en	SCurve_Test_Top.v	/^  wire SCurve_Data_fifo_rd_en;$/;"	n	language:Verilog	module:SCurve_Test_Top
+SCurve_Data_wr_en	SCurve_Single_Test.v	/^    output reg SCurve_Data_wr_en,$/;"	p	language:Verilog	module:SCurve_Single_Test
+SCurve_Data_wr_en	SCurve_Test_Top.v	/^  wire SCurve_Data_wr_en;$/;"	n	language:Verilog	module:SCurve_Test_Top
 SCurve_ForceExternalRaz	DaqSwitcher.v	/^    input SCurve_ForceExternalRaz,$/;"	p	language:Verilog	module:DaqSwitcher
+SCurve_Single_Input	SCurve_Single_Input.v	/^module SCurve_Single_Input($/;"	m	language:Verilog
+SCurve_Single_Test	SCurve_Single_Test.v	/^module SCurve_Single_Test($/;"	m	language:Verilog
+SCurve_Test_Control	SCurve_Test_Control.v	/^module SCurve_Test_Control($/;"	m	language:Verilog
+SCurve_Test_Done	SCurve_Test_Control.v	/^  output reg                                  SCurve_Test_Done,$/;"	p	language:Verilog	module:SCurve_Test_Control
+SCurve_Test_Done	SCurve_Test_Top.v	/^  output SCurve_Test_Done,$/;"	p	language:Verilog	module:SCurve_Test_Top
+SCurve_Test_Start	SCurve_Single_Test.v	/^    input SCurve_Test_Start,$/;"	p	language:Verilog	module:SCurve_Single_Test
+SCurve_Test_Top	SCurve_Test_Top.v	/^module SCurve_Test_Top($/;"	m	language:Verilog
 SELECT	MicrorocControl.v	/^	output SELECT,                            \/\/ select = 1,slowcontrol register; select = 0,read/;"	p	language:Verilog	module:MicrorocControl
 SELECT	SlowControlAndReadScopeSet.v	/^	output SELECT,                            \/\/ select = 1,slowcontrol register; select = 0,read/;"	p	language:Verilog	module:SlowControlAndReadScopeSet
+SINGLE_CHN_PARAM_Ctest	SCurve_Test_Control.v	/^  localparam [63:0] SINGLE_CHN_PARAM_Ctest           = 64'h0000_0000_0000_0001;$/;"	c	language:Verilog	module:SCurve_Test_Control
 SR_CK	MicrorocControl.v	/^	output SR_CK,                             \/\/ Selected Register Clock$/;"	p	language:Verilog	module:MicrorocControl
 SR_CK	SlowControlAndReadScopeSet.v	/^	output SR_CK,                             \/\/ Selected Register Clock$/;"	p	language:Verilog	module:SlowControlAndReadScopeSet
 SR_IN	MicrorocControl.v	/^	output SR_IN,                             \/\/ Selected Register Input$/;"	p	language:Verilog	module:MicrorocControl
@@ -660,12 +876,14 @@ START_ACQ	DaqSwitcher.v	/^    output START_ACQ,$/;"	p	language:Verilog	module:Da
 START_ACQ	MicrorocControl.v	/^	output START_ACQ,$/;"	p	language:Verilog	module:MicrorocControl
 START_ACQ	SlaveDaq.v	/^	output reg START_ACQ,           \/\/Start & maintain acquisition, Active H$/;"	p	language:Verilog	module:SlaveDaq
 START_ACQUISITION	SlaveDaq.v	/^	START_ACQUISITION = 5'd5,$/;"	c	language:Verilog	module:SlaveDaq
+START_ADC	AdcControl.v	/^                     START_ADC = 3'd1,$/;"	c	language:Verilog	module:AdcControl
 START_READOUT	AutoDaq.v	/^            START_READOUT = 4'd6,$/;"	c	language:Verilog	module:AutoDaq
 START_READOUT	SlaveDaq.v	/^	START_READOUT = 5'd7,$/;"	c	language:Verilog	module:SlaveDaq
 START_READOUT1	MicrorocControl.v	/^	output START_READOUT1,$/;"	p	language:Verilog	module:MicrorocControl
 START_READOUT1	Redundancy.v	/^	output START_READOUT1,$/;"	p	language:Verilog	module:Redundancy
 START_READOUT2	MicrorocControl.v	/^	output START_READOUT2,$/;"	p	language:Verilog	module:MicrorocControl
 START_READOUT2	Redundancy.v	/^	output START_READOUT2,$/;"	p	language:Verilog	module:Redundancy
+START_SCURVE_TEST	SCurve_Test_Control.v	/^  START_SCURVE_TEST               = 5'd9,$/;"	c	language:Verilog	module:SCurve_Test_Control
 SerialClock	BitShiftOut.v	/^	output SerialClock,$/;"	p	language:Verilog	module:BitShiftOut
 SerialClockCount	BitShiftOut.v	/^	reg [1:0] SerialClockCount;$/;"	r	language:Verilog	module:BitShiftOut
 SerialClockEnable	BitShiftOut.v	/^	reg SerialClockEnable;$/;"	r	language:Verilog	module:BitShiftOut
@@ -690,6 +908,15 @@ SingleStart	DaqSwitcher.v	/^    output SingleStart,$/;"	p	language:Verilog	modul
 SingleTestChannel	CommandInterpreter.v	/^  output [5:0] SingleTestChannel,$/;"	p	language:Verilog	module:CommandInterpreter
 SingleTestChannelSet3to0_CAND	CommandParameter.v	/^`define SingleTestChannelSet3to0_CAND              16'hE070$/;"	c	language:Verilog
 SingleTestChannelSet5to4_CAND	CommandParameter.v	/^`define SingleTestChannelSet5to4_CAND              16'hE080$/;"	c	language:Verilog
+SingleTest_Chn	SCurve_Test_Control.v	/^  input [5:0]                                 SingleTest_Chn,$/;"	p	language:Verilog	module:SCurve_Test_Control
+SingleTest_Chn	SCurve_Test_Top.v	/^  input [5:0] SingleTest_Chn,$/;"	p	language:Verilog	module:SCurve_Test_Top
+Single_Chn_Test_Start	SCurve_Single_Test.v	/^    reg Single_Chn_Test_Start;$/;"	r	language:Verilog	module:SCurve_Single_Test
+Single_Test_Done	SCurve_Test_Control.v	/^  input                                       Single_Test_Done,$/;"	p	language:Verilog	module:SCurve_Test_Control
+Single_Test_Done	SCurve_Test_Top.v	/^  wire Single_Test_Done;$/;"	n	language:Verilog	module:SCurve_Test_Top
+Single_Test_Start	SCurve_Test_Control.v	/^  output reg                                  Single_Test_Start,$/;"	p	language:Verilog	module:SCurve_Test_Control
+Single_Test_Start	SCurve_Test_Top.v	/^  wire Single_Test_Start;$/;"	n	language:Verilog	module:SCurve_Test_Top
+Single_or_64Chn	SCurve_Test_Control.v	/^  input                                       Single_or_64Chn,\/\/High:Single Channel test, Low:/;"	p	language:Verilog	module:SCurve_Test_Control
+Single_or_64Chn	SCurve_Test_Top.v	/^  input Single_or_64Chn,$/;"	p	language:Verilog	module:SCurve_Test_Top
 SlaveDaq	SlaveDaq.v	/^module SlaveDaq($/;"	m	language:Verilog
 SlaveDaqData	DaqControl.v	/^    wire [15:0] SlaveDaqData;$/;"	n	language:Verilog	module:DaqControl
 SlaveDaqData	DaqSwitcher.v	/^    input [15:0] SlaveDaqData,$/;"	p	language:Verilog	module:DaqSwitcher
@@ -738,7 +965,10 @@ SlowControlOrReadScopeSelect_CAND	CommandParameter.v	/^`define SlowControlOrRead
 SlowControlParameterNumber	ParameterGenerator.v	/^	localparam [5:0] SlowControlParameterNumber = 6'd36; \/\/ 592\/16=37$/;"	c	language:Verilog	module:ParameterGenerator
 SlowControlParameter_Shift	ParameterGenerator.v	/^	reg [591:0] SlowControlParameter_Shift;$/;"	r	language:Verilog	module:ParameterGenerator
 SlowControlParameters	ParameterGenerator.v	/^	wire [592:1] SlowControlParameters;$/;"	n	language:Verilog	module:ParameterGenerator
+StartAcq	AdcControl.v	/^    input StartAcq,$/;"	p	language:Verilog	module:AdcControl
 StartDac	CommandInterpreter.v	/^  output [9:0] StartDac,$/;"	p	language:Verilog	module:CommandInterpreter
+StartDac	SCurve_Test_Control.v	/^  input [9:0]                                 StartDac,$/;"	p	language:Verilog	module:SCurve_Test_Control
+StartDac	SCurve_Test_Top.v	/^  input [9:0] StartDac,$/;"	p	language:Verilog	module:SCurve_Test_Top
 StartReadout	DaqControl.v	/^    output StartReadout,$/;"	p	language:Verilog	module:DaqControl
 StartReadout	DaqSwitcher.v	/^    output StartReadout,$/;"	p	language:Verilog	module:DaqSwitcher
 StartReadout	MicrorocControl.v	/^	wire StartReadout;$/;"	n	language:Verilog	module:MicrorocControl
@@ -750,8 +980,11 @@ StartReadoutChannelSelect	SlowControlAndReadScopeSet.v	/^	input StartReadoutChan
 StartReadoutChannelSelect_CAND	CommandParameter.v	/^`define StartReadoutChannelSelect_CAND             16'hA0D1$/;"	c	language:Verilog
 Start_Acq	AutoDaq.v	/^  output reg Start_Acq,    \/\/Start & maintain acquisition, Active H$/;"	p	language:Verilog	module:AutoDaq
 Start_Readout	AutoDaq.v	/^  output reg Start_Readout,\/\/Digital RAM start reading signal$/;"	p	language:Verilog	module:AutoDaq
+State	ADC_AD9220.v	/^reg [1:0] State;$/;"	r	language:Verilog	module:ADC_AD9220
+State	AdcControl.v	/^    reg [2:0] State;$/;"	r	language:Verilog	module:AdcControl
 State	AutoDaq.v	/^reg [3:0] State;$/;"	r	language:Verilog	module:AutoDaq
 State	CommandInterpreter.v	/^  reg State;$/;"	r	language:Verilog	module:CommandInterpreter
+State	SCurve_Test_Control.v	/^  reg [4:0] State;$/;"	r	language:Verilog	module:SCurve_Test_Control
 State	SlaveDaq.v	/^	reg [4:0] State;$/;"	r	language:Verilog	module:SlaveDaq
 State	usb_synchronous_slavefifo.v	/^    reg [2:0] State = Idle;$/;"	r	language:Verilog	module:usb_synchronous_slavefifo
 Swap	usb_synchronous_slavefifo.v	/^    function [15:0] Swap(input [15:0] num);$/;"	f	language:Verilog	module:usb_synchronous_slavefifo
@@ -777,8 +1010,13 @@ SweepTestStartStop_CAND	CommandParameter.v	/^`define SweepTestStartStop_CAND    
 SyncClk	HoldGenerate.v	/^	input SyncClk,$/;"	p	language:Verilog	module:HoldGenerate
 SyncClk	MicrorocControl.v	/^	input SyncClk,							  \/\/ This clock is a fast clock to synchronous the TriggerIn signal to g/;"	p	language:Verilog	module:MicrorocControl
 SynchronousReg	PulseSynchronous.v	/^	reg [2:0] SynchronousReg;$/;"	r	language:Verilog	module:PulseSynchronous
-TRANSMIION1B	Redundancy.v	/^	input TRANSMIION1B,$/;"	p	language:Verilog	module:Redundancy
+TAIL_OUT	SCurve_Test_Control.v	/^  TAIL_OUT                        = 5'd16,$/;"	c	language:Verilog	module:SCurve_Test_Control
+TEST_DONE	SCurve_Single_Test.v	/^                     TEST_DONE = 3'd3,$/;"	c	language:Verilog	module:SCurve_Single_Test
+TEST_PROCESS	SCurve_Single_Test.v	/^                     TEST_PROCESS = 3'd2,$/;"	c	language:Verilog	module:SCurve_Single_Test
+TEST_START	SCurve_Single_Test.v	/^                     TEST_START = 3'd1,$/;"	c	language:Verilog	module:SCurve_Single_Test
+TEST_State	SCurve_Single_Test.v	/^    reg [2:0] TEST_State;$/;"	r	language:Verilog	module:SCurve_Single_Test
 TRANSMITON1B	MicrorocControl.v	/^	input TRANSMITON1B,$/;"	p	language:Verilog	module:MicrorocControl
+TRANSMITON1B	Redundancy.v	/^	input TRANSMITON1B,$/;"	p	language:Verilog	module:Redundancy
 TRANSMITON2B	MicrorocControl.v	/^	input TRANSMITON2B,$/;"	p	language:Verilog	module:MicrorocControl
 TRANSMITON2B	Redundancy.v	/^	input TRANSMITON2B$/;"	p	language:Verilog	module:Redundancy
 TRIG_EXT	MicrorocControl.v	/^	output TRIG_EXT,$/;"	p	language:Verilog	module:MicrorocControl
@@ -786,6 +1024,15 @@ T_acquisition	AutoDaq.v	/^  input [15:0] T_acquisition,\/\/Send from USB, defaul
 T_minPwrRst	AutoDaq.v	/^localparam T_minPwrRst = 8; \/\/200ns, time to wake up clock LVDS receivers $/;"	c	language:Verilog	module:AutoDaq
 T_minRstStart	AutoDaq.v	/^localparam T_minRstStart = 40;\/\/1us, $/;"	c	language:Verilog	module:AutoDaq
 T_minSro	AutoDaq.v	/^localparam T_minSro      = 16;\/\/400ns, time to wake up clock LVDS receivers$/;"	c	language:Verilog	module:AutoDaq
+TestAsicNumber	SCurve_Test_Control.v	/^  input [2:0] TestAsicNumber,$/;"	p	language:Verilog	module:SCurve_Test_Control
+TestAsicNumber	SCurve_Test_Top.v	/^  input [2:0] TestAsicNumber,$/;"	p	language:Verilog	module:SCurve_Test_Top
+Test_Chn	SCurve_Test_Control.v	/^  reg [5:0]   Test_Chn;$/;"	r	language:Verilog	module:SCurve_Test_Control
+Test_Start	SCurve_Single_Input.v	/^    input Test_Start,$/;"	p	language:Verilog	module:SCurve_Single_Input
+Test_Start	SCurve_Test_Control.v	/^  input                                       Test_Start,$/;"	p	language:Verilog	module:SCurve_Test_Control
+Test_Start	SCurve_Test_Top.v	/^  input Test_Start,$/;"	p	language:Verilog	module:SCurve_Test_Top
+Test_Start_Pulse	SCurve_Test_Top.v	/^  wire Test_Start_Pulse = Test_Start_reg1 & (~Test_Start_reg2);$/;"	n	language:Verilog	module:SCurve_Test_Top
+Test_Start_reg1	SCurve_Test_Top.v	/^  reg Test_Start_reg1;$/;"	r	language:Verilog	module:SCurve_Test_Top
+Test_Start_reg2	SCurve_Test_Top.v	/^  reg Test_Start_reg2;$/;"	r	language:Verilog	module:SCurve_Test_Top
 TimeMinPowerReset	SlaveDaq.v	/^	localparam TimeMinPowerReset = 8;\/\/Time to wake up clock LVDS receivers 200ns$/;"	c	language:Verilog	module:SlaveDaq
 TimeMinResetStart	SlaveDaq.v	/^	localparam TimeMinResetStart = 40;\/\/4 SlowClock ticks + 4 FastClock ticks (internal managemen/;"	c	language:Verilog	module:SlaveDaq
 TimeMinSro	SlaveDaq.v	/^	localparam TimeMinSro = 16;\/\/Time to wake up clock LVDS receivers 400ns$/;"	c	language:Verilog	module:SlaveDaq
@@ -805,6 +1052,10 @@ TransmitOn_rd	AsicRamReadout.v	/^	reg TransmitOn_rd;$/;"	r	language:Verilog	modu
 TrigCount_en	SlaveDaq.v	/^	reg TrigCount_en;$/;"	r	language:Verilog	module:SlaveDaq
 TrigCounter	SlaveDaq.v	/^	reg [23:0] TrigCounter;$/;"	r	language:Verilog	module:SlaveDaq
 TrigCounter_sync	SlaveDaq.v	/^	reg [23:0] TrigCounter_sync;$/;"	r	language:Verilog	module:SlaveDaq
+TrigEffi_or_CountEffi	SCurve_Single_Input.v	/^    input TrigEffi_or_CountEffi,$/;"	p	language:Verilog	module:SCurve_Single_Input
+TrigEffi_or_CountEffi	SCurve_Single_Test.v	/^    input TrigEffi_or_CountEffi,$/;"	p	language:Verilog	module:SCurve_Single_Test
+TrigEffi_or_CountEffi	SCurve_Test_Top.v	/^  input TrigEffi_or_CountEffi,$/;"	p	language:Verilog	module:SCurve_Test_Top
+Trigger	SCurve_Single_Input.v	/^    input Trigger,$/;"	p	language:Verilog	module:SCurve_Single_Input
 TriggerCoincidence	CommandInterpreter.v	/^  output [1:0] TriggerCoincidence,$/;"	p	language:Verilog	module:CommandInterpreter
 TriggerCoincidenceSet_CAND	CommandParameter.v	/^`define TriggerCoincidenceSet_CAND                 16'hE2D0$/;"	c	language:Verilog
 TriggerCountMax	CommandInterpreter.v	/^  output [15:0] TriggerCountMax,$/;"	p	language:Verilog	module:CommandInterpreter
@@ -813,6 +1064,9 @@ TriggerCountMaxSet15to12_CAND	CommandParameter.v	/^`define TriggerCountMaxSet15t
 TriggerCountMaxSet3to0_CAND	CommandParameter.v	/^`define TriggerCountMaxSet3to0_CAND                16'hE1A8$/;"	c	language:Verilog
 TriggerCountMaxSet7to4_CAND	CommandParameter.v	/^`define TriggerCountMaxSet7to4_CAND                16'hE1B8$/;"	c	language:Verilog
 TriggerDelay	CommandInterpreter.v	/^  output [3:0] TriggerDelay,$/;"	p	language:Verilog	module:CommandInterpreter
+TriggerDelay	SCurve_Single_Input.v	/^    input [3:0] TriggerDelay,$/;"	p	language:Verilog	module:SCurve_Single_Input
+TriggerDelay	SCurve_Single_Test.v	/^    input [3:0] TriggerDelay,$/;"	p	language:Verilog	module:SCurve_Single_Test
+TriggerDelay	SCurve_Test_Top.v	/^  input [3:0] TriggerDelay,$/;"	p	language:Verilog	module:SCurve_Test_Top
 TriggerDelaySet_CAND	CommandParameter.v	/^`define TriggerDelaySet_CAND                       16'hE1E3$/;"	c	language:Verilog
 TriggerDelayed	HoldGenerate.v	/^	wire TriggerDelayed = TriggerShift[HoldDelay];$/;"	n	language:Verilog	module:HoldGenerate
 TriggerEfficiencyOrCountEfficiency	CommandInterpreter.v	/^  output TriggerEfficiencyOrCountEfficiency,$/;"	p	language:Verilog	module:CommandInterpreter
@@ -834,12 +1088,17 @@ TriggerOutputEnable	ParameterGenerator.v	/^	input TriggerOutputEnable, \/\/ Defa
 TriggerOutputEnable	SlowControlAndReadScopeSet.v	/^	input TriggerOutputEnable,                \/\/ Default: 1 Enable$/;"	p	language:Verilog	module:SlowControlAndReadScopeSet
 TriggerOutputEnable_CAND	CommandParameter.v	/^`define TriggerOutputEnable_CAND                   16'hA071$/;"	c	language:Verilog
 TriggerShift	HoldGenerate.v	/^	reg [255:0] TriggerShift;$/;"	r	language:Verilog	module:HoldGenerate
+TriggerShift	SCurve_Single_Input.v	/^  reg [15:0] TriggerShift;$/;"	r	language:Verilog	module:SCurve_Single_Input
 TriggerToWriteSelect	MicrorocControl.v	/^	input [2:0] TriggerToWriteSelect,         \/\/ Default: 111 all$/;"	p	language:Verilog	module:MicrorocControl
 TriggerToWriteSelect	ParameterGenerator.v	/^	input [2:0] TriggerToWriteSelect, \/\/ Default: 111 all$/;"	p	language:Verilog	module:ParameterGenerator
 TriggerToWriteSelect	SlowControlAndReadScopeSet.v	/^	input [2:0] TriggerToWriteSelect,         \/\/ Default: 111 all$/;"	p	language:Verilog	module:SlowControlAndReadScopeSet
 TriggerToWriteSelect_CAND	CommandParameter.v	/^`define TriggerToWriteSelect_CAND                  16'hA087$/;"	c	language:Verilog
+Trigger_Falling	SCurve_Single_Input.v	/^  wire Trigger_Falling;$/;"	n	language:Verilog	module:SCurve_Single_Input
+Trigger_delay	SCurve_Single_Input.v	/^  wire Trigger_delay;$/;"	n	language:Verilog	module:SCurve_Single_Input
 UNMASK	CommandInterpreter.v	/^                    UNMASK     = 2'b10,$/;"	c	language:Verilog	module:CommandInterpreter
 UnmaskAllChannel	CommandInterpreter.v	/^  output UnmaskAllChannel,$/;"	p	language:Verilog	module:CommandInterpreter
+UnmaskAllChannel	SCurve_Test_Control.v	/^  input                                       UnmaskAllChannel,$/;"	p	language:Verilog	module:SCurve_Test_Control
+UnmaskAllChannel	SCurve_Test_Top.v	/^  input UnmaskAllChannel,$/;"	p	language:Verilog	module:SCurve_Test_Top
 UnmaskAllChannelSet_CAND	CommandParameter.v	/^`define UnmaskAllChannelSet_CAND                   16'hE1F0$/;"	c	language:Verilog
 UsbAcqStart	DaqControl.v	/^    input UsbAcqStart,$/;"	p	language:Verilog	module:DaqControl
 UsbAcqStart	DaqSwitcher.v	/^    input UsbAcqStart,$/;"	p	language:Verilog	module:DaqSwitcher
@@ -853,18 +1112,29 @@ VAL_EVTN	MicrorocControl.v	/^	output VAL_EVTN,$/;"	p	language:Verilog	module:Mic
 VAL_EVTP	MicrorocControl.v	/^	output VAL_EVTP,$/;"	p	language:Verilog	module:MicrorocControl
 WAIT	AutoDaq.v	/^            WAIT = 4'd5,$/;"	c	language:Verilog	module:AutoDaq
 WAIT	BitShiftOut.v	/^					WAIT = 3'd6,$/;"	c	language:Verilog	module:BitShiftOut
+WAIT_DATA	AdcControl.v	/^                     WAIT_DATA = 3'd3,$/;"	c	language:Verilog	module:AdcControl
 WAIT_DATA_END	SlaveDaq.v	/^	WAIT_DATA_END =5'd12,$/;"	c	language:Verilog	module:SlaveDaq
+WAIT_DONE	SCurve_Test_Control.v	/^  WAIT_DONE                       = 5'd18,$/;"	c	language:Verilog	module:SCurve_Test_Control
+WAIT_LOAD_SC_PARAM_DONE	SCurve_Test_Control.v	/^  WAIT_LOAD_SC_PARAM_DONE         = 5'd8,$/;"	c	language:Verilog	module:SCurve_Test_Control
 WAIT_READ	AutoDaq.v	/^            WAIT_READ = 4'd7,$/;"	c	language:Verilog	module:AutoDaq
 WAIT_READ	SlaveDaq.v	/^	WAIT_READ = 5'd6,$/;"	c	language:Verilog	module:SlaveDaq
 WAIT_READ_DONE	SlaveDaq.v	/^	WAIT_READ_DONE = 5'd8,$/;"	c	language:Verilog	module:SlaveDaq
 WAIT_START	SlaveDaq.v	/^	WAIT_START = 5'd4,$/;"	c	language:Verilog	module:SlaveDaq
+WAIT_TAIL_WRITE	SCurve_Test_Control.v	/^  WAIT_TAIL_WRITE                 = 5'd17,$/;"	c	language:Verilog	module:SCurve_Test_Control
+WAIT_TRIGGER_DATA	SCurve_Test_Control.v	/^  WAIT_TRIGGER_DATA               = 5'd11,$/;"	c	language:Verilog	module:SCurve_Test_Control
 WRITE	usb_synchronous_slavefifo.v	/^                     WRITE = 3'd3,$/;"	c	language:Verilog	module:usb_synchronous_slavefifo
 WRITE_PROCESS	usb_synchronous_slavefifo.v	/^                     WRITE_PROCESS = 3'd4,$/;"	c	language:Verilog	module:usb_synchronous_slavefifo
+Wait_Tail_Cnt	SCurve_Test_Control.v	/^  reg [3:0]   Wait_Tail_Cnt;$/;"	r	language:Verilog	module:SCurve_Test_Control
 WidlarPPEnable	MicrorocControl.v	/^	input WidlarPPEnable,                     \/\/ Default: 0 Disable$/;"	p	language:Verilog	module:MicrorocControl
 WidlarPPEnable	ParameterGenerator.v	/^	input WidlarPPEnable, \/\/ Default: 0 Disable$/;"	p	language:Verilog	module:ParameterGenerator
 WidlarPPEnable	SlowControlAndReadScopeSet.v	/^	input WidlarPPEnable,                     \/\/ Default: 0 Disable$/;"	p	language:Verilog	module:SlowControlAndReadScopeSet
 WidlarPPEnable_CAND	CommandParameter.v	/^`define WidlarPPEnable_CAND                        16'hA240$/;"	c	language:Verilog
+data	ADC_AD9220.v	/^  output reg [11:0] data$/;"	p	language:Verilog	module:ADC_AD9220
+data_out_cnt	SCurve_Single_Test.v	/^    reg [2:0] data_out_cnt;$/;"	r	language:Verilog	module:SCurve_Single_Test
+data_ready	ADC_AD9220.v	/^  output reg data_ready,$/;"	p	language:Verilog	module:ADC_AD9220
+delay_cnt	ADC_AD9220.v	/^reg [3:0] delay_cnt;$/;"	r	language:Verilog	module:ADC_AD9220
 delay_cnt	AutoDaq.v	/^reg [15:0] delay_cnt;$/;"	r	language:Verilog	module:AutoDaq
+fifo_full	SCurve_Test_Top.v	/^  wire fifo_full;$/;"	n	language:Verilog	module:SCurve_Test_Top
 in_from_ext_fifo_dout	FPGA_Top.v	/^    wire [15:0] in_from_ext_fifo_dout;$/;"	n	language:Verilog	module:FPGA_Top
 in_from_ext_fifo_dout	usb_synchronous_slavefifo.v	/^    input [15:0] in_from_ext_fifo_dout,$/;"	p	language:Verilog	module:usb_synchronous_slavefifo
 in_from_ext_fifo_empty	usb_synchronous_slavefifo.v	/^    input in_from_ext_fifo_empty,$/;"	p	language:Verilog	module:usb_synchronous_slavefifo
@@ -874,12 +1144,22 @@ nSLCS	usb_synchronous_slavefifo.v	/^    output nSLCS, \/\/Chip select$/;"	p	lang
 nSLOE	usb_synchronous_slavefifo.v	/^    output reg nSLOE,\/\/READ$/;"	p	language:Verilog	module:usb_synchronous_slavefifo
 nSLRD	usb_synchronous_slavefifo.v	/^    output reg nSLRD,\/\/READ$/;"	p	language:Verilog	module:usb_synchronous_slavefifo
 nSLWR	usb_synchronous_slavefifo.v	/^    output reg nSLWR,    \/\/WRITE$/;"	p	language:Verilog	module:usb_synchronous_slavefifo
-num	CommandInterpreter.v	/^  function [3:0] Invert10bit(input [9:0] num);$/;"	p	language:Verilog	function:CommandInterpreter.Invert10bit
 num	CommandInterpreter.v	/^  function [3:0] Invert4bit(input [3:0] num);$/;"	p	language:Verilog	function:CommandInterpreter.Invert4bit
+num	CommandInterpreter.v	/^  function [9:0] Invert10bit(input [9:0] num);$/;"	p	language:Verilog	function:CommandInterpreter.Invert10bit
+num	SCurve_Test_Control.v	/^  function [9:0] Invert(input [9:0] num);$/;"	p	language:Verilog	function:SCurve_Test_Control.Invert
 num	usb_synchronous_slavefifo.v	/^    function [15:0] Swap(input [15:0] num);$/;"	p	language:Verilog	function:usb_synchronous_slavefifo.Swap
+out_reset_n	SCurve_Single_Test.v	/^    reg out_reset_n;$/;"	r	language:Verilog	module:SCurve_Single_Test
 out_to_Microroc_SC_Param_Load	FPGA_Top.v	/^    wire out_to_Microroc_SC_Param_Load;$/;"	n	language:Verilog	module:FPGA_Top
 out_to_ext_fifo_rd_en	FPGA_Top.v	/^    wire out_to_ext_fifo_rd_en;$/;"	n	language:Verilog	module:FPGA_Top
 out_to_ext_fifo_rd_en	usb_synchronous_slavefifo.v	/^    output reg out_to_ext_fifo_rd_en$/;"	p	language:Verilog	module:usb_synchronous_slavefifo
+out_trigger0b	SCurve_Single_Test.v	/^    input out_trigger0b,$/;"	p	language:Verilog	module:SCurve_Single_Test
+out_trigger0b	SCurve_Test_Top.v	/^  input out_trigger0b,$/;"	p	language:Verilog	module:SCurve_Test_Top
+out_trigger1b	SCurve_Single_Test.v	/^    input out_trigger1b,$/;"	p	language:Verilog	module:SCurve_Single_Test
+out_trigger1b	SCurve_Test_Top.v	/^  input out_trigger1b,$/;"	p	language:Verilog	module:SCurve_Test_Top
+out_trigger2b	SCurve_Single_Test.v	/^    input out_trigger2b,$/;"	p	language:Verilog	module:SCurve_Single_Test
+out_trigger2b	SCurve_Test_Top.v	/^  input out_trigger2b,$/;"	p	language:Verilog	module:SCurve_Test_Top
+reset_n	ADC_AD9220.v	/^  input reset_n,$/;"	p	language:Verilog	module:ADC_AD9220
+reset_n	AdcControl.v	/^    input reset_n,$/;"	p	language:Verilog	module:AdcControl
 reset_n	AsicRamReadout.v	/^	input reset_n,$/;"	p	language:Verilog	module:AsicRamReadout
 reset_n	AutoDaq.v	/^  input reset_n,$/;"	p	language:Verilog	module:AutoDaq
 reset_n	BitShiftOut.v	/^	input reset_n,$/;"	p	language:Verilog	module:BitShiftOut
@@ -893,10 +1173,23 @@ reset_n	HoldGenerate.v	/^	input reset_n,$/;"	p	language:Verilog	module:HoldGener
 reset_n	MicrorocControl.v	/^	input reset_n,$/;"	p	language:Verilog	module:MicrorocControl
 reset_n	ParameterGenerator.v	/^	input reset_n,$/;"	p	language:Verilog	module:ParameterGenerator
 reset_n	PulseSynchronous.v	/^    input reset_n,$/;"	p	language:Verilog	module:PulseSynchronous
+reset_n	SCurve_Single_Input.v	/^    input reset_n,$/;"	p	language:Verilog	module:SCurve_Single_Input
+reset_n	SCurve_Single_Test.v	/^    input reset_n,$/;"	p	language:Verilog	module:SCurve_Single_Test
+reset_n	SCurve_Test_Control.v	/^  input                                       reset_n,$/;"	p	language:Verilog	module:SCurve_Test_Control
+reset_n	SCurve_Test_Top.v	/^  input reset_n,$/;"	p	language:Verilog	module:SCurve_Test_Top
 reset_n	SlaveDaq.v	/^	input reset_n,$/;"	p	language:Verilog	module:SlaveDaq
 reset_n	SlowControlAndReadScopeSet.v	/^	input reset_n,$/;"	p	language:Verilog	module:SlowControlAndReadScopeSet
 reset_n	TimeStampSyncAndDataTrigger.v	/^	input reset_n,$/;"	p	language:Verilog	module:TimeStampSyncAndDataTrigger
 rst_n	FPGA_Top.v	/^	input rst_n$/;"	p	language:Verilog	module:FPGA_Top
+start	ADC_AD9220.v	/^  input start,  \/\/start acquisition$/;"	p	language:Verilog	module:ADC_AD9220
 start	AutoDaq.v	/^  input start,$/;"	p	language:Verilog	module:AutoDaq
 swap	usb_synchronous_slavefifo.v	/^      begin:swap$/;"	b	language:Verilog	function:usb_synchronous_slavefifo.Swap
+trigger_reg1	SCurve_Single_Input.v	/^  reg trigger_reg1;$/;"	r	language:Verilog	module:SCurve_Single_Input
+trigger_reg2	SCurve_Single_Input.v	/^  reg trigger_reg2;$/;"	r	language:Verilog	module:SCurve_Single_Input
+usb_data_fifo_full	SCurve_Test_Control.v	/^  input                                       usb_data_fifo_full,$/;"	p	language:Verilog	module:SCurve_Test_Control
+usb_data_fifo_full	SCurve_Test_Top.v	/^  input usb_data_fifo_full,$/;"	p	language:Verilog	module:SCurve_Test_Top
+usb_data_fifo_wr_din	SCurve_Test_Control.v	/^  output reg [15:0]                           usb_data_fifo_wr_din,$/;"	p	language:Verilog	module:SCurve_Test_Control
+usb_data_fifo_wr_din	SCurve_Test_Top.v	/^  output [15:0] usb_data_fifo_wr_din,$/;"	p	language:Verilog	module:SCurve_Test_Top
+usb_data_fifo_wr_en	SCurve_Test_Control.v	/^  output reg                                  usb_data_fifo_wr_en,$/;"	p	language:Verilog	module:SCurve_Test_Control
+usb_data_fifo_wr_en	SCurve_Test_Top.v	/^  output usb_data_fifo_wr_en,$/;"	p	language:Verilog	module:SCurve_Test_Top
 usb_synchronous_slavefifo	usb_synchronous_slavefifo.v	/^module usb_synchronous_slavefifo($/;"	m	language:Verilog
