@@ -39,7 +39,7 @@ module Redundancy(
 	
 	input DOUT1B,
 	input DOUT2B,
-	input TRANSMIION1B,
+	input TRANSMITON1B,
 	input TRANSMITON2B
     );
 	assign EndReadout = ReadoutChannelSelect ? END_READOUT1 : END_READOUT2;
