@@ -102,7 +102,7 @@
 `define EndHoldTimeSet15to12_CAND                  16'hE280
 `define AsicChainSelectSet_CAND                    16'hB0A0
 `define LightLed_CAND                              16'hB000
-`define AcquisitionStartStop_CAND 16'hF0F0
-`define ResetDataFifo_CAND 16'hF1A0
-`define ResetTimeStamp_CAND 16'hA3B0
-`define DaqSelect_CAND 16'hE290
+`define AcquisitionStartStop_CAND                  16'hF0F0
+`define ResetDataFifo_CAND                         16'hF1A0
+`define ResetTimeStamp_CAND                        16'hA3B0
+`define DaqSelect_CAND                             16'hE290

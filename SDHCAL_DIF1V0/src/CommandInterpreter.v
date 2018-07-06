@@ -21,18 +21,19 @@
 //  Call the CommandDecoder module to get the command.
 //  Use as CommandDecoder instname (/*autoinst*/);
 //  CommandDecoder
-//  #(
-//    .COMMAND_WIDTH(2'b0),
-//    .COMMAND_ADDRESS(12'hFFF)
-//  )
+//	#(
+//		.LEVEL_OR_PULSE(1'b1),
+//		.COMMAND_WIDTH(2'b0),
+//		.COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+//	)
 //  instname(
-//    .Clk(Clk),
-//    .reset_n(reset_n),
-//    .CommandFifoReadEn(CommandFifoReadEn),
-//    .COMMAND_WORD(COMMAND_WORD),
-//    .DefaultValue(DefaultValue),
-//    .CommandOut(CommandOut)
-//  );
+//  	.Clk(Clk),
+//  	.reset_n(reset_n),
+//  	.CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
+//  	.COMMAND_WORD(COMMAND_WORD),
+//  	// input [COMMAND_WIDTH:0] DefaultValue,
+//  	.CommandOut(CommandOut)
+//  	);
 //
 //
 // Dependencies:
@@ -41,6 +42,7 @@
 // Revision 0.01 - File Created
 // Revision 0.02 - autoinst added 20180702
 // Revision 0.03 - AutoInst
+// Revision 0.04 - Simulated done 20180704
 // Additional Comments:
 //
 //////////////////////////////////////////////////////////////////////////////////
@@ -61,7 +63,7 @@ module CommandInterpreter(
   //  the max ASIC chain is set to 16
   //*** Microorc Parameter
   // MICROROC slow control parameter
-  output wire MicrorocSlowControlOrReadScopeSelect,
+  output MicrorocSlowControlOrReadScopeSelect,
   output MicrorocParameterLoadStart,
   output [1:0] MicrorocDataoutChannelSelect,
   output [1:0] MicrorocTransmitOnChannelSelect,
@@ -702,8 +704,8 @@ module CommandInterpreter(
   // Pulse signal
   CommandDecoder
   #(
-    .LEVEL_OR_PULSE(1'b1),
-    .COMMAND_WIDTH(2'd2),
+    .LEVEL_OR_PULSE(1'b0),
+    .COMMAND_WIDTH(2'd1),
     .COMMAND_ADDRESS_AND_DEFAULT(`MaskSet_CAND)
   )
   MaskSet(
@@ -737,17 +739,21 @@ module CommandInterpreter(
     else begin
       case(MaskState)
         IDLE:begin
-          if(MaskOrUnmask == 16'hA2C0) begin
+          if(MaskOrUnmask == 2'b00) begin
             MicrorocChannelDiscriminatorMask <= MicrorocChannelDiscriminatorMask;
             MaskState <= IDLE;
           end
-          else if(MaskOrUnmask == 16'hA2C1) begin
+          else if(MaskOrUnmask == 2'b01) begin
             SingleChannelMask <= {{189{1'b1}},DiscriMask} << MaskShift | {DiscriMask,{189{1'b1}}} >> (192- MaskShift - 3);
             MaskState <= MASK;
           end
-          else if(MaskOrUnmask == 16'hA2C2) begin
+          else if(MaskOrUnmask == 2'b10) begin
             SingleChannelMask <= {189'b0, 3'b111} << MaskShift;
             MaskState <= UNMASK;
+          end
+          else if(MaskOrUnmask == 2'b11) begin
+            MaskState <= IDLE;
+            MicrorocChannelDiscriminatorMask <= {192{1'b1}};
           end
           else begin
             MicrorocChannelDiscriminatorMask <= MicrorocChannelDiscriminatorMask;
@@ -2385,7 +2391,7 @@ DaqModeSelect(
       Invert4bit = {num[0], num[1], num[2], num[3]};
     end
   endfunction
-  function [3:0] Invert10bit(input [9:0] num);
+  function [9:0] Invert10bit(input [9:0] num);
     begin
       Invert10bit = {num[0], num[1], num[2], num[3], num[4], num[5], num[6], num[7], num[8], num[9]};
     end
