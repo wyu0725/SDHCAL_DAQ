@@ -111,6 +111,7 @@ module SCurve_Test_Control(
       Discri_Mask_Shift <= 8'b0;
       All_Chn_Discri_Mask <= {189'b0, 3'b111};
       MicrorocDiscriminatorMaskInternal <= {192{1'b1}};
+      Microroc_Discriminator_Mask <= 192'b0;
       SlowControlParameterLoadStart_Cnt <= 16'b0;
       Wait_Tail_Cnt <= 4'b0;
       Force_Ext_RAZ <= 1'b0;
@@ -201,7 +202,7 @@ module SCurve_Test_Control(
         end
         DISCRIMINATOR_MASK_FILTER:begin
           SCurveTestDataoutEnable <= 1'b0;
-          if(LoadAsicNumberCount == TestAsicNumber) begin
+          if(LoadAsicNumberCount == (AsicNumber - TestAsicNumber - 1'b1)) begin
             Microroc_Discriminator_Mask <= MicrorocDiscriminatorMaskInternal;
             State <= LOAD_SC_PARAM;
           end
