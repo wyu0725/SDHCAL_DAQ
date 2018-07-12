@@ -90,7 +90,7 @@ module SlowControlAndReadScope_tb();
 		.DataoutChannelSelect        (DataoutChannelSelect),         // Default: 11 Valid
 		.TransmitOnChannelSelect     (TransmitOnChannelSelect),      // Default: 11 Valid
 		.ChipSatbEnable              (ChipSatbEnable),               // Default: 1 Valid
-		.StartReadoutchannelSelect   (StartReadoutchannelSelect),    // Default: 1 StartReadout1
+		.StartReadoutChannelSelect   (StartReadoutchannelSelect),    // Default: 1 StartReadout1
 		.EndReadoutChannelSelect     (EndReadoutChannelSelect),      // Default: 1 EndReadout1
 		.NC                          (NC),
 		.InternalRazSignalLength     (InternalRazSignalLength),      // 00: 75ns, 01: 250ns, 10: 500ns, 11: 1us Default: 11
