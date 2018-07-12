@@ -27,7 +27,7 @@ module HoldGenerate(
 	input SyncClk,
 	input reset_n,
 	input TriggerIn,
-	input Hold_en,
+	input HoldEnable,
 	input [7:0] HoldDelay,
 	input [15:0] HoldTime,
 	output reg HoldOut
@@ -65,7 +65,7 @@ module HoldGenerate(
 	always @(posedge TriggerDelayed or negedge ResetHold_n) begin
 		if(~ResetHold_n)
 			HoldOut <= 1'b0;
-		else if(Hold_en)
+		else if(HoldEnable)
 			HoldOut <= 1'b1;
 		else
 			HoldOut <= 1'b0;
