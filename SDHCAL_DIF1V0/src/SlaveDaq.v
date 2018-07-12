@@ -4,10 +4,10 @@
 // Engineer: Yu Wang
 // 
 // Create Date: 2017/06/27 14:18:35
-// Design Name: SDHCAL_DAQ2V0
+// Design Name: SDHCAL DIF 1V0
 // Module Name: SlaveDaq
-// Project Name: SDHCAL_DAQ2V0
-// Target Devices: XC7A200TFGG484-2
+// Project Name: SDHCAL DIF 1V0
+// Target Devices: XC7A100TFGG484-2L
 // Tool Versions: Vivado 16.3
 // Description: This module is used to control the DAQ function of the ASIC,
 // as it's name shows, this module is started by a trigger signal that is
@@ -431,13 +431,13 @@ module SlaveDaq(
 	end
 	//*** Power On Control
 	always @(State) begin
-		if(State == POWER_ON || State == POWER_ON || State == RELEASE || State == WAIT_START || State == START_ACQUISITION || State == WAIT_READ || State == START_READOUT || State == WAIT_READ || State == WAIT_READ_DONE || State == ONCE_END)
+		if(State == POWER_ON || State == POWER_ON || State == RELEASE || State == WAIT_START || State == START_ACQUISITION || State == WAIT_READ || State == START_READOUT || State == WAIT_READ || State == WAIT_READ_DONE || State == ONCE_END || State == OUT_TRIG_ID1 || State == OUT_TRIG_ID2)
 			PWR_ON_D = 1'b1;
 		else
 			PWR_ON_D = 1'b0;
 	end
 	always @(State) begin
-		if(State == CHIP_RESET || State == POWER_ON || State == POWER_ON || State == RELEASE || State == WAIT_START || State == START_ACQUISITION || State == WAIT_READ || State == START_READOUT || State == WAIT_READ || State == WAIT_READ_DONE || State == ONCE_END) begin
+		if(State == CHIP_RESET || State == POWER_ON || State == POWER_ON || State == RELEASE || State == WAIT_START || State == START_ACQUISITION || State == WAIT_READ || State == START_READOUT || State == WAIT_READ || State == WAIT_READ_DONE || State == ONCE_END|| State == OUT_TRIG_ID1 || State == OUT_TRIG_ID2) begin
 			PWR_ON_A = 1'b1;
 			PWR_ON_DAC = 1'b1;
 		end
