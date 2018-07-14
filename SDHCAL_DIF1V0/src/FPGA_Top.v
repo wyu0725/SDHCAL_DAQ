@@ -70,4 +70,5 @@ module FPGA_Top(
   CommandInterpreter Command(/*autoinst*/);
   ConfigurationParameterDistribution ConfigurationSelect(/*autoinst*/);
   AcquisitionControl Acquisition(/*autoinst*/);
+  TriggerSwitcher TriggerSelect(/*autoinst*/);
 endmodule
