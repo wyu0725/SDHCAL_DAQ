@@ -99,7 +99,8 @@ module MicrorocControl_tb;
   wire DOUT2B;
   reg TRANSMITON1B;
   reg TRANSMITON2B;
-
+  reg DataTrigger;
+  reg DataTriggerEnable;
   // Outputs
   wire ParameterLoadDone;
   wire [15:0] ExternalFifoData;
@@ -201,6 +202,8 @@ module MicrorocControl_tb;
     .UsbStartStop(UsbStartStop),
     .AcquisitionStartTime(AcquisitionStartTime),
     .EndHoldTime(EndHoldTime),
+    .DataTriggerEnable(DataTriggerEnable),
+    .DataTrigger(DataTrigger),
     .HoldEnable(HoldEnable),
     .HoldDelay(HoldDelay),
     .HoldTime(HoldTime),
@@ -303,6 +306,8 @@ module MicrorocControl_tb;
     HoldEnable = 0;
     HoldDelay = 8'd11;
     HoldTime = 16'd20;
+    DataTriggerEnable = 1'b0;
+    DataTrigger = 1'b0;
 
     // Wait 100 ns for global reset to finish
     #100;
@@ -323,6 +328,15 @@ module MicrorocControl_tb;
     #100000;
     PowerPulsingPinEnable = 1'b1;
     #100000;
+    DataTrigger = 1'b1;
+    #25;
+    DataTrigger = 1'b0;
+    #208;
+    DataTriggerEnable = 1'b1;
+    #29;
+    DataTrigger = 1'b1;
+    #25
+    DataTrigger = 1'b0;
     AcqStart = 1'b0;
     DaqSelect = 1'b0;
     #10000;

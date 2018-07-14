@@ -136,6 +136,8 @@ CK_40N	MicrorocControl.v	/^  output CK_40N,$/;"	p	language:Verilog	module:Micror
 CK_40P	MicrorocControl.v	/^  output CK_40P,$/;"	p	language:Verilog	module:MicrorocControl
 CK_5N	MicrorocControl.v	/^  output CK_5N$/;"	p	language:Verilog	module:MicrorocControl
 CK_5P	MicrorocControl.v	/^  output CK_5P,$/;"	p	language:Verilog	module:MicrorocControl
+CLKFBOUT	ClockManagement.v	/^  wire CLKFBOUT;$/;"	n	language:Verilog	module:ClockManagement
+CLKGOOD	ClockManagement.v	/^  output CLKGOOD$/;"	p	language:Verilog	module:ClockManagement
 CLK_EXT	SCurve_Single_Input.v	/^    input CLK_EXT,$/;"	p	language:Verilog	module:SCurve_Single_Input
 CLK_EXT	SCurve_Single_Test.v	/^    input CLK_EXT,$/;"	p	language:Verilog	module:SCurve_Single_Test
 CLK_EXT	SCurve_Test_Top.v	/^  input CLK_EXT,$/;"	p	language:Verilog	module:SCurve_Test_Top
@@ -212,6 +214,7 @@ Clk	ADC_AD9220.v	/^  input Clk,$/;"	p	language:Verilog	module:ADC_AD9220
 Clk	AcquisitionControl.v	/^  input Clk,$/;"	p	language:Verilog	module:AcquisitionControl
 Clk	AdcControl.v	/^    input Clk,$/;"	p	language:Verilog	module:AdcControl
 Clk	AutoDaq.v	/^  input Clk,         \/\/40M$/;"	p	language:Verilog	module:AutoDaq
+Clk	ClockManagement.v	/^  output Clk,$/;"	p	language:Verilog	module:ClockManagement
 Clk	CommandDecoder.v	/^	input Clk,$/;"	p	language:Verilog	module:CommandDecoder
 Clk	CommandDecoder_beforeInst.v	/^	input Clk,$/;"	p	language:Verilog	module:CommandDecoder
 Clk	CommandInterpreter.v	/^  input Clk,$/;"	p	language:Verilog	module:CommandInterpreter
@@ -228,9 +231,11 @@ Clk	SCurve_Test_Top.v	/^  input Clk,$/;"	p	language:Verilog	module:SCurve_Test_T
 Clk	SlaveDaq.v	/^	input Clk,$/;"	p	language:Verilog	module:SlaveDaq
 Clk	SlowControlAndReadScopeSet.v	/^  input Clk,$/;"	p	language:Verilog	module:SlowControlAndReadScopeSet
 Clk	TimeStampSyncAndDataTrigger.v	/^	input Clk,$/;"	p	language:Verilog	module:TimeStampSyncAndDataTrigger
+Clk40M	ClockManagement.v	/^  input Clk40M,$/;"	p	language:Verilog	module:ClockManagement
 Clk40M	FPGA_Top.v	/^	input Clk40M,$/;"	p	language:Verilog	module:FPGA_Top
 Clk5M	AcquisitionControl.v	/^  input Clk5M,$/;"	p	language:Verilog	module:AcquisitionControl
 Clk5M	BitShiftOut.v	/^	input Clk5M,$/;"	p	language:Verilog	module:BitShiftOut
+Clk5M	ClockManagement.v	/^  output Clk5M,$/;"	p	language:Verilog	module:ClockManagement
 Clk5M	MicrorocControl.v	/^  input Clk5M,                              \/\/ Clock for Microroc Configuration. If SlowClock /;"	p	language:Verilog	module:MicrorocControl
 ClkDestination	PulseSynchronous.v	/^    input ClkDestination,$/;"	p	language:Verilog	module:PulseSynchronous
 ClkSource	PulseSynchronous.v	/^    input ClkSource,$/;"	p	language:Verilog	module:PulseSynchronous
@@ -238,6 +243,7 @@ Clk_1K	SCurve_Test_Top.v	/^  reg Clk_1K;$/;"	r	language:Verilog	module:SCurve_Te
 Clk_5M	SCurve_Test_Top.v	/^  input Clk_5M,\/\/ Use 5M clock to generate 1k clock$/;"	p	language:Verilog	module:SCurve_Test_Top
 Clock1K_Cnt	SCurve_Test_Top.v	/^  reg [11:0] Clock1K_Cnt;$/;"	r	language:Verilog	module:SCurve_Test_Top
 Clock1K_Max	SCurve_Test_Top.v	/^  localparam [11:0] Clock1K_Max = 12'd1250;$/;"	c	language:Verilog	module:SCurve_Test_Top
+ClockManagement	ClockManagement.v	/^module ClockManagement($/;"	m	language:Verilog
 CommandAdcStartStop	AcquisitionControl.v	/^  input CommandAdcStartStop,$/;"	p	language:Verilog	module:AcquisitionControl
 CommandAdcStartStop	AcquisitionSwitcher.v	/^  input CommandAdcStartStop,$/;"	p	language:Verilog	module:AcquisitionSwitcher
 CommandDecoder	CommandDecoder.v	/^module CommandDecoder$/;"	m	language:Verilog
@@ -369,7 +375,9 @@ DataTransmitDone	DaqControl.v	/^  input DataTransmitDone,$/;"	p	language:Verilog
 DataTransmitDone	DaqSwitcher.v	/^    input DataTransmitDone,$/;"	p	language:Verilog	module:DaqSwitcher
 DataTransmitDone	MicrorocControl.v	/^  wire DataTransmitDone;$/;"	n	language:Verilog	module:MicrorocControl
 DataTransmitDone	SlaveDaq.v	/^	input DataTransmitDone$/;"	p	language:Verilog	module:SlaveDaq
+DataTrigger	MicrorocControl.v	/^  input DataTrigger,$/;"	p	language:Verilog	module:MicrorocControl
 DataTrigger	TimeStampSyncAndDataTrigger.v	/^	input DataTrigger,$/;"	p	language:Verilog	module:TimeStampSyncAndDataTrigger
+DataTriggerEnable	MicrorocControl.v	/^  input DataTriggerEnable,$/;"	p	language:Verilog	module:MicrorocControl
 DataTriggerEnable	TimeStampSyncAndDataTrigger.v	/^	input DataTriggerEnable,$/;"	p	language:Verilog	module:TimeStampSyncAndDataTrigger
 Data_Transmit_Done	SCurve_Test_Control.v	/^  input                                       Data_Transmit_Done$/;"	p	language:Verilog	module:SCurve_Test_Control
 Data_Transmit_Done	SCurve_Test_Top.v	/^  input Data_Transmit_Done$/;"	p	language:Verilog	module:SCurve_Test_Top
@@ -537,6 +545,7 @@ IDLE	CommandInterpreter.v	/^  localparam [1:0]  IDLE       = 2'b00,$/;"	c	langua
 IDLE	SCurve_Single_Test.v	/^    localparam [2:0] IDLE = 3'd0,$/;"	c	language:Verilog	module:SCurve_Single_Test
 IDLE	SCurve_Test_Control.v	/^  localparam [4:0] IDLE                            = 5'd0,$/;"	c	language:Verilog	module:SCurve_Test_Control
 IDLE	SlaveDaq.v	/^	localparam [4:0] IDLE = 5'd0,$/;"	c	language:Verilog	module:SlaveDaq
+IFCLK	ClockManagement.v	/^  output IFCLK,$/;"	p	language:Verilog	module:ClockManagement
 IFCLK	CommandInterpreter.v	/^  input IFCLK,$/;"	p	language:Verilog	module:CommandInterpreter
 IFCLK	usb_synchronous_slavefifo.v	/^    input IFCLK,$/;"	p	language:Verilog	module:usb_synchronous_slavefifo
 Idle	ADC_AD9220.v	/^localparam [1:0] Idle = 2'b00,$/;"	c	language:Verilog	module:ADC_AD9220
@@ -757,6 +766,9 @@ Microroc_CTest_Chn_Out	SCurve_Test_Control.v	/^  output reg [63:0]              
 Microroc_CTest_Chn_Out	SCurve_Test_Top.v	/^  output [63:0] Microroc_CTest_Chn_Out,$/;"	p	language:Verilog	module:SCurve_Test_Top
 Microroc_Discriminator_Mask	SCurve_Test_Control.v	/^  output reg [191:0]                          Microroc_Discriminator_Mask,$/;"	p	language:Verilog	module:SCurve_Test_Control
 Microroc_Discriminator_Mask	SCurve_Test_Top.v	/^  output [191:0] Microroc_Discriminator_Mask,$/;"	p	language:Verilog	module:SCurve_Test_Top
+Mmcm100M	ClockManagement.v	/^  wire Mmcm100M;$/;"	n	language:Verilog	module:ClockManagement
+Mmcm40M	ClockManagement.v	/^  wire Mmcm40M;$/;"	n	language:Verilog	module:ClockManagement
+Mmcm5M	ClockManagement.v	/^  wire Mmcm5M;$/;"	n	language:Verilog	module:ClockManagement
 ModeSelect	AcquisitionControl.v	/^  input [3:0] ModeSelect,$/;"	p	language:Verilog	module:AcquisitionControl
 ModeSelect	AcquisitionSwitcher.v	/^  input [3:0] ModeSelect,$/;"	p	language:Verilog	module:AcquisitionSwitcher
 ModeSelect	CommandInterpreter.v	/^  output [3:0] ModeSelect,$/;"	p	language:Verilog	module:CommandInterpreter
@@ -810,8 +822,11 @@ OutTestData	AcquisitionSwitcher.v	/^  output reg [15:0] OutTestData,$/;"	p	langu
 OutTestDataEnable	AcquisitionControl.v	/^  output OutTestDataEnable,$/;"	p	language:Verilog	module:AcquisitionControl
 OutTestDataEnable	AcquisitionSwitcher.v	/^  output reg OutTestDataEnable,$/;"	p	language:Verilog	module:AcquisitionSwitcher
 OutTrigger0b	AcquisitionControl.v	/^  input OutTrigger0b,$/;"	p	language:Verilog	module:AcquisitionControl
+OutTrigger0b	TriggerSwitcher.v	/^  input OutTrigger0b,$/;"	p	language:Verilog	module:TriggerSwitcher
 OutTrigger1b	AcquisitionControl.v	/^  input OutTrigger1b,$/;"	p	language:Verilog	module:AcquisitionControl
+OutTrigger1b	TriggerSwitcher.v	/^  input OutTrigger1b,$/;"	p	language:Verilog	module:TriggerSwitcher
 OutTrigger2b	AcquisitionControl.v	/^  input OutTrigger2b,$/;"	p	language:Verilog	module:AcquisitionControl
+OutTrigger2b	TriggerSwitcher.v	/^  input OutTrigger2b,$/;"	p	language:Verilog	module:TriggerSwitcher
 OutUsbStartStop	AcquisitionControl.v	/^  output OutUsbStartStop,$/;"	p	language:Verilog	module:AcquisitionControl
 OutUsbStartStop	AcquisitionSwitcher.v	/^  output reg OutUsbStartStop$/;"	p	language:Verilog	module:AcquisitionSwitcher
 PERIOD	ADC_AD9220.v	/^                PERIOD= 2'b10;$/;"	c	language:Verilog	module:ADC_AD9220
@@ -1124,6 +1139,7 @@ SweepTestDone	CommandInterpreter.v	/^  input SweepTestDone,$/;"	p	language:Veril
 SweepTestStartStop	CommandInterpreter.v	/^  output reg SweepTestStartStop,$/;"	p	language:Verilog	module:CommandInterpreter
 SweepTestStartStopInternal	CommandInterpreter.v	/^  wire SweepTestStartStopInternal;$/;"	n	language:Verilog	module:CommandInterpreter
 SweepTestStartStop_CAND	CommandParameter.v	/^`define SweepTestStartStop_CAND                    16'hF0A0$/;"	c	language:Verilog
+SyncClk	ClockManagement.v	/^  output SyncClk,$/;"	p	language:Verilog	module:ClockManagement
 SyncClk	HoldGenerate.v	/^	input SyncClk,$/;"	p	language:Verilog	module:HoldGenerate
 SyncClk	MicrorocControl.v	/^  input SyncClk,                            \/\/ This clock is a fast clock to synchronous the T/;"	p	language:Verilog	module:MicrorocControl
 SynchronousReg	PulseSynchronous.v	/^	reg [2:0] SynchronousReg;$/;"	r	language:Verilog	module:PulseSynchronous
@@ -1175,6 +1191,7 @@ TrigCount_en	SlaveDaq.v	/^	reg TrigCount_en;$/;"	r	language:Verilog	module:Slave
 TrigCounter	SlaveDaq.v	/^	reg [23:0] TrigCounter;$/;"	r	language:Verilog	module:SlaveDaq
 TrigCounter_sync	SlaveDaq.v	/^	reg [23:0] TrigCounter_sync;$/;"	r	language:Verilog	module:SlaveDaq
 Trigger	SCurve_Single_Input.v	/^    input Trigger,$/;"	p	language:Verilog	module:SCurve_Single_Input
+Trigger	TriggerSwitcher.v	/^  output Trigger$/;"	p	language:Verilog	module:TriggerSwitcher
 TriggerCoincidence	CommandInterpreter.v	/^  output [1:0] TriggerCoincidence,$/;"	p	language:Verilog	module:CommandInterpreter
 TriggerCoincidenceSet_CAND	CommandParameter.v	/^`define TriggerCoincidenceSet_CAND                 16'hE2D0$/;"	c	language:Verilog
 TriggerCountMax	AcquisitionControl.v	/^  input [15:0] TriggerCountMax,$/;"	p	language:Verilog	module:AcquisitionControl
@@ -1197,6 +1214,7 @@ TriggerEfficiencyOrCountEfficiency	SCurve_Single_Test.v	/^    input TriggerEffic
 TriggerEfficiencyOrCountEfficiency	SCurve_Test_Top.v	/^  input TriggerEfficiencyOrCountEfficiency,$/;"	p	language:Verilog	module:SCurve_Test_Top
 TriggerEfficiencyOrCountEfficiencySet_CAND	CommandParameter.v	/^`define TriggerEfficiencyOrCountEfficiencySet_CAND 16'hE101$/;"	c	language:Verilog
 TriggerExt	TimeStampSyncAndDataTrigger.v	/^	output reg TriggerExt$/;"	p	language:Verilog	module:TimeStampSyncAndDataTrigger
+TriggerExt	TriggerSwitcher.v	/^  input TriggerExt,$/;"	p	language:Verilog	module:TriggerSwitcher
 TriggerExt_i	TimeStampSyncAndDataTrigger.v	/^	reg TriggerExt_i;$/;"	r	language:Verilog	module:TimeStampSyncAndDataTrigger
 TriggerIn	ExternalRazGenerate.v	/^	input TriggerIn,$/;"	p	language:Verilog	module:ExternalRazGenerate
 TriggerIn	HoldGenerate.v	/^	input TriggerIn,$/;"	p	language:Verilog	module:HoldGenerate
@@ -1212,8 +1230,10 @@ TriggerOutputEnable	MicrorocControl.v	/^  input TriggerOutputEnable,            
 TriggerOutputEnable	ParameterGenerator.v	/^	input TriggerOutputEnable, \/\/ Default: 1 Enable$/;"	p	language:Verilog	module:ParameterGenerator
 TriggerOutputEnable	SlowControlAndReadScopeSet.v	/^  input TriggerOutputEnable,                \/\/ Default: 1 Enable$/;"	p	language:Verilog	module:SlowControlAndReadScopeSet
 TriggerOutputEnable_CAND	CommandParameter.v	/^`define TriggerOutputEnable_CAND                   16'hA071$/;"	c	language:Verilog
+TriggerSelect	TriggerSwitcher.v	/^  input [4:0] TriggerSelect,$/;"	p	language:Verilog	module:TriggerSwitcher
 TriggerShift	HoldGenerate.v	/^	reg [255:0] TriggerShift;$/;"	r	language:Verilog	module:HoldGenerate
 TriggerShift	SCurve_Single_Input.v	/^  reg [15:0] TriggerShift;$/;"	r	language:Verilog	module:SCurve_Single_Input
+TriggerSwitcher	TriggerSwitcher.v	/^module TriggerSwitcher($/;"	m	language:Verilog
 TriggerToWriteSelect	MicrorocControl.v	/^  input [2:0] TriggerToWriteSelect,         \/\/ Default: 111 all$/;"	p	language:Verilog	module:MicrorocControl
 TriggerToWriteSelect	ParameterGenerator.v	/^	input [2:0] TriggerToWriteSelect, \/\/ Default: 111 all$/;"	p	language:Verilog	module:ParameterGenerator
 TriggerToWriteSelect	SlowControlAndReadScopeSet.v	/^  input [2:0] TriggerToWriteSelect,         \/\/ Default: 111 all$/;"	p	language:Verilog	module:SlowControlAndReadScopeSet
@@ -1228,8 +1248,10 @@ UnmaskAllChannel	SCurve_Test_Top.v	/^  input UnmaskAllChannel,$/;"	p	language:Ve
 UnmaskAllChannelSet_CAND	CommandParameter.v	/^`define UnmaskAllChannelSet_CAND                   16'hE1F0$/;"	c	language:Verilog
 UsbAcqStart	DaqControl.v	/^  input UsbAcqStart,$/;"	p	language:Verilog	module:DaqControl
 UsbAcqStart	DaqSwitcher.v	/^    input UsbAcqStart,$/;"	p	language:Verilog	module:DaqSwitcher
+UsbClockout	ClockManagement.v	/^  input UsbClockout,$/;"	p	language:Verilog	module:ClockManagement
 UsbFifoEmpty	CommandInterpreter.v	/^  input UsbFifoEmpty,$/;"	p	language:Verilog	module:CommandInterpreter
 UsbFifoEmpty	DaqControl.v	/^  input UsbFifoEmpty,$/;"	p	language:Verilog	module:DaqControl
+UsbIfclk	ClockManagement.v	/^  output UsbIfclk,$/;"	p	language:Verilog	module:ClockManagement
 UsbStartStop	DaqControl.v	/^  output UsbStartStop,$/;"	p	language:Verilog	module:DaqControl
 UsbStartStop	DaqSwitcher.v	/^    output UsbStartStop,$/;"	p	language:Verilog	module:DaqSwitcher
 UsbStartStop	FPGA_Top.v	/^    wire UsbStartStop;$/;"	n	language:Verilog	module:FPGA_Top
@@ -1291,6 +1313,7 @@ reset_n	AdcControl.v	/^    input reset_n,$/;"	p	language:Verilog	module:AdcContr
 reset_n	AsicRamReadout.v	/^	input reset_n,$/;"	p	language:Verilog	module:AsicRamReadout
 reset_n	AutoDaq.v	/^  input reset_n,$/;"	p	language:Verilog	module:AutoDaq
 reset_n	BitShiftOut.v	/^	input reset_n,$/;"	p	language:Verilog	module:BitShiftOut
+reset_n	ClockManagement.v	/^  output reset_n,$/;"	p	language:Verilog	module:ClockManagement
 reset_n	CommandDecoder.v	/^	input reset_n,$/;"	p	language:Verilog	module:CommandDecoder
 reset_n	CommandDecoder_beforeInst.v	/^	input reset_n,$/;"	p	language:Verilog	module:CommandDecoder
 reset_n	CommandInterpreter.v	/^  input reset_n,$/;"	p	language:Verilog	module:CommandInterpreter
@@ -1308,6 +1331,7 @@ reset_n	SCurve_Test_Top.v	/^  input reset_n,$/;"	p	language:Verilog	module:SCurv
 reset_n	SlaveDaq.v	/^	input reset_n,$/;"	p	language:Verilog	module:SlaveDaq
 reset_n	SlowControlAndReadScopeSet.v	/^  input reset_n,$/;"	p	language:Verilog	module:SlowControlAndReadScopeSet
 reset_n	TimeStampSyncAndDataTrigger.v	/^	input reset_n,$/;"	p	language:Verilog	module:TimeStampSyncAndDataTrigger
+rst_n	ClockManagement.v	/^  input rst_n,$/;"	p	language:Verilog	module:ClockManagement
 rst_n	FPGA_Top.v	/^	input rst_n$/;"	p	language:Verilog	module:FPGA_Top
 start	ADC_AD9220.v	/^  input start,  \/\/start acquisition$/;"	p	language:Verilog	module:ADC_AD9220
 start	AutoDaq.v	/^  input start,$/;"	p	language:Verilog	module:AutoDaq
