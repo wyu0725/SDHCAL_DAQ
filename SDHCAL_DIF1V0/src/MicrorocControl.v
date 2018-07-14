@@ -101,6 +101,8 @@ module MicrorocControl(
   output UsbStartStop,
   input [15:0] AcquisitionStartTime,
   input [15:0] EndHoldTime,
+  input DataTriggerEnable,
+  input DataTrigger,
   // Hold Control
   input HoldEnable,
   input [7:0] HoldDelay,
@@ -320,9 +322,9 @@ module MicrorocControl(
     .reset_n          (reset_n),
     .TimeStampReset   (TimeStampReset),
     .RST_COUNTERB     (RST_COUNTERB),
-    .DataTrigger      (),
-    .DataTriggerEnable(),
-    .TriggerExt       ()
+    .DataTrigger      (DataTrigger),
+    .DataTriggerEnable(DataTriggerEnable),
+    .TriggerExt       (TRIG_EXT)
     );
 
   // LVDS BUFF OBUFDS
