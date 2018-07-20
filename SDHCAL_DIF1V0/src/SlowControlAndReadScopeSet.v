@@ -73,7 +73,6 @@ module SlowControlAndReadScopeSet(
   input [63:0] CTestChannel,
   input [63:0] ReadScopeChannel,
   // *** Pins
-  output SELECT,                            // select = 1,slowcontrol register; select = 0,read register
   output SR_RSTB,                           // Selected Register Reset
   output SR_CK,                             // Selected Register Clock
   output SR_IN                              // Selected Register Input
@@ -175,5 +174,4 @@ module SlowControlAndReadScopeSet(
     .SerialDataout             (SR_IN),
     .BitShiftDone              (ParameterLoadDone)
     );
-  assign SELECT = SlowControlOrReadScopeSelect;
 endmodule
