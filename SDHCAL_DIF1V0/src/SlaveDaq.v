@@ -199,6 +199,7 @@ module SlaveDaq(
 					end
 				end
 				WAIT_START:begin
+          OnceEnd <= 1'b0;
 					if(~ModuleStart) begin
 						AcqEnable <= 1'b0;
 						//AllDone <= 1'b1;
@@ -252,7 +253,7 @@ module SlaveDaq(
 				end
 				WAIT_READ_DONE:begin
 					if(EndReadout) begin
-						OnceEnd <= 1'b1;
+						//OnceEnd <= 1'b1;
 						State <= ONCE_END;
 					end
 					else begin
@@ -265,14 +266,14 @@ module SlaveDaq(
 						State <= ONCE_END;
 					end
 					else if(MicrorocHit) begin
-						OnceEnd <= 1'b0;
+						//OnceEnd <= 1'b0;
 						DelayCount <= 16'b0;
 						ResetStartAcq_n <= 1'b1;
 						ResetMicrorocHit <= 1'b0;
 						State <= OUT_TRIG_ID1;
 					end
 					else begin
-						OnceEnd <= 1'b0;
+						OnceEnd <= 1'b1;
 						DelayCount <= 16'b0;
 						ResetStartAcq_n <= 1'b1;
 						State <= WAIT_START;
@@ -297,6 +298,7 @@ module SlaveDaq(
 						State <= OUT_TRIG_ID2;
 					end
 					else begin
+            OnceEnd <= 1'b1;
 						DelayCount <= 16'b0;
 						InternalData_en <= 1'b0;
 						State <= WAIT_START;
