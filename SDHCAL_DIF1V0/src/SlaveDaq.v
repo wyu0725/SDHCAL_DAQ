@@ -252,7 +252,7 @@ module SlaveDaq(
 					end
 				end
 				WAIT_READ_DONE:begin
-					if(EndReadout) begin
+					if(EndRead) begin
 						//OnceEnd <= 1'b1;
 						State <= ONCE_END;
 					end
