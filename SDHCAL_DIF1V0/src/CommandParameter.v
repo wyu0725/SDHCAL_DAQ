@@ -42,6 +42,12 @@
 `define ReadoutChannelSelect_CAND                  16'hA281
 `define ExternalRazModeSelect_CAND                 16'hA293
 `define ExternalRazDelayTime_CAND                  16'hA3A7
+`define PowerPulsingPinEnable_CAND                 16'hA3B1
+`define EndReadoutParameter_CAND                   16'hA3CF
+// 16'hA3DF is reserved for EndReadoutParameter more than 4bits
+`define AsicNumberSet_CAND                         16'hA3E4
+`define SCurveTestAsicSelect_CAND 16'hA3F0
+`define ResetTimeStamp_CAND                        16'hA300
 `define Dac0Vth3to0_CAND                           16'hC000
 `define Dac0Vth7to4_CAND                           16'hC010
 `define Dac0Vth9to8_CAND                           16'hC020
@@ -104,5 +110,8 @@
 `define LightLed_CAND                              16'hB000
 `define AcquisitionStartStop_CAND                  16'hF0F0
 `define ResetDataFifo_CAND                         16'hF1A0
-`define ResetTimeStamp_CAND                        16'hA3B0
 `define DaqSelect_CAND                             16'hE290
+`define MicrorocStartAcquisitionTime3to0_CAND 16'hE3A0
+`define MicrorocStartAcquisitionTime7to4_CAND 16'hE3B5
+`define MicrorocStartAcquisitionTime11to8_CAND 16'hE3C0
+`define MicrorocStartAcquisitionTime15to12_CAND 16'hE3D0

@@ -21,19 +21,19 @@
 //  Call the CommandDecoder module to get the command.
 //  Use as CommandDecoder instname (/*autoinst*/);
 //  CommandDecoder
-//	#(
-//		.LEVEL_OR_PULSE(1'b1),
-//		.COMMAND_WIDTH(2'b0),
-//		.COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
-//	)
+//  #(
+//    .LEVEL_OR_PULSE(1'b1),
+//    .COMMAND_WIDTH(2'b0),
+//    .COMMAND_ADDRESS_AND_DEFAULT(16'hFFFF)
+//  )
 //  instname(
-//  	.Clk(Clk),
-//  	.reset_n(reset_n),
-//  	.CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
-//  	.COMMAND_WORD(COMMAND_WORD),
-//  	// input [COMMAND_WIDTH:0] DefaultValue,
-//  	.CommandOut(CommandOut)
-//  	);
+//    .Clk(Clk),
+//    .reset_n(reset_n),
+//    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
+//    .COMMAND_WORD(COMMAND_WORD),
+//    // input [COMMAND_WIDTH:0] DefaultValue,
+//    .CommandOut(CommandOut)
+//    );
 //
 //
 // Dependencies:
@@ -57,10 +57,12 @@ module CommandInterpreter(
   input CommandWordEn,
   input [15:0] CommandWord,
   //--- Command ---//
-  output AcquisitionStartStop,
+  output [3:0] AcquisitionStartStop,
   output ResetDataFifo,
   output [3:0] AsicChainSelect, // Considering the expand board in the future,
   //  the max ASIC chain is set to 16
+  output [3:0] AsicNumberSet,
+  output [3:0] SCurveTestAsicSelect,
   //*** Microorc Parameter
   // MICROROC slow control parameter
   output MicrorocSlowControlOrReadScopeSelect,
@@ -96,7 +98,7 @@ module CommandInterpreter(
   output MicrorocOTAqPPEnable,
   output MicrorocOTAqEnable,
   output MicrorocDac4bitPPEnable,
-  output [255:0] ChannelAdjust,
+  output [255:0] MicrorocChannelAdjust,
   output [1:0] MicrorocHighGainShaperFeedbackSelect,
   output MicrorocShaperOutLowGainOrHighGain,
   output MicrorocWidlarPPEnable,
@@ -113,8 +115,11 @@ module CommandInterpreter(
 
   // Microroc Control
   output MicrorocResetTimeStamp,
+  output MicrorocPowerPulsingPinEnable,
+  output [3:0] MicrorocEndReadoutParameter,
 
   //*** Acquisition Control
+  output [15:0] MicrorocStartAcquisitionTime,
   // Mode Select
   output [3:0] ModeSelect,
   output [1:0] DacSelect,
@@ -143,7 +148,7 @@ module CommandInterpreter(
   output AdcStartStop,
   output [3:0] AdcStartDelayTime,
   output [7:0] AdcDataNumber,
-  output [1:0] TriggerCoincidence,
+  output [3:0] TriggerCoincidence,
   output [7:0] HoldDelay,
   output [15:0] HoldTime,
   output HoldEnable,
@@ -203,7 +208,7 @@ module CommandInterpreter(
       endcase
     end
   end
-    reg CommandFifoReadEnDelayed;
+  reg CommandFifoReadEnDelayed;
   always @ (posedge Clk or negedge reset_n) begin
     if(~reset_n)
       CommandFifoReadEnDelayed <= 1'b0;
@@ -717,7 +722,7 @@ module CommandInterpreter(
     .CommandOut(MaskOrUnmask)
     );
 
-  always @ (posedge Clk or reset_n) begin
+  always @ (posedge Clk or negedge reset_n) begin
     if(~reset_n)
       MaskShift <= 8'b0;
     else
@@ -727,9 +732,9 @@ module CommandInterpreter(
   reg [191:0] SingleChannelMask;
   reg [1:0] MaskState;
   localparam [1:0]  IDLE       = 2'b00,
-                    MASK       = 2'b01,
-                    UNMASK     = 2'b10,
-                    MASK_CLEAR = 2'b11;
+  MASK       = 2'b01,
+  UNMASK     = 2'b10,
+  MASK_CLEAR = 2'b11;
   always @ (posedge Clk or negedge reset_n) begin
     if(~reset_n) begin
       MaskState <= IDLE;
@@ -955,7 +960,7 @@ module CommandInterpreter(
       //Dac4bit <= Dac4bit;
     end
   end
-  assign ChannelAdjust = {Invert4bit(Dac4bit[63]),
+  assign MicrorocChannelAdjust = {Invert4bit(Dac4bit[63]),
     Invert4bit(Dac4bit[62]),
     Invert4bit(Dac4bit[61]),
     Invert4bit(Dac4bit[60]),
@@ -1070,20 +1075,20 @@ module CommandInterpreter(
     );
 
   // GainBoostEnable 1bit, default A051
-CommandDecoder
-	#(
-		.LEVEL_OR_PULSE(1'b1),
-		.COMMAND_WIDTH(2'b0),
-		.COMMAND_ADDRESS_AND_DEFAULT(`GainBoostEnable_CAND)
-	)
-GainBoostEnable(
-	.Clk(Clk),
-	.reset_n(reset_n),
-	.CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
-	.COMMAND_WORD(COMMAND_WORD),
-	// input [COMMAND_WIDTH:0] DefaultValue,
-	.CommandOut(MicrorocGainBoostEnable)
-	);
+  CommandDecoder
+  #(
+    .LEVEL_OR_PULSE(1'b1),
+    .COMMAND_WIDTH(2'b0),
+    .COMMAND_ADDRESS_AND_DEFAULT(`GainBoostEnable_CAND)
+  )
+  GainBoostEnable(
+    .Clk(Clk),
+    .reset_n(reset_n),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
+    .COMMAND_WORD(COMMAND_WORD),
+    // input [COMMAND_WIDTH:0] DefaultValue,
+    .CommandOut(MicrorocGainBoostEnable)
+    );
   // CTestChannel 64bit, need decode
   // CTestChannel[3:0] default A16X
   // CTestChannel[7:4] default A17X
@@ -2103,7 +2108,7 @@ GainBoostEnable(
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
-    .COMMAND_WIDTH(2'b1),
+    .COMMAND_WIDTH(2'b11),
     .COMMAND_ADDRESS_AND_DEFAULT(`TriggerCoincidenceSet_CAND)
   )
   TriggerCoincidenceSet(
@@ -2303,69 +2308,195 @@ GainBoostEnable(
     // input [COMMAND_WIDTH:0] DefaultValue,
     .CommandOut(AsicChainSelect)
     );
-  
+
   // AcquisitionStartStopSet 1bit, default F0F0
+  CommandDecoder
+  #(
+    .LEVEL_OR_PULSE(1'b1),
+    .COMMAND_WIDTH(2'b11),
+    .COMMAND_ADDRESS_AND_DEFAULT(`AcquisitionStartStop_CAND)
+  )
+  AcquisitionStartStopSet(
+    .Clk(Clk),
+    .reset_n(reset_n),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
+    .COMMAND_WORD(COMMAND_WORD),
+    // input [COMMAND_WIDTH:0] DefaultValue,
+    .CommandOut(AcquisitionStartStop)
+    );
+
+  // DataFifoReset 1bit, default F1A0, pulse
+  CommandDecoder
+  #(
+    .LEVEL_OR_PULSE(1'b0),
+    .COMMAND_WIDTH(2'b0),
+    .COMMAND_ADDRESS_AND_DEFAULT(`ResetDataFifo_CAND)
+  )
+  DataFifoReset(
+    .Clk(Clk),
+    .reset_n(reset_n),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
+    .COMMAND_WORD(COMMAND_WORD),
+    // input [COMMAND_WIDTH:0] DefaultValue,
+    .CommandOut(ResetDataFifo)
+    );
+
+  // TimeStampReset 1bit, default A3B0, pulse
+  CommandDecoder
+  #(
+    .LEVEL_OR_PULSE(1'b0),
+    .COMMAND_WIDTH(2'b0),
+    .COMMAND_ADDRESS_AND_DEFAULT(`ResetTimeStamp_CAND)
+  )
+  TimeStampReset(
+    .Clk(Clk),
+    .reset_n(reset_n),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
+    .COMMAND_WORD(COMMAND_WORD),
+    // input [COMMAND_WIDTH:0] DefaultValue,
+    .CommandOut(MicrorocResetTimeStamp)
+    );
+
+  // PowerPulsingPinEnable 1bit, default A3B1
+  CommandDecoder
+  #(
+    .LEVEL_OR_PULSE(1'b1),
+    .COMMAND_WIDTH(2'b0),
+    .COMMAND_ADDRESS_AND_DEFAULT(`PowerPulsingPinEnable_CAND)
+  )
+  EnablePowerPulsingPin(
+    .Clk(Clk),
+    .reset_n(reset_n),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
+    .COMMAND_WORD(COMMAND_WORD),
+    // input [COMMAND_WIDTH:0] DefaultValue,
+    .CommandOut(MicrorocPowerPulsingPinEnable)
+    );
+
+  // EndReadoutParameter 4bits, default A3CF
 CommandDecoder
 	#(
 		.LEVEL_OR_PULSE(1'b1),
-		.COMMAND_WIDTH(2'b0),
-		.COMMAND_ADDRESS_AND_DEFAULT(`AcquisitionStartStop_CAND)
+		.COMMAND_WIDTH(2'b11),
+		.COMMAND_ADDRESS_AND_DEFAULT(`EndReadoutParameter_CAND)
 	)
-AcquisitionStartStopSet(
+EndReadoutParameterGenerator(
 	.Clk(Clk),
 	.reset_n(reset_n),
 	.CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
 	.COMMAND_WORD(COMMAND_WORD),
 	// input [COMMAND_WIDTH:0] DefaultValue,
-	.CommandOut(AcquisitionStartStop)
+	.CommandOut(MicrorocEndReadoutParameter)
 	);
 
-  // DataFifoReset 1bit, default F1A0, pulse
+  // AsicNumberSet 4bits, default A3E4
 CommandDecoder
 	#(
-		.LEVEL_OR_PULSE(1'b0),
-		.COMMAND_WIDTH(2'b0),
-		.COMMAND_ADDRESS_AND_DEFAULT(`ResetDataFifo_CAND)
+		.LEVEL_OR_PULSE(1'b1),
+		.COMMAND_WIDTH(2'b11),
+		.COMMAND_ADDRESS_AND_DEFAULT(`AsicNumberSet_CAND)
 	)
-DataFifoReset(
+SetAsicNumber(
 	.Clk(Clk),
 	.reset_n(reset_n),
 	.CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
 	.COMMAND_WORD(COMMAND_WORD),
 	// input [COMMAND_WIDTH:0] DefaultValue,
-	.CommandOut(ResetDataFifo)
+	.CommandOut(AsicNumberSet)
 	);
 
-  // TimeStampReset 1bit, default A3B0, pulse
+  // SCurveTestAsicSelect 4bits, default A3F0
 CommandDecoder
 	#(
-		.LEVEL_OR_PULSE(1'b0),
-		.COMMAND_WIDTH(2'b0),
-		.COMMAND_ADDRESS_AND_DEFAULT(`ResetTimeStamp_CAND)
+		.LEVEL_OR_PULSE(1'b1),
+		.COMMAND_WIDTH(2'b11),
+		.COMMAND_ADDRESS_AND_DEFAULT(`SCurveTestAsicSelect_CAND)
 	)
-TimeStampReset(
+SelectSCurveTestAsic(
 	.Clk(Clk),
 	.reset_n(reset_n),
 	.CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
 	.COMMAND_WORD(COMMAND_WORD),
 	// input [COMMAND_WIDTH:0] DefaultValue,
-	.CommandOut(MicrorocResetTimeStamp)
+	.CommandOut(SCurveTestAsicSelect)
 	);
 
   // DaqModeSelect 1bit, default E290
+  CommandDecoder
+  #(
+    .LEVEL_OR_PULSE(1'b1),
+    .COMMAND_WIDTH(2'b0),
+    .COMMAND_ADDRESS_AND_DEFAULT(`DaqSelect_CAND)
+  )
+  DaqModeSelect(
+    .Clk(Clk),
+    .reset_n(reset_n),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
+    .COMMAND_WORD(COMMAND_WORD),
+    // input [COMMAND_WIDTH:0] DefaultValue,
+    .CommandOut(DaqSelect)
+    );
+
+  // StartAcquisition Time Set 16bits
+  // [3:0] default E3A0
+  // [7:4] default E3B5
+  // [11:8] default E3C0
+  // [15:12] default E3D0
 CommandDecoder
 	#(
 		.LEVEL_OR_PULSE(1'b1),
-		.COMMAND_WIDTH(2'b0),
-		.COMMAND_ADDRESS_AND_DEFAULT(`DaqSelect_CAND)
+		.COMMAND_WIDTH(2'b11),
+		.COMMAND_ADDRESS_AND_DEFAULT(`MicrorocStartAcquisitionTime3to0_CAND)
 	)
-DaqModeSelect(
+SetStartAcquisitionTime3to0(
 	.Clk(Clk),
 	.reset_n(reset_n),
 	.CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
 	.COMMAND_WORD(COMMAND_WORD),
 	// input [COMMAND_WIDTH:0] DefaultValue,
-	.CommandOut(DaqSelect)
+	.CommandOut(MicrorocStartAcquisitionTime[3:0])
+	);
+CommandDecoder
+	#(
+		.LEVEL_OR_PULSE(1'b1),
+		.COMMAND_WIDTH(2'b11),
+		.COMMAND_ADDRESS_AND_DEFAULT(`MicrorocStartAcquisitionTime7to4_CAND)
+	)
+SetStartAcquisitionTime7to4(
+	.Clk(Clk),
+	.reset_n(reset_n),
+	.CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
+	.COMMAND_WORD(COMMAND_WORD),
+	// input [COMMAND_WIDTH:0] DefaultValue,
+	.CommandOut(MicrorocStartAcquisitionTime[7:4])
+	);
+CommandDecoder
+	#(
+		.LEVEL_OR_PULSE(1'b1),
+		.COMMAND_WIDTH(2'b11),
+		.COMMAND_ADDRESS_AND_DEFAULT(`MicrorocStartAcquisitionTime11to8_CAND)
+	)
+SetStartAcquisitionTime11to8(
+	.Clk(Clk),
+	.reset_n(reset_n),
+	.CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
+	.COMMAND_WORD(COMMAND_WORD),
+	// input [COMMAND_WIDTH:0] DefaultValue,
+	.CommandOut(MicrorocStartAcquisitionTime[11:8])
+	);
+CommandDecoder
+	#(
+		.LEVEL_OR_PULSE(1'b1),
+		.COMMAND_WIDTH(2'b11),
+		.COMMAND_ADDRESS_AND_DEFAULT(`MicrorocStartAcquisitionTime15to12_CAND)
+	)
+SetStartAcquisitionTime15to12(
+	.Clk(Clk),
+	.reset_n(reset_n),
+	.CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
+	.COMMAND_WORD(COMMAND_WORD),
+	// input [COMMAND_WIDTH:0] DefaultValue,
+	.CommandOut(MicrorocStartAcquisitionTime[15:12])
 	);
 
   // LED 4bits, default B000
