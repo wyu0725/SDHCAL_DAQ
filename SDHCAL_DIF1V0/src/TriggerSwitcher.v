@@ -31,7 +31,9 @@ module TriggerSwitcher(
   output Trigger,
   output TriggerAnd,
   output TriggerOr,
-  output ExternalTriggerSyncOut
+  output ExternalTriggerSyncOut,
+  input ExternalSyncSignalIn,
+  output SyncSignalOut
     );
   reg InternalTrigger0;
   reg InternalTrigger1;
@@ -58,6 +60,7 @@ module TriggerSwitcher(
       4'b0001:TriggerSelected = InternalTrigger1;
       4'b0010:TriggerSelected = InternalTrigger2;
       4'b1000:TriggerSelected = TriggerExternal;
+      default:TriggerSelected = InternalTrigger0;
     endcase
   end
   BUFG BUFG_TRIGGER (
@@ -79,5 +82,10 @@ module TriggerSwitcher(
   BUFG BUFG_TRIGGER_EXT (
       .O(ExternalTriggerSyncOut), // 1-bit output: Clock output
       .I(TriggerExternal)  // 1-bit input: Clock input
+   );
+
+  BUFG BUFG_SYNC_SIGNAL (
+      .O(SyncSignalOut), // 1-bit output: Clock output
+      .I(ExternalSyncSignalIn)  // 1-bit input: Clock input
    );
 endmodule
