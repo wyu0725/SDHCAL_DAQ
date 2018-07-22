@@ -32,6 +32,7 @@ module ConfigurationParameterDistribution
     // MICROROC slow control parameter
     input MicrorocSlowControlOrReadScopeSelect_Input,
     input MicrorocParameterLoadStart_Input,
+    input [ASIC_CHAIN_NUMBER - 1:0]MicrorocParameterLoadDone_Input,
     input [1:0] MicrorocDataoutChannelSelect_Input,
     input [1:0] MicrorocTransmitOnChannelSelect_Input,
     // ChipSatbEnable
@@ -75,15 +76,12 @@ module ConfigurationParameterDistribution
     input [63:0] MicrorocCTestChannel_Input,
     input [63:0] MicrorocReadScopeChannel_Input,
     input MicrorocReadRedundancy_Input,// To redundancy module
-    input [1:0] MicrorocExternalRazMode_Input,
-    input [3:0] MicrorocExternalRazDelayTime_Input,
 
-    // Microroc Control
-    input MicrorocResetTimeStamp_Input,
     //*** Microorc Parameter
     // MICROROC slow control parameter
     output reg [ASIC_CHAIN_NUMBER - 1:0] MicrorocSlowControlOrReadScopeSelect_Output,
     output reg [ASIC_CHAIN_NUMBER - 1:0] MicrorocParameterLoadStart_Output,
+    output reg MicrorocParameterLoadDone_Output,
     output reg [2*ASIC_CHAIN_NUMBER - 1:0] MicrorocDataoutChannelSelect_Output,
     output reg [2*ASIC_CHAIN_NUMBER - 1:0] MicrorocTransmitOnChannelSelect_Output,
     // ChipSatbEnable
@@ -126,12 +124,7 @@ module ConfigurationParameterDistribution
     output reg [ASIC_CHAIN_NUMBER - 1:0] MicrorocPreAmplifierPPEnable_Output,
     output reg [64*ASIC_CHAIN_NUMBER - 1:0] MicrorocCTestChannel_Output,
     output reg [64*ASIC_CHAIN_NUMBER - 1:0] MicrorocReadScopeChannel_Output,
-    output reg [ASIC_CHAIN_NUMBER - 1:0] MicrorocReadRedundancy_Output,// To redundancy module
-    output reg [2*ASIC_CHAIN_NUMBER - 1:0] MicrorocExternalRazMode_Output,
-    output reg [4*ASIC_CHAIN_NUMBER - 1:0] MicrorocExternalRazDelayTime_Output,
-
-    // Microroc Control
-    output reg [ASIC_CHAIN_NUMBER - 1:0] MicrorocResetTimeStamp_Output
+    output reg [ASIC_CHAIN_NUMBER - 1:0] MicrorocReadRedundancy_Output// To redundancy module
     );
   wire [1:0] ASIC_CHAIN_SELECT = AsicChainSelect[1:0];
   always @(posedge Clk or negedge reset_n) begin
@@ -140,6 +133,7 @@ module ConfigurationParameterDistribution
       // MICROROC slow controlparameter_Output <= 4'b0;
       MicrorocSlowControlOrReadScopeSelect_Output <= 4'b0;
       MicrorocParameterLoadStart_Output <= 4'b0;
+      MicrorocParameterLoadDone_Output <= 4'b0;
       MicrorocDataoutChannelSelect_Output <= 8'b0;
       MicrorocTransmitOnChannelSelect_Output <= 8'b0;
       //ChipSatbEnable_Output <= 4'b0;
@@ -183,16 +177,14 @@ module ConfigurationParameterDistribution
       MicrorocCTestChannel_Output <= 256'b0;
       MicrorocReadScopeChannel_Output <= 256'b0;
       MicrorocReadRedundancy_Output <= 4'b0;// To redundancymodule_Output <= 4'b0;
-      MicrorocExternalRazMode_Output <= 8'b0;
-      MicrorocExternalRazDelayTime_Output <= 16'b0;
       // MicrorocControl_Output <= 4'b0;
-      MicrorocResetTimeStamp_Output <= 4'b0;
     end
     else begin
       //*** Microorc Parameter
       // MICROROC slow control parameter
       MicrorocSlowControlOrReadScopeSelect_Output[ASIC_CHAIN_SELECT] <= MicrorocSlowControlOrReadScopeSelect_Input;
       MicrorocParameterLoadStart_Output[ASIC_CHAIN_SELECT] <= MicrorocParameterLoadStart_Input;
+      MicrorocParameterLoadDone_Output <= MicrorocParameterLoadDone_Input[ASIC_CHAIN_SELECT];
       MicrorocDataoutChannelSelect_Output[2*(ASIC_CHAIN_SELECT + 1) - 1 -: 2] <= MicrorocDataoutChannelSelect_Input;
       MicrorocTransmitOnChannelSelect_Output[2*(ASIC_CHAIN_SELECT + 1)-1 -: 2] <= MicrorocTransmitOnChannelSelect_Input;
       // ChipSatbEnable
@@ -236,11 +228,6 @@ module ConfigurationParameterDistribution
       MicrorocCTestChannel_Output[64*(ASIC_CHAIN_SELECT + 1)-1 -: 64] <= MicrorocCTestChannel_Input;
       MicrorocReadScopeChannel_Output[64*(ASIC_CHAIN_SELECT + 1)-1 -: 64] <= MicrorocReadScopeChannel_Input;
       MicrorocReadRedundancy_Output[ASIC_CHAIN_SELECT] <= MicrorocReadRedundancy_Input;// To redundancy module
-      MicrorocExternalRazMode_Output[2*(ASIC_CHAIN_SELECT + 1)-1 -: 2] <= MicrorocExternalRazMode_Input;
-      MicrorocExternalRazDelayTime_Output[4*(ASIC_CHAIN_SELECT + 1)-1 -: 4] <= MicrorocExternalRazDelayTime_Input;
-
-      // Microroc Control
-      MicrorocResetTimeStamp_Output[ASIC_CHAIN_SELECT] <= MicrorocResetTimeStamp_Input;
     end
   end
 endmodule
