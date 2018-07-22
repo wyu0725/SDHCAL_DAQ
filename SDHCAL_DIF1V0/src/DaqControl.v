@@ -30,6 +30,7 @@ module DaqControl(
   // Start signal
   input UsbAcqStart,
   output UsbStartStop,
+  input StartEnable,
   // Read start and end
   input EndReadout,
   output StartReadout,
@@ -165,21 +166,23 @@ module DaqControl(
 
   AutoDaq AutoDaqControl
   (
-    .Clk(Clk),         //40M
+    .Clk(Clk),                            // 40M
     .reset_n(reset_n),
-    .start(AutoDaq_Start), //a pulse or a level?
-    .End_Readout(AutoDaq_EndReadout), //Digitial RAM end reading signal, Active H
-    .Chipsatb(AutoDaq_CHIPSATB),    //Chip is full, Active L, PIN
-    .T_acquisition(AcquisitionTime),//Get from USB, default 8
-    .Reset_b(AutoDaq_RESET_B),      //Reset ASIC digital part, PIN
-    .Start_Acq(AutoDaq_START_ACQ),  //Start & maintain acquisition, Active H,PIN
-    .Start_Readout(AutoDaq_StartReadout),//Digital RAM start reading signal
-    .Pwr_on_a(AutoDaq_PWR_ON_A),  //Analogue Part Power Pulsing control, active H
-    .Pwr_on_d(AutoDaq_PWR_ON_D),  //Digital Power Pulsing control, active H
-    .Pwr_on_adc(AutoDaq_PWR_ON_ADC),//Slow shaper Power Pulsing Control, active H
-    .Pwr_on_dac(AutoDaq_PWR_ON_DAC),//DAC Power Pulsing Control, Active H
-    .Once_end(AutoDaq_OnceEnd) //a pulse
+    .start(AutoDaq_Start),                // a pulse or a level?
+    .StartEnable(StartEnable),
+    .End_Readout(AutoDaq_EndReadout),     // Digitial RAM end reading signal, Active H
+    .Chipsatb(AutoDaq_CHIPSATB),          // Chip is full, Active L, PIN
+    .T_acquisition(AcquisitionTime),      // Get from USB, default 8
+    .Reset_b(AutoDaq_RESET_B),            // Reset ASIC digital part, PIN
+    .Start_Acq(AutoDaq_START_ACQ),        // Start & maintain acquisition, Active H,PIN
+    .Start_Readout(AutoDaq_StartReadout), // Digital RAM start reading signal
+    .Pwr_on_a(AutoDaq_PWR_ON_A),          // Analogue Part Power Pulsing control, active H
+    .Pwr_on_d(AutoDaq_PWR_ON_D),          // Digital Power Pulsing control, active H
+    .Pwr_on_adc(AutoDaq_PWR_ON_ADC),      // Slow shaper Power Pulsing Control, active H
+    .Pwr_on_dac(AutoDaq_PWR_ON_DAC),      // DAC Power Pulsing Control, Active H
+    .Once_end(AutoDaq_OnceEnd)            // a pulse
     );
+
   assign AutoDaq_AllDone = 1'b0;
   SlaveDaq SlaveDaqControl(
     .Clk(Clk),
