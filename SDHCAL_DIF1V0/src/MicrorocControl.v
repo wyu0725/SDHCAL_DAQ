@@ -28,7 +28,7 @@ module MicrorocControl(
   input reset_n,
   input SlowClock,                          // Slow clock for MICROROC, typically 5M. It is worth to try 10M clock
   input Clk5M,                              // Clock for Microroc Configuration. If SlowClock is 5M, this clock shoudl be same as SlowClock
-  input SyncClk,                            // This clock is a fast clock to synchronous the TriggerIn signal to generate the hold signal
+  //input SyncClk,                            // This clock is a fast clock to synchronous the TriggerIn signal to generate the hold signal
   // The 'jitter' of the hold signal depends on the peroid of this signal
   input MicrorocReset_n,
   input SlowControlOrReadScopeSelect,
@@ -83,15 +83,14 @@ module MicrorocControl(
   input PowerPulsingPinEnable,
   input ReadoutChannelSelect,
   // *** Trigger In
-  input TimeStampReset,
-  input TriggerIn,
-  input [1:0] RazMode,
+  input ExternalTriggerIn,
   input SCurveForceExternalRaz,
-  input [3:0] ExternalRazDelayTime,
+  output ForceExternalRaz,
   // *** Dataout interface
   output [15:0] ExternalFifoData,
   output ExternalFifoDataEnable,
   output TestDone,
+  output OnceEnd,
   input nPKTEND,
   input ExternalFifoFull,
   input ExternalFifoEmpty,
@@ -99,17 +98,11 @@ module MicrorocControl(
   input DaqSelect,
   input AcqStart,
   output UsbStartStop,
+  input StartEnable,
   input [15:0] AcquisitionStartTime,
   input [15:0] EndHoldTime,
-  input DataTriggerEnable,
-  input DataTrigger,
-  // Hold Control
-  input HoldEnable,
-  input [7:0] HoldDelay,
-  input [15:0] HoldTime,
   // *** Pins
   // Slow control and ReadScope
-  output SELECT,                            // select = 1,slowcontrol register; select = 0,read register
   output SR_RSTB,                           // Selected Register Reset
   output SR_CK,                             // Selected Register Clock
   output SR_IN,                             // Selected Register Input
@@ -131,20 +124,7 @@ module MicrorocControl(
   input DOUT1B,
   input DOUT2B,
   input TRANSMITON1B,
-  input TRANSMITON2B,
-  // Trig gen
-  output HOLD,
-  output TRIG_EXT,
-  output RAZ_CHNP,
-  output RAZ_CHNN,
-  output VAL_EVTP,
-  output VAL_EVTN,
-  output RST_COUNTERB,
-  // Clk gen
-  output CK_40P,
-  output CK_40N,
-  output CK_5P,
-  output CK_5N
+  input TRANSMITON2B
   );
 
   SlowControlAndReadScopeSet SlowControlAndReadScope(
@@ -200,7 +180,6 @@ module MicrorocControl(
     .CTestChannel                (CTestChannel),
     .ReadScopeChannel            (ReadScopeChannel),
     // *** Pins
-    .SELECT                      (SELECT),                       // select = 1,slowcontrol register; select = 0,read register
     .SR_RSTB                     (SR_RSTB),                      // Selected Register Reset
     .SR_CK                       (SR_CK),                        // Selected Register Clock
     .SR_IN                       (SR_IN)                         // Selected Register Input
@@ -243,29 +222,29 @@ module MicrorocControl(
     .ReadDone           (ReadDone)
     );
 
-  wire RAZ_CHN;
+  /*wire RAZ_CHN;
   wire ForceExternalRaz;
   ExternalRazGenerate ExternalRazGen(
-    .Clk                 (Clk),
-    .reset_n             (reset_n),
-    .TriggerIn           (TriggerIn),
-    .ExternalRaz_en      (ExternalRazSignalEnable),
-    .ExternalRazDelayTime(ExternalRazDelayTime),
-    .RazMode             (RazMode),
-    .ForceRaz            (ForceExternalRaz),
-    .RAZ_CHN             (RAZ_CHN)
-    );
+  .Clk                 (Clk),
+  .reset_n             (reset_n),
+  .TriggerIn           (TriggerIn),
+  .ExternalRaz_en      (ExternalRazSignalEnable),
+  .ExternalRazDelayTime(ExternalRazDelayTime),
+  .RazMode             (RazMode),
+  .ForceRaz            (ForceExternalRaz),
+  .RAZ_CHN             (RAZ_CHN)
+ );
 
   HoldGenerate HoldGen(
-    .Clk              (Clk),
-    .SyncClk          (SyncClk),
-    .reset_n          (reset_n),
-    .TriggerIn        (TriggerIn),
-    .HoldEnable       (HoldEnable),
-    .HoldDelay        (HoldDelay),
-    .HoldTime         (HoldTime),
-    .HoldOut          (HOLD)
-    );
+  .Clk              (Clk),
+  .SyncClk          (SyncClk),
+  .reset_n          (reset_n),
+  .TriggerIn        (TriggerIn),
+  .HoldEnable       (HoldEnable),
+  .HoldDelay        (HoldDelay),
+  .HoldTime         (HoldTime),
+  .HoldOut          (HOLD)
+    );*/
 
   wire PowerOnAnalog;
   wire PowerOnDigital;
@@ -273,7 +252,6 @@ module MicrorocControl(
   wire PowerOnAdc;
   wire DataTransmitDone;
   assign DataTransmitDone = ~nPKTEND;
-  wire OnceEnd;
   DaqControl MicrorocDaq
   (
     .Clk                   (Clk),         //40M
@@ -281,6 +259,7 @@ module MicrorocControl(
     .DaqSelect             (DaqSelect),
     .UsbAcqStart           (AcqStart),
     .UsbStartStop          (UsbStartStop),
+    .StartEnable           (StartEnable),
     .EndReadout            (EndReadout),
     .StartReadout          (StartReadout),
     .CHIPSATB              (CHIPSATB),
@@ -302,7 +281,7 @@ module MicrorocControl(
     .MicrorocData_en       (MicrorocDataEnable),
     .DaqData               (ExternalFifoData),//Data output
     .DaqData_en            (ExternalFifoDataEnable),
-    .ExternalTrigger       (TriggerIn)
+    .ExternalTrigger       (ExternalTriggerIn)
     );
 
   PowerOnControl PowerPulsingEnable (
@@ -317,54 +296,5 @@ module MicrorocControl(
     .PWR_ON_DAC           (PWR_ON_DAC)
     );
 
-  TimeStampSyncAndDataTrigger TimeStampSyncAndTrigger (
-    .Clk              (Clk),
-    .reset_n          (reset_n),
-    .TimeStampReset   (TimeStampReset),
-    .RST_COUNTERB     (RST_COUNTERB),
-    .DataTrigger      (DataTrigger),
-    .DataTriggerEnable(DataTriggerEnable),
-    .TriggerExt       (TRIG_EXT)
-    );
 
-  // LVDS BUFF OBUFDS
-  // See UG593
-  // https://www.xilinx.com/support/documentation/sw_manuals/xilinx2014_2/ug953-vivado-7series-libraries.pdf
-  
-                            // RAZ_CHN
-  OBUFDS #(
-    .IOSTANDARD("DEFAULT"), // Specify the output I/O standard
-    .SLEW("SLOW")           // Specify the output slew rate
-  ) RazChn (
-    .O(RAZ_CHNP),           // Diff_p output (connect directly to top-level port)
-    .OB(RAZ_CHNN),          // Diff_n output (connect directly to top-level port)
-    .I(RAZ_CHN)             // Buffer input
-    );
-                            // VAL_EVT should always set 1
-  OBUFDS #(
-    .IOSTANDARD("DEFAULT"), // Specify the output I/O standard
-    .SLEW("SLOW")           // Specify the output slew rate
-  ) ValEvt (
-    .O(VAL_EVTP),           // Diff_p output (connect directly to top-level port)
-    .OB(VAL_EVTN),          // Diff_n output (connect directly to top-level port)
-    .I(1'b1)                // Buffer input
-    );
-                            // CK_40
-  OBUFDS #(
-    .IOSTANDARD("DEFAULT"), // Specify the output I/O standard
-    .SLEW("SLOW")           // Specify the output slew rate
-  ) Ck40M (
-    .O(CK_40P),             // Diff_p output (connect directly to top-level port)
-    .OB(CK_40N),            // Diff_n output (connect directly to top-level port)
-    .I(Clk)                 // Buffer input
-    );
-                            // CK_5
-  OBUFDS #(
-    .IOSTANDARD("DEFAULT"), // Specify the output I/O standard
-    .SLEW("SLOW")           // Specify the output slew rate
-  ) Ck5M (
-    .O(CK_5P),              // Diff_p output (connect directly to top-level port)
-    .OB(CK_5N),             // Diff_n output (connect directly to top-level port)
-    .I(SlowClock)           // Buffer input
-    );
 endmodule
