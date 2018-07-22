@@ -149,15 +149,17 @@ module ParameterGenerator(
 			CurrentState <= NextState;
 	end
 	always @ (*) begin
+    NextState = Idle;
 		case(CurrentState)
 			Idle: begin
-				if(ParameterLoadStart) begin
-					if(SlowControlOrReadScopeSelect) begin
-						NextState = READ_PROCESS;
-					end
-					else begin
-						NextState = SC_PROCESS;
-					end
+				if(~ParameterLoadStart) begin
+          NextState = Idle;
+        end
+				else if(SlowControlOrReadScopeSelect) begin
+					NextState = READ_PROCESS;
+				end
+				else begin
+					NextState = SC_PROCESS;
 				end
 			end
 			READ_PROCESS: NextState = READ_PROCESS_LOOP;
@@ -188,6 +190,8 @@ module ParameterGenerator(
 			ExternalFifoData <= 16'b0;
 			ShiftCount <= 5'd0;
 			ParameterDone <= 1'b0;
+      SlowControlParameter_Shift <= 592'b0;
+      ReadScopeParameter_Shift <= 64'b0;
 		end
 		else begin
 			case(CurrentState)
@@ -199,7 +203,7 @@ module ParameterGenerator(
 				end
 				READ_PROCESS: begin
 					ExternalFifoWriteEn <= 1'b1;
-					ExternalFifoData <= ReadScopeChannel[63-:16];
+					ExternalFifoData <= ReadScopeParameter_Shift[63-:16];
 				end
 				READ_PROCESS_LOOP: begin
 					ExternalFifoWriteEn <= 1'b0;
