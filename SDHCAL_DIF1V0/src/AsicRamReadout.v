@@ -52,7 +52,7 @@ module AsicRamReadout(
 	end
 
 	reg [1:0] CurrentState;
-	reg [0:0] NextState;
+	reg [1:0] NextState;
 	localparam [1:0] Idle = 2'b00,
 	READ  = 2'b01,
 	DONE  = 2'b10;
