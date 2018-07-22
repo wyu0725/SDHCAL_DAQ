@@ -1,0 +1,61 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  \
+"../../../../SDHCAL_DIF1V0.ip_user_files/ip/CommandFifo/sim/CommandFifo.v" \
+"../../../../SDHCAL_DIF1V0.ip_user_files/ip/ConfigParameterFIFO/sim/ConfigParameterFIFO.v" \
+"../../../../src/AsicRamReadout.v" \
+"../../../../src/AutoDaq.v" \
+"../../../../src/BitShiftOut.v" \
+"../../../../src/CommandDecoder.v" \
+"../../../../src/CommandInterpreter.v" \
+"../../../../src/ConfigurationParameterDistribution.v" \
+"../../../../src/DaqControl.v" \
+"../../../../src/DaqSwitcher.v" \
+"../../../../src/ExternalRazGenerate.v" \
+"../../../../src/HoldGenerate.v" \
+"../../../../src/MicrorocControl.v" \
+"../../../../src/ParameterGenerator.v" \
+"../../../../src/PowerOnControl.v" \
+"../../../../src/PulseSynchronous.v" \
+"../../../../src/Redundancy.v" \
+"../../../../src/SlaveDaq.v" \
+"../../../../src/SlowControlAndReadScopeSet.v" \
+"../../../../src/TimeStampSyncAndDataTrigger.v" \
+"../../../../src/usb_synchronous_slavefifo.v" \
+"../../../../src/FPGA_Top.v" \
+"../../../../src/SCurve_Test_Control.v" \
+"../../../../src/SCurve_Test_Top.v" \
+"../../../../src/SCurve_Single_Test.v" \
+"../../../../src/SCurve_Single_Input.v" \
+"../../../../SDHCAL_DIF1V0.ip_user_files/ip/SCurveDataFifo/sim/SCurveDataFifo.v" \
+"../../../../src/ADC_AD9220.v" \
+"../../../../src/AdcControl.v" \
+"../../../../src/AcquisitionControl.v" \
+"../../../../src/AcquisitionSwitcher.v" \
+"../../../../src/TriggerSwitcher.v" \
+"../../../../src/ClockManagement.v" \
+"../../../../src/MicrorocDataSwitcher.v" \
+"../../../../SDHCAL_DIF1V0.ip_user_files/ip/MicrorocChainDataFifo/sim/MicrorocChainDataFifo.v" \
+"../../../../SDHCAL_DIF1V0.ip_user_files/ip/ExternalDataFifo/sim/ExternalDataFifo.v" \
+"../../../../src/MicrorocCommonControl.v" \
+"../../../../src/RamReadDoneSync4Chain.v" \
+"../../../../SDHCAL_DIF1V0.srcs/sim_1/new/AsicRamReadout_tb.v" \
+"../../../../SDHCAL_DIF1V0.srcs/sim_1/new/CommandDecoder_tb.v" \
+"../../../../SDHCAL_DIF1V0.srcs/sim_1/new/CommandInterpreter_tb.v" \
+"../../../../SDHCAL_DIF1V0.srcs/sim_1/new/ConfigurationParameterDistribution_tb.v" \
+"../../../../SDHCAL_DIF1V0.srcs/sim_1/new/DaqControl_tb.v" \
+"../../../../SDHCAL_DIF1V0.srcs/sim_1/new/ExternalRazGenetate_tb.v" \
+"../../../../SDHCAL_DIF1V0.srcs/sim_1/new/HoldGenerate_tb.v" \
+"../../../../SDHCAL_DIF1V0.srcs/sim_1/new/SlowControlAndReadScope_tb.v" \
+"../../../../SDHCAL_DIF1V0.srcs/sim_1/new/TimeStampAndDataTrigger_tb.v" \
+"../../../../SDHCAL_DIF1V0.srcs/sim_1/new/SCurve_Test_Top_tb.v" \
+"../../../../SDHCAL_DIF1V0.srcs/sim_1/new/AcquisitionControl_tb.v" \
+"../../../../SDHCAL_DIF1V0.srcs/sim_1/new/MicrorocControl_tb.v" \
+"../../../../SDHCAL_DIF1V0.srcs/sim_1/new/ClockManagement_tb.v" \
+"../../../../SDHCAL_DIF1V0.srcs/sim_1/new/MicrorocDataSwitcher_tb.v" \
+"../../../../SDHCAL_DIF1V0.srcs/sim_1/new/RamReadDoneSync4Chain_tb.v" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort
