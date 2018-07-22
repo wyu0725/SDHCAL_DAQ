@@ -25,8 +25,16 @@ module AcquisitionControl(
   input reset_n,
   input [3:0] ModeSelect,
   // Data interface
-  input [15:0] MicrorocAcquisitionData,
-  input MicrorocAcquisitionDataEnable,
+  // Microroc Chain data
+  input [15:0] MicrorocChain1Data,
+  input MicrorocChain1DataEnable,
+  input [15:0] MicrorocChain2Data,
+  input MicrorocChain2DataEnable,
+  input [15:0] MicrorocChain3Data,
+  input MicrorocChain3DataEnable,
+  input [15:0] MicrorocChain4Data,
+  input MicrorocChain4DataEnable,
+  input EndReadout,
   input ExternalFifoFull,
   output [15:0] OutTestData,
   output OutTestDataEnable,
@@ -102,6 +110,8 @@ module AcquisitionControl(
   wire [191:0] SCurveTestMicrorocChannelDiscriminatorMask;
   wire [9:0] SCurveTestMicrorocVthDac;
   wire SCurveTestForceExternalRaz;
+  wire [15:0] MicrorocAcquisitionData;
+  wire MicrorocAcquisitionDataEnable;
   AcquisitionSwitcher Switcher(
     .ModeSelect(ModeSelect),
     // Data interface
@@ -155,6 +165,26 @@ module AcquisitionControl(
     .CommandAdcStartStop(CommandAdcStartStop),
     .OutUsbStartStop(OutUsbStartStop)
     );
+
+  //*** AcquisitionDataSwitcher
+  
+  MicrorocDataSwitcher AcquisitionDataSwitcher(
+    .Clk(Clk),
+    .reset_n(reset_n),
+    .AcquisitionStart(CommandMicrorocAcquisitionStartStop),
+    .EndReadout(EndReadout),
+    .MicrorocChain1Data(MicrorocChain1Data),
+    .MicrorocChain1DataEnable(MicrorocChain1DataEnable),
+    .MicrorocChain2Data(MicrorocChain2Data),
+    .MicrorocChain2DataEnable(MicrorocChain2DataEnable),
+    .MicrorocChain3Data(MicrorocChain3Data),
+    .MicrorocChain3DataEnable(MicrorocChain3DataEnable),
+    .MicrorocChain4Data(MicrorocChain4Data),
+    .MicrorocChain4DataEnable(MicrorocChain4DataEnable),
+    .MicrorocAcquisitionData(MicrorocAcquisitionData),
+    .MicrorocAcquisitionDataEnable(MicrorocAcquisitionDataEnable)
+    );
+
   SCurve_Test_Top MicrorocSCurveTest(
     .Clk(Clk),
     .Clk_5M(Clk5M),// Use 5M clock to generate 1k clock
