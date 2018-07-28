@@ -155,6 +155,7 @@ CLK_EXT_falling	SCurve_Single_Input.v	/^  wire CLK_EXT_falling;$/;"	n	language:V
 CLK_EXT_reg1	SCurve_Single_Input.v	/^  reg CLK_EXT_reg1;$/;"	r	language:Verilog	module:SCurve_Single_Input
 CLK_EXT_reg2	SCurve_Single_Input.v	/^  reg CLK_EXT_reg2;$/;"	r	language:Verilog	module:SCurve_Single_Input
 CLK_EXT_rising	SCurve_Single_Input.v	/^  wire CLK_EXT_rising;$/;"	n	language:Verilog	module:SCurve_Single_Input
+COLUMN	FPGA_Top.v	/^  output [2:0] COLUMN,$/;"	p	language:Verilog	module:FPGA_Top
 COMMAND_ADDRESS_AND_DEFAULT	CommandDecoder.v	/^		parameter [15:0] COMMAND_ADDRESS_AND_DEFAULT = 16'hFFFF$/;"	c	language:Verilog	module:CommandDecoder
 COMMAND_ADDRESS_AND_DEFAULT	CommandDecoder_beforeInst.v	/^		parameter [15:0] COMMAND_ADDRESS_AND_DEFAULT = 16'hFFFF$/;"	c	language:Verilog	module:CommandDecoder
 COMMAND_WIDTH	CommandDecoder.v	/^		parameter [1:0] COMMAND_WIDTH = 2'b0,$/;"	c	language:Verilog	module:CommandDecoder
@@ -264,6 +265,7 @@ ClockFeedback	ClockManagement.v	/^  wire ClockFeedback;$/;"	n	language:Verilog	m
 ClockGood	ClockManagement.v	/^  output ClockGood$/;"	p	language:Verilog	module:ClockManagement
 ClockGood	FPGA_Top.v	/^  wire ClockGood;$/;"	n	language:Verilog	module:FPGA_Top
 ClockManagement	ClockManagement.v	/^module ClockManagement($/;"	m	language:Verilog
+ColumnSelect	CommandInterpreter.v	/^  output [2:0] ColumnSelect,$/;"	p	language:Verilog	module:CommandInterpreter
 CommandAdcStartStop	AcquisitionControl.v	/^  input CommandAdcStartStop,$/;"	p	language:Verilog	module:AcquisitionControl
 CommandAdcStartStop	AcquisitionSwitcher.v	/^  input CommandAdcStartStop,$/;"	p	language:Verilog	module:AcquisitionSwitcher
 CommandAdcStartStop	FPGA_Top.v	/^  wire CommandAdcStartStop;$/;"	n	language:Verilog	module:FPGA_Top
@@ -1161,6 +1163,7 @@ RESET_B	MicrorocCommonControl.v	/^  output RESET_B,$/;"	p	language:Verilog	modul
 RESET_B	MicrorocControl.v	/^  output RESET_B,$/;"	p	language:Verilog	module:MicrorocControl
 RESET_B	SlaveDaq.v	/^	output reg RESET_B,             \/\/Reset ASIC digital part$/;"	p	language:Verilog	module:SlaveDaq
 RESET_REGISTER	BitShiftOut.v	/^					RESET_REGISTER = 3'd1,$/;"	c	language:Verilog	module:BitShiftOut
+ROW	FPGA_Top.v	/^  output [2:0] ROW,$/;"	p	language:Verilog	module:FPGA_Top
 RST_COUNTERB	TimeStampSyncAndDataTrigger.v	/^	output reg RST_COUNTERB,$/;"	p	language:Verilog	module:TimeStampSyncAndDataTrigger
 RamReadDoneSync4Chain	RamReadDoneSync4Chain.v	/^module RamReadDoneSync4Chain$/;"	m	language:Verilog
 RamReadoutDone	FPGA_Top.v	/^  wire RamReadoutDone;$/;"	n	language:Verilog	module:FPGA_Top
@@ -1207,6 +1210,7 @@ ResetTimeStamp	MicrorocCommonControl.v	/^  input ResetTimeStamp,$/;"	p	language:
 ResetTimeStamp_CAND	CommandParameter.v	/^`define ResetTimeStamp_CAND                        16'hA300$/;"	c	language:Verilog
 ResetTrigCount_n	SlaveDaq.v	/^	reg ResetTrigCount_n;$/;"	r	language:Verilog	module:SlaveDaq
 Reset_b	AutoDaq.v	/^  output reg Reset_b,         \/\/ Reset ASIC digital part$/;"	p	language:Verilog	module:AutoDaq
+RowSelect	CommandInterpreter.v	/^  output [2:0] RowSelect,$/;"	p	language:Verilog	module:CommandInterpreter
 RunningModeSelect_CAND	CommandParameter.v	/^`define RunningModeSelect_CAND                     16'hE0A0$/;"	c	language:Verilog
 SCURVE_TEST_HEADER	SCurve_Test_Control.v	/^  localparam [15:0] SCURVE_TEST_HEADER               = 16'h5343;\/\/In ASCII 53 = S,43 = C.0x534/;"	c	language:Verilog	module:SCurve_Test_Control
 SCURVE_TEST_MODE	AcquisitionSwitcher.v	/^                   SCURVE_TEST_MODE = 4'b0001,$/;"	c	language:Verilog	module:AcquisitionSwitcher
@@ -1472,6 +1476,8 @@ TestAsicNumber	SCurve_Test_Control.v	/^  input [2:0] TestAsicNumber,$/;"	p	langu
 TestAsicNumber	SCurve_Test_Top.v	/^  input [2:0] TestAsicNumber,$/;"	p	language:Verilog	module:SCurve_Test_Top
 TestDone	AcquisitionControl.v	/^  output TestDone,$/;"	p	language:Verilog	module:AcquisitionControl
 TestDone	MicrorocControl.v	/^  output TestDone,$/;"	p	language:Verilog	module:MicrorocControl
+TestSignalColumnSelect_CAND	CommandParameter.v	/^`define TestSignalColumnSelect_CAND 16'hE3E0$/;"	c	language:Verilog
+TestSignalRowSelect_CAND	CommandParameter.v	/^`define TestSignalRowSelect_CAND 16'hE3F0$/;"	c	language:Verilog
 Test_Chn	SCurve_Test_Control.v	/^  reg [5:0]   Test_Chn;$/;"	r	language:Verilog	module:SCurve_Test_Control
 Test_Start	SCurve_Single_Input.v	/^    input Test_Start,$/;"	p	language:Verilog	module:SCurve_Single_Input
 Test_Start	SCurve_Test_Control.v	/^  input                                       Test_Start,$/;"	p	language:Verilog	module:SCurve_Test_Control
@@ -1621,8 +1627,11 @@ hold	FPGA_Top.v	/^  output hold,$/;"	p	language:Verilog	module:FPGA_Top
 in_from_ext_fifo_dout	usb_synchronous_slavefifo.v	/^    input [15:0] in_from_ext_fifo_dout,$/;"	p	language:Verilog	module:usb_synchronous_slavefifo
 in_from_ext_fifo_empty	usb_synchronous_slavefifo.v	/^    input in_from_ext_fifo_empty,$/;"	p	language:Verilog	module:usb_synchronous_slavefifo
 nPKTEND	AcquisitionControl.v	/^  input nPKTEND,$/;"	p	language:Verilog	module:AcquisitionControl
+nPKTEND	FPGA_Top.v	/^  wire nPKTEND;$/;"	n	language:Verilog	module:FPGA_Top
 nPKTEND	MicrorocControl.v	/^  input nPKTEND,$/;"	p	language:Verilog	module:MicrorocControl
 nPKTEND	usb_synchronous_slavefifo.v	/^    output reg nPKTEND,  \/\/WRITE$/;"	p	language:Verilog	module:usb_synchronous_slavefifo
+nPKTEND_r1	FPGA_Top.v	/^  reg nPKTEND_r1;$/;"	r	language:Verilog	module:FPGA_Top
+nPKTEND_r2	FPGA_Top.v	/^  reg nPKTEND_r2;$/;"	r	language:Verilog	module:FPGA_Top
 nSLCS	usb_synchronous_slavefifo.v	/^    output nSLCS, \/\/Chip select$/;"	p	language:Verilog	module:usb_synchronous_slavefifo
 nSLOE	usb_synchronous_slavefifo.v	/^    output reg nSLOE,\/\/READ$/;"	p	language:Verilog	module:usb_synchronous_slavefifo
 nSLRD	usb_synchronous_slavefifo.v	/^    output reg nSLRD,\/\/READ$/;"	p	language:Verilog	module:usb_synchronous_slavefifo
