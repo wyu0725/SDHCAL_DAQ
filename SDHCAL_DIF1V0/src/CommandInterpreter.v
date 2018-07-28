@@ -155,6 +155,9 @@ module CommandInterpreter(
   // Slave DAQ
   output [15:0] EndHoldTime,
   output DaqSelect,
+  // Cloumn and row select
+  output [2:0] ColumnSelect,
+  output [2:0] RowSelect,
   // LED
   output [3:0] LED
   );
@@ -169,8 +172,8 @@ module CommandInterpreter(
   assign FifoReady = !FifoReadResetBusy & !FifoReadResetBusy;
   CommandFifo CommandFifo32Depth (
     .rst(!reset_n),                   // input wire rst
-    .wr_clk(IFCLK),                   // input wire wr_clk
-    .rd_clk(Clk),                     // input wire rd_clk
+    .wr_clk(~IFCLK),                   // input wire wr_clk
+    .rd_clk(~Clk),                     // input wire rd_clk
     .din(CommandWord),                // input wire [15 : 0] din
     .wr_en(CommandWordEn),            // input wire wr_en
     .rd_en(CommandFifoReadEn),        // input wire rd_en
@@ -1468,7 +1471,7 @@ module CommandInterpreter(
     .COMMAND_WIDTH(2'b0),
     .COMMAND_ADDRESS_AND_DEFAULT(`ReadoutChannelSelect_CAND)
   )
-  ReadoutchannelSelect(
+  ReadoutChannelSelect(
     .Clk(Clk),
     .reset_n(reset_n),
     .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
@@ -2374,52 +2377,52 @@ module CommandInterpreter(
     );
 
   // EndReadoutParameter 4bits, default A3CF
-CommandDecoder
-	#(
-		.LEVEL_OR_PULSE(1'b1),
-		.COMMAND_WIDTH(2'b11),
-		.COMMAND_ADDRESS_AND_DEFAULT(`EndReadoutParameter_CAND)
-	)
-EndReadoutParameterGenerator(
-	.Clk(Clk),
-	.reset_n(reset_n),
-	.CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
-	.COMMAND_WORD(COMMAND_WORD),
-	// input [COMMAND_WIDTH:0] DefaultValue,
-	.CommandOut(MicrorocEndReadoutParameter)
-	);
+  CommandDecoder
+  #(
+    .LEVEL_OR_PULSE(1'b1),
+    .COMMAND_WIDTH(2'b11),
+    .COMMAND_ADDRESS_AND_DEFAULT(`EndReadoutParameter_CAND)
+  )
+  EndReadoutParameterGenerator(
+    .Clk(Clk),
+    .reset_n(reset_n),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
+    .COMMAND_WORD(COMMAND_WORD),
+    // input [COMMAND_WIDTH:0] DefaultValue,
+    .CommandOut(MicrorocEndReadoutParameter)
+    );
 
   // AsicNumberSet 4bits, default A3E4
-CommandDecoder
-	#(
-		.LEVEL_OR_PULSE(1'b1),
-		.COMMAND_WIDTH(2'b11),
-		.COMMAND_ADDRESS_AND_DEFAULT(`AsicNumberSet_CAND)
-	)
-SetAsicNumber(
-	.Clk(Clk),
-	.reset_n(reset_n),
-	.CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
-	.COMMAND_WORD(COMMAND_WORD),
-	// input [COMMAND_WIDTH:0] DefaultValue,
-	.CommandOut(AsicNumberSet)
-	);
+  CommandDecoder
+  #(
+    .LEVEL_OR_PULSE(1'b1),
+    .COMMAND_WIDTH(2'b11),
+    .COMMAND_ADDRESS_AND_DEFAULT(`AsicNumberSet_CAND)
+  )
+  SetAsicNumber(
+    .Clk(Clk),
+    .reset_n(reset_n),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
+    .COMMAND_WORD(COMMAND_WORD),
+    // input [COMMAND_WIDTH:0] DefaultValue,
+    .CommandOut(AsicNumberSet)
+    );
 
   // SCurveTestAsicSelect 4bits, default A3F0
-CommandDecoder
-	#(
-		.LEVEL_OR_PULSE(1'b1),
-		.COMMAND_WIDTH(2'b11),
-		.COMMAND_ADDRESS_AND_DEFAULT(`SCurveTestAsicSelect_CAND)
-	)
-SelectSCurveTestAsic(
-	.Clk(Clk),
-	.reset_n(reset_n),
-	.CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
-	.COMMAND_WORD(COMMAND_WORD),
-	// input [COMMAND_WIDTH:0] DefaultValue,
-	.CommandOut(SCurveTestAsicSelect)
-	);
+  CommandDecoder
+  #(
+    .LEVEL_OR_PULSE(1'b1),
+    .COMMAND_WIDTH(2'b11),
+    .COMMAND_ADDRESS_AND_DEFAULT(`SCurveTestAsicSelect_CAND)
+  )
+  SelectSCurveTestAsic(
+    .Clk(Clk),
+    .reset_n(reset_n),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
+    .COMMAND_WORD(COMMAND_WORD),
+    // input [COMMAND_WIDTH:0] DefaultValue,
+    .CommandOut(SCurveTestAsicSelect)
+    );
 
   // DaqModeSelect 1bit, default E290
   CommandDecoder
@@ -2442,62 +2445,94 @@ SelectSCurveTestAsic(
   // [7:4] default E3B5
   // [11:8] default E3C0
   // [15:12] default E3D0
-CommandDecoder
-	#(
-		.LEVEL_OR_PULSE(1'b1),
-		.COMMAND_WIDTH(2'b11),
-		.COMMAND_ADDRESS_AND_DEFAULT(`MicrorocStartAcquisitionTime3to0_CAND)
-	)
-SetStartAcquisitionTime3to0(
-	.Clk(Clk),
-	.reset_n(reset_n),
-	.CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
-	.COMMAND_WORD(COMMAND_WORD),
-	// input [COMMAND_WIDTH:0] DefaultValue,
-	.CommandOut(MicrorocStartAcquisitionTime[3:0])
-	);
-CommandDecoder
-	#(
-		.LEVEL_OR_PULSE(1'b1),
-		.COMMAND_WIDTH(2'b11),
-		.COMMAND_ADDRESS_AND_DEFAULT(`MicrorocStartAcquisitionTime7to4_CAND)
-	)
-SetStartAcquisitionTime7to4(
-	.Clk(Clk),
-	.reset_n(reset_n),
-	.CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
-	.COMMAND_WORD(COMMAND_WORD),
-	// input [COMMAND_WIDTH:0] DefaultValue,
-	.CommandOut(MicrorocStartAcquisitionTime[7:4])
-	);
-CommandDecoder
-	#(
-		.LEVEL_OR_PULSE(1'b1),
-		.COMMAND_WIDTH(2'b11),
-		.COMMAND_ADDRESS_AND_DEFAULT(`MicrorocStartAcquisitionTime11to8_CAND)
-	)
-SetStartAcquisitionTime11to8(
-	.Clk(Clk),
-	.reset_n(reset_n),
-	.CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
-	.COMMAND_WORD(COMMAND_WORD),
-	// input [COMMAND_WIDTH:0] DefaultValue,
-	.CommandOut(MicrorocStartAcquisitionTime[11:8])
-	);
-CommandDecoder
-	#(
-		.LEVEL_OR_PULSE(1'b1),
-		.COMMAND_WIDTH(2'b11),
-		.COMMAND_ADDRESS_AND_DEFAULT(`MicrorocStartAcquisitionTime15to12_CAND)
-	)
-SetStartAcquisitionTime15to12(
-	.Clk(Clk),
-	.reset_n(reset_n),
-	.CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
-	.COMMAND_WORD(COMMAND_WORD),
-	// input [COMMAND_WIDTH:0] DefaultValue,
-	.CommandOut(MicrorocStartAcquisitionTime[15:12])
-	);
+  CommandDecoder
+  #(
+    .LEVEL_OR_PULSE(1'b1),
+    .COMMAND_WIDTH(2'b11),
+    .COMMAND_ADDRESS_AND_DEFAULT(`MicrorocStartAcquisitionTime3to0_CAND)
+  )
+  SetStartAcquisitionTime3to0(
+    .Clk(Clk),
+    .reset_n(reset_n),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
+    .COMMAND_WORD(COMMAND_WORD),
+    // input [COMMAND_WIDTH:0] DefaultValue,
+    .CommandOut(MicrorocStartAcquisitionTime[3:0])
+    );
+  CommandDecoder
+  #(
+    .LEVEL_OR_PULSE(1'b1),
+    .COMMAND_WIDTH(2'b11),
+    .COMMAND_ADDRESS_AND_DEFAULT(`MicrorocStartAcquisitionTime7to4_CAND)
+  )
+  SetStartAcquisitionTime7to4(
+    .Clk(Clk),
+    .reset_n(reset_n),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
+    .COMMAND_WORD(COMMAND_WORD),
+    // input [COMMAND_WIDTH:0] DefaultValue,
+    .CommandOut(MicrorocStartAcquisitionTime[7:4])
+    );
+  CommandDecoder
+  #(
+    .LEVEL_OR_PULSE(1'b1),
+    .COMMAND_WIDTH(2'b11),
+    .COMMAND_ADDRESS_AND_DEFAULT(`MicrorocStartAcquisitionTime11to8_CAND)
+  )
+  SetStartAcquisitionTime11to8(
+    .Clk(Clk),
+    .reset_n(reset_n),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
+    .COMMAND_WORD(COMMAND_WORD),
+    // input [COMMAND_WIDTH:0] DefaultValue,
+    .CommandOut(MicrorocStartAcquisitionTime[11:8])
+    );
+  CommandDecoder
+  #(
+    .LEVEL_OR_PULSE(1'b1),
+    .COMMAND_WIDTH(2'b11),
+    .COMMAND_ADDRESS_AND_DEFAULT(`MicrorocStartAcquisitionTime15to12_CAND)
+  )
+  SetStartAcquisitionTime15to12(
+    .Clk(Clk),
+    .reset_n(reset_n),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
+    .COMMAND_WORD(COMMAND_WORD),
+    // input [COMMAND_WIDTH:0] DefaultValue,
+    .CommandOut(MicrorocStartAcquisitionTime[15:12])
+    );
+
+  // Column select, default E3E0
+  CommandDecoder
+  #(
+    .LEVEL_OR_PULSE(1'b1),
+    .COMMAND_WIDTH(2'b10),
+    .COMMAND_ADDRESS_AND_DEFAULT(`TestSignalRowSelect_CAND)
+  )
+  TestSignalColumnSelect(
+    .Clk(Clk),
+    .reset_n(reset_n),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
+    .COMMAND_WORD(COMMAND_WORD),
+    // input [COMMAND_WIDTH:0] DefaultValue,
+    .CommandOut(ColumnSelect)
+    );
+
+  //Row select, default E3F0
+  CommandDecoder
+  #(
+    .LEVEL_OR_PULSE(1'b1),
+    .COMMAND_WIDTH(2'b10),
+    .COMMAND_ADDRESS_AND_DEFAULT(`TestSignalRowSelect_CAND)
+  )
+  TestSignalRowSelect(
+    .Clk(Clk),
+    .reset_n(reset_n),
+    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
+    .COMMAND_WORD(COMMAND_WORD),
+    // input [COMMAND_WIDTH:0] DefaultValue,
+    .CommandOut(RowSelect)
+    );
 
   // LED 4bits, default B000
   CommandDecoder
