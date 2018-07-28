@@ -115,3 +115,5 @@
 `define MicrorocStartAcquisitionTime7to4_CAND 16'hE3B5
 `define MicrorocStartAcquisitionTime11to8_CAND 16'hE3C0
 `define MicrorocStartAcquisitionTime15to12_CAND 16'hE3D0
+`define TestSignalColumnSelect_CAND 16'hE3E0
+`define TestSignalRowSelect_CAND 16'hE3F0
