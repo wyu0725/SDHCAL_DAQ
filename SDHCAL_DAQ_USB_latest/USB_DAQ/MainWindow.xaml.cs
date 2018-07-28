@@ -37,6 +37,9 @@ namespace USB_DAQ
         private const int AsicId = 0xA1;
         private const int NumberOfChip = 4;
         private MicrorocControl MicrorocChain1 = new MicrorocControl(AsicId, NumberOfChip);
+
+        private MicrorocAsic[] MicrorocAsicChain = new MicrorocAsic[4] { new MicrorocAsic(4, 1), new MicrorocAsic(4, 2), new MicrorocAsic(4, 3), new MicrorocAsic(4, 4) };
+
         private string rx_Command = @"\b[0-9a-fA-F]{4}\b";//match 16 bit Hex
         private string rx_Byte = @"\b[0-9a-fA-F]{2}\b";//match 8 bit Hex
         private string rx_Integer = @"^\d+$";   //匹配非负 整数
@@ -2784,7 +2787,8 @@ namespace USB_DAQ
             if (StateIndicator.OperationModeSelect == StateIndicator.OperationMode.Acq 
                 || StateIndicator.OperationModeSelect == StateIndicator.OperationMode.SweepAcq 
                 || StateIndicator.OperationModeSelect == StateIndicator.OperationMode.SCTest 
-                || StateIndicator.OperationModeSelect == StateIndicator.OperationMode.Efficiency)
+                || StateIndicator.OperationModeSelect == StateIndicator.OperationMode.Efficiency
+                || StateIndicator.OperationModeSelect == StateIndicator.OperationMode.MicrorocCarier)
             {
                 #region The Max Data Number is Set
                 if (StateIndicator.SlowDataRatePackageNumber != 0)
@@ -4424,6 +4428,102 @@ namespace USB_DAQ
         private void btnHelp_Click(object sender, RoutedEventArgs e)
         {
             Process.Start(AppDomain.CurrentDomain.BaseDirectory + "Help/Help.html");
+        }
+
+        private void PowerPulsingPinEnable()
+        {
+            if(MicrorocAsic.PowerPulsingPinEnableSet(1, MyUsbDevice1))
+            {
+                txtReport.AppendText("Power Pulsing Pin Enable\n");
+            }
+            else
+            {
+                MessageBox.Show("Set power pulsing pin enable failure. Please check USB", "USB ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void PowerPulsingPinDisable()
+        {
+            if (MicrorocAsic.PowerPulsingPinEnableSet(0, MyUsbDevice1))
+            {
+                txtReport.AppendText("Power Pulsing Pin Disable\n");
+            }
+            else
+            {
+                MessageBox.Show("Set power pulsing pin disable failure. Please check USB", "USB ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void rdbPowerPulsingEnableNewDif_Checked(object sender, RoutedEventArgs e)
+        {
+            PowerPulsingPinEnable();
+        }
+
+        private void rdbPowerPulsingDisableNewDif_Checked(object sender, RoutedEventArgs e)
+        {
+            PowerPulsingPinDisable();
+        }
+
+        private void SelectSlowControl()
+        {
+            if(MicrorocAsic.SlowControlOrReadScopeSelect(1, MyUsbDevice1))
+            {
+                txtReport.AppendText("Select Slow Control\n");
+            }
+            else
+            {
+                MessageBox.Show("Select Slow Control failure. Please check USB", "USB ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+        private void SelectReadScope
+
+        private void rdbSlowControlSet_Checked(object sender, RoutedEventArgs e)
+        {
+            btnConfigurationParameterLoad.Content = "Slow Control";
+        }
+
+        private void rdbReadScopeSet_Checked(object sender, RoutedEventArgs e)
+        {
+            btnConfigurationParameterLoad.Content = "Read Scope";
+        }
+
+        private async void btnStartCarrierUsb_Click(object sender, RoutedEventArgs e)
+        {
+            #region Check File Legal
+            if (!CheckFileSaved())
+            {
+                return;
+            }
+            #endregion
+            if (StateIndicator.SlowAcqStart == false)
+            {
+                StateIndicator.SlowAcqStart = true;
+                txtReport.AppendText("Microroc Carier USB Stop\n");
+                btnStartCarrierUsb.Content = "StopStop";
+                await Task.Run(() => GetSlowDataRateResultCallBack(MyUsbDevice1));
+                
+                Thread.Sleep(10);
+                StateIndicator.SlowAcqStart = false;
+                StateIndicator.FileSaved = false;
+            }
+            else
+            {
+                btnStartCarrierUsb.Content = "Microroc Carier USB Start";
+                Thread.Sleep(10);
+                StateIndicator.SlowAcqStart = false;
+                StateIndicator.FileSaved = false;
+            }
+        }
+
+        private void btnSelectCarrier_Click(object sender, RoutedEventArgs e)
+        {
+            StateIndicator.OperationModeSelect = StateIndicator.OperationMode.MicrorocCarier;
+            StateIndicator.SlowDataRatePackageNumber = 0;
+        }
+
+        private void btnConfigurationParameterLoad_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

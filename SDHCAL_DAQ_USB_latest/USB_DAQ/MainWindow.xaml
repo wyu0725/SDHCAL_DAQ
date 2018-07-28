@@ -59,6 +59,7 @@
             </Grid>
         </GroupBox>
         <Button x:Name="btnCommandSend" Content="CommandSend" HorizontalAlignment="Left" Margin= "827,150,0,0" VerticalAlignment="Top" Width="102" Height="22" Click="btnCommandSend_Click" Grid.Column="5"/>
+        <Label x:Name="lblTestLabel" Content="Test"  HorizontalAlignment="Left" Margin="739,195,0,0" VerticalAlignment="Top" Grid.Column="5" Width="150"/>
         <TextBox x:Name="txtCommand" HorizontalAlignment="Left" Height="22" Margin="739,150,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="78" IsEnabled="False" Grid.Column="5"/>
         <TextBox x:Name="txtReport" HorizontalAlignment="Left" Height="464" Margin="7,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="212" IsReadOnlyCaretVisible="True" IsUndoEnabled="False" IsReadOnly="True"
                  ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto"
@@ -78,7 +79,7 @@
         </GroupBox>
         <GroupBox x:Name="gbxMICROROC" Header="MICROROC Control" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Height="500" Width="797" Grid.Column="4" Grid.ColumnSpan="2">
             <Grid  Margin="0,0,0,0" >
-                <TabControl x:Name="tbcMicrorocControl" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="785" Height="500" >
+                <TabControl x:Name="tbcMicrorocControl" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="785" Height="480" >
                     <TabItem Name="tbiMicrorocAcq" Header="MICROROC ACQ" Margin="0,0,0,0" MouseLeftButtonUp="tbiMicrorocAcq_MouseLeftButtonUp">
                         <Grid Margin="0,0,0,0">
                             <GroupBox x:Name="gbxSC_ReadReg" Header="ASIC Parameter" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Height="400" Width="550">
@@ -800,12 +801,15 @@
                     </TabItem>
                     <TabItem Name="tbiTestParam" Header="ASIC Test Parameters">
                         <Grid Margin="0,0,0,0">
-                            <Label x:Name="lblPower_Pulsing" Content="Powerpulsing" HorizontalAlignment="Left" Margin="0,60,0,0" VerticalAlignment="Top" Height="24" Width="90"/>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="388*"/>
+                                <ColumnDefinition Width="391*"/>
+                            </Grid.ColumnDefinitions>
                             <StackPanel HorizontalAlignment="Left" Height="30" Margin="100,60,0,0" VerticalAlignment="Top" Width="70">
                                 <RadioButton Name="rdbPowerPulsingEnable" GroupName="PP_En_Dis" Checked="PowerPulsing_Checked" Content="Enable"/>
                                 <RadioButton Name="rdbPowerPulsingDisable" GroupName="PP_En_Dis" Checked="PowerPulsing_Checked" Content="Disable" HorizontalAlignment="Right" Width="70"/>
                             </StackPanel>
-                            <GroupBox x:Name="gbxPowerPulsing" Header="Power Pulsing" HorizontalAlignment="Left" Margin="510,0,0,0" VerticalAlignment="Top" Height="250" Width="160" Grid.Column="1">
+                            <GroupBox x:Name="gbxPowerPulsing" Header="Power Pulsing" HorizontalAlignment="Left" Margin="122,0,0,0" VerticalAlignment="Top" Height="250" Width="160" Grid.Column="1">
                                 <Grid Margin="0,0,0,0">
                                     <Label x:Name="lblPreAmpPP" Content="PraAmp" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Height="25" Width="75"/>
                                     <Label x:Name="lblShaperPP" Content="Shaper" HorizontalAlignment="Left" Margin="0,25,0,0" VerticalAlignment="Top" Height="25" Width="75"/>
@@ -854,30 +858,852 @@
                                     </ComboBox>
                                 </Grid>
                             </GroupBox>
-                            <Label x:Name="Raz_Chn_Select" Content="RAZ Chn Select" HorizontalAlignment="Left" Margin="0,90,0,0" VerticalAlignment="Top" Width="100" Grid.ColumnSpan="2"/>
-                            <ComboBox x:Name="cbxRazSelect" HorizontalAlignment="Left" Margin="100,90,0,0" VerticalAlignment="Top" Width="80" Height="24" Grid.Column="1">
+                            <Label x:Name="Raz_Chn_Select" Content="RAZ Chn Select" HorizontalAlignment="Left" Margin="0,90,0,0" VerticalAlignment="Top" Width="100"/>
+                            <ComboBox x:Name="cbxRazSelect" HorizontalAlignment="Left" Margin="100,90,0,0" VerticalAlignment="Top" Width="80" Height="24">
                                 <ComboBoxItem Content="Internal" IsSelected="True"/>
                                 <ComboBoxItem Content="External" />
                             </ComboBox>
-                            <Label x:Name="lblRSOrDirect" Content="RS or Direct" HorizontalAlignment="Left" Margin="0,120,0,0" VerticalAlignment="Top" Width="100" Height="24" Grid.ColumnSpan="2" />
-                            <ComboBox x:Name="cbxRSOrDirect" HorizontalAlignment="Left" Margin="100,120,0,0" VerticalAlignment="Top" Width="80" Height="24" Grid.Column="1">
+                            <Label x:Name="lblRSOrDirect" Content="RS or Direct" HorizontalAlignment="Left" Margin="0,120,0,0" VerticalAlignment="Top" Width="100" Height="24" />
+                            <ComboBox x:Name="cbxRSOrDirect" HorizontalAlignment="Left" Margin="100,120,0,0" VerticalAlignment="Top" Width="80" Height="24">
                                 <ComboBoxItem Content="RS" IsSelected="True"/>
                                 <ComboBoxItem Content="Direct" />
                             </ComboBox>
-                            <Label x:Name="lblReadOrNOR64" Content="Read or NOR64" HorizontalAlignment="Left" Margin="0,150,0,0" VerticalAlignment="Top" Width="100" Height="24" Grid.ColumnSpan="2" />
-                            <ComboBox x:Name="cbxReadOrNOR64" HorizontalAlignment="Left" Margin="100,150,0,0" VerticalAlignment="Top" Width="80" Height="24" Grid.Column="1">
+                            <Label x:Name="lblReadOrNOR64" Content="Read or NOR64" HorizontalAlignment="Left" Margin="0,150,0,0" VerticalAlignment="Top" Width="100" Height="24" />
+                            <ComboBox x:Name="cbxReadOrNOR64" HorizontalAlignment="Left" Margin="100,150,0,0" VerticalAlignment="Top" Width="80" Height="24">
                                 <ComboBoxItem Content="ReadReg"/>
                                 <ComboBoxItem Content="NOR64"  IsSelected="True"/>
                             </ComboBox>
                             <Button x:Name="btnTRIG_EXT_EN" Content="TRIG EXT" HorizontalAlignment="Left" Margin="0,400,0,0" VerticalAlignment="Top" Width="75" Height="24" Click="btnTRIG_EXT_EN_Click"/>
-                            <TextBox x:Name="txtTestLed" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="185,337,0,0" TextWrapping="Wrap" Text="7" VerticalAlignment="Top" Width="120"/>
+                            <TextBox x:Name="txtTestLed" HorizontalAlignment="Left" Height="23" Margin="185,337,0,0" TextWrapping="Wrap" Text="7" VerticalAlignment="Top" Width="120"/>
                             <Button x:Name="TestLed" Content="LED" HorizontalAlignment="Left" Margin="305,341,0,0" VerticalAlignment="Top" Width="75" Height="24" Click="TestLed_Click"/>
                             <Button x:Name="btnTestSlowControlSend" Content="SC Param Load" HorizontalAlignment="Left" Margin="232,235,0,0" VerticalAlignment="Top" Width="100" Height="24" Click="btnTestSlowControlSend_Click"/>
-                            <TextBox x:Name="tbxCurrentPath" Height="24" TextWrapping="Wrap" Text="Null" Margin="185,402,243,42"/>
-                            <Button x:Name="btnShowCurrentPath" Content="Show Path" HorizontalAlignment="Left" Margin="536,400,0,0" VerticalAlignment="Top" Width="75" Height="24" Click="btnShowCurrentPath_Click"/>
+                            <TextBox x:Name="tbxCurrentPath" Height="24" TextWrapping="Wrap" Text="Null" Margin="185,402,243,22" Grid.ColumnSpan="2"/>
+                            <Button x:Name="btnShowCurrentPath" Content="Show Path" HorizontalAlignment="Left" Margin="148,400,0,0" VerticalAlignment="Top" Width="75" Height="24" Click="btnShowCurrentPath_Click" Grid.Column="1"/>
                             <Label x:Name="lblCurrentPath" Content="Current Path:" HorizontalAlignment="Left" Margin="100,400,0,0" VerticalAlignment="Top" Height="24"/>
                         </Grid>
                     </TabItem>
+                    <TabItem Name="tbiDifControl" Header="New DIF">
+                        <Grid Margin="0,0,0,0">
+                            <GroupBox x:Name="gbxIndependentControl" Header="Indepent Control" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Height="435" Width="500">
+                                <Grid Margin="0,0,0,0">
+                                    <TabControl x:Name="ChipControl" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" TabStripPlacement="Left" Width="480" Height="410">
+                                        <TabItem Name ="tbiVth" Header="Vth">
+                                            <Grid Margin="0,0,0,0">
+                                                <Label x:Name="lblVth0Chain1" Content="VTH0" HorizontalAlignment="Left" Margin="0,15,0,0" VerticalAlignment="Top" Width="50" Height="24"/>
+                                                <Label x:Name="lblVth1Chain1" Content="VTH1" HorizontalAlignment="Left" Margin="0,40,0,0" VerticalAlignment="Top" Width="50" Height="24"/>
+                                                <Label x:Name="lblVth2Chain1" Content="VTH2" HorizontalAlignment="Left" Margin="0,65,0,0" VerticalAlignment="Top" Width="50" Height="24"/>
+                                                <GroupBox x:Name="gbxAsic14" Header="ASIC14" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,0,0,0"  Height="100" Width="60">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <TextBox x:Name="tbxVth0Asic14" HorizontalAlignment="Center" Height="25" Margin="0,0,0,0" TextWrapping="Wrap"  Text="589" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                        <TextBox x:Name="tbxVth1Asic14" HorizontalAlignment="Center" Height="25" Margin="0,25,0,0" TextWrapping="Wrap"  Text="570" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                        <TextBox x:Name="tbxVth2Asic14" HorizontalAlignment="Center" Height="25" Margin="0,50,0,0" TextWrapping="Wrap"  Text="588" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+
+                                                    </Grid>
+                                                </GroupBox>
+                                                <GroupBox x:Name="gbxAsic13" Header="ASIC13" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="110,0,0,0"  Height="100" Width="60">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <TextBox x:Name="tbxVth0Asic13" HorizontalAlignment="Center" Height="25" Margin="0,0,0,0" TextWrapping="Wrap"  Text="589" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                        <TextBox x:Name="tbxVth1Asic13" HorizontalAlignment="Center" Height="25" Margin="0,25,0,0" TextWrapping="Wrap"  Text="570" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                        <TextBox x:Name="tbxVth2Asic13" HorizontalAlignment="Center" Height="25" Margin="0,50,0,0" TextWrapping="Wrap"  Text="588" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+
+                                                    </Grid>
+                                                </GroupBox>
+                                                <GroupBox x:Name="gbxAsic12" Header="ASIC12" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="170,0,0,0"  Height="100" Width="60">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <TextBox x:Name="tbxVth0Asic12" HorizontalAlignment="Center" Height="25" Margin="0,0,0,0" TextWrapping="Wrap"  Text="589" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                        <TextBox x:Name="tbxVth1Asic12" HorizontalAlignment="Center" Height="25" Margin="0,25,0,0" TextWrapping="Wrap"  Text="570" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                        <TextBox x:Name="tbxVth2Asic12" HorizontalAlignment="Center" Height="25" Margin="0,50,0,0" TextWrapping="Wrap"  Text="588" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                    </Grid>
+                                                </GroupBox>
+                                                <GroupBox x:Name="gbxAsic11" Header="ASIC11" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="230,0,0,0"  Height="100" Width="60">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <TextBox x:Name="tbxVth0Asic11" HorizontalAlignment="Center" Height="25" Margin="0,00,0,0" TextWrapping="Wrap"  Text="589" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                        <TextBox x:Name="tbxVth1Asic11" HorizontalAlignment="Center" Height="25" Margin="0,25,0,0" TextWrapping="Wrap"  Text="570" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                        <TextBox x:Name="tbxVth2Asic11" HorizontalAlignment="Center" Height="25" Margin="0,50,0,0" TextWrapping="Wrap"  Text="588" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                    </Grid>
+                                                </GroupBox>
+                                                <Label x:Name="lblHeaderChain1" Content="Header" HorizontalAlignment="Left" Margin="290,0,0,0" VerticalAlignment="Top" Width="60" Height="24"/>
+                                                <TextBox x:Name="tbxHeaderChain1" HorizontalAlignment="Left" Height="25" Margin="350,0,0,0" TextWrapping="Wrap"  Text="A1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                <Label x:Name="lblAsicNumberChain1" Content="Number" HorizontalAlignment="Left" Margin="290,25,0,0" VerticalAlignment="Top" Width="60" Height="24"/>
+                                                <ComboBox x:Name="cbxAsicNumberChain1" HorizontalAlignment="Left" Margin="350,25,0,0" VerticalAlignment="Top" Width="40" Height="24">
+                                                    <ComboBoxItem Content="1"/>
+                                                    <ComboBoxItem Content="2"/>
+                                                    <ComboBoxItem Content="3"/>
+                                                    <ComboBoxItem Content="4" IsSelected="True"/>
+                                                </ComboBox>
+                                                <ComboBox x:Name="cbxEnableChain1" HorizontalAlignment="Left" Margin="290,50,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="100" Height="24">
+                                                    <ComboBoxItem Content="Enable" IsSelected="True"/>
+                                                    <ComboBoxItem Content="Disable"/>
+                                                </ComboBox>
+                                                <Label x:Name="lblVth0Chain2" Content="VTH0" HorizontalAlignment="Left" Margin="0,115,0,0" VerticalAlignment="Top" Width="50" Height="24"/>
+                                                <Label x:Name="lblVth1Chain2" Content="VTH1" HorizontalAlignment="Left" Margin="0,140,0,0" VerticalAlignment="Top" Width="50" Height="24"/>
+                                                <Label x:Name="lblVth2Chain2" Content="VTH2" HorizontalAlignment="Left" Margin="0,165,0,0" VerticalAlignment="Top" Width="50" Height="24"/>
+                                                <GroupBox x:Name="gbxAsic24" Header="ASIC24" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,100,0,0"  Height="100" Width="60">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <TextBox x:Name="tbxVth0Asic24" HorizontalAlignment="Center" Height="25" Margin="0,0,0,0" TextWrapping="Wrap"  Text="589" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                        <TextBox x:Name="tbxVth1Asic24" HorizontalAlignment="Center" Height="25" Margin="0,25,0,0" TextWrapping="Wrap"  Text="570" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                        <TextBox x:Name="tbxVth2Asic24" HorizontalAlignment="Center" Height="25" Margin="0,50,0,0" TextWrapping="Wrap"  Text="588" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+
+                                                    </Grid>
+                                                </GroupBox>
+                                                <GroupBox x:Name="gbxAsic23" Header="ASIC23" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="110,100,0,0"  Height="100" Width="60">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <TextBox x:Name="tbxVth0Asic23" HorizontalAlignment="Center" Height="25" Margin="0,00,0,0" TextWrapping="Wrap"  Text="589" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                        <TextBox x:Name="tbxVth1Asic23" HorizontalAlignment="Center" Height="25" Margin="0,25,0,0" TextWrapping="Wrap"  Text="570" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                        <TextBox x:Name="tbxVth2Asic23" HorizontalAlignment="Center" Height="25" Margin="0,50,0,0" TextWrapping="Wrap"  Text="588" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+
+                                                    </Grid>
+                                                </GroupBox>
+                                                <GroupBox x:Name="gbxAsic22" Header="ASIC22" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="170,100,0,0"  Height="100" Width="60">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <TextBox x:Name="tbxVth0Asic22" HorizontalAlignment="Center" Height="25" Margin="0,00,0,0" TextWrapping="Wrap"  Text="589" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                        <TextBox x:Name="tbxVth1Asic22" HorizontalAlignment="Center" Height="25" Margin="0,25,0,0" TextWrapping="Wrap"  Text="570" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                        <TextBox x:Name="tbxVth2Asic22" HorizontalAlignment="Center" Height="25" Margin="0,50,0,0" TextWrapping="Wrap"  Text="588" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                    </Grid>
+                                                </GroupBox>
+                                                <GroupBox x:Name="gbxAsic21" Header="ASIC21" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="230,100,0,0"  Height="100" Width="60">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <TextBox x:Name="tbxVth0Asic21" HorizontalAlignment="Center" Height="25" Margin="0,0,0,0" TextWrapping="Wrap"  Text="589" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                        <TextBox x:Name="tbxVth1Asic21" HorizontalAlignment="Center" Height="25" Margin="0,25,0,0" TextWrapping="Wrap"  Text="570" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                        <TextBox x:Name="tbxVth2Asic21" HorizontalAlignment="Center" Height="25" Margin="0,50,0,0" TextWrapping="Wrap"  Text="588" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                    </Grid>
+                                                </GroupBox>
+                                                <Label x:Name="lblHeaderChain2" Content="Header" HorizontalAlignment="Left" Margin="290,100,0,0" VerticalAlignment="Top" Width="60" Height="24"/>
+                                                <TextBox x:Name="tbxHeaderChain2" HorizontalAlignment="Left" Height="25" Margin="350,100,0,0" TextWrapping="Wrap"  Text="B1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                <Label x:Name="lblAsicNumberChain2" Content="Number" HorizontalAlignment="Left" Margin="290,125,0,0" VerticalAlignment="Top" Width="60" Height="24"/>
+                                                <ComboBox x:Name="cbxAsicNumberChain2" HorizontalAlignment="Left" Margin="350,125,0,0" VerticalAlignment="Top" Width="40" Height="24">
+                                                    <ComboBoxItem Content="1"/>
+                                                    <ComboBoxItem Content="2"/>
+                                                    <ComboBoxItem Content="3"/>
+                                                    <ComboBoxItem Content="4" IsSelected="True"/>
+                                                </ComboBox>
+                                                <ComboBox x:Name="cbxEnableChain2" HorizontalAlignment="Left" Margin="290,150,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="100" Height="24">
+                                                    <ComboBoxItem Content="Enable" IsSelected="True"/>
+                                                    <ComboBoxItem Content="Disable"/>
+                                                </ComboBox>
+                                                <Label x:Name="lblVth0Chain3" Content="VTH0" HorizontalAlignment="Left" Margin="0,215,0,0" VerticalAlignment="Top" Width="50" Height="24"/>
+                                                <Label x:Name="lblVth1Chain3" Content="VTH1" HorizontalAlignment="Left" Margin="0,240,0,0" VerticalAlignment="Top" Width="50" Height="24"/>
+                                                <Label x:Name="lblVth2Chain3" Content="VTH2" HorizontalAlignment="Left" Margin="0,265,0,0" VerticalAlignment="Top" Width="50" Height="24"/>
+                                                <GroupBox x:Name="gbxAsic34" Header="ASIC34" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,200,0,0"  Height="100" Width="60">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <TextBox x:Name="tbxVth0Asic34" HorizontalAlignment="Center" Height="25" Margin="0,0,0,0" TextWrapping="Wrap"  Text="589" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                        <TextBox x:Name="tbxVth1Asic34" HorizontalAlignment="Center" Height="25" Margin="0,25,0,0" TextWrapping="Wrap"  Text="570" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                        <TextBox x:Name="tbxVth2Asic34" HorizontalAlignment="Center" Height="25" Margin="0,50,0,0" TextWrapping="Wrap"  Text="588" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                    </Grid>
+                                                </GroupBox>
+                                                <GroupBox x:Name="gbxAsic33" Header="ASIC33" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="110,200,0,0"  Height="100" Width="60">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <TextBox x:Name="tbxVth0Asic33" HorizontalAlignment="Center" Height="25" Margin="0,00,0,0" TextWrapping="Wrap"  Text="589" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                        <TextBox x:Name="tbxVth1Asic33" HorizontalAlignment="Center" Height="25" Margin="0,25,0,0" TextWrapping="Wrap"  Text="570" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                        <TextBox x:Name="tbxVth2Asic33" HorizontalAlignment="Center" Height="25" Margin="0,50,0,0" TextWrapping="Wrap"  Text="588" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+
+                                                    </Grid>
+                                                </GroupBox>
+                                                <GroupBox x:Name="gbxAsic32" Header="ASIC32" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="170,200,0,0"  Height="100" Width="60">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <TextBox x:Name="tbxVth0Asic32" HorizontalAlignment="Center" Height="25" Margin="0,00,0,0" TextWrapping="Wrap"  Text="589" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                        <TextBox x:Name="tbxVth1Asic32" HorizontalAlignment="Center" Height="25" Margin="0,25,0,0" TextWrapping="Wrap"  Text="570" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                        <TextBox x:Name="tbxVth2Asic32" HorizontalAlignment="Center" Height="25" Margin="0,50,0,0" TextWrapping="Wrap"  Text="588" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                    </Grid>
+                                                </GroupBox>
+                                                <GroupBox x:Name="gbxAsic31" Header="ASIC31" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="230,200,0,0"  Height="100" Width="60">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <TextBox x:Name="tbxVth0Asic31" HorizontalAlignment="Center" Height="25" Margin="0,0,0,0" TextWrapping="Wrap"  Text="589" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                        <TextBox x:Name="tbxVth1Asic31" HorizontalAlignment="Center" Height="25" Margin="0,25,0,0" TextWrapping="Wrap"  Text="570" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                        <TextBox x:Name="tbxVth2Asic31" HorizontalAlignment="Center" Height="25" Margin="0,50,0,0" TextWrapping="Wrap"  Text="588" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                    </Grid>
+                                                </GroupBox>
+                                                <Label x:Name="lblHeaderChain3" Content="Header" HorizontalAlignment="Left" Margin="290,200,0,0" VerticalAlignment="Top" Width="60" Height="24"/>
+                                                <TextBox x:Name="tbxHeaderChain3" HorizontalAlignment="Left" Height="25" Margin="350,200,0,0" TextWrapping="Wrap"  Text="C1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                <Label x:Name="lblAsicNumberChain3" Content="Number" HorizontalAlignment="Left" Margin="290,225,0,0" VerticalAlignment="Top" Width="60" Height="24"/>
+                                                <ComboBox x:Name="cbxAsicNumberChain3" HorizontalAlignment="Left" Margin="350,225,0,0" VerticalAlignment="Top" Width="40" Height="24">
+                                                    <ComboBoxItem Content="1"/>
+                                                    <ComboBoxItem Content="2"/>
+                                                    <ComboBoxItem Content="3"/>
+                                                    <ComboBoxItem Content="4" IsSelected="True"/>
+                                                </ComboBox>
+                                                <ComboBox x:Name="cbxEnableChain3" HorizontalAlignment="Left" Margin="290,250,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="100" Height="24">
+                                                    <ComboBoxItem Content="Enable" IsSelected="True"/>
+                                                    <ComboBoxItem Content="Disable"/>
+                                                </ComboBox>
+                                                <Label x:Name="lblVth0Chain4" Content="VTH0" HorizontalAlignment="Left" Margin="0,315,0,0" VerticalAlignment="Top" Width="50" Height="24"/>
+                                                <Label x:Name="lblVth1Chain4" Content="VTH1" HorizontalAlignment="Left" Margin="0,340,0,0" VerticalAlignment="Top" Width="50" Height="24"/>
+                                                <Label x:Name="lblVth2Chain4" Content="VTH2" HorizontalAlignment="Left" Margin="0,365,0,0" VerticalAlignment="Top" Width="50" Height="24"/>
+                                                <GroupBox x:Name="gbxAsic44" Header="ASIC44" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,300,0,0"  Height="100" Width="60">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <TextBox x:Name="tbxVth0Asic44" HorizontalAlignment="Center" Height="25" Margin="0,0,0,0" TextWrapping="Wrap"  Text="589" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                        <TextBox x:Name="tbxVth1Asic44" HorizontalAlignment="Center" Height="25" Margin="0,25,0,0" TextWrapping="Wrap"  Text="570" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                        <TextBox x:Name="tbxVth2Asic44" HorizontalAlignment="Center" Height="25" Margin="0,50,0,0" TextWrapping="Wrap"  Text="588" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+
+                                                    </Grid>
+                                                </GroupBox>
+                                                <GroupBox x:Name="gbxAsic43" Header="ASIC43" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="110,300,0,0"  Height="100" Width="60">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <TextBox x:Name="tbxVth0Asic43" HorizontalAlignment="Center" Height="25" Margin="0,00,0,0" TextWrapping="Wrap"  Text="589" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                        <TextBox x:Name="tbxVth1Asic43" HorizontalAlignment="Center" Height="25" Margin="0,25,0,0" TextWrapping="Wrap"  Text="570" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                        <TextBox x:Name="tbxVth2Asic43" HorizontalAlignment="Center" Height="25" Margin="0,50,0,0" TextWrapping="Wrap"  Text="588" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                    </Grid>
+                                                </GroupBox>
+                                                <GroupBox x:Name="gbxAsic42" Header="ASIC42" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="170,300,0,0"  Height="100" Width="60">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <TextBox x:Name="tbxVth0Asic42" HorizontalAlignment="Center" Height="25" Margin="0,00,0,0" TextWrapping="Wrap"  Text="589" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                        <TextBox x:Name="tbxVth1Asic42" HorizontalAlignment="Center" Height="25" Margin="0,25,0,0" TextWrapping="Wrap"  Text="570" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                        <TextBox x:Name="tbxVth2Asic42" HorizontalAlignment="Center" Height="25" Margin="0,50,0,0" TextWrapping="Wrap"  Text="588" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                    </Grid>
+                                                </GroupBox>
+                                                <GroupBox x:Name="gbxAsic41" Header="ASIC41" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="230,300,0,0"  Height="100" Width="60">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <TextBox x:Name="tbxVth0Asic41" HorizontalAlignment="Center" Height="25" Margin="0,0,0,0" TextWrapping="Wrap"  Text="589" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                        <TextBox x:Name="tbxVth1Asic41" HorizontalAlignment="Center" Height="25" Margin="0,25,0,0" TextWrapping="Wrap"  Text="570" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                        <TextBox x:Name="tbxVth2Asic41" HorizontalAlignment="Center" Height="25" Margin="0,50,0,0" TextWrapping="Wrap"  Text="588" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                    </Grid>
+                                                </GroupBox>
+                                                <Label x:Name="lblHeaderChain4" Content="Header" HorizontalAlignment="Left" Margin="290,300,0,0" VerticalAlignment="Top" Width="60" Height="24"/>
+                                                <TextBox x:Name="tbxHeaderChain4" HorizontalAlignment="Left" Height="25" Margin="350,300,0,0" TextWrapping="Wrap"  Text="D1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                <Label x:Name="lblAsicNumberChain4" Content="Number" HorizontalAlignment="Left" Margin="290,325,0,0" VerticalAlignment="Top" Width="60" Height="24"/>
+                                                <ComboBox x:Name="cbxAsicNumberChain4" HorizontalAlignment="Left" Margin="350,325,0,0" VerticalAlignment="Top" Width="40" Height="24">
+                                                    <ComboBoxItem Content="1"/>
+                                                    <ComboBoxItem Content="2"/>
+                                                    <ComboBoxItem Content="3"/>
+                                                    <ComboBoxItem Content="4" IsSelected="True"/>
+                                                </ComboBox>
+                                                <ComboBox x:Name="cbxEnableChain4" HorizontalAlignment="Left" Margin="290,350,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="100" Height="24">
+                                                    <ComboBoxItem Content="Enable" IsSelected="True"/>
+                                                    <ComboBoxItem Content="Disable"/>
+                                                </ComboBox>
+                                            </Grid>
+                                        </TabItem>
+                                        <TabItem Name ="tbiTest" Header="Test">
+                                            <Grid Margin="0,0,0,0">
+                                                <Label x:Name="lblShaperChain1" Content="Shaper" HorizontalAlignment="Left" Margin="0,15,0,0" VerticalAlignment="Top" Width="50" Height="24"/>
+                                                <Label x:Name="lblCTestChain1" Content="CTest" HorizontalAlignment="Left" Margin="0,40,0,0" VerticalAlignment="Top" Width="50" Height="24"/>
+                                                <Label x:Name="lblCaliChain1" Content="Cali" HorizontalAlignment="Left" Margin="0,65,0,0" VerticalAlignment="Top" Width="50" Height="24"/>
+                                                <GroupBox x:Name="gbxAsic14a" Header="ASIC14" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,0,0,0"  Height="100" Width="70">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <ComboBox x:Name="cbxShaperAsic14" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="55" Height="24">
+                                                            <ComboBoxItem Content="High" IsSelected="True"/>
+                                                            <ComboBoxItem Content="Low" />
+                                                        </ComboBox>
+                                                        <TextBox x:Name="tbxCTestChannelAsic14" HorizontalAlignment="Center" Height="25" Margin="0,25,0,0" TextWrapping="Wrap"  Text="0" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="55"/>
+                                                        <TextBox x:Name="tbxCalibrationAsic14" HorizontalAlignment="Center" Height="25" Margin="0,50,0,0" TextWrapping="Wrap"  Text="C14.txt" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="55"/>
+
+                                                    </Grid>
+                                                </GroupBox>
+                                                <GroupBox x:Name="gbxAsic13a" Header="ASIC13" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="120,0,0,0"  Height="100" Width="70">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <ComboBox x:Name="cbxShaperAsic13" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="55" Height="24">
+                                                            <ComboBoxItem Content="High" IsSelected="True"/>
+                                                            <ComboBoxItem Content="Low" />
+                                                        </ComboBox>
+                                                        <TextBox x:Name="tbxCTestChannelAsic13" HorizontalAlignment="Center" Height="25" Margin="0,25,0,0" TextWrapping="Wrap"  Text="0" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="55"/>
+                                                        <TextBox x:Name="tbxCalibrationAsic13" HorizontalAlignment="Center" Height="25" Margin="0,50,0,0" TextWrapping="Wrap"  Text="C13.txt" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="55"/>
+
+                                                    </Grid>
+                                                </GroupBox>
+                                                <GroupBox x:Name="gbxAsic12a" Header="ASIC12" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="190,0,0,0"  Height="100" Width="70">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <ComboBox x:Name="cbxShaperAsic12" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="55" Height="24">
+                                                            <ComboBoxItem Content="High" IsSelected="True"/>
+                                                            <ComboBoxItem Content="Low" />
+                                                        </ComboBox>
+                                                        <TextBox x:Name="tbxCTestChannelAsic12" HorizontalAlignment="Center" Height="25" Margin="0,25,0,0" TextWrapping="Wrap"  Text="0" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="55"/>
+                                                        <TextBox x:Name="tbxCalibrationAsic12" HorizontalAlignment="Center" Height="25" Margin="0,50,0,0" TextWrapping="Wrap"  Text="C12.txt" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="55"/>
+
+                                                    </Grid>
+                                                </GroupBox>
+                                                <GroupBox x:Name="gbxAsic11a" Header="ASIC11" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="260,0,0,0"  Height="100" Width="70">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <ComboBox x:Name="cbxShaperAsic11" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="55" Height="24">
+                                                            <ComboBoxItem Content="High" IsSelected="True"/>
+                                                            <ComboBoxItem Content="Low" />
+                                                        </ComboBox>
+                                                        <TextBox x:Name="tbxCTestChannelAsic11" HorizontalAlignment="Center" Height="25" Margin="0,25,0,0" TextWrapping="Wrap"  Text="0" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="55"/>
+                                                        <TextBox x:Name="tbxCalibrationAsic11" HorizontalAlignment="Center" Height="25" Margin="0,50,0,0" TextWrapping="Wrap"  Text="C11.txt" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="55"/>
+
+                                                    </Grid>
+                                                </GroupBox>
+                                                <Label x:Name="lblShaperChain2" Content="Shaper" HorizontalAlignment="Left" Margin="0,115,0,0" VerticalAlignment="Top" Width="50" Height="24"/>
+                                                <Label x:Name="lblCTestChain2" Content="CTest" HorizontalAlignment="Left" Margin="0,140,0,0" VerticalAlignment="Top" Width="50" Height="24"/>
+                                                <Label x:Name="lblCaliChain2" Content="Cali" HorizontalAlignment="Left" Margin="0,165,0,0" VerticalAlignment="Top" Width="50" Height="24"/>
+                                                <GroupBox x:Name="gbxAsic24a" Header="ASIC24" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,100,0,0"  Height="100" Width="70">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <ComboBox x:Name="cbxShaperAsic24" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="55" Height="24">
+                                                            <ComboBoxItem Content="High" IsSelected="True"/>
+                                                            <ComboBoxItem Content="Low" />
+                                                        </ComboBox>
+                                                        <TextBox x:Name="tbxCTestChannelAsic24" HorizontalAlignment="Center" Height="25" Margin="0,25,0,0" TextWrapping="Wrap"  Text="0" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="55"/>
+                                                        <TextBox x:Name="tbxCalibrationAsic24" HorizontalAlignment="Center" Height="25" Margin="0,50,0,0" TextWrapping="Wrap"  Text="C24.txt" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="55"/>
+                                                    </Grid>
+                                                </GroupBox>
+                                                <GroupBox x:Name="gbxAsic23a" Header="ASIC23" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="120,100,0,0"  Height="100" Width="70">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <ComboBox x:Name="cbxShaperAsic23" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="55" Height="24">
+                                                            <ComboBoxItem Content="High" IsSelected="True"/>
+                                                            <ComboBoxItem Content="Low" />
+                                                        </ComboBox>
+                                                        <TextBox x:Name="tbxCTestChannelAsic23" HorizontalAlignment="Center" Height="25" Margin="0,25,0,0" TextWrapping="Wrap"  Text="0" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="55"/>
+                                                        <TextBox x:Name="tbxCalibrationAsic23" HorizontalAlignment="Center" Height="25" Margin="0,50,0,0" TextWrapping="Wrap"  Text="C23.txt" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="55"/>
+                                                    </Grid>
+                                                </GroupBox>
+                                                <GroupBox x:Name="gbxAsic22a" Header="ASIC22" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="190,100,0,0"  Height="100" Width="70">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <ComboBox x:Name="cbxShaperAsic22" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="55" Height="24">
+                                                            <ComboBoxItem Content="High" IsSelected="True"/>
+                                                            <ComboBoxItem Content="Low" />
+                                                        </ComboBox>
+                                                        <TextBox x:Name="tbxCTestChannelAsic22" HorizontalAlignment="Center" Height="25" Margin="0,25,0,0" TextWrapping="Wrap"  Text="0" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="55"/>
+                                                        <TextBox x:Name="tbxCalibrationAsic22" HorizontalAlignment="Center" Height="25" Margin="0,50,0,0" TextWrapping="Wrap"  Text="C22.txt" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="55"/>
+                                                    </Grid>
+                                                </GroupBox>
+                                                <GroupBox x:Name="gbxAsic21a" Header="ASIC21" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="260,100,0,0"  Height="100" Width="70">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <ComboBox x:Name="cbxShaperAsic21" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="55" Height="24">
+                                                            <ComboBoxItem Content="High" IsSelected="True"/>
+                                                            <ComboBoxItem Content="Low" />
+                                                        </ComboBox>
+                                                        <TextBox x:Name="tbxCTestChannelAsic21" HorizontalAlignment="Center" Height="25" Margin="0,25,0,0" TextWrapping="Wrap"  Text="0" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="55"/>
+                                                        <TextBox x:Name="tbxCalibrationAsic21" HorizontalAlignment="Center" Height="25" Margin="0,50,0,0" TextWrapping="Wrap"  Text="C21.txt" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="55"/>
+                                                    </Grid>
+                                                </GroupBox>
+                                                <Label x:Name="lblShaperChain3" Content="Shaper" HorizontalAlignment="Left" Margin="0,215,0,0" VerticalAlignment="Top" Width="50" Height="24"/>
+                                                <Label x:Name="lblCTestChain3" Content="CTest" HorizontalAlignment="Left" Margin="0,240,0,0" VerticalAlignment="Top" Width="50" Height="24"/>
+                                                <Label x:Name="lblCaliChain3" Content="Cali" HorizontalAlignment="Left" Margin="0,265,0,0" VerticalAlignment="Top" Width="50" Height="24"/>
+                                                <GroupBox x:Name="gbxAsic34a" Header="ASIC34" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,200,0,0"  Height="100" Width="70">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <ComboBox x:Name="cbxShaperAsic34" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="55" Height="24">
+                                                            <ComboBoxItem Content="High" IsSelected="True"/>
+                                                            <ComboBoxItem Content="Low" />
+                                                        </ComboBox>
+                                                        <TextBox x:Name="tbxCTestChannelAsic34" HorizontalAlignment="Center" Height="25" Margin="0,25,0,0" TextWrapping="Wrap"  Text="0" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="55"/>
+                                                        <TextBox x:Name="tbxCalibrationAsic34" HorizontalAlignment="Center" Height="25" Margin="0,50,0,0" TextWrapping="Wrap"  Text="C34.txt" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="55"/>
+                                                    </Grid>
+                                                </GroupBox>
+                                                <GroupBox x:Name="gbxAsic33a" Header="ASIC33" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="120,200,0,0"  Height="100" Width="70">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <ComboBox x:Name="cbxShaperAsic33" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="55" Height="24">
+                                                            <ComboBoxItem Content="High" IsSelected="True"/>
+                                                            <ComboBoxItem Content="Low" />
+                                                        </ComboBox>
+                                                        <TextBox x:Name="tbxCTestChannelAsic33" HorizontalAlignment="Center" Height="25" Margin="0,25,0,0" TextWrapping="Wrap"  Text="0" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="55"/>
+                                                        <TextBox x:Name="tbxCalibrationAsic33" HorizontalAlignment="Center" Height="25" Margin="0,50,0,0" TextWrapping="Wrap"  Text="C33.txt" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="55"/>
+                                                    </Grid>
+                                                </GroupBox>
+                                                <GroupBox x:Name="gbxAsic32a" Header="ASIC32" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="190,200,0,0"  Height="100" Width="70">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <ComboBox x:Name="cbxShaperAsic32" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="55" Height="24">
+                                                            <ComboBoxItem Content="High" IsSelected="True"/>
+                                                            <ComboBoxItem Content="Low" />
+                                                        </ComboBox>
+                                                        <TextBox x:Name="tbxCTestChannelAsic32" HorizontalAlignment="Center" Height="25" Margin="0,25,0,0" TextWrapping="Wrap"  Text="0" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="55"/>
+                                                        <TextBox x:Name="tbxCalibrationAsic32" HorizontalAlignment="Center" Height="25" Margin="0,50,0,0" TextWrapping="Wrap"  Text="C32.txt" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="55"/>
+                                                    </Grid>
+                                                </GroupBox>
+                                                <GroupBox x:Name="gbxAsic31a" Header="ASIC31" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="260,200,0,0"  Height="100" Width="70">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <ComboBox x:Name="cbxShaperAsic31" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="55" Height="24">
+                                                            <ComboBoxItem Content="High" IsSelected="True"/>
+                                                            <ComboBoxItem Content="Low" />
+                                                        </ComboBox>
+                                                        <TextBox x:Name="tbxCTestChannelAsic31" HorizontalAlignment="Center" Height="25" Margin="0,25,0,0" TextWrapping="Wrap"  Text="0" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="55"/>
+                                                        <TextBox x:Name="tbxCalibrationAsic31" HorizontalAlignment="Center" Height="25" Margin="0,50,0,0" TextWrapping="Wrap"  Text="C31.txt" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="55"/>
+                                                    </Grid>
+                                                </GroupBox>
+                                                <Label x:Name="lblShaperChain4" Content="Shaper" HorizontalAlignment="Left" Margin="0,315,0,0" VerticalAlignment="Top" Width="50" Height="24"/>
+                                                <Label x:Name="lblCTestChain4" Content="CTest" HorizontalAlignment="Left" Margin="0,340,0,0" VerticalAlignment="Top" Width="50" Height="24"/>
+                                                <Label x:Name="lblCaliChain4" Content="Cali" HorizontalAlignment="Left" Margin="0,365,0,0" VerticalAlignment="Top" Width="50" Height="24"/>
+                                                <GroupBox x:Name="gbxAsic44a" Header="ASIC44" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,300,0,0"  Height="100" Width="70">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <ComboBox x:Name="cbxShaperAsic44" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="55" Height="24">
+                                                            <ComboBoxItem Content="High" IsSelected="True"/>
+                                                            <ComboBoxItem Content="Low" />
+                                                        </ComboBox>
+                                                        <TextBox x:Name="tbxCTestChannelAsic44" HorizontalAlignment="Center" Height="25" Margin="0,25,0,0" TextWrapping="Wrap"  Text="0" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="55"/>
+                                                        <TextBox x:Name="tbxCalibrationAsic44" HorizontalAlignment="Center" Height="25" Margin="0,50,0,0" TextWrapping="Wrap"  Text="C44.txt" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="55"/>
+                                                    </Grid>
+                                                </GroupBox>
+                                                <GroupBox x:Name="gbxAsic43a" Header="ASIC43" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="120,300,0,0"  Height="100" Width="70">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <ComboBox x:Name="cbxShaperAsic43" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="55" Height="24">
+                                                            <ComboBoxItem Content="High" IsSelected="True"/>
+                                                            <ComboBoxItem Content="Low" />
+                                                        </ComboBox>
+                                                        <TextBox x:Name="tbxCTestChannelAsic43" HorizontalAlignment="Center" Height="25" Margin="0,25,0,0" TextWrapping="Wrap"  Text="0" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="55"/>
+                                                        <TextBox x:Name="tbxCalibrationAsic43" HorizontalAlignment="Center" Height="25" Margin="0,50,0,0" TextWrapping="Wrap"  Text="C43.txt" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="55"/>
+                                                    </Grid>
+                                                </GroupBox>
+                                                <GroupBox x:Name="gbxAsic42a" Header="ASIC42" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="190,300,0,0"  Height="100" Width="70">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <ComboBox x:Name="cbxShaperAsic42" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="55" Height="24">
+                                                            <ComboBoxItem Content="High" IsSelected="True"/>
+                                                            <ComboBoxItem Content="Low" />
+                                                        </ComboBox>
+                                                        <TextBox x:Name="tbxCTestChannelAsic42" HorizontalAlignment="Center" Height="25" Margin="0,25,0,0" TextWrapping="Wrap"  Text="0" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="55"/>
+                                                        <TextBox x:Name="tbxCalibrationAsic42" HorizontalAlignment="Center" Height="25" Margin="0,50,0,0" TextWrapping="Wrap"  Text="C42.txt" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="55"/>
+                                                    </Grid>
+                                                </GroupBox>
+                                                <GroupBox x:Name="gbxAsic41a" Header="ASIC41" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="260,300,0,0"  Height="100" Width="70">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <ComboBox x:Name="cbxShaperAsic41" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="55" Height="24">
+                                                            <ComboBoxItem Content="High" IsSelected="True"/>
+                                                            <ComboBoxItem Content="Low" />
+                                                        </ComboBox>
+                                                        <TextBox x:Name="tbxCTestChannelAsic41" HorizontalAlignment="Center" Height="25" Margin="0,25,0,0" TextWrapping="Wrap"  Text="0" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="55"/>
+                                                        <TextBox x:Name="tbxCalibrationAsic41" HorizontalAlignment="Center" Height="25" Margin="0,50,0,0" TextWrapping="Wrap"  Text="C41.txt" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="55"/>
+                                                    </Grid>
+                                                </GroupBox>
+                                            </Grid>
+                                        </TabItem>
+                                        <TabItem Name="OtherControl" Header="Shaper">
+                                            <Grid Margin="0,0,0,0">
+                                                <Label x:Name="lblReadScopeChain1" Content="Read" HorizontalAlignment="Left" Margin="0,15,0,0" VerticalAlignment="Top" Width="50" Height="24"/>
+                                                <Label x:Name="lblHighGainFeedbackChain1" Content="Sw_hg" HorizontalAlignment="Left" Margin="0,40,0,0" VerticalAlignment="Top" Width="50" Height="24"/>
+                                                <Label x:Name="lblLowGainFeedbackChain1" Content="Sw_lg" HorizontalAlignment="Left" Margin="0,65,0,0" VerticalAlignment="Top" Width="50" Height="24"/>
+                                                <GroupBox x:Name="gbxAsic14b" Header="ASIC14" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,0,0,0"  Height="100" Width="70">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <TextBox x:Name="tbxReadScopeAsic14" HorizontalAlignment="Center" Height="25" Margin="0,0,0,0" TextWrapping="Wrap"  Text="0" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="55"/>
+                                                        <ComboBox x:Name="cbxHighGainFeedbackAsic14" HorizontalAlignment="Left" Margin="0,25,0,0" VerticalAlignment="Top" Width="55" Height="24">
+                                                            <ComboBoxItem Content="00"/>
+                                                            <ComboBoxItem Content="01" IsSelected="True"/>
+                                                            <ComboBoxItem Content="10"/>
+                                                            <ComboBoxItem Content="11"/>
+                                                        </ComboBox>
+                                                        <ComboBox x:Name="cbxLowGainFeedbackAsic14" HorizontalAlignment="Left" Margin="0,50,0,0" VerticalAlignment="Top" Width="55" Height="24">
+                                                            <ComboBoxItem Content="00"/>
+                                                            <ComboBoxItem Content="01" IsSelected="True"/>
+                                                            <ComboBoxItem Content="10"/>
+                                                            <ComboBoxItem Content="11"/>
+                                                        </ComboBox>
+                                                    </Grid>
+                                                </GroupBox>
+                                                <GroupBox x:Name="gbxAsic13b" Header="ASIC13" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="120,0,0,0"  Height="100" Width="70">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <TextBox x:Name="tbxReadScopeAsic13" HorizontalAlignment="Center" Height="25" Margin="0,0,0,0" TextWrapping="Wrap"  Text="0" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="55"/>
+                                                        <ComboBox x:Name="cbxHighGainFeedbackAsic13" HorizontalAlignment="Left" Margin="0,25,0,0" VerticalAlignment="Top" Width="55" Height="24">
+                                                            <ComboBoxItem Content="00"/>
+                                                            <ComboBoxItem Content="01" IsSelected="True"/>
+                                                            <ComboBoxItem Content="10"/>
+                                                            <ComboBoxItem Content="11"/>
+                                                        </ComboBox>
+                                                        <ComboBox x:Name="cbxLowGainFeedbackAsic13" HorizontalAlignment="Left" Margin="0,50,0,0" VerticalAlignment="Top" Width="55" Height="24">
+                                                            <ComboBoxItem Content="00"/>
+                                                            <ComboBoxItem Content="01" IsSelected="True"/>
+                                                            <ComboBoxItem Content="10"/>
+                                                            <ComboBoxItem Content="11"/>
+                                                        </ComboBox>
+                                                    </Grid>
+                                                </GroupBox>
+                                                <GroupBox x:Name="gbxAsic12b" Header="ASIC12" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="190,0,0,0"  Height="100" Width="70">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <TextBox x:Name="tbxReadScopeAsic12" HorizontalAlignment="Center" Height="25" Margin="0,0,0,0" TextWrapping="Wrap"  Text="0" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="55"/>
+                                                        <ComboBox x:Name="cbxHighGainFeedbackAsic12" HorizontalAlignment="Left" Margin="0,25,0,0" VerticalAlignment="Top" Width="55" Height="24">
+                                                            <ComboBoxItem Content="00"/>
+                                                            <ComboBoxItem Content="01" IsSelected="True"/>
+                                                            <ComboBoxItem Content="10"/>
+                                                            <ComboBoxItem Content="11"/>
+                                                        </ComboBox>
+                                                        <ComboBox x:Name="cbxLowGainFeedbackAsic12" HorizontalAlignment="Left" Margin="0,50,0,0" VerticalAlignment="Top" Width="55" Height="24">
+                                                            <ComboBoxItem Content="00"/>
+                                                            <ComboBoxItem Content="01" IsSelected="True"/>
+                                                            <ComboBoxItem Content="10"/>
+                                                            <ComboBoxItem Content="11"/>
+                                                        </ComboBox>
+                                                    </Grid>
+                                                </GroupBox>
+                                                <GroupBox x:Name="gbxAsic11b" Header="ASIC11" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="260,0,0,0"  Height="100" Width="70">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <TextBox x:Name="tbxReadScopeAsic11" HorizontalAlignment="Center" Height="25" Margin="0,0,0,0" TextWrapping="Wrap"  Text="0" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="55"/>
+                                                        <ComboBox x:Name="cbxHighGainFeedbackAsic11" HorizontalAlignment="Left" Margin="0,25,0,0" VerticalAlignment="Top" Width="55" Height="24">
+                                                            <ComboBoxItem Content="00"/>
+                                                            <ComboBoxItem Content="01" IsSelected="True"/>
+                                                            <ComboBoxItem Content="10"/>
+                                                            <ComboBoxItem Content="11"/>
+                                                        </ComboBox>
+                                                        <ComboBox x:Name="cbxLowGainFeedbackAsic11" HorizontalAlignment="Left" Margin="0,50,0,0" VerticalAlignment="Top" Width="55" Height="24">
+                                                            <ComboBoxItem Content="00"/>
+                                                            <ComboBoxItem Content="01" IsSelected="True"/>
+                                                            <ComboBoxItem Content="10"/>
+                                                            <ComboBoxItem Content="11"/>
+                                                        </ComboBox>
+                                                    </Grid>
+                                                </GroupBox>
+                                                <Label x:Name="lblReadScopeChain2" Content="Read" HorizontalAlignment="Left" Margin="0,115,0,0" VerticalAlignment="Top" Width="50" Height="24"/>
+                                                <Label x:Name="lblHighGainFeedbackChain2" Content="Sw_hg" HorizontalAlignment="Left" Margin="0,140,0,0" VerticalAlignment="Top" Width="50" Height="24"/>
+                                                <Label x:Name="lblLowGainFeedbackChain2" Content="Sw_lg" HorizontalAlignment="Left" Margin="0,165,0,0" VerticalAlignment="Top" Width="50" Height="24"/>
+                                                <GroupBox x:Name="gbxAsic24b" Header="ASIC24" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,100,0,0"  Height="100" Width="70">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <TextBox x:Name="tbxReadScopeAsic24" HorizontalAlignment="Center" Height="25" Margin="0,0,0,0" TextWrapping="Wrap"  Text="0" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="55"/>
+                                                        <ComboBox x:Name="cbxHighGainFeedbackAsic24" HorizontalAlignment="Left" Margin="0,25,0,0" VerticalAlignment="Top" Width="55" Height="24">
+                                                            <ComboBoxItem Content="00"/>
+                                                            <ComboBoxItem Content="01" IsSelected="True"/>
+                                                            <ComboBoxItem Content="10"/>
+                                                            <ComboBoxItem Content="11"/>
+                                                        </ComboBox>
+                                                        <ComboBox x:Name="cbxLowGainFeedbackAsic24" HorizontalAlignment="Left" Margin="0,50,0,0" VerticalAlignment="Top" Width="55" Height="24">
+                                                            <ComboBoxItem Content="00"/>
+                                                            <ComboBoxItem Content="01" IsSelected="True"/>
+                                                            <ComboBoxItem Content="10"/>
+                                                            <ComboBoxItem Content="11"/>
+                                                        </ComboBox>
+                                                    </Grid>
+                                                </GroupBox>
+                                                <GroupBox x:Name="gbxAsic23b" Header="ASIC23" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="120,100,0,0"  Height="100" Width="70">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <TextBox x:Name="tbxReadScopeAsic23" HorizontalAlignment="Center" Height="25" Margin="0,0,0,0" TextWrapping="Wrap"  Text="0" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="55"/>
+                                                        <ComboBox x:Name="cbxHighGainFeedbackAsic23" HorizontalAlignment="Left" Margin="0,25,0,0" VerticalAlignment="Top" Width="55" Height="24">
+                                                            <ComboBoxItem Content="00"/>
+                                                            <ComboBoxItem Content="01" IsSelected="True"/>
+                                                            <ComboBoxItem Content="10"/>
+                                                            <ComboBoxItem Content="11"/>
+                                                        </ComboBox>
+                                                        <ComboBox x:Name="cbxLowGainFeedbackAsic23" HorizontalAlignment="Left" Margin="0,50,0,0" VerticalAlignment="Top" Width="55" Height="24">
+                                                            <ComboBoxItem Content="00"/>
+                                                            <ComboBoxItem Content="01" IsSelected="True"/>
+                                                            <ComboBoxItem Content="10"/>
+                                                            <ComboBoxItem Content="11"/>
+                                                        </ComboBox>
+                                                    </Grid>
+                                                </GroupBox>
+                                                <GroupBox x:Name="gbxAsic22b" Header="ASIC22" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="190,100,0,0"  Height="100" Width="70">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <TextBox x:Name="tbxReadScopeAsic22" HorizontalAlignment="Center" Height="25" Margin="0,0,0,0" TextWrapping="Wrap"  Text="0" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="55"/>
+                                                        <ComboBox x:Name="cbxHighGainFeedbackAsic22" HorizontalAlignment="Left" Margin="0,25,0,0" VerticalAlignment="Top" Width="55" Height="24">
+                                                            <ComboBoxItem Content="00"/>
+                                                            <ComboBoxItem Content="01" IsSelected="True"/>
+                                                            <ComboBoxItem Content="10"/>
+                                                            <ComboBoxItem Content="11"/>
+                                                        </ComboBox>
+                                                        <ComboBox x:Name="cbxLowGainFeedbackAsic22" HorizontalAlignment="Left" Margin="0,50,0,0" VerticalAlignment="Top" Width="55" Height="24">
+                                                            <ComboBoxItem Content="00"/>
+                                                            <ComboBoxItem Content="01" IsSelected="True"/>
+                                                            <ComboBoxItem Content="10"/>
+                                                            <ComboBoxItem Content="11"/>
+                                                        </ComboBox>
+                                                    </Grid>
+                                                </GroupBox>
+                                                <GroupBox x:Name="gbxAsic21b" Header="ASIC21" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="260,100,0,0"  Height="100" Width="70">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <TextBox x:Name="tbxReadScopeAsic21" HorizontalAlignment="Center" Height="25" Margin="0,0,0,0" TextWrapping="Wrap"  Text="0" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="55"/>
+                                                        <ComboBox x:Name="cbxHighGainFeedbackAsic21" HorizontalAlignment="Left" Margin="0,25,0,0" VerticalAlignment="Top" Width="55" Height="24">
+                                                            <ComboBoxItem Content="00"/>
+                                                            <ComboBoxItem Content="01" IsSelected="True"/>
+                                                            <ComboBoxItem Content="10"/>
+                                                            <ComboBoxItem Content="11"/>
+                                                        </ComboBox>
+                                                        <ComboBox x:Name="cbxLowGainFeedbackAsic21" HorizontalAlignment="Left" Margin="0,50,0,0" VerticalAlignment="Top" Width="55" Height="24">
+                                                            <ComboBoxItem Content="00"/>
+                                                            <ComboBoxItem Content="01" IsSelected="True"/>
+                                                            <ComboBoxItem Content="10"/>
+                                                            <ComboBoxItem Content="11"/>
+                                                        </ComboBox>
+                                                    </Grid>
+                                                </GroupBox>
+                                                <Label x:Name="lblReadScopeChain3" Content="Read" HorizontalAlignment="Left" Margin="0,215,0,0" VerticalAlignment="Top" Width="50" Height="24"/>
+                                                <Label x:Name="lblHighGainFeedbackChain3" Content="Sw_hg" HorizontalAlignment="Left" Margin="0,240,0,0" VerticalAlignment="Top" Width="50" Height="24"/>
+                                                <Label x:Name="lblLowGainFeedbackChain3" Content="Sw_lg" HorizontalAlignment="Left" Margin="0,265,0,0" VerticalAlignment="Top" Width="50" Height="24"/>
+                                                <GroupBox x:Name="gbxAsic34b" Header="ASIC34" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,200,0,0"  Height="100" Width="70">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <TextBox x:Name="tbxReadScopeAsic34" HorizontalAlignment="Center" Height="25" Margin="0,0,0,0" TextWrapping="Wrap"  Text="0" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="55"/>
+                                                        <ComboBox x:Name="cbxHighGainFeedbackAsic34" HorizontalAlignment="Left" Margin="0,25,0,0" VerticalAlignment="Top" Width="55" Height="24">
+                                                            <ComboBoxItem Content="00"/>
+                                                            <ComboBoxItem Content="01" IsSelected="True"/>
+                                                            <ComboBoxItem Content="10"/>
+                                                            <ComboBoxItem Content="11"/>
+                                                        </ComboBox>
+                                                        <ComboBox x:Name="cbxLowGainFeedbackAsic34" HorizontalAlignment="Left" Margin="0,50,0,0" VerticalAlignment="Top" Width="55" Height="24">
+                                                            <ComboBoxItem Content="00"/>
+                                                            <ComboBoxItem Content="01" IsSelected="True"/>
+                                                            <ComboBoxItem Content="10"/>
+                                                            <ComboBoxItem Content="11"/>
+                                                        </ComboBox>
+                                                    </Grid>
+                                                </GroupBox>
+                                                <GroupBox x:Name="gbxAsic33b" Header="ASIC33" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="120,200,0,0"  Height="100" Width="70">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <TextBox x:Name="tbxReadScopeAsic33" HorizontalAlignment="Center" Height="25" Margin="0,0,0,0" TextWrapping="Wrap"  Text="0" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="55"/>
+                                                        <ComboBox x:Name="cbxHighGainFeedbackAsic33" HorizontalAlignment="Left" Margin="0,25,0,0" VerticalAlignment="Top" Width="55" Height="24">
+                                                            <ComboBoxItem Content="00"/>
+                                                            <ComboBoxItem Content="01" IsSelected="True"/>
+                                                            <ComboBoxItem Content="10"/>
+                                                            <ComboBoxItem Content="11"/>
+                                                        </ComboBox>
+                                                        <ComboBox x:Name="cbxLowGainFeedbackAsic33" HorizontalAlignment="Left" Margin="0,50,0,0" VerticalAlignment="Top" Width="55" Height="24">
+                                                            <ComboBoxItem Content="00"/>
+                                                            <ComboBoxItem Content="01" IsSelected="True"/>
+                                                            <ComboBoxItem Content="10"/>
+                                                            <ComboBoxItem Content="11"/>
+                                                        </ComboBox>
+                                                    </Grid>
+                                                </GroupBox>
+                                                <GroupBox x:Name="gbxAsic32b" Header="ASIC32" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="190,200,0,0"  Height="100" Width="70">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <TextBox x:Name="tbxReadScopeAsic32" HorizontalAlignment="Center" Height="25" Margin="0,0,0,0" TextWrapping="Wrap"  Text="0" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="55"/>
+                                                        <ComboBox x:Name="cbxHighGainFeedbackAsic32" HorizontalAlignment="Left" Margin="0,25,0,0" VerticalAlignment="Top" Width="55" Height="24">
+                                                            <ComboBoxItem Content="00"/>
+                                                            <ComboBoxItem Content="01" IsSelected="True"/>
+                                                            <ComboBoxItem Content="10"/>
+                                                            <ComboBoxItem Content="11"/>
+                                                        </ComboBox>
+                                                        <ComboBox x:Name="cbxLowGainFeedbackAsic32" HorizontalAlignment="Left" Margin="0,50,0,0" VerticalAlignment="Top" Width="55" Height="24">
+                                                            <ComboBoxItem Content="00"/>
+                                                            <ComboBoxItem Content="01" IsSelected="True"/>
+                                                            <ComboBoxItem Content="10"/>
+                                                            <ComboBoxItem Content="11"/>
+                                                        </ComboBox>
+                                                    </Grid>
+                                                </GroupBox>
+                                                <GroupBox x:Name="gbxAsic31b" Header="ASIC31" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="260,200,0,0"  Height="100" Width="70">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <TextBox x:Name="tbxReadScopeAsic31" HorizontalAlignment="Center" Height="25" Margin="0,0,0,0" TextWrapping="Wrap"  Text="0" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="55"/>
+                                                        <ComboBox x:Name="cbxHighGainFeedbackAsic31" HorizontalAlignment="Left" Margin="0,25,0,0" VerticalAlignment="Top" Width="55" Height="24">
+                                                            <ComboBoxItem Content="00"/>
+                                                            <ComboBoxItem Content="01" IsSelected="True"/>
+                                                            <ComboBoxItem Content="10"/>
+                                                            <ComboBoxItem Content="11"/>
+                                                        </ComboBox>
+                                                        <ComboBox x:Name="cbxLowGainFeedbackAsic31" HorizontalAlignment="Left" Margin="0,50,0,0" VerticalAlignment="Top" Width="55" Height="24">
+                                                            <ComboBoxItem Content="00"/>
+                                                            <ComboBoxItem Content="01" IsSelected="True"/>
+                                                            <ComboBoxItem Content="10"/>
+                                                            <ComboBoxItem Content="11"/>
+                                                        </ComboBox>
+                                                    </Grid>
+                                                </GroupBox>
+                                                <Label x:Name="lblReadScopeChain4" Content="Read" HorizontalAlignment="Left" Margin="0,315,0,0" VerticalAlignment="Top" Width="50" Height="24"/>
+                                                <Label x:Name="lblHighGainFeedbackChain4" Content="Sw_hg" HorizontalAlignment="Left" Margin="0,340,0,0" VerticalAlignment="Top" Width="50" Height="24"/>
+                                                <Label x:Name="lblLowGainFeedbackChain4" Content="Sw_lg" HorizontalAlignment="Left" Margin="0,365,0,0" VerticalAlignment="Top" Width="50" Height="24"/>
+                                                <GroupBox x:Name="gbxAsic44b" Header="ASIC44" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,300,0,0"  Height="100" Width="70">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <TextBox x:Name="tbxReadScopeAsic44" HorizontalAlignment="Center" Height="25" Margin="0,0,0,0" TextWrapping="Wrap"  Text="0" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="55"/>
+                                                        <ComboBox x:Name="cbxHighGainFeedbackAsic44" HorizontalAlignment="Left" Margin="0,25,0,0" VerticalAlignment="Top" Width="55" Height="24">
+                                                            <ComboBoxItem Content="00"/>
+                                                            <ComboBoxItem Content="01" IsSelected="True"/>
+                                                            <ComboBoxItem Content="10"/>
+                                                            <ComboBoxItem Content="11"/>
+                                                        </ComboBox>
+                                                        <ComboBox x:Name="cbxLowGainFeedbackAsic44" HorizontalAlignment="Left" Margin="0,50,0,0" VerticalAlignment="Top" Width="55" Height="24">
+                                                            <ComboBoxItem Content="00"/>
+                                                            <ComboBoxItem Content="01" IsSelected="True"/>
+                                                            <ComboBoxItem Content="10"/>
+                                                            <ComboBoxItem Content="11"/>
+                                                        </ComboBox>
+                                                    </Grid>
+                                                </GroupBox>
+                                                <GroupBox x:Name="gbxAsic43b" Header="ASIC43" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="120,300,0,0"  Height="100" Width="70">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <TextBox x:Name="tbxReadScopeAsic43" HorizontalAlignment="Center" Height="25" Margin="0,0,0,0" TextWrapping="Wrap"  Text="0" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="55"/>
+                                                        <ComboBox x:Name="cbxHighGainFeedbackAsic43" HorizontalAlignment="Left" Margin="0,25,0,0" VerticalAlignment="Top" Width="55" Height="24">
+                                                            <ComboBoxItem Content="00"/>
+                                                            <ComboBoxItem Content="01" IsSelected="True"/>
+                                                            <ComboBoxItem Content="10"/>
+                                                            <ComboBoxItem Content="11"/>
+                                                        </ComboBox>
+                                                        <ComboBox x:Name="cbxLowGainFeedbackAsic43" HorizontalAlignment="Left" Margin="0,50,0,0" VerticalAlignment="Top" Width="55" Height="24">
+                                                            <ComboBoxItem Content="00"/>
+                                                            <ComboBoxItem Content="01" IsSelected="True"/>
+                                                            <ComboBoxItem Content="10"/>
+                                                            <ComboBoxItem Content="11"/>
+                                                        </ComboBox>
+                                                    </Grid>
+                                                </GroupBox>
+                                                <GroupBox x:Name="gbxAsic42b" Header="ASIC42" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="190,300,0,0"  Height="100" Width="70">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <TextBox x:Name="tbxReadScopeAsic42" HorizontalAlignment="Center" Height="25" Margin="0,0,0,0" TextWrapping="Wrap"  Text="0" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="55"/>
+                                                        <ComboBox x:Name="cbxHighGainFeedbackAsic42" HorizontalAlignment="Left" Margin="0,25,0,0" VerticalAlignment="Top" Width="55" Height="24">
+                                                            <ComboBoxItem Content="00"/>
+                                                            <ComboBoxItem Content="01" IsSelected="True"/>
+                                                            <ComboBoxItem Content="10"/>
+                                                            <ComboBoxItem Content="11"/>
+                                                        </ComboBox>
+                                                        <ComboBox x:Name="cbxLowGainFeedbackAsic42" HorizontalAlignment="Left" Margin="0,50,0,0" VerticalAlignment="Top" Width="55" Height="24">
+                                                            <ComboBoxItem Content="00"/>
+                                                            <ComboBoxItem Content="01" IsSelected="True"/>
+                                                            <ComboBoxItem Content="10"/>
+                                                            <ComboBoxItem Content="11"/>
+                                                        </ComboBox>
+                                                    </Grid>
+                                                </GroupBox>
+                                                <GroupBox x:Name="gbxAsic41b" Header="ASIC41" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="260,300,0,0"  Height="100" Width="70">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <TextBox x:Name="tbxReadScopeAsic41" HorizontalAlignment="Center" Height="25" Margin="0,0,0,0" TextWrapping="Wrap"  Text="0" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="55"/>
+                                                        <ComboBox x:Name="cbxHighGainFeedbackAsic41" HorizontalAlignment="Left" Margin="0,25,0,0" VerticalAlignment="Top" Width="55" Height="24">
+                                                            <ComboBoxItem Content="00"/>
+                                                            <ComboBoxItem Content="01" IsSelected="True"/>
+                                                            <ComboBoxItem Content="10"/>
+                                                            <ComboBoxItem Content="11"/>
+                                                        </ComboBox>
+                                                        <ComboBox x:Name="cbxLowGainFeedbackAsic41" HorizontalAlignment="Left" Margin="0,50,0,0" VerticalAlignment="Top" Width="55" Height="24">
+                                                            <ComboBoxItem Content="00"/>
+                                                            <ComboBoxItem Content="01" IsSelected="True"/>
+                                                            <ComboBoxItem Content="10"/>
+                                                            <ComboBoxItem Content="11"/>
+                                                        </ComboBox>
+                                                    </Grid>
+                                                </GroupBox>
+                                            </Grid>
+                                        </TabItem>
+                                    </TabControl>
+                                </Grid>
+                            </GroupBox>
+                            <Label x:Name="lblPowerPulsingNewDif" Content="Powerpulsing" HorizontalAlignment="Left" Margin="500,0,0,0" VerticalAlignment="Top" Height="24" Width="90"/>
+                            <StackPanel HorizontalAlignment="Left" Height="30" Margin="600,0,0,0" VerticalAlignment="Top" Width="70">
+                                <RadioButton Name="rdbPowerPulsingEnableNewDif" Content="Enable" Checked="rdbPowerPulsingEnableNewDif_Checked"/>
+                                <RadioButton Name="rdbPowerPulsingDisableNewDif" Content="Disable" Checked="rdbPowerPulsingDisableNewDif_Checked"/>
+                            </StackPanel>
+                            <Label x:Name="lblSlowControlOrReadScope" Content="SC or Read:" HorizontalAlignment="Left" Margin="500,30,0,0" VerticalAlignment="Top" Width="100" Height="24"/>
+                            <StackPanel HorizontalAlignment="Left" Height="31" Margin="600,30,0,0" VerticalAlignment="Top" Width="75">
+                                <RadioButton Name="rdbSlowControlSet" Content="SC" Checked="rdbSlowControlSet_Checked"/>
+                                <RadioButton Name="rdbReadScopeSet" Content="ReadScope" Checked="rdbReadScopeSet_Checked"/>
+                            </StackPanel>
+                            <Button x:Name="btnConfigurationParameterLoad" Content="Configuration Parameter Load" Height="24" Width="200" Margin="500,60,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Center" Click="btnConfigurationParameterLoad_Click"/>
+                            <TabControl x:Name="tbcNewDifAcquisition" Height="300" Margin="500,100,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200">
+                                <TabItem Name="tbmAcquisition" Header="Acquisition"  MouseLeftButtonUp="tbmNormalAcq_MouseLeftButtonUp">
+                                    <Grid Margin="0,0,0,0">
+                                        <GroupBox x:Name="gbxAcquisition" Header="Acq" HorizontalAlignment="Left" VerticalAlignment="Top" Height="150" Width="155" Margin="0,0,0,0">
+                                            <Grid  Margin="0,0,0,0" >
+                                                <Label x:Name="lblAcquisitionMode" Content="DAQ Mode:" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Height="24" Width="80"/>
+                                                <StackPanel HorizontalAlignment="Left" Height="30" Margin="80,0,0,0" VerticalAlignment="Top" Width="60">
+                                                    <RadioButton Name="AutoDaq" Content="Auto"/>
+                                                    <RadioButton GroupName="SlaveDaq" Content="Slave"/>
+                                                </StackPanel>
+                                                <Label x:Name="lblAcquisitionDataNumber" Content="Data Number" HorizontalAlignment="Left" Margin="0,30,0,0" VerticalAlignment="Top" Width="90" Height="24"/>
+                                                <TextBox x:Name="txtAcquisitionDataNumber" HorizontalAlignment="Left" Height="24" Margin="90,30,0,0" TextWrapping="Wrap" Text="5120" VerticalAlignment="Top" Width="50"/>
+                                                <Label x:Name="lblEndHoldTime" Content="End Time(ns):" HorizontalAlignment="Left" Margin="0,60,0,0" VerticalAlignment="Top" Height="24" Width="90"/>
+                                                <TextBox x:Name="txtAcquisitionndHoldTime" HorizontalAlignment="Left" Height="24" Margin="90,60,0,0" TextWrapping="Wrap" Text="500" VerticalAlignment="Top" Width="50"/>
+                                                
+                                                <Button x:Name="btnNewDifAcquisitionStart" Content="SlowACQ" HorizontalAlignment="Left" Margin="0,90,0,0" VerticalAlignment="Top" Width="130" Height="24"/>
+                                            </Grid>
+                                        </GroupBox>
+                                    </Grid>
+                                </TabItem>
+                                <TabItem Name="tbiAdcControlNewDif" Header="AD9220" MouseLeftButtonUp="tbiAD9220_MouseLeftButtonUp">
+                                    <Grid Margin="0,0,0,0">
+                                        <Label x:Name="lblHoldGenerate" Content="Hold Set" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="80"/>
+                                        <ComboBox x:Name="cbxHoldSelect" HorizontalAlignment="Left" Margin="100,0,0,0" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.088,-0.048" Height="24">
+                                            <ComboBoxItem Content="OUT_TRIG0B" IsSelected="True"/>
+                                            <ComboBoxItem Content="OUT_TRIG1B"/>
+                                            <ComboBoxItem Content="OUT_TRIG2B"/>
+                                            <ComboBoxItem Content="EXT_TRIGB"/>
+                                        </ComboBox>
+                                        <Label x:Name="lblHoldDelayNewDif" Content="Hold Delay(ns)" HorizontalAlignment="Left" Margin="0,30,0,0" VerticalAlignment="Top"/>
+                                        <TextBox x:Name="txtHoldDelayNewDif" HorizontalAlignment="Left" Height="24" Margin="100,30,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="50"/>
+                                        <Label x:Name="lblHoldTimeNewDif" Content="Hold Time(ns)" HorizontalAlignment="Left" Margin="0,60,0,0" VerticalAlignment="Top"/>
+                                        <TextBox x:Name="txtHoldTimeNewDif" HorizontalAlignment="Left" Height="24" Margin="100,60,0,0" TextWrapping="Wrap" Text="5000" VerticalAlignment="Top" Width="50" />
+                                        <ComboBox x:Name="cbxHoldEnableNewDif" HorizontalAlignment="Left" Margin="0,90,0,0" VerticalAlignment="Top" Width="60">
+                                            <ComboBoxItem Content="Disable" IsSelected="True"/>
+                                            <ComboBoxItem Content="Enable"/>
+                                        </ComboBox>
+                                        <Button x:Name="btnSetHoldNewDif" Content="SET HOLD" HorizontalAlignment="Left" Margin="100,90,0,0" VerticalAlignment="Top" Width="76" Height="24" Click="btnSet_Hold_Click"/>
+                                        <Label x:Name="lblTriggerDelayNewDif" Content="TriggerDelay" HorizontalAlignment="Left" Margin="0,120,0,0" VerticalAlignment="Top"/>
+                                        <TextBox x:Name="txtTriggerDelayNewDif" HorizontalAlignment="Left" Height="24" Margin="100,120,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="60"/>
+                                        <GroupBox x:Name="gbxAD9220ControlNewDif" Header="AD9220" HorizontalAlignment="Left" Margin="0,150,0,0" VerticalAlignment="Top" Width="156" Height="110">
+                                            <Grid Margin="0,0,0,0">
+                                                <Label x:Name="lblStartDelayNewDif" Content="Start Delay" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Height="24" Width="75" Grid.ColumnSpan="2"/>
+                                                <TextBox x:Name="txtStartDelayNewDif" HorizontalAlignment="Left" Height="24" Margin="80,0,0,0" TextWrapping="Wrap" Text="50" VerticalAlignment="Top" Width="50" Grid.Column="1"/>
+                                                <Button x:Name="btnStartAdcNewDif" Content="ADC Start" HorizontalAlignment="Right" Margin="0,60,0,0" Width="75" Height="24" VerticalAlignment="Top"/>
+                                                <Label x:Name="lblAdcAcqTimesNewDif" Content="Acq Times" HorizontalAlignment="Left" Margin="0,30,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+                                                <TextBox x:Name="txtAdcAcqTimesNewDif" HorizontalAlignment="Left" Height="24" Margin="80,30,0,0" TextWrapping="Wrap" Text="32" VerticalAlignment="Top" Width="50"/>
+                                            </Grid>
+                                        </GroupBox>
+                                    </Grid>
+                                </TabItem>
+                            </TabControl>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Name="tbiSCTestNewDif" Header="SCurve">
+                        <Grid Margin="0,0,0,0">
+                            <GroupBox x:Name="gbxExternalRazParameterNewDif" Header="External RAZ Parameter" HorizontalAlignment="Left" Height="80" Margin="400,0,0,0" VerticalAlignment="Top" Width="300">
+                                <Grid Margin="0,0,0,0">
+                                    <Label x:Name="lblExternalRazDelayND" Content="External RAZ Delay" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="120" Height="24"/>
+                                    <TextBox x:Name="txtExternalRazDelayND" HorizontalAlignment="Left" Height="24" Margin="120,0,0,0" TextWrapping="Wrap" Text="200" VerticalAlignment="Top" Width="75"/>
+                                    <Button x:Name="btnSetExternalRazDelayND" Content="Set Delay" HorizontalAlignment="Left" Margin="200,0,0,0" VerticalAlignment="Top" Width="75" Height="24" />
+                                    <Label x:Name="lblExternalRazTimeND" Content="External RAZ Time" HorizontalAlignment="Left" Margin="0,30,0,0" VerticalAlignment="Top" Width="120"/>
+                                    <ComboBox x:Name="cbxExternalRazModeND" HorizontalAlignment="Left" Margin="120,30,0,0" VerticalAlignment="Top" Width="75" Height="24">
+                                        <ComboBoxItem Content="75 ns"/>
+                                        <ComboBoxItem Content="250 ns"/>
+                                        <ComboBoxItem Content="500 ns"/>
+                                        <ComboBoxItem Content="1000 ns" IsSelected="True"/>
+                                    </ComboBox>
+                                    <Button x:Name="btnSetExternalRazWidthND" Content="SET RAZ" HorizontalAlignment="Left" Margin="200,30,0,0" VerticalAlignment="Top" Width="76" Height="24"/>
+                                </Grid>
+                            </GroupBox>
+                            <GroupBox x:Name="gbxSweepTestND" Header="SweepTest" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Height="230" Width="400">
+                                <Grid Margin="0,0,0,0">
+                                    <GroupBox x:Name="gbxSCurveTestND" Header="SCurveTest" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Height="203" Width="185" Grid.ColumnSpan="3">
+                                        <Grid Margin="0,0,0,0">
+                                            <Label x:Name="lblTrigEfficiencyOrCountEfficiencyND" Content="Trig or Count" HorizontalAlignment="Left" VerticalAlignment="Top" Height="24" Width="92" Margin="0,0,0,0"/>
+                                            <StackPanel HorizontalAlignment="Left" Height="30" Margin="95,0,0,0" VerticalAlignment="Top" Width="60">
+                                                <RadioButton Name="TriggerEfficiencyND" Content="Trigger"/>
+                                                <RadioButton Name="CountEfficiencyND" Content="Count"/>
+                                            </StackPanel>
+                                            <Label x:Name="lblSingleOrAutoND" Content="Single or Auto" HorizontalAlignment="Left" Margin="0,30,0,0" VerticalAlignment="Top" Height="24"/>
+                                            <ComboBox x:Name="cbxSingleOrAutoND" HorizontalAlignment="Left" Margin="95,30,0,0" VerticalAlignment="Top" Width="65" Height="24">
+                                                <ComboBoxItem Content="Single" IsSelected="True"/>
+                                                <ComboBoxItem Content="Auto" />
+                                            </ComboBox>
+                                            <Label x:Name="lblCTestOrInputND" Content="CTest or Input" HorizontalAlignment="Left" Margin="0,60,0,0" VerticalAlignment="Top" Height="24" Width="92" />
+                                            <ComboBox x:Name="cbxCTestOrInputND" HorizontalAlignment="Left" Margin="95,60,0,0" VerticalAlignment="Top" Width="65" Height="24">
+                                                <ComboBoxItem Content="CTest" IsSelected="True"/>
+                                                <ComboBoxItem Content="Input" />
+                                            </ComboBox>
+                                            <Label x:Name="lblCPT_MAX_ND" Content="Max count:" HorizontalAlignment="Left" Margin="0,90,0,0" VerticalAlignment="Top" Height="24"/>
+                                            <ComboBox x:Name="cbxCPT_MAX_ND" HorizontalAlignment="Left" Margin="95,90,0,0" VerticalAlignment="Top" Width="65">
+                                                <ComboBoxItem Content= "200"/>
+                                                <ComboBoxItem Content= "1000"/>
+                                                <ComboBoxItem Content= "2000"/>
+                                                <ComboBoxItem Content= "5000"/>
+                                                <ComboBoxItem Content= "10000" IsSelected= "True"/>
+                                                <ComboBoxItem Content= "20000"/>
+                                                <ComboBoxItem Content= "50000"/>
+                                            </ComboBox>
+                                            <Label x:Name="lblCountTimeND" Content="Count Time(s):" HorizontalAlignment="Left" Margin="0,120,0,0" VerticalAlignment="Top" Height="24" Width="100"/>
+                                            <Label x:Name="lblSingleTestChannelND" Content="Single Channel:" HorizontalAlignment="Left" Margin="0,150,0,0" VerticalAlignment="Top" Height="25" RenderTransformOrigin="0.452,1.083" Width="100"/>
+                                            <TextBox x:Name="txtSingleTestChannelND" HorizontalAlignment="Left" Height="24" Margin="100,150,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="65"/>
+                                            <TextBox x:Name="txtCountTimeND" HorizontalAlignment="Left" Height="24" Margin="100,120,0,0" TextWrapping="Wrap" Text="10" VerticalAlignment="Top" Width="60"/>
+
+                                        </Grid>
+                                    </GroupBox>
+                                    
+                                    <Label x:Name="lblStartDacND" Content="Start DAC" HorizontalAlignment="Left" Margin="190,0,0,0" VerticalAlignment="Top" Height="24" Width="70" Grid.Column="2"/>
+                                    <Label x:Name="lblEndDacND" Content="End DAC" HorizontalAlignment="Left" Margin="190,30,0,0" VerticalAlignment="Top" Height="24" Width="70" Grid.Column="2"/>
+                                    <Label x:Name="lblDacStepND" Content="DAC Step" HorizontalAlignment="Left" Margin="190,60,0,0" VerticalAlignment="Top" Height="24" Width="70" Grid.Column="2"/>
+                                    <TextBox x:Name="txtStartDacND" HorizontalAlignment="Left" Height="24" Margin="260,0,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="50" Grid.Column="2" />
+                                    <TextBox x:Name="txtEndDacND" HorizontalAlignment="Left" Height="24" Margin="260,30,0,0" TextWrapping="Wrap" Text="1023" VerticalAlignment="Top" Width="50" Grid.Column="2"/>
+                                    <Button x:Name="btnSCurveTestStartND" Content="SCurveTestStart" HorizontalAlignment="Left" Margin="190,150,0,0" VerticalAlignment="Top" Width="100" Height="24"/>
+                                    <ComboBox x:Name="cbxUnmaskAllChannelND" HorizontalAlignment="Left" Margin="320,0,0,0" VerticalAlignment="Top" Width="60" >
+                                        <ComboBoxItem Content="Mask" IsSelected="True"/>
+                                        <ComboBoxItem Content="Unmask"/>
+                                    </ComboBox>
+                                    <TextBox x:Name="txtDacStepND" HorizontalAlignment="Left" Height="24" Margin="260,60,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="60"/>
+                                    <ComboBox x:Name="cbxSCurveTestAsic" HorizontalAlignment="Left" Margin="190,120,0,0" VerticalAlignment="Top" Width="60" >
+                                        <ComboBoxItem Content="ASIC11" IsSelected="True"/>
+                                        <ComboBoxItem Content="ASIC12"/>
+                                        <ComboBoxItem Content="ASIC13"/>
+                                        <ComboBoxItem Content="ASIC14"/>
+                                        <ComboBoxItem Content="ASIC21"/>
+                                        <ComboBoxItem Content="ASIC22"/>
+                                        <ComboBoxItem Content="ASIC23"/>
+                                        <ComboBoxItem Content="ASIC24"/>
+                                        <ComboBoxItem Content="ASIC31"/>
+                                        <ComboBoxItem Content="ASIC32"/>
+                                        <ComboBoxItem Content="ASIC33"/>
+                                        <ComboBoxItem Content="ASIC34"/>
+                                        <ComboBoxItem Content="ASIC41"/>
+                                        <ComboBoxItem Content="ASIC42"/>
+                                        <ComboBoxItem Content="ASIC43"/>
+                                        <ComboBoxItem Content="ASIC44"/>
+                                    </ComboBox>
+                                </Grid>
+                            </GroupBox>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Name="MicrorocCarier" Header="Microroc Carier">
+                        <Grid Margin="0,0,0,0">
+                            <Button x:Name="btnStartCarrierUsb" Content="USB Acquisition Start" HorizontalAlignment="Left" Margin="100,60,0,0" VerticalAlignment="Top" Width="150" Height="24" Click="btnStartCarrierUsb_Click"/>
+                            <Button x:Name="btnSelectCarrier" Content="Select" HorizontalAlignment="Left" Margin="100,30,0,0" VerticalAlignment="Top" Width="150" Height="24" Click="btnSelectCarrier_Click"/>
+
+                        </Grid>
+                    </TabItem>
+                    
                 </TabControl>
             </Grid>
         </GroupBox>
@@ -896,6 +1722,7 @@
         </GroupBox>
         <Button x:Name="btnHelp" Content="Help" Grid.Column="5" HorizontalAlignment="Left" Margin="827,260,0,0" VerticalAlignment="Top" Width="75" Height="24" Click="btnHelp_Click"/>
         <Label x:Name="lblFinishDate" Content="Date: 2018/03/28" Grid.Column="5" HorizontalAlignment="Left" Margin="827,284,0,0" VerticalAlignment="Top"/>
+        
         <!--GroupBox x:Name="gbxWaveform" Header="Waveform" HorizontalAlignment="Left" Margin="260,135,0,0" VerticalAlignment="Top" Height="343" Width="557">
             <Grid  Margin="0,0,0,0">
                 <Border Margin="0,1,0,42" Grid.Row="0" Background="#FF5F5A5A">
