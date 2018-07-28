@@ -164,6 +164,9 @@ module FPGA_Top(
   output EXT_TRIG_OUT,
   input EXT_CLK_IN,
   output [3:0] TP,
+  // TEST COLUMN and ROW
+  output [2:0] COLUMN,
+  output [2:0] ROW,
   //*** LED
   output [7:0] LED
   );
@@ -221,6 +224,23 @@ module FPGA_Top(
     .in_from_ext_fifo_empty(ExternalFifoEmpty),
     .out_to_ext_fifo_rd_en(ExternalFifoDataReadEnable)
     );
+  reg nPKTEND_r1;
+  reg nPKTEND_r2;
+  always @ (posedge Clk or negedge reset_n) begin
+    if(~reset_n) begin
+      nPKTEND_r1 <= 1'b1;
+      nPKTEND_r2 <= 1'b1;
+    end
+    else begin
+      nPKTEND_r1 <= PKTEND;
+      nPKTEND_r2 <= nPKTEND_r1;
+    end
+  end
+  wire nPKTEND;
+  BUFG BUFG_NPKTEND (
+      .O(nPKTEND), // 1-bit output: Clock output
+      .I(nPKTEND_r2)  // 1-bit input: Clock input
+   );
 
   wire ExternalDataFifoFull;
   wire [15:0] OutTestData;
@@ -228,8 +248,8 @@ module FPGA_Top(
   wire CommandResetDataFifo;
   ExternalDataFifo UsbDataFifo (
     .rst(~reset_n || ~CommandResetDataFifo),                  // input wire rst
-    .wr_clk(Clk),            // input wire wr_clk
-    .rd_clk(IFCLK),            // input wire rd_clk
+    .wr_clk(~Clk),            // input wire wr_clk
+    .rd_clk(~IFCLK),            // input wire rd_clk
     .din(OutTestData),                  // input wire [15 : 0] din
     .wr_en(OutTestDataEnable),              // input wire wr_en
     .rd_en(ExternalFifoDataReadEnable),              // input wire rd_en
@@ -424,6 +444,9 @@ module FPGA_Top(
     // Slave DAQ
     .EndHoldTime(EndHoldTime),
     .DaqSelect(DaqSelect),
+    // Column and row select
+    .ColumnSelect(COLUMN),
+    .RowSelect(ROW),
     // LED
     .LED(LED[3:0])
     );
@@ -654,7 +677,7 @@ module FPGA_Top(
     .CommandAdcStartStop(CommandAdcStartStop),
     .OutUsbStartStop(UsbStartStop),
     // Data Transmit signal
-    .nPKTEND(PKTEND),
+    .nPKTEND(nPKTEND),
     .TestDone(SCurveTestDone),
 
     //*** SCurve ports
@@ -828,7 +851,7 @@ module FPGA_Top(
     .ReadScopeChannel(MicrorocReadScopeChannelChain[63:0]),
     // *** Redundancy
     .PowerPulsingPinEnable(CommandMicrorocPowerPulsingPinEnable),
-    .ReadoutChannelSelect(CommandMicrorocDataoutChannelSelect[1]),
+    .ReadoutChannelSelect(MicrorocReadRedundancyChain[0]),
     // *** Trigger In
     .ExternalTriggerIn(ExternalTriggerIn),
     .SCurveForceExternalRaz(SCurveTestForceExternalRaz),
@@ -838,7 +861,7 @@ module FPGA_Top(
     .ExternalFifoDataEnable(MicrorocChain1DataEnable),
     .TestDone(),
     .OnceEnd(MicrorocAcquisitionOnceDone[0]),
-    .nPKTEND(PKTEND),
+    .nPKTEND(nPKTEND),
     .ExternalFifoFull(ExternalFifoFull),
     .ExternalFifoEmpty(ExternalFifoEmpty),
     // AcqControl
@@ -933,7 +956,7 @@ module FPGA_Top(
     .ReadScopeChannel(MicrorocReadScopeChannelChain[127:64]),
     // *** Redundancy
     .PowerPulsingPinEnable(CommandMicrorocPowerPulsingPinEnable),
-    .ReadoutChannelSelect(CommandMicrorocDataoutChannelSelect[1]),
+    .ReadoutChannelSelect(MicrorocReadRedundancyChain[1]),
     // *** Trigger In
     .ExternalTriggerIn(ExternalTriggerIn),
     .SCurveForceExternalRaz(SCurveTestForceExternalRaz),
@@ -943,7 +966,7 @@ module FPGA_Top(
     .ExternalFifoDataEnable(MicrorocChain2DataEnable),
     .TestDone(),
     .OnceEnd(MicrorocAcquisitionOnceDone[1]),
-    .nPKTEND(PKTEND),
+    .nPKTEND(nPKTEND),
     .ExternalFifoFull(ExternalFifoFull),
     .ExternalFifoEmpty(ExternalFifoEmpty),
     // AcqControl
@@ -1038,7 +1061,7 @@ module FPGA_Top(
     .ReadScopeChannel(MicrorocReadScopeChannelChain[191:128]),
     // *** Redundancy
     .PowerPulsingPinEnable(CommandMicrorocPowerPulsingPinEnable),
-    .ReadoutChannelSelect(CommandMicrorocDataoutChannelSelect[1]),
+    .ReadoutChannelSelect(MicrorocReadRedundancyChain[2]),
     // *** Trigger In
     .ExternalTriggerIn(ExternalTriggerIn),
     .SCurveForceExternalRaz(SCurveTestForceExternalRaz),
@@ -1048,7 +1071,7 @@ module FPGA_Top(
     .ExternalFifoDataEnable(MicrorocChain3DataEnable),
     .TestDone(),
     .OnceEnd(MicrorocAcquisitionOnceDone[2]),
-    .nPKTEND(PKTEND),
+    .nPKTEND(nPKTEND),
     .ExternalFifoFull(ExternalFifoFull),
     .ExternalFifoEmpty(ExternalFifoEmpty),
     // AcqControl
@@ -1143,7 +1166,7 @@ module FPGA_Top(
     .ReadScopeChannel(MicrorocReadScopeChannelChain[255:192]),
     // *** Redundancy
     .PowerPulsingPinEnable(CommandMicrorocPowerPulsingPinEnable),
-    .ReadoutChannelSelect(CommandMicrorocDataoutChannelSelect[1]),
+    .ReadoutChannelSelect(MicrorocReadRedundancyChain[3]),
     // *** Trigger In
     .ExternalTriggerIn(ExternalTriggerIn),
     .SCurveForceExternalRaz(SCurveTestForceExternalRaz),
@@ -1153,7 +1176,7 @@ module FPGA_Top(
     .ExternalFifoDataEnable(MicrorocChain4DataEnable),
     .TestDone(),
     .OnceEnd(MicrorocAcquisitionOnceDone[3]),
-    .nPKTEND(PKTEND),
+    .nPKTEND(nPKTEND),
     .ExternalFifoFull(ExternalFifoFull),
     .ExternalFifoEmpty(ExternalFifoEmpty),
     // AcqControl
@@ -1188,6 +1211,7 @@ module FPGA_Top(
     .TRANSMITON1B(TransmitOn1b_D),
     .TRANSMITON2B(TransmitOn2b_D)
     );
+  assign hold = HoldSignal;
   assign TP[0] = StartAcq_A;
   assign TP[1] = StartReadout1_A;
   assign TP[2] = EndReadout1_A;
