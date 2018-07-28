@@ -45,7 +45,8 @@ namespace USB_DAQ
             SCTest,
             SweepAcq,
             ADC,
-            Efficiency
+            Efficiency,
+            MicrorocCarier
         }
         public static OperationMode OperationModeSelect = OperationMode.Acq;
 
