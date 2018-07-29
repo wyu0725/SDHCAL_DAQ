@@ -4475,16 +4475,28 @@ namespace USB_DAQ
                 MessageBox.Show("Select Slow Control failure. Please check USB", "USB ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-        private void SelectReadScope
+        private void SelectReadScope()
+        {
+            if (MicrorocAsic.SlowControlOrReadScopeSelect(0, MyUsbDevice1))
+            {
+                txtReport.AppendText("Select Read Scope\n");
+            }
+            else
+            {
+                MessageBox.Show("Select Read Scope failure. Please check USB", "USB ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
 
         private void rdbSlowControlSet_Checked(object sender, RoutedEventArgs e)
         {
             btnConfigurationParameterLoad.Content = "Slow Control";
+            SelectSlowControl();
         }
 
         private void rdbReadScopeSet_Checked(object sender, RoutedEventArgs e)
         {
             btnConfigurationParameterLoad.Content = "Read Scope";
+            SelectReadScope();
         }
 
         private async void btnStartCarrierUsb_Click(object sender, RoutedEventArgs e)
@@ -4524,6 +4536,123 @@ namespace USB_DAQ
         private void btnConfigurationParameterLoad_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void SetDac0Vth(string Dac0Vth, MicrorocAsic MyMicroroc)
+        {
+            bool IllegalInput;
+            bool bResult = MyMicroroc.Dac0VthSet(Dac0Vth, MyUsbDevice1, out IllegalInput);
+            if(IllegalInput)
+            {
+                MessageBox.Show("Illegal Input value. The Vth0 should be 0-1023", "Illegal Input ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if(bResult)
+            {
+                string report = string.Format("Set ASIC{0} VTH0:{1}\n", MyMicroroc.ChainID + 1, Dac0Vth);
+                txtReport.AppendText(report);
+            }
+            else
+            {
+                MessageBox.Show("Set VTH0 failure. Please check USB", "USB ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+        private void SetDac1Vth(string Dac1Vth, MicrorocAsic MyMicroroc)
+        {
+            bool IllegalInput;
+            bool bResult = MyMicroroc.Dac0VthSet(Dac1Vth, MyUsbDevice1, out IllegalInput);
+            if (IllegalInput)
+            {
+                MessageBox.Show("Illegal Input value. The Vth1 should be 0-1023", "Illegal Input ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (bResult)
+            {
+                string report = string.Format("Set ASIC{0} VTH1:{1}\n", MyMicroroc.ChainID + 1, Dac1Vth);
+                txtReport.AppendText(report);
+            }
+            else
+            {
+                MessageBox.Show("Set VTH1 failure. Please check USB", "USB ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+        private void SetDac2Vth(string Dac2Vth, MicrorocAsic MyMicroroc)
+        {
+            bool IllegalInput;
+            bool bResult = MyMicroroc.Dac0VthSet(Dac2Vth, MyUsbDevice1, out IllegalInput);
+            if (IllegalInput)
+            {
+                MessageBox.Show("Illegal Input value. The Vth2 should be 0-1023", "Illegal Input ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (bResult)
+            {
+                string report = string.Format("Set ASIC{0} VTH2:{1}\n", MyMicroroc.ChainID + 1, Dac2Vth);
+                txtReport.AppendText(report);
+            }
+            else
+            {
+                MessageBox.Show("Set VTH2 failure. Please check USB", "USB ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void SetAsicHeader(string Header, MicrorocAsic myMicroroc)
+        {
+            bool IllegalInput;
+            bool bResult = myMicroroc.SetChipID(Header, MyUsbDevice1, out IllegalInput);
+            if(IllegalInput)
+            {
+                ShowIllegalInput("The header value should be 00-FF");
+                return;
+            }
+            if(bResult)
+            {
+                string report = string.Format("Set ASIC{0} Header:{}\n", myMicroroc.ChainID + 1, Header);
+                txtReport.AppendText(report);
+            }
+            else
+            {
+                ShowUsbError("Header");
+            }
+        }
+
+        private void SetShaperHighOrLowGain(int HighOrLow, MicrorocAsic MyMicroroc)
+        {
+            bool bResult = MyMicroroc.ShaperOutLowGainOrHighGainSelect(HighOrLow, MyUsbDevice1);
+            if(bResult)
+            {
+                string report = string.Format("Set ASIC{0} Shaper output {1} gain\n", MyMicroroc.ChainID, ((HighOrLow == 1) ? "Low" : "High"));
+            }
+            else
+            {
+                ShowUsbError("Shaper output");
+            }
+        }
+
+        private void SetCTestChannel(string CTestChannel, MicrorocAsic MyMicroroc)
+        {
+            bool IllegalInput;
+            bool bResult = MyMicroroc.CTestChannelSet(CTestChannel, MyUsbDevice1, out IllegalInput);
+            if(IllegalInput)
+            {
+                ShowIllegalInput("CTest Channel should be 1-64");
+                return;
+            }
+            if(bResult)
+            {
+                string report = string.Format("Set ASIC")
+            }
+        }
+
+        private void ShowIllegalInput(string SetItem)
+        {
+            string ErrorMessage = string.Format("Illegal Input Value. {0}", SetItem);
+            MessageBox.Show(ErrorMessage, "Illegal Input ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+        private void ShowUsbError(string SetItem)
+        {
+            string ErrorMessage = string.Format("Set {0} failure. Pease check USB", SetItem);
+            MessageBox.Show(ErrorMessage, "USB ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 }
