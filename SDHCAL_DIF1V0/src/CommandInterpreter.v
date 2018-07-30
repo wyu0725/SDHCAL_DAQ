@@ -708,12 +708,12 @@ module CommandInterpreter(
     .CommandOut(DiscriMask)
     );
 
-  wire [1:0] MaskOrUnmask;
+  wire [2:0] MaskOrUnmask;
   // Pulse signal
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b0),
-    .COMMAND_WIDTH(2'd1),
+    .COMMAND_WIDTH(2'd2),
     .COMMAND_ADDRESS_AND_DEFAULT(`MaskSet_CAND)
   )
   MaskSet(
@@ -733,11 +733,12 @@ module CommandInterpreter(
   end
 
   reg [191:0] SingleChannelMask;
-  reg [1:0] MaskState;
-  localparam [1:0]  IDLE       = 2'b00,
-  MASK       = 2'b01,
-  UNMASK     = 2'b10,
-  MASK_CLEAR = 2'b11;
+  reg [2:0] MaskState;
+  localparam [2:0]  IDLE = 3'b000,
+  MASK                   = 3'b001,
+  UNMASK                 = 3'b010,
+  MASK_CLEAR             = 3'b011,
+  MASK_ALL               = 3'b100;
   always @ (posedge Clk or negedge reset_n) begin
     if(~reset_n) begin
       MaskState <= IDLE;
@@ -747,21 +748,25 @@ module CommandInterpreter(
     else begin
       case(MaskState)
         IDLE:begin
-          if(MaskOrUnmask == 2'b00) begin
+          if(MaskOrUnmask == 3'b000) begin
             MicrorocChannelDiscriminatorMask <= MicrorocChannelDiscriminatorMask;
             MaskState <= IDLE;
           end
-          else if(MaskOrUnmask == 2'b01) begin
+          else if(MaskOrUnmask == 3'b001) begin
             SingleChannelMask <= {{189{1'b1}},DiscriMask} << MaskShift | {DiscriMask,{189{1'b1}}} >> (192- MaskShift - 3);
             MaskState <= MASK;
           end
-          else if(MaskOrUnmask == 2'b10) begin
+          else if(MaskOrUnmask == 3'b010) begin
             SingleChannelMask <= {189'b0, 3'b111} << MaskShift;
             MaskState <= UNMASK;
           end
-          else if(MaskOrUnmask == 2'b11) begin
+          else if(MaskOrUnmask == 3'b011) begin
             MaskState <= IDLE;
             MicrorocChannelDiscriminatorMask <= {192{1'b1}};
+          end
+          else if(MaskOrUnmask == 3'b100) begin
+            MaskState <= IDLE;
+            MicrorocChannelDiscriminatorMask = 192'b0;
           end
           else begin
             MicrorocChannelDiscriminatorMask <= MicrorocChannelDiscriminatorMask;
