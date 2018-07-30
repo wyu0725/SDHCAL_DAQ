@@ -971,6 +971,61 @@ namespace USB_DAQ
             int TestRowValue = TestRow + HexToInt(DifCommandAddress.TestSignalRowSelectAdress);
             return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(HexToInt(DifCommandAddress.TestSignalRowSelectAdress)));
         }
+
+        public bool SetChannelCalibration(MyCyUsb usbInterface, params byte[] CalibrationData)
+        {
+            byte[] ChannelCaliCommandHeader = GenerateCaliCommandHeader();
+            byte CaliByte1, CaliByte2;
+            byte[] CommandBytes = new byte[2];
+            bool bResult;
+            for (int j = 0; j < 64; j++)
+            {
+                CaliByte1 = (byte)((ChannelCaliCommandHeader[j] >> 4) + 0xC0);
+                CaliByte2 = (byte)((ChannelCaliCommandHeader[j] << 4) + CalibrationData[j]);
+                CommandBytes = usbInterface.ConstCommandByteArray(CaliByte1, CaliByte2);
+                bResult = usbInterface.CommandSend(CommandBytes);
+                if (!bResult)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+        private byte[] GenerateCaliCommandHeader()
+        {
+            string[] Chn = new string[64];
+            byte[] ChannelCaliCommandHeader = new byte[64];
+            for (int i = 0; i < 64; i++)
+            {
+                Chn[i] = string.Format("Chn{0}", i);
+                ChannelCaliCommandHeader[i] = (byte)(0xC0 + i);
+            }
+            return ChannelCaliCommandHeader;
+        }
+
+        public bool MaskModeSelect(int MaskMode, MyCyUsb usbInterface)
+        {
+            int MaskModeValue = MaskMode + HexToInt(DifCommandAddress.MaskSetAddress);
+            return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(MaskModeValue));
+        }
+        public bool DiscriminatorMaskSelect(int DiscriminatorMask, MyCyUsb usbInterface)
+        {
+            int DiscriminatorMaskValue = DiscriminatorMask + HexToInt(DifCommandAddress.DiscriMaskAddress);
+            return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(DiscriminatorMaskValue));
+        }
+        public bool MaskChannelSelect(int MaskChannel, MyCyUsb usbInterface)
+        {
+            int MaskChannelValue1 = (MaskChannel & 15) + HexToInt(DifCommandAddress.MaskChannel3to0Address);
+            int MaskChannelValue2 = ((MaskChannel >> 4) & 15) + HexToInt(DifCommandAddress.MaskChannel5to4Address);
+            if (usbInterface.CommandSend(usbInterface.ConstCommandByteArray(MaskChannelValue1)))
+            {
+                return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(MaskChannelValue2));
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }
 
