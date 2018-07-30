@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="impl_1" LaunchPart="xc7a100tfgg484-2L" LaunchTime="1532938605">
+<GenRun Id="impl_1" LaunchPart="xc7a100tfgg484-2L" LaunchTime="1532951053">
   <File Type="PWROPT-DCP" Name="FPGA_Top_pwropt.dcp"/>
   <File Type="ROUTE-PWR" Name="FPGA_Top_power_routed.rpt"/>
   <File Type="PA-TCL" Name="FPGA_Top.tcl"/>
@@ -395,9 +395,9 @@
     <Step Id="route_design"/>
     <Step Id="post_route_phys_opt_design"/>
     <Step Id="write_bitstream">
-      <Option Id="BinFile">1</Option>
       <Option Id="RawbitFileBool">1</Option>
       <Option Id="LogicLocationFileBool">1</Option>
+      <Option Id="BinFile">1</Option>
     </Step>
   </Strategy>
 </GenRun>
