@@ -46,12 +46,12 @@ namespace USB_DAQ
         /// <param name="usbInterface"></param>
         /// <param name="IllegalInput">True for error</param>
         /// <returns></returns>
-        public bool SetChipID(string ChipID, MyCyUsb usbInterface, out bool IllegalInput)
+        public bool SetChipID(string ChipID, int Offset, MyCyUsb usbInterface, out bool IllegalInput)
         {
             if (CheckStringLegal.Check8BitHexLegal(ChipID))
             {
                 IllegalInput = false;
-                int ChipIDValue = HexToInt(ChipID);
+                int ChipIDValue = HexToInt(ChipID) + Offset;
                 int ChipIDValue1 = (byte)(ChipIDValue & 15) + HexToInt(DifCommandAddress.ChipID3to0Address);
                 int ChipIDValue2 = (byte)((ChipIDValue >> 4) & 15) + HexToInt(DifCommandAddress.ChipID7to4Address);
                 bool bResult = usbInterface.CommandSend(usbInterface.ConstCommandByteArray(ChipIDValue1));

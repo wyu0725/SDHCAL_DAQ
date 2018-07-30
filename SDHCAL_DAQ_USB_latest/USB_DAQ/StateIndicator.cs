@@ -56,5 +56,12 @@ namespace USB_DAQ
             AllChannel = 1
         }
         public static ChannelMode ChannelModeSelect = ChannelMode.SingleChannel;
+
+        public enum NewDifParameterLoad
+        {
+            SlowControl = 0,
+            ReadScope = 1
+        }
+        public static NewDifParameterLoad NewDifSlowControlOrReadScope = NewDifParameterLoad.SlowControl;
     }
 }
