@@ -696,7 +696,7 @@ HoldTimeSet7to4_CAND	CommandParameter.v	/^`define HoldTimeSet7to4_CAND          
 Hold_reg1	AdcControl.v	/^    reg Hold_reg1;$/;"	r	language:Verilog	module:AdcControl
 Hold_reg2	AdcControl.v	/^    reg Hold_reg2;$/;"	r	language:Verilog	module:AdcControl
 IDLE	AdcControl.v	/^    localparam [2:0] IDLE = 3'd0,$/;"	c	language:Verilog	module:AdcControl
-IDLE	CommandInterpreter.v	/^  localparam [1:0]  IDLE       = 2'b00,$/;"	c	language:Verilog	module:CommandInterpreter
+IDLE	CommandInterpreter.v	/^  localparam [2:0]  IDLE = 3'b000,$/;"	c	language:Verilog	module:CommandInterpreter
 IDLE	MicrorocDataSwitcher.v	/^  IDLE         = 4'd0,$/;"	c	language:Verilog	module:MicrorocDataSwitcher
 IDLE	SCurve_Single_Test.v	/^    localparam [2:0] IDLE = 3'd0,$/;"	c	language:Verilog	module:SCurve_Single_Test
 IDLE	SCurve_Test_Control.v	/^  localparam [4:0] IDLE                            = 5'd0,$/;"	c	language:Verilog	module:SCurve_Test_Control
@@ -750,15 +750,16 @@ LvdsReceiverPPEnable	MicrorocControl.v	/^  input LvdsReceiverPPEnable,          
 LvdsReceiverPPEnable	ParameterGenerator.v	/^	input LvdsReceiverPPEnable,\/\/ Default:0 Disable$/;"	p	language:Verilog	module:ParameterGenerator
 LvdsReceiverPPEnable	SlowControlAndReadScopeSet.v	/^  input LvdsReceiverPPEnable,               \/\/ Default:0 Disable$/;"	p	language:Verilog	module:SlowControlAndReadScopeSet
 LvdsReceiverPPEnable_CAND	CommandParameter.v	/^`define LvdsReceiverPPEnable_CAND                  16'hA2E0$/;"	c	language:Verilog
-MASK	CommandInterpreter.v	/^  MASK       = 2'b01,$/;"	c	language:Verilog	module:CommandInterpreter
-MASK_CLEAR	CommandInterpreter.v	/^  MASK_CLEAR = 2'b11;$/;"	c	language:Verilog	module:CommandInterpreter
+MASK	CommandInterpreter.v	/^  MASK                   = 3'b001,$/;"	c	language:Verilog	module:CommandInterpreter
+MASK_ALL	CommandInterpreter.v	/^  MASK_ALL               = 3'b100;$/;"	c	language:Verilog	module:CommandInterpreter
+MASK_CLEAR	CommandInterpreter.v	/^  MASK_CLEAR             = 3'b011,$/;"	c	language:Verilog	module:CommandInterpreter
 MaskChannel	CommandInterpreter.v	/^  wire [5:0] MaskChannel;$/;"	n	language:Verilog	module:CommandInterpreter
 MaskChannel3to0_CAND	CommandParameter.v	/^`define MaskChannel3to0_CAND                       16'hA2A0$/;"	c	language:Verilog
 MaskChannel5to4_CAND	CommandParameter.v	/^`define MaskChannel5to4_CAND                       16'hA2B0$/;"	c	language:Verilog
-MaskOrUnmask	CommandInterpreter.v	/^  wire [1:0] MaskOrUnmask;$/;"	n	language:Verilog	module:CommandInterpreter
+MaskOrUnmask	CommandInterpreter.v	/^  wire [2:0] MaskOrUnmask;$/;"	n	language:Verilog	module:CommandInterpreter
 MaskSet_CAND	CommandParameter.v	/^`define MaskSet_CAND                               16'hA2D0$/;"	c	language:Verilog
 MaskShift	CommandInterpreter.v	/^  reg [7:0] MaskShift;$/;"	r	language:Verilog	module:CommandInterpreter
-MaskState	CommandInterpreter.v	/^  reg [1:0] MaskState;$/;"	r	language:Verilog	module:CommandInterpreter
+MaskState	CommandInterpreter.v	/^  reg [2:0] MaskState;$/;"	r	language:Verilog	module:CommandInterpreter
 MicrorocAcquisitionData	AcquisitionControl.v	/^  wire [15:0] MicrorocAcquisitionData;$/;"	n	language:Verilog	module:AcquisitionControl
 MicrorocAcquisitionData	AcquisitionSwitcher.v	/^  input [15:0] MicrorocAcquisitionData,$/;"	p	language:Verilog	module:AcquisitionSwitcher
 MicrorocAcquisitionData	MicrorocDataSwitcher.v	/^  output reg [15:0] MicrorocAcquisitionData,$/;"	p	language:Verilog	module:MicrorocDataSwitcher
@@ -1574,7 +1575,7 @@ TriggerToWriteSelect	SlowControlAndReadScopeSet.v	/^  input [2:0] TriggerToWrite
 TriggerToWriteSelect_CAND	CommandParameter.v	/^`define TriggerToWriteSelect_CAND                  16'hA087$/;"	c	language:Verilog
 Trigger_Falling	SCurve_Single_Input.v	/^  wire Trigger_Falling;$/;"	n	language:Verilog	module:SCurve_Single_Input
 Trigger_delay	SCurve_Single_Input.v	/^  wire Trigger_delay;$/;"	n	language:Verilog	module:SCurve_Single_Input
-UNMASK	CommandInterpreter.v	/^  UNMASK     = 2'b10,$/;"	c	language:Verilog	module:CommandInterpreter
+UNMASK	CommandInterpreter.v	/^  UNMASK                 = 3'b010,$/;"	c	language:Verilog	module:CommandInterpreter
 UnmaskAllChannel	AcquisitionControl.v	/^  input UnmaskAllChannel,$/;"	p	language:Verilog	module:AcquisitionControl
 UnmaskAllChannel	CommandInterpreter.v	/^  output UnmaskAllChannel,$/;"	p	language:Verilog	module:CommandInterpreter
 UnmaskAllChannel	SCurve_Test_Control.v	/^  input                                       UnmaskAllChannel,$/;"	p	language:Verilog	module:SCurve_Test_Control
