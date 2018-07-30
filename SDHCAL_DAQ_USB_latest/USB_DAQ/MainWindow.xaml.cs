@@ -4350,10 +4350,7 @@ namespace USB_DAQ
             #endregion
             SetSCurveTestParameter();
         }
-        /*private bool SingleChannelCalibration(double TestCharge, int TestSW, bool TestShaper, bool DacMode)
-        {
 
-        }*/
         private bool CreateSCTestFolder()
         {
             string DefaultPath = @"D:\ExperimentsData\test";
@@ -4511,7 +4508,7 @@ namespace USB_DAQ
             {
                 StateIndicator.SlowAcqStart = true;
                 txtReport.AppendText("Microroc Carier USB Stop\n");
-                btnStartCarrierUsb.Content = "StopStop";
+                btnStartCarrierUsb.Content = "2. Data Stop";
                 await Task.Run(() => GetSlowDataRateResultCallBack(MyUsbDevice1));
                 
                 Thread.Sleep(10);
@@ -4520,7 +4517,7 @@ namespace USB_DAQ
             }
             else
             {
-                btnStartCarrierUsb.Content = "Microroc Carier USB Start";
+                btnStartCarrierUsb.Content = "2. Data Start";
                 Thread.Sleep(10);
                 StateIndicator.SlowAcqStart = false;
                 StateIndicator.FileSaved = false;
@@ -4531,14 +4528,104 @@ namespace USB_DAQ
         {
             StateIndicator.OperationModeSelect = StateIndicator.OperationMode.MicrorocCarier;
             StateIndicator.SlowDataRatePackageNumber = 0;
+            txtReport.AppendText("Select Microroc Carier board\n");
         }
 
         private void btnConfigurationParameterLoad_Click(object sender, RoutedEventArgs e)
         {
-
+            #region Generate parameter array
+            #region Header
+            TextBox[] tbxHeaderChain = new TextBox[4] { tbxHeaderChain1, tbxHeaderChain2, tbxHeaderChain3, tbxHeaderChain4 };
+            #endregion
+            #region Enabled
+            int[] ChainEnable = new int[4] { cbxEnableChain1.SelectedIndex, cbxEnableChain2.SelectedIndex, cbxEnableChain3.SelectedIndex, cbxEnableChain4.SelectedIndex };
+            #endregion
+            #region Vth0~2
+            TextBox[,] tbxVth0Asic = new TextBox[4, 4] {
+                {tbxVth0Asic11, tbxVth0Asic12, tbxVth0Asic13, tbxVth0Asic14},
+                {tbxVth0Asic21, tbxVth0Asic22, tbxVth0Asic23, tbxVth0Asic24 },
+                {tbxVth0Asic31, tbxVth0Asic32, tbxVth0Asic33, tbxVth0Asic34 },
+                {tbxVth0Asic41, tbxVth0Asic42, tbxVth0Asic43, tbxVth0Asic44 }
+            };
+            TextBox[,] tbxVth1Asic = new TextBox[4, 4] {
+                {tbxVth1Asic11, tbxVth1Asic12, tbxVth1Asic13, tbxVth1Asic14},
+                {tbxVth1Asic21, tbxVth1Asic22, tbxVth1Asic23, tbxVth1Asic24 },
+                {tbxVth1Asic31, tbxVth1Asic32, tbxVth1Asic33, tbxVth1Asic34 },
+                {tbxVth1Asic41, tbxVth1Asic42, tbxVth1Asic43, tbxVth1Asic44 }
+            };
+            TextBox[,] tbxVth2Asic = new TextBox[4, 4] {
+                {tbxVth2Asic11, tbxVth2Asic12, tbxVth2Asic13, tbxVth2Asic14},
+                {tbxVth2Asic21, tbxVth2Asic22, tbxVth2Asic23, tbxVth2Asic24 },
+                {tbxVth2Asic31, tbxVth2Asic32, tbxVth2Asic33, tbxVth2Asic34 },
+                {tbxVth2Asic41, tbxVth2Asic42, tbxVth2Asic43, tbxVth2Asic44 }
+            };
+            #endregion
+            #region Shaper out
+            ComboBox[,] cbxShaperHighOrLowGainChain = new ComboBox[4, 4] {
+                {cbxShaperAsic11, cbxShaperAsic12, cbxShaperAsic13, cbxShaperAsic14} ,
+                {cbxShaperAsic21, cbxShaperAsic22, cbxShaperAsic23, cbxShaperAsic24 },
+                {cbxShaperAsic31, cbxShaperAsic32, cbxShaperAsic33, cbxShaperAsic34 },
+                {cbxShaperAsic41, cbxShaperAsic42, cbxShaperAsic43, cbxShaperAsic44 }
+            };
+            #endregion
+            #region CTest Channel
+            TextBox[,] tbxCTestChannelAsic = new TextBox[4, 4]
+            {
+                {tbxCTestChannelAsic11, tbxCTestChannelAsic12, tbxCTestChannelAsic13, tbxCTestChannelAsic14 },
+                {tbxCTestChannelAsic21, tbxCTestChannelAsic22, tbxCTestChannelAsic23, tbxCTestChannelAsic24 },
+                {tbxCTestChannelAsic31, tbxCTestChannelAsic32, tbxCTestChannelAsic33, tbxCTestChannelAsic34 },
+                {tbxCTestChannelAsic41, tbxCTestChannelAsic42, tbxCTestChannelAsic43, tbxCTestChannelAsic44 }
+            };
+            #endregion
+            #region Calibration File
+            TextBox[,] tbxCalibrationAsic = new TextBox[4, 4]
+            {
+                {tbxCalibrationAsic11, tbxCalibrationAsic12, tbxCalibrationAsic13, tbxCalibrationAsic14 },
+                {tbxCalibrationAsic21, tbxCalibrationAsic22, tbxCalibrationAsic23, tbxCalibrationAsic24 },
+                {tbxCalibrationAsic31, tbxCalibrationAsic32, tbxCalibrationAsic33, tbxCalibrationAsic34 },
+                {tbxCalibrationAsic41, tbxCalibrationAsic42, tbxCalibrationAsic43, tbxCalibrationAsic44 }
+            };
+            #endregion
+            #region Read Scope
+            TextBox[,] tbxReadScopeAsic = new TextBox[4, 4]
+            {
+                {tbxReadScopeAsic11, tbxReadScopeAsic12, tbxReadScopeAsic13, tbxReadScopeAsic14 },
+                {tbxReadScopeAsic21, tbxReadScopeAsic22, tbxReadScopeAsic23, tbxReadScopeAsic24 },
+                {tbxReadScopeAsic31, tbxReadScopeAsic32, tbxReadScopeAsic33, tbxReadScopeAsic34 },
+                {tbxReadScopeAsic41, tbxReadScopeAsic42, tbxReadScopeAsic43, tbxReadScopeAsic44 }
+            };
+            #endregion
+            #region Sw hg
+            ComboBox[,] cbxHighGainFeedbackAsic = new ComboBox[4, 4]
+            {
+                {cbxHighGainFeedbackAsic11, cbxHighGainFeedbackAsic12, cbxHighGainFeedbackAsic13, cbxHighGainFeedbackAsic14 },
+                {cbxHighGainFeedbackAsic21, cbxHighGainFeedbackAsic22, cbxHighGainFeedbackAsic23, cbxHighGainFeedbackAsic24 },
+                {cbxHighGainFeedbackAsic31, cbxHighGainFeedbackAsic32, cbxHighGainFeedbackAsic33, cbxHighGainFeedbackAsic34 },
+                {cbxHighGainFeedbackAsic41, cbxHighGainFeedbackAsic42, cbxHighGainFeedbackAsic43, cbxHighGainFeedbackAsic44 }
+            };
+            #endregion
+            #region Sw lg
+            ComboBox[,] cbxLowGainShaperFeedbackAsic = new ComboBox[4, 4]
+            {
+                {cbxLowGainFeedbackAsic11, cbxLowGainFeedbackAsic12, cbxLowGainFeedbackAsic13, cbxLowGainFeedbackAsic14 },
+                {cbxLowGainFeedbackAsic21, cbxLowGainFeedbackAsic22, cbxLowGainFeedbackAsic23, cbxLowGainFeedbackAsic24 },
+                {cbxLowGainFeedbackAsic31, cbxLowGainFeedbackAsic32, cbxLowGainFeedbackAsic33, cbxLowGainFeedbackAsic34 },
+                {cbxLowGainFeedbackAsic41, cbxLowGainFeedbackAsic42, cbxLowGainFeedbackAsic43, cbxLowGainFeedbackAsic44 }
+            };
+            #endregion
+            #region Mask Select
+            ComboBox[,] cbxMaskSelectAsic = new ComboBox[4, 4]
+            {
+                {cbxMaskSelectAsic11, cbxMaskSelectAsic12, cbxMaskSelectAsic13, cbxMaskSelectAsic14 },
+                { },
+                { },
+                { }
+            }
+            #endregion
+            #endregion
         }
 
-        private void SetDac0Vth(string Dac0Vth, MicrorocAsic MyMicroroc)
+        private void SetDac0Vth(string Dac0Vth, MicrorocAsic MyMicroroc, int AsicLocation)
         {
             bool IllegalInput;
             bool bResult = MyMicroroc.Dac0VthSet(Dac0Vth, MyUsbDevice1, out IllegalInput);
@@ -4549,7 +4636,7 @@ namespace USB_DAQ
             }
             if(bResult)
             {
-                string report = string.Format("Set ASIC{0} VTH0:{1}\n", MyMicroroc.ChainID + 1, Dac0Vth);
+                string report = string.Format("Set ASIC{0}{1} VTH0:{2}\n", MyMicroroc.ChainID + 1, AsicLocation + 1, Dac0Vth);
                 txtReport.AppendText(report);
             }
             else
@@ -4557,7 +4644,7 @@ namespace USB_DAQ
                 MessageBox.Show("Set VTH0 failure. Please check USB", "USB ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-        private void SetDac1Vth(string Dac1Vth, MicrorocAsic MyMicroroc)
+        private void SetDac1Vth(string Dac1Vth, MicrorocAsic MyMicroroc, int AsicLocation)
         {
             bool IllegalInput;
             bool bResult = MyMicroroc.Dac0VthSet(Dac1Vth, MyUsbDevice1, out IllegalInput);
@@ -4568,7 +4655,7 @@ namespace USB_DAQ
             }
             if (bResult)
             {
-                string report = string.Format("Set ASIC{0} VTH1:{1}\n", MyMicroroc.ChainID + 1, Dac1Vth);
+                string report = string.Format("Set ASIC{0}{1} VTH1:{2}\n", MyMicroroc.ChainID + 1, AsicLocation + 1, Dac1Vth);
                 txtReport.AppendText(report);
             }
             else
@@ -4576,7 +4663,7 @@ namespace USB_DAQ
                 MessageBox.Show("Set VTH1 failure. Please check USB", "USB ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-        private void SetDac2Vth(string Dac2Vth, MicrorocAsic MyMicroroc)
+        private void SetDac2Vth(string Dac2Vth, MicrorocAsic MyMicroroc, int AsicLocation)
         {
             bool IllegalInput;
             bool bResult = MyMicroroc.Dac0VthSet(Dac2Vth, MyUsbDevice1, out IllegalInput);
@@ -4587,7 +4674,7 @@ namespace USB_DAQ
             }
             if (bResult)
             {
-                string report = string.Format("Set ASIC{0} VTH2:{1}\n", MyMicroroc.ChainID + 1, Dac2Vth);
+                string report = string.Format("Set ASIC{0}{1} VTH2:{2}\n", MyMicroroc.ChainID + 1, AsicLocation + 1, Dac2Vth);
                 txtReport.AppendText(report);
             }
             else
@@ -4596,7 +4683,7 @@ namespace USB_DAQ
             }
         }
 
-        private void SetAsicHeader(string Header, MicrorocAsic myMicroroc)
+        private void SetAsicHeader(string Header, MicrorocAsic myMicroroc, int AsicLocation)
         {
             bool IllegalInput;
             bool bResult = myMicroroc.SetChipID(Header, MyUsbDevice1, out IllegalInput);
@@ -4607,7 +4694,7 @@ namespace USB_DAQ
             }
             if(bResult)
             {
-                string report = string.Format("Set ASIC{0} Header:{}\n", myMicroroc.ChainID + 1, Header);
+                string report = string.Format("Set ASIC{0}{1} Header:{2}\n", myMicroroc.ChainID + 1, AsicLocation, Header);
                 txtReport.AppendText(report);
             }
             else
@@ -4616,12 +4703,13 @@ namespace USB_DAQ
             }
         }
 
-        private void SetShaperHighOrLowGain(int HighOrLow, MicrorocAsic MyMicroroc)
+        private void SetShaperHighOrLowGain(int HighOrLow, MicrorocAsic MyMicroroc, int AsicLocation)
         {
             bool bResult = MyMicroroc.ShaperOutLowGainOrHighGainSelect(HighOrLow, MyUsbDevice1);
             if(bResult)
             {
-                string report = string.Format("Set ASIC{0} Shaper output {1} gain\n", MyMicroroc.ChainID, ((HighOrLow == 1) ? "Low" : "High"));
+                string report = string.Format("Set ASIC{0}{1} Shaper output {2} gain\n", MyMicroroc.ChainID, AsicLocation, ((HighOrLow == 1) ? "Low" : "High"));
+                txtReport.AppendText(report);
             }
             else
             {
@@ -4629,7 +4717,7 @@ namespace USB_DAQ
             }
         }
 
-        private void SetCTestChannel(string CTestChannel, MicrorocAsic MyMicroroc)
+        private void SetCTestChannel(string CTestChannel, MicrorocAsic MyMicroroc, int AsicLocation)
         {
             bool IllegalInput;
             bool bResult = MyMicroroc.CTestChannelSet(CTestChannel, MyUsbDevice1, out IllegalInput);
@@ -4640,7 +4728,56 @@ namespace USB_DAQ
             }
             if(bResult)
             {
-                string report = string.Format("Set ASIC")
+                string report = string.Format("Set ASIC{0}{1} CTest channel: {2}", MyMicroroc.ChainID + 1, AsicLocation + 1, CTestChannel);
+                txtReport.AppendText(report);
+            }
+            else
+            {
+                ShowUsbError("CTest Channel");
+            }
+        }
+        private void SetReadScopeChannel(string ReadScopeChannel, MicrorocAsic MyMicroroc, int AsicLocation)
+        {
+            bool IllegalInput;
+            bool bResult = MyMicroroc.ReadScopeChannelSet(ReadScopeChannel, MyUsbDevice1, out IllegalInput);
+            if(IllegalInput)
+            {
+                ShowIllegalInput("Read scope channel should be: 1-64");
+                return;
+            }
+            if(bResult)
+            {
+                string report = string.Format("Set ASIC{0}{1} ReadScope channel: {2}", MyMicroroc.ChainID + 1, AsicLocation, ReadScopeChannel);
+                txtReport.AppendText(report);
+            }
+            else
+            {
+                ShowUsbError("ReadScope Channel");
+            }
+        }
+
+        private void SetHighGainFeedbackParameter(int HighGainFeedback, MicrorocAsic MyMicroroc, int AsicLocation)
+        {
+            if (MyMicroroc.HighGainShaperFeedbackSelect(HighGainFeedback, MyUsbDevice1))
+            {
+                string report = string.Format("Set ASIC{0}{1} Sw_hg: {2}", MyMicroroc.ChainID + 1, AsicLocation + 1, HighGainFeedback);
+                txtReport.AppendText(report);
+            }
+            else
+            {
+                ShowUsbError("Sw_hg");
+            }
+        }
+        private void SetLowGainFeedbackParameter(int LowGainFeedback, MicrorocAsic MyMicroroc, int AsicLocation)
+        {
+            if (MyMicroroc.LowGainShaperFeedbackSelect(LowGainFeedback, MyUsbDevice1))
+            {
+                string report = string.Format("Set ASIC{0}{1} Sw_lg: {2}", MyMicroroc.ChainID + 1, AsicLocation + 1, LowGainFeedback);
+                txtReport.AppendText(report);
+            }
+            else
+            {
+                ShowUsbError("Sw_lg");
             }
         }
 
@@ -4653,6 +4790,37 @@ namespace USB_DAQ
         {
             string ErrorMessage = string.Format("Set {0} failure. Pease check USB", SetItem);
             MessageBox.Show(ErrorMessage, "USB ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+
+        private void btnSendSerialData_Click(object sender, RoutedEventArgs e)
+        {
+            int TranmitData = Convert.ToInt32(tbxSerialData.Text, 16);
+            int TransmitData1 = (TranmitData & 15) + Convert.ToInt32("A0B0", 16);
+            int TransmitData2 = ((TranmitData >> 4) & 15) + Convert.ToInt32("A0C0", 16);
+            MyUsbDevice1.CommandSend(MyUsbDevice1.ConstCommandByteArray(TransmitData1));
+            MyUsbDevice1.CommandSend(MyUsbDevice1.ConstCommandByteArray(TransmitData2));
+            Thread.Sleep(100);
+            MyUsbDevice1.CommandSend(MyUsbDevice1.ConstCommandByteArray(Convert.ToInt32("A0A1", 16)));
+            string report = string.Format("Send serial data: {0}", tbxSerialData.Text);
+            txtReport.AppendText(report);
+        }
+        bool MicrorocCarrierUsbStart = false;
+        private void btnMicrorocCarierUsbStart_Click(object sender, RoutedEventArgs e)
+        {
+            if(MicrorocCarrierUsbStart == false)
+            {
+                MicrorocCarrierUsbStart = true;
+                btnMicrorocCarierUsbStart.Content = "3. USB Stop";
+                MyUsbDevice1.CommandSend(MyUsbDevice1.ConstCommandByteArray(HexStringToByteArray("A0D1")));
+                txtReport.AppendText("USB Start\n");
+            }
+            else
+            {
+                MicrorocCarrierUsbStart = false;
+                btnMicrorocCarierUsbStart.Content = "3. USB Start";
+                MyUsbDevice1.CommandSend(MyUsbDevice1.ConstCommandByteArray(HexStringToByteArray("A0D0")));
+                txtReport.AppendText("USB Stop\n");
+            }
         }
     }
 }
