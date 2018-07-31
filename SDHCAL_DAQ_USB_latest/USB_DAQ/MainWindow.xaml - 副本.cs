@@ -17,6 +17,7 @@ using Microsoft.Research.DynamicDataDisplay.PointMarkers;//new add 20151024
 using System.IO.Ports;
 using System.Runtime.InteropServices;
 using System.Windows.Interop;
+using System.Diagnostics;
 //using System.Collections.ObjectModel;//new add 20150823
 //using Target7_NEWDAQ.DataModel;      //new add 20150823
 namespace USB_DAQ
@@ -26,19 +27,24 @@ namespace USB_DAQ
     /// </summary>
     public partial class MainWindow : Window
     {
-        private USBDeviceList usbDevices;
-        private CyUSBDevice myDevice;
-        private static CyBulkEndPoint BulkInEndPt;
-        private static CyBulkEndPoint BulkOutEndPt;
+        //private USBDeviceList usbDevices;
+        //private CyUSBDevice myDevice;
+        //private static CyBulkEndPoint BulkInEndPt;
+        //private static CyBulkEndPoint BulkOutEndPt;
         private const int VID = 0x04B4;
         private const int PID = 0x1004;
+        private MyCyUsb MyUsbDevice1 = new MyCyUsb(PID, VID);
+        private const int AsicId = 0xA1;
+        private const int NumberOfChip = 4;
+        private MicrorocControl MicrorocChain1 = new MicrorocControl(AsicId, NumberOfChip);
+
+        private MicrorocAsic[] MicrorocAsicChain = new MicrorocAsic[4] { new MicrorocAsic(4, 0), new MicrorocAsic(4, 1), new MicrorocAsic(4, 2), new MicrorocAsic(4, 3) };
+
         private string rx_Command = @"\b[0-9a-fA-F]{4}\b";//match 16 bit Hex
         private string rx_Byte = @"\b[0-9a-fA-F]{2}\b";//match 8 bit Hex
         private string rx_Integer = @"^\d+$";   //匹配非负 整数
         private string rx_Double = @"^-?\d+(\.\d{1,6})?$";//小数可有可无最多6位小数 
         private string filepath = null;//文件路径
-        private static bool AcqStart = false; //采集标志
-        private static bool Enabled_Ext_Trigger = false;
         //private static bool ScurveStart_En = false;
         // private static bool SPopen = false; //串口是否打开
         // private SerialPort mySerialPort = new SerialPort();//新建串口
@@ -62,93 +68,68 @@ namespace USB_DAQ
         //private static int Scurve_Data_Remain;
         //private NoSortHashtable hasht = new NoSortHashtable(); //排序之后的哈希表     
         //private NoSortHashtable[] CaliHashTable = new NoSortHashtable[4]{new NoSortHashtable(), new NoSortHashtable(), new NoSortHashtable(), new NoSortHashtable() };
-        private int SlowACQDataNumber = 100;
-        private int SlowDataRatePackageNumber;
-        private const int Acq = 0;
-        private const int SCTest = 1;
-        private const int SweepAcq = 2;
-        private const int Adc = 3;
-        private const int Efficiency = 4;
-        private int DataAcqMode = Acq;
-        private const int AutoDaq = 0;
-        private const int SlaveDaq = 1;
-        private int DaqMode = AutoDaq;
-        private const int Trig = 0;
-        private const int Count = 1;
-        private int SCurveMode = Trig;
+
         private const int SingleChannel = 0;
         private const int AllChannel = 1;
-        private int ChannelMode = SingleChannel;
         private const int OneDacDataLength = 7*2;//7*16-bits == 14 bytes
         private const int HeaderLength = 1 * 2;//16-bits
         private const int ChannelLength = 1 * 2;//16-bits
         private const int TailLength = 1 * 2;//16-bits
-        private static bool IsAdcStart = false;
-        private static bool IsSlowAcqStart = false;
 
         private static bool IsTestStart = false;
 
-        private const string AFG3252Descr = "USB[0-9]::0x0699::0x034E::C[0-9]+::INSTR";
-        private const string AFG3252VidPid = "VID_0699&PID_034E";
+        //private const string AFG3252Descr = "USB[0-9]::0x0699::0x034E::C[0-9]+::INSTR";
+        //private const string AFG3252VidPid = "VID_0699&PID_034E";
+
+        private const string AFG3252Descr = "USB[0-9]::0x0699::0x0345::C[0-9]+::INSTR";
+        private const string AFG3252VidPid = "VID_0699&PID_0345";
         private AFG3252 MyAFG3252 = new AFG3252(AFG3252Descr);
         private bool AFG3252Attach = false;
         private bool AmplitudeOrLevel = true;
+        string CurrentPath = Environment.CurrentDirectory;
         //SC Parameter
-        
-        
+
+
         public MainWindow()
         {
-            //txtDAC0_VTH_ASIC[0].Margin = ""
-
             InitializeComponent();
-            //Dynamic list of USB devices bound to CyUSB.sys
-            usbDevices = new USBDeviceList(CyConst.DEVICES_CYUSB);
             //Adding event handles for device attachment and device removal
-            usbDevices.DeviceAttached += new EventHandler(usbDevices_DeviceAttached);
-            usbDevices.DeviceRemoved += new EventHandler(usbDevices_DeviceRemoved);
+            MyUsbDevice1.usbDevices.DeviceAttached += new EventHandler(usbDevices_DeviceAttached);
+            MyUsbDevice1.usbDevices.DeviceRemoved += new EventHandler(usbDevices_DeviceRemoved);
             RefreshDevice();
             Afg3252Refresh();
-            //cbxAverage_Points.SelectedIndex = 0;
             //Initial_SerialPort();
         }
         private void usbDevices_DeviceAttached(object sender, EventArgs e)
         {
             USBEventArgs usbEvent = e as USBEventArgs;
-            //StatusLabel.Text = usbEvent.Device.FriendlyName + " connected.";
             RefreshDevice();
         }
         private void usbDevices_DeviceRemoved(object sender, EventArgs e)
         {
             USBEventArgs usbEvent = e as USBEventArgs;
-            //StatusLabel.Text = usbEvent.FriendlyName + " removed.";
             RefreshDevice();
         }
         private void RefreshDevice()
         {
             // Get the first device having VendorID == 0x04B4 and ProductID == 0x1004
-            myDevice = usbDevices[VID,PID] as CyUSBDevice;
-            if (myDevice != null)
+            //myDevice = usbDevices[VID,PID] as CyUSBDevice;
+            if (MyUsbDevice1.InitialDevice())
             {
                 usb_status.Content = "USB device connected";
                 usb_status.Foreground = Brushes.Green;
                 btnCommandSend.Background = Brushes.ForestGreen;
                 btnCommandSend.IsEnabled = true;
                 txtCommand.IsEnabled = true;
-                //btnConfig.IsEnabled = true;
                 btnAcqStart.IsEnabled = true;
                 btnAcqStart.Background = Brushes.ForestGreen;
-                //Instantiating the endpoints
-                BulkOutEndPt = myDevice.EndPointOf(0x02) as CyBulkEndPoint; //EP2
-                BulkInEndPt = myDevice.EndPointOf(0x86) as CyBulkEndPoint;  //EP6
-                BulkInEndPt.XferSize = BulkInEndPt.MaxPktSize * 8;//4KB = 512bytes*8,4096
-                BulkInEndPt.TimeOut = 10;
+
 
                 btnSC_or_ReadReg.IsEnabled = true;
                 btnReset_cntb.IsEnabled = true;
                 btnTRIG_EXT_EN.IsEnabled = true;
                 btnSet_Raz_Width.IsEnabled = true;
                 btnSet_Hold.IsEnabled = true;
-                //btnSetAcqTime.IsEnabled = true;
                 btnOut_th_set.IsEnabled = true;
             }
             else
@@ -157,17 +138,12 @@ namespace USB_DAQ
                 usb_status.Foreground = Brushes.DeepPink;
                 btnCommandSend.IsEnabled = false;
                 txtCommand.IsEnabled = false;
-                //btnConfig.IsEnabled = false;
                 btnAcqStart.IsEnabled = false;
-                BulkOutEndPt = null;//clear
-                BulkInEndPt = null;//clear
-
                 btnSC_or_ReadReg.IsEnabled = false;
                 btnReset_cntb.IsEnabled = false;
                 btnTRIG_EXT_EN.IsEnabled = false;
                 btnSet_Raz_Width.IsEnabled = false;
                 btnSet_Hold.IsEnabled = false;
-                //btnSetAcqTime.IsEnabled = false;
                 btnOut_th_set.IsEnabled = false;
             }
         }
@@ -188,9 +164,8 @@ namespace USB_DAQ
             {
                 string report = String.Format("command: 0x{0} issued!\n", txtCommand.Text);
                 bool bResult = false;
-                byte[] bytes = ConstCommandByteArray(HexStringToByteArray(txtCommand.Text));//convert to byte 
-
-                bResult = CommandSend(bytes,bytes.Length);
+                byte[] CommandBytes = MyUsbDevice1.ConstCommandByteArray(HexStringToByteArray(txtCommand.Text));//convert to byte 
+                bResult = MyUsbDevice1.CommandSend(CommandBytes);
                 if (bResult)
                 {
                     txtReport.AppendText(report.ToString());
@@ -212,21 +187,13 @@ namespace USB_DAQ
             txtReport.Text = "";
         }
         //methods
+
         private static byte[] HexStringToByteArray(string s)
         {
             s.Replace(" ","");
             byte[] buffer = new byte[s.Length / 2];
             for (int i = 0; i < s.Length; i += 2)
                 buffer[i / 2] = (byte)Convert.ToByte(s.Substring(i, 2), 16);
-            /*
-            byte temp;
-            for (int i = 0; i < buffer.Length; i += 2)
-            {
-                temp = buffer[i];
-                buffer[i] = buffer[i + 1];
-                buffer[i + 1] = temp;
-            }
-            */
             return buffer;
         }
 
@@ -239,7 +206,7 @@ namespace USB_DAQ
             return buffer;
         }
         //methods
-        private static byte[] ConstCommandByteArray(params byte[] paramList)
+        /*private static byte[] ConstCommandByteArray(params byte[] paramList)
         {
             byte[] buffer = new byte[paramList.Length];
             Array.Copy(paramList,buffer,paramList.Length);
@@ -251,9 +218,9 @@ namespace USB_DAQ
                 buffer[i + 1] = temp;
             }
             return buffer;
-        }
+        }*/
         //Command send method
-        public static bool CommandSend(byte[] OutData, int xferLen)
+        /*public static bool CommandSend(byte[] OutData, int xferLen)
         {
             bool bResult = false;
             if (BulkInEndPt == null)
@@ -265,19 +232,19 @@ namespace USB_DAQ
                 bResult = BulkOutEndPt.XferData(ref OutData, ref xferLen);
             }
             return bResult;
-        }
+        }*/
         //data recieve method
-        private bool DataRecieve(byte[] InData, int xferLen)
+        /*private bool DataRecieve(byte[] InData, int xferLen)
         {
             bool bResult = false;
-            /*if(myDevice != null)
+            if(myDevice != null)
             {
                 bResult = BulkInEndPt.XferData(ref InData, ref xferLen, true);
             }
             else
             {
                 MessageBox.Show("USB Error");//弹出还是不弹出错误信息？不弹出错误信息可能会丢包，弹出的话采集就会中断
-            }*/
+            }
             try
             {
                 bResult = BulkInEndPt.XferData(ref InData, ref xferLen, true);
@@ -287,7 +254,7 @@ namespace USB_DAQ
                 MessageBox.Show(exp.Message);
             }
             return bResult;
-        }
+        }*/
         //Create file directory
         private void btnDirCreate_Click(object sender, RoutedEventArgs e)
         {
@@ -373,6 +340,7 @@ namespace USB_DAQ
                         fs = File.Create(filepath);                         
                         string report = String.Format("File:{0} Created\n",filepath);
                         txtReport.AppendText(report.ToString());
+                        StateIndicator.FileSaved = true;
                         
                     }
                     else
@@ -386,25 +354,62 @@ namespace USB_DAQ
                 }
             }
         }
-        //set average points
-        /*
-        private void btnAverage_Points_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// True for saved and false for not saved. If file is not saved, a select box will show.
+        /// </summary>
+        /// <returns></returns>
+        private bool CheckFileSaved()
         {
-            string report;
-            byte value = (byte)cbxAverage_Points.SelectedIndex;
-            byte[] ave_points = ConstCommandByteArray(0xC0, value);
-            bool bResult = CommandSend(ave_points, ave_points.Length);
-            if (bResult)
+            if((filepath != null) && (!string.IsNullOrEmpty(filepath.Trim())) && StateIndicator.FileSaved)
             {
-                report = string.Format("Select {0} averaging for each chn\n", cbxAverage_Points.Text.Trim());
+                return true;
             }
             else
             {
-                report = string.Format("Fail to select average points\n");
+                if (MessageBox.Show("File not saved. Use default name?", "Confirm Message", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    if (SaveFileDefault())
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    return false;
+                }
             }
-            txtReport.AppendText(report.ToString());
+          
         }
-        */
+        private bool SaveFileDefault()
+        {
+            string DefaultDicrectory = @txtFileDir.Text;
+            string DefaultFileName = DateTime.Now.ToString();
+            DefaultFileName = DefaultFileName.Replace("/", "_");
+            DefaultFileName = DefaultFileName.Replace(":", "_");
+            DefaultFileName = DefaultFileName.Replace(" ", "T");
+            DefaultFileName += ".dat";
+            filepath = Path.Combine(DefaultDicrectory, DefaultFileName);
+            FileStream fs = null;
+            if (!File.Exists(filepath))
+            {
+                fs = File.Create(filepath);
+                string report = String.Format("File:{0} Created\n", filepath);
+                txtReport.AppendText(report.ToString());
+                StateIndicator.FileSaved = true;
+                fs.Close();
+                txtFileName.Text = DefaultFileName;
+                return true;
+            }
+            else
+            {
+                MessageBox.Show("Save file failure. Please save the file manual", "File Save Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+        }
         //data acquisition start
         private void btnAcqStart_Click(object sender, RoutedEventArgs e)
         {            
@@ -418,125 +423,77 @@ namespace USB_DAQ
             else //file is exsits
             {
                 StringBuilder reports = new StringBuilder();
-                if (!AcqStart) //Acquisition is not start then start acquisition
-                {
-                    bool bResult;
+                bool bResult;
+                if (!StateIndicator.AcqStart) //Acquisition is not start then start acquisition
+                {                    
+                    bool IllegalInput;
                     #region Set Start Acq Time
-                    Regex rx_int = new Regex(rx_Integer);
-                    bool Is_Time_legal = rx_int.IsMatch(txtStartAcqTime.Text);
-                    if (Is_Time_legal)
+                    bResult = MicrorocChain1.SetAcquisitionTime(txtStartAcqTime.Text, MyUsbDevice1, out IllegalInput);
+                    if (bResult)
                     {
-                        int value = Int32.Parse(txtStartAcqTime.Text) / 25; //除以25ns 
-                        byte[] CmdBytes = ConstCommandByteArray(0xB2, (byte)(value >> 8));
-                        bResult = CommandSend(CmdBytes, CmdBytes.Length);
-                        if (!bResult)
-                        {
-                            MessageBox.Show("Set StartAcq time failure, please check USB", //text
-                                             "USB Error",   //caption
-                                             MessageBoxButton.OK,//button
-                                             MessageBoxImage.Error);//icon
-                            return;
-                        }
-                        CmdBytes = ConstCommandByteArray(0xB1, (byte)(value));
-                        bResult = CommandSend(CmdBytes, CmdBytes.Length);
-                        if (bResult)
-                        {
-                            string report = string.Format("Set StartAcq time : {0}\n", txtStartAcqTime.Text);
-                            txtReport.AppendText(report);
-                        }
-                        else
-                        {
-                            MessageBox.Show("Set StartAcq time failure, please check USB", //text
-                                             "USB Error",   //caption
-                                             MessageBoxButton.OK,//button
-                                             MessageBoxImage.Error);//icon
-                            return;
-                        }
+                        string report = string.Format("Set StartAcq time : {0}\n", txtStartAcqTime.Text);
+                        txtReport.AppendText(report);
                     }
-                    else
+                    else if (IllegalInput)
                     {
                         MessageBox.Show("Illegal StartAcq Time, please re-type(Integer:0--1638400,step:25ns)", //text
-                                         "Illegal input",   //caption
+                                         "Illegal Input",   //caption
                                          MessageBoxButton.OK,//button
                                          MessageBoxImage.Error);//icon
                         return;
                     }
+                    else
+                    {
+                        MessageBox.Show("Set StartAcq time failure, please check USB", //text
+                                         "USB Error",   //caption
+                                         MessageBoxButton.OK,//button
+                                         MessageBoxImage.Error);//icon
+                        return;
+                    } 
                     #endregion
                     #region Set End Hold Time
-                    if (DaqMode == SlaveDaq)
+                    if (StateIndicator.DaqModeSelect == StateIndicator.DaqMode.SlaveDaq)
                     {
-                        byte[] CommandBytes = new byte[2];
-                        bool IsEndHoldTimeLegal = rx_int.IsMatch(txtEndHoldTime.Text) && (int.Parse(txtEndHoldTime.Text) < 65536);
-                        if(IsEndHoldTimeLegal)
+                        bResult = MicrorocChain1.SetEndHoldTime(txtEndHoldTime.Text, MyUsbDevice1, out IllegalInput);
+                        if(bResult)
                         {
-                            int EndHoldTime = int.Parse(txtEndHoldTime.Text);
-                            int EndHoldTime1 = (EndHoldTime & 15) + 64;//0x40
-                            int EndHoldTime2 = ((EndHoldTime >> 4) & 15) + 80;//0x50
-                            int EndHoldTime3 = ((EndHoldTime >> 8) & 15) + 96;//0x60
-                            int EndHoldTime4 = ((EndHoldTime >> 12) & 15) + 112;//0x70
-                            CommandBytes = ConstCommandByteArray(0xE8, (byte)EndHoldTime1);
-                            bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                            if(!bResult)
-                            {
-                                MessageBox.Show("Set End Hold Time Failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                                return;
-                            }
-                            CommandBytes = ConstCommandByteArray(0xE8, (byte)EndHoldTime2);
-                            bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                            if (!bResult)
-                            {
-                                MessageBox.Show("Set End Hold Time Failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                                return;
-                            }
-                            CommandBytes = ConstCommandByteArray(0xE0, (byte)EndHoldTime3);
-                            bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                            if (!bResult)
-                            {
-                                MessageBox.Show("Set End Hold Time Failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                                return;
-                            }
-                            CommandBytes = ConstCommandByteArray(0xE0, (byte)EndHoldTime4);
-                            bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                            if (bResult)
-                            {
-                                string report = string.Format("Set End Signal Time:{0}\n", EndHoldTime);
-                                txtReport.AppendText(report);
-                            }
-                            else
-                            {
-                                MessageBox.Show("Set End Hold Time Failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                                return;
-                            }
+                            string report = string.Format("Set End Signal Time:{0}\n", txtEndHoldTime.Text);
+                            txtReport.AppendText(report);
                         }
-                        else
+
+                        else if(IllegalInput)
                         {
                             MessageBox.Show("Illegal End Signal Hold Time, please re-type(Integer:0--1638400,step:25ns)", //text
                                          "Illegal input",   //caption
                                          MessageBoxButton.OK,//button
                                          MessageBoxImage.Error);//icon
+                            return;
+                            
+                        }                        
+                        else
+                        {
+                            MessageBox.Show("Set End Hold Time Failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                            return;
                         }
-                    }                    
+                    }
                     #endregion
-                    AcqStart = true;
-                    btnAcqStart.Content = "AcqAbort";
-                    btnAcqStart.Background = Brushes.DeepPink;
-                    threadbuffer.Clear();
-                    bResult = false;
-                    byte[] cmd_ClrUSBFifo = ConstCommandByteArray(0xF0, 0xFA);
-                    bResult = CommandSend(cmd_ClrUSBFifo, 2);//
+                    #region Clear USB FIFO
+                    bResult = MicrorocChain1.ClearUsbFifo(MyUsbDevice1);
                     if (bResult)
                         reports.AppendLine("USB fifo cleared");
                     else
+                    {
                         reports.AppendLine("fail to clear USB fifo");
+                        return;
+                    }
+                    #endregion
                     //string test = string.Format("MAXPktSize is {0}\n", BulkInEndPt.MaxPktSize);
                     //reports.AppendLine(test.ToString());
-                    byte[] bytes = new byte[2048];
-                    bResult = DataRecieve(bytes, bytes.Length);
                     /*Modefied for the Microroc DAQ
                     byte value = (byte)cbxChn_Select.SelectedIndex;
                     byte[] cmd_AcqStart = ConstCommandByteArray(0xF0, value);*/
-                    byte[] CommandForceMicrorocReset = ConstCommandByteArray(0xF0,0xF2);
-                    bResult = CommandSend(CommandForceMicrorocReset, CommandForceMicrorocReset.Length);
+                    #region Reset Microroc
+                    bResult = MicrorocChain1.ResetMicroroc(MyUsbDevice1);
                     if(bResult)
                     {
                         reports.AppendLine("Microroc Reset");
@@ -546,11 +503,15 @@ namespace USB_DAQ
                         MessageBox.Show("Reset Microroc Failure", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
                     }
+                    #endregion
                     Thread.Sleep(10);
-                    byte[] cmd_AcqStart = ConstCommandByteArray(0xF0, 0xF0);
-                    bResult = CommandSend(cmd_AcqStart, 2);
+                    threadbuffer.Clear();
+                    bResult = MicrorocChain1.StartAcquisition(MyUsbDevice1);
                     if (bResult)
                     {
+                        StateIndicator.AcqStart = true;
+                        btnAcqStart.Content = "AcqAbort";
+                        btnAcqStart.Background = Brushes.DeepPink;
                         reports.AppendLine("Data Acquisition Thread start");
                         data_acq_cts.Dispose(); //clean up old token source
                         file_write_cts.Dispose();//clean up old token source
@@ -567,12 +528,10 @@ namespace USB_DAQ
                 }
                 else //Acqsition is running then stop acquisition
                 {
-                    AcqStart = false;
+                    StateIndicator.AcqStart = false;
                     btnAcqStart.Content = "AcqStart";
                     btnAcqStart.Background = Brushes.ForestGreen;
-                    bool bResult = false;
-                    byte[] cmd_AcqStop = ConstCommandByteArray(0xF0, 0xF1);
-                    bResult = CommandSend(cmd_AcqStop, 2);
+                    bResult = MicrorocChain1.StopAcquisition(MyUsbDevice1);
                     if (bResult)
                     {
                         //AcqStart = false;
@@ -591,7 +550,7 @@ namespace USB_DAQ
         {
             //CancellationToken token = (CancellationToken)StartOrNot;
             //StringBuilder sb = new StringBuilder();
-            string report;
+            /*string report;
             // DisplayPacketNum dp = new DisplayPacketNum((StringBuilder s) => { ShowPacketNum(s); });
             DisplayPacketNum dp = new DisplayPacketNum((string s) => { ShowPacketNum(s); });
             Packetcnt = 0;
@@ -645,6 +604,7 @@ namespace USB_DAQ
             }
             report = string.Format("About {0} packets in total\n", Packetcnt);
             Dispatcher.Invoke(dp, report);
+            */
             //delegate
         }
         //wrting file thread
@@ -778,20 +738,10 @@ namespace USB_DAQ
                     //chk_PedCali_ASIC[i].IsEnabled = false;
                 }
                 txtHeader.IsEnabled = true;
-                /*txtRead_reg.IsEnabled = false;
-                txtDAC0_VTH.IsEnabled = true;
-                txtDAC1_VTH.IsEnabled = true;
-                txtDAC2_VTH.IsEnabled = true;
-                txtHeader.IsEnabled = true;
-                txtCTest.IsEnabled = true;*/
-
-                //Raz_Chn_Select.IsEnabled = true;
-                byte[] Slow_Control = ConstCommandByteArray(0xA0, 0xA0);
-                //bResult = false;
-                bResult = CommandSend(Slow_Control, Slow_Control.Length);
+                bResult = MicrorocChain1.SelectSlowControlOrReadRegister(false, MyUsbDevice1);
                 if (bResult)
                 {
-                    txtReport.AppendText("you are choosing SC mode\n");
+                    txtReport.AppendText("You are choosing SC mode\n");
                 }
                 else
                 {
@@ -800,6 +750,7 @@ namespace USB_DAQ
                                      "USB Error",   //caption
                                      MessageBoxButton.OK,//button
                                      MessageBoxImage.Error);//icon
+                    return;
                 }
             }
             #endregion
@@ -836,30 +787,21 @@ namespace USB_DAQ
                     cbxsw_lg_ASIC[i].IsEnabled = false;
                     cbxInternal_RAZ_Time_ASIC[i].IsEnabled = false;
                     cbxPedCali_ASIC[i].IsEnabled = false;
-                    //chk_PedCali_ASIC[i].IsEnabled = false;
+
                 }
                 txtHeader.IsEnabled = false;
-                /*txtRead_reg.IsEnabled = true;
-                txtDAC0_VTH.IsEnabled = false;
-                txtDAC1_VTH.IsEnabled = false;
-                txtDAC2_VTH.IsEnabled = false;
-                txtHeader.IsEnabled = false;
-                txtCTest.IsEnabled = false;*/
-                //Raz_Chn_Select.IsEnabled = false;
-                byte[] Read_Register = ConstCommandByteArray(0xA0, 0xA1);
-                //bResult = false;
-                bResult = CommandSend(Read_Register, Read_Register.Length);
+                bResult = MicrorocChain1.SelectSlowControlOrReadRegister(true, MyUsbDevice1);
                 if (bResult)
                 {
                     txtReport.AppendText("you are choosing ReadReg mode\n");
                 }
                 else
                 {
-                    //txtReport.AppendText("select failure, please check USB\n");
                     MessageBox.Show("select failure, please check USB", //text
                                      "USB Error",   //caption
                                      MessageBoxButton.OK,//button
                                      MessageBoxImage.Error);//icon
+                    return;
                 }
             }
             #endregion
@@ -871,13 +813,11 @@ namespace USB_DAQ
         private void MicrorocSetSlowControl()
         {
             bool bResult = false;
+            bool IllegalInput;
             #region Set ASIC Number
             /*----------------ASIC number and start load---------------------*/
-            int ASIC_Number = cbxASIC_Number.SelectedIndex;
-            int value = ASIC_Number + 176 + 1;//0xB0
-            byte[] com_bytes = new byte[2];
-            com_bytes = ConstCommandByteArray(0xA0, (byte)(value));
-            bResult = CommandSend(com_bytes, com_bytes.Length);
+            int AsicNumber = cbxASIC_Number.SelectedIndex;
+            bResult = MicrorocChain1.SetAsicNumber(AsicNumber + 1, MyUsbDevice1);
             if (bResult)
             {
                 string report = string.Format("ASIC quantity : {0}\n", cbxASIC_Number.Text);
@@ -889,6 +829,7 @@ namespace USB_DAQ
                                  "USB Error",   //caption
                                  MessageBoxButton.OK,//button
                                  MessageBoxImage.Error);//icon
+                return;
             }
             #endregion
             //if there is a slow control operation      
@@ -916,70 +857,26 @@ namespace USB_DAQ
                 ComboBox[] cbxPedCali_ASIC = new ComboBox[4] { cbxPedCali_ASIC1, cbxPedCali_ASIC2, cbxPedCali_ASIC3, cbxPedCali_ASIC4 };
                 TextBox[] txtMaskFile = new TextBox[4] { txtMaskFile_ASIC1, txtMaskFile_ASIC2, txtMaskFile_ASIC3, txtMaskFile_ASIC4 };
                 #endregion
-                Regex rx_int = new Regex(rx_Integer);
-                Regex rx_b = new Regex(rx_Byte);
                 #region Check Header Legal
-                bool Is_Header_Legal = false;
-                Is_Header_Legal = rx_b.IsMatch(txtHeader.Text);
-                byte[] Header_Value = new byte[1];
-                if (Is_Header_Legal)
+                bool IsHeaderLegal = MicrorocChain1.Check8BitHexLegal(txtHeader.Text);
+                byte HeaderValue;
+                if (IsHeaderLegal)
                 {
-                    Header_Value = HexStringToByteArray(txtHeader.Text.Trim());
+                    HeaderValue = Convert.ToByte(txtHeader.Text, 16);
                 }
                 else
                 {
                     MessageBox.Show("Header value is illegal. Please re-type (Eg:Hex:AA).\n Set header default value 0xA1", "Illega Input", MessageBoxButton.OK, MessageBoxImage.Error);
-                    string header_default = "A1";
-                    Header_Value = HexStringToByteArray(header_default);
+                    HeaderValue = 0xA1;
                 }
                 #endregion                
-                bool Is_DAC_Legal = false;
-                int DAC0_Value, DAC1_Value, DAC2_Value;
-                int ShaperOutput_Value;
-                int ShaperOutputEnable_Value;
-                bool IsCTestLegal = false;
-                int CTest_Value;
-                int SW_HG_Value, SW_LG_Value, SW_Value;
-                int InternalRazTime_Value;
-                byte[] CommandBytes = new byte[2];
-                //byte[] PedCali_Param;
-                //byte PedCali_Byte1,PedCali_Byte2;
                 StringBuilder details = new StringBuilder();
                 //NoSortHashtable TempHashTabel;
-                Header_Value[0] += (byte)(ASIC_Number + 1);
+                HeaderValue += (byte)(AsicNumber + 1);
                 string DCCaliString, SCTCaliString;
                 byte[] CaliData = new byte[64];
-                //byte[] SCTCaliData = new byte[64];
-                string[] Chn = new string[64];
-                byte[] CommandHeader = new byte[64];
-                byte CaliByte1, CaliByte2;
-                // *** Generate channel mask header
-                for (int i = 0; i < 64; i++)
-                {
-                    Chn[i] = string.Format("Chn{0}", i);
-                    CommandHeader[i] = (byte)(0xC0 + i);
-                }
-                #region RAZ Select
-                int RazSelect = cbxRazSelect.SelectedIndex + 160;//0xA0
-                CommandBytes = ConstCommandByteArray(0xA8, (byte)RazSelect);
-                bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                if (bResult)
-                {
-                    string report = string.Format("Set Raz Mode: {0}\n", cbxRazSelect.Text);
-                    txtReport.AppendText(report);
-                }
-                else
-                {
-                    MessageBox.Show("Set Raz Mode failure, please check USB", //text
-                                 "USB Error",   //caption
-                                 MessageBoxButton.OK,//button
-                                 MessageBoxImage.Error);//icon
-                }
-                #endregion
-                #region Channel Select
-                int ChannelSelect = cbxChannelSelect.SelectedIndex + 160;//A0
-                CommandBytes = ConstCommandByteArray(0xA4, (byte)ChannelSelect);
-                bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                #region Readout channel select
+                bResult = MicrorocChain1.SelectReadoutChannel(cbxChannelSelect.SelectedIndex, MyUsbDevice1);
                 if (bResult)
                 {
                     string report = string.Format("Set ReadOut {0}\n", cbxChannelSelect.Text);
@@ -991,12 +888,11 @@ namespace USB_DAQ
                                  "USB Error",   //caption
                                  MessageBoxButton.OK,//button
                                  MessageBoxImage.Error);//icon
+                    return;
                 }
                 #endregion
                 #region RS Or Direct
-                int RSOrDirect = cbxRSOrDirect.SelectedIndex + 160;//A0
-                CommandBytes = ConstCommandByteArray(0xAC, (byte)RSOrDirect);
-                bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                bResult = MicrorocChain1.SelectCmpOutLatchedOrDirectOut(cbxRSOrDirect.SelectedIndex, MyUsbDevice1);
                 if (bResult)
                 {
                     string report = string.Format("Set {0} as trigger\n", cbxRSOrDirect.Text);
@@ -1005,29 +901,13 @@ namespace USB_DAQ
                 else
                 {
                     MessageBox.Show("Set RS Or Direct failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                #endregion
-                #region ReadReg Or NOR64
-                int ReadRegOrNOR64 = cbxReadOrNOR64.SelectedIndex + 176;//0xB0
-                CommandBytes = ConstCommandByteArray(0xAC, (byte)ReadRegOrNOR64);
-                bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                if (bResult)
-                {
-                    string report = string.Format("Set trigger out by {0}\n", cbxReadOrNOR64.Text);
-                    txtReport.AppendText(report);
-                }
-                else
-                {
-                    MessageBox.Show("Set Readreg or NOR64 failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
                 #endregion
+                
                 #region PowerPulsing Control
-                int PowerPulsingBase = 0xA0E0;
                 #region PreAmp
-                int PowerPulsingValue = PowerPulsingBase + cbxPreAmpPP.SelectedIndex;
-                CommandBytes = ConstCommandByteArray((byte)(PowerPulsingValue >> 8), (byte)PowerPulsingValue);
-                bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                bResult = MicrorocChain1.SetPowerPulsing(cbxPreAmpPP.SelectedIndex, CommandHeader.PreAmpPowerPulsingIndex, MyUsbDevice1);
                 if (bResult)
                 {
                     string report = string.Format("Set Pre Amp PowerPulsing: {0}\n", cbxPreAmpPP.Text);
@@ -1040,12 +920,10 @@ namespace USB_DAQ
                 }
                 #endregion
                 #region Shaper
-                PowerPulsingValue = PowerPulsingBase + cbxShaperPP.SelectedIndex + 2;
-                CommandBytes = ConstCommandByteArray((byte)(PowerPulsingValue >> 8), (byte)PowerPulsingValue);
-                bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                bResult = MicrorocChain1.SetPowerPulsing(cbxShaperPP.SelectedIndex, CommandHeader.ShaperPowerPulsingIndex, MyUsbDevice1);
                 if (bResult)
                 {
-                    string report = string.Format("Set Shaper PowerPulsing: {0}\n", cbxPreAmpPP.Text);
+                    string report = string.Format("Set Shaper PowerPulsing: {0}\n", cbxShaperPP.Text);
                     txtReport.AppendText(report);
                 }
                 else
@@ -1055,12 +933,10 @@ namespace USB_DAQ
                 }
                 #endregion
                 #region Wildar
-                PowerPulsingValue = PowerPulsingBase + cbxWidlarPP.SelectedIndex + 4;
-                CommandBytes = ConstCommandByteArray((byte)(PowerPulsingValue >> 8), (byte)PowerPulsingValue);
-                bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                bResult = MicrorocChain1.SetPowerPulsing(cbxWidlarPP.SelectedIndex, CommandHeader.WildarPowerPulsingIndex, MyUsbDevice1);
                 if (bResult)
                 {
-                    string report = string.Format("Set Widlar PowerPulsing: {0}\n", cbxPreAmpPP.Text);
+                    string report = string.Format("Set Widlar PowerPulsing: {0}\n", cbxWidlarPP.Text);
                     txtReport.AppendText(report);
                 }
                 else
@@ -1070,12 +946,10 @@ namespace USB_DAQ
                 }
                 #endregion
                 #region 4-bit DAC
-                PowerPulsingValue = PowerPulsingBase + cbxDac4BitPP.SelectedIndex + 6;
-                CommandBytes = ConstCommandByteArray((byte)(PowerPulsingValue >> 8), (byte)PowerPulsingValue);
-                bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                bResult = MicrorocChain1.SetPowerPulsing(cbxDac4BitPP.SelectedIndex, CommandHeader.Dac4BitPowerPulsingIndex, MyUsbDevice1);
                 if (bResult)
                 {
-                    string report = string.Format("Set 4-bit DAC PowerPulsing: {0}\n", cbxPreAmpPP.Text);
+                    string report = string.Format("Set 4-bit DAC PowerPulsing: {0}\n", cbxDac4BitPP.Text);
                     txtReport.AppendText(report);
                 }
                 else
@@ -1085,12 +959,10 @@ namespace USB_DAQ
                 }
                 #endregion
                 #region OTAq
-                PowerPulsingValue = PowerPulsingBase + cbxOTAqPP.SelectedIndex + 8;
-                CommandBytes = ConstCommandByteArray((byte)(PowerPulsingValue >> 8), (byte)PowerPulsingValue);
-                bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                bResult = MicrorocChain1.SetPowerPulsing(cbxOTAqPP.SelectedIndex, CommandHeader.OtaqPowerPulsingIndex, MyUsbDevice1);
                 if (bResult)
                 {
-                    string report = string.Format("Set OTAq PowerPulsing: {0}\n", cbxPreAmpPP.Text);
+                    string report = string.Format("Set OTAq PowerPulsing: {0}\n", cbxOTAqPP.Text);
                     txtReport.AppendText(report);
                 }
                 else
@@ -1100,12 +972,10 @@ namespace USB_DAQ
                 }
                 #endregion
                 #region Discriminator
-                PowerPulsingValue = PowerPulsingBase + cbxDiscriPP.SelectedIndex + 10;
-                CommandBytes = ConstCommandByteArray((byte)(PowerPulsingValue >> 8), (byte)PowerPulsingValue);
-                bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                bResult = MicrorocChain1.SetPowerPulsing(cbxDiscriPP.SelectedIndex, CommandHeader.DiscriminatorPowerPulsingIndex, MyUsbDevice1);
                 if (bResult)
                 {
-                    string report = string.Format("Set Discriminator PowerPulsing: {0}\n", cbxPreAmpPP.Text);
+                    string report = string.Format("Set Discriminator PowerPulsing: {0}\n", cbxDiscriPP.Text);
                     txtReport.AppendText(report);
                 }
                 else
@@ -1115,12 +985,10 @@ namespace USB_DAQ
                 }
                 #endregion
                 #region V_bg
-                PowerPulsingValue = PowerPulsingBase + cbxVbgPP.SelectedIndex + 12;
-                CommandBytes = ConstCommandByteArray((byte)(PowerPulsingValue >> 8), (byte)PowerPulsingValue);
-                bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                bResult = MicrorocChain1.SetPowerPulsing(cbxVbgPP.SelectedIndex, CommandHeader.VbgPowerPulsingIndex, MyUsbDevice1);
                 if (bResult)
                 {
-                    string report = string.Format("Set V_bg PowerPulsing: {0}\n", cbxPreAmpPP.Text);
+                    string report = string.Format("Set V_bg PowerPulsing: {0}\n", cbxVbgPP.Text);
                     txtReport.AppendText(report);
                 }
                 else
@@ -1130,12 +998,10 @@ namespace USB_DAQ
                 }
                 #endregion
                 #region 10bit DAC
-                PowerPulsingValue = PowerPulsingBase + cbxDac10BitPP.SelectedIndex + 14;
-                CommandBytes = ConstCommandByteArray((byte)(PowerPulsingValue >> 8), (byte)PowerPulsingValue);
-                bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                bResult = MicrorocChain1.SetPowerPulsing(cbxDac10BitPP.SelectedIndex, CommandHeader.Dac10BitPowerPulsingIndex, MyUsbDevice1);
                 if (bResult)
                 {
-                    string report = string.Format("Set 10-bit DAC PowerPulsing: {0}\n", cbxPreAmpPP.Text);
+                    string report = string.Format("Set 10-bit DAC PowerPulsing: {0}\n", cbxDac10BitPP.Text);
                     txtReport.AppendText(report);
                 }
                 else
@@ -1145,12 +1011,10 @@ namespace USB_DAQ
                 }
                 #endregion
                 #region LVDS
-                PowerPulsingValue = PowerPulsingBase + cbxLvdsPP.SelectedIndex + 16;
-                CommandBytes = ConstCommandByteArray((byte)(PowerPulsingValue >> 8), (byte)PowerPulsingValue);
-                bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                bResult = MicrorocChain1.SetPowerPulsing(cbxLvdsPP.SelectedIndex, CommandHeader.LvdsPowerPulsingIndex, MyUsbDevice1);
                 if (bResult)
                 {
-                    string report = string.Format("Set LVDS PowerPulsing: {0}\n", cbxPreAmpPP.Text);
+                    string report = string.Format("Set LVDS PowerPulsing: {0}\n", cbxLvdsPP.Text);
                     txtReport.AppendText(report);
                 }
                 else
@@ -1160,12 +1024,11 @@ namespace USB_DAQ
                 }
                 #endregion
                 #endregion
-                for (int i = ASIC_Number; i >= 0; i--)
+                for (int i = AsicNumber; i >= 0; i--)
                 {
                     #region Header   
-                    Header_Value[0] -= 1;
-                    CommandBytes = ConstCommandByteArray(0xAB, Header_Value[0]);
-                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                    HeaderValue -= 1;
+                    bResult = MicrorocChain1.SetAsicHeader(HeaderValue, MyUsbDevice1);
                     if (bResult)
                     {
                         string report = string.Format("Setting header: 0x{0}\n", txtHeader.Text.Trim());
@@ -1177,79 +1040,68 @@ namespace USB_DAQ
                                          "USB Error",   //caption
                                          MessageBoxButton.OK,//button
                                          MessageBoxImage.Error);//icon
+                        return;
                     }
                     #endregion
                     #region 10-bit DAC
-                    Is_DAC_Legal = rx_int.IsMatch(txtDAC0_VTH_ASIC[i].Text) && rx_int.IsMatch(txtDAC1_VTH_ASIC[i].Text) && rx_int.IsMatch(txtDAC2_VTH_ASIC[i].Text);
-                    if (Is_DAC_Legal)
+                    #region Dac0
+                    bResult = MicrorocChain1.Set10BitDac0(txtDAC0_VTH_ASIC[i].Text, MyUsbDevice1, out IllegalInput);
+                    if (bResult)
                     {
-                        DAC0_Value = Int32.Parse(txtDAC0_VTH_ASIC[i].Text) + 49152;//0xC000
-                        DAC1_Value = Int32.Parse(txtDAC1_VTH_ASIC[i].Text) + 50176;//0xC400
-                        DAC2_Value = Int32.Parse(txtDAC2_VTH_ASIC[i].Text) + 51200;//0xC800
-                        #region DAC0
-                        CommandBytes = ConstCommandByteArray((byte)(DAC0_Value >> 8), (byte)DAC0_Value);
-                        bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                        if (bResult)
-                        {
-                            string report = string.Format("Setting DAC0 VTH: {0}\n", txtDAC0_VTH_ASIC[i].Text);
-                            txtReport.AppendText(report);
-                        }
-                        else
-                        {
-                            //txtReport.AppendText("set DAC0 failure, please check USB\n");
-                            MessageBox.Show("Set DAC0 failure. Please check USB", //text
-                                             "USB Error",   //caption
-                                             MessageBoxButton.OK,//button
-                                             MessageBoxImage.Error);//icon
-                        }
-                        #endregion
-                        #region DAC1
-                        CommandBytes = ConstCommandByteArray((byte)(DAC1_Value >> 8), (byte)DAC1_Value);
-                        bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                        if (bResult)
-                        {
-                            string report = string.Format("Setting DAC1 VTH: {0}\n", txtDAC1_VTH_ASIC[i].Text);
-                            txtReport.AppendText(report);
-                        }
-                        else
-                        {
-                            //txtReport.AppendText("set DAC0 failure, please check USB\n");
-                            MessageBox.Show("Set DAC1 failure. Please check USB", //text
-                                             "USB Error",   //caption
-                                             MessageBoxButton.OK,//button
-                                             MessageBoxImage.Error);//icon
-                        }
-                        #endregion
-                        #region DAC2
-                        CommandBytes = ConstCommandByteArray((byte)(DAC2_Value >> 8), (byte)DAC2_Value);
-                        bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                        if (bResult)
-                        {
-                            string report = string.Format("Setting DAC2 VTH: {0}\n", txtDAC2_VTH_ASIC[i].Text);
-                            txtReport.AppendText(report);
-                        }
-                        else
-                        {
-                            //txtReport.AppendText("set DAC0 failure, please check USB\n");
-                            MessageBox.Show("Set DAC0 failure. Please check USB", //text
-                                             "USB Error",   //caption
-                                             MessageBoxButton.OK,//button
-                                             MessageBoxImage.Error);//icon
-                        }
-                        #endregion
+
+                        string report = string.Format("Setting DAC0 VTH: {0}\n", txtDAC0_VTH_ASIC[i].Text);
+                        txtReport.AppendText(report);
+                    }
+                    else if (IllegalInput)
+                    {
+                        MessageBox.Show("DAC value is illegal,please re-type(Integer:0--1023)", "Illegal input", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
                     }
                     else
                     {
-                        MessageBox.Show("DAC value is illegal,please re-type(Integer:0--1023)", //text
-                    "Illegal input",   //caption
-                    MessageBoxButton.OK,//button
-                    MessageBoxImage.Error);//icon
+                        MessageBox.Show("Set DAC0 failure. Please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
                     }
                     #endregion
+                    #region DAC1
+                    bResult = MicrorocChain1.Set10BitDac1(txtDAC1_VTH_ASIC[i].Text, MyUsbDevice1, out IllegalInput);
+                    if (bResult)
+                    {
+                        string report = string.Format("Setting DAC1 VTH: {0}\n", txtDAC1_VTH_ASIC[i].Text);
+                        txtReport.AppendText(report);
+                    }
+                    else if (IllegalInput)
+                    {
+                        MessageBox.Show("DAC value is illegal,please re-type(Integer:0--1023)", "Illegal input", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Set DAC1 failure. Please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+                    #endregion
+                    #region DAC2
+                    bResult = MicrorocChain1.Set10BitDac2(txtDAC2_VTH_ASIC[i].Text, MyUsbDevice1, out IllegalInput);
+                    if (bResult)
+                    {
+                        string report = string.Format("Setting DAC2 VTH: {0}\n", txtDAC2_VTH_ASIC[i].Text);
+                        txtReport.AppendText(report);
+                    }
+                    else if (IllegalInput)
+                    {
+                        MessageBox.Show("DAC value is illegal,please re-type(Integer:0--1023)", "Illegal input", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Set DAC0 failure. Please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+                    #endregion
+                    #endregion
                     #region Shaper Output
-                    ShaperOutput_Value = cbxOut_sh_ASIC[i].SelectedIndex + 192;//C0
-                    CommandBytes = ConstCommandByteArray(0xA0, (byte)ShaperOutput_Value);
-                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                    bResult = MicrorocChain1.SelectHighOrLowGainShaper(cbxOut_sh_ASIC[i].SelectedIndex, MyUsbDevice1);
                     if (bResult)
                     {
                         string report = string.Format("Shape output: {0}\n", cbxOut_sh_ASIC[i].Text);
@@ -1261,12 +1113,11 @@ namespace USB_DAQ
                                          "USB Error",   //caption
                                          MessageBoxButton.OK,//button
                                          MessageBoxImage.Error);//icon
+                        return;
                     }
                     #endregion
                     #region Shaper Output Enable
-                    ShaperOutputEnable_Value = cbxShaper_Output_Enable_ASIC[i].SelectedIndex + 208;//0xD0
-                    CommandBytes = ConstCommandByteArray(0xA0, (byte)ShaperOutputEnable_Value);
-                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                    bResult = MicrorocChain1.SetShaperOutEnable(cbxShaper_Output_Enable_ASIC[i].SelectedIndex, MyUsbDevice1);
                     if (bResult)
                     {
                         string report = string.Format("You have {0} the shaper output", cbxShaper_Output_Enable_ASIC[i].Text);
@@ -1275,43 +1126,31 @@ namespace USB_DAQ
                     else
                     {
                         MessageBox.Show("Set shaper state failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
                     }
                     #endregion
                     #region CTest Channel
-                    IsCTestLegal = rx_int.IsMatch(txtCTest_ASIC[i].Text);
-                    if (IsCTestLegal)
+                    bResult = MicrorocChain1.SetCTestChannel(txtCTest_ASIC[i].Text, MyUsbDevice1, out IllegalInput);
+                    if (bResult)
                     {
-                        CTest_Value = Int32.Parse(txtCTest_ASIC[i].Text);//A1XX
-                        CommandBytes = ConstCommandByteArray(0xA1, (byte)CTest_Value);
-                        bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                        if (bResult)
-                        {
-                            string report = string.Format("Setting CTest channel: {0}\n", txtCTest_ASIC[i].Text);
-                            txtReport.AppendText(report);
-                        }
-                        else
-                        {
-                            //txtReport.AppendText("set DAC0 failure, please check USB\n");
-                            MessageBox.Show("Set Ctest failure. Please check USB", //text
-                                             "USB Error",   //caption
-                                             MessageBoxButton.OK,//button
-                                             MessageBoxImage.Error);//icon
-                        }
+                        string report = string.Format("Setting CTest channel: {0}\n", txtCTest_ASIC[i].Text);
+                        txtReport.AppendText(report);
+
+
+                    }
+                    else if (IllegalInput)
+                    {
+                        MessageBox.Show("Ctest value is illegal,please re-type(Integer:0--64,or 255)", "Illegal input", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
                     }
                     else
                     {
-                        MessageBox.Show("Ctest value is illegal,please re-type(Integer:0--64,or 255)", //text
-                  "Illegal input",   //caption
-                  MessageBoxButton.OK,//button
-                  MessageBoxImage.Error);//icon
+                        MessageBox.Show("Set Ctest failure. Please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
                     }
                     #endregion
                     #region sw_hg sw_lg
-                    SW_HG_Value = cbxsw_hg_ASIC[i].SelectedIndex * 16;
-                    SW_LG_Value = cbxsw_lg_ASIC[i].SelectedIndex;
-                    SW_Value = SW_HG_Value + SW_LG_Value;
-                    CommandBytes = ConstCommandByteArray(0xB3, (byte)SW_Value);
-                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                    bResult = MicrorocChain1.SetSWHighGainAndLowGain(cbxsw_hg_ASIC[i].SelectedIndex, cbxsw_lg_ASIC[i].SelectedIndex, MyUsbDevice1);
                     if (bResult)
                     {
                         string report = string.Format("Set sw_hg: {0}; sw_lg: {1}\n", cbxsw_hg_ASIC[i].Text, cbxsw_lg_ASIC[i].Text);
@@ -1319,16 +1158,12 @@ namespace USB_DAQ
                     }
                     else
                     {
-                        MessageBox.Show("Set sw_hg and sw_lg failure. Please check USB", //text
-                                         "USB Error",   //caption
-                                         MessageBoxButton.OK,//button
-                                         MessageBoxImage.Error);//icon
+                        MessageBox.Show("Set sw_hg and sw_lg failure. Please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
                     }
                     #endregion
                     #region Internal RAZ Time
-                    InternalRazTime_Value = cbxInternal_RAZ_Time_ASIC[i].SelectedIndex + 176;//0xB0
-                    CommandBytes = ConstCommandByteArray(0xA8, (byte)InternalRazTime_Value);
-                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                    bResult = MicrorocChain1.SelectInternalRazTime(cbxInternal_RAZ_Time_ASIC[i].SelectedIndex, MyUsbDevice1);
                     if (bResult)
                     {
                         string report = string.Format("Internal RAZ Mode: {0} \n", cbxInternal_RAZ_Time_ASIC[i].Text);
@@ -1337,13 +1172,16 @@ namespace USB_DAQ
                     else
                     {
                         MessageBox.Show("Set Internal RAZ Mode failed. Please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
                     }
                     #endregion
                     #region 4bitDAC Cali
                     string DCCaliFileName, SCTCaliFileName;
                     StreamReader DCCaliFile, SCTCaliFile;
-                    DCCaliFileName = string.Format("D:\\ExperimentsData\\test\\DCCali{0}.txt", i);
-                    SCTCaliFileName = string.Format("D:\\ExperimentsData\\test\\SCTCali{0}.txt", i);
+                    DCCaliFileName = string.Format("DCCali{0}.txt", i);
+                    SCTCaliFileName = string.Format("SCTCali{0}.txt", i);
+                    DCCaliFileName = Path.Combine(CurrentPath, DCCaliFileName);
+                    SCTCaliFileName = Path.Combine(CurrentPath, SCTCaliFileName);
                     DCCaliFile = File.OpenText(DCCaliFileName);
                     SCTCaliFile = File.OpenText(SCTCaliFileName);
                     switch (cbxPedCali_ASIC[i].SelectedIndex)
@@ -1375,22 +1213,18 @@ namespace USB_DAQ
                             }
                             break;
                     }
-                    for (int j = 0; j < 64; j++)
+                    bResult = MicrorocChain1.SetChannelCalibration(MyUsbDevice1, CaliData);
+                    if (bResult)
                     {
-                        CaliByte1 = (byte)(CommandHeader[j] >> 4 + 0xC0);
-                        CaliByte2 = (byte)(CommandHeader[j] << 4 + CaliData[j]);
-                        CommandBytes = ConstCommandByteArray(CaliByte1, CaliByte2);
-                        bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                        if (bResult)
-                        {
-                            details.AppendFormat("{0},4-bitDAC:{1}\n", Chn[j], CaliData[j]);
-                        }
-                        else
-                        {
-                            MessageBox.Show("4bit-DAC Cali faliure. Please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                        }
-                        Thread.Sleep(10);
+                        details.AppendFormat("Set 4-bit Calibration Successful\n");
                     }
+                    else
+                    {
+                        MessageBox.Show("4bit-DAC Cali faliure. Please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+                    Thread.Sleep(10);
+
                     if (cbxPedCali_ASIC[i].SelectedIndex != 0)
                         txtReport.AppendText(details.ToString());
                     else
@@ -1421,8 +1255,7 @@ namespace USB_DAQ
                     #endregion
                     #region Set ChannelMask
                     // Clear the forer mask information
-                    CommandBytes = ConstCommandByteArray(0xAE, 0x10);
-                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                    bResult = MicrorocChain1.SelectMaskOrUnmask(0, MyUsbDevice1);
                     if (bResult)
                     {
                         txtReport.AppendText("Mask Clear\n");
@@ -1438,45 +1271,44 @@ namespace USB_DAQ
                         string MaskFileName;
                         string MaskChannelString;
                         StreamReader MaskFile;
-                        MaskFileName = string.Format("D:\\ExperimentsData\\test\\{0}", FileName);
-                        MaskFile = File.OpenText(MaskFileName);
-                        MaskChannelString = MaskFile.ReadLine();
-                        while (MaskChannelString != null)
+                        MaskFileName = Path.Combine(CurrentPath, FileName);
+                        if (File.Exists(MaskFileName))
                         {
-                            int MaskChannel = int.Parse(MaskChannelString) - 1;
-                            CommandBytes = ConstCommandByteArray(0xAD, (byte)MaskChannel);
-                            bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                            if (!bResult)
-                            {
-                                MessageBox.Show("Set Mask Channel faliure. Please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                                return;
-                            }
-                            CommandBytes = ConstCommandByteArray(0xAE, 0x07);
-                            bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                            if (!bResult)
-                            {
-                                MessageBox.Show("Set Mask Channel faliure. Please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                                return;
-                            }
-                            CommandBytes = ConstCommandByteArray(0xAE, 0x11);
-                            bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                            if (bResult)
-                            {
-                                string report = string.Format("Set ASIC{0} Mask Channel{1}\n", i, MaskChannel + 1);
-                                txtReport.AppendText(report);
-                            }
-                            else
-                            {
-                                MessageBox.Show("Set Mask Channel faliure. Please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                                return;
-                            }
+                            MaskFile = File.OpenText(MaskFileName);
                             MaskChannelString = MaskFile.ReadLine();
+                            while (MaskChannelString != null)
+                            {
+                                int MaskChannel = int.Parse(MaskChannelString) - 1;
+                                bResult = MicrorocChain1.SetMaskChannel(MaskChannel, MyUsbDevice1);
+                                if (!bResult)
+                                {
+                                    MessageBox.Show("Set Mask Channel faliure. Please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                    return;
+                                }
+                                bResult = MicrorocChain1.SelectMaskDiscriminator(7, MyUsbDevice1);
+                                if (!bResult)
+                                {
+                                    MessageBox.Show("Set Mask Channel faliure. Please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                    return;
+                                }
+                                bResult = MicrorocChain1.SelectMaskOrUnmask(1, MyUsbDevice1);
+                                if (bResult)
+                                {
+                                    string report = string.Format("Set ASIC{0} Mask Channel{1}\n", i, MaskChannel + 1);
+                                    txtReport.AppendText(report);
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Set Mask Channel faliure. Please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                    return;
+                                }
+                                MaskChannelString = MaskFile.ReadLine();
+                            }
                         }
                     }
                     #endregion
                     #region Start Load
-                    CommandBytes = ConstCommandByteArray(0xD0, 0xA2);
-                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                    bResult = MicrorocChain1.LoadSlowControlParameter(MyUsbDevice1);
                     if (bResult)
                     {
                         string report = string.Format("Load No.{0} ASIC parameter done!\n", i + 1);
@@ -1484,10 +1316,8 @@ namespace USB_DAQ
                     }
                     else
                     {
-                        MessageBox.Show("Load parameter failure, please check USB", //text
-                                         "USB Error",   //caption
-                                         MessageBoxButton.OK,//button
-                                         MessageBoxImage.Error);//icon
+                        MessageBox.Show("Load parameter failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
                     }
                     #endregion
                     //Sleep 100ms to wait load done
@@ -1683,43 +1513,26 @@ namespace USB_DAQ
             else if ((string)btnSC_or_ReadReg.Content == "Read Register")
             {
                 TextBox[] txtRead_reg_ASIC = new TextBox[4] { txtRead_reg_ASIC1, txtRead_reg_ASIC2, txtRead_reg_ASIC3, txtRead_reg_ASIC4 };
-                Regex rx_int = new Regex(rx_Integer);
-                bool Is_ReadReg_legal = false;
-                int ReadReg_Value;
-                byte[] Command_Bytes = new byte[2];
-                for (int i = ASIC_Number; i >= 0; i--)
+                for (int i = AsicNumber; i >= 0; i--)
                 {
                     #region Set ReadReg
-                    Is_ReadReg_legal = rx_int.IsMatch(txtRead_reg_ASIC[i].Text);
-                    if (Is_ReadReg_legal)
+                    bResult = MicrorocChain1.SetReadRegChannel(txtRead_reg_ASIC[i].Text, MyUsbDevice1, out IllegalInput);
+                    if (bResult)
                     {
-                        ReadReg_Value = Int32.Parse(txtRead_reg_ASIC[i].Text) + 41472;//0xA200
-                        Command_Bytes = ConstCommandByteArray((byte)(ReadReg_Value >> 8), (byte)ReadReg_Value);
-                        bResult = CommandSend(Command_Bytes, Command_Bytes.Length);
-                        if (bResult)
-                        {
-                            string report = string.Format("Setting ReadReg channel: {0}\n", txtRead_reg_ASIC[i].Text);
-                            txtReport.AppendText(report);
-                        }
-                        else
-                        {
-                            MessageBox.Show("Set ReadReg failure. Please check USB", //text
-                                             "USB Error",   //caption
-                                             MessageBoxButton.OK,//button
-                                             MessageBoxImage.Error);//icon
-                        }
+                        string report = string.Format("Setting ReadReg channel: {0}\n", txtRead_reg_ASIC[i].Text);
+                        txtReport.AppendText(report);
+                    }
+                    else if (IllegalInput)
+                    {
+                        MessageBox.Show("ReadReg value is illegal,please re-type(Integer:0--64)", "Illegal input", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                     else
                     {
-                        MessageBox.Show("ReadReg value is illegal,please re-type(Integer:0--64)", //text
-                  "Illegal input",   //caption
-                  MessageBoxButton.OK,//button
-                  MessageBoxImage.Error);//icon 
+                        MessageBox.Show("Set ReadReg failure. Please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                     #endregion
                     #region Start Load
-                    Command_Bytes = ConstCommandByteArray(0xD0, 0xA2);
-                    bResult = CommandSend(Command_Bytes, Command_Bytes.Length);
+                    bResult = MicrorocChain1.LoadSlowControlParameter(MyUsbDevice1);
                     if (bResult)
                     {
                         string report = string.Format("Load No.{0} ASIC parameter done!\n", i + 1);
@@ -1735,52 +1548,53 @@ namespace USB_DAQ
                     #endregion
                     //Sleep 100ms to wait load done
                     Thread.Sleep(100);
-                }
-                #region Old Code
-                /*if (Is_ReadReg_legal)
-                {
-                    int value_ReadReg = Int32.Parse(txtRead_reg.Text) + 41472; //header
-                    byte[] bytes = ConstCommandByteArray((byte)(value_ReadReg >> 8), (byte)(value_ReadReg));
-                    bResult = CommandSend(bytes, bytes.Length);
-                    if (bResult)
+                    
+                    #region Old Code
+                    /*if (Is_ReadReg_legal)
                     {
-                        string report = string.Format("setting ReadReg channel: {0}\n", txtRead_reg.Text);
-                        txtReport.AppendText(report);
+                        int value_ReadReg = Int32.Parse(txtRead_reg.Text) + 41472; //header
+                        byte[] bytes = ConstCommandByteArray((byte)(value_ReadReg >> 8), (byte)(value_ReadReg));
+                        bResult = CommandSend(bytes, bytes.Length);
+                        if (bResult)
+                        {
+                            string report = string.Format("setting ReadReg channel: {0}\n", txtRead_reg.Text);
+                            txtReport.AppendText(report);
+                        }
+                        else
+                        {
+                            MessageBox.Show("set ReadReg failure, please check USB", //text
+                                             "USB Error",   //caption
+                                             MessageBoxButton.OK,//button
+                                             MessageBoxImage.Error);//icon
+                        }
                     }
                     else
                     {
-                        MessageBox.Show("set ReadReg failure, please check USB", //text
+                        MessageBox.Show("ReadReg value is illegal,please re-type(Integer:0--64)", //text
+                      "Illegal input",   //caption
+                      MessageBoxButton.OK,//button
+                      MessageBoxImage.Error);//icon  
+                    }*/
+                    #endregion
+                }
+                #endregion
+                #region Old Code
+                //---start load
+                /*com_bytes = ConstCommandByteArray(0xD0, 0xA2);
+                    bResult = CommandSend(com_bytes, com_bytes.Length);
+                    if (bResult)
+                    {
+                        txtReport.AppendText("Load parameter done!\n");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Load parameter failure, please check USB", //text
                                          "USB Error",   //caption
                                          MessageBoxButton.OK,//button
                                          MessageBoxImage.Error);//icon
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("ReadReg value is illegal,please re-type(Integer:0--64)", //text
-                  "Illegal input",   //caption
-                  MessageBoxButton.OK,//button
-                  MessageBoxImage.Error);//icon  
-                }*/
+                    }*/
                 #endregion
             }
-            #endregion
-            #region Old Code
-            //---start load
-            /*com_bytes = ConstCommandByteArray(0xD0, 0xA2);
-                bResult = CommandSend(com_bytes, com_bytes.Length);
-                if (bResult)
-                {
-                    txtReport.AppendText("Load parameter done!\n");
-                }
-                else
-                {
-                    MessageBox.Show("Load parameter failure, please check USB", //text
-                                     "USB Error",   //caption
-                                     MessageBoxButton.OK,//button
-                                     MessageBoxImage.Error);//icon
-                }*/
-            #endregion
         }
 
         private void PowerPulsing_Checked(object sender, RoutedEventArgs e)
@@ -1799,9 +1613,7 @@ namespace USB_DAQ
         }
         private void MicrorocPowerPulsingEnable()
         {
-            byte[] bytes = ConstCommandByteArray(0xA3, 0xA1);
-            //bResult = false;
-            bool bResult = CommandSend(bytes, bytes.Length);
+            bool bResult = MicrorocChain1.PowerPulsingCheck(true, MyUsbDevice1);
             if (bResult)
             {
                 txtReport.AppendText("PowerPulsing Enabed\n");
@@ -1817,9 +1629,7 @@ namespace USB_DAQ
         }
         private void MicrorocPowerPulsingDisable()
         {
-            byte[] bytes = ConstCommandByteArray(0xA3, 0xA0);
-            //bResult = false;
-            bool bResult = CommandSend(bytes, bytes.Length);
+            bool bResult = MicrorocChain1.PowerPulsingCheck(false, MyUsbDevice1);
             if (bResult)
             {
                 txtReport.AppendText("PowerPulsing Disabled\n");
@@ -1835,8 +1645,7 @@ namespace USB_DAQ
         //Reset tntb
         private void btnReset_cntb_Click(object sender, RoutedEventArgs e)
         {
-            byte[] bytes = ConstCommandByteArray(0xA7, 0xA1);
-            bool bResult = CommandSend(bytes, bytes.Length);
+            bool bResult = MicrorocChain1.ResetCounterB(MyUsbDevice1);
             if (bResult)
             {
                 txtReport.AppendText("Reset 24-bit cntb\n");
@@ -1852,16 +1661,14 @@ namespace USB_DAQ
         //external force trigger 
         private void btnTRIG_EXT_EN_Click(object sender, RoutedEventArgs e)
         {
-            byte[] bytes = new byte[2];
             bool bResult = false;
-            if (Enabled_Ext_Trigger == false) //open
+            if (StateIndicator.ExternalTriggerEnabled == false) //open
             {
-                Enabled_Ext_Trigger = true;
-                btnTRIG_EXT_EN.Background = Brushes.DeepPink;
-                bytes = ConstCommandByteArray(0xA9, 0xA1);
-                bResult = CommandSend(bytes, bytes.Length);
+                bResult = MicrorocChain1.EnableExternalTrigger(true, MyUsbDevice1);
                 if (bResult)
                 {
+                    StateIndicator.ExternalTriggerEnabled = true;
+                    btnTRIG_EXT_EN.Background = Brushes.DeepPink;
                     txtReport.AppendText("Enable force trigger\n");
                 }
                 else
@@ -1874,12 +1681,12 @@ namespace USB_DAQ
             }
             else
             {
-                Enabled_Ext_Trigger = false;
-                btnTRIG_EXT_EN.Background = Brushes.Green;
-                bytes = ConstCommandByteArray(0xA9, 0xA0);
-                bResult = CommandSend(bytes, bytes.Length);
+                
+                bResult = MicrorocChain1.EnableExternalTrigger(false, MyUsbDevice1);
                 if (bResult)
                 {
+                    StateIndicator.ExternalTriggerEnabled = false;
+                    btnTRIG_EXT_EN.Background = Brushes.Green;
                     txtReport.AppendText("Disable force trigger\n");
                 }
                 else
@@ -1894,10 +1701,7 @@ namespace USB_DAQ
         //RAZ width
         private void btnSet_Raz_Width_Click(object sender, RoutedEventArgs e)
         {
-            int value = cbxRaz_mode.SelectedIndex + 192;//0xC0
-            byte[] bytes = new byte[2];
-            bytes = ConstCommandByteArray(0xA8, (byte)(value));
-            bool bResult = CommandSend(bytes, bytes.Length);
+            bool bResult = MicrorocChain1.SetExternalRazWidth(cbxRaz_mode.SelectedIndex, MyUsbDevice1);
             if (bResult)
             {
                 string report = string.Format("External RAZ Width : {0}\n", cbxRaz_mode.Text);
@@ -1915,45 +1719,27 @@ namespace USB_DAQ
         private void btnSet_Hold_Click(object sender, RoutedEventArgs e)
         {
             bool bResult;
-            byte[] CommandBytes = new byte[2];
-            Regex rx_int = new Regex(rx_Integer);
+            bool IllegalInput;
             #region Set Hold Delay
-            bool Is_Hold_legal = rx_int.IsMatch(txtHold_delay.Text) && int.Parse(txtHold_delay.Text) < 800;
-            if (Is_Hold_legal)
+            bResult = MicrorocChain1.SetHoldDelayTime(txtHold_delay.Text, MyUsbDevice1, out IllegalInput);
+            if (bResult)
             {
-                int DelayTime = (int)(int.Parse(txtHold_delay.Text)/6.25); //除以6.25ns
-                byte DelayTime1 = (byte)(DelayTime & 15);//15 = 0xF
-                byte DelayTime2 = (byte)(((DelayTime >> 4) & 15) | 16);//16 = 0x10
-                CommandBytes = ConstCommandByteArray(0xA6, DelayTime1);
-                bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                if (!bResult)
-                {
-                    MessageBox.Show("Set Hold delay failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return;
-                }
-                CommandBytes = ConstCommandByteArray(0xA6, DelayTime2);
-                bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                if(bResult)
-                {
-                    string report = string.Format("Set Hold Delay Time:{0}ns\n", DelayTime * 6.25);
-                    txtReport.AppendText(report);
-                }
-                else
-                {
-                    MessageBox.Show("Set Hold delay failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return;
-                }                
+                string report = string.Format("Set Hold Delay Time:{0}ns\n", txtHold_delay.Text);
+                txtReport.AppendText(report);
+            }
+            else if(IllegalInput)
+            {
+                MessageBox.Show("Illegal Hold delay, please re-type(Integer:0--650,step:2ns)", "Illegal input", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
             }
             else
             {
-                MessageBox.Show("Illegal Hold delay, please re-type(Integer:0--650,step:2ns)","Illegal input",MessageBoxButton.OK,MessageBoxImage.Error);
+                MessageBox.Show("Set Hold delay failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             #endregion
             #region Set Trig Coincide
-            int TrigCoincid = cbxTrig_Coincid.SelectedIndex + 160;//160 = 0xA0
-            CommandBytes = ConstCommandByteArray(0xA5, (byte)TrigCoincid);
-            bResult = CommandSend(CommandBytes, CommandBytes.Length);
+            bResult = MicrorocChain1.SetTrigCoincidence(cbxTrig_Coincid.SelectedIndex, MyUsbDevice1);
             if (bResult)
             {
                 string report = string.Format("Set Trigger Coincidence : {0}\n", cbxTrig_Coincid.Text);
@@ -1966,64 +1752,27 @@ namespace USB_DAQ
             }
             #endregion
             #region Set Hold Time
-            /*
-                + 4Y:HoldTime[3:0]
-                + 5Y:HoldTime[7:4]
-                + 6Y:HoldTime[11:8]
-                + 7Y:HoldTime[15:12]
-             */
-            bool IsHoldTimeLegal = rx_int.IsMatch(txtHoldTime.Text) && int.Parse(txtHoldTime.Text) < 10000;
-            if(IsHoldTimeLegal)
+            bResult = MicrorocChain1.SetHoldTime(txtHoldTime.Text, MyUsbDevice1, out IllegalInput);
+            if (bResult)
             {
-                int HoldTime = int.Parse(txtHoldTime.Text) / 25;
-                int HoldTime1 = (HoldTime & 15) + 64;//0x40
-                int HoldTime2 = ((HoldTime >> 4) & 15) + 80;//0x50
-                int HoldTime3 = ((HoldTime >> 8) & 15) + 96;
-                int HoldTime4 = ((HoldTime >> 12) & 15) + 112;
-                CommandBytes = ConstCommandByteArray(0xA6, (byte)HoldTime1);
-                bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                if(!bResult)
-                {
-                    MessageBox.Show("Set Hold Time failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return;
-                }
-                CommandBytes = ConstCommandByteArray(0xA6, (byte)HoldTime2);
-                bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                if (!bResult)
-                {
-                    MessageBox.Show("Set Hold Time failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return;
-                }
-                CommandBytes = ConstCommandByteArray(0xA6, (byte)HoldTime3);
-                bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                if (!bResult)
-                {
-                    MessageBox.Show("Set Hold Time failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return;
-                }
-                CommandBytes = ConstCommandByteArray(0xA6, (byte)HoldTime4);
-                bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                if (bResult)
-                {
-                    string report = string.Format("Set Hold Time:{0}\n", HoldTime * 25);
-                    txtReport.AppendText(report);
-                }
-                else
-                {
-                    MessageBox.Show("Set Hold Time failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return;
-                }
+                string report = string.Format("Set Hold Time:{0}\n", txtHoldTime.Text);
+                txtReport.AppendText(report);
+
+
             }
-            else
+            else if (IllegalInput)
             {
                 MessageBox.Show("Illegal Hold Time, please re-type(Integer:0--10000,step:2ns)", "Illegal input", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
+            else
+            {
+                MessageBox.Show("Set Hold Time failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
             #endregion
             #region Hold Enable
-            int HoldEnable = cbxHoldEnable.SelectedIndex + 176; // 176 = 0xB0
-            CommandBytes = ConstCommandByteArray(0xA5, (byte)HoldEnable);
-            bResult = CommandSend(CommandBytes, CommandBytes.Length);
+            bResult = MicrorocChain1.EnableHold(cbxHoldEnable.SelectedIndex == 1, MyUsbDevice1);
             if(bResult)
             {
                 string report = string.Format("Hold {0}\n", cbxHoldEnable.Text);
@@ -2039,39 +1788,24 @@ namespace USB_DAQ
         //Set StartAcq Time
         private void btnSetAcqTime_Click(object sender, RoutedEventArgs e)
         {
-            Regex rx_int = new Regex(rx_Integer);
-            bool Is_Time_legal = rx_int.IsMatch(txtStartAcqTime.Text);
-            if (Is_Time_legal)
+            bool IllegalInput;
+            bool bResult = MicrorocChain1.SetAcquisitionTime(txtStartAcqTime.Text, MyUsbDevice1, out IllegalInput);
+            if (bResult)
             {
-                int value = Int32.Parse(txtStartAcqTime.Text) / 25; //除以25ns 
-                byte[] bytes = ConstCommandByteArray(0xB2, (byte)(value >> 8));
-                bool bResult = CommandSend(bytes, bytes.Length);
-                if (!bResult)
-                {
-                    MessageBox.Show("Set StartAcq time failure, please check USB", //text
-                                     "USB Error",   //caption
-                                     MessageBoxButton.OK,//button
-                                     MessageBoxImage.Error);//icon
-                }
-                bytes = ConstCommandByteArray(0xB1, (byte)(value));
-                bResult = CommandSend(bytes, bytes.Length);
-                if (bResult)
-                {
-                    string report = string.Format("Set StartAcq time : {0}\n", txtStartAcqTime.Text);
-                    txtReport.AppendText(report);
-                }
-                else
-                {
-                    MessageBox.Show("Set StartAcq time failure, please check USB", //text
-                                     "USB Error",   //caption
-                                     MessageBoxButton.OK,//button
-                                     MessageBoxImage.Error);//icon
-                }
+                string report = string.Format("Set StartAcq time : {0}\n", txtStartAcqTime.Text);
+                txtReport.AppendText(report);
             }
-            else
+            else if (IllegalInput)
             {
                 MessageBox.Show("Illegal StartAcq Time, please re-type(Integer:0--1638400,step:25ns)", //text
                                  "Illegal input",   //caption
+                                 MessageBoxButton.OK,//button
+                                 MessageBoxImage.Error);//icon
+            }
+            else
+            {
+                MessageBox.Show("Set StartAcq time failure, please check USB", //text
+                                 "USB Error",   //caption
                                  MessageBoxButton.OK,//button
                                  MessageBoxImage.Error);//icon
             }
@@ -2079,10 +1813,7 @@ namespace USB_DAQ
         //Set which ASIC OUT_T&H output
         private void btnOut_th_set_Click(object sender, RoutedEventArgs e)
         {
-            int value = cbxOut_th.SelectedIndex + 176;
-            byte[] bytes = new byte[2];
-            bytes = ConstCommandByteArray(0xD1, (byte)(value));
-            bool bResult = CommandSend(bytes, bytes.Length);
+            bool bResult = MicrorocChain1.SelectHoldOutput(cbxOut_th.SelectedIndex, MyUsbDevice1);
             if (bResult)
             {
                 string report = string.Format("Select {0} Out_T&H\n", cbxOut_th.Text);
@@ -2100,65 +1831,54 @@ namespace USB_DAQ
         //设定EXT_RAZ延迟A8XX
         private void btnSet_External_RAZ_Delay_Click(object sender, RoutedEventArgs e)
         {
-            Regex rx_int = new Regex(rx_Integer);
-            bool Is_Time_Legel = rx_int.IsMatch(txtExternal_RAZ_Delay.Text) && int.Parse(txtExternal_RAZ_Delay.Text) < 400;
-            if(Is_Time_Legel)
+            bool IllegalInput;
+            bool bResult = MicrorocChain1.SetExternalRazDelayTime(txtExternal_RAZ_Delay.Text, MyUsbDevice1, out IllegalInput);
+            if (bResult)
             {
-                int ExternalRazDelay = short.Parse(txtExternal_RAZ_Delay.Text) / 25 + 208;//208 = 0xD0
-                byte[] CommandBytes = new byte[2];
-                CommandBytes = ConstCommandByteArray(0xA8, (byte)ExternalRazDelay);
-                bool bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                if(bResult)
-                {
-                    string report = string.Format("Set External RAZ Delay time:{0} ns\n", txtExternal_RAZ_Delay.Text);
-                }
-                else
-                {
-                    MessageBox.Show("select failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                
+                string report = string.Format("Set External RAZ Delay time:{0} ns\n", txtExternal_RAZ_Delay.Text);
             }
-            else
+            else if (IllegalInput)
             {
                 MessageBox.Show("Illegal External RAZ Delay Time, please re-type(Integer:0--400ns,step:25ns)", "Ilegal Input", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            else
+            {
+                MessageBox.Show("select failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
-        
+
         // Select Trigger efficiency test or counter efficiency test
         private void Trig_or_Count_Checked(object sender, RoutedEventArgs e)
         {
             var button = sender as RadioButton;
             bool bResult = false;
-            byte[] CommandBytes = new byte[2];
             if(button.Content.ToString() == "Trig")
             {
                 cbxCPT_MAX.IsEnabled = true;
                 txtCountTime.IsEnabled = false;
-                CommandBytes = ConstCommandByteArray(0xE0, 0xD0);
-                SCurveMode = Trig;
-                bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                bResult = MicrorocChain1.SelectTrigOrCounterMode(0, MyUsbDevice1);
                 if (bResult)
                 {
+                    StateIndicator.SCurveModeSelect = StateIndicator.SCurveMode.Trig;
                     txtReport.AppendText("You are testing Trigger-Efficiency\n");
                 }
                 else
                 {
-                    // txtReport.AppendText("select failure, please check USB\n");
                     MessageBox.Show("select failure, please check USB", //text
                                      "USB Error",   //caption
                                      MessageBoxButton.OK,//button
                                      MessageBoxImage.Error);//icon
+                    return;
                 }
             }
             else if(button.Content.ToString() == "Count")
             {
                 txtCountTime.IsEnabled = true;
                 cbxCPT_MAX.IsEnabled = false;
-                CommandBytes = ConstCommandByteArray(0xE0, 0xD1);
-                SCurveMode = Count;
-                bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                bResult = MicrorocChain1.SelectTrigOrCounterMode(1, MyUsbDevice1);
                 if (bResult)
                 {
+                    StateIndicator.SCurveModeSelect = StateIndicator.SCurveMode.Count;
                     txtReport.AppendText("You are testing Counter-Efficiency\n");
                 }
                 else
@@ -2182,7 +1902,8 @@ namespace USB_DAQ
                 btnAcqStart.IsEnabled = true;
                 btnSlowACQ.IsEnabled = false;
                 txtSlowACQDataNum.IsEnabled = false;
-                txtReport.AppendText("Set fast data rate acq\n");              
+                txtReport.AppendText("Set fast data rate acq\n");
+                StateIndicator.DataRateModeSelect = StateIndicator.DataRateMode.Fast;            
             }
             else if(button.Content.ToString() == "Slow")
             {
@@ -2190,214 +1911,160 @@ namespace USB_DAQ
                 btnSlowACQ.IsEnabled = true;
                 txtSlowACQDataNum.IsEnabled = true;
                 Regex rx_int = new Regex(rx_Integer);
-                bool Is_DataNum_Legal = rx_int.IsMatch(txtSlowACQDataNum.Text);
-                if(Is_DataNum_Legal)
-                {
-                    SlowACQDataNumber = Int16.Parse(txtSlowACQDataNum.Text);
-                    string report = string.Format("Set slow data rate ACQ. Max data package: {0}\n", txtSlowACQDataNum.Text);
-                    txtReport.AppendText(report);
-                }
-                else
-                {
-                    MessageBox.Show("Ilegal input the Data Package Num must be Int\n", "Ilegal Input", MessageBoxButton.OK, MessageBoxImage.Error);
-                }                
+                StateIndicator.DataRateModeSelect = StateIndicator.DataRateMode.Slow;             
             }
         }
         // Slow data rate ACQ
         private async void btnSlowACQ_Click(object sender, RoutedEventArgs e)
-        {            
-            if (filepath == null || string.IsNullOrEmpty(filepath.Trim()))
+        {
+            if (!CheckFileSaved())
             {
-                MessageBox.Show("You should save the file first before Scurve start", //text
-                                        "imformation", //caption
-                                   MessageBoxButton.OK, //button
-                                    MessageBoxImage.Error);//icon     
+                return;
             }
-            else //file is exsits
+            bool bResult;
+            bool IllegalInput;
+            if (!StateIndicator.SlowAcqStart)
             {
                 #region Start Slow Acq
-                if (!IsSlowAcqStart)
+                #region Set Start Acq Time
+                bResult = MicrorocChain1.SetAcquisitionTime(txtStartAcqTime.Text, MyUsbDevice1, out IllegalInput);
+                if (bResult)
                 {
-                    bool bResult;
-                    #region Set Start Acq Time
-                    Regex rx_int = new Regex(rx_Integer);
-                    bool Is_Time_legal = rx_int.IsMatch(txtStartAcqTime.Text);
-                    if (Is_Time_legal)
-                    {
-                        int value = Int32.Parse(txtStartAcqTime.Text) / 25; //除以25ns 
-                        byte[] CmdSetStartTimeBytes = ConstCommandByteArray(0xB2, (byte)(value >> 8));
-                        bResult = CommandSend(CmdSetStartTimeBytes, CmdSetStartTimeBytes.Length);
-                        if (!bResult)
-                        {
-                            MessageBox.Show("Set StartAcq time failure, please check USB", //text
-                                             "USB Error",   //caption
-                                             MessageBoxButton.OK,//button
-                                             MessageBoxImage.Error);//icon
-                            return;
-                        }
-                        CmdSetStartTimeBytes = ConstCommandByteArray(0xB1, (byte)(value));
-                        bResult = CommandSend(CmdSetStartTimeBytes, CmdSetStartTimeBytes.Length);
-                        if (bResult)
-                        {
-                            string report = string.Format("Set StartAcq time : {0}\n", txtStartAcqTime.Text);
-                            txtReport.AppendText(report);
-                        }
-                        else
-                        {
-                            MessageBox.Show("Set StartAcq time failure, please check USB", //text
-                                             "USB Error",   //caption
-                                             MessageBoxButton.OK,//button
-                                             MessageBoxImage.Error);//icon
-                            return;
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("Illegal StartAcq Time, please re-type(Integer:0--1638400,step:25ns)", //text
-                                         "Illegal input",   //caption
-                                         MessageBoxButton.OK,//button
-                                         MessageBoxImage.Error);//icon
-                        return;
-                    }
-                    #endregion
-                    #region Set End Hold Time
-                    if (DaqMode == SlaveDaq)
-                    {
-                        byte[] CommandBytes = new byte[2];
-                        bool IsEndHoldTimeLegal = rx_int.IsMatch(txtEndHoldTime.Text) && (int.Parse(txtEndHoldTime.Text) < 65536);
-                        if (IsEndHoldTimeLegal)
-                        {
-                            int EndHoldTime = int.Parse(txtEndHoldTime.Text);
-                            int EndHoldTime1 = (EndHoldTime & 15) + 64;//0x40
-                            int EndHoldTime2 = ((EndHoldTime >> 4) & 15) + 80;//0x50
-                            int EndHoldTime3 = ((EndHoldTime >> 8) & 15) + 96;//0x60
-                            int EndHoldTime4 = ((EndHoldTime >> 12) & 15) + 112;//0x70
-                            CommandBytes = ConstCommandByteArray(0xE8, (byte)EndHoldTime1);
-                            bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                            if (!bResult)
-                            {
-                                MessageBox.Show("Set End Hold Time Failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                                return;
-                            }
-                            CommandBytes = ConstCommandByteArray(0xE8, (byte)EndHoldTime2);
-                            bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                            if (!bResult)
-                            {
-                                MessageBox.Show("Set End Hold Time Failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                                return;
-                            }
-                            CommandBytes = ConstCommandByteArray(0xE0, (byte)EndHoldTime3);
-                            bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                            if (!bResult)
-                            {
-                                MessageBox.Show("Set End Hold Time Failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                                return;
-                            }
-                            CommandBytes = ConstCommandByteArray(0xE0, (byte)EndHoldTime4);
-                            bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                            if (bResult)
-                            {
-                                string report = string.Format("Set End Signal Time:{0}\n", EndHoldTime);
-                                txtReport.AppendText(report);
-                            }
-                            else
-                            {
-                                MessageBox.Show("Set End Hold Time Failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                                return;
-                            }
-                        }
-                        else
-                        {
-                            MessageBox.Show("Illegal End Signal Hold Time, please re-type(Integer:0--1638400,step:25ns)", //text
-                                         "Illegal input",   //caption
-                                         MessageBoxButton.OK,//button
-                                         MessageBoxImage.Error);//icon
-                        }
-                    }
-                    #endregion
-                    //Regex rx_int = new Regex(rx_Integer);
-                    bool Is_DataNum_Legal = rx_int.IsMatch(txtSlowACQDataNum.Text);
-                    if (Is_DataNum_Legal)
-                    {
-                        SlowACQDataNumber = Int16.Parse(txtSlowACQDataNum.Text);
-
-                    }
-                    else
-                    {
-                        SlowACQDataNumber = 5120;
-                    }
-                    SlowDataRatePackageNumber = SlowACQDataNumber * 20;
-                    #region Clear USB FIFO and Reset Microroc
-                    //bool bResult = false;
-                    byte[] cmd_ClrUSBFifo = ConstCommandByteArray(0xF0, 0xFA);
-                    bResult = CommandSend(cmd_ClrUSBFifo, 2);//
-                    if (bResult)
-                        txtReport.AppendText("Usb Fifo clear \n");
-                    else
-                    {
-                        MessageBox.Show("USB FIFO Clear Failure", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                        return;
-                    }                        
-                    byte[] bytes = new byte[2048];
-                    bResult = DataRecieve(bytes, bytes.Length);//读空剩余在USB芯片里面的数据
-                    byte[] CommandForceMicrorocReset = ConstCommandByteArray(0xF0, 0xF2);
-                    bResult = CommandSend(CommandForceMicrorocReset, CommandForceMicrorocReset.Length);
+                    string report = string.Format("Set StartAcq time : {0}\n", txtStartAcqTime.Text);
+                    txtReport.AppendText(report);
+                }
+                else if (IllegalInput)
+                {
+                    MessageBox.Show("Illegal StartAcq Time, please re-type(Integer:0--1638400,step:25ns)", //text
+                                     "Illegal input",   //caption
+                                     MessageBoxButton.OK,//button
+                                     MessageBoxImage.Error);//icon
+                    return;
+                }
+                else
+                {
+                    MessageBox.Show("Set StartAcq time failure, please check USB", //text
+                                     "USB Error",   //caption
+                                     MessageBoxButton.OK,//button
+                                     MessageBoxImage.Error);//icon
+                    return;
+                }
+                #endregion
+                #region Set End Hold Time
+                if (StateIndicator.DaqModeSelect == StateIndicator.DaqMode.SlaveDaq)
+                {
+                    bResult = MicrorocChain1.SetEndHoldTime(txtEndHoldTime.Text, MyUsbDevice1, out IllegalInput);
                     if (bResult)
                     {
-                        txtReport.AppendText("Microroc Reset");
+                        string report = string.Format("Set End Signal Time:{0}\n", txtEndHoldTime.Text);
+                        txtReport.AppendText(report);
                     }
-                    else
+                    else if (IllegalInput)
                     {
-                        MessageBox.Show("Reset Microroc Failure", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show("Illegal End Signal Hold Time, please re-type(Integer:0--1638400,step:25ns)", //text
+                                     "Illegal input",   //caption
+                                     MessageBoxButton.OK,//button
+                                     MessageBoxImage.Error);//icon
                         return;
                     }
-                    #endregion
-                    Thread.Sleep(10);
-                    byte[] CmdSlowACQ = ConstCommandByteArray(0xF0, 0xF0);
-                    bResult = CommandSend(CmdSlowACQ, CmdSlowACQ.Length);
-                    if (bResult)
-                    {
-                        IsSlowAcqStart = true;
-                        txtReport.AppendText("Slow data rate ACQ Start\n");
-                        txtReport.AppendText("Slow data rate Acq Contunue\n");
-                        btnSlowACQ.Content = "Stop";
-                        //Task SlowDataRateACQ = new Task(() => GetSlowDataRateResultCallBack());
-                        //SlowDataRateACQ.Start();
-                        //SlowDataRateACQ.Wait();
-                        await Task.Run(() => GetSlowDataRateResultCallBack());               
-                        CmdSlowACQ = ConstCommandByteArray(0xF0, 0xF1);
-                        bResult = CommandSend(CmdSlowACQ, CmdSlowACQ.Length);
-                        if(bResult)
-                        {
-                            btnSlowACQ.Content = "Slow ACQ";
-                            IsSlowAcqStart = false;
-                            txtReport.AppendText("Slow data rate Acq Stop\n");
-                        }
-                        else
-                        {
-                            txtReport.AppendText("Slow data rate Acq Stop Failure\n");
-                        }                                                
-                    }
                     else
                     {
-                        txtReport.AppendText("Slow data rate ACQ start failure\n");
+                        MessageBox.Show("Set End Hold Time Failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
                     }
                 }
                 #endregion
+                #region Set Acquisition Data Number
+                bool IsDataNumberLegal = MicrorocChain1.CheckIntegerLegal(txtSlowACQDataNum.Text);
+                if (IsDataNumberLegal)
+                {
+                    StateIndicator.SlowAcqDataNumber = int.Parse(txtSlowACQDataNum.Text);
+
+                }
                 else
                 {
-                    IsSlowAcqStart = false;
-                    byte[] ACQStop = ConstCommandByteArray(0xF0, 0xF1);
-                    if (CommandSend(ACQStop, ACQStop.Length))
+                    StateIndicator.SlowAcqDataNumber = 5120;
+                    txtSlowACQDataNum.Text = string.Format("{0}", 5120);
+                }
+                StateIndicator.SlowDataRatePackageNumber = StateIndicator.SlowAcqDataNumber * 20;
+                #endregion
+                #region Clear USB FIFO and Reset Microroc
+                bResult = MicrorocChain1.ClearUsbFifo(MyUsbDevice1);
+                if (bResult)
+                    txtReport.AppendText("Usb Fifo clear \n");
+                else
+                {
+                    MessageBox.Show("USB FIFO Clear Failure", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                bResult = MicrorocChain1.ResetMicroroc(MyUsbDevice1);
+                if (bResult)
+                {
+                    txtReport.AppendText("Microroc Reset");
+                }
+                else
+                {
+                    MessageBox.Show("Reset Microroc Failure", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                #endregion
+                Thread.Sleep(10);
+                #region DAQ
+                bResult = MicrorocChain1.ResetCounterB(MyUsbDevice1);
+                if(bResult)
+                {
+                    txtReport.AppendText("Reset grey counter successfully\n");
+                }
+                else
+                {
+                    MessageBox.Show("Please check the USB cable", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                bResult = MicrorocChain1.StartAcquisition(MyUsbDevice1);
+                //bResult = true;
+                if (bResult)
+                {
+                    StateIndicator.SlowAcqStart = true;
+                    txtReport.AppendText("Slow data rate ACQ Start\n");
+                    txtReport.AppendText("Slow data rate Acq Contunue\n");
+                    btnSlowACQ.Content = "Stop";
+                    await Task.Run(() => GetSlowDataRateResultCallBack(MyUsbDevice1));
+                    bResult = MicrorocChain1.StopAcquisition(MyUsbDevice1);
+                    if (bResult)
                     {
                         btnSlowACQ.Content = "Slow ACQ";
-                        txtReport.AppendText("Slow data rate ACQ Abort\n");
+                        StateIndicator.SlowAcqStart = false;
+                        StateIndicator.FileSaved = false;
+                        txtReport.AppendText("Slow data rate Acq Stop\n");
                     }
                     else
                     {
-                        txtReport.AppendText("Slow data rate ACQ Stop failure\n");
+                        txtReport.AppendText("Slow data rate Acq Stop Failure\n");
                     }
                 }
+                else
+                {
+                    txtReport.AppendText("Slow data rate ACQ start failure\n");
+                }
+                #endregion
+                #endregion
+            }
+            else
+            {
+                #region Stop ACQ
+                StateIndicator.FileSaved = false;
+                StateIndicator.SlowAcqStart = false;
+                bResult = MicrorocChain1.StopAcquisition(MyUsbDevice1);
+                if (bResult)
+                {
+                    btnSlowACQ.Content = "Slow ACQ";
+                    txtReport.AppendText("Slow data rate ACQ Abort\n");
+                }
+                else
+                {
+                    StateIndicator.SlowAcqStart = true;
+                    txtReport.AppendText("Slow data rate ACQ Stop failure\n");
+                }
+                #endregion
             }
         }
 
@@ -2409,13 +2076,11 @@ namespace USB_DAQ
             if (botton.Content.ToString() == "ACQ") //这里已经直接将通道都切换过去
             {
                 gbxNormalAcq.IsEnabled = true;
-                //btnScurve_start.IsEnabled = false;
                 gbxSweepTest.IsEnabled = false;
                 gbxAD9220.IsEnabled = false;
                 btnSC_or_ReadReg.IsEnabled = true;
-                DataAcqMode = Acq;
-                byte[] bytes = ConstCommandByteArray(0xE0, 0xA0);
-                bResult = CommandSend(bytes, bytes.Length);
+                StateIndicator.OperationModeSelect = StateIndicator.OperationMode.Acq;
+                bResult = MicrorocChain1.SelectOperationMode(CommandHeader.AcqModeIndex, MyUsbDevice1);
                 if (bResult)
                 {
                     txtReport.AppendText("Select ACQ mode\n");
@@ -2423,6 +2088,7 @@ namespace USB_DAQ
                 else
                 {
                     MessageBox.Show("Set ACQ Mode Failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
                 }
             }
             else if (botton.Content.ToString() == "SCTest")
@@ -2435,10 +2101,8 @@ namespace USB_DAQ
                 gbxSweepAcq.IsEnabled = false;
                 gbxAD9220.IsEnabled = false;
                 btnSC_or_ReadReg.IsEnabled = false;
-                DataAcqMode = SCTest;
-
-                byte[] bytes = ConstCommandByteArray(0xE0, 0xA1);
-                bResult = CommandSend(bytes, bytes.Length);
+                StateIndicator.OperationModeSelect = StateIndicator.OperationMode.SCTest;
+                bResult = MicrorocChain1.SelectOperationMode(CommandHeader.SCurveTestModeIndex, MyUsbDevice1);
                 if (bResult)
                 {
                     txtReport.AppendText("Select S Curve Test Mode");
@@ -2446,9 +2110,9 @@ namespace USB_DAQ
                 else
                 {
                     MessageBox.Show("Set S Curve Test mode failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
                 }
-                bytes = ConstCommandByteArray(0xE0, 0x00);
-                bResult = CommandSend(bytes, bytes.Length);
+                bResult = MicrorocChain1.SelectAcquisitionMode(false, MyUsbDevice1);
                 if(bResult)
                 {
                     txtReport.AppendText("External Raz Release \n");
@@ -2456,6 +2120,7 @@ namespace USB_DAQ
                 else
                 {
                     MessageBox.Show("Set S Curve Test mode failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
                 }
             }
             else if(botton.Content.ToString() == "SweepACQ")
@@ -2466,9 +2131,8 @@ namespace USB_DAQ
                 gbxSweepAcq.IsEnabled = true;
                 gbxAD9220.IsEnabled = false;
                 btnSC_or_ReadReg.IsEnabled = false;
-                DataAcqMode = SweepAcq;
-                byte[] bytes = ConstCommandByteArray(0xE0, 0xA2);
-                bResult = CommandSend(bytes, bytes.Length);
+                StateIndicator.OperationModeSelect = StateIndicator.OperationMode.SweepAcq;
+                bResult = MicrorocChain1.SelectOperationMode(CommandHeader.SweepAcqModeIndex, MyUsbDevice1);
                 if(bResult)
                 {
                     txtReport.AppendText("Select Sweep Acq mode \n");
@@ -2476,9 +2140,9 @@ namespace USB_DAQ
                 else
                 {
                     MessageBox.Show("Set Sweep ACQ Test mode failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
                 }
-                bytes = ConstCommandByteArray(0xE0, 0x00);
-                bResult = CommandSend(bytes, bytes.Length);
+                bResult = MicrorocChain1.SelectAcquisitionMode(false, MyUsbDevice1);
                 if (bResult)
                 {
                     txtReport.AppendText("External Raz Release \n");
@@ -2486,6 +2150,7 @@ namespace USB_DAQ
                 else
                 {
                     MessageBox.Show("Set Sweep ACQ Test mode failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
                 }
             }
             else if(botton.Content.ToString() == "AD9220")
@@ -2494,9 +2159,8 @@ namespace USB_DAQ
                 gbxSweepTest.IsEnabled = false;
                 gbxAD9220.IsEnabled = true;
                 btnSC_or_ReadReg.IsEnabled = true;
-                DataAcqMode = Adc;
-                byte[] CommandBytes = ConstCommandByteArray(0xE0, 0xA3);
-                bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                StateIndicator.OperationModeSelect = StateIndicator.OperationMode.ADC;
+                bResult = MicrorocChain1.SelectOperationMode(CommandHeader.AdcModeIndex, MyUsbDevice1);
                 if(bResult)
                 {
                     txtReport.AppendText("Select AD9220\n");
@@ -2504,9 +2168,9 @@ namespace USB_DAQ
                 else
                 {
                     MessageBox.Show("Set AD9220 mode failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
                 }
-                byte[] bytes = ConstCommandByteArray(0xE0, 0x00);
-                bResult = CommandSend(bytes, bytes.Length);
+                bResult = MicrorocChain1.SelectAcquisitionMode(false, MyUsbDevice1);
                 if (bResult)
                 {
                     txtReport.AppendText("External Raz Release \n");
@@ -2514,6 +2178,7 @@ namespace USB_DAQ
                 else
                 {
                     MessageBox.Show("Set AD9220 mode failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
                 }
             }
             else if(botton.Content.ToString() == "Efficiency")
@@ -2525,9 +2190,8 @@ namespace USB_DAQ
                 gbxAD9220.IsEnabled = false;
                 btnSweepTestStart.IsEnabled = true;
                 btnSC_or_ReadReg.IsEnabled = true;
-                DataAcqMode = Efficiency;
-                byte[] CommandBytes = ConstCommandByteArray(0xE0, 0xA4);
-                bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                StateIndicator.OperationModeSelect = StateIndicator.OperationMode.Efficiency;
+                bResult = MicrorocChain1.SelectOperationMode(CommandHeader.EfficiencyModeIndex, MyUsbDevice1);
                 if (bResult)
                 {
                     txtReport.AppendText("Select AD9220\n");
@@ -2535,9 +2199,9 @@ namespace USB_DAQ
                 else
                 {
                     MessageBox.Show("Set Efficiency mode failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
                 }
-                byte[] bytes = ConstCommandByteArray(0xE0, 0x00);
-                bResult = CommandSend(bytes, bytes.Length);
+                bResult = MicrorocChain1.SelectAcquisitionMode(false, MyUsbDevice1);
                 if (bResult)
                 {
                     txtReport.AppendText("External Raz Release \n");
@@ -2549,238 +2213,87 @@ namespace USB_DAQ
             }
         }
 
-        /*private void btnSetMask_Click(object sender, RoutedEventArgs e)
-        {
-            bool bResult = false;
-            byte[] CommandBytes = new byte[2];
-            string report = null;
-            int MaskChoise = cbxMaskOrUnMask.SelectedIndex + 16;
-            #region Mask Channel
-            Regex rxInt = new Regex(rx_Integer);
-            bool IsChannelLegeal = rxInt.IsMatch(txtChannelMask.Text) && (int.Parse(txtChannelMask.Text) <= 64 && (int.Parse(txtChannelMask.Text)) >= 1);
-            if(IsChannelLegeal)
-            {
-                int MaskChannel = short.Parse(txtChannelMask.Text) - 1;
-                CommandBytes = ConstCommandByteArray(0xAD, (byte)MaskChannel);
-                bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                if(bResult)
-                {
-                    if(MaskChoise != 16)
-                    {
-                        report = string.Format("Channel{0}", MaskChannel + 1);
-                        txtReport.AppendText(report);
-                    }                    
-                    //txtReport.AppendText(report);
-                }
-                else
-                {
-                    MessageBox.Show("Set Mask Channel failure, please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return;
-                }
-            }
-            else
-            {
-                MessageBox.Show("Illegal Mask Channel, please re-type(Integer:1--64)", "Ilegal Input", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-            #endregion
-            #region Discri Mask
-            int DiscriMask = cbxDiscriMask.SelectedIndex;
-            CommandBytes = ConstCommandByteArray(0xAE, (byte)DiscriMask);
-            bResult = CommandSend(CommandBytes, CommandBytes.Length);
-            if(bResult)
-            {
-                if(MaskChoise != 16)
-                {
-                    report = string.Format("{0} \n", cbxDiscriMask.Text);
-                    txtReport.AppendText(report);
-                }                
-            }
-            else
-            {
-                MessageBox.Show("Set Mask Discriminator failure, please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            #endregion
-            #region Mask or not            
-            CommandBytes = ConstCommandByteArray(0xAE, (byte)MaskChoise);
-            bResult = CommandSend(CommandBytes, CommandBytes.Length);
-            if (bResult)
-            {
-                report = string.Format("{0} ", cbxMaskOrUnMask.Text);
-                txtReport.AppendText(report);
-            }
-            else
-            {
-                MessageBox.Show("Set Mask Channel failure, please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            #endregion
-        }*/
-
         private async void btnSweepTestStart_Click(object sender, RoutedEventArgs e)
         {
             #region Check File Legal
-            if (filepath == null || string.IsNullOrEmpty(filepath.Trim()))
+            if (!CheckFileSaved())
             {
-                MessageBox.Show("You should save the file first before Scurve start", //text
-                                        "imformation", //caption
-                                   MessageBoxButton.OK, //button
-                                    MessageBoxImage.Error);//icon     
+                return;
             }
             #endregion
-            else
+            bool bResult;
+            bool IllegalInput;
+            string report;
+            if (!StateIndicator.SlowAcqStart)
             {
-                byte[] CommandBytes = new byte[2];
-                bool bResult;
-                string report;
+                #region Start ACQ
                 #region Start and End DAC
-                Regex rxInt = new Regex(rx_Integer);
-                bool IsDacLegal = rxInt.IsMatch(txtStartDac.Text) && rxInt.IsMatch(txtEndDac.Text) && (int.Parse(txtStartDac.Text) < 1023) && (int.Parse(txtEndDac.Text) <= 1023) && (int.Parse(txtStartDac.Text) <= int.Parse(txtEndDac.Text));
-                if (IsDacLegal)
+                bResult = MicrorocChain1.SetSCTestStartAndStopDacCode(txtStartDac.Text, txtEndDac.Text, MyUsbDevice1, out IllegalInput);
+                if (bResult)
                 {
-                    #region Start DAC
-                    uint StartDacValue = uint.Parse(txtStartDac.Text);
-                    uint StartDacValue1 = StartDacValue & 15;
-                    uint StartDacValue2 = ((StartDacValue >> 4) & 15) + 16;
-                    uint StartDacValue3 = ((StartDacValue >> 8) & 3) + 32;
-                    CommandBytes = ConstCommandByteArray(0xE5, (byte)StartDacValue1);
-                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                    if (!bResult)
-                    {
-                        MessageBox.Show("Set StartDAC failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
-                    CommandBytes = ConstCommandByteArray(0xE5, (byte)StartDacValue2);
-                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                    if (!bResult)
-                    {
-                        MessageBox.Show("Set StartDAC failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
-                    CommandBytes = ConstCommandByteArray(0xE5, (byte)StartDacValue3);
-                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                    if (bResult)
-                    {
-                        report = string.Format("Set StartDAC:{0}\n", StartDacValue);
-                        txtReport.AppendText(report);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Set StartDAC failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
-                    #endregion
-                    #region EndDAC
-                    uint EndDacValue = uint.Parse(txtEndDac.Text);
-                    uint EndDacValue1 = (EndDacValue & 15) + 48;
-                    uint EndDacValue2 = ((EndDacValue >> 4) & 15) + 64;
-                    uint EndDacValue3 = ((EndDacValue >> 8) & 3) + 80;
-                    CommandBytes = ConstCommandByteArray(0xE5, (byte)EndDacValue1);
-                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                    if (!bResult)
-                    {
-                        MessageBox.Show("Set EndDAC failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                        return;
-                    }
-                    CommandBytes = ConstCommandByteArray(0xE5, (byte)EndDacValue2);
-                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                    if (!bResult)
-                    {
-                        MessageBox.Show("Set EndDAC failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                        return;
-                    }
-                    CommandBytes = ConstCommandByteArray(0xE5, (byte)EndDacValue3);
-                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                    if (bResult)
-                    {
-                        report = string.Format("Set EndDAC:{0}\n", EndDacValue);
-                        txtReport.AppendText(report);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Set EndDAC failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                        return;
-                    }
-                    #endregion
+                    report = string.Format("Set StartDAC:{0}\n", txtStartDac.Text);
+                    txtReport.AppendText(report);
+                    report = string.Format("Set EndDAC:{0}\n", txtEndDac.Text);
+                    txtReport.AppendText(report);
                 }
-                else
+                else if (IllegalInput)
                 {
                     MessageBox.Show("Ilegal input the StartDAC and EndDAC. The StartDAC should less than EndDAC\n", "Ilegal Input", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
+                else
+                {
+                    MessageBox.Show("Set StartDAC failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
                 #endregion
                 #region Set AdcInterval
-                bool IsAdcIntervalLegal = rxInt.IsMatch(txtAdcInterval.Text) && (int.Parse(txtAdcInterval.Text) < 1023);
-                if(IsAdcIntervalLegal)
+                bResult = MicrorocChain1.SetSCTestDacInterval(txtAdcInterval.Text, MyUsbDevice1, out IllegalInput);
+                if (bResult)
                 {
-                    int AdcIntervalValue = int.Parse(txtAdcInterval.Text);
-                    int AdcIntervalValue1 = (AdcIntervalValue & 15) + 96;
-                    int AdcIntervalValue2 = ((AdcIntervalValue >> 4) & 15) + 112;
-                    int AdcIntervalValue3 = ((AdcIntervalValue >> 8) & 3) + 128;
-                    CommandBytes = ConstCommandByteArray(0xE5, (byte)AdcIntervalValue1);
-                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                    if(!bResult)
-                    {
-                        MessageBox.Show("Set Adc Interval failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                        return;
-                    }
-                    CommandBytes = ConstCommandByteArray(0xE5, (byte)AdcIntervalValue2);
-                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                    if (!bResult)
-                    {
-                        MessageBox.Show("Set Adc Interval failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                        return;
-                    }
-                    CommandBytes = ConstCommandByteArray(0xE5, (byte)AdcIntervalValue3);
-                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                    if (!bResult)
-                    {
-                        MessageBox.Show("Set Adc Interval failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                        return;
-                    }
-                    else
-                    {
-                        report = string.Format("Set Adc Interval:{0}\n", AdcIntervalValue);
-                        txtReport.AppendText(report);
-                    }
+                    report = string.Format("Set Adc Interval:{0}\n", txtAdcInterval.Text);
+                    txtReport.AppendText(report);
                 }
-                else
+                else if (IllegalInput)
                 {
                     MessageBox.Show("Ilegal input the ADC Interval. The StartDAC should less than EndDAC\n", "Ilegal Input", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
-
+                else
+                {
+                    MessageBox.Show("Set Adc Interval failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
                 #endregion
                 int StartDac = int.Parse(txtStartDac.Text);
                 int EndDac = int.Parse(txtEndDac.Text);
                 int AdcInterval = int.Parse(txtAdcInterval.Text);
                 #region SCurve
-                if (DataAcqMode == SCTest)
-                {                    
+                if (StateIndicator.OperationModeSelect == StateIndicator.OperationMode.SCTest)
+                {
                     #region Set Single Test Channel
-                    bool IsSCurveChannelLegal = rxInt.IsMatch(txtSingleTest_Chn.Text) && (int.Parse(txtSingleTest_Chn.Text) <= 64);
-                    if (IsSCurveChannelLegal)
+                    bResult = MicrorocChain1.SetSCTestSingleChannelNumber(txtSingleTest_Chn.Text, MyUsbDevice1, out IllegalInput);
+                    if (bResult)
                     {
-                        int SCurveChannelValue = int.Parse(txtSingleTest_Chn.Text) - 1;
-                        CommandBytes = ConstCommandByteArray(0xE1, (byte)SCurveChannelValue);
-                        bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                        if (bResult)
                         {
-                            report = string.Format("Set single test channel:{0}", SCurveChannelValue + 1);
+                            report = string.Format("Set single test channel:{0}", txtSingleTest_Chn.Text);
                             txtReport.AppendText(report);
                         }
-                        else
-                        {
-                            MessageBox.Show("Set single test channel failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                        }
+
+                    }
+                    else if (IllegalInput)
+                    {
+                        MessageBox.Show("Ilegal input the channel must between 1 to 64\n", "Ilegal Input", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
                     }
                     else
                     {
-                        MessageBox.Show("Ilegal input the channel must between 1 to 64\n", "Ilegal Input", MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show("Set single test channel failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
                     }
                     #endregion
                     #region Set Single or Auto
-                    //E0B0:Single Channel
-                    //E0B1:64 Channel
-                    int SingleOrAutoValue = cbxSingleOrAuto.SelectedIndex + 176;//0xB0
-                    CommandBytes = ConstCommandByteArray(0xE0, (byte)SingleOrAutoValue);
-                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                    bResult = MicrorocChain1.SelectSCTestSingleOrAllChannel(cbxSingleOrAuto.SelectedIndex, MyUsbDevice1);
                     if (bResult)
                     {
                         report = string.Format("Choose {0} Mode\n", cbxSingleOrAuto.Text);
@@ -2789,14 +2302,11 @@ namespace USB_DAQ
                     else
                     {
                         MessageBox.Show("Set S Curve channel mode failure. Please check the USB\n", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
                     }
                     #endregion
                     #region Set CTest or Input
-                    // E0C0:Signal input from CTest pin
-                    // E0C1:Signal input from input pin
-                    int CTestOrInputValue = cbxCTestOrInput.SelectedIndex + 192;//0xC0
-                    CommandBytes = ConstCommandByteArray(0xE0, (byte)CTestOrInputValue);
-                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                    bResult = MicrorocChain1.SelectSCTestSignalCTestOrInput(cbxCTestOrInput.SelectedIndex, MyUsbDevice1);
                     if (bResult)
                     {
                         report = string.Format("Choose {0} Mode\n", cbxCTestOrInput.Text);
@@ -2805,25 +2315,20 @@ namespace USB_DAQ
                     else
                     {
                         MessageBox.Show("Set charge inject method failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
                     }
                     #endregion
                     #region Set Trigger Delay
-                    bool IsTriggerDelayLegal = rxInt.IsMatch(txtTriggerDelay.Text) && int.Parse(txtTriggerDelay.Text) < 400;
-                    int TriggerDelayValue;
-                    if (IsTriggerDelayLegal)
+                    bResult = MicrorocChain1.SetTriggerDelayTime(txtTriggerDelay.Text, MyUsbDevice1, out IllegalInput);
+                    if (bResult)
                     {
-                        TriggerDelayValue = int.Parse(txtTriggerDelay.Text) / 25;
-                    }
-                    else
-                    {
-                        TriggerDelayValue = 0;
-                    }
-                    CommandBytes = ConstCommandByteArray(0xE9, (byte)TriggerDelayValue);
-                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                    if(bResult)
-                    {
-                        report = string.Format("Set Trigger Delay {0}\n", TriggerDelayValue * 25);
+                        report = string.Format("Set Trigger Delay {0}\n", txtTriggerDelay.Text);
                         txtReport.AppendText(report);
+                    }
+                    else if (IllegalInput)
+                    {
+                        MessageBox.Show("Illegal input. Retype TriggerDelay: 0~400", "Illegal Input", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
                     }
                     else
                     {
@@ -2832,10 +2337,8 @@ namespace USB_DAQ
                     }
                     #endregion
                     #region Set Unmask
-                    int UnmaskAllChannel = cbxUnmaskAllChannel.SelectedIndex + 16;//0x10;
-                    CommandBytes = ConstCommandByteArray(0xE9, (byte)UnmaskAllChannel);
-                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                    if(bResult)
+                    bResult = MicrorocChain1.SetSCTestChannelMaskMode(cbxUnmaskAllChannel.SelectedIndex, MyUsbDevice1);
+                    if (bResult)
                     {
                         report = string.Format("Set All channel {0}\n", cbxUnmaskAllChannel.Text);
                         txtReport.AppendText(report);
@@ -2848,13 +2351,10 @@ namespace USB_DAQ
                     #endregion
                     #region Trig Mode
                     //--- Trig Mode ---//
-                    if (SCurveMode == Trig)
+                    if (StateIndicator.SCurveModeSelect == StateIndicator.SCurveMode.Trig)
                     {
                         #region Set CPT_MAX
-                        //*** Send CPT_MAX
-                        int MaxCountValue = cbxCPT_MAX.SelectedIndex;
-                        CommandBytes = ConstCommandByteArray(0xE2, (byte)MaxCountValue);
-                        bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                        bResult = MicrorocChain1.SelectSCTestTrigMaxCount(cbxCPT_MAX.SelectedIndex, MyUsbDevice1);
                         if (bResult)
                         {
                             report = string.Format("Set MAX count number {0}", cbxCPT_MAX.Text);
@@ -2862,320 +2362,68 @@ namespace USB_DAQ
                         }
                         else
                         {
-                            MessageBox.Show("Set S Curve test max count failure. Please check the USB\n", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                            MessageBox.Show("Set SCurve test max count failure. Please check the USB\n", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                            return;
                         }
                         #endregion
                         #region Single Channel Mode
                         //--- Single Channel Test ---///
                         if (cbxSingleOrAuto.SelectedIndex == SingleChannel)
                         {
-                            if (!IsSlowAcqStart)
-                            {
-                                //*** Set Package Number
-                                SlowDataRatePackageNumber = HeaderLength + ChannelLength + ((EndDac - StartDac) / AdcInterval + 1) * OneDacDataLength + TailLength;
-                                #region Clear USB FIFO
-                                //*** Clear USB FIFO
-                                byte[] ClearUSBFifo = ConstCommandByteArray(0xF0, 0xFA);
-                                bResult = CommandSend(ClearUSBFifo, ClearUSBFifo.Length);//
-                                if (bResult)
-                                    txtReport.AppendText("USB fifo cleared");
-                                else
-                                    txtReport.AppendText("fail to clear USB fifo");
-                                byte[] RemainData = new byte[2048];
-                                bResult = DataRecieve(RemainData, RemainData.Length);
-                                #endregion
-                                #region Data ACQ
-                                CommandBytes = ConstCommandByteArray(0xE0, 0xF0);
-                                bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                                if (bResult)
-                                {
-                                    IsSlowAcqStart = true;
-                                    txtReport.AppendText("SCurve Test Start\n");
-                                    txtReport.AppendText("SCurve Test Continue\n");
-                                    btnSweepTestStart.Content = "SCurve Test Stop";
-                                    await Task.Run(() => GetSlowDataRateResultCallBack());
-                                    //Task SCurveDataAcq = new Task(() => GetSlowDataRateResultCallBack());
-                                    //SCurveDataAcq.Start();
-                                    //SCurveDataAcq.Wait();
-                                    CommandBytes = ConstCommandByteArray(0xE0, 0xF1);
-                                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                                    if (bResult)
-                                    {
-                                        IsSlowAcqStart = false;
-                                        txtReport.AppendText("SCurve Test Done\n");
-                                        btnSweepTestStart.Content = "SCurve Test Start";
-                                    }
-                                    else
-                                    {
-                                        txtReport.AppendText("SCurve Test Stop Failure\n");
-                                    }
-                                }
-                                else
-                                {
-                                    txtReport.AppendText("SCurve Stop Failure\n");
-                                }
-                                #endregion
-                            }
-                            else
-                            {
-                                IsSlowAcqStart = false;
-                                CommandBytes = ConstCommandByteArray(0xE0, 0xF1);
-                                bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                                if (bResult)
-                                {
-
-                                    btnSweepTestStart.Content = "Sweep Test Start";
-                                    txtReport.AppendText("SCurve Test Abort\n");
-                                }
-                                else
-                                {
-                                    txtReport.AppendText("SCurve Test Stop Failure\n");
-                                }
-                            }
+                            //*** Set Package Number
+                            StateIndicator.SlowDataRatePackageNumber = HeaderLength + ChannelLength + ((EndDac - StartDac) / AdcInterval + 1) * OneDacDataLength + TailLength;
                         }
                         #endregion
                         #region 64 Channel Mode
                         //--- 64 Channel Test ---//
                         else if (cbxSingleOrAuto.SelectedIndex == AllChannel)
                         {
-                            if (!IsSlowAcqStart)
-                            {
-                                //*** Set Package Number
-                                SlowDataRatePackageNumber = HeaderLength + (ChannelLength + ((EndDac - StartDac) / AdcInterval + 1)  * OneDacDataLength) * 64 + TailLength;
-                                #region Clear USB FIFO
-                                //*** Clear USB FIFO
-                                byte[] ClearUSBFifo = ConstCommandByteArray(0xF0, 0xFA);
-                                bResult = CommandSend(ClearUSBFifo, ClearUSBFifo.Length);//
-                                if (bResult)
-                                    txtReport.AppendText("USB fifo cleared");
-                                else
-                                    txtReport.AppendText("fail to clear USB fifo");
-                                byte[] RemainData = new byte[2048];
-                                bResult = DataRecieve(RemainData, RemainData.Length);
-                                #endregion
-                                #region Data ACQ
-                                CommandBytes = ConstCommandByteArray(0xE0, 0xF0);
-                                bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                                if (bResult)
-                                {
-                                    IsSlowAcqStart = true;
-                                    txtReport.AppendText("SCurve Test Start\n");
-                                    txtReport.AppendText("SCurve Test Continue\n");
-                                    btnSweepTestStart.Content = "SCurve Test Stop";
-                                    await Task.Run(() => GetSlowDataRateResultCallBack());
-                                    //Task SCurveDataAcq = new Task(() => GetSlowDataRateResultCallBack());
-                                    //SCurveDataAcq.Start();
-                                    //SCurveDataAcq.Wait();
-                                    CommandBytes = ConstCommandByteArray(0xE0, 0xF1);
-                                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                                    if (bResult)
-                                    {
-                                        IsSlowAcqStart = false;
-                                        btnSweepTestStart.Content = "Sweep Test Start";
-                                        txtReport.AppendText("SCurve Test Stop\n");
-                                    }
-                                    else
-                                    {
-                                        txtReport.AppendText("SCurve Test Stop Failure\n");
-                                    }
-                                }
-                                else
-                                {
-                                    txtReport.AppendText("SCurve Stop Failure\n");
-                                }
-                                #endregion
-                            }
-                            else
-                            {
-                                IsSlowAcqStart = false;
-                                CommandBytes = ConstCommandByteArray(0xE0, 0xF1);
-                                bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                                if (bResult)
-                                {
-                                    btnSweepTestStart.Content = "Sweep Test Start";
-                                    txtReport.AppendText("SCurve Test Stop\n");
-                                }
-                                else
-                                {
-                                    txtReport.AppendText("SCurve Test Stop Failure\n");
-                                }
-                            }
+                            //*** Set Package Number
+                            StateIndicator.SlowDataRatePackageNumber = HeaderLength + (ChannelLength + ((EndDac - StartDac) / AdcInterval + 1) * OneDacDataLength) * 64 + TailLength;
                         }
                         #endregion
                     }
                     #endregion
                     #region Count Mode
-                    else if (SCurveMode == Count)
+                    else if (StateIndicator.SCurveModeSelect == StateIndicator.SCurveMode.Count)
                     {
                         #region Set Count Time
                         //*** Set Max Count Time
-                        bool IsCounterMaxLegal = rxInt.IsMatch(txtCountTime.Text) && (int.Parse(txtCountTime.Text) < 65535);
-                        if (IsCounterMaxLegal)
+                        bResult = MicrorocChain1.SetSCTestCountModeTime(txtCountTime.Text, MyUsbDevice1, out IllegalInput);
+                        if (bResult)
                         {
-                            int CountTimeValue = int.Parse(txtCountTime.Text);
-                            CommandBytes = ConstCommandByteArray(0xE3, (byte)CountTimeValue);
-                            bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                            if (!bResult)
-                            {
-                                MessageBox.Show("Set count time failure. Please check the ", //text
-                                     "USB Error",   //caption
-                                     MessageBoxButton.OK,//button
-                                     MessageBoxImage.Error);//icon
-                            }
-                            CommandBytes = ConstCommandByteArray(0xE4, (byte)(CountTimeValue >> 8));
-                            bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                            if (bResult)
-                            {
-                                report = string.Format("Set count time:{0}", txtCountTime.Text);
-                                txtReport.AppendText(report);
-                            }
-                            else
-                            {
-                                MessageBox.Show("Set count time failure. Please check the ", //text
-                                     "USB Error",   //caption
-                                     MessageBoxButton.OK,//button
-                                     MessageBoxImage.Error);//icon
-                            }
+                            report = string.Format("Set count time:{0}", txtCountTime.Text);
+                            txtReport.AppendText(report);
                         }
-                        else
+                        else if (IllegalInput)
                         {
                             MessageBox.Show("Illegal count time, please re-type(Integer:0--65536)", //text
                                      "Illegal input",   //caption
                                      MessageBoxButton.OK,//button
                                      MessageBoxImage.Error);//icon
+                            return;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Set count time failure. Please check the ", //text
+                                 "USB Error",   //caption
+                                 MessageBoxButton.OK,//button
+                                 MessageBoxImage.Error);//icon
+                            return;
                         }
                         #endregion
                         #region Single Channel Mode
                         if (cbxSingleOrAuto.SelectedIndex == SingleChannel)
                         {
-                            if (!IsSlowAcqStart)
-                            {
-                                //*** Set Package Number
-                                SlowDataRatePackageNumber = HeaderLength + ChannelLength + ((EndDac - StartDac) / AdcInterval + 1) * OneDacDataLength + TailLength;
-                                #region Clear Usb FIFO
-                                //*** Clear USB FIFO
-                                byte[] ClearUSBFifo = ConstCommandByteArray(0xF0, 0xFA);
-                                bResult = CommandSend(ClearUSBFifo, ClearUSBFifo.Length);//
-                                if (bResult)
-                                    txtReport.AppendText("USB fifo cleared");
-                                else
-                                    txtReport.AppendText("fail to clear USB fifo");
-                                byte[] RemainData = new byte[2048];
-                                bResult = DataRecieve(RemainData, RemainData.Length);
-                                #endregion
-                                #region Data ACQ
-                                CommandBytes = ConstCommandByteArray(0xE0, 0xF0);
-                                bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                                if (bResult)
-                                {
-
-                                    IsSlowAcqStart = true;
-                                    txtReport.AppendText("SCurve Test Start\n");
-                                    txtReport.AppendText("SCurve Test Continue\n");
-                                    btnSweepTestStart.Content = "SCurve Test Stop";
-                                    await Task.Run(() => GetSlowDataRateResultCallBack());
-                                    //Task SCurveDataAcq = new Task(() => GetSlowDataRateResultCallBack());
-                                    //SCurveDataAcq.Start();
-                                    //SCurveDataAcq.Wait();
-                                    CommandBytes = ConstCommandByteArray(0xE0, 0xF1);
-                                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                                    if (bResult)
-                                    {
-                                        IsSlowAcqStart = false;
-                                        btnSweepTestStart.Content = "Sweep Test Start";
-                                        txtReport.AppendText("SCurve Test Stop\n");
-                                    }
-                                    else
-                                    {
-                                        txtReport.AppendText("SCurve Test Stop Failure\n");
-                                    }
-                                }
-                                else
-                                {
-                                    txtReport.AppendText("SCurve Stop Failure\n");
-                                }
-                                #endregion
-                            }
-                            else
-                            {
-                                IsSlowAcqStart = false;
-                                CommandBytes = ConstCommandByteArray(0xE0, 0xF1);
-                                bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                                if (bResult)
-                                {
-                                    btnSweepTestStart.Content = "Sweep Test Start";
-                                    txtReport.AppendText("SCurve Test Stop\n");
-                                }
-                                else
-                                {
-                                    txtReport.AppendText("SCurve Test Stop Failure\n");
-                                }
-                            }
+                            //*** Set Package Number
+                            StateIndicator.SlowDataRatePackageNumber = HeaderLength + ChannelLength + ((EndDac - StartDac) / AdcInterval + 1) * OneDacDataLength + TailLength;
                         }
                         #endregion
                         #region 64Channel Mode
                         else if (cbxSingleOrAuto.SelectedIndex == AllChannel)
                         {
-                            if (!IsSlowAcqStart)
-                            {
-                                //*** Set Package Number
-                                SlowDataRatePackageNumber = HeaderLength + (ChannelLength + ((EndDac - StartDac) / AdcInterval + 1) * OneDacDataLength) * 64 + TailLength;
-                                #region Clear USB FIFO
-                                //*** Clear USB FIFO
-                                byte[] ClearUSBFifo = ConstCommandByteArray(0xF0, 0xFA);
-                                bResult = CommandSend(ClearUSBFifo, ClearUSBFifo.Length);//
-                                if (bResult)
-                                    txtReport.AppendText("USB fifo cleared");
-                                else
-                                    txtReport.AppendText("fail to clear USB fifo");
-                                byte[] RemainData = new byte[2048];
-                                bResult = DataRecieve(RemainData, RemainData.Length);
-                                #endregion
-                                #region Data ACQ
-                                CommandBytes = ConstCommandByteArray(0xE0, 0xF0);
-                                bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                                if (bResult)
-                                {
-                                    IsSlowAcqStart = true;
-                                    txtReport.AppendText("SCurve Test Start\n");
-                                    btnSweepTestStart.Content = "Sweep Test Stop";
-                                    txtReport.AppendText("SCurve Test Continue\n");
-                                    await Task.Run(() => GetSlowDataRateResultCallBack());
-                                    //Task SCurveDataAcq = new Task(() => GetSlowDataRateResultCallBack());
-                                    //SCurveDataAcq.Start();
-                                    //SCurveDataAcq.Wait();
-                                    CommandBytes = ConstCommandByteArray(0xE0, 0xF1);
-                                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                                    if (bResult)
-                                    {
-                                        IsSlowAcqStart = false;
-                                        txtReport.AppendText("SCurve Test Stop\n");
-                                    }
-                                    else
-                                    {
-                                        txtReport.AppendText("SCurve Test Stop Failure\n");
-                                    }
-                                }
-                                else
-                                {
-                                    txtReport.AppendText("SCurve Stop Failure\n");
-                                }
-                                #endregion
-                            }
-                            else
-                            {
-                                IsSlowAcqStart = false;
-                                CommandBytes = ConstCommandByteArray(0xE0, 0xF1);
-                                bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                                if (bResult)
-                                {
-                                    txtReport.AppendText("SCurve Test Stop\n");
-                                }
-                                else
-                                {
-                                    txtReport.AppendText("SCurve Test Stop Failure\n");
-                                }
-                            }
+                            //*** Set Package Number
+                            StateIndicator.SlowDataRatePackageNumber = HeaderLength + (ChannelLength + ((EndDac - StartDac) / AdcInterval + 1) * OneDacDataLength) * 64 + TailLength;
                         }
                         #endregion
                     }
@@ -3183,264 +2431,163 @@ namespace USB_DAQ
                 }
                 #endregion
                 #region Sweep Acq
-                else if (DataAcqMode == SweepAcq)
+                else if (StateIndicator.OperationModeSelect == StateIndicator.OperationMode.SweepAcq)
                 {
-                    if (!IsSlowAcqStart)
+                    #region Set Start Acq Time
+                    bResult = MicrorocChain1.SetAcquisitionTime(txtStartAcqTime.Text, MyUsbDevice1, out IllegalInput);
+                    if (bResult)
                     {
-                        #region Set Start Acq Time
-                        Regex rx_int = new Regex(rx_Integer);
-                        bool Is_Time_legal = rx_int.IsMatch(txtStartAcqTime.Text);
-                        if (Is_Time_legal)
-                        {
-                            int value = Int32.Parse(txtStartAcqTime.Text) / 25; //除以25ns 
-                            byte[] bytes = ConstCommandByteArray(0xB2, (byte)(value >> 8));
-                            bResult = CommandSend(bytes, bytes.Length);
-                            if (!bResult)
-                            {
-                                MessageBox.Show("Set StartAcq time failure, please check USB", //text
-                                                 "USB Error",   //caption
-                                                 MessageBoxButton.OK,//button
-                                                 MessageBoxImage.Error);//icon
-                                return;
-                            }
-                            bytes = ConstCommandByteArray(0xB1, (byte)(value));
-                            bResult = CommandSend(bytes, bytes.Length);
-                            if (bResult)
-                            {
-                                report = string.Format("Set StartAcq time : {0}\n", txtStartAcqTime.Text);
-                                txtReport.AppendText(report);
-                            }
-                            else
-                            {
-                                MessageBox.Show("Set StartAcq time failure, please check USB", //text
-                                                 "USB Error",   //caption
-                                                 MessageBoxButton.OK,//button
-                                                 MessageBoxImage.Error);//icon
-                                return;
-                            }
-                        }
-                        else
-                        {
-                            MessageBox.Show("Illegal StartAcq Time, please re-type(Integer:0--1638400,step:25ns)", //text
-                                             "Illegal input",   //caption
-                                             MessageBoxButton.OK,//button
-                                             MessageBoxImage.Error);//icon
-                            return;
-                        }
-                        #endregion
-                        #region Set Package Number
-                        bool IsPackageNumberLegal = rxInt.IsMatch(txtPackageNumber.Text) && (int.Parse(txtPackageNumber.Text) < 65535);
-                        int PackageNumberValue;
-                        if (IsPackageNumberLegal)
-                        {
-                            PackageNumberValue = int.Parse(txtPackageNumber.Text);
-                        }
-                        else
-                        {
-                            PackageNumberValue = 10000;
-                        }
-                        CommandBytes = ConstCommandByteArray(0xE6, (byte)PackageNumberValue);
-                        bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                        if (!bResult)
-                        {
-                            MessageBox.Show("Set count time failure. Please check the USB ", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                        }
-                        CommandBytes = ConstCommandByteArray(0xE7, (byte)(PackageNumberValue >> 8));
-                        bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                        if (bResult)
-                        {
-                            report = string.Format("Set sweep acq package number:{0}\n", txtPackageNumber.Text);
-                            txtReport.AppendText(report);
-                        }
-                        else
-                        {
-                            MessageBox.Show("Set count time failure. Please check the USB ", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                        }
-                        #endregion
-                        #region Set Sweep Dac
-                        int SweepDacSelectValue = cbxDacSelect.SelectedIndex;
-                        CommandBytes = ConstCommandByteArray(0xE0, (byte)(SweepDacSelectValue));
-                        bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                        if (bResult)
-                        {
-                            report = string.Format("Set {0} as sweep DAC\n", cbxDacSelect.Text);
-                            txtReport.AppendText(report);
-                        }
-                        else
-                        {
-                            MessageBox.Show("Set sweep DAC failure. Please check the ", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                        }
-                        #endregion
-                        #region Start Acq
-                        //*** Set Package Number
-                        SlowDataRatePackageNumber = HeaderLength + (2 + PackageNumberValue * 20) * ((EndDac - StartDac) / AdcInterval + 1) + TailLength;
-                        #region Clear USB FIFO
-                        //*** Clear USB FIFO
-                        byte[] ClearUSBFifo = ConstCommandByteArray(0xF0, 0xFA);
-                        bResult = CommandSend(ClearUSBFifo, ClearUSBFifo.Length);//
-                        if (bResult)
-                            txtReport.AppendText("USB fifo cleared");
-                        else
-                            txtReport.AppendText("fail to clear USB fifo");
-                        byte[] RemainData = new byte[2048];
-                        bResult = DataRecieve(RemainData, RemainData.Length);
-                        #endregion
-                        #region Data ACQ
-                        CommandBytes = ConstCommandByteArray(0xE0, 0xF0);
-                        bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                        if (bResult)
-                        {
-                            IsSlowAcqStart = true;
-                            txtReport.AppendText("Sweep Acq Test Start\n");
-                            txtReport.AppendText("Sweep Acq Continue\n");
-                            btnSweepTestStart.Content = "Sweep Test Stop";
-                            await Task.Run(() => GetSlowDataRateResultCallBack());
-                            btnSweepTestStart.Content = "Sweep Acq Start";
-                            //Task SCurveDataAcq = new Task(() => GetSlowDataRateResultCallBack());
-                            //SCurveDataAcq.Start();
-                            //SCurveDataAcq.Wait();
-                            CommandBytes = ConstCommandByteArray(0xE0, 0xF1);
-                            bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                            if (bResult)
-                            {
-                                IsSlowAcqStart = false;
-                                btnSweepTestStart.Content = "Sweep Test Start";
-                                txtReport.AppendText("Sweep Acq Test Stop\n");
-                            }
-                            else
-                            {
-                                txtReport.AppendText("Sweep Acq Test Stop Failure\n");
-                            }
-                        }
-                        else
-                        {
-                            txtReport.AppendText("Sweep Acq Stop Failure\n");
-                        }
-                        #endregion
-                        #endregion
+                        report = string.Format("Set StartAcq time : {0}\n", txtStartAcqTime.Text);
+                        txtReport.AppendText(report);
+                    }
+                    else if (IllegalInput)
+                    {
+                        MessageBox.Show("Illegal StartAcq Time, please re-type(Integer:0--1638400,step:25ns)", //text
+                                         "Illegal input",   //caption
+                                         MessageBoxButton.OK,//button
+                                         MessageBoxImage.Error);//icon
+                        return;
                     }
                     else
                     {
-                        IsSlowAcqStart = false;
-                        CommandBytes = ConstCommandByteArray(0xE0, 0xF1);
-                        bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                        if (bResult)
-                        {
-                            btnSweepTestStart.Content = "Sweep Test Start";
-                            txtReport.AppendText("Sweep Acq Test Stop\n");
-                        }
-                        else
-                        {
-                            txtReport.AppendText("Sweep Acq Test Stop Failure\n");
-                        }
+                        MessageBox.Show("Set StartAcq time failure, please check USB", //text
+                                         "USB Error",   //caption
+                                         MessageBoxButton.OK,//button
+                                         MessageBoxImage.Error);//icon
+                        return;
                     }
+                    #endregion
+                    #region Set Package Number
+                    int PackageNumberValue;
+                    bResult = MicrorocChain1.SetSweepAcqMaxCount(txtPackageNumber.Text, MyUsbDevice1, out IllegalInput);
+                    if (bResult)
+                    {
+                        report = string.Format("Set sweep acq package number:{0}\n", txtPackageNumber.Text);
+                        txtReport.AppendText(report);
+                        PackageNumberValue = int.Parse(txtPackageNumber.Text);
+                    }
+                    else if (IllegalInput)
+                    {
+                        MessageBox.Show("Illegal Package Number. Please retype: Integer", "Illegal Input", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Set count time failure. Please check the USB ", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+                    #endregion
+                    #region Set Sweep DAC
+                    bResult = MicrorocChain1.SelectSweepAcqDac(cbxDacSelect.SelectedIndex, MyUsbDevice1);
+
+                    if (bResult)
+                    {
+                        report = string.Format("Set {0} as sweep DAC\n", cbxDacSelect.Text);
+                        txtReport.AppendText(report);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Set Sweep DAC failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+                    #endregion
+                    //*** Set Package Number
+                    StateIndicator.SlowDataRatePackageNumber = HeaderLength + (2 + PackageNumberValue * 20) * ((EndDac - StartDac) / AdcInterval + 1) + TailLength;
                 }
                 #endregion
                 #region Efficiency
-                else if(DataAcqMode == Efficiency)
+                else if (StateIndicator.OperationModeSelect == StateIndicator.OperationMode.Efficiency)
                 {
-                    if(!IsSlowAcqStart)
+                    #region Set CPT_MAX
+                    bResult = MicrorocChain1.SelectSCTestTrigMaxCount(cbxCPT_MAX.SelectedIndex, MyUsbDevice1);
+                    if (bResult)
                     {
-                        #region Set CPT_MAX
-                        //*** Send CPT_MAX
-                        int MaxCountValue = cbxCPT_MAX.SelectedIndex;
-                        CommandBytes = ConstCommandByteArray(0xE2, (byte)MaxCountValue);
-                        bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                        if (bResult)
-                        {
-                            report = string.Format("Set MAX count number {0}", cbxCPT_MAX.Text);
-                            txtReport.AppendText(report);
-                        }
-                        else
-                        {
-                            MessageBox.Show("Set S Curve test max count failure. Please check the USB\n", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                        }
-                        #endregion
-                        #region Set Trigger Delay
-                        bool IsTriggerDelayLegal = rxInt.IsMatch(txtTriggerDelay.Text) && int.Parse(txtTriggerDelay.Text) < 400;
-                        int TriggerDelayValue;
-                        if (IsTriggerDelayLegal)
-                        {
-                            TriggerDelayValue = int.Parse(txtTriggerDelay.Text) / 25;
-                        }
-                        else
-                        {
-                            TriggerDelayValue = 0;
-                        }
-                        CommandBytes = ConstCommandByteArray(0xE9, (byte)TriggerDelayValue);
-                        bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                        if (bResult)
-                        {
-                            report = string.Format("Set Trigger Delay {0}\n", TriggerDelayValue * 25);
-                            txtReport.AppendText(report);
-                        }
-                        else
-                        {
-                            MessageBox.Show("Set Trigger Delay failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                            return;
-                        }
-                        #endregion
-                        SlowDataRatePackageNumber = 7 * 2;
-                        #region Clear USB FIFO
-                        //*** Clear USB FIFO
-                        byte[] ClearUSBFifo = ConstCommandByteArray(0xF0, 0xFA);
-                        bResult = CommandSend(ClearUSBFifo, ClearUSBFifo.Length);//
-                        if (bResult)
-                            txtReport.AppendText("USB fifo cleared");
-                        else
-                            txtReport.AppendText("fail to clear USB fifo");
-                        byte[] RemainData = new byte[2048];
-                        bResult = DataRecieve(RemainData, RemainData.Length);
-                        #endregion
-                        #region Data ACQ
-                        CommandBytes = ConstCommandByteArray(0xE0, 0xF0);
-                        bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                        if (bResult)
-                        {
-                            IsSlowAcqStart = true;
-                            txtReport.AppendText("Sweep Acq Test Start\n");
-                            txtReport.AppendText("Sweep Acq Continue\n");
-                            btnSweepTestStart.Content = "Sweep Test Stop";
-                            await Task.Run(() => GetSlowDataRateResultCallBack());
-                            btnSweepTestStart.Content = "Sweep Acq Start";
-                            //Task SCurveDataAcq = new Task(() => GetSlowDataRateResultCallBack());
-                            //SCurveDataAcq.Start();
-                            //SCurveDataAcq.Wait();
-                            CommandBytes = ConstCommandByteArray(0xE0, 0xF1);
-                            bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                            if (bResult)
-                            {                                
-                                btnSweepTestStart.Content = "Sweep Test Start";
-                                txtReport.AppendText("Sweep Acq Test Stop\n");
-                            }
-                            else
-                            {
-                                txtReport.AppendText("Sweep Acq Test Stop Failure\n");
-                            }
-                            Thread.Sleep(10);
-                            IsSlowAcqStart = false;                            
-                        }
-                        else
-                        {
-                            txtReport.AppendText("Sweep Acq Stop Failure\n");
-                        }
-                        #endregion
+                        report = string.Format("Set MAX count number {0}", cbxCPT_MAX.Text);
+                        txtReport.AppendText(report);
                     }
                     else
                     {
-                        IsSlowAcqStart = false;
-                        CommandBytes = ConstCommandByteArray(0xE0, 0xF1);
-                        bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                        if (bResult)
-                        {
-                            btnSweepTestStart.Content = "Sweep Test Start";
-                            txtReport.AppendText("Sweep Acq Test Stop\n");
-                        }
-                        else
-                        {
-                            txtReport.AppendText("Sweep Acq Test Stop Failure\n");
-                        }
+                        MessageBox.Show("Set S Curve test max count failure. Please check the USB\n", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
                     }
+                    #endregion
+                    #region Set Trigger Delay
+                    bResult = MicrorocChain1.SetTriggerDelayTime(txtTriggerDelay.Text, MyUsbDevice1, out IllegalInput);
+                    if (bResult)
+                    {
+                        report = string.Format("Set Trigger Delay {0}\n", txtTriggerDelay.Text);
+                        txtReport.AppendText(report);
+                    }
+                    else if (IllegalInput)
+                    {
+                    }
+                    else
+                    {
+                        MessageBox.Show("Set Trigger Delay failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+                    #endregion
+                    StateIndicator.SlowDataRatePackageNumber = 7 * 2;
+                }
+                #endregion
+                #region Clear USB FIFO
+                bResult = MicrorocChain1.ClearUsbFifo(MyUsbDevice1);
+                if (bResult)
+                    txtReport.AppendText("USB fifo cleared");
+                else
+                {
+                    MessageBox.Show("Please chek the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+
+                }
+                #endregion
+                #region Data ACQ
+                Thread.Sleep(100);
+                bResult = MicrorocChain1.StartSCTest(MyUsbDevice1);
+                if (bResult)
+                {
+                    StateIndicator.SlowAcqStart = true;
+                    txtReport.AppendText("Sweep Acq Test Start\n");
+                    txtReport.AppendText("Sweep Acq Continue\n");
+                    btnSweepTestStart.Content = "Sweep Test Stop";
+                    await Task.Run(() => GetSlowDataRateResultCallBack(MyUsbDevice1));
+                    btnSweepTestStart.Content = "Sweep Acq Start";
+                    bResult = MicrorocChain1.StopSCTest(MyUsbDevice1);
+                    if (bResult)
+                    {
+                        btnSweepTestStart.Content = "Sweep Test Start";
+                        txtReport.AppendText("Sweep Acq Test Stop\n");
+                    }
+                    else
+                    {
+                        txtReport.AppendText("Sweep Acq Test Stop Failure\n");
+                    }
+                    Thread.Sleep(10);
+                    StateIndicator.SlowAcqStart = false;
+                    StateIndicator.FileSaved = false;
+                }
+                else
+                {
+                    txtReport.AppendText("Sweep Acq Stop Failure\n");
+                }
+                #endregion
+                #endregion
+            }
+            else
+            {
+                #region Stop ACQ
+                StateIndicator.SlowAcqStart = false;
+                StateIndicator.FileSaved = false;
+                bResult = MicrorocChain1.StopSCTest(MyUsbDevice1);
+                if (bResult)
+                {
+
+                    btnSweepTestStart.Content = "Sweep Test Start";
+                    txtReport.AppendText("SCurve Test Abort\n");
+                }
+                else
+                {
+                    txtReport.AppendText("SCurve Test Stop Failure\n");
                 }
                 #endregion
             }
@@ -3448,309 +2595,241 @@ namespace USB_DAQ
 
         private async void btnStartAdc_Click(object sender, RoutedEventArgs e)
         {
-            if (filepath == null || string.IsNullOrEmpty(filepath.Trim()))
+            if (!CheckFileSaved())
             {
-                MessageBox.Show("You should save the file first before Scurve start", "imformation", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
             }
-            else
+            if (!StateIndicator.AdcStart)
             {
-                if (!IsAdcStart)
+                #region Set ADC Delay
+                bool IllegalInput;
+                bool bResult = MicrorocChain1.SetAdcStartDelayTime(txtStartDelay.Text, MyUsbDevice1, out IllegalInput);
+                if (bResult)
                 {
-                    #region Set ADC Delay
-                    Regex rxInt = new Regex(rx_Integer);
-                    bool IsDelayLegeal = rxInt.IsMatch(txtStartDelay.Text) && (int.Parse(txtStartDelay.Text) < 400);
-                    int AdcStartDelay;
-                    if (IsDelayLegeal)
-                    {
-                        AdcStartDelay = int.Parse(txtStartDelay.Text) / 25;
-                    }
-                    else
-                    {
-                        AdcStartDelay = 2;
-                    }
-                    byte[] CommandBytes = ConstCommandByteArray(0xA8, (byte)AdcStartDelay);
-                    bool bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                    if (bResult)
-                    {
-                        string report = string.Format("Set ADC start delay :{0}ns\n", AdcStartDelay * 25);
-                        txtReport.AppendText(report);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Set ADC start delay failure, please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                        //return;
-                    }
-                    #endregion
-                    #region Set Hold Parameter
-                    Regex rx_int = new Regex(rx_Integer);
-                    #region Set Hold Delay
-                    bool Is_Hold_legal = rx_int.IsMatch(txtHold_delay.Text) && int.Parse(txtHold_delay.Text) < 800;
-                    if (Is_Hold_legal)
-                    {
-                        int DelayTime = (int)(int.Parse(txtHold_delay.Text) / 6.25); //除以6.25ns
-                        byte DelayTime1 = (byte)(DelayTime & 15);//15 = 0xF
-                        byte DelayTime2 = (byte)(((DelayTime >> 4) & 15) | 16);//16 = 0x10
-                        CommandBytes = ConstCommandByteArray(0xA6, DelayTime1);
-                        bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                        if (!bResult)
-                        {
-                            MessageBox.Show("Set Hold delay failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                            return;
-                        }
-                        CommandBytes = ConstCommandByteArray(0xA6, DelayTime2);
-                        bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                        if (bResult)
-                        {
-                            string report = string.Format("Set Hold Delay Time:{0}ns\n", DelayTime * 6.25);
-                            txtReport.AppendText(report);
-                        }
-                        else
-                        {
-                            MessageBox.Show("Set Hold delay failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                            return;
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("Illegal Hold delay, please re-type(Integer:0--650,step:2ns)", "Illegal input", MessageBoxButton.OK, MessageBoxImage.Error);
-                        return;
-                    }
-                    #endregion
-                    #region Set Trig Coincide
-                    int TrigCoincid = cbxTrig_Coincid.SelectedIndex + 160;//160 = 0xA0
-                    CommandBytes = ConstCommandByteArray(0xA5, (byte)TrigCoincid);
-                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                    if (bResult)
-                    {
-                        string report = string.Format("Set Trigger Coincidence : {0}\n", cbxTrig_Coincid.Text);
-                        txtReport.AppendText(report);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Set Trigger Coincid failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                        return;
-                    }
-                    #endregion
-                    #region Set Hold Time
-                    /*
-                        + 4Y:HoldTime[3:0]
-                        + 5Y:HoldTime[7:4]
-                        + 6Y:HoldTime[11:8]
-                        + 7Y:HoldTime[15:12]
-                     */
-                    bool IsHoldTimeLegal = rx_int.IsMatch(txtHoldTime.Text) && int.Parse(txtHoldTime.Text) < 10000;
-                    if (IsHoldTimeLegal)
-                    {
-                        int HoldTime = int.Parse(txtHoldTime.Text) / 25;
-                        int HoldTime1 = (HoldTime & 15) + 64;//0x40
-                        int HoldTime2 = ((HoldTime >> 4) & 15) + 80;//0x50
-                        int HoldTime3 = ((HoldTime >> 8) & 15) + 96;
-                        int HoldTime4 = ((HoldTime >> 12) & 15) + 112;
-                        CommandBytes = ConstCommandByteArray(0xA6, (byte)HoldTime1);
-                        bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                        if (!bResult)
-                        {
-                            MessageBox.Show("Set Hold Time failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                            return;
-                        }
-                        CommandBytes = ConstCommandByteArray(0xA6, (byte)HoldTime2);
-                        bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                        if (!bResult)
-                        {
-                            MessageBox.Show("Set Hold Time failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                            return;
-                        }
-                        CommandBytes = ConstCommandByteArray(0xA6, (byte)HoldTime3);
-                        bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                        if (!bResult)
-                        {
-                            MessageBox.Show("Set Hold Time failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                            return;
-                        }
-                        CommandBytes = ConstCommandByteArray(0xA6, (byte)HoldTime4);
-                        bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                        if (bResult)
-                        {
-                            string report = string.Format("Set Hold Time:{0}\n", HoldTime * 25);
-                            txtReport.AppendText(report);
-                        }
-                        else
-                        {
-                            MessageBox.Show("Set Hold Time failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                            return;
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("Illegal Hold Time, please re-type(Integer:0--10000,step:2ns)", "Illegal input", MessageBoxButton.OK, MessageBoxImage.Error);
-                        return;
-                    }
-                    #endregion
-                    #endregion
-                    #region Set Adc Data Number
-                    bool IsAdcDataNumberLegal = rxInt.IsMatch(txtAdcAcqTimes.Text) && int.Parse(txtAdcAcqTimes.Text) < 255;
-                    int AdcDataNumber;
-                    if(IsAdcDataNumberLegal)
-                    {
-                        AdcDataNumber = int.Parse(txtAdcAcqTimes.Text);
-                    }
-                    else
-                    {
-                        AdcDataNumber = 32;
-                    }
-                    int AdcDataNumber1 = (AdcDataNumber & 15) + 16;//0x10
-                    int AdcDataNumber2 = ((AdcDataNumber >> 4) & 15) + 32;//0x20
-                    CommandBytes = ConstCommandByteArray(0xE8, (byte)AdcDataNumber1);
-                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                    if(!bResult)
-                    {
-                        MessageBox.Show("Set ADC Data Times failure, please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                        return;
-                    }
-                    CommandBytes = ConstCommandByteArray(0xE8, (byte)AdcDataNumber2);
-                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                    if(bResult)
-                    {
-                        string report = string.Format("Set Adc Data Nmuber:{0}\n", AdcDataNumber);
-                        txtReport.AppendText(report);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Set ADC Data Times failure, please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                        return;
-                    }
-                    #endregion
-                    #region Set ADC Input
-                    int AdcInput = cbxAdcInput.SelectedIndex + 240;//240 = 0xF0
-                    CommandBytes = ConstCommandByteArray(0xD2, (byte)AdcInput);
-                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                    if(bResult)
-                    {
-                        string report = string.Format("Set ADC monitor {0}\n", cbxAdcInput.Text);
-                        txtReport.AppendText(report);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Set ADC Monitor failure, please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                        return;
-                    }
-                    #endregion
-                    #region Set Adc Start Mode
-                    /*int AdcStartModeValue = cbxAdcStartMode.SelectedIndex + 128;//0x80
-                    CommandBytes = ConstCommandByteArray(0xE8, (byte)AdcStartModeValue);
-                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                    if (bResult)
-                    {
-                        string report = string.Format("Select ADC Start{0}\n", cbxAdcStartMode.Text);
-                        txtReport.AppendText(report);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Set ADC Start Mode failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
-                    */
-                    #endregion
-                    #region Start Acq
-                    CommandBytes = ConstCommandByteArray(0xE0, 0xF2);
-                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                    bResult = true;
-                    if (bResult)
-                    {
-                        btnStartAdc.Content = "ADC Stop";
-                        btnStartAdc.Background = Brushes.Blue;
-                        IsAdcStart = true;
-                        await Task.Run(() => GetSlowDataRateResultCallBack());
-                        CommandBytes = ConstCommandByteArray(0xE0, 0xF3);
-                        bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                        if (bResult)
-                        {
-                            IsAdcStart = false;
-                            btnAcqStart.Background = Brushes.Green;
-                            btnAcqStart.Content = "ADC Start";
-                            txtReport.AppendText("ADC Stopped\n");
-                        }
-                        {
-                            MessageBox.Show("ADC Stop failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                            return;
-                        }
-                        //Task SCurveDataAcq = new Task(() => GetSlowDataRateResultCallBack());
-                        //SCurveDataAcq.Start();
-                        //await GetSlowDataRateResultCallBack();                     
-                    }
-                    else
-                    {
-                        MessageBox.Show("ADC Start failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                        return;
-                    }
-                    #endregion
+                    string report = string.Format("Set ADC start delay :{0}ns\n", txtStartDelay.Text);
+                    txtReport.AppendText(report);
+                }
+                else if (IllegalInput)
+                {
+                    MessageBox.Show("Delay time is not correct, please retype:0-400 integer", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
                 }
                 else
                 {
-                    #region Stop Acq
-                    //txtReport.AppendText("ADC Stopped\n");
-                    byte[] CommandBytes = ConstCommandByteArray(0xE0, 0xF3);
-                    bool bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                    MessageBox.Show("Set ADC start delay failure, please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                #endregion
+                #region Set Hold Parameter
+                #region Set Hold Delay
+                bResult = MicrorocChain1.SetHoldDelayTime(txtHold_delay.Text, MyUsbDevice1, out IllegalInput);
+                if (bResult)
+                {
+                    string report = string.Format("Set Hold Delay Time:{0}ns\n", txtHold_delay.Text);
+                    txtReport.AppendText(report);
+                }
+                else if (IllegalInput)
+                {
+                    MessageBox.Show("Illegal Hold delay, please re-type(Integer:0--650,step:2ns)", "Illegal input", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                else
+                {
+                    MessageBox.Show("Set Hold delay failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                #endregion
+                #region Set Trig Coincide
+                bResult = MicrorocChain1.SetTrigCoincidence(cbxTrig_Coincid.SelectedIndex, MyUsbDevice1);
+                if (bResult)
+                {
+                    string report = string.Format("Set Trigger Coincidence : {0}\n", cbxTrig_Coincid.Text);
+                    txtReport.AppendText(report);
+                }
+                else
+                {
+                    MessageBox.Show("Set Trigger Coincid failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                #endregion
+                #region Set Hold Time
+                bResult = MicrorocChain1.SetHoldTime(txtHoldTime.Text, MyUsbDevice1, out IllegalInput);
+                if (bResult)
+                {
+                    string report = string.Format("Set Hold Time:{0}\n", txtHoldTime.Text);
+                    txtReport.AppendText(report);
+                }
+                else if (IllegalInput)
+                {
+                    MessageBox.Show("Illegal Hold Time, please re-type(Integer:0--10000,step:2ns)", "Illegal input", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                else
+                {
+                    MessageBox.Show("Set Hold Time failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                #endregion
+                #endregion
+                #region Set Adc Data Number
+                bResult = MicrorocChain1.SetAdcDataNumberPerHit(txtAdcAcqTimes.Text, MyUsbDevice1, out IllegalInput);
+                if (bResult)
+                {
+                    string report = string.Format("Set Adc Data Nmuber:{0}\n", txtAdcAcqTimes.Text);
+                    txtReport.AppendText(report);
+                }
+                else if (IllegalInput)
+                {
+                    MessageBox.Show("Adc data number incorrect. Please re-type:0-255 integer", "Illegal Input", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                else
+                {
+                    MessageBox.Show("Set ADC Data Times failure, please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                #endregion
+                #region Set ADC Input
+                bResult = MicrorocChain1.SelectAdcMonitorHoldOrTemp(cbxAdcInput.SelectedIndex, MyUsbDevice1);
+                if (bResult)
+                {
+                    string report = string.Format("Set ADC monitor {0}\n", cbxAdcInput.Text);
+                    txtReport.AppendText(report);
+                }
+                else
+                {
+                    MessageBox.Show("Set ADC Monitor failure, please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                #endregion
+                #region Set Adc Start Mode
+                /*int AdcStartModeValue = cbxAdcStartMode.SelectedIndex + 128;//0x80
+                CommandBytes = ConstCommandByteArray(0xE8, (byte)AdcStartModeValue);
+                bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                if (bResult)
+                {
+                    string report = string.Format("Select ADC Start{0}\n", cbxAdcStartMode.Text);
+                    txtReport.AppendText(report);
+                }
+                else
+                {
+                    MessageBox.Show("Set ADC Start Mode failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                */
+                #endregion
+                #region Start Acq
+                bResult = MicrorocChain1.ClearUsbFifo(MyUsbDevice1);
+                if(bResult)
+                {
+                    txtReport.AppendText("Clear USB FIFO\n");
+                }
+                else
+                {
+                    MessageBox.Show("Please check the USB cable", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                bResult = MicrorocChain1.StartAdc(MyUsbDevice1);
+                if (bResult)
+                {
+                    btnStartAdc.Content = "ADC Stop";
+                    btnStartAdc.Background = Brushes.Blue;
+                    StateIndicator.AdcStart = true;
+                    await Task.Run(() => GetSlowDataRateResultCallBack(MyUsbDevice1));
+                    bResult = MicrorocChain1.StopAdc(MyUsbDevice1);
                     if (bResult)
                     {
-                        IsAdcStart = false;
-                        btnStartAdc.Background = Brushes.Green;
-                        btnStartAdc.Content = "ADC Start";
-                        txtReport.AppendText("ADC Abort\n");
+                        StateIndicator.AdcStart = false;
+                        btnAcqStart.Background = Brushes.Green;
+                        btnAcqStart.Content = "ADC Start";
+                        txtReport.AppendText("ADC Stopped\n");
                     }
                     else
                     {
-                        txtReport.AppendText("Stop ADC Failure 1st time \n");
+                        MessageBox.Show("ADC Stop failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
                     }
-                    #endregion
                 }
+                else
+                {
+                    MessageBox.Show("ADC Start failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                #endregion
             }
+            else
+            {
+                #region Stop Acq
+                bool bResult = MicrorocChain1.StopAdc(MyUsbDevice1);
+                if (bResult)
+                {
+                    StateIndicator.FileSaved = false;
+                    StateIndicator.AdcStart = false;
+                    btnStartAdc.Background = Brushes.Green;
+                    btnStartAdc.Content = "ADC Start";
+                    txtReport.AppendText("ADC Abort\n");
+                }
+                else
+                {
+                    txtReport.AppendText("Stop ADC Failure \n");
+                    return;
+                }
+                #endregion
+            }
+
 
         }
         // Slow data rate acquisition thread
-        private void GetSlowDataRateResultCallBack()
+        private void GetSlowDataRateResultCallBack(MyCyUsb usbInterface)
         {
             bw = new BinaryWriter(File.Open(filepath, FileMode.Append));
             //private int SingleDataLength = 512;
             bool bResult = false;
             byte[] DataReceiveBytes = new byte[512];
-            if (DataAcqMode == Acq || DataAcqMode == SweepAcq || DataAcqMode == SCTest || DataAcqMode == Efficiency)
+            if (StateIndicator.OperationModeSelect == StateIndicator.OperationMode.Acq 
+                || StateIndicator.OperationModeSelect == StateIndicator.OperationMode.SweepAcq 
+                || StateIndicator.OperationModeSelect == StateIndicator.OperationMode.SCTest 
+                || StateIndicator.OperationModeSelect == StateIndicator.OperationMode.Efficiency
+                || StateIndicator.OperationModeSelect == StateIndicator.OperationMode.MicrorocCarier)
             {
                 #region The Max Data Number is Set
-                if (SlowDataRatePackageNumber != 0)
+                if (StateIndicator.SlowDataRatePackageNumber != 0)
                 {
-                    int PackageNumber = SlowDataRatePackageNumber / 512;
-                    int RemainPackageNum = SlowDataRatePackageNumber % 512;
+                    int PackageNumber = StateIndicator.SlowDataRatePackageNumber / 512;
+                    int RemainPackageNum = StateIndicator.SlowDataRatePackageNumber % 512;
+                    int TotalPackageNumber = RemainPackageNum == 0 ? PackageNumber : (PackageNumber + 1);
                     int PackageCount = 0;
-                    while (PackageCount < PackageNumber & IsSlowAcqStart)
+                    while (PackageCount < TotalPackageNumber & StateIndicator.SlowAcqStart)
                     {
-                        bResult = DataRecieve(DataReceiveBytes, DataReceiveBytes.Length);
+                        //Stopwatch sw = new Stopwatch();
+                        //sw.Start();
+                        bResult = usbInterface.DataRecieve(DataReceiveBytes, DataReceiveBytes.Length);
+                        //sw.Stop();
+
                         if (bResult)
                         {
                             bw.Write(DataReceiveBytes);
                             PackageCount++;
                         }
                     }
-                    if (RemainPackageNum != 0)
+                    /*if (RemainPackageNum != 0)
                     {
                         bResult = false;
                         byte[] RemainByte = new byte[2048];
-                        while (!DataRecieve(RemainByte, RemainByte.Length) & IsSlowAcqStart) ;
+                        while (!usbInterface.DataRecieve(RemainByte, RemainByte.Length) & StateIndicator.SlowAcqStart) ;
                         byte[] RemainByteWrite = new byte[RemainPackageNum];
                         for (int i = 0; i < RemainPackageNum; i++)
                         {
                             RemainByteWrite[i] = RemainByte[i];
                         }
                         bw.Write(RemainByteWrite);
-                    }
+                    }*/
                 }
                 #endregion
                 #region The Max Data Number is not set and work in consist mode
                 else
                 {
-                    while (IsSlowAcqStart)
+                    while (StateIndicator.SlowAcqStart)
                     {
-                        bResult = DataRecieve(DataReceiveBytes, DataReceiveBytes.Length);
+                        bResult = usbInterface.DataRecieve(DataReceiveBytes, DataReceiveBytes.Length);
                         if (bResult)
                         {
                             bw.Write(DataReceiveBytes);
@@ -3760,26 +2839,26 @@ namespace USB_DAQ
                 #endregion
                 //IsSlowAcqStart = false;
             }
-            else if (DataAcqMode == Adc)
+            else if (StateIndicator.OperationModeSelect == StateIndicator.OperationMode.ADC)
             {
-                while (IsAdcStart)
+                while (StateIndicator.AdcStart)
                 {
-                    bResult = DataRecieve(DataReceiveBytes, DataReceiveBytes.Length);
+                    bResult = usbInterface.DataRecieve(DataReceiveBytes, DataReceiveBytes.Length);
                     if (bResult)
                     {
                         bw.Write(DataReceiveBytes);
                     }
                 }
             }
-            byte[] EndFrame = new byte[512];
+            /*byte[] EndFrame = new byte[512];
             for (int j = 0; j < 32; j++)
             {
-                bResult = DataRecieve(EndFrame, EndFrame.Length);
+                bResult = usbInterface.DataRecieve(EndFrame, EndFrame.Length);
                 if (bResult)
                 {
                     bw.Write(EndFrame);
                 }
-            }
+            }*/
             bw.Flush();
             bw.Dispose();
             bw.Close();
@@ -3789,20 +2868,17 @@ namespace USB_DAQ
         {
             var button = sender as RadioButton;
             bool bResult = false;
-            byte[] CommandBytes = new byte[2];
             if(button.Content.ToString() == "Auto")
             {
-                DaqMode = AutoDaq;
+                StateIndicator.DaqModeSelect = StateIndicator.DaqMode.AutoDaq;
                 txtEndHoldTime.IsEnabled = false;
                 btnSlowACQ.Content = "SlowACQ";
                 btnSC_or_ReadReg.IsEnabled = true;
-                #region Set External RAZ
-                int RazSelect = 160;//0xA0
-                CommandBytes = ConstCommandByteArray(0xA8, (byte)RazSelect);
-                bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                #region Set Internal RAZ
+                bResult = MicrorocChain1.SelectRazChannel(0, MyUsbDevice1);
                 if (bResult)
                 {
-                    txtReport.AppendText("Set Raz Mode:External");
+                    txtReport.AppendText("Set Raz Mode: Internal\n");
                 }
                 else
                 {
@@ -3810,117 +2886,87 @@ namespace USB_DAQ
                                  "USB Error",   //caption
                                  MessageBoxButton.OK,//button
                                  MessageBoxImage.Error);//icon
+                    return;
                 }
                 #endregion
+                bResult = MicrorocChain1.SelectAcquisitionMode(false, MyUsbDevice1);
+                if (bResult)
+                {
+                    string report = string.Format("Set DAQ Mode: {0} DAQ\n", button.Content.ToString());
+                    txtReport.AppendText(report);
+                }
+                else
+                {
+                    MessageBox.Show("Set DAQ Mode failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
             else if(button.Content.ToString() == "Slave")
             {
-                DaqMode = SlaveDaq;
+                StateIndicator.DaqModeSelect = StateIndicator.DaqMode.SlaveDaq;
                 txtSlowACQDataNum.Text = "0";
+                bool IllegalInput;
                 btnSlowACQ.Content = "Cosmic Ray Test";
                 txtEndHoldTime.IsEnabled = true;
                 btnSC_or_ReadReg.IsEnabled = false;
                 #region DAC VTH
-                Regex rx_int = new Regex(rx_Integer);
-                bool Is_DAC_Legal = rx_int.IsMatch(txtDAC0_VTH_ASIC1.Text) && rx_int.IsMatch(txtDAC1_VTH_ASIC1.Text) && rx_int.IsMatch(txtDAC2_VTH_ASIC1.Text);
-                if (Is_DAC_Legal)
+                bResult = MicrorocChain1.Set10BitDac0(txtDAC0_VTH_ASIC1.Text, MyUsbDevice1, out IllegalInput);
+                if (bResult)
                 {
-                    int DAC0_Value = int.Parse(txtDAC0_VTH_ASIC1.Text) + 49152;//0xC000
-                    int DAC1_Value = int.Parse(txtDAC1_VTH_ASIC1.Text) + 50176;//0xC400
-                    int DAC2_Value = int.Parse(txtDAC2_VTH_ASIC1.Text) + 51200;//0xC800
-                    #region DAC0
-                    CommandBytes = ConstCommandByteArray((byte)(DAC0_Value >> 8), (byte)DAC0_Value);
-                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                    if (bResult)
-                    {
-                        string report = string.Format("Setting DAC0 VTH: {0}\n", txtDAC0_VTH_ASIC1.Text);
-                        txtReport.AppendText(report);
-                    }
-                    else
-                    {
-                        //txtReport.AppendText("set DAC0 failure, please check USB\n");
-                        MessageBox.Show("Set DAC0 failure. Please check USB", //text
-                                         "USB Error",   //caption
-                                         MessageBoxButton.OK,//button
-                                         MessageBoxImage.Error);//icon
-                    }
-                    #endregion
-                    #region DAC1
-                    CommandBytes = ConstCommandByteArray((byte)(DAC1_Value >> 8), (byte)DAC1_Value);
-                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                    if (bResult)
-                    {
-                        string report = string.Format("Setting DAC1 VTH: {0}\n", txtDAC1_VTH_ASIC1.Text);
-                        txtReport.AppendText(report);
-                    }
-                    else
-                    {
-                        //txtReport.AppendText("set DAC0 failure, please check USB\n");
-                        MessageBox.Show("Set DAC1 failure. Please check USB", //text
-                                         "USB Error",   //caption
-                                         MessageBoxButton.OK,//button
-                                         MessageBoxImage.Error);//icon
-                    }
-                    #endregion
-                    #region DAC2
-                    CommandBytes = ConstCommandByteArray((byte)(DAC2_Value >> 8), (byte)DAC2_Value);
-                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                    if (bResult)
-                    {
-                        string report = string.Format("Setting DAC2 VTH: {0}\n", txtDAC2_VTH_ASIC1.Text);
-                        txtReport.AppendText(report);
-                    }
-                    else
-                    {
-                        //txtReport.AppendText("set DAC0 failure, please check USB\n");
-                        MessageBox.Show("Set DAC0 failure. Please check USB", //text
-                                         "USB Error",   //caption
-                                         MessageBoxButton.OK,//button
-                                         MessageBoxImage.Error);//icon
-                    }
-                    #endregion
+                    string report = string.Format("Setting DAC0 VTH: {0}\n", txtDAC0_VTH_ASIC1.Text);
+                    txtReport.AppendText(report);
+                }
+                else if(IllegalInput)
+                {
+                    MessageBox.Show("DAC value is illegal,please re-type(Integer:0--1023)", "Illegal input", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
                 }
                 else
                 {
-                    MessageBox.Show("DAC value is illegal,please re-type(Integer:0--1023)", //text
-                "Illegal input",   //caption
-                MessageBoxButton.OK,//button
-                MessageBoxImage.Error);//icon
+                    MessageBox.Show("Set DAC0 failure. Please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                bResult = MicrorocChain1.Set10BitDac1(txtDAC1_VTH_ASIC1.Text, MyUsbDevice1, out IllegalInput);
+                if (bResult)
+                {
+                    string report = string.Format("Setting DAC1 VTH: {0}\n", txtDAC1_VTH_ASIC1.Text);
+                    txtReport.AppendText(report);
+                }
+                else if (IllegalInput)
+                {
+                    MessageBox.Show("DAC value is illegal,please re-type(Integer:0--1023)", "Illegal input", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                else
+                {
+                    MessageBox.Show("Set DAC1 failure. Please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                bResult = MicrorocChain1.Set10BitDac2(txtDAC2_VTH_ASIC1.Text, MyUsbDevice1, out IllegalInput);
+                if (bResult)
+                {
+                    string report = string.Format("Setting DAC2 VTH: {0}\n", txtDAC2_VTH_ASIC1.Text);
+                    txtReport.AppendText(report);
+                }
+                else if (IllegalInput)
+                {
+                    MessageBox.Show("DAC value is illegal,please re-type(Integer:0--1023)", "Illegal input", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                else
+                {
+                    MessageBox.Show("Set DAC2 failure. Please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
                 }
                 #endregion
                 #region Set Start Acq Time
                 txtStartAcqTime.Text = "1500";
-                bool Is_Time_legal = rx_int.IsMatch(txtStartAcqTime.Text);
-                if (Is_Time_legal)
+                bResult = MicrorocChain1.SetAcquisitionTime(txtStartAcqTime.Text, MyUsbDevice1, out IllegalInput);
+                if (bResult)
                 {
-                    int value1 = Int32.Parse(txtStartAcqTime.Text) / 25; //除以25ns 
-                    byte[] CmdBytes = ConstCommandByteArray(0xB2, (byte)(value1 >> 8));
-                    bResult = CommandSend(CmdBytes, CmdBytes.Length);
-                    if (!bResult)
-                    {
-                        MessageBox.Show("Set StartAcq time failure, please check USB", //text
-                                         "USB Error",   //caption
-                                         MessageBoxButton.OK,//button
-                                         MessageBoxImage.Error);//icon
-                        return;
-                    }
-                    CmdBytes = ConstCommandByteArray(0xB1, (byte)(value1));
-                    bResult = CommandSend(CmdBytes, CmdBytes.Length);
-                    if (bResult)
-                    {
-                        string report = string.Format("Set StartAcq time : {0}\n", txtStartAcqTime.Text);
-                        txtReport.AppendText(report);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Set StartAcq time failure, please check USB", //text
-                                         "USB Error",   //caption
-                                         MessageBoxButton.OK,//button
-                                         MessageBoxImage.Error);//icon
-                        return;
-                    }
+                    string report = string.Format("Set StartAcq time : {0}\n", txtStartAcqTime.Text);
+                    txtReport.AppendText(report);
                 }
-                else
+                else if (IllegalInput)
                 {
                     MessageBox.Show("Illegal StartAcq Time, please re-type(Integer:0--1638400,step:25ns)", //text
                                      "Illegal input",   //caption
@@ -3928,11 +2974,17 @@ namespace USB_DAQ
                                      MessageBoxImage.Error);//icon
                     return;
                 }
+                else
+                {
+                    MessageBox.Show("Set StartAcq time failure, please check USB", //text
+                                     "USB Error",   //caption
+                                     MessageBoxButton.OK,//button
+                                     MessageBoxImage.Error);//icon
+                    return;
+                }
                 #endregion
                 #region Set External RAZ
-                int RazSelect = 161;//0xA1
-                CommandBytes = ConstCommandByteArray(0xA8, (byte)RazSelect);
-                bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                bResult = MicrorocChain1.SelectRazChannel(1, MyUsbDevice1);
                 if (bResult)
                 {
                     txtReport.AppendText("Set Raz Mode:External");
@@ -3943,36 +2995,28 @@ namespace USB_DAQ
                                  "USB Error",   //caption
                                  MessageBoxButton.OK,//button
                                  MessageBoxImage.Error);//icon
+                    return;
                 }
                 #endregion
                 #region Set External RAZ Delay
-                bool Is_Time_Legel = rx_int.IsMatch(txtExternal_RAZ_Delay.Text) && int.Parse(txtExternal_RAZ_Delay.Text) < 400;
-                if (Is_Time_Legel)
+                bResult = MicrorocChain1.SetExternalRazDelayTime(txtExternal_RAZ_Delay.Text, MyUsbDevice1, out IllegalInput);
+                if (bResult)
                 {
-                    int ExternalRazDelay = short.Parse(txtExternal_RAZ_Delay.Text) / 25 + 208;//208 = 0xD0
-                    CommandBytes = new byte[2];
-                    CommandBytes = ConstCommandByteArray(0xA8, (byte)ExternalRazDelay);
-                    bResult = CommandSend(CommandBytes, CommandBytes.Length);
-                    if (bResult)
-                    {
                         string report = string.Format("Set External RAZ Delay time:{0} ns\n", txtExternal_RAZ_Delay.Text);
-                    }
-                    else
-                    {
-                        MessageBox.Show("select failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
-
+                }
+                else if(IllegalInput)
+                {
+                    MessageBox.Show("Illegal External RAZ Delay Time, please re-type(Integer:0--400ns,step:25ns)", "Ilegal Input", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
                 }
                 else
                 {
-                    MessageBox.Show("Illegal External RAZ Delay Time, please re-type(Integer:0--400ns,step:25ns)", "Ilegal Input", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("select failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
                 }
                 #endregion
                 #region Set External RAZ Time
-                int value = cbxRaz_mode.SelectedIndex + 192;//0xC0
-                byte[] bytes = new byte[2];
-                bytes = ConstCommandByteArray(0xA8, (byte)(value));
-                bResult = CommandSend(bytes, bytes.Length);
+                bResult = MicrorocChain1.SetExternalRazWidth(cbxRaz_mode.SelectedIndex, MyUsbDevice1);
                 if (bResult)
                 {
                     string report = string.Format("External RAZ Width : {0}\n", cbxRaz_mode.Text);
@@ -3984,12 +3028,21 @@ namespace USB_DAQ
                                      "USB Error",   //caption
                                      MessageBoxButton.OK,//button
                                      MessageBoxImage.Error);//icon
+                    return;
                 }
                 #endregion
                 MicrorocPowerPulsingDisable();
                 #region Start Load
-                CommandBytes = ConstCommandByteArray(0xD0, 0xA2);
-                bResult = CommandSend(CommandBytes, CommandBytes.Length);
+                bResult = MicrorocChain1.SelectSlowControlOrReadRegister(false, MyUsbDevice1);
+                if(bResult)
+                {
+                    txtReport.AppendText("Start load slow control parameters\n");
+                }
+                else
+                {
+                    MessageBox.Show("Please check the USB cable","USB Error",MessageBoxButton.OK,MessageBoxImage.Error);
+                }
+                bResult = MicrorocChain1.LoadSlowControlParameter(MyUsbDevice1);
                 if (bResult)
                 {
                     txtReport.AppendText("Load ASIC parameter done!\n");
@@ -4002,30 +3055,20 @@ namespace USB_DAQ
                                      MessageBoxImage.Error);//icon
                 }
                 #endregion
+                #region Select Daq Mode
+                bResult = MicrorocChain1.SelectAcquisitionMode(true, MyUsbDevice1);
+                if (bResult)
+                {
+                    string report = string.Format("Set DAQ Mode: {0} DAQ\n", button.Content.ToString());
+                    txtReport.AppendText(report);
+                }
+                else
+                {
+                    MessageBox.Show("Set DAQ Mode failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                #endregion
 
             }
-            CommandBytes = ConstCommandByteArray(0xE0, (byte)DaqMode);
-            bResult = CommandSend(CommandBytes, CommandBytes.Length);
-            if(bResult)
-            {
-                string report = string.Format("Set DAQ Mode: {0} DAQ\n", button.Content.ToString());
-                txtReport.AppendText(report);
-            }
-            else
-            {
-                MessageBox.Show("Set DAQ Mode failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            
-        }
-
-        private void TabItem_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-
-        }
-
-        private void tbiMicrorocAcq_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            txtReport.AppendText("Microroc Acq");
         }
 
         private void btnAFG3252Command_Click(object sender, RoutedEventArgs e)
@@ -4875,9 +3918,9 @@ namespace USB_DAQ
             SetAfg3252Channel1FunctionShape();
             #endregion
             #region Set Frequency
-            SetAfg3252FrequencyCopy();
             SetAfg3252Ch1Frequency();
             SetAfg3252Ch2Frequency();
+            SetAfg3252FrequencyCopy();
             #endregion
             #region Voltage Level
             if (AmplitudeOrLevel)
@@ -4897,22 +3940,988 @@ namespace USB_DAQ
             #endregion
         }
 
-        /*private void cbxAdcStartMode_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void TestLed_Click(object sender, RoutedEventArgs e)
         {
-            byte[] CommandBytes = new byte[2];
-            bool bResult = false;
-            int AdcStartModeValue = cbxAdcStartMode.SelectedIndex + 128;//0x80
-            CommandBytes = ConstCommandByteArray(0xE8, (byte)AdcStartModeValue);
-            bResult = CommandSend(CommandBytes, CommandBytes.Length);
+            bool IllegalInput;
+            bool bResult = MicrorocChain1.LightLed(txtTestLed.Text, MyUsbDevice1, out IllegalInput);
             if(bResult)
             {
-                string report = string.Format("Select ADC Start{0}\n", cbxAdcStartMode.Text);
+                txtReport.AppendText("Light LED\n");
+            }
+            else if(IllegalInput)
+            {
+                MessageBox.Show("Illegal Input: Single Hex", "Illegal Input", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            else
+            {
+                MessageBox.Show("USB Connect Error", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+        }
+
+        private void tbiMicrorocAcq_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            txtReport.AppendText("Microroc ACQ\n\n");
+        }
+
+        private void tbiSCTest_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            txtReport.Text = "";
+            btnAutoCalibrationStart.IsEnabled = false;
+            btnAutoCalibrationInitial.Background = Brushes.AliceBlue;
+            SetSCurveTestParameter();    
+        }
+        private void SetSCurveTestParameter()
+        {
+            bool bResult;
+            MicrorocPowerPulsingDisable();
+            #region Select External Raz
+            bResult = MicrorocChain1.SelectRazChannel(1, MyUsbDevice1);
+            if (bResult)
+            {
+                txtReport.AppendText("Select External RAZ\n");
+            }
+            else
+            {
+                MessageBox.Show("Select Internal RAZ failure. Please check the USB cable", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            #endregion
+            #region Select trigger out NOR64
+            bResult = MicrorocChain1.SelectTrigOutNor64OrSingle(1, MyUsbDevice1);
+            if (bResult)
+            {
+                txtReport.AppendText("Select trigger out NOR64\n");
+            }
+            else
+            {
+                MessageBox.Show("Set trigger out failure. Olease check USB cable", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            #endregion
+            #region Set external RAZ Delay
+            bool IllegalInput;
+            bResult = MicrorocChain1.SetExternalRazDelayTime("200", MyUsbDevice1, out IllegalInput);
+            if (bResult)
+            {
+                txtReport.AppendText("Set External RAZ delay time: 200ns\n");
+            }
+            else
+            {
+                MessageBox.Show("Set External RAZ delay time failure. Please check the USB cable", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            #endregion
+            #region Set External RAZ Time
+            bResult = MicrorocChain1.SetExternalRazWidth(3, MyUsbDevice1);
+            if (bResult)
+            {
+                txtReport.AppendText("Set External RAZ time: 1000ns\n");
+            }
+            else
+            {
+                MessageBox.Show("Set external RAZ time failure. Please check the USB cable", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            #endregion
+            #region Slow Control Load
+            bResult = MicrorocChain1.LoadSlowControlParameter(MyUsbDevice1);
+            if (bResult)
+            {
+                txtReport.AppendText("Load Slow Control successful\n");
+            }
+            else
+            {
+                MessageBox.Show("Load SC parameter failure. Olease check the USB cable", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            #endregion
+            #region Release External RAZ
+            bResult = MicrorocChain1.SelectAcquisitionMode(false, MyUsbDevice1);
+            if (bResult)
+            {
+                txtReport.AppendText("Release External RAZ\n");
+            }
+            else
+            {
+                MessageBox.Show("Release External RAZ failure. Please check USB cable", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            #endregion
+            bResult = MicrorocChain1.SelectOperationMode(CommandHeader.SCurveTestModeIndex, MyUsbDevice1);
+            if (bResult)
+            {
+                txtReport.AppendText("SCurve Test Mode\n");
+                StateIndicator.OperationModeSelect = StateIndicator.OperationMode.SCTest;
+            }
+            else
+            {
+                MessageBox.Show("Select SCurve Test mode failure. Please check the USB cable and re-click SCTest", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+        private void tbiAD9220_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            txtReport.Text = "";
+            bool bResult = MicrorocChain1.SelectOperationMode(CommandHeader.AdcModeIndex, MyUsbDevice1);
+            if(bResult)
+            {
+                txtReport.AppendText("ADC Mode\n");
+                StateIndicator.OperationModeSelect = StateIndicator.OperationMode.ADC;
+                MicrorocPowerPulsingDisable();
+                #region Select External Raz
+                bResult = MicrorocChain1.SelectRazChannel(1, MyUsbDevice1);
+                if (bResult)
+                {
+                    txtReport.AppendText("Select External RAZ\n");
+                }
+                else
+                {
+                    MessageBox.Show("Select Internal RAZ failure. Please check the USB cable", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                #endregion
+                #region Set trigger out Read
+                bResult = MicrorocChain1.SelectTrigOutNor64OrSingle(0, MyUsbDevice1);
+                if(bResult)
+                {
+                    txtReport.AppendText("Set trigger out: Read register\n");
+                }
+                else
+                {
+                    MessageBox.Show("Set trigger out failure. Please check the USB cable", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                #endregion
+                #region Set external RAZ Delay
+                bool IllegalInput;
+                bResult = MicrorocChain1.SetExternalRazDelayTime("200", MyUsbDevice1, out IllegalInput);
+                if(bResult)
+                {
+                    txtReport.AppendText("Set External RAZ delay time: 200ns\n");
+                }
+                else
+                {
+                    MessageBox.Show("Set External RAZ delay time failure. Please check the USB cable", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                #endregion
+                #region Set External RAZ Time
+                bResult = MicrorocChain1.SetExternalRazWidth(3, MyUsbDevice1);
+                if(bResult)
+                {
+                    txtReport.AppendText("Set External RAZ time: 1000ns\n");
+                }
+                else
+                {
+                    MessageBox.Show("Set external RAZ time failure. Please check the USB cable", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                #endregion
+                #region Slow Control Load
+                bResult = MicrorocChain1.SelectSlowControlOrReadRegister(false, MyUsbDevice1);
+                if(bResult)
+                {
+                    txtReport.AppendText("Start load slow control parameter\n");
+                }
+                else
+                {
+                    MessageBox.Show("Please check the USB cable", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                bResult = MicrorocChain1.LoadSlowControlParameter(MyUsbDevice1);
+                if (bResult)
+                {
+                    txtReport.AppendText("Load Slow Control successful\n");
+                }
+                else
+                {
+                    MessageBox.Show("Load SC parameter failure. Olease check the USB cable", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                #endregion
+            }
+            else
+            {
+                MessageBox.Show("Select AD9220 test mode failure. Please check the USB cable and re-click the AD9220", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+        }
+
+        private void tbiSweepAcq_MouseRightButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            txtReport.Text = "";
+            bool bResult = MicrorocChain1.SelectOperationMode(CommandHeader.SweepAcqModeIndex, MyUsbDevice1);
+            if(bResult)
+            {
+                txtReport.AppendText("Sweep ACQ Mode Select\n");
+                StateIndicator.OperationModeSelect = StateIndicator.OperationMode.SweepAcq;
+            }
+            else
+            {
+                MessageBox.Show("Select Sweep ACQ Test mode failure. Please check the USB cable and re-click Sweep ACQ", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+        }
+
+        private void tbmNormalAcq_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            txtReport.Text = "";
+            bool bResult = MicrorocChain1.SelectOperationMode(CommandHeader.AcqModeIndex, MyUsbDevice1);
+            if (bResult)
+            {
+                txtReport.AppendText("Normal ACQ\n");
+                StateIndicator.OperationModeSelect = StateIndicator.OperationMode.SCTest;
+                MicrorocPowerPulsingEnable();
+                #region Select Internal RAZ
+                bResult = MicrorocChain1.SelectRazChannel(0, MyUsbDevice1);
+                if(bResult)
+                {
+                    txtReport.AppendText("Internal RAZ\n");
+                }
+                else
+                {
+                    MessageBox.Show("Set internal RAZ failure. Please check the USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                #endregion
+                #region Select trigger out NOR64
+                bResult = MicrorocChain1.SelectTrigOutNor64OrSingle(1, MyUsbDevice1);
+                if(bResult)
+                {
+                    txtReport.AppendText("Select trigger out NOR64\n");
+                }
+                else
+                {
+                    MessageBox.Show("Set trigger out failure. Olease check USB cable", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                #endregion
+                #region Slow Control Load
+                bResult = MicrorocChain1.LoadSlowControlParameter(MyUsbDevice1);
+                if(bResult)
+                {
+                    txtReport.AppendText("Load Slow Control successful\n");
+                }
+                else
+                {
+                    MessageBox.Show("Load SC parameter failure. Olease check the USB cable", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                #endregion
+            }
+            else
+            {
+                MessageBox.Show("Select Normal ACQ mode failure. Please check the USB cable and re-click Normal ACQ", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void btnTestSlowControlSend_Click(object sender, RoutedEventArgs e)
+        {
+            bool bResult;
+            #region RAZ Select
+            bResult = MicrorocChain1.SelectRazChannel(cbxRazSelect.SelectedIndex, MyUsbDevice1);
+            if (bResult)
+            {
+                string report = string.Format("Set Raz Mode: {0}\n", cbxRazSelect.Text);
                 txtReport.AppendText(report);
             }
             else
             {
-                MessageBox.Show("Set ADC Start Mode failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Set Raz Mode failure, please check USB", //text
+                             "USB Error",   //caption
+                             MessageBoxButton.OK,//button
+                             MessageBoxImage.Error);//icon
+                return;
             }
-        }*/
+            #endregion
+            #region ReadReg Or NOR64
+            bResult = MicrorocChain1.SelectTrigOutNor64OrSingle(cbxReadOrNOR64.SelectedIndex, MyUsbDevice1);
+            if (bResult)
+            {
+                string report = string.Format("Set trigger out by {0}\n", cbxReadOrNOR64.Text);
+                txtReport.AppendText(report);
+            }
+            else
+            {
+                MessageBox.Show("Set Readreg or NOR64 failure, please check USB", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            #endregion
+        }
+
+        private void btnShowCurrentPath_Click(object sender, RoutedEventArgs e)
+        {
+            
+            txtReport.AppendText(CurrentPath);
+            string DefaultDicrectory = @txtFileDir.Text;
+            string DefaultFileName = DateTime.Now.ToString();
+            DefaultFileName = DefaultFileName.Replace("/", "_");
+            DefaultFileName = DefaultFileName.Replace(":", "_");
+            DefaultFileName = DefaultFileName.Replace(" ", "T");
+            DefaultFileName += ".dat";
+            filepath = Path.Combine(DefaultDicrectory, DefaultFileName);
+            tbxCurrentPath.Text = filepath;
+            FileStream fs = null;
+            if (!File.Exists(filepath))
+            {
+                fs = File.Create(filepath);
+                string report = String.Format("File:{0} Created\n", filepath);
+                txtReport.AppendText(report.ToString());
+                StateIndicator.FileSaved = true;
+                fs.Close();
+            }
+            else
+            {
+                MessageBox.Show("Save file failure. Please save the file manual", "File Save Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+        private void CalibrationInitial()
+        {
+            bool bResult;
+            string report;
+            #region Set frequency 100kHz
+            bResult = AutoCalibration.SetTestFrequency(MyAFG3252, out report);
+            if (bResult)
+            {
+                txtReport.AppendText(report);
+            }
+            else
+            {
+                MessageBox.Show("Set test frequency failure. Please check the USB", "AFG3252 Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            #endregion
+            #region Set test shape: Pulse
+            bResult = AutoCalibration.SetTestShape(MyAFG3252, out report);
+            if (bResult)
+            {
+                txtReport.AppendText(report);
+            }
+            else
+            {
+                MessageBox.Show("Set test shape failure. Please check the USB", "AFG3252 Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            #endregion
+            #region Set channel2 voltage level LVCMOS
+            bResult = AutoCalibration.SetChannel2Voltage(MyAFG3252, out report);
+            if (bResult)
+            {
+                txtReport.AppendText(report);
+            }
+            else
+            {
+                MessageBox.Show("Set EXT_CLK failure. Please check the USB", "AFG3252 Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            #endregion
+            #region Set channel1 low level at 0V
+            bResult = MyAFG3252.SetVoltageLow(1, 0, AFG3252.VoltageUnitV);
+            if(!bResult)
+            {
+                MessageBox.Show("Initial AFG3252 failure. Please check the USB cable", "AFG3252 Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            #endregion
+            #region Set output on
+            bResult = MyAFG3252.OpenOutput();
+            if(bResult)
+            {
+                txtReport.AppendText("AFG3252 ON\n");
+            }
+            else
+            {
+                MessageBox.Show("Set output on failure. Please check the USB cable", "AFG3252 Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            #endregion
+            #region Create test path
+            CreateSCTestFolder();
+            #endregion
+            #region Set Slow Control
+            bResult = MicrorocChain1.SelectOperationMode(CommandHeader.AcqModeIndex, MyUsbDevice1);
+            if(!bResult)
+            {
+                MessageBox.Show("Please check the USB cable of DIF", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            MicrorocChain1.SelectSlowControlOrReadRegister(true, MyUsbDevice1);
+            MicrorocSetSlowControl();
+            MicrorocChain1.SelectSlowControlOrReadRegister(false, MyUsbDevice1);
+            MicrorocSetSlowControl();
+            #endregion
+            SetSCurveTestParameter();
+        }
+
+        private bool CreateSCTestFolder()
+        {
+            string DefaultPath = @"D:\ExperimentsData\test";
+            string DefaultSubPath = DateTime.Now.ToString();
+            DefaultSubPath = DefaultSubPath.Replace("/", "_");
+            DefaultSubPath = DefaultSubPath.Replace(":", "_");
+            DefaultSubPath = DefaultSubPath.Replace(" ", "_");
+            string TestFolder = Path.Combine(DefaultPath, "SCurveTest", DefaultSubPath);
+            if (!Directory.Exists(TestFolder))//路径不存在
+            {
+                string path = String.Format("File Directory {0} Created\n", TestFolder);
+                Directory.CreateDirectory(TestFolder);
+                txtReport.AppendText(path);
+                txtFileDir.Text = TestFolder;
+                return true;
+            }
+            else
+            {
+                MessageBox.Show("The File Directory already exits", //text
+                                "Created failure",   //caption
+                                MessageBoxButton.OK,//button
+                                MessageBoxImage.Warning);//icon
+                return false;
+            }
+        }
+        private bool SaveSCTestFile(double TestCharge)
+        {
+            string TestFileName = string.Format("SCTest{0}fC.dat", TestCharge);
+            filepath = Path.Combine(txtFileDir.Text, TestFileName);
+            FileStream fs = null;
+            if (!File.Exists(filepath))
+            {
+                fs = File.Create(filepath);
+                string report = String.Format("File:{0} Created\n", filepath);
+                txtReport.AppendText(report.ToString());
+                StateIndicator.FileSaved = true;
+                fs.Close();
+                txtFileName.Text = TestFileName;
+                return true;
+            }
+            else
+            {
+                MessageBox.Show("Save file failure. Please save the file manual", "File Save Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+        }
+
+
+        private void btnAutoCalibrationStart_Click(object sender, RoutedEventArgs e)
+        {
+            btnAutoCalibrationStart.Background = Brushes.Red;
+            btnAutoCalibrationStart.Content = "Calibration Abort";
+            //测试完按钮不可按
+            btnAutoCalibrationStart.IsEnabled = false;
+        }
+
+        private void btnAutoCalibrationInitial_Click(object sender, RoutedEventArgs e)
+        {
+            CalibrationInitial();
+            btnAutoCalibrationStart.IsEnabled = true;
+            btnAutoCalibrationStart.Background = Brushes.Green;
+            btnAutoCalibrationStart.Content = "Calibration Start";
+            btnAutoCalibrationInitial.Background = Brushes.DimGray;
+        }
+
+        private void btnTestFileSave_Click(object sender, RoutedEventArgs e)
+        {
+            CreateSCTestFolder();
+            SaveSCTestFile(20);
+        }
+
+        private void btnHelp_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start(AppDomain.CurrentDomain.BaseDirectory + "Help/Help.html");
+        }
+
+        private void PowerPulsingPinEnable()
+        {
+            if(MicrorocAsic.PowerPulsingPinEnableSet(1, MyUsbDevice1))
+            {
+                txtReport.AppendText("Power Pulsing Pin Enable\n");
+            }
+            else
+            {
+                MessageBox.Show("Set power pulsing pin enable failure. Please check USB", "USB ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void PowerPulsingPinDisable()
+        {
+            if (MicrorocAsic.PowerPulsingPinEnableSet(0, MyUsbDevice1))
+            {
+                txtReport.AppendText("Power Pulsing Pin Disable\n");
+            }
+            else
+            {
+                MessageBox.Show("Set power pulsing pin disable failure. Please check USB", "USB ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void rdbPowerPulsingEnableNewDif_Checked(object sender, RoutedEventArgs e)
+        {
+            PowerPulsingPinEnable();
+        }
+
+        private void rdbPowerPulsingDisableNewDif_Checked(object sender, RoutedEventArgs e)
+        {
+            PowerPulsingPinDisable();
+        }
+
+        private bool SelectSlowControl()
+        {
+            if(MicrorocAsic.SlowControlOrReadScopeSelect(1, MyUsbDevice1))
+            {
+                txtReport.AppendText("Select Slow Control\n");
+                StateIndicator.NewDifSlowControlOrReadScope = StateIndicator.NewDifParameterLoad.SlowControl;
+                return true;
+            }
+            else
+            {
+                MessageBox.Show("Select Slow Control failure. Please check USB", "USB ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+        }
+        private bool SelectReadScope()
+        {
+            if (MicrorocAsic.SlowControlOrReadScopeSelect(0, MyUsbDevice1))
+            {
+                txtReport.AppendText("Select Read Scope\n");
+                StateIndicator.NewDifSlowControlOrReadScope = StateIndicator.NewDifParameterLoad.ReadScope;
+                return true;
+            }
+            else
+            {
+                MessageBox.Show("Select Read Scope failure. Please check USB", "USB ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+        }
+
+        private bool rdbSlowControlSet_Checked(object sender, RoutedEventArgs e)
+        {
+            btnConfigurationParameterLoad.Content = "Slow Control";
+            return SelectSlowControl();
+        }
+
+        private bool rdbReadScopeSet_Checked(object sender, RoutedEventArgs e)
+        {
+            btnConfigurationParameterLoad.Content = "Read Scope";
+            return SelectReadScope();
+        }
+
+        private async void btnStartCarrierUsb_Click(object sender, RoutedEventArgs e)
+        {
+            #region Check File Legal
+            if (!CheckFileSaved())
+            {
+                return;
+            }
+            #endregion
+            if (StateIndicator.SlowAcqStart == false)
+            {
+                StateIndicator.SlowAcqStart = true;
+                txtReport.AppendText("Microroc Carier USB Stop\n");
+                btnStartCarrierUsb.Content = "2. Data Stop";
+                await Task.Run(() => GetSlowDataRateResultCallBack(MyUsbDevice1));
+                
+                Thread.Sleep(10);
+                StateIndicator.SlowAcqStart = false;
+                StateIndicator.FileSaved = false;
+            }
+            else
+            {
+                btnStartCarrierUsb.Content = "2. Data Start";
+                Thread.Sleep(10);
+                StateIndicator.SlowAcqStart = false;
+                StateIndicator.FileSaved = false;
+            }
+        }
+
+        private void btnSelectCarrier_Click(object sender, RoutedEventArgs e)
+        {
+            StateIndicator.OperationModeSelect = StateIndicator.OperationMode.MicrorocCarier;
+            StateIndicator.SlowDataRatePackageNumber = 0;
+            txtReport.AppendText("Select Microroc Carier board\n");
+        }
+
+        private void btnConfigurationParameterLoad_Click(object sender, RoutedEventArgs e)
+        {
+            #region Generate parameter array
+            #region Header
+            TextBox[] tbxHeaderChain = new TextBox[4] { tbxHeaderChain1, tbxHeaderChain2, tbxHeaderChain3, tbxHeaderChain4 };
+            #endregion
+            #region Enabled
+            int[] ChainEnable = new int[4] { cbxEnableChain1.SelectedIndex, cbxEnableChain2.SelectedIndex, cbxEnableChain3.SelectedIndex, cbxEnableChain4.SelectedIndex };
+            #endregion
+            #region Vth0~2
+            TextBox[,] tbxVth0Asic = new TextBox[4, 4] {
+                {tbxVth0Asic11, tbxVth0Asic12, tbxVth0Asic13, tbxVth0Asic14},
+                {tbxVth0Asic21, tbxVth0Asic22, tbxVth0Asic23, tbxVth0Asic24 },
+                {tbxVth0Asic31, tbxVth0Asic32, tbxVth0Asic33, tbxVth0Asic34 },
+                {tbxVth0Asic41, tbxVth0Asic42, tbxVth0Asic43, tbxVth0Asic44 }
+            };
+            TextBox[,] tbxVth1Asic = new TextBox[4, 4] {
+                {tbxVth1Asic11, tbxVth1Asic12, tbxVth1Asic13, tbxVth1Asic14},
+                {tbxVth1Asic21, tbxVth1Asic22, tbxVth1Asic23, tbxVth1Asic24 },
+                {tbxVth1Asic31, tbxVth1Asic32, tbxVth1Asic33, tbxVth1Asic34 },
+                {tbxVth1Asic41, tbxVth1Asic42, tbxVth1Asic43, tbxVth1Asic44 }
+            };
+            TextBox[,] tbxVth2Asic = new TextBox[4, 4] {
+                {tbxVth2Asic11, tbxVth2Asic12, tbxVth2Asic13, tbxVth2Asic14},
+                {tbxVth2Asic21, tbxVth2Asic22, tbxVth2Asic23, tbxVth2Asic24 },
+                {tbxVth2Asic31, tbxVth2Asic32, tbxVth2Asic33, tbxVth2Asic34 },
+                {tbxVth2Asic41, tbxVth2Asic42, tbxVth2Asic43, tbxVth2Asic44 }
+            };
+            #endregion
+            #region Shaper out
+            ComboBox[,] cbxShaperHighOrLowGainChain = new ComboBox[4, 4] {
+                {cbxShaperAsic11, cbxShaperAsic12, cbxShaperAsic13, cbxShaperAsic14} ,
+                {cbxShaperAsic21, cbxShaperAsic22, cbxShaperAsic23, cbxShaperAsic24 },
+                {cbxShaperAsic31, cbxShaperAsic32, cbxShaperAsic33, cbxShaperAsic34 },
+                {cbxShaperAsic41, cbxShaperAsic42, cbxShaperAsic43, cbxShaperAsic44 }
+            };
+            #endregion
+            #region CTest Channel
+            TextBox[,] tbxCTestChannelAsic = new TextBox[4, 4]
+            {
+                {tbxCTestChannelAsic11, tbxCTestChannelAsic12, tbxCTestChannelAsic13, tbxCTestChannelAsic14 },
+                {tbxCTestChannelAsic21, tbxCTestChannelAsic22, tbxCTestChannelAsic23, tbxCTestChannelAsic24 },
+                {tbxCTestChannelAsic31, tbxCTestChannelAsic32, tbxCTestChannelAsic33, tbxCTestChannelAsic34 },
+                {tbxCTestChannelAsic41, tbxCTestChannelAsic42, tbxCTestChannelAsic43, tbxCTestChannelAsic44 }
+            };
+            #endregion
+            #region Calibration File
+            TextBox[,] tbxCalibrationAsic = new TextBox[4, 4]
+            {
+                {tbxCalibrationAsic11, tbxCalibrationAsic12, tbxCalibrationAsic13, tbxCalibrationAsic14 },
+                {tbxCalibrationAsic21, tbxCalibrationAsic22, tbxCalibrationAsic23, tbxCalibrationAsic24 },
+                {tbxCalibrationAsic31, tbxCalibrationAsic32, tbxCalibrationAsic33, tbxCalibrationAsic34 },
+                {tbxCalibrationAsic41, tbxCalibrationAsic42, tbxCalibrationAsic43, tbxCalibrationAsic44 }
+            };
+            #endregion
+            #region Read Scope
+            TextBox[,] tbxReadScopeAsic = new TextBox[4, 4]
+            {
+                {tbxReadScopeAsic11, tbxReadScopeAsic12, tbxReadScopeAsic13, tbxReadScopeAsic14 },
+                {tbxReadScopeAsic21, tbxReadScopeAsic22, tbxReadScopeAsic23, tbxReadScopeAsic24 },
+                {tbxReadScopeAsic31, tbxReadScopeAsic32, tbxReadScopeAsic33, tbxReadScopeAsic34 },
+                {tbxReadScopeAsic41, tbxReadScopeAsic42, tbxReadScopeAsic43, tbxReadScopeAsic44 }
+            };
+            #endregion
+            #region Sw hg
+            ComboBox[,] cbxHighGainFeedbackAsic = new ComboBox[4, 4]
+            {
+                {cbxHighGainFeedbackAsic11, cbxHighGainFeedbackAsic12, cbxHighGainFeedbackAsic13, cbxHighGainFeedbackAsic14 },
+                {cbxHighGainFeedbackAsic21, cbxHighGainFeedbackAsic22, cbxHighGainFeedbackAsic23, cbxHighGainFeedbackAsic24 },
+                {cbxHighGainFeedbackAsic31, cbxHighGainFeedbackAsic32, cbxHighGainFeedbackAsic33, cbxHighGainFeedbackAsic34 },
+                {cbxHighGainFeedbackAsic41, cbxHighGainFeedbackAsic42, cbxHighGainFeedbackAsic43, cbxHighGainFeedbackAsic44 }
+            };
+            #endregion
+            #region Sw lg
+            ComboBox[,] cbxLowGainShaperFeedbackAsic = new ComboBox[4, 4]
+            {
+                {cbxLowGainFeedbackAsic11, cbxLowGainFeedbackAsic12, cbxLowGainFeedbackAsic13, cbxLowGainFeedbackAsic14 },
+                {cbxLowGainFeedbackAsic21, cbxLowGainFeedbackAsic22, cbxLowGainFeedbackAsic23, cbxLowGainFeedbackAsic24 },
+                {cbxLowGainFeedbackAsic31, cbxLowGainFeedbackAsic32, cbxLowGainFeedbackAsic33, cbxLowGainFeedbackAsic34 },
+                {cbxLowGainFeedbackAsic41, cbxLowGainFeedbackAsic42, cbxLowGainFeedbackAsic43, cbxLowGainFeedbackAsic44 }
+            };
+            #endregion
+            #region Mask Select
+            ComboBox[,] cbxMaskSelectAsic = new ComboBox[4, 4]
+            {
+                {cbxMaskSelectAsic11, cbxMaskSelectAsic12, cbxMaskSelectAsic13, cbxMaskSelectAsic14 },
+                {cbxMaskSelectAsic21, cbxMaskSelectAsic22, cbxMaskSelectAsic23, cbxMaskSelectAsic24 },
+                {cbxMaskSelectAsic31, cbxMaskSelectAsic32, cbxMaskSelectAsic33, cbxMaskSelectAsic34 },
+                {cbxMaskSelectAsic41, cbxMaskSelectAsic42, cbxMaskSelectAsic43, cbxMaskSelectAsic44 }
+            };
+            #endregion
+            #region Mask File
+            TextBox[,] tbxMaskFileAsic = new TextBox[4, 4]
+            {
+                {tbxMaskFileAsic11, tbxMaskFileAsic12, tbxMaskFileAsic13, tbxMaskFileAsic14 },
+                {tbxMaskFileAsic21, tbxMaskFileAsic22, tbxMaskFileAsic23, tbxMaskFileAsic24 },
+                {tbxMaskFileAsic31, tbxMaskFileAsic32, tbxMaskFileAsic33, tbxMaskFileAsic34 },
+                {tbxMaskFileAsic41, tbxMaskFileAsic42, tbxMaskFileAsic43, tbxMaskFileAsic44 }
+            };
+            #endregion
+            #endregion
+            #region EndReadoutParameter
+            int EndReadoutParameter = ChainEnable[0] + ChainEnable[1] * 2 + ChainEnable[2] * 4 + ChainEnable[3] * 8;
+            bool bResult = MicrorocAsic.EndReadoutParameterSet(EndReadoutParameter, MyUsbDevice1);
+            string report;
+            if(bResult)
+            {
+                report = string.Format("Set EndReadoutParameter: {0}{1}{2}{3}", ChainEnable[0], ChainEnable[1], ChainEnable[2], ChainEnable[3]);
+                txtReport.AppendText(report);
+            }
+            else
+            {
+                ShowUsbError("EndReadoutParameter");
+            }
+            #endregion
+            for(int i = 0; i<4; i++)
+            {
+                #region Select ASIC chain
+                bResult = MicrorocAsicChain[i].SelectAsicChain(MyUsbDevice1);
+                if(bResult)
+                {
+                    report = string.Format("Select Chain{0}\n", i);
+                    txtReport.AppendText(report);
+                }
+                else
+                {
+                    ShowUsbError("Chain Select");
+                    return;
+                }
+                #endregion
+                for (int j = 3; j>=0; j--)
+                {
+                    #region SlowControl
+                    if(StateIndicator.NewDifSlowControlOrReadScope == StateIndicator.NewDifParameterLoad.SlowControl)
+                    {
+                        #region Set Header
+                        bResult = SetAsicHeader(tbxHeaderChain[i].Text, MicrorocAsicChain[i], j);
+                        if (!bResult)
+                        {
+                            return;
+                        }
+                        #endregion
+                        #region Set VTH
+                        bResult = SetDac0Vth(tbxVth0Asic[i, j].Text, MicrorocAsicChain[i], j);
+                        if(!bResult)
+                        {
+                            return;
+                        }
+                        bResult = SetDac1Vth(tbxVth1Asic[i, j].Text, MicrorocAsicChain[i], j);
+                        if (!bResult)
+                        {
+                            return;
+                        }
+                        bResult = SetDac2Vth(tbxVth2Asic[i, j].Text, MicrorocAsicChain[i], j);
+                        if (!bResult)
+                        {
+                            return;
+                        }
+                        #endregion
+                        #region Shaper Out
+                        bResult = SetShaperHighOrLowGain(cbxShaperHighOrLowGainChain[i, j].SelectedIndex, MicrorocAsicChain[i], j);
+                        if(!bResult)
+                        {
+                            return;
+                        }
+                        #endregion
+
+                    }
+                    #endregion
+                    #region ReadScope
+                    else
+                    {
+
+                    }
+                    #endregion
+                }
+            }
+        }
+
+        private bool SetDac0Vth(string Dac0Vth, MicrorocAsic MyMicroroc, int AsicLocation)
+        {
+            bool IllegalInput;
+            bool bResult = MyMicroroc.Dac0VthSet(Dac0Vth, MyUsbDevice1, out IllegalInput);
+            if(IllegalInput)
+            {
+                MessageBox.Show("Illegal Input value. The Vth0 should be 0-1023", "Illegal Input ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            if(bResult)
+            {
+                string report = string.Format("Set ASIC{0}{1} VTH0:{2}\n", MyMicroroc.ChainID + 1, AsicLocation + 1, Dac0Vth);
+                txtReport.AppendText(report);
+                return true;
+            }
+            else
+            {
+                MessageBox.Show("Set VTH0 failure. Please check USB", "USB ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+        }
+        private bool SetDac1Vth(string Dac1Vth, MicrorocAsic MyMicroroc, int AsicLocation)
+        {
+            bool IllegalInput;
+            bool bResult = MyMicroroc.Dac0VthSet(Dac1Vth, MyUsbDevice1, out IllegalInput);
+            if (IllegalInput)
+            {
+                MessageBox.Show("Illegal Input value. The Vth1 should be 0-1023", "Illegal Input ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            if (bResult)
+            {
+                string report = string.Format("Set ASIC{0}{1} VTH1:{2}\n", MyMicroroc.ChainID + 1, AsicLocation + 1, Dac1Vth);
+                txtReport.AppendText(report);
+                return true;
+            }
+            else
+            {
+                MessageBox.Show("Set VTH1 failure. Please check USB", "USB ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+        }
+        private bool SetDac2Vth(string Dac2Vth, MicrorocAsic MyMicroroc, int AsicLocation)
+        {
+            bool IllegalInput;
+            bool bResult = MyMicroroc.Dac0VthSet(Dac2Vth, MyUsbDevice1, out IllegalInput);
+            if (IllegalInput)
+            {
+                MessageBox.Show("Illegal Input value. The Vth2 should be 0-1023", "Illegal Input ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            if (bResult)
+            {
+                string report = string.Format("Set ASIC{0}{1} VTH2:{2}\n", MyMicroroc.ChainID + 1, AsicLocation + 1, Dac2Vth);
+                txtReport.AppendText(report);
+                return true;
+            }
+            else
+            {
+                MessageBox.Show("Set VTH2 failure. Please check USB", "USB ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+        }
+
+        private bool SetAsicHeader(string Header,  MicrorocAsic myMicroroc, int AsicLocation)
+        {
+            bool IllegalInput;
+            bool bResult = myMicroroc.SetChipID(Header, AsicLocation, MyUsbDevice1, out IllegalInput);
+            if(IllegalInput)
+            {
+                ShowIllegalInput("The header value should be 00-FF");
+                return false;
+            }
+            if(bResult)
+            {
+                string report = string.Format("Set ASIC{0}{1} Header:{2}\n", myMicroroc.ChainID + 1, AsicLocation, Header);
+                txtReport.AppendText(report);
+                return true;
+            }
+            else
+            {
+                ShowUsbError("Header");
+                return false;
+            }
+        }
+
+        private bool SetShaperHighOrLowGain(int HighOrLow, MicrorocAsic MyMicroroc, int AsicLocation)
+        {
+            bool bResult = MyMicroroc.ShaperOutLowGainOrHighGainSelect(HighOrLow, MyUsbDevice1);
+            if(bResult)
+            {
+                string report = string.Format("Set ASIC{0}{1} Shaper output {2} gain\n", MyMicroroc.ChainID, AsicLocation, ((HighOrLow == 1) ? "Low" : "High"));
+                txtReport.AppendText(report);
+                return true;
+            }
+            else
+            {
+                ShowUsbError("Shaper output");
+                return false;
+            }
+        }
+
+        private void SetCTestChannel(string CTestChannel, MicrorocAsic MyMicroroc, int AsicLocation)
+        {
+            bool IllegalInput;
+            bool bResult = MyMicroroc.CTestChannelSet(CTestChannel, MyUsbDevice1, out IllegalInput);
+            if(IllegalInput)
+            {
+                ShowIllegalInput("CTest Channel should be 1-64");
+                return;
+            }
+            if(bResult)
+            {
+                string report = string.Format("Set ASIC{0}{1} CTest channel: {2}", MyMicroroc.ChainID + 1, AsicLocation + 1, CTestChannel);
+                txtReport.AppendText(report);
+            }
+            else
+            {
+                ShowUsbError("CTest Channel");
+            }
+        }
+        private void SetReadScopeChannel(string ReadScopeChannel, MicrorocAsic MyMicroroc, int AsicLocation)
+        {
+            bool IllegalInput;
+            bool bResult = MyMicroroc.ReadScopeChannelSet(ReadScopeChannel, MyUsbDevice1, out IllegalInput);
+            if(IllegalInput)
+            {
+                ShowIllegalInput("Read scope channel should be: 1-64");
+                return;
+            }
+            if(bResult)
+            {
+                string report = string.Format("Set ASIC{0}{1} ReadScope channel: {2}", MyMicroroc.ChainID + 1, AsicLocation, ReadScopeChannel);
+                txtReport.AppendText(report);
+            }
+            else
+            {
+                ShowUsbError("ReadScope Channel");
+            }
+        }
+
+        private void SetHighGainFeedbackParameter(int HighGainFeedback, MicrorocAsic MyMicroroc, int AsicLocation)
+        {
+            if (MyMicroroc.HighGainShaperFeedbackSelect(HighGainFeedback, MyUsbDevice1))
+            {
+                string report = string.Format("Set ASIC{0}{1} Sw_hg: {2}", MyMicroroc.ChainID + 1, AsicLocation + 1, HighGainFeedback);
+                txtReport.AppendText(report);
+            }
+            else
+            {
+                ShowUsbError("Sw_hg");
+            }
+        }
+        private void SetLowGainFeedbackParameter(int LowGainFeedback, MicrorocAsic MyMicroroc, int AsicLocation)
+        {
+            if (MyMicroroc.LowGainShaperFeedbackSelect(LowGainFeedback, MyUsbDevice1))
+            {
+                string report = string.Format("Set ASIC{0}{1} Sw_lg: {2}", MyMicroroc.ChainID + 1, AsicLocation + 1, LowGainFeedback);
+                txtReport.AppendText(report);
+            }
+            else
+            {
+                ShowUsbError("Sw_lg");
+            }
+        }
+
+        private void ShowIllegalInput(string SetItem)
+        {
+            string ErrorMessage = string.Format("Illegal Input Value. {0}", SetItem);
+            MessageBox.Show(ErrorMessage, "Illegal Input ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+        private void ShowUsbError(string SetItem)
+        {
+            string ErrorMessage = string.Format("Set {0} failure. Pease check USB", SetItem);
+            MessageBox.Show(ErrorMessage, "USB ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+
+        private void btnSendSerialData_Click(object sender, RoutedEventArgs e)
+        {
+            int TranmitData = Convert.ToInt32(tbxSerialData.Text, 16);
+            int TransmitData1 = (TranmitData & 15) + Convert.ToInt32("A0B0", 16);
+            int TransmitData2 = ((TranmitData >> 4) & 15) + Convert.ToInt32("A0C0", 16);
+            MyUsbDevice1.CommandSend(MyUsbDevice1.ConstCommandByteArray(TransmitData1));
+            MyUsbDevice1.CommandSend(MyUsbDevice1.ConstCommandByteArray(TransmitData2));
+            Thread.Sleep(100);
+            MyUsbDevice1.CommandSend(MyUsbDevice1.ConstCommandByteArray(Convert.ToInt32("A0A1", 16)));
+            string report = string.Format("Send serial data: {0}", tbxSerialData.Text);
+            txtReport.AppendText(report);
+        }
+        bool MicrorocCarrierUsbStart = false;
+        private void btnMicrorocCarierUsbStart_Click(object sender, RoutedEventArgs e)
+        {
+            if(MicrorocCarrierUsbStart == false)
+            {
+                MicrorocCarrierUsbStart = true;
+                btnMicrorocCarierUsbStart.Content = "3. USB Stop";
+                MyUsbDevice1.CommandSend(MyUsbDevice1.ConstCommandByteArray(HexStringToByteArray("A0D1")));
+                txtReport.AppendText("USB Start\n");
+            }
+            else
+            {
+                MicrorocCarrierUsbStart = false;
+                btnMicrorocCarierUsbStart.Content = "3. USB Start";
+                MyUsbDevice1.CommandSend(MyUsbDevice1.ConstCommandByteArray(HexStringToByteArray("A0D0")));
+                txtReport.AppendText("USB Stop\n");
+            }
+        }
     }
 }

@@ -18,6 +18,7 @@ using System.IO.Ports;
 using System.Runtime.InteropServices;
 using System.Windows.Interop;
 using System.Diagnostics;
+using System.Collections;
 //using System.Collections.ObjectModel;//new add 20150823
 //using Target7_NEWDAQ.DataModel;      //new add 20150823
 namespace USB_DAQ
@@ -4490,16 +4491,16 @@ namespace USB_DAQ
             }
         }
 
-        private bool rdbSlowControlSet_Checked(object sender, RoutedEventArgs e)
+        private void rdbSlowControlSet_Checked(object sender, RoutedEventArgs e)
         {
             btnConfigurationParameterLoad.Content = "Slow Control";
-            return SelectSlowControl();
+            SelectSlowControl();
         }
 
-        private bool rdbReadScopeSet_Checked(object sender, RoutedEventArgs e)
+        private void rdbReadScopeSet_Checked(object sender, RoutedEventArgs e)
         {
             btnConfigurationParameterLoad.Content = "Read Scope";
-            return SelectReadScope();
+            SelectReadScope();
         }
 
         private async void btnStartCarrierUsb_Click(object sender, RoutedEventArgs e)
@@ -4637,6 +4638,15 @@ namespace USB_DAQ
                 {tbxMaskFileAsic41, tbxMaskFileAsic42, tbxMaskFileAsic43, tbxMaskFileAsic44 }
             };
             #endregion
+            #region DiscriminatorSelect
+            ComboBox[,] cbxMaskDiscriminatorAsic = new ComboBox[4, 4]
+            {
+                {cbxMaskDiscriminatorAsic11, cbxMaskDiscriminatorAsic12, cbxMaskDiscriminatorAsic13, cbxMaskDiscriminatorAsic14 },
+                {cbxMaskDiscriminatorAsic21, cbxMaskDiscriminatorAsic22, cbxMaskDiscriminatorAsic23, cbxMaskDiscriminatorAsic24 },
+                {cbxMaskDiscriminatorAsic31, cbxMaskDiscriminatorAsic32, cbxMaskDiscriminatorAsic33, cbxMaskDiscriminatorAsic34 },
+                {cbxMaskDiscriminatorAsic41, cbxMaskDiscriminatorAsic42, cbxMaskDiscriminatorAsic43, cbxMaskDiscriminatorAsic44 }
+            };
+            #endregion
             #endregion
             #region EndReadoutParameter
             int EndReadoutParameter = ChainEnable[0] + ChainEnable[1] * 2 + ChainEnable[2] * 4 + ChainEnable[3] * 8;
@@ -4644,7 +4654,7 @@ namespace USB_DAQ
             string report;
             if(bResult)
             {
-                report = string.Format("Set EndReadoutParameter: {0}{1}{2}{3}", ChainEnable[0], ChainEnable[1], ChainEnable[2], ChainEnable[3]);
+                report = string.Format("Set EndReadoutParameter: {0}{1}{2}{3}\n", ChainEnable[0], ChainEnable[1], ChainEnable[2], ChainEnable[3]);
                 txtReport.AppendText(report);
             }
             else
@@ -4654,6 +4664,10 @@ namespace USB_DAQ
             #endregion
             for(int i = 0; i<4; i++)
             {
+                if(ChainEnable[i] == 0)
+                {
+                    continue;
+                }
                 #region Select ASIC chain
                 bResult = MicrorocAsicChain[i].SelectAsicChain(MyUsbDevice1);
                 if(bResult)
@@ -4703,14 +4717,100 @@ namespace USB_DAQ
                             return;
                         }
                         #endregion
-
+                        #region Set CTest channel
+                        bResult = SetCTestChannel(tbxCTestChannelAsic[i, j].Text, MicrorocAsicChain[i], j);
+                        if(!bResult)
+                        {
+                            return;
+                        }
+                        #endregion
+                        #region Calibration
+                        string CalibrationFileName;
+                        StreamReader CalibrationFile;
+                        CalibrationFileName = Path.Combine(CurrentPath, tbxCalibrationAsic[i, j].Text);
+                        if (File.Exists(CalibrationFileName))
+                        {
+                            byte[] CalibrationData = new byte[64];
+                            CalibrationFile = File.OpenText(CalibrationFileName);
+                            string CalibrationDataString;
+                            for (int m = 0; m < 64; m++)
+                            {
+                                CalibrationDataString = CalibrationFile.ReadLine();
+                                if(CalibrationDataString != null)
+                                {
+                                    CalibrationData[m] = byte.Parse(CalibrationDataString);
+                                }
+                                else
+                                {
+                                    CalibrationData[m] = 0;
+                                }
+                            }
+                            bResult = SetCalibrationData(MicrorocAsicChain[i], j, CalibrationData);
+                            if(!bResult)
+                            {
+                                return;
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Do not found Calibration File. Skip the calibration", "FILE NOT FOUND", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }
+                        #endregion
+                        #region Sw hg
+                        bResult = SetHighGainFeedbackParameter(cbxHighGainFeedbackAsic[i, j].SelectedIndex, MicrorocAsicChain[i], j);
+                        if(!bResult)
+                        {
+                            return;
+                        }
+                        #endregion
+                        #region SW lg
+                        bResult = SetLowGainFeedbackParameter(cbxLowGainShaperFeedbackAsic[i, j].SelectedIndex, MicrorocAsicChain[i], j);
+                        if(!bResult)
+                        {
+                            return;
+                        }
+                        #endregion
+                        #region Discriminator Mask
+                        string MaskFileName;
+                        StreamReader MaskFile;
+                        MaskFileName = Path.Combine(CurrentPath, tbxMaskFileAsic[i, j].Text);
+                        ArrayList MaskChannel = new ArrayList();
+                        if (File.Exists(MaskFileName))
+                        {
+                            string MaskChannelTemp;
+                            MaskFile = File.OpenText(MaskFileName);
+                            MaskChannelTemp = MaskFile.ReadLine();
+                            while(MaskChannelTemp != null)
+                            {
+                                MaskChannel.Add(MaskChannelTemp);
+                                MaskChannelTemp = MaskFile.ReadLine();
+                            }
+                            string[] Channel = (string[])MaskChannel.ToArray(typeof(string));
+                            bResult = SetChannelMask(cbxMaskSelectAsic[i, j].SelectedIndex, cbxMaskDiscriminatorAsic[i, j].SelectedIndex, j, MicrorocAsicChain[i], Channel);
+                            if(!bResult)
+                            {
+                                return;
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Mask file not found. Skip the set.", "FILE NOT FOUND", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }
+                        #endregion
                     }
                     #endregion
                     #region ReadScope
                     else
                     {
-
+                        bResult = SetReadScopeChannel(tbxReadScopeAsic[i, j].Text, MicrorocAsicChain[i], j);
+                        if(!bResult)
+                        {
+                            return;
+                        }
                     }
+                    #endregion
+                    #region Parameter Load
+                    MicrorocAsicChain[i].ParameterLoadStart(MyUsbDevice1);
                     #endregion
                 }
             }
@@ -4791,7 +4891,8 @@ namespace USB_DAQ
             }
             if(bResult)
             {
-                string report = string.Format("Set ASIC{0}{1} Header:{2}\n", myMicroroc.ChainID + 1, AsicLocation, Header);
+                int AsicHeader = Convert.ToInt32(Header, 16) + AsicLocation;
+                string report = string.Format("Set ASIC{0}{1} Header:{2}\n", myMicroroc.ChainID + 1, AsicLocation + 1, AsicHeader.ToString("X"));
                 txtReport.AppendText(report);
                 return true;
             }
@@ -4818,68 +4919,128 @@ namespace USB_DAQ
             }
         }
 
-        private void SetCTestChannel(string CTestChannel, MicrorocAsic MyMicroroc, int AsicLocation)
+        private bool SetCTestChannel(string CTestChannel, MicrorocAsic MyMicroroc, int AsicLocation)
         {
             bool IllegalInput;
             bool bResult = MyMicroroc.CTestChannelSet(CTestChannel, MyUsbDevice1, out IllegalInput);
             if(IllegalInput)
             {
                 ShowIllegalInput("CTest Channel should be 1-64");
-                return;
+                return false;
             }
             if(bResult)
             {
-                string report = string.Format("Set ASIC{0}{1} CTest channel: {2}", MyMicroroc.ChainID + 1, AsicLocation + 1, CTestChannel);
+                string report = string.Format("Set ASIC{0}{1} CTest channel: {2}\n", MyMicroroc.ChainID + 1, AsicLocation + 1, CTestChannel);
                 txtReport.AppendText(report);
+                return true;
             }
             else
             {
                 ShowUsbError("CTest Channel");
+                return false;
             }
         }
-        private void SetReadScopeChannel(string ReadScopeChannel, MicrorocAsic MyMicroroc, int AsicLocation)
+        private bool SetReadScopeChannel(string ReadScopeChannel, MicrorocAsic MyMicroroc, int AsicLocation)
         {
             bool IllegalInput;
             bool bResult = MyMicroroc.ReadScopeChannelSet(ReadScopeChannel, MyUsbDevice1, out IllegalInput);
             if(IllegalInput)
             {
                 ShowIllegalInput("Read scope channel should be: 1-64");
-                return;
+                return false;
             }
             if(bResult)
             {
-                string report = string.Format("Set ASIC{0}{1} ReadScope channel: {2}", MyMicroroc.ChainID + 1, AsicLocation, ReadScopeChannel);
+                string report = string.Format("Set ASIC{0}{1} ReadScope channel: {2}\n", MyMicroroc.ChainID + 1, AsicLocation, ReadScopeChannel);
                 txtReport.AppendText(report);
+                return true;
             }
             else
             {
                 ShowUsbError("ReadScope Channel");
+                return false;
             }
         }
 
-        private void SetHighGainFeedbackParameter(int HighGainFeedback, MicrorocAsic MyMicroroc, int AsicLocation)
+        private bool SetCalibrationData(MicrorocAsic MyMicroroc, int AsicLocation, params byte[] CalibrationData)
+        {
+            if(CalibrationData.Length != 64)
+            {
+                MessageBox.Show("Calibration data is not 64 byte. Skip the calibration", "FILE ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            if(MyMicroroc.SetChannelCalibration(MyUsbDevice1, CalibrationData))
+            {
+                string report = string.Format("Set ASIC[0][1] Calibration successful\n", MyMicroroc.ChainID + 1, AsicLocation + 1);
+                txtReport.AppendText(report);
+                return true;
+            }
+            else
+            {
+                ShowUsbError("Calibration");
+                return false;
+            }
+        }
+
+        private bool SetHighGainFeedbackParameter(int HighGainFeedback, MicrorocAsic MyMicroroc, int AsicLocation)
         {
             if (MyMicroroc.HighGainShaperFeedbackSelect(HighGainFeedback, MyUsbDevice1))
             {
-                string report = string.Format("Set ASIC{0}{1} Sw_hg: {2}", MyMicroroc.ChainID + 1, AsicLocation + 1, HighGainFeedback);
+                string report = string.Format("Set ASIC{0}{1} Sw_hg: {2}\n", MyMicroroc.ChainID + 1, AsicLocation + 1, HighGainFeedback);
                 txtReport.AppendText(report);
+                return true;
             }
             else
             {
                 ShowUsbError("Sw_hg");
+                return false;
             }
         }
-        private void SetLowGainFeedbackParameter(int LowGainFeedback, MicrorocAsic MyMicroroc, int AsicLocation)
+        private bool SetLowGainFeedbackParameter(int LowGainFeedback, MicrorocAsic MyMicroroc, int AsicLocation)
         {
             if (MyMicroroc.LowGainShaperFeedbackSelect(LowGainFeedback, MyUsbDevice1))
             {
-                string report = string.Format("Set ASIC{0}{1} Sw_lg: {2}", MyMicroroc.ChainID + 1, AsicLocation + 1, LowGainFeedback);
+                string report = string.Format("Set ASIC{0}{1} Sw_lg: {2}\n", MyMicroroc.ChainID + 1, AsicLocation + 1, LowGainFeedback);
                 txtReport.AppendText(report);
+                return true;
             }
             else
             {
                 ShowUsbError("Sw_lg");
+                return false;
             }
+        }
+
+        private bool SetChannelMask(int MaskMode, int MaskDisCriminator, int AsicLocation, MicrorocAsic MyMicroroc, params string[] MaskChannel)
+        {
+            bool bResult = MyMicroroc.DiscriminatorMaskSet(MaskDisCriminator, MyUsbDevice1);
+            if(!bResult)
+            {
+                return false;
+            }
+            bool IllegalInput;
+            foreach(string Channel in MaskChannel)
+            {
+                bResult = MyMicroroc.MaskChannelSet(Channel, MyUsbDevice1, out IllegalInput);
+                if(IllegalInput)
+                {
+                    ShowIllegalInput("The Channel mask should be 0-63");
+                    return false;
+                }
+                if(!bResult)
+                {
+                    ShowUsbError("Mask Channel");
+                    return false;
+                }
+                bResult = MyMicroroc.MaskModeSet(MaskMode, MyUsbDevice1);
+                if(!bResult)
+                {
+                    return false;
+                }
+            }
+            string report = string.Format("Set ASIC[0][1] Mask Successful", MyMicroroc.ChainID + 1, AsicLocation + 1);
+            txtReport.AppendText(report);
+            return true;
         }
 
         private void ShowIllegalInput(string SetItem)
@@ -4923,5 +5084,6 @@ namespace USB_DAQ
                 txtReport.AppendText("USB Stop\n");
             }
         }
+
     }
 }

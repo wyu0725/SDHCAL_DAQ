@@ -978,8 +978,8 @@
                                                     <ComboBoxItem Content="4" IsSelected="True"/>
                                                 </ComboBox>
                                                 <ComboBox x:Name="cbxEnableChain2" HorizontalAlignment="Left" Margin="290,150,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="100" Height="24">
-                                                    <ComboBoxItem Content="Enable" IsSelected="True"/>
                                                     <ComboBoxItem Content="Disable"/>
+                                                    <ComboBoxItem Content="Enable" IsSelected="True"/>
                                                 </ComboBox>
                                                 <Label x:Name="lblVth0Chain3" Content="VTH0" HorizontalAlignment="Left" Margin="0,215,0,0" VerticalAlignment="Top" Width="50" Height="24"/>
                                                 <Label x:Name="lblVth1Chain3" Content="VTH1" HorizontalAlignment="Left" Margin="0,240,0,0" VerticalAlignment="Top" Width="50" Height="24"/>
@@ -1023,8 +1023,8 @@
                                                     <ComboBoxItem Content="4" IsSelected="True"/>
                                                 </ComboBox>
                                                 <ComboBox x:Name="cbxEnableChain3" HorizontalAlignment="Left" Margin="290,250,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="100" Height="24">
-                                                    <ComboBoxItem Content="Enable" IsSelected="True"/>
                                                     <ComboBoxItem Content="Disable"/>
+                                                    <ComboBoxItem Content="Enable" IsSelected="True"/>
                                                 </ComboBox>
                                                 <Label x:Name="lblVth0Chain4" Content="VTH0" HorizontalAlignment="Left" Margin="0,315,0,0" VerticalAlignment="Top" Width="50" Height="24"/>
                                                 <Label x:Name="lblVth1Chain4" Content="VTH1" HorizontalAlignment="Left" Margin="0,340,0,0" VerticalAlignment="Top" Width="50" Height="24"/>
@@ -1068,8 +1068,8 @@
                                                     <ComboBoxItem Content="4" IsSelected="True"/>
                                                 </ComboBox>
                                                 <ComboBox x:Name="cbxEnableChain4" HorizontalAlignment="Left" Margin="290,350,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="100" Height="24">
-                                                    <ComboBoxItem Content="Enable" IsSelected="True"/>
                                                     <ComboBoxItem Content="Disable"/>
+                                                    <ComboBoxItem Content="Enable" IsSelected="True"/>
                                                 </ComboBox>
                                             </Grid>
                                         </TabItem>
@@ -1545,6 +1545,7 @@
                                             <Grid Margin="0,0,0,0">
                                                 <Label x:Name="lblMaskSelectChain1" Content="Mask" HorizontalAlignment="Left" Margin="0,15,0,0" VerticalAlignment="Top" Width="50" Height="24"/>
                                                 <Label x:Name="lblMaskFileChain1" Content="File" HorizontalAlignment="Left" Margin="0,40,0,0" VerticalAlignment="Top" Width="50" Height="24"/>
+                                                <Label x:Name="lblMaskDiscriChain1" Content="Discri" HorizontalAlignment="Left" Margin="0,65,0,0" VerticalAlignment="Top" Width="50" Height="24"/>
                                                 <GroupBox x:Name="gbxAsic14c" Header="ASIC14" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,0,0,0"  Height="100" Width="90">
                                                     <Grid Margin="0,0,0,0">
                                                         <ComboBox x:Name="cbxMaskSelectAsic14" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top" Width="75" Height="24">
@@ -1554,6 +1555,16 @@
                                                             <ComboBoxItem Content="Mask All"/>
                                                         </ComboBox>
                                                         <TextBox x:Name="tbxMaskFileAsic14" HorizontalAlignment="Center" Height="25" Margin="0,25,0,0" TextWrapping="Wrap"  Text="M14.txt" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="75"/>
+                                                        <ComboBox x:Name="cbxMaskDiscriminatorAsic14" HorizontalAlignment="Center" Margin="0,50,0,0" VerticalAlignment="Top" Width="75" Height="24">
+                                                            <ComboBoxItem Content="0,1,2" IsSelected="True"/>
+                                                            <ComboBoxItem Content="1,2"/>
+                                                            <ComboBoxItem Content="0,2"/>
+                                                            <ComboBoxItem Content="2"/>
+                                                            <ComboBoxItem Content="0,1"/>
+                                                            <ComboBoxItem Content="1"/>
+                                                            <ComboBoxItem Content="0"/>
+                                                            <ComboBoxItem Content="No Mask"/>
+                                                        </ComboBox>
                                                     </Grid>
                                                 </GroupBox>
                                                 <GroupBox x:Name="gbxAsic13c" Header="ASIC13" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="140,0,0,0"  Height="100" Width="90">
@@ -1565,6 +1576,16 @@
                                                             <ComboBoxItem Content="Mask All"/>
                                                         </ComboBox>
                                                         <TextBox x:Name="tbxMaskFileAsic13" HorizontalAlignment="Center" Height="25" Margin="0,25,0,0" TextWrapping="Wrap"  Text="M13.txt" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="75"/>
+                                                        <ComboBox x:Name="cbxMaskDiscriminatorAsic13" HorizontalAlignment="Center" Margin="0,50,0,0" VerticalAlignment="Top" Width="75" Height="24">
+                                                            <ComboBoxItem Content="0,1,2" IsSelected="True"/>
+                                                            <ComboBoxItem Content="1,2"/>
+                                                            <ComboBoxItem Content="0,2"/>
+                                                            <ComboBoxItem Content="2"/>
+                                                            <ComboBoxItem Content="0,1"/>
+                                                            <ComboBoxItem Content="1"/>
+                                                            <ComboBoxItem Content="0"/>
+                                                            <ComboBoxItem Content="No Mask"/>
+                                                        </ComboBox>
                                                     </Grid>
                                                 </GroupBox>
                                                 <GroupBox x:Name="gbxAsic12c" Header="ASIC12" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="230,0,0,0"  Height="100" Width="90">
@@ -1576,6 +1597,16 @@
                                                             <ComboBoxItem Content="Mask All"/>
                                                         </ComboBox>
                                                         <TextBox x:Name="tbxMaskFileAsic12" HorizontalAlignment="Center" Height="25" Margin="0,25,0,0" TextWrapping="Wrap"  Text="M12.txt" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="75"/>
+                                                        <ComboBox x:Name="cbxMaskDiscriminatorAsic12" HorizontalAlignment="Center" Margin="0,50,0,0" VerticalAlignment="Top" Width="75" Height="24">
+                                                            <ComboBoxItem Content="0,1,2" IsSelected="True"/>
+                                                            <ComboBoxItem Content="1,2"/>
+                                                            <ComboBoxItem Content="0,2"/>
+                                                            <ComboBoxItem Content="2"/>
+                                                            <ComboBoxItem Content="0,1"/>
+                                                            <ComboBoxItem Content="1"/>
+                                                            <ComboBoxItem Content="0"/>
+                                                            <ComboBoxItem Content="No Mask"/>
+                                                        </ComboBox>
                                                     </Grid>
                                                 </GroupBox>
                                                 <GroupBox x:Name="gbxAsic11c" Header="ASIC11" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="320,0,0,0"  Height="100" Width="90">
@@ -1587,10 +1618,21 @@
                                                             <ComboBoxItem Content="Mask All"/>
                                                         </ComboBox>
                                                         <TextBox x:Name="tbxMaskFileAsic11" HorizontalAlignment="Center" Height="25" Margin="0,25,0,0" TextWrapping="Wrap"  Text="M11.txt" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="75"/>
+                                                        <ComboBox x:Name="cbxMaskDiscriminatorAsic11" HorizontalAlignment="Center" Margin="0,50,0,0" VerticalAlignment="Top" Width="75" Height="24">
+                                                            <ComboBoxItem Content="0,1,2" IsSelected="True"/>
+                                                            <ComboBoxItem Content="1,2"/>
+                                                            <ComboBoxItem Content="0,2"/>
+                                                            <ComboBoxItem Content="2"/>
+                                                            <ComboBoxItem Content="0,1"/>
+                                                            <ComboBoxItem Content="1"/>
+                                                            <ComboBoxItem Content="0"/>
+                                                            <ComboBoxItem Content="No Mask"/>
+                                                        </ComboBox>
                                                     </Grid>
                                                 </GroupBox>
                                                 <Label x:Name="lblMaskSelectChain2" Content="Mask" HorizontalAlignment="Left" Margin="0,115,0,0" VerticalAlignment="Top" Width="50" Height="24"/>
                                                 <Label x:Name="lblMaskFileChain2" Content="File" HorizontalAlignment="Left" Margin="0,140,0,0" VerticalAlignment="Top" Width="50" Height="24"/>
+                                                <Label x:Name="lblMaskDiscriChain2" Content="Discri" HorizontalAlignment="Left" Margin="0,165,0,0" VerticalAlignment="Top" Width="50" Height="24"/>
                                                 <GroupBox x:Name="gbxAsic24c" Header="ASIC24" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,100,0,0"  Height="100" Width="90">
                                                     <Grid Margin="0,0,0,0">
                                                         <ComboBox x:Name="cbxMaskSelectAsic24" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top" Width="75" Height="24">
@@ -1600,6 +1642,16 @@
                                                             <ComboBoxItem Content="Mask All"/>
                                                         </ComboBox>
                                                         <TextBox x:Name="tbxMaskFileAsic24" HorizontalAlignment="Center" Height="25" Margin="0,25,0,0" TextWrapping="Wrap"  Text="M24.txt" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="75"/>
+                                                        <ComboBox x:Name="cbxMaskDiscriminatorAsic24" HorizontalAlignment="Center" Margin="0,50,0,0" VerticalAlignment="Top" Width="75" Height="24">
+                                                            <ComboBoxItem Content="0,1,2" IsSelected="True"/>
+                                                            <ComboBoxItem Content="1,2"/>
+                                                            <ComboBoxItem Content="0,2"/>
+                                                            <ComboBoxItem Content="2"/>
+                                                            <ComboBoxItem Content="0,1"/>
+                                                            <ComboBoxItem Content="1"/>
+                                                            <ComboBoxItem Content="0"/>
+                                                            <ComboBoxItem Content="No Mask"/>
+                                                        </ComboBox>
                                                     </Grid>
                                                 </GroupBox>
                                                 <GroupBox x:Name="gbxAsic23c" Header="ASIC23" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="140,100,0,0"  Height="100" Width="90">
@@ -1611,6 +1663,16 @@
                                                             <ComboBoxItem Content="Mask All"/>
                                                         </ComboBox>
                                                         <TextBox x:Name="tbxMaskFileAsic23" HorizontalAlignment="Center" Height="25" Margin="0,25,0,0" TextWrapping="Wrap"  Text="M23.txt" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="75"/>
+                                                        <ComboBox x:Name="cbxMaskDiscriminatorAsic23" HorizontalAlignment="Center" Margin="0,50,0,0" VerticalAlignment="Top" Width="75" Height="24">
+                                                            <ComboBoxItem Content="0,1,2" IsSelected="True"/>
+                                                            <ComboBoxItem Content="1,2"/>
+                                                            <ComboBoxItem Content="0,2"/>
+                                                            <ComboBoxItem Content="2"/>
+                                                            <ComboBoxItem Content="0,1"/>
+                                                            <ComboBoxItem Content="1"/>
+                                                            <ComboBoxItem Content="0"/>
+                                                            <ComboBoxItem Content="No Mask"/>
+                                                        </ComboBox>
                                                     </Grid>
                                                 </GroupBox>
                                                 <GroupBox x:Name="gbxAsic22c" Header="ASIC22" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="230,100,0,0"  Height="100" Width="90">
@@ -1622,6 +1684,16 @@
                                                             <ComboBoxItem Content="Mask All"/>
                                                         </ComboBox>
                                                         <TextBox x:Name="tbxMaskFileAsic22" HorizontalAlignment="Center" Height="25" Margin="0,25,0,0" TextWrapping="Wrap"  Text="M22.txt" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="75"/>
+                                                        <ComboBox x:Name="cbxMaskDiscriminatorAsic22" HorizontalAlignment="Center" Margin="0,50,0,0" VerticalAlignment="Top" Width="75" Height="24">
+                                                            <ComboBoxItem Content="0,1,2" IsSelected="True"/>
+                                                            <ComboBoxItem Content="1,2"/>
+                                                            <ComboBoxItem Content="0,2"/>
+                                                            <ComboBoxItem Content="2"/>
+                                                            <ComboBoxItem Content="0,1"/>
+                                                            <ComboBoxItem Content="1"/>
+                                                            <ComboBoxItem Content="0"/>
+                                                            <ComboBoxItem Content="No Mask"/>
+                                                        </ComboBox>
                                                     </Grid>
                                                 </GroupBox>
                                                 <GroupBox x:Name="gbxAsic21c" Header="ASIC21" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="320,100,0,0"  Height="100" Width="90">
@@ -1633,10 +1705,21 @@
                                                             <ComboBoxItem Content="Mask All"/>
                                                         </ComboBox>
                                                         <TextBox x:Name="tbxMaskFileAsic21" HorizontalAlignment="Center" Height="25" Margin="0,25,0,0" TextWrapping="Wrap"  Text="M21.txt" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="75"/>
+                                                        <ComboBox x:Name="cbxMaskDiscriminatorAsic21" HorizontalAlignment="Center" Margin="0,50,0,0" VerticalAlignment="Top" Width="75" Height="24">
+                                                            <ComboBoxItem Content="0,1,2" IsSelected="True"/>
+                                                            <ComboBoxItem Content="1,2"/>
+                                                            <ComboBoxItem Content="0,2"/>
+                                                            <ComboBoxItem Content="2"/>
+                                                            <ComboBoxItem Content="0,1"/>
+                                                            <ComboBoxItem Content="1"/>
+                                                            <ComboBoxItem Content="0"/>
+                                                            <ComboBoxItem Content="No Mask"/>
+                                                        </ComboBox>
                                                     </Grid>
                                                 </GroupBox>
                                                 <Label x:Name="lblMaskSelectChain3" Content="Mask" HorizontalAlignment="Left" Margin="0,215,0,0" VerticalAlignment="Top" Width="50" Height="24"/>
                                                 <Label x:Name="lblMaskFileChain3" Content="File" HorizontalAlignment="Left" Margin="0,240,0,0" VerticalAlignment="Top" Width="50" Height="24"/>
+                                                <Label x:Name="lblMaskDiscriChain3" Content="Discri" HorizontalAlignment="Left" Margin="0,265,0,0" VerticalAlignment="Top" Width="50" Height="24"/>
                                                 <GroupBox x:Name="gbxAsic34c" Header="ASIC34" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,200,0,0"  Height="100" Width="90">
                                                     <Grid Margin="0,0,0,0">
                                                         <ComboBox x:Name="cbxMaskSelectAsic34" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top" Width="75" Height="24">
@@ -1646,6 +1729,16 @@
                                                             <ComboBoxItem Content="Mask All"/>
                                                         </ComboBox>
                                                         <TextBox x:Name="tbxMaskFileAsic34" HorizontalAlignment="Center" Height="25" Margin="0,25,0,0" TextWrapping="Wrap"  Text="M34.txt" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="75"/>
+                                                        <ComboBox x:Name="cbxMaskDiscriminatorAsic34" HorizontalAlignment="Center" Margin="0,50,0,0" VerticalAlignment="Top" Width="75" Height="24">
+                                                            <ComboBoxItem Content="0,1,2" IsSelected="True"/>
+                                                            <ComboBoxItem Content="1,2"/>
+                                                            <ComboBoxItem Content="0,2"/>
+                                                            <ComboBoxItem Content="2"/>
+                                                            <ComboBoxItem Content="0,1"/>
+                                                            <ComboBoxItem Content="1"/>
+                                                            <ComboBoxItem Content="0"/>
+                                                            <ComboBoxItem Content="No Mask"/>
+                                                        </ComboBox>
                                                     </Grid>
                                                 </GroupBox>
                                                 <GroupBox x:Name="gbxAsic33c" Header="ASIC33" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="140,200,0,0"  Height="100" Width="90">
@@ -1657,6 +1750,16 @@
                                                             <ComboBoxItem Content="Mask All"/>
                                                         </ComboBox>
                                                         <TextBox x:Name="tbxMaskFileAsic33" HorizontalAlignment="Center" Height="25" Margin="0,25,0,0" TextWrapping="Wrap"  Text="M33.txt" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="75"/>
+                                                        <ComboBox x:Name="cbxMaskDiscriminatorAsic33" HorizontalAlignment="Center" Margin="0,50,0,0" VerticalAlignment="Top" Width="75" Height="24">
+                                                            <ComboBoxItem Content="0,1,2" IsSelected="True"/>
+                                                            <ComboBoxItem Content="1,2"/>
+                                                            <ComboBoxItem Content="0,2"/>
+                                                            <ComboBoxItem Content="2"/>
+                                                            <ComboBoxItem Content="0,1"/>
+                                                            <ComboBoxItem Content="1"/>
+                                                            <ComboBoxItem Content="0"/>
+                                                            <ComboBoxItem Content="No Mask"/>
+                                                        </ComboBox>
                                                     </Grid>
                                                 </GroupBox>
                                                 <GroupBox x:Name="gbxAsic32c" Header="ASIC32" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="230,200,0,0"  Height="100" Width="90">
@@ -1666,6 +1769,16 @@
                                                             <ComboBoxItem Content="Unmask"/>
                                                             <ComboBoxItem Content="Numask All"/>
                                                             <ComboBoxItem Content="Mask All"/>
+                                                        </ComboBox>
+                                                        <ComboBox x:Name="cbxMaskDiscriminatorAsic32" HorizontalAlignment="Center" Margin="0,50,0,0" VerticalAlignment="Top" Width="75" Height="24">
+                                                            <ComboBoxItem Content="0,1,2" IsSelected="True"/>
+                                                            <ComboBoxItem Content="1,2"/>
+                                                            <ComboBoxItem Content="0,2"/>
+                                                            <ComboBoxItem Content="2"/>
+                                                            <ComboBoxItem Content="0,1"/>
+                                                            <ComboBoxItem Content="1"/>
+                                                            <ComboBoxItem Content="0"/>
+                                                            <ComboBoxItem Content="No Mask"/>
                                                         </ComboBox>
                                                         <TextBox x:Name="tbxMaskFileAsic32" HorizontalAlignment="Center" Height="25" Margin="0,25,0,0" TextWrapping="Wrap"  Text="M32.txt" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="75"/>
                                                     </Grid>
@@ -1679,10 +1792,21 @@
                                                             <ComboBoxItem Content="Mask All"/>
                                                         </ComboBox>
                                                         <TextBox x:Name="tbxMaskFileAsic31" HorizontalAlignment="Center" Height="25" Margin="0,25,0,0" TextWrapping="Wrap"  Text="M31.txt" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="75"/>
+                                                        <ComboBox x:Name="cbxMaskDiscriminatorAsic31" HorizontalAlignment="Center" Margin="0,50,0,0" VerticalAlignment="Top" Width="75" Height="24">
+                                                            <ComboBoxItem Content="0,1,2" IsSelected="True"/>
+                                                            <ComboBoxItem Content="1,2"/>
+                                                            <ComboBoxItem Content="0,2"/>
+                                                            <ComboBoxItem Content="2"/>
+                                                            <ComboBoxItem Content="0,1"/>
+                                                            <ComboBoxItem Content="1"/>
+                                                            <ComboBoxItem Content="0"/>
+                                                            <ComboBoxItem Content="No Mask"/>
+                                                        </ComboBox>
                                                     </Grid>
                                                 </GroupBox>
                                                 <Label x:Name="lblMaskSelectChain4" Content="Mask" HorizontalAlignment="Left" Margin="0,315,0,0" VerticalAlignment="Top" Width="50" Height="24"/>
                                                 <Label x:Name="lblMaskFileChain4" Content="File" HorizontalAlignment="Left" Margin="0,340,0,0" VerticalAlignment="Top" Width="50" Height="24"/>
+                                                <Label x:Name="lblMaskDiscriChain4" Content="Discri" HorizontalAlignment="Left" Margin="0,365,0,0" VerticalAlignment="Top" Width="50" Height="24"/>
                                                 <GroupBox x:Name="gbxAsic44c" Header="ASIC44" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,300,0,0"  Height="100" Width="90">
                                                     <Grid Margin="0,0,0,0">
                                                         <ComboBox x:Name="cbxMaskSelectAsic44" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top" Width="75" Height="24">
@@ -1692,6 +1816,16 @@
                                                             <ComboBoxItem Content="Mask All"/>
                                                         </ComboBox>
                                                         <TextBox x:Name="tbxMaskFileAsic44" HorizontalAlignment="Center" Height="25" Margin="0,25,0,0" TextWrapping="Wrap"  Text="M44.txt" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="75"/>
+                                                        <ComboBox x:Name="cbxMaskDiscriminatorAsic44" HorizontalAlignment="Center" Margin="0,50,0,0" VerticalAlignment="Top" Width="75" Height="24">
+                                                            <ComboBoxItem Content="0,1,2" IsSelected="True"/>
+                                                            <ComboBoxItem Content="1,2"/>
+                                                            <ComboBoxItem Content="0,2"/>
+                                                            <ComboBoxItem Content="2"/>
+                                                            <ComboBoxItem Content="0,1"/>
+                                                            <ComboBoxItem Content="1"/>
+                                                            <ComboBoxItem Content="0"/>
+                                                            <ComboBoxItem Content="No Mask"/>
+                                                        </ComboBox>
                                                     </Grid>
                                                 </GroupBox>
                                                 <GroupBox x:Name="gbxAsic43c" Header="ASIC43" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="140,300,0,0"  Height="100" Width="90">
@@ -1703,6 +1837,16 @@
                                                             <ComboBoxItem Content="Mask All"/>
                                                         </ComboBox>
                                                         <TextBox x:Name="tbxMaskFileAsic43" HorizontalAlignment="Center" Height="25" Margin="0,25,0,0" TextWrapping="Wrap"  Text="M43.txt" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="75"/>
+                                                        <ComboBox x:Name="cbxMaskDiscriminatorAsic43" HorizontalAlignment="Center" Margin="0,50,0,0" VerticalAlignment="Top" Width="75" Height="24">
+                                                            <ComboBoxItem Content="0,1,2" IsSelected="True"/>
+                                                            <ComboBoxItem Content="1,2"/>
+                                                            <ComboBoxItem Content="0,2"/>
+                                                            <ComboBoxItem Content="2"/>
+                                                            <ComboBoxItem Content="0,1"/>
+                                                            <ComboBoxItem Content="1"/>
+                                                            <ComboBoxItem Content="0"/>
+                                                            <ComboBoxItem Content="No Mask"/>
+                                                        </ComboBox>
                                                     </Grid>
                                                 </GroupBox>
                                                 <GroupBox x:Name="gbxAsic42c" Header="ASIC42" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="230,300,0,0"  Height="100" Width="90">
@@ -1714,6 +1858,16 @@
                                                             <ComboBoxItem Content="Mask All"/>
                                                         </ComboBox>
                                                         <TextBox x:Name="tbxMaskFileAsic42" HorizontalAlignment="Center" Height="25" Margin="0,25,0,0" TextWrapping="Wrap"  Text="M42.txt" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="75"/>
+                                                        <ComboBox x:Name="cbxMaskDiscriminatorAsic42" HorizontalAlignment="Center" Margin="0,50,0,0" VerticalAlignment="Top" Width="75" Height="24">
+                                                            <ComboBoxItem Content="0,1,2" IsSelected="True"/>
+                                                            <ComboBoxItem Content="1,2"/>
+                                                            <ComboBoxItem Content="0,2"/>
+                                                            <ComboBoxItem Content="2"/>
+                                                            <ComboBoxItem Content="0,1"/>
+                                                            <ComboBoxItem Content="1"/>
+                                                            <ComboBoxItem Content="0"/>
+                                                            <ComboBoxItem Content="No Mask"/>
+                                                        </ComboBox>
                                                     </Grid>
                                                 </GroupBox>
                                                 <GroupBox x:Name="gbxAsic41c" Header="ASIC41" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="320,300,0,0"  Height="100" Width="90">
@@ -1725,6 +1879,16 @@
                                                             <ComboBoxItem Content="Mask All"/>
                                                         </ComboBox>
                                                         <TextBox x:Name="tbxMaskFileAsic41" HorizontalAlignment="Center" Height="25" Margin="0,25,0,0" TextWrapping="Wrap"  Text="M41.txt" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="75"/>
+                                                        <ComboBox x:Name="cbxMaskDiscriminatorAsic41" HorizontalAlignment="Center" Margin="0,50,0,0" VerticalAlignment="Top" Width="75" Height="24">
+                                                            <ComboBoxItem Content="0,1,2" IsSelected="True"/>
+                                                            <ComboBoxItem Content="1,2"/>
+                                                            <ComboBoxItem Content="0,2"/>
+                                                            <ComboBoxItem Content="2"/>
+                                                            <ComboBoxItem Content="0,1"/>
+                                                            <ComboBoxItem Content="1"/>
+                                                            <ComboBoxItem Content="0"/>
+                                                            <ComboBoxItem Content="No Mask"/>
+                                                        </ComboBox>
                                                     </Grid>
                                                 </GroupBox>
                                             </Grid>
