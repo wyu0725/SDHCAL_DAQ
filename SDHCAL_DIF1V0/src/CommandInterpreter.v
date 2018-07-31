@@ -2568,12 +2568,12 @@ module CommandInterpreter(
     end
   endfunction
 
-  (* MARK_DEBUG="true" *)wire [15:0] COMMAND_WORD_Debug;
+  /*(* MARK_DEBUG="true" *)wire [15:0] COMMAND_WORD_Debug;
   assign COMMAND_WORD_Debug = COMMAND_WORD;
   (* MARK_DEBUG="true" *)wire CommandFifoReadEnDelayed_Debug;
   assign CommandFifoReadEnDelayed_Debug = CommandFifoReadEnDelayed;
   (* MARK_DEBUG="true" *)wire [3:0] AsicChainSelect_Debug;
   assign AsicChainSelect_Debug = AsicChainSelect;
   (* MARK_DEBUG="true" *)wire MicrorocParameterLoadStart_Debug;
-  assign MicrorocParameterLoadStart_Debug = MicrorocParameterLoadStart;
+  assign MicrorocParameterLoadStart_Debug = MicrorocParameterLoadStart;*/
 endmodule

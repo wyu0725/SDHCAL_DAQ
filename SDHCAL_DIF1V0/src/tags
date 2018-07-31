@@ -82,7 +82,6 @@ AsicChainSelect	CommandInterpreter.v	/^  output [3:0] AsicChainSelect, \/\/ Cons
 AsicChainSelect	ConfigurationParameterDistribution.v	/^    input [3:0] AsicChainSelect,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
 AsicChainSelect	FPGA_Top.v	/^  wire [3:0] AsicChainSelect;$/;"	n	language:Verilog	module:FPGA_Top
 AsicChainSelectSet_CAND	CommandParameter.v	/^`define AsicChainSelectSet_CAND                    16'hB0A0$/;"	c	language:Verilog
-AsicChainSelect_Debug	CommandInterpreter.v	/^  (* MARK_DEBUG="true" *)wire [3:0] AsicChainSelect_Debug;$/;"	n	language:Verilog	module:CommandInterpreter
 AsicDatain_r	AsicRamReadout.v	/^	reg AsicDatain_r;$/;"	r	language:Verilog	module:AsicRamReadout
 AsicDatain_r1	AsicRamReadout.v	/^	reg AsicDatain_r1;$/;"	r	language:Verilog	module:AsicRamReadout
 AsicDatain_r2	AsicRamReadout.v	/^	reg AsicDatain_r2;$/;"	r	language:Verilog	module:AsicRamReadout
@@ -130,7 +129,7 @@ BandGapEnable_CAND	CommandParameter.v	/^`define BandGapEnable_CAND              
 BandGapPPEnable	MicrorocControl.v	/^  input BandGapPPEnable,$/;"	p	language:Verilog	module:MicrorocControl
 BandGapPPEnable	ParameterGenerator.v	/^	input BandGapPPEnable,$/;"	p	language:Verilog	module:ParameterGenerator
 BandGapPPEnable	SlowControlAndReadScopeSet.v	/^  input BandGapPPEnable,$/;"	p	language:Verilog	module:SlowControlAndReadScopeSet
-BandGapPPEnable_CAND	CommandParameter.v	/^`define BandGapPPEnable_CAND                       16'hA200$/;"	c	language:Verilog
+BandGapPPEnable_CAND	CommandParameter.v	/^`define BandGapPPEnable_CAND                       16'hA201$/;"	c	language:Verilog
 BitShiftDone	BitShiftOut.v	/^	output reg BitShiftDone$/;"	p	language:Verilog	module:BitShiftOut
 BitShiftOut	BitShiftOut.v	/^module BitShiftOut($/;"	m	language:Verilog
 BitShiftOutStart	BitShiftOut.v	/^	input BitShiftOutStart,$/;"	p	language:Verilog	module:BitShiftOut
@@ -164,7 +163,6 @@ COMMAND_WIDTH	CommandDecoder_beforeInst.v	/^		parameter [1:0] COMMAND_WIDTH = 2'
 COMMAND_WORD	CommandDecoder.v	/^	input [15:0] COMMAND_WORD,$/;"	p	language:Verilog	module:CommandDecoder
 COMMAND_WORD	CommandDecoder_beforeInst.v	/^	input [15:0] COMMAND_WORD,$/;"	p	language:Verilog	module:CommandDecoder
 COMMAND_WORD	CommandInterpreter.v	/^  wire [15:0] COMMAND_WORD;$/;"	n	language:Verilog	module:CommandInterpreter
-COMMAND_WORD_Debug	CommandInterpreter.v	/^  (* MARK_DEBUG="true" *)wire [15:0] COMMAND_WORD_Debug;$/;"	n	language:Verilog	module:CommandInterpreter
 CPT_All_Done	SCurve_Single_Test.v	/^    wire CPT_All_Done;$/;"	n	language:Verilog	module:SCurve_Single_Test
 CPT_DATA	SCurve_Single_Test.v	/^    reg [95:0] CPT_DATA;$/;"	r	language:Verilog	module:SCurve_Single_Test
 CPT_DONE	SCurve_Single_Input.v	/^    output reg CPT_DONE$/;"	p	language:Verilog	module:SCurve_Single_Input
@@ -281,7 +279,6 @@ CommandFifoReadEn	CommandDecoder_beforeInst.v	/^	input CommandFifoReadEn,$/;"	p	
 CommandFifoReadEn	CommandInterpreter.v	/^  reg CommandFifoReadEn;$/;"	r	language:Verilog	module:CommandInterpreter
 CommandFifoReadEnDelayed	CommandDecoder.v	/^	input CommandFifoReadEnDelayed,$/;"	p	language:Verilog	module:CommandDecoder
 CommandFifoReadEnDelayed	CommandInterpreter.v	/^  reg CommandFifoReadEnDelayed;$/;"	r	language:Verilog	module:CommandInterpreter
-CommandFifoReadEnDelayed_Debug	CommandInterpreter.v	/^  (* MARK_DEBUG="true" *)wire CommandFifoReadEnDelayed_Debug;$/;"	n	language:Verilog	module:CommandInterpreter
 CommandInterpreter	CommandInterpreter.v	/^module CommandInterpreter($/;"	m	language:Verilog
 CommandMicrorocAcquisitionStartStop	AcquisitionControl.v	/^  input CommandMicrorocAcquisitionStartStop,$/;"	p	language:Verilog	module:AcquisitionControl
 CommandMicrorocAcquisitionStartStop	AcquisitionSwitcher.v	/^  input CommandMicrorocAcquisitionStartStop,$/;"	p	language:Verilog	module:AcquisitionSwitcher
@@ -420,7 +417,7 @@ Dac4bit	CommandInterpreter.v	/^  reg [3:0] Dac4bit[0:63];$/;"	r	language:Verilog
 Dac4bitPPEnable	MicrorocControl.v	/^  input Dac4bitPPEnable,$/;"	p	language:Verilog	module:MicrorocControl
 Dac4bitPPEnable	ParameterGenerator.v	/^	input Dac4bitPPEnable,$/;"	p	language:Verilog	module:ParameterGenerator
 Dac4bitPPEnable	SlowControlAndReadScopeSet.v	/^  input Dac4bitPPEnable,$/;"	p	language:Verilog	module:SlowControlAndReadScopeSet
-Dac4bitPPEnable_CAND	CommandParameter.v	/^`define Dac4bitPPEnable_CAND                       16'hA230$/;"	c	language:Verilog
+Dac4bitPPEnable_CAND	CommandParameter.v	/^`define Dac4bitPPEnable_CAND                       16'hA231$/;"	c	language:Verilog
 DacEnable	MicrorocControl.v	/^  input DacEnable,                          \/\/ Default: 1 Enable$/;"	p	language:Verilog	module:MicrorocControl
 DacEnable	ParameterGenerator.v	/^	input DacEnable,$/;"	p	language:Verilog	module:ParameterGenerator
 DacEnable	SlowControlAndReadScopeSet.v	/^  input DacEnable,$/;"	p	language:Verilog	module:SlowControlAndReadScopeSet
@@ -428,7 +425,7 @@ DacEnable_CAND	CommandParameter.v	/^`define DacEnable_CAND                      
 DacPPEnable	MicrorocControl.v	/^  input DacPPEnable,$/;"	p	language:Verilog	module:MicrorocControl
 DacPPEnable	ParameterGenerator.v	/^	input DacPPEnable,$/;"	p	language:Verilog	module:ParameterGenerator
 DacPPEnable	SlowControlAndReadScopeSet.v	/^  input DacPPEnable,$/;"	p	language:Verilog	module:SlowControlAndReadScopeSet
-DacPPEnable_CAND	CommandParameter.v	/^`define DacPPEnable_CAND                           16'hA2F0$/;"	c	language:Verilog
+DacPPEnable_CAND	CommandParameter.v	/^`define DacPPEnable_CAND                           16'hA2F1$/;"	c	language:Verilog
 DacSelect	CommandInterpreter.v	/^  output [1:0] DacSelect,$/;"	p	language:Verilog	module:CommandInterpreter
 DacStep	AcquisitionControl.v	/^  input [9:0] DacStep,$/;"	p	language:Verilog	module:AcquisitionControl
 DacStep	CommandInterpreter.v	/^  output [9:0] DacStep,$/;"	p	language:Verilog	module:CommandInterpreter
@@ -485,7 +482,7 @@ Discriminator2PPEnable	MicrorocControl.v	/^  input Discriminator2PPEnable,$/;"	p
 Discriminator2PPEnable	ParameterGenerator.v	/^	input Discriminator2PPEnable,$/;"	p	language:Verilog	module:ParameterGenerator
 Discriminator2PPEnable	SlowControlAndReadScopeSet.v	/^  input Discriminator2PPEnable,$/;"	p	language:Verilog	module:SlowControlAndReadScopeSet
 DiscriminatorPPEnableInternal	CommandInterpreter.v	/^  wire DiscriminatorPPEnableInternal;$/;"	n	language:Verilog	module:CommandInterpreter
-DiscriminatorPPEnable_CAND	CommandParameter.v	/^`define DiscriminatorPPEnable_CAND                 16'hA210$/;"	c	language:Verilog
+DiscriminatorPPEnable_CAND	CommandParameter.v	/^`define DiscriminatorPPEnable_CAND                 16'hA211$/;"	c	language:Verilog
 Dout	Redundancy.v	/^	output Dout,$/;"	p	language:Verilog	module:Redundancy
 Dout1b_A	FPGA_Top.v	/^  input Dout1b_A,$/;"	p	language:Verilog	module:FPGA_Top
 Dout1b_B	FPGA_Top.v	/^  input Dout1b_B,$/;"	p	language:Verilog	module:FPGA_Top
@@ -666,7 +663,7 @@ HighGainShaperFeedbackSelect_CAND	CommandParameter.v	/^`define HighGainShaperFee
 HighGainShaperPPEnable	MicrorocControl.v	/^  input HighGainShaperPPEnable,             \/\/ Default: 0$/;"	p	language:Verilog	module:MicrorocControl
 HighGainShaperPPEnable	ParameterGenerator.v	/^	input HighGainShaperPPEnable, \/\/ Default: 0$/;"	p	language:Verilog	module:ParameterGenerator
 HighGainShaperPPEnable	SlowControlAndReadScopeSet.v	/^  input HighGainShaperPPEnable,             \/\/ Default: 0$/;"	p	language:Verilog	module:SlowControlAndReadScopeSet
-HighGainShaperPPEnable_CAND	CommandParameter.v	/^`define HighGainShaperPPEnable_CAND                16'hA260$/;"	c	language:Verilog
+HighGainShaperPPEnable_CAND	CommandParameter.v	/^`define HighGainShaperPPEnable_CAND                16'hA261$/;"	c	language:Verilog
 Hold	AdcControl.v	/^    input Hold,$/;"	p	language:Verilog	module:AdcControl
 HoldCount	RamReadDoneSync4Chain.v	/^  reg [3:0] HoldCount;$/;"	r	language:Verilog	module:RamReadDoneSync4Chain
 HoldDelay	CommandInterpreter.v	/^  output [7:0] HoldDelay,$/;"	p	language:Verilog	module:CommandInterpreter
@@ -748,11 +745,11 @@ LowGainShaperFeedbackSelect_CAND	CommandParameter.v	/^`define LowGainShaperFeedb
 LowGainShaperPPEnable	MicrorocControl.v	/^  input LowGainShaperPPEnable,              \/\/ Default: 0$/;"	p	language:Verilog	module:MicrorocControl
 LowGainShaperPPEnable	ParameterGenerator.v	/^	input LowGainShaperPPEnable, \/\/ Default: 0$/;"	p	language:Verilog	module:ParameterGenerator
 LowGainShaperPPEnable	SlowControlAndReadScopeSet.v	/^  input LowGainShaperPPEnable,              \/\/ Default: 0$/;"	p	language:Verilog	module:SlowControlAndReadScopeSet
-LowGainShaperPPEnable_CAND	CommandParameter.v	/^`define LowGainShaperPPEnable_CAND                 16'hA250$/;"	c	language:Verilog
+LowGainShaperPPEnable_CAND	CommandParameter.v	/^`define LowGainShaperPPEnable_CAND                 16'hA251$/;"	c	language:Verilog
 LvdsReceiverPPEnable	MicrorocControl.v	/^  input LvdsReceiverPPEnable,               \/\/ Default:0 Disable$/;"	p	language:Verilog	module:MicrorocControl
 LvdsReceiverPPEnable	ParameterGenerator.v	/^	input LvdsReceiverPPEnable,\/\/ Default:0 Disable$/;"	p	language:Verilog	module:ParameterGenerator
 LvdsReceiverPPEnable	SlowControlAndReadScopeSet.v	/^  input LvdsReceiverPPEnable,               \/\/ Default:0 Disable$/;"	p	language:Verilog	module:SlowControlAndReadScopeSet
-LvdsReceiverPPEnable_CAND	CommandParameter.v	/^`define LvdsReceiverPPEnable_CAND                  16'hA2E0$/;"	c	language:Verilog
+LvdsReceiverPPEnable_CAND	CommandParameter.v	/^`define LvdsReceiverPPEnable_CAND                  16'hA2E1$/;"	c	language:Verilog
 MASK	CommandInterpreter.v	/^  MASK                   = 3'b001,$/;"	c	language:Verilog	module:CommandInterpreter
 MASK_ALL	CommandInterpreter.v	/^  MASK_ALL               = 3'b100;$/;"	c	language:Verilog	module:CommandInterpreter
 MASK_CLEAR	CommandInterpreter.v	/^  MASK_CLEAR             = 3'b011,$/;"	c	language:Verilog	module:CommandInterpreter
@@ -952,7 +949,6 @@ MicrorocOTAqPPEnable_Output	ConfigurationParameterDistribution.v	/^    output re
 MicrorocParameterLoadDone_Input	ConfigurationParameterDistribution.v	/^    input [ASIC_CHAIN_NUMBER - 1:0]MicrorocParameterLoadDone_Input,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
 MicrorocParameterLoadDone_Output	ConfigurationParameterDistribution.v	/^    output reg MicrorocParameterLoadDone_Output,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
 MicrorocParameterLoadStart	CommandInterpreter.v	/^  output MicrorocParameterLoadStart,$/;"	p	language:Verilog	module:CommandInterpreter
-MicrorocParameterLoadStart_Debug	CommandInterpreter.v	/^  (* MARK_DEBUG="true" *)wire MicrorocParameterLoadStart_Debug;$/;"	n	language:Verilog	module:CommandInterpreter
 MicrorocParameterLoadStart_Input	ConfigurationParameterDistribution.v	/^    input MicrorocParameterLoadStart_Input,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
 MicrorocParameterLoadStart_Output	ConfigurationParameterDistribution.v	/^    output reg [ASIC_CHAIN_NUMBER - 1:0] MicrorocParameterLoadStart_Output,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
 MicrorocPowerPulsingPinEnable	CommandInterpreter.v	/^  output MicrorocPowerPulsingPinEnable,$/;"	p	language:Verilog	module:CommandInterpreter
@@ -1037,7 +1033,7 @@ OTAqEnable_CAND	CommandParameter.v	/^`define OTAqEnable_CAND                    
 OTAqPPEnable	MicrorocControl.v	/^  input OTAqPPEnable,$/;"	p	language:Verilog	module:MicrorocControl
 OTAqPPEnable	ParameterGenerator.v	/^	input OTAqPPEnable,$/;"	p	language:Verilog	module:ParameterGenerator
 OTAqPPEnable	SlowControlAndReadScopeSet.v	/^  input OTAqPPEnable,$/;"	p	language:Verilog	module:SlowControlAndReadScopeSet
-OTAqPPEnable_CAND	CommandParameter.v	/^`define OTAqPPEnable_CAND                          16'hA220$/;"	c	language:Verilog
+OTAqPPEnable_CAND	CommandParameter.v	/^`define OTAqPPEnable_CAND                          16'hA221$/;"	c	language:Verilog
 OTR	FPGA_Top.v	/^  input OTR,$/;"	p	language:Verilog	module:FPGA_Top
 OUT_COUNT1	SlaveDaq.v	/^	OUT_COUNT1 = 5'd15,$/;"	c	language:Verilog	module:SlaveDaq
 OUT_COUNT2	SlaveDaq.v	/^	OUT_COUNT2 = 5'd16,$/;"	c	language:Verilog	module:SlaveDaq
@@ -1141,7 +1137,7 @@ PowerPulsingPinEnable_CAND	CommandParameter.v	/^`define PowerPulsingPinEnable_CA
 PreAmplifierPPEnable	MicrorocControl.v	/^  input PreAmplifierPPEnable,               \/\/ Default: 0$/;"	p	language:Verilog	module:MicrorocControl
 PreAmplifierPPEnable	ParameterGenerator.v	/^	input PreAmplifierPPEnable, \/\/Default: 0$/;"	p	language:Verilog	module:ParameterGenerator
 PreAmplifierPPEnable	SlowControlAndReadScopeSet.v	/^  input PreAmplifierPPEnable,               \/\/ Default: 0$/;"	p	language:Verilog	module:SlowControlAndReadScopeSet
-PreAmplifierPPEnable_CAND	CommandParameter.v	/^`define PreAmplifierPPEnable_CAND                  16'hA270$/;"	c	language:Verilog
+PreAmplifierPPEnable_CAND	CommandParameter.v	/^`define PreAmplifierPPEnable_CAND                  16'hA271$/;"	c	language:Verilog
 PulseDestination	PulseSynchronous.v	/^    output PulseDestination$/;"	p	language:Verilog	module:PulseSynchronous
 PulseSource	PulseSynchronous.v	/^    input PulseSource,$/;"	p	language:Verilog	module:PulseSynchronous
 PulseSynchronous	PulseSynchronous.v	/^module PulseSynchronous ($/;"	m	language:Verilog
@@ -1617,7 +1613,7 @@ Wait_Tail_Cnt	SCurve_Test_Control.v	/^  reg [3:0]   Wait_Tail_Cnt;$/;"	r	languag
 WidlarPPEnable	MicrorocControl.v	/^  input WidlarPPEnable,                     \/\/ Default: 0 Disable$/;"	p	language:Verilog	module:MicrorocControl
 WidlarPPEnable	ParameterGenerator.v	/^	input WidlarPPEnable, \/\/ Default: 0 Disable$/;"	p	language:Verilog	module:ParameterGenerator
 WidlarPPEnable	SlowControlAndReadScopeSet.v	/^  input WidlarPPEnable,                     \/\/ Default: 0 Disable$/;"	p	language:Verilog	module:SlowControlAndReadScopeSet
-WidlarPPEnable_CAND	CommandParameter.v	/^`define WidlarPPEnable_CAND                        16'hA240$/;"	c	language:Verilog
+WidlarPPEnable_CAND	CommandParameter.v	/^`define WidlarPPEnable_CAND                        16'hA241$/;"	c	language:Verilog
 ck_40n	FPGA_Top.v	/^  output ck_40n,$/;"	p	language:Verilog	module:FPGA_Top
 ck_40p	FPGA_Top.v	/^  output ck_40p,$/;"	p	language:Verilog	module:FPGA_Top
 ck_5n	FPGA_Top.v	/^  output ck_5n,$/;"	p	language:Verilog	module:FPGA_Top
