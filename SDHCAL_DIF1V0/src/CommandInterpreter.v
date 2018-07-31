@@ -2567,4 +2567,13 @@ module CommandInterpreter(
       Invert10bit = {num[0], num[1], num[2], num[3], num[4], num[5], num[6], num[7], num[8], num[9]};
     end
   endfunction
+
+  (* MARK_DEBUG="true" *)wire [15:0] COMMAND_WORD_Debug;
+  assign COMMAND_WORD_Debug = COMMAND_WORD;
+  (* MARK_DEBUG="true" *)wire CommandFifoReadEnDelayed_Debug;
+  assign CommandFifoReadEnDelayed_Debug = CommandFifoReadEnDelayed;
+  (* MARK_DEBUG="true" *)wire [3:0] AsicChainSelect_Debug;
+  assign AsicChainSelect_Debug = AsicChainSelect;
+  (* MARK_DEBUG="true" *)wire MicrorocParameterLoadStart_Debug;
+  assign MicrorocParameterLoadStart_Debug = MicrorocParameterLoadStart;
 endmodule

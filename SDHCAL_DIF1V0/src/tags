@@ -82,6 +82,7 @@ AsicChainSelect	CommandInterpreter.v	/^  output [3:0] AsicChainSelect, \/\/ Cons
 AsicChainSelect	ConfigurationParameterDistribution.v	/^    input [3:0] AsicChainSelect,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
 AsicChainSelect	FPGA_Top.v	/^  wire [3:0] AsicChainSelect;$/;"	n	language:Verilog	module:FPGA_Top
 AsicChainSelectSet_CAND	CommandParameter.v	/^`define AsicChainSelectSet_CAND                    16'hB0A0$/;"	c	language:Verilog
+AsicChainSelect_Debug	CommandInterpreter.v	/^  (* MARK_DEBUG="true" *)wire [3:0] AsicChainSelect_Debug;$/;"	n	language:Verilog	module:CommandInterpreter
 AsicDatain_r	AsicRamReadout.v	/^	reg AsicDatain_r;$/;"	r	language:Verilog	module:AsicRamReadout
 AsicDatain_r1	AsicRamReadout.v	/^	reg AsicDatain_r1;$/;"	r	language:Verilog	module:AsicRamReadout
 AsicDatain_r2	AsicRamReadout.v	/^	reg AsicDatain_r2;$/;"	r	language:Verilog	module:AsicRamReadout
@@ -163,6 +164,7 @@ COMMAND_WIDTH	CommandDecoder_beforeInst.v	/^		parameter [1:0] COMMAND_WIDTH = 2'
 COMMAND_WORD	CommandDecoder.v	/^	input [15:0] COMMAND_WORD,$/;"	p	language:Verilog	module:CommandDecoder
 COMMAND_WORD	CommandDecoder_beforeInst.v	/^	input [15:0] COMMAND_WORD,$/;"	p	language:Verilog	module:CommandDecoder
 COMMAND_WORD	CommandInterpreter.v	/^  wire [15:0] COMMAND_WORD;$/;"	n	language:Verilog	module:CommandInterpreter
+COMMAND_WORD_Debug	CommandInterpreter.v	/^  (* MARK_DEBUG="true" *)wire [15:0] COMMAND_WORD_Debug;$/;"	n	language:Verilog	module:CommandInterpreter
 CPT_All_Done	SCurve_Single_Test.v	/^    wire CPT_All_Done;$/;"	n	language:Verilog	module:SCurve_Single_Test
 CPT_DATA	SCurve_Single_Test.v	/^    reg [95:0] CPT_DATA;$/;"	r	language:Verilog	module:SCurve_Single_Test
 CPT_DONE	SCurve_Single_Input.v	/^    output reg CPT_DONE$/;"	p	language:Verilog	module:SCurve_Single_Input
@@ -279,6 +281,7 @@ CommandFifoReadEn	CommandDecoder_beforeInst.v	/^	input CommandFifoReadEn,$/;"	p	
 CommandFifoReadEn	CommandInterpreter.v	/^  reg CommandFifoReadEn;$/;"	r	language:Verilog	module:CommandInterpreter
 CommandFifoReadEnDelayed	CommandDecoder.v	/^	input CommandFifoReadEnDelayed,$/;"	p	language:Verilog	module:CommandDecoder
 CommandFifoReadEnDelayed	CommandInterpreter.v	/^  reg CommandFifoReadEnDelayed;$/;"	r	language:Verilog	module:CommandInterpreter
+CommandFifoReadEnDelayed_Debug	CommandInterpreter.v	/^  (* MARK_DEBUG="true" *)wire CommandFifoReadEnDelayed_Debug;$/;"	n	language:Verilog	module:CommandInterpreter
 CommandInterpreter	CommandInterpreter.v	/^module CommandInterpreter($/;"	m	language:Verilog
 CommandMicrorocAcquisitionStartStop	AcquisitionControl.v	/^  input CommandMicrorocAcquisitionStartStop,$/;"	p	language:Verilog	module:AcquisitionControl
 CommandMicrorocAcquisitionStartStop	AcquisitionSwitcher.v	/^  input CommandMicrorocAcquisitionStartStop,$/;"	p	language:Verilog	module:AcquisitionSwitcher
@@ -949,6 +952,7 @@ MicrorocOTAqPPEnable_Output	ConfigurationParameterDistribution.v	/^    output re
 MicrorocParameterLoadDone_Input	ConfigurationParameterDistribution.v	/^    input [ASIC_CHAIN_NUMBER - 1:0]MicrorocParameterLoadDone_Input,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
 MicrorocParameterLoadDone_Output	ConfigurationParameterDistribution.v	/^    output reg MicrorocParameterLoadDone_Output,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
 MicrorocParameterLoadStart	CommandInterpreter.v	/^  output MicrorocParameterLoadStart,$/;"	p	language:Verilog	module:CommandInterpreter
+MicrorocParameterLoadStart_Debug	CommandInterpreter.v	/^  (* MARK_DEBUG="true" *)wire MicrorocParameterLoadStart_Debug;$/;"	n	language:Verilog	module:CommandInterpreter
 MicrorocParameterLoadStart_Input	ConfigurationParameterDistribution.v	/^    input MicrorocParameterLoadStart_Input,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
 MicrorocParameterLoadStart_Output	ConfigurationParameterDistribution.v	/^    output reg [ASIC_CHAIN_NUMBER - 1:0] MicrorocParameterLoadStart_Output,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
 MicrorocPowerPulsingPinEnable	CommandInterpreter.v	/^  output MicrorocPowerPulsingPinEnable,$/;"	p	language:Verilog	module:CommandInterpreter
