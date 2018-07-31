@@ -4840,7 +4840,7 @@ namespace USB_DAQ
         private bool SetDac1Vth(string Dac1Vth, MicrorocAsic MyMicroroc, int AsicLocation)
         {
             bool IllegalInput;
-            bool bResult = MyMicroroc.Dac0VthSet(Dac1Vth, MyUsbDevice1, out IllegalInput);
+            bool bResult = MyMicroroc.Dac1VthSet(Dac1Vth, MyUsbDevice1, out IllegalInput);
             if (IllegalInput)
             {
                 MessageBox.Show("Illegal Input value. The Vth1 should be 0-1023", "Illegal Input ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -4861,7 +4861,7 @@ namespace USB_DAQ
         private bool SetDac2Vth(string Dac2Vth, MicrorocAsic MyMicroroc, int AsicLocation)
         {
             bool IllegalInput;
-            bool bResult = MyMicroroc.Dac0VthSet(Dac2Vth, MyUsbDevice1, out IllegalInput);
+            bool bResult = MyMicroroc.Dac2VthSet(Dac2Vth, MyUsbDevice1, out IllegalInput);
             if (IllegalInput)
             {
                 MessageBox.Show("Illegal Input value. The Vth2 should be 0-1023", "Illegal Input ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
