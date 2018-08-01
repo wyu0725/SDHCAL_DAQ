@@ -4464,7 +4464,7 @@ namespace USB_DAQ
 
         private bool SelectSlowControl()
         {
-            if(MicrorocAsic.SlowControlOrReadScopeSelect(1, MyUsbDevice1))
+            if(MicrorocAsic.SlowControlOrReadScopeSelect(0, MyUsbDevice1))
             {
                 txtReport.AppendText("Select Slow Control\n");
                 StateIndicator.NewDifSlowControlOrReadScope = StateIndicator.NewDifParameterLoad.SlowControl;
@@ -4478,7 +4478,7 @@ namespace USB_DAQ
         }
         private bool SelectReadScope()
         {
-            if (MicrorocAsic.SlowControlOrReadScopeSelect(0, MyUsbDevice1))
+            if (MicrorocAsic.SlowControlOrReadScopeSelect(1, MyUsbDevice1))
             {
                 txtReport.AppendText("Select Read Scope\n");
                 StateIndicator.NewDifSlowControlOrReadScope = StateIndicator.NewDifParameterLoad.ReadScope;
@@ -4908,7 +4908,7 @@ namespace USB_DAQ
             bool bResult = MyMicroroc.ShaperOutLowGainOrHighGainSelect(HighOrLow, MyUsbDevice1);
             if(bResult)
             {
-                string report = string.Format("Set ASIC{0}{1} Shaper output {2} gain\n", MyMicroroc.ChainID, AsicLocation, ((HighOrLow == 1) ? "Low" : "High"));
+                string report = string.Format("Set ASIC{0}{1} Shaper output {2} gain\n", MyMicroroc.ChainID + 1, AsicLocation + 1, ((HighOrLow == 1) ? "High" : "Low"));
                 txtReport.AppendText(report);
                 return true;
             }
@@ -4971,7 +4971,7 @@ namespace USB_DAQ
             }
             if(MyMicroroc.SetChannelCalibration(MyUsbDevice1, CalibrationData))
             {
-                string report = string.Format("Set ASIC[0][1] Calibration successful\n", MyMicroroc.ChainID + 1, AsicLocation + 1);
+                string report = string.Format("Set ASIC{0}{1} Calibration successful\n", MyMicroroc.ChainID + 1, AsicLocation + 1);
                 txtReport.AppendText(report);
                 return true;
             }
