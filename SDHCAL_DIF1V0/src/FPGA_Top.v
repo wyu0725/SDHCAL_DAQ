@@ -171,7 +171,7 @@ module FPGA_Top(
   output [7:0] LED
   );
 
-  assign EXT_TRIG_OUT = 1'b0;
+  assign EXT_TRIG_OUT = |MicrorocAcquisitionOnceDone;
   
   wire Clk;
   wire Clk5M;
