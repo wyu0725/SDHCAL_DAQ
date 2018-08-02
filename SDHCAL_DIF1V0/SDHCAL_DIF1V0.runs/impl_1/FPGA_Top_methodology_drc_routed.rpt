@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2018.1 (win64) Build 2188600 Wed Apr  4 18:40:38 MDT 2018
-| Date         : Tue Jul 31 20:24:56 2018
+| Date         : Thu Aug  2 17:05:04 2018
 | Host         : WYU running 64-bit major release  (build 9200)
 | Command      : report_methodology -file FPGA_Top_methodology_drc_routed.rpt -pb FPGA_Top_methodology_drc_routed.pb -rpx FPGA_Top_methodology_drc_routed.rpx
 | Design       : FPGA_Top
@@ -23,7 +23,7 @@ Table of Contents
           Floorplan: design_1
       Design limits: <entire design considered>
              Max violations: <unlimited>
-             Violations found: 243
+             Violations found: 244
 +-----------+----------+-------------------------------------------------+------------+
 | Rule      | Severity | Description                                     | Violations |
 +-----------+----------+-------------------------------------------------+------------+
@@ -34,59 +34,59 @@ Table of Contents
 | TIMING-10 | Warning  | Missing property on synchronizer                | 1          |
 | TIMING-14 | Warning  | LUT on the clock tree                           | 3          |
 | TIMING-17 | Warning  | Non-clocked sequential cell                     | 131        |
-| TIMING-18 | Warning  | Missing input or output delay                   | 92         |
+| TIMING-18 | Warning  | Missing input or output delay                   | 93         |
 +-----------+----------+-------------------------------------------------+------------+
 
 2. REPORT DETAILS
 -----------------
 PDRC-190#1 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell Acquisition/AcquisitionDataSwitcher/MicrorocChain1DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d2_reg in site SLICE_X29Y67 is part of a synchronized register chain that is suboptimally placed as the load FDSE cell Acquisition/AcquisitionDataSwitcher/MicrorocChain1DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d3_reg is not placed in the same (SLICE) site.
+The FDRE cell Acquisition/AcquisitionDataSwitcher/MicrorocChain1DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d2_reg in site SLICE_X4Y31 is part of a synchronized register chain that is suboptimally placed as the load FDSE cell Acquisition/AcquisitionDataSwitcher/MicrorocChain1DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d3_reg is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#2 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell Acquisition/AcquisitionDataSwitcher/MicrorocChain2DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d2_reg in site SLICE_X31Y63 is part of a synchronized register chain that is suboptimally placed as the load FDSE cell Acquisition/AcquisitionDataSwitcher/MicrorocChain2DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d3_reg is not placed in the same (SLICE) site.
+The FDRE cell Acquisition/AcquisitionDataSwitcher/MicrorocChain2DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d2_reg in site SLICE_X6Y39 is part of a synchronized register chain that is suboptimally placed as the load FDSE cell Acquisition/AcquisitionDataSwitcher/MicrorocChain2DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d3_reg is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#3 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell Acquisition/AcquisitionDataSwitcher/MicrorocChain3DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d2_reg in site SLICE_X15Y59 is part of a synchronized register chain that is suboptimally placed as the load FDSE cell Acquisition/AcquisitionDataSwitcher/MicrorocChain3DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d3_reg is not placed in the same (SLICE) site.
+The FDRE cell Acquisition/AcquisitionDataSwitcher/MicrorocChain3DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d2_reg in site SLICE_X3Y28 is part of a synchronized register chain that is suboptimally placed as the load FDSE cell Acquisition/AcquisitionDataSwitcher/MicrorocChain3DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d3_reg is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#4 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell Acquisition/AcquisitionDataSwitcher/MicrorocChain4DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d2_reg in site SLICE_X31Y66 is part of a synchronized register chain that is suboptimally placed as the load FDSE cell Acquisition/AcquisitionDataSwitcher/MicrorocChain4DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d3_reg is not placed in the same (SLICE) site.
+The FDRE cell Acquisition/AcquisitionDataSwitcher/MicrorocChain4DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d2_reg in site SLICE_X0Y37 is part of a synchronized register chain that is suboptimally placed as the load FDSE cell Acquisition/AcquisitionDataSwitcher/MicrorocChain4DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d3_reg is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#5 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell Command/CommandFifo32Depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d2_reg in site SLICE_X74Y83 is part of a synchronized register chain that is suboptimally placed as the load FDSE cell Command/CommandFifo32Depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d3_reg is not placed in the same (SLICE) site.
+The FDRE cell Command/CommandFifo32Depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d2_reg in site SLICE_X54Y53 is part of a synchronized register chain that is suboptimally placed as the load FDSE cell Command/CommandFifo32Depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d3_reg is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#6 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell MicrorocChain1/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d2_reg in site SLICE_X34Y89 is part of a synchronized register chain that is suboptimally placed as the load FDSE cell MicrorocChain1/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d3_reg is not placed in the same (SLICE) site.
+The FDRE cell MicrorocChain1/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d2_reg in site SLICE_X13Y7 is part of a synchronized register chain that is suboptimally placed as the load FDSE cell MicrorocChain1/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d3_reg is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#7 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell MicrorocChain2/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d2_reg in site SLICE_X41Y88 is part of a synchronized register chain that is suboptimally placed as the load FDSE cell MicrorocChain2/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d3_reg is not placed in the same (SLICE) site.
+The FDRE cell MicrorocChain2/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d2_reg in site SLICE_X16Y1 is part of a synchronized register chain that is suboptimally placed as the load FDSE cell MicrorocChain2/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d3_reg is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#8 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell MicrorocChain3/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d2_reg in site SLICE_X49Y91 is part of a synchronized register chain that is suboptimally placed as the load FDSE cell MicrorocChain3/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d3_reg is not placed in the same (SLICE) site.
+The FDRE cell MicrorocChain3/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d2_reg in site SLICE_X22Y1 is part of a synchronized register chain that is suboptimally placed as the load FDSE cell MicrorocChain3/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d3_reg is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#9 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell MicrorocChain4/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d2_reg in site SLICE_X37Y90 is part of a synchronized register chain that is suboptimally placed as the load FDSE cell MicrorocChain4/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d3_reg is not placed in the same (SLICE) site.
+The FDRE cell MicrorocChain4/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d2_reg in site SLICE_X14Y4 is part of a synchronized register chain that is suboptimally placed as the load FDSE cell MicrorocChain4/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d3_reg is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#10 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d2_reg in site SLICE_X62Y75 is part of a synchronized register chain that is suboptimally placed as the load FDSE cell UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d3_reg is not placed in the same (SLICE) site.
+The FDRE cell UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d2_reg in site SLICE_X14Y31 is part of a synchronized register chain that is suboptimally placed as the load FDSE cell UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d3_reg is not placed in the same (SLICE) site.
 Related violations: <none>
 
 TIMING-6#1 Warning
@@ -1056,200 +1056,205 @@ Related violations: <none>
 
 TIMING-18#53 Warning
 Missing input or output delay  
-An output delay is missing on LED[0] relative to clock(s) Clk40M
+An output delay is missing on EXT_TRIG_OUT relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#54 Warning
 Missing input or output delay  
-An output delay is missing on LED[1] relative to clock(s) Clk40M
+An output delay is missing on LED[0] relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#55 Warning
 Missing input or output delay  
-An output delay is missing on LED[2] relative to clock(s) Clk40M
+An output delay is missing on LED[1] relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#56 Warning
 Missing input or output delay  
-An output delay is missing on LED[3] relative to clock(s) Clk40M
+An output delay is missing on LED[2] relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#57 Warning
 Missing input or output delay  
-An output delay is missing on LED[4] relative to clock(s) Clk40M
+An output delay is missing on LED[3] relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#58 Warning
 Missing input or output delay  
-An output delay is missing on LED[5] relative to clock(s) Clk40M
+An output delay is missing on LED[4] relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#59 Warning
 Missing input or output delay  
-An output delay is missing on LED[6] relative to clock(s) Clk40M
+An output delay is missing on LED[5] relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#60 Warning
 Missing input or output delay  
-An output delay is missing on LED[7] relative to clock(s) Clk40M
+An output delay is missing on LED[6] relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#61 Warning
 Missing input or output delay  
-An output delay is missing on PKTEND relative to clock(s) CLKOUT
+An output delay is missing on LED[7] relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#62 Warning
 Missing input or output delay  
-An output delay is missing on ROW[0] relative to clock(s) Clk40M
+An output delay is missing on PKTEND relative to clock(s) CLKOUT
 Related violations: <none>
 
 TIMING-18#63 Warning
 Missing input or output delay  
-An output delay is missing on ROW[1] relative to clock(s) Clk40M
+An output delay is missing on ROW[0] relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#64 Warning
 Missing input or output delay  
-An output delay is missing on ROW[2] relative to clock(s) Clk40M
+An output delay is missing on ROW[1] relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#65 Warning
 Missing input or output delay  
-An output delay is missing on SLOE relative to clock(s) CLKOUT
+An output delay is missing on ROW[2] relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#66 Warning
 Missing input or output delay  
-An output delay is missing on SLRD relative to clock(s) CLKOUT
+An output delay is missing on SLOE relative to clock(s) CLKOUT
 Related violations: <none>
 
 TIMING-18#67 Warning
 Missing input or output delay  
-An output delay is missing on SLWR relative to clock(s) CLKOUT
+An output delay is missing on SLRD relative to clock(s) CLKOUT
 Related violations: <none>
 
 TIMING-18#68 Warning
 Missing input or output delay  
-An output delay is missing on StartAcq_A relative to clock(s) Clk40M
+An output delay is missing on SLWR relative to clock(s) CLKOUT
 Related violations: <none>
 
 TIMING-18#69 Warning
 Missing input or output delay  
-An output delay is missing on StartAcq_B relative to clock(s) Clk40M
+An output delay is missing on StartAcq_A relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#70 Warning
 Missing input or output delay  
-An output delay is missing on StartAcq_C relative to clock(s) Clk40M
+An output delay is missing on StartAcq_B relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#71 Warning
 Missing input or output delay  
-An output delay is missing on StartAcq_D relative to clock(s) Clk40M
+An output delay is missing on StartAcq_C relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#72 Warning
 Missing input or output delay  
-An output delay is missing on StartReadout1_A relative to clock(s) Clk40M
+An output delay is missing on StartAcq_D relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#73 Warning
 Missing input or output delay  
-An output delay is missing on StartReadout1_B relative to clock(s) Clk40M
+An output delay is missing on StartReadout1_A relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#74 Warning
 Missing input or output delay  
-An output delay is missing on StartReadout1_C relative to clock(s) Clk40M
+An output delay is missing on StartReadout1_B relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#75 Warning
 Missing input or output delay  
-An output delay is missing on StartReadout1_D relative to clock(s) Clk40M
+An output delay is missing on StartReadout1_C relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#76 Warning
 Missing input or output delay  
-An output delay is missing on StartReadout2_A relative to clock(s) Clk40M
+An output delay is missing on StartReadout1_D relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#77 Warning
 Missing input or output delay  
-An output delay is missing on StartReadout2_B relative to clock(s) Clk40M
+An output delay is missing on StartReadout2_A relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#78 Warning
 Missing input or output delay  
-An output delay is missing on StartReadout2_C relative to clock(s) Clk40M
+An output delay is missing on StartReadout2_B relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#79 Warning
 Missing input or output delay  
-An output delay is missing on StartReadout2_D relative to clock(s) Clk40M
+An output delay is missing on StartReadout2_C relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#80 Warning
 Missing input or output delay  
-An output delay is missing on TP[0] relative to clock(s) Clk40M
+An output delay is missing on StartReadout2_D relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#81 Warning
 Missing input or output delay  
-An output delay is missing on TP[1] relative to clock(s) Clk40M
+An output delay is missing on TP[0] relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#82 Warning
 Missing input or output delay  
-An output delay is missing on TP[2] relative to clock(s) Clk40M
+An output delay is missing on TP[1] relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#83 Warning
 Missing input or output delay  
-An output delay is missing on TP[3] relative to clock(s) Clk40M
+An output delay is missing on TP[2] relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#84 Warning
 Missing input or output delay  
-An output delay is missing on pwr_on_a relative to clock(s) Clk40M
+An output delay is missing on TP[3] relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#85 Warning
 Missing input or output delay  
-An output delay is missing on pwr_on_adc relative to clock(s) Clk40M
+An output delay is missing on pwr_on_a relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#86 Warning
 Missing input or output delay  
-An output delay is missing on pwr_on_d relative to clock(s) Clk40M
+An output delay is missing on pwr_on_adc relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#87 Warning
 Missing input or output delay  
-An output delay is missing on pwr_on_dac relative to clock(s) Clk40M
+An output delay is missing on pwr_on_d relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#88 Warning
 Missing input or output delay  
-An output delay is missing on raz_chnn relative to clock(s) Clk40M
+An output delay is missing on pwr_on_dac relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#89 Warning
 Missing input or output delay  
-An output delay is missing on raz_chnp relative to clock(s) Clk40M
+An output delay is missing on raz_chnn relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#90 Warning
 Missing input or output delay  
-An output delay is missing on reset_b relative to clock(s) Clk40M
+An output delay is missing on raz_chnp relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#91 Warning
 Missing input or output delay  
-An output delay is missing on rst_counterb relative to clock(s) Clk40M
+An output delay is missing on reset_b relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#92 Warning
+Missing input or output delay  
+An output delay is missing on rst_counterb relative to clock(s) Clk40M
+Related violations: <none>
+
+TIMING-18#93 Warning
 Missing input or output delay  
 An output delay is missing on select relative to clock(s) Clk40M
 Related violations: <none>

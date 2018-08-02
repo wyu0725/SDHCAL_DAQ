@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2018.1 (win64) Build 2188600 Wed Apr  4 18:40:38 MDT 2018
-| Date             : Tue Jul 31 20:25:02 2018
+| Date             : Thu Aug  2 17:05:11 2018
 | Host             : WYU running 64-bit major release  (build 9200)
 | Command          : report_power -file FPGA_Top_power_routed.rpt -pb FPGA_Top_power_summary_routed.pb -rpx FPGA_Top_power_routed.rpx
 | Design           : FPGA_Top
@@ -30,7 +30,7 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.386        |
+| Total On-Chip Power (W)  | 0.387        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
 | Dynamic (W)              | 0.279        |
@@ -54,20 +54,20 @@ Table of Contents
 | On-Chip                 | Power (W) | Used     | Available | Utilization (%) |
 +-------------------------+-----------+----------+-----------+-----------------+
 | Clocks                  |     0.014 |        8 |       --- |             --- |
-| Slice Logic             |     0.006 |    20123 |       --- |             --- |
-|   LUT as Logic          |     0.005 |     8639 |     63400 |           13.63 |
+| Slice Logic             |     0.006 |    20125 |       --- |             --- |
+|   LUT as Logic          |     0.005 |     8631 |     63400 |           13.61 |
 |   Register              |    <0.001 |     9547 |    126800 |            7.53 |
 |   CARRY4                |    <0.001 |      182 |     15850 |            1.15 |
 |   F7/F8 Muxes           |    <0.001 |       65 |     63400 |            0.10 |
 |   BUFG                  |    <0.001 |        2 |        32 |            6.25 |
 |   LUT as Shift Register |    <0.001 |       26 |     19000 |            0.14 |
 |   Others                |     0.000 |      345 |       --- |             --- |
-| Signals                 |     0.008 |    13419 |       --- |             --- |
+| Signals                 |     0.008 |    13426 |       --- |             --- |
 | Block RAM               |     0.005 |        9 |       135 |            6.67 |
 | MMCM                    |     0.084 |        1 |         6 |           16.67 |
 | I/O                     |     0.162 |      140 |       285 |           49.12 |
 | Static Power            |     0.108 |          |           |                 |
-| Total                   |     0.386 |          |           |                 |
+| Total                   |     0.387 |          |           |                 |
 +-------------------------+-----------+----------+-----------+-----------------+
 
 
@@ -155,7 +155,7 @@ Table of Contents
 |   Acquisition                                                                           |     0.003 |
 |     AD9220Control                                                                       |    <0.001 |
 |       Ad9220Control                                                                     |    <0.001 |
-|     AcquisitionDataSwitcher                                                             |    <0.001 |
+|     AcquisitionDataSwitcher                                                             |     0.001 |
 |       MicrorocChain1DataFIFO                                                            |    <0.001 |
 |         U0                                                                              |    <0.001 |
 |           inst_fifo_gen                                                                 |    <0.001 |
@@ -419,7 +419,7 @@ Table of Contents
 |     TriggerToWriteSelect                                                                |    <0.001 |
 |     UnmaskAllChannelSet                                                                 |    <0.001 |
 |     WidlarPPEnable                                                                      |    <0.001 |
-|   CommonControlSignalGenerator                                                          |     0.155 |
+|   CommonControlSignalGenerator                                                          |     0.154 |
 |     ExternalRazGen                                                                      |    <0.001 |
 |     HoldGen                                                                             |     0.003 |
 |     RamReadDoneDetect                                                                   |    <0.001 |

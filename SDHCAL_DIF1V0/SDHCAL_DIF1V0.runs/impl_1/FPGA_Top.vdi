@@ -2,8 +2,8 @@
 # Vivado v2018.1 (64-bit)
 # SW Build 2188600 on Wed Apr  4 18:40:38 MDT 2018
 # IP Build 2185939 on Wed Apr  4 20:55:05 MDT 2018
-# Start of session at: Tue Jul 31 20:21:26 2018
-# Process ID: 19004
+# Start of session at: Thu Aug  2 17:01:07 2018
+# Process ID: 21376
 # Current directory: D:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.runs/impl_1
 # Command line: vivado.exe -log FPGA_Top.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source FPGA_Top.tcl -notrace
 # Log file: D:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.runs/impl_1/FPGA_Top.vdi
@@ -144,7 +144,7 @@ INFO: [Project 1-111] Unisim Transformation Summary:
 
 7 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
 link_design completed successfully
-link_design: Time (s): cpu = 00:00:31 ; elapsed = 00:00:35 . Memory (MB): peak = 1316.723 ; gain = 978.105
+link_design: Time (s): cpu = 00:00:32 ; elapsed = 00:00:36 . Memory (MB): peak = 1315.445 ; gain = 977.016
 Command: opt_design
 Attempting to get a license for feature 'Implementation' and/or device 'xc7a100t'
 INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7a100t'
@@ -155,7 +155,7 @@ INFO: [DRC 23-27] Running DRC with 2 threads
 INFO: [Project 1-461] DRC finished with 0 Errors
 INFO: [Project 1-462] Please refer to the DRC report (report_drc) for more information.
 
-Time (s): cpu = 00:00:02 ; elapsed = 00:00:01 . Memory (MB): peak = 1316.723 ; gain = 0.000
+Time (s): cpu = 00:00:02 ; elapsed = 00:00:01 . Memory (MB): peak = 1315.445 ; gain = 0.000
 INFO: [Timing 38-35] Done setting XDC timing constraints.
 
 Starting Logic Optimization Task
@@ -163,48 +163,48 @@ Starting Logic Optimization Task
 Phase 1 Retarget
 INFO: [Opt 31-138] Pushed 4 inverter(s) to 805 load pin(s).
 INFO: [Opt 31-49] Retargeted 0 cell(s).
-Phase 1 Retarget | Checksum: 1690ce0f4
+Phase 1 Retarget | Checksum: 1af7178f7
 
-Time (s): cpu = 00:00:03 ; elapsed = 00:00:02 . Memory (MB): peak = 1316.723 ; gain = 0.000
+Time (s): cpu = 00:00:02 ; elapsed = 00:00:02 . Memory (MB): peak = 1315.445 ; gain = 0.000
 INFO: [Opt 31-389] Phase Retarget created 0 cells and removed 0 cells
 
 Phase 2 Constant propagation
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Phase 2 Constant propagation | Checksum: 1690ce0f4
+Phase 2 Constant propagation | Checksum: 1af7178f7
 
-Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 1316.723 ; gain = 0.000
+Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 1315.445 ; gain = 0.000
 INFO: [Opt 31-389] Phase Constant propagation created 0 cells and removed 0 cells
 
 Phase 3 Sweep
-Phase 3 Sweep | Checksum: 11f6a6829
+Phase 3 Sweep | Checksum: dbfabb66
 
-Time (s): cpu = 00:00:04 ; elapsed = 00:00:03 . Memory (MB): peak = 1316.723 ; gain = 0.000
+Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 1315.445 ; gain = 0.000
 INFO: [Opt 31-389] Phase Sweep created 4 cells and removed 4 cells
 
 Phase 4 BUFG optimization
-Phase 4 BUFG optimization | Checksum: 108be8523
+Phase 4 BUFG optimization | Checksum: 16a43954c
 
-Time (s): cpu = 00:00:04 ; elapsed = 00:00:03 . Memory (MB): peak = 1316.723 ; gain = 0.000
+Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1315.445 ; gain = 0.000
 INFO: [Opt 31-389] Phase BUFG optimization created 0 cells and removed 3 cells
 
 Phase 5 Shift Register Optimization
-Phase 5 Shift Register Optimization | Checksum: 108be8523
+Phase 5 Shift Register Optimization | Checksum: 16a43954c
 
-Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1316.723 ; gain = 0.000
+Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1315.445 ; gain = 0.000
 INFO: [Opt 31-389] Phase Shift Register Optimization created 0 cells and removed 0 cells
 
 Phase 6 Post Processing Netlist
-Phase 6 Post Processing Netlist | Checksum: 1d05c68ce
+Phase 6 Post Processing Netlist | Checksum: 1a510e17a
 
-Time (s): cpu = 00:00:05 ; elapsed = 00:00:04 . Memory (MB): peak = 1316.723 ; gain = 0.000
+Time (s): cpu = 00:00:04 ; elapsed = 00:00:05 . Memory (MB): peak = 1315.445 ; gain = 0.000
 INFO: [Opt 31-389] Phase Post Processing Netlist created 0 cells and removed 0 cells
 
 Starting Connectivity Check Task
 
-Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.054 . Memory (MB): peak = 1316.723 ; gain = 0.000
-Ending Logic Optimization Task | Checksum: 1d05c68ce
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.065 . Memory (MB): peak = 1315.445 ; gain = 0.000
+Ending Logic Optimization Task | Checksum: 1a510e17a
 
-Time (s): cpu = 00:00:05 ; elapsed = 00:00:04 . Memory (MB): peak = 1316.723 ; gain = 0.000
+Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 1315.445 ; gain = 0.000
 
 Starting Power Optimization Task
 INFO: [Pwropt 34-132] Skipping clock gating for clocks with a period < 2.00 ns.
@@ -222,41 +222,42 @@ INFO: [Pwropt 34-162] WRITE_MODE attribute of 8 BRAM(s) out of a total of 14 has
 INFO: [Timing 38-35] Done setting XDC timing constraints.
 INFO: [Pwropt 34-201] Structural ODC has moved 4 WE to EN ports
 Number of BRAM Ports augmented: 4 newly gated: 4 Total Ports: 28
-Ending PowerOpt Patch Enables Task | Checksum: 9b913024
+Ending PowerOpt Patch Enables Task | Checksum: 156152d90
 
-Time (s): cpu = 00:00:02 ; elapsed = 00:00:00.974 . Memory (MB): peak = 1586.391 ; gain = 0.000
-Ending Power Optimization Task | Checksum: 9b913024
+Time (s): cpu = 00:00:02 ; elapsed = 00:00:01 . Memory (MB): peak = 1589.020 ; gain = 0.000
+Ending Power Optimization Task | Checksum: 156152d90
 
-Time (s): cpu = 00:00:15 ; elapsed = 00:00:09 . Memory (MB): peak = 1586.391 ; gain = 269.668
+Time (s): cpu = 00:00:15 ; elapsed = 00:00:10 . Memory (MB): peak = 1589.020 ; gain = 273.574
 
 Starting Logic Optimization Task
 INFO: [Timing 38-35] Done setting XDC timing constraints.
 
 Phase 1 Remap
-Phase 1 Remap | Checksum: bd9df74e
+Phase 1 Remap | Checksum: 133ab1572
 
-Time (s): cpu = 00:00:02 ; elapsed = 00:00:02 . Memory (MB): peak = 1586.391 ; gain = 0.000
+Time (s): cpu = 00:00:02 ; elapsed = 00:00:02 . Memory (MB): peak = 1589.020 ; gain = 0.000
 INFO: [Opt 31-389] Phase Remap created 4 cells and removed 12 cells
 
 Phase 2 Post Processing Netlist
-Phase 2 Post Processing Netlist | Checksum: a759595e
+Phase 2 Post Processing Netlist | Checksum: bd318adf
 
-Time (s): cpu = 00:00:03 ; elapsed = 00:00:02 . Memory (MB): peak = 1586.391 ; gain = 0.000
+Time (s): cpu = 00:00:03 ; elapsed = 00:00:02 . Memory (MB): peak = 1589.020 ; gain = 0.000
 INFO: [Opt 31-389] Phase Post Processing Netlist created 0 cells and removed 0 cells
-Ending Logic Optimization Task | Checksum: a759595e
+Ending Logic Optimization Task | Checksum: bd318adf
 
-Time (s): cpu = 00:00:03 ; elapsed = 00:00:02 . Memory (MB): peak = 1586.391 ; gain = 0.000
+Time (s): cpu = 00:00:03 ; elapsed = 00:00:02 . Memory (MB): peak = 1589.020 ; gain = 0.000
 INFO: [Common 17-83] Releasing license: Implementation
 33 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
 opt_design completed successfully
-opt_design: Time (s): cpu = 00:00:26 ; elapsed = 00:00:18 . Memory (MB): peak = 1586.391 ; gain = 269.668
+opt_design: Time (s): cpu = 00:00:26 ; elapsed = 00:00:21 . Memory (MB): peak = 1589.020 ; gain = 273.574
 INFO: [Timing 38-480] Writing timing data to binary archive.
 Writing placer database...
 Writing XDEF routing.
 Writing XDEF routing logical nets.
 Writing XDEF routing special nets.
-Write XDEF Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.058 . Memory (MB): peak = 1586.391 ; gain = 0.000
+Write XDEF Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.113 . Memory (MB): peak = 1589.020 ; gain = 0.000
 INFO: [Common 17-1381] The checkpoint 'D:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.runs/impl_1/FPGA_Top_opt.dcp' has been generated.
+write_checkpoint: Time (s): cpu = 00:00:06 ; elapsed = 00:00:05 . Memory (MB): peak = 1589.020 ; gain = 0.000
 INFO: [runtcl-4] Executing : report_drc -file FPGA_Top_drc_opted.rpt -pb FPGA_Top_drc_opted.pb -rpx FPGA_Top_drc_opted.rpx
 Command: report_drc -file FPGA_Top_drc_opted.rpt -pb FPGA_Top_drc_opted.pb -rpx FPGA_Top_drc_opted.rpx
 INFO: [DRC 23-27] Running DRC with 2 threads
@@ -310,7 +311,7 @@ WARNING: [DRC REQP-1840] RAMB18 async control check: The RAMB18E1 Acquisition/Ac
 WARNING: [DRC REQP-1840] RAMB18 async control check: The RAMB18E1 Acquisition/AcquisitionDataSwitcher/MicrorocChain1DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.mem/gbm.gbmg.gbmga.ngecc.bmg/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/prim_noinit.ram/DEVICE_7SERIES.NO_BMM_INFO.SDP.SIMPLE_PRIM18.ram has an input control pin Acquisition/AcquisitionDataSwitcher/MicrorocChain1DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.mem/gbm.gbmg.gbmga.ngecc.bmg/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/prim_noinit.ram/DEVICE_7SERIES.NO_BMM_INFO.SDP.SIMPLE_PRIM18.ram/WEA[0] (net: Acquisition/AcquisitionDataSwitcher/MicrorocChain1DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.mem/gbm.gbmg.gbmga.ngecc.bmg/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/prim_noinit.ram/E[0]) which is driven by a register (MicrorocChain1/MicrorocDaq/SlaveDaqControl/InternalData_en_reg) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 WARNING: [DRC REQP-1840] RAMB18 async control check: The RAMB18E1 Acquisition/AcquisitionDataSwitcher/MicrorocChain1DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.mem/gbm.gbmg.gbmga.ngecc.bmg/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/prim_noinit.ram/DEVICE_7SERIES.NO_BMM_INFO.SDP.SIMPLE_PRIM18.ram has an input control pin Acquisition/AcquisitionDataSwitcher/MicrorocChain1DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.mem/gbm.gbmg.gbmga.ngecc.bmg/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/prim_noinit.ram/DEVICE_7SERIES.NO_BMM_INFO.SDP.SIMPLE_PRIM18.ram/WEA[0] (net: Acquisition/AcquisitionDataSwitcher/MicrorocChain1DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.mem/gbm.gbmg.gbmga.ngecc.bmg/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/prim_noinit.ram/E[0]) which is driven by a register (MicrorocChain1/ReadOnChipRam/ExternalFifoWriteEn_reg) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 WARNING: [DRC REQP-1840] RAMB18 async control check: The RAMB18E1 Acquisition/AcquisitionDataSwitcher/MicrorocChain2DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.mem/gbm.gbmg.gbmga.ngecc.bmg/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/prim_noinit.ram/DEVICE_7SERIES.NO_BMM_INFO.SDP.SIMPLE_PRIM18.ram has an input control pin Acquisition/AcquisitionDataSwitcher/MicrorocChain2DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.mem/gbm.gbmg.gbmga.ngecc.bmg/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/prim_noinit.ram/DEVICE_7SERIES.NO_BMM_INFO.SDP.SIMPLE_PRIM18.ram/ENARDEN (net: Acquisition/AcquisitionDataSwitcher/MicrorocChain2DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.mem/gbm.gbmg.gbmga.ngecc.bmg/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/prim_noinit.ram/E[0]) which is driven by a register (Command/DaqModeSelect/CommandOut_reg[0]_rep__0) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
-WARNING: [DRC REQP-1840] RAMB18 async control check: The RAMB18E1 Acquisition/AcquisitionDataSwitcher/MicrorocChain2DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.mem/gbm.gbmg.gbmga.ngecc.bmg/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/prim_noinit.ram/DEVICE_7SERIES.NO_BMM_INFO.SDP.SIMPLE_PRIM18.ram has an input control pin Acquisition/AcquisitionDataSwitcher/MicrorocChain2DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.mem/gbm.gbmg.gbmga.ngecc.bmg/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/prim_noinit.ram/DEVICE_7SERIES.NO_BMM_INFO.SDP.SIMPLE_PRIM18.ram/ENARDEN (net: Acquisition/AcquisitionDataSwitcher/MicrorocChain2DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.mem/gbm.gbmg.gbmga.ngecc.bmg/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/prim_noinit.ram/E[0]) which is driven by a register (MicrorocChain2/MicrorocDaq/SlaveDaqControl/FSM_sequential_State_reg[4]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+WARNING: [DRC REQP-1840] RAMB18 async control check: The RAMB18E1 Acquisition/AcquisitionDataSwitcher/MicrorocChain2DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.mem/gbm.gbmg.gbmga.ngecc.bmg/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/prim_noinit.ram/DEVICE_7SERIES.NO_BMM_INFO.SDP.SIMPLE_PRIM18.ram has an input control pin Acquisition/AcquisitionDataSwitcher/MicrorocChain2DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.mem/gbm.gbmg.gbmga.ngecc.bmg/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/prim_noinit.ram/DEVICE_7SERIES.NO_BMM_INFO.SDP.SIMPLE_PRIM18.ram/ENARDEN (net: Acquisition/AcquisitionDataSwitcher/MicrorocChain2DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.mem/gbm.gbmg.gbmga.ngecc.bmg/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/prim_noinit.ram/E[0]) which is driven by a register (MicrorocChain2/MicrorocDaq/SlaveDaqControl/FSM_sequential_State_reg[1]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 WARNING: [DRC REQP-1840] RAMB18 async control check: The RAMB18E1 Acquisition/AcquisitionDataSwitcher/MicrorocChain2DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.mem/gbm.gbmg.gbmga.ngecc.bmg/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/prim_noinit.ram/DEVICE_7SERIES.NO_BMM_INFO.SDP.SIMPLE_PRIM18.ram has an input control pin Acquisition/AcquisitionDataSwitcher/MicrorocChain2DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.mem/gbm.gbmg.gbmga.ngecc.bmg/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/prim_noinit.ram/DEVICE_7SERIES.NO_BMM_INFO.SDP.SIMPLE_PRIM18.ram/ENARDEN (net: Acquisition/AcquisitionDataSwitcher/MicrorocChain2DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.mem/gbm.gbmg.gbmga.ngecc.bmg/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/prim_noinit.ram/E[0]) which is driven by a register (MicrorocChain2/ReadOnChipRam/ExternalFifoWriteEn_reg) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 INFO: [Vivado_Tcl 4-198] DRC finished with 0 Errors, 42 Warnings
 INFO: [Vivado_Tcl 4-199] Please refer to the DRC report (report_drc) for more information.
@@ -321,31 +322,31 @@ INFO: [Place 30-611] Multithreading enabled for place_design using a maximum of 
 Phase 1 Placer Initialization
 
 Phase 1.1 Placer Initialization Netlist Sorting
-Netlist sorting complete. Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.136 . Memory (MB): peak = 1586.391 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.153 . Memory (MB): peak = 1589.020 ; gain = 0.000
 Phase 1.1 Placer Initialization Netlist Sorting | Checksum: 73b79475
 
-Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.146 . Memory (MB): peak = 1586.391 ; gain = 0.000
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.264 . Memory (MB): peak = 1589.020 ; gain = 0.000
 INFO: [Timing 38-35] Done setting XDC timing constraints.
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.140 . Memory (MB): peak = 1586.391 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.151 . Memory (MB): peak = 1589.020 ; gain = 0.000
 
 Phase 1.2 IO Placement/ Clock Placement/ Build Placer Device
-WARNING: [Place 30-568] A LUT 'Command/AcquisitionStartStopSet/SlaveDaq_UsbStartStop_i_1__1' is driving clock pin of 1 registers. This could lead to large hold time violations. First few involved registers are:
-	MicrorocChain2/MicrorocDaq/SlaveDaq_UsbStartStop_reg {FDCE}
-WARNING: [Place 30-568] A LUT 'Command/AcquisitionStartStopSet/SlaveDaq_UsbStartStop_i_1__2' is driving clock pin of 1 registers. This could lead to large hold time violations. First few involved registers are:
-	MicrorocChain1/MicrorocDaq/SlaveDaq_UsbStartStop_reg {FDCE}
 WARNING: [Place 30-568] A LUT 'Command/AcquisitionStartStopSet/SlaveDaq_UsbStartStop_i_1' is driving clock pin of 1 registers. This could lead to large hold time violations. First few involved registers are:
 	MicrorocChain3/MicrorocDaq/SlaveDaq_UsbStartStop_reg {FDCE}
+WARNING: [Place 30-568] A LUT 'Command/AcquisitionStartStopSet/SlaveDaq_UsbStartStop_i_1__1' is driving clock pin of 1 registers. This could lead to large hold time violations. First few involved registers are:
+	MicrorocChain2/MicrorocDaq/SlaveDaq_UsbStartStop_reg {FDCE}
 WARNING: [Place 30-568] A LUT 'Command/AcquisitionStartStopSet/SlaveDaq_UsbStartStop_i_1__0' is driving clock pin of 1 registers. This could lead to large hold time violations. First few involved registers are:
 	MicrorocChain4/MicrorocDaq/SlaveDaq_UsbStartStop_reg {FDCE}
-WARNING: [Place 30-568] A LUT 'Command/DaqModeSelect/StartRising_i_1__2' is driving clock pin of 1 registers. This could lead to large hold time violations. First few involved registers are:
-	MicrorocChain1/MicrorocDaq/AutoDaqControl/StartRising_reg {FDCE}
-WARNING: [Place 30-568] A LUT 'Command/DaqModeSelect/StartRising_i_1' is driving clock pin of 1 registers. This could lead to large hold time violations. First few involved registers are:
-	MicrorocChain3/MicrorocDaq/AutoDaqControl/StartRising_reg {FDCE}
+WARNING: [Place 30-568] A LUT 'Command/AcquisitionStartStopSet/SlaveDaq_UsbStartStop_i_1__2' is driving clock pin of 1 registers. This could lead to large hold time violations. First few involved registers are:
+	MicrorocChain1/MicrorocDaq/SlaveDaq_UsbStartStop_reg {FDCE}
 WARNING: [Place 30-568] A LUT 'Command/DaqModeSelect/StartRising_i_1__1' is driving clock pin of 1 registers. This could lead to large hold time violations. First few involved registers are:
 	MicrorocChain2/MicrorocDaq/AutoDaqControl/StartRising_reg {FDCE}
 WARNING: [Place 30-568] A LUT 'Command/DaqModeSelect/StartRising_i_1__0' is driving clock pin of 1 registers. This could lead to large hold time violations. First few involved registers are:
 	MicrorocChain4/MicrorocDaq/AutoDaqControl/StartRising_reg {FDCE}
+WARNING: [Place 30-568] A LUT 'Command/DaqModeSelect/StartRising_i_1' is driving clock pin of 1 registers. This could lead to large hold time violations. First few involved registers are:
+	MicrorocChain3/MicrorocDaq/AutoDaqControl/StartRising_reg {FDCE}
+WARNING: [Place 30-568] A LUT 'Command/DaqModeSelect/StartRising_i_1__2' is driving clock pin of 1 registers. This could lead to large hold time violations. First few involved registers are:
+	MicrorocChain1/MicrorocDaq/AutoDaqControl/StartRising_reg {FDCE}
 WARNING: [Place 30-568] A LUT 'MicrorocChain4/ReadOnChipRam/MicrorocHit_i_1__0' is driving clock pin of 1 registers. This could lead to large hold time violations. First few involved registers are:
 	MicrorocChain4/MicrorocDaq/SlaveDaqControl/MicrorocHit_reg {FDCE}
 WARNING: [Place 30-568] A LUT 'MicrorocChain4/MicrorocDaq/AutoDaqControl/EndReadout4Hit_i_1' is driving clock pin of 1 registers. This could lead to large hold time violations. First few involved registers are:
@@ -354,103 +355,93 @@ WARNING: [Place 30-568] A LUT 'MicrorocChain1/MicrorocDaq/AutoDaqControl/EndRead
 	CommonControlSignalGenerator/RamReadDoneDetect/EndReadout1Hit_reg {FDCE}
 WARNING: [Place 30-568] A LUT 'MicrorocChain1/ReadOnChipRam/MicrorocHit_i_1__2' is driving clock pin of 1 registers. This could lead to large hold time violations. First few involved registers are:
 	MicrorocChain1/MicrorocDaq/SlaveDaqControl/MicrorocHit_reg {FDCE}
-WARNING: [Place 30-568] A LUT 'MicrorocChain2/ReadOnChipRam/MicrorocHit_i_1__1' is driving clock pin of 1 registers. This could lead to large hold time violations. First few involved registers are:
-	MicrorocChain2/MicrorocDaq/SlaveDaqControl/MicrorocHit_reg {FDCE}
 WARNING: [Place 30-568] A LUT 'MicrorocChain2/MicrorocDaq/AutoDaqControl/EndReadout2Hit_i_1' is driving clock pin of 1 registers. This could lead to large hold time violations. First few involved registers are:
 	CommonControlSignalGenerator/RamReadDoneDetect/EndReadout2Hit_reg {FDCE}
-WARNING: [Place 30-568] A LUT 'MicrorocChain3/MicrorocDaq/AutoDaqControl/EndReadout3Hit_i_1' is driving clock pin of 1 registers. This could lead to large hold time violations. First few involved registers are:
-	CommonControlSignalGenerator/RamReadDoneDetect/EndReadout3Hit_reg {FDCE}
+WARNING: [Place 30-568] A LUT 'MicrorocChain2/ReadOnChipRam/MicrorocHit_i_1__1' is driving clock pin of 1 registers. This could lead to large hold time violations. First few involved registers are:
+	MicrorocChain2/MicrorocDaq/SlaveDaqControl/MicrorocHit_reg {FDCE}
 WARNING: [Place 30-568] A LUT 'MicrorocChain3/ReadOnChipRam/MicrorocHit_i_1' is driving clock pin of 1 registers. This could lead to large hold time violations. First few involved registers are:
 	MicrorocChain3/MicrorocDaq/SlaveDaqControl/MicrorocHit_reg {FDCE}
+WARNING: [Place 30-568] A LUT 'MicrorocChain3/MicrorocDaq/AutoDaqControl/EndReadout3Hit_i_1' is driving clock pin of 1 registers. This could lead to large hold time violations. First few involved registers are:
+	CommonControlSignalGenerator/RamReadDoneDetect/EndReadout3Hit_reg {FDCE}
 WARNING: [Place 30-568] A LUT 'ConfigParameter_i_1' is driving clock pin of 8 registers. This could lead to large hold time violations. First few involved registers are:
-	MicrorocChain4/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_fb_i_reg {FDSE}
 	MicrorocChain4/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_i_reg {FDSE}
-	MicrorocChain1/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_i_reg {FDSE}
+	MicrorocChain4/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_fb_i_reg {FDSE}
 	MicrorocChain1/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_fb_i_reg {FDSE}
+	MicrorocChain1/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_i_reg {FDSE}
 	MicrorocChain2/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_fb_i_reg {FDSE}
-WARNING: [Place 30-568] A LUT 'UsbDataFifo_i_2' is driving clock pin of 24 registers. This could lead to large hold time violations. First few involved registers are:
-	Acquisition/AcquisitionDataSwitcher/MicrorocChain4DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/grss.rsts/ram_empty_fb_i_reg {FDRE}
-	Acquisition/AcquisitionDataSwitcher/MicrorocChain4DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/grss.rsts/ram_empty_i_reg {FDRE}
-	Acquisition/AcquisitionDataSwitcher/MicrorocChain4DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_full_i_reg {FDSE}
-	Acquisition/AcquisitionDataSwitcher/MicrorocChain4DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_full_fb_i_reg {FDSE}
-	Acquisition/AcquisitionDataSwitcher/MicrorocChain1DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/grss.rsts/ram_empty_fb_i_reg {FDRE}
 WARNING: [Place 30-568] A LUT 'UsbDataFifo_i_3' is driving clock pin of 4 registers. This could lead to large hold time violations. First few involved registers are:
 	Command/CommandFifo32Depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwas.wsts/ram_full_fb_i_reg {FDSE}
 	Command/CommandFifo32Depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwas.wsts/ram_full_i_reg {FDSE}
-	UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_i_reg {FDSE}
 	UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_fb_i_reg {FDSE}
+	UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_i_reg {FDSE}
+WARNING: [Place 30-568] A LUT 'UsbDataFifo_i_2' is driving clock pin of 24 registers. This could lead to large hold time violations. First few involved registers are:
+	Acquisition/AcquisitionDataSwitcher/MicrorocChain4DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_full_i_reg {FDSE}
+	Acquisition/AcquisitionDataSwitcher/MicrorocChain4DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_full_fb_i_reg {FDSE}
+	Acquisition/AcquisitionDataSwitcher/MicrorocChain1DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/grss.rsts/ram_empty_i_reg {FDRE}
+	Acquisition/AcquisitionDataSwitcher/MicrorocChain1DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/grss.rsts/ram_empty_fb_i_reg {FDRE}
+	Acquisition/AcquisitionDataSwitcher/MicrorocChain1DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_full_fb_i_reg {FDSE}
 INFO: [Timing 38-35] Done setting XDC timing constraints.
-Phase 1.2 IO Placement/ Clock Placement/ Build Placer Device | Checksum: e1688e7e
+Phase 1.2 IO Placement/ Clock Placement/ Build Placer Device | Checksum: 9f2d12e8
 
-Time (s): cpu = 00:00:09 ; elapsed = 00:00:07 . Memory (MB): peak = 1586.391 ; gain = 0.000
+Time (s): cpu = 00:00:09 ; elapsed = 00:00:08 . Memory (MB): peak = 1589.020 ; gain = 0.000
 
 Phase 1.3 Build Placer Netlist Model
-Phase 1.3 Build Placer Netlist Model | Checksum: 1bc903557
+Phase 1.3 Build Placer Netlist Model | Checksum: bcb289c9
 
-Time (s): cpu = 00:00:15 ; elapsed = 00:00:10 . Memory (MB): peak = 1586.391 ; gain = 0.000
+Time (s): cpu = 00:00:15 ; elapsed = 00:00:12 . Memory (MB): peak = 1589.020 ; gain = 0.000
 
 Phase 1.4 Constrain Clocks/Macros
-Phase 1.4 Constrain Clocks/Macros | Checksum: 1bc903557
+Phase 1.4 Constrain Clocks/Macros | Checksum: bcb289c9
 
-Time (s): cpu = 00:00:15 ; elapsed = 00:00:10 . Memory (MB): peak = 1586.391 ; gain = 0.000
-Phase 1 Placer Initialization | Checksum: 1bc903557
+Time (s): cpu = 00:00:15 ; elapsed = 00:00:13 . Memory (MB): peak = 1589.020 ; gain = 0.000
+Phase 1 Placer Initialization | Checksum: bcb289c9
 
-Time (s): cpu = 00:00:15 ; elapsed = 00:00:11 . Memory (MB): peak = 1586.391 ; gain = 0.000
+Time (s): cpu = 00:00:15 ; elapsed = 00:00:13 . Memory (MB): peak = 1589.020 ; gain = 0.000
 
 Phase 2 Global Placement
-Phase 2 Global Placement | Checksum: 1e6899fd6
+Phase 2 Global Placement | Checksum: cf64b88b
 
-Time (s): cpu = 00:00:35 ; elapsed = 00:00:22 . Memory (MB): peak = 1586.391 ; gain = 0.000
+Time (s): cpu = 00:00:34 ; elapsed = 00:00:26 . Memory (MB): peak = 1589.020 ; gain = 0.000
 
 Phase 3 Detail Placement
 
 Phase 3.1 Commit Multi Column Macros
-Phase 3.1 Commit Multi Column Macros | Checksum: 1e6899fd6
+Phase 3.1 Commit Multi Column Macros | Checksum: cf64b88b
 
-Time (s): cpu = 00:00:35 ; elapsed = 00:00:22 . Memory (MB): peak = 1586.391 ; gain = 0.000
+Time (s): cpu = 00:00:34 ; elapsed = 00:00:26 . Memory (MB): peak = 1589.020 ; gain = 0.000
 
 Phase 3.2 Commit Most Macros & LUTRAMs
-Phase 3.2 Commit Most Macros & LUTRAMs | Checksum: 2707b092e
+Phase 3.2 Commit Most Macros & LUTRAMs | Checksum: 1797fa2a1
 
-Time (s): cpu = 00:00:39 ; elapsed = 00:00:25 . Memory (MB): peak = 1586.391 ; gain = 0.000
+Time (s): cpu = 00:00:38 ; elapsed = 00:00:29 . Memory (MB): peak = 1589.020 ; gain = 0.000
 
 Phase 3.3 Area Swap Optimization
-Phase 3.3 Area Swap Optimization | Checksum: 25f7e0865
+Phase 3.3 Area Swap Optimization | Checksum: 1abd96ba8
 
-Time (s): cpu = 00:00:40 ; elapsed = 00:00:25 . Memory (MB): peak = 1586.391 ; gain = 0.000
+Time (s): cpu = 00:00:39 ; elapsed = 00:00:29 . Memory (MB): peak = 1589.020 ; gain = 0.000
 
 Phase 3.4 Pipeline Register Optimization
-Phase 3.4 Pipeline Register Optimization | Checksum: 25f7e0865
+Phase 3.4 Pipeline Register Optimization | Checksum: 1abd96ba8
 
-Time (s): cpu = 00:00:40 ; elapsed = 00:00:25 . Memory (MB): peak = 1586.391 ; gain = 0.000
+Time (s): cpu = 00:00:39 ; elapsed = 00:00:29 . Memory (MB): peak = 1589.020 ; gain = 0.000
 
-Phase 3.5 Timing Path Optimizer
-Phase 3.5 Timing Path Optimizer | Checksum: 25f7e0865
+Phase 3.5 Small Shape Detail Placement
+Phase 3.5 Small Shape Detail Placement | Checksum: 1bde0df6c
 
-Time (s): cpu = 00:00:40 ; elapsed = 00:00:25 . Memory (MB): peak = 1586.391 ; gain = 0.000
+Time (s): cpu = 00:00:47 ; elapsed = 00:00:39 . Memory (MB): peak = 1589.020 ; gain = 0.000
 
-Phase 3.6 Fast Optimization
-Phase 3.6 Fast Optimization | Checksum: 2509f259b
+Phase 3.6 Re-assign LUT pins
+Phase 3.6 Re-assign LUT pins | Checksum: 1dbcb3221
 
-Time (s): cpu = 00:00:40 ; elapsed = 00:00:25 . Memory (MB): peak = 1586.391 ; gain = 0.000
+Time (s): cpu = 00:00:48 ; elapsed = 00:00:40 . Memory (MB): peak = 1589.020 ; gain = 0.000
 
-Phase 3.7 Small Shape Detail Placement
-Phase 3.7 Small Shape Detail Placement | Checksum: 1fbcd56e0
+Phase 3.7 Pipeline Register Optimization
+Phase 3.7 Pipeline Register Optimization | Checksum: 1dbcb3221
 
-Time (s): cpu = 00:00:48 ; elapsed = 00:00:33 . Memory (MB): peak = 1586.391 ; gain = 0.000
+Time (s): cpu = 00:00:48 ; elapsed = 00:00:41 . Memory (MB): peak = 1589.020 ; gain = 0.000
+Phase 3 Detail Placement | Checksum: 1dbcb3221
 
-Phase 3.8 Re-assign LUT pins
-Phase 3.8 Re-assign LUT pins | Checksum: 1ff7e4eb6
-
-Time (s): cpu = 00:00:49 ; elapsed = 00:00:34 . Memory (MB): peak = 1586.391 ; gain = 0.000
-
-Phase 3.9 Pipeline Register Optimization
-Phase 3.9 Pipeline Register Optimization | Checksum: 1ff7e4eb6
-
-Time (s): cpu = 00:00:49 ; elapsed = 00:00:34 . Memory (MB): peak = 1586.391 ; gain = 0.000
-Phase 3 Detail Placement | Checksum: 1ff7e4eb6
-
-Time (s): cpu = 00:00:50 ; elapsed = 00:00:35 . Memory (MB): peak = 1586.391 ; gain = 0.000
+Time (s): cpu = 00:00:48 ; elapsed = 00:00:41 . Memory (MB): peak = 1589.020 ; gain = 0.000
 
 Phase 4 Post Placement Optimization and Clean-Up
 
@@ -458,60 +449,61 @@ Phase 4.1 Post Commit Optimization
 INFO: [Timing 38-35] Done setting XDC timing constraints.
 
 Phase 4.1.1 Post Placement Optimization
-Post Placement Optimization Initialization | Checksum: 1b0f72a77
+Post Placement Optimization Initialization | Checksum: 219e896ce
 
 Phase 4.1.1.1 BUFG Insertion
 INFO: [Physopt 32-721] Multithreading enabled for phys_opt_design using a maximum of 2 CPUs
 INFO: [Place 46-33] Processed net ClockGenerator/TriggerExternal_reg, BUFG insertion was skipped due to placement/routing conflicts.
 INFO: [Place 46-31] BUFG insertion identified 1 candidate nets, 0 success, 1 skipped for placement/routing, 0 skipped for timing, 0 skipped for netlist change reason.
-Phase 4.1.1.1 BUFG Insertion | Checksum: 1b0f72a77
+Phase 4.1.1.1 BUFG Insertion | Checksum: 219e896ce
 
-Time (s): cpu = 00:00:56 ; elapsed = 00:00:39 . Memory (MB): peak = 1586.391 ; gain = 0.000
-INFO: [Place 30-746] Post Placement Timing Summary WNS=0.501. For the most accurate timing information please run report_timing.
-Phase 4.1.1 Post Placement Optimization | Checksum: 1812445ec
+Time (s): cpu = 00:00:55 ; elapsed = 00:00:46 . Memory (MB): peak = 1589.020 ; gain = 0.000
+INFO: [Place 30-746] Post Placement Timing Summary WNS=0.344. For the most accurate timing information please run report_timing.
+Phase 4.1.1 Post Placement Optimization | Checksum: 1a2b1a68a
 
-Time (s): cpu = 00:00:59 ; elapsed = 00:00:42 . Memory (MB): peak = 1586.391 ; gain = 0.000
-Phase 4.1 Post Commit Optimization | Checksum: 1812445ec
+Time (s): cpu = 00:00:59 ; elapsed = 00:00:50 . Memory (MB): peak = 1589.020 ; gain = 0.000
+Phase 4.1 Post Commit Optimization | Checksum: 1a2b1a68a
 
-Time (s): cpu = 00:00:59 ; elapsed = 00:00:42 . Memory (MB): peak = 1586.391 ; gain = 0.000
+Time (s): cpu = 00:00:59 ; elapsed = 00:00:50 . Memory (MB): peak = 1589.020 ; gain = 0.000
 
 Phase 4.2 Post Placement Cleanup
-Phase 4.2 Post Placement Cleanup | Checksum: 1812445ec
+Phase 4.2 Post Placement Cleanup | Checksum: 1a2b1a68a
 
-Time (s): cpu = 00:01:00 ; elapsed = 00:00:43 . Memory (MB): peak = 1586.391 ; gain = 0.000
+Time (s): cpu = 00:00:59 ; elapsed = 00:00:50 . Memory (MB): peak = 1589.020 ; gain = 0.000
 
 Phase 4.3 Placer Reporting
-Phase 4.3 Placer Reporting | Checksum: 1812445ec
+Phase 4.3 Placer Reporting | Checksum: 1a2b1a68a
 
-Time (s): cpu = 00:01:00 ; elapsed = 00:00:43 . Memory (MB): peak = 1586.391 ; gain = 0.000
+Time (s): cpu = 00:00:59 ; elapsed = 00:00:50 . Memory (MB): peak = 1589.020 ; gain = 0.000
 
 Phase 4.4 Final Placement Cleanup
-Phase 4.4 Final Placement Cleanup | Checksum: 203fd6756
+Phase 4.4 Final Placement Cleanup | Checksum: 13ccfe554
 
-Time (s): cpu = 00:01:00 ; elapsed = 00:00:43 . Memory (MB): peak = 1586.391 ; gain = 0.000
-Phase 4 Post Placement Optimization and Clean-Up | Checksum: 203fd6756
+Time (s): cpu = 00:00:59 ; elapsed = 00:00:50 . Memory (MB): peak = 1589.020 ; gain = 0.000
+Phase 4 Post Placement Optimization and Clean-Up | Checksum: 13ccfe554
 
-Time (s): cpu = 00:01:00 ; elapsed = 00:00:43 . Memory (MB): peak = 1586.391 ; gain = 0.000
-Ending Placer Task | Checksum: 1985bdbea
+Time (s): cpu = 00:01:00 ; elapsed = 00:00:51 . Memory (MB): peak = 1589.020 ; gain = 0.000
+Ending Placer Task | Checksum: 1226d92ce
 
-Time (s): cpu = 00:01:00 ; elapsed = 00:00:43 . Memory (MB): peak = 1586.391 ; gain = 0.000
+Time (s): cpu = 00:01:00 ; elapsed = 00:00:51 . Memory (MB): peak = 1589.020 ; gain = 0.000
 INFO: [Common 17-83] Releasing license: Implementation
 55 Infos, 61 Warnings, 0 Critical Warnings and 0 Errors encountered.
 place_design completed successfully
-place_design: Time (s): cpu = 00:01:03 ; elapsed = 00:00:45 . Memory (MB): peak = 1586.391 ; gain = 0.000
+place_design: Time (s): cpu = 00:01:03 ; elapsed = 00:00:53 . Memory (MB): peak = 1589.020 ; gain = 0.000
 INFO: [Timing 38-480] Writing timing data to binary archive.
 Writing placer database...
 Writing XDEF routing.
 Writing XDEF routing logical nets.
 Writing XDEF routing special nets.
-Write XDEF Complete: Time (s): cpu = 00:00:04 ; elapsed = 00:00:02 . Memory (MB): peak = 1586.391 ; gain = 0.000
+Write XDEF Complete: Time (s): cpu = 00:00:05 ; elapsed = 00:00:02 . Memory (MB): peak = 1589.020 ; gain = 0.000
 INFO: [Common 17-1381] The checkpoint 'D:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.runs/impl_1/FPGA_Top_placed.dcp' has been generated.
+write_checkpoint: Time (s): cpu = 00:00:08 ; elapsed = 00:00:06 . Memory (MB): peak = 1589.020 ; gain = 0.000
 INFO: [runtcl-4] Executing : report_io -file FPGA_Top_io_placed.rpt
-report_io: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.165 . Memory (MB): peak = 1586.391 ; gain = 0.000
+report_io: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.194 . Memory (MB): peak = 1589.020 ; gain = 0.000
 INFO: [runtcl-4] Executing : report_utilization -file FPGA_Top_utilization_placed.rpt -pb FPGA_Top_utilization_placed.pb
-report_utilization: Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.273 . Memory (MB): peak = 1586.391 ; gain = 0.000
+report_utilization: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.292 . Memory (MB): peak = 1589.020 ; gain = 0.000
 INFO: [runtcl-4] Executing : report_control_sets -verbose -file FPGA_Top_control_sets_placed.rpt
-report_control_sets: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.081 . Memory (MB): peak = 1586.391 ; gain = 0.000
+report_control_sets: Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.094 . Memory (MB): peak = 1589.020 ; gain = 0.000
 Command: route_design
 Attempting to get a license for feature 'Implementation' and/or device 'xc7a100t'
 INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7a100t'
@@ -523,119 +515,121 @@ INFO: [Vivado_Tcl 4-199] Please refer to the DRC report (report_drc) for more in
 
 Starting Routing Task
 INFO: [Route 35-254] Multithreading enabled for route_design using a maximum of 2 CPUs
-Checksum: PlaceDB: e8d02a5d ConstDB: 0 ShapeSum: af8bb18d RouteDB: 0
+Checksum: PlaceDB: 96d93727 ConstDB: 0 ShapeSum: 8b945ba7 RouteDB: 0
 
 Phase 1 Build RT Design
-Phase 1 Build RT Design | Checksum: 6a3ebd81
+Phase 1 Build RT Design | Checksum: e09fa46a
 
-Time (s): cpu = 00:00:44 ; elapsed = 00:00:38 . Memory (MB): peak = 1586.391 ; gain = 0.000
-Post Restoration Checksum: NetGraph: 3ae1a33a NumContArr: 2f5d1a47 Constraints: 0 Timing: 0
+Time (s): cpu = 00:00:47 ; elapsed = 00:00:42 . Memory (MB): peak = 1589.020 ; gain = 0.000
+Post Restoration Checksum: NetGraph: bc486dfc NumContArr: 2457366e Constraints: 0 Timing: 0
 
 Phase 2 Router Initialization
 
 Phase 2.1 Create Timer
-Phase 2.1 Create Timer | Checksum: 6a3ebd81
+Phase 2.1 Create Timer | Checksum: e09fa46a
 
-Time (s): cpu = 00:00:45 ; elapsed = 00:00:39 . Memory (MB): peak = 1586.391 ; gain = 0.000
+Time (s): cpu = 00:00:47 ; elapsed = 00:00:42 . Memory (MB): peak = 1589.020 ; gain = 0.000
 
 Phase 2.2 Fix Topology Constraints
-Phase 2.2 Fix Topology Constraints | Checksum: 6a3ebd81
+Phase 2.2 Fix Topology Constraints | Checksum: e09fa46a
 
-Time (s): cpu = 00:00:45 ; elapsed = 00:00:39 . Memory (MB): peak = 1586.391 ; gain = 0.000
+Time (s): cpu = 00:00:48 ; elapsed = 00:00:42 . Memory (MB): peak = 1589.020 ; gain = 0.000
 
 Phase 2.3 Pre Route Cleanup
-Phase 2.3 Pre Route Cleanup | Checksum: 6a3ebd81
+Phase 2.3 Pre Route Cleanup | Checksum: e09fa46a
 
-Time (s): cpu = 00:00:45 ; elapsed = 00:00:39 . Memory (MB): peak = 1586.391 ; gain = 0.000
+Time (s): cpu = 00:00:48 ; elapsed = 00:00:43 . Memory (MB): peak = 1589.020 ; gain = 0.000
  Number of Nodes with overlaps = 0
 
 Phase 2.4 Update Timing
-Phase 2.4 Update Timing | Checksum: 1421c6f40
+Phase 2.4 Update Timing | Checksum: 1305837f7
 
-Time (s): cpu = 00:00:53 ; elapsed = 00:00:44 . Memory (MB): peak = 1586.391 ; gain = 0.000
-INFO: [Route 35-416] Intermediate Timing Summary | WNS=0.457  | TNS=0.000  | WHS=-0.963 | THS=-426.316|
+Time (s): cpu = 00:00:57 ; elapsed = 00:00:49 . Memory (MB): peak = 1589.020 ; gain = 0.000
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=0.068  | TNS=0.000  | WHS=-1.318 | THS=-460.418|
 
 
 Phase 2.5 Update Timing for Bus Skew
 
 Phase 2.5.1 Update Timing
-Phase 2.5.1 Update Timing | Checksum: 1a076dc96
+Phase 2.5.1 Update Timing | Checksum: f8875c51
 
-Time (s): cpu = 00:00:58 ; elapsed = 00:00:47 . Memory (MB): peak = 1586.391 ; gain = 0.000
-INFO: [Route 35-416] Intermediate Timing Summary | WNS=0.457  | TNS=0.000  | WHS=N/A    | THS=N/A    |
+Time (s): cpu = 00:01:01 ; elapsed = 00:00:52 . Memory (MB): peak = 1589.020 ; gain = 0.000
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=0.068  | TNS=0.000  | WHS=N/A    | THS=N/A    |
 
-Phase 2.5 Update Timing for Bus Skew | Checksum: 18e57bfc3
+Phase 2.5 Update Timing for Bus Skew | Checksum: 18e946aa1
 
-Time (s): cpu = 00:00:58 ; elapsed = 00:00:47 . Memory (MB): peak = 1586.391 ; gain = 0.000
-Phase 2 Router Initialization | Checksum: 1d21efb1a
+Time (s): cpu = 00:01:01 ; elapsed = 00:00:52 . Memory (MB): peak = 1589.020 ; gain = 0.000
+Phase 2 Router Initialization | Checksum: cf2c3d88
 
-Time (s): cpu = 00:00:58 ; elapsed = 00:00:47 . Memory (MB): peak = 1586.391 ; gain = 0.000
+Time (s): cpu = 00:01:01 ; elapsed = 00:00:52 . Memory (MB): peak = 1589.020 ; gain = 0.000
 
 Phase 3 Initial Routing
-Phase 3 Initial Routing | Checksum: 209d951fb
+Phase 3 Initial Routing | Checksum: 162158b47
 
-Time (s): cpu = 00:01:03 ; elapsed = 00:00:50 . Memory (MB): peak = 1586.391 ; gain = 0.000
+Time (s): cpu = 00:01:06 ; elapsed = 00:00:55 . Memory (MB): peak = 1589.020 ; gain = 0.000
 
 Phase 4 Rip-up And Reroute
 
 Phase 4.1 Global Iteration 0
- Number of Nodes with overlaps = 1113
- Number of Nodes with overlaps = 28
+ Number of Nodes with overlaps = 1076
+ Number of Nodes with overlaps = 29
  Number of Nodes with overlaps = 1
  Number of Nodes with overlaps = 0
-INFO: [Route 35-416] Intermediate Timing Summary | WNS=0.334  | TNS=0.000  | WHS=N/A    | THS=N/A    |
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=0.028  | TNS=0.000  | WHS=N/A    | THS=N/A    |
 
-Phase 4.1 Global Iteration 0 | Checksum: 16b0166ff
+Phase 4.1 Global Iteration 0 | Checksum: 240b5cc6e
 
-Time (s): cpu = 00:01:14 ; elapsed = 00:00:56 . Memory (MB): peak = 1586.391 ; gain = 0.000
-Phase 4 Rip-up And Reroute | Checksum: 16b0166ff
+Time (s): cpu = 00:01:19 ; elapsed = 00:01:03 . Memory (MB): peak = 1589.020 ; gain = 0.000
 
-Time (s): cpu = 00:01:14 ; elapsed = 00:00:56 . Memory (MB): peak = 1586.391 ; gain = 0.000
+Phase 4.2 Global Iteration 1
+ Number of Nodes with overlaps = 6
+ Number of Nodes with overlaps = 0
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=0.028  | TNS=0.000  | WHS=N/A    | THS=N/A    |
+
+Phase 4.2 Global Iteration 1 | Checksum: 180d632bd
+
+Time (s): cpu = 00:01:22 ; elapsed = 00:01:05 . Memory (MB): peak = 1589.020 ; gain = 0.000
+Phase 4 Rip-up And Reroute | Checksum: 180d632bd
+
+Time (s): cpu = 00:01:22 ; elapsed = 00:01:05 . Memory (MB): peak = 1589.020 ; gain = 0.000
 
 Phase 5 Delay and Skew Optimization
 
 Phase 5.1 Delay CleanUp
+Phase 5.1 Delay CleanUp | Checksum: 180d632bd
 
-Phase 5.1.1 Update Timing
-Phase 5.1.1 Update Timing | Checksum: 16b6a3a4e
-
-Time (s): cpu = 00:01:15 ; elapsed = 00:00:56 . Memory (MB): peak = 1586.391 ; gain = 0.000
-INFO: [Route 35-416] Intermediate Timing Summary | WNS=0.334  | TNS=0.000  | WHS=N/A    | THS=N/A    |
-
-Phase 5.1 Delay CleanUp | Checksum: 1dab5036b
-
-Time (s): cpu = 00:01:15 ; elapsed = 00:00:56 . Memory (MB): peak = 1586.391 ; gain = 0.000
+Time (s): cpu = 00:01:22 ; elapsed = 00:01:05 . Memory (MB): peak = 1589.020 ; gain = 0.000
 
 Phase 5.2 Clock Skew Optimization
-Phase 5.2 Clock Skew Optimization | Checksum: 1dab5036b
+Phase 5.2 Clock Skew Optimization | Checksum: 180d632bd
 
-Time (s): cpu = 00:01:15 ; elapsed = 00:00:56 . Memory (MB): peak = 1586.391 ; gain = 0.000
-Phase 5 Delay and Skew Optimization | Checksum: 1dab5036b
+Time (s): cpu = 00:01:22 ; elapsed = 00:01:05 . Memory (MB): peak = 1589.020 ; gain = 0.000
+Phase 5 Delay and Skew Optimization | Checksum: 180d632bd
 
-Time (s): cpu = 00:01:15 ; elapsed = 00:00:56 . Memory (MB): peak = 1586.391 ; gain = 0.000
+Time (s): cpu = 00:01:22 ; elapsed = 00:01:05 . Memory (MB): peak = 1589.020 ; gain = 0.000
 
 Phase 6 Post Hold Fix
 
 Phase 6.1 Hold Fix Iter
 
 Phase 6.1.1 Update Timing
-Phase 6.1.1 Update Timing | Checksum: 168a6c0f6
+Phase 6.1.1 Update Timing | Checksum: f76efb4a
 
-Time (s): cpu = 00:01:16 ; elapsed = 00:00:57 . Memory (MB): peak = 1586.391 ; gain = 0.000
-INFO: [Route 35-416] Intermediate Timing Summary | WNS=0.334  | TNS=0.000  | WHS=0.032  | THS=0.000  |
+Time (s): cpu = 00:01:23 ; elapsed = 00:01:06 . Memory (MB): peak = 1589.020 ; gain = 0.000
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=0.028  | TNS=0.000  | WHS=0.038  | THS=0.000  |
 
-Phase 6.1 Hold Fix Iter | Checksum: 1a2f6749b
+Phase 6.1 Hold Fix Iter | Checksum: 14419825b
 
-Time (s): cpu = 00:01:16 ; elapsed = 00:00:57 . Memory (MB): peak = 1586.391 ; gain = 0.000
-Phase 6 Post Hold Fix | Checksum: 1a2f6749b
+Time (s): cpu = 00:01:23 ; elapsed = 00:01:06 . Memory (MB): peak = 1589.020 ; gain = 0.000
+Phase 6 Post Hold Fix | Checksum: 14419825b
 
-Time (s): cpu = 00:01:16 ; elapsed = 00:00:57 . Memory (MB): peak = 1586.391 ; gain = 0.000
+Time (s): cpu = 00:01:23 ; elapsed = 00:01:06 . Memory (MB): peak = 1589.020 ; gain = 0.000
 
 Phase 7 Route finalize
 
 Router Utilization Summary
-  Global Vertical Routing Utilization    = 2.33438 %
-  Global Horizontal Routing Utilization  = 3.00064 %
+  Global Vertical Routing Utilization    = 2.5116 %
+  Global Horizontal Routing Utilization  = 2.87148 %
   Routable Net Status*
   *Does not include unroutable nets such as driverless and loadless.
   Run report_route_status for detailed report.
@@ -644,51 +638,52 @@ Router Utilization Summary
   Number of Partially Routed Nets     = 0
   Number of Node Overlaps             = 0
 
-Phase 7 Route finalize | Checksum: 20b588997
+Phase 7 Route finalize | Checksum: fbd14116
 
-Time (s): cpu = 00:01:17 ; elapsed = 00:00:57 . Memory (MB): peak = 1586.391 ; gain = 0.000
+Time (s): cpu = 00:01:24 ; elapsed = 00:01:06 . Memory (MB): peak = 1589.020 ; gain = 0.000
 
 Phase 8 Verifying routed nets
 
  Verification completed successfully
-Phase 8 Verifying routed nets | Checksum: 20b588997
+Phase 8 Verifying routed nets | Checksum: fbd14116
 
-Time (s): cpu = 00:01:17 ; elapsed = 00:00:57 . Memory (MB): peak = 1586.391 ; gain = 0.000
+Time (s): cpu = 00:01:24 ; elapsed = 00:01:06 . Memory (MB): peak = 1589.020 ; gain = 0.000
 
 Phase 9 Depositing Routes
-Phase 9 Depositing Routes | Checksum: 1790a513d
+Phase 9 Depositing Routes | Checksum: 854a3ea4
 
-Time (s): cpu = 00:01:18 ; elapsed = 00:00:59 . Memory (MB): peak = 1586.391 ; gain = 0.000
+Time (s): cpu = 00:01:25 ; elapsed = 00:01:08 . Memory (MB): peak = 1589.020 ; gain = 0.000
 
 Phase 10 Post Router Timing
-INFO: [Route 35-57] Estimated Timing Summary | WNS=0.334  | TNS=0.000  | WHS=0.032  | THS=0.000  |
+INFO: [Route 35-57] Estimated Timing Summary | WNS=0.028  | TNS=0.000  | WHS=0.038  | THS=0.000  |
 
 INFO: [Route 35-327] The final timing numbers are based on the router estimated timing analysis. For a complete and accurate timing signoff, please run report_timing_summary.
-Phase 10 Post Router Timing | Checksum: 1790a513d
+Phase 10 Post Router Timing | Checksum: 854a3ea4
 
-Time (s): cpu = 00:01:19 ; elapsed = 00:00:59 . Memory (MB): peak = 1586.391 ; gain = 0.000
+Time (s): cpu = 00:01:26 ; elapsed = 00:01:08 . Memory (MB): peak = 1589.020 ; gain = 0.000
 INFO: [Route 35-16] Router Completed Successfully
 
-Time (s): cpu = 00:01:19 ; elapsed = 00:00:59 . Memory (MB): peak = 1586.391 ; gain = 0.000
+Time (s): cpu = 00:01:26 ; elapsed = 00:01:08 . Memory (MB): peak = 1589.020 ; gain = 0.000
 
 Routing Is Done.
 INFO: [Common 17-83] Releasing license: Implementation
 74 Infos, 61 Warnings, 0 Critical Warnings and 0 Errors encountered.
 route_design completed successfully
-route_design: Time (s): cpu = 00:01:23 ; elapsed = 00:01:02 . Memory (MB): peak = 1586.391 ; gain = 0.000
+route_design: Time (s): cpu = 00:01:30 ; elapsed = 00:01:11 . Memory (MB): peak = 1589.020 ; gain = 0.000
 INFO: [Timing 38-480] Writing timing data to binary archive.
 Writing placer database...
 Writing XDEF routing.
 Writing XDEF routing logical nets.
 Writing XDEF routing special nets.
-Write XDEF Complete: Time (s): cpu = 00:00:05 ; elapsed = 00:00:02 . Memory (MB): peak = 1586.391 ; gain = 0.000
+Write XDEF Complete: Time (s): cpu = 00:00:06 ; elapsed = 00:00:02 . Memory (MB): peak = 1589.020 ; gain = 0.000
 INFO: [Common 17-1381] The checkpoint 'D:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.runs/impl_1/FPGA_Top_routed.dcp' has been generated.
-write_checkpoint: Time (s): cpu = 00:00:08 ; elapsed = 00:00:05 . Memory (MB): peak = 1586.391 ; gain = 0.000
+write_checkpoint: Time (s): cpu = 00:00:09 ; elapsed = 00:00:06 . Memory (MB): peak = 1589.020 ; gain = 0.000
 INFO: [runtcl-4] Executing : report_drc -file FPGA_Top_drc_routed.rpt -pb FPGA_Top_drc_routed.pb -rpx FPGA_Top_drc_routed.rpx
 Command: report_drc -file FPGA_Top_drc_routed.rpt -pb FPGA_Top_drc_routed.pb -rpx FPGA_Top_drc_routed.rpx
 INFO: [DRC 23-27] Running DRC with 2 threads
 INFO: [Coretcl 2-168] The results of DRC are in file D:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.runs/impl_1/FPGA_Top_drc_routed.rpt.
 report_drc completed successfully
+report_drc: Time (s): cpu = 00:00:08 ; elapsed = 00:00:05 . Memory (MB): peak = 1589.020 ; gain = 0.000
 INFO: [runtcl-4] Executing : report_methodology -file FPGA_Top_methodology_drc_routed.rpt -pb FPGA_Top_methodology_drc_routed.pb -rpx FPGA_Top_methodology_drc_routed.rpx
 Command: report_methodology -file FPGA_Top_methodology_drc_routed.rpt -pb FPGA_Top_methodology_drc_routed.pb -rpx FPGA_Top_methodology_drc_routed.rpx
 INFO: [Timing 38-35] Done setting XDC timing constraints.
@@ -696,7 +691,7 @@ INFO: [Timing 38-35] Done setting XDC timing constraints.
 INFO: [DRC 23-133] Running Methodology with 2 threads
 INFO: [Coretcl 2-1520] The results of Report Methodology are in file D:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.runs/impl_1/FPGA_Top_methodology_drc_routed.rpt.
 report_methodology completed successfully
-report_methodology: Time (s): cpu = 00:00:12 ; elapsed = 00:00:07 . Memory (MB): peak = 1608.445 ; gain = 22.055
+report_methodology: Time (s): cpu = 00:00:14 ; elapsed = 00:00:08 . Memory (MB): peak = 1605.910 ; gain = 16.891
 INFO: [runtcl-4] Executing : report_power -file FPGA_Top_power_routed.rpt -pb FPGA_Top_power_summary_routed.pb -rpx FPGA_Top_power_routed.rpx
 Command: report_power -file FPGA_Top_power_routed.rpt -pb FPGA_Top_power_summary_routed.pb -rpx FPGA_Top_power_routed.rpx
 INFO: [Timing 38-35] Done setting XDC timing constraints.
@@ -705,7 +700,7 @@ Running Vector-less Activity Propagation...
 Finished Running Vector-less Activity Propagation
 86 Infos, 61 Warnings, 0 Critical Warnings and 0 Errors encountered.
 report_power completed successfully
-report_power: Time (s): cpu = 00:00:10 ; elapsed = 00:00:06 . Memory (MB): peak = 1655.941 ; gain = 47.496
+report_power: Time (s): cpu = 00:00:10 ; elapsed = 00:00:07 . Memory (MB): peak = 1655.254 ; gain = 49.344
 INFO: [runtcl-4] Executing : report_route_status -file FPGA_Top_route_status.rpt -pb FPGA_Top_route_status.pb
 INFO: [runtcl-4] Executing : report_timing_summary -max_paths 10 -file FPGA_Top_timing_summary_routed.rpt -pb FPGA_Top_timing_summary_routed.pb -rpx FPGA_Top_timing_summary_routed.rpx -warn_on_violation 
 INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -2L, Delay Type: min_max, Timing Stage: Requireds.
@@ -761,10 +756,10 @@ WARNING: [DRC PLHOLDVIO-2] Non-Optimal connections which could lead to hold viol
 WARNING: [DRC PLHOLDVIO-2] Non-Optimal connections which could lead to hold violations: A LUT Command/DaqModeSelect/StartRising_i_1__2 is driving clock pin of 1 cells. This could lead to large hold time violations. First few involved cells are:
     MicrorocChain1/MicrorocDaq/AutoDaqControl/StartRising_reg {FDCE}
 WARNING: [DRC PLHOLDVIO-2] Non-Optimal connections which could lead to hold violations: A LUT ConfigParameter_i_1 is driving clock pin of 8 cells. This could lead to large hold time violations. First few involved cells are:
-    MicrorocChain4/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_fb_i_reg {FDSE}
     MicrorocChain4/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_i_reg {FDSE}
-    MicrorocChain1/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_i_reg {FDSE}
+    MicrorocChain4/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_fb_i_reg {FDSE}
     MicrorocChain1/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_fb_i_reg {FDSE}
+    MicrorocChain1/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_i_reg {FDSE}
     MicrorocChain2/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_fb_i_reg {FDSE}
 WARNING: [DRC PLHOLDVIO-2] Non-Optimal connections which could lead to hold violations: A LUT MicrorocChain1/MicrorocDaq/AutoDaqControl/EndReadout1Hit_i_1 is driving clock pin of 1 cells. This could lead to large hold time violations. First few involved cells are:
     CommonControlSignalGenerator/RamReadDoneDetect/EndReadout1Hit_reg {FDCE}
@@ -783,16 +778,16 @@ WARNING: [DRC PLHOLDVIO-2] Non-Optimal connections which could lead to hold viol
 WARNING: [DRC PLHOLDVIO-2] Non-Optimal connections which could lead to hold violations: A LUT MicrorocChain4/ReadOnChipRam/MicrorocHit_i_1__0 is driving clock pin of 1 cells. This could lead to large hold time violations. First few involved cells are:
     MicrorocChain4/MicrorocDaq/SlaveDaqControl/MicrorocHit_reg {FDCE}
 WARNING: [DRC PLHOLDVIO-2] Non-Optimal connections which could lead to hold violations: A LUT UsbDataFifo_i_2 is driving clock pin of 24 cells. This could lead to large hold time violations. First few involved cells are:
-    Acquisition/AcquisitionDataSwitcher/MicrorocChain4DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/grss.rsts/ram_empty_fb_i_reg {FDRE}
-    Acquisition/AcquisitionDataSwitcher/MicrorocChain4DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/grss.rsts/ram_empty_i_reg {FDRE}
     Acquisition/AcquisitionDataSwitcher/MicrorocChain4DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_full_i_reg {FDSE}
     Acquisition/AcquisitionDataSwitcher/MicrorocChain4DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_full_fb_i_reg {FDSE}
+    Acquisition/AcquisitionDataSwitcher/MicrorocChain1DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/grss.rsts/ram_empty_i_reg {FDRE}
     Acquisition/AcquisitionDataSwitcher/MicrorocChain1DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/grss.rsts/ram_empty_fb_i_reg {FDRE}
+    Acquisition/AcquisitionDataSwitcher/MicrorocChain1DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_full_fb_i_reg {FDSE}
 WARNING: [DRC PLHOLDVIO-2] Non-Optimal connections which could lead to hold violations: A LUT UsbDataFifo_i_3 is driving clock pin of 4 cells. This could lead to large hold time violations. First few involved cells are:
     Command/CommandFifo32Depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwas.wsts/ram_full_fb_i_reg {FDSE}
     Command/CommandFifo32Depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwas.wsts/ram_full_i_reg {FDSE}
-    UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_i_reg {FDSE}
     UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_fb_i_reg {FDSE}
+    UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_i_reg {FDSE}
 WARNING: [DRC REQP-1839] RAMB36 async control check: The RAMB36E1 UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.mem/gbm.gbmg.gbmga.ngecc.bmg/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/prim_noinit.ram/DEVICE_7SERIES.NO_BMM_INFO.SDP.SIMPLE_PRIM36.ram has an input control pin UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.mem/gbm.gbmg.gbmga.ngecc.bmg/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/prim_noinit.ram/DEVICE_7SERIES.NO_BMM_INFO.SDP.SIMPLE_PRIM36.ram/ENARDEN (net: UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.mem/gbm.gbmg.gbmga.ngecc.bmg/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/prim_noinit.ram/DEVICE_7SERIES.NO_BMM_INFO.SDP.SIMPLE_PRIM36.ram_ENARDEN_cooolgate_en_sig_1) which is driven by a register (Acquisition/AD9220Control/Ad9220Control/data_ready_reg) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 WARNING: [DRC REQP-1839] RAMB36 async control check: The RAMB36E1 UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.mem/gbm.gbmg.gbmga.ngecc.bmg/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/prim_noinit.ram/DEVICE_7SERIES.NO_BMM_INFO.SDP.SIMPLE_PRIM36.ram has an input control pin UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.mem/gbm.gbmg.gbmga.ngecc.bmg/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/prim_noinit.ram/DEVICE_7SERIES.NO_BMM_INFO.SDP.SIMPLE_PRIM36.ram/ENARDEN (net: UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.mem/gbm.gbmg.gbmga.ngecc.bmg/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/prim_noinit.ram/DEVICE_7SERIES.NO_BMM_INFO.SDP.SIMPLE_PRIM36.ram_ENARDEN_cooolgate_en_sig_1) which is driven by a register (Acquisition/AD9220Control/DataOutput_en_reg) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 WARNING: [DRC REQP-1839] RAMB36 async control check: The RAMB36E1 UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.mem/gbm.gbmg.gbmga.ngecc.bmg/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/prim_noinit.ram/DEVICE_7SERIES.NO_BMM_INFO.SDP.SIMPLE_PRIM36.ram has an input control pin UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.mem/gbm.gbmg.gbmga.ngecc.bmg/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/prim_noinit.ram/DEVICE_7SERIES.NO_BMM_INFO.SDP.SIMPLE_PRIM36.ram/ENARDEN (net: UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.mem/gbm.gbmg.gbmga.ngecc.bmg/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/prim_noinit.ram/DEVICE_7SERIES.NO_BMM_INFO.SDP.SIMPLE_PRIM36.ram_ENARDEN_cooolgate_en_sig_1) which is driven by a register (Acquisition/AcquisitionDataSwitcher/MicrorocAcquisitionDataEnable_reg) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
@@ -831,9 +826,9 @@ WARNING: [DRC REQP-1840] RAMB18 async control check: The RAMB18E1 Acquisition/Ac
 WARNING: [DRC REQP-1840] RAMB18 async control check: The RAMB18E1 Acquisition/AcquisitionDataSwitcher/MicrorocChain1DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.mem/gbm.gbmg.gbmga.ngecc.bmg/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/prim_noinit.ram/DEVICE_7SERIES.NO_BMM_INFO.SDP.SIMPLE_PRIM18.ram has an input control pin Acquisition/AcquisitionDataSwitcher/MicrorocChain1DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.mem/gbm.gbmg.gbmga.ngecc.bmg/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/prim_noinit.ram/DEVICE_7SERIES.NO_BMM_INFO.SDP.SIMPLE_PRIM18.ram/WEA[0] (net: Acquisition/AcquisitionDataSwitcher/MicrorocChain1DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.mem/gbm.gbmg.gbmga.ngecc.bmg/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/prim_noinit.ram/E[0]) which is driven by a register (MicrorocChain1/MicrorocDaq/SlaveDaqControl/InternalData_en_reg) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 WARNING: [DRC REQP-1840] RAMB18 async control check: The RAMB18E1 Acquisition/AcquisitionDataSwitcher/MicrorocChain1DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.mem/gbm.gbmg.gbmga.ngecc.bmg/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/prim_noinit.ram/DEVICE_7SERIES.NO_BMM_INFO.SDP.SIMPLE_PRIM18.ram has an input control pin Acquisition/AcquisitionDataSwitcher/MicrorocChain1DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.mem/gbm.gbmg.gbmga.ngecc.bmg/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/prim_noinit.ram/DEVICE_7SERIES.NO_BMM_INFO.SDP.SIMPLE_PRIM18.ram/WEA[0] (net: Acquisition/AcquisitionDataSwitcher/MicrorocChain1DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.mem/gbm.gbmg.gbmga.ngecc.bmg/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/prim_noinit.ram/E[0]) which is driven by a register (MicrorocChain1/ReadOnChipRam/ExternalFifoWriteEn_reg) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 WARNING: [DRC REQP-1840] RAMB18 async control check: The RAMB18E1 Acquisition/AcquisitionDataSwitcher/MicrorocChain2DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.mem/gbm.gbmg.gbmga.ngecc.bmg/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/prim_noinit.ram/DEVICE_7SERIES.NO_BMM_INFO.SDP.SIMPLE_PRIM18.ram has an input control pin Acquisition/AcquisitionDataSwitcher/MicrorocChain2DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.mem/gbm.gbmg.gbmga.ngecc.bmg/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/prim_noinit.ram/DEVICE_7SERIES.NO_BMM_INFO.SDP.SIMPLE_PRIM18.ram/ENARDEN (net: Acquisition/AcquisitionDataSwitcher/MicrorocChain2DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.mem/gbm.gbmg.gbmga.ngecc.bmg/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/prim_noinit.ram/E[0]) which is driven by a register (Command/DaqModeSelect/CommandOut_reg[0]_rep__0) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
-WARNING: [DRC REQP-1840] RAMB18 async control check: The RAMB18E1 Acquisition/AcquisitionDataSwitcher/MicrorocChain2DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.mem/gbm.gbmg.gbmga.ngecc.bmg/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/prim_noinit.ram/DEVICE_7SERIES.NO_BMM_INFO.SDP.SIMPLE_PRIM18.ram has an input control pin Acquisition/AcquisitionDataSwitcher/MicrorocChain2DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.mem/gbm.gbmg.gbmga.ngecc.bmg/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/prim_noinit.ram/DEVICE_7SERIES.NO_BMM_INFO.SDP.SIMPLE_PRIM18.ram/ENARDEN (net: Acquisition/AcquisitionDataSwitcher/MicrorocChain2DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.mem/gbm.gbmg.gbmga.ngecc.bmg/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/prim_noinit.ram/E[0]) which is driven by a register (MicrorocChain2/MicrorocDaq/SlaveDaqControl/FSM_sequential_State_reg[4]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+WARNING: [DRC REQP-1840] RAMB18 async control check: The RAMB18E1 Acquisition/AcquisitionDataSwitcher/MicrorocChain2DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.mem/gbm.gbmg.gbmga.ngecc.bmg/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/prim_noinit.ram/DEVICE_7SERIES.NO_BMM_INFO.SDP.SIMPLE_PRIM18.ram has an input control pin Acquisition/AcquisitionDataSwitcher/MicrorocChain2DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.mem/gbm.gbmg.gbmga.ngecc.bmg/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/prim_noinit.ram/DEVICE_7SERIES.NO_BMM_INFO.SDP.SIMPLE_PRIM18.ram/ENARDEN (net: Acquisition/AcquisitionDataSwitcher/MicrorocChain2DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.mem/gbm.gbmg.gbmga.ngecc.bmg/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/prim_noinit.ram/E[0]) which is driven by a register (MicrorocChain2/MicrorocDaq/SlaveDaqControl/FSM_sequential_State_reg[1]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 WARNING: [DRC REQP-1840] RAMB18 async control check: The RAMB18E1 Acquisition/AcquisitionDataSwitcher/MicrorocChain2DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.mem/gbm.gbmg.gbmga.ngecc.bmg/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/prim_noinit.ram/DEVICE_7SERIES.NO_BMM_INFO.SDP.SIMPLE_PRIM18.ram has an input control pin Acquisition/AcquisitionDataSwitcher/MicrorocChain2DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.mem/gbm.gbmg.gbmga.ngecc.bmg/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/prim_noinit.ram/DEVICE_7SERIES.NO_BMM_INFO.SDP.SIMPLE_PRIM18.ram/ENARDEN (net: Acquisition/AcquisitionDataSwitcher/MicrorocChain2DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.mem/gbm.gbmg.gbmga.ngecc.bmg/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/prim_noinit.ram/E[0]) which is driven by a register (MicrorocChain2/ReadOnChipRam/ExternalFifoWriteEn_reg) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
-WARNING: [DRC RTSTAT-10] No routable loads: 20 net(s) have no routable loads. The problem bus(es) and/or net(s) are Acquisition/AcquisitionDataSwitcher/MicrorocChain4DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_afull_fb, Acquisition/AcquisitionDataSwitcher/MicrorocChain1DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_afull_fb, Acquisition/AcquisitionDataSwitcher/MicrorocChain2DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_afull_fb, Acquisition/AcquisitionDataSwitcher/MicrorocChain3DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_afull_fb, Acquisition/MicrorocSCurveTest/scurve_data_fifo_16x16/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_afull_fb, Acquisition/AcquisitionDataSwitcher/MicrorocChain4DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_afull_i, Acquisition/AcquisitionDataSwitcher/MicrorocChain1DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_afull_i, Acquisition/AcquisitionDataSwitcher/MicrorocChain2DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_afull_i, Acquisition/AcquisitionDataSwitcher/MicrorocChain3DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_afull_i, Acquisition/MicrorocSCurveTest/scurve_data_fifo_16x16/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_afull_i, Acquisition/AcquisitionDataSwitcher/MicrorocChain4DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_full_i, Acquisition/AcquisitionDataSwitcher/MicrorocChain1DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_full_i, Acquisition/AcquisitionDataSwitcher/MicrorocChain2DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_full_i, Acquisition/AcquisitionDataSwitcher/MicrorocChain3DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_full_i, Acquisition/MicrorocSCurveTest/scurve_data_fifo_16x16/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_full_i... and (the first 15 of 20 listed).
+WARNING: [DRC RTSTAT-10] No routable loads: 20 net(s) have no routable loads. The problem bus(es) and/or net(s) are Acquisition/AcquisitionDataSwitcher/MicrorocChain3DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_afull_fb, Acquisition/AcquisitionDataSwitcher/MicrorocChain4DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_afull_fb, Acquisition/AcquisitionDataSwitcher/MicrorocChain1DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_afull_fb, Acquisition/AcquisitionDataSwitcher/MicrorocChain2DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_afull_fb, Acquisition/MicrorocSCurveTest/scurve_data_fifo_16x16/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_afull_fb, Acquisition/AcquisitionDataSwitcher/MicrorocChain3DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_afull_i, Acquisition/AcquisitionDataSwitcher/MicrorocChain4DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_afull_i, Acquisition/AcquisitionDataSwitcher/MicrorocChain1DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_afull_i, Acquisition/AcquisitionDataSwitcher/MicrorocChain2DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_afull_i, Acquisition/MicrorocSCurveTest/scurve_data_fifo_16x16/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_afull_i, Acquisition/AcquisitionDataSwitcher/MicrorocChain4DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_full_i, Acquisition/AcquisitionDataSwitcher/MicrorocChain3DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_full_i, Acquisition/AcquisitionDataSwitcher/MicrorocChain1DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_full_i, Acquisition/AcquisitionDataSwitcher/MicrorocChain2DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_full_i, Acquisition/MicrorocSCurveTest/scurve_data_fifo_16x16/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_full_i... and (the first 15 of 20 listed).
 INFO: [Vivado 12-3199] DRC finished with 0 Errors, 82 Warnings
 INFO: [Vivado 12-3200] Please refer to the DRC report (report_drc) for more information.
 INFO: [Designutils 20-2272] Running write_bitstream with 2 threads.
@@ -850,9 +845,9 @@ Creating logic location data...
 Writing logic location file ./FPGA_Top.ll...
 INFO: [Vivado 12-1842] Bitgen Completed Successfully.
 INFO: [Project 1-120] WebTalk data collection is mandatory when using a WebPACK part without a full Vivado license. To see the specific WebTalk data collected for your design, open the usage_statistics_webtalk.html or usage_statistics_webtalk.xml file in the implementation directory.
-INFO: [Common 17-186] 'D:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.runs/impl_1/usage_statistics_webtalk.xml' has been successfully sent to Xilinx on Tue Jul 31 20:25:47 2018. For additional details about this file, please refer to the WebTalk help file at D:/Xilinx/2018.1/Vivado/2018.1/doc/webtalk_introduction.html.
+INFO: [Common 17-186] 'D:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.runs/impl_1/usage_statistics_webtalk.xml' has been successfully sent to Xilinx on Thu Aug  2 17:05:59 2018. For additional details about this file, please refer to the WebTalk help file at D:/Xilinx/2018.1/Vivado/2018.1/doc/webtalk_introduction.html.
 INFO: [Common 17-83] Releasing license: Implementation
 105 Infos, 144 Warnings, 0 Critical Warnings and 0 Errors encountered.
 write_bitstream completed successfully
-write_bitstream: Time (s): cpu = 00:00:45 ; elapsed = 00:00:40 . Memory (MB): peak = 2165.668 ; gain = 501.711
-INFO: [Common 17-206] Exiting Vivado at Tue Jul 31 20:25:47 2018...
+write_bitstream: Time (s): cpu = 00:00:47 ; elapsed = 00:00:42 . Memory (MB): peak = 2170.582 ; gain = 508.258
+INFO: [Common 17-206] Exiting Vivado at Thu Aug  2 17:05:59 2018...
