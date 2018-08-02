@@ -5237,19 +5237,6 @@ namespace USB_DAQ
             }
         }
 
-        private void tbmAdcControlNewDif_PreviewMouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            bool bResult = MicrorocAsic.RunningModeSelect(2, MyUsbDevice1);
-            if (bResult)
-            {
-                txtReport.AppendText("Select ADC\n");
-            }
-            else
-            {
-                ShowUsbError("Select ADC");
-            }
-        }
-
         private void tbiSCTestNewDif_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             bool bResult = MicrorocAsic.RunningModeSelect(1, MyUsbDevice1);
@@ -5272,10 +5259,12 @@ namespace USB_DAQ
                 txtReport.AppendText("Select Acquisition\n");
                 SelectAcuqisitionNewDif();
                 DisableSCurveTestNewDif();
+                btnNewDifAcquisitionStartNewDif.Background = Brushes.Green;
             }
             else
             {
                 ShowUsbError("Select Acquisition");
+                rdbAcquisitionNewDif.IsChecked = false;
             }
         }
 
@@ -5291,6 +5280,7 @@ namespace USB_DAQ
             else
             {
                 ShowUsbError("Select ADC");
+                rdbAD9220NewDif.IsChecked = false;
             }
         }
 
@@ -5319,6 +5309,9 @@ namespace USB_DAQ
             btnConfigurationParameterLoad.IsEnabled = true;
             stpPowerPulsingNewDif.IsEnabled = true;
             stpSlowControlOrReadScopeNewDif.IsEnabled = true;
+            tbmAdcControlNewDif.IsEnabled = false;
+            tbmNewDifAcquisition.IsEnabled = false;
+            HoldDisable();
         }
         private void SelectAd9220NewDif()
         {
@@ -5331,6 +5324,21 @@ namespace USB_DAQ
             rdbAutoDaqNewDif.IsChecked = false;
             rdbSlaveDaqNewDif.IsChecked = false;
             btnNewDifAcquisitionStartNewDif.IsEnabled = false;
+            tbmNewDifAcquisition.IsEnabled = false;
+            tbmAdcControlNewDif.IsEnabled = true;
+            btnStartAdcNewDif.IsEnabled = false;
+            btnStartAdcNewDif.Background = Brushes.Green;
+            HoldEnable();
+            bool bResult = PowerPulsingPinDisable();
+            if(bResult)
+            {
+                rdbPowerPulsingDisableNewDif.IsChecked = true;
+                rdbPowerPulsingEnableNewDif.IsChecked = false;
+            }
+            else
+            {
+                return;
+            }
         }
 
         private void DisableSCurveTestNewDif()
@@ -5340,11 +5348,11 @@ namespace USB_DAQ
             cbxSingleOrAutoNewDif.IsEnabled = false;
             cbxCTestOrInputNewDif.IsEnabled = false;
             cbxCPT_MAX_NewDif.IsEnabled = false;
-            txtCountTimeNewDif.IsEnabled = false;
-            txtSingleTestChannelNewDif.IsEnabled = false;
-            txtStartDacNewDif.IsEnabled = false;
-            txtDacStepNewDif.IsEnabled = false;
-            txtEndDacNewDif.IsEnabled = false;
+            tbcCountTimeNewDif.IsEnabled = false;
+            tbcSingleTestChannelNewDif.IsEnabled = false;
+            tbcStartDacNewDif.IsEnabled = false;
+            tbcDacStepNewDif.IsEnabled = false;
+            tbcEndDacNewDif.IsEnabled = false;
             cbxUnmaskAllChannelNewDif.IsEnabled = false;
             cbxSCurveTestAsicNewDif.IsEnabled = false;
             btnSCurveTestStartNewDif.IsEnabled = false;
@@ -5353,35 +5361,82 @@ namespace USB_DAQ
             rdbCountEfficiencyNewDif.IsChecked = false;
             btnNewDifAcquisitionStartNewDif.IsEnabled = false;
         }
+
         private void SelectSCurveTriggerMode()
         {
+            bool bResult = MicrorocAsic.SCurveTestTriggerOrCountModeSelect(0, MyUsbDevice1);
+            if (bResult)
+            {
+                txtReport.AppendText("Select Trigger Mode\n");
+            }
+            else
+            {
+                ShowUsbError("Select Trigger Mode");
+                rdbTriggerEfficiencyNewDif.IsChecked = false;
+                return;
+            }
             cbxSingleOrAutoNewDif.IsEnabled = true;
             cbxCTestOrInputNewDif.IsEnabled = true;
             cbxCPT_MAX_NewDif.IsEnabled = true;
-            txtCountTimeNewDif.IsEnabled = false;
-            txtSingleTestChannelNewDif.IsEnabled = true;
-            txtStartDacNewDif.IsEnabled = true;
-            txtDacStepNewDif.IsEnabled = true;
-            txtEndDacNewDif.IsEnabled = true;
+            tbcCountTimeNewDif.IsEnabled = false;
+            tbcSingleTestChannelNewDif.IsEnabled = true;
+            tbcStartDacNewDif.IsEnabled = true;
+            tbcDacStepNewDif.IsEnabled = true;
+            tbcEndDacNewDif.IsEnabled = true;
             cbxUnmaskAllChannelNewDif.IsEnabled = true;
             cbxSCurveTestAsicNewDif.IsEnabled = true;
             btnSCurveTestStartNewDif.IsEnabled = true;
+            btnSCurveTestStartNewDif.Background = Brushes.Green;
             gbxExternalRazParameterNewDif.IsEnabled = true;
+            HoldDisable();
+            bResult = PowerPulsingPinDisable();
+            if (bResult)
+            {
+                rdbPowerPulsingDisable.IsChecked = true;
+                rdbPowerPulsingEnable.IsChecked = false;
+            }
+            else
+            {
+                return;
+            }
         }
         private void SelectSCurveCountMode()
         {
+            bool bResult = MicrorocAsic.SCurveTestTriggerOrCountModeSelect(0, MyUsbDevice1);
+            if(bResult)
+            {
+                txtReport.AppendText("Select Count Mode\n");
+            }
+            else
+            {
+                ShowUsbError("Select Count Mode");
+                rdbCountEfficiencyNewDif.IsChecked = false;
+                return;
+            }
             cbxSingleOrAutoNewDif.IsEnabled = true;
             cbxCTestOrInputNewDif.IsEnabled = true;
             cbxCPT_MAX_NewDif.IsEnabled = false;
-            txtCountTimeNewDif.IsEnabled = true;
-            txtSingleTestChannelNewDif.IsEnabled = true;
-            txtStartDacNewDif.IsEnabled = true;
-            txtDacStepNewDif.IsEnabled = true;
-            txtEndDacNewDif.IsEnabled = true;
+            tbcCountTimeNewDif.IsEnabled = true;
+            tbcSingleTestChannelNewDif.IsEnabled = true;
+            tbcStartDacNewDif.IsEnabled = true;
+            tbcDacStepNewDif.IsEnabled = true;
+            tbcEndDacNewDif.IsEnabled = true;
             cbxUnmaskAllChannelNewDif.IsEnabled = true;
             cbxSCurveTestAsicNewDif.IsEnabled = true;
             btnSCurveTestStartNewDif.IsEnabled = true;
+            btnSCurveTestStartNewDif.Background = Brushes.Green;
             gbxExternalRazParameterNewDif.IsEnabled = true;
+            HoldDisable();
+            bResult = PowerPulsingPinDisable();
+            if (bResult)
+            {
+                rdbPowerPulsingDisable.IsChecked = true;
+                rdbPowerPulsingEnable.IsChecked = false;
+            }
+            else
+            {
+                return;
+            }
         }
 
 
@@ -5525,7 +5580,7 @@ namespace USB_DAQ
             bResult = MicrorocAsic.DaqModeSelect(0, MyUsbDevice1);
             if(bResult)
             {
-                txtAcquisitionHoldTimeNewDif.IsEnabled = false;
+                tbxAcquisitionHoldTimeNewDif.IsEnabled = false;
                 txtReport.AppendText("Select auto DAQ mode\n");
                 btnNewDifAcquisitionStartNewDif.IsEnabled = true;
             }
@@ -5646,7 +5701,7 @@ namespace USB_DAQ
             if(bResult)
             {
                 txtReport.AppendText("Select slave DAQ\n");
-                txtAcquisitionHoldTimeNewDif.IsEnabled = true;
+                tbxAcquisitionHoldTimeNewDif.IsEnabled = true;
                 btnNewDifAcquisitionStartNewDif.IsEnabled = true;
             }
             else
@@ -5656,7 +5711,7 @@ namespace USB_DAQ
             }
         }
 
-        private void btnNewDifAcquisitionStartNewDif_Click(object sender, RoutedEventArgs e)
+        private async void btnNewDifAcquisitionStartNewDif_Click(object sender, RoutedEventArgs e)
         {
             if(!CheckFileSaved())
             {
@@ -5672,11 +5727,80 @@ namespace USB_DAQ
                     return;
                 }
                 #endregion
-
+                #region EndHoldTime
+                bResult = SetEndHoldTime(tbxAcquisitionHoldTimeNewDif.Text);
+                if(!bResult)
+                {
+                    return;
+                }
+                #endregion
+                #region Acquisition Data Number
+                if (CheckStringLegal.CheckIntegerLegal(tbxAcquisitionDataNumberNewDif.Text))
+                {
+                    StateIndicator.SlowDataRatePackageNumber = int.Parse(tbxAcquisitionDataNumberNewDif.Text);
+                }
+                else
+                {
+                    MessageBox.Show("Data Number Illegal. Set to dafault 5120", "IllegalInput", MessageBoxButton.OK, MessageBoxImage.Error);
+                    tbxAcquisitionDataNumberNewDif.Text = "5120";
+                    StateIndicator.SlowDataRatePackageNumber = int.Parse(tbxAcquisitionDataNumberNewDif.Text);
+                }
+                string report = string.Format("Set Start Acquisition Time{0}\n", tbxAcquisitionDataNumberNewDif.Text);
+                txtReport.AppendText(report);
+                #endregion
+                #region Reset
+                bResult = ClearUsbFifo();
+                if(!bResult)
+                {
+                    return;
+                }
+                bResult = ResetMicrorocTimeStamp();
+                if(!bResult)
+                {
+                    return;
+                }
+                bResult = ResetMicrorocAcquisition();
+                if(!bResult)
+                {
+                    return;
+                }
+                #endregion
+                int Start = cbxEnableChain1.SelectedIndex * 1 + cbxEnableChain2.SelectedIndex * 2 + cbxEnableChain3.SelectedIndex * 4 + cbxEnableChain4.SelectedIndex * 8;
+                bResult = MicrorocAsic.MicrorocAcquisitionStart(Start, MyUsbDevice1);
+                if(bResult)
+                {
+                    StateIndicator.SlowAcqStart = true;
+                    btnNewDifAcquisitionStartNewDif.Background = Brushes.Red;
+                    btnNewDifAcquisitionStartNewDif.Content = "Slow ACQ Stop";
+                    await Task.Run(() => GetSlowDataRateResultCallBack(MyUsbDevice1));
+                    bResult = MicrorocAsic.MicrorocAcquisitionStop(MyUsbDevice1);
+                    if (bResult)
+                    {
+                        btnNewDifAcquisitionStartNewDif.Background = Brushes.Green;
+                        btnNewDifAcquisitionStartNewDif.Content = "Slow ACQ Start";
+                        StateIndicator.SlowAcqStart = false;
+                    }
+                    else
+                    {
+                        ShowUsbError("Stop Acquisition");
+                    }
+                }
+                else
+                {
+                    ShowUsbError("Start Acquisition");
+                }
             }
             else
             {
-
+                bResult = MicrorocAsic.MicrorocAcquisitionStop(MyUsbDevice1);
+                if (bResult)
+                {
+                    StateIndicator.SlowAcqStart = false;
+                }
+                else
+                {
+                    ShowUsbError("Stop Acquisition");
+                }
             }
         }
 
@@ -5722,5 +5846,310 @@ namespace USB_DAQ
                 return false;
             }
         }
+
+        private bool ClearUsbFifo()
+        {
+            bool bResult = MicrorocAsic.ResetDataFifo(MyUsbDevice1);
+            if(bResult)
+            {
+                txtReport.AppendText("Clear USB data FIFO\n");
+                return true;
+            }
+            else
+            {
+                ShowUsbError("Clear USB FIFO");
+                return false;
+            }
+        }
+        private bool ResetMicrorocTimeStamp()
+        {
+            if(MicrorocAsic.ResetTimeStamp(MyUsbDevice1))
+            {
+                txtReport.AppendText("Reset Microroc time stamp\n");
+                return true;
+            }
+            else
+            {
+                ShowUsbError("Reset Microroc time stamp");
+                return false;
+            }
+        }
+        private bool ResetMicrorocAcquisition()
+        {
+            if (MicrorocAsic.ResetMicrorocAcquisition(MyUsbDevice1))
+            {
+                txtReport.AppendText("Microroc Reset\n");
+                return true;
+            }
+            else
+            {
+                ShowUsbError("Microroc Reset");
+                return false;
+            }
+        }
+
+        private void btnSetHoldNewDif_Click(object sender, RoutedEventArgs e)
+        {
+            #region Select hold
+            bool bResult = SelectTrigger(cbxHoldSelectNewDif.SelectedIndex);
+            if(!bResult)
+            {
+                return;
+            }
+            #endregion
+            #region Hold Delay
+            bResult = SetHoldDelay(tbcHoldDelayNewDif.Text);
+            if(!bResult)
+            {
+                return;
+            }
+            #endregion
+            #region HoldTime
+            bResult = SetHoldTime(tbcHoldTimeNewDif.Text);
+            if(!bResult)
+            {
+                return;
+            }
+            #endregion
+            #region Hold Enable
+            if(cbxHoldEnableNewDif.SelectedIndex == 1)
+            {
+                HoldEnable();
+            }
+            else
+            {
+                HoldDisable();
+            }
+            #endregion
+            btnStartAdcNewDif.IsEnabled = true;
+        }
+
+        private bool SelectTrigger(int Trigger)
+        {
+            int TriggerValue;
+            switch(Trigger)
+            {
+                case 0: TriggerValue = 0;break;
+                case 1: TriggerValue = 1;break;
+                case 2: TriggerValue = 2;break;
+                case 3: TriggerValue = 8;break;
+                default: TriggerValue = 0;break;
+            }
+            bool bResult = MicrorocAsic.TriggerCoincidenceSet(TriggerValue, MyUsbDevice1);
+            if(bResult)
+            {
+                txtReport.AppendText("Trigger select successfully\n");
+                return true;
+            }
+            else
+            {
+                ShowUsbError("Select trigger");
+                return false;
+            }
+        }
+        private bool HoldEnable()
+        {
+            bool bResult = MicrorocAsic.HoldEnable(MyUsbDevice1);
+            if(bResult)
+            {
+                txtReport.AppendText("Hold Enable\n");
+                return true;
+            }
+            else
+            {
+                ShowUsbError("Hold enable");
+                return false;
+            }
+        }
+        private bool HoldDisable()
+        {
+            bool bResult = MicrorocAsic.HoldDisable(MyUsbDevice1);
+            if(bResult)
+            {
+                txtReport.AppendText("Hold disable\n");
+                return true;
+            }
+            else
+            {
+                ShowUsbError("Hold disable");
+                return false;
+            }
+        }
+        private bool SetHoldDelay(string HoldDelay)
+        {
+            bool IllegalInput;
+            bool bResult = MicrorocAsic.HoldDelaySet(HoldDelay, MyUsbDevice1, out IllegalInput);
+            if(IllegalInput)
+            {
+                ShowIllegalInput("Hold delay should be 2550");
+                return false;
+            }
+            if(bResult)
+            {
+                string report = string.Format("Set hold delay {0}ns\n", HoldDelay);
+                txtReport.AppendText(report);
+                return true;
+            }
+            else
+            {
+                ShowUsbError("Set Hold Delay");
+                return false;
+            }
+        }
+        private bool SetHoldTime(string HoldTime)
+        {
+            bool IllegalInput;
+            bool bResult = MicrorocAsic.HoldTimeSet(HoldTime, MyUsbDevice1, out IllegalInput);
+            if(IllegalInput)
+            {
+                ShowIllegalInput("Hold Time should be 0-1638400");
+                return false;
+            }
+            if(bResult)
+            {
+                string report = string.Format("Set hold time: {0}\n", HoldTime);
+                txtReport.AppendText(report);
+                return true;
+            }
+            else
+            {
+                ShowUsbError("Set HoldTime");
+                return false;
+            }
+        }
+
+        private async void btnStartAdcNewDif_Click(object sender, RoutedEventArgs e)
+        {
+            if (!CheckFileSaved())
+            {
+                return;
+            }
+            bool bResult;
+            if(!StateIndicator.SlowAcqStart)
+            {
+                bResult = SetAdcStartDelay(tbcStartDelayNewDif.Text);
+                if(!bResult)
+                {
+                    return;
+                }
+                bResult = SetAdcSamplingTimes(txtAdcAcqTimes.Text);
+                if(!bResult)
+                {
+                    return;
+                }
+                bResult = SelectTestAsic(cbxAdcTestAsicNewDif.SelectedIndex);
+                if(!bResult)
+                {
+                    return;
+                }
+                StateIndicator.SlowDataRatePackageNumber = 0;
+                bResult = MicrorocAsic.ExternalAdcStart(MyUsbDevice1);
+                if(bResult)
+                {
+                    btnStartAdcNewDif.Content = "ADC Stop";
+                    btnStartAdcNewDif.Background = Brushes.Red;
+                    StateIndicator.SlowAcqStart = true;
+                    txtReport.AppendText("ADC Start\n");
+                    await Task.Run(() => GetSlowDataRateResultCallBack(MyUsbDevice1));
+                }
+                else
+                {
+                    MessageBox.Show("Start ADC failure. Please Check USB", "USB ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            else
+            {
+                bResult = MicrorocAsic.ExternalAdcStop(MyUsbDevice1);
+                if(bResult)
+                {
+                    StateIndicator.SlowAcqStart = false;
+                    btnStartAdcNewDif.Content = "ADC Start";
+                    btnStartAdcNewDif.Background = Brushes.Green;
+                    txtReport.AppendText("ADC Stop\n");
+                }
+                else
+                {
+                    MessageBox.Show("Stop ADC failure. Please Check USB", "USB ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
+        private bool SetAdcStartDelay(string AdcStartDelay)
+        {
+            bool IllegalInput;
+            bool bResult = MicrorocAsic.AdcStartDelayTimeSet(AdcStartDelay, MyUsbDevice1, out IllegalInput);
+            if(IllegalInput)
+            {
+                ShowIllegalInput("Adc Start Delay Time should be 0-400");
+                return false;
+            }
+            if (bResult)
+            {
+                string report = string.Format("Set ADC start delay time: {0}", AdcStartDelay);
+                txtReport.AppendText(report);
+                return true;
+            }
+            else
+            {
+                ShowUsbError("Set ADC Start DelayTime");
+                return false;
+            }
+        }
+        private bool SetAdcSamplingTimes(string AdcSamplingTimes)
+        {
+            bool IllegalInput;
+            bool bResult = MicrorocAsic.AdcDataNumberSet(AdcSamplingTimes, MyUsbDevice1, out IllegalInput);
+            if(IllegalInput)
+            {
+                ShowIllegalInput("ADC sampling times should be 0-255");
+                return false;
+            }
+            if (bResult)
+            {
+                string report = string.Format("Set ADC sampling {0} times\n", AdcSamplingTimes);
+                txtReport.AppendText(report);
+                return true;
+            }
+            else
+            {
+                ShowUsbError("Set ADC sampling times");
+                return false;
+            }
+        }
+
+        private bool SelectTestAsic(int AsicIndex)
+        {
+            int Row, Column;
+            Row = AsicIndex / 4;
+            Column = AsicIndex % 4;
+            bool bResult = MicrorocAsic.TestSignalRowSelect(Row, MyUsbDevice1);
+            if(!bResult)
+            {
+                ShowUsbError("Set Row");
+                return false;
+            }
+            bResult = MicrorocAsic.TestSignalColumnSelect(Column, MyUsbDevice1);
+            if(bResult)
+            {
+                string report = string.Format("Select ASIC{0}{1}\n", Row + 1, Column + 1);
+                txtReport.AppendText(report);
+                return true;
+            }
+            else
+            {
+                ShowUsbError("Set Column");
+                return false;
+            }
+        }
+
+
+        private void btnSCurveTestStartNewDif_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void SetTriggerDelay()
+        { }
+
     }
 }

@@ -2165,43 +2165,66 @@
                                                     <RadioButton Name="rdbSlaveDaqNewDif" Content="Slave" Checked="rdbSlaveDaqNewDif_Checked"/>
                                                 </StackPanel>
                                                 <Label x:Name="lblAcquisitionDataNumberNewDif" Content="Data Number" HorizontalAlignment="Left" Margin="0,30,0,0" VerticalAlignment="Top" Width="90" Height="24"/>
-                                                <TextBox x:Name="txtAcquisitionDataNumberNewDif" HorizontalAlignment="Left" Height="24" Margin="90,30,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="50"/>
+                                                <TextBox x:Name="tbxAcquisitionDataNumberNewDif" HorizontalAlignment="Left" Height="24" Margin="90,30,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="50"/>
                                                 <Label x:Name="lblEndHoldTimeNewDif" Content="End Time(ns):" HorizontalAlignment="Left" Margin="0,60,0,0" VerticalAlignment="Top" Height="24" Width="90"/>
-                                                <TextBox x:Name="txtAcquisitionHoldTimeNewDif" HorizontalAlignment="Left" Height="24" Margin="90,60,0,0" TextWrapping="Wrap" Text="500" VerticalAlignment="Top" Width="50"/>
+                                                <TextBox x:Name="tbxAcquisitionHoldTimeNewDif" HorizontalAlignment="Left" Height="24" Margin="90,60,0,0" TextWrapping="Wrap" Text="500" VerticalAlignment="Top" Width="50"/>
                                                 <Label x:Name="lblStartAcquisitionTimeNewDif" Content="Start Time(ns):" HorizontalAlignment="Left" Margin="0,90,0,0" VerticalAlignment="Top" Height="24" Width="90"/>
                                                 <TextBox x:Name="tbxStartAcquisitionTimeNewDif" HorizontalAlignment="Left" Height="24" Margin="90,90,0,0" TextWrapping="Wrap" Text="40000" VerticalAlignment="Top" Width="50"/>
-                                                <Button x:Name="btnNewDifAcquisitionStartNewDif" Content="SlowACQ" HorizontalAlignment="Left" Margin="0,120,0,0" VerticalAlignment="Top" Width="130" Height="24" Click="btnNewDifAcquisitionStartNewDif_Click"/>
+                                                <Button x:Name="btnNewDifAcquisitionStartNewDif" Content="Slow ACQ Start" HorizontalAlignment="Left" Margin="0,120,0,0" VerticalAlignment="Top" Width="130" Height="24" Click="btnNewDifAcquisitionStartNewDif_Click">
+                                                    <Button.Resources>
+                                                        <Color x:Key="GreenButton">#FF17DA5E</Color>
+                                                    </Button.Resources>
+                                                    <Button.Background>
+                                                        <SolidColorBrush Color="{DynamicResource GreenButton}"/>
+                                                    </Button.Background>
+                                                </Button>
                                             </Grid>
                                         </GroupBox>
                                     </Grid>
                                 </TabItem>
-                                <TabItem Name="tbmAdcControlNewDif" Header="AD9220" Height="21" VerticalAlignment="Bottom" IsSelected="True" PreviewMouseLeftButtonUp="tbmAdcControlNewDif_PreviewMouseLeftButtonUp">
+                                <TabItem Name="tbmAdcControlNewDif" Header="AD9220" Height="21" VerticalAlignment="Bottom" IsSelected="True">
                                     <Grid Margin="0,0,0,0">
-                                        <Label x:Name="lblHoldGenerate" Content="Hold Set" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="80"/>
-                                        <ComboBox x:Name="cbxHoldSelect" HorizontalAlignment="Left" Margin="100,0,0,0" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.088,-0.048" Height="24">
+                                        <Label x:Name="lblHoldGenerateNewDif" Content="Hold Set" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="80"/>
+                                        <ComboBox x:Name="cbxHoldSelectNewDif" HorizontalAlignment="Left" Margin="100,0,0,0" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.088,-0.048" Height="24">
                                             <ComboBoxItem Content="OUT_TRIG0B" IsSelected="True"/>
                                             <ComboBoxItem Content="OUT_TRIG1B"/>
                                             <ComboBoxItem Content="OUT_TRIG2B"/>
                                             <ComboBoxItem Content="EXT_TRIGB"/>
                                         </ComboBox>
                                         <Label x:Name="lblHoldDelayNewDif" Content="Hold Delay(ns)" HorizontalAlignment="Left" Margin="0,30,0,0" VerticalAlignment="Top"/>
-                                        <TextBox x:Name="txtHoldDelayNewDif" HorizontalAlignment="Left" Height="24" Margin="100,30,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="50"/>
+                                        <TextBox x:Name="tbcHoldDelayNewDif" HorizontalAlignment="Left" Height="24" Margin="100,30,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="50"/>
                                         <Label x:Name="lblHoldTimeNewDif" Content="Hold Time(ns)" HorizontalAlignment="Left" Margin="0,60,0,0" VerticalAlignment="Top"/>
-                                        <TextBox x:Name="txtHoldTimeNewDif" HorizontalAlignment="Left" Height="24" Margin="100,60,0,0" TextWrapping="Wrap" Text="5000" VerticalAlignment="Top" Width="50" />
-                                        <ComboBox x:Name="cbxHoldEnableNewDif" HorizontalAlignment="Left" Margin="0,90,0,0" VerticalAlignment="Top" Width="60">
-                                            <ComboBoxItem Content="Disable" IsSelected="True"/>
-                                            <ComboBoxItem Content="Enable"/>
+                                        <TextBox x:Name="tbcHoldTimeNewDif" HorizontalAlignment="Left" Height="24" Margin="100,60,0,0" TextWrapping="Wrap" Text="5000" VerticalAlignment="Top" Width="50" />
+                                        <ComboBox x:Name="cbxHoldEnableNewDif" HorizontalAlignment="Left" Margin="0,90,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="80" Height="24">
+                                            <ComboBoxItem Content="Disable"/>
+                                            <ComboBoxItem Content="Enable" IsSelected="True"/>
                                         </ComboBox>
-                                        <Button x:Name="btnSetHoldNewDif" Content="SET HOLD" HorizontalAlignment="Left" Margin="100,90,0,0" VerticalAlignment="Top" Width="76" Height="24" Click="btnSet_Hold_Click"/>
-                                        <Label x:Name="lblTriggerDelayNewDif" Content="TriggerDelay" HorizontalAlignment="Left" Margin="0,120,0,0" VerticalAlignment="Top"/>
-                                        <TextBox x:Name="txtTriggerDelayNewDif" HorizontalAlignment="Left" Height="24" Margin="100,120,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="60"/>
+                                        <Button x:Name="btnSetHoldNewDif" Content="SET HOLD" HorizontalAlignment="Left" Margin="100,90,0,0" VerticalAlignment="Top" Width="76" Height="24" Click="btnSetHoldNewDif_Click"/>
+                                        <ComboBox x:Name="cbxAdcTestAsicNewDif" HorizontalAlignment="Left" Margin="0,120,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="80" Height="24" >
+                                            <ComboBoxItem Content="ASIC11" IsSelected="True"/>
+                                            <ComboBoxItem Content="ASIC12"/>
+                                            <ComboBoxItem Content="ASIC13"/>
+                                            <ComboBoxItem Content="ASIC14"/>
+                                            <ComboBoxItem Content="ASIC21"/>
+                                            <ComboBoxItem Content="ASIC22"/>
+                                            <ComboBoxItem Content="ASIC23"/>
+                                            <ComboBoxItem Content="ASIC24"/>
+                                            <ComboBoxItem Content="ASIC31"/>
+                                            <ComboBoxItem Content="ASIC32"/>
+                                            <ComboBoxItem Content="ASIC33"/>
+                                            <ComboBoxItem Content="ASIC34"/>
+                                            <ComboBoxItem Content="ASIC41"/>
+                                            <ComboBoxItem Content="ASIC42"/>
+                                            <ComboBoxItem Content="ASIC43"/>
+                                            <ComboBoxItem Content="ASIC44"/>
+                                        </ComboBox>
                                         <GroupBox x:Name="gbxAD9220ControlNewDif" Header="AD9220" HorizontalAlignment="Left" Margin="0,150,0,0" VerticalAlignment="Top" Width="156" Height="110">
                                             <Grid Margin="0,0,0,0">
                                                 <Label x:Name="lblStartDelayNewDif" Content="Start Delay" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Height="24" Width="75" Grid.ColumnSpan="2"/>
-                                                <TextBox x:Name="txtStartDelayNewDif" HorizontalAlignment="Left" Height="24" Margin="80,0,0,0" TextWrapping="Wrap" Text="50" VerticalAlignment="Top" Width="50" Grid.Column="1"/>
-                                                <Button x:Name="btnStartAdcNewDif" Content="ADC Start" HorizontalAlignment="Right" Margin="0,60,0,0" Width="75" Height="24" VerticalAlignment="Top"/>
+                                                <TextBox x:Name="tbcStartDelayNewDif" HorizontalAlignment="Left" Height="24" Margin="80,0,0,0" TextWrapping="Wrap" Text="50" VerticalAlignment="Top" Width="50" Grid.Column="1"/>
+                                                <Button x:Name="btnStartAdcNewDif" Content="ADC Start" HorizontalAlignment="Right" Margin="0,60,0,0" Width="75" Height="24" VerticalAlignment="Top" Click="btnStartAdcNewDif_Click"/>
                                                 <Label x:Name="lblAdcAcqTimesNewDif" Content="Acq Times" HorizontalAlignment="Left" Margin="0,30,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
-                                                <TextBox x:Name="txtAdcAcqTimesNewDif" HorizontalAlignment="Left" Height="24" Margin="80,30,0,0" TextWrapping="Wrap" Text="32" VerticalAlignment="Top" Width="50"/>
+                                                <TextBox x:Name="tbcAdcAcqTimesNewDif" HorizontalAlignment="Left" Height="24" Margin="80,30,0,0" TextWrapping="Wrap" Text="32" VerticalAlignment="Top" Width="50"/>
                                             </Grid>
                                         </GroupBox>
                                     </Grid>
@@ -2213,17 +2236,17 @@
                         <Grid Margin="0,0,0,0">
                             <GroupBox x:Name="gbxExternalRazParameterNewDif" Header="External RAZ Parameter" HorizontalAlignment="Left" Height="80" Margin="400,0,0,0" VerticalAlignment="Top" Width="300">
                                 <Grid Margin="0,0,0,0">
-                                    <Label x:Name="lblExternalRazDelayND" Content="External RAZ Delay" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="120" Height="24"/>
-                                    <TextBox x:Name="txtExternalRazDelayND" HorizontalAlignment="Left" Height="24" Margin="120,0,0,0" TextWrapping="Wrap" Text="200" VerticalAlignment="Top" Width="75"/>
-                                    <Button x:Name="btnSetExternalRazDelayND" Content="Set Delay" HorizontalAlignment="Left" Margin="200,0,0,0" VerticalAlignment="Top" Width="75" Height="24" />
-                                    <Label x:Name="lblExternalRazTimeND" Content="External RAZ Time" HorizontalAlignment="Left" Margin="0,30,0,0" VerticalAlignment="Top" Width="120"/>
-                                    <ComboBox x:Name="cbxExternalRazModeND" HorizontalAlignment="Left" Margin="120,30,0,0" VerticalAlignment="Top" Width="75" Height="24">
+                                    <Label x:Name="lblExternalRazDelayNewDif" Content="External RAZ Delay" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="120" Height="24"/>
+                                    <TextBox x:Name="tbcExternalRazDelayNewDif" HorizontalAlignment="Left" Height="24" Margin="120,0,0,0" TextWrapping="Wrap" Text="200" VerticalAlignment="Top" Width="75"/>
+                                    <Button x:Name="btnSetExternalRazDelayNewDif" Content="Set Delay" HorizontalAlignment="Left" Margin="200,0,0,0" VerticalAlignment="Top" Width="75" Height="24" />
+                                    <Label x:Name="lblExternalRazTimeNewDifSCurve" Content="External RAZ Time" HorizontalAlignment="Left" Margin="0,30,0,0" VerticalAlignment="Top" Width="120"/>
+                                    <ComboBox x:Name="cbxExternalRazModeNewDifSCurve" HorizontalAlignment="Left" Margin="120,30,0,0" VerticalAlignment="Top" Width="75" Height="24">
                                         <ComboBoxItem Content="75 ns"/>
                                         <ComboBoxItem Content="250 ns"/>
                                         <ComboBoxItem Content="500 ns"/>
                                         <ComboBoxItem Content="1000 ns" IsSelected="True"/>
                                     </ComboBox>
-                                    <Button x:Name="btnSetExternalRazWidthND" Content="SET RAZ" HorizontalAlignment="Left" Margin="200,30,0,0" VerticalAlignment="Top" Width="76" Height="24"/>
+                                    <Button x:Name="btnSetExternalRazWidthNewDif" Content="Set RAZ" HorizontalAlignment="Left" Margin="200,30,0,0" VerticalAlignment="Top" Width="76" Height="24"/>
                                 </Grid>
                             </GroupBox>
                             <GroupBox x:Name="gbxSweepTestNewDif" Header="SweepTest" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Height="230" Width="400">
@@ -2257,8 +2280,8 @@
                                             </ComboBox>
                                             <Label x:Name="lblCountTimeND" Content="Count Time(s):" HorizontalAlignment="Left" Margin="0,120,0,0" VerticalAlignment="Top" Height="24" Width="100"/>
                                             <Label x:Name="lblSingleTestChannelND" Content="Single Channel:" HorizontalAlignment="Left" Margin="0,150,0,0" VerticalAlignment="Top" Height="25" RenderTransformOrigin="0.452,1.083" Width="100"/>
-                                            <TextBox x:Name="txtSingleTestChannelNewDif" HorizontalAlignment="Left" Height="24" Margin="100,150,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="65"/>
-                                            <TextBox x:Name="txtCountTimeNewDif" HorizontalAlignment="Left" Height="24" Margin="100,120,0,0" TextWrapping="Wrap" Text="10" VerticalAlignment="Top" Width="60"/>
+                                            <TextBox x:Name="tbcSingleTestChannelNewDif" HorizontalAlignment="Left" Height="24" Margin="100,150,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="65"/>
+                                            <TextBox x:Name="tbcCountTimeNewDif" HorizontalAlignment="Left" Height="24" Margin="100,120,0,0" TextWrapping="Wrap" Text="10" VerticalAlignment="Top" Width="60"/>
 
                                         </Grid>
                                     </GroupBox>
@@ -2266,15 +2289,17 @@
                                     <Label x:Name="lblStartDacND" Content="Start DAC" HorizontalAlignment="Left" Margin="190,0,0,0" VerticalAlignment="Top" Height="24" Width="70" Grid.Column="2"/>
                                     <Label x:Name="lblEndDacND" Content="End DAC" HorizontalAlignment="Left" Margin="190,30,0,0" VerticalAlignment="Top" Height="24" Width="70" Grid.Column="2"/>
                                     <Label x:Name="lblDacStepND" Content="DAC Step" HorizontalAlignment="Left" Margin="190,60,0,0" VerticalAlignment="Top" Height="24" Width="70" Grid.Column="2"/>
-                                    <TextBox x:Name="txtStartDacNewDif" HorizontalAlignment="Left" Height="24" Margin="260,0,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="50" Grid.Column="2" />
-                                    <TextBox x:Name="txtEndDacNewDif" HorizontalAlignment="Left" Height="24" Margin="260,30,0,0" TextWrapping="Wrap" Text="1023" VerticalAlignment="Top" Width="50" Grid.Column="2"/>
-                                    <Button x:Name="btnSCurveTestStartNewDif" Content="SCurveTestStart" HorizontalAlignment="Left" Margin="190,150,0,0" VerticalAlignment="Top" Width="100" Height="24"/>
+                                    <TextBox x:Name="tbcStartDacNewDif" HorizontalAlignment="Left" Height="24" Margin="260,0,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="50" Grid.Column="2" />
+                                    <TextBox x:Name="tbcEndDacNewDif" HorizontalAlignment="Left" Height="24" Margin="260,30,0,0" TextWrapping="Wrap" Text="1023" VerticalAlignment="Top" Width="50" Grid.Column="2"/>
+                                    <Button x:Name="btnSCurveTestStartNewDif" Content="SCurveTestStart" HorizontalAlignment="Left" Margin="190,150,0,0" VerticalAlignment="Top" Width="120" Height="24" Click="btnSCurveTestStartNewDif_Click"/>
                                     <ComboBox x:Name="cbxUnmaskAllChannelNewDif" HorizontalAlignment="Left" Margin="320,0,0,0" VerticalAlignment="Top" Width="60" >
                                         <ComboBoxItem Content="Mask" IsSelected="True"/>
                                         <ComboBoxItem Content="Unmask"/>
                                     </ComboBox>
-                                    <TextBox x:Name="txtDacStepNewDif" HorizontalAlignment="Left" Height="24" Margin="260,60,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="60"/>
-                                    <ComboBox x:Name="cbxSCurveTestAsicNewDif" HorizontalAlignment="Left" Margin="190,120,0,0" VerticalAlignment="Top" Width="80" >
+                                    <TextBox x:Name="tbcDacStepNewDif" HorizontalAlignment="Left" Height="24" Margin="260,60,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="60"/>
+                                    <Label x:Name="lblTriggerDelayNewDif" Content="TriggerDelay" HorizontalAlignment="Left" Margin="190,90,0,0" VerticalAlignment="Top"/>
+                                    <TextBox x:Name="tbcTriggerDelayNewDif" HorizontalAlignment="Left" Height="24" Margin="280,90,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="60"/>
+                                    <ComboBox x:Name="cbxSCurveTestAsicNewDif" HorizontalAlignment="Left" Margin="190,120,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="80" Height="24" >
                                         <ComboBoxItem Content="ASIC11" IsSelected="True"/>
                                         <ComboBoxItem Content="ASIC12"/>
                                         <ComboBoxItem Content="ASIC13"/>
