@@ -99,6 +99,8 @@ namespace USB_DAQ
             MyUsbDevice1.usbDevices.DeviceRemoved += new EventHandler(usbDevices_DeviceRemoved);
             RefreshDevice();
             Afg3252Refresh();
+            DisableNewDif();
+            DisableSCurveTestNewDif();
             //Initial_SerialPort();
         }
         private void usbDevices_DeviceAttached(object sender, EventArgs e)
@@ -4428,27 +4430,31 @@ namespace USB_DAQ
             Process.Start(AppDomain.CurrentDomain.BaseDirectory + "Help/Help.html");
         }
 
-        private void PowerPulsingPinEnable()
+        private bool PowerPulsingPinEnable()
         {
             if(MicrorocAsic.PowerPulsingPinEnableSet(1, MyUsbDevice1))
             {
                 txtReport.AppendText("Power Pulsing Pin Enable\n");
+                return true;
             }
             else
             {
                 MessageBox.Show("Set power pulsing pin enable failure. Please check USB", "USB ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
             }
         }
 
-        private void PowerPulsingPinDisable()
+        private bool PowerPulsingPinDisable()
         {
             if (MicrorocAsic.PowerPulsingPinEnableSet(0, MyUsbDevice1))
             {
                 txtReport.AppendText("Power Pulsing Pin Disable\n");
+                return true;
             }
             else
             {
                 MessageBox.Show("Set power pulsing pin disable failure. Please check USB", "USB ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
             }
         }
 
@@ -4620,6 +4626,24 @@ namespace USB_DAQ
                 {cbxLowGainFeedbackAsic41, cbxLowGainFeedbackAsic42, cbxLowGainFeedbackAsic43, cbxLowGainFeedbackAsic44 }
             };
             #endregion
+            #region RAZ channel
+            ComboBox[,] cbxRazSelectAsic = new ComboBox[4, 4]
+            {
+                {cbxRazSelectAsic11, cbxRazSelectAsic12, cbxRazSelectAsic13, cbxRazSelectAsic14 },
+                {cbxRazSelectAsic21, cbxRazSelectAsic22, cbxRazSelectAsic23, cbxRazSelectAsic24 },
+                {cbxRazSelectAsic31, cbxRazSelectAsic32, cbxRazSelectAsic33, cbxRazSelectAsic34 },
+                {cbxRazSelectAsic41, cbxRazSelectAsic42, cbxRazSelectAsic43, cbxRazSelectAsic44 }
+            };
+            #endregion
+            #region InternalRazTime
+            ComboBox[,] cbxInternalRazTimeAsic = new ComboBox[4, 4]
+            {
+                {cbxInternalRazTimeAsic11, cbxInternalRazTimeAsic12, cbxInternalRazTimeAsic13, cbxInternalRazTimeAsic14 },
+                {cbxInternalRazTimeAsic21, cbxInternalRazTimeAsic22, cbxInternalRazTimeAsic23, cbxInternalRazTimeAsic24 },
+                {cbxInternalRazTimeAsic31, cbxInternalRazTimeAsic32, cbxInternalRazTimeAsic33, cbxInternalRazTimeAsic34 },
+                {cbxInternalRazTimeAsic41, cbxInternalRazTimeAsic42, cbxInternalRazTimeAsic43, cbxInternalRazTimeAsic44 }
+            };
+            #endregion
             #region Mask Select
             ComboBox[,] cbxMaskSelectAsic = new ComboBox[4, 4]
             {
@@ -4646,8 +4670,9 @@ namespace USB_DAQ
                 {cbxMaskDiscriminatorAsic31, cbxMaskDiscriminatorAsic32, cbxMaskDiscriminatorAsic33, cbxMaskDiscriminatorAsic34 },
                 {cbxMaskDiscriminatorAsic41, cbxMaskDiscriminatorAsic42, cbxMaskDiscriminatorAsic43, cbxMaskDiscriminatorAsic44 }
             };
+            #endregion        
             #endregion
-            #endregion
+
             #region EndReadoutParameter
             int EndReadoutParameter = ChainEnable[0] + ChainEnable[1] * 2 + ChainEnable[2] * 4 + ChainEnable[3] * 8;
             bool bResult = MicrorocAsic.EndReadoutParameterSet(EndReadoutParameter, MyUsbDevice1);
@@ -4662,22 +4687,17 @@ namespace USB_DAQ
                 ShowUsbError("EndReadoutParameter");
             }
             #endregion
-            for(int i = 0; i<4; i++)
+            
+            for (int i = 0; i<4; i++)
             {
                 if(ChainEnable[i] == 0)
                 {
                     continue;
                 }
                 #region Select ASIC chain
-                bResult = MicrorocAsicChain[i].SelectAsicChain(MyUsbDevice1);
-                if(bResult)
+                bResult = SelectAsicChain(MicrorocAsicChain[i]);
+                if(!bResult)
                 {
-                    report = string.Format("Select Chain{0}\n", i);
-                    txtReport.AppendText(report);
-                }
-                else
-                {
-                    ShowUsbError("Chain Select");
                     return;
                 }
                 #endregion
@@ -4770,6 +4790,18 @@ namespace USB_DAQ
                             return;
                         }
                         #endregion
+                        #region RAZ Channel
+                        bResult = SelectRazChannel(cbxRazSelectAsic[i, j].SelectedIndex, j, MicrorocAsicChain[i]);
+                        if(!bResult)
+                        {
+                            return;
+                        }
+                        bResult = SetInternalRazTime(cbxInternalRazTimeAsic[i, j].SelectedIndex, j, MicrorocAsicChain[i]);
+                        if(!bResult)
+                        {
+                            return;
+                        }
+                        #endregion
                         #region Discriminator Mask
                         string MaskFileName;
                         StreamReader MaskFile;
@@ -4810,9 +4842,43 @@ namespace USB_DAQ
                     }
                     #endregion
                     #region Parameter Load
-                    MicrorocAsicChain[i].ParameterLoadStart(MyUsbDevice1);
+                    bResult = ConfigurationParameterLoad(MicrorocAsicChain[j]);
+                    if(!bResult)
+                    {
+                        return;
+                    }
                     #endregion
                 }
+            }
+        }
+
+        private bool SelectAsicChain(MicrorocAsic MyMicroroc)
+        {
+            bool bResult = MyMicroroc.SelectAsicChain(MyUsbDevice1);
+            if (bResult)
+            {
+                string report = string.Format("Select Chain{0}\n", MyMicroroc.ChainID);
+                txtReport.AppendText(report);
+                return true;
+            }
+            else
+            {
+                ShowUsbError("Chain Select");
+                return false;
+            }
+        }
+
+        private bool ConfigurationParameterLoad(MicrorocAsic MyMicroroc)
+        {
+            bool bResult = MyMicroroc.ParameterLoadStart(MyUsbDevice1);
+            if(bResult)
+            {
+                return true;
+            }
+            else
+            {
+                ShowUsbError("Load Parameter");
+                return false;
             }
         }
 
@@ -5043,6 +5109,92 @@ namespace USB_DAQ
             return true;
         }
 
+        private bool SelectRazChannel(int RazChannel, int AsicLocation, MicrorocAsic MyMicroroc)
+        {
+            bool bResult = MyMicroroc.ExternalRazOrInternalRazSelect(RazChannel, MyUsbDevice1);
+            if(bResult)
+            {
+                string report = string.Format("Set ASIC{0}{1} RAZ: {2}\n", MyMicroroc.ChainID + 1, AsicLocation + 1, (RazChannel == 1 ? "External" : "Internal"));
+                txtReport.AppendText(report);
+                return true;
+            }
+            else
+            {
+                ShowUsbError("Select RAZ Channel");
+                return false;
+            }
+        }
+        private bool SetInternalRazTime(int InternalRazTime, int AsicLocation, MicrorocAsic MyMicroroc)
+        {
+            string RazTime;
+            switch (InternalRazTime)
+            {
+                case 0: RazTime = "75ns"; break;
+                case 1: RazTime = "250ns"; break;
+                case 2: RazTime = "500ns"; break;
+                case 3: RazTime = "1000ns"; break;
+                default: RazTime = "1000ns"; break;
+            }
+            bool bResult = MyMicroroc.InternalRazSignalLengthSelect(InternalRazTime, MyUsbDevice1);
+            if(bResult)
+            {
+                string report = string.Format("Set ASIC{0}{1} Internal RAZ Time: {2}\n", MyMicroroc.ChainID + 1, AsicLocation + 1, RazTime);
+                txtReport.AppendText(report);
+                return true;
+            }
+            else
+            {
+                ShowUsbError("Set Internal RAZ");
+                return false;
+            }
+        }
+
+        private bool SetExternalRazTime(int ExternalRazTime)
+        {
+            string RazTime;
+            switch(ExternalRazTime)
+            {
+                case 0: RazTime = "75ns";break;
+                case 1: RazTime = "250ns";break;
+                case 2: RazTime = "500ns";break;
+                case 3: RazTime = "1000ns";break;
+                default: RazTime = "1000ns";break;
+            }
+            bool bResult = MicrorocAsic.ExternalRazModeSelect(ExternalRazTime, MyUsbDevice1);
+            if(bResult)
+            {
+                string report = string.Format("Set External RAZ Time:{0}\n", RazTime);
+                txtReport.AppendText(report);
+                return true;
+            }
+            else
+            {
+                ShowUsbError("Set External RAZ");
+                return false;
+            }
+        }
+        private bool SetExternalRazDelay(string ExternalRazDelayTime)
+        {
+            bool IllegalInput;
+            bool bResult = MicrorocAsic.ExternalRazDelayTimeSet(ExternalRazDelayTime, MyUsbDevice1, out IllegalInput);
+            if(IllegalInput)
+            {
+                ShowIllegalInput("The External RAZ Delay Time should be 0-375");
+                return false;
+            }
+            if(bResult)
+            {
+                string report = string.Format("Set External RAZ Delay Time {0}ns\n", ExternalRazDelayTime);
+                txtReport.AppendText(report);
+                return true;
+            }
+            else
+            {
+                ShowUsbError("Set Extenal RAZ Delay");
+                return false;
+            }
+        }
+
         private void ShowIllegalInput(string SetItem)
         {
             string ErrorMessage = string.Format("Illegal Input Value. {0}", SetItem);
@@ -5085,5 +5237,490 @@ namespace USB_DAQ
             }
         }
 
+        private void tbmAdcControlNewDif_PreviewMouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            bool bResult = MicrorocAsic.RunningModeSelect(2, MyUsbDevice1);
+            if (bResult)
+            {
+                txtReport.AppendText("Select ADC\n");
+            }
+            else
+            {
+                ShowUsbError("Select ADC");
+            }
+        }
+
+        private void tbiSCTestNewDif_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            bool bResult = MicrorocAsic.RunningModeSelect(1, MyUsbDevice1);
+            if(bResult)
+            {
+                txtReport.AppendText("Select SCurveTest\n");
+                DisableNewDif();
+            }
+            else
+            {
+                ShowUsbError("Select SCurve Test");
+            }
+        }
+
+        private void rdbAcquisitionNewDif_Checked(object sender, RoutedEventArgs e)
+        {
+            bool bResult = MicrorocAsic.RunningModeSelect(0, MyUsbDevice1);
+            if(bResult)
+            {
+                txtReport.AppendText("Select Acquisition\n");
+                SelectAcuqisitionNewDif();
+                DisableSCurveTestNewDif();
+            }
+            else
+            {
+                ShowUsbError("Select Acquisition");
+            }
+        }
+
+        private void rdbAD9220NewDif_Checked(object sender, RoutedEventArgs e)
+        {
+            bool bResult = MicrorocAsic.RunningModeSelect(2, MyUsbDevice1);
+            if (bResult)
+            {
+                txtReport.AppendText("Select ADC\n");
+                SelectAd9220NewDif();
+                DisableSCurveTestNewDif();
+            }
+            else
+            {
+                ShowUsbError("Select ADC");
+            }
+        }
+
+        private void DisableNewDif()
+        {
+            gbxIndependentControl.IsEnabled = false;
+            tbcNewDifAcquisition.IsEnabled = false;
+            stpAcquisitionModeSelectNewDif.IsEnabled = true;
+            rdbAcquisitionNewDif.IsChecked = false;
+            rdbAD9220NewDif.IsChecked = false;
+            rdbPowerPulsingDisableNewDif.IsChecked = false;
+            rdbPowerPulsingEnableNewDif.IsChecked = false;
+            rdbReadScopeSet.IsChecked = false;
+            rdbSlowControlSet.IsChecked = false;
+            btnConfigurationParameterLoad.IsEnabled = false;
+            stpPowerPulsingNewDif.IsEnabled = false;
+            stpSlowControlOrReadScopeNewDif.IsEnabled = false;
+            rdbAutoDaqNewDif.IsChecked = false;
+            rdbSlaveDaqNewDif.IsChecked = false;
+        }
+        private void SelectAcuqisitionNewDif()
+        {
+            gbxIndependentControl.IsEnabled = true;
+            tbcNewDifAcquisition.IsEnabled = true;
+            tbcNewDifAcquisition.SelectedIndex = 0;
+            btnConfigurationParameterLoad.IsEnabled = true;
+            stpPowerPulsingNewDif.IsEnabled = true;
+            stpSlowControlOrReadScopeNewDif.IsEnabled = true;
+        }
+        private void SelectAd9220NewDif()
+        {
+            gbxIndependentControl.IsEnabled = true;
+            tbcNewDifAcquisition.IsEnabled = true;
+            tbcNewDifAcquisition.SelectedIndex = 1;
+            btnConfigurationParameterLoad.IsEnabled = true;
+            stpPowerPulsingNewDif.IsEnabled = true;
+            stpSlowControlOrReadScopeNewDif.IsEnabled = true;
+            rdbAutoDaqNewDif.IsChecked = false;
+            rdbSlaveDaqNewDif.IsChecked = false;
+            btnNewDifAcquisitionStartNewDif.IsEnabled = false;
+        }
+
+        private void DisableSCurveTestNewDif()
+        {
+            rdbTriggerEfficiencyNewDif.IsChecked = false;
+            rdbCountEfficiencyNewDif.IsChecked = false;
+            cbxSingleOrAutoNewDif.IsEnabled = false;
+            cbxCTestOrInputNewDif.IsEnabled = false;
+            cbxCPT_MAX_NewDif.IsEnabled = false;
+            txtCountTimeNewDif.IsEnabled = false;
+            txtSingleTestChannelNewDif.IsEnabled = false;
+            txtStartDacNewDif.IsEnabled = false;
+            txtDacStepNewDif.IsEnabled = false;
+            txtEndDacNewDif.IsEnabled = false;
+            cbxUnmaskAllChannelNewDif.IsEnabled = false;
+            cbxSCurveTestAsicNewDif.IsEnabled = false;
+            btnSCurveTestStartNewDif.IsEnabled = false;
+            gbxExternalRazParameterNewDif.IsEnabled = false;
+            rdbTriggerEfficiencyNewDif.IsChecked = false;
+            rdbCountEfficiencyNewDif.IsChecked = false;
+            btnNewDifAcquisitionStartNewDif.IsEnabled = false;
+        }
+        private void SelectSCurveTriggerMode()
+        {
+            cbxSingleOrAutoNewDif.IsEnabled = true;
+            cbxCTestOrInputNewDif.IsEnabled = true;
+            cbxCPT_MAX_NewDif.IsEnabled = true;
+            txtCountTimeNewDif.IsEnabled = false;
+            txtSingleTestChannelNewDif.IsEnabled = true;
+            txtStartDacNewDif.IsEnabled = true;
+            txtDacStepNewDif.IsEnabled = true;
+            txtEndDacNewDif.IsEnabled = true;
+            cbxUnmaskAllChannelNewDif.IsEnabled = true;
+            cbxSCurveTestAsicNewDif.IsEnabled = true;
+            btnSCurveTestStartNewDif.IsEnabled = true;
+            gbxExternalRazParameterNewDif.IsEnabled = true;
+        }
+        private void SelectSCurveCountMode()
+        {
+            cbxSingleOrAutoNewDif.IsEnabled = true;
+            cbxCTestOrInputNewDif.IsEnabled = true;
+            cbxCPT_MAX_NewDif.IsEnabled = false;
+            txtCountTimeNewDif.IsEnabled = true;
+            txtSingleTestChannelNewDif.IsEnabled = true;
+            txtStartDacNewDif.IsEnabled = true;
+            txtDacStepNewDif.IsEnabled = true;
+            txtEndDacNewDif.IsEnabled = true;
+            cbxUnmaskAllChannelNewDif.IsEnabled = true;
+            cbxSCurveTestAsicNewDif.IsEnabled = true;
+            btnSCurveTestStartNewDif.IsEnabled = true;
+            gbxExternalRazParameterNewDif.IsEnabled = true;
+        }
+
+
+
+        private void rdbTriggerEfficiencyNewDif_Checked(object sender, RoutedEventArgs e)
+        {
+            SelectSCurveTriggerMode();
+        }
+
+        private void rdbCountEfficiencyNewDif_Checked(object sender, RoutedEventArgs e)
+        {
+            SelectSCurveCountMode();
+        }
+
+        private void rdbAutoDaqNewDif_Checked(object sender, RoutedEventArgs e)
+        {
+            
+
+            bool bResult = false;
+            
+            bResult = SelectSlowControl();
+            if(!bResult)
+            {
+                return;
+            }
+            else
+            {
+                rdbSlowControlSet.IsChecked = true;
+                rdbReadScopeSet.IsChecked = false;
+            }
+            StateIndicator.DaqModeSelect = StateIndicator.DaqMode.AutoDaq;
+            #region Enabled
+            int[] ChainEnable = new int[4] { cbxEnableChain1.SelectedIndex, cbxEnableChain2.SelectedIndex, cbxEnableChain3.SelectedIndex, cbxEnableChain4.SelectedIndex };
+            #endregion
+            #region Vth0~2
+            TextBox[,] tbxVth0Asic = new TextBox[4, 4] {
+                {tbxVth0Asic11, tbxVth0Asic12, tbxVth0Asic13, tbxVth0Asic14},
+                {tbxVth0Asic21, tbxVth0Asic22, tbxVth0Asic23, tbxVth0Asic24 },
+                {tbxVth0Asic31, tbxVth0Asic32, tbxVth0Asic33, tbxVth0Asic34 },
+                {tbxVth0Asic41, tbxVth0Asic42, tbxVth0Asic43, tbxVth0Asic44 }
+            };
+            TextBox[,] tbxVth1Asic = new TextBox[4, 4] {
+                {tbxVth1Asic11, tbxVth1Asic12, tbxVth1Asic13, tbxVth1Asic14},
+                {tbxVth1Asic21, tbxVth1Asic22, tbxVth1Asic23, tbxVth1Asic24 },
+                {tbxVth1Asic31, tbxVth1Asic32, tbxVth1Asic33, tbxVth1Asic34 },
+                {tbxVth1Asic41, tbxVth1Asic42, tbxVth1Asic43, tbxVth1Asic44 }
+            };
+            TextBox[,] tbxVth2Asic = new TextBox[4, 4] {
+                {tbxVth2Asic11, tbxVth2Asic12, tbxVth2Asic13, tbxVth2Asic14},
+                {tbxVth2Asic21, tbxVth2Asic22, tbxVth2Asic23, tbxVth2Asic24 },
+                {tbxVth2Asic31, tbxVth2Asic32, tbxVth2Asic33, tbxVth2Asic34 },
+                {tbxVth2Asic41, tbxVth2Asic42, tbxVth2Asic43, tbxVth2Asic44 }
+            };
+            #endregion
+            #region RAZ channel
+            ComboBox[,] cbxRazSelectAsic = new ComboBox[4, 4]
+            {
+                {cbxRazSelectAsic11, cbxRazSelectAsic12, cbxRazSelectAsic13, cbxRazSelectAsic14 },
+                {cbxRazSelectAsic21, cbxRazSelectAsic22, cbxRazSelectAsic23, cbxRazSelectAsic24 },
+                {cbxRazSelectAsic31, cbxRazSelectAsic32, cbxRazSelectAsic33, cbxRazSelectAsic34 },
+                {cbxRazSelectAsic41, cbxRazSelectAsic42, cbxRazSelectAsic43, cbxRazSelectAsic44 }
+            };
+            #endregion
+            #region InternalRazTime
+            ComboBox[,] cbxInternalRazTimeAsic = new ComboBox[4, 4]
+            {
+                {cbxInternalRazTimeAsic11, cbxInternalRazTimeAsic12, cbxInternalRazTimeAsic13, cbxInternalRazTimeAsic14 },
+                {cbxInternalRazTimeAsic21, cbxInternalRazTimeAsic22, cbxInternalRazTimeAsic23, cbxInternalRazTimeAsic24 },
+                {cbxInternalRazTimeAsic31, cbxInternalRazTimeAsic32, cbxInternalRazTimeAsic33, cbxInternalRazTimeAsic34 },
+                {cbxInternalRazTimeAsic41, cbxInternalRazTimeAsic42, cbxInternalRazTimeAsic43, cbxInternalRazTimeAsic44 }
+            };
+            #endregion
+            #region EndReadoutParameter
+            int EndReadoutParameter = ChainEnable[0] + ChainEnable[1] * 2 + ChainEnable[2] * 4 + ChainEnable[3] * 8;
+            bResult = MicrorocAsic.EndReadoutParameterSet(EndReadoutParameter, MyUsbDevice1);
+            string report;
+            if (bResult)
+            {
+                report = string.Format("Set EndReadoutParameter: {0}{1}{2}{3}\n", ChainEnable[0], ChainEnable[1], ChainEnable[2], ChainEnable[3]);
+                txtReport.AppendText(report);
+            }
+            else
+            {
+                ShowUsbError("EndReadoutParameter");
+            }
+            #endregion
+            for (int i = 0; i < 4; i++)
+            {
+                #region Select Chain
+                bResult = SelectAsicChain(MicrorocAsicChain[i]);
+                if(!bResult)
+                {
+                    return;
+                }
+                #endregion
+                if (ChainEnable[i] == 0)
+                {
+                    continue;
+                }
+                for(int j = 3; j >= 0; j--)
+                {
+                    #region Select RAZ Channel
+                    bResult = SelectRazChannel(cbxRazSelectAsic[i, j].SelectedIndex, j, MicrorocAsicChain[i]);
+                    if(!bResult)
+                    {
+                        return;
+                    }
+                    #endregion
+                    #region InternalRAZ Time
+                    bResult = SetInternalRazTime(cbxInternalRazTimeAsic[i, j].SelectedIndex, j, MicrorocAsicChain[i]);
+                    if(!bResult)
+                    {
+                        return;
+                    }
+                    #endregion
+                    #region DAC0-2Vth
+                    bResult = SetDac0Vth(tbxVth0Asic[i, j].Text, MicrorocAsicChain[i], j);
+                    if(!bResult)
+                    {
+                        return;
+                    }
+                    bResult = SetDac1Vth(tbxVth1Asic[i, j].Text, MicrorocAsicChain[i], j);
+                    if(!bResult)
+                    {
+                        return;
+                    }
+                    bResult = SetDac2Vth(tbxVth2Asic[i, j].Text, MicrorocAsicChain[i], j);
+                    if(!bResult)
+                    {
+                        return;
+                    }
+                    #endregion
+                    bResult = ConfigurationParameterLoad(MicrorocAsicChain[j]);
+                    if(!bResult)
+                    {
+                        return;
+                    }
+                }
+            }
+            tbxStartAcquisitionTimeNewDif.Text = "40000";
+            bResult = MicrorocAsic.DaqModeSelect(0, MyUsbDevice1);
+            if(bResult)
+            {
+                txtAcquisitionHoldTimeNewDif.IsEnabled = false;
+                txtReport.AppendText("Select auto DAQ mode\n");
+                btnNewDifAcquisitionStartNewDif.IsEnabled = true;
+            }
+            else
+            {
+                ShowUsbError("Select DAQ mode");
+                rdbAutoDaqNewDif.IsChecked = false;
+            }
+        }
+
+        private void rdbSlaveDaqNewDif_Checked(object sender, RoutedEventArgs e)
+        {
+            bool bResult = false;
+            rdbSlowControlSet.IsChecked = true;
+            rdbReadScopeSet.IsChecked = false;
+            bResult = SelectSlowControl();
+            if (!bResult)
+            {
+                return;
+            }
+            StateIndicator.DaqModeSelect = StateIndicator.DaqMode.SlaveDaq;
+            #region Enabled
+            int[] ChainEnable = new int[4] { cbxEnableChain1.SelectedIndex, cbxEnableChain2.SelectedIndex, cbxEnableChain3.SelectedIndex, cbxEnableChain4.SelectedIndex };
+            #endregion
+            #region Vth0~2
+            TextBox[,] tbxVth0Asic = new TextBox[4, 4] {
+                {tbxVth0Asic11, tbxVth0Asic12, tbxVth0Asic13, tbxVth0Asic14},
+                {tbxVth0Asic21, tbxVth0Asic22, tbxVth0Asic23, tbxVth0Asic24 },
+                {tbxVth0Asic31, tbxVth0Asic32, tbxVth0Asic33, tbxVth0Asic34 },
+                {tbxVth0Asic41, tbxVth0Asic42, tbxVth0Asic43, tbxVth0Asic44 }
+            };
+            TextBox[,] tbxVth1Asic = new TextBox[4, 4] {
+                {tbxVth1Asic11, tbxVth1Asic12, tbxVth1Asic13, tbxVth1Asic14},
+                {tbxVth1Asic21, tbxVth1Asic22, tbxVth1Asic23, tbxVth1Asic24 },
+                {tbxVth1Asic31, tbxVth1Asic32, tbxVth1Asic33, tbxVth1Asic34 },
+                {tbxVth1Asic41, tbxVth1Asic42, tbxVth1Asic43, tbxVth1Asic44 }
+            };
+            TextBox[,] tbxVth2Asic = new TextBox[4, 4] {
+                {tbxVth2Asic11, tbxVth2Asic12, tbxVth2Asic13, tbxVth2Asic14},
+                {tbxVth2Asic21, tbxVth2Asic22, tbxVth2Asic23, tbxVth2Asic24 },
+                {tbxVth2Asic31, tbxVth2Asic32, tbxVth2Asic33, tbxVth2Asic34 },
+                {tbxVth2Asic41, tbxVth2Asic42, tbxVth2Asic43, tbxVth2Asic44 }
+            };
+            #endregion
+            #region EndReadoutParameter
+            int EndReadoutParameter = ChainEnable[0] + ChainEnable[1] * 2 + ChainEnable[2] * 4 + ChainEnable[3] * 8;
+            bResult = MicrorocAsic.EndReadoutParameterSet(EndReadoutParameter, MyUsbDevice1);
+            string report;
+            if (bResult)
+            {
+                report = string.Format("Set EndReadoutParameter: {0}{1}{2}{3}\n", ChainEnable[0], ChainEnable[1], ChainEnable[2], ChainEnable[3]);
+                txtReport.AppendText(report);
+            }
+            else
+            {
+                ShowUsbError("EndReadoutParameter");
+            }
+            #endregion
+            for (int i = 0; i < 4; i++)
+            {
+                if(ChainEnable[i] == 0)
+                {
+                    continue;
+                }
+                for(int j = 3; j >= 0; j--)
+                {
+                    #region DAC0~2
+                    bResult = SetDac0Vth(tbxVth0Asic[i, j].Text, MicrorocAsicChain[i], j);
+                    if (!bResult)
+                    {
+                        return;
+                    }
+                    bResult = SetDac1Vth(tbxVth1Asic[i, j].Text, MicrorocAsicChain[i], j);
+                    if (!bResult)
+                    {
+                        return;
+                    }
+                    bResult = SetDac2Vth(tbxVth2Asic[i, j].Text, MicrorocAsicChain[i], j);
+                    if (!bResult)
+                    {
+                        return;
+                    }
+                    #endregion
+                    bResult = SelectRazChannel(1, j, MicrorocAsicChain[i]);
+                    if(!bResult)
+                    {
+                        return;
+                    }
+                    bResult = ConfigurationParameterLoad(MicrorocAsicChain[j]);
+                    if (!bResult)
+                    {
+                        return;
+                    }
+                }
+            }
+            bResult = SetExternalRazDelay("200");
+            if(!bResult)
+            {
+                return;
+            }
+            bResult = SetExternalRazTime(cbxExternalRazTimeNewDif.SelectedIndex);
+            if(!bResult)
+            {
+                return;
+            }
+            tbxStartAcquisitionTimeNewDif.Text = "1500";
+            bResult = PowerPulsingPinDisable();
+            if (!bResult)
+            {
+                return;
+            }
+            else
+            {
+                rdbPowerPulsingDisableNewDif.IsChecked = true;
+                rdbPowerPulsingEnableNewDif.IsChecked = false;
+            }
+            bResult = MicrorocAsic.DaqModeSelect(1, MyUsbDevice1);
+            if(bResult)
+            {
+                txtReport.AppendText("Select slave DAQ\n");
+                txtAcquisitionHoldTimeNewDif.IsEnabled = true;
+                btnNewDifAcquisitionStartNewDif.IsEnabled = true;
+            }
+            else
+            {
+                ShowUsbError("Select DAQ mode");
+                rdbSlaveDaqNewDif.IsChecked = false;
+            }
+        }
+
+        private void btnNewDifAcquisitionStartNewDif_Click(object sender, RoutedEventArgs e)
+        {
+            if(!CheckFileSaved())
+            {
+                return;
+            }
+            bool bResult;
+            if(!StateIndicator.SlowAcqStart)
+            {
+                #region Set StartAcquisitionTime
+                bResult = SetStartAcquisitionTime(tbxStartAcquisitionTimeNewDif.Text);
+                if(!bResult)
+                {
+                    return;
+                }
+                #endregion
+
+            }
+            else
+            {
+
+            }
+        }
+
+        private bool SetStartAcquisitionTime(string StartAcquisitionTime)
+        {
+            bool IllegalInput;
+            bool bResult = MicrorocAsic.MicrorocStartAcquisitionTimeSet(StartAcquisitionTime, MyUsbDevice1, out IllegalInput);
+            if(IllegalInput)
+            {
+                ShowIllegalInput("Start Acquisition Time should be 0-1638400");
+                return false;
+            }
+            if(bResult)
+            {
+                string report = string.Format("Set Start Acquisition Time: {0}\n", StartAcquisitionTime);
+                txtReport.AppendText(report);
+                return true;
+            }
+            else
+            {
+                ShowUsbError("Set Start Acquisition Time");
+                return false;
+            }
+        }
+        private bool SetEndHoldTime(string EndHoldTime)
+        {
+            bool IllegalInput;
+            bool bResult = MicrorocAsic.EndHoldTimeSet(EndHoldTime, MyUsbDevice1, out IllegalInput);
+            if(IllegalInput)
+            {
+                ShowIllegalInput("EndHoldTime should be 0-1638400");
+                return false;
+            }
+            if(bResult)
+            {
+                string report = string.Format("Set EndHoldTime: {0}ns\n", EndHoldTime);
+                txtReport.AppendText(report);
+                return true;
+            }
+            else
+            {
+                ShowUsbError("Set EndHoldTime");
+                return false;
+            }
+        }
     }
 }

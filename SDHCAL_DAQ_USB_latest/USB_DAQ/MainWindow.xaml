@@ -882,7 +882,7 @@
                             <Label x:Name="lblCurrentPath" Content="Current Path:" HorizontalAlignment="Left" Margin="100,400,0,0" VerticalAlignment="Top" Height="24"/>
                         </Grid>
                     </TabItem>
-                    <TabItem Name="tbiDifControl" Header="New DIF">
+                    <TabItem Name="tbiDifControl" Header="New DIF" >
                         <Grid Margin="0,0,0,0">
                             <GroupBox x:Name="gbxIndependentControl" Header="Indepent Control" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Height="435" Width="500">
                                 <Grid Margin="0,0,0,0">
@@ -1251,7 +1251,7 @@
                                                 </GroupBox>
                                             </Grid>
                                         </TabItem>
-                                        <TabItem Name="OtherControl" Header="Shaper">
+                                        <TabItem Name="ShaperControl" Header="Shaper">
                                             <Grid Margin="0,0,0,0">
                                                 <Label x:Name="lblReadScopeChain1" Content="Read" HorizontalAlignment="Left" Margin="0,15,0,0" VerticalAlignment="Top" Width="50" Height="24"/>
                                                 <Label x:Name="lblHighGainFeedbackChain1" Content="Sw_hg" HorizontalAlignment="Left" Margin="0,40,0,0" VerticalAlignment="Top" Width="50" Height="24"/>
@@ -1534,6 +1534,244 @@
                                                             <ComboBoxItem Content="01" IsSelected="True"/>
                                                             <ComboBoxItem Content="10"/>
                                                             <ComboBoxItem Content="11"/>
+                                                        </ComboBox>
+                                                    </Grid>
+                                                </GroupBox>
+                                            </Grid>
+                                        </TabItem>
+                                        <TabItem Name="RazControl" Header="RAZ">
+                                            <Grid Margin="0,0,0,0">
+                                                <Label x:Name="lblRazSelectChain1" Content="RAZ" HorizontalAlignment="Left" Margin="0,15,0,0" VerticalAlignment="Top" Width="60" Height="24"/>
+                                                <Label x:Name="lblInternalRazTimeChain1" Content="Internal" HorizontalAlignment="Left" Margin="0,40,0,0" VerticalAlignment="Top" Width="60" Height="24"/>
+                                                <GroupBox x:Name="gbxAsic14d" Header="ASIC14" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="60,0,0,0"  Height="100" Width="90">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <ComboBox x:Name="cbxRazSelectAsic14" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="75" Height="24">
+                                                            <ComboBoxItem Content="Internal" IsSelected="True"/>
+                                                            <ComboBoxItem Content="External"/>
+                                                        </ComboBox>
+                                                        <ComboBox x:Name="cbxInternalRazTimeAsic14" HorizontalAlignment="Left" Margin="0,25,0,0" VerticalAlignment="Top" Width="75" Height="24">
+                                                            <ComboBoxItem Content="75ns"/>
+                                                            <ComboBoxItem Content="250ns"/>
+                                                            <ComboBoxItem Content="500ns"/>
+                                                            <ComboBoxItem Content="1000ns" IsSelected="True"/>
+                                                        </ComboBox>
+                                                    </Grid>
+                                                </GroupBox>
+                                                <GroupBox x:Name="gbxAsic13d" Header="ASIC13" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="150,0,0,0"  Height="100" Width="90">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <ComboBox x:Name="cbxRazSelectAsic13" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="75" Height="24">
+                                                            <ComboBoxItem Content="Internal" IsSelected="True"/>
+                                                            <ComboBoxItem Content="External"/>
+                                                        </ComboBox>
+                                                        <ComboBox x:Name="cbxInternalRazTimeAsic13" HorizontalAlignment="Left" Margin="0,25,0,0" VerticalAlignment="Top" Width="75" Height="24">
+                                                            <ComboBoxItem Content="75ns"/>
+                                                            <ComboBoxItem Content="250ns"/>
+                                                            <ComboBoxItem Content="500ns"/>
+                                                            <ComboBoxItem Content="1000ns" IsSelected="True"/>
+                                                        </ComboBox>
+                                                        
+                                                    </Grid>
+                                                </GroupBox>
+                                                <GroupBox x:Name="gbxAsic12d" Header="ASIC12" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="240,0,0,0"  Height="100" Width="90">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <ComboBox x:Name="cbxRazSelectAsic12" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="75" Height="24">
+                                                            <ComboBoxItem Content="Internal" IsSelected="True"/>
+                                                            <ComboBoxItem Content="External"/>
+                                                        </ComboBox>
+                                                        <ComboBox x:Name="cbxInternalRazTimeAsic12" HorizontalAlignment="Left" Margin="0,25,0,0" VerticalAlignment="Top" Width="75" Height="24">
+                                                            <ComboBoxItem Content="75ns"/>
+                                                            <ComboBoxItem Content="250ns"/>
+                                                            <ComboBoxItem Content="500ns"/>
+                                                            <ComboBoxItem Content="1000ns" IsSelected="True"/>
+                                                        </ComboBox>
+                                                    </Grid>
+                                                </GroupBox>
+                                                <GroupBox x:Name="gbxAsic11d" Header="ASIC11" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="330,0,0,0"  Height="100" Width="90">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <ComboBox x:Name="cbxRazSelectAsic11" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="75" Height="24">
+                                                            <ComboBoxItem Content="Internal" IsSelected="True"/>
+                                                            <ComboBoxItem Content="External"/>
+                                                        </ComboBox>
+                                                        <ComboBox x:Name="cbxInternalRazTimeAsic11" HorizontalAlignment="Left" Margin="0,25,0,0" VerticalAlignment="Top" Width="75" Height="24">
+                                                            <ComboBoxItem Content="75ns"/>
+                                                            <ComboBoxItem Content="250ns"/>
+                                                            <ComboBoxItem Content="500ns"/>
+                                                            <ComboBoxItem Content="1000ns" IsSelected="True"/>
+                                                        </ComboBox>
+                                                    </Grid>
+                                                </GroupBox>
+                                                <Label x:Name="lblRazSelectChain2" Content="RAZ" HorizontalAlignment="Left" Margin="0,115,0,0" VerticalAlignment="Top" Width="60" Height="24"/>
+                                                <Label x:Name="lblInternalRazTimeChain2" Content="Internal" HorizontalAlignment="Left" Margin="0,140,0,0" VerticalAlignment="Top" Width="60" Height="24"/>
+                                                <GroupBox x:Name="gbxAsic24d" Header="ASIC24" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="60,100,0,0"  Height="100" Width="90">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <ComboBox x:Name="cbxRazSelectAsic24" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="75" Height="24">
+                                                            <ComboBoxItem Content="Internal" IsSelected="True"/>
+                                                            <ComboBoxItem Content="External"/>
+                                                        </ComboBox>
+                                                        <ComboBox x:Name="cbxInternalRazTimeAsic24" HorizontalAlignment="Left" Margin="0,25,0,0" VerticalAlignment="Top" Width="75" Height="24">
+                                                            <ComboBoxItem Content="75ns"/>
+                                                            <ComboBoxItem Content="250ns"/>
+                                                            <ComboBoxItem Content="500ns"/>
+                                                            <ComboBoxItem Content="1000ns" IsSelected="True"/>
+                                                        </ComboBox>
+                                                    </Grid>
+                                                </GroupBox>
+                                                <GroupBox x:Name="gbxAsic23d" Header="ASIC23" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="150,100,0,0"  Height="100" Width="90">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <ComboBox x:Name="cbxRazSelectAsic23" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="75" Height="24">
+                                                            <ComboBoxItem Content="Internal" IsSelected="True"/>
+                                                            <ComboBoxItem Content="External"/>
+                                                        </ComboBox>
+                                                        <ComboBox x:Name="cbxInternalRazTimeAsic23" HorizontalAlignment="Left" Margin="0,25,0,0" VerticalAlignment="Top" Width="75" Height="24">
+                                                            <ComboBoxItem Content="75ns"/>
+                                                            <ComboBoxItem Content="250ns"/>
+                                                            <ComboBoxItem Content="500ns"/>
+                                                            <ComboBoxItem Content="1000ns" IsSelected="True"/>
+                                                        </ComboBox>
+                                                    </Grid>
+                                                </GroupBox>
+                                                <GroupBox x:Name="gbxAsic22d" Header="ASIC22" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="240,100,0,0"  Height="100" Width="90">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <ComboBox x:Name="cbxRazSelectAsic22" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="75" Height="24">
+                                                            <ComboBoxItem Content="Internal" IsSelected="True"/>
+                                                            <ComboBoxItem Content="External"/>
+                                                        </ComboBox>
+                                                        <ComboBox x:Name="cbxInternalRazTimeAsic22" HorizontalAlignment="Left" Margin="0,25,0,0" VerticalAlignment="Top" Width="75" Height="24">
+                                                            <ComboBoxItem Content="75ns"/>
+                                                            <ComboBoxItem Content="250ns"/>
+                                                            <ComboBoxItem Content="500ns"/>
+                                                            <ComboBoxItem Content="1000ns" IsSelected="True"/>
+                                                        </ComboBox>
+                                                    </Grid>
+                                                </GroupBox>
+                                                <GroupBox x:Name="gbxAsic21d" Header="ASIC21" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="330,100,0,0"  Height="100" Width="90">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <ComboBox x:Name="cbxRazSelectAsic21" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="75" Height="24">
+                                                            <ComboBoxItem Content="Internal" IsSelected="True"/>
+                                                            <ComboBoxItem Content="External"/>
+                                                        </ComboBox>
+                                                        <ComboBox x:Name="cbxInternalRazTimeAsic21" HorizontalAlignment="Left" Margin="0,25,0,0" VerticalAlignment="Top" Width="75" Height="24">
+                                                            <ComboBoxItem Content="75ns"/>
+                                                            <ComboBoxItem Content="250ns"/>
+                                                            <ComboBoxItem Content="500ns"/>
+                                                            <ComboBoxItem Content="1000ns" IsSelected="True"/>
+                                                        </ComboBox>
+                                                    </Grid>
+                                                </GroupBox>
+                                                <Label x:Name="lblRazSelectChain3" Content="RAZ" HorizontalAlignment="Left" Margin="0,215,0,0" VerticalAlignment="Top" Width="60" Height="24"/>
+                                                <Label x:Name="lblInternalRazTimeChain3" Content="Internal" HorizontalAlignment="Left" Margin="0,240,0,0" VerticalAlignment="Top" Width="60" Height="24"/>
+                                                <GroupBox x:Name="gbxAsic34d" Header="ASIC34" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="60,200,0,0"  Height="100" Width="90">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <ComboBox x:Name="cbxRazSelectAsic34" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="75" Height="24">
+                                                            <ComboBoxItem Content="Internal" IsSelected="True"/>
+                                                            <ComboBoxItem Content="External"/>
+                                                        </ComboBox>
+                                                        <ComboBox x:Name="cbxInternalRazTimeAsic34" HorizontalAlignment="Left" Margin="0,25,0,0" VerticalAlignment="Top" Width="75" Height="24">
+                                                            <ComboBoxItem Content="75ns"/>
+                                                            <ComboBoxItem Content="250ns"/>
+                                                            <ComboBoxItem Content="500ns"/>
+                                                            <ComboBoxItem Content="1000ns" IsSelected="True"/>
+                                                        </ComboBox>
+                                                    </Grid>
+                                                </GroupBox>
+                                                <GroupBox x:Name="gbxAsic33d" Header="ASIC33" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="150,200,0,0"  Height="100" Width="90">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <ComboBox x:Name="cbxRazSelectAsic33" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="75" Height="24">
+                                                            <ComboBoxItem Content="Internal" IsSelected="True"/>
+                                                            <ComboBoxItem Content="External"/>
+                                                        </ComboBox>
+                                                        <ComboBox x:Name="cbxInternalRazTimeAsic33" HorizontalAlignment="Left" Margin="0,25,0,0" VerticalAlignment="Top" Width="75" Height="24">
+                                                            <ComboBoxItem Content="75ns"/>
+                                                            <ComboBoxItem Content="250ns"/>
+                                                            <ComboBoxItem Content="500ns"/>
+                                                            <ComboBoxItem Content="1000ns" IsSelected="True"/>
+                                                        </ComboBox>
+                                                    </Grid>
+                                                </GroupBox>
+                                                <GroupBox x:Name="gbxAsic32d" Header="ASIC32" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="240,200,0,0"  Height="100" Width="90">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <ComboBox x:Name="cbxRazSelectAsic32" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="75" Height="24">
+                                                            <ComboBoxItem Content="Internal" IsSelected="True"/>
+                                                            <ComboBoxItem Content="External"/>
+                                                        </ComboBox>
+                                                        <ComboBox x:Name="cbxInternalRazTimeAsic32" HorizontalAlignment="Left" Margin="0,25,0,0" VerticalAlignment="Top" Width="75" Height="24">
+                                                            <ComboBoxItem Content="75ns"/>
+                                                            <ComboBoxItem Content="250ns"/>
+                                                            <ComboBoxItem Content="500ns"/>
+                                                            <ComboBoxItem Content="1000ns" IsSelected="True"/>
+                                                        </ComboBox>
+                                                    </Grid>
+                                                </GroupBox>
+                                                <GroupBox x:Name="gbxAsic31d" Header="ASIC31" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="330,200,0,0"  Height="100" Width="90">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <ComboBox x:Name="cbxRazSelectAsic31" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="75" Height="24">
+                                                            <ComboBoxItem Content="Internal" IsSelected="True"/>
+                                                            <ComboBoxItem Content="External"/>
+                                                        </ComboBox>
+                                                        <ComboBox x:Name="cbxInternalRazTimeAsic31" HorizontalAlignment="Left" Margin="0,25,0,0" VerticalAlignment="Top" Width="75" Height="24">
+                                                            <ComboBoxItem Content="75ns"/>
+                                                            <ComboBoxItem Content="250ns"/>
+                                                            <ComboBoxItem Content="500ns"/>
+                                                            <ComboBoxItem Content="1000ns" IsSelected="True"/>
+                                                        </ComboBox>
+                                                    </Grid>
+                                                </GroupBox>
+                                                <Label x:Name="lblRazSelectChain4" Content="RAZ" HorizontalAlignment="Left" Margin="0,315,0,0" VerticalAlignment="Top" Width="60" Height="24"/>
+                                                <Label x:Name="lblInternalRazTimeChain4" Content="Internal" HorizontalAlignment="Left" Margin="0,340,0,0" VerticalAlignment="Top" Width="60" Height="24"/>
+                                                <GroupBox x:Name="gbxAsic44d" Header="ASIC44" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="60,300,0,0"  Height="100" Width="90">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <ComboBox x:Name="cbxRazSelectAsic44" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="75" Height="24">
+                                                            <ComboBoxItem Content="Internal" IsSelected="True"/>
+                                                            <ComboBoxItem Content="External"/>
+                                                        </ComboBox>
+                                                        <ComboBox x:Name="cbxInternalRazTimeAsic44" HorizontalAlignment="Left" Margin="0,25,0,0" VerticalAlignment="Top" Width="75" Height="24">
+                                                            <ComboBoxItem Content="75ns"/>
+                                                            <ComboBoxItem Content="250ns"/>
+                                                            <ComboBoxItem Content="500ns"/>
+                                                            <ComboBoxItem Content="1000ns" IsSelected="True"/>
+                                                        </ComboBox>
+                                                    </Grid>
+                                                </GroupBox>
+                                                <GroupBox x:Name="gbxAsic43d" Header="ASIC43" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="150,300,0,0"  Height="100" Width="90">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <ComboBox x:Name="cbxRazSelectAsic43" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="75" Height="24">
+                                                            <ComboBoxItem Content="Internal" IsSelected="True"/>
+                                                            <ComboBoxItem Content="External"/>
+                                                        </ComboBox>
+                                                        <ComboBox x:Name="cbxInternalRazTimeAsic43" HorizontalAlignment="Left" Margin="0,25,0,0" VerticalAlignment="Top" Width="75" Height="24">
+                                                            <ComboBoxItem Content="75ns"/>
+                                                            <ComboBoxItem Content="250ns"/>
+                                                            <ComboBoxItem Content="500ns"/>
+                                                            <ComboBoxItem Content="1000ns" IsSelected="True"/>
+                                                        </ComboBox>
+                                                    </Grid>
+                                                </GroupBox>
+                                                <GroupBox x:Name="gbxAsic42d" Header="ASIC42" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="240,300,0,0"  Height="100" Width="90">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <ComboBox x:Name="cbxRazSelectAsic42" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="75" Height="24">
+                                                            <ComboBoxItem Content="Internal" IsSelected="True"/>
+                                                            <ComboBoxItem Content="External"/>
+                                                        </ComboBox>
+                                                        <ComboBox x:Name="cbxInternalRazTimeAsic42" HorizontalAlignment="Left" Margin="0,25,0,0" VerticalAlignment="Top" Width="75" Height="24">
+                                                            <ComboBoxItem Content="75ns"/>
+                                                            <ComboBoxItem Content="250ns"/>
+                                                            <ComboBoxItem Content="500ns"/>
+                                                            <ComboBoxItem Content="1000ns" IsSelected="True"/>
+                                                        </ComboBox>
+ 
+                                                    </Grid>
+                                                </GroupBox>
+                                                <GroupBox x:Name="gbxAsic41d" Header="ASIC41" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="330,300,0,0"  Height="100" Width="90">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <ComboBox x:Name="cbxRazSelectAsic41" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="75" Height="24">
+                                                            <ComboBoxItem Content="Internal" IsSelected="True"/>
+                                                            <ComboBoxItem Content="External"/>
+                                                        </ComboBox>
+                                                        <ComboBox x:Name="cbxInternalRazTimeAsic41" HorizontalAlignment="Left" Margin="0,25,0,0" VerticalAlignment="Top" Width="75" Height="24">
+                                                            <ComboBoxItem Content="75ns"/>
+                                                            <ComboBoxItem Content="250ns"/>
+                                                            <ComboBoxItem Content="500ns"/>
+                                                            <ComboBoxItem Content="1000ns" IsSelected="True"/>
                                                         </ComboBox>
                                                     </Grid>
                                                 </GroupBox>
@@ -1895,37 +2133,49 @@
                                 </Grid>
                             </GroupBox>
                             <Label x:Name="lblPowerPulsingNewDif" Content="Powerpulsing" HorizontalAlignment="Left" Margin="500,0,0,0" VerticalAlignment="Top" Height="24" Width="90"/>
-                            <StackPanel HorizontalAlignment="Left" Height="30" Margin="600,0,0,0" VerticalAlignment="Top" Width="70">
+                            <StackPanel Name="stpPowerPulsingNewDif" HorizontalAlignment="Left" Height="30" Margin="600,0,0,0" VerticalAlignment="Top" Width="70">
                                 <RadioButton Name="rdbPowerPulsingEnableNewDif" Content="Enable" Checked="rdbPowerPulsingEnableNewDif_Checked"/>
                                 <RadioButton Name="rdbPowerPulsingDisableNewDif" Content="Disable" Checked="rdbPowerPulsingDisableNewDif_Checked"/>
                             </StackPanel>
                             <Label x:Name="lblSlowControlOrReadScope" Content="SC or Read:" HorizontalAlignment="Left" Margin="500,30,0,0" VerticalAlignment="Top" Width="100" Height="24"/>
-                            <StackPanel HorizontalAlignment="Left" Height="31" Margin="600,30,0,0" VerticalAlignment="Top" Width="75">
+                            <StackPanel Name="stpSlowControlOrReadScopeNewDif" HorizontalAlignment="Left" Height="31" Margin="600,30,0,0" VerticalAlignment="Top" Width="75">
                                 <RadioButton Name="rdbSlowControlSet" Content="SC" Checked="rdbSlowControlSet_Checked"/>
                                 <RadioButton Name="rdbReadScopeSet" Content="ReadScope" Checked="rdbReadScopeSet_Checked"/>
                             </StackPanel>
                             <Button x:Name="btnConfigurationParameterLoad" Content="Configuration Parameter Load" Height="24" Width="200" Margin="500,60,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Center" Click="btnConfigurationParameterLoad_Click"/>
-                            <TabControl x:Name="tbcNewDifAcquisition" Height="300" Margin="500,100,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200">
-                                <TabItem Name="tbmAcquisition" Header="Acquisition"  MouseLeftButtonUp="tbmNormalAcq_MouseLeftButtonUp">
+                            <StackPanel Name="stpAcquisitionModeSelectNewDif" HorizontalAlignment="Left" Height="31" Margin="500,90,0,0" VerticalAlignment="Top" Width="150">
+                                <RadioButton Name="rdbAcquisitionNewDif" Content="Acquisition" Checked="rdbAcquisitionNewDif_Checked"/>
+                                <RadioButton Name="rdbAD9220NewDif" Content="AD9220" Checked="rdbAD9220NewDif_Checked"/>
+                            </StackPanel>
+                            <Label x:Name="lblExternalRazTimeNewDif" Content="ExternalRaz" HorizontalAlignment="Left" Margin="620,90,0,0" VerticalAlignment="Top" Width="80" Height="24"/>
+                            <ComboBox x:Name="cbxExternalRazTimeNewDif" Margin="700,90,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Height="24">
+                                <ComboBoxItem Content="75ns"/>
+                                <ComboBoxItem Content="250ns"/>
+                                <ComboBoxItem Content="500ns"/>
+                                <ComboBoxItem Content="1000ns" IsSelected="True"/>
+                            </ComboBox>
+                            <TabControl x:Name="tbcNewDifAcquisition" Height="300" Margin="500,130,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200">
+                                <TabItem Name="tbmNewDifAcquisition" Header="Acquisition" >
                                     <Grid Margin="0,0,0,0">
-                                        <GroupBox x:Name="gbxAcquisition" Header="Acq" HorizontalAlignment="Left" VerticalAlignment="Top" Height="150" Width="155" Margin="0,0,0,0">
+                                        <GroupBox x:Name="gbxAcquisition" Header="Acq" HorizontalAlignment="Left" VerticalAlignment="Top" Height="180" Width="185" Margin="0,0,0,0">
                                             <Grid  Margin="0,0,0,0" >
-                                                <Label x:Name="lblAcquisitionMode" Content="DAQ Mode:" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Height="24" Width="80"/>
-                                                <StackPanel HorizontalAlignment="Left" Height="30" Margin="80,0,0,0" VerticalAlignment="Top" Width="60">
-                                                    <RadioButton Name="AutoDaq" Content="Auto"/>
-                                                    <RadioButton GroupName="SlaveDaq" Content="Slave"/>
+                                                <Label x:Name="lblAcquisitionModeNewDif" Content="DAQ Mode:" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Height="24" Width="80"/>
+                                                <StackPanel Name="stpDaqModeSelectNewDif" HorizontalAlignment="Left" Height="30" Margin="80,0,0,0" VerticalAlignment="Top" Width="60">
+                                                    <RadioButton Name="rdbAutoDaqNewDif" Content="Auto" Checked="rdbAutoDaqNewDif_Checked"/>
+                                                    <RadioButton Name="rdbSlaveDaqNewDif" Content="Slave" Checked="rdbSlaveDaqNewDif_Checked"/>
                                                 </StackPanel>
-                                                <Label x:Name="lblAcquisitionDataNumber" Content="Data Number" HorizontalAlignment="Left" Margin="0,30,0,0" VerticalAlignment="Top" Width="90" Height="24"/>
-                                                <TextBox x:Name="txtAcquisitionDataNumber" HorizontalAlignment="Left" Height="24" Margin="90,30,0,0" TextWrapping="Wrap" Text="5120" VerticalAlignment="Top" Width="50"/>
-                                                <Label x:Name="lblEndHoldTime" Content="End Time(ns):" HorizontalAlignment="Left" Margin="0,60,0,0" VerticalAlignment="Top" Height="24" Width="90"/>
-                                                <TextBox x:Name="txtAcquisitionndHoldTime" HorizontalAlignment="Left" Height="24" Margin="90,60,0,0" TextWrapping="Wrap" Text="500" VerticalAlignment="Top" Width="50"/>
-                                                
-                                                <Button x:Name="btnNewDifAcquisitionStart" Content="SlowACQ" HorizontalAlignment="Left" Margin="0,90,0,0" VerticalAlignment="Top" Width="130" Height="24"/>
+                                                <Label x:Name="lblAcquisitionDataNumberNewDif" Content="Data Number" HorizontalAlignment="Left" Margin="0,30,0,0" VerticalAlignment="Top" Width="90" Height="24"/>
+                                                <TextBox x:Name="txtAcquisitionDataNumberNewDif" HorizontalAlignment="Left" Height="24" Margin="90,30,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="50"/>
+                                                <Label x:Name="lblEndHoldTimeNewDif" Content="End Time(ns):" HorizontalAlignment="Left" Margin="0,60,0,0" VerticalAlignment="Top" Height="24" Width="90"/>
+                                                <TextBox x:Name="txtAcquisitionHoldTimeNewDif" HorizontalAlignment="Left" Height="24" Margin="90,60,0,0" TextWrapping="Wrap" Text="500" VerticalAlignment="Top" Width="50"/>
+                                                <Label x:Name="lblStartAcquisitionTimeNewDif" Content="Start Time(ns):" HorizontalAlignment="Left" Margin="0,90,0,0" VerticalAlignment="Top" Height="24" Width="90"/>
+                                                <TextBox x:Name="tbxStartAcquisitionTimeNewDif" HorizontalAlignment="Left" Height="24" Margin="90,90,0,0" TextWrapping="Wrap" Text="40000" VerticalAlignment="Top" Width="50"/>
+                                                <Button x:Name="btnNewDifAcquisitionStartNewDif" Content="SlowACQ" HorizontalAlignment="Left" Margin="0,120,0,0" VerticalAlignment="Top" Width="130" Height="24" Click="btnNewDifAcquisitionStartNewDif_Click"/>
                                             </Grid>
                                         </GroupBox>
                                     </Grid>
                                 </TabItem>
-                                <TabItem Name="tbiAdcControlNewDif" Header="AD9220" MouseLeftButtonUp="tbiAD9220_MouseLeftButtonUp">
+                                <TabItem Name="tbmAdcControlNewDif" Header="AD9220" Height="21" VerticalAlignment="Bottom" IsSelected="True" PreviewMouseLeftButtonUp="tbmAdcControlNewDif_PreviewMouseLeftButtonUp">
                                     <Grid Margin="0,0,0,0">
                                         <Label x:Name="lblHoldGenerate" Content="Hold Set" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="80"/>
                                         <ComboBox x:Name="cbxHoldSelect" HorizontalAlignment="Left" Margin="100,0,0,0" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.088,-0.048" Height="24">
@@ -1959,7 +2209,7 @@
                             </TabControl>
                         </Grid>
                     </TabItem>
-                    <TabItem Name="tbiSCTestNewDif" Header="SCurve">
+                    <TabItem Name="tbiSCTestNewDif" Header="SCurve" MouseLeftButtonUp="tbiSCTestNewDif_MouseLeftButtonUp">
                         <Grid Margin="0,0,0,0">
                             <GroupBox x:Name="gbxExternalRazParameterNewDif" Header="External RAZ Parameter" HorizontalAlignment="Left" Height="80" Margin="400,0,0,0" VerticalAlignment="Top" Width="300">
                                 <Grid Margin="0,0,0,0">
@@ -1976,27 +2226,27 @@
                                     <Button x:Name="btnSetExternalRazWidthND" Content="SET RAZ" HorizontalAlignment="Left" Margin="200,30,0,0" VerticalAlignment="Top" Width="76" Height="24"/>
                                 </Grid>
                             </GroupBox>
-                            <GroupBox x:Name="gbxSweepTestND" Header="SweepTest" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Height="230" Width="400">
+                            <GroupBox x:Name="gbxSweepTestNewDif" Header="SweepTest" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Height="230" Width="400">
                                 <Grid Margin="0,0,0,0">
                                     <GroupBox x:Name="gbxSCurveTestND" Header="SCurveTest" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Height="203" Width="185" Grid.ColumnSpan="3">
                                         <Grid Margin="0,0,0,0">
                                             <Label x:Name="lblTrigEfficiencyOrCountEfficiencyND" Content="Trig or Count" HorizontalAlignment="Left" VerticalAlignment="Top" Height="24" Width="92" Margin="0,0,0,0"/>
                                             <StackPanel HorizontalAlignment="Left" Height="30" Margin="95,0,0,0" VerticalAlignment="Top" Width="60">
-                                                <RadioButton Name="TriggerEfficiencyND" Content="Trigger"/>
-                                                <RadioButton Name="CountEfficiencyND" Content="Count"/>
+                                                <RadioButton Name="rdbTriggerEfficiencyNewDif" Content="Trigger" Checked="rdbTriggerEfficiencyNewDif_Checked"/>
+                                                <RadioButton Name="rdbCountEfficiencyNewDif" Content="Count" Checked="rdbCountEfficiencyNewDif_Checked"/>
                                             </StackPanel>
                                             <Label x:Name="lblSingleOrAutoND" Content="Single or Auto" HorizontalAlignment="Left" Margin="0,30,0,0" VerticalAlignment="Top" Height="24"/>
-                                            <ComboBox x:Name="cbxSingleOrAutoND" HorizontalAlignment="Left" Margin="95,30,0,0" VerticalAlignment="Top" Width="65" Height="24">
+                                            <ComboBox x:Name="cbxSingleOrAutoNewDif" HorizontalAlignment="Left" Margin="95,30,0,0" VerticalAlignment="Top" Width="65" Height="24">
                                                 <ComboBoxItem Content="Single" IsSelected="True"/>
                                                 <ComboBoxItem Content="Auto" />
                                             </ComboBox>
                                             <Label x:Name="lblCTestOrInputND" Content="CTest or Input" HorizontalAlignment="Left" Margin="0,60,0,0" VerticalAlignment="Top" Height="24" Width="92" />
-                                            <ComboBox x:Name="cbxCTestOrInputND" HorizontalAlignment="Left" Margin="95,60,0,0" VerticalAlignment="Top" Width="65" Height="24">
+                                            <ComboBox x:Name="cbxCTestOrInputNewDif" HorizontalAlignment="Left" Margin="95,60,0,0" VerticalAlignment="Top" Width="65" Height="24">
                                                 <ComboBoxItem Content="CTest" IsSelected="True"/>
                                                 <ComboBoxItem Content="Input" />
                                             </ComboBox>
                                             <Label x:Name="lblCPT_MAX_ND" Content="Max count:" HorizontalAlignment="Left" Margin="0,90,0,0" VerticalAlignment="Top" Height="24"/>
-                                            <ComboBox x:Name="cbxCPT_MAX_ND" HorizontalAlignment="Left" Margin="95,90,0,0" VerticalAlignment="Top" Width="65">
+                                            <ComboBox x:Name="cbxCPT_MAX_NewDif" HorizontalAlignment="Left" Margin="95,90,0,0" VerticalAlignment="Top" Width="65">
                                                 <ComboBoxItem Content= "200"/>
                                                 <ComboBoxItem Content= "1000"/>
                                                 <ComboBoxItem Content= "2000"/>
@@ -2007,8 +2257,8 @@
                                             </ComboBox>
                                             <Label x:Name="lblCountTimeND" Content="Count Time(s):" HorizontalAlignment="Left" Margin="0,120,0,0" VerticalAlignment="Top" Height="24" Width="100"/>
                                             <Label x:Name="lblSingleTestChannelND" Content="Single Channel:" HorizontalAlignment="Left" Margin="0,150,0,0" VerticalAlignment="Top" Height="25" RenderTransformOrigin="0.452,1.083" Width="100"/>
-                                            <TextBox x:Name="txtSingleTestChannelND" HorizontalAlignment="Left" Height="24" Margin="100,150,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="65"/>
-                                            <TextBox x:Name="txtCountTimeND" HorizontalAlignment="Left" Height="24" Margin="100,120,0,0" TextWrapping="Wrap" Text="10" VerticalAlignment="Top" Width="60"/>
+                                            <TextBox x:Name="txtSingleTestChannelNewDif" HorizontalAlignment="Left" Height="24" Margin="100,150,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="65"/>
+                                            <TextBox x:Name="txtCountTimeNewDif" HorizontalAlignment="Left" Height="24" Margin="100,120,0,0" TextWrapping="Wrap" Text="10" VerticalAlignment="Top" Width="60"/>
 
                                         </Grid>
                                     </GroupBox>
@@ -2016,15 +2266,15 @@
                                     <Label x:Name="lblStartDacND" Content="Start DAC" HorizontalAlignment="Left" Margin="190,0,0,0" VerticalAlignment="Top" Height="24" Width="70" Grid.Column="2"/>
                                     <Label x:Name="lblEndDacND" Content="End DAC" HorizontalAlignment="Left" Margin="190,30,0,0" VerticalAlignment="Top" Height="24" Width="70" Grid.Column="2"/>
                                     <Label x:Name="lblDacStepND" Content="DAC Step" HorizontalAlignment="Left" Margin="190,60,0,0" VerticalAlignment="Top" Height="24" Width="70" Grid.Column="2"/>
-                                    <TextBox x:Name="txtStartDacND" HorizontalAlignment="Left" Height="24" Margin="260,0,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="50" Grid.Column="2" />
-                                    <TextBox x:Name="txtEndDacND" HorizontalAlignment="Left" Height="24" Margin="260,30,0,0" TextWrapping="Wrap" Text="1023" VerticalAlignment="Top" Width="50" Grid.Column="2"/>
-                                    <Button x:Name="btnSCurveTestStartND" Content="SCurveTestStart" HorizontalAlignment="Left" Margin="190,150,0,0" VerticalAlignment="Top" Width="100" Height="24"/>
-                                    <ComboBox x:Name="cbxUnmaskAllChannelND" HorizontalAlignment="Left" Margin="320,0,0,0" VerticalAlignment="Top" Width="60" >
+                                    <TextBox x:Name="txtStartDacNewDif" HorizontalAlignment="Left" Height="24" Margin="260,0,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="50" Grid.Column="2" />
+                                    <TextBox x:Name="txtEndDacNewDif" HorizontalAlignment="Left" Height="24" Margin="260,30,0,0" TextWrapping="Wrap" Text="1023" VerticalAlignment="Top" Width="50" Grid.Column="2"/>
+                                    <Button x:Name="btnSCurveTestStartNewDif" Content="SCurveTestStart" HorizontalAlignment="Left" Margin="190,150,0,0" VerticalAlignment="Top" Width="100" Height="24"/>
+                                    <ComboBox x:Name="cbxUnmaskAllChannelNewDif" HorizontalAlignment="Left" Margin="320,0,0,0" VerticalAlignment="Top" Width="60" >
                                         <ComboBoxItem Content="Mask" IsSelected="True"/>
                                         <ComboBoxItem Content="Unmask"/>
                                     </ComboBox>
-                                    <TextBox x:Name="txtDacStepND" HorizontalAlignment="Left" Height="24" Margin="260,60,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="60"/>
-                                    <ComboBox x:Name="cbxSCurveTestAsic" HorizontalAlignment="Left" Margin="190,120,0,0" VerticalAlignment="Top" Width="60" >
+                                    <TextBox x:Name="txtDacStepNewDif" HorizontalAlignment="Left" Height="24" Margin="260,60,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="60"/>
+                                    <ComboBox x:Name="cbxSCurveTestAsicNewDif" HorizontalAlignment="Left" Margin="190,120,0,0" VerticalAlignment="Top" Width="80" >
                                         <ComboBoxItem Content="ASIC11" IsSelected="True"/>
                                         <ComboBoxItem Content="ASIC12"/>
                                         <ComboBoxItem Content="ASIC13"/>
@@ -2057,6 +2307,7 @@
                         </Grid>
                     </TabItem>
                     
+
                 </TabControl>
             </Grid>
         </GroupBox>
@@ -2075,7 +2326,8 @@
         </GroupBox>
         <Button x:Name="btnHelp" Content="Help" Grid.Column="5" HorizontalAlignment="Left" Margin="827,260,0,0" VerticalAlignment="Top" Width="75" Height="24" Click="btnHelp_Click"/>
         <Label x:Name="lblFinishDate" Content="Date: 2018/03/28" Grid.Column="5" HorizontalAlignment="Left" Margin="827,284,0,0" VerticalAlignment="Top"/>
-        
+
+
         <!--GroupBox x:Name="gbxWaveform" Header="Waveform" HorizontalAlignment="Left" Margin="260,135,0,0" VerticalAlignment="Top" Height="343" Width="557">
             <Grid  Margin="0,0,0,0">
                 <Border Margin="0,1,0,42" Grid.Row="0" Background="#FF5F5A5A">
