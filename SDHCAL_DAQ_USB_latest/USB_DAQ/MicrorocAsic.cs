@@ -649,28 +649,38 @@ namespace USB_DAQ
             }
         }
 
-        public static bool SCurveTestTriggerCountMaxSet(int TriggerCountMax, MyCyUsb usbInterface)
+        public static bool SCurveTestTriggerCountMaxSet(string TriggerCountMax, MyCyUsb usbInterface, out bool IllegalInput)
         {
-            int TriggerCountMaxValue1 = (TriggerCountMax & 15) + HexToInt(DifCommandAddress.TriggerCountMaxSet3to0Address);
-            int TriggerCountMaxValue2 = ((TriggerCountMax >> 4) & 15) + HexToInt(DifCommandAddress.TriggerCountMaxSet7to4Address);
-            int TriggerCountMaxValue3 = ((TriggerCountMax >> 8) & 15) + HexToInt(DifCommandAddress.TriggerCountMaxSet11to8Address);
-            int TriggerCountMaxValue4 = ((TriggerCountMax >> 12) & 15) + HexToInt(DifCommandAddress.TriggerCountMaxSet15to12Address);
-            bool bResult = usbInterface.CommandSend(usbInterface.ConstCommandByteArray(TriggerCountMaxValue1));
-            if (!bResult)
+            if (CheckStringLegal.CheckIntegerLegal(TriggerCountMax) && int.Parse(TriggerCountMax) < 65536)
             {
+                IllegalInput = false;
+                int TriggerCountMaxValue = int.Parse(TriggerCountMax);
+                int TriggerCountMaxValue1 = (TriggerCountMaxValue & 15) + HexToInt(DifCommandAddress.TriggerCountMaxSet3to0Address);
+                int TriggerCountMaxValue2 = ((TriggerCountMaxValue >> 4) & 15) + HexToInt(DifCommandAddress.TriggerCountMaxSet7to4Address);
+                int TriggerCountMaxValue3 = ((TriggerCountMaxValue >> 8) & 15) + HexToInt(DifCommandAddress.TriggerCountMaxSet11to8Address);
+                int TriggerCountMaxValue4 = ((TriggerCountMaxValue >> 12) & 15) + HexToInt(DifCommandAddress.TriggerCountMaxSet15to12Address);
+                bool bResult = usbInterface.CommandSend(usbInterface.ConstCommandByteArray(TriggerCountMaxValue1));
+                if (!bResult)
+                {
+                    return false;
+                }
+                bResult = usbInterface.CommandSend(usbInterface.ConstCommandByteArray(TriggerCountMaxValue2));
+                if (!bResult)
+                {
+                    return false;
+                }
+                bResult = usbInterface.CommandSend(usbInterface.ConstCommandByteArray(TriggerCountMaxValue3));
+                if (!bResult)
+                {
+                    return false;
+                }
+                return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(TriggerCountMaxValue4));
+            }
+            else
+            {
+                IllegalInput = true;
                 return false;
             }
-            bResult = usbInterface.CommandSend(usbInterface.ConstCommandByteArray(TriggerCountMaxValue2));
-            if (!bResult)
-            {
-                return false;
-            }
-            bResult = usbInterface.CommandSend(usbInterface.ConstCommandByteArray(TriggerCountMaxValue3));
-            if (!bResult)
-            {
-                return false;
-            }
-            return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(TriggerCountMaxValue4));
         }
 
         public static bool SCurveTestTriggerDelaySet(string TriggerDelay, MyCyUsb usbInterface, out bool IllegalInput)

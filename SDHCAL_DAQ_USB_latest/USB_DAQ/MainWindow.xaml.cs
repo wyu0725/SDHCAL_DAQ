@@ -2787,64 +2787,44 @@ namespace USB_DAQ
             //private int SingleDataLength = 512;
             bool bResult = false;
             byte[] DataReceiveBytes = new byte[512];
-            if (StateIndicator.OperationModeSelect == StateIndicator.OperationMode.Acq 
-                || StateIndicator.OperationModeSelect == StateIndicator.OperationMode.SweepAcq 
-                || StateIndicator.OperationModeSelect == StateIndicator.OperationMode.SCTest 
-                || StateIndicator.OperationModeSelect == StateIndicator.OperationMode.Efficiency
-                || StateIndicator.OperationModeSelect == StateIndicator.OperationMode.MicrorocCarier)
+            #region The Max Data Number is Set
+            if (StateIndicator.SlowDataRatePackageNumber != 0)
             {
-                #region The Max Data Number is Set
-                if (StateIndicator.SlowDataRatePackageNumber != 0)
+                int PackageNumber = StateIndicator.SlowDataRatePackageNumber / 512;
+                int RemainPackageNum = StateIndicator.SlowDataRatePackageNumber % 512;
+                int TotalPackageNumber = RemainPackageNum == 0 ? PackageNumber : (PackageNumber + 1);
+                int PackageCount = 0;
+                while (PackageCount < TotalPackageNumber & StateIndicator.SlowAcqStart)
                 {
-                    int PackageNumber = StateIndicator.SlowDataRatePackageNumber / 512;
-                    int RemainPackageNum = StateIndicator.SlowDataRatePackageNumber % 512;
-                    int TotalPackageNumber = RemainPackageNum == 0 ? PackageNumber : (PackageNumber + 1);
-                    int PackageCount = 0;
-                    while (PackageCount < TotalPackageNumber & StateIndicator.SlowAcqStart)
-                    {
-                        //Stopwatch sw = new Stopwatch();
-                        //sw.Start();
-                        bResult = usbInterface.DataRecieve(DataReceiveBytes, DataReceiveBytes.Length);
-                        //sw.Stop();
+                    //Stopwatch sw = new Stopwatch();
+                    //sw.Start();
+                    bResult = usbInterface.DataRecieve(DataReceiveBytes, DataReceiveBytes.Length);
+                    //sw.Stop();
 
-                        if (bResult)
-                        {
-                            bw.Write(DataReceiveBytes);
-                            PackageCount++;
-                        }
-                    }
-                    /*if (RemainPackageNum != 0)
+                    if (bResult)
                     {
-                        bResult = false;
-                        byte[] RemainByte = new byte[2048];
-                        while (!usbInterface.DataRecieve(RemainByte, RemainByte.Length) & StateIndicator.SlowAcqStart) ;
-                        byte[] RemainByteWrite = new byte[RemainPackageNum];
-                        for (int i = 0; i < RemainPackageNum; i++)
-                        {
-                            RemainByteWrite[i] = RemainByte[i];
-                        }
-                        bw.Write(RemainByteWrite);
-                    }*/
+                        bw.Write(DataReceiveBytes);
+                        PackageCount++;
+                    }
                 }
-                #endregion
-                #region The Max Data Number is not set and work in consist mode
-                else
+                /*if (RemainPackageNum != 0)
                 {
-                    while (StateIndicator.SlowAcqStart)
+                    bResult = false;
+                    byte[] RemainByte = new byte[2048];
+                    while (!usbInterface.DataRecieve(RemainByte, RemainByte.Length) & StateIndicator.SlowAcqStart) ;
+                    byte[] RemainByteWrite = new byte[RemainPackageNum];
+                    for (int i = 0; i < RemainPackageNum; i++)
                     {
-                        bResult = usbInterface.DataRecieve(DataReceiveBytes, DataReceiveBytes.Length);
-                        if (bResult)
-                        {
-                            bw.Write(DataReceiveBytes);
-                        }
+                        RemainByteWrite[i] = RemainByte[i];
                     }
-                }
-                #endregion
-                //IsSlowAcqStart = false;
+                    bw.Write(RemainByteWrite);
+                }*/
             }
-            else if (StateIndicator.OperationModeSelect == StateIndicator.OperationMode.ADC)
+            #endregion
+            #region The Max Data Number is not set and work in consist mode
+            else
             {
-                while (StateIndicator.AdcStart)
+                while (StateIndicator.SlowAcqStart)
                 {
                     bResult = usbInterface.DataRecieve(DataReceiveBytes, DataReceiveBytes.Length);
                     if (bResult)
@@ -2853,15 +2833,7 @@ namespace USB_DAQ
                     }
                 }
             }
-            /*byte[] EndFrame = new byte[512];
-            for (int j = 0; j < 32; j++)
-            {
-                bResult = usbInterface.DataRecieve(EndFrame, EndFrame.Length);
-                if (bResult)
-                {
-                    bw.Write(EndFrame);
-                }
-            }*/
+            #endregion
             bw.Flush();
             bw.Dispose();
             bw.Close();
@@ -6143,11 +6115,243 @@ namespace USB_DAQ
         }
 
 
-        private void btnSCurveTestStartNewDif_Click(object sender, RoutedEventArgs e)
+        private async void btnSCurveTestStartNewDif_Click(object sender, RoutedEventArgs e)
         {
+            if (!CheckFileSaved())
+            {
+                return;
+            }
+            bool bResult;
+            if (StateIndicator.SlowAcqStart)
+            {
+                #region Select Single or Auto
+                bResult = SelectSCurveTestSingleChannelOrAuto(cbxSingleOrAutoNewDif.SelectedIndex);
+                if (!bResult)
+                {
+                    return;
+                }
+                #endregion
+                #region CTest Or Input
+                bResult = SelectSCurveSignalCTestOrInput(cbxCTestOrInputNewDif.SelectedIndex);
+                if(!bResult)
+                {
+                    return;
+                }
+                #endregion
+                #region Max Trigger Count
+                bResult = SetMaxTriggerCount(cbxCPT_MAX_NewDif.Text);
+                if(!bResult)
+                {
+                    return;
+                }
+                #endregion
+                #region Count Time
+                bResult = SetCountTime(tbcCountTimeNewDif.Text);
+                if(!bResult)
+                {
+                    return;
+                }
+                #endregion
+                #region Single Channel
+                bResult = SetSingleTestChannel(tbcSingleTestChannelNewDif.Text);
+                if(!bResult)
+                {
+                    return;
+                }
+                #endregion
+                #region DAC
+                bResult = SetStartDac(tbcStartDacNewDif.Text);
+                if(!bResult)
+                {
+                    return;
+                }
+                int StartDac = int.Parse(tbcStartDacNewDif.Text);
+                bResult = SetEndDac(tbcEndDacNewDif.Text);
+                if(!bResult)
+                {
+                    return;
+                }
+                int EndDac = int.Parse(tbcEndDacNewDif.Text);
+                bResult = SetDacStep(tbcDacStepNewDif.Text);
+                if(!bResult)
+                {
+                    return;
+                }
+                int AdcInterval = int.Parse(tbcDacStepNewDif.Text);
+                #endregion
+                #region Data number
+                if (cbxSingleOrAutoNewDif.SelectedIndex == 0)
+                {
+                    //*** Set Package Number
+                    StateIndicator.SlowDataRatePackageNumber = HeaderLength + ChannelLength + ((EndDac - StartDac) / AdcInterval + 1) * OneDacDataLength + TailLength;
+                }
+                //--- 64 Channel Test ---//
+                else
+                {
+                    //*** Set Package Number
+                    StateIndicator.SlowDataRatePackageNumber = HeaderLength + (ChannelLength + ((EndDac - StartDac) / AdcInterval + 1) * OneDacDataLength) * 64 + TailLength;
+                }
+                #endregion
 
+            }
         }
 
+        private bool SelectSCurveTestSingleChannelOrAuto(int SingleChannelOrAuto)
+        {
+            bool bResult = MicrorocAsic.SCurveTestSingleOr64ChannelSelect(SingleChannelOrAuto, MyUsbDevice1);
+            if(bResult)
+            {
+                string report = string.Format("Select {0} Test\n", (SingleChannelOrAuto == 1 ? "Single Channel" : "64 Channel"));
+                txtReport.AppendText(report);
+                return true;
+            }
+            else
+            {
+                ShowUsbError("Select test channel mode");
+                return false;
+            }
+        }
+        private bool SelectSCurveSignalCTestOrInput(int CTestOrInput)
+        {
+            bool bResult = MicrorocAsic.SCurveTestCTestOrInputSelect(CTestOrInput, MyUsbDevice1);
+            if(bResult)
+            {
+                string report = string.Format("Select {0}\n", (CTestOrInput == 1 ? "CTest" : "Input"));
+                txtReport.AppendText(report);
+                return true;
+            }
+            else
+            {
+                ShowUsbError("Select CTest Or Input");
+                return false;
+            }
+        }
+        private bool SetMaxTriggerCount(string TriggerCount)
+        {
+            bool IllegalInput;
+            bool bResult = MicrorocAsic.SCurveTestTriggerCountMaxSet(TriggerCount, MyUsbDevice1, out IllegalInput);
+            if(IllegalInput)
+            {
+                ShowIllegalInput("Max count should be 0-65536");
+                return false;
+            }
+            if(bResult)
+            {
+                string report = string.Format("Set Max count {0}\n", TriggerCount);
+                txtReport.AppendText(report);
+                return true;
+            }
+            else
+            {
+                ShowUsbError("Set Max count");
+                return false;
+            }
+        }
+        private bool SetCountTime(string CountTime)
+        {
+            bool IllegalInput;
+            bool bResult = MicrorocAsic.CounterModeMaxValueSet(CountTime, MyUsbDevice1, out IllegalInput);
+            if(IllegalInput)
+            {
+                ShowIllegalInput("Count Time should be 0-65.355");
+                return false;
+            }
+            if(bResult)
+            {
+                string report = string.Format("Set Count Time {0}s\n", CountTime);
+                txtReport.AppendText(report);
+                return true;
+            }
+            else
+            {
+                ShowUsbError("Set Count Time");
+                return false;
+            }
+        }
+        private bool SetSingleTestChannel(string SingleTestChannel)
+        {
+            bool IllegalInput;
+            bool bResult = MicrorocAsic.SingleTestChannelSet(SingleTestChannel, MyUsbDevice1, out IllegalInput);
+            if(IllegalInput)
+            {
+                ShowIllegalInput("Single Test Channel should be 0-63");
+                return false;
+            }
+            if(bResult)
+            {
+                string report = string.Format("Set Single Test Channel {0}\n", SingleTestChannel);
+                txtReport.AppendText(report);
+                return true;
+            }
+            else
+            {
+                ShowUsbError("Set Single Channel");
+                return false;
+            }
+        }
+        private bool SetStartDac(string StartDac)
+        {
+            bool IllegalInput;
+            bool bResult = MicrorocAsic.SCurveTestStartDacSet(StartDac, MyUsbDevice1, out IllegalInput);
+            if(IllegalInput)
+            {
+                ShowIllegalInput("Start DAC Value should be 0-1203");
+                return false;
+            }
+            if (bResult)
+            {
+                string report = string.Format("Set Start DAC {0}\n", StartDac);
+                txtReport.AppendText(report);
+                return true;
+            }
+            else
+            {
+                ShowUsbError("Set Start DAC");
+                return false;
+            }
+        }
+        private bool SetEndDac(string EndDac)
+        {
+            bool IllegalInput;
+            bool bResult = MicrorocAsic.SCurveTestEndDacSet(EndDac, MyUsbDevice1, out IllegalInput);
+            if(IllegalInput)
+            {
+                ShowIllegalInput("End DAC should be 0-1023");
+                return false;
+            }
+            if(bResult)
+            {
+                string report = string.Format("Set End DAC {0}\n", EndDac);
+                txtReport.AppendText(report);
+                return true;
+            }
+            else
+            {
+                ShowUsbError("Set End DAC");
+                return false;
+            }
+        }
+        private bool SetDacStep(string DacStep)
+        {
+            bool IllegalInput;
+            bool bResult = MicrorocAsic.SCurveTestDacStepSet(DacStep, MyUsbDevice1, out IllegalInput);
+            if (IllegalInput)
+            {
+                ShowIllegalInput("DAC Step should be 1-1022");
+                return false;
+            }
+            if (bResult)
+            {
+                string report = string.Format("Set DAC step {0}\n", DacStep);
+                txtReport.AppendText(report);
+                return true;
+            }
+            else
+            {
+                ShowUsbError("Set DAC Step");
+                return false;
+            }
+        }
         private void SetTriggerDelay()
         { }
 
