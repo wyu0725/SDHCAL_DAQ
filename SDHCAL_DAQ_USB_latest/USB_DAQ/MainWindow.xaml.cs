@@ -5549,7 +5549,7 @@ namespace USB_DAQ
                 }
             }
             tbxStartAcquisitionTimeNewDif.Text = "40000";
-            bResult = MicrorocAsic.DaqModeSelect(0, MyUsbDevice1);
+            bResult = MicrorocAsic.DaqModeSelect(1, MyUsbDevice1);
             if(bResult)
             {
                 tbxAcquisitionHoldTimeNewDif.IsEnabled = false;
@@ -5669,7 +5669,7 @@ namespace USB_DAQ
                 rdbPowerPulsingDisableNewDif.IsChecked = true;
                 rdbPowerPulsingEnableNewDif.IsChecked = false;
             }
-            bResult = MicrorocAsic.DaqModeSelect(1, MyUsbDevice1);
+            bResult = MicrorocAsic.DaqModeSelect(0, MyUsbDevice1);
             if(bResult)
             {
                 txtReport.AppendText("Select slave DAQ\n");
@@ -5748,6 +5748,7 @@ namespace USB_DAQ
                     bResult = MicrorocAsic.MicrorocAcquisitionStop(MyUsbDevice1);
                     if (bResult)
                     {
+                        StateIndicator.FileSaved = false;
                         btnNewDifAcquisitionStartNewDif.Background = Brushes.Green;
                         btnNewDifAcquisitionStartNewDif.Content = "Slow ACQ Start";
                         StateIndicator.SlowAcqStart = false;
@@ -6254,6 +6255,7 @@ namespace USB_DAQ
                 bResult = SCurveTestStart();
                 if (bResult)
                 {
+                    StateIndicator.FileSaved = false;
                     StateIndicator.SlowAcqStart = true;
                     btnSCurveTestStartNewDif.Content = "SCurve Test Stop";
                     btnSCurveTestStartNewDif.Background = Brushes.Red;
