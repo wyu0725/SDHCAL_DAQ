@@ -6192,7 +6192,96 @@ namespace USB_DAQ
                     StateIndicator.SlowDataRatePackageNumber = HeaderLength + (ChannelLength + ((EndDac - StartDac) / AdcInterval + 1) * OneDacDataLength) * 64 + TailLength;
                 }
                 #endregion
-
+                #region Set mask choise
+                if (!SetMaskChoise(cbxUnmaskAllChannelNewDif.SelectedIndex))
+                {
+                    return;
+                }
+                #endregion
+                #region Set Trigger Delay
+                if (!SetTriggerDelay(tbcTriggerDelayNewDif.Text)) 
+                {
+                    return;
+                }
+                #endregion
+                #region RAZ 
+                #region Select External RAZ
+                for (int i = 0; i < 4; i++)
+                {
+                    for (int j = 3; j >= 0; j++)
+                    {
+                        bResult = SelectAsicChain(MicrorocAsicChain[i]);
+                        if (!bResult)
+                        {
+                            return;
+                        }
+                        bResult = SelectRazChannel(1, j, MicrorocAsicChain[i]);
+                        if(!bResult)
+                        {
+                            return;
+                        }
+                        bResult = SetAsicNumber(4, MicrorocAsicChain[i]);
+                    }
+                }
+                #endregion
+                #region RAZ delay and time
+                if (!SetExternalRazDelay(tbcExternalRazDelayNewDif.Text))
+                {
+                    return;
+                }
+                if (!SetExternalRazTime(cbxExternalRazModeNewDifSCurve.SelectedIndex))
+                {
+                    return;
+                }
+                #endregion
+                #endregion
+                #region Set test row and column
+                if (!SelectTestAsic(cbxSCurveTestAsicNewDif.SelectedIndex))
+                {
+                    return;
+                }
+                if(!SetSCurveTestAsic(cbxSCurveTestAsicNewDif.SelectedIndex))
+                {
+                    return;
+                }
+                #endregion
+                #region Clear USB FIFO
+                if(!ClearUsbFifo())
+                {
+                    return;
+                }
+                #endregion
+                bResult = SCurveTestStart();
+                if (bResult)
+                {
+                    StateIndicator.SlowAcqStart = true;
+                    btnSCurveTestStartNewDif.Content = "SCurve Test Stop";
+                    btnSCurveTestStartNewDif.Background = Brushes.Red;
+                    StateIndicator.SlowAcqStart = true;
+                    await Task.Run(() => GetSlowDataRateResultCallBack(MyUsbDevice1));
+                    SCurveTestStop();
+                    StateIndicator.SlowAcqStart = false;
+                    btnSCurveTestStartNewDif.Content = "SCurve Test Start";
+                    btnSCurveTestStartNewDif.Background = Brushes.Green;
+                }
+                else
+                {
+                    return;
+                }
+            }
+            else
+            {
+                bResult = SCurveTestStop();
+                if(bResult)
+                {
+                    StateIndicator.SlowAcqStart = false;
+                    btnSCurveTestStartNewDif.Content = "SCurve Test Start";
+                    btnSCurveTestStartNewDif.Background = Brushes.Green;
+                }
+                else
+                {
+                    return;
+                }
             }
         }
 
@@ -6352,8 +6441,101 @@ namespace USB_DAQ
                 return false;
             }
         }
-        private void SetTriggerDelay()
-        { }
-
+        private bool SetMaskChoise(int MaskChoise)
+        {
+            bool bResult = MicrorocAsic.SCurveTestUnmaskAllChannel(MaskChoise, MyUsbDevice1);
+            if(bResult)
+            {
+                string report = string.Format("Set {0}\n", (MaskChoise == 1 ? "Mask" : "Unmask"));
+                txtReport.AppendText(report);
+                return true;
+            }
+            else
+            {
+                ShowUsbError("Set MaskChoise");
+                return false;
+            }
+        }
+        private bool SetTriggerDelay(string TriggerDelay)
+        {
+            bool IllegalInput;
+            bool bResult = MicrorocAsic.SCurveTestTriggerDelaySet(TriggerDelay, MyUsbDevice1, out IllegalInput);
+            if(IllegalInput)
+            {
+                ShowIllegalInput("Trigger Delay should be 0-400");
+                return false;
+            }
+            if (bResult)
+            {
+                string report = string.Format("Set Trigger Delay {0}\n", TriggerDelay);
+                txtReport.AppendText(report);
+                return true;
+            }
+            else
+            {
+                ShowUsbError("Set Trigger Delay");
+                return false;
+            }
+        }
+        private bool SetAsicNumber(int AsicNumber, MicrorocAsic MyMicroroc)
+        {
+            if (MyMicroroc.AsicNumberSet(AsicNumber, MyUsbDevice1)) 
+            {
+                string report = string.Format("Set Chain{0} ASIC number {1}\n", MyMicroroc.ChainID + 1, AsicNumber + 1);
+                txtReport.AppendText(report);
+                return true;
+            }
+            else
+            {
+                ShowUsbError("Set ASIC number");
+                return false;
+            }
+        }
+        private bool SetSCurveTestAsic(int AsicIndex)
+        {
+            int TestAsic = AsicIndex / 4;
+            int TestRow = AsicIndex % 4;
+            bool bResult = MicrorocAsic.SCurveTestAsicSelect(TestAsic, MyUsbDevice1);
+            if(bResult)
+            {
+                string report = string.Format("Select ASIC{0}{1}\n", TestRow + 1, TestAsic + 1);
+                txtReport.AppendText(report);
+                return true;
+            }
+            else
+            {
+                ShowUsbError("Set Test ASIC");
+                return false;
+            }
+        }
+        private bool SCurveTestStart()
+        {
+            bool bResult = MicrorocAsic.SweepTestStart(MyUsbDevice1);
+            if(bResult)
+            {
+                txtReport.AppendText("SCurve Test Start\n");
+                return true;
+            }
+            else
+            {
+                ShowUsbError("Start SCurve Test");
+                return false;
+            }
+        }
+        private bool SCurveTestStop()
+        {
+            bool bResult = MicrorocAsic.SweepTestStop(MyUsbDevice1);
+            if (bResult)
+            {
+                txtReport.AppendText("SCurve Test Stop\n");
+                return true;
+            }
+            else
+            {
+                ShowUsbError("Stop SCurve Test");
+                return false;
+            }
+        }
     }
+    
 }
