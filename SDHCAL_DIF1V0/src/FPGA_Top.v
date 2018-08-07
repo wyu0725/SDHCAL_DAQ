@@ -289,7 +289,9 @@ module FPGA_Top(
   wire [7:0] CommandMicrorocChipID;
   wire [191:0] CommandMicrorocChannelDiscriminatorMask;
   wire CommandMicrorocLatchedOrDirectOutput;
-  wire CommandMicrorocDiscriminatorPPEnable;
+  wire CommandMicrorocDiscriminator2PPEnable;
+  wire CommandMicrorocDiscriminator1PPEnable;
+  wire CommandMicrorocDiscriminator0PPEnable;
   wire CommandMicrorocOTAqPPEnable;
   wire CommandMicrorocOTAqEnable;
   wire CommandMicrorocDac4bitPPEnable;
@@ -381,9 +383,9 @@ module FPGA_Top(
     .MicrorocChipID(CommandMicrorocChipID),
     .MicrorocChannelDiscriminatorMask(CommandMicrorocChannelDiscriminatorMask),
     .MicrorocLatchedOrDirectOutput(CommandMicrorocLatchedOrDirectOutput),
-    .MicrorocDiscriminator2PPEnable(CommandMicrorocDiscriminatorPPEnable),
-    .MicrorocDiscriminator1PPEnable(CommandMicrorocDiscriminatorPPEnable),
-    .MicrorocDiscriminator0PPEnable(CommandMicrorocDiscriminatorPPEnable),
+    .MicrorocDiscriminator2PPEnable(CommandMicrorocDiscriminator2PPEnable),
+    .MicrorocDiscriminator1PPEnable(CommandMicrorocDiscriminator1PPEnable),
+    .MicrorocDiscriminator0PPEnable(CommandMicrorocDiscriminator0PPEnable),
     .MicrorocOTAqPPEnable(CommandMicrorocOTAqPPEnable),
     .MicrorocOTAqEnable(CommandMicrorocOTAqEnable),
     .MicrorocDac4bitPPEnable(CommandMicrorocDac4bitPPEnable),
@@ -493,7 +495,9 @@ module FPGA_Top(
   wire [ASIC_CHAIN_NUMBER - 1:0] MicrorocBandGapPPEnableChain;
   wire [8*ASIC_CHAIN_NUMBER - 1:0] MicrorocChipIDChain;
   wire [ASIC_CHAIN_NUMBER - 1:0] MicrorocLatchedOrDirectOutputChain;
-  wire [ASIC_CHAIN_NUMBER - 1:0] MicrorocDiscriminatorPPEnableChain;
+  wire [ASIC_CHAIN_NUMBER - 1:0] MicrorocDiscriminator2PPEnableChain;
+  wire [ASIC_CHAIN_NUMBER - 1:0] MicrorocDiscriminator1PPEnableChain;
+  wire [ASIC_CHAIN_NUMBER - 1:0] MicrorocDiscriminator0PPEnableChain; 
   wire [ASIC_CHAIN_NUMBER - 1:0] MicrorocOTAqPPEnableChain;
   wire [ASIC_CHAIN_NUMBER - 1:0] MicrorocOTAqEnableChain;
   wire [ASIC_CHAIN_NUMBER - 1:0] MicrorocDac4bitPPEnableChain;
@@ -547,9 +551,9 @@ module FPGA_Top(
     .MicrorocChipID_Input(CommandMicrorocChipID),
     .MicrorocChannelDiscriminatorMask_Input(MicrorocChannelDiscriminatorMask),
     .MicrorocLatchedOrDirectOutput_Input(CommandMicrorocLatchedOrDirectOutput),
-    .MicrorocDiscriminator2PPEnable_Input(CommandMicrorocDiscriminatorPPEnable),
-    .MicrorocDiscriminator1PPEnable_Input(CommandMicrorocDiscriminatorPPEnable),
-    .MicrorocDiscriminator0PPEnable_Input(CommandMicrorocDiscriminatorPPEnable),
+    .MicrorocDiscriminator2PPEnable_Input(CommandMicrorocDiscriminator2PPEnable),
+    .MicrorocDiscriminator1PPEnable_Input(CommandMicrorocDiscriminator1PPEnable),
+    .MicrorocDiscriminator0PPEnable_Input(CommandMicrorocDiscriminator0PPEnable),
     .MicrorocOTAqPPEnable_Input(CommandMicrorocOTAqPPEnable),
     .MicrorocOTAqEnable_Input(CommandMicrorocOTAqEnable),
     .MicrorocDac4bitPPEnable_Input(CommandMicrorocDac4bitPPEnable),
@@ -595,9 +599,9 @@ module FPGA_Top(
     .MicrorocChipID_Output(MicrorocChipIDChain),
     .MicrorocChannelDiscriminatorMask_Output(MicrorocChannelDiscriminatorMaskChain),
     .MicrorocLatchedOrDirectOutput_Output(MicrorocLatchedOrDirectOutputChain),
-    .MicrorocDiscriminator2PPEnable_Output(MicrorocDiscriminatorPPEnableChain),
-    .MicrorocDiscriminator1PPEnable_Output(MicrorocDiscriminatorPPEnableChain),
-    .MicrorocDiscriminator0PPEnable_Output(MicrorocDiscriminatorPPEnableChain),
+    .MicrorocDiscriminator2PPEnable_Output(MicrorocDiscriminator2PPEnableChain),
+    .MicrorocDiscriminator1PPEnable_Output(MicrorocDiscriminator1PPEnableChain),
+    .MicrorocDiscriminator0PPEnable_Output(MicrorocDiscriminator0PPEnableChain),
     .MicrorocOTAqPPEnable_Output(MicrorocOTAqPPEnableChain),
     .MicrorocOTAqEnable_Output(MicrorocOTAqEnableChain),
     .MicrorocDac4bitPPEnable_Output(MicrorocDac4bitPPEnableChain),
@@ -831,9 +835,9 @@ module FPGA_Top(
     .ChipID(MicrorocChipIDChain[7:0]),
     .ChannelDiscriminatorMask(MicrorocChannelDiscriminatorMaskChain[191:0]),   // MSB correspones to Channel 63
     .LatchedOrDirectOutput(MicrorocLatchedOrDirectOutputChain[0]),              // Default: 1 Latched
-    .Discriminator1PPEnable(MicrorocDiscriminatorPPEnableChain[0]),
-    .Discriminator2PPEnable(MicrorocDiscriminatorPPEnableChain[0]),
-    .Discriminator0PPEnable(MicrorocDiscriminatorPPEnableChain[0]),
+    .Discriminator1PPEnable(MicrorocDiscriminator2PPEnableChain[0]),
+    .Discriminator2PPEnable(MicrorocDiscriminator1PPEnableChain[0]),
+    .Discriminator0PPEnable(MicrorocDiscriminator0PPEnableChain[0]),
     .OTAqPPEnable(MicrorocOTAqPPEnableChain[0]),
     .OTAqEnable(MicrorocOTAqEnableChain[0]),
     .Dac4bitPPEnable(MicrorocDac4bitPPEnableChain[0]),
@@ -936,9 +940,9 @@ module FPGA_Top(
     .ChipID(MicrorocChipIDChain[15:8]),
     .ChannelDiscriminatorMask(MicrorocChannelDiscriminatorMaskChain[383:192]),   // MSB correspones to Channel 63
     .LatchedOrDirectOutput(MicrorocLatchedOrDirectOutputChain[1]),              // Default: 1 Latched
-    .Discriminator1PPEnable(MicrorocDiscriminatorPPEnableChain[1]),
-    .Discriminator2PPEnable(MicrorocDiscriminatorPPEnableChain[1]),
-    .Discriminator0PPEnable(MicrorocDiscriminatorPPEnableChain[1]),
+    .Discriminator1PPEnable(MicrorocDiscriminator2PPEnableChain[1]),
+    .Discriminator2PPEnable(MicrorocDiscriminator1PPEnableChain[1]),
+    .Discriminator0PPEnable(MicrorocDiscriminator0PPEnableChain[1]),
     .OTAqPPEnable(MicrorocOTAqPPEnableChain[1]),
     .OTAqEnable(MicrorocOTAqEnableChain[1]),
     .Dac4bitPPEnable(MicrorocDac4bitPPEnableChain[1]),
@@ -1041,9 +1045,9 @@ module FPGA_Top(
     .ChipID(MicrorocChipIDChain[23:16]),
     .ChannelDiscriminatorMask(MicrorocChannelDiscriminatorMaskChain[575:384]),   // MSB correspones to Channel 63
     .LatchedOrDirectOutput(MicrorocLatchedOrDirectOutputChain[2]),              // Default: 1 Latched
-    .Discriminator1PPEnable(MicrorocDiscriminatorPPEnableChain[2]),
-    .Discriminator2PPEnable(MicrorocDiscriminatorPPEnableChain[2]),
-    .Discriminator0PPEnable(MicrorocDiscriminatorPPEnableChain[2]),
+    .Discriminator1PPEnable(MicrorocDiscriminator2PPEnableChain[2]),
+    .Discriminator2PPEnable(MicrorocDiscriminator1PPEnableChain[2]),
+    .Discriminator0PPEnable(MicrorocDiscriminator0PPEnableChain[2]),
     .OTAqPPEnable(MicrorocOTAqPPEnableChain[2]),
     .OTAqEnable(MicrorocOTAqEnableChain[2]),
     .Dac4bitPPEnable(MicrorocDac4bitPPEnableChain[2]),
@@ -1146,9 +1150,9 @@ module FPGA_Top(
     .ChipID(MicrorocChipIDChain[31:24]),
     .ChannelDiscriminatorMask(MicrorocChannelDiscriminatorMaskChain[767:576]),   // MSB correspones to Channel 63
     .LatchedOrDirectOutput(MicrorocLatchedOrDirectOutputChain[3]),              // Default: 1 Latched
-    .Discriminator1PPEnable(MicrorocDiscriminatorPPEnableChain[3]),
-    .Discriminator2PPEnable(MicrorocDiscriminatorPPEnableChain[3]),
-    .Discriminator0PPEnable(MicrorocDiscriminatorPPEnableChain[3]),
+    .Discriminator1PPEnable(MicrorocDiscriminator2PPEnableChain[3]),
+    .Discriminator2PPEnable(MicrorocDiscriminator1PPEnableChain[3]),
+    .Discriminator0PPEnable(MicrorocDiscriminator0PPEnableChain[3]),
     .OTAqPPEnable(MicrorocOTAqPPEnableChain[3]),
     .OTAqEnable(MicrorocOTAqEnableChain[3]),
     .Dac4bitPPEnable(MicrorocDac4bitPPEnableChain[3]),
@@ -1237,4 +1241,14 @@ module FPGA_Top(
   assign Chain3DataEnable_debug = MicrorocChain3DataEnable;
   assign Chain4Data_debug = MicrorocChain4Data;
   assign Chain4DataEnable_debug = MicrorocChain4DataEnable;
+  (* MARK_DEBUG="true" *)wire UsbStartStop_Debug;
+  assign UsbStartStop_Debug = UsbStartStop;
+  (* MARK_DEBUG="true" *)wire MicrorocConfigurationParameterLoadStart_Debug;
+  assign MicrorocConfigurationParameterLoadStart_Debug = MicrorocConfigurationParameterLoadStart;
+  (* MARK_DEBUG="true" *)wire [3:0] MicrorocConfigurationParameterLoadDoneChain_Debug;
+  assign MicrorocConfigurationParameterLoadDoneChain_Debug = MicrorocConfigurationParameterLoadDoneChain;
+  (* MARK_DEBUG="true" *)wire MicrorocConfigurationParameterLoadDone_Debug;
+  assign MicrorocConfigurationParameterLoadDone_Debug = MicrorocConfigurationParameterLoadDone;
+  (* MARK_DEBUG="true" *)wire [3:0] CommandModeSelect_Debug;
+  assign CommandModeSelect_Debug = CommandModeSelect;
 endmodule

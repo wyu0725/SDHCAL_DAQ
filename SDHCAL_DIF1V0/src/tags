@@ -192,6 +192,14 @@ CTestOrInput	AcquisitionControl.v	/^  input CTestOrInput,$/;"	p	language:Verilog
 CTestOrInput	CommandInterpreter.v	/^  output CTestOrInput,$/;"	p	language:Verilog	module:CommandInterpreter
 CTestOrInputSelect_CAND	CommandParameter.v	/^`define CTestOrInputSelect_CAND                    16'hE061$/;"	c	language:Verilog
 CTest_CHN_PARAM_Input	SCurve_Test_Control.v	/^  localparam [63:0] CTest_CHN_PARAM_Input            = 64'h0;$/;"	c	language:Verilog	module:SCurve_Test_Control
+Chain1DataEnable_debug	FPGA_Top.v	/^  (* MARK_DEBUG="true" *)wire Chain1DataEnable_debug;$/;"	n	language:Verilog	module:FPGA_Top
+Chain1Data_debug	FPGA_Top.v	/^  (* MARK_DEBUG="true" *)wire [15:0] Chain1Data_debug;$/;"	n	language:Verilog	module:FPGA_Top
+Chain2DataEnable_debug	FPGA_Top.v	/^  (* MARK_DEBUG="true" *)wire Chain2DataEnable_debug;$/;"	n	language:Verilog	module:FPGA_Top
+Chain2Data_debug	FPGA_Top.v	/^  (* MARK_DEBUG="true" *)wire [15:0] Chain2Data_debug;$/;"	n	language:Verilog	module:FPGA_Top
+Chain3DataEnable_debug	FPGA_Top.v	/^  (* MARK_DEBUG="true" *)wire Chain3DataEnable_debug;$/;"	n	language:Verilog	module:FPGA_Top
+Chain3Data_debug	FPGA_Top.v	/^  (* MARK_DEBUG="true" *)wire [15:0] Chain3Data_debug;$/;"	n	language:Verilog	module:FPGA_Top
+Chain4DataEnable_debug	FPGA_Top.v	/^  (* MARK_DEBUG="true" *)wire Chain4DataEnable_debug;$/;"	n	language:Verilog	module:FPGA_Top
+Chain4Data_debug	FPGA_Top.v	/^  (* MARK_DEBUG="true" *)wire [15:0] Chain4Data_debug;$/;"	n	language:Verilog	module:FPGA_Top
 ChannelAdjust	MicrorocControl.v	/^  input [255:0] ChannelAdjust,              \/\/ MSB to LSB from channel0 to channel 63$/;"	p	language:Verilog	module:MicrorocControl
 ChannelAdjust	ParameterGenerator.v	/^	input [255:0] ChannelAdjust,\/\/ MSB to LSB from channel0 to channel 63$/;"	p	language:Verilog	module:ParameterGenerator
 ChannelAdjust	SlowControlAndReadScopeSet.v	/^  input [255:0] ChannelAdjust,              \/\/ MSB to LSB from channel0 to channel 63$/;"	p	language:Verilog	module:SlowControlAndReadScopeSet
@@ -344,6 +352,7 @@ CommandMicrorocVth2Dac	AcquisitionControl.v	/^  input [9:0] CommandMicrorocVth2D
 CommandMicrorocVth2Dac	AcquisitionSwitcher.v	/^  input [9:0] CommandMicrorocVth2Dac,$/;"	p	language:Verilog	module:AcquisitionSwitcher
 CommandMicrorocWidlarPPEnable	FPGA_Top.v	/^  wire CommandMicrorocWidlarPPEnable;$/;"	n	language:Verilog	module:FPGA_Top
 CommandModeSelect	FPGA_Top.v	/^  wire [3:0] CommandModeSelect;$/;"	n	language:Verilog	module:FPGA_Top
+CommandModeSelect_Debug	FPGA_Top.v	/^  (* MARK_DEBUG="true" *)wire [3:0] CommandModeSelect_Debug;$/;"	n	language:Verilog	module:FPGA_Top
 CommandOut	CommandDecoder.v	/^	output reg [COMMAND_WIDTH:0] CommandOut$/;"	p	language:Verilog	module:CommandDecoder
 CommandOut	CommandDecoder_beforeInst.v	/^	output reg [COMMAND_WIDTH:0] CommandOut$/;"	p	language:Verilog	module:CommandDecoder
 CommandResetDataFifo	FPGA_Top.v	/^  wire CommandResetDataFifo;$/;"	n	language:Verilog	module:FPGA_Top
@@ -355,6 +364,7 @@ CommandWord	CommandInterpreter.v	/^  input [15:0] CommandWord,$/;"	p	language:Ve
 CommandWord	FPGA_Top.v	/^  wire [15:0] CommandWord;$/;"	n	language:Verilog	module:FPGA_Top
 CommandWordEn	CommandInterpreter.v	/^  input CommandWordEn,$/;"	p	language:Verilog	module:CommandInterpreter
 CommandWordEn	FPGA_Top.v	/^  wire CommandWordEn;$/;"	n	language:Verilog	module:FPGA_Top
+ConfigDoneDebug	SCurve_Test_Control.v	/^  (*mark_debug = "true"*)wire ConfigDoneDebug;$/;"	n	language:Verilog	module:SCurve_Test_Control
 ConfigFifoDataIn	SlowControlAndReadScopeSet.v	/^  wire [15:0] ConfigFifoDataIn;$/;"	n	language:Verilog	module:SlowControlAndReadScopeSet
 ConfigFifoDataOut	SlowControlAndReadScopeSet.v	/^  wire [15:0] ConfigFifoDataOut;$/;"	n	language:Verilog	module:SlowControlAndReadScopeSet
 ConfigFifoEmpty	SlowControlAndReadScopeSet.v	/^  wire ConfigFifoEmpty;$/;"	n	language:Verilog	module:SlowControlAndReadScopeSet
@@ -832,8 +842,11 @@ MicrorocConfigurationDoneToSCurveTest	AcquisitionControl.v	/^  wire MicrorocConf
 MicrorocConfigurationParameterLoad	AcquisitionControl.v	/^  output MicrorocConfigurationParameterLoad,$/;"	p	language:Verilog	module:AcquisitionControl
 MicrorocConfigurationParameterLoadDone	FPGA_Top.v	/^  wire MicrorocConfigurationParameterLoadDone;$/;"	n	language:Verilog	module:FPGA_Top
 MicrorocConfigurationParameterLoadDoneChain	FPGA_Top.v	/^  wire [ASIC_CHAIN_NUMBER - 1:0] MicrorocConfigurationParameterLoadDoneChain;$/;"	n	language:Verilog	module:FPGA_Top
+MicrorocConfigurationParameterLoadDoneChain_Debug	FPGA_Top.v	/^  (* MARK_DEBUG="true" *)wire [3:0] MicrorocConfigurationParameterLoadDoneChain_Debug;$/;"	n	language:Verilog	module:FPGA_Top
+MicrorocConfigurationParameterLoadDone_Debug	FPGA_Top.v	/^  (* MARK_DEBUG="true" *)wire MicrorocConfigurationParameterLoadDone_Debug;$/;"	n	language:Verilog	module:FPGA_Top
 MicrorocConfigurationParameterLoadStart	FPGA_Top.v	/^  wire MicrorocConfigurationParameterLoadStart;$/;"	n	language:Verilog	module:FPGA_Top
 MicrorocConfigurationParameterLoadStartChain	FPGA_Top.v	/^  wire [ASIC_CHAIN_NUMBER - 1:0] MicrorocConfigurationParameterLoadStartChain;$/;"	n	language:Verilog	module:FPGA_Top
+MicrorocConfigurationParameterLoadStart_Debug	FPGA_Top.v	/^  (* MARK_DEBUG="true" *)wire MicrorocConfigurationParameterLoadStart_Debug;$/;"	n	language:Verilog	module:FPGA_Top
 MicrorocControl	MicrorocControl.v	/^module MicrorocControl($/;"	m	language:Verilog
 MicrorocDac0Vth	CommandInterpreter.v	/^  output [9:0] MicrorocDac0Vth,$/;"	p	language:Verilog	module:CommandInterpreter
 MicrorocDac0Vth	FPGA_Top.v	/^  wire [9:0] MicrorocDac0Vth;$/;"	n	language:Verilog	module:FPGA_Top
@@ -1213,6 +1226,8 @@ ResetTrigCount_n	SlaveDaq.v	/^	reg ResetTrigCount_n;$/;"	r	language:Verilog	modu
 Reset_b	AutoDaq.v	/^  output reg Reset_b,         \/\/ Reset ASIC digital part$/;"	p	language:Verilog	module:AutoDaq
 RowSelect	CommandInterpreter.v	/^  output [2:0] RowSelect,$/;"	p	language:Verilog	module:CommandInterpreter
 RunningModeSelect_CAND	CommandParameter.v	/^`define RunningModeSelect_CAND                     16'hE0A0$/;"	c	language:Verilog
+SCParamLoadDebug	SCurve_Test_Control.v	/^  (*mark_debug = "true"*)wire SCParamLoadDebug;$/;"	n	language:Verilog	module:SCurve_Test_Control
+SCTestStateDebug	SCurve_Test_Control.v	/^  (*mark_debug = "true"*)wire[4:0] SCTestStateDebug;$/;"	n	language:Verilog	module:SCurve_Test_Control
 SCURVE_TEST_HEADER	SCurve_Test_Control.v	/^  localparam [15:0] SCURVE_TEST_HEADER               = 16'h5343;\/\/In ASCII 53 = S,43 = C.0x534/;"	c	language:Verilog	module:SCurve_Test_Control
 SCURVE_TEST_MODE	AcquisitionSwitcher.v	/^                   SCURVE_TEST_MODE = 4'b0001,$/;"	c	language:Verilog	module:AcquisitionSwitcher
 SC_PARAM_LOAD_DELAY	SCurve_Test_Control.v	/^  localparam [15:0] SC_PARAM_LOAD_DELAY              = 16'd40_000;$/;"	c	language:Verilog	module:SCurve_Test_Control
@@ -1584,6 +1599,8 @@ UnmaskAllChannelSet_CAND	CommandParameter.v	/^`define UnmaskAllChannelSet_CAND  
 UsbAcqStart	DaqControl.v	/^  input UsbAcqStart,$/;"	p	language:Verilog	module:DaqControl
 UsbAcqStart	DaqSwitcher.v	/^    input UsbAcqStart,$/;"	p	language:Verilog	module:DaqSwitcher
 UsbClockout	ClockManagement.v	/^  input UsbClockout,$/;"	p	language:Verilog	module:ClockManagement
+UsbDataEnable_debug	FPGA_Top.v	/^  (* MARK_DEBUG="true" *)wire UsbDataEnable_debug;$/;"	n	language:Verilog	module:FPGA_Top
+UsbData_debug	FPGA_Top.v	/^  (* MARK_DEBUG="true" *)wire [15:0] UsbData_debug;$/;"	n	language:Verilog	module:FPGA_Top
 UsbFifoEmpty	CommandInterpreter.v	/^  input UsbFifoEmpty,$/;"	p	language:Verilog	module:CommandInterpreter
 UsbFifoEmpty	DaqControl.v	/^  input UsbFifoEmpty,$/;"	p	language:Verilog	module:DaqControl
 UsbIfclk	ClockManagement.v	/^  output UsbIfclk,$/;"	p	language:Verilog	module:ClockManagement
@@ -1592,6 +1609,7 @@ UsbStartStop	DaqControl.v	/^  output UsbStartStop,$/;"	p	language:Verilog	module
 UsbStartStop	DaqSwitcher.v	/^    output UsbStartStop,$/;"	p	language:Verilog	module:DaqSwitcher
 UsbStartStop	FPGA_Top.v	/^  wire UsbStartStop;$/;"	n	language:Verilog	module:FPGA_Top
 UsbStartStop	MicrorocControl.v	/^  output UsbStartStop,$/;"	p	language:Verilog	module:MicrorocControl
+UsbStartStop_Debug	FPGA_Top.v	/^  (* MARK_DEBUG="true" *)wire UsbStartStop_Debug;$/;"	n	language:Verilog	module:FPGA_Top
 VAL_EVTN	MicrorocCommonControl.v	/^  output VAL_EVTN$/;"	p	language:Verilog	module:MicrorocCommonControl
 VAL_EVTP	MicrorocCommonControl.v	/^  output VAL_EVTP,$/;"	p	language:Verilog	module:MicrorocCommonControl
 WAIT	AutoDaq.v	/^  WAIT = 4'd5,$/;"	c	language:Verilog	module:AutoDaq

@@ -65,14 +65,22 @@ start_step init_design
 set ACTIVE_STEP init_design
 set rc [catch {
   create_msg_db init_design.pb
-  set_param xicom.use_bs_reader 1
-  reset_param project.defaultXPMLibraries 
-  open_checkpoint D:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.runs/impl_1/FPGA_Top.dcp
+  create_project -in_memory -part xc7a100tfgg484-2L
+  set_property design_mode GateLvl [current_fileset]
+  set_param project.singleFileAddWarning.threshold 0
   set_property webtalk.parent_dir D:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.cache/wt [current_project]
   set_property parent.project_path D:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.xpr [current_project]
   set_property ip_output_repo D:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.cache/ip [current_project]
   set_property ip_cache_permissions {read write} [current_project]
   set_property XPM_LIBRARIES {XPM_CDC XPM_MEMORY} [current_project]
+  add_files -quiet D:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.runs/synth_1/FPGA_Top.dcp
+  read_ip -quiet D:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.srcs/sources_1/ip/CommandFifo/CommandFifo.xci
+  read_ip -quiet D:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.srcs/sources_1/ip/ConfigParameterFIFO/ConfigParameterFIFO.xci
+  read_ip -quiet D:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.srcs/sources_1/ip/SCurveDataFifo/SCurveDataFifo.xci
+  read_ip -quiet D:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.srcs/sources_1/ip/MicrorocChainDataFifo/MicrorocChainDataFifo.xci
+  read_ip -quiet D:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.srcs/sources_1/ip/ExternalDataFifo/ExternalDataFifo.xci
+  read_xdc D:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.srcs/constrs_1/new/SDHCAL_DIF_1V0.xdc
+  link_design -top FPGA_Top -part xc7a100tfgg484-2L
   close_msg_db -file init_design.pb
 } RESULT]
 if {$rc} {
@@ -144,25 +152,6 @@ if {$rc} {
   return -code error $RESULT
 } else {
   end_step route_design
-  unset ACTIVE_STEP 
-}
-
-start_step write_bitstream
-set ACTIVE_STEP write_bitstream
-set rc [catch {
-  create_msg_db write_bitstream.pb
-  set_property XPM_LIBRARIES {XPM_CDC XPM_MEMORY} [current_project]
-  catch { write_mem_info -force FPGA_Top.mmi }
-  write_bitstream -force FPGA_Top.bit -raw_bitfile -bin_file -logic_location_file
-  catch {write_debug_probes -quiet -force FPGA_Top}
-  catch {file copy -force FPGA_Top.ltx debug_nets.ltx}
-  close_msg_db -file write_bitstream.pb
-} RESULT]
-if {$rc} {
-  step_failed write_bitstream
-  return -code error $RESULT
-} else {
-  end_step write_bitstream
   unset ACTIVE_STEP 
 }
 
