@@ -4598,24 +4598,6 @@ namespace USB_DAQ
                 {cbxLowGainFeedbackAsic41, cbxLowGainFeedbackAsic42, cbxLowGainFeedbackAsic43, cbxLowGainFeedbackAsic44 }
             };
             #endregion
-            #region RAZ channel
-            ComboBox[,] cbxRazSelectAsic = new ComboBox[4, 4]
-            {
-                {cbxRazSelectAsic11, cbxRazSelectAsic12, cbxRazSelectAsic13, cbxRazSelectAsic14 },
-                {cbxRazSelectAsic21, cbxRazSelectAsic22, cbxRazSelectAsic23, cbxRazSelectAsic24 },
-                {cbxRazSelectAsic31, cbxRazSelectAsic32, cbxRazSelectAsic33, cbxRazSelectAsic34 },
-                {cbxRazSelectAsic41, cbxRazSelectAsic42, cbxRazSelectAsic43, cbxRazSelectAsic44 }
-            };
-            #endregion
-            #region InternalRazTime
-            ComboBox[,] cbxInternalRazTimeAsic = new ComboBox[4, 4]
-            {
-                {cbxInternalRazTimeAsic11, cbxInternalRazTimeAsic12, cbxInternalRazTimeAsic13, cbxInternalRazTimeAsic14 },
-                {cbxInternalRazTimeAsic21, cbxInternalRazTimeAsic22, cbxInternalRazTimeAsic23, cbxInternalRazTimeAsic24 },
-                {cbxInternalRazTimeAsic31, cbxInternalRazTimeAsic32, cbxInternalRazTimeAsic33, cbxInternalRazTimeAsic34 },
-                {cbxInternalRazTimeAsic41, cbxInternalRazTimeAsic42, cbxInternalRazTimeAsic43, cbxInternalRazTimeAsic44 }
-            };
-            #endregion
             #region Mask Select
             ComboBox[,] cbxMaskSelectAsic = new ComboBox[4, 4]
             {
@@ -4659,7 +4641,28 @@ namespace USB_DAQ
                 ShowUsbError("EndReadoutParameter");
             }
             #endregion
-            
+            #region RAZ Channel
+            bResult = SelectRazChannel(cbxRazSelectNewDif.SelectedIndex);
+            if(!bResult)
+            {
+                return;
+            }
+            bResult = SetInternalRazTime(cbxInternalRazTimeNewDif.SelectedIndex);
+            if(!bResult)
+            {
+                return;
+            }
+            bResult = SetExternalRazTime(cbxExternalRazTimeNewDif.SelectedIndex);
+            if(!bResult)
+            {
+                return;
+            }
+            bResult = SetExternalRazDelay("200");
+            if (bResult)
+            {
+                return;
+            }
+            #endregion
             for (int i = 0; i<4; i++)
             {
                 if(ChainEnable[i] == 0)
@@ -4757,18 +4760,6 @@ namespace USB_DAQ
                         #endregion
                         #region SW lg
                         bResult = SetLowGainFeedbackParameter(cbxLowGainShaperFeedbackAsic[i, j].SelectedIndex, MicrorocAsicChain[i], j);
-                        if(!bResult)
-                        {
-                            return;
-                        }
-                        #endregion
-                        #region RAZ Channel
-                        bResult = SelectRazChannel(cbxRazSelectAsic[i, j].SelectedIndex, j, MicrorocAsicChain[i]);
-                        if(!bResult)
-                        {
-                            return;
-                        }
-                        bResult = SetInternalRazTime(cbxInternalRazTimeAsic[i, j].SelectedIndex, j, MicrorocAsicChain[i]);
                         if(!bResult)
                         {
                             return;
@@ -5081,12 +5072,12 @@ namespace USB_DAQ
             return true;
         }
 
-        private bool SelectRazChannel(int RazChannel, int AsicLocation, MicrorocAsic MyMicroroc)
+        private bool SelectRazChannel(int RazChannel)
         {
-            bool bResult = MyMicroroc.ExternalRazOrInternalRazSelect(RazChannel, MyUsbDevice1);
+            bool bResult = MicrorocAsic.ExternalRazOrInternalRazSelect(RazChannel, MyUsbDevice1);
             if(bResult)
             {
-                string report = string.Format("Set ASIC{0}{1} RAZ: {2}\n", MyMicroroc.ChainID + 1, AsicLocation + 1, (RazChannel == 1 ? "External" : "Internal"));
+                string report = string.Format("Set {0} RAZ: {2}\n", (RazChannel == 1 ? "External" : "Internal"));
                 txtReport.AppendText(report);
                 return true;
             }
@@ -5096,7 +5087,7 @@ namespace USB_DAQ
                 return false;
             }
         }
-        private bool SetInternalRazTime(int InternalRazTime, int AsicLocation, MicrorocAsic MyMicroroc)
+        private bool SetInternalRazTime(int InternalRazTime)
         {
             string RazTime;
             switch (InternalRazTime)
@@ -5107,10 +5098,10 @@ namespace USB_DAQ
                 case 3: RazTime = "1000ns"; break;
                 default: RazTime = "1000ns"; break;
             }
-            bool bResult = MyMicroroc.InternalRazSignalLengthSelect(InternalRazTime, MyUsbDevice1);
+            bool bResult = MicrorocAsic.InternalRazSignalLengthSelect(InternalRazTime, MyUsbDevice1);
             if(bResult)
             {
-                string report = string.Format("Set ASIC{0}{1} Internal RAZ Time: {2}\n", MyMicroroc.ChainID + 1, AsicLocation + 1, RazTime);
+                string report = string.Format("Set Internal RAZ Time: {0}\n", RazTime);
                 txtReport.AppendText(report);
                 return true;
             }
@@ -5463,24 +5454,6 @@ namespace USB_DAQ
                 {tbxVth2Asic41, tbxVth2Asic42, tbxVth2Asic43, tbxVth2Asic44 }
             };
             #endregion
-            #region RAZ channel
-            ComboBox[,] cbxRazSelectAsic = new ComboBox[4, 4]
-            {
-                {cbxRazSelectAsic11, cbxRazSelectAsic12, cbxRazSelectAsic13, cbxRazSelectAsic14 },
-                {cbxRazSelectAsic21, cbxRazSelectAsic22, cbxRazSelectAsic23, cbxRazSelectAsic24 },
-                {cbxRazSelectAsic31, cbxRazSelectAsic32, cbxRazSelectAsic33, cbxRazSelectAsic34 },
-                {cbxRazSelectAsic41, cbxRazSelectAsic42, cbxRazSelectAsic43, cbxRazSelectAsic44 }
-            };
-            #endregion
-            #region InternalRazTime
-            ComboBox[,] cbxInternalRazTimeAsic = new ComboBox[4, 4]
-            {
-                {cbxInternalRazTimeAsic11, cbxInternalRazTimeAsic12, cbxInternalRazTimeAsic13, cbxInternalRazTimeAsic14 },
-                {cbxInternalRazTimeAsic21, cbxInternalRazTimeAsic22, cbxInternalRazTimeAsic23, cbxInternalRazTimeAsic24 },
-                {cbxInternalRazTimeAsic31, cbxInternalRazTimeAsic32, cbxInternalRazTimeAsic33, cbxInternalRazTimeAsic34 },
-                {cbxInternalRazTimeAsic41, cbxInternalRazTimeAsic42, cbxInternalRazTimeAsic43, cbxInternalRazTimeAsic44 }
-            };
-            #endregion
             #region EndReadoutParameter
             int EndReadoutParameter = ChainEnable[0] + ChainEnable[1] * 2 + ChainEnable[2] * 4 + ChainEnable[3] * 8;
             bResult = MicrorocAsic.EndReadoutParameterSet(EndReadoutParameter, MyUsbDevice1);
@@ -5510,20 +5483,6 @@ namespace USB_DAQ
                 }
                 for(int j = 3; j >= 0; j--)
                 {
-                    #region Select RAZ Channel
-                    bResult = SelectRazChannel(cbxRazSelectAsic[i, j].SelectedIndex, j, MicrorocAsicChain[i]);
-                    if(!bResult)
-                    {
-                        return;
-                    }
-                    #endregion
-                    #region InternalRAZ Time
-                    bResult = SetInternalRazTime(cbxInternalRazTimeAsic[i, j].SelectedIndex, j, MicrorocAsicChain[i]);
-                    if(!bResult)
-                    {
-                        return;
-                    }
-                    #endregion
                     #region DAC0-2Vth
                     bResult = SetDac0Vth(tbxVth0Asic[i, j].Text, MicrorocAsicChain[i], j);
                     if(!bResult)
@@ -5611,6 +5570,23 @@ namespace USB_DAQ
                 ShowUsbError("EndReadoutParameter");
             }
             #endregion
+            #region SelectExternalRAZ
+            bResult = SelectRazChannel(1);
+            if (!bResult)
+            {
+                return;
+            }
+            bResult = SetExternalRazDelay("200");
+            if (!bResult)
+            {
+                return;
+            }
+            bResult = SetExternalRazTime(cbxExternalRazTimeNewDif.SelectedIndex);
+            if(!bResult)
+            {
+                return;
+            }
+            #endregion
             for (int i = 0; i < 4; i++)
             {
                 if(ChainEnable[i] == 0)
@@ -5636,11 +5612,6 @@ namespace USB_DAQ
                         return;
                     }
                     #endregion
-                    bResult = SelectRazChannel(1, j, MicrorocAsicChain[i]);
-                    if(!bResult)
-                    {
-                        return;
-                    }
                     bResult = ConfigurationParameterLoad(MicrorocAsicChain[j]);
                     if (!bResult)
                     {
@@ -6207,22 +6178,10 @@ namespace USB_DAQ
                 #endregion
                 #region RAZ 
                 #region Select External RAZ
-                for (int i = 0; i < 4; i++)
+                bResult = SelectRazChannel(1);
+                if(!bResult)
                 {
-                    for (int j = 3; j >= 0; j++)
-                    {
-                        bResult = SelectAsicChain(MicrorocAsicChain[i]);
-                        if (!bResult)
-                        {
-                            return;
-                        }
-                        bResult = SelectRazChannel(1, j, MicrorocAsicChain[i]);
-                        if(!bResult)
-                        {
-                            return;
-                        }
-                        bResult = SetAsicNumber(4, MicrorocAsicChain[i]);
-                    }
+                    return;
                 }
                 #endregion
                 #region RAZ delay and time

@@ -107,7 +107,7 @@ namespace USB_DAQ
             return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(EndReadoutChannelValue));
         }
 
-        public bool InternalRazSignalLengthSelect(int InternalRazSignalLength, MyCyUsb usbInterface)
+        public static bool InternalRazSignalLengthSelect(int InternalRazSignalLength, MyCyUsb usbInterface)
         {
             int InternalRazSignalLengthValue = InternalRazSignalLength + HexToInt(DifCommandAddress.InternalRazSignalLengthAddress);
             return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(InternalRazSignalLengthValue));
@@ -119,7 +119,7 @@ namespace USB_DAQ
             return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(CkMuxValue));
         }
 
-        public bool ExternalRazOrInternalRazSelect(int ExternalRazOrInternalRaz, MyCyUsb usbInterface)
+        public static bool ExternalRazOrInternalRazSelect(int ExternalRazOrInternalRaz, MyCyUsb usbInterface)
         {
             int ExternalRazEnableValue = ExternalRazOrInternalRaz + HexToInt(DifCommandAddress.ExternalRazSignalEnableAddress);
             int InternalRazEnableValue = ExternalRazOrInternalRaz + HexToInt(DifCommandAddress.InternalRazSignalEnableAddress) + 1;
