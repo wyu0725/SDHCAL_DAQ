@@ -6462,7 +6462,7 @@ namespace USB_DAQ
             {
                 string report = string.Format("Select ASIC{0}{1}\n", TestRow + 1, TestAsic + 1);
                 txtReport.AppendText(report);
-                return true;
+                return MicrorocAsicChain[TestRow].SelectAsicChain(MyUsbDevice1);
             }
             else
             {
