@@ -4658,7 +4658,7 @@ namespace USB_DAQ
                 return;
             }
             bResult = SetExternalRazDelay("200");
-            if (bResult)
+            if (!bResult)
             {
                 return;
             }
@@ -5077,7 +5077,7 @@ namespace USB_DAQ
             bool bResult = MicrorocAsic.ExternalRazOrInternalRazSelect(RazChannel, MyUsbDevice1);
             if(bResult)
             {
-                string report = string.Format("Set {0} RAZ: {2}\n", (RazChannel == 1 ? "External" : "Internal"));
+                string report = string.Format("Set {0} RAZ\n", (RazChannel == 1 ? "External" : "Internal"));
                 txtReport.AppendText(report);
                 return true;
             }
@@ -6089,13 +6089,14 @@ namespace USB_DAQ
 
         private async void btnSCurveTestStartNewDif_Click(object sender, RoutedEventArgs e)
         {
-            if (!CheckFileSaved())
-            {
-                return;
-            }
+            
             bool bResult;
-            if (StateIndicator.SlowAcqStart)
+            if (!StateIndicator.SlowAcqStart)
             {
+                if (!CheckFileSaved())
+                {
+                    return;
+                }
                 #region Select Single or Auto
                 bResult = SelectSCurveTestSingleChannelOrAuto(cbxSingleOrAutoNewDif.SelectedIndex);
                 if (!bResult)
@@ -6152,7 +6153,7 @@ namespace USB_DAQ
                 int AdcInterval = int.Parse(tbcDacStepNewDif.Text);
                 #endregion
                 #region Data number
-                if (cbxSingleOrAutoNewDif.SelectedIndex == 0)
+                if (cbxSingleOrAutoNewDif.SelectedIndex == 1)
                 {
                     //*** Set Package Number
                     StateIndicator.SlowDataRatePackageNumber = HeaderLength + ChannelLength + ((EndDac - StartDac) / AdcInterval + 1) * OneDacDataLength + TailLength;
