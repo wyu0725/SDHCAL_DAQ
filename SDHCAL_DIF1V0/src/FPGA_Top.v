@@ -1216,4 +1216,25 @@ module FPGA_Top(
   assign TP[1] = StartReadout1_A;
   assign TP[2] = EndReadout1_A;
   assign TP[3] = MicrorocConfigurationParameterLoadStartChain[0];
+
+  (* MARK_DEBUG="true" *)wire [15:0] UsbData_debug;
+  (* MARK_DEBUG="true" *)wire UsbDataEnable_debug;
+  (* MARK_DEBUG="true" *)wire [15:0] Chain1Data_debug;
+  (* MARK_DEBUG="true" *)wire Chain1DataEnable_debug;
+  (* MARK_DEBUG="true" *)wire [15:0] Chain2Data_debug;
+  (* MARK_DEBUG="true" *)wire Chain2DataEnable_debug;
+  (* MARK_DEBUG="true" *)wire [15:0] Chain3Data_debug;
+  (* MARK_DEBUG="true" *)wire Chain3DataEnable_debug;
+  (* MARK_DEBUG="true" *)wire [15:0] Chain4Data_debug;
+  (* MARK_DEBUG="true" *)wire Chain4DataEnable_debug;
+  assign UsbData_debug = ExternalFifoData;
+  assign UsbDataEnable_debug = ExternalFifoDataReadEnable;
+  assign Chain1Data_debug = MicrorocChain1Data;
+  assign Chain1DataEnable_debug = MicrorocChain1DataEnable;
+  assign Chain2Data_debug = MicrorocChain2Data;
+  assign Chain2DataEnable_debug = MicrorocChain2DataEnable;
+  assign Chain3Data_debug = MicrorocChain3Data;
+  assign Chain3DataEnable_debug = MicrorocChain3DataEnable;
+  assign Chain4Data_debug = MicrorocChain4Data;
+  assign Chain4DataEnable_debug = MicrorocChain4DataEnable;
 endmodule
