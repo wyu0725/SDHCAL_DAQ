@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7a100tfgg484-2L" LaunchTime="1533636637">
+<GenRun Id="synth_1" LaunchPart="xc7a100tfgg484-2L" LaunchTime="1533645588">
   <File Type="PA-TCL" Name="FPGA_Top.tcl"/>
+  <File Type="RDS-PROPCONSTRS" Name="FPGA_Top_drc_synth.rpt"/>
   <File Type="REPORTS-TCL" Name="FPGA_Top_reports.tcl"/>
   <File Type="RDS-RDS" Name="FPGA_Top.vds"/>
   <File Type="RDS-UTIL" Name="FPGA_Top_utilization_synth.rpt"/>
   <File Type="RDS-UTIL-PB" Name="FPGA_Top_utilization_synth.pb"/>
   <File Type="RDS-DCP" Name="FPGA_Top.dcp"/>
+  <File Type="VDS-TIMINGSUMMARY" Name="FPGA_Top_timing_summary_synth.rpt"/>
+  <File Type="VDS-TIMING-PB" Name="FPGA_Top_timing_summary_synth.pb"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">
     <Filter Type="Srcs"/>
     <File Path="$PSRCDIR/sources_1/ip/CommandFifo.xcix">

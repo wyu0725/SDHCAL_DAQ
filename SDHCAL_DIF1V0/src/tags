@@ -311,7 +311,9 @@ CommandMicrorocDac4bitPPEnable	FPGA_Top.v	/^  wire CommandMicrorocDac4bitPPEnabl
 CommandMicrorocDacEnable	FPGA_Top.v	/^  wire CommandMicrorocDacEnable;$/;"	n	language:Verilog	module:FPGA_Top
 CommandMicrorocDacPPEnable	FPGA_Top.v	/^  wire CommandMicrorocDacPPEnable;$/;"	n	language:Verilog	module:FPGA_Top
 CommandMicrorocDataoutChannelSelect	FPGA_Top.v	/^  wire [1:0] CommandMicrorocDataoutChannelSelect;$/;"	n	language:Verilog	module:FPGA_Top
-CommandMicrorocDiscriminatorPPEnable	FPGA_Top.v	/^  wire CommandMicrorocDiscriminatorPPEnable;$/;"	n	language:Verilog	module:FPGA_Top
+CommandMicrorocDiscriminator0PPEnable	FPGA_Top.v	/^  wire CommandMicrorocDiscriminator0PPEnable;$/;"	n	language:Verilog	module:FPGA_Top
+CommandMicrorocDiscriminator1PPEnable	FPGA_Top.v	/^  wire CommandMicrorocDiscriminator1PPEnable;$/;"	n	language:Verilog	module:FPGA_Top
+CommandMicrorocDiscriminator2PPEnable	FPGA_Top.v	/^  wire CommandMicrorocDiscriminator2PPEnable;$/;"	n	language:Verilog	module:FPGA_Top
 CommandMicrorocEndReadoutChannelSelect	FPGA_Top.v	/^  wire CommandMicrorocEndReadoutChannelSelect;$/;"	n	language:Verilog	module:FPGA_Top
 CommandMicrorocEndReadoutParameter	FPGA_Top.v	/^  wire [3:0] CommandMicrorocEndReadoutParameter;$/;"	n	language:Verilog	module:FPGA_Top
 CommandMicrorocExternalRazDelayTime	FPGA_Top.v	/^  wire [3:0] CommandMicrorocExternalRazDelayTime;$/;"	n	language:Verilog	module:FPGA_Top
@@ -889,16 +891,18 @@ MicrorocDataoutChannelSelectChain	FPGA_Top.v	/^  wire [2*ASIC_CHAIN_NUMBER - 1:0
 MicrorocDataoutChannelSelect_Input	ConfigurationParameterDistribution.v	/^    input [1:0] MicrorocDataoutChannelSelect_Input,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
 MicrorocDataoutChannelSelect_Output	ConfigurationParameterDistribution.v	/^    output reg [2*ASIC_CHAIN_NUMBER - 1:0] MicrorocDataoutChannelSelect_Output,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
 MicrorocDiscriminator0PPEnable	CommandInterpreter.v	/^  output MicrorocDiscriminator0PPEnable,$/;"	p	language:Verilog	module:CommandInterpreter
+MicrorocDiscriminator0PPEnableChain	FPGA_Top.v	/^  wire [ASIC_CHAIN_NUMBER - 1:0] MicrorocDiscriminator0PPEnableChain; $/;"	n	language:Verilog	module:FPGA_Top
 MicrorocDiscriminator0PPEnable_Input	ConfigurationParameterDistribution.v	/^    input MicrorocDiscriminator0PPEnable_Input,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
 MicrorocDiscriminator0PPEnable_Output	ConfigurationParameterDistribution.v	/^    output reg [ASIC_CHAIN_NUMBER - 1:0] MicrorocDiscriminator0PPEnable_Output,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
 MicrorocDiscriminator1PPEnable	CommandInterpreter.v	/^  output MicrorocDiscriminator1PPEnable,$/;"	p	language:Verilog	module:CommandInterpreter
+MicrorocDiscriminator1PPEnableChain	FPGA_Top.v	/^  wire [ASIC_CHAIN_NUMBER - 1:0] MicrorocDiscriminator1PPEnableChain;$/;"	n	language:Verilog	module:FPGA_Top
 MicrorocDiscriminator1PPEnable_Input	ConfigurationParameterDistribution.v	/^    input MicrorocDiscriminator1PPEnable_Input,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
 MicrorocDiscriminator1PPEnable_Output	ConfigurationParameterDistribution.v	/^    output reg [ASIC_CHAIN_NUMBER - 1:0] MicrorocDiscriminator1PPEnable_Output,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
 MicrorocDiscriminator2PPEnable	CommandInterpreter.v	/^  output MicrorocDiscriminator2PPEnable,$/;"	p	language:Verilog	module:CommandInterpreter
+MicrorocDiscriminator2PPEnableChain	FPGA_Top.v	/^  wire [ASIC_CHAIN_NUMBER - 1:0] MicrorocDiscriminator2PPEnableChain;$/;"	n	language:Verilog	module:FPGA_Top
 MicrorocDiscriminator2PPEnable_Input	ConfigurationParameterDistribution.v	/^    input MicrorocDiscriminator2PPEnable_Input,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
 MicrorocDiscriminator2PPEnable_Output	ConfigurationParameterDistribution.v	/^    output reg [ASIC_CHAIN_NUMBER - 1:0] MicrorocDiscriminator2PPEnable_Output,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
 MicrorocDiscriminatorMaskInternal	SCurve_Test_Control.v	/^  reg [191:0] MicrorocDiscriminatorMaskInternal;$/;"	r	language:Verilog	module:SCurve_Test_Control
-MicrorocDiscriminatorPPEnableChain	FPGA_Top.v	/^  wire [ASIC_CHAIN_NUMBER - 1:0] MicrorocDiscriminatorPPEnableChain;$/;"	n	language:Verilog	module:FPGA_Top
 MicrorocEndReadoutChannelSelect	CommandInterpreter.v	/^  output MicrorocEndReadoutChannelSelect,$/;"	p	language:Verilog	module:CommandInterpreter
 MicrorocEndReadoutChannelSelectChain	FPGA_Top.v	/^  wire [ASIC_CHAIN_NUMBER - 1:0] MicrorocEndReadoutChannelSelectChain;$/;"	n	language:Verilog	module:FPGA_Top
 MicrorocEndReadoutChannelSelect_Input	ConfigurationParameterDistribution.v	/^    input MicrorocEndReadoutChannelSelect_Input,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
@@ -1085,6 +1089,8 @@ OutTestData	FPGA_Top.v	/^  wire [15:0] OutTestData;$/;"	n	language:Verilog	modul
 OutTestDataEnable	AcquisitionControl.v	/^  output OutTestDataEnable,$/;"	p	language:Verilog	module:AcquisitionControl
 OutTestDataEnable	AcquisitionSwitcher.v	/^  output reg OutTestDataEnable,$/;"	p	language:Verilog	module:AcquisitionSwitcher
 OutTestDataEnable	FPGA_Top.v	/^  wire OutTestDataEnable;$/;"	n	language:Verilog	module:FPGA_Top
+OutTestDataEnable_Debug	FPGA_Top.v	/^  (* MARK_DEBUG="true" *)wire OutTestDataEnable_Debug;$/;"	n	language:Verilog	module:FPGA_Top
+OutTestData_Debug	FPGA_Top.v	/^  (* MARK_DEBUG="true" *)wire [15:0] OutTestData_Debug;$/;"	n	language:Verilog	module:FPGA_Top
 OutTrigger0b	AcquisitionControl.v	/^  input OutTrigger0b,$/;"	p	language:Verilog	module:AcquisitionControl
 OutTrigger0b	TriggerSwitcher.v	/^  input OutTrigger0b,$/;"	p	language:Verilog	module:TriggerSwitcher
 OutTrigger1b	AcquisitionControl.v	/^  input OutTrigger1b,$/;"	p	language:Verilog	module:AcquisitionControl
