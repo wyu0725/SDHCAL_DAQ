@@ -3,125 +3,117 @@
    <wave_state>
    </wave_state>
    <db_ref_list>
-      <db_ref path="AutoDaq_tb_behav.wdb" id="1">
+      <db_ref path="AsicRamReadout_tb_behav.wdb" id="1">
          <top_modules>
-            <top_module name="AutoDaq_tb" />
+            <top_module name="AsicRamReadout_tb" />
             <top_module name="glbl" />
          </top_modules>
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="0fs"></ZoomStartTime>
-      <ZoomEndTime time="13400000001fs"></ZoomEndTime>
-      <Cursor1Time time="300000000fs"></Cursor1Time>
+      <ZoomStartTime time="8825000000fs"></ZoomStartTime>
+      <ZoomEndTime time="10730000001fs"></ZoomEndTime>
+      <Cursor1Time time="11100000000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="243"></NameColumnWidth>
-      <ValueColumnWidth column_width="62"></ValueColumnWidth>
+      <NameColumnWidth column_width="239"></NameColumnWidth>
+      <ValueColumnWidth column_width="58"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="26" />
-   <wvobject fp_name="/AutoDaq_tb/uut/Clk" type="logic">
-      <obj_property name="ElementShortName">Clk</obj_property>
-      <obj_property name="ObjectShortName">Clk</obj_property>
+   <WVObjectSize size="24" />
+   <wvobject fp_name="/AsicRamReadout_tb/ReadClk" type="logic">
+      <obj_property name="ElementShortName">ReadClk</obj_property>
+      <obj_property name="ObjectShortName">ReadClk</obj_property>
    </wvobject>
-   <wvobject fp_name="/AutoDaq_tb/uut/reset_n" type="logic">
+   <wvobject fp_name="/AsicRamReadout_tb/reset_n" type="logic">
       <obj_property name="ElementShortName">reset_n</obj_property>
       <obj_property name="ObjectShortName">reset_n</obj_property>
    </wvobject>
-   <wvobject fp_name="/AutoDaq_tb/uut/start" type="logic">
-      <obj_property name="ElementShortName">start</obj_property>
-      <obj_property name="ObjectShortName">start</obj_property>
+   <wvobject fp_name="/AsicRamReadout_tb/AsicDin" type="logic">
+      <obj_property name="ElementShortName">AsicDin</obj_property>
+      <obj_property name="ObjectShortName">AsicDin</obj_property>
    </wvobject>
-   <wvobject fp_name="/AutoDaq_tb/uut/StartEnable" type="logic">
-      <obj_property name="ElementShortName">StartEnable</obj_property>
-      <obj_property name="ObjectShortName">StartEnable</obj_property>
+   <wvobject fp_name="/AsicRamReadout_tb/TransmitOn" type="logic">
+      <obj_property name="ElementShortName">TransmitOn</obj_property>
+      <obj_property name="ObjectShortName">TransmitOn</obj_property>
    </wvobject>
-   <wvobject fp_name="/AutoDaq_tb/uut/End_Readout" type="logic">
-      <obj_property name="ElementShortName">End_Readout</obj_property>
-      <obj_property name="ObjectShortName">End_Readout</obj_property>
+   <wvobject fp_name="/AsicRamReadout_tb/ExternalFifoData" type="array">
+      <obj_property name="ElementShortName">ExternalFifoData[15:0]</obj_property>
+      <obj_property name="ObjectShortName">ExternalFifoData[15:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/AutoDaq_tb/uut/Chipsatb" type="logic">
-      <obj_property name="ElementShortName">Chipsatb</obj_property>
-      <obj_property name="ObjectShortName">Chipsatb</obj_property>
+   <wvobject fp_name="/AsicRamReadout_tb/ExternalFifoWriteEn" type="logic">
+      <obj_property name="ElementShortName">ExternalFifoWriteEn</obj_property>
+      <obj_property name="ObjectShortName">ExternalFifoWriteEn</obj_property>
    </wvobject>
-   <wvobject fp_name="/AutoDaq_tb/uut/T_acquisition" type="array">
-      <obj_property name="ElementShortName">T_acquisition[15:0]</obj_property>
-      <obj_property name="ObjectShortName">T_acquisition[15:0]</obj_property>
+   <wvobject fp_name="/AsicRamReadout_tb/ReadDone" type="logic">
+      <obj_property name="ElementShortName">ReadDone</obj_property>
+      <obj_property name="ObjectShortName">ReadDone</obj_property>
    </wvobject>
-   <wvobject fp_name="/AutoDaq_tb/uut/Reset_b" type="logic">
-      <obj_property name="ElementShortName">Reset_b</obj_property>
-      <obj_property name="ObjectShortName">Reset_b</obj_property>
+   <wvobject fp_name="/AsicRamReadout_tb/uut/ReadClk" type="logic">
+      <obj_property name="ElementShortName">ReadClk</obj_property>
+      <obj_property name="ObjectShortName">ReadClk</obj_property>
    </wvobject>
-   <wvobject fp_name="/AutoDaq_tb/uut/Start_Acq" type="logic">
-      <obj_property name="ElementShortName">Start_Acq</obj_property>
-      <obj_property name="ObjectShortName">Start_Acq</obj_property>
+   <wvobject fp_name="/AsicRamReadout_tb/uut/reset_n" type="logic">
+      <obj_property name="ElementShortName">reset_n</obj_property>
+      <obj_property name="ObjectShortName">reset_n</obj_property>
    </wvobject>
-   <wvobject fp_name="/AutoDaq_tb/uut/Start_Readout" type="logic">
-      <obj_property name="ElementShortName">Start_Readout</obj_property>
-      <obj_property name="ObjectShortName">Start_Readout</obj_property>
+   <wvobject fp_name="/AsicRamReadout_tb/uut/AsicDin" type="logic">
+      <obj_property name="ElementShortName">AsicDin</obj_property>
+      <obj_property name="ObjectShortName">AsicDin</obj_property>
    </wvobject>
-   <wvobject fp_name="/AutoDaq_tb/uut/Pwr_on_a" type="logic">
-      <obj_property name="ElementShortName">Pwr_on_a</obj_property>
-      <obj_property name="ObjectShortName">Pwr_on_a</obj_property>
+   <wvobject fp_name="/AsicRamReadout_tb/uut/TransmitOn" type="logic">
+      <obj_property name="ElementShortName">TransmitOn</obj_property>
+      <obj_property name="ObjectShortName">TransmitOn</obj_property>
    </wvobject>
-   <wvobject fp_name="/AutoDaq_tb/uut/Pwr_on_d" type="logic">
-      <obj_property name="ElementShortName">Pwr_on_d</obj_property>
-      <obj_property name="ObjectShortName">Pwr_on_d</obj_property>
+   <wvobject fp_name="/AsicRamReadout_tb/uut/ReadDone" type="logic">
+      <obj_property name="ElementShortName">ReadDone</obj_property>
+      <obj_property name="ObjectShortName">ReadDone</obj_property>
    </wvobject>
-   <wvobject fp_name="/AutoDaq_tb/uut/Pwr_on_adc" type="logic">
-      <obj_property name="ElementShortName">Pwr_on_adc</obj_property>
-      <obj_property name="ObjectShortName">Pwr_on_adc</obj_property>
+   <wvobject fp_name="/AsicRamReadout_tb/uut/AsicDatain_r1" type="logic">
+      <obj_property name="ElementShortName">AsicDatain_r1</obj_property>
+      <obj_property name="ObjectShortName">AsicDatain_r1</obj_property>
    </wvobject>
-   <wvobject fp_name="/AutoDaq_tb/uut/Pwr_on_dac" type="logic">
-      <obj_property name="ElementShortName">Pwr_on_dac</obj_property>
-      <obj_property name="ObjectShortName">Pwr_on_dac</obj_property>
+   <wvobject fp_name="/AsicRamReadout_tb/uut/TransmitOn_r1" type="logic">
+      <obj_property name="ElementShortName">TransmitOn_r1</obj_property>
+      <obj_property name="ObjectShortName">TransmitOn_r1</obj_property>
    </wvobject>
-   <wvobject fp_name="/AutoDaq_tb/uut/Once_end" type="logic">
-      <obj_property name="ElementShortName">Once_end</obj_property>
-      <obj_property name="ObjectShortName">Once_end</obj_property>
+   <wvobject fp_name="/AsicRamReadout_tb/uut/AsicDatain_r2" type="logic">
+      <obj_property name="ElementShortName">AsicDatain_r2</obj_property>
+      <obj_property name="ObjectShortName">AsicDatain_r2</obj_property>
    </wvobject>
-   <wvobject fp_name="/AutoDaq_tb/uut/Chipsatb_sync1" type="logic">
-      <obj_property name="ElementShortName">Chipsatb_sync1</obj_property>
-      <obj_property name="ObjectShortName">Chipsatb_sync1</obj_property>
+   <wvobject fp_name="/AsicRamReadout_tb/uut/TransmitOn_r" type="logic">
+      <obj_property name="ElementShortName">TransmitOn_r</obj_property>
+      <obj_property name="ObjectShortName">TransmitOn_r</obj_property>
    </wvobject>
-   <wvobject fp_name="/AutoDaq_tb/uut/Chipsatb_sync2" type="logic">
-      <obj_property name="ElementShortName">Chipsatb_sync2</obj_property>
-      <obj_property name="ObjectShortName">Chipsatb_sync2</obj_property>
+   <wvobject fp_name="/AsicRamReadout_tb/uut/AsicDatain_r" type="logic">
+      <obj_property name="ElementShortName">AsicDatain_r</obj_property>
+      <obj_property name="ObjectShortName">AsicDatain_r</obj_property>
    </wvobject>
-   <wvobject fp_name="/AutoDaq_tb/uut/Chip_full" type="logic">
-      <obj_property name="ElementShortName">Chip_full</obj_property>
-      <obj_property name="ObjectShortName">Chip_full</obj_property>
+   <wvobject fp_name="/AsicRamReadout_tb/uut/TransmitOn_rd" type="logic">
+      <obj_property name="ElementShortName">TransmitOn_rd</obj_property>
+      <obj_property name="ObjectShortName">TransmitOn_rd</obj_property>
    </wvobject>
-   <wvobject fp_name="/AutoDaq_tb/uut/Read_start" type="logic">
-      <obj_property name="ElementShortName">Read_start</obj_property>
-      <obj_property name="ObjectShortName">Read_start</obj_property>
+   <wvobject fp_name="/AsicRamReadout_tb/uut/ExternalFifoData" type="array">
+      <obj_property name="ElementShortName">ExternalFifoData[15:0]</obj_property>
+      <obj_property name="ObjectShortName">ExternalFifoData[15:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/AutoDaq_tb/uut/End_Readout_sync1" type="logic">
-      <obj_property name="ElementShortName">End_Readout_sync1</obj_property>
-      <obj_property name="ObjectShortName">End_Readout_sync1</obj_property>
+   <wvobject fp_name="/AsicRamReadout_tb/uut/ExternalFifoWriteEn" type="logic">
+      <obj_property name="ElementShortName">ExternalFifoWriteEn</obj_property>
+      <obj_property name="ObjectShortName">ExternalFifoWriteEn</obj_property>
    </wvobject>
-   <wvobject fp_name="/AutoDaq_tb/uut/End_Readout_sync2" type="logic">
-      <obj_property name="ElementShortName">End_Readout_sync2</obj_property>
-      <obj_property name="ObjectShortName">End_Readout_sync2</obj_property>
+   <wvobject fp_name="/AsicRamReadout_tb/uut/CurrentState" type="array">
+      <obj_property name="ElementShortName">CurrentState[1:0]</obj_property>
+      <obj_property name="ObjectShortName">CurrentState[1:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/AutoDaq_tb/uut/Read_End" type="logic">
-      <obj_property name="ElementShortName">Read_End</obj_property>
-      <obj_property name="ObjectShortName">Read_End</obj_property>
+   <wvobject fp_name="/AsicRamReadout_tb/uut/NextState" type="array">
+      <obj_property name="ElementShortName">NextState[1:0]</obj_property>
+      <obj_property name="ObjectShortName">NextState[1:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/AutoDaq_tb/uut/StartRising" type="logic">
-      <obj_property name="ElementShortName">StartRising</obj_property>
-      <obj_property name="ObjectShortName">StartRising</obj_property>
+   <wvobject fp_name="/AsicRamReadout_tb/uut/DataCount" type="array">
+      <obj_property name="ElementShortName">DataCount[3:0]</obj_property>
+      <obj_property name="ObjectShortName">DataCount[3:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/AutoDaq_tb/uut/ResetStartRising_n" type="logic">
-      <obj_property name="ElementShortName">ResetStartRising_n</obj_property>
-      <obj_property name="ObjectShortName">ResetStartRising_n</obj_property>
-   </wvobject>
-   <wvobject fp_name="/AutoDaq_tb/uut/delay_cnt" type="array">
-      <obj_property name="ElementShortName">delay_cnt[15:0]</obj_property>
-      <obj_property name="ObjectShortName">delay_cnt[15:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/AutoDaq_tb/uut/State" type="array">
-      <obj_property name="ElementShortName">State[3:0]</obj_property>
-      <obj_property name="ObjectShortName">State[3:0]</obj_property>
+   <wvobject fp_name="/AsicRamReadout_tb/uut/DataFull" type="logic">
+      <obj_property name="ElementShortName">DataFull</obj_property>
+      <obj_property name="ObjectShortName">DataFull</obj_property>
    </wvobject>
 </wave_config>

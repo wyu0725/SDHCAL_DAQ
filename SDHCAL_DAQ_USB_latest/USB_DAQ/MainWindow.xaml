@@ -1927,7 +1927,11 @@
                                 <RadioButton Name="rdbSlowControlSet" Content="SC" Checked="rdbSlowControlSet_Checked"/>
                                 <RadioButton Name="rdbReadScopeSet" Content="ReadScope" Checked="rdbReadScopeSet_Checked"/>
                             </StackPanel>
-                            <Button x:Name="btnConfigurationParameterLoad" Content="Configuration Parameter Load" Height="24" Width="200" Margin="500,60,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Center" Click="btnConfigurationParameterLoad_Click"/>
+                            <Button x:Name="btnConfigurationParameterLoad" Content="Configuration Parameter Load" Height="24" Width="200" Margin="500,60,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Center" Click="btnConfigurationParameterLoad_Click">
+                                <Button.ToolTip>
+                                    <TextBlock>Slow Control</TextBlock>
+                                </Button.ToolTip>
+                            </Button>
                             <StackPanel Name="stpAcquisitionModeSelectNewDif" HorizontalAlignment="Left" Height="31" Margin="500,90,0,0" VerticalAlignment="Top" Width="150">
                                 <RadioButton Name="rdbAcquisitionNewDif" Content="Acquisition" Checked="rdbAcquisitionNewDif_Checked"/>
                                 <RadioButton Name="rdbAD9220NewDif" Content="AD9220" Checked="rdbAD9220NewDif_Checked"/>

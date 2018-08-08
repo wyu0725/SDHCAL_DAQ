@@ -2,8 +2,8 @@
 # Vivado v2018.1 (64-bit)
 # SW Build 2188600 on Wed Apr  4 18:40:38 MDT 2018
 # IP Build 2185939 on Wed Apr  4 20:55:05 MDT 2018
-# Start of session at: Wed Aug  8 09:34:19 2018
-# Process ID: 1468
+# Start of session at: Wed Aug  8 13:07:37 2018
+# Process ID: 17068
 # Current directory: D:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.runs/synth_1
 # Command line: vivado.exe -log FPGA_Top.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source FPGA_Top.tcl
 # Log file: D:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.runs/synth_1/FPGA_Top.vds
@@ -15,9 +15,9 @@ Starting synth_design
 Attempting to get a license for feature 'Synthesis' and/or device 'xc7a100t'
 INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a100t'
 INFO: Launching helper process for spawning children vivado processes
-INFO: Helper process launched with PID 22020 
+INFO: Helper process launched with PID 14720 
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:12 ; elapsed = 00:00:14 . Memory (MB): peak = 454.809 ; gain = 106.703
+Starting RTL Elaboration : Time (s): cpu = 00:00:12 ; elapsed = 00:00:14 . Memory (MB): peak = 454.508 ; gain = 106.422
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-6157] synthesizing module 'FPGA_Top' [D:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/src/FPGA_Top.v:37]
 	Parameter ASIC_CHAIN_NUMBER bound to: 4 - type: integer 
@@ -1751,6 +1751,9 @@ WARNING: [Synth 8-6014] Unused sequential element SerialReset_r_reg was removed.
 	Parameter READ bound to: 2'b01 
 	Parameter DONE bound to: 2'b10 
 	Parameter DATA_WIDTH bound to: 4'b1111 
+INFO: [Synth 8-5534] Detected attribute (* MARK_DEBUG = "true" *) [D:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/src/AsicRamReadout.v:110]
+INFO: [Synth 8-5534] Detected attribute (* MARK_DEBUG = "true" *) [D:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/src/AsicRamReadout.v:111]
+INFO: [Synth 8-5534] Detected attribute (* MARK_DEBUG = "true" *) [D:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/src/AsicRamReadout.v:114]
 INFO: [Synth 8-155] case statement is not full and has no default [D:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/src/AsicRamReadout.v:69]
 INFO: [Synth 8-155] case statement is not full and has no default [D:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/src/AsicRamReadout.v:85]
 	Parameter Idle bound to: 4'b0000 
@@ -1899,7 +1902,7 @@ WARNING: [Synth 8-3331] design blk_mem_gen_prim_wrapper__parameterized6 has unco
 WARNING: [Synth 8-3331] design blk_mem_gen_prim_wrapper__parameterized6 has unconnected port DINB[19]
 INFO: [Common 17-14] Message 'Synth 8-3331' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:07:31 ; elapsed = 00:08:00 . Memory (MB): peak = 1048.004 ; gain = 699.898
+Finished RTL Elaboration : Time (s): cpu = 00:07:32 ; elapsed = 00:07:44 . Memory (MB): peak = 1050.090 ; gain = 702.004
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -1913,10 +1916,10 @@ WARNING: [Synth 8-3295] tying undriven pin CommonControlSignalGenerator:DataTrig
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:07:32 ; elapsed = 00:08:01 . Memory (MB): peak = 1048.004 ; gain = 699.898
+Finished Handling Custom Attributes : Time (s): cpu = 00:07:33 ; elapsed = 00:07:45 . Memory (MB): peak = 1050.090 ; gain = 702.004
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:07:32 ; elapsed = 00:08:01 . Memory (MB): peak = 1048.004 ; gain = 699.898
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:07:33 ; elapsed = 00:07:45 . Memory (MB): peak = 1050.090 ; gain = 702.004
 ---------------------------------------------------------------------------------
 INFO: [Netlist 29-17] Analyzing 127 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
@@ -2064,16 +2067,16 @@ INFO: [Project 1-111] Unisim Transformation Summary:
   MMCME2_BASE => MMCME2_ADV: 1 instances
   OBUFDS => OBUFDS: 4 instances
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.049 . Memory (MB): peak = 1048.004 ; gain = 0.000
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.042 . Memory (MB): peak = 1050.090 ; gain = 0.000
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:08:03 ; elapsed = 00:08:36 . Memory (MB): peak = 1048.004 ; gain = 699.898
+Finished Constraint Validation : Time (s): cpu = 00:08:04 ; elapsed = 00:08:19 . Memory (MB): peak = 1050.090 ; gain = 702.004
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7a100tfgg484-2L
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:08:03 ; elapsed = 00:08:36 . Memory (MB): peak = 1048.004 ; gain = 699.898
+Finished Loading Part and Timing Information : Time (s): cpu = 00:08:04 ; elapsed = 00:08:19 . Memory (MB): peak = 1050.090 ; gain = 702.004
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
@@ -2142,7 +2145,7 @@ Applied set_property DONT_TOUCH = true for MicrorocChain2/SlowControlAndReadScop
 Applied set_property DONT_TOUCH = true for MicrorocChain3/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/\gconvfifo.rf /\grf.rf /rstblk/\ngwrdrst.grst.g7serrst.gsckt_wrst.xpm_cdc_sync_rst_inst_wrst . (constraint file  auto generated constraint, line ).
 Applied set_property DONT_TOUCH = true for MicrorocChain4/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/\gconvfifo.rf /\grf.rf /rstblk/\ngwrdrst.grst.g7serrst.gsckt_wrst.xpm_cdc_sync_rst_inst_wrst . (constraint file  auto generated constraint, line ).
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:08:04 ; elapsed = 00:08:37 . Memory (MB): peak = 1048.004 ; gain = 699.898
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:08:04 ; elapsed = 00:08:20 . Memory (MB): peak = 1050.090 ; gain = 702.004
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-802] inferred FSM for state register 'State_reg' in module 'usb_synchronous_slavefifo'
 INFO: [Synth 8-5544] ROM "nSLOE" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
@@ -2438,7 +2441,7 @@ INFO: [Synth 8-3354] encoded FSM with state register 'State_reg' using encoding 
 ---------------------------------------------------------------------------------------------------
 INFO: [Synth 8-3354] encoded FSM with state register 'State_reg' using encoding 'sequential' in module 'SlaveDaq'
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:08:16 ; elapsed = 00:08:52 . Memory (MB): peak = 1048.004 ; gain = 699.898
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:08:16 ; elapsed = 00:08:33 . Memory (MB): peak = 1050.090 ; gain = 702.004
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-223] decloning instance 'Command/TestSignalColumnSelect' (CommandDecoder__parameterized114) to 'Command/TestSignalRowSelect'
 
@@ -2448,8 +2451,8 @@ Report RTL Partitions:
 +------+-----------------------------------+------------+----------+
 |1     |MicrorocCommonControl__GC0         |           1|      1297|
 |2     |ConfigurationParameterDistribution |           1|     33343|
-|3     |FPGA_Top__GCB1                     |           1|     11300|
-|4     |FPGA_Top__GCB2                     |           1|     11303|
+|3     |FPGA_Top__GCB1                     |           1|     11316|
+|4     |FPGA_Top__GCB2                     |           1|     11319|
 |5     |FPGA_Top__GCB3                     |           1|     25024|
 +------+-----------------------------------+------------+----------+
 ---------------------------------------------------------------------------------
@@ -2474,7 +2477,7 @@ Detailed RTL Component Info :
 	   2 Input     13 Bit         XORs := 2     
 	   2 Input      6 Bit         XORs := 8     
 	   2 Input      5 Bit         XORs := 2     
-	   2 Input      1 Bit         XORs := 448   
+	   2 Input      1 Bit         XORs := 452   
 +---Registers : 
 	             1024 Bit    Registers := 1     
 	              768 Bit    Registers := 1     
@@ -2494,9 +2497,9 @@ Detailed RTL Component Info :
 	                6 Bit    Registers := 59    
 	                5 Bit    Registers := 75    
 	                4 Bit    Registers := 176   
-	                3 Bit    Registers := 14    
+	                3 Bit    Registers := 18    
 	                2 Bit    Registers := 26    
-	                1 Bit    Registers := 511   
+	                1 Bit    Registers := 515   
 +---Muxes : 
 	   6 Input    592 Bit        Muxes := 4     
 	   2 Input    192 Bit        Muxes := 7     
@@ -2728,7 +2731,7 @@ Detailed RTL Component Info :
 	   6 Input      3 Bit        Muxes := 1     
 	   2 Input      3 Bit        Muxes := 4     
 	   6 Input      1 Bit        Muxes := 8     
-Module PulseSynchronous__5 
+Module PulseSynchronous__6 
 Detailed RTL Component Info : 
 +---XORs : 
 	   2 Input      1 Bit         XORs := 1     
@@ -2773,6 +2776,13 @@ Detailed RTL Component Info :
 	   3 Input      2 Bit        Muxes := 1     
 	   2 Input      2 Bit        Muxes := 2     
 	   3 Input      1 Bit        Muxes := 3     
+Module PulseSynchronous__7 
+Detailed RTL Component Info : 
++---XORs : 
+	   2 Input      1 Bit         XORs := 1     
++---Registers : 
+	                3 Bit    Registers := 1     
+	                1 Bit    Registers := 1     
 Module DaqSwitcher__5 
 Detailed RTL Component Info : 
 +---Muxes : 
@@ -2969,6 +2979,13 @@ Detailed RTL Component Info :
 	   3 Input      2 Bit        Muxes := 1     
 	   2 Input      2 Bit        Muxes := 2     
 	   3 Input      1 Bit        Muxes := 3     
+Module PulseSynchronous__5 
+Detailed RTL Component Info : 
++---XORs : 
+	   2 Input      1 Bit         XORs := 1     
++---Registers : 
+	                3 Bit    Registers := 1     
+	                1 Bit    Registers := 1     
 Module DaqSwitcher__4 
 Detailed RTL Component Info : 
 +---Muxes : 
@@ -3120,7 +3137,7 @@ Detailed RTL Component Info :
 	   6 Input      3 Bit        Muxes := 1     
 	   2 Input      3 Bit        Muxes := 4     
 	   6 Input      1 Bit        Muxes := 8     
-Module PulseSynchronous 
+Module PulseSynchronous__10 
 Detailed RTL Component Info : 
 +---XORs : 
 	   2 Input      1 Bit         XORs := 1     
@@ -3165,6 +3182,13 @@ Detailed RTL Component Info :
 	   3 Input      2 Bit        Muxes := 1     
 	   2 Input      2 Bit        Muxes := 2     
 	   3 Input      1 Bit        Muxes := 3     
+Module PulseSynchronous 
+Detailed RTL Component Info : 
++---XORs : 
+	   2 Input      1 Bit         XORs := 1     
++---Registers : 
+	                3 Bit    Registers := 1     
+	                1 Bit    Registers := 1     
 Module DaqSwitcher 
 Detailed RTL Component Info : 
 +---Muxes : 
@@ -3316,7 +3340,7 @@ Detailed RTL Component Info :
 	   6 Input      3 Bit        Muxes := 1     
 	   2 Input      3 Bit        Muxes := 4     
 	   6 Input      1 Bit        Muxes := 8     
-Module PulseSynchronous__6 
+Module PulseSynchronous__8 
 Detailed RTL Component Info : 
 +---XORs : 
 	   2 Input      1 Bit         XORs := 1     
@@ -3361,6 +3385,13 @@ Detailed RTL Component Info :
 	   3 Input      2 Bit        Muxes := 1     
 	   2 Input      2 Bit        Muxes := 2     
 	   3 Input      1 Bit        Muxes := 3     
+Module PulseSynchronous__9 
+Detailed RTL Component Info : 
++---XORs : 
+	   2 Input      1 Bit         XORs := 1     
++---Registers : 
+	                3 Bit    Registers := 1     
+	                1 Bit    Registers := 1     
 Module DaqSwitcher__6 
 Detailed RTL Component Info : 
 +---Muxes : 
@@ -4602,10 +4633,6 @@ INFO: [Synth 8-5546] ROM "Dac4bit_reg[26]" won't be mapped to RAM because it is 
 INFO: [Synth 8-5546] ROM "Dac4bit_reg[27]" won't be mapped to RAM because it is too sparse
 INFO: [Synth 8-5546] ROM "Dac4bit_reg[28]" won't be mapped to RAM because it is too sparse
 INFO: [Common 17-14] Message 'Synth 8-5546' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
-WARNING: [Synth 8-3332] Sequential element (ReadOnChipRam/ReadDone_reg) is unused and will be removed from module MicrorocControl__xdcDup__3.
-WARNING: [Synth 8-3332] Sequential element (ReadOnChipRam/ReadDone_reg) is unused and will be removed from module MicrorocControl.
-WARNING: [Synth 8-3332] Sequential element (ReadOnChipRam/ReadDone_reg) is unused and will be removed from module MicrorocControl__xdcDup__2.
-WARNING: [Synth 8-3332] Sequential element (ReadOnChipRam/ReadDone_reg) is unused and will be removed from module MicrorocControl__xdcDup__1.
 INFO: [Synth 8-3886] merging instance 'i_2/Acquisition/AcquisitionDataSwitcher/MicrorocChain1DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.mem/gbm.gbmg.gbmga.ngecc.bmg/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/SAFETY_CKT_GEN.RSTB_SHFT_REG_reg[0]' (FDS) to 'i_2/Acquisition/AcquisitionDataSwitcher/MicrorocChain1DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.mem/gbm.gbmg.gbmga.ngecc.bmg/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/SAFETY_CKT_GEN.RSTA_SHFT_REG_reg[0]'
 INFO: [Synth 8-3886] merging instance 'i_2/Acquisition/AcquisitionDataSwitcher/MicrorocChain1DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.mem/gbm.gbmg.gbmga.ngecc.bmg/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/SAFETY_CKT_GEN.RSTB_SHFT_REG_reg[1]' (FD) to 'i_2/Acquisition/AcquisitionDataSwitcher/MicrorocChain1DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.mem/gbm.gbmg.gbmga.ngecc.bmg/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/SAFETY_CKT_GEN.RSTA_SHFT_REG_reg[1]'
 INFO: [Synth 8-3886] merging instance 'i_2/Acquisition/AcquisitionDataSwitcher/MicrorocChain1DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.mem/gbm.gbmg.gbmga.ngecc.bmg/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/SAFETY_CKT_GEN.RSTB_SHFT_REG_reg[2]' (FD) to 'i_2/Acquisition/AcquisitionDataSwitcher/MicrorocChain1DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.mem/gbm.gbmg.gbmga.ngecc.bmg/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/SAFETY_CKT_GEN.RSTA_SHFT_REG_reg[2]'
@@ -4709,7 +4736,7 @@ INFO: [Synth 8-3886] merging instance 'i_2/Acquisition/MicrorocSCurveTest/SC_tes
 INFO: [Common 17-14] Message 'Synth 8-3886' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
 INFO: [Synth 8-3333] propagating constant 0 across sequential element (CommonControlSignalGeneratori_3/\TimeStampSyncAndTrigger/TriggerExt_reg )
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:09:31 ; elapsed = 00:10:09 . Memory (MB): peak = 1048.004 ; gain = 699.898
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:09:34 ; elapsed = 00:10:02 . Memory (MB): peak = 1050.090 ; gain = 702.004
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -4718,21 +4745,21 @@ Report RTL Partitions:
 +------+-----------------------------------+------------+----------+
 |1     |MicrorocCommonControl__GC0         |           1|       872|
 |2     |ConfigurationParameterDistribution |           1|      6469|
-|3     |FPGA_Top__GCB1                     |           1|      7382|
-|4     |FPGA_Top__GCB2                     |           1|      7385|
+|3     |FPGA_Top__GCB1                     |           1|      7310|
+|4     |FPGA_Top__GCB2                     |           1|      7313|
 |5     |FPGA_Top__GCB3                     |           1|     13142|
 +------+-----------------------------------+------------+----------+
 ---------------------------------------------------------------------------------
 Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:09:45 ; elapsed = 00:10:24 . Memory (MB): peak = 1048.004 ; gain = 699.898
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:09:49 ; elapsed = 00:10:18 . Memory (MB): peak = 1050.090 ; gain = 702.004
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:10:12 ; elapsed = 00:10:51 . Memory (MB): peak = 1061.469 ; gain = 713.363
+Finished Timing Optimization : Time (s): cpu = 00:10:18 ; elapsed = 00:10:48 . Memory (MB): peak = 1061.934 ; gain = 713.848
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -4741,13 +4768,13 @@ Report RTL Partitions:
 +------+-----------------------------------+------------+----------+
 |1     |MicrorocCommonControl__GC0         |           1|       872|
 |2     |ConfigurationParameterDistribution |           1|      6469|
-|3     |FPGA_Top_GT0                       |           1|     27896|
+|3     |FPGA_Top_GT0                       |           1|     27672|
 +------+-----------------------------------+------------+----------+
 ---------------------------------------------------------------------------------
 Start Technology Mapping
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:10:23 ; elapsed = 00:11:03 . Memory (MB): peak = 1079.418 ; gain = 731.313
+Finished Technology Mapping : Time (s): cpu = 00:10:29 ; elapsed = 00:11:01 . Memory (MB): peak = 1077.496 ; gain = 729.410
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -4776,8 +4803,12 @@ INFO: [Synth 8-5365] Flop CommonControlSignalGenerator/RamReadDoneDetect/ResetEn
 ---------------------------------------------------------------------------------
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
+WARNING: [Synth 8-3295] tying undriven pin Transmiton_Debug_inferred:in0 to constant 0
+WARNING: [Synth 8-3295] tying undriven pin Transmiton_Debug_inferred:in0 to constant 0
+WARNING: [Synth 8-3295] tying undriven pin Transmiton_Debug_inferred:in0 to constant 0
+WARNING: [Synth 8-3295] tying undriven pin Transmiton_Debug_inferred:in0 to constant 0
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:10:25 ; elapsed = 00:11:05 . Memory (MB): peak = 1079.418 ; gain = 731.313
+Finished IO Insertion : Time (s): cpu = 00:10:32 ; elapsed = 00:11:04 . Memory (MB): peak = 1077.496 ; gain = 729.410
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -4790,7 +4821,7 @@ Report Check Netlist:
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:10:26 ; elapsed = 00:11:06 . Memory (MB): peak = 1079.418 ; gain = 731.313
+Finished Renaming Generated Instances : Time (s): cpu = 00:10:32 ; elapsed = 00:11:04 . Memory (MB): peak = 1077.496 ; gain = 729.410
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -4802,25 +4833,25 @@ Report RTL Partitions:
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:10:28 ; elapsed = 00:11:08 . Memory (MB): peak = 1079.418 ; gain = 731.313
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:10:35 ; elapsed = 00:11:06 . Memory (MB): peak = 1077.496 ; gain = 729.410
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:10:28 ; elapsed = 00:11:08 . Memory (MB): peak = 1079.418 ; gain = 731.313
+Finished Renaming Generated Ports : Time (s): cpu = 00:10:35 ; elapsed = 00:11:06 . Memory (MB): peak = 1077.496 ; gain = 729.410
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:10:30 ; elapsed = 00:11:11 . Memory (MB): peak = 1079.418 ; gain = 731.313
+Finished Handling Custom Attributes : Time (s): cpu = 00:10:37 ; elapsed = 00:11:09 . Memory (MB): peak = 1077.496 ; gain = 729.410
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:10:31 ; elapsed = 00:11:11 . Memory (MB): peak = 1079.418 ; gain = 731.313
+Finished Renaming Generated Nets : Time (s): cpu = 00:10:38 ; elapsed = 00:11:09 . Memory (MB): peak = 1077.496 ; gain = 729.410
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP and Shift Register Reporting
@@ -4832,7 +4863,7 @@ Static Shift Register Report:
 +-----------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
 |fifo_generator_v13_2_2 | inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.mem/gbm.gbmg.gbmga.ngecc.bmg/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/SAFETY_CKT_GEN.RSTA_SHFT_REG_reg[4]     | 4      | 17    | NO           | NO                 | YES               | 17     | 0       | 
 |fifo_generator_v13_2_2 | inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.mem/gbm.gbmg.gbmga.ngecc.bmg/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/SAFETY_CKT_GEN.ENA_NO_REG.ENA_dly_D_reg | 3      | 5     | NO           | NO                 | YES               | 5      | 0       | 
-|MicrorocControl        | ReadOnChipRam/AsicDatain_r_reg                                                                                                                                                                             | 3      | 4     | NO           | NO                 | YES               | 4      | 0       | 
+|AsicRamReadout         | AsicDatain_r_reg                                                                                                                                                                                           | 3      | 4     | NO           | NO                 | YES               | 4      | 0       | 
 +-----------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
 
 ---------------------------------------------------------------------------------
@@ -4854,12 +4885,12 @@ Report Cell Usage:
 +------+------------+------+
 |1     |BUFG        |    10|
 |2     |CARRY4      |   142|
-|3     |LUT1        |   179|
-|4     |LUT2        |  1113|
-|5     |LUT3        |  4163|
-|6     |LUT4        |   930|
-|7     |LUT5        |  1129|
-|8     |LUT6        |  2770|
+|3     |LUT1        |   183|
+|4     |LUT2        |  1089|
+|5     |LUT3        |  4183|
+|6     |LUT4        |   926|
+|7     |LUT5        |  1185|
+|8     |LUT6        |  2702|
 |9     |MMCME2_BASE |     1|
 |10    |MUXCY       |   108|
 |11    |MUXF7       |    45|
@@ -4869,9 +4900,9 @@ Report Cell Usage:
 |15    |RAMB18E1_2  |     1|
 |16    |RAMB36E1    |     4|
 |17    |SRL16E      |    26|
-|18    |FDCE        |  7523|
+|18    |FDCE        |  7527|
 |19    |FDPE        |   782|
-|20    |FDRE        |  1178|
+|20    |FDRE        |  1194|
 |21    |FDSE        |    74|
 |22    |IBUF        |    52|
 |23    |IOBUF       |    16|
@@ -4884,13 +4915,13 @@ Report Instance Areas:
 +------+------------------------------------------------------------------------------------------+--------------------------------------------------------+------+
 |      |Instance                                                                                  |Module                                                  |Cells |
 +------+------------------------------------------------------------------------------------------+--------------------------------------------------------+------+
-|1     |top                                                                                       |                                                        | 20343|
+|1     |top                                                                                       |                                                        | 20347|
 |2     |  ConfigurationSelect                                                                     |ConfigurationParameterDistribution                      |  4360|
-|3     |  MicrorocChain3                                                                          |MicrorocControl__xdcDup__3                              |  2174|
-|4     |    MicrorocDaq                                                                           |DaqControl_99                                           |   449|
-|5     |      AutoDaqControl                                                                      |AutoDaq_117                                             |   108|
-|6     |      SlaveDaqControl                                                                     |SlaveDaq_118                                            |   338|
-|7     |    ReadOnChipRam                                                                         |AsicRamReadout_100                                      |    76|
+|3     |  MicrorocChain3                                                                          |MicrorocControl__xdcDup__3                              |  2175|
+|4     |    ReadOnChipRam                                                                         |AsicRamReadout__5                                       |    65|
+|5     |    MicrorocDaq                                                                           |DaqControl_100                                          |   446|
+|6     |      AutoDaqControl                                                                      |AutoDaq_118                                             |   109|
+|7     |      SlaveDaqControl                                                                     |SlaveDaq_119                                            |   334|
 |8     |    SlowControlAndReadScope                                                               |SlowControlAndReadScopeSet__xdcDup__3                   |  1646|
 |9     |      ConfigParameter                                                                     |ConfigParameterFIFO__xdcDup__3                          |   183|
 |10    |        U0                                                                                |fifo_generator_v13_2_2__parameterized7__xdcDup__3       |   183|
@@ -4900,459 +4931,463 @@ Report Instance Areas:
 |14    |                \gntv_or_sync_fifo.gcx.clkx                                               |clk_x_pntrs__parameterized1__xdcDup__3                  |    75|
 |15    |                  wr_pntr_cdc_inst                                                        |xpm_cdc_gray__parameterized1__6                         |    34|
 |16    |                  rd_pntr_cdc_inst                                                        |xpm_cdc_gray__parameterized1__7                         |    34|
-|17    |                \gntv_or_sync_fifo.gl0.rd                                                 |rd_logic__parameterized3_104                            |    28|
-|18    |                  \gras.rsts                                                              |rd_status_flags_as__parameterized1_115                  |     3|
-|19    |                  rpntr                                                                   |rd_bin_cntr__parameterized3_116                         |    25|
-|20    |                \gntv_or_sync_fifo.gl0.wr                                                 |wr_logic__parameterized3_105                            |    27|
-|21    |                  \gwas.wsts                                                              |wr_status_flags_as__parameterized1_113                  |     3|
-|22    |                  wpntr                                                                   |wr_bin_cntr__parameterized3_114                         |    24|
-|23    |                \gntv_or_sync_fifo.mem                                                    |memory__parameterized3_106                              |    17|
-|24    |                  \gbm.gbmg.gbmga.ngecc.bmg                                               |blk_mem_gen_v8_4_1__parameterized7_107                  |    17|
-|25    |                    inst_blk_mem_gen                                                      |blk_mem_gen_v8_4_1_synth__parameterized3_108            |    17|
-|26    |                      \gnbram.gnativebmg.native_blk_mem_gen                               |blk_mem_gen_top__parameterized3_109                     |    17|
-|27    |                        \valid.cstr                                                       |blk_mem_gen_generic_cstr__parameterized3_110            |    17|
-|28    |                          \ramloop[0].ram.r                                               |blk_mem_gen_prim_width__parameterized6_111              |    17|
-|29    |                            \prim_noinit.ram                                              |blk_mem_gen_prim_wrapper__parameterized6_112            |     3|
+|17    |                \gntv_or_sync_fifo.gl0.rd                                                 |rd_logic__parameterized3_105                            |    28|
+|18    |                  \gras.rsts                                                              |rd_status_flags_as__parameterized1_116                  |     3|
+|19    |                  rpntr                                                                   |rd_bin_cntr__parameterized3_117                         |    25|
+|20    |                \gntv_or_sync_fifo.gl0.wr                                                 |wr_logic__parameterized3_106                            |    27|
+|21    |                  \gwas.wsts                                                              |wr_status_flags_as__parameterized1_114                  |     3|
+|22    |                  wpntr                                                                   |wr_bin_cntr__parameterized3_115                         |    24|
+|23    |                \gntv_or_sync_fifo.mem                                                    |memory__parameterized3_107                              |    17|
+|24    |                  \gbm.gbmg.gbmga.ngecc.bmg                                               |blk_mem_gen_v8_4_1__parameterized7_108                  |    17|
+|25    |                    inst_blk_mem_gen                                                      |blk_mem_gen_v8_4_1_synth__parameterized3_109            |    17|
+|26    |                      \gnbram.gnativebmg.native_blk_mem_gen                               |blk_mem_gen_top__parameterized3_110                     |    17|
+|27    |                        \valid.cstr                                                       |blk_mem_gen_generic_cstr__parameterized3_111            |    17|
+|28    |                          \ramloop[0].ram.r                                               |blk_mem_gen_prim_width__parameterized6_112              |    17|
+|29    |                            \prim_noinit.ram                                              |blk_mem_gen_prim_wrapper__parameterized6_113            |     3|
 |30    |                rstblk                                                                    |reset_blk_ramfifo__xdcDup__5                            |    36|
 |31    |                  \ngwrdrst.grst.g7serrst.gsckt_wrst.xpm_cdc_sync_rst_inst_wrst           |xpm_cdc_sync_rst__12                                    |     5|
 |32    |                  \ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_sync_rst_inst_wrst   |xpm_cdc_sync_rst__13                                    |     5|
 |33    |                  \ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_single_inst_wrst_rd  |xpm_cdc_single__8                                       |     5|
 |34    |                  \ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_single_inst_rrst_wr  |xpm_cdc_single__9                                       |     5|
-|35    |      ParameterGen                                                                        |ParameterGenerator_101                                  |  1381|
-|36    |      ParameterShiftOut                                                                   |BitShiftOut_102                                         |    74|
-|37    |      PulseSync                                                                           |PulseSynchronous_103                                    |     8|
-|38    |  MicrorocChain4                                                                          |MicrorocControl                                         |  2174|
-|39    |    MicrorocDaq                                                                           |DaqControl_79                                           |   449|
-|40    |      AutoDaqControl                                                                      |AutoDaq_97                                              |   108|
-|41    |      SlaveDaqControl                                                                     |SlaveDaq_98                                             |   338|
-|42    |    ReadOnChipRam                                                                         |AsicRamReadout_80                                       |    76|
-|43    |    SlowControlAndReadScope                                                               |SlowControlAndReadScopeSet                              |  1646|
-|44    |      ConfigParameter                                                                     |ConfigParameterFIFO                                     |   183|
-|45    |        U0                                                                                |fifo_generator_v13_2_2__parameterized7                  |   183|
-|46    |          inst_fifo_gen                                                                   |fifo_generator_v13_2_2_synth__parameterized3            |   183|
-|47    |            \gconvfifo.rf                                                                 |fifo_generator_top__parameterized3                      |   183|
-|48    |              \grf.rf                                                                     |fifo_generator_ramfifo__parameterized3                  |   183|
-|49    |                \gntv_or_sync_fifo.gcx.clkx                                               |clk_x_pntrs__parameterized1                             |    75|
-|50    |                  wr_pntr_cdc_inst                                                        |xpm_cdc_gray__parameterized1__4                         |    34|
-|51    |                  rd_pntr_cdc_inst                                                        |xpm_cdc_gray__parameterized1__5                         |    34|
-|52    |                \gntv_or_sync_fifo.gl0.rd                                                 |rd_logic__parameterized3_84                             |    28|
-|53    |                  \gras.rsts                                                              |rd_status_flags_as__parameterized1_95                   |     3|
-|54    |                  rpntr                                                                   |rd_bin_cntr__parameterized3_96                          |    25|
-|55    |                \gntv_or_sync_fifo.gl0.wr                                                 |wr_logic__parameterized3_85                             |    27|
-|56    |                  \gwas.wsts                                                              |wr_status_flags_as__parameterized1_93                   |     3|
-|57    |                  wpntr                                                                   |wr_bin_cntr__parameterized3_94                          |    24|
-|58    |                \gntv_or_sync_fifo.mem                                                    |memory__parameterized3_86                               |    17|
-|59    |                  \gbm.gbmg.gbmga.ngecc.bmg                                               |blk_mem_gen_v8_4_1__parameterized7_87                   |    17|
-|60    |                    inst_blk_mem_gen                                                      |blk_mem_gen_v8_4_1_synth__parameterized3_88             |    17|
-|61    |                      \gnbram.gnativebmg.native_blk_mem_gen                               |blk_mem_gen_top__parameterized3_89                      |    17|
-|62    |                        \valid.cstr                                                       |blk_mem_gen_generic_cstr__parameterized3_90             |    17|
-|63    |                          \ramloop[0].ram.r                                               |blk_mem_gen_prim_width__parameterized6_91               |    17|
-|64    |                            \prim_noinit.ram                                              |blk_mem_gen_prim_wrapper__parameterized6_92             |     3|
-|65    |                rstblk                                                                    |reset_blk_ramfifo                                       |    36|
-|66    |                  \ngwrdrst.grst.g7serrst.gsckt_wrst.xpm_cdc_sync_rst_inst_wrst           |xpm_cdc_sync_rst__10                                    |     5|
-|67    |                  \ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_sync_rst_inst_wrst   |xpm_cdc_sync_rst__11                                    |     5|
-|68    |                  \ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_single_inst_wrst_rd  |xpm_cdc_single__6                                       |     5|
-|69    |                  \ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_single_inst_rrst_wr  |xpm_cdc_single__7                                       |     5|
-|70    |      ParameterGen                                                                        |ParameterGenerator_81                                   |  1381|
-|71    |      ParameterShiftOut                                                                   |BitShiftOut_82                                          |    74|
-|72    |      PulseSync                                                                           |PulseSynchronous_83                                     |     8|
-|73    |  Command                                                                                 |CommandInterpreter                                      |  3029|
-|74    |    CommandFifo32Depth                                                                    |CommandFifo                                             |   160|
-|75    |      U0                                                                                  |fifo_generator_v13_2_2__parameterized1                  |   160|
-|76    |        inst_fifo_gen                                                                     |fifo_generator_v13_2_2_synth__parameterized0            |   160|
-|77    |          \gconvfifo.rf                                                                   |fifo_generator_top__parameterized0                      |   160|
-|78    |            \grf.rf                                                                       |fifo_generator_ramfifo__parameterized0                  |   160|
-|79    |              \gntv_or_sync_fifo.gcx.clkx                                                 |clk_x_pntrs__parameterized0                             |    60|
-|80    |                wr_pntr_cdc_inst                                                          |xpm_cdc_gray__parameterized0__1                         |    28|
-|81    |                rd_pntr_cdc_inst                                                          |xpm_cdc_gray__parameterized0                            |    28|
-|82    |              \gntv_or_sync_fifo.gl0.rd                                                   |rd_logic__parameterized0                                |    21|
-|83    |                \gras.rsts                                                                |rd_status_flags_as__parameterized0                      |     3|
-|84    |                rpntr                                                                     |rd_bin_cntr__parameterized0                             |    18|
-|85    |              \gntv_or_sync_fifo.gl0.wr                                                   |wr_logic__parameterized0                                |    26|
-|86    |                \gwas.wsts                                                                |wr_status_flags_as__parameterized0                      |     3|
-|87    |                wpntr                                                                     |wr_bin_cntr__parameterized0                             |    23|
-|88    |              \gntv_or_sync_fifo.mem                                                      |memory__parameterized0                                  |    17|
-|89    |                \gbm.gbmg.gbmga.ngecc.bmg                                                 |blk_mem_gen_v8_4_1__parameterized1                      |    17|
-|90    |                  inst_blk_mem_gen                                                        |blk_mem_gen_v8_4_1_synth__parameterized0                |    17|
-|91    |                    \gnbram.gnativebmg.native_blk_mem_gen                                 |blk_mem_gen_top__parameterized0                         |    17|
-|92    |                      \valid.cstr                                                         |blk_mem_gen_generic_cstr__parameterized0                |    17|
-|93    |                        \ramloop[0].ram.r                                                 |blk_mem_gen_prim_width__parameterized3                  |    17|
-|94    |                          \prim_noinit.ram                                                |blk_mem_gen_prim_wrapper__parameterized3                |     3|
-|95    |              rstblk                                                                      |reset_blk_ramfifo__xdcDup__2                            |    36|
-|96    |                \ngwrdrst.grst.g7serrst.gsckt_wrst.xpm_cdc_sync_rst_inst_wrst             |xpm_cdc_sync_rst__20                                    |     5|
-|97    |                \ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_sync_rst_inst_wrst     |xpm_cdc_sync_rst__21                                    |     5|
-|98    |                \ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_single_inst_wrst_rd    |xpm_cdc_single__16                                      |     5|
-|99    |                \ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_single_inst_rrst_wr    |xpm_cdc_single                                          |     5|
-|100   |    AcquisitionStartStopSet                                                               |CommandDecoder__parameterized102                        |     6|
-|101   |    AdcDataNumberSet3to0                                                                  |CommandDecoder__parameterized87                         |     5|
-|102   |    AdcDataNumberSet7to4                                                                  |CommandDecoder__parameterized88                         |     5|
-|103   |    AdcStartDelayTimeSet                                                                  |CommandDecoder__parameterized86                         |     5|
-|104   |    AsicChainSelectSet                                                                    |CommandDecoder__parameterized101                        |     5|
-|105   |    BandGapEnable                                                                         |CommandDecoder__parameterized22                         |     2|
-|106   |    BandGapPPEnable                                                                       |CommandDecoder__parameterized41                         |     2|
-|107   |    CTestChannel3to0                                                                      |CommandDecoder__parameterized35                         |    52|
-|108   |    CTestChannel7to4                                                                      |CommandDecoder__parameterized36                         |    55|
-|109   |    CTestOrInputSelect                                                                    |CommandDecoder__parameterized65                         |     2|
-|110   |    ChipID3to0                                                                            |CommandDecoder__parameterized23                         |     5|
-|111   |    ChipID7to4                                                                            |CommandDecoder__parameterized24                         |     5|
-|112   |    CkMux                                                                                 |CommandDecoder__parameterized5                          |     2|
-|113   |    CounterMaxSet11to8                                                                    |CommandDecoder__parameterized78                         |     5|
-|114   |    CounterMaxSet15to12                                                                   |CommandDecoder__parameterized79                         |     5|
-|115   |    CounterMaxSet3to0                                                                     |CommandDecoder__parameterized76                         |     5|
-|116   |    CounterMaxSet7to4                                                                     |CommandDecoder__parameterized77                         |     5|
-|117   |    Dac0Vth3to0                                                                           |CommandDecoder__parameterized18                         |     5|
-|118   |    Dac0Vth7to4                                                                           |CommandDecoder__parameterized19                         |     5|
-|119   |    Dac0Vth9to8                                                                           |CommandDecoder__parameterized20                         |     3|
-|120   |    Dac1Vth3to0                                                                           |CommandDecoder__parameterized15                         |     5|
-|121   |    Dac1Vth7to4                                                                           |CommandDecoder__parameterized16                         |     5|
-|122   |    Dac1Vth9to8                                                                           |CommandDecoder__parameterized17                         |     3|
-|123   |    Dac2Vth3to0                                                                           |CommandDecoder__parameterized12                         |     5|
-|124   |    Dac2Vth7to4                                                                           |CommandDecoder__parameterized13                         |     5|
-|125   |    Dac2Vth9to8                                                                           |CommandDecoder__parameterized14                         |     5|
-|126   |    Dac4bitPPEnable                                                                       |CommandDecoder__parameterized44                         |     2|
-|127   |    DacEnable                                                                             |CommandDecoder__parameterized21                         |     2|
-|128   |    DacPPEnable                                                                           |CommandDecoder__parameterized40                         |     2|
-|129   |    DaqModeSelect                                                                         |CommandDecoder__parameterized109                        |     2|
-|130   |    DataFifoReset                                                                         |CommandDecoder__parameterized103                        |     3|
-|131   |    DataoutChannelSelect                                                                  |CommandDecoder__parameterized0                          |     3|
-|132   |    DiscriMaskSet                                                                         |CommandDecoder__parameterized27                         |   990|
-|133   |    DiscriminatorPPEnable                                                                 |CommandDecoder__parameterized42                         |     2|
-|134   |    EnablePowerPulsingPin                                                                 |CommandDecoder__parameterized105                        |     2|
-|135   |    EndHoldTimeSet11to8                                                                   |CommandDecoder__parameterized99                         |     5|
-|136   |    EndHoldTimeSet15to12                                                                  |CommandDecoder__parameterized100                        |     5|
-|137   |    EndHoldTimeSet3to0                                                                    |CommandDecoder__parameterized97                         |     5|
-|138   |    EndHoldTimeSet7to4                                                                    |CommandDecoder__parameterized98                         |     5|
-|139   |    EndReadoutChannelSelect                                                               |CommandDecoder__parameterized3                          |     2|
-|140   |    EndReadoutParameterGenerator                                                          |CommandDecoder__parameterized106                        |     5|
-|141   |    ExternalAdcStartStop                                                                  |CommandDecoder__parameterized85                         |     3|
-|142   |    ExternalRazDelayTime                                                                  |CommandDecoder__parameterized51                         |     5|
-|143   |    ExternalRazMode                                                                       |CommandDecoder__parameterized50                         |     3|
-|144   |    ExternalRazSignalEnable                                                               |CommandDecoder__parameterized6                          |     2|
-|145   |    ExternalTriggerEnable                                                                 |CommandDecoder__parameterized8                          |     2|
-|146   |    GainBoostEnable                                                                       |CommandDecoder__parameterized34                         |     2|
-|147   |    HighGainShaperFeedbackSelect                                                          |CommandDecoder__parameterized31                         |     3|
-|148   |    HighGainShaperPPEnable                                                                |CommandDecoder__parameterized47                         |     2|
-|149   |    HoldDelaySet3to0                                                                      |CommandDecoder__parameterized90                         |     5|
-|150   |    HoldDelaySet7to4                                                                      |CommandDecoder__parameterized91                         |     5|
-|151   |    HoldEnableSet                                                                         |CommandDecoder__parameterized96                         |     2|
-|152   |    HoldTimeSet11to8                                                                      |CommandDecoder__parameterized94                         |     5|
-|153   |    HoldTimeSet15to12                                                                     |CommandDecoder__parameterized95                         |     5|
-|154   |    HoldTimeSet3to0                                                                       |CommandDecoder__parameterized92                         |     5|
-|155   |    HoldTimeSet7to4                                                                       |CommandDecoder__parameterized93                         |     5|
-|156   |    InternalRazSignalEnable                                                               |CommandDecoder__parameterized7                          |     2|
-|157   |    InternalRazSignalLenth                                                                |CommandDecoder__parameterized4                          |     3|
-|158   |    LatchedOrDirectOutput                                                                 |CommandDecoder__parameterized29                         |     2|
-|159   |    LightLed                                                                              |CommandDecoder__parameterized115                        |     6|
-|160   |    LowGainShaperFeedbackSelect                                                           |CommandDecoder__parameterized33                         |     3|
-|161   |    LowGainShaperPPEnable                                                                 |CommandDecoder__parameterized46                         |     2|
-|162   |    LvdsReceiverPPEnable                                                                  |CommandDecoder__parameterized39                         |     2|
-|163   |    MaskChannel3to0                                                                       |CommandDecoder__parameterized25                         |    13|
-|164   |    MaskChannel5to4                                                                       |CommandDecoder__parameterized26                         |     5|
-|165   |    MaskSet                                                                               |CommandDecoder__parameterized28                         |   390|
-|166   |    OTAqEnable                                                                            |CommandDecoder__parameterized30                         |     2|
-|167   |    OTAqPPEnable                                                                          |CommandDecoder__parameterized43                         |     2|
-|168   |    ParameterLoadStart                                                                    |CommandDecoder__parameterized52                         |     4|
-|169   |    PreAmplifierPPEnable                                                                  |CommandDecoder__parameterized48                         |     3|
-|170   |    ReadScopeChannel3to0                                                                  |CommandDecoder__parameterized37                         |    54|
-|171   |    ReadScopeChannel7to4                                                                  |CommandDecoder__parameterized38                         |    47|
-|172   |    ReadoutChannelSelect                                                                  |CommandDecoder__parameterized49                         |     2|
-|173   |    ResetMicrorocAcq                                                                      |CommandDecoder__parameterized84                         |     3|
-|174   |    RunningModeSelect                                                                     |CommandDecoder__parameterized53                         |     7|
-|175   |    SelectSCurveTestAsic                                                                  |CommandDecoder__parameterized108                        |     5|
-|176   |    SetAsicNumber                                                                         |CommandDecoder__parameterized107                        |     5|
-|177   |    SetStartAcquisitionTime11to8                                                          |CommandDecoder__parameterized112                        |     5|
-|178   |    SetStartAcquisitionTime15to12                                                         |CommandDecoder__parameterized113                        |     5|
-|179   |    SetStartAcquisitionTime3to0                                                           |CommandDecoder__parameterized110                        |     5|
-|180   |    SetStartAcquisitionTime7to4                                                           |CommandDecoder__parameterized111                        |     5|
-|181   |    ShaperOutLowGainOrHighGain                                                            |CommandDecoder__parameterized32                         |     2|
-|182   |    SingleOr64ChannelSelect                                                               |CommandDecoder__parameterized64                         |     2|
-|183   |    SingleTestChannelSet3to0                                                              |CommandDecoder__parameterized66                         |     5|
-|184   |    SingleTestChannelSet5to4                                                              |CommandDecoder__parameterized67                         |     3|
-|185   |    SlowControlOrReadScopeSelect                                                          |CommandDecoder                                          |     2|
-|186   |    StartReadoutChannelSelect                                                             |CommandDecoder__parameterized2                          |     2|
-|187   |    SweepAcqMaxPackageNumberSet11to8                                                      |CommandDecoder__parameterized82                         |     5|
-|188   |    SweepAcqMaxPackageNumberSet15to12                                                     |CommandDecoder__parameterized83                         |     5|
-|189   |    SweepAcqMaxPackageNumberSet3to0                                                       |CommandDecoder__parameterized80                         |     5|
-|190   |    SweepAcqMaxPackageNumberSet7to4                                                       |CommandDecoder__parameterized81                         |     5|
-|191   |    SweepDacEndValue3to0                                                                  |CommandDecoder__parameterized58                         |     5|
-|192   |    SweepDacEndValue7to4                                                                  |CommandDecoder__parameterized59                         |     5|
-|193   |    SweepDacEndValue9to8                                                                  |CommandDecoder__parameterized60                         |     3|
-|194   |    SweepDacSelect                                                                        |CommandDecoder__parameterized54                         |     3|
-|195   |    SweepDacStartValue3to0                                                                |CommandDecoder__parameterized55                         |     5|
-|196   |    SweepDacStartValue7to4                                                                |CommandDecoder__parameterized56                         |     5|
-|197   |    SweepDacStartValue9to8                                                                |CommandDecoder__parameterized57                         |     3|
-|198   |    SweepDacStepValue3to0                                                                 |CommandDecoder__parameterized61                         |     5|
-|199   |    SweepDacStepValue7to4                                                                 |CommandDecoder__parameterized62                         |     5|
-|200   |    SweepDacStepValue9to8                                                                 |CommandDecoder__parameterized63                         |     3|
-|201   |    SweepTestStartStopSet                                                                 |CommandDecoder__parameterized73                         |     4|
-|202   |    TestSignalColumnSelect                                                                |CommandDecoder__parameterized114                        |     4|
-|203   |    TimeStampReset                                                                        |CommandDecoder__parameterized104                        |     3|
-|204   |    TransmitOnChannelSelect                                                               |CommandDecoder__parameterized1                          |     3|
-|205   |    TriggerCoincidenceSet                                                                 |CommandDecoder__parameterized89                         |     5|
-|206   |    TriggerCountMaxSet11to8                                                               |CommandDecoder__parameterized70                         |     5|
-|207   |    TriggerCountMaxSet15to12                                                              |CommandDecoder__parameterized71                         |     5|
-|208   |    TriggerCountMaxSet3to0                                                                |CommandDecoder__parameterized68                         |     6|
-|209   |    TriggerCountMaxSet7to4                                                                |CommandDecoder__parameterized69                         |     5|
-|210   |    TriggerDelaySet                                                                       |CommandDecoder__parameterized72                         |     5|
-|211   |    TriggerEfficiencyOrCountEfficiencySet                                                 |CommandDecoder__parameterized75                         |     2|
-|212   |    TriggerNor64OrDirectSelect                                                            |CommandDecoder__parameterized9                          |     2|
-|213   |    TriggerOutputEnable                                                                   |CommandDecoder__parameterized10                         |     2|
-|214   |    TriggerToWriteSelect                                                                  |CommandDecoder__parameterized11                         |     4|
-|215   |    UnmaskAllChannelSet                                                                   |CommandDecoder__parameterized74                         |     2|
-|216   |    WidlarPPEnable                                                                        |CommandDecoder__parameterized45                         |     2|
-|217   |  MicrorocChain2                                                                          |MicrorocControl__xdcDup__2                              |  2174|
-|218   |    MicrorocDaq                                                                           |DaqControl_59                                           |   449|
-|219   |      AutoDaqControl                                                                      |AutoDaq_77                                              |   108|
-|220   |      SlaveDaqControl                                                                     |SlaveDaq_78                                             |   338|
-|221   |    ReadOnChipRam                                                                         |AsicRamReadout_60                                       |    76|
-|222   |    SlowControlAndReadScope                                                               |SlowControlAndReadScopeSet__xdcDup__2                   |  1646|
-|223   |      ConfigParameter                                                                     |ConfigParameterFIFO__xdcDup__2                          |   183|
-|224   |        U0                                                                                |fifo_generator_v13_2_2__parameterized7__xdcDup__2       |   183|
-|225   |          inst_fifo_gen                                                                   |fifo_generator_v13_2_2_synth__parameterized3__xdcDup__2 |   183|
-|226   |            \gconvfifo.rf                                                                 |fifo_generator_top__parameterized3__xdcDup__2           |   183|
-|227   |              \grf.rf                                                                     |fifo_generator_ramfifo__parameterized3__xdcDup__2       |   183|
-|228   |                \gntv_or_sync_fifo.gcx.clkx                                               |clk_x_pntrs__parameterized1__xdcDup__2                  |    75|
-|229   |                  wr_pntr_cdc_inst                                                        |xpm_cdc_gray__parameterized1__10                        |    34|
-|230   |                  rd_pntr_cdc_inst                                                        |xpm_cdc_gray__parameterized1                            |    34|
-|231   |                \gntv_or_sync_fifo.gl0.rd                                                 |rd_logic__parameterized3_64                             |    28|
-|232   |                  \gras.rsts                                                              |rd_status_flags_as__parameterized1_75                   |     3|
-|233   |                  rpntr                                                                   |rd_bin_cntr__parameterized3_76                          |    25|
-|234   |                \gntv_or_sync_fifo.gl0.wr                                                 |wr_logic__parameterized3_65                             |    27|
-|235   |                  \gwas.wsts                                                              |wr_status_flags_as__parameterized1_73                   |     3|
-|236   |                  wpntr                                                                   |wr_bin_cntr__parameterized3_74                          |    24|
-|237   |                \gntv_or_sync_fifo.mem                                                    |memory__parameterized3_66                               |    17|
-|238   |                  \gbm.gbmg.gbmga.ngecc.bmg                                               |blk_mem_gen_v8_4_1__parameterized7_67                   |    17|
-|239   |                    inst_blk_mem_gen                                                      |blk_mem_gen_v8_4_1_synth__parameterized3_68             |    17|
-|240   |                      \gnbram.gnativebmg.native_blk_mem_gen                               |blk_mem_gen_top__parameterized3_69                      |    17|
-|241   |                        \valid.cstr                                                       |blk_mem_gen_generic_cstr__parameterized3_70             |    17|
-|242   |                          \ramloop[0].ram.r                                               |blk_mem_gen_prim_width__parameterized6_71               |    17|
-|243   |                            \prim_noinit.ram                                              |blk_mem_gen_prim_wrapper__parameterized6_72             |     3|
-|244   |                rstblk                                                                    |reset_blk_ramfifo__xdcDup__4                            |    36|
-|245   |                  \ngwrdrst.grst.g7serrst.gsckt_wrst.xpm_cdc_sync_rst_inst_wrst           |xpm_cdc_sync_rst__16                                    |     5|
-|246   |                  \ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_sync_rst_inst_wrst   |xpm_cdc_sync_rst__17                                    |     5|
-|247   |                  \ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_single_inst_wrst_rd  |xpm_cdc_single__12                                      |     5|
-|248   |                  \ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_single_inst_rrst_wr  |xpm_cdc_single__13                                      |     5|
-|249   |      ParameterGen                                                                        |ParameterGenerator_61                                   |  1381|
-|250   |      ParameterShiftOut                                                                   |BitShiftOut_62                                          |    74|
-|251   |      PulseSync                                                                           |PulseSynchronous_63                                     |     8|
-|252   |  MicrorocChain1                                                                          |MicrorocControl__xdcDup__1                              |  2174|
-|253   |    MicrorocDaq                                                                           |DaqControl                                              |   449|
-|254   |      AutoDaqControl                                                                      |AutoDaq                                                 |   108|
-|255   |      SlaveDaqControl                                                                     |SlaveDaq                                                |   338|
-|256   |    ReadOnChipRam                                                                         |AsicRamReadout                                          |    76|
-|257   |    SlowControlAndReadScope                                                               |SlowControlAndReadScopeSet__xdcDup__1                   |  1646|
-|258   |      ConfigParameter                                                                     |ConfigParameterFIFO__xdcDup__1                          |   183|
-|259   |        U0                                                                                |fifo_generator_v13_2_2__parameterized7__xdcDup__1       |   183|
-|260   |          inst_fifo_gen                                                                   |fifo_generator_v13_2_2_synth__parameterized3__xdcDup__1 |   183|
-|261   |            \gconvfifo.rf                                                                 |fifo_generator_top__parameterized3__xdcDup__1           |   183|
-|262   |              \grf.rf                                                                     |fifo_generator_ramfifo__parameterized3__xdcDup__1       |   183|
-|263   |                \gntv_or_sync_fifo.gcx.clkx                                               |clk_x_pntrs__parameterized1__xdcDup__1                  |    75|
-|264   |                  wr_pntr_cdc_inst                                                        |xpm_cdc_gray__parameterized1__8                         |    34|
-|265   |                  rd_pntr_cdc_inst                                                        |xpm_cdc_gray__parameterized1__9                         |    34|
-|266   |                \gntv_or_sync_fifo.gl0.rd                                                 |rd_logic__parameterized3                                |    28|
-|267   |                  \gras.rsts                                                              |rd_status_flags_as__parameterized1                      |     3|
-|268   |                  rpntr                                                                   |rd_bin_cntr__parameterized3                             |    25|
-|269   |                \gntv_or_sync_fifo.gl0.wr                                                 |wr_logic__parameterized3                                |    27|
-|270   |                  \gwas.wsts                                                              |wr_status_flags_as__parameterized1                      |     3|
-|271   |                  wpntr                                                                   |wr_bin_cntr__parameterized3                             |    24|
-|272   |                \gntv_or_sync_fifo.mem                                                    |memory__parameterized3                                  |    17|
-|273   |                  \gbm.gbmg.gbmga.ngecc.bmg                                               |blk_mem_gen_v8_4_1__parameterized7                      |    17|
-|274   |                    inst_blk_mem_gen                                                      |blk_mem_gen_v8_4_1_synth__parameterized3                |    17|
-|275   |                      \gnbram.gnativebmg.native_blk_mem_gen                               |blk_mem_gen_top__parameterized3                         |    17|
-|276   |                        \valid.cstr                                                       |blk_mem_gen_generic_cstr__parameterized3                |    17|
-|277   |                          \ramloop[0].ram.r                                               |blk_mem_gen_prim_width__parameterized6                  |    17|
-|278   |                            \prim_noinit.ram                                              |blk_mem_gen_prim_wrapper__parameterized6                |     3|
-|279   |                rstblk                                                                    |reset_blk_ramfifo__xdcDup__3                            |    36|
-|280   |                  \ngwrdrst.grst.g7serrst.gsckt_wrst.xpm_cdc_sync_rst_inst_wrst           |xpm_cdc_sync_rst__14                                    |     5|
-|281   |                  \ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_sync_rst_inst_wrst   |xpm_cdc_sync_rst__15                                    |     5|
-|282   |                  \ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_single_inst_wrst_rd  |xpm_cdc_single__10                                      |     5|
-|283   |                  \ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_single_inst_rrst_wr  |xpm_cdc_single__11                                      |     5|
-|284   |      ParameterGen                                                                        |ParameterGenerator                                      |  1381|
-|285   |      ParameterShiftOut                                                                   |BitShiftOut                                             |    74|
-|286   |      PulseSync                                                                           |PulseSynchronous                                        |     8|
-|287   |  Acquisition                                                                             |AcquisitionControl                                      |  3143|
-|288   |    AD9220Control                                                                         |AdcControl                                              |   101|
-|289   |      Ad9220Control                                                                       |ADC_AD9220                                              |    33|
-|290   |    AcquisitionDataSwitcher                                                               |MicrorocDataSwitcher                                    |   643|
-|291   |      MicrorocChain1DataFIFO                                                              |MicrorocChainDataFifo__xdcDup__1                        |   141|
-|292   |        U0                                                                                |fifo_generator_v13_2_2__parameterized3__xdcDup__1       |   141|
-|293   |          inst_fifo_gen                                                                   |fifo_generator_v13_2_2_synth__parameterized1__xdcDup__1 |   141|
-|294   |            \gconvfifo.rf                                                                 |fifo_generator_top__parameterized1__xdcDup__1           |   141|
-|295   |              \grf.rf                                                                     |fifo_generator_ramfifo__parameterized1__xdcDup__1       |   141|
-|296   |                \gntv_or_sync_fifo.gl0.rd                                                 |rd_logic__parameterized1_42                             |    66|
-|297   |                  \grss.rsts                                                              |rd_status_flags_ss_55                                   |    15|
-|298   |                    c1                                                                    |compare__parameterized1_57                              |     5|
-|299   |                    c2                                                                    |compare__parameterized1_58                              |     6|
-|300   |                  rpntr                                                                   |rd_bin_cntr__parameterized1_56                          |    51|
-|301   |                \gntv_or_sync_fifo.gl0.wr                                                 |wr_logic__parameterized1_43                             |    48|
-|302   |                  \gwss.wsts                                                              |wr_status_flags_ss_51                                   |    17|
-|303   |                    c0                                                                    |compare__parameterized1_53                              |     6|
-|304   |                    c1                                                                    |compare__parameterized1_54                              |     5|
-|305   |                  wpntr                                                                   |wr_bin_cntr__parameterized1_52                          |    31|
-|306   |                \gntv_or_sync_fifo.mem                                                    |memory__parameterized1_44                               |    11|
-|307   |                  \gbm.gbmg.gbmga.ngecc.bmg                                               |blk_mem_gen_v8_4_1__parameterized3_45                   |    11|
-|308   |                    inst_blk_mem_gen                                                      |blk_mem_gen_v8_4_1_synth__parameterized1_46             |    11|
-|309   |                      \gnbram.gnativebmg.native_blk_mem_gen                               |blk_mem_gen_top__parameterized1_47                      |    11|
-|310   |                        \valid.cstr                                                       |blk_mem_gen_generic_cstr__parameterized1_48             |    11|
-|311   |                          \ramloop[0].ram.r                                               |blk_mem_gen_prim_width__parameterized4_49               |    11|
-|312   |                            \prim_noinit.ram                                              |blk_mem_gen_prim_wrapper__parameterized4_50             |     2|
-|313   |                rstblk                                                                    |reset_blk_ramfifo__parameterized0__xdcDup__1            |    16|
-|314   |                  \ngwrdrst.grst.g7serrst.gsckt_wrst.xpm_cdc_sync_rst_inst_wrst           |xpm_cdc_sync_rst                                        |     5|
-|315   |      MicrorocChain2DataFIFO                                                              |MicrorocChainDataFifo__xdcDup__2                        |   141|
-|316   |        U0                                                                                |fifo_generator_v13_2_2__parameterized3__xdcDup__2       |   141|
-|317   |          inst_fifo_gen                                                                   |fifo_generator_v13_2_2_synth__parameterized1__xdcDup__2 |   141|
-|318   |            \gconvfifo.rf                                                                 |fifo_generator_top__parameterized1__xdcDup__2           |   141|
-|319   |              \grf.rf                                                                     |fifo_generator_ramfifo__parameterized1__xdcDup__2       |   141|
-|320   |                \gntv_or_sync_fifo.gl0.rd                                                 |rd_logic__parameterized1_25                             |    66|
-|321   |                  \grss.rsts                                                              |rd_status_flags_ss_38                                   |    15|
-|322   |                    c1                                                                    |compare__parameterized1_40                              |     5|
-|323   |                    c2                                                                    |compare__parameterized1_41                              |     6|
-|324   |                  rpntr                                                                   |rd_bin_cntr__parameterized1_39                          |    51|
-|325   |                \gntv_or_sync_fifo.gl0.wr                                                 |wr_logic__parameterized1_26                             |    48|
-|326   |                  \gwss.wsts                                                              |wr_status_flags_ss_34                                   |    17|
-|327   |                    c0                                                                    |compare__parameterized1_36                              |     6|
-|328   |                    c1                                                                    |compare__parameterized1_37                              |     5|
-|329   |                  wpntr                                                                   |wr_bin_cntr__parameterized1_35                          |    31|
-|330   |                \gntv_or_sync_fifo.mem                                                    |memory__parameterized1_27                               |    11|
-|331   |                  \gbm.gbmg.gbmga.ngecc.bmg                                               |blk_mem_gen_v8_4_1__parameterized3_28                   |    11|
-|332   |                    inst_blk_mem_gen                                                      |blk_mem_gen_v8_4_1_synth__parameterized1_29             |    11|
-|333   |                      \gnbram.gnativebmg.native_blk_mem_gen                               |blk_mem_gen_top__parameterized1_30                      |    11|
-|334   |                        \valid.cstr                                                       |blk_mem_gen_generic_cstr__parameterized1_31             |    11|
-|335   |                          \ramloop[0].ram.r                                               |blk_mem_gen_prim_width__parameterized4_32               |    11|
-|336   |                            \prim_noinit.ram                                              |blk_mem_gen_prim_wrapper__parameterized4_33             |     2|
-|337   |                rstblk                                                                    |reset_blk_ramfifo__parameterized0__xdcDup__2            |    16|
-|338   |                  \ngwrdrst.grst.g7serrst.gsckt_wrst.xpm_cdc_sync_rst_inst_wrst           |xpm_cdc_sync_rst__25                                    |     5|
-|339   |      MicrorocChain3DataFIFO                                                              |MicrorocChainDataFifo__xdcDup__3                        |   141|
-|340   |        U0                                                                                |fifo_generator_v13_2_2__parameterized3__xdcDup__3       |   141|
-|341   |          inst_fifo_gen                                                                   |fifo_generator_v13_2_2_synth__parameterized1__xdcDup__3 |   141|
-|342   |            \gconvfifo.rf                                                                 |fifo_generator_top__parameterized1__xdcDup__3           |   141|
-|343   |              \grf.rf                                                                     |fifo_generator_ramfifo__parameterized1__xdcDup__3       |   141|
-|344   |                \gntv_or_sync_fifo.gl0.rd                                                 |rd_logic__parameterized1_8                              |    66|
-|345   |                  \grss.rsts                                                              |rd_status_flags_ss_21                                   |    15|
-|346   |                    c1                                                                    |compare__parameterized1_23                              |     5|
-|347   |                    c2                                                                    |compare__parameterized1_24                              |     6|
-|348   |                  rpntr                                                                   |rd_bin_cntr__parameterized1_22                          |    51|
-|349   |                \gntv_or_sync_fifo.gl0.wr                                                 |wr_logic__parameterized1_9                              |    48|
-|350   |                  \gwss.wsts                                                              |wr_status_flags_ss_17                                   |    17|
-|351   |                    c0                                                                    |compare__parameterized1_19                              |     6|
-|352   |                    c1                                                                    |compare__parameterized1_20                              |     5|
-|353   |                  wpntr                                                                   |wr_bin_cntr__parameterized1_18                          |    31|
-|354   |                \gntv_or_sync_fifo.mem                                                    |memory__parameterized1_10                               |    11|
-|355   |                  \gbm.gbmg.gbmga.ngecc.bmg                                               |blk_mem_gen_v8_4_1__parameterized3_11                   |    11|
-|356   |                    inst_blk_mem_gen                                                      |blk_mem_gen_v8_4_1_synth__parameterized1_12             |    11|
-|357   |                      \gnbram.gnativebmg.native_blk_mem_gen                               |blk_mem_gen_top__parameterized1_13                      |    11|
-|358   |                        \valid.cstr                                                       |blk_mem_gen_generic_cstr__parameterized1_14             |    11|
-|359   |                          \ramloop[0].ram.r                                               |blk_mem_gen_prim_width__parameterized4_15               |    11|
-|360   |                            \prim_noinit.ram                                              |blk_mem_gen_prim_wrapper__parameterized4_16             |     2|
-|361   |                rstblk                                                                    |reset_blk_ramfifo__parameterized0__xdcDup__3            |    16|
-|362   |                  \ngwrdrst.grst.g7serrst.gsckt_wrst.xpm_cdc_sync_rst_inst_wrst           |xpm_cdc_sync_rst__24                                    |     5|
-|363   |      MicrorocChain4DataFIFO                                                              |MicrorocChainDataFifo                                   |   141|
-|364   |        U0                                                                                |fifo_generator_v13_2_2__parameterized3                  |   141|
-|365   |          inst_fifo_gen                                                                   |fifo_generator_v13_2_2_synth__parameterized1            |   141|
-|366   |            \gconvfifo.rf                                                                 |fifo_generator_top__parameterized1                      |   141|
-|367   |              \grf.rf                                                                     |fifo_generator_ramfifo__parameterized1                  |   141|
-|368   |                \gntv_or_sync_fifo.gl0.rd                                                 |rd_logic__parameterized1                                |    66|
-|369   |                  \grss.rsts                                                              |rd_status_flags_ss                                      |    15|
-|370   |                    c1                                                                    |compare__parameterized1_6                               |     5|
-|371   |                    c2                                                                    |compare__parameterized1_7                               |     6|
-|372   |                  rpntr                                                                   |rd_bin_cntr__parameterized1                             |    51|
-|373   |                \gntv_or_sync_fifo.gl0.wr                                                 |wr_logic__parameterized1                                |    48|
-|374   |                  \gwss.wsts                                                              |wr_status_flags_ss                                      |    17|
-|375   |                    c0                                                                    |compare__parameterized1                                 |     6|
-|376   |                    c1                                                                    |compare__parameterized1_5                               |     5|
-|377   |                  wpntr                                                                   |wr_bin_cntr__parameterized1                             |    31|
-|378   |                \gntv_or_sync_fifo.mem                                                    |memory__parameterized1                                  |    11|
-|379   |                  \gbm.gbmg.gbmga.ngecc.bmg                                               |blk_mem_gen_v8_4_1__parameterized3                      |    11|
-|380   |                    inst_blk_mem_gen                                                      |blk_mem_gen_v8_4_1_synth__parameterized1                |    11|
-|381   |                      \gnbram.gnativebmg.native_blk_mem_gen                               |blk_mem_gen_top__parameterized1                         |    11|
-|382   |                        \valid.cstr                                                       |blk_mem_gen_generic_cstr__parameterized1                |    11|
-|383   |                          \ramloop[0].ram.r                                               |blk_mem_gen_prim_width__parameterized4                  |    11|
-|384   |                            \prim_noinit.ram                                              |blk_mem_gen_prim_wrapper__parameterized4                |     2|
-|385   |                rstblk                                                                    |reset_blk_ramfifo__parameterized0__xdcDup__4            |    16|
-|386   |                  \ngwrdrst.grst.g7serrst.gsckt_wrst.xpm_cdc_sync_rst_inst_wrst           |xpm_cdc_sync_rst__23                                    |     5|
-|387   |    MicrorocSCurveTest                                                                    |SCurve_Test_Top                                         |  2392|
-|388   |      SC_test_control                                                                     |SCurve_Test_Control                                     |  1464|
-|389   |      scurve_data_fifo_16x16                                                              |SCurveDataFifo                                          |    69|
-|390   |        U0                                                                                |fifo_generator_v13_2_2__parameterized5                  |    69|
-|391   |          inst_fifo_gen                                                                   |fifo_generator_v13_2_2_synth__parameterized2            |    69|
-|392   |            \gconvfifo.rf                                                                 |fifo_generator_top__parameterized2                      |    69|
-|393   |              \grf.rf                                                                     |fifo_generator_ramfifo__parameterized2                  |    69|
-|394   |                \gntv_or_sync_fifo.gl0.rd                                                 |rd_logic__parameterized2                                |    16|
-|395   |                  \grss.rsts                                                              |rd_status_flags_ss__parameterized0                      |     3|
-|396   |                  rpntr                                                                   |rd_bin_cntr__parameterized2                             |    13|
-|397   |                \gntv_or_sync_fifo.gl0.wr                                                 |wr_logic__parameterized2                                |    26|
-|398   |                  \gwss.wsts                                                              |wr_status_flags_ss__parameterized0                      |     6|
-|399   |                  wpntr                                                                   |wr_bin_cntr__parameterized2                             |    20|
-|400   |                \gntv_or_sync_fifo.mem                                                    |memory__parameterized2                                  |    10|
-|401   |                  \gbm.gbmg.gbmga.ngecc.bmg                                               |blk_mem_gen_v8_4_1__parameterized5                      |    10|
-|402   |                    inst_blk_mem_gen                                                      |blk_mem_gen_v8_4_1_synth__parameterized2                |    10|
-|403   |                      \gnbram.gnativebmg.native_blk_mem_gen                               |blk_mem_gen_top__parameterized2                         |    10|
-|404   |                        \valid.cstr                                                       |blk_mem_gen_generic_cstr__parameterized2                |    10|
-|405   |                          \ramloop[0].ram.r                                               |blk_mem_gen_prim_width__parameterized5                  |    10|
-|406   |                            \prim_noinit.ram                                              |blk_mem_gen_prim_wrapper__parameterized5                |     1|
-|407   |                rstblk                                                                    |reset_blk_ramfifo__parameterized0                       |    17|
-|408   |                  \ngwrdrst.grst.g7serrst.gsckt_wrst.xpm_cdc_sync_rst_inst_wrst           |xpm_cdc_sync_rst__22                                    |     5|
-|409   |      SC_test_single                                                                      |SCurve_Single_Test                                      |   530|
-|410   |        Trigger0                                                                          |SCurve_Single_Input                                     |   131|
-|411   |        Trigger1                                                                          |SCurve_Single_Input_3                                   |   140|
-|412   |        Trigger2                                                                          |SCurve_Single_Input_4                                   |   123|
-|413   |  usb_cy7c68013A                                                                          |usb_synchronous_slavefifo                               |    66|
-|414   |  UsbDataFifo                                                                             |ExternalDataFifo                                        |   368|
-|415   |    U0                                                                                    |fifo_generator_v13_2_2                                  |   368|
-|416   |      inst_fifo_gen                                                                       |fifo_generator_v13_2_2_synth                            |   368|
-|417   |        \gconvfifo.rf                                                                     |fifo_generator_top                                      |   368|
-|418   |          \grf.rf                                                                         |fifo_generator_ramfifo                                  |   368|
-|419   |            \gntv_or_sync_fifo.gcx.clkx                                                   |clk_x_pntrs                                             |   152|
-|420   |              wr_pntr_cdc_inst                                                            |xpm_cdc_gray__1                                         |    76|
-|421   |              rd_pntr_cdc_inst                                                            |xpm_cdc_gray                                            |    76|
-|422   |            \gntv_or_sync_fifo.gl0.rd                                                     |rd_logic                                                |    66|
-|423   |              \gras.rsts                                                                  |rd_status_flags_as                                      |    33|
-|424   |                c0                                                                        |compare_1                                               |    14|
-|425   |                c1                                                                        |compare_2                                               |    14|
-|426   |              rpntr                                                                       |rd_bin_cntr                                             |    33|
-|427   |            \gntv_or_sync_fifo.gl0.wr                                                     |wr_logic                                                |    78|
-|428   |              \gwas.wsts                                                                  |wr_status_flags_as                                      |    33|
-|429   |                c1                                                                        |compare                                                 |    14|
-|430   |                c2                                                                        |compare_0                                               |    14|
-|431   |              wpntr                                                                       |wr_bin_cntr                                             |    45|
-|432   |            \gntv_or_sync_fifo.mem                                                        |memory                                                  |    36|
-|433   |              \gbm.gbmg.gbmga.ngecc.bmg                                                   |blk_mem_gen_v8_4_1                                      |    36|
-|434   |                inst_blk_mem_gen                                                          |blk_mem_gen_v8_4_1_synth                                |    36|
-|435   |                  \gnbram.gnativebmg.native_blk_mem_gen                                   |blk_mem_gen_top                                         |    36|
-|436   |                    \valid.cstr                                                           |blk_mem_gen_generic_cstr                                |    36|
-|437   |                      \has_mux_b.B                                                        |blk_mem_gen_mux__parameterized0                         |    17|
-|438   |                      \ramloop[0].ram.r                                                   |blk_mem_gen_prim_width                                  |     1|
-|439   |                        \prim_noinit.ram                                                  |blk_mem_gen_prim_wrapper                                |     1|
-|440   |                      \ramloop[1].ram.r                                                   |blk_mem_gen_prim_width__parameterized0                  |     1|
-|441   |                        \prim_noinit.ram                                                  |blk_mem_gen_prim_wrapper__parameterized0                |     1|
-|442   |                      \ramloop[2].ram.r                                                   |blk_mem_gen_prim_width__parameterized1                  |    16|
-|443   |                        \prim_noinit.ram                                                  |blk_mem_gen_prim_wrapper__parameterized1                |     1|
-|444   |                      \ramloop[3].ram.r                                                   |blk_mem_gen_prim_width__parameterized2                  |     1|
-|445   |                        \prim_noinit.ram                                                  |blk_mem_gen_prim_wrapper__parameterized2                |     1|
-|446   |            rstblk                                                                        |reset_blk_ramfifo__xdcDup__1                            |    36|
-|447   |              \ngwrdrst.grst.g7serrst.gsckt_wrst.xpm_cdc_sync_rst_inst_wrst               |xpm_cdc_sync_rst__18                                    |     5|
-|448   |              \ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_sync_rst_inst_wrst       |xpm_cdc_sync_rst__19                                    |     5|
-|449   |              \ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_single_inst_wrst_rd      |xpm_cdc_single__14                                      |     5|
-|450   |              \ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_single_inst_rrst_wr      |xpm_cdc_single__15                                      |     5|
-|451   |  ClockGenerator                                                                          |ClockManagement                                         |    11|
-|452   |  CommonControlSignalGenerator                                                            |MicrorocCommonControl                                   |   523|
-|453   |    ExternalRazGen                                                                        |ExternalRazGenerate                                     |    39|
-|454   |    HoldGen                                                                               |HoldGenerate                                            |   444|
-|455   |    RamReadDoneDetect                                                                     |RamReadDoneSync4Chain                                   |    19|
-|456   |    TimeStampSyncAndTrigger                                                               |TimeStampSyncAndDataTrigger                             |    17|
-|457   |  TriggerSwitcher                                                                         |TriggerSwitcher                                         |    17|
+|35    |      ParameterGen                                                                        |ParameterGenerator_102                                  |  1381|
+|36    |      ParameterShiftOut                                                                   |BitShiftOut_103                                         |    74|
+|37    |      PulseSync                                                                           |PulseSynchronous_104                                    |     8|
+|38    |    SynchronousDataEnableToSystem                                                         |PulseSynchronous_101                                    |     9|
+|39    |  MicrorocChain4                                                                          |MicrorocControl                                         |  2175|
+|40    |    ReadOnChipRam                                                                         |AsicRamReadout__4                                       |    65|
+|41    |    MicrorocDaq                                                                           |DaqControl_80                                           |   446|
+|42    |      AutoDaqControl                                                                      |AutoDaq_98                                              |   109|
+|43    |      SlaveDaqControl                                                                     |SlaveDaq_99                                             |   334|
+|44    |    SlowControlAndReadScope                                                               |SlowControlAndReadScopeSet                              |  1646|
+|45    |      ConfigParameter                                                                     |ConfigParameterFIFO                                     |   183|
+|46    |        U0                                                                                |fifo_generator_v13_2_2__parameterized7                  |   183|
+|47    |          inst_fifo_gen                                                                   |fifo_generator_v13_2_2_synth__parameterized3            |   183|
+|48    |            \gconvfifo.rf                                                                 |fifo_generator_top__parameterized3                      |   183|
+|49    |              \grf.rf                                                                     |fifo_generator_ramfifo__parameterized3                  |   183|
+|50    |                \gntv_or_sync_fifo.gcx.clkx                                               |clk_x_pntrs__parameterized1                             |    75|
+|51    |                  wr_pntr_cdc_inst                                                        |xpm_cdc_gray__parameterized1__4                         |    34|
+|52    |                  rd_pntr_cdc_inst                                                        |xpm_cdc_gray__parameterized1__5                         |    34|
+|53    |                \gntv_or_sync_fifo.gl0.rd                                                 |rd_logic__parameterized3_85                             |    28|
+|54    |                  \gras.rsts                                                              |rd_status_flags_as__parameterized1_96                   |     3|
+|55    |                  rpntr                                                                   |rd_bin_cntr__parameterized3_97                          |    25|
+|56    |                \gntv_or_sync_fifo.gl0.wr                                                 |wr_logic__parameterized3_86                             |    27|
+|57    |                  \gwas.wsts                                                              |wr_status_flags_as__parameterized1_94                   |     3|
+|58    |                  wpntr                                                                   |wr_bin_cntr__parameterized3_95                          |    24|
+|59    |                \gntv_or_sync_fifo.mem                                                    |memory__parameterized3_87                               |    17|
+|60    |                  \gbm.gbmg.gbmga.ngecc.bmg                                               |blk_mem_gen_v8_4_1__parameterized7_88                   |    17|
+|61    |                    inst_blk_mem_gen                                                      |blk_mem_gen_v8_4_1_synth__parameterized3_89             |    17|
+|62    |                      \gnbram.gnativebmg.native_blk_mem_gen                               |blk_mem_gen_top__parameterized3_90                      |    17|
+|63    |                        \valid.cstr                                                       |blk_mem_gen_generic_cstr__parameterized3_91             |    17|
+|64    |                          \ramloop[0].ram.r                                               |blk_mem_gen_prim_width__parameterized6_92               |    17|
+|65    |                            \prim_noinit.ram                                              |blk_mem_gen_prim_wrapper__parameterized6_93             |     3|
+|66    |                rstblk                                                                    |reset_blk_ramfifo                                       |    36|
+|67    |                  \ngwrdrst.grst.g7serrst.gsckt_wrst.xpm_cdc_sync_rst_inst_wrst           |xpm_cdc_sync_rst__10                                    |     5|
+|68    |                  \ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_sync_rst_inst_wrst   |xpm_cdc_sync_rst__11                                    |     5|
+|69    |                  \ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_single_inst_wrst_rd  |xpm_cdc_single__6                                       |     5|
+|70    |                  \ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_single_inst_rrst_wr  |xpm_cdc_single__7                                       |     5|
+|71    |      ParameterGen                                                                        |ParameterGenerator_82                                   |  1381|
+|72    |      ParameterShiftOut                                                                   |BitShiftOut_83                                          |    74|
+|73    |      PulseSync                                                                           |PulseSynchronous_84                                     |     8|
+|74    |    SynchronousDataEnableToSystem                                                         |PulseSynchronous_81                                     |     9|
+|75    |  Command                                                                                 |CommandInterpreter                                      |  3029|
+|76    |    CommandFifo32Depth                                                                    |CommandFifo                                             |   160|
+|77    |      U0                                                                                  |fifo_generator_v13_2_2__parameterized1                  |   160|
+|78    |        inst_fifo_gen                                                                     |fifo_generator_v13_2_2_synth__parameterized0            |   160|
+|79    |          \gconvfifo.rf                                                                   |fifo_generator_top__parameterized0                      |   160|
+|80    |            \grf.rf                                                                       |fifo_generator_ramfifo__parameterized0                  |   160|
+|81    |              \gntv_or_sync_fifo.gcx.clkx                                                 |clk_x_pntrs__parameterized0                             |    60|
+|82    |                wr_pntr_cdc_inst                                                          |xpm_cdc_gray__parameterized0__1                         |    28|
+|83    |                rd_pntr_cdc_inst                                                          |xpm_cdc_gray__parameterized0                            |    28|
+|84    |              \gntv_or_sync_fifo.gl0.rd                                                   |rd_logic__parameterized0                                |    21|
+|85    |                \gras.rsts                                                                |rd_status_flags_as__parameterized0                      |     3|
+|86    |                rpntr                                                                     |rd_bin_cntr__parameterized0                             |    18|
+|87    |              \gntv_or_sync_fifo.gl0.wr                                                   |wr_logic__parameterized0                                |    26|
+|88    |                \gwas.wsts                                                                |wr_status_flags_as__parameterized0                      |     3|
+|89    |                wpntr                                                                     |wr_bin_cntr__parameterized0                             |    23|
+|90    |              \gntv_or_sync_fifo.mem                                                      |memory__parameterized0                                  |    17|
+|91    |                \gbm.gbmg.gbmga.ngecc.bmg                                                 |blk_mem_gen_v8_4_1__parameterized1                      |    17|
+|92    |                  inst_blk_mem_gen                                                        |blk_mem_gen_v8_4_1_synth__parameterized0                |    17|
+|93    |                    \gnbram.gnativebmg.native_blk_mem_gen                                 |blk_mem_gen_top__parameterized0                         |    17|
+|94    |                      \valid.cstr                                                         |blk_mem_gen_generic_cstr__parameterized0                |    17|
+|95    |                        \ramloop[0].ram.r                                                 |blk_mem_gen_prim_width__parameterized3                  |    17|
+|96    |                          \prim_noinit.ram                                                |blk_mem_gen_prim_wrapper__parameterized3                |     3|
+|97    |              rstblk                                                                      |reset_blk_ramfifo__xdcDup__2                            |    36|
+|98    |                \ngwrdrst.grst.g7serrst.gsckt_wrst.xpm_cdc_sync_rst_inst_wrst             |xpm_cdc_sync_rst__20                                    |     5|
+|99    |                \ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_sync_rst_inst_wrst     |xpm_cdc_sync_rst__21                                    |     5|
+|100   |                \ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_single_inst_wrst_rd    |xpm_cdc_single__16                                      |     5|
+|101   |                \ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_single_inst_rrst_wr    |xpm_cdc_single                                          |     5|
+|102   |    AcquisitionStartStopSet                                                               |CommandDecoder__parameterized102                        |     6|
+|103   |    AdcDataNumberSet3to0                                                                  |CommandDecoder__parameterized87                         |     5|
+|104   |    AdcDataNumberSet7to4                                                                  |CommandDecoder__parameterized88                         |     5|
+|105   |    AdcStartDelayTimeSet                                                                  |CommandDecoder__parameterized86                         |     5|
+|106   |    AsicChainSelectSet                                                                    |CommandDecoder__parameterized101                        |     5|
+|107   |    BandGapEnable                                                                         |CommandDecoder__parameterized22                         |     2|
+|108   |    BandGapPPEnable                                                                       |CommandDecoder__parameterized41                         |     2|
+|109   |    CTestChannel3to0                                                                      |CommandDecoder__parameterized35                         |    52|
+|110   |    CTestChannel7to4                                                                      |CommandDecoder__parameterized36                         |    55|
+|111   |    CTestOrInputSelect                                                                    |CommandDecoder__parameterized65                         |     2|
+|112   |    ChipID3to0                                                                            |CommandDecoder__parameterized23                         |     5|
+|113   |    ChipID7to4                                                                            |CommandDecoder__parameterized24                         |     5|
+|114   |    CkMux                                                                                 |CommandDecoder__parameterized5                          |     2|
+|115   |    CounterMaxSet11to8                                                                    |CommandDecoder__parameterized78                         |     5|
+|116   |    CounterMaxSet15to12                                                                   |CommandDecoder__parameterized79                         |     5|
+|117   |    CounterMaxSet3to0                                                                     |CommandDecoder__parameterized76                         |     5|
+|118   |    CounterMaxSet7to4                                                                     |CommandDecoder__parameterized77                         |     5|
+|119   |    Dac0Vth3to0                                                                           |CommandDecoder__parameterized18                         |     5|
+|120   |    Dac0Vth7to4                                                                           |CommandDecoder__parameterized19                         |     5|
+|121   |    Dac0Vth9to8                                                                           |CommandDecoder__parameterized20                         |     3|
+|122   |    Dac1Vth3to0                                                                           |CommandDecoder__parameterized15                         |     5|
+|123   |    Dac1Vth7to4                                                                           |CommandDecoder__parameterized16                         |     5|
+|124   |    Dac1Vth9to8                                                                           |CommandDecoder__parameterized17                         |     3|
+|125   |    Dac2Vth3to0                                                                           |CommandDecoder__parameterized12                         |     5|
+|126   |    Dac2Vth7to4                                                                           |CommandDecoder__parameterized13                         |     5|
+|127   |    Dac2Vth9to8                                                                           |CommandDecoder__parameterized14                         |     5|
+|128   |    Dac4bitPPEnable                                                                       |CommandDecoder__parameterized44                         |     2|
+|129   |    DacEnable                                                                             |CommandDecoder__parameterized21                         |     2|
+|130   |    DacPPEnable                                                                           |CommandDecoder__parameterized40                         |     2|
+|131   |    DaqModeSelect                                                                         |CommandDecoder__parameterized109                        |     2|
+|132   |    DataFifoReset                                                                         |CommandDecoder__parameterized103                        |     3|
+|133   |    DataoutChannelSelect                                                                  |CommandDecoder__parameterized0                          |     3|
+|134   |    DiscriMaskSet                                                                         |CommandDecoder__parameterized27                         |   990|
+|135   |    DiscriminatorPPEnable                                                                 |CommandDecoder__parameterized42                         |     2|
+|136   |    EnablePowerPulsingPin                                                                 |CommandDecoder__parameterized105                        |     2|
+|137   |    EndHoldTimeSet11to8                                                                   |CommandDecoder__parameterized99                         |     5|
+|138   |    EndHoldTimeSet15to12                                                                  |CommandDecoder__parameterized100                        |     5|
+|139   |    EndHoldTimeSet3to0                                                                    |CommandDecoder__parameterized97                         |     5|
+|140   |    EndHoldTimeSet7to4                                                                    |CommandDecoder__parameterized98                         |     5|
+|141   |    EndReadoutChannelSelect                                                               |CommandDecoder__parameterized3                          |     2|
+|142   |    EndReadoutParameterGenerator                                                          |CommandDecoder__parameterized106                        |     5|
+|143   |    ExternalAdcStartStop                                                                  |CommandDecoder__parameterized85                         |     3|
+|144   |    ExternalRazDelayTime                                                                  |CommandDecoder__parameterized51                         |     5|
+|145   |    ExternalRazMode                                                                       |CommandDecoder__parameterized50                         |     3|
+|146   |    ExternalRazSignalEnable                                                               |CommandDecoder__parameterized6                          |     2|
+|147   |    ExternalTriggerEnable                                                                 |CommandDecoder__parameterized8                          |     2|
+|148   |    GainBoostEnable                                                                       |CommandDecoder__parameterized34                         |     2|
+|149   |    HighGainShaperFeedbackSelect                                                          |CommandDecoder__parameterized31                         |     3|
+|150   |    HighGainShaperPPEnable                                                                |CommandDecoder__parameterized47                         |     2|
+|151   |    HoldDelaySet3to0                                                                      |CommandDecoder__parameterized90                         |     5|
+|152   |    HoldDelaySet7to4                                                                      |CommandDecoder__parameterized91                         |     5|
+|153   |    HoldEnableSet                                                                         |CommandDecoder__parameterized96                         |     2|
+|154   |    HoldTimeSet11to8                                                                      |CommandDecoder__parameterized94                         |     5|
+|155   |    HoldTimeSet15to12                                                                     |CommandDecoder__parameterized95                         |     5|
+|156   |    HoldTimeSet3to0                                                                       |CommandDecoder__parameterized92                         |     5|
+|157   |    HoldTimeSet7to4                                                                       |CommandDecoder__parameterized93                         |     5|
+|158   |    InternalRazSignalEnable                                                               |CommandDecoder__parameterized7                          |     2|
+|159   |    InternalRazSignalLenth                                                                |CommandDecoder__parameterized4                          |     3|
+|160   |    LatchedOrDirectOutput                                                                 |CommandDecoder__parameterized29                         |     2|
+|161   |    LightLed                                                                              |CommandDecoder__parameterized115                        |     6|
+|162   |    LowGainShaperFeedbackSelect                                                           |CommandDecoder__parameterized33                         |     3|
+|163   |    LowGainShaperPPEnable                                                                 |CommandDecoder__parameterized46                         |     2|
+|164   |    LvdsReceiverPPEnable                                                                  |CommandDecoder__parameterized39                         |     2|
+|165   |    MaskChannel3to0                                                                       |CommandDecoder__parameterized25                         |    13|
+|166   |    MaskChannel5to4                                                                       |CommandDecoder__parameterized26                         |     5|
+|167   |    MaskSet                                                                               |CommandDecoder__parameterized28                         |   390|
+|168   |    OTAqEnable                                                                            |CommandDecoder__parameterized30                         |     2|
+|169   |    OTAqPPEnable                                                                          |CommandDecoder__parameterized43                         |     2|
+|170   |    ParameterLoadStart                                                                    |CommandDecoder__parameterized52                         |     4|
+|171   |    PreAmplifierPPEnable                                                                  |CommandDecoder__parameterized48                         |     3|
+|172   |    ReadScopeChannel3to0                                                                  |CommandDecoder__parameterized37                         |    54|
+|173   |    ReadScopeChannel7to4                                                                  |CommandDecoder__parameterized38                         |    47|
+|174   |    ReadoutChannelSelect                                                                  |CommandDecoder__parameterized49                         |     2|
+|175   |    ResetMicrorocAcq                                                                      |CommandDecoder__parameterized84                         |     3|
+|176   |    RunningModeSelect                                                                     |CommandDecoder__parameterized53                         |     7|
+|177   |    SelectSCurveTestAsic                                                                  |CommandDecoder__parameterized108                        |     5|
+|178   |    SetAsicNumber                                                                         |CommandDecoder__parameterized107                        |     5|
+|179   |    SetStartAcquisitionTime11to8                                                          |CommandDecoder__parameterized112                        |     5|
+|180   |    SetStartAcquisitionTime15to12                                                         |CommandDecoder__parameterized113                        |     5|
+|181   |    SetStartAcquisitionTime3to0                                                           |CommandDecoder__parameterized110                        |     5|
+|182   |    SetStartAcquisitionTime7to4                                                           |CommandDecoder__parameterized111                        |     5|
+|183   |    ShaperOutLowGainOrHighGain                                                            |CommandDecoder__parameterized32                         |     2|
+|184   |    SingleOr64ChannelSelect                                                               |CommandDecoder__parameterized64                         |     2|
+|185   |    SingleTestChannelSet3to0                                                              |CommandDecoder__parameterized66                         |     5|
+|186   |    SingleTestChannelSet5to4                                                              |CommandDecoder__parameterized67                         |     3|
+|187   |    SlowControlOrReadScopeSelect                                                          |CommandDecoder                                          |     2|
+|188   |    StartReadoutChannelSelect                                                             |CommandDecoder__parameterized2                          |     2|
+|189   |    SweepAcqMaxPackageNumberSet11to8                                                      |CommandDecoder__parameterized82                         |     5|
+|190   |    SweepAcqMaxPackageNumberSet15to12                                                     |CommandDecoder__parameterized83                         |     5|
+|191   |    SweepAcqMaxPackageNumberSet3to0                                                       |CommandDecoder__parameterized80                         |     5|
+|192   |    SweepAcqMaxPackageNumberSet7to4                                                       |CommandDecoder__parameterized81                         |     5|
+|193   |    SweepDacEndValue3to0                                                                  |CommandDecoder__parameterized58                         |     5|
+|194   |    SweepDacEndValue7to4                                                                  |CommandDecoder__parameterized59                         |     5|
+|195   |    SweepDacEndValue9to8                                                                  |CommandDecoder__parameterized60                         |     3|
+|196   |    SweepDacSelect                                                                        |CommandDecoder__parameterized54                         |     3|
+|197   |    SweepDacStartValue3to0                                                                |CommandDecoder__parameterized55                         |     5|
+|198   |    SweepDacStartValue7to4                                                                |CommandDecoder__parameterized56                         |     5|
+|199   |    SweepDacStartValue9to8                                                                |CommandDecoder__parameterized57                         |     3|
+|200   |    SweepDacStepValue3to0                                                                 |CommandDecoder__parameterized61                         |     5|
+|201   |    SweepDacStepValue7to4                                                                 |CommandDecoder__parameterized62                         |     5|
+|202   |    SweepDacStepValue9to8                                                                 |CommandDecoder__parameterized63                         |     3|
+|203   |    SweepTestStartStopSet                                                                 |CommandDecoder__parameterized73                         |     4|
+|204   |    TestSignalColumnSelect                                                                |CommandDecoder__parameterized114                        |     4|
+|205   |    TimeStampReset                                                                        |CommandDecoder__parameterized104                        |     3|
+|206   |    TransmitOnChannelSelect                                                               |CommandDecoder__parameterized1                          |     3|
+|207   |    TriggerCoincidenceSet                                                                 |CommandDecoder__parameterized89                         |     5|
+|208   |    TriggerCountMaxSet11to8                                                               |CommandDecoder__parameterized70                         |     5|
+|209   |    TriggerCountMaxSet15to12                                                              |CommandDecoder__parameterized71                         |     5|
+|210   |    TriggerCountMaxSet3to0                                                                |CommandDecoder__parameterized68                         |     6|
+|211   |    TriggerCountMaxSet7to4                                                                |CommandDecoder__parameterized69                         |     5|
+|212   |    TriggerDelaySet                                                                       |CommandDecoder__parameterized72                         |     5|
+|213   |    TriggerEfficiencyOrCountEfficiencySet                                                 |CommandDecoder__parameterized75                         |     2|
+|214   |    TriggerNor64OrDirectSelect                                                            |CommandDecoder__parameterized9                          |     2|
+|215   |    TriggerOutputEnable                                                                   |CommandDecoder__parameterized10                         |     2|
+|216   |    TriggerToWriteSelect                                                                  |CommandDecoder__parameterized11                         |     4|
+|217   |    UnmaskAllChannelSet                                                                   |CommandDecoder__parameterized74                         |     2|
+|218   |    WidlarPPEnable                                                                        |CommandDecoder__parameterized45                         |     2|
+|219   |  MicrorocChain2                                                                          |MicrorocControl__xdcDup__2                              |  2175|
+|220   |    ReadOnChipRam                                                                         |AsicRamReadout                                          |    65|
+|221   |    MicrorocDaq                                                                           |DaqControl_60                                           |   446|
+|222   |      AutoDaqControl                                                                      |AutoDaq_78                                              |   109|
+|223   |      SlaveDaqControl                                                                     |SlaveDaq_79                                             |   334|
+|224   |    SlowControlAndReadScope                                                               |SlowControlAndReadScopeSet__xdcDup__2                   |  1646|
+|225   |      ConfigParameter                                                                     |ConfigParameterFIFO__xdcDup__2                          |   183|
+|226   |        U0                                                                                |fifo_generator_v13_2_2__parameterized7__xdcDup__2       |   183|
+|227   |          inst_fifo_gen                                                                   |fifo_generator_v13_2_2_synth__parameterized3__xdcDup__2 |   183|
+|228   |            \gconvfifo.rf                                                                 |fifo_generator_top__parameterized3__xdcDup__2           |   183|
+|229   |              \grf.rf                                                                     |fifo_generator_ramfifo__parameterized3__xdcDup__2       |   183|
+|230   |                \gntv_or_sync_fifo.gcx.clkx                                               |clk_x_pntrs__parameterized1__xdcDup__2                  |    75|
+|231   |                  wr_pntr_cdc_inst                                                        |xpm_cdc_gray__parameterized1__10                        |    34|
+|232   |                  rd_pntr_cdc_inst                                                        |xpm_cdc_gray__parameterized1                            |    34|
+|233   |                \gntv_or_sync_fifo.gl0.rd                                                 |rd_logic__parameterized3_65                             |    28|
+|234   |                  \gras.rsts                                                              |rd_status_flags_as__parameterized1_76                   |     3|
+|235   |                  rpntr                                                                   |rd_bin_cntr__parameterized3_77                          |    25|
+|236   |                \gntv_or_sync_fifo.gl0.wr                                                 |wr_logic__parameterized3_66                             |    27|
+|237   |                  \gwas.wsts                                                              |wr_status_flags_as__parameterized1_74                   |     3|
+|238   |                  wpntr                                                                   |wr_bin_cntr__parameterized3_75                          |    24|
+|239   |                \gntv_or_sync_fifo.mem                                                    |memory__parameterized3_67                               |    17|
+|240   |                  \gbm.gbmg.gbmga.ngecc.bmg                                               |blk_mem_gen_v8_4_1__parameterized7_68                   |    17|
+|241   |                    inst_blk_mem_gen                                                      |blk_mem_gen_v8_4_1_synth__parameterized3_69             |    17|
+|242   |                      \gnbram.gnativebmg.native_blk_mem_gen                               |blk_mem_gen_top__parameterized3_70                      |    17|
+|243   |                        \valid.cstr                                                       |blk_mem_gen_generic_cstr__parameterized3_71             |    17|
+|244   |                          \ramloop[0].ram.r                                               |blk_mem_gen_prim_width__parameterized6_72               |    17|
+|245   |                            \prim_noinit.ram                                              |blk_mem_gen_prim_wrapper__parameterized6_73             |     3|
+|246   |                rstblk                                                                    |reset_blk_ramfifo__xdcDup__4                            |    36|
+|247   |                  \ngwrdrst.grst.g7serrst.gsckt_wrst.xpm_cdc_sync_rst_inst_wrst           |xpm_cdc_sync_rst__16                                    |     5|
+|248   |                  \ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_sync_rst_inst_wrst   |xpm_cdc_sync_rst__17                                    |     5|
+|249   |                  \ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_single_inst_wrst_rd  |xpm_cdc_single__12                                      |     5|
+|250   |                  \ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_single_inst_rrst_wr  |xpm_cdc_single__13                                      |     5|
+|251   |      ParameterGen                                                                        |ParameterGenerator_62                                   |  1381|
+|252   |      ParameterShiftOut                                                                   |BitShiftOut_63                                          |    74|
+|253   |      PulseSync                                                                           |PulseSynchronous_64                                     |     8|
+|254   |    SynchronousDataEnableToSystem                                                         |PulseSynchronous_61                                     |     9|
+|255   |  MicrorocChain1                                                                          |MicrorocControl__xdcDup__1                              |  2175|
+|256   |    ReadOnChipRam                                                                         |AsicRamReadout__6                                       |    65|
+|257   |    MicrorocDaq                                                                           |DaqControl                                              |   446|
+|258   |      AutoDaqControl                                                                      |AutoDaq                                                 |   109|
+|259   |      SlaveDaqControl                                                                     |SlaveDaq                                                |   334|
+|260   |    SlowControlAndReadScope                                                               |SlowControlAndReadScopeSet__xdcDup__1                   |  1646|
+|261   |      ConfigParameter                                                                     |ConfigParameterFIFO__xdcDup__1                          |   183|
+|262   |        U0                                                                                |fifo_generator_v13_2_2__parameterized7__xdcDup__1       |   183|
+|263   |          inst_fifo_gen                                                                   |fifo_generator_v13_2_2_synth__parameterized3__xdcDup__1 |   183|
+|264   |            \gconvfifo.rf                                                                 |fifo_generator_top__parameterized3__xdcDup__1           |   183|
+|265   |              \grf.rf                                                                     |fifo_generator_ramfifo__parameterized3__xdcDup__1       |   183|
+|266   |                \gntv_or_sync_fifo.gcx.clkx                                               |clk_x_pntrs__parameterized1__xdcDup__1                  |    75|
+|267   |                  wr_pntr_cdc_inst                                                        |xpm_cdc_gray__parameterized1__8                         |    34|
+|268   |                  rd_pntr_cdc_inst                                                        |xpm_cdc_gray__parameterized1__9                         |    34|
+|269   |                \gntv_or_sync_fifo.gl0.rd                                                 |rd_logic__parameterized3                                |    28|
+|270   |                  \gras.rsts                                                              |rd_status_flags_as__parameterized1                      |     3|
+|271   |                  rpntr                                                                   |rd_bin_cntr__parameterized3                             |    25|
+|272   |                \gntv_or_sync_fifo.gl0.wr                                                 |wr_logic__parameterized3                                |    27|
+|273   |                  \gwas.wsts                                                              |wr_status_flags_as__parameterized1                      |     3|
+|274   |                  wpntr                                                                   |wr_bin_cntr__parameterized3                             |    24|
+|275   |                \gntv_or_sync_fifo.mem                                                    |memory__parameterized3                                  |    17|
+|276   |                  \gbm.gbmg.gbmga.ngecc.bmg                                               |blk_mem_gen_v8_4_1__parameterized7                      |    17|
+|277   |                    inst_blk_mem_gen                                                      |blk_mem_gen_v8_4_1_synth__parameterized3                |    17|
+|278   |                      \gnbram.gnativebmg.native_blk_mem_gen                               |blk_mem_gen_top__parameterized3                         |    17|
+|279   |                        \valid.cstr                                                       |blk_mem_gen_generic_cstr__parameterized3                |    17|
+|280   |                          \ramloop[0].ram.r                                               |blk_mem_gen_prim_width__parameterized6                  |    17|
+|281   |                            \prim_noinit.ram                                              |blk_mem_gen_prim_wrapper__parameterized6                |     3|
+|282   |                rstblk                                                                    |reset_blk_ramfifo__xdcDup__3                            |    36|
+|283   |                  \ngwrdrst.grst.g7serrst.gsckt_wrst.xpm_cdc_sync_rst_inst_wrst           |xpm_cdc_sync_rst__14                                    |     5|
+|284   |                  \ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_sync_rst_inst_wrst   |xpm_cdc_sync_rst__15                                    |     5|
+|285   |                  \ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_single_inst_wrst_rd  |xpm_cdc_single__10                                      |     5|
+|286   |                  \ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_single_inst_rrst_wr  |xpm_cdc_single__11                                      |     5|
+|287   |      ParameterGen                                                                        |ParameterGenerator                                      |  1381|
+|288   |      ParameterShiftOut                                                                   |BitShiftOut                                             |    74|
+|289   |      PulseSync                                                                           |PulseSynchronous_59                                     |     8|
+|290   |    SynchronousDataEnableToSystem                                                         |PulseSynchronous                                        |     9|
+|291   |  Acquisition                                                                             |AcquisitionControl                                      |  3143|
+|292   |    AD9220Control                                                                         |AdcControl                                              |   101|
+|293   |      Ad9220Control                                                                       |ADC_AD9220                                              |    33|
+|294   |    AcquisitionDataSwitcher                                                               |MicrorocDataSwitcher                                    |   643|
+|295   |      MicrorocChain1DataFIFO                                                              |MicrorocChainDataFifo__xdcDup__1                        |   141|
+|296   |        U0                                                                                |fifo_generator_v13_2_2__parameterized3__xdcDup__1       |   141|
+|297   |          inst_fifo_gen                                                                   |fifo_generator_v13_2_2_synth__parameterized1__xdcDup__1 |   141|
+|298   |            \gconvfifo.rf                                                                 |fifo_generator_top__parameterized1__xdcDup__1           |   141|
+|299   |              \grf.rf                                                                     |fifo_generator_ramfifo__parameterized1__xdcDup__1       |   141|
+|300   |                \gntv_or_sync_fifo.gl0.rd                                                 |rd_logic__parameterized1_42                             |    66|
+|301   |                  \grss.rsts                                                              |rd_status_flags_ss_55                                   |    15|
+|302   |                    c1                                                                    |compare__parameterized1_57                              |     5|
+|303   |                    c2                                                                    |compare__parameterized1_58                              |     6|
+|304   |                  rpntr                                                                   |rd_bin_cntr__parameterized1_56                          |    51|
+|305   |                \gntv_or_sync_fifo.gl0.wr                                                 |wr_logic__parameterized1_43                             |    48|
+|306   |                  \gwss.wsts                                                              |wr_status_flags_ss_51                                   |    17|
+|307   |                    c0                                                                    |compare__parameterized1_53                              |     6|
+|308   |                    c1                                                                    |compare__parameterized1_54                              |     5|
+|309   |                  wpntr                                                                   |wr_bin_cntr__parameterized1_52                          |    31|
+|310   |                \gntv_or_sync_fifo.mem                                                    |memory__parameterized1_44                               |    11|
+|311   |                  \gbm.gbmg.gbmga.ngecc.bmg                                               |blk_mem_gen_v8_4_1__parameterized3_45                   |    11|
+|312   |                    inst_blk_mem_gen                                                      |blk_mem_gen_v8_4_1_synth__parameterized1_46             |    11|
+|313   |                      \gnbram.gnativebmg.native_blk_mem_gen                               |blk_mem_gen_top__parameterized1_47                      |    11|
+|314   |                        \valid.cstr                                                       |blk_mem_gen_generic_cstr__parameterized1_48             |    11|
+|315   |                          \ramloop[0].ram.r                                               |blk_mem_gen_prim_width__parameterized4_49               |    11|
+|316   |                            \prim_noinit.ram                                              |blk_mem_gen_prim_wrapper__parameterized4_50             |     2|
+|317   |                rstblk                                                                    |reset_blk_ramfifo__parameterized0__xdcDup__1            |    16|
+|318   |                  \ngwrdrst.grst.g7serrst.gsckt_wrst.xpm_cdc_sync_rst_inst_wrst           |xpm_cdc_sync_rst                                        |     5|
+|319   |      MicrorocChain2DataFIFO                                                              |MicrorocChainDataFifo__xdcDup__2                        |   141|
+|320   |        U0                                                                                |fifo_generator_v13_2_2__parameterized3__xdcDup__2       |   141|
+|321   |          inst_fifo_gen                                                                   |fifo_generator_v13_2_2_synth__parameterized1__xdcDup__2 |   141|
+|322   |            \gconvfifo.rf                                                                 |fifo_generator_top__parameterized1__xdcDup__2           |   141|
+|323   |              \grf.rf                                                                     |fifo_generator_ramfifo__parameterized1__xdcDup__2       |   141|
+|324   |                \gntv_or_sync_fifo.gl0.rd                                                 |rd_logic__parameterized1_25                             |    66|
+|325   |                  \grss.rsts                                                              |rd_status_flags_ss_38                                   |    15|
+|326   |                    c1                                                                    |compare__parameterized1_40                              |     5|
+|327   |                    c2                                                                    |compare__parameterized1_41                              |     6|
+|328   |                  rpntr                                                                   |rd_bin_cntr__parameterized1_39                          |    51|
+|329   |                \gntv_or_sync_fifo.gl0.wr                                                 |wr_logic__parameterized1_26                             |    48|
+|330   |                  \gwss.wsts                                                              |wr_status_flags_ss_34                                   |    17|
+|331   |                    c0                                                                    |compare__parameterized1_36                              |     6|
+|332   |                    c1                                                                    |compare__parameterized1_37                              |     5|
+|333   |                  wpntr                                                                   |wr_bin_cntr__parameterized1_35                          |    31|
+|334   |                \gntv_or_sync_fifo.mem                                                    |memory__parameterized1_27                               |    11|
+|335   |                  \gbm.gbmg.gbmga.ngecc.bmg                                               |blk_mem_gen_v8_4_1__parameterized3_28                   |    11|
+|336   |                    inst_blk_mem_gen                                                      |blk_mem_gen_v8_4_1_synth__parameterized1_29             |    11|
+|337   |                      \gnbram.gnativebmg.native_blk_mem_gen                               |blk_mem_gen_top__parameterized1_30                      |    11|
+|338   |                        \valid.cstr                                                       |blk_mem_gen_generic_cstr__parameterized1_31             |    11|
+|339   |                          \ramloop[0].ram.r                                               |blk_mem_gen_prim_width__parameterized4_32               |    11|
+|340   |                            \prim_noinit.ram                                              |blk_mem_gen_prim_wrapper__parameterized4_33             |     2|
+|341   |                rstblk                                                                    |reset_blk_ramfifo__parameterized0__xdcDup__2            |    16|
+|342   |                  \ngwrdrst.grst.g7serrst.gsckt_wrst.xpm_cdc_sync_rst_inst_wrst           |xpm_cdc_sync_rst__25                                    |     5|
+|343   |      MicrorocChain3DataFIFO                                                              |MicrorocChainDataFifo__xdcDup__3                        |   141|
+|344   |        U0                                                                                |fifo_generator_v13_2_2__parameterized3__xdcDup__3       |   141|
+|345   |          inst_fifo_gen                                                                   |fifo_generator_v13_2_2_synth__parameterized1__xdcDup__3 |   141|
+|346   |            \gconvfifo.rf                                                                 |fifo_generator_top__parameterized1__xdcDup__3           |   141|
+|347   |              \grf.rf                                                                     |fifo_generator_ramfifo__parameterized1__xdcDup__3       |   141|
+|348   |                \gntv_or_sync_fifo.gl0.rd                                                 |rd_logic__parameterized1_8                              |    66|
+|349   |                  \grss.rsts                                                              |rd_status_flags_ss_21                                   |    15|
+|350   |                    c1                                                                    |compare__parameterized1_23                              |     5|
+|351   |                    c2                                                                    |compare__parameterized1_24                              |     6|
+|352   |                  rpntr                                                                   |rd_bin_cntr__parameterized1_22                          |    51|
+|353   |                \gntv_or_sync_fifo.gl0.wr                                                 |wr_logic__parameterized1_9                              |    48|
+|354   |                  \gwss.wsts                                                              |wr_status_flags_ss_17                                   |    17|
+|355   |                    c0                                                                    |compare__parameterized1_19                              |     6|
+|356   |                    c1                                                                    |compare__parameterized1_20                              |     5|
+|357   |                  wpntr                                                                   |wr_bin_cntr__parameterized1_18                          |    31|
+|358   |                \gntv_or_sync_fifo.mem                                                    |memory__parameterized1_10                               |    11|
+|359   |                  \gbm.gbmg.gbmga.ngecc.bmg                                               |blk_mem_gen_v8_4_1__parameterized3_11                   |    11|
+|360   |                    inst_blk_mem_gen                                                      |blk_mem_gen_v8_4_1_synth__parameterized1_12             |    11|
+|361   |                      \gnbram.gnativebmg.native_blk_mem_gen                               |blk_mem_gen_top__parameterized1_13                      |    11|
+|362   |                        \valid.cstr                                                       |blk_mem_gen_generic_cstr__parameterized1_14             |    11|
+|363   |                          \ramloop[0].ram.r                                               |blk_mem_gen_prim_width__parameterized4_15               |    11|
+|364   |                            \prim_noinit.ram                                              |blk_mem_gen_prim_wrapper__parameterized4_16             |     2|
+|365   |                rstblk                                                                    |reset_blk_ramfifo__parameterized0__xdcDup__3            |    16|
+|366   |                  \ngwrdrst.grst.g7serrst.gsckt_wrst.xpm_cdc_sync_rst_inst_wrst           |xpm_cdc_sync_rst__24                                    |     5|
+|367   |      MicrorocChain4DataFIFO                                                              |MicrorocChainDataFifo                                   |   141|
+|368   |        U0                                                                                |fifo_generator_v13_2_2__parameterized3                  |   141|
+|369   |          inst_fifo_gen                                                                   |fifo_generator_v13_2_2_synth__parameterized1            |   141|
+|370   |            \gconvfifo.rf                                                                 |fifo_generator_top__parameterized1                      |   141|
+|371   |              \grf.rf                                                                     |fifo_generator_ramfifo__parameterized1                  |   141|
+|372   |                \gntv_or_sync_fifo.gl0.rd                                                 |rd_logic__parameterized1                                |    66|
+|373   |                  \grss.rsts                                                              |rd_status_flags_ss                                      |    15|
+|374   |                    c1                                                                    |compare__parameterized1_6                               |     5|
+|375   |                    c2                                                                    |compare__parameterized1_7                               |     6|
+|376   |                  rpntr                                                                   |rd_bin_cntr__parameterized1                             |    51|
+|377   |                \gntv_or_sync_fifo.gl0.wr                                                 |wr_logic__parameterized1                                |    48|
+|378   |                  \gwss.wsts                                                              |wr_status_flags_ss                                      |    17|
+|379   |                    c0                                                                    |compare__parameterized1                                 |     6|
+|380   |                    c1                                                                    |compare__parameterized1_5                               |     5|
+|381   |                  wpntr                                                                   |wr_bin_cntr__parameterized1                             |    31|
+|382   |                \gntv_or_sync_fifo.mem                                                    |memory__parameterized1                                  |    11|
+|383   |                  \gbm.gbmg.gbmga.ngecc.bmg                                               |blk_mem_gen_v8_4_1__parameterized3                      |    11|
+|384   |                    inst_blk_mem_gen                                                      |blk_mem_gen_v8_4_1_synth__parameterized1                |    11|
+|385   |                      \gnbram.gnativebmg.native_blk_mem_gen                               |blk_mem_gen_top__parameterized1                         |    11|
+|386   |                        \valid.cstr                                                       |blk_mem_gen_generic_cstr__parameterized1                |    11|
+|387   |                          \ramloop[0].ram.r                                               |blk_mem_gen_prim_width__parameterized4                  |    11|
+|388   |                            \prim_noinit.ram                                              |blk_mem_gen_prim_wrapper__parameterized4                |     2|
+|389   |                rstblk                                                                    |reset_blk_ramfifo__parameterized0__xdcDup__4            |    16|
+|390   |                  \ngwrdrst.grst.g7serrst.gsckt_wrst.xpm_cdc_sync_rst_inst_wrst           |xpm_cdc_sync_rst__23                                    |     5|
+|391   |    MicrorocSCurveTest                                                                    |SCurve_Test_Top                                         |  2392|
+|392   |      SC_test_control                                                                     |SCurve_Test_Control                                     |  1464|
+|393   |      scurve_data_fifo_16x16                                                              |SCurveDataFifo                                          |    69|
+|394   |        U0                                                                                |fifo_generator_v13_2_2__parameterized5                  |    69|
+|395   |          inst_fifo_gen                                                                   |fifo_generator_v13_2_2_synth__parameterized2            |    69|
+|396   |            \gconvfifo.rf                                                                 |fifo_generator_top__parameterized2                      |    69|
+|397   |              \grf.rf                                                                     |fifo_generator_ramfifo__parameterized2                  |    69|
+|398   |                \gntv_or_sync_fifo.gl0.rd                                                 |rd_logic__parameterized2                                |    16|
+|399   |                  \grss.rsts                                                              |rd_status_flags_ss__parameterized0                      |     3|
+|400   |                  rpntr                                                                   |rd_bin_cntr__parameterized2                             |    13|
+|401   |                \gntv_or_sync_fifo.gl0.wr                                                 |wr_logic__parameterized2                                |    26|
+|402   |                  \gwss.wsts                                                              |wr_status_flags_ss__parameterized0                      |     6|
+|403   |                  wpntr                                                                   |wr_bin_cntr__parameterized2                             |    20|
+|404   |                \gntv_or_sync_fifo.mem                                                    |memory__parameterized2                                  |    10|
+|405   |                  \gbm.gbmg.gbmga.ngecc.bmg                                               |blk_mem_gen_v8_4_1__parameterized5                      |    10|
+|406   |                    inst_blk_mem_gen                                                      |blk_mem_gen_v8_4_1_synth__parameterized2                |    10|
+|407   |                      \gnbram.gnativebmg.native_blk_mem_gen                               |blk_mem_gen_top__parameterized2                         |    10|
+|408   |                        \valid.cstr                                                       |blk_mem_gen_generic_cstr__parameterized2                |    10|
+|409   |                          \ramloop[0].ram.r                                               |blk_mem_gen_prim_width__parameterized5                  |    10|
+|410   |                            \prim_noinit.ram                                              |blk_mem_gen_prim_wrapper__parameterized5                |     1|
+|411   |                rstblk                                                                    |reset_blk_ramfifo__parameterized0                       |    17|
+|412   |                  \ngwrdrst.grst.g7serrst.gsckt_wrst.xpm_cdc_sync_rst_inst_wrst           |xpm_cdc_sync_rst__22                                    |     5|
+|413   |      SC_test_single                                                                      |SCurve_Single_Test                                      |   530|
+|414   |        Trigger0                                                                          |SCurve_Single_Input                                     |   131|
+|415   |        Trigger1                                                                          |SCurve_Single_Input_3                                   |   140|
+|416   |        Trigger2                                                                          |SCurve_Single_Input_4                                   |   123|
+|417   |  usb_cy7c68013A                                                                          |usb_synchronous_slavefifo                               |    66|
+|418   |  UsbDataFifo                                                                             |ExternalDataFifo                                        |   368|
+|419   |    U0                                                                                    |fifo_generator_v13_2_2                                  |   368|
+|420   |      inst_fifo_gen                                                                       |fifo_generator_v13_2_2_synth                            |   368|
+|421   |        \gconvfifo.rf                                                                     |fifo_generator_top                                      |   368|
+|422   |          \grf.rf                                                                         |fifo_generator_ramfifo                                  |   368|
+|423   |            \gntv_or_sync_fifo.gcx.clkx                                                   |clk_x_pntrs                                             |   152|
+|424   |              wr_pntr_cdc_inst                                                            |xpm_cdc_gray__1                                         |    76|
+|425   |              rd_pntr_cdc_inst                                                            |xpm_cdc_gray                                            |    76|
+|426   |            \gntv_or_sync_fifo.gl0.rd                                                     |rd_logic                                                |    66|
+|427   |              \gras.rsts                                                                  |rd_status_flags_as                                      |    33|
+|428   |                c0                                                                        |compare_1                                               |    14|
+|429   |                c1                                                                        |compare_2                                               |    14|
+|430   |              rpntr                                                                       |rd_bin_cntr                                             |    33|
+|431   |            \gntv_or_sync_fifo.gl0.wr                                                     |wr_logic                                                |    78|
+|432   |              \gwas.wsts                                                                  |wr_status_flags_as                                      |    33|
+|433   |                c1                                                                        |compare                                                 |    14|
+|434   |                c2                                                                        |compare_0                                               |    14|
+|435   |              wpntr                                                                       |wr_bin_cntr                                             |    45|
+|436   |            \gntv_or_sync_fifo.mem                                                        |memory                                                  |    36|
+|437   |              \gbm.gbmg.gbmga.ngecc.bmg                                                   |blk_mem_gen_v8_4_1                                      |    36|
+|438   |                inst_blk_mem_gen                                                          |blk_mem_gen_v8_4_1_synth                                |    36|
+|439   |                  \gnbram.gnativebmg.native_blk_mem_gen                                   |blk_mem_gen_top                                         |    36|
+|440   |                    \valid.cstr                                                           |blk_mem_gen_generic_cstr                                |    36|
+|441   |                      \has_mux_b.B                                                        |blk_mem_gen_mux__parameterized0                         |    17|
+|442   |                      \ramloop[0].ram.r                                                   |blk_mem_gen_prim_width                                  |     1|
+|443   |                        \prim_noinit.ram                                                  |blk_mem_gen_prim_wrapper                                |     1|
+|444   |                      \ramloop[1].ram.r                                                   |blk_mem_gen_prim_width__parameterized0                  |     1|
+|445   |                        \prim_noinit.ram                                                  |blk_mem_gen_prim_wrapper__parameterized0                |     1|
+|446   |                      \ramloop[2].ram.r                                                   |blk_mem_gen_prim_width__parameterized1                  |    16|
+|447   |                        \prim_noinit.ram                                                  |blk_mem_gen_prim_wrapper__parameterized1                |     1|
+|448   |                      \ramloop[3].ram.r                                                   |blk_mem_gen_prim_width__parameterized2                  |     1|
+|449   |                        \prim_noinit.ram                                                  |blk_mem_gen_prim_wrapper__parameterized2                |     1|
+|450   |            rstblk                                                                        |reset_blk_ramfifo__xdcDup__1                            |    36|
+|451   |              \ngwrdrst.grst.g7serrst.gsckt_wrst.xpm_cdc_sync_rst_inst_wrst               |xpm_cdc_sync_rst__18                                    |     5|
+|452   |              \ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_sync_rst_inst_wrst       |xpm_cdc_sync_rst__19                                    |     5|
+|453   |              \ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_single_inst_wrst_rd      |xpm_cdc_single__14                                      |     5|
+|454   |              \ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_single_inst_rrst_wr      |xpm_cdc_single__15                                      |     5|
+|455   |  ClockGenerator                                                                          |ClockManagement                                         |    11|
+|456   |  CommonControlSignalGenerator                                                            |MicrorocCommonControl                                   |   523|
+|457   |    ExternalRazGen                                                                        |ExternalRazGenerate                                     |    39|
+|458   |    HoldGen                                                                               |HoldGenerate                                            |   444|
+|459   |    RamReadDoneDetect                                                                     |RamReadDoneSync4Chain                                   |    19|
+|460   |    TimeStampSyncAndTrigger                                                               |TimeStampSyncAndDataTrigger                             |    17|
+|461   |  TriggerSwitcher                                                                         |TriggerSwitcher                                         |    17|
 +------+------------------------------------------------------------------------------------------+--------------------------------------------------------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:10:31 ; elapsed = 00:11:11 . Memory (MB): peak = 1079.418 ; gain = 731.313
+Finished Writing Synthesis Report : Time (s): cpu = 00:10:38 ; elapsed = 00:11:09 . Memory (MB): peak = 1077.496 ; gain = 729.410
 ---------------------------------------------------------------------------------
 Synthesis finished with 0 errors, 0 critical warnings and 16 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:02:36 ; elapsed = 00:10:46 . Memory (MB): peak = 1079.418 ; gain = 731.313
-Synthesis Optimization Complete : Time (s): cpu = 00:10:31 ; elapsed = 00:11:11 . Memory (MB): peak = 1079.418 ; gain = 731.313
+Synthesis Optimization Runtime : Time (s): cpu = 00:02:42 ; elapsed = 00:10:44 . Memory (MB): peak = 1077.496 ; gain = 729.410
+Synthesis Optimization Complete : Time (s): cpu = 00:10:38 ; elapsed = 00:11:10 . Memory (MB): peak = 1077.496 ; gain = 729.410
 INFO: [Project 1-571] Translating synthesized netlist
 INFO: [Netlist 29-17] Analyzing 402 Unisim elements for replacement
-INFO: [Netlist 29-28] Unisim Transformation completed in 1 CPU seconds
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
-INFO: [Opt 31-138] Pushed 13 inverter(s) to 42 load pin(s).
+INFO: [Opt 31-138] Pushed 9 inverter(s) to 38 load pin(s).
 INFO: [Project 1-111] Unisim Transformation Summary:
   A total of 61 instances were transformed.
   (MUXCY,XORCY) => CARRY4: 40 instances
@@ -5361,10 +5396,10 @@ INFO: [Project 1-111] Unisim Transformation Summary:
   OBUFDS => OBUFDS_DUAL_BUF (INV, OBUFDS, OBUFDS): 4 instances
 
 INFO: [Common 17-83] Releasing license: Synthesis
-589 Infos, 112 Warnings, 1 Critical Warnings and 0 Errors encountered.
+592 Infos, 112 Warnings, 1 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:10:41 ; elapsed = 00:11:23 . Memory (MB): peak = 1079.418 ; gain = 742.973
+synth_design: Time (s): cpu = 00:10:49 ; elapsed = 00:11:22 . Memory (MB): peak = 1077.496 ; gain = 741.070
 INFO: [Common 17-1381] The checkpoint 'D:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.runs/synth_1/FPGA_Top.dcp' has been generated.
 INFO: [runtcl-4] Executing : report_utilization -file FPGA_Top_utilization_synth.rpt -pb FPGA_Top_utilization_synth.pb
-report_utilization: Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.223 . Memory (MB): peak = 1079.418 ; gain = 0.000
-INFO: [Common 17-206] Exiting Vivado at Wed Aug  8 09:46:00 2018...
+report_utilization: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.204 . Memory (MB): peak = 1077.496 ; gain = 0.000
+INFO: [Common 17-206] Exiting Vivado at Wed Aug  8 13:19:24 2018...

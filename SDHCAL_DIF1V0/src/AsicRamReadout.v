@@ -107,4 +107,10 @@ module AsicRamReadout(
 		else
 			ExternalFifoWriteEn <= 1'b0;
 	end
+  (* MARK_DEBUG="true" *)wire AsicDataIn_Debug;
+  (* MARK_DEBUG="true" *)wire Transmiton_Debug;
+  assign AsicDataIn_Debug = AsicDatain_r;
+  assign TransmitOn_Debug = TransmitOn_rd;
+  (* MARK_DEBUG="true" *)wire SlowClock_Debug;
+  assign SlowClock_Debug = ReadClk;
 endmodule

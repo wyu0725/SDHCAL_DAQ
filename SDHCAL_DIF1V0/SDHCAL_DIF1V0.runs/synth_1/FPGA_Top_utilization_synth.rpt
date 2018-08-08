@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 -----------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2018.1 (win64) Build 2188600 Wed Apr  4 18:40:38 MDT 2018
-| Date         : Wed Aug  8 09:46:00 2018
+| Date         : Wed Aug  8 13:19:23 2018
 | Host         : WYU running 64-bit major release  (build 9200)
 | Command      : report_utilization -file FPGA_Top_utilization_synth.rpt -pb FPGA_Top_utilization_synth.pb
 | Design       : FPGA_Top
@@ -35,8 +35,8 @@ Table of Contents
 |   LUT as Memory            |   26 |     0 |     19000 |  0.14 |
 |     LUT as Distributed RAM |    0 |     0 |           |       |
 |     LUT as Shift Register  |   26 |     0 |           |       |
-| Slice Registers            | 9557 |     0 |    126800 |  7.54 |
-|   Register as Flip Flop    | 9557 |     0 |    126800 |  7.54 |
+| Slice Registers            | 9577 |     0 |    126800 |  7.55 |
+|   Register as Flip Flop    | 9577 |     0 |    126800 |  7.55 |
 |   Register as Latch        |    0 |     0 |    126800 |  0.00 |
 | F7 Muxes                   |   45 |     0 |     31700 |  0.14 |
 | F8 Muxes                   |   20 |     0 |     15850 |  0.13 |
@@ -57,9 +57,9 @@ Table of Contents
 | 0     |            _ |       Reset |            - |
 | 0     |          Yes |           - |            - |
 | 782   |          Yes |           - |          Set |
-| 7523  |          Yes |           - |        Reset |
+| 7527  |          Yes |           - |        Reset |
 | 74    |          Yes |         Set |            - |
-| 1178  |          Yes |       Reset |            - |
+| 1194  |          Yes |       Reset |            - |
 +-------+--------------+-------------+--------------+
 
 
@@ -153,16 +153,16 @@ Table of Contents
 +------------+------+---------------------+
 |  Ref Name  | Used | Functional Category |
 +------------+------+---------------------+
-| FDCE       | 7523 |        Flop & Latch |
-| LUT3       | 4163 |                 LUT |
-| LUT6       | 2770 |                 LUT |
-| FDRE       | 1178 |        Flop & Latch |
-| LUT5       | 1129 |                 LUT |
-| LUT2       | 1113 |                 LUT |
-| LUT4       |  930 |                 LUT |
+| FDCE       | 7527 |        Flop & Latch |
+| LUT3       | 4183 |                 LUT |
+| LUT6       | 2702 |                 LUT |
+| FDRE       | 1194 |        Flop & Latch |
+| LUT5       | 1185 |                 LUT |
+| LUT2       | 1089 |                 LUT |
+| LUT4       |  926 |                 LUT |
 | FDPE       |  782 |        Flop & Latch |
+| LUT1       |  183 |                 LUT |
 | CARRY4     |  182 |          CarryLogic |
-| LUT1       |  175 |                 LUT |
 | FDSE       |   74 |        Flop & Latch |
 | IBUF       |   68 |                  IO |
 | OBUF       |   61 |                  IO |

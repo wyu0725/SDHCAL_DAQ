@@ -46,7 +46,7 @@ module AsicRamReadout_tb();
 		TransmitOn = 1'b1;
 		#150;
 		reset_n = 1'b1;
-		#1000;
+		#950;
 		TransmitOn = 1'b0;
 		AsicDin = 1'b1;
 		#PEROID;

@@ -82,6 +82,7 @@ AsicChainSelect	CommandInterpreter.v	/^  output [3:0] AsicChainSelect, \/\/ Cons
 AsicChainSelect	ConfigurationParameterDistribution.v	/^    input [3:0] AsicChainSelect,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
 AsicChainSelect	FPGA_Top.v	/^  wire [3:0] AsicChainSelect;$/;"	n	language:Verilog	module:FPGA_Top
 AsicChainSelectSet_CAND	CommandParameter.v	/^`define AsicChainSelectSet_CAND                    16'hB0A0$/;"	c	language:Verilog
+AsicDataIn_Debug	AsicRamReadout.v	/^  (* MARK_DEBUG="true" *)wire AsicDataIn_Debug;$/;"	n	language:Verilog	module:AsicRamReadout
 AsicDatain_r	AsicRamReadout.v	/^	reg AsicDatain_r;$/;"	r	language:Verilog	module:AsicRamReadout
 AsicDatain_r1	AsicRamReadout.v	/^	reg AsicDatain_r1;$/;"	r	language:Verilog	module:AsicRamReadout
 AsicDatain_r2	AsicRamReadout.v	/^	reg AsicDatain_r2;$/;"	r	language:Verilog	module:AsicRamReadout
@@ -884,6 +885,7 @@ MicrorocData	DaqSwitcher.v	/^    input [15:0] MicrorocData,$/;"	p	language:Veril
 MicrorocData	MicrorocControl.v	/^  wire [15:0] MicrorocData;$/;"	n	language:Verilog	module:MicrorocControl
 MicrorocData	SlaveDaq.v	/^	input [15:0] MicrorocData,$/;"	p	language:Verilog	module:SlaveDaq
 MicrorocDataEnable	MicrorocControl.v	/^  wire MicrorocDataEnable;$/;"	n	language:Verilog	module:MicrorocControl
+MicrorocDataEnableSyncSystemClk	MicrorocControl.v	/^  wire MicrorocDataEnableSyncSystemClk;$/;"	n	language:Verilog	module:MicrorocControl
 MicrorocDataSwitcher	MicrorocDataSwitcher.v	/^module MicrorocDataSwitcher($/;"	m	language:Verilog
 MicrorocData_en	DaqControl.v	/^  input MicrorocData_en,$/;"	p	language:Verilog	module:DaqControl
 MicrorocData_en	DaqSwitcher.v	/^    input MicrorocData_en,$/;"	p	language:Verilog	module:DaqSwitcher
@@ -1398,6 +1400,7 @@ SlowClock	MicrorocCommonControl.v	/^  input SlowClock,$/;"	p	language:Verilog	mo
 SlowClock	MicrorocControl.v	/^  input SlowClock,                          \/\/ Slow clock for MICROROC, typically 5M. It is wo/;"	p	language:Verilog	module:MicrorocControl
 SlowClock	ParameterGenerator.v	/^	input SlowClock,\/\/ Slow clock for MICROROC, typically 5M. It is worth to try 10M clock$/;"	p	language:Verilog	module:ParameterGenerator
 SlowClock	SlowControlAndReadScopeSet.v	/^  input SlowClock,                          \/\/ Slow clock for MICROROC, typically 5M. It is wo/;"	p	language:Verilog	module:SlowControlAndReadScopeSet
+SlowClock_Debug	AsicRamReadout.v	/^  (* MARK_DEBUG="true" *)wire SlowClock_Debug;$/;"	n	language:Verilog	module:AsicRamReadout
 SlowControlAndReadScopeSet	SlowControlAndReadScopeSet.v	/^module SlowControlAndReadScopeSet($/;"	m	language:Verilog
 SlowControlOrReadScopeSelect	MicrorocCommonControl.v	/^  input SlowControlOrReadScopeSelect,$/;"	p	language:Verilog	module:MicrorocCommonControl
 SlowControlOrReadScopeSelect	MicrorocControl.v	/^  input SlowControlOrReadScopeSelect,$/;"	p	language:Verilog	module:MicrorocControl
@@ -1533,6 +1536,7 @@ TransmitOnChannelSelect_CAND	CommandParameter.v	/^`define TransmitOnChannelSelec
 TransmitOn_r	AsicRamReadout.v	/^	reg TransmitOn_r;$/;"	r	language:Verilog	module:AsicRamReadout
 TransmitOn_r1	AsicRamReadout.v	/^	reg TransmitOn_r1;$/;"	r	language:Verilog	module:AsicRamReadout
 TransmitOn_rd	AsicRamReadout.v	/^	reg TransmitOn_rd;$/;"	r	language:Verilog	module:AsicRamReadout
+Transmiton_Debug	AsicRamReadout.v	/^  (* MARK_DEBUG="true" *)wire Transmiton_Debug;$/;"	n	language:Verilog	module:AsicRamReadout
 TrigCount_en	SlaveDaq.v	/^	reg TrigCount_en;$/;"	r	language:Verilog	module:SlaveDaq
 TrigCounter	SlaveDaq.v	/^	reg [23:0] TrigCounter;$/;"	r	language:Verilog	module:SlaveDaq
 TrigCounter_sync	SlaveDaq.v	/^	reg [23:0] TrigCounter_sync;$/;"	r	language:Verilog	module:SlaveDaq

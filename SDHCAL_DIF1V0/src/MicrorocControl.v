@@ -222,6 +222,15 @@ module MicrorocControl(
     .ReadDone           (ReadDone)
     );
 
+  wire MicrorocDataEnableSyncSystemClk;
+  PulseSynchronous SynchronousDataEnableToSystem (
+    .ClkSource(SlowClock),
+    .reset_n(reset_n),
+    .PulseSource(MicrorocDataEnable),
+    .ClkDestination(Clk),
+    .PulseDestination(MicrorocDataEnableSyncSystemClk)
+    );
+
   /*wire RAZ_CHN;
   wire ForceExternalRaz;
   ExternalRazGenerate ExternalRazGen(
@@ -278,7 +287,7 @@ module MicrorocControl(
     .DataTransmitDone      (DataTransmitDone),
     .UsbFifoEmpty          (ExternalFifoEmpty),
     .MicrorocData          (MicrorocData),//Acquired data
-    .MicrorocData_en       (MicrorocDataEnable),
+    .MicrorocData_en       (MicrorocDataEnableSyncSystemClk),
     .DaqData               (ExternalFifoData),//Data output
     .DaqData_en            (ExternalFifoDataEnable),
     .ExternalTrigger       (ExternalTriggerIn)
