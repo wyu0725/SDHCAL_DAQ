@@ -247,7 +247,7 @@ module FPGA_Top(
   wire OutTestDataEnable;
   wire CommandResetDataFifo;
   ExternalDataFifo UsbDataFifo (
-    .rst(~reset_n || ~CommandResetDataFifo),                  // input wire rst
+    .rst(~reset_n || CommandResetDataFifo),                  // input wire rst
     .wr_clk(~Clk),            // input wire wr_clk
     .rd_clk(~IFCLK),            // input wire rd_clk
     .din(OutTestData),                  // input wire [15 : 0] din

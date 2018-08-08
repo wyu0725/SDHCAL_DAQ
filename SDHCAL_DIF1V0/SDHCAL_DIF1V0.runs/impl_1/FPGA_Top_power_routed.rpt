@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2018.1 (win64) Build 2188600 Wed Apr  4 18:40:38 MDT 2018
-| Date             : Tue Aug  7 20:53:18 2018
+| Date             : Wed Aug  8 09:55:43 2018
 | Host             : WYU running 64-bit major release  (build 9200)
 | Command          : report_power -file FPGA_Top_power_routed.rpt -pb FPGA_Top_power_summary_routed.pb -rpx FPGA_Top_power_routed.rpx
 | Design           : FPGA_Top
@@ -30,10 +30,10 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.416        |
+| Total On-Chip Power (W)  | 0.415        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.308        |
+| Dynamic (W)              | 0.307        |
 | Device Static (W)        | 0.108        |
 | Total Off-Chip Power (W) | 0.005        |
 | Effective TJA (C/W)      | 2.7          |
@@ -54,7 +54,7 @@ Table of Contents
 | On-Chip                  | Power (W) | Used     | Available | Utilization (%) |
 +--------------------------+-----------+----------+-----------+-----------------+
 | Clocks                   |     0.036 |        9 |       --- |             --- |
-| Slice Logic              |     0.007 |    47620 |       --- |             --- |
+| Slice Logic              |     0.008 |    47620 |       --- |             --- |
 |   LUT as Logic           |     0.007 |    16081 |     63400 |           25.36 |
 |   Register               |    <0.001 |    20753 |    126800 |           16.37 |
 |   CARRY4                 |    <0.001 |      873 |     15850 |            5.51 |
@@ -64,11 +64,11 @@ Table of Contents
 |   BUFG                   |    <0.001 |        1 |        32 |            3.13 |
 |   Others                 |     0.000 |     2592 |       --- |             --- |
 | Signals                  |     0.011 |    29885 |       --- |             --- |
-| Block RAM                |     0.007 |       16 |       135 |           11.85 |
+| Block RAM                |     0.004 |       16 |       135 |           11.85 |
 | MMCM                     |     0.084 |        1 |         6 |           16.67 |
-| I/O                      |     0.162 |      140 |       285 |           49.12 |
+| I/O                      |     0.163 |      140 |       285 |           49.12 |
 | Static Power             |     0.108 |          |           |                 |
-| Total                    |     0.416 |          |           |                 |
+| Total                    |     0.415 |          |           |                 |
 +--------------------------+-----------+----------+-----------+-----------------+
 
 
@@ -78,7 +78,7 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) |
 +-----------+-------------+-----------+-------------+------------+
-| Vccint    |       1.000 |     0.077 |       0.061 |      0.016 |
+| Vccint    |       1.000 |     0.076 |       0.060 |      0.016 |
 | Vccaux    |       1.800 |     0.065 |       0.047 |      0.018 |
 | Vcco33    |       3.300 |     0.007 |       0.003 |      0.004 |
 | Vcco25    |       2.500 |     0.066 |       0.062 |      0.004 |
@@ -87,7 +87,7 @@ Table of Contents
 | Vcco135   |       1.350 |     0.000 |       0.000 |      0.000 |
 | Vcco12    |       1.200 |     0.000 |       0.000 |      0.000 |
 | Vccaux_io |       1.800 |     0.000 |       0.000 |      0.000 |
-| Vccbram   |       1.000 |     0.001 |       0.001 |      0.001 |
+| Vccbram   |       1.000 |     0.001 |       0.000 |      0.001 |
 | MGTAVcc   |       1.000 |     0.000 |       0.000 |      0.000 |
 | MGTAVtt   |       1.200 |     0.000 |       0.000 |      0.000 |
 | Vccadc    |       1.800 |     0.020 |       0.000 |      0.020 |
@@ -153,7 +153,7 @@ Table of Contents
 +-----------------------------------------------------------------------------------------+-----------+
 | Name                                                                                    | Power (W) |
 +-----------------------------------------------------------------------------------------+-----------+
-| FPGA_Top                                                                                |     0.308 |
+| FPGA_Top                                                                                |     0.307 |
 |   Acquisition                                                                           |     0.005 |
 |     AD9220Control                                                                       |    <0.001 |
 |       Ad9220Control                                                                     |    <0.001 |
@@ -567,29 +567,29 @@ Table of Contents
 |       ParameterShiftOut                                                                 |    <0.001 |
 |       PulseSync                                                                         |    <0.001 |
 |   TriggerSwitcher                                                                       |    <0.001 |
-|   UsbDataFifo                                                                           |     0.004 |
-|     U0                                                                                  |     0.004 |
-|       inst_fifo_gen                                                                     |     0.004 |
-|         gconvfifo.rf                                                                    |     0.004 |
-|           grf.rf                                                                        |     0.004 |
+|   UsbDataFifo                                                                           |     0.002 |
+|     U0                                                                                  |     0.002 |
+|       inst_fifo_gen                                                                     |     0.002 |
+|         gconvfifo.rf                                                                    |     0.002 |
+|           grf.rf                                                                        |     0.002 |
 |             gntv_or_sync_fifo.gcx.clkx                                                  |    <0.001 |
 |               rd_pntr_cdc_inst                                                          |    <0.001 |
 |               wr_pntr_cdc_inst                                                          |    <0.001 |
 |             gntv_or_sync_fifo.gl0.rd                                                    |    <0.001 |
 |               gras.rsts                                                                 |    <0.001 |
-|                 c0                                                                      |     0.000 |
-|                 c1                                                                      |     0.000 |
+|                 c0                                                                      |    <0.001 |
+|                 c1                                                                      |    <0.001 |
 |               rpntr                                                                     |    <0.001 |
 |             gntv_or_sync_fifo.gl0.wr                                                    |    <0.001 |
 |               gwas.wsts                                                                 |    <0.001 |
 |                 c1                                                                      |    <0.001 |
-|                 c2                                                                      |     0.000 |
+|                 c2                                                                      |    <0.001 |
 |               wpntr                                                                     |    <0.001 |
-|             gntv_or_sync_fifo.mem                                                       |     0.004 |
-|               gbm.gbmg.gbmga.ngecc.bmg                                                  |     0.004 |
-|                 inst_blk_mem_gen                                                        |     0.004 |
-|                   gnbram.gnativebmg.native_blk_mem_gen                                  |     0.004 |
-|                     valid.cstr                                                          |     0.004 |
+|             gntv_or_sync_fifo.mem                                                       |     0.001 |
+|               gbm.gbmg.gbmga.ngecc.bmg                                                  |     0.001 |
+|                 inst_blk_mem_gen                                                        |     0.001 |
+|                   gnbram.gnativebmg.native_blk_mem_gen                                  |     0.001 |
+|                     valid.cstr                                                          |     0.001 |
 |                       has_mux_b.B                                                       |    <0.001 |
 |                       ramloop[0].ram.r                                                  |    <0.001 |
 |                         prim_noinit.ram                                                 |    <0.001 |
@@ -4026,22 +4026,22 @@ Table of Contents
 |                     u_srlD                                                              |    <0.001 |
 |         xsdb_memory_read_inst                                                           |    <0.001 |
 |   usb_cy7c68013A                                                                        |    <0.001 |
-|     FD_BUS_IOBUF[0]_inst                                                                |     0.000 |
-|     FD_BUS_IOBUF[10]_inst                                                               |     0.000 |
-|     FD_BUS_IOBUF[11]_inst                                                               |     0.000 |
-|     FD_BUS_IOBUF[12]_inst                                                               |     0.000 |
-|     FD_BUS_IOBUF[13]_inst                                                               |     0.000 |
-|     FD_BUS_IOBUF[14]_inst                                                               |     0.000 |
-|     FD_BUS_IOBUF[15]_inst                                                               |     0.000 |
-|     FD_BUS_IOBUF[1]_inst                                                                |     0.000 |
-|     FD_BUS_IOBUF[2]_inst                                                                |     0.000 |
-|     FD_BUS_IOBUF[3]_inst                                                                |     0.000 |
-|     FD_BUS_IOBUF[4]_inst                                                                |     0.000 |
-|     FD_BUS_IOBUF[5]_inst                                                                |     0.000 |
-|     FD_BUS_IOBUF[6]_inst                                                                |     0.000 |
-|     FD_BUS_IOBUF[7]_inst                                                                |     0.000 |
-|     FD_BUS_IOBUF[8]_inst                                                                |     0.000 |
-|     FD_BUS_IOBUF[9]_inst                                                                |     0.000 |
+|     FD_BUS_IOBUF[0]_inst                                                                |    <0.001 |
+|     FD_BUS_IOBUF[10]_inst                                                               |    <0.001 |
+|     FD_BUS_IOBUF[11]_inst                                                               |    <0.001 |
+|     FD_BUS_IOBUF[12]_inst                                                               |    <0.001 |
+|     FD_BUS_IOBUF[13]_inst                                                               |    <0.001 |
+|     FD_BUS_IOBUF[14]_inst                                                               |    <0.001 |
+|     FD_BUS_IOBUF[15]_inst                                                               |    <0.001 |
+|     FD_BUS_IOBUF[1]_inst                                                                |    <0.001 |
+|     FD_BUS_IOBUF[2]_inst                                                                |    <0.001 |
+|     FD_BUS_IOBUF[3]_inst                                                                |    <0.001 |
+|     FD_BUS_IOBUF[4]_inst                                                                |    <0.001 |
+|     FD_BUS_IOBUF[5]_inst                                                                |    <0.001 |
+|     FD_BUS_IOBUF[6]_inst                                                                |    <0.001 |
+|     FD_BUS_IOBUF[7]_inst                                                                |    <0.001 |
+|     FD_BUS_IOBUF[8]_inst                                                                |    <0.001 |
+|     FD_BUS_IOBUF[9]_inst                                                                |    <0.001 |
 +-----------------------------------------------------------------------------------------+-----------+
 
 
