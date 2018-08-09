@@ -14,9 +14,9 @@ Starting synth_design
 Attempting to get a license for feature 'Synthesis' and/or device 'xc7a100t'
 INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a100t'
 INFO: Launching helper process for spawning children vivado processes
-INFO: Helper process launched with PID 14720 
+INFO: Helper process launched with PID 21812 
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:12 ; elapsed = 00:00:14 . Memory (MB): peak = 454.508 ; gain = 106.422
+Starting RTL Elaboration : Time (s): cpu = 00:00:14 ; elapsed = 00:00:16 . Memory (MB): peak = 453.758 ; gain = 105.547
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-6157] synthesizing module 'FPGA_Top' [D:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/src/FPGA_Top.v:37]
 	Parameter ASIC_CHAIN_NUMBER bound to: 4 - type: integer 
@@ -1737,15 +1737,13 @@ INFO: [Synth 8-256] done synthesizing module 'ConfigParameterFIFO' (59#1) [d:/My
 	Parameter END_PROCESS bound to: 3'b101 
 INFO: [Synth 8-155] case statement is not full and has no default [D:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/src/ParameterGenerator.v:197]
 	Parameter Idle bound to: 3'b000 
-	Parameter RESET_REGISTER bound to: 3'b001 
-	Parameter READ_FIFO bound to: 3'b010 
-	Parameter GET_DATA bound to: 3'b011 
-	Parameter DATA_OUT bound to: 3'b100 
+	Parameter READ_FIFO bound to: 3'b001 
+	Parameter DATA_LATENCY bound to: 3'b110 
+	Parameter GET_DATA bound to: 3'b010 
+	Parameter LOOP bound to: 3'b011 
 	Parameter END_ONCE bound to: 3'b101 
-	Parameter WAIT bound to: 3'b110 
-	Parameter DONE bound to: 3'b111 
-INFO: [Synth 8-226] default block is never used [D:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/src/BitShiftOut.v:81]
-WARNING: [Synth 8-6014] Unused sequential element SerialReset_r_reg was removed.  [D:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/src/BitShiftOut.v:127]
+	Parameter END bound to: 3'b100 
+WARNING: [Synth 8-6014] Unused sequential element SerialReset_r_reg was removed.  [D:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/src/BitShiftOut.v:234]
 	Parameter Idle bound to: 2'b00 
 	Parameter READ bound to: 2'b01 
 	Parameter DONE bound to: 2'b10 
@@ -1901,7 +1899,7 @@ WARNING: [Synth 8-3331] design blk_mem_gen_prim_wrapper__parameterized6 has unco
 WARNING: [Synth 8-3331] design blk_mem_gen_prim_wrapper__parameterized6 has unconnected port DINB[19]
 INFO: [Common 17-14] Message 'Synth 8-3331' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:07:32 ; elapsed = 00:07:44 . Memory (MB): peak = 1050.090 ; gain = 702.004
+Finished RTL Elaboration : Time (s): cpu = 00:08:23 ; elapsed = 00:08:42 . Memory (MB): peak = 1047.480 ; gain = 699.270
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -1915,10 +1913,10 @@ WARNING: [Synth 8-3295] tying undriven pin CommonControlSignalGenerator:DataTrig
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:07:33 ; elapsed = 00:07:45 . Memory (MB): peak = 1050.090 ; gain = 702.004
+Finished Handling Custom Attributes : Time (s): cpu = 00:08:25 ; elapsed = 00:08:43 . Memory (MB): peak = 1047.480 ; gain = 699.270
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:07:33 ; elapsed = 00:07:45 . Memory (MB): peak = 1050.090 ; gain = 702.004
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:08:25 ; elapsed = 00:08:43 . Memory (MB): peak = 1047.480 ; gain = 699.270
 ---------------------------------------------------------------------------------
 INFO: [Netlist 29-17] Analyzing 127 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
@@ -2066,16 +2064,16 @@ INFO: [Project 1-111] Unisim Transformation Summary:
   MMCME2_BASE => MMCME2_ADV: 1 instances
   OBUFDS => OBUFDS: 4 instances
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.042 . Memory (MB): peak = 1050.090 ; gain = 0.000
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.051 . Memory (MB): peak = 1047.480 ; gain = 0.000
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:08:04 ; elapsed = 00:08:19 . Memory (MB): peak = 1050.090 ; gain = 702.004
+Finished Constraint Validation : Time (s): cpu = 00:08:59 ; elapsed = 00:09:21 . Memory (MB): peak = 1047.480 ; gain = 699.270
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7a100tfgg484-2L
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:08:04 ; elapsed = 00:08:19 . Memory (MB): peak = 1050.090 ; gain = 702.004
+Finished Loading Part and Timing Information : Time (s): cpu = 00:08:59 ; elapsed = 00:09:21 . Memory (MB): peak = 1047.480 ; gain = 699.270
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
@@ -2144,7 +2142,7 @@ Applied set_property DONT_TOUCH = true for MicrorocChain2/SlowControlAndReadScop
 Applied set_property DONT_TOUCH = true for MicrorocChain3/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/\gconvfifo.rf /\grf.rf /rstblk/\ngwrdrst.grst.g7serrst.gsckt_wrst.xpm_cdc_sync_rst_inst_wrst . (constraint file  auto generated constraint, line ).
 Applied set_property DONT_TOUCH = true for MicrorocChain4/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/\gconvfifo.rf /\grf.rf /rstblk/\ngwrdrst.grst.g7serrst.gsckt_wrst.xpm_cdc_sync_rst_inst_wrst . (constraint file  auto generated constraint, line ).
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:08:04 ; elapsed = 00:08:20 . Memory (MB): peak = 1050.090 ; gain = 702.004
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:08:59 ; elapsed = 00:09:22 . Memory (MB): peak = 1047.480 ; gain = 699.270
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-802] inferred FSM for state register 'State_reg' in module 'usb_synchronous_slavefifo'
 INFO: [Synth 8-5544] ROM "nSLOE" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
@@ -2259,17 +2257,10 @@ INFO: [Synth 8-5544] ROM "ExternalFifoWriteEn" won't be mapped to Block RAM beca
 INFO: [Synth 8-5544] ROM "NextState" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
 INFO: [Synth 8-5544] ROM "NextState" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
 INFO: [Synth 8-5544] ROM "NextState" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
-INFO: [Synth 8-802] inferred FSM for state register 'CurrentState_reg' in module 'BitShiftOut'
-INFO: [Synth 8-5544] ROM "ShiftDataCount" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
-INFO: [Synth 8-5544] ROM "DelayCount" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
-INFO: [Synth 8-5544] ROM "ExternalFifoReadEn" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
-INFO: [Synth 8-5544] ROM "ShiftData" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
-INFO: [Synth 8-5544] ROM "BitShiftDone" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-802] inferred FSM for state register 'State_reg' in module 'BitShiftOut'
 INFO: [Synth 8-5544] ROM "SerialDataout" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
-INFO: [Synth 8-5544] ROM "NextState" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
-INFO: [Synth 8-5544] ROM "NextState" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
-INFO: [Synth 8-5544] ROM "NextState" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
-INFO: [Synth 8-5544] ROM "NextState" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "sr_ck_en" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "State" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
 INFO: [Synth 8-802] inferred FSM for state register 'CurrentState_reg' in module 'AsicRamReadout'
 INFO: [Synth 8-5544] ROM "ReadDone" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
 INFO: [Synth 8-5544] ROM "DataCount" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
@@ -2383,15 +2374,14 @@ INFO: [Synth 8-3354] encoded FSM with state register 'CurrentState_reg' using en
                    State |                     New Encoding |                Previous Encoding 
 ---------------------------------------------------------------------------------------------------
                     Idle |                              000 |                              000
-          RESET_REGISTER |                              001 |                              001
-               READ_FIFO |                              010 |                              010
-                GET_DATA |                              011 |                              011
-                DATA_OUT |                              100 |                              100
-                    WAIT |                              101 |                              110
-                END_ONCE |                              110 |                              101
-                    DONE |                              111 |                              111
+               READ_FIFO |                              001 |                              001
+            DATA_LATENCY |                              010 |                              110
+                GET_DATA |                              011 |                              010
+                    LOOP |                              100 |                              011
+                END_ONCE |                              101 |                              101
+                     END |                              110 |                              100
 ---------------------------------------------------------------------------------------------------
-INFO: [Synth 8-3354] encoded FSM with state register 'CurrentState_reg' using encoding 'sequential' in module 'BitShiftOut'
+INFO: [Synth 8-3354] encoded FSM with state register 'State_reg' using encoding 'sequential' in module 'BitShiftOut'
 ---------------------------------------------------------------------------------------------------
                    State |                     New Encoding |                Previous Encoding 
 ---------------------------------------------------------------------------------------------------
@@ -2440,7 +2430,7 @@ INFO: [Synth 8-3354] encoded FSM with state register 'State_reg' using encoding 
 ---------------------------------------------------------------------------------------------------
 INFO: [Synth 8-3354] encoded FSM with state register 'State_reg' using encoding 'sequential' in module 'SlaveDaq'
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:08:16 ; elapsed = 00:08:33 . Memory (MB): peak = 1050.090 ; gain = 702.004
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:09:12 ; elapsed = 00:09:36 . Memory (MB): peak = 1047.480 ; gain = 699.270
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-223] decloning instance 'Command/TestSignalColumnSelect' (CommandDecoder__parameterized114) to 'Command/TestSignalRowSelect'
 
@@ -2450,8 +2440,8 @@ Report RTL Partitions:
 +------+-----------------------------------+------------+----------+
 |1     |MicrorocCommonControl__GC0         |           1|      1297|
 |2     |ConfigurationParameterDistribution |           1|     33343|
-|3     |FPGA_Top__GCB1                     |           1|     11316|
-|4     |FPGA_Top__GCB2                     |           1|     11319|
+|3     |FPGA_Top__GCB1                     |           1|     11344|
+|4     |FPGA_Top__GCB2                     |           1|     11347|
 |5     |FPGA_Top__GCB3                     |           1|     25024|
 +------+-----------------------------------+------------+----------+
 ---------------------------------------------------------------------------------
@@ -2467,8 +2457,8 @@ Detailed RTL Component Info :
 	   3 Input      8 Bit       Adders := 2     
 	   2 Input      8 Bit       Adders := 1     
 	   2 Input      6 Bit       Adders := 15    
-	   2 Input      5 Bit       Adders := 7     
-	   2 Input      4 Bit       Adders := 11    
+	   2 Input      5 Bit       Adders := 3     
+	   2 Input      4 Bit       Adders := 15    
 	   2 Input      3 Bit       Adders := 7     
 	   3 Input      3 Bit       Adders := 1     
 	   2 Input      2 Bit       Adders := 5     
@@ -2494,8 +2484,8 @@ Detailed RTL Component Info :
 	               10 Bit    Registers := 18    
 	                8 Bit    Registers := 8     
 	                6 Bit    Registers := 59    
-	                5 Bit    Registers := 75    
-	                4 Bit    Registers := 176   
+	                5 Bit    Registers := 71    
+	                4 Bit    Registers := 180   
 	                3 Bit    Registers := 18    
 	                2 Bit    Registers := 26    
 	                1 Bit    Registers := 515   
@@ -2514,9 +2504,10 @@ Detailed RTL Component Info :
 	  67 Input     64 Bit        Muxes := 1     
 	   2 Input     16 Bit        Muxes := 61    
 	   6 Input     16 Bit        Muxes := 4     
-	   8 Input     16 Bit        Muxes := 8     
+	   7 Input     16 Bit        Muxes := 4     
 	   3 Input     16 Bit        Muxes := 8     
 	   9 Input     16 Bit        Muxes := 5     
+	   8 Input     16 Bit        Muxes := 4     
 	  20 Input     16 Bit        Muxes := 4     
 	   4 Input     16 Bit        Muxes := 1     
 	  20 Input     12 Bit        Muxes := 4     
@@ -2527,19 +2518,17 @@ Detailed RTL Component Info :
 	   2 Input      6 Bit        Muxes := 8     
 	   4 Input      6 Bit        Muxes := 1     
 	   6 Input      6 Bit        Muxes := 5     
-	   8 Input      5 Bit        Muxes := 4     
 	  20 Input      5 Bit        Muxes := 4     
 	   2 Input      5 Bit        Muxes := 86    
 	   3 Input      5 Bit        Muxes := 1     
-	   2 Input      4 Bit        Muxes := 37    
+	   2 Input      4 Bit        Muxes := 41    
 	   3 Input      4 Bit        Muxes := 6     
 	   9 Input      4 Bit        Muxes := 4     
 	  17 Input      4 Bit        Muxes := 1     
 	   5 Input      4 Bit        Muxes := 1     
 	   6 Input      3 Bit        Muxes := 4     
-	   2 Input      3 Bit        Muxes := 46    
-	   8 Input      3 Bit        Muxes := 8     
-	   7 Input      3 Bit        Muxes := 1     
+	   2 Input      3 Bit        Muxes := 42    
+	   7 Input      3 Bit        Muxes := 9     
 	   5 Input      3 Bit        Muxes := 1     
 	   3 Input      3 Bit        Muxes := 1     
 	   4 Input      3 Bit        Muxes := 1     
@@ -2549,14 +2538,14 @@ Detailed RTL Component Info :
 	  21 Input      2 Bit        Muxes := 1     
 	   2 Input      1 Bit        Muxes := 232   
 	   6 Input      1 Bit        Muxes := 34    
-	   8 Input      1 Bit        Muxes := 40    
+	   7 Input      1 Bit        Muxes := 55    
 	   3 Input      1 Bit        Muxes := 20    
 	   9 Input      1 Bit        Muxes := 56    
+	   8 Input      1 Bit        Muxes := 4     
 	  20 Input      1 Bit        Muxes := 80    
 	   4 Input      1 Bit        Muxes := 13    
 	  21 Input      1 Bit        Muxes := 19    
 	  23 Input      1 Bit        Muxes := 1     
-	   7 Input      1 Bit        Muxes := 11    
 	   5 Input      1 Bit        Muxes := 10    
 ---------------------------------------------------------------------------------
 Finished RTL Component Statistics 
@@ -2740,23 +2729,23 @@ Detailed RTL Component Info :
 Module BitShiftOut__5 
 Detailed RTL Component Info : 
 +---Adders : 
-	   2 Input      5 Bit       Adders := 1     
+	   2 Input      4 Bit       Adders := 1     
 	   2 Input      3 Bit       Adders := 1     
 	   2 Input      2 Bit       Adders := 1     
 +---Registers : 
 	               16 Bit    Registers := 1     
-	                5 Bit    Registers := 1     
+	                4 Bit    Registers := 1     
 	                3 Bit    Registers := 1     
 	                2 Bit    Registers := 1     
 	                1 Bit    Registers := 5     
 +---Muxes : 
-	   8 Input     16 Bit        Muxes := 1     
-	   8 Input      5 Bit        Muxes := 1     
-	   8 Input      3 Bit        Muxes := 2     
-	   2 Input      3 Bit        Muxes := 5     
+	   7 Input     16 Bit        Muxes := 1     
+	   2 Input      4 Bit        Muxes := 1     
+	   2 Input      3 Bit        Muxes := 4     
+	   7 Input      3 Bit        Muxes := 2     
 	   2 Input      2 Bit        Muxes := 1     
-	   8 Input      1 Bit        Muxes := 9     
 	   2 Input      1 Bit        Muxes := 1     
+	   7 Input      1 Bit        Muxes := 11    
 Module Redundancy__5 
 Detailed RTL Component Info : 
 +---Muxes : 
@@ -2943,23 +2932,23 @@ Detailed RTL Component Info :
 Module BitShiftOut__4 
 Detailed RTL Component Info : 
 +---Adders : 
-	   2 Input      5 Bit       Adders := 1     
+	   2 Input      4 Bit       Adders := 1     
 	   2 Input      3 Bit       Adders := 1     
 	   2 Input      2 Bit       Adders := 1     
 +---Registers : 
 	               16 Bit    Registers := 1     
-	                5 Bit    Registers := 1     
+	                4 Bit    Registers := 1     
 	                3 Bit    Registers := 1     
 	                2 Bit    Registers := 1     
 	                1 Bit    Registers := 5     
 +---Muxes : 
-	   8 Input     16 Bit        Muxes := 1     
-	   8 Input      5 Bit        Muxes := 1     
-	   8 Input      3 Bit        Muxes := 2     
-	   2 Input      3 Bit        Muxes := 5     
+	   7 Input     16 Bit        Muxes := 1     
+	   2 Input      4 Bit        Muxes := 1     
+	   2 Input      3 Bit        Muxes := 4     
+	   7 Input      3 Bit        Muxes := 2     
 	   2 Input      2 Bit        Muxes := 1     
-	   8 Input      1 Bit        Muxes := 9     
 	   2 Input      1 Bit        Muxes := 1     
+	   7 Input      1 Bit        Muxes := 11    
 Module Redundancy__4 
 Detailed RTL Component Info : 
 +---Muxes : 
@@ -3146,23 +3135,23 @@ Detailed RTL Component Info :
 Module BitShiftOut 
 Detailed RTL Component Info : 
 +---Adders : 
-	   2 Input      5 Bit       Adders := 1     
+	   2 Input      4 Bit       Adders := 1     
 	   2 Input      3 Bit       Adders := 1     
 	   2 Input      2 Bit       Adders := 1     
 +---Registers : 
 	               16 Bit    Registers := 1     
-	                5 Bit    Registers := 1     
+	                4 Bit    Registers := 1     
 	                3 Bit    Registers := 1     
 	                2 Bit    Registers := 1     
 	                1 Bit    Registers := 5     
 +---Muxes : 
-	   8 Input     16 Bit        Muxes := 1     
-	   8 Input      5 Bit        Muxes := 1     
-	   8 Input      3 Bit        Muxes := 2     
-	   2 Input      3 Bit        Muxes := 5     
+	   7 Input     16 Bit        Muxes := 1     
+	   2 Input      4 Bit        Muxes := 1     
+	   2 Input      3 Bit        Muxes := 4     
+	   7 Input      3 Bit        Muxes := 2     
 	   2 Input      2 Bit        Muxes := 1     
-	   8 Input      1 Bit        Muxes := 9     
 	   2 Input      1 Bit        Muxes := 1     
+	   7 Input      1 Bit        Muxes := 11    
 Module Redundancy 
 Detailed RTL Component Info : 
 +---Muxes : 
@@ -3349,23 +3338,23 @@ Detailed RTL Component Info :
 Module BitShiftOut__6 
 Detailed RTL Component Info : 
 +---Adders : 
-	   2 Input      5 Bit       Adders := 1     
+	   2 Input      4 Bit       Adders := 1     
 	   2 Input      3 Bit       Adders := 1     
 	   2 Input      2 Bit       Adders := 1     
 +---Registers : 
 	               16 Bit    Registers := 1     
-	                5 Bit    Registers := 1     
+	                4 Bit    Registers := 1     
 	                3 Bit    Registers := 1     
 	                2 Bit    Registers := 1     
 	                1 Bit    Registers := 5     
 +---Muxes : 
-	   8 Input     16 Bit        Muxes := 1     
-	   8 Input      5 Bit        Muxes := 1     
-	   8 Input      3 Bit        Muxes := 2     
-	   2 Input      3 Bit        Muxes := 5     
+	   7 Input     16 Bit        Muxes := 1     
+	   2 Input      4 Bit        Muxes := 1     
+	   2 Input      3 Bit        Muxes := 4     
+	   7 Input      3 Bit        Muxes := 2     
 	   2 Input      2 Bit        Muxes := 1     
-	   8 Input      1 Bit        Muxes := 9     
 	   2 Input      1 Bit        Muxes := 1     
+	   7 Input      1 Bit        Muxes := 11    
 Module Redundancy__6 
 Detailed RTL Component Info : 
 +---Muxes : 
@@ -4735,7 +4724,7 @@ INFO: [Synth 8-3886] merging instance 'i_2/Acquisition/MicrorocSCurveTest/SC_tes
 INFO: [Common 17-14] Message 'Synth 8-3886' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
 INFO: [Synth 8-3333] propagating constant 0 across sequential element (CommonControlSignalGeneratori_3/\TimeStampSyncAndTrigger/TriggerExt_reg )
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:09:34 ; elapsed = 00:10:02 . Memory (MB): peak = 1050.090 ; gain = 702.004
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:10:40 ; elapsed = 00:11:09 . Memory (MB): peak = 1047.480 ; gain = 699.270
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -4744,21 +4733,21 @@ Report RTL Partitions:
 +------+-----------------------------------+------------+----------+
 |1     |MicrorocCommonControl__GC0         |           1|       872|
 |2     |ConfigurationParameterDistribution |           1|      6469|
-|3     |FPGA_Top__GCB1                     |           1|      7310|
-|4     |FPGA_Top__GCB2                     |           1|      7313|
+|3     |FPGA_Top__GCB1                     |           1|      7340|
+|4     |FPGA_Top__GCB2                     |           1|      7343|
 |5     |FPGA_Top__GCB3                     |           1|     13142|
 +------+-----------------------------------+------------+----------+
 ---------------------------------------------------------------------------------
 Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:09:49 ; elapsed = 00:10:18 . Memory (MB): peak = 1050.090 ; gain = 702.004
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:10:56 ; elapsed = 00:11:27 . Memory (MB): peak = 1047.480 ; gain = 699.270
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:10:18 ; elapsed = 00:10:48 . Memory (MB): peak = 1061.934 ; gain = 713.848
+Finished Timing Optimization : Time (s): cpu = 00:11:28 ; elapsed = 00:12:00 . Memory (MB): peak = 1062.422 ; gain = 714.211
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -4767,13 +4756,13 @@ Report RTL Partitions:
 +------+-----------------------------------+------------+----------+
 |1     |MicrorocCommonControl__GC0         |           1|       872|
 |2     |ConfigurationParameterDistribution |           1|      6469|
-|3     |FPGA_Top_GT0                       |           1|     27672|
+|3     |FPGA_Top_GT0                       |           1|     27732|
 +------+-----------------------------------+------------+----------+
 ---------------------------------------------------------------------------------
 Start Technology Mapping
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:10:29 ; elapsed = 00:11:01 . Memory (MB): peak = 1077.496 ; gain = 729.410
+Finished Technology Mapping : Time (s): cpu = 00:11:41 ; elapsed = 00:12:14 . Memory (MB): peak = 1078.902 ; gain = 730.691
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -4807,7 +4796,7 @@ WARNING: [Synth 8-3295] tying undriven pin Transmiton_Debug_inferred:in0 to cons
 WARNING: [Synth 8-3295] tying undriven pin Transmiton_Debug_inferred:in0 to constant 0
 WARNING: [Synth 8-3295] tying undriven pin Transmiton_Debug_inferred:in0 to constant 0
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:10:32 ; elapsed = 00:11:04 . Memory (MB): peak = 1077.496 ; gain = 729.410
+Finished IO Insertion : Time (s): cpu = 00:11:44 ; elapsed = 00:12:17 . Memory (MB): peak = 1078.902 ; gain = 730.691
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -4820,7 +4809,7 @@ Report Check Netlist:
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:10:32 ; elapsed = 00:11:04 . Memory (MB): peak = 1077.496 ; gain = 729.410
+Finished Renaming Generated Instances : Time (s): cpu = 00:11:44 ; elapsed = 00:12:17 . Memory (MB): peak = 1078.902 ; gain = 730.691
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -4832,25 +4821,25 @@ Report RTL Partitions:
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:10:35 ; elapsed = 00:11:06 . Memory (MB): peak = 1077.496 ; gain = 729.410
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:11:47 ; elapsed = 00:12:20 . Memory (MB): peak = 1078.902 ; gain = 730.691
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:10:35 ; elapsed = 00:11:06 . Memory (MB): peak = 1077.496 ; gain = 729.410
+Finished Renaming Generated Ports : Time (s): cpu = 00:11:47 ; elapsed = 00:12:20 . Memory (MB): peak = 1078.902 ; gain = 730.691
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:10:37 ; elapsed = 00:11:09 . Memory (MB): peak = 1077.496 ; gain = 729.410
+Finished Handling Custom Attributes : Time (s): cpu = 00:11:50 ; elapsed = 00:12:23 . Memory (MB): peak = 1078.902 ; gain = 730.691
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:10:38 ; elapsed = 00:11:09 . Memory (MB): peak = 1077.496 ; gain = 729.410
+Finished Renaming Generated Nets : Time (s): cpu = 00:11:50 ; elapsed = 00:12:23 . Memory (MB): peak = 1078.902 ; gain = 730.691
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP and Shift Register Reporting
@@ -4884,23 +4873,23 @@ Report Cell Usage:
 +------+------------+------+
 |1     |BUFG        |    10|
 |2     |CARRY4      |   142|
-|3     |LUT1        |   183|
-|4     |LUT2        |  1089|
+|3     |LUT1        |   187|
+|4     |LUT2        |  1081|
 |5     |LUT3        |  4183|
 |6     |LUT4        |   926|
 |7     |LUT5        |  1185|
-|8     |LUT6        |  2702|
+|8     |LUT6        |  2710|
 |9     |MMCME2_BASE |     1|
 |10    |MUXCY       |   108|
-|11    |MUXF7       |    45|
+|11    |MUXF7       |    41|
 |12    |MUXF8       |    20|
 |13    |RAMB18E1    |     5|
 |14    |RAMB18E1_1  |     4|
 |15    |RAMB18E1_2  |     1|
 |16    |RAMB36E1    |     4|
 |17    |SRL16E      |    26|
-|18    |FDCE        |  7527|
-|19    |FDPE        |   782|
+|18    |FDCE        |  7519|
+|19    |FDPE        |   786|
 |20    |FDRE        |  1194|
 |21    |FDSE        |    74|
 |22    |IBUF        |    52|
@@ -4914,14 +4903,14 @@ Report Instance Areas:
 +------+------------------------------------------------------------------------------------------+--------------------------------------------------------+------+
 |      |Instance                                                                                  |Module                                                  |Cells |
 +------+------------------------------------------------------------------------------------------+--------------------------------------------------------+------+
-|1     |top                                                                                       |                                                        | 20347|
+|1     |top                                                                                       |                                                        | 20343|
 |2     |  ConfigurationSelect                                                                     |ConfigurationParameterDistribution                      |  4360|
-|3     |  MicrorocChain3                                                                          |MicrorocControl__xdcDup__3                              |  2175|
+|3     |  MicrorocChain3                                                                          |MicrorocControl__xdcDup__3                              |  2174|
 |4     |    ReadOnChipRam                                                                         |AsicRamReadout__5                                       |    65|
 |5     |    MicrorocDaq                                                                           |DaqControl_100                                          |   446|
 |6     |      AutoDaqControl                                                                      |AutoDaq_118                                             |   109|
 |7     |      SlaveDaqControl                                                                     |SlaveDaq_119                                            |   334|
-|8     |    SlowControlAndReadScope                                                               |SlowControlAndReadScopeSet__xdcDup__3                   |  1646|
+|8     |    SlowControlAndReadScope                                                               |SlowControlAndReadScopeSet__xdcDup__3                   |  1645|
 |9     |      ConfigParameter                                                                     |ConfigParameterFIFO__xdcDup__3                          |   183|
 |10    |        U0                                                                                |fifo_generator_v13_2_2__parameterized7__xdcDup__3       |   183|
 |11    |          inst_fifo_gen                                                                   |fifo_generator_v13_2_2_synth__parameterized3__xdcDup__3 |   183|
@@ -4949,15 +4938,15 @@ Report Instance Areas:
 |33    |                  \ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_single_inst_wrst_rd  |xpm_cdc_single__8                                       |     5|
 |34    |                  \ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_single_inst_rrst_wr  |xpm_cdc_single__9                                       |     5|
 |35    |      ParameterGen                                                                        |ParameterGenerator_102                                  |  1381|
-|36    |      ParameterShiftOut                                                                   |BitShiftOut_103                                         |    74|
+|36    |      ParameterShiftOut                                                                   |BitShiftOut_103                                         |    73|
 |37    |      PulseSync                                                                           |PulseSynchronous_104                                    |     8|
 |38    |    SynchronousDataEnableToSystem                                                         |PulseSynchronous_101                                    |     9|
-|39    |  MicrorocChain4                                                                          |MicrorocControl                                         |  2175|
+|39    |  MicrorocChain4                                                                          |MicrorocControl                                         |  2174|
 |40    |    ReadOnChipRam                                                                         |AsicRamReadout__4                                       |    65|
 |41    |    MicrorocDaq                                                                           |DaqControl_80                                           |   446|
 |42    |      AutoDaqControl                                                                      |AutoDaq_98                                              |   109|
 |43    |      SlaveDaqControl                                                                     |SlaveDaq_99                                             |   334|
-|44    |    SlowControlAndReadScope                                                               |SlowControlAndReadScopeSet                              |  1646|
+|44    |    SlowControlAndReadScope                                                               |SlowControlAndReadScopeSet                              |  1645|
 |45    |      ConfigParameter                                                                     |ConfigParameterFIFO                                     |   183|
 |46    |        U0                                                                                |fifo_generator_v13_2_2__parameterized7                  |   183|
 |47    |          inst_fifo_gen                                                                   |fifo_generator_v13_2_2_synth__parameterized3            |   183|
@@ -4985,7 +4974,7 @@ Report Instance Areas:
 |69    |                  \ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_single_inst_wrst_rd  |xpm_cdc_single__6                                       |     5|
 |70    |                  \ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_single_inst_rrst_wr  |xpm_cdc_single__7                                       |     5|
 |71    |      ParameterGen                                                                        |ParameterGenerator_82                                   |  1381|
-|72    |      ParameterShiftOut                                                                   |BitShiftOut_83                                          |    74|
+|72    |      ParameterShiftOut                                                                   |BitShiftOut_83                                          |    73|
 |73    |      PulseSync                                                                           |PulseSynchronous_84                                     |     8|
 |74    |    SynchronousDataEnableToSystem                                                         |PulseSynchronous_81                                     |     9|
 |75    |  Command                                                                                 |CommandInterpreter                                      |  3029|
@@ -5132,12 +5121,12 @@ Report Instance Areas:
 |216   |    TriggerToWriteSelect                                                                  |CommandDecoder__parameterized11                         |     4|
 |217   |    UnmaskAllChannelSet                                                                   |CommandDecoder__parameterized74                         |     2|
 |218   |    WidlarPPEnable                                                                        |CommandDecoder__parameterized45                         |     2|
-|219   |  MicrorocChain2                                                                          |MicrorocControl__xdcDup__2                              |  2175|
+|219   |  MicrorocChain2                                                                          |MicrorocControl__xdcDup__2                              |  2174|
 |220   |    ReadOnChipRam                                                                         |AsicRamReadout                                          |    65|
 |221   |    MicrorocDaq                                                                           |DaqControl_60                                           |   446|
 |222   |      AutoDaqControl                                                                      |AutoDaq_78                                              |   109|
 |223   |      SlaveDaqControl                                                                     |SlaveDaq_79                                             |   334|
-|224   |    SlowControlAndReadScope                                                               |SlowControlAndReadScopeSet__xdcDup__2                   |  1646|
+|224   |    SlowControlAndReadScope                                                               |SlowControlAndReadScopeSet__xdcDup__2                   |  1645|
 |225   |      ConfigParameter                                                                     |ConfigParameterFIFO__xdcDup__2                          |   183|
 |226   |        U0                                                                                |fifo_generator_v13_2_2__parameterized7__xdcDup__2       |   183|
 |227   |          inst_fifo_gen                                                                   |fifo_generator_v13_2_2_synth__parameterized3__xdcDup__2 |   183|
@@ -5165,15 +5154,15 @@ Report Instance Areas:
 |249   |                  \ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_single_inst_wrst_rd  |xpm_cdc_single__12                                      |     5|
 |250   |                  \ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_single_inst_rrst_wr  |xpm_cdc_single__13                                      |     5|
 |251   |      ParameterGen                                                                        |ParameterGenerator_62                                   |  1381|
-|252   |      ParameterShiftOut                                                                   |BitShiftOut_63                                          |    74|
+|252   |      ParameterShiftOut                                                                   |BitShiftOut_63                                          |    73|
 |253   |      PulseSync                                                                           |PulseSynchronous_64                                     |     8|
 |254   |    SynchronousDataEnableToSystem                                                         |PulseSynchronous_61                                     |     9|
-|255   |  MicrorocChain1                                                                          |MicrorocControl__xdcDup__1                              |  2175|
+|255   |  MicrorocChain1                                                                          |MicrorocControl__xdcDup__1                              |  2174|
 |256   |    ReadOnChipRam                                                                         |AsicRamReadout__6                                       |    65|
 |257   |    MicrorocDaq                                                                           |DaqControl                                              |   446|
 |258   |      AutoDaqControl                                                                      |AutoDaq                                                 |   109|
 |259   |      SlaveDaqControl                                                                     |SlaveDaq                                                |   334|
-|260   |    SlowControlAndReadScope                                                               |SlowControlAndReadScopeSet__xdcDup__1                   |  1646|
+|260   |    SlowControlAndReadScope                                                               |SlowControlAndReadScopeSet__xdcDup__1                   |  1645|
 |261   |      ConfigParameter                                                                     |ConfigParameterFIFO__xdcDup__1                          |   183|
 |262   |        U0                                                                                |fifo_generator_v13_2_2__parameterized7__xdcDup__1       |   183|
 |263   |          inst_fifo_gen                                                                   |fifo_generator_v13_2_2_synth__parameterized3__xdcDup__1 |   183|
@@ -5201,7 +5190,7 @@ Report Instance Areas:
 |285   |                  \ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_single_inst_wrst_rd  |xpm_cdc_single__10                                      |     5|
 |286   |                  \ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_single_inst_rrst_wr  |xpm_cdc_single__11                                      |     5|
 |287   |      ParameterGen                                                                        |ParameterGenerator                                      |  1381|
-|288   |      ParameterShiftOut                                                                   |BitShiftOut                                             |    74|
+|288   |      ParameterShiftOut                                                                   |BitShiftOut                                             |    73|
 |289   |      PulseSync                                                                           |PulseSynchronous_59                                     |     8|
 |290   |    SynchronousDataEnableToSystem                                                         |PulseSynchronous                                        |     9|
 |291   |  Acquisition                                                                             |AcquisitionControl                                      |  3143|
@@ -5377,13 +5366,13 @@ Report Instance Areas:
 |461   |  TriggerSwitcher                                                                         |TriggerSwitcher                                         |    17|
 +------+------------------------------------------------------------------------------------------+--------------------------------------------------------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:10:38 ; elapsed = 00:11:09 . Memory (MB): peak = 1077.496 ; gain = 729.410
+Finished Writing Synthesis Report : Time (s): cpu = 00:11:50 ; elapsed = 00:12:23 . Memory (MB): peak = 1078.902 ; gain = 730.691
 ---------------------------------------------------------------------------------
 Synthesis finished with 0 errors, 0 critical warnings and 16 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:02:42 ; elapsed = 00:10:44 . Memory (MB): peak = 1077.496 ; gain = 729.410
-Synthesis Optimization Complete : Time (s): cpu = 00:10:38 ; elapsed = 00:11:10 . Memory (MB): peak = 1077.496 ; gain = 729.410
+Synthesis Optimization Runtime : Time (s): cpu = 00:03:00 ; elapsed = 00:11:55 . Memory (MB): peak = 1078.902 ; gain = 730.691
+Synthesis Optimization Complete : Time (s): cpu = 00:11:50 ; elapsed = 00:12:23 . Memory (MB): peak = 1078.902 ; gain = 730.691
 INFO: [Project 1-571] Translating synthesized netlist
-INFO: [Netlist 29-17] Analyzing 402 Unisim elements for replacement
+INFO: [Netlist 29-17] Analyzing 398 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 9 inverter(s) to 38 load pin(s).
@@ -5395,10 +5384,11 @@ INFO: [Project 1-111] Unisim Transformation Summary:
   OBUFDS => OBUFDS_DUAL_BUF (INV, OBUFDS, OBUFDS): 4 instances
 
 INFO: [Common 17-83] Releasing license: Synthesis
-592 Infos, 112 Warnings, 1 Critical Warnings and 0 Errors encountered.
+584 Infos, 112 Warnings, 1 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:10:49 ; elapsed = 00:11:22 . Memory (MB): peak = 1077.496 ; gain = 741.070
+synth_design: Time (s): cpu = 00:12:02 ; elapsed = 00:12:37 . Memory (MB): peak = 1078.902 ; gain = 742.352
 INFO: [Common 17-1381] The checkpoint 'D:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.runs/synth_1/FPGA_Top.dcp' has been generated.
+write_checkpoint: Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 1078.902 ; gain = 0.000
 INFO: [runtcl-4] Executing : report_utilization -file FPGA_Top_utilization_synth.rpt -pb FPGA_Top_utilization_synth.pb
-report_utilization: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.204 . Memory (MB): peak = 1077.496 ; gain = 0.000
-INFO: [Common 17-206] Exiting Vivado at Wed Aug  8 13:19:24 2018...
+report_utilization: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.225 . Memory (MB): peak = 1078.902 ; gain = 0.000
+INFO: [Common 17-206] Exiting Vivado at Wed Aug  8 21:46:49 2018...

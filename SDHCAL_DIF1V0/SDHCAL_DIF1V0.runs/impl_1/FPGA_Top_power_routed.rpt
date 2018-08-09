@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2018.1 (win64) Build 2188600 Wed Apr  4 18:40:38 MDT 2018
-| Date             : Wed Aug  8 14:37:06 2018
+| Date             : Wed Aug  8 21:58:21 2018
 | Host             : WYU running 64-bit major release  (build 9200)
 | Command          : report_power -file FPGA_Top_power_routed.rpt -pb FPGA_Top_power_summary_routed.pb -rpx FPGA_Top_power_routed.rpx
 | Design           : FPGA_Top
@@ -30,10 +30,10 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.422        |
+| Total On-Chip Power (W)  | 0.423        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.314        |
+| Dynamic (W)              | 0.315        |
 | Device Static (W)        | 0.108        |
 | Total Off-Chip Power (W) | 0.005        |
 | Effective TJA (C/W)      | 2.7          |
@@ -53,22 +53,22 @@ Table of Contents
 +--------------------------+-----------+----------+-----------+-----------------+
 | On-Chip                  | Power (W) | Used     | Available | Utilization (%) |
 +--------------------------+-----------+----------+-----------+-----------------+
-| Clocks                   |     0.041 |        9 |       --- |             --- |
-| Slice Logic              |     0.008 |    55140 |       --- |             --- |
-|   LUT as Logic           |     0.007 |    17714 |     63400 |           27.94 |
-|   Register               |    <0.001 |    23031 |    126800 |           18.16 |
+| Clocks                   |     0.043 |        9 |       --- |             --- |
+| Slice Logic              |     0.008 |    55136 |       --- |             --- |
+|   LUT as Logic           |     0.007 |    17712 |     63400 |           27.94 |
+|   Register               |    <0.001 |    23027 |    126800 |           18.16 |
 |   CARRY4                 |    <0.001 |     1167 |     15850 |            7.36 |
 |   LUT as Distributed RAM |    <0.001 |      280 |     19000 |            1.47 |
 |   LUT as Shift Register  |    <0.001 |     3289 |     19000 |           17.31 |
-|   F7/F8 Muxes            |    <0.001 |      733 |     63400 |            1.16 |
+|   F7/F8 Muxes            |    <0.001 |      729 |     63400 |            1.15 |
 |   BUFG                   |    <0.001 |        1 |        32 |            3.13 |
 |   Others                 |     0.000 |     3409 |       --- |             --- |
-| Signals                  |     0.013 |    33732 |       --- |             --- |
+| Signals                  |     0.012 |    33744 |       --- |             --- |
 | Block RAM                |     0.005 |       17 |       135 |           12.59 |
 | MMCM                     |     0.084 |        1 |         6 |           16.67 |
 | I/O                      |     0.164 |      140 |       285 |           49.12 |
 | Static Power             |     0.108 |          |           |                 |
-| Total                    |     0.422 |          |           |                 |
+| Total                    |     0.423 |          |           |                 |
 +--------------------------+-----------+----------+-----------+-----------------+
 
 
@@ -78,7 +78,7 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) |
 +-----------+-------------+-----------+-------------+------------+
-| Vccint    |       1.000 |     0.082 |       0.067 |      0.016 |
+| Vccint    |       1.000 |     0.083 |       0.068 |      0.016 |
 | Vccaux    |       1.800 |     0.065 |       0.047 |      0.018 |
 | Vcco33    |       3.300 |     0.007 |       0.003 |      0.004 |
 | Vcco25    |       2.500 |     0.066 |       0.062 |      0.004 |
@@ -153,7 +153,7 @@ Table of Contents
 +-----------------------------------------------------------------------------------------+-----------+
 | Name                                                                                    | Power (W) |
 +-----------------------------------------------------------------------------------------+-----------+
-| FPGA_Top                                                                                |     0.314 |
+| FPGA_Top                                                                                |     0.315 |
 |   Acquisition                                                                           |     0.005 |
 |     AD9220Control                                                                       |    <0.001 |
 |       Ad9220Control                                                                     |    <0.001 |
@@ -255,7 +255,7 @@ Table of Contents
 |                 rstblk                                                                  |    <0.001 |
 |                   ngwrdrst.grst.g7serrst.gsckt_wrst.xpm_cdc_sync_rst_inst_wrst          |    <0.001 |
 |     MicrorocSCurveTest                                                                  |     0.004 |
-|       SC_test_control                                                                   |     0.002 |
+|       SC_test_control                                                                   |     0.003 |
 |       SC_test_single                                                                    |    <0.001 |
 |         Trigger0                                                                        |    <0.001 |
 |         Trigger1                                                                        |    <0.001 |
@@ -420,7 +420,7 @@ Table of Contents
 |     TriggerToWriteSelect                                                                |    <0.001 |
 |     UnmaskAllChannelSet                                                                 |    <0.001 |
 |     WidlarPPEnable                                                                      |    <0.001 |
-|   CommonControlSignalGenerator                                                          |     0.154 |
+|   CommonControlSignalGenerator                                                          |     0.155 |
 |     ExternalRazGen                                                                      |    <0.001 |
 |     HoldGen                                                                             |     0.003 |
 |     RamReadDoneDetect                                                                   |    <0.001 |
@@ -429,7 +429,7 @@ Table of Contents
 |   MicrorocChain1                                                                        |     0.004 |
 |     MicrorocDaq                                                                         |     0.001 |
 |       AutoDaqControl                                                                    |    <0.001 |
-|       SlaveDaqControl                                                                   |     0.001 |
+|       SlaveDaqControl                                                                   |    <0.001 |
 |     ReadOnChipRam                                                                       |    <0.001 |
 |     SlowControlAndReadScope                                                             |     0.003 |
 |       ConfigParameter                                                                   |    <0.001 |
@@ -690,9 +690,9 @@ Table of Contents
 |           U_SYNC                                                                        |    <0.001 |
 |         SWITCH_N_EXT_BSCAN.bscan_inst                                                   |    <0.001 |
 |         SWITCH_N_EXT_BSCAN.bscan_switch                                                 |    <0.001 |
-|   u_ila_0                                                                               |     0.024 |
-|     inst                                                                                |     0.024 |
-|       ila_core_inst                                                                     |     0.024 |
+|   u_ila_0                                                                               |     0.025 |
+|     inst                                                                                |     0.025 |
+|       ila_core_inst                                                                     |     0.025 |
 |         ADV_TRIG.u_adv_trig                                                             |    <0.001 |
 |           fsm_mem_data_reg_r1_0_63_0_2                                                  |    <0.001 |
 |           fsm_mem_data_reg_r1_0_63_12_14                                                |    <0.001 |
@@ -1029,7 +1029,7 @@ Table of Contents
 |           asyncrounous_transfer.halt_in_transfer_inst                                   |    <0.001 |
 |           asyncrounous_transfer.halt_out_transfer_inst                                  |    <0.001 |
 |           halt_detection_inst                                                           |    <0.001 |
-|         u_trig                                                                          |     0.009 |
+|         u_trig                                                                          |     0.010 |
 |           N_DDR_TC.N_DDR_TC_INST[0].U_TC                                                |    <0.001 |
 |             allx_typeA_match_detection.ltlib_v1_0_0_allx_typeA_inst                     |    <0.001 |
 |               DUT                                                                       |    <0.001 |
@@ -3769,7 +3769,7 @@ Table of Contents
 |                   u_srlB                                                                |    <0.001 |
 |                   u_srlC                                                                |    <0.001 |
 |                   u_srlD                                                                |    <0.001 |
-|           U_TM                                                                          |     0.003 |
+|           U_TM                                                                          |     0.004 |
 |             N_DDR_MODE.G_NMU[0].U_M                                                     |    <0.001 |
 |               allx_typeA_match_detection.ltlib_v1_0_0_allx_typeA_inst                   |    <0.001 |
 |                 DUT                                                                     |    <0.001 |
