@@ -46,7 +46,7 @@
 `define EndReadoutParameter_CAND                   16'hA3CF
 // 16'hA3DF is reserved for EndReadoutParameter more than 4bits
 `define AsicNumberSet_CAND                         16'hA3E4
-`define SCurveTestAsicSelect_CAND 16'hA3F0
+`define SCurveTestAsicSelect_CAND                  16'hA3F0
 `define ResetTimeStamp_CAND                        16'hA300
 `define Dac0Vth3to0_CAND                           16'hC000
 `define Dac0Vth7to4_CAND                           16'hC010
@@ -111,9 +111,10 @@
 `define AcquisitionStartStop_CAND                  16'hF0F0
 `define ResetDataFifo_CAND                         16'hF1A0
 `define DaqSelect_CAND                             16'hE290
-`define MicrorocStartAcquisitionTime3to0_CAND 16'hE3A0
-`define MicrorocStartAcquisitionTime7to4_CAND 16'hE3B5
-`define MicrorocStartAcquisitionTime11to8_CAND 16'hE3C0
-`define MicrorocStartAcquisitionTime15to12_CAND 16'hE3D0
-`define TestSignalColumnSelect_CAND 16'hE3E0
-`define TestSignalRowSelect_CAND 16'hE3F0
+`define MicrorocStartAcquisitionTime3to0_CAND      16'hE3A0
+`define MicrorocStartAcquisitionTime7to4_CAND      16'hE3B5
+`define MicrorocStartAcquisitionTime11to8_CAND     16'hE3C0
+`define MicrorocStartAcquisitionTime15to12_CAND    16'hE3D0
+`define TestSignalColumnSelect_CAND                16'hE3E0
+`define TestSignalRowSelect_CAND                   16'hE3F0
+`define ResetSCurveTest_CAND                       16'hF1B0

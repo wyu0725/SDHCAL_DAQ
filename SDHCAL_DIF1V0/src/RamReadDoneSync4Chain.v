@@ -34,30 +34,42 @@ module RamReadDoneSync4Chain
   reg EndReadout3Hit;
   reg EndReadout4Hit;
   reg ResetEndReadout_n;
-  always @ (posedge OnceEnd[0] or negedge ResetEndReadout_n) begin
-    if(~ResetEndReadout_n)
+  always @ (posedge Clk or negedge reset_n) begin
+    if(~reset_n) begin
       EndReadout1Hit <= 1'b0;
-    else
-      EndReadout1Hit <= 1'b1;
+    end
+    else begin
+      EndReadout1Hit <= (EndReadout1Hit | OnceEnd[0]) & ResetEndReadout_n;
+    end
   end
-  always @ (posedge OnceEnd[1] or negedge ResetEndReadout_n) begin
-    if(~ResetEndReadout_n)
+
+  always @ (posedge Clk or negedge reset_n) begin
+    if(~reset_n) begin
       EndReadout2Hit <= 1'b0;
-    else
-      EndReadout2Hit <= 1'b1;
+    end
+    else begin
+      EndReadout2Hit <= (EndReadout2Hit | OnceEnd[1]) & ResetEndReadout_n;
+    end
   end
-  always @ (posedge OnceEnd[2] or negedge ResetEndReadout_n) begin
-    if(~ResetEndReadout_n)
+
+  always @ (posedge Clk or negedge reset_n) begin
+    if(~reset_n) begin
       EndReadout3Hit <= 1'b0;
-    else
-      EndReadout3Hit <= 1'b1;
+    end
+    else begin
+      EndReadout3Hit <= (EndReadout3Hit | OnceEnd[2]) & ResetEndReadout_n;
+    end
   end
-  always @ (posedge OnceEnd[3] or negedge ResetEndReadout_n) begin
-    if(~ResetEndReadout_n)
+
+  always @ (posedge Clk or negedge reset_n) begin
+    if(~reset_n) begin
       EndReadout4Hit <= 1'b0;
-    else
-      EndReadout4Hit <= 1'b1;
+    end
+    else begin
+      EndReadout4Hit <= (EndReadout4Hit | OnceEnd[3]) & ResetEndReadout_n;
+    end
   end
+  
   reg EndReadout;
   always @ (posedge Clk or negedge reset_n) begin
     if(~reset_n)

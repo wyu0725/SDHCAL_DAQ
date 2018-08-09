@@ -607,18 +607,7 @@ set_property BITSTREAM.CONFIG.UNUSEDPIN PULLUP [current_design]
 
 
 
-connect_debug_port u_ila_0/probe8 [get_nets [list MicrorocChain1/ReadOnChipRam/AsicDataIn_Debug]]
-connect_debug_port u_ila_0/probe9 [get_nets [list MicrorocChain3/ReadOnChipRam/AsicDataIn_Debug]]
-connect_debug_port u_ila_0/probe10 [get_nets [list MicrorocChain2/ReadOnChipRam/AsicDataIn_Debug]]
-connect_debug_port u_ila_0/probe11 [get_nets [list MicrorocChain4/ReadOnChipRam/AsicDataIn_Debug]]
-connect_debug_port u_ila_0/probe23 [get_nets [list MicrorocChain4/ReadOnChipRam/SlowClock_Debug]]
-connect_debug_port u_ila_0/probe24 [get_nets [list MicrorocChain1/ReadOnChipRam/SlowClock_Debug]]
-connect_debug_port u_ila_0/probe25 [get_nets [list MicrorocChain3/ReadOnChipRam/SlowClock_Debug]]
-connect_debug_port u_ila_0/probe26 [get_nets [list MicrorocChain2/ReadOnChipRam/SlowClock_Debug]]
-connect_debug_port u_ila_0/probe27 [get_nets [list MicrorocChain3/ReadOnChipRam/Transmiton_Debug]]
-connect_debug_port u_ila_0/probe28 [get_nets [list MicrorocChain2/ReadOnChipRam/Transmiton_Debug]]
-connect_debug_port u_ila_0/probe29 [get_nets [list MicrorocChain1/ReadOnChipRam/Transmiton_Debug]]
-connect_debug_port u_ila_0/probe30 [get_nets [list MicrorocChain4/ReadOnChipRam/Transmiton_Debug]]
+
 
 create_debug_core u_ila_0 ila
 set_property ALL_PROBE_SAME_MU true [get_debug_cores u_ila_0]
@@ -632,36 +621,36 @@ set_property C_TRIGOUT_EN false [get_debug_cores u_ila_0]
 set_property port_width 1 [get_debug_ports u_ila_0/clk]
 connect_debug_port u_ila_0/clk [get_nets [list ClockGenerator/Clk]]
 set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe0]
-set_property port_width 5 [get_debug_ports u_ila_0/probe0]
-connect_debug_port u_ila_0/probe0 [get_nets [list {Acquisition/MicrorocSCurveTest/SC_test_control/SCTestStateDebug[0]} {Acquisition/MicrorocSCurveTest/SC_test_control/SCTestStateDebug[1]} {Acquisition/MicrorocSCurveTest/SC_test_control/SCTestStateDebug[2]} {Acquisition/MicrorocSCurveTest/SC_test_control/SCTestStateDebug[3]} {Acquisition/MicrorocSCurveTest/SC_test_control/SCTestStateDebug[4]}]]
+set_property port_width 4 [get_debug_ports u_ila_0/probe0]
+connect_debug_port u_ila_0/probe0 [get_nets [list {MicrorocConfigurationParameterLoadDoneChain_Debug[0]} {MicrorocConfigurationParameterLoadDoneChain_Debug[1]} {MicrorocConfigurationParameterLoadDoneChain_Debug[2]} {MicrorocConfigurationParameterLoadDoneChain_Debug[3]}]]
 create_debug_port u_ila_0 probe
 set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe1]
-set_property port_width 4 [get_debug_ports u_ila_0/probe1]
-connect_debug_port u_ila_0/probe1 [get_nets [list {CommandModeSelect_Debug[0]} {CommandModeSelect_Debug[1]} {CommandModeSelect_Debug[2]} {CommandModeSelect_Debug[3]}]]
+set_property port_width 16 [get_debug_ports u_ila_0/probe1]
+connect_debug_port u_ila_0/probe1 [get_nets [list {OutTestData_Debug[0]} {OutTestData_Debug[1]} {OutTestData_Debug[2]} {OutTestData_Debug[3]} {OutTestData_Debug[4]} {OutTestData_Debug[5]} {OutTestData_Debug[6]} {OutTestData_Debug[7]} {OutTestData_Debug[8]} {OutTestData_Debug[9]} {OutTestData_Debug[10]} {OutTestData_Debug[11]} {OutTestData_Debug[12]} {OutTestData_Debug[13]} {OutTestData_Debug[14]} {OutTestData_Debug[15]}]]
 create_debug_port u_ila_0 probe
 set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe2]
-set_property port_width 16 [get_debug_ports u_ila_0/probe2]
-connect_debug_port u_ila_0/probe2 [get_nets [list {Chain1Data_debug[0]} {Chain1Data_debug[1]} {Chain1Data_debug[2]} {Chain1Data_debug[3]} {Chain1Data_debug[4]} {Chain1Data_debug[5]} {Chain1Data_debug[6]} {Chain1Data_debug[7]} {Chain1Data_debug[8]} {Chain1Data_debug[9]} {Chain1Data_debug[10]} {Chain1Data_debug[11]} {Chain1Data_debug[12]} {Chain1Data_debug[13]} {Chain1Data_debug[14]} {Chain1Data_debug[15]}]]
+set_property port_width 5 [get_debug_ports u_ila_0/probe2]
+connect_debug_port u_ila_0/probe2 [get_nets [list {Acquisition/MicrorocSCurveTest/SC_test_control/SCTestStateDebug[0]} {Acquisition/MicrorocSCurveTest/SC_test_control/SCTestStateDebug[1]} {Acquisition/MicrorocSCurveTest/SC_test_control/SCTestStateDebug[2]} {Acquisition/MicrorocSCurveTest/SC_test_control/SCTestStateDebug[3]} {Acquisition/MicrorocSCurveTest/SC_test_control/SCTestStateDebug[4]}]]
 create_debug_port u_ila_0 probe
 set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe3]
 set_property port_width 16 [get_debug_ports u_ila_0/probe3]
-connect_debug_port u_ila_0/probe3 [get_nets [list {Chain2Data_debug[0]} {Chain2Data_debug[1]} {Chain2Data_debug[2]} {Chain2Data_debug[3]} {Chain2Data_debug[4]} {Chain2Data_debug[5]} {Chain2Data_debug[6]} {Chain2Data_debug[7]} {Chain2Data_debug[8]} {Chain2Data_debug[9]} {Chain2Data_debug[10]} {Chain2Data_debug[11]} {Chain2Data_debug[12]} {Chain2Data_debug[13]} {Chain2Data_debug[14]} {Chain2Data_debug[15]}]]
+connect_debug_port u_ila_0/probe3 [get_nets [list {Chain4Data_debug[0]} {Chain4Data_debug[1]} {Chain4Data_debug[2]} {Chain4Data_debug[3]} {Chain4Data_debug[4]} {Chain4Data_debug[5]} {Chain4Data_debug[6]} {Chain4Data_debug[7]} {Chain4Data_debug[8]} {Chain4Data_debug[9]} {Chain4Data_debug[10]} {Chain4Data_debug[11]} {Chain4Data_debug[12]} {Chain4Data_debug[13]} {Chain4Data_debug[14]} {Chain4Data_debug[15]}]]
 create_debug_port u_ila_0 probe
 set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe4]
 set_property port_width 16 [get_debug_ports u_ila_0/probe4]
-connect_debug_port u_ila_0/probe4 [get_nets [list {Chain3Data_debug[0]} {Chain3Data_debug[1]} {Chain3Data_debug[2]} {Chain3Data_debug[3]} {Chain3Data_debug[4]} {Chain3Data_debug[5]} {Chain3Data_debug[6]} {Chain3Data_debug[7]} {Chain3Data_debug[8]} {Chain3Data_debug[9]} {Chain3Data_debug[10]} {Chain3Data_debug[11]} {Chain3Data_debug[12]} {Chain3Data_debug[13]} {Chain3Data_debug[14]} {Chain3Data_debug[15]}]]
+connect_debug_port u_ila_0/probe4 [get_nets [list {Chain1Data_debug[0]} {Chain1Data_debug[1]} {Chain1Data_debug[2]} {Chain1Data_debug[3]} {Chain1Data_debug[4]} {Chain1Data_debug[5]} {Chain1Data_debug[6]} {Chain1Data_debug[7]} {Chain1Data_debug[8]} {Chain1Data_debug[9]} {Chain1Data_debug[10]} {Chain1Data_debug[11]} {Chain1Data_debug[12]} {Chain1Data_debug[13]} {Chain1Data_debug[14]} {Chain1Data_debug[15]}]]
 create_debug_port u_ila_0 probe
 set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe5]
 set_property port_width 16 [get_debug_ports u_ila_0/probe5]
-connect_debug_port u_ila_0/probe5 [get_nets [list {Chain4Data_debug[0]} {Chain4Data_debug[1]} {Chain4Data_debug[2]} {Chain4Data_debug[3]} {Chain4Data_debug[4]} {Chain4Data_debug[5]} {Chain4Data_debug[6]} {Chain4Data_debug[7]} {Chain4Data_debug[8]} {Chain4Data_debug[9]} {Chain4Data_debug[10]} {Chain4Data_debug[11]} {Chain4Data_debug[12]} {Chain4Data_debug[13]} {Chain4Data_debug[14]} {Chain4Data_debug[15]}]]
+connect_debug_port u_ila_0/probe5 [get_nets [list {Chain3Data_debug[0]} {Chain3Data_debug[1]} {Chain3Data_debug[2]} {Chain3Data_debug[3]} {Chain3Data_debug[4]} {Chain3Data_debug[5]} {Chain3Data_debug[6]} {Chain3Data_debug[7]} {Chain3Data_debug[8]} {Chain3Data_debug[9]} {Chain3Data_debug[10]} {Chain3Data_debug[11]} {Chain3Data_debug[12]} {Chain3Data_debug[13]} {Chain3Data_debug[14]} {Chain3Data_debug[15]}]]
 create_debug_port u_ila_0 probe
 set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe6]
-set_property port_width 4 [get_debug_ports u_ila_0/probe6]
-connect_debug_port u_ila_0/probe6 [get_nets [list {MicrorocConfigurationParameterLoadDoneChain_Debug[0]} {MicrorocConfigurationParameterLoadDoneChain_Debug[1]} {MicrorocConfigurationParameterLoadDoneChain_Debug[2]} {MicrorocConfigurationParameterLoadDoneChain_Debug[3]}]]
+set_property port_width 16 [get_debug_ports u_ila_0/probe6]
+connect_debug_port u_ila_0/probe6 [get_nets [list {Chain2Data_debug[0]} {Chain2Data_debug[1]} {Chain2Data_debug[2]} {Chain2Data_debug[3]} {Chain2Data_debug[4]} {Chain2Data_debug[5]} {Chain2Data_debug[6]} {Chain2Data_debug[7]} {Chain2Data_debug[8]} {Chain2Data_debug[9]} {Chain2Data_debug[10]} {Chain2Data_debug[11]} {Chain2Data_debug[12]} {Chain2Data_debug[13]} {Chain2Data_debug[14]} {Chain2Data_debug[15]}]]
 create_debug_port u_ila_0 probe
 set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe7]
-set_property port_width 16 [get_debug_ports u_ila_0/probe7]
-connect_debug_port u_ila_0/probe7 [get_nets [list {OutTestData_Debug[0]} {OutTestData_Debug[1]} {OutTestData_Debug[2]} {OutTestData_Debug[3]} {OutTestData_Debug[4]} {OutTestData_Debug[5]} {OutTestData_Debug[6]} {OutTestData_Debug[7]} {OutTestData_Debug[8]} {OutTestData_Debug[9]} {OutTestData_Debug[10]} {OutTestData_Debug[11]} {OutTestData_Debug[12]} {OutTestData_Debug[13]} {OutTestData_Debug[14]} {OutTestData_Debug[15]}]]
+set_property port_width 4 [get_debug_ports u_ila_0/probe7]
+connect_debug_port u_ila_0/probe7 [get_nets [list {CommandModeSelect_Debug[0]} {CommandModeSelect_Debug[1]} {CommandModeSelect_Debug[2]} {CommandModeSelect_Debug[3]}]]
 create_debug_port u_ila_0 probe
 set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe8]
 set_property port_width 1 [get_debug_ports u_ila_0/probe8]

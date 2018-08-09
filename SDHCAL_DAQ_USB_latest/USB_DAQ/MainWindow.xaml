@@ -1560,6 +1560,10 @@
                                                     <ComboBoxItem Content="500ns"/>
                                                     <ComboBoxItem Content="1000ns" IsSelected="True"/>
                                                 </ComboBox>
+                                                <Button x:Name="btnSetExternalRazParameterSlowControl" Content="Set External RAZ Parameter" Height="25" Width="200" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="80,90,0,0" Click="btnSetExternalRazParameterSlowControl_Click"/>
+                                                <Label x:Name="lblExternalRazDelaySlowControl" Content="External RAZ Delay" HorizontalAlignment="Left" Margin="160,60,0,0" VerticalAlignment="Top" Width="120" Height="24"/>
+                                                <TextBox x:Name="tbcExternalRazDelaySlowControl" HorizontalAlignment="Left" Height="24" Margin="280,60,0,0" TextWrapping="Wrap" Text="200" VerticalAlignment="Top" Width="75"/>
+                                                
                                             </Grid>
                                         </TabItem>
                                         <TabItem Name="Mask" Header="Mask">
@@ -1914,6 +1918,7 @@
                                                 </GroupBox>
                                             </Grid>
                                         </TabItem>
+                                        
                                     </TabControl>
                                 </Grid>
                             </GroupBox>

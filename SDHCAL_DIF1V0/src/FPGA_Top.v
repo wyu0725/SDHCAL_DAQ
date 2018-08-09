@@ -340,6 +340,7 @@ module FPGA_Top(
   wire [15:0] EndHoldTime;
   wire DaqSelect;
   wire [15:0] CommandMicrorocStartAcquisitionTime;
+  wire ResetSCurveTest;
   CommandInterpreter Command(
     .Clk(Clk),
     .IFCLK(IFCLK),
@@ -449,6 +450,7 @@ module FPGA_Top(
     // Column and row select
     .ColumnSelect(COLUMN),
     .RowSelect(ROW),
+    .ResetSCurveTest(ResetSCurveTest),
     // LED
     .LED(LED[3:0])
     );
@@ -638,6 +640,7 @@ module FPGA_Top(
     .Clk(Clk),
     .Clk5M(Clk5M),
     .reset_n(reset_n),
+    .ResetSCurveTest_n(~ResetSCurveTest),
     .ModeSelect(CommandModeSelect),
     // Data interface
     // Microroc Chain data
@@ -748,7 +751,7 @@ module FPGA_Top(
   )
   CommonControlSignalGenerator(
     .Clk(Clk),
-    .reset_n(reset_n),
+    .reset_n(reset_n & ~ForceMicrorocAcqReset),
     .SlowClock(Clk5M),
     .SyncClk(SyncClk),
     .TriggerIn(TriggerSelected),

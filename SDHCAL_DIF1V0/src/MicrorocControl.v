@@ -256,7 +256,7 @@ module MicrorocControl(
   DaqControl MicrorocDaq
   (
     .Clk                   (Clk),         //40M
-    .reset_n               (MicrorocReset_n),
+    .reset_n               (reset_n & MicrorocReset_n),
     .DaqSelect             (DaqSelect),
     .UsbAcqStart           (AcqStart),
     .UsbStartStop          (UsbStartStop),
@@ -279,7 +279,7 @@ module MicrorocControl(
     .DataTransmitDone      (DataTransmitDone),
     .UsbFifoEmpty          (ExternalFifoEmpty),
     .MicrorocData          (MicrorocData),//Acquired data
-    .MicrorocData_en       (MicrorocDataEnable),
+    .MicrorocData_en       (MicrorocDataEnable&AcqStart),
     .DaqData               (ExternalFifoData),//Data output
     .DaqData_en            (ExternalFifoDataEnable),
     .ExternalTrigger       (ExternalTriggerIn)

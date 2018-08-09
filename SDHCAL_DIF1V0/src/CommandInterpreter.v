@@ -158,6 +158,8 @@ module CommandInterpreter(
   // Cloumn and row select
   output [2:0] ColumnSelect,
   output [2:0] RowSelect,
+  // Reset SCurveTest
+  output ResetSCurveTest,
   // LED
   output [3:0] LED
   );
@@ -2540,6 +2542,22 @@ module CommandInterpreter(
     // input [COMMAND_WIDTH:0] DefaultValue,
     .CommandOut(RowSelect)
     );
+
+  // Reset SCurve Test
+  CommandDecoder
+	  #(
+		  .LEVEL_OR_PULSE(1'b0),
+		  .COMMAND_WIDTH(2'b0),
+		  .COMMAND_ADDRESS_AND_DEFAULT(`ResetSCurveTest_CAND)
+	  )
+  SCurveTestReset(
+	  .Clk(Clk),
+	  .reset_n(reset_n),
+	  .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
+	  .COMMAND_WORD(COMMAND_WORD),
+	  // input [COMMAND_WIDTH:0] DefaultValue,
+	  .CommandOut(ResetSCurveTest)
+	  );
 
   // LED 4bits, default B000
   CommandDecoder

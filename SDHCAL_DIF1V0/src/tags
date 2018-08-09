@@ -989,10 +989,10 @@ MicrorocSlowControlOrReadScopeSelectChain	FPGA_Top.v	/^  wire [ASIC_CHAIN_NUMBER
 MicrorocSlowControlOrReadScopeSelect_Input	ConfigurationParameterDistribution.v	/^    input MicrorocSlowControlOrReadScopeSelect_Input,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
 MicrorocSlowControlOrReadScopeSelect_Output	ConfigurationParameterDistribution.v	/^    output reg [ASIC_CHAIN_NUMBER - 1:0] MicrorocSlowControlOrReadScopeSelect_Output,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
 MicrorocStartAcquisitionTime	CommandInterpreter.v	/^  output [15:0] MicrorocStartAcquisitionTime,$/;"	p	language:Verilog	module:CommandInterpreter
-MicrorocStartAcquisitionTime11to8_CAND	CommandParameter.v	/^`define MicrorocStartAcquisitionTime11to8_CAND 16'hE3C0$/;"	c	language:Verilog
-MicrorocStartAcquisitionTime15to12_CAND	CommandParameter.v	/^`define MicrorocStartAcquisitionTime15to12_CAND 16'hE3D0$/;"	c	language:Verilog
-MicrorocStartAcquisitionTime3to0_CAND	CommandParameter.v	/^`define MicrorocStartAcquisitionTime3to0_CAND 16'hE3A0$/;"	c	language:Verilog
-MicrorocStartAcquisitionTime7to4_CAND	CommandParameter.v	/^`define MicrorocStartAcquisitionTime7to4_CAND 16'hE3B5$/;"	c	language:Verilog
+MicrorocStartAcquisitionTime11to8_CAND	CommandParameter.v	/^`define MicrorocStartAcquisitionTime11to8_CAND     16'hE3C0$/;"	c	language:Verilog
+MicrorocStartAcquisitionTime15to12_CAND	CommandParameter.v	/^`define MicrorocStartAcquisitionTime15to12_CAND    16'hE3D0$/;"	c	language:Verilog
+MicrorocStartAcquisitionTime3to0_CAND	CommandParameter.v	/^`define MicrorocStartAcquisitionTime3to0_CAND      16'hE3A0$/;"	c	language:Verilog
+MicrorocStartAcquisitionTime7to4_CAND	CommandParameter.v	/^`define MicrorocStartAcquisitionTime7to4_CAND      16'hE3B5$/;"	c	language:Verilog
 MicrorocStartReadoutChannelSelect	CommandInterpreter.v	/^  output MicrorocStartReadoutChannelSelect,$/;"	p	language:Verilog	module:CommandInterpreter
 MicrorocStartReadoutChannelSelectChain	FPGA_Top.v	/^  wire [ASIC_CHAIN_NUMBER - 1:0] MicrorocStartReadoutChannelSelectChain;$/;"	n	language:Verilog	module:FPGA_Top
 MicrorocStartReadoutChannelSelect_Input	ConfigurationParameterDistribution.v	/^    input MicrorocStartReadoutChannelSelect_Input,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
@@ -1212,6 +1212,10 @@ ResetHold_n	HoldGenerate.v	/^	reg ResetHold_n;$/;"	r	language:Verilog	module:Hol
 ResetMicrorocAcq_CAND	CommandParameter.v	/^`define ResetMicrorocAcq_CAND                      16'hE190$/;"	c	language:Verilog
 ResetMicrorocDigitalPart	FPGA_Top.v	/^  wire [3:0] ResetMicrorocDigitalPart;$/;"	n	language:Verilog	module:FPGA_Top
 ResetMicrorocHit	SlaveDaq.v	/^	reg ResetMicrorocHit;	$/;"	r	language:Verilog	module:SlaveDaq
+ResetSCurveTest	CommandInterpreter.v	/^  output ResetSCurveTest,$/;"	p	language:Verilog	module:CommandInterpreter
+ResetSCurveTest	FPGA_Top.v	/^  wire ResetSCurveTest;$/;"	n	language:Verilog	module:FPGA_Top
+ResetSCurveTest_CAND	CommandParameter.v	/^`define ResetSCurveTest_CAND                       16'hF1B0$/;"	c	language:Verilog
+ResetSCurveTest_n	AcquisitionControl.v	/^  input ResetSCurveTest_n,$/;"	p	language:Verilog	module:AcquisitionControl
 ResetStartAcq_n	SlaveDaq.v	/^	reg ResetStartAcq_n;$/;"	r	language:Verilog	module:SlaveDaq
 ResetStartRising_n	AutoDaq.v	/^  reg ResetStartRising_n;$/;"	r	language:Verilog	module:AutoDaq
 ResetTimeStamp	MicrorocCommonControl.v	/^  input ResetTimeStamp,$/;"	p	language:Verilog	module:MicrorocCommonControl
@@ -1230,7 +1234,7 @@ SC_PROCESS_LOOP	ParameterGenerator.v	/^					SC_PROCESS_LOOP = 3'd4,$/;"	c	langua
 SCurveForceExternalRaz	DaqControl.v	/^  input SCurveForceExternalRaz,$/;"	p	language:Verilog	module:DaqControl
 SCurveForceExternalRaz	MicrorocControl.v	/^  input SCurveForceExternalRaz,$/;"	p	language:Verilog	module:MicrorocControl
 SCurveTestAsicSelect	CommandInterpreter.v	/^  output [3:0] SCurveTestAsicSelect,$/;"	p	language:Verilog	module:CommandInterpreter
-SCurveTestAsicSelect_CAND	CommandParameter.v	/^`define SCurveTestAsicSelect_CAND 16'hA3F0$/;"	c	language:Verilog
+SCurveTestAsicSelect_CAND	CommandParameter.v	/^`define SCurveTestAsicSelect_CAND                  16'hA3F0$/;"	c	language:Verilog
 SCurveTestCTestOrInput	FPGA_Top.v	/^  wire SCurveTestCTestOrInput;$/;"	n	language:Verilog	module:FPGA_Top
 SCurveTestCounterMax	FPGA_Top.v	/^  wire [15:0] SCurveTestCounterMax;$/;"	n	language:Verilog	module:FPGA_Top
 SCurveTestDacStart	FPGA_Top.v	/^  wire [9:0] SCurveTestDacStart;$/;"	n	language:Verilog	module:FPGA_Top
@@ -1483,8 +1487,8 @@ TestAsicNumber	SCurve_Test_Control.v	/^  input [2:0] TestAsicNumber,$/;"	p	langu
 TestAsicNumber	SCurve_Test_Top.v	/^  input [2:0] TestAsicNumber,$/;"	p	language:Verilog	module:SCurve_Test_Top
 TestDone	AcquisitionControl.v	/^  output TestDone,$/;"	p	language:Verilog	module:AcquisitionControl
 TestDone	MicrorocControl.v	/^  output TestDone,$/;"	p	language:Verilog	module:MicrorocControl
-TestSignalColumnSelect_CAND	CommandParameter.v	/^`define TestSignalColumnSelect_CAND 16'hE3E0$/;"	c	language:Verilog
-TestSignalRowSelect_CAND	CommandParameter.v	/^`define TestSignalRowSelect_CAND 16'hE3F0$/;"	c	language:Verilog
+TestSignalColumnSelect_CAND	CommandParameter.v	/^`define TestSignalColumnSelect_CAND                16'hE3E0$/;"	c	language:Verilog
+TestSignalRowSelect_CAND	CommandParameter.v	/^`define TestSignalRowSelect_CAND                   16'hE3F0$/;"	c	language:Verilog
 Test_Chn	SCurve_Test_Control.v	/^  reg [5:0]   Test_Chn;$/;"	r	language:Verilog	module:SCurve_Test_Control
 Test_Start	SCurve_Single_Input.v	/^    input Test_Start,$/;"	p	language:Verilog	module:SCurve_Single_Input
 Test_Start	SCurve_Test_Control.v	/^  input                                       Test_Start,$/;"	p	language:Verilog	module:SCurve_Test_Control

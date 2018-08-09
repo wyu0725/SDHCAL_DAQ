@@ -64,17 +64,31 @@ module RamReadDoneSync4Chain_tb;
     EndReadoutParameter = 4'b0011;
     #1000;
     OnceEnd = 4'b0011;
+    #25;
+    OnceEnd = 4'b0;
     #1000;
     EndReadoutParameter = 4'b1111;
     OnceEnd = 4'b0000;
     #100;
     OnceEnd = 4'b0001;
+    #25;
+    OnceEnd = 4'b0;
     #200;
     OnceEnd = 4'b0011;
+    #25;
+    OnceEnd = 4'b0;
+    #100;
+    reset_n = 1'b0;
+    #100;
+    reset_n = 1'b1;
     #300;
     OnceEnd = 4'b0111;
+    #25;
+    OnceEnd = 4'b0;
     #400;
     OnceEnd = 4'b1111;
+    #25;
+    OnceEnd = 4'b0;
         
 		// Add stimulus here
 

@@ -5327,7 +5327,7 @@ namespace USB_DAQ
 
         private void SelectSCurveTriggerMode()
         {
-            bool bResult = MicrorocAsic.SCurveTestTriggerOrCountModeSelect(0, MyUsbDevice1);
+            bool bResult = MicrorocAsic.SCurveTestTriggerOrCountModeSelect(1, MyUsbDevice1);
             if (bResult)
             {
                 txtReport.AppendText("Select Trigger Mode\n");
@@ -6496,6 +6496,20 @@ namespace USB_DAQ
             {
                 ShowUsbError("Stop SCurve Test");
                 return false;
+            }
+        }
+
+        private void btnSetExternalRazParameterSlowControl_Click(object sender, RoutedEventArgs e)
+        {
+            bool bResult = SetExternalRazDelay(tbcExternalRazDelaySlowControl.Text);
+            if(!bResult)
+            {
+                return;
+            }
+            bResult = SetExternalRazTime(cbxExternalRazTimeNewDif.SelectedIndex);
+            if (!bResult)
+            {
+                return;
             }
         }
     }

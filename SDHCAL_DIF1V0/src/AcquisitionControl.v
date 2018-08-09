@@ -23,6 +23,7 @@ module AcquisitionControl(
   input Clk,
   input Clk5M,
   input reset_n,
+  input ResetSCurveTest_n,
   input [3:0] ModeSelect,
   // Data interface
   // Microroc Chain data
@@ -188,7 +189,7 @@ module AcquisitionControl(
   SCurve_Test_Top MicrorocSCurveTest(
     .Clk(Clk),
     .Clk_5M(Clk5M),// Use 5M clock to generate 1k clock
-    .reset_n(reset_n),
+    .reset_n(reset_n & ResetSCurveTest_n),
 
     .TriggerEfficiencyOrCountEfficiency(TriggerEfficiencyOrCountEfficiency),
 
