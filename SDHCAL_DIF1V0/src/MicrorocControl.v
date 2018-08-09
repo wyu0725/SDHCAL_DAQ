@@ -213,22 +213,14 @@ module MicrorocControl(
   wire MicrorocDataEnable;
   wire [15:0] MicrorocData;
   AsicRamReadout ReadOnChipRam(
-    .ReadClk            (SlowClock),
-    .reset_n            (reset_n),
-    .AsicDin            (AsicDataout),
-    .TransmitOn         (TransmitOn),
-    .ExternalFifoData   (MicrorocData),
-    .ExternalFifoWriteEn(MicrorocDataEnable),
-    .ReadDone           (ReadDone)
-    );
-
-  wire MicrorocDataEnableSyncSystemClk;
-  PulseSynchronous SynchronousDataEnableToSystem (
-    .ClkSource(SlowClock),
+    .Clk(Clk),
     .reset_n(reset_n),
-    .PulseSource(MicrorocDataEnable),
-    .ClkDestination(Clk),
-    .PulseDestination(MicrorocDataEnableSyncSystemClk)
+    .Dout(AsicDataout), //pin Active L
+    .TransmitOn(TransmitOn),//pin  Active L
+    //------fifo access-----------//
+    .ext_fifo_full(ExternalFifoFull),
+    .parallel_data(MicrorocData),
+    .parallel_data_en(MicrorocDataEnable)
     );
 
   /*wire RAZ_CHN;
@@ -287,7 +279,7 @@ module MicrorocControl(
     .DataTransmitDone      (DataTransmitDone),
     .UsbFifoEmpty          (ExternalFifoEmpty),
     .MicrorocData          (MicrorocData),//Acquired data
-    .MicrorocData_en       (MicrorocDataEnableSyncSystemClk),
+    .MicrorocData_en       (MicrorocDataEnable),
     .DaqData               (ExternalFifoData),//Data output
     .DaqData_en            (ExternalFifoDataEnable),
     .ExternalTrigger       (ExternalTriggerIn)

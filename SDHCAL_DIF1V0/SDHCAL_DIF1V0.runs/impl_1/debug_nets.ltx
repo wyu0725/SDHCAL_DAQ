@@ -10,25 +10,14 @@
         <Option Id="HW_ILA" value="u_ila_0"/>
         <Option Id="PROBE_PORT" value="0"/>
         <Option Id="PROBE_PORT_BITS" value="0"/>
-        <Option Id="PROBE_PORT_BIT_COUNT" value="16"/>
+        <Option Id="PROBE_PORT_BIT_COUNT" value="5"/>
       </probeOptions>
       <nets>
-        <net name="Chain3Data_debug[15]"/>
-        <net name="Chain3Data_debug[14]"/>
-        <net name="Chain3Data_debug[13]"/>
-        <net name="Chain3Data_debug[12]"/>
-        <net name="Chain3Data_debug[11]"/>
-        <net name="Chain3Data_debug[10]"/>
-        <net name="Chain3Data_debug[9]"/>
-        <net name="Chain3Data_debug[8]"/>
-        <net name="Chain3Data_debug[7]"/>
-        <net name="Chain3Data_debug[6]"/>
-        <net name="Chain3Data_debug[5]"/>
-        <net name="Chain3Data_debug[4]"/>
-        <net name="Chain3Data_debug[3]"/>
-        <net name="Chain3Data_debug[2]"/>
-        <net name="Chain3Data_debug[1]"/>
-        <net name="Chain3Data_debug[0]"/>
+        <net name="Acquisition/MicrorocSCurveTest/SC_test_control/SCTestStateDebug[4]"/>
+        <net name="Acquisition/MicrorocSCurveTest/SC_test_control/SCTestStateDebug[3]"/>
+        <net name="Acquisition/MicrorocSCurveTest/SC_test_control/SCTestStateDebug[2]"/>
+        <net name="Acquisition/MicrorocSCurveTest/SC_test_control/SCTestStateDebug[1]"/>
+        <net name="Acquisition/MicrorocSCurveTest/SC_test_control/SCTestStateDebug[0]"/>
       </nets>
     </probe>
     <probe type="ila" busType="bus" source="netlist" spec="ILA_V2_RT">
@@ -39,6 +28,24 @@
         <Option Id="HUB_CLK_INPUT_FREQ_HZ" value="48000769"/>
         <Option Id="HW_ILA" value="u_ila_0"/>
         <Option Id="PROBE_PORT" value="1"/>
+        <Option Id="PROBE_PORT_BITS" value="0"/>
+        <Option Id="PROBE_PORT_BIT_COUNT" value="4"/>
+      </probeOptions>
+      <nets>
+        <net name="CommandModeSelect_Debug[3]"/>
+        <net name="CommandModeSelect_Debug[2]"/>
+        <net name="CommandModeSelect_Debug[1]"/>
+        <net name="CommandModeSelect_Debug[0]"/>
+      </nets>
+    </probe>
+    <probe type="ila" busType="bus" source="netlist" spec="ILA_V2_RT">
+      <probeOptions Id="DebugProbeParams">
+        <Option Id="BSCAN_SWITCH_INDEX" value="0"/>
+        <Option Id="CORE_LOCATION" value="1:0"/>
+        <Option Id="CORE_UUID" value="23e7d65a79bc59f7bc47406c1714dfae"/>
+        <Option Id="HUB_CLK_INPUT_FREQ_HZ" value="48000769"/>
+        <Option Id="HW_ILA" value="u_ila_0"/>
+        <Option Id="PROBE_PORT" value="2"/>
         <Option Id="PROBE_PORT_BITS" value="0"/>
         <Option Id="PROBE_PORT_BIT_COUNT" value="16"/>
       </probeOptions>
@@ -59,36 +66,6 @@
         <net name="Chain1Data_debug[2]"/>
         <net name="Chain1Data_debug[1]"/>
         <net name="Chain1Data_debug[0]"/>
-      </nets>
-    </probe>
-    <probe type="ila" busType="bus" source="netlist" spec="ILA_V2_RT">
-      <probeOptions Id="DebugProbeParams">
-        <Option Id="BSCAN_SWITCH_INDEX" value="0"/>
-        <Option Id="CORE_LOCATION" value="1:0"/>
-        <Option Id="CORE_UUID" value="23e7d65a79bc59f7bc47406c1714dfae"/>
-        <Option Id="HUB_CLK_INPUT_FREQ_HZ" value="48000769"/>
-        <Option Id="HW_ILA" value="u_ila_0"/>
-        <Option Id="PROBE_PORT" value="2"/>
-        <Option Id="PROBE_PORT_BITS" value="0"/>
-        <Option Id="PROBE_PORT_BIT_COUNT" value="16"/>
-      </probeOptions>
-      <nets>
-        <net name="Chain4Data_debug[15]"/>
-        <net name="Chain4Data_debug[14]"/>
-        <net name="Chain4Data_debug[13]"/>
-        <net name="Chain4Data_debug[12]"/>
-        <net name="Chain4Data_debug[11]"/>
-        <net name="Chain4Data_debug[10]"/>
-        <net name="Chain4Data_debug[9]"/>
-        <net name="Chain4Data_debug[8]"/>
-        <net name="Chain4Data_debug[7]"/>
-        <net name="Chain4Data_debug[6]"/>
-        <net name="Chain4Data_debug[5]"/>
-        <net name="Chain4Data_debug[4]"/>
-        <net name="Chain4Data_debug[3]"/>
-        <net name="Chain4Data_debug[2]"/>
-        <net name="Chain4Data_debug[1]"/>
-        <net name="Chain4Data_debug[0]"/>
       </nets>
     </probe>
     <probe type="ila" busType="bus" source="netlist" spec="ILA_V2_RT">
@@ -130,14 +107,25 @@
         <Option Id="HW_ILA" value="u_ila_0"/>
         <Option Id="PROBE_PORT" value="4"/>
         <Option Id="PROBE_PORT_BITS" value="0"/>
-        <Option Id="PROBE_PORT_BIT_COUNT" value="5"/>
+        <Option Id="PROBE_PORT_BIT_COUNT" value="16"/>
       </probeOptions>
       <nets>
-        <net name="Acquisition/MicrorocSCurveTest/SC_test_control/SCTestStateDebug[4]"/>
-        <net name="Acquisition/MicrorocSCurveTest/SC_test_control/SCTestStateDebug[3]"/>
-        <net name="Acquisition/MicrorocSCurveTest/SC_test_control/SCTestStateDebug[2]"/>
-        <net name="Acquisition/MicrorocSCurveTest/SC_test_control/SCTestStateDebug[1]"/>
-        <net name="Acquisition/MicrorocSCurveTest/SC_test_control/SCTestStateDebug[0]"/>
+        <net name="Chain3Data_debug[15]"/>
+        <net name="Chain3Data_debug[14]"/>
+        <net name="Chain3Data_debug[13]"/>
+        <net name="Chain3Data_debug[12]"/>
+        <net name="Chain3Data_debug[11]"/>
+        <net name="Chain3Data_debug[10]"/>
+        <net name="Chain3Data_debug[9]"/>
+        <net name="Chain3Data_debug[8]"/>
+        <net name="Chain3Data_debug[7]"/>
+        <net name="Chain3Data_debug[6]"/>
+        <net name="Chain3Data_debug[5]"/>
+        <net name="Chain3Data_debug[4]"/>
+        <net name="Chain3Data_debug[3]"/>
+        <net name="Chain3Data_debug[2]"/>
+        <net name="Chain3Data_debug[1]"/>
+        <net name="Chain3Data_debug[0]"/>
       </nets>
     </probe>
     <probe type="ila" busType="bus" source="netlist" spec="ILA_V2_RT">
@@ -149,13 +137,25 @@
         <Option Id="HW_ILA" value="u_ila_0"/>
         <Option Id="PROBE_PORT" value="5"/>
         <Option Id="PROBE_PORT_BITS" value="0"/>
-        <Option Id="PROBE_PORT_BIT_COUNT" value="4"/>
+        <Option Id="PROBE_PORT_BIT_COUNT" value="16"/>
       </probeOptions>
       <nets>
-        <net name="CommandModeSelect_Debug[3]"/>
-        <net name="CommandModeSelect_Debug[2]"/>
-        <net name="CommandModeSelect_Debug[1]"/>
-        <net name="CommandModeSelect_Debug[0]"/>
+        <net name="Chain4Data_debug[15]"/>
+        <net name="Chain4Data_debug[14]"/>
+        <net name="Chain4Data_debug[13]"/>
+        <net name="Chain4Data_debug[12]"/>
+        <net name="Chain4Data_debug[11]"/>
+        <net name="Chain4Data_debug[10]"/>
+        <net name="Chain4Data_debug[9]"/>
+        <net name="Chain4Data_debug[8]"/>
+        <net name="Chain4Data_debug[7]"/>
+        <net name="Chain4Data_debug[6]"/>
+        <net name="Chain4Data_debug[5]"/>
+        <net name="Chain4Data_debug[4]"/>
+        <net name="Chain4Data_debug[3]"/>
+        <net name="Chain4Data_debug[2]"/>
+        <net name="Chain4Data_debug[1]"/>
+        <net name="Chain4Data_debug[0]"/>
       </nets>
     </probe>
     <probe type="ila" busType="bus" source="netlist" spec="ILA_V2_RT">
@@ -218,7 +218,7 @@
         <Option Id="PROBE_PORT_BIT_COUNT" value="1"/>
       </probeOptions>
       <nets>
-        <net name="MicrorocChain1/ReadOnChipRam/AsicDataIn_Debug"/>
+        <net name="Chain1DataEnable_debug"/>
       </nets>
     </probe>
     <probe type="ila" busType="net" source="netlist" spec="ILA_V2_RT">
@@ -233,7 +233,7 @@
         <Option Id="PROBE_PORT_BIT_COUNT" value="1"/>
       </probeOptions>
       <nets>
-        <net name="MicrorocChain3/ReadOnChipRam/AsicDataIn_Debug"/>
+        <net name="Chain2DataEnable_debug"/>
       </nets>
     </probe>
     <probe type="ila" busType="net" source="netlist" spec="ILA_V2_RT">
@@ -248,7 +248,7 @@
         <Option Id="PROBE_PORT_BIT_COUNT" value="1"/>
       </probeOptions>
       <nets>
-        <net name="MicrorocChain2/ReadOnChipRam/AsicDataIn_Debug"/>
+        <net name="Chain3DataEnable_debug"/>
       </nets>
     </probe>
     <probe type="ila" busType="net" source="netlist" spec="ILA_V2_RT">
@@ -263,7 +263,7 @@
         <Option Id="PROBE_PORT_BIT_COUNT" value="1"/>
       </probeOptions>
       <nets>
-        <net name="MicrorocChain4/ReadOnChipRam/AsicDataIn_Debug"/>
+        <net name="Chain4DataEnable_debug"/>
       </nets>
     </probe>
     <probe type="ila" busType="net" source="netlist" spec="ILA_V2_RT">
@@ -278,7 +278,7 @@
         <Option Id="PROBE_PORT_BIT_COUNT" value="1"/>
       </probeOptions>
       <nets>
-        <net name="Chain1DataEnable_debug"/>
+        <net name="Acquisition/MicrorocSCurveTest/SC_test_control/ConfigDoneDebug"/>
       </nets>
     </probe>
     <probe type="ila" busType="net" source="netlist" spec="ILA_V2_RT">
@@ -293,7 +293,7 @@
         <Option Id="PROBE_PORT_BIT_COUNT" value="1"/>
       </probeOptions>
       <nets>
-        <net name="Chain2DataEnable_debug"/>
+        <net name="ExternalFifoEmpty_Debug"/>
       </nets>
     </probe>
     <probe type="ila" busType="net" source="netlist" spec="ILA_V2_RT">
@@ -308,7 +308,7 @@
         <Option Id="PROBE_PORT_BIT_COUNT" value="1"/>
       </probeOptions>
       <nets>
-        <net name="Chain3DataEnable_debug"/>
+        <net name="ExternalFifoFull_Debug"/>
       </nets>
     </probe>
     <probe type="ila" busType="net" source="netlist" spec="ILA_V2_RT">
@@ -323,7 +323,7 @@
         <Option Id="PROBE_PORT_BIT_COUNT" value="1"/>
       </probeOptions>
       <nets>
-        <net name="Chain4DataEnable_debug"/>
+        <net name="MicrorocConfigurationParameterLoadDone_Debug"/>
       </nets>
     </probe>
     <probe type="ila" busType="net" source="netlist" spec="ILA_V2_RT">
@@ -338,7 +338,7 @@
         <Option Id="PROBE_PORT_BIT_COUNT" value="1"/>
       </probeOptions>
       <nets>
-        <net name="Acquisition/MicrorocSCurveTest/SC_test_control/ConfigDoneDebug"/>
+        <net name="MicrorocConfigurationParameterLoadStart_Debug"/>
       </nets>
     </probe>
     <probe type="ila" busType="net" source="netlist" spec="ILA_V2_RT">
@@ -353,7 +353,7 @@
         <Option Id="PROBE_PORT_BIT_COUNT" value="1"/>
       </probeOptions>
       <nets>
-        <net name="ExternalFifoEmpty_Debug"/>
+        <net name="OutTestDataEnable_Debug"/>
       </nets>
     </probe>
     <probe type="ila" busType="net" source="netlist" spec="ILA_V2_RT">
@@ -368,66 +368,6 @@
         <Option Id="PROBE_PORT_BIT_COUNT" value="1"/>
       </probeOptions>
       <nets>
-        <net name="ExternalFifoFull_Debug"/>
-      </nets>
-    </probe>
-    <probe type="ila" busType="net" source="netlist" spec="ILA_V2_RT">
-      <probeOptions Id="DebugProbeParams">
-        <Option Id="BSCAN_SWITCH_INDEX" value="0"/>
-        <Option Id="CORE_LOCATION" value="1:0"/>
-        <Option Id="CORE_UUID" value="23e7d65a79bc59f7bc47406c1714dfae"/>
-        <Option Id="HUB_CLK_INPUT_FREQ_HZ" value="48000769"/>
-        <Option Id="HW_ILA" value="u_ila_0"/>
-        <Option Id="PROBE_PORT" value="19"/>
-        <Option Id="PROBE_PORT_BITS" value="0"/>
-        <Option Id="PROBE_PORT_BIT_COUNT" value="1"/>
-      </probeOptions>
-      <nets>
-        <net name="MicrorocConfigurationParameterLoadDone_Debug"/>
-      </nets>
-    </probe>
-    <probe type="ila" busType="net" source="netlist" spec="ILA_V2_RT">
-      <probeOptions Id="DebugProbeParams">
-        <Option Id="BSCAN_SWITCH_INDEX" value="0"/>
-        <Option Id="CORE_LOCATION" value="1:0"/>
-        <Option Id="CORE_UUID" value="23e7d65a79bc59f7bc47406c1714dfae"/>
-        <Option Id="HUB_CLK_INPUT_FREQ_HZ" value="48000769"/>
-        <Option Id="HW_ILA" value="u_ila_0"/>
-        <Option Id="PROBE_PORT" value="20"/>
-        <Option Id="PROBE_PORT_BITS" value="0"/>
-        <Option Id="PROBE_PORT_BIT_COUNT" value="1"/>
-      </probeOptions>
-      <nets>
-        <net name="MicrorocConfigurationParameterLoadStart_Debug"/>
-      </nets>
-    </probe>
-    <probe type="ila" busType="net" source="netlist" spec="ILA_V2_RT">
-      <probeOptions Id="DebugProbeParams">
-        <Option Id="BSCAN_SWITCH_INDEX" value="0"/>
-        <Option Id="CORE_LOCATION" value="1:0"/>
-        <Option Id="CORE_UUID" value="23e7d65a79bc59f7bc47406c1714dfae"/>
-        <Option Id="HUB_CLK_INPUT_FREQ_HZ" value="48000769"/>
-        <Option Id="HW_ILA" value="u_ila_0"/>
-        <Option Id="PROBE_PORT" value="21"/>
-        <Option Id="PROBE_PORT_BITS" value="0"/>
-        <Option Id="PROBE_PORT_BIT_COUNT" value="1"/>
-      </probeOptions>
-      <nets>
-        <net name="OutTestDataEnable_Debug"/>
-      </nets>
-    </probe>
-    <probe type="ila" busType="net" source="netlist" spec="ILA_V2_RT">
-      <probeOptions Id="DebugProbeParams">
-        <Option Id="BSCAN_SWITCH_INDEX" value="0"/>
-        <Option Id="CORE_LOCATION" value="1:0"/>
-        <Option Id="CORE_UUID" value="23e7d65a79bc59f7bc47406c1714dfae"/>
-        <Option Id="HUB_CLK_INPUT_FREQ_HZ" value="48000769"/>
-        <Option Id="HW_ILA" value="u_ila_0"/>
-        <Option Id="PROBE_PORT" value="22"/>
-        <Option Id="PROBE_PORT_BITS" value="0"/>
-        <Option Id="PROBE_PORT_BIT_COUNT" value="1"/>
-      </probeOptions>
-      <nets>
         <net name="Acquisition/MicrorocSCurveTest/SC_test_control/SCParamLoadDebug"/>
       </nets>
     </probe>
@@ -438,127 +378,7 @@
         <Option Id="CORE_UUID" value="23e7d65a79bc59f7bc47406c1714dfae"/>
         <Option Id="HUB_CLK_INPUT_FREQ_HZ" value="48000769"/>
         <Option Id="HW_ILA" value="u_ila_0"/>
-        <Option Id="PROBE_PORT" value="23"/>
-        <Option Id="PROBE_PORT_BITS" value="0"/>
-        <Option Id="PROBE_PORT_BIT_COUNT" value="1"/>
-      </probeOptions>
-      <nets>
-        <net name="Clk5M_1"/>
-      </nets>
-    </probe>
-    <probe type="ila" busType="net" source="netlist" spec="ILA_V2_RT">
-      <probeOptions Id="DebugProbeParams">
-        <Option Id="BSCAN_SWITCH_INDEX" value="0"/>
-        <Option Id="CORE_LOCATION" value="1:0"/>
-        <Option Id="CORE_UUID" value="23e7d65a79bc59f7bc47406c1714dfae"/>
-        <Option Id="HUB_CLK_INPUT_FREQ_HZ" value="48000769"/>
-        <Option Id="HW_ILA" value="u_ila_0"/>
-        <Option Id="PROBE_PORT" value="24"/>
-        <Option Id="PROBE_PORT_BITS" value="0"/>
-        <Option Id="PROBE_PORT_BIT_COUNT" value="1"/>
-      </probeOptions>
-      <nets>
-        <net name="Clk5M_2"/>
-      </nets>
-    </probe>
-    <probe type="ila" busType="net" source="netlist" spec="ILA_V2_RT">
-      <probeOptions Id="DebugProbeParams">
-        <Option Id="BSCAN_SWITCH_INDEX" value="0"/>
-        <Option Id="CORE_LOCATION" value="1:0"/>
-        <Option Id="CORE_UUID" value="23e7d65a79bc59f7bc47406c1714dfae"/>
-        <Option Id="HUB_CLK_INPUT_FREQ_HZ" value="48000769"/>
-        <Option Id="HW_ILA" value="u_ila_0"/>
-        <Option Id="PROBE_PORT" value="25"/>
-        <Option Id="PROBE_PORT_BITS" value="0"/>
-        <Option Id="PROBE_PORT_BIT_COUNT" value="1"/>
-      </probeOptions>
-      <nets>
-        <net name="Clk5M_3"/>
-      </nets>
-    </probe>
-    <probe type="ila" busType="net" source="netlist" spec="ILA_V2_RT">
-      <probeOptions Id="DebugProbeParams">
-        <Option Id="BSCAN_SWITCH_INDEX" value="0"/>
-        <Option Id="CORE_LOCATION" value="1:0"/>
-        <Option Id="CORE_UUID" value="23e7d65a79bc59f7bc47406c1714dfae"/>
-        <Option Id="HUB_CLK_INPUT_FREQ_HZ" value="48000769"/>
-        <Option Id="HW_ILA" value="u_ila_0"/>
-        <Option Id="PROBE_PORT" value="26"/>
-        <Option Id="PROBE_PORT_BITS" value="0"/>
-        <Option Id="PROBE_PORT_BIT_COUNT" value="1"/>
-      </probeOptions>
-      <nets>
-        <net name="Clk5M"/>
-      </nets>
-    </probe>
-    <probe type="ila" busType="net" source="netlist" spec="ILA_V2_RT">
-      <probeOptions Id="DebugProbeParams">
-        <Option Id="BSCAN_SWITCH_INDEX" value="0"/>
-        <Option Id="CORE_LOCATION" value="1:0"/>
-        <Option Id="CORE_UUID" value="23e7d65a79bc59f7bc47406c1714dfae"/>
-        <Option Id="HUB_CLK_INPUT_FREQ_HZ" value="48000769"/>
-        <Option Id="HW_ILA" value="u_ila_0"/>
-        <Option Id="PROBE_PORT" value="27"/>
-        <Option Id="PROBE_PORT_BITS" value="0"/>
-        <Option Id="PROBE_PORT_BIT_COUNT" value="1"/>
-      </probeOptions>
-      <nets>
-        <net name="MicrorocChain3/ReadOnChipRam/Transmiton_Debug"/>
-      </nets>
-    </probe>
-    <probe type="ila" busType="net" source="netlist" spec="ILA_V2_RT">
-      <probeOptions Id="DebugProbeParams">
-        <Option Id="BSCAN_SWITCH_INDEX" value="0"/>
-        <Option Id="CORE_LOCATION" value="1:0"/>
-        <Option Id="CORE_UUID" value="23e7d65a79bc59f7bc47406c1714dfae"/>
-        <Option Id="HUB_CLK_INPUT_FREQ_HZ" value="48000769"/>
-        <Option Id="HW_ILA" value="u_ila_0"/>
-        <Option Id="PROBE_PORT" value="28"/>
-        <Option Id="PROBE_PORT_BITS" value="0"/>
-        <Option Id="PROBE_PORT_BIT_COUNT" value="1"/>
-      </probeOptions>
-      <nets>
-        <net name="MicrorocChain2/ReadOnChipRam/Transmiton_Debug"/>
-      </nets>
-    </probe>
-    <probe type="ila" busType="net" source="netlist" spec="ILA_V2_RT">
-      <probeOptions Id="DebugProbeParams">
-        <Option Id="BSCAN_SWITCH_INDEX" value="0"/>
-        <Option Id="CORE_LOCATION" value="1:0"/>
-        <Option Id="CORE_UUID" value="23e7d65a79bc59f7bc47406c1714dfae"/>
-        <Option Id="HUB_CLK_INPUT_FREQ_HZ" value="48000769"/>
-        <Option Id="HW_ILA" value="u_ila_0"/>
-        <Option Id="PROBE_PORT" value="29"/>
-        <Option Id="PROBE_PORT_BITS" value="0"/>
-        <Option Id="PROBE_PORT_BIT_COUNT" value="1"/>
-      </probeOptions>
-      <nets>
-        <net name="MicrorocChain1/ReadOnChipRam/Transmiton_Debug"/>
-      </nets>
-    </probe>
-    <probe type="ila" busType="net" source="netlist" spec="ILA_V2_RT">
-      <probeOptions Id="DebugProbeParams">
-        <Option Id="BSCAN_SWITCH_INDEX" value="0"/>
-        <Option Id="CORE_LOCATION" value="1:0"/>
-        <Option Id="CORE_UUID" value="23e7d65a79bc59f7bc47406c1714dfae"/>
-        <Option Id="HUB_CLK_INPUT_FREQ_HZ" value="48000769"/>
-        <Option Id="HW_ILA" value="u_ila_0"/>
-        <Option Id="PROBE_PORT" value="30"/>
-        <Option Id="PROBE_PORT_BITS" value="0"/>
-        <Option Id="PROBE_PORT_BIT_COUNT" value="1"/>
-      </probeOptions>
-      <nets>
-        <net name="MicrorocChain4/ReadOnChipRam/Transmiton_Debug"/>
-      </nets>
-    </probe>
-    <probe type="ila" busType="net" source="netlist" spec="ILA_V2_RT">
-      <probeOptions Id="DebugProbeParams">
-        <Option Id="BSCAN_SWITCH_INDEX" value="0"/>
-        <Option Id="CORE_LOCATION" value="1:0"/>
-        <Option Id="CORE_UUID" value="23e7d65a79bc59f7bc47406c1714dfae"/>
-        <Option Id="HUB_CLK_INPUT_FREQ_HZ" value="48000769"/>
-        <Option Id="HW_ILA" value="u_ila_0"/>
-        <Option Id="PROBE_PORT" value="31"/>
+        <Option Id="PROBE_PORT" value="19"/>
         <Option Id="PROBE_PORT_BITS" value="0"/>
         <Option Id="PROBE_PORT_BIT_COUNT" value="1"/>
       </probeOptions>

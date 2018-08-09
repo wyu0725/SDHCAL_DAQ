@@ -607,6 +607,7 @@ module CommandInterpreter(
   // ChipID 8bits
   // ChipID[3:0], default A1B1
   // ChipID[7:0], default A1CA
+  wire [7:0] ChipIDInternal;
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
@@ -619,7 +620,7 @@ module CommandInterpreter(
     .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(MicrorocChipID[3:0])
+    .CommandOut(ChipIDInternal[3:0])
     );
   CommandDecoder
   #(
@@ -633,8 +634,9 @@ module CommandInterpreter(
     .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(MicrorocChipID[7:4])
+    .CommandOut(ChipIDInternal[7:4])
     );
+  assign MicrorocChipID = {ChipIDInternal[0], ChipIDInternal[1], ChipIDInternal[2], ChipIDInternal[3], ChipIDInternal[4], ChipIDInternal[5], ChipIDInternal[6], ChipIDInternal[7]};
 
   //////////////////////////////////////////////////////////////
   // ChannelDiscriminatorMask
