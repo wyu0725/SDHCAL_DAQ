@@ -5656,13 +5656,14 @@ namespace USB_DAQ
 
         private async void btnNewDifAcquisitionStartNewDif_Click(object sender, RoutedEventArgs e)
         {
-            if(!CheckFileSaved())
-            {
-                return;
-            }
+            
             bool bResult;
             if(!StateIndicator.SlowAcqStart)
             {
+                if (!CheckFileSaved())
+                {
+                    return;
+                }
                 #region Set StartAcquisitionTime
                 bResult = SetStartAcquisitionTime(tbxStartAcquisitionTimeNewDif.Text);
                 if(!bResult)
@@ -6197,15 +6198,15 @@ namespace USB_DAQ
                 #endregion
                 #endregion
                 #region Set test row and column
-                if (!SelectTestAsic(cbxSCurveTestAsicNewDif.SelectedIndex))
-                {
-                    return;
-                }
                 if(!SetSCurveTestAsic(cbxSCurveTestAsicNewDif.SelectedIndex))
                 {
                     return;
                 }
                 #endregion
+                if(!ResetSCurveTest())
+                {
+                    return;
+                }
                 #region Clear USB FIFO
                 if(!ClearUsbFifo())
                 {
@@ -6222,6 +6223,7 @@ namespace USB_DAQ
                     StateIndicator.SlowAcqStart = true;
                     await Task.Run(() => GetSlowDataRateResultCallBack(MyUsbDevice1));
                     SCurveTestStop();
+                    ResetSCurveTest();
                     StateIndicator.SlowAcqStart = false;
                     btnSCurveTestStartNewDif.Content = "SCurve Test Start";
                     btnSCurveTestStartNewDif.Background = Brushes.Green;
@@ -6239,6 +6241,7 @@ namespace USB_DAQ
                     StateIndicator.SlowAcqStart = false;
                     btnSCurveTestStartNewDif.Content = "SCurve Test Start";
                     btnSCurveTestStartNewDif.Background = Brushes.Green;
+                    ResetSCurveTest();
                 }
                 else
                 {
@@ -6439,7 +6442,7 @@ namespace USB_DAQ
                 return false;
             }
         }
-        private bool SetAsicNumber(int AsicNumber, MicrorocAsic MyMicroroc)
+        private bool SetTotalAsicNumber(int AsicNumber, MicrorocAsic MyMicroroc)
         {
             if (MyMicroroc.AsicNumberSet(AsicNumber, MyUsbDevice1)) 
             {
@@ -6457,7 +6460,35 @@ namespace USB_DAQ
         {
             int TestAsic = AsicIndex / 4;
             int TestRow = AsicIndex % 4;
-            bool bResult = MicrorocAsic.SCurveTestAsicSelect(TestAsic, MyUsbDevice1);
+            #region Select Row
+            // There is an error in the PCB design that the row and column is swithced. The column does not connect as 1, 2, 3
+            int ColumnSetValue;
+            switch(TestRow)
+            {
+                case 0: ColumnSetValue = 0;break;
+                case 1: ColumnSetValue = 4;break;
+                case 2: ColumnSetValue = 2;break;
+                case 3: ColumnSetValue = 6;break;
+                default: ColumnSetValue = 0;break;
+            }
+            bool bResult = MicrorocAsic.TestSignalColumnSelect(ColumnSetValue, MyUsbDevice1);
+            if(bResult)
+            {
+                string report = string.Format("Set Test ASIC chain{0}\n", TestRow + 1);
+                txtReport.AppendText(report);
+            }
+            else
+            {
+                ShowUsbError("Set Test Column");
+                return false;
+            }
+            #endregion
+            bResult = SetTotalAsicNumber(4, MicrorocAsicChain[TestRow]);
+            if(!bResult)
+            {
+                return;
+            }
+            bResult = MicrorocAsic.SCurveTestAsicSelect(TestAsic, MyUsbDevice1);
             if(bResult)
             {
                 string report = string.Format("Select ASIC{0}{1}\n", TestRow + 1, TestAsic + 1);
@@ -6495,6 +6526,20 @@ namespace USB_DAQ
             else
             {
                 ShowUsbError("Stop SCurve Test");
+                return false;
+            }
+        }
+        private bool ResetSCurveTest()
+        {
+            bool bResult = MicrorocAsic.SCurveTestReset(MyUsbDevice1);
+            if(bResult)
+            {
+                txtReport.AppendText("SCurve Test reset\n");
+                return true;
+            }
+            else
+            {
+                ShowUsbError("Reset SCurve");
                 return false;
             }
         }

@@ -927,7 +927,17 @@ namespace USB_DAQ
 
         public static bool ResetDataFifo(MyCyUsb usbInterface)
         {
-            return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(HexToInt(DifCommandAddress.ResetDataFifoAddress) + 1));
+            bool bResult = usbInterface.CommandSend(usbInterface.ConstCommandByteArray(HexToInt(DifCommandAddress.ResetDataFifoAddress) + 1));
+            if(bResult)
+            {
+                byte[] ClearBytes = new byte[2014];
+                bResult = usbInterface.DataRecieve(ClearBytes, ClearBytes.Length);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         
         public static bool DaqModeSelect(int DaqMode, MyCyUsb usbInterface)
@@ -980,6 +990,11 @@ namespace USB_DAQ
         {
             int TestRowValue = TestRow + HexToInt(DifCommandAddress.TestSignalRowSelectAdress);
             return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(HexToInt(DifCommandAddress.TestSignalRowSelectAdress)));
+        }
+
+        public static bool SCurveTestReset(MyCyUsb usbInterface)
+        {
+            return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(HexToInt(DifCommandAddress.ResetSCurveTestAdress)));
         }
 
         public bool SetChannelCalibration(MyCyUsb usbInterface, params byte[] CalibrationData)

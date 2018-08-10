@@ -127,6 +127,7 @@ namespace USB_DAQ
         public const string MicrorocStartAcquisitionTime15to12Address = "E3D0";
         public const string TestSignalColumnSelectAdress = "E3E0";
         public const string TestSignalRowSelectAdress = "E3F0";
+        public const string ResetSCurveTestAdress = "F1B0";
 
     }
 }
