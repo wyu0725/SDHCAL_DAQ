@@ -641,6 +641,7 @@ module FPGA_Top(
     .Clk5M(Clk5M),
     .reset_n(reset_n),
     .ResetSCurveTest_n(~ResetSCurveTest),
+    .ForceMicrorocAcqReset_n(~ForceMicrorocAcqReset),
     .ModeSelect(CommandModeSelect),
     // Data interface
     // Microroc Chain data

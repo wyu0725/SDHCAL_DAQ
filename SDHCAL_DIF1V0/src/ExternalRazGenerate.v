@@ -108,4 +108,18 @@ module ExternalRazGenerate(
 			RazModeCounter <= 6'b0;
 		end
 	end
+  
+  (* MARK_DEBUG="true" *)wire ExternalRaz_en_Debug;
+  assign ExternalRaz_en_Debug = ExternalRaz_en;
+  (* MARK_DEBUG="true" *)wire TriggerIn_Debug;
+  assign TriggerIn_Debug = TriggerIn;
+  (* MARK_DEBUG="true" *)wire TriggerInRise_Debug;
+  assign TriggerInRise_Debug = TriggerInRise;
+  (* MARK_DEBUG="true" *)wire SingleRaz_en_Debug;
+  assign SingleRaz_en_Debug = SingleRaz_en;
+  (* MARK_DEBUG="true" *)wire RazEnableRise_Debug;
+  assign RazEnableRise_Debug = RazEnableRise;
+  (* MARK_DEBUG="true" *)wire RAZ_CHN_Debug;
+  assign RAZ_CHN_Debug = RAZ_CHN;
+  
 endmodule

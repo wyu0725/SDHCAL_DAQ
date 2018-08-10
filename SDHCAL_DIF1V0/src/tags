@@ -599,6 +599,7 @@ ExternalRazSignalEnable	ParameterGenerator.v	/^	input ExternalRazSignalEnable,\/
 ExternalRazSignalEnable	SlowControlAndReadScopeSet.v	/^  input ExternalRazSignalEnable,            \/\/ Default: 0 Disable$/;"	p	language:Verilog	module:SlowControlAndReadScopeSet
 ExternalRazSignalEnable_CAND	CommandParameter.v	/^`define ExternalRazSignalEnable_CAND               16'hA030$/;"	c	language:Verilog
 ExternalRaz_en	ExternalRazGenerate.v	/^	input ExternalRaz_en,$/;"	p	language:Verilog	module:ExternalRazGenerate
+ExternalRaz_en_Debug	ExternalRazGenerate.v	/^  (* MARK_DEBUG="true" *)wire ExternalRaz_en_Debug;$/;"	n	language:Verilog	module:ExternalRazGenerate
 ExternalSyncSignalIn	TriggerSwitcher.v	/^  input ExternalSyncSignalIn,$/;"	p	language:Verilog	module:TriggerSwitcher
 ExternalTrigger	DaqControl.v	/^  input ExternalTrigger$/;"	p	language:Verilog	module:DaqControl
 ExternalTrigger	DaqSwitcher.v	/^    input ExternalTrigger,$/;"	p	language:Verilog	module:DaqSwitcher
@@ -652,6 +653,7 @@ ForceExternalRaz	MicrorocControl.v	/^  output ForceExternalRaz,$/;"	p	language:V
 ForceExternalRaz	SlaveDaq.v	/^	output reg ForceExternalRaz,    \/\/Active H, When the start does not come, force externalRaz$/;"	p	language:Verilog	module:SlaveDaq
 ForceMicrorocAcqReset	CommandInterpreter.v	/^  output ForceMicrorocAcqReset,$/;"	p	language:Verilog	module:CommandInterpreter
 ForceMicrorocAcqReset	FPGA_Top.v	/^  wire ForceMicrorocAcqReset;$/;"	n	language:Verilog	module:FPGA_Top
+ForceMicrorocAcqReset_n	AcquisitionControl.v	/^  input ForceMicrorocAcqReset_n,$/;"	p	language:Verilog	module:AcquisitionControl
 ForceRaz	ExternalRazGenerate.v	/^	input ForceRaz,$/;"	p	language:Verilog	module:ExternalRazGenerate
 Force_Ext_RAZ	SCurve_Test_Control.v	/^  output reg                                  Force_Ext_RAZ,$/;"	p	language:Verilog	module:SCurve_Test_Control
 Force_Ext_RAZ	SCurve_Test_Top.v	/^  output Force_Ext_RAZ,$/;"	p	language:Verilog	module:SCurve_Test_Top
@@ -1160,6 +1162,7 @@ RAZ_CHN	ExternalRazGenerate.v	/^	output reg RAZ_CHN$/;"	p	language:Verilog	modul
 RAZ_CHN	MicrorocCommonControl.v	/^  wire RAZ_CHN;$/;"	n	language:Verilog	module:MicrorocCommonControl
 RAZ_CHNN	MicrorocCommonControl.v	/^  output RAZ_CHNN,$/;"	p	language:Verilog	module:MicrorocCommonControl
 RAZ_CHNP	MicrorocCommonControl.v	/^  output RAZ_CHNP,$/;"	p	language:Verilog	module:MicrorocCommonControl
+RAZ_CHN_Debug	ExternalRazGenerate.v	/^  (* MARK_DEBUG="true" *)wire RAZ_CHN_Debug;$/;"	n	language:Verilog	module:ExternalRazGenerate
 READ	CommandInterpreter.v	/^  localparam READ = 1'b1;$/;"	c	language:Verilog	module:CommandInterpreter
 READ	usb_synchronous_slavefifo.v	/^                     READ = 3'd1,$/;"	c	language:Verilog	module:usb_synchronous_slavefifo
 READ_FIFO	BitShiftOut.v	/^  READ_FIFO = 3'b001,$/;"	c	language:Verilog	module:BitShiftOut
@@ -1181,6 +1184,7 @@ RamReadoutDone	MicrorocCommonControl.v	/^  output RamReadoutDone,$/;"	p	language
 RamReadoutDone	RamReadDoneSync4Chain.v	/^  output reg RamReadoutDone$/;"	p	language:Verilog	module:RamReadDoneSync4Chain
 RazDelayCount	ExternalRazGenerate.v	/^	reg [3:0] RazDelayCount;$/;"	r	language:Verilog	module:ExternalRazGenerate
 RazEnableRise	ExternalRazGenerate.v	/^	wire RazEnableRise = Raz_r1 && (~Raz_r2);$/;"	n	language:Verilog	module:ExternalRazGenerate
+RazEnableRise_Debug	ExternalRazGenerate.v	/^  (* MARK_DEBUG="true" *)wire RazEnableRise_Debug;$/;"	n	language:Verilog	module:ExternalRazGenerate
 RazMode	ExternalRazGenerate.v	/^	input [1:0] RazMode,$/;"	p	language:Verilog	module:ExternalRazGenerate
 RazMode	MicrorocCommonControl.v	/^  input [1:0] RazMode,$/;"	p	language:Verilog	module:MicrorocCommonControl
 RazModeCounter	ExternalRazGenerate.v	/^	reg [5:0] RazModeCounter;$/;"	r	language:Verilog	module:ExternalRazGenerate
@@ -1326,6 +1330,7 @@ SingleOr64Channel	AcquisitionControl.v	/^  input SingleOr64Channel,$/;"	p	langua
 SingleOr64Channel	CommandInterpreter.v	/^  output SingleOr64Channel,$/;"	p	language:Verilog	module:CommandInterpreter
 SingleOr64ChannelSelect_CAND	CommandParameter.v	/^`define SingleOr64ChannelSelect_CAND               16'hE051$/;"	c	language:Verilog
 SingleRaz_en	ExternalRazGenerate.v	/^	reg SingleRaz_en;$/;"	r	language:Verilog	module:ExternalRazGenerate
+SingleRaz_en_Debug	ExternalRazGenerate.v	/^  (* MARK_DEBUG="true" *)wire SingleRaz_en_Debug;$/;"	n	language:Verilog	module:ExternalRazGenerate
 SingleStart	DaqControl.v	/^  wire SingleStart;$/;"	n	language:Verilog	module:DaqControl
 SingleStart	DaqSwitcher.v	/^    output SingleStart,$/;"	p	language:Verilog	module:DaqSwitcher
 SingleTestChannel	AcquisitionControl.v	/^  input [5:0] SingleTestChannel,$/;"	p	language:Verilog	module:AcquisitionControl
@@ -1561,6 +1566,8 @@ TriggerIn	MicrorocCommonControl.v	/^  input TriggerIn,$/;"	p	language:Verilog	mo
 TriggerIn1	ExternalRazGenerate.v	/^	reg TriggerIn1;$/;"	r	language:Verilog	module:ExternalRazGenerate
 TriggerIn2	ExternalRazGenerate.v	/^	reg TriggerIn2;$/;"	r	language:Verilog	module:ExternalRazGenerate
 TriggerInRise	ExternalRazGenerate.v	/^	wire TriggerInRise;$/;"	n	language:Verilog	module:ExternalRazGenerate
+TriggerInRise_Debug	ExternalRazGenerate.v	/^  (* MARK_DEBUG="true" *)wire TriggerInRise_Debug;$/;"	n	language:Verilog	module:ExternalRazGenerate
+TriggerIn_Debug	ExternalRazGenerate.v	/^  (* MARK_DEBUG="true" *)wire TriggerIn_Debug;$/;"	n	language:Verilog	module:ExternalRazGenerate
 TriggerNor64OrDirectSelect	MicrorocControl.v	/^  input TriggerNor64OrDirectSelect,         \/\/ Default: 1 Nor64$/;"	p	language:Verilog	module:MicrorocControl
 TriggerNor64OrDirectSelect	ParameterGenerator.v	/^	input TriggerNor64OrDirectSelect, \/\/ Default: 1 Nor64$/;"	p	language:Verilog	module:ParameterGenerator
 TriggerNor64OrDirectSelect	SlowControlAndReadScopeSet.v	/^  input TriggerNor64OrDirectSelect,         \/\/ Default: 1 Nor64$/;"	p	language:Verilog	module:SlowControlAndReadScopeSet

@@ -75,6 +75,10 @@ module ExternalRazGenetate_tb();
 		TriggerIn = 1'b1;
 		#PEROID;
 		TriggerIn = 1'b0;
+    #262;
+    TriggerIn = 1'b1;
+    #PEROID;
+    TriggerIn = 1'b0;
 	end
 	localparam Low = 12;
 	localparam High = 13;

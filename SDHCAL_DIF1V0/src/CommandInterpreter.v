@@ -2516,7 +2516,7 @@ module CommandInterpreter(
   #(
     .LEVEL_OR_PULSE(1'b1),
     .COMMAND_WIDTH(2'b10),
-    .COMMAND_ADDRESS_AND_DEFAULT(`TestSignalRowSelect_CAND)
+    .COMMAND_ADDRESS_AND_DEFAULT(`TestSignalColumnSelect_CAND)
   )
   TestSignalColumnSelect(
     .Clk(Clk),

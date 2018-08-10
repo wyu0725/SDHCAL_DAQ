@@ -24,6 +24,7 @@ module AcquisitionControl(
   input Clk5M,
   input reset_n,
   input ResetSCurveTest_n,
+  input ForceMicrorocAcqReset_n,
   input [3:0] ModeSelect,
   // Data interface
   // Microroc Chain data
@@ -171,7 +172,7 @@ module AcquisitionControl(
   
   MicrorocDataSwitcher AcquisitionDataSwitcher(
     .Clk(Clk),
-    .reset_n(reset_n),
+    .reset_n(reset_n & ForceMicrorocAcqReset_n),
     .AcquisitionStart(CommandMicrorocAcquisitionStartStop),
     .EndReadout(EndReadout),
     .MicrorocChain1Data(MicrorocChain1Data),
