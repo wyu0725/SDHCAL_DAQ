@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2018.1 (win64) Build 2188600 Wed Apr  4 18:40:38 MDT 2018
-| Date             : Thu Aug  9 21:33:28 2018
+| Date             : Fri Aug 10 18:01:56 2018
 | Host             : WYU running 64-bit major release  (build 9200)
 | Command          : report_power -file FPGA_Top_power_routed.rpt -pb FPGA_Top_power_summary_routed.pb -rpx FPGA_Top_power_routed.rpx
 | Design           : FPGA_Top
@@ -55,15 +55,15 @@ Table of Contents
 +--------------------------+-----------+----------+-----------+-----------------+
 | Clocks                   |     0.040 |        9 |       --- |             --- |
 | Slice Logic              |     0.007 |    51425 |       --- |             --- |
-|   LUT as Logic           |     0.006 |    16895 |     63400 |           26.65 |
-|   Register               |    <0.001 |    21881 |    126800 |           17.26 |
+|   LUT as Logic           |     0.006 |    16891 |     63400 |           26.64 |
+|   Register               |    <0.001 |    21880 |    126800 |           17.26 |
 |   CARRY4                 |    <0.001 |     1020 |     15850 |            6.44 |
 |   LUT as Distributed RAM |    <0.001 |      280 |     19000 |            1.47 |
-|   LUT as Shift Register  |    <0.001 |     2765 |     19000 |           14.55 |
+|   LUT as Shift Register  |    <0.001 |     2767 |     19000 |           14.56 |
 |   F7/F8 Muxes            |    <0.001 |      643 |     63400 |            1.01 |
 |   BUFG                   |    <0.001 |        1 |        32 |            3.13 |
-|   Others                 |     0.000 |     2996 |       --- |             --- |
-| Signals                  |     0.011 |    31904 |       --- |             --- |
+|   Others                 |     0.000 |     2998 |       --- |             --- |
+| Signals                  |     0.011 |    31890 |       --- |             --- |
 | Block RAM                |     0.004 |     16.5 |       135 |           12.22 |
 | MMCM                     |     0.084 |        1 |         6 |           16.67 |
 | I/O                      |     0.162 |      140 |       285 |           49.12 |
@@ -78,7 +78,7 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) |
 +-----------+-------------+-----------+-------------+------------+
-| Vccint    |       1.000 |     0.079 |       0.063 |      0.016 |
+| Vccint    |       1.000 |     0.078 |       0.063 |      0.016 |
 | Vccaux    |       1.800 |     0.065 |       0.047 |      0.018 |
 | Vcco33    |       3.300 |     0.007 |       0.003 |      0.004 |
 | Vcco25    |       2.500 |     0.066 |       0.062 |      0.004 |
@@ -295,11 +295,11 @@ Table of Contents
 |     ChipID3to0                                                                          |    <0.001 |
 |     ChipID7to4                                                                          |    <0.001 |
 |     CkMux                                                                               |    <0.001 |
-|     CommandFifo32Depth                                                                  |     0.002 |
-|       U0                                                                                |     0.002 |
-|         inst_fifo_gen                                                                   |     0.002 |
-|           gconvfifo.rf                                                                  |     0.002 |
-|             grf.rf                                                                      |     0.002 |
+|     CommandFifo32Depth                                                                  |     0.001 |
+|       U0                                                                                |     0.001 |
+|         inst_fifo_gen                                                                   |     0.001 |
+|           gconvfifo.rf                                                                  |     0.001 |
+|             grf.rf                                                                      |     0.001 |
 |               gntv_or_sync_fifo.gcx.clkx                                                |    <0.001 |
 |                 rd_pntr_cdc_inst                                                        |    <0.001 |
 |                 wr_pntr_cdc_inst                                                        |    <0.001 |
@@ -422,7 +422,7 @@ Table of Contents
 |     TriggerToWriteSelect                                                                |    <0.001 |
 |     UnmaskAllChannelSet                                                                 |    <0.001 |
 |     WidlarPPEnable                                                                      |    <0.001 |
-|   CommonControlSignalGenerator                                                          |     0.155 |
+|   CommonControlSignalGenerator                                                          |     0.154 |
 |     ExternalRazGen                                                                      |    <0.001 |
 |     HoldGen                                                                             |     0.003 |
 |     RamReadDoneDetect                                                                   |    <0.001 |
@@ -499,11 +499,11 @@ Table of Contents
 |       ParameterShiftOut                                                                 |    <0.001 |
 |       PulseSync                                                                         |    <0.001 |
 |   MicrorocChain3                                                                        |     0.004 |
-|     MicrorocDaq                                                                         |    <0.001 |
+|     MicrorocDaq                                                                         |     0.001 |
 |       AutoDaqControl                                                                    |    <0.001 |
 |       SlaveDaqControl                                                                   |    <0.001 |
 |     ReadOnChipRam                                                                       |    <0.001 |
-|     SlowControlAndReadScope                                                             |     0.003 |
+|     SlowControlAndReadScope                                                             |     0.002 |
 |       ConfigParameter                                                                   |    <0.001 |
 |         U0                                                                              |    <0.001 |
 |           inst_fifo_gen                                                                 |    <0.001 |

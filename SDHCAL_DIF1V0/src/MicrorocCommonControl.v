@@ -30,6 +30,8 @@ module MicrorocCommonControl
   input SlowClock,
   input SyncClk,
   input TriggerIn,
+  input TriggerOr,
+  input TriggerAnd,
   // Hold
   input HoldEnable,
   input [7:0] HoldDelay,
@@ -75,7 +77,7 @@ module MicrorocCommonControl
   ExternalRazGenerate ExternalRazGen(
     .Clk                 (Clk),
     .reset_n             (reset_n),
-    .TriggerIn           (TriggerIn),
+    .TriggerIn           (TriggerOr),
     .ExternalRaz_en      (ExternalRazSignalEnable),
     .ExternalRazDelayTime(ExternalRazDelayTime),
     .RazMode             (RazMode),

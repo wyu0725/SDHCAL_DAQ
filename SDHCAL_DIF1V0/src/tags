@@ -445,7 +445,7 @@ DaqSelect	DaqControl.v	/^  input DaqSelect,$/;"	p	language:Verilog	module:DaqCon
 DaqSelect	DaqSwitcher.v	/^    input DaqSelect,$/;"	p	language:Verilog	module:DaqSwitcher
 DaqSelect	FPGA_Top.v	/^  wire DaqSelect;$/;"	n	language:Verilog	module:FPGA_Top
 DaqSelect	MicrorocControl.v	/^  input DaqSelect,$/;"	p	language:Verilog	module:MicrorocControl
-DaqSelect_CAND	CommandParameter.v	/^`define DaqSelect_CAND                             16'hE290$/;"	c	language:Verilog
+DaqSelect_CAND	CommandParameter.v	/^`define DaqSelect_CAND                             16'hE291$/;"	c	language:Verilog
 DaqSwitcher	DaqSwitcher.v	/^module DaqSwitcher($/;"	m	language:Verilog
 Data	AdcControl.v	/^    output [15:0] Data,$/;"	p	language:Verilog	module:AdcControl
 DataDiscardCount	AdcControl.v	/^    reg [1:0] DataDiscardCount;$/;"	r	language:Verilog	module:AdcControl
@@ -1506,6 +1506,7 @@ TimeMinResetStart	SlaveDaq.v	/^	localparam TimeMinResetStart = 40;\/\/4 SlowCloc
 TimeMinSro	SlaveDaq.v	/^	localparam TimeMinSro = 16;\/\/Time to wake up clock LVDS receivers 400ns$/;"	c	language:Verilog	module:SlaveDaq
 TimeStampReset	TimeStampSyncAndDataTrigger.v	/^	input TimeStampReset,$/;"	p	language:Verilog	module:TimeStampSyncAndDataTrigger
 TimeStampSyncAndDataTrigger	TimeStampSyncAndDataTrigger.v	/^module TimeStampSyncAndDataTrigger($/;"	m	language:Verilog
+TirggerOr	FPGA_Top.v	/^  wire TirggerOr;$/;"	n	language:Verilog	module:FPGA_Top
 Toggle	PulseSynchronous.v	/^	reg Toggle;$/;"	r	language:Verilog	module:PulseSynchronous
 TransmitOn	AsicRamReadout.v	/^  input TransmitOn,\/\/pin  Active L$/;"	p	language:Verilog	module:AsicRamReadout
 TransmitOn	MicrorocControl.v	/^  wire TransmitOn;$/;"	n	language:Verilog	module:MicrorocControl
@@ -1528,6 +1529,8 @@ TrigCounter	SlaveDaq.v	/^	reg [23:0] TrigCounter;$/;"	r	language:Verilog	module:
 TrigCounter_sync	SlaveDaq.v	/^	reg [23:0] TrigCounter_sync;$/;"	r	language:Verilog	module:SlaveDaq
 Trigger	SCurve_Single_Input.v	/^    input Trigger,$/;"	p	language:Verilog	module:SCurve_Single_Input
 Trigger	TriggerSwitcher.v	/^  output Trigger,$/;"	p	language:Verilog	module:TriggerSwitcher
+TriggerAnd	FPGA_Top.v	/^  wire TriggerAnd;$/;"	n	language:Verilog	module:FPGA_Top
+TriggerAnd	MicrorocCommonControl.v	/^  input TriggerAnd,$/;"	p	language:Verilog	module:MicrorocCommonControl
 TriggerAnd	TriggerSwitcher.v	/^  output TriggerAnd,$/;"	p	language:Verilog	module:TriggerSwitcher
 TriggerAndInternal	TriggerSwitcher.v	/^  wire TriggerAndInternal;$/;"	n	language:Verilog	module:TriggerSwitcher
 TriggerCoincidence	CommandInterpreter.v	/^  output [3:0] TriggerCoincidence,$/;"	p	language:Verilog	module:CommandInterpreter
@@ -1572,6 +1575,7 @@ TriggerNor64OrDirectSelect	MicrorocControl.v	/^  input TriggerNor64OrDirectSelec
 TriggerNor64OrDirectSelect	ParameterGenerator.v	/^	input TriggerNor64OrDirectSelect, \/\/ Default: 1 Nor64$/;"	p	language:Verilog	module:ParameterGenerator
 TriggerNor64OrDirectSelect	SlowControlAndReadScopeSet.v	/^  input TriggerNor64OrDirectSelect,         \/\/ Default: 1 Nor64$/;"	p	language:Verilog	module:SlowControlAndReadScopeSet
 TriggerNor64OrDirectSelect_CAND	CommandParameter.v	/^`define TriggerNor64OrDirectSelect_CAND            16'hA061$/;"	c	language:Verilog
+TriggerOr	MicrorocCommonControl.v	/^  input TriggerOr,$/;"	p	language:Verilog	module:MicrorocCommonControl
 TriggerOr	TriggerSwitcher.v	/^  output TriggerOr,$/;"	p	language:Verilog	module:TriggerSwitcher
 TriggerOrInternal	TriggerSwitcher.v	/^  wire TriggerOrInternal;$/;"	n	language:Verilog	module:TriggerSwitcher
 TriggerOutputEnable	MicrorocControl.v	/^  input TriggerOutputEnable,                \/\/ Default: 1 Enable$/;"	p	language:Verilog	module:MicrorocControl

@@ -110,7 +110,7 @@
 `define LightLed_CAND                              16'hB000
 `define AcquisitionStartStop_CAND                  16'hF0F0
 `define ResetDataFifo_CAND                         16'hF1A0
-`define DaqSelect_CAND                             16'hE290
+`define DaqSelect_CAND                             16'hE291
 `define MicrorocStartAcquisitionTime3to0_CAND      16'hE3A0
 `define MicrorocStartAcquisitionTime7to4_CAND      16'hE3B5
 `define MicrorocStartAcquisitionTime11to8_CAND     16'hE3C0

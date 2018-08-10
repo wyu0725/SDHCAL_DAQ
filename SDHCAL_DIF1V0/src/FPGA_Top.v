@@ -721,6 +721,8 @@ module FPGA_Top(
   //---------- Trigger Switcher ----------//
   wire ExternalTriggerIn;
   wire TriggerSelected;
+  wire TirggerOr;
+  wire TriggerAnd;
   TriggerSwitcher TriggerSwitcher(
     .SyncClk(SyncClk),
     .reset_n(reset_n),
@@ -730,8 +732,8 @@ module FPGA_Top(
     .OutTrigger2b(out_trigger2b),
     .TriggerExt(EXT_TRIG_IN),
     .Trigger(TriggerSelected),
-    .TriggerAnd(),
-    .TriggerOr(),
+    .TriggerAnd(TriggerAnd),
+    .TriggerOr(TriggerOr),
     .ExternalTriggerSyncOut(ExternalTriggerIn),
     .ExternalSyncSignalIn(EXT_CLK_IN),
     .SyncSignalOut(SynchronousSignalIn)
