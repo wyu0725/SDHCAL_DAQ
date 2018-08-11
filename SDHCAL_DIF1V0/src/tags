@@ -1458,6 +1458,7 @@ SweepDacStartValue9to8_CAND	CommandParameter.v	/^`define SweepDacStartValue9to8_
 SweepDacStepValue3to0_CAND	CommandParameter.v	/^`define SweepDacStepValue3to0_CAND                 16'hE021$/;"	c	language:Verilog
 SweepDacStepValue7to4_CAND	CommandParameter.v	/^`define SweepDacStepValue7to4_CAND                 16'hE030$/;"	c	language:Verilog
 SweepDacStepValue9to8_CAND	CommandParameter.v	/^`define SweepDacStepValue9to8_CAND                 16'hE040$/;"	c	language:Verilog
+SweepTestDataTransmitDone	CommandInterpreter.v	/^  wire SweepTestDataTransmitDone;$/;"	n	language:Verilog	module:CommandInterpreter
 SweepTestDone	CommandInterpreter.v	/^  input SweepTestDone,$/;"	p	language:Verilog	module:CommandInterpreter
 SweepTestStartStop	CommandInterpreter.v	/^  output reg SweepTestStartStop,$/;"	p	language:Verilog	module:CommandInterpreter
 SweepTestStartStopInternal	CommandInterpreter.v	/^  wire SweepTestStartStopInternal;$/;"	n	language:Verilog	module:CommandInterpreter
@@ -1506,7 +1507,6 @@ TimeMinResetStart	SlaveDaq.v	/^	localparam TimeMinResetStart = 40;\/\/4 SlowCloc
 TimeMinSro	SlaveDaq.v	/^	localparam TimeMinSro = 16;\/\/Time to wake up clock LVDS receivers 400ns$/;"	c	language:Verilog	module:SlaveDaq
 TimeStampReset	TimeStampSyncAndDataTrigger.v	/^	input TimeStampReset,$/;"	p	language:Verilog	module:TimeStampSyncAndDataTrigger
 TimeStampSyncAndDataTrigger	TimeStampSyncAndDataTrigger.v	/^module TimeStampSyncAndDataTrigger($/;"	m	language:Verilog
-TirggerOr	FPGA_Top.v	/^  wire TirggerOr;$/;"	n	language:Verilog	module:FPGA_Top
 Toggle	PulseSynchronous.v	/^	reg Toggle;$/;"	r	language:Verilog	module:PulseSynchronous
 TransmitOn	AsicRamReadout.v	/^  input TransmitOn,\/\/pin  Active L$/;"	p	language:Verilog	module:AsicRamReadout
 TransmitOn	MicrorocControl.v	/^  wire TransmitOn;$/;"	n	language:Verilog	module:MicrorocControl
@@ -1575,6 +1575,7 @@ TriggerNor64OrDirectSelect	MicrorocControl.v	/^  input TriggerNor64OrDirectSelec
 TriggerNor64OrDirectSelect	ParameterGenerator.v	/^	input TriggerNor64OrDirectSelect, \/\/ Default: 1 Nor64$/;"	p	language:Verilog	module:ParameterGenerator
 TriggerNor64OrDirectSelect	SlowControlAndReadScopeSet.v	/^  input TriggerNor64OrDirectSelect,         \/\/ Default: 1 Nor64$/;"	p	language:Verilog	module:SlowControlAndReadScopeSet
 TriggerNor64OrDirectSelect_CAND	CommandParameter.v	/^`define TriggerNor64OrDirectSelect_CAND            16'hA061$/;"	c	language:Verilog
+TriggerOr	FPGA_Top.v	/^  wire TriggerOr;$/;"	n	language:Verilog	module:FPGA_Top
 TriggerOr	MicrorocCommonControl.v	/^  input TriggerOr,$/;"	p	language:Verilog	module:MicrorocCommonControl
 TriggerOr	TriggerSwitcher.v	/^  output TriggerOr,$/;"	p	language:Verilog	module:TriggerSwitcher
 TriggerOrInternal	TriggerSwitcher.v	/^  wire TriggerOrInternal;$/;"	n	language:Verilog	module:TriggerSwitcher

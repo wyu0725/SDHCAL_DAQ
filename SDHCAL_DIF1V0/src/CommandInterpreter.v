@@ -133,7 +133,7 @@ module CommandInterpreter(
   output [5:0] SingleTestChannel,
   output [15:0] TriggerCountMax,
   output [3:0] TriggerDelay,
-  output reg SweepTestStartStop,
+  output SweepTestStartStop,
   output UnmaskAllChannel,
   // Count Efficiency
   output TriggerEfficiencyOrCountEfficiency,
@@ -1856,15 +1856,17 @@ module CommandInterpreter(
     );
 
   // SweepTestStartStop 1bit, default F0A0
-  wire SweepTestStartStopInternal;
-  always @ (posedge Clk or negedge reset_n) begin
+  //wire SweepTestStartStopInternal;
+  wire SweepTestDataTransmitDone;
+  assign SweepTestDataTransmitDone = UsbFifoEmpty && SweepTestDone;
+  /*always @ (posedge Clk or negedge reset_n) begin
     if(~reset_n)
       SweepTestStartStop <= 1'b0;
-    else if(UsbFifoEmpty && SweepTestDone)
+    else if(SweepTestDataTransmitDone)
       SweepTestStartStop <= 1'b0;
     else
       SweepTestStartStop <= SweepTestStartStopInternal;
-  end
+  end*/
   CommandDecoder
   #(
     .LEVEL_OR_PULSE(1'b1),
@@ -1873,11 +1875,11 @@ module CommandInterpreter(
   )
   SweepTestStartStopSet(
     .Clk(Clk),
-    .reset_n(reset_n),
+    .reset_n(reset_n & (~SweepTestDataTransmitDone)),
     .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
     .COMMAND_WORD(COMMAND_WORD),
     // input [COMMAND_WIDTH:0] DefaultValue,
-    .CommandOut(SweepTestStartStopInternal)
+    .CommandOut(SweepTestStartStop)
     );
 
   // UnmaskAllChannelSet 1bit, default E1F0

@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2018.1 (win64) Build 2188600 Wed Apr  4 18:40:38 MDT 2018
-| Date             : Fri Aug 10 20:41:35 2018
+| Date             : Sat Aug 11 09:45:45 2018
 | Host             : WYU running 64-bit major release  (build 9200)
 | Command          : report_power -file FPGA_Top_power_routed.rpt -pb FPGA_Top_power_summary_routed.pb -rpx FPGA_Top_power_routed.rpx
 | Design           : FPGA_Top
@@ -53,17 +53,17 @@ Table of Contents
 +--------------------------+-----------+----------+-----------+-----------------+
 | On-Chip                  | Power (W) | Used     | Available | Utilization (%) |
 +--------------------------+-----------+----------+-----------+-----------------+
-| Clocks                   |     0.041 |        9 |       --- |             --- |
-| Slice Logic              |     0.007 |    51427 |       --- |             --- |
-|   LUT as Logic           |     0.006 |    16895 |     63400 |           26.65 |
-|   Register               |    <0.001 |    21881 |    126800 |           17.26 |
+| Clocks                   |     0.040 |        9 |       --- |             --- |
+| Slice Logic              |     0.007 |    51426 |       --- |             --- |
+|   LUT as Logic           |     0.006 |    16890 |     63400 |           26.64 |
+|   Register               |    <0.001 |    21880 |    126800 |           17.26 |
 |   CARRY4                 |    <0.001 |     1020 |     15850 |            6.44 |
 |   LUT as Distributed RAM |    <0.001 |      280 |     19000 |            1.47 |
 |   LUT as Shift Register  |    <0.001 |     2765 |     19000 |           14.55 |
 |   F7/F8 Muxes            |    <0.001 |      643 |     63400 |            1.01 |
 |   BUFG                   |    <0.001 |        2 |        32 |            6.25 |
 |   Others                 |     0.000 |     2996 |       --- |             --- |
-| Signals                  |     0.012 |    31892 |       --- |             --- |
+| Signals                  |     0.011 |    31903 |       --- |             --- |
 | Block RAM                |     0.004 |     16.5 |       135 |           12.22 |
 | MMCM                     |     0.084 |        1 |         6 |           16.67 |
 | I/O                      |     0.162 |      140 |       285 |           49.12 |
@@ -78,7 +78,7 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) |
 +-----------+-------------+-----------+-------------+------------+
-| Vccint    |       1.000 |     0.080 |       0.064 |      0.016 |
+| Vccint    |       1.000 |     0.079 |       0.064 |      0.016 |
 | Vccaux    |       1.800 |     0.065 |       0.047 |      0.018 |
 | Vcco33    |       3.300 |     0.007 |       0.003 |      0.004 |
 | Vcco25    |       2.500 |     0.066 |       0.062 |      0.004 |
@@ -255,7 +255,7 @@ Table of Contents
 |                 rstblk                                                                  |    <0.001 |
 |                   ngwrdrst.grst.g7serrst.gsckt_wrst.xpm_cdc_sync_rst_inst_wrst          |    <0.001 |
 |     MicrorocSCurveTest                                                                  |     0.004 |
-|       SC_test_control                                                                   |     0.003 |
+|       SC_test_control                                                                   |     0.002 |
 |       SC_test_single                                                                    |    <0.001 |
 |         Trigger0                                                                        |    <0.001 |
 |         Trigger1                                                                        |    <0.001 |
@@ -429,7 +429,7 @@ Table of Contents
 |     TimeStampSyncAndTrigger                                                             |    <0.001 |
 |   ConfigurationSelect                                                                   |     0.004 |
 |   MicrorocChain1                                                                        |     0.004 |
-|     MicrorocDaq                                                                         |     0.001 |
+|     MicrorocDaq                                                                         |    <0.001 |
 |       AutoDaqControl                                                                    |    <0.001 |
 |       SlaveDaqControl                                                                   |    <0.001 |
 |     ReadOnChipRam                                                                       |    <0.001 |
@@ -499,7 +499,7 @@ Table of Contents
 |       ParameterShiftOut                                                                 |    <0.001 |
 |       PulseSync                                                                         |    <0.001 |
 |   MicrorocChain3                                                                        |     0.004 |
-|     MicrorocDaq                                                                         |     0.001 |
+|     MicrorocDaq                                                                         |    <0.001 |
 |       AutoDaqControl                                                                    |    <0.001 |
 |       SlaveDaqControl                                                                   |    <0.001 |
 |     ReadOnChipRam                                                                       |    <0.001 |
@@ -534,7 +534,7 @@ Table of Contents
 |       ParameterShiftOut                                                                 |    <0.001 |
 |       PulseSync                                                                         |    <0.001 |
 |   MicrorocChain4                                                                        |     0.004 |
-|     MicrorocDaq                                                                         |     0.001 |
+|     MicrorocDaq                                                                         |    <0.001 |
 |       AutoDaqControl                                                                    |    <0.001 |
 |       SlaveDaqControl                                                                   |    <0.001 |
 |     ReadOnChipRam                                                                       |    <0.001 |
