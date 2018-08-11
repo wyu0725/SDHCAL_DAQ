@@ -721,7 +721,7 @@ module FPGA_Top(
   //---------- Trigger Switcher ----------//
   wire ExternalTriggerIn;
   wire TriggerSelected;
-  wire TirggerOr;
+  wire TriggerOr;
   wire TriggerAnd;
   TriggerSwitcher TriggerSwitcher(
     .SyncClk(SyncClk),
@@ -758,6 +758,8 @@ module FPGA_Top(
     .SlowClock(Clk5M),
     .SyncClk(SyncClk),
     .TriggerIn(TriggerSelected),
+    .TriggerOr(TriggerOr),
+    .TriggerAnd(TriggerAnd),
     // Hold
     .HoldEnable(HoldEnable),
     .HoldDelay(HoldDelay),
