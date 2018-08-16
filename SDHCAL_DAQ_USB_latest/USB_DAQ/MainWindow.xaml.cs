@@ -4540,6 +4540,19 @@ namespace USB_DAQ
             }
             else
             {
+                bResult = SCurveTestStop();
+                if(!bResult)
+                {
+                    return;
+                }
+                bResult = ResetSCurveTest();
+                if(!bResult)
+                {
+                    return;
+                }
+                StateIndicator.SlowAcqStart = false;
+                btnSCurveTestStartNewDif.Content = "SCurve Test Start";
+                btnSCurveTestStartNewDif.Background = Brushes.Green;
                 StateIndicator.AutoCalibrationStart = false;
                 btnAutoCalibrationStart.Content = "Calibration Start";
                 btnAutoCalibrationStart.Background = Brushes.Green;
@@ -6317,12 +6330,7 @@ namespace USB_DAQ
             }
             #endregion
             #endregion
-            #region Set test row and column
-            if (!SetSCurveTestAsic(cbxSCurveTestAsicNewDif.SelectedIndex))
-            {
-                return false;
-            }
-            #endregion
+            
             return true;
         }
 
@@ -6374,13 +6382,19 @@ namespace USB_DAQ
                 {
                     return;
                 }
-                
-                if(!ResetSCurveTest())
+                #region Set test row and column
+                if (!SetSCurveTestAsic(cbxSCurveTestAsicNewDif.SelectedIndex))
                 {
                     return;
                 }
+                #endregion
+                if (!ResetSCurveTest())
+                {
+                    return;
+                }
+                
                 #region Clear USB FIFO
-                if(!ClearUsbFifo())
+                if (!ClearUsbFifo())
                 {
                     return;
                 }
@@ -6629,8 +6643,8 @@ namespace USB_DAQ
         }
         private bool SetSCurveTestAsic(int AsicIndex)
         {
-            int TestAsic = AsicIndex / 4;
-            int TestRow = AsicIndex % 4;
+            int TestAsic = AsicIndex % 4;
+            int TestRow = AsicIndex / 4;
             #region Select Row
             // There is an error in the PCB design that the row and column is swithced. The column does not connect as 1, 2, 3
             int ColumnSetValue;
@@ -6726,6 +6740,185 @@ namespace USB_DAQ
             if (!bResult)
             {
                 return;
+            }
+        }
+
+        private async void btnSCurveTestPedestal_Click(object sender, RoutedEventArgs e)
+        {
+            bool bResult;
+            if (!StateIndicator.PedestalTestStart)
+            {
+                #region Create Folder
+                bResult = CreatePedestalTestFolder();
+                if (!bResult)
+                {
+                    return;
+                }
+                #endregion
+                for (int i = 0; i < 4; i++)
+                {
+                    for (int j = 0; j < 4; j++)
+                    {
+                        #region SaveFile
+                        bResult = SavePedestalTestFile(i, j);
+                        if (!bResult)
+                        {
+                            return;
+                        }
+                        #endregion
+                        #region DAC
+                        bResult = SetStartDac(tbcStartDacNewDif.Text);
+                        if (!bResult)
+                        {
+                            return;
+                        }
+                        int StartDac = int.Parse(tbcStartDacNewDif.Text);
+                        bResult = SetEndDac(tbcEndDacNewDif.Text);
+                        if (!bResult)
+                        {
+                            return;
+                        }
+                        int EndDac = int.Parse(tbcEndDacNewDif.Text);
+                        bResult = SetDacStep(tbcDacStepNewDif.Text);
+                        if (!bResult)
+                        {
+                            return;
+                        }
+                        int AdcInterval = int.Parse(tbcDacStepNewDif.Text);
+                        #endregion
+                        #region Data number
+                        if (cbxSingleOrAutoNewDif.SelectedIndex == 1)
+                        {
+                            //*** Set Package Number
+                            StateIndicator.SlowDataRatePackageNumber = HeaderLength + ChannelLength + ((EndDac - StartDac) / AdcInterval + 1) * OneDacDataLength + TailLength;
+                        }
+                        //--- 64 Channel Test ---//
+                        else
+                        {
+                            //*** Set Package Number
+                            StateIndicator.SlowDataRatePackageNumber = HeaderLength + (ChannelLength + ((EndDac - StartDac) / AdcInterval + 1) * OneDacDataLength) * 64 + TailLength;
+                        }
+                        #endregion
+                        #region Set Common Parameter
+                        if (!SetSCurveTestCommomParameter())
+                        {
+                            return;
+                        }
+                        #endregion
+                        #region Set test row and column
+                        int TestAsicIndex = i * 4 + j;
+                        if (!SetSCurveTestAsic(TestAsicIndex))
+                        {
+                            return;
+                        }
+                        #endregion
+                        #region Reset SCurve Test
+                        if (!ResetSCurveTest())
+                        {
+                            return;
+                        }
+                        #endregion
+                        #region Clear USB FIFO
+                        if (!ClearUsbFifo())
+                        {
+                            return;
+                        }
+                        #endregion
+                        bResult = SCurveTestStart();
+                        if (bResult)
+                        {
+                            StateIndicator.FileSaved = false;
+                            StateIndicator.SlowAcqStart = true;
+                            StateIndicator.PedestalTestStart = true;
+                            btnSCurveTestStartNewDif.Content = "SCurve Test Stop";
+                            btnSCurveTestStartNewDif.Background = Brushes.Red;
+                            btnSCurveTestPedestal.Content = "PedestalTestStop";
+                            btnSCurveTestPedestal.Background = Brushes.Red;
+                            await Task.Run(() => GetSlowDataRateResultCallBack(MyUsbDevice1));
+                            SCurveTestStop();
+                            ResetSCurveTest();
+                            StateIndicator.SlowAcqStart = false;
+                            btnSCurveTestStartNewDif.Content = "SCurve Test Start";
+                            btnSCurveTestStartNewDif.Background = Brushes.Green;
+                        }// if
+                        else
+                        {
+                            return;
+                        }// else
+                    }// for j
+                }// for i
+                StateIndicator.AutoCalibrationStart = false;
+                btnSCurveTestPedestal.Content = "Pedestal Test Start";
+                btnSCurveTestPedestal.Background = Brushes.Green;
+            }//if
+            else
+            {
+                bResult = SCurveTestStop();
+                if (!bResult)
+                {
+                    return;
+                }
+                bResult = ResetSCurveTest();
+                if (!bResult)
+                {
+                    return;
+                }
+                StateIndicator.SlowAcqStart = false;
+                btnSCurveTestStartNewDif.Content = "SCurve Test Start";
+                btnSCurveTestStartNewDif.Background = Brushes.Green;
+                StateIndicator.AutoCalibrationStart = false;
+                btnSCurveTestPedestal.Content = "Pedestal Test Start";
+                btnSCurveTestPedestal.Background = Brushes.Green;
+            }// else
+            MediaPlayer TestDonePlayer = new MediaPlayer();
+            TestDonePlayer.Open(new Uri("TestDone.wav", UriKind.Relative));
+            TestDonePlayer.Play();
+        }
+
+        private bool CreatePedestalTestFolder()
+        {
+            string DefaultPath = @"D:\ExperimentsData\test";
+            string DefaultSubPath = DateTime.Now.ToString();
+            DefaultSubPath = DefaultSubPath.Replace("/", "_");
+            DefaultSubPath = DefaultSubPath.Replace(":", "_");
+            DefaultSubPath = DefaultSubPath.Replace(" ", "_");
+            string TestFolder = Path.Combine(DefaultPath, "Pedestal", DefaultSubPath);
+            if (!Directory.Exists(TestFolder))//路径不存在
+            {
+                string path = String.Format("File Directory {0} Created\n", TestFolder);
+                Directory.CreateDirectory(TestFolder);
+                txtReport.AppendText(path);
+                txtFileDir.Text = TestFolder;
+                return true;
+            }
+            else
+            {
+                MessageBox.Show("The File Directory already exits", //text
+                                "Created failure",   //caption
+                                MessageBoxButton.OK,//button
+                                MessageBoxImage.Warning);//icon
+                return false;
+            }
+        }
+        private bool SavePedestalTestFile(int i, int j)
+        {
+            string TestFileName = string.Format("ASIC{0}{1}.dat", i, j);
+            filepath = Path.Combine(txtFileDir.Text, TestFileName);
+            FileStream fs = null;
+            if (!File.Exists(filepath))
+            {
+                fs = File.Create(filepath);
+                string report = String.Format("File:{0} Created\n", filepath);
+                txtReport.AppendText(report.ToString());
+                StateIndicator.FileSaved = true;
+                fs.Close();
+                txtFileName.Text = TestFileName;
+                return true;
+            }
+            else
+            {
+                MessageBox.Show("Save file failure. Please save the file manual", "File Save Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
             }
         }
     }
