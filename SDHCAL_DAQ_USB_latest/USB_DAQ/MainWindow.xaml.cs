@@ -4311,19 +4311,6 @@ namespace USB_DAQ
             #region Create test path
             CreateSCTestFolder();
             #endregion
-            #region Set Slow Control
-            bResult = MicrorocChain1.SelectOperationMode(CommandHeader.AcqModeIndex, MyUsbDevice1);
-            if(!bResult)
-            {
-                MessageBox.Show("Please check the USB cable of DIF", "USB Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-            MicrorocChain1.SelectSlowControlOrReadRegister(true, MyUsbDevice1);
-            MicrorocSetSlowControl();
-            MicrorocChain1.SelectSlowControlOrReadRegister(false, MyUsbDevice1);
-            MicrorocSetSlowControl();
-            #endregion
-            SetSCurveTestParameter();
         }
 
         private bool CreateSCTestFolder()
@@ -4351,9 +4338,9 @@ namespace USB_DAQ
                 return false;
             }
         }
-        private bool SaveSCTestFile(double TestCharge)
+        private bool SaveSCTestFile(int TestCharge, string AsicID, int HighGainOrLowGain)
         {
-            string TestFileName = string.Format("SCTest{0}fC.dat", TestCharge);
+            string TestFileName = string.Format("ASIC{0}SCTest{1}fC{2}.dat", AsicID, TestCharge, ((HighGainOrLowGain == 1) ? "HighGain" : "LowGain"));
             filepath = Path.Combine(txtFileDir.Text, TestFileName);
             FileStream fs = null;
             if (!File.Exists(filepath))
@@ -4374,12 +4361,192 @@ namespace USB_DAQ
         }
 
 
-        private void btnAutoCalibrationStart_Click(object sender, RoutedEventArgs e)
+        private async void btnAutoCalibrationStart_Click(object sender, RoutedEventArgs e)
         {
-            btnAutoCalibrationStart.Background = Brushes.Red;
-            btnAutoCalibrationStart.Content = "Calibration Abort";
-            //测试完按钮不可按
-            btnAutoCalibrationStart.IsEnabled = false;
+            bool bResult;
+            if (!StateIndicator.AutoCalibrationStart)
+            {
+                #region Set Common SCurve Parameter
+                if (!SetSCurveTestCommomParameter())
+                {
+                    return;
+                }
+                #endregion
+                #region Caculate Start and end Charge
+                if (!CheckStringLegal.CheckIntegerLegal(tbxACStartCharge.Text))
+                {
+                    ShowIllegalInput("Start Charge should be Integer");
+                    return;
+                }
+                if(!CheckStringLegal.CheckIntegerLegal(tbxACEndCharge.Text))
+                {
+                    ShowIllegalInput("End Charge should be Integer");
+                    return;
+                }
+                if((int.Parse(tbxACEndCharge.Text) < int.Parse(tbxACStartCharge.Text)))
+                {
+                    ShowIllegalInput("Start Charge should lower than End Charge");
+                    return;
+                }
+                if (!CheckStringLegal.CheckIntegerLegal(tbxACChargeStep.Text))
+                {
+                    ShowIllegalInput("Charge Step should be interger");
+                    return;
+                }
+                int StartCharge = int.Parse(tbxACStartCharge.Text);
+                int EndCharge = int.Parse(tbxACEndCharge.Text);
+                int ChargeStep = int.Parse(tbxACChargeStep.Text);
+                #endregion
+                #region Check test capacitor
+                if (!CheckStringLegal.CheckDoubleLegal(tbxACCTestCapacitor.Text))
+                {
+                    ShowIllegalInput("Test capacitor should be double");
+                    return;
+                }
+                double TestCapacitor = double.Parse(tbxACCTestCapacitor.Text);
+                #endregion
+                bool AttenuatorOrNot = cbxACAttenuator.SelectedIndex == 0;
+                for (int TestCharge = StartCharge; TestCharge <= EndCharge; TestCharge += ChargeStep)
+                {
+                    #region Set AFG3252 Voltage
+                    double DeltaV = TestCharge / TestCapacitor;
+                    double TestVoltage;
+                    #region Check attenuator
+                    if (DeltaV < 50 & !AttenuatorOrNot)
+                    {
+                        if(MessageBox.Show("AFG3252 voltage < 50mV. Add Attenuator?", "Confirm Message", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                        {
+                            AttenuatorOrNot = true;
+                        }
+                        else
+                        {
+                            return;
+                        }
+                    }
+                    else if(DeltaV > 50 & AttenuatorOrNot)
+                    {
+                        if (MessageBox.Show("AFG3252 voltage > 5V. Remove Attenuator?", "Confirm Message", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                        {
+                            AttenuatorOrNot = false;
+                        }
+                        else
+                        {
+                            return;
+                        }
+                    }
+                    #endregion
+                    if (AttenuatorOrNot)
+                    {
+                        TestVoltage = DeltaV * 100;
+                    }
+                    else
+                    {
+                        TestVoltage = DeltaV;
+                    }
+                    bResult = MyAFG3252.SetVoltageHigh(1, TestVoltage, AFG3252.VoltageUnitMV);
+                    if(!bResult)
+                    {
+                        ShowUsbError("Set AFG3252");
+                        return;
+                    }
+                    #endregion
+                    #region Set Start and End DAC
+                    int TestDac;
+                    if (cbxACHighGainOrLowGain.SelectedIndex == 1)
+                    {
+                        TestDac = 600 - 4 * TestCharge;
+                    }
+                    else
+                    {
+                        TestDac = 600 - TestCharge;
+                    }
+                    int StartDac = (TestCharge >= 50) ? (TestCharge - 50) : 0;
+                    if(StartDac > 923)
+                    {
+                        MessageBox.Show("Start DAC Caculate wrong. Please run debug", "System Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+                    int EndDac = StartDac + 100;
+                    if (!SetStartDac(StartDac.ToString()))
+                    {
+                        return;
+                    }
+                    if (!SetEndDac(EndDac.ToString()))
+                    {
+                        return;
+                    }
+                    if (!SetDacStep(tbcDacStepNewDif.Text))
+                    {
+                        return;
+                    }
+                    int DacStep = int.Parse(tbcDacStepNewDif.Text);
+                    #endregion
+                    #region Data number
+                    if (cbxSingleOrAutoNewDif.SelectedIndex == 1)
+                    {
+                        StateIndicator.SlowDataRatePackageNumber = HeaderLength + ChannelLength + ((EndDac - StartDac) / DacStep + 1) * OneDacDataLength + TailLength;
+                    }
+                    //--- 64 Channel Test ---//
+                    else
+                    {
+                        StateIndicator.SlowDataRatePackageNumber = HeaderLength + (ChannelLength + ((EndDac - StartDac) / DacStep + 1) * OneDacDataLength) * 64 + TailLength;
+                    }
+                    #endregion
+                    #region SaveFile
+                    if(!SaveSCTestFile(TestCharge, tbxACAsicID.Text,cbxACHighGainOrLowGain.SelectedIndex))
+                    {
+                        MessageBox.Show("Save file failure", "File Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+                    #endregion
+                    #region Reset test
+                    if (!ResetSCurveTest())
+                    {
+                        return;
+                    }
+                    if(!ClearUsbFifo())
+                    {
+                        return;
+                    }
+                    #endregion
+                    tbxACStatus.Text = string.Format("{0}fC", TestCharge);
+                    #region Single charge SCurve
+                    bResult = SCurveTestStart();
+                    if(bResult)
+                    {
+                        StateIndicator.FileSaved = false;
+                        StateIndicator.SlowAcqStart = true;
+                        StateIndicator.AutoCalibrationStart = true;
+                        btnAutoCalibrationStart.Content = "Calibration Stop";
+                        btnAutoCalibrationStart.Background = Brushes.Red;
+                        btnSCurveTestStartNewDif.Content = "SCurve Test Stop";
+                        btnSCurveTestStartNewDif.Background = Brushes.Red;
+                        await Task.Run(() => GetSlowDataRateResultCallBack(MyUsbDevice1));
+                        SCurveTestStop();
+                        ResetSCurveTest();
+                        StateIndicator.SlowAcqStart = false;
+                        btnSCurveTestStartNewDif.Content = "SCurve Test Start";
+                        btnSCurveTestStartNewDif.Background = Brushes.Green;
+                    }
+                    else
+                    {
+                        return;
+                    }
+                    #endregion
+                }
+                StateIndicator.AutoCalibrationStart = false;
+                btnAutoCalibrationStart.Content = "Calibration Start";
+                btnAutoCalibrationStart.Background = Brushes.Green;
+            }
+            else
+            {
+                StateIndicator.AutoCalibrationStart = false;
+                btnAutoCalibrationStart.Content = "Calibration Start";
+                btnAutoCalibrationStart.Background = Brushes.Green;
+            }
+            MediaPlayer TestDonePlayer = new MediaPlayer();
+            TestDonePlayer.Open(new Uri("TestDone.wav", UriKind.Relative));
+            TestDonePlayer.Play();
         }
 
         private void btnAutoCalibrationInitial_Click(object sender, RoutedEventArgs e)
@@ -4388,13 +4555,6 @@ namespace USB_DAQ
             btnAutoCalibrationStart.IsEnabled = true;
             btnAutoCalibrationStart.Background = Brushes.Green;
             btnAutoCalibrationStart.Content = "Calibration Start";
-            btnAutoCalibrationInitial.Background = Brushes.DimGray;
-        }
-
-        private void btnTestFileSave_Click(object sender, RoutedEventArgs e)
-        {
-            CreateSCTestFolder();
-            SaveSCTestFile(20);
         }
 
         private void btnHelp_Click(object sender, RoutedEventArgs e)
@@ -6088,6 +6248,84 @@ namespace USB_DAQ
         }
 
 
+        private bool SetSCurveTestCommomParameter()
+        {
+            bool bResult;
+            #region Select Single or Auto
+            bResult = SelectSCurveTestSingleChannelOrAuto(cbxSingleOrAutoNewDif.SelectedIndex);
+            if (!bResult)
+            {
+                return false;
+            }
+            #endregion
+            #region CTest Or Input
+            bResult = SelectSCurveSignalCTestOrInput(cbxCTestOrInputNewDif.SelectedIndex);
+            if (!bResult)
+            {
+                return false;
+            }
+            #endregion
+            #region Max Trigger Count
+            bResult = SetMaxTriggerCount(cbxCPT_MAX_NewDif.Text);
+            if (!bResult)
+            {
+                return false;
+            }
+            #endregion
+            #region Count Time
+            bResult = SetCountTime(tbcCountTimeNewDif.Text);
+            if (!bResult)
+            {
+                return false;
+            }
+            #endregion
+            #region Single Channel
+            bResult = SetSingleTestChannel(tbcSingleTestChannelNewDif.Text);
+            if (!bResult)
+            {
+                return false;
+            }
+            #endregion
+            #region Set mask choise
+            if (!SetMaskChoise(cbxUnmaskAllChannelNewDif.SelectedIndex))
+            {
+                return false;
+            }
+            #endregion
+            #region Set Trigger Delay
+            if (!SetTriggerDelay(tbcTriggerDelayNewDif.Text))
+            {
+                return false;
+            }
+            #endregion
+            #region RAZ 
+            #region Select External RAZ
+            bResult = SelectRazChannel(1);
+            if (!bResult)
+            {
+                return false;
+            }
+            #endregion
+            #region RAZ delay and time
+            if (!SetExternalRazDelay(tbcExternalRazDelayNewDif.Text))
+            {
+                return false;
+            }
+            if (!SetExternalRazTime(cbxExternalRazModeNewDifSCurve.SelectedIndex))
+            {
+                return false;
+            }
+            #endregion
+            #endregion
+            #region Set test row and column
+            if (!SetSCurveTestAsic(cbxSCurveTestAsicNewDif.SelectedIndex))
+            {
+                return false;
+            }
+            #endregion
+            return true;
+        }
+
         private async void btnSCurveTestStartNewDif_Click(object sender, RoutedEventArgs e)
         {
             
@@ -6098,41 +6336,7 @@ namespace USB_DAQ
                 {
                     return;
                 }
-                #region Select Single or Auto
-                bResult = SelectSCurveTestSingleChannelOrAuto(cbxSingleOrAutoNewDif.SelectedIndex);
-                if (!bResult)
-                {
-                    return;
-                }
-                #endregion
-                #region CTest Or Input
-                bResult = SelectSCurveSignalCTestOrInput(cbxCTestOrInputNewDif.SelectedIndex);
-                if(!bResult)
-                {
-                    return;
-                }
-                #endregion
-                #region Max Trigger Count
-                bResult = SetMaxTriggerCount(cbxCPT_MAX_NewDif.Text);
-                if(!bResult)
-                {
-                    return;
-                }
-                #endregion
-                #region Count Time
-                bResult = SetCountTime(tbcCountTimeNewDif.Text);
-                if(!bResult)
-                {
-                    return;
-                }
-                #endregion
-                #region Single Channel
-                bResult = SetSingleTestChannel(tbcSingleTestChannelNewDif.Text);
-                if(!bResult)
-                {
-                    return;
-                }
-                #endregion
+
                 #region DAC
                 bResult = SetStartDac(tbcStartDacNewDif.Text);
                 if(!bResult)
@@ -6166,43 +6370,11 @@ namespace USB_DAQ
                     StateIndicator.SlowDataRatePackageNumber = HeaderLength + (ChannelLength + ((EndDac - StartDac) / AdcInterval + 1) * OneDacDataLength) * 64 + TailLength;
                 }
                 #endregion
-                #region Set mask choise
-                if (!SetMaskChoise(cbxUnmaskAllChannelNewDif.SelectedIndex))
+                if (!SetSCurveTestCommomParameter())
                 {
                     return;
                 }
-                #endregion
-                #region Set Trigger Delay
-                if (!SetTriggerDelay(tbcTriggerDelayNewDif.Text)) 
-                {
-                    return;
-                }
-                #endregion
-                #region RAZ 
-                #region Select External RAZ
-                bResult = SelectRazChannel(1);
-                if(!bResult)
-                {
-                    return;
-                }
-                #endregion
-                #region RAZ delay and time
-                if (!SetExternalRazDelay(tbcExternalRazDelayNewDif.Text))
-                {
-                    return;
-                }
-                if (!SetExternalRazTime(cbxExternalRazModeNewDifSCurve.SelectedIndex))
-                {
-                    return;
-                }
-                #endregion
-                #endregion
-                #region Set test row and column
-                if(!SetSCurveTestAsic(cbxSCurveTestAsicNewDif.SelectedIndex))
-                {
-                    return;
-                }
-                #endregion
+                
                 if(!ResetSCurveTest())
                 {
                     return;
@@ -6220,7 +6392,6 @@ namespace USB_DAQ
                     StateIndicator.SlowAcqStart = true;
                     btnSCurveTestStartNewDif.Content = "SCurve Test Stop";
                     btnSCurveTestStartNewDif.Background = Brushes.Red;
-                    StateIndicator.SlowAcqStart = true;
                     await Task.Run(() => GetSlowDataRateResultCallBack(MyUsbDevice1));
                     SCurveTestStop();
                     ResetSCurveTest();
@@ -6486,7 +6657,7 @@ namespace USB_DAQ
             bResult = SetTotalAsicNumber(4, MicrorocAsicChain[TestRow]);
             if(!bResult)
             {
-                return;
+                return false;
             }
             bResult = MicrorocAsic.SCurveTestAsicSelect(TestAsic, MyUsbDevice1);
             if(bResult)

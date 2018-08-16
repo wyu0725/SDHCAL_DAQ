@@ -13,6 +13,8 @@ namespace USB_DAQ
         public static bool SlowAcqStart = false;
         public static bool AdcStart = false;
 
+        public static bool AutoCalibrationStart = false;
+
         public static int SlowAcqDataNumber = 100;
         public static int SlowDataRatePackageNumber;
 

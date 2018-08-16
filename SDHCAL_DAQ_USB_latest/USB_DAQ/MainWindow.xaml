@@ -79,7 +79,7 @@
         </GroupBox>
         <GroupBox x:Name="gbxMICROROC" Header="MICROROC Control" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Height="500" Width="797" Grid.Column="4" Grid.ColumnSpan="2">
             <Grid  Margin="0,0,0,0" >
-                <TabControl x:Name="tbcMicrorocControl" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="785" Height="480" >
+                <TabControl x:Name="tbcMicrorocControl" HorizontalAlignment="Left" Margin="0,0,0,-2" VerticalAlignment="Top" Width="785" Height="480" >
                     <TabItem Name="tbiMicrorocAcq" Header="MICROROC ACQ" Margin="0,0,0,0" MouseLeftButtonUp="tbiMicrorocAcq_MouseLeftButtonUp">
                         <Grid Margin="0,0,0,0">
                             <GroupBox x:Name="gbxSC_ReadReg" Header="ASIC Parameter" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Height="400" Width="550">
@@ -666,37 +666,7 @@
                                     <TextBox x:Name="txtAdcInterval" HorizontalAlignment="Left" Height="24" Margin="320,120,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="60"/>
                                 </Grid>
                             </GroupBox>
-                            <GroupBox x:Name="gbxAutoCalibration" Header="Auto Calibration" HorizontalAlignment="Left" Margin="0,230,0,0" VerticalAlignment="Top" Height="200" Width="400">
-                                <Grid Margin="0,0,0,0">
-                                    <Label x:Name="lblACStartCharge" Content="Start Charge:" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Height="25" Width="100"/>
-                                    <TextBox x:Name="tbxACStartCharge" HorizontalAlignment="Left" Height="25" Margin="100,0,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="70"/>
-                                    <Label x:Name="lblACEndCharge" Content="End Charge:" HorizontalAlignment="Left" Margin="0,30,0,0" VerticalAlignment="Top" Height="25" Width="100"/>
-                                    <TextBox x:Name="tbxACEndCharge" HorizontalAlignment="Left" Height="25" Margin="100,30,0,0" TextWrapping="Wrap" Text="140" VerticalAlignment="Top" Width="70"/>
-                                    <Label x:Name="lblACChargeStep" Content="Charge Step:" HorizontalAlignment="Left" Margin="0,60,0,0" VerticalAlignment="Top" Height="25" Width="100"/>
-                                    <TextBox x:Name="tbxACChargeStep" HorizontalAlignment="Left" Height="25" Margin="100,60,0,0" TextWrapping="Wrap" Text="10" VerticalAlignment="Top" Width="70"/>
-                                    <Label x:Name="lblACCountMax" Content="Max count:" HorizontalAlignment="Left" Margin="0,90,0,0" VerticalAlignment="Top" Height="24"/>
-                                    <ComboBox x:Name="cbxACCountMax" HorizontalAlignment="Left" Margin="100,90,0,0" VerticalAlignment="Top" Width="70">
-                                        <ComboBoxItem Content= "200"/>
-                                        <ComboBoxItem Content= "1000"/>
-                                        <ComboBoxItem Content= "2000"/>
-                                        <ComboBoxItem Content= "5000" IsSelected= "True"/>
-                                        <ComboBoxItem Content= "10000" />
-                                        <ComboBoxItem Content= "20000"/>
-                                        <ComboBoxItem Content= "50000"/>
-                                    </ComboBox>
-                                    <Label x:Name="lblACSingleOrAuto" Content="Single or Auto:" HorizontalAlignment="Left" Margin="0,120,0,0" VerticalAlignment="Top" Height="24"/>
-                                    <ComboBox x:Name="cbxACSingleOrAuto" HorizontalAlignment="Left" Margin="100,120,0,0" VerticalAlignment="Top" Width="65" Height="24">
-                                        <ComboBoxItem Content="Single" />
-                                        <ComboBoxItem Content="Auto" IsSelected="True"/>
-                                    </ComboBox>
-                                    <Label x:Name="lblACSingleTestChannel" Content="Single channel#:" HorizontalAlignment="Left" Margin="0,150,0,0" VerticalAlignment="Top" Height="25" RenderTransformOrigin="0.452,1.083" Width="100"/>
-                                    <TextBox x:Name="txtACSingleTestChannel" HorizontalAlignment="Left" Height="24" Margin="100,150,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="65"/>
-                                    <Button x:Name="btnAutoCalibrationInitial" Content="Initial Test" HorizontalAlignment="Left" Margin="200,0,0,0" VerticalAlignment="Top" Width="100" Height="25" Click="btnAutoCalibrationInitial_Click"/>
-                                    <Button x:Name="btnAutoCalibrationStart" Content="Calibration Start" HorizontalAlignment="Left" Margin="200,30,0,0" VerticalAlignment="Top" Width="100" Height="25" Click="btnAutoCalibrationStart_Click"/>
-                                    <Button x:Name="btnTestFileSave" Content="Button" HorizontalAlignment="Left" Margin="200,71,0,0" VerticalAlignment="Top" Width="75" Click="btnTestFileSave_Click"/>
-
-                                </Grid>
-                            </GroupBox>
+                            
 
                         </Grid>
                     </TabItem>
@@ -1544,9 +1514,9 @@
                                                 <Label x:Name="lblRazSelectChain1" Content="RAZ" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="80" Height="24"/>
                                                 <Label x:Name="lblInternalRazTimeChain1" Content="Internal" HorizontalAlignment="Left" Margin="0,30,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" Width="80" Height="24"/>
                                                 <ComboBox x:Name="cbxRazSelectNewDif" HorizontalAlignment="Left" Margin="80,0,0,0" VerticalAlignment="Top" Width="75" Height="24">
-                                                            <ComboBoxItem Content="Internal" IsSelected="True"/>
-                                                            <ComboBoxItem Content="External"/>
-                                                        </ComboBox>
+                                                    <ComboBoxItem Content="Internal" IsSelected="True"/>
+                                                    <ComboBoxItem Content="External"/>
+                                                </ComboBox>
                                                 <ComboBox x:Name="cbxInternalRazTimeNewDif" HorizontalAlignment="Left" Margin="80,30,0,0" VerticalAlignment="Top" Width="75" Height="24">
                                                     <ComboBoxItem Content="75ns"/>
                                                     <ComboBoxItem Content="250ns"/>
@@ -1563,7 +1533,7 @@
                                                 <Button x:Name="btnSetExternalRazParameterSlowControl" Content="Set External RAZ Parameter" Height="25" Width="200" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="80,90,0,0" Click="btnSetExternalRazParameterSlowControl_Click"/>
                                                 <Label x:Name="lblExternalRazDelaySlowControl" Content="External RAZ Delay" HorizontalAlignment="Left" Margin="160,60,0,0" VerticalAlignment="Top" Width="120" Height="24"/>
                                                 <TextBox x:Name="tbcExternalRazDelaySlowControl" HorizontalAlignment="Left" Height="24" Margin="280,60,0,0" TextWrapping="Wrap" Text="200" VerticalAlignment="Top" Width="75"/>
-                                                
+
                                             </Grid>
                                         </TabItem>
                                         <TabItem Name="Mask" Header="Mask">
@@ -1918,7 +1888,7 @@
                                                 </GroupBox>
                                             </Grid>
                                         </TabItem>
-                                        
+
                                     </TabControl>
                                 </Grid>
                             </GroupBox>
@@ -1941,7 +1911,7 @@
                                 <RadioButton Name="rdbAcquisitionNewDif" Content="Acquisition" Checked="rdbAcquisitionNewDif_Checked"/>
                                 <RadioButton Name="rdbAD9220NewDif" Content="AD9220" Checked="rdbAD9220NewDif_Checked"/>
                             </StackPanel>
-                            
+
                             <TabControl x:Name="tbcNewDifAcquisition" Height="300" Margin="500,130,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200">
                                 <TabItem Name="tbmNewDifAcquisition" Header="Acquisition" >
                                     <Grid Margin="0,0,0,0">
@@ -2057,7 +2027,7 @@
                                                 <ComboBoxItem Content="CTest" IsSelected="True"/>
                                             </ComboBox>
                                             <Label x:Name="lblCPT_MAX_ND" Content="Max count:" HorizontalAlignment="Left" Margin="0,90,0,0" VerticalAlignment="Top" Height="24"/>
-                                            <ComboBox x:Name="cbxCPT_MAX_NewDif" HorizontalAlignment="Left" Margin="95,90,0,0" VerticalAlignment="Top" Width="65">
+                                            <ComboBox x:Name="cbxCPT_MAX_NewDif" HorizontalAlignment="Left" Margin="95,90,0,0" VerticalAlignment="Top" Width="65" Height='24'>
                                                 <ComboBoxItem Content= "200"/>
                                                 <ComboBoxItem Content= "1000"/>
                                                 <ComboBoxItem Content= "2000"/>
@@ -2073,7 +2043,7 @@
 
                                         </Grid>
                                     </GroupBox>
-                                    
+
                                     <Label x:Name="lblStartDacND" Content="Start DAC" HorizontalAlignment="Left" Margin="190,0,0,0" VerticalAlignment="Top" Height="24" Width="70" Grid.Column="2"/>
                                     <Label x:Name="lblEndDacND" Content="End DAC" HorizontalAlignment="Left" Margin="190,30,0,0" VerticalAlignment="Top" Height="24" Width="70" Grid.Column="2"/>
                                     <Label x:Name="lblDacStepND" Content="DAC Step" HorizontalAlignment="Left" Margin="190,60,0,0" VerticalAlignment="Top" Height="24" Width="70" Grid.Column="2"/>
@@ -2107,6 +2077,34 @@
                                     </ComboBox>
                                 </Grid>
                             </GroupBox>
+                            <GroupBox x:Name="gbxAutoCalibration" Header="Auto Calibration" HorizontalAlignment="Left" Margin="0,230,0,0" VerticalAlignment="Top" Height="200" Width="400">
+                                <Grid Margin="0,0,0,0">
+                                    <Label x:Name="lblACStartCharge" Content="Start Charge:" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Height="25" Width="100"/>
+                                    <TextBox x:Name="tbxACStartCharge" HorizontalAlignment="Left" Height="25" Margin="100,0,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="60"/>
+                                    <Label x:Name="lblACEndCharge" Content="End Charge:" HorizontalAlignment="Left" Margin="0,30,0,0" VerticalAlignment="Top" Height="25" Width="100"/>
+                                    <TextBox x:Name="tbxACEndCharge" HorizontalAlignment="Left" Height="25" Margin="100,30,0,0" TextWrapping="Wrap" Text="140" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="60"/>
+                                    <Label x:Name="lblACChargeStep" Content="Charge Step:" HorizontalAlignment="Left" Margin="0,60,0,0" VerticalAlignment="Top" Height="25" Width="100"/>
+                                    <TextBox x:Name="tbxACChargeStep" HorizontalAlignment="Left" Height="25" Margin="100,60,0,0" TextWrapping="Wrap" Text="10" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="60"/>
+                                    <Label x:Name="lblACAsicID" Content="ASIC ID:" HorizontalAlignment="Left" Margin="0,150,0,0" VerticalAlignment="Top" Height="25" Width="100"/>
+                                    <TextBox x:Name="tbxACAsicID" HorizontalAlignment="Left" Height="25" Margin="100,150,0,0" TextWrapping="Wrap" Text="247" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="60"/>
+                                    <Label x:Name="lblACHighGainOrLowGain" Content="High Or Low:" HorizontalAlignment="Left" Margin="0,120,0,0" VerticalAlignment="Top" Height="24"/>
+                                    <ComboBox x:Name="cbxACHighGainOrLowGain" HorizontalAlignment="Left" Margin="100,120,0,0" VerticalAlignment="Top" Width="60" Height='24'>
+                                        <ComboBoxItem Content= "Low"/>
+                                        <ComboBoxItem Content= "High" IsSelected= "True"/>
+                                    </ComboBox>
+                                    <Label x:Name="lblACCTestCapacitor" Content="Capacitor(pF):" HorizontalAlignment="Left" Margin="0,90,0,0" VerticalAlignment="Top" Height="25" Width="100"/>
+                                    <TextBox x:Name="tbxACCTestCapacitor" HorizontalAlignment="Left" Height="25" Margin="100,90,0,0" TextWrapping="Wrap" Text="0.5" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="60"/>
+                                    <Label x:Name="lblACAttenuator" Content="Attenuator:" HorizontalAlignment="Left" Margin="170,0,0,0" VerticalAlignment="Top" Height="24" Width="80"/>
+                                    <ComboBox x:Name="cbxACAttenuator" HorizontalAlignment="Left" Margin="250,0,0,0" VerticalAlignment="Top" Width="70" Height='24'>
+                                        <ComboBoxItem Content= "40dB"/>
+                                        <ComboBoxItem Content= "0dB" IsSelected= "True"/>
+                                    </ComboBox>
+                                    <Button x:Name="btnAutoCalibrationInitial" Content="Initial Test" HorizontalAlignment="Left" Margin="170,30,0,0" VerticalAlignment="Top" Width="150" Height="25" Click="btnAutoCalibrationInitial_Click"/>
+                                    <Button x:Name="btnAutoCalibrationStart" Content="Calibration Start" HorizontalAlignment="Left" Margin="170,60,0,0" VerticalAlignment="Top" Width="150" Height="25" Click="btnAutoCalibrationStart_Click"/>
+                                    <Label x:Name="lblACStatus" Content="Test charge:" HorizontalAlignment="Left" Margin="170,90,0,0" VerticalAlignment="Top" Height="25" Width="80"/>
+                                    <TextBox x:Name="tbxACStatus" HorizontalAlignment="Left" Height="25" Margin="250,90,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="70" BorderBrush="White"/>
+                                </Grid>
+                            </GroupBox>
                         </Grid>
                     </TabItem>
                     <TabItem Name="MicrorocCarier" Header="Microroc Carier">
@@ -2119,7 +2117,7 @@
 
                         </Grid>
                     </TabItem>
-                    
+
 
                 </TabControl>
             </Grid>
