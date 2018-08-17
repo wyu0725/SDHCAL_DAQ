@@ -994,7 +994,7 @@ namespace USB_DAQ
 
         public static bool SCurveTestReset(MyCyUsb usbInterface)
         {
-            return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(HexToInt(DifCommandAddress.ResetSCurveTestAdress)));
+            return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(HexToInt(DifCommandAddress.ResetSCurveTestAdress) + 1));
         }
 
         public bool SetChannelCalibration(MyCyUsb usbInterface, params byte[] CalibrationData)

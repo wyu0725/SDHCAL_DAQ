@@ -6824,6 +6824,7 @@ namespace USB_DAQ
                             return;
                         }
                         #endregion
+                        tbxPedestalAsic.Text = string.Format("ASIC{0}{1}", i, j);
                         bResult = SCurveTestStart();
                         if (bResult)
                         {
@@ -6845,9 +6846,17 @@ namespace USB_DAQ
                         {
                             return;
                         }// else
+                        if(!StateIndicator.PedestalTestStart)
+                        {
+                            break;
+                        }
                     }// for j
+                    if (!StateIndicator.PedestalTestStart)
+                    {
+                        break;
+                    }
                 }// for i
-                StateIndicator.AutoCalibrationStart = false;
+                StateIndicator.PedestalTestStart = false;
                 btnSCurveTestPedestal.Content = "Pedestal Test Start";
                 btnSCurveTestPedestal.Background = Brushes.Green;
             }//if
@@ -6866,7 +6875,7 @@ namespace USB_DAQ
                 StateIndicator.SlowAcqStart = false;
                 btnSCurveTestStartNewDif.Content = "SCurve Test Start";
                 btnSCurveTestStartNewDif.Background = Brushes.Green;
-                StateIndicator.AutoCalibrationStart = false;
+                StateIndicator.PedestalTestStart = false;
                 btnSCurveTestPedestal.Content = "Pedestal Test Start";
                 btnSCurveTestPedestal.Background = Brushes.Green;
             }// else
