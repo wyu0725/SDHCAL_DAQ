@@ -4460,7 +4460,7 @@ namespace USB_DAQ
                     {
                         TestDac = 600 - TestCharge;
                     }
-                    int StartDac = (TestCharge >= 50) ? (TestCharge - 50) : 0;
+                    int StartDac = (TestDac >= 50) ? (TestDac - 50) : 0;
                     if(StartDac > 923)
                     {
                         MessageBox.Show("Start DAC Caculate wrong. Please run debug", "System Error", MessageBoxButton.OK, MessageBoxImage.Error);
