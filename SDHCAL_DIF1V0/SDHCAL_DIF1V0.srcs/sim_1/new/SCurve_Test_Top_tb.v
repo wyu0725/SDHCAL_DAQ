@@ -66,28 +66,28 @@ module SCurve_Test_Top_tb;
     .Clk(Clk),
     .Clk_5M(Clk_5M),
     .reset_n(reset_n),
-    .TrigEffi_or_CountEffi(TrigEffi_or_CountEffi),
+    .TriggerEfficiencyOrCountEfficiency(TrigEffi_or_CountEffi),
     .Test_Start(Test_Start),
-    .SingleTest_Chn(SingleTest_Chn),
+    .SingleTestChannel(SingleTest_Chn),
     .Single_or_64Chn(Single_or_64Chn),
     .Ctest_or_Input(Ctest_or_Input),
     .CPT_MAX(CPT_MAX),
     .Counter_MAX(Counter_MAX),
     .StartDac(StartDac),
     .EndDac(EndDac),
-    .AdcInterval(AdcInterval),
+    .DacStep(AdcInterval),
     .TriggerDelay(TriggerDelay),
     .AsicNumber(AsicNumber),
     .TestAsicNumber(TestAsicNumber),
     .UnmaskAllChannel(UnmaskAllChannel),
-    .usb_data_fifo_wr_en(usb_data_fifo_wr_en),
-    .usb_data_fifo_wr_din(usb_data_fifo_wr_din),
-    .usb_data_fifo_full(usb_data_fifo_full),
-    .Microroc_Config_Done(Microroc_Config_Done),
+    .SCurveTestDataoutEnable(usb_data_fifo_wr_en),
+    .SCurveTestDataout(usb_data_fifo_wr_din),
+    .ExternalDataFifoFull(usb_data_fifo_full),
+    .MicrorocConfigurationDone(Microroc_Config_Done),
     .Microroc_CTest_Chn_Out(Microroc_CTest_Chn_Out),
     .Microroc_10bit_DAC_Out(Microroc_10bit_DAC_Out),
     .Microroc_Discriminator_Mask(Microroc_Discriminator_Mask),
-    .SC_Param_Load(SC_Param_Load),
+    .SlowControlParameterLoadStart(SC_Param_Load),
     .Force_Ext_RAZ(Force_Ext_RAZ),
     .CLK_EXT(CLK_EXT),
     .out_trigger0b(out_trigger0b),
@@ -104,12 +104,12 @@ module SCurve_Test_Top_tb;
     reset_n = 0;
     TrigEffi_or_CountEffi = 0;
     Test_Start = 0;
-    SingleTest_Chn = 0;
+    SingleTest_Chn = 3;
     Single_or_64Chn = 0;
     Ctest_or_Input = 1;
     CPT_MAX = 20;
     Counter_MAX = 20;
-    StartDac = 0;
+    StartDac = 20;
     EndDac = 1023;
     AdcInterval = 1;
     TriggerDelay = 2;

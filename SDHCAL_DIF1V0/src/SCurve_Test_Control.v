@@ -79,12 +79,13 @@ module SCurve_Test_Control(
   WAIT_DONE                       = 5'd18,
   ALL_DONE                        = 5'd19;
 
-  localparam [15:0] SCURVE_TEST_HEADER               = 16'h5343;//In ASCII 53 = S,43 = C.0x5343 stands for SC
-  localparam [63:0] SINGLE_CHN_PARAM_Ctest           = 64'h0000_0000_0000_0001;
-  localparam [63:0] CTest_CHN_PARAM_Input            = 64'h0;
-  localparam [191:0] DISCRIMINATOR_MASK              = {189'b0, 3'b111};
-  localparam [15:0] SC_PARAM_LOAD_DELAY              = 16'd40_000;
-  localparam [191:0] ALL_DISCRIMINATOR_MASK          = 192'b0;
+  localparam [15:0] SCURVE_TEST_HEADER      = 16'h5343; // In ASCII 53 = S,43 = C.0x5343 stands for SC
+  localparam [63:0] SINGLE_CHN_PARAM_Ctest  = 64'h0000_0000_0000_0001;
+  localparam [63:0] CTest_CHN_PARAM_Input   = 64'h0;
+  localparam [191:0] DISCRIMINATOR_MASK     = {189'b0, 3'b111};
+  localparam [15:0] SC_PARAM_LOAD_DELAY     = 16'd40_000;
+  localparam [191:0] ALL_DISCRIMINATOR_MASK = 192'b0;
+  localparam [9:0] NO_TEST_ASIC_DAC_CODE    = 10'b0;
 
   reg [7:0]   Discri_Mask_Shift;
   reg [191:0] All_Chn_Discri_Mask;
@@ -95,6 +96,7 @@ module SCurve_Test_Control(
   reg [3:0]   Wait_Tail_Cnt;
   reg [2:0]   LoadAsicNumberCount;
   reg [191:0] MicrorocDiscriminatorMaskInternal;
+  reg [9:0] MicrorocVthDacInternal;
   always @(posedge Clk or negedge reset_n)begin
     if(~reset_n)begin
       All_Chn_Param <= 64'h0000_0000_0000_0001;
@@ -106,6 +108,7 @@ module SCurve_Test_Control(
       SCurveTestDataoutEnable <= 1'b0;
       Actual_10bit_DAC_Code <= 10'b0;
       Microroc_10bit_DAC_Out <= 10'b0;
+      MicrorocVthDacInternal <= 10'b0;
       SlowControlParameterLoadStart <= 1'b0;
       SCurve_Test_Done <= 1'b0;
       Discri_Mask_Shift <= 8'b0;
@@ -131,6 +134,7 @@ module SCurve_Test_Control(
             SCurveTestDataoutEnable <= 1'b0;
             Actual_10bit_DAC_Code <= StartDac;
             Microroc_10bit_DAC_Out <= 10'b0;
+            MicrorocVthDacInternal <= 10'b0;
             SlowControlParameterLoadStart <= 1'b0;
             SCurve_Test_Done <= 1'b0;
             All_Chn_Discri_Mask <= {189'b0, 3'b111};
@@ -192,7 +196,7 @@ module SCurve_Test_Control(
         end
         OUT_DAC_CODE_SC:begin
           SCurveTestDataoutEnable <= 1'b0;
-          Microroc_10bit_DAC_Out <= Invert(Actual_10bit_DAC_Code);
+          MicrorocVthDacInternal <= Invert(Actual_10bit_DAC_Code);
           SCurveTestDataout <= {4'hD,2'b00,Actual_10bit_DAC_Code};
           State <= OUT_DAC_CODE_USB;
         end
@@ -204,10 +208,12 @@ module SCurve_Test_Control(
           SCurveTestDataoutEnable <= 1'b0;
           if(LoadAsicNumberCount == (AsicNumber - TestAsicNumber - 1'b1)) begin
             Microroc_Discriminator_Mask <= MicrorocDiscriminatorMaskInternal;
+            Microroc_10bit_DAC_Out <= MicrorocVthDacInternal;
             State <= LOAD_SC_PARAM;
           end
           else begin
             Microroc_Discriminator_Mask <= ALL_DISCRIMINATOR_MASK;
+            Microroc_10bit_DAC_Out <= NO_TEST_ASIC_DAC_CODE;
             State <= LOAD_SC_PARAM;
           end
         end
