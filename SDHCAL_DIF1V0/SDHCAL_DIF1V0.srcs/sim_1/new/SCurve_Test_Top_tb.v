@@ -50,6 +50,7 @@ module SCurve_Test_Top_tb;
   reg out_trigger2b;
   reg Data_Transmit_Done;
   reg TriggerClk;
+  reg [19:0] TriggerSuppressWidth;
 
   // Outputs
   wire usb_data_fifo_wr_en;
@@ -89,6 +90,7 @@ module SCurve_Test_Top_tb;
     .Microroc_Discriminator_Mask(Microroc_Discriminator_Mask),
     .SlowControlParameterLoadStart(SC_Param_Load),
     .Force_Ext_RAZ(Force_Ext_RAZ),
+    .TriggerSuppressWidth(TriggerSuppressWidth),
     .CLK_EXT(CLK_EXT),
     .out_trigger0b(out_trigger0b),
     .out_trigger1b(out_trigger1b),
@@ -109,8 +111,8 @@ module SCurve_Test_Top_tb;
     Ctest_or_Input = 1;
     CPT_MAX = 20;
     Counter_MAX = 20;
-    StartDac = 20;
-    EndDac = 1023;
+    StartDac = 500;
+    EndDac = 550;
     AdcInterval = 1;
     TriggerDelay = 2;
     AsicNumber = 4;
@@ -123,6 +125,7 @@ module SCurve_Test_Top_tb;
     out_trigger1b = 1;
     out_trigger2b = 1;
     TriggerClk = 1'b0;
+    TriggerSuppressWidth = 20'hB71B0;
     // Data_Transmit_Done = 0;
 
     // Wait 100 ns for global reset to finish

@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 ------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2018.1 (win64) Build 2188600 Wed Apr  4 18:40:38 MDT 2018
-| Date         : Sun Aug 19 11:17:24 2018
+| Date         : Wed Aug 22 21:22:13 2018
 | Host         : WYU running 64-bit major release  (build 9200)
 | Command      : report_drc -file FPGA_Top_drc_routed.rpt -pb FPGA_Top_drc_routed.pb -rpx FPGA_Top_drc_routed.rpx
 | Design       : FPGA_Top
@@ -181,35 +181,35 @@ Related violations: <none>
 PLHOLDVIO-2#1 Warning
 Non-Optimal connections which could lead to hold violations  
 A LUT Acquisition/MicrorocChain1DataFIFO_i_1 is driving clock pin of 20 cells. This could lead to large hold time violations. First few involved cells are:
+    Acquisition/AcquisitionDataSwitcher/MicrorocChain4DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_full_fb_i_reg {FDSE}
+    Acquisition/AcquisitionDataSwitcher/MicrorocChain4DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/grss.rsts/ram_empty_fb_i_reg {FDRE}
+    Acquisition/AcquisitionDataSwitcher/MicrorocChain4DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/grss.rsts/ram_empty_i_reg {FDRE}
     Acquisition/AcquisitionDataSwitcher/MicrorocChain4DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_full_i_reg {FDSE}
     Acquisition/AcquisitionDataSwitcher/MicrorocChain1DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/grss.rsts/ram_empty_fb_i_reg {FDRE}
-    Acquisition/AcquisitionDataSwitcher/MicrorocChain1DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/grss.rsts/ram_empty_i_reg {FDRE}
-    Acquisition/AcquisitionDataSwitcher/MicrorocChain1DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_full_i_reg {FDSE}
-    Acquisition/AcquisitionDataSwitcher/MicrorocChain1DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_full_fb_i_reg {FDSE}
 
 Related violations: <none>
 
 PLHOLDVIO-2#2 Warning
 Non-Optimal connections which could lead to hold violations  
 A LUT Command/CommandFifo32Depth_i_1 is driving clock pin of 2 cells. This could lead to large hold time violations. First few involved cells are:
-    Command/CommandFifo32Depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwas.wsts/ram_full_i_reg {FDSE}
     Command/CommandFifo32Depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwas.wsts/ram_full_fb_i_reg {FDSE}
+    Command/CommandFifo32Depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwas.wsts/ram_full_i_reg {FDSE}
 
 Related violations: <none>
 
 PLHOLDVIO-2#3 Warning
 Non-Optimal connections which could lead to hold violations  
 A LUT Command/CommandFifo32Depth_i_2 is driving clock pin of 2 cells. This could lead to large hold time violations. First few involved cells are:
-    Command/CommandFifo32Depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_i_reg {FDSE}
     Command/CommandFifo32Depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_fb_i_reg {FDSE}
+    Command/CommandFifo32Depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_i_reg {FDSE}
 
 Related violations: <none>
 
 PLHOLDVIO-2#4 Warning
 Non-Optimal connections which could lead to hold violations  
 A LUT MicrorocChain1/ConfigParameter_i_1 is driving clock pin of 2 cells. This could lead to large hold time violations. First few involved cells are:
-    MicrorocChain1/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_i_reg {FDSE}
     MicrorocChain1/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_fb_i_reg {FDSE}
+    MicrorocChain1/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_i_reg {FDSE}
 
 Related violations: <none>
 
@@ -223,11 +223,11 @@ Related violations: <none>
 PLHOLDVIO-2#6 Warning
 Non-Optimal connections which could lead to hold violations  
 A LUT MicrorocChain1/MicrorocDaq/SlaveDaqControl/AcqStart_r1_i_1 is driving clock pin of 26 cells. This could lead to large hold time violations. First few involved cells are:
-    MicrorocChain1/MicrorocDaq/SlaveDaqControl/START_ACQ_reg {FDCE}
     MicrorocChain1/MicrorocDaq/SlaveDaqControl/ForceExternalRaz_reg {FDPE}
-    MicrorocChain1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[16] {FDCE}
+    MicrorocChain1/MicrorocDaq/SlaveDaqControl/START_ACQ_reg {FDCE}
+    MicrorocChain1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[0] {FDCE}
     MicrorocChain1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[10] {FDCE}
-    MicrorocChain1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[12] {FDCE}
+    MicrorocChain1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[11] {FDCE}
 
 Related violations: <none>
 
@@ -265,9 +265,9 @@ Non-Optimal connections which could lead to hold violations
 A LUT MicrorocChain2/MicrorocDaq/SlaveDaqControl/AcqStart_r1_i_1 is driving clock pin of 26 cells. This could lead to large hold time violations. First few involved cells are:
     MicrorocChain2/MicrorocDaq/SlaveDaqControl/ForceExternalRaz_reg {FDPE}
     MicrorocChain2/MicrorocDaq/SlaveDaqControl/START_ACQ_reg {FDCE}
-    MicrorocChain2/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[1] {FDCE}
-    MicrorocChain2/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[16] {FDCE}
-    MicrorocChain2/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[0] {FDCE}
+    MicrorocChain2/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[11] {FDCE}
+    MicrorocChain2/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[6] {FDCE}
+    MicrorocChain2/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[18] {FDCE}
 
 Related violations: <none>
 
@@ -303,11 +303,11 @@ Related violations: <none>
 PLHOLDVIO-2#16 Warning
 Non-Optimal connections which could lead to hold violations  
 A LUT MicrorocChain3/MicrorocDaq/SlaveDaqControl/AcqStart_r1_i_1 is driving clock pin of 26 cells. This could lead to large hold time violations. First few involved cells are:
-    MicrorocChain3/MicrorocDaq/SlaveDaqControl/ForceExternalRaz_reg {FDPE}
     MicrorocChain3/MicrorocDaq/SlaveDaqControl/START_ACQ_reg {FDCE}
-    MicrorocChain3/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[14] {FDCE}
+    MicrorocChain3/MicrorocDaq/SlaveDaqControl/ForceExternalRaz_reg {FDPE}
+    MicrorocChain3/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[0] {FDCE}
+    MicrorocChain3/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[11] {FDCE}
     MicrorocChain3/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[10] {FDCE}
-    MicrorocChain3/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[1] {FDCE}
 
 Related violations: <none>
 
@@ -346,8 +346,8 @@ A LUT MicrorocChain4/MicrorocDaq/SlaveDaqControl/AcqStart_r1_i_1 is driving cloc
     MicrorocChain4/MicrorocDaq/SlaveDaqControl/ForceExternalRaz_reg {FDPE}
     MicrorocChain4/MicrorocDaq/SlaveDaqControl/START_ACQ_reg {FDCE}
     MicrorocChain4/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[11] {FDCE}
-    MicrorocChain4/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[13] {FDCE}
-    MicrorocChain4/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[14] {FDCE}
+    MicrorocChain4/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[22] {FDCE}
+    MicrorocChain4/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[21] {FDCE}
 
 Related violations: <none>
 
@@ -368,8 +368,8 @@ Related violations: <none>
 PLHOLDVIO-2#24 Warning
 Non-Optimal connections which could lead to hold violations  
 A LUT UsbDataFifo_i_2 is driving clock pin of 2 cells. This could lead to large hold time violations. First few involved cells are:
-    UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwas.wsts/ram_full_i_reg {FDSE}
     UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwas.wsts/ram_full_fb_i_reg {FDSE}
+    UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwas.wsts/ram_full_i_reg {FDSE}
 
 Related violations: <none>
 
@@ -583,7 +583,7 @@ Related violations: <none>
 
 RTSTAT-10#1 Warning
 No routable loads  
-39 net(s) have no routable loads. The problem bus(es) and/or net(s) are dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD6_RD/U_RD_FIFO/SUBCORE_FIFO.xsdbm_v3_0_0_rdfifo_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gr1.gr1_int.rfwft/aempty_fwft_i, dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD7_CTL/ctl_reg[2:0], dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD7_CTL/ctl_reg_en_2[1], dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD1/ctl_reg_en_2[1], dbg_hub/inst/BSCANID.u_xsdbm_id/SWITCH_N_EXT_BSCAN.bscan_switch/m_bscan_capture[0], dbg_hub/inst/BSCANID.u_xsdbm_id/SWITCH_N_EXT_BSCAN.bscan_switch/m_bscan_drck[0], dbg_hub/inst/BSCANID.u_xsdbm_id/SWITCH_N_EXT_BSCAN.bscan_switch/m_bscan_runtest[0], Acquisition/AcquisitionDataSwitcher/MicrorocChain4DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_afull_fb, Acquisition/MicrorocSCurveTest/scurve_data_fifo_16x16/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_afull_fb, Acquisition/AcquisitionDataSwitcher/MicrorocChain1DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_afull_fb, Acquisition/AcquisitionDataSwitcher/MicrorocChain2DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_afull_fb, Acquisition/AcquisitionDataSwitcher/MicrorocChain3DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_afull_fb, Acquisition/AcquisitionDataSwitcher/MicrorocChain4DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_afull_i, Acquisition/MicrorocSCurveTest/scurve_data_fifo_16x16/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_afull_i, Acquisition/AcquisitionDataSwitcher/MicrorocChain1DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_afull_i (the first 15 of 37 listed).
+39 net(s) have no routable loads. The problem bus(es) and/or net(s) are dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD6_RD/U_RD_FIFO/SUBCORE_FIFO.xsdbm_v3_0_0_rdfifo_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gr1.gr1_int.rfwft/aempty_fwft_i, dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD7_CTL/ctl_reg[2:0], dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD7_CTL/ctl_reg_en_2[1], dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD1/ctl_reg_en_2[1], dbg_hub/inst/BSCANID.u_xsdbm_id/SWITCH_N_EXT_BSCAN.bscan_switch/m_bscan_capture[0], dbg_hub/inst/BSCANID.u_xsdbm_id/SWITCH_N_EXT_BSCAN.bscan_switch/m_bscan_drck[0], dbg_hub/inst/BSCANID.u_xsdbm_id/SWITCH_N_EXT_BSCAN.bscan_switch/m_bscan_runtest[0], Acquisition/AcquisitionDataSwitcher/MicrorocChain2DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_afull_fb, Acquisition/AcquisitionDataSwitcher/MicrorocChain1DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_afull_fb, Acquisition/AcquisitionDataSwitcher/MicrorocChain3DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_afull_fb, Acquisition/MicrorocSCurveTest/scurve_data_fifo_16x16/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_afull_fb, Acquisition/AcquisitionDataSwitcher/MicrorocChain4DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_afull_fb, Acquisition/AcquisitionDataSwitcher/MicrorocChain2DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_afull_i, Acquisition/MicrorocSCurveTest/scurve_data_fifo_16x16/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_afull_i, Acquisition/AcquisitionDataSwitcher/MicrorocChain3DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_afull_i (the first 15 of 37 listed).
 Related violations: <none>
 
 
