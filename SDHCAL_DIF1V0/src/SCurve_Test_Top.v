@@ -52,6 +52,7 @@ module SCurve_Test_Top(
   output [191:0] Microroc_Discriminator_Mask,
   output SlowControlParameterLoadStart,
   output Force_Ext_RAZ,
+  input [19:0] TriggerSuppressWidth,
   /*--- Pin ---*/
   input CLK_EXT,
   input out_trigger0b,
@@ -112,6 +113,7 @@ module SCurve_Test_Top(
   wire SCurve_Data_fifo_rd_en;
   SCurve_Test_Control SC_test_control(
     .Clk(Clk),
+    .Clk5M(Clk_5M),
     .reset_n(reset_n),
     .Test_Start(Test_Start_Pulse),
     /*--- Lower-Level module:SCurve Single Test Interface ---*/
@@ -137,6 +139,7 @@ module SCurve_Test_Top(
     .Force_Ext_RAZ(Force_Ext_RAZ),
     .SlowControlParameterLoadStart(SlowControlParameterLoadStart),
     .MicrorocConfigurationDone(MicrorocConfigurationDone),
+    .TriggerSuppressWidth(TriggerSuppressWidth),
     /*--- USB Data FIFO Interface ---*/
     .SCurveTestDataout(SCurveTestDataout),
     .SCurveTestDataoutEnable(SCurveTestDataoutEnable),

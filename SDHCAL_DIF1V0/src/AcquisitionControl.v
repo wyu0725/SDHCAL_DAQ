@@ -85,6 +85,7 @@ module AcquisitionControl(
   input [2:0] AsicNumber,
   input [2:0] TestAsicNumber,
   input UnmaskAllChannel,
+  input [19:0] TriggerSuppressWidth,
   // Pins
   input SynchronousSignalIn,
   input OutTrigger0b,
@@ -218,6 +219,7 @@ module AcquisitionControl(
     .Microroc_Discriminator_Mask(SCurveTestMicrorocChannelDiscriminatorMask),
     .SlowControlParameterLoadStart(SCurveTestMicrorocConfigurationParameterLoad),
     .Force_Ext_RAZ(SCurveTestForceExternalRaz),
+    .TriggerSuppressWidth(TriggerSuppressWidth),
 
     .CLK_EXT(SynchronousSignalIn),
     .out_trigger0b(OutTrigger0b),

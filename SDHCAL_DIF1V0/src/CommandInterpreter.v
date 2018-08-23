@@ -160,6 +160,8 @@ module CommandInterpreter(
   output [2:0] RowSelect,
   // Reset SCurveTest
   output ResetSCurveTest,
+  // Trigger Suppress
+  output [19:0] SCurveTestTriggerSuppressWidth,
   // LED
   output [3:0] LED
   );
@@ -2559,6 +2561,82 @@ module CommandInterpreter(
 	  .COMMAND_WORD(COMMAND_WORD),
 	  // input [COMMAND_WIDTH:0] DefaultValue,
 	  .CommandOut(ResetSCurveTest)
+	  );
+
+  // SCurve Test Trigger Suppress 20bits
+  CommandDecoder
+	  #(
+		  .LEVEL_OR_PULSE(1'b1),
+		  .COMMAND_WIDTH(2'd3),
+		  .COMMAND_ADDRESS_AND_DEFAULT(`TriggerSuppressWidth3to0_CAND)
+	  )
+  TriggerSuppressWidth3to0(
+	  .Clk(Clk),
+	  .reset_n(reset_n),
+	  .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
+	  .COMMAND_WORD(COMMAND_WORD),
+	  // input [COMMAND_WIDTH:0] DefaultValue,
+	  .CommandOut(SCurveTestTriggerSuppressWidth[3:0])
+	  );
+
+    CommandDecoder
+	  #(
+		  .LEVEL_OR_PULSE(1'b1),
+		  .COMMAND_WIDTH(2'd3),
+		  .COMMAND_ADDRESS_AND_DEFAULT(`TriggerSuppressWidth7to4_CAND)
+	  )
+  TriggerSuppressWidth7to4(
+	  .Clk(Clk),
+	  .reset_n(reset_n),
+	  .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
+	  .COMMAND_WORD(COMMAND_WORD),
+	  // input [COMMAND_WIDTH:0] DefaultValue,
+	  .CommandOut(SCurveTestTriggerSuppressWidth[7:4])
+	  );
+
+    CommandDecoder
+	  #(
+		  .LEVEL_OR_PULSE(1'b1),
+		  .COMMAND_WIDTH(2'd3),
+		  .COMMAND_ADDRESS_AND_DEFAULT(`TriggerSuppressWidth11to8_CAND)
+	  )
+  TriggerSuppressWidth11to8(
+	  .Clk(Clk),
+	  .reset_n(reset_n),
+	  .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
+	  .COMMAND_WORD(COMMAND_WORD),
+	  // input [COMMAND_WIDTH:0] DefaultValue,
+	  .CommandOut(SCurveTestTriggerSuppressWidth[11:8])
+	  );
+
+    CommandDecoder
+	  #(
+		  .LEVEL_OR_PULSE(1'b1),
+		  .COMMAND_WIDTH(2'd3),
+		  .COMMAND_ADDRESS_AND_DEFAULT(`TriggerSuppressWidth15to12_CAND)
+	  )
+  TriggerSuppressWidth15to12(
+	  .Clk(Clk),
+	  .reset_n(reset_n),
+	  .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
+	  .COMMAND_WORD(COMMAND_WORD),
+	  // input [COMMAND_WIDTH:0] DefaultValue,
+	  .CommandOut(SCurveTestTriggerSuppressWidth[15:12])
+	  );
+
+    CommandDecoder
+	  #(
+		  .LEVEL_OR_PULSE(1'b1),
+		  .COMMAND_WIDTH(2'd3),
+		  .COMMAND_ADDRESS_AND_DEFAULT(`TriggerSuppressWidth19to16_CAND)
+	  )
+  TriggerSuppressWidth19to16(
+	  .Clk(Clk),
+	  .reset_n(reset_n),
+	  .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
+	  .COMMAND_WORD(COMMAND_WORD),
+	  // input [COMMAND_WIDTH:0] DefaultValue,
+	  .CommandOut(SCurveTestTriggerSuppressWidth[19:16])
 	  );
 
   // LED 4bits, default B000

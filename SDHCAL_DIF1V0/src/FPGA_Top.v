@@ -171,6 +171,7 @@ module FPGA_Top(
   output [7:0] LED
   );
 
+  wire [3:0] MicrorocAcquisitionOnceDone;
   assign EXT_TRIG_OUT = |MicrorocAcquisitionOnceDone;
   
   wire Clk;
@@ -341,6 +342,7 @@ module FPGA_Top(
   wire DaqSelect;
   wire [15:0] CommandMicrorocStartAcquisitionTime;
   wire ResetSCurveTest;
+  wire [19:0] CommandSCurveTestTriggerSuppressWidth;
   CommandInterpreter Command(
     .Clk(Clk),
     .IFCLK(IFCLK),
@@ -451,6 +453,7 @@ module FPGA_Top(
     .ColumnSelect(COLUMN),
     .RowSelect(ROW),
     .ResetSCurveTest(ResetSCurveTest),
+    .SCurveTestTriggerSuppress(CommandSCurveTestTriggerSuppressWidth),
     // LED
     .LED(LED[3:0])
     );
@@ -702,6 +705,7 @@ module FPGA_Top(
     .AsicNumber(CommandAsicNumberSet[2:0]),
     .TestAsicNumber(CommandSCurveTestAsicSelect[2:0]),
     .UnmaskAllChannel(SCurveTestUnmaskAllChannel),
+    .TriggerSuppressWidth(CommandSCurveTestTriggerSuppressWidth),
     // Pins
     .SynchronousSignalIn(SynchronousSignalIn),
     .OutTrigger0b(out_trigger0b),
@@ -746,7 +750,7 @@ module FPGA_Top(
   wire [3:0] PowerOnDigital;
   wire [3:0] PowerOnAdc;
   wire [3:0] PowerOnDac;
-  wire [3:0] MicrorocAcquisitionOnceDone;
+  
   wire TRIG_EXT;
   MicrorocCommonControl
   #(
@@ -1224,10 +1228,10 @@ module FPGA_Top(
     .TRANSMITON2B(TransmitOn2b_D)
     );
   assign hold = HoldSignal;
-  assign TP[0] = StartAcq_A;
+  assign TP[0] = MicrorocConfigurationParameterLoadDone;
   assign TP[1] = StartReadout1_A;
   assign TP[2] = EndReadout1_A;
-  assign TP[3] = MicrorocConfigurationParameterLoadStartChain[0];
+  assign TP[3] = MicrorocConfigurationParameterLoadStart;
 
   (* MARK_DEBUG="true" *)wire [15:0] UsbData_debug;
   (* MARK_DEBUG="true" *)wire UsbDataEnable_debug;

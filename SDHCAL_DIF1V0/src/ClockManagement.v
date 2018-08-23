@@ -1,10 +1,10 @@
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
-// Company:
-// Engineer:
+// Company: USTC
+// Engineer: Yu Wang
 //
 // Create Date: 2018/07/13 15:37:58
-// Design Name:
+// Design Name: SDHCAL DIF 1V0
 // Module Name: ClockManagement
 // Project Name:
 // Target Devices:

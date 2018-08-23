@@ -118,3 +118,8 @@
 `define TestSignalColumnSelect_CAND                16'hE3E0
 `define TestSignalRowSelect_CAND                   16'hE3F0
 `define ResetSCurveTest_CAND                       16'hF1B0
+`define TriggerSuppressWidth3to0_CAND              16'hE300
+`define TriggerSuppressWidth7to4_CAND              16'hE31B
+`define TriggerSuppressWidth11to8_CAND             16'hE321
+`define TriggerSuppressWidth15to12_CAND            16'hE337
+`define TriggerSuppressWidth19to16_CAND            16'hE34B

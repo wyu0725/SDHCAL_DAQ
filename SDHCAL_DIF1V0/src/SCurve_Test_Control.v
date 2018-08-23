@@ -21,44 +21,47 @@
 
 
 module SCurve_Test_Control(
-  input                                       Clk,
-  input                                       reset_n,
-  input                                       Test_Start,
+  input              Clk,
+  input              Clk5M,//Delay Count Clock, please see the description
+  input              reset_n,
+  input              Test_Start,
   /*--- Lower-Level module:SCurve Single Channel Interface ---*/
-  output reg                                  Single_Test_Start,
-  input                                       Single_Test_Done,
-  input                                       SCurve_Data_fifo_empty,
-  input [15:0]                                SCurve_Data_fifo_din,
-  output reg                                  SCurve_Data_fifo_rd_en,
+  output reg         Single_Test_Start,
+  input              Single_Test_Done,
+  input              SCurve_Data_fifo_empty,
+  input [15:0]       SCurve_Data_fifo_din,
+  output reg         SCurve_Data_fifo_rd_en,
   /*--- Test Parameter Interface ---*/
-  input                                       Single_or_64Chn,//High:Single Channel test, Low:64 Channel test through Ctest pin
-  input [5:0]                                 SingleTestChannel,
-  input                                       Ctest_or_Input,//Add by wyu 20170307. When single channel test, this parameter can choose the charge inject from Ctest pin or the input pin
-  input [9:0]                                 StartDac,
-  input [9:0]                                 EndDac,
-  input [9:0]                                 DacStep,
-  input [2:0]                                 AsicNumber,
-  input [2:0] TestAsicNumber,
-  input                                       UnmaskAllChannel,
+  input              Single_or_64Chn,//High:Single Channel test, Low:64 Channel test through Ctest pin
+  input [5:0]        SingleTestChannel,
+  input              Ctest_or_Input,//Add by wyu 20170307. When single channel test, this parameter can choose the charge inject from Ctest pin or the input pin
+  input [9:0]        StartDac,
+  input [9:0]        EndDac,
+  input [9:0]        DacStep,
+  input [2:0]        AsicNumber,
+  input [2:0]        TestAsicNumber,
+  input              UnmaskAllChannel,
   /*--- Microroc SC Parameter Interface ---*/
-  output reg [63:0]                           Microroc_CTest_Chn_Out,
-  output reg [9:0]                            Microroc_10bit_DAC_Out,
-  output reg [191:0]                          Microroc_Discriminator_Mask,
-  output reg                                  Force_Ext_RAZ,
-  output reg                                  SlowControlParameterLoadStart,
-  input                                       MicrorocConfigurationDone,
+  output reg [63:0]  Microroc_CTest_Chn_Out,
+  output reg [9:0]   Microroc_10bit_DAC_Out,
+  output reg [191:0] Microroc_Discriminator_Mask,
+  output reg         Force_Ext_RAZ,
+  output reg         SlowControlParameterLoadStart,
+  input              MicrorocConfigurationDone,
+  input [19:0] TriggerSuppressWidth,
   /*--- USB Data FIFO Interface ---*/
   //input ExternalDataFifoFull,
-  output reg [15:0]                           SCurveTestDataout,
-  output reg                                  SCurveTestDataoutEnable,
-  input                                       ExternalDataFifoFull,
+  output reg [15:0]  SCurveTestDataout,
+  output reg         SCurveTestDataoutEnable,
+  input              ExternalDataFifoFull,
   /*--- Done Indicator ---*/
-  output reg                                  SCurve_Test_Done,
-  input                                       Data_Transmit_Done
+  output reg         SCurve_Test_Done,
+  input              Data_Transmit_Done
   );
 
   reg [4:0] State;
-  localparam [4:0] IDLE                            = 5'd0,
+  localparam [4:0] 
+  IDLE                            = 5'd0,
   HEADER_OUT                      = 5'd1,
   OUT_TEST_CHN_AND_DISCRI_MASK_SC = 5'd2,
   OUT_TEST_CHN_USB                = 5'd3,
@@ -67,17 +70,18 @@ module SCurve_Test_Control(
   DISCRIMINATOR_MASK_FILTER       = 5'd6,
   LOAD_SC_PARAM                   = 5'd7,
   WAIT_LOAD_SC_PARAM_DONE         = 5'd8,
-  START_SCURVE_TEST               = 5'd9,
-  PROCESS_SCURVE_TEST             = 5'd10,
-  WAIT_TRIGGER_DATA               = 5'd11,
-  GET_TRIGGER_DATA                = 5'd12,
-  OUT_TRIGGER_DATA                = 5'd13,
-  CHECK_CHN_DONE                  = 5'd14,
-  CHECK_ALL_DONE                  = 5'd15,
-  TAIL_OUT                        = 5'd16,
-  WAIT_TAIL_WRITE                 = 5'd17,
-  WAIT_DONE                       = 5'd18,
-  ALL_DONE                        = 5'd19;
+  TRIGGER_SUPPRESS                = 5'd9,
+  START_SCURVE_TEST               = 5'd10,
+  PROCESS_SCURVE_TEST             = 5'd11,
+  WAIT_TRIGGER_DATA               = 5'd12,
+  GET_TRIGGER_DATA                = 5'd13,
+  OUT_TRIGGER_DATA                = 5'd14,
+  CHECK_CHN_DONE                  = 5'd15,
+  CHECK_ALL_DONE                  = 5'd16,
+  TAIL_OUT                        = 5'd17,
+  WAIT_TAIL_WRITE                 = 5'd18,
+  WAIT_DONE                       = 5'd19,
+  ALL_DONE                        = 5'd20;
 
   localparam [15:0] SCURVE_TEST_HEADER      = 16'h5343; // In ASCII 53 = S,43 = C.0x5343 stands for SC
   localparam [63:0] SINGLE_CHN_PARAM_Ctest  = 64'h0000_0000_0000_0001;
@@ -85,7 +89,6 @@ module SCurve_Test_Control(
   localparam [191:0] DISCRIMINATOR_MASK     = {189'b0, 3'b111};
   localparam [15:0] SC_PARAM_LOAD_DELAY     = 16'd40_000;
   localparam [191:0] ALL_DISCRIMINATOR_MASK = 192'b0;
-  localparam [9:0] NO_TEST_ASIC_DAC_CODE    = 10'b0;
 
   reg [7:0]   Discri_Mask_Shift;
   reg [191:0] All_Chn_Discri_Mask;
@@ -97,6 +100,8 @@ module SCurve_Test_Control(
   reg [2:0]   LoadAsicNumberCount;
   reg [191:0] MicrorocDiscriminatorMaskInternal;
   reg [9:0] MicrorocVthDacInternal;
+  reg TriggerSuppressStart;
+  reg [19:0] TriggerSuppressCounter;
   always @(posedge Clk or negedge reset_n)begin
     if(~reset_n)begin
       All_Chn_Param <= 64'h0000_0000_0000_0001;
@@ -118,6 +123,7 @@ module SCurve_Test_Control(
       SlowControlParameterLoadStart_Cnt <= 16'b0;
       Wait_Tail_Cnt <= 4'b0;
       Force_Ext_RAZ <= 1'b0;
+      TriggerSuppressStart <= 1'b0;
       LoadAsicNumberCount <= 3'b0;
       State <= IDLE;
     end
@@ -141,6 +147,7 @@ module SCurve_Test_Control(
             MicrorocDiscriminatorMaskInternal <= {192{1'b1}};
             SlowControlParameterLoadStart_Cnt <= 16'b0;
             Wait_Tail_Cnt <= 4'b0;
+            TriggerSuppressStart <= 1'b0;
             LoadAsicNumberCount <= 3'b0;
             State <= IDLE;
           end
@@ -213,7 +220,7 @@ module SCurve_Test_Control(
           end
           else begin
             Microroc_Discriminator_Mask <= ALL_DISCRIMINATOR_MASK;
-            Microroc_10bit_DAC_Out <= NO_TEST_ASIC_DAC_CODE;
+            Microroc_10bit_DAC_Out <= 10'b0;
             State <= LOAD_SC_PARAM;
           end
         end
@@ -228,7 +235,8 @@ module SCurve_Test_Control(
           else
           begin
             LoadAsicNumberCount <= 3'b0;
-            State <= START_SCURVE_TEST;
+            State <= TRIGGER_SUPPRESS;
+            TriggerSuppressStart <= 1'b1;
           end
         end
         WAIT_LOAD_SC_PARAM_DONE:begin
@@ -238,12 +246,21 @@ module SCurve_Test_Control(
             SlowControlParameterLoadStart_Cnt <= SlowControlParameterLoadStart_Cnt + 1'b1;
           end
           else if(SlowControlParameterLoadStart_Cnt == SC_PARAM_LOAD_DELAY)begin
-            Force_Ext_RAZ <= 1'b0;
             SlowControlParameterLoadStart_Cnt <= 16'b0;
             State <= DISCRIMINATOR_MASK_FILTER;
           end
           else
             State <= WAIT_LOAD_SC_PARAM_DONE;
+        end
+        TRIGGER_SUPPRESS:begin
+          if(TriggerSuppressCounter == TriggerSuppressWidth) begin
+            TriggerSuppressStart <= 1'b0;
+            Force_Ext_RAZ <= 1'b0;
+            State <= START_SCURVE_TEST;
+          end
+          else begin
+            State <= TRIGGER_SUPPRESS;
+          end
         end
         START_SCURVE_TEST:begin
           Single_Test_Start <= 1'b1;
@@ -344,6 +361,16 @@ module SCurve_Test_Control(
       endcase
     end
   end
+
+  always @ (posedge Clk5M or negedge reset_n) begin
+    if(~reset_n)
+      TriggerSuppressCounter <= 20'b0;
+    else if(TriggerSuppressStart)
+      TriggerSuppressCounter <= TriggerSuppressCounter + 1'b1;
+    else
+      TriggerSuppressCounter <= 20'b0;
+  end
+
   //Swap the LSB and MSB
   function [9:0] Invert(input [9:0] num);
     begin
