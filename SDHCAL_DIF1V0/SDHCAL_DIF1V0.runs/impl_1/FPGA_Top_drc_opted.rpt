@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2018.1 (win64) Build 2188600 Wed Apr  4 18:40:38 MDT 2018
-| Date         : Wed Aug 22 21:16:59 2018
+| Date         : Thu Aug 23 18:53:30 2018
 | Host         : WYU running 64-bit major release  (build 9200)
 | Command      : report_drc -file FPGA_Top_drc_opted.rpt -pb FPGA_Top_drc_opted.pb -rpx FPGA_Top_drc_opted.rpx
 | Design       : FPGA_Top
@@ -53,15 +53,15 @@ A LUT Acquisition/MicrorocChain1DataFIFO_i_1 is driving clock pin of 20 cells. T
     Acquisition/AcquisitionDataSwitcher/MicrorocChain4DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/grss.rsts/ram_empty_fb_i_reg {FDRE}
     Acquisition/AcquisitionDataSwitcher/MicrorocChain4DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/grss.rsts/ram_empty_i_reg {FDRE}
     Acquisition/AcquisitionDataSwitcher/MicrorocChain4DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_full_i_reg {FDSE}
-    Acquisition/AcquisitionDataSwitcher/MicrorocChain1DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/grss.rsts/ram_empty_fb_i_reg {FDRE}
+    Acquisition/AcquisitionDataSwitcher/MicrorocChain1DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/grss.rsts/ram_empty_i_reg {FDRE}
 
 Related violations: <none>
 
 PLHOLDVIO-2#2 Warning
 Non-Optimal connections which could lead to hold violations  
 A LUT Command/CommandFifo32Depth_i_1 is driving clock pin of 2 cells. This could lead to large hold time violations. First few involved cells are:
-    Command/CommandFifo32Depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwas.wsts/ram_full_fb_i_reg {FDSE}
     Command/CommandFifo32Depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwas.wsts/ram_full_i_reg {FDSE}
+    Command/CommandFifo32Depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwas.wsts/ram_full_fb_i_reg {FDSE}
 
 Related violations: <none>
 
@@ -91,11 +91,11 @@ Related violations: <none>
 PLHOLDVIO-2#6 Warning
 Non-Optimal connections which could lead to hold violations  
 A LUT MicrorocChain1/MicrorocDaq/SlaveDaqControl/AcqStart_r1_i_1 is driving clock pin of 26 cells. This could lead to large hold time violations. First few involved cells are:
-    MicrorocChain1/MicrorocDaq/SlaveDaqControl/ForceExternalRaz_reg {FDPE}
     MicrorocChain1/MicrorocDaq/SlaveDaqControl/START_ACQ_reg {FDCE}
-    MicrorocChain1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[0] {FDCE}
-    MicrorocChain1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[10] {FDCE}
-    MicrorocChain1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[11] {FDCE}
+    MicrorocChain1/MicrorocDaq/SlaveDaqControl/ForceExternalRaz_reg {FDPE}
+    MicrorocChain1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[13] {FDCE}
+    MicrorocChain1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[14] {FDCE}
+    MicrorocChain1/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[19] {FDCE}
 
 Related violations: <none>
 
@@ -116,8 +116,8 @@ Related violations: <none>
 PLHOLDVIO-2#9 Warning
 Non-Optimal connections which could lead to hold violations  
 A LUT MicrorocChain2/ConfigParameter_i_1 is driving clock pin of 2 cells. This could lead to large hold time violations. First few involved cells are:
-    MicrorocChain2/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_fb_i_reg {FDSE}
     MicrorocChain2/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_i_reg {FDSE}
+    MicrorocChain2/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_fb_i_reg {FDSE}
 
 Related violations: <none>
 
@@ -131,11 +131,11 @@ Related violations: <none>
 PLHOLDVIO-2#11 Warning
 Non-Optimal connections which could lead to hold violations  
 A LUT MicrorocChain2/MicrorocDaq/SlaveDaqControl/AcqStart_r1_i_1 is driving clock pin of 26 cells. This could lead to large hold time violations. First few involved cells are:
-    MicrorocChain2/MicrorocDaq/SlaveDaqControl/ForceExternalRaz_reg {FDPE}
     MicrorocChain2/MicrorocDaq/SlaveDaqControl/START_ACQ_reg {FDCE}
+    MicrorocChain2/MicrorocDaq/SlaveDaqControl/ForceExternalRaz_reg {FDPE}
+    MicrorocChain2/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[10] {FDCE}
     MicrorocChain2/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[11] {FDCE}
-    MicrorocChain2/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[6] {FDCE}
-    MicrorocChain2/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[18] {FDCE}
+    MicrorocChain2/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[15] {FDCE}
 
 Related violations: <none>
 
@@ -156,8 +156,8 @@ Related violations: <none>
 PLHOLDVIO-2#14 Warning
 Non-Optimal connections which could lead to hold violations  
 A LUT MicrorocChain3/ConfigParameter_i_1 is driving clock pin of 2 cells. This could lead to large hold time violations. First few involved cells are:
-    MicrorocChain3/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_fb_i_reg {FDSE}
     MicrorocChain3/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_i_reg {FDSE}
+    MicrorocChain3/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_fb_i_reg {FDSE}
 
 Related violations: <none>
 
@@ -171,11 +171,11 @@ Related violations: <none>
 PLHOLDVIO-2#16 Warning
 Non-Optimal connections which could lead to hold violations  
 A LUT MicrorocChain3/MicrorocDaq/SlaveDaqControl/AcqStart_r1_i_1 is driving clock pin of 26 cells. This could lead to large hold time violations. First few involved cells are:
-    MicrorocChain3/MicrorocDaq/SlaveDaqControl/START_ACQ_reg {FDCE}
     MicrorocChain3/MicrorocDaq/SlaveDaqControl/ForceExternalRaz_reg {FDPE}
+    MicrorocChain3/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[10] {FDCE}
+    MicrorocChain3/MicrorocDaq/SlaveDaqControl/START_ACQ_reg {FDCE}
     MicrorocChain3/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[0] {FDCE}
     MicrorocChain3/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[11] {FDCE}
-    MicrorocChain3/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[10] {FDCE}
 
 Related violations: <none>
 
@@ -211,11 +211,11 @@ Related violations: <none>
 PLHOLDVIO-2#21 Warning
 Non-Optimal connections which could lead to hold violations  
 A LUT MicrorocChain4/MicrorocDaq/SlaveDaqControl/AcqStart_r1_i_1 is driving clock pin of 26 cells. This could lead to large hold time violations. First few involved cells are:
-    MicrorocChain4/MicrorocDaq/SlaveDaqControl/ForceExternalRaz_reg {FDPE}
     MicrorocChain4/MicrorocDaq/SlaveDaqControl/START_ACQ_reg {FDCE}
-    MicrorocChain4/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[11] {FDCE}
-    MicrorocChain4/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[22] {FDCE}
-    MicrorocChain4/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[21] {FDCE}
+    MicrorocChain4/MicrorocDaq/SlaveDaqControl/ForceExternalRaz_reg {FDPE}
+    MicrorocChain4/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[12] {FDCE}
+    MicrorocChain4/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[5] {FDCE}
+    MicrorocChain4/MicrorocDaq/SlaveDaqControl/TrigCounter_reg[0] {FDCE}
 
 Related violations: <none>
 
@@ -236,8 +236,8 @@ Related violations: <none>
 PLHOLDVIO-2#24 Warning
 Non-Optimal connections which could lead to hold violations  
 A LUT UsbDataFifo_i_2 is driving clock pin of 2 cells. This could lead to large hold time violations. First few involved cells are:
-    UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwas.wsts/ram_full_fb_i_reg {FDSE}
     UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwas.wsts/ram_full_i_reg {FDSE}
+    UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwas.wsts/ram_full_fb_i_reg {FDSE}
 
 Related violations: <none>
 

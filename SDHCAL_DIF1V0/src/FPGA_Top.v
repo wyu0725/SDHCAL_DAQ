@@ -453,7 +453,7 @@ module FPGA_Top(
     .ColumnSelect(COLUMN),
     .RowSelect(ROW),
     .ResetSCurveTest(ResetSCurveTest),
-    .SCurveTestTriggerSuppress(CommandSCurveTestTriggerSuppressWidth),
+    .SCurveTestTriggerSuppressWidth(CommandSCurveTestTriggerSuppressWidth),
     // LED
     .LED(LED[3:0])
     );
