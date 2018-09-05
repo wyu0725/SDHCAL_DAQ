@@ -6846,15 +6846,15 @@ namespace USB_DAQ
                         {
                             return;
                         }// else
-                        if(!StateIndicator.PedestalTestStart)
+                        /*if(!StateIndicator.PedestalTestStart)
                         {
                             break;
-                        }
+                        }*/
                     }// for j
-                    if (!StateIndicator.PedestalTestStart)
+                    /*if (!StateIndicator.PedestalTestStart)
                     {
                         break;
-                    }
+                    }*/
                 }// for i
                 StateIndicator.PedestalTestStart = false;
                 btnSCurveTestPedestal.Content = "Pedestal Test Start";
