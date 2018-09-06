@@ -19,6 +19,7 @@ using System.Runtime.InteropServices;
 using System.Windows.Interop;
 using System.Diagnostics;
 using System.Collections;
+using System.Net.Mail;
 //using System.Collections.ObjectModel;//new add 20150823
 //using Target7_NEWDAQ.DataModel;      //new add 20150823
 namespace USB_DAQ
@@ -4372,6 +4373,12 @@ namespace USB_DAQ
                     return;
                 }
                 #endregion
+                #region Set test row and column
+                if (!SetSCurveTestAsic(cbxSCurveTestAsicNewDif.SelectedIndex))
+                {
+                    return;
+                }
+                #endregion
                 #region Caculate Start and end Charge
                 if (!CheckStringLegal.CheckIntegerLegal(tbxACStartCharge.Text))
                 {
@@ -6882,6 +6889,7 @@ namespace USB_DAQ
             MediaPlayer TestDonePlayer = new MediaPlayer();
             TestDonePlayer.Open(new Uri("TestDone.wav", UriKind.Relative));
             TestDonePlayer.Play();
+            SendMail();
         }
 
         private bool CreatePedestalTestFolder()
@@ -6927,6 +6935,40 @@ namespace USB_DAQ
             else
             {
                 MessageBox.Show("Save file failure. Please save the file manual", "File Save Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+        }
+
+        private void btnSendTestMail_Click(object sender, RoutedEventArgs e)
+        {
+            SendMail();
+        }
+
+        private bool SendMail()
+        {
+            MailMessage MailMsg = new MailMessage();
+            MailMsg.To.Add(tbcReceiveEmail.Text);
+            MailMsg.From = new MailAddress(tbcSendEmail.Text, "SDHCAL Test");
+            MailMsg.Subject = "Test Done";
+            MailMsg.SubjectEncoding = Encoding.UTF8;
+            string MailBody = string.Format("ASIC{0}{1}Test Done\n", cbxSCurveTestAsicNewDif.SelectedIndex % 4, cbxSCurveTestAsicNewDif.SelectedIndex / 4);
+            MailMsg.Body = MailBody;
+            MailMsg.BodyEncoding = Encoding.UTF8;//邮件内容编码
+            MailMsg.IsBodyHtml = false;//是否是HTML邮件
+            MailMsg.Priority = MailPriority.High;//邮件优先级
+
+            SmtpClient client = new SmtpClient();
+            client.Credentials = new System.Net.NetworkCredential(tbcSendEmail.Text, psbxMailPassword.Password);//注册的邮箱和密码，就QQ邮箱而言，如果设置了独立密码，要用独立密码代替密码            
+            client.Host = tbcSendServer.Text;//QQ邮箱对应的SMTP服务器
+            object userState = MailMsg;
+            try
+            {
+                client.SendAsync(MailMsg, userState);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Tips");
                 return false;
             }
         }

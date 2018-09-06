@@ -2107,6 +2107,22 @@
                                     <TextBox x:Name="tbxACStatus" HorizontalAlignment="Left" Height="25" Margin="250,90,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="70" BorderBrush="White"/>
                                 </Grid>
                             </GroupBox>
+                            
+                            <GroupBox x:Name="gbxSendMail" Header="Mail" HorizontalAlignment="Left" Margin="405,85,0,0" VerticalAlignment="Top" Width="295" Height="240">
+                                <Grid Margin="0,0,0,0">
+                                    <Label x:Name="lblSend" Content="Send:" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Height="25" Width="80"/>
+                                    <Label x:Name="lblSendMail" Content="Mail:" HorizontalAlignment="Left" Margin="0,30,0,0" VerticalAlignment="Top" Height="25" Width="70"/>
+                                    <Label x:Name="lblMailPassword" Content="Password:" HorizontalAlignment="Left" Margin="0,60,0,0" VerticalAlignment="Top" Height="25" Width="70"/>
+                                    <TextBox x:Name="tbcSendEmail" HorizontalAlignment="Left" Height="24" Margin="70,30,0,0" TextWrapping="Wrap" Text="labworkwyu@163.com" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="180"/>
+                                    <PasswordBox x:Name="psbxMailPassword" VerticalAlignment="Top" HorizontalAlignment="Left" VerticalContentAlignment="Center" Height="24" Width="180" Margin="70,60,0,0" Password="uyW112358"/>
+                                    <Label x:Name="lblSendServer" Content="Server:" HorizontalAlignment="Left" Margin="0,90,0,0" VerticalAlignment="Top" Height="25" Width="70"/>
+                                    <TextBox x:Name="tbcSendServer" HorizontalAlignment="Left" Height="24" Margin="70,90,0,0" TextWrapping="Wrap" Text="smtp.163.com" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="180"/>
+                                    <Label x:Name="lblReceive" Content="Receive:" HorizontalAlignment="Left" Margin="0,120,0,0" VerticalAlignment="Top" Height="25" Width="80"/>
+                                    <Label x:Name="lblReceiveMail" Content="Mail:" HorizontalAlignment="Left" Margin="0,150,0,0" VerticalAlignment="Top" Height="25" Width="70"/>
+                                    <TextBox x:Name="tbcReceiveEmail" HorizontalAlignment="Left" Height="24" Margin="70,150,0,0" TextWrapping="Wrap" Text="wyu0725@mail.ustc.edu.cn" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="180"/>
+                                    <Button x:Name="btnSendTestMail" Content="Test Mail" HorizontalAlignment="Left" Margin="0,180,0,0" VerticalAlignment="Top" Width="90" Height="24" Click="btnSendTestMail_Click"/>
+                                </Grid>
+                            </GroupBox>
                         </Grid>
                     </TabItem>
                     <TabItem Name="MicrorocCarier" Header="Microroc Carier">
@@ -2119,6 +2135,7 @@
 
                         </Grid>
                     </TabItem>
+                    
 
 
                 </TabControl>
