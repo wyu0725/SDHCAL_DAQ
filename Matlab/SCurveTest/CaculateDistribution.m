@@ -1,9 +1,8 @@
-D01 = zeros(64,1);
-Trouble = zeros(64,1);
-for i = 1:1:64
-    D01(i) = D00(i,1)*D00(i,2);
-    if(D01(i)<585)
-        D01(i) = [];
-        Trouble(i) = 1;
-    end
+function [Mean, Rms] = CaculateDistribution(FitFunction, DacStart, DacEnd)
+    x = DacStart:0.01:DacEnd;
+    y = FitFunction(x);
+    Distribution = diff(y);
+    x0 = DacStart:0.01:DacEnd-0.01;
+    Mean = x0*Distribution;
+    Rms = sqrt((x0-Mean).*(x0-Mean)*Distribution);
 end
