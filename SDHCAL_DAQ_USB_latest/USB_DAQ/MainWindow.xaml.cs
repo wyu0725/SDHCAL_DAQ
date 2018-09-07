@@ -4379,6 +4379,34 @@ namespace USB_DAQ
                     return;
                 }
                 #endregion
+                #region Set Channel Align
+                if (cbxAlignOrNot.SelectedIndex == 0)
+                {
+                    int TestAsic = cbxSCurveTestAsicNewDif.SelectedIndex % 4;
+                    int TestRow = cbxSCurveTestAsicNewDif.SelectedIndex / 4;
+                    string FileName = string.Format("C{0}{1}.txt", TestRow + 1, TestAsic + 1);
+                    string AlignmentFileName = Path.Combine(CurrentPath, FileName);
+                    bool FileExist;
+                    bResult = AsicBaseLineAlignment(TestRow, TestAsic, AlignmentFileName, out FileExist);
+                    if (!FileExist)
+                    {
+                        MessageBox.Show("Do not found Calibration File. Skip the calibration", "FILE NOT FOUND", MessageBoxButton.OK, MessageBoxImage.Information);
+                        return;
+                    }
+                    else
+                    {
+                        if (bResult)
+                        {
+                            txtReport.AppendText("Aligned\n");
+                        }
+                        else
+                        {
+                            ShowUsbError("Align");
+                            return;
+                        }
+                    }
+                }
+                #endregion
                 #region Caculate Start and end Charge
                 if (!CheckStringLegal.CheckIntegerLegal(tbxACStartCharge.Text))
                 {
@@ -4901,34 +4929,24 @@ namespace USB_DAQ
                         #endregion
                         #region Calibration
                         string CalibrationFileName;
-                        StreamReader CalibrationFile;
                         CalibrationFileName = Path.Combine(CurrentPath, tbxCalibrationAsic[i, j].Text);
-                        if (File.Exists(CalibrationFileName))
+                        bool FileExist;
+                        bResult = AsicBaseLineAlignment(i, j, CalibrationFileName, out FileExist);
+                        if (!FileExist)                        
                         {
-                            byte[] CalibrationData = new byte[64];
-                            CalibrationFile = File.OpenText(CalibrationFileName);
-                            string CalibrationDataString;
-                            for (int m = 0; m < 64; m++)
-                            {
-                                CalibrationDataString = CalibrationFile.ReadLine();
-                                if(CalibrationDataString != null)
-                                {
-                                    CalibrationData[m] = byte.Parse(CalibrationDataString);
-                                }
-                                else
-                                {
-                                    CalibrationData[m] = 0;
-                                }
-                            }
-                            bResult = SetCalibrationData(MicrorocAsicChain[i], j, CalibrationData);
-                            if(!bResult)
-                            {
-                                return;
-                            }
+                            MessageBox.Show("Do not found Calibration File. Skip the calibration", "FILE NOT FOUND", MessageBoxButton.OK, MessageBoxImage.Information);
                         }
                         else
                         {
-                            MessageBox.Show("Do not found Calibration File. Skip the calibration", "FILE NOT FOUND", MessageBoxButton.OK, MessageBoxImage.Information);
+                            if(bResult)
+                            {
+                                txtReport.AppendText("Aligned\n");
+                            }
+                            else
+                            {
+                                ShowUsbError("Align");
+                                return;
+                            }
                         }
                         #endregion
                         #region Sw hg
@@ -4992,6 +5010,36 @@ namespace USB_DAQ
                     }
                     #endregion
                 }
+            }
+        }
+
+        private bool AsicBaseLineAlignment(int ChainNumber, int AsicNumbner, string AlignmentFileName, out bool FileExistance)
+        {
+            if (File.Exists(AlignmentFileName))
+            {
+                FileExistance = true;
+                byte[] CalibrationData = new byte[64];
+                StreamReader CalibrationFile;
+                CalibrationFile = File.OpenText(AlignmentFileName);
+                string CalibrationDataString;
+                for (int m = 0; m < 64; m++)
+                {
+                    CalibrationDataString = CalibrationFile.ReadLine();
+                    if (CalibrationDataString != null)
+                    {
+                        CalibrationData[m] = byte.Parse(CalibrationDataString);
+                    }
+                    else
+                    {
+                        CalibrationData[m] = 0;
+                    }
+                }
+                return SetCalibrationData(MicrorocAsicChain[ChainNumber], AsicNumbner, CalibrationData);
+            }
+            else
+            {
+                FileExistance = false;
+                return false;
             }
         }
 
@@ -6343,7 +6391,6 @@ namespace USB_DAQ
 
         private async void btnSCurveTestStartNewDif_Click(object sender, RoutedEventArgs e)
         {
-            
             bool bResult;
             if (!StateIndicator.SlowAcqStart)
             {
@@ -6393,6 +6440,34 @@ namespace USB_DAQ
                 if (!SetSCurveTestAsic(cbxSCurveTestAsicNewDif.SelectedIndex))
                 {
                     return;
+                }
+                #endregion
+                #region Set Channel Align
+                if (cbxAlignOrNot.SelectedIndex == 0)
+                {
+                    int TestAsic = cbxSCurveTestAsicNewDif.SelectedIndex % 4;
+                    int TestRow = cbxSCurveTestAsicNewDif.SelectedIndex / 4;
+                    string FileName = string.Format("C{0}{1}.txt", TestRow + 1, TestAsic + 1);
+                    string AlignmentFileName = Path.Combine(CurrentPath, FileName);
+                    bool FileExist;
+                    bResult = AsicBaseLineAlignment(TestRow, TestAsic, AlignmentFileName, out FileExist);
+                    if (!FileExist)
+                    {
+                        MessageBox.Show("Do not found Calibration File. Skip the calibration", "FILE NOT FOUND", MessageBoxButton.OK, MessageBoxImage.Information);
+                        return;
+                    }
+                    else
+                    {
+                        if (bResult)
+                        {
+                            txtReport.AppendText("Aligned\n");
+                        }
+                        else
+                        {
+                            ShowUsbError("Align");
+                            return;
+                        }
+                    }
                 }
                 #endregion
                 if (!ResetSCurveTest())
@@ -6817,6 +6892,32 @@ namespace USB_DAQ
                         if (!SetSCurveTestAsic(TestAsicIndex))
                         {
                             return;
+                        }
+                        #endregion
+                        #region Set Channel Align
+                        if (cbxAlignOrNot.SelectedIndex == 0)
+                        {
+                            string FileName = string.Format("C{0}{1}.txt", i + 1, j + 1);
+                            string AlignmentFileName = Path.Combine(CurrentPath, FileName);
+                            bool FileExist;
+                            bResult = AsicBaseLineAlignment(i, j, AlignmentFileName, out FileExist);
+                            if (!FileExist)
+                            {
+                                MessageBox.Show("Do not found Calibration File. Skip the calibration", "FILE NOT FOUND", MessageBoxButton.OK, MessageBoxImage.Information);
+                                return;
+                            }
+                            else
+                            {
+                                if (bResult)
+                                {
+                                    txtReport.AppendText("Aligned\n");
+                                }
+                                else
+                                {
+                                    ShowUsbError("Align");
+                                    return;
+                                }
+                            }
                         }
                         #endregion
                         #region Reset SCurve Test

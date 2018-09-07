@@ -2077,6 +2077,11 @@
                                         <ComboBoxItem Content="ASIC43"/>
                                         <ComboBoxItem Content="ASIC44"/>
                                     </ComboBox>
+                                    <Label x:Name="lblAlign" Content="Align" HorizontalAlignment="Left" Margin="270,120,0,0" VerticalAlignment="Top" Height="24" Width="40"/>
+                                    <ComboBox x:Name="cbxAlignOrNot" HorizontalAlignment="Left" Margin="310,120,0,0" VerticalAlignment="Top" Width="60" Height="24">
+                                        <ComboBoxItem Content="No" IsSelected="True"/>
+                                        <ComboBoxItem Content="Yes" />
+                                    </ComboBox>
                                 </Grid>
                             </GroupBox>
                             <GroupBox x:Name="gbxAutoCalibration" Header="Auto Calibration" HorizontalAlignment="Left" Margin="0,230,0,0" VerticalAlignment="Top" Height="200" Width="400">
