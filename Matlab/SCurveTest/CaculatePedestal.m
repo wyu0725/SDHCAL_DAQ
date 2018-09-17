@@ -40,45 +40,40 @@ for Column = 0:1:3
     end
 end
 
-D00 = zeros(64,2);
-D10 = zeros(64,2);
-D20 = zeros(64,2);
-MeanDac = zeros(64,1);
-RmsDac = zeros(64,1);
-RSquare = zeros(64,1);
+Dac0FitPSingle = zeros(64,4);
+muChannel = zeros(4,4,64);
+sigmaChannel = zeros(4,4,64);
+ChannelAdjust = zeros(4,4,64,1);
+SlopeDac0 = zeros(4,4);
+SlopeDac0(1,2) = 2.1487;
+SlopeDac0(1,3) = 2.1852;
 for i = 1:1:4
     for j = 1:1:4
         for k = 1:1:64
-            D00(k,:) = D0(i,j,k,:);
-            D10(k,:) = D1(i,j,k,:);
-            D20(k,:) = D2(i,j,k,:);
-            MeanDac(k) = MeanDac0(i,j,k);
-            RmsDac(k) = RmsDac0(i,j,k);
-            RSquare(k) = Dac0FitRSquare(i,j,k);
+            Dac0FitPSingle(k,:) = Dac0FitP(i,j,k,:);
+            a = Dac0FitPSingle(k,1);
+            b = Dac0FitPSingle(k,2);
+            c = Dac0FitPSingle(k,3);
+            A = Dac0FitPSingle(k,4);
+            muChannel(i,j,k) = b;
+            sigmaChannel(i,j,k) = 1/(sqrt(2)*a);
+%             mu = b;
+%             sigma = 1/(sqrt(2)*a);
+%             FErrorFunction = @(x) A*(erf(a*(x-b))+c);
+%             FGaussFunction = @(x) (1/(sigma*sqrt(2)*pi))*exp(-(x-mu).^2/2/sigma^2);
+%             figure;
+%             yyaxis left;
+%             fplot(FErrorFunction,[500 625])
+%             yyaxis right
+%             fplot(FGaussFunction,[500 625])
+%             titleString = sprintf('Channel%d',k);
+%             title(titleString);
         end
-        figure;
-        subplot(2,2,1);
-        plot(D00(:,1),'*');
-        hold on;
-        plot(MeanDac,'o');
-        hold off;
-        titleString = sprintf('ASIC%d%d Pedestal',i,j);
-        title(titleString);
-        legend('50% Trigger Ratio','Mean');
-        subplot(2,2,2);
-        plot(RmsDac);
-        titleString = sprintf('ASIC%d%d Rms',i,j);
-        title(titleString);
-        legend('RMS');
-        subplot(2,2,3);
-        plot(D00(:,2));
-        titleString = sprintf('ASIC%d%d',i,j);
-        title(titleString);
-        legend('Data Valid');
-        subplot(2,2,4);
-        plot(RSquare);
-        titleString = sprintf('ASIC%d%d RSquare',i,j);
-        title(titleString);
-        legend('RSquare');
+%         MaxMu = max(muChannel(i,j,:));
+%         for k = 1:1:64
+%             Adjustment = MaxMu - muChannel(i,j,k);
+%             AdjustmentVoltage = Adjustment*2.1852;
+%             ChannelAdjust(i,j,k) = AdjustmentVoltage / 0.728;
+%         end
     end
 end

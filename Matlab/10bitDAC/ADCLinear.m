@@ -33,7 +33,7 @@ text0 = sprintf('Slope: %1.6f mV / DAC Unit \n Vth(min) = %.6fV',p0(1)*1000,p0(2
 text1 = sprintf('Slope: %1.6f mV / DAC Unit \n Vth(min) = %.6fV',p1(1)*1000,p1(2));
 text2 = sprintf('Slope: %1.6f mV / DAC Unit \n Vth(min) = %.6fV',p2(1)*1000,p2(2));
 
-figure(1);
+figure;
 plot(Code,Vth0,'ok');
 hold on;
 plot(x,y0);
@@ -41,7 +41,7 @@ text('String',text0,'Position',[xText,yText]);
 h0 = legend(str0);
 set(h0,'Location','northwest');
 
-figure(2);
+figure;
 plot(Code,Vth1,'*k');
 hold on;
 plot(x,y1);
@@ -49,7 +49,7 @@ text('String',text1,'Position',[xText,yText]);
 h1 = legend(str1);
 set(h1,'Location','northwest')
 
-figure(3);
+figure;
 plot(Code,Vth2,'xk');
 hold on;
 plot(x,y2);
