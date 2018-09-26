@@ -33,8 +33,8 @@ for Column = 0:1:3
         end
         for i = 0:1:63
             [DacCode,~,~,~,...,
-            Dac0FitP(Column+1,Row+1,i+1,:),~,~,...,
-                Dac0Rsquare(Column+1,Row+1,i+1,:),~,~] ...,
+            Dac0FitP(Column+1,Row+1,i+1,:),Dac1FitP(Column+1,Row+1,i+1,:),Dac2FitP(Column+1,Row+1,i+1,:),...,
+                Dac0Rsquare(Column+1,Row+1,i+1,:),Dac1Rsquare(Column+1,Row+1,i+1,:),Dac2Rsquare(Column+1,Row+1,i+1,:)] ...,
             = SingleChannelSCurveCaculate(InitialData,i,DacRange);
         end
     end
@@ -47,6 +47,8 @@ ChannelAdjust = zeros(4,4,64,1);
 SlopeDac0 = zeros(4,4);
 SlopeDac0(1,2) = 2.1487;
 SlopeDac0(1,3) = 2.1852;
+muPlot = zeros(1,64);
+sigmaPlot = zeros(1,64);
 for i = 1:1:4
     for j = 1:1:4
         for k = 1:1:64
@@ -56,7 +58,9 @@ for i = 1:1:4
             c = Dac0FitPSingle(k,3);
             A = Dac0FitPSingle(k,4);
             muChannel(i,j,k) = b;
+            muPlot(k) = b;
             sigmaChannel(i,j,k) = 1/(sqrt(2)*a);
+            sigmaPlot(k) = 1/(sqrt(2)*a);
 %             mu = b;
 %             sigma = 1/(sqrt(2)*a);
 %             FErrorFunction = @(x) A*(erf(a*(x-b))+c);
@@ -69,11 +73,45 @@ for i = 1:1:4
 %             titleString = sprintf('Channel%d',k);
 %             title(titleString);
         end
+        figure;
+        yyaxis left;
+        plot(muPlot);
+        ylabel('\bf DAC Code');
+        yyaxis right
+        plot(sigmaPlot);
+        ylabel('\bf DAC Code');
+        xlabel('\bf Channel');
+        titleString = sprintf('\\bf ASIC%d%d',i,j);
+        title(titleString);
+        legend('mu','sigma');
 %         MaxMu = max(muChannel(i,j,:));
 %         for k = 1:1:64
 %             Adjustment = MaxMu - muChannel(i,j,k);
 %             AdjustmentVoltage = Adjustment*2.1852;
 %             ChannelAdjust(i,j,k) = AdjustmentVoltage / 0.728;
 %         end
+    end
+end
+for i = 1:1:4
+    figure;
+    for j = 1:1:4
+        for k = 1:1:64
+            Dac0FitPSingle(k,:) = Dac0FitP(i,j,k,:);
+            a = Dac0FitPSingle(k,1);
+            b = Dac0FitPSingle(k,2);
+            c = Dac0FitPSingle(k,3);
+            A = Dac0FitPSingle(k,4);
+            muChannel(i,j,k) = b;
+            muPlot(k) = b;
+            sigmaChannel(i,j,k) = 1/(sqrt(2)*a);
+            sigmaPlot(k) = 1/(sqrt(2)*a);
+        end
+        subplot(2,2,j)
+        plot(muPlot);
+        ylabel('\bf DAC Code');
+        xlabel('\bf Channel');
+        titleString = sprintf('\\bf ASIC%d%d',i,j);
+        title(titleString);
+        legend('mu','Location','southeast');
     end
 end
