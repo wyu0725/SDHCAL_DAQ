@@ -1,12 +1,11 @@
 filepath = uigetdir('*.*','ÇëÑ¡ÔñÎÄ¼þ¼Ð');
-prompt = {'Input ASIC ID','High Gain(1) or Low Gain(0)'};
+prompt = {'Input ASIC ID'};
 dlg = 'Input data info';
 answer = inputdlg(prompt,dlg);
 AsicID = str2double(answer(1));
-HighOrLowGain = str2double(answer(2));
 DacRange = 101;
-% Charge = [2 4 6 8 10 12 14 16 18 20 40 60 80 100 120 140];
-ChargeHigh = [2 4 6 8 10 40 60 80 100 120 140];
+ChargeHigh = [2 4 6 8 10 12 14 16 18 20 40 60 80 100 120 140 160];
+% ChargeHigh = [2 4 6 8 10 40 60 80 100 120 140];
 
 ChargeLow = [50 100 150 200 250 300 350 400 450 500 550 600];
 
@@ -79,8 +78,8 @@ figure;
 plot(ChargeHigh,Dac1Value','*');
 
 
-Dac2Value = zeros(PackageNumber,1);
-Dac2Sigma = zeros(PackageNumber,1);
+Dac2Value = zeros(PackageNumberLow,1);
+Dac2Sigma = zeros(PackageNumberLow,1);
 for i = 1:1:PackageNumberLow
     Dac2Value(i) = Dac2FitP(i,1,2);
     Dac2Sigma(i) = 1/(sqrt(2)*Dac2FitP(i,1,1));

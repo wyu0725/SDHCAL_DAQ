@@ -115,3 +115,19 @@ for i = 1:1:4
         legend('mu','Location','southeast');
     end
 end
+RPlot = zeros(1,64);
+for i = 1:1:4
+    figure;
+    for j = 1:1:4
+        for k = 1:1:64
+            RPlot(k) = Dac0Rsquare(i,j,k);
+        end
+        subplot(2,2,j)
+        plot(RPlot);
+        ylabel('\bf R');
+        xlabel('\bf Channel');
+        titleString = sprintf('\\bf ASIC%d%d',i,j);
+        title(titleString);
+        legend('R','Location','southeast');
+    end
+end
