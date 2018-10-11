@@ -34,8 +34,13 @@ for i = 1:1:PackageNumberLow
             %Size = length(importdata);
             fclose(fid);%close file
         end
+        if(ChargeLow(i) == 0)
+            DacRangeFit = 126;
+        else
+            DacRangeFit = DacRange;
+        end
         for j = 0:1:63
-            [DacCode, ~, ~, TriggerRatio2] = SingleChannelSCurveReadback(InitialData, j, DacRange);
+            [DacCode, ~, ~, TriggerRatio2] = SingleChannelSCurveReadback(InitialData, j, DacRangeFit);
             [Dac2FitP(i,j+1,:), Dac2RSquare(i,j+1)] = SCurveFitReadback(DacCode, TriggerRatio2);        
         end
 end
@@ -55,8 +60,13 @@ for i = 1:1:PackageNumberHigh
             %Size = length(importdata);
             fclose(fid);%close file
         end
+        if(ChargeHigh(i) == 0)
+            DacRangeFit = 126;
+        else
+            DacRangeFit = DacRange;
+        end
         for j = 0:1:63
-            [DacCode, TriggerRatio0, TriggerRatio1, ~] = SingleChannelSCurveReadback(InitialData, j, DacRange);
+            [DacCode, TriggerRatio0, TriggerRatio1, ~] = SingleChannelSCurveReadback(InitialData, j, DacRangeFit);
             [Dac0FitP(i,j+1,:), Dac0RSquare(i,j+1)] = SCurveFitReadback(DacCode, TriggerRatio0);
             [Dac1FitP(i,j+1,:), Dac1RSquare(i,j+1)] = SCurveFitReadback(DacCode, TriggerRatio1);        
         end
