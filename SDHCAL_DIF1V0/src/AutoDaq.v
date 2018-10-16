@@ -21,20 +21,25 @@
 
 module AutoDaq
 (
-  input Clk,                  // 40M
+  input Clk,                   // 40M
   input reset_n,
   input start,
   input StartEnable,
-  input End_Readout,          // Digitial RAM end reading signal, Active H
-  input Chipsatb,             // Chip is full, Active L
-  input [15:0] T_acquisition, // Send from USB, default 8
-  output reg Reset_b,         // Reset ASIC digital part
-  output reg Start_Acq,       // Start & maintain acquisition, Active H
-  output reg Start_Readout,   // Digital RAM start reading signal
-  output reg Pwr_on_a,        // Analogue Part Power Pulsing control, active H
-  output reg Pwr_on_d,        // Digital Power Pulsing control, active H
-  output Pwr_on_adc,          // Slow shaper Power Pulsing Control, active H
-  output reg Pwr_on_dac,      // DAC Power Pulsing Control, Active H
+  input ChipFullEnable,        // When enable, the acquisition phase will stop when chip is full
+  input AcquisitionModeSelect, // Low: Power Pulsing mode
+  input TriggerModeSelect,     // Low: Trigger Mode, AcquisitionModeSelect == 1, TriggerModeSelect == 1 Continue mode
+  input SlowTrigger,           // Trigger to start MICROROC acquisition can be delayed. The delaytime is determined by the TriggerDelayTime parameter
+  input [15:0] TriggerDelayTime,
+  input End_Readout,           // Digitial RAM end reading signal, Active H
+  input Chipsatb,              // Chip is full, Active L
+  input [15:0] T_acquisition,  // Send from USB, default 8
+  output reg Reset_b,          // Reset ASIC digital part
+  output reg Start_Acq,        // Start & maintain acquisition, Active H
+  output reg Start_Readout,    // Digital RAM start reading signal
+  output Pwr_on_a,         // Analogue Part Power Pulsing control, active H
+  output Pwr_on_d,         // Digital Power Pulsing control, active H
+  output Pwr_on_adc,           // Slow shaper Power Pulsing Control, active H
+  output Pwr_on_dac,       // DAC Power Pulsing Control, Active H
   output reg Once_end
   );
 
@@ -66,6 +71,38 @@ module AutoDaq
   end
   wire Read_End = End_Readout_sync2 & !End_Readout_sync1;//falling edge
 
+  // Synchronize the slow trigger
+  reg SlowTriggerSync1;
+  reg SlowTriggerSync2;
+  always @ (posedge Clk or negedge reset_n) begin
+    if(~reset_n) begin
+      SlowTriggerSync1 <= 1'b0;
+      SlowTriggerSync2 <= 1'b0;
+    end
+    else begin
+      SlowTriggerSync1 <= SlowTrigger;
+      SlowTriggerSync2 <= SlowTriggerSync1;
+    end
+  end
+  wire SlowTriggerSync3 = SlowTriggerSync1 & (~SlowTriggerSync2); // Rising edge
+  reg [15:0] TriggerDelayCount;
+  reg SlowTriggerSync;
+  always @ (posedge Clk or negedge reset_n) begin
+    if(~reset_n) begin
+      SlowTriggerSync <= 1'b0;
+      TriggerDelayCount <= 16'b0;
+    end
+    else if(SlowTriggerSync3 || (TriggerDelayCount != 16'b0 && TriggerDelayCount <= TriggerDelayTime )) begin
+      SlowTriggerSync <= (TriggerDelayCount == TriggerDelayTime);
+      TriggerDelayCount <= TriggerDelayCount + 1'b1;
+    end
+    else begin
+      SlowTriggerSync <= 1'b0;
+      TriggerDelayCount <= 16'b0;
+    end
+  end
+  
+
   reg StartRising;
   reg ResetStartRising_n;
   always @ (posedge start or negedge ResetStartRising_n) begin
@@ -76,18 +113,27 @@ module AutoDaq
       StartRising <= 1'b1;
     end
   end
-  //fsm of daq control
+
+  //FSM of daq control
   reg [15:0] delay_cnt;
   localparam [3:0] Idle = 4'd0,
-  CHIPRESET = 4'd1,
-  POWOND    = 4'd2,
-  RELEASE   = 4'd3,
-  ACQUISITION = 4'd4,
-  WAIT = 4'd5,
-  START_READOUT = 4'd6,
-  WAIT_READ = 4'd7,
-  END_READOUT = 4'd8;
+  MODE_SELECT = 4'd1,
+  WAIT_TRIGGER = 4'd2,
+  CHIPRESET = 4'd3,
+  POWOND    = 4'd4,
+  RELEASE   = 4'd5,
+  ACQUISITION = 4'd6,
+  WAIT = 4'd7,
+  START_READOUT = 4'd8,
+  WAIT_READ = 4'd9,
+  END_READOUT = 4'd10;
   reg [3:0] State;
+
+  localparam POWER_PULSING_MODE = 0;
+  localparam CONTINUE_MODE = 1;
+
+  localparam TRIGGER_MODE = 0;
+
   localparam T_minPwrRst = 8; //200ns, time to wake up clock LVDS receivers
   localparam T_minRstStart = 40;//1us,
   //localparam T_acquisition = 8; //acquisition time corresponding to the bunch crossing
@@ -111,16 +157,35 @@ module AutoDaq
         Idle:begin
           ResetStartRising_n <= 1'b1;
           if(start && (StartRising || StartEnable)) begin
-            Reset_b <= 1'b0;
-            State <= CHIPRESET;
+            State <= MODE_SELECT;
           end
           else
             State <= Idle;
         end
-        CHIPRESET:begin    //reset the chip
-          //Pwr_on_d <= 1'b1;    //This signal is set during the reset State before each acquisition
-          State <= POWOND;
+        MODE_SELECT:begin
           ResetStartRising_n <= 1'b0;
+          if(AcquisitionModeSelect == POWER_PULSING_MODE) begin
+            Reset_b <= 1'b0;
+            State <= CHIPRESET;
+          end
+          else if(TriggerModeSelect == TRIGGER_MODE) begin
+            State <= WAIT_TRIGGER;
+          end
+          else begin
+            Start_Acq <= 1'b1;
+            State <= ACQUISITION; 
+          end          
+        end
+        WAIT_TRIGGER:begin
+          if(SlowTriggerSync) begin
+            Start_Acq <= 1'b1;
+            State <= ACQUISITION; 
+          end
+          else
+            State <= WAIT_TRIGGER;
+        end
+        CHIPRESET:begin    //reset the chip
+          State <= POWOND;
         end
         POWOND:begin
           if(delay_cnt < T_minPwrRst) begin//T_minPwrRst = 8
@@ -145,15 +210,31 @@ module AutoDaq
           end
         end
         ACQUISITION:begin
+          /*
           if(delay_cnt < T_acquisition) begin//T_acquisition = 8//send from USB, default 8
-            //delay_cnt <= delay_cnt + 1'b1;
-            if(Chip_full) begin //chip full during acquisition
-              State <= WAIT;
-              delay_cnt <= 16'b0;
-              Start_Acq <= 1'b0;
-            end
-            else
-              delay_cnt <= delay_cnt + 1'b1;
+          //delay_cnt <= delay_cnt + 1'b1;
+          if(Chip_full) begin //chip full during acquisition
+          State <= WAIT;
+          delay_cnt <= 16'b0;
+          Start_Acq <= 1'b0;
+        end
+          else
+            delay_cnt <= delay_cnt + 1'b1;
+          State <= ACQUISITION;
+        end
+          else begin
+          delay_cnt <= 16'b0;
+          Start_Acq <= 1'b0;
+          State <= WAIT;
+        end
+          */
+          if(Chip_full && ChipFullEnable) begin //chip full during acquisition
+            State <= WAIT;
+            delay_cnt <= 16'b0;
+            Start_Acq <= 1'b0;
+          end
+          else if(delay_cnt < T_acquisition) begin
+            delay_cnt <= delay_cnt + 1'b1;
             State <= ACQUISITION;
           end
           else begin
@@ -201,25 +282,31 @@ module AutoDaq
   end
   //Powerpulsing control
   //Pwr_on_d
+  reg PowerOnD;
+  reg PowerOnA;
+  reg PowerOnDac;
   always @ (State) begin
     if(State == POWOND || State == RELEASE || State == ACQUISITION || State == WAIT)
-      Pwr_on_d = 1'b1;
+      PowerOnD = 1'b1;
     else
-      Pwr_on_d = 1'b0;
+      PowerOnD = 1'b0;
   end
+  assign Pwr_on_d = PowerOnD | AcquisitionModeSelect; 
   //Pwr_on_a
   //Pwr_on_dac
   always @ (State) begin
     if(State == CHIPRESET || State == POWOND || State == RELEASE || State == ACQUISITION
       || State == WAIT || State == START_READOUT) begin
-        Pwr_on_a = 1'b1;
-        Pwr_on_dac = 1'b1;
+        PowerOnA = 1'b1;
+        PowerOnDac = 1'b1;
       end
     else begin
-      Pwr_on_a = 1'b0;
-      Pwr_on_dac = 1'b0;
+      PowerOnA = 1'b0;
+      PowerOnDac = 1'b0;
     end
   end
+  assign Pwr_on_a = PowerOnA | AcquisitionModeSelect;
+  assign Pwr_on_dac = PowerOnDac | AcquisitionModeSelect;
   assign Pwr_on_adc = 1'b0;
   /*(*mark_debug = "true"*)wire start_debug;
   (*mark_debug = "true"*)wire End_Readout_debug;

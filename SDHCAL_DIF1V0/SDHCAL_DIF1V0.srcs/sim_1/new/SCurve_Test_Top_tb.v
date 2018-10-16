@@ -42,6 +42,7 @@ module SCurve_Test_Top_tb;
   reg [2:0] AsicNumber;
   reg [2:0] TestAsicNumber;
   reg UnmaskAllChannel;
+  reg InnerClockEnable;
   reg usb_data_fifo_full;
   reg Microroc_Config_Done;
   reg CLK_EXT;
@@ -81,6 +82,7 @@ module SCurve_Test_Top_tb;
     .AsicNumber(AsicNumber),
     .TestAsicNumber(TestAsicNumber),
     .UnmaskAllChannel(UnmaskAllChannel),
+    .InnerClockEnable(InnerClockEnable),
     .SCurveTestDataoutEnable(usb_data_fifo_wr_en),
     .SCurveTestDataout(usb_data_fifo_wr_din),
     .ExternalDataFifoFull(usb_data_fifo_full),
@@ -104,7 +106,7 @@ module SCurve_Test_Top_tb;
     Clk = 0;
     Clk_5M = 0;
     reset_n = 0;
-    TrigEffi_or_CountEffi = 0;
+    TrigEffi_or_CountEffi = 1;
     Test_Start = 0;
     SingleTest_Chn = 3;
     Single_or_64Chn = 0;
@@ -126,6 +128,7 @@ module SCurve_Test_Top_tb;
     out_trigger2b = 1;
     TriggerClk = 1'b0;
     TriggerSuppressWidth = 20'hB71B0;
+    InnerClockEnable = 1'b0;
     // Data_Transmit_Done = 0;
 
     // Wait 100 ns for global reset to finish
@@ -135,6 +138,8 @@ module SCurve_Test_Top_tb;
     // Add stimulus here
     #10000;
     Test_Start = 1'b1;
+    #500000;
+    InnerClockEnable = 1'b1;
     
   end
   localparam LOW = 13;

@@ -31,6 +31,11 @@ module DaqControl(
   input UsbAcqStart,
   output UsbStartStop,
   input StartEnable,
+  // Acquisition parameter
+  input ChipFullEnable,
+  input AcquisitionModeSelect,
+  input TriggerModeSelect,
+  input [15:0] TriggerDelayTime,
   // Read start and end
   input EndReadout,
   output StartReadout,
@@ -90,6 +95,7 @@ module DaqControl(
   wire AutoDaq_DataTransmitDone;
   wire SlaveDaq_DataTransmitDone;
   wire SingleStart;
+  wire SlowTriger;
   wire AutoDaq_UsbStartStop;
   reg SlaveDaq_UsbStartStop;
   wire [15:0] SlaveDaqData;
@@ -150,6 +156,7 @@ module DaqControl(
     // Start trigger for SlaveDaq
     .ExternalTrigger(ExternalTrigger),
     .SingleStart(SingleStart),
+    .SlowTrigger(SlowTrigger),
     .AutoDaq_UsbStartStop(AutoDaq_UsbStartStop),
     .SlaveDaq_UsbStartStop(SlaveDaq_UsbStartStop),
     .UsbStartStop(UsbStartStop),
@@ -170,6 +177,11 @@ module DaqControl(
     .reset_n(reset_n),
     .start(AutoDaq_Start),                // a pulse or a level?
     .StartEnable(StartEnable),
+    .ChipFullEnable(ChipFullEnable),
+    .AcquisitionModeSelect(AcquisitionModeSelect),
+    .TriggerModeSelect(TriggerModeSelect),
+    .SlowTrigger(SlowTrigger),
+    .TriggerDelayTime(TriggerDelayTime),
     .End_Readout(AutoDaq_EndReadout),     // Digitial RAM end reading signal, Active H
     .Chipsatb(AutoDaq_CHIPSATB),          // Chip is full, Active L, PIN
     .T_acquisition(AcquisitionTime),      // Get from USB, default 8

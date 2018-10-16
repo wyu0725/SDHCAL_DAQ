@@ -48,6 +48,10 @@
 `define AsicNumberSet_CAND                         16'hA3E4
 `define SCurveTestAsicSelect_CAND                  16'hA3F0
 `define ResetTimeStamp_CAND                        16'hA300
+
+`define AsicChainSelectSet_CAND                    16'hB0A0
+`define LightLed_CAND                              16'hB000
+
 `define Dac0Vth3to0_CAND                           16'hC000
 `define Dac0Vth7to4_CAND                           16'hC010
 `define Dac0Vth9to8_CAND                           16'hC020
@@ -57,7 +61,9 @@
 `define Dac2Vth3to0_CAND                           16'hC060
 `define Dac2Vth7to4_CAND                           16'hC070
 `define Dac2Vth9to8_CAND                           16'hC080
+
 `define ParameterLoadStart_CAND                    16'hD0A0
+
 `define RunningModeSelect_CAND                     16'hE0A0
 `define SweepDacSelect_CAND                        16'hE0B0
 `define SweepDacStartValue3to0_CAND                16'hE0C0
@@ -106,10 +112,6 @@
 `define EndHoldTimeSet7to4_CAND                    16'hE261
 `define EndHoldTimeSet11to8_CAND                   16'hE270
 `define EndHoldTimeSet15to12_CAND                  16'hE280
-`define AsicChainSelectSet_CAND                    16'hB0A0
-`define LightLed_CAND                              16'hB000
-`define AcquisitionStartStop_CAND                  16'hF0F0
-`define ResetDataFifo_CAND                         16'hF1A0
 `define DaqSelect_CAND                             16'hE291
 `define MicrorocStartAcquisitionTime3to0_CAND      16'hE3A0
 `define MicrorocStartAcquisitionTime7to4_CAND      16'hE3B5
@@ -117,9 +119,20 @@
 `define MicrorocStartAcquisitionTime15to12_CAND    16'hE3D0
 `define TestSignalColumnSelect_CAND                16'hE3E0
 `define TestSignalRowSelect_CAND                   16'hE3F0
-`define ResetSCurveTest_CAND                       16'hF1B0
 `define TriggerSuppressWidth3to0_CAND              16'hE300
 `define TriggerSuppressWidth7to4_CAND              16'hE31B
 `define TriggerSuppressWidth11to8_CAND             16'hE321
 `define TriggerSuppressWidth15to12_CAND            16'hE337
 `define TriggerSuppressWidth19to16_CAND            16'hE34B
+`define ChipFullEnable_CAND                        16'hE351
+`define AutoDaqAcquisitionModeSelect_CAND          16'hE360
+`define AutoDaqTriggerModeSelect_CAND              16'hE370
+`define AutoDaqTriggerDelayTime3to0_CAND           16'hE380
+`define AutoDaqTriggerDelayTime7to4_CAND           16'hE390
+`define AutoDaqTriggerDelayTime11to8_CAND          16'hE4A0
+`define AutoDaqTriggerDelayTime15to12_CAND         16'hE4B0
+`define SCurveTestInnerClockEnable_CAND 16'hE4C0
+
+`define AcquisitionStartStop_CAND                  16'hF0F0
+`define ResetDataFifo_CAND                         16'hF1A0
+`define ResetSCurveTest_CAND                       16'hF1B0

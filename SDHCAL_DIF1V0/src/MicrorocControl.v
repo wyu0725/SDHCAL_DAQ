@@ -99,6 +99,11 @@ module MicrorocControl(
   input AcqStart,
   output UsbStartStop,
   input StartEnable,
+  // Acquisition parameter
+  input ChipFullEnable,
+  input AcquisitionModeSelect,
+  input TriggerModeSelect,
+  input [15:0] TriggerDelayTime,
   input [15:0] AcquisitionStartTime,
   input [15:0] EndHoldTime,
   // *** Pins
@@ -213,14 +218,14 @@ module MicrorocControl(
   wire MicrorocDataEnable;
   wire [15:0] MicrorocData;
   AsicRamReadout ReadOnChipRam(
-    .Clk(Clk),
-    .reset_n(reset_n),
-    .Dout(AsicDataout), //pin Active L
-    .TransmitOn(TransmitOn),//pin  Active L
+    .Clk                      (Clk),
+    .reset_n                  (reset_n),
+    .Dout                     (AsicDataout), //pin Active L
+    .TransmitOn               (TransmitOn),//pin  Active L
     //------fifo access-----------//
-    .ext_fifo_full(ExternalFifoFull),
-    .parallel_data(MicrorocData),
-    .parallel_data_en(MicrorocDataEnable)
+    .ext_fifo_full            (ExternalFifoFull),
+    .parallel_data            (MicrorocData),
+    .parallel_data_en         (MicrorocDataEnable)
     );
 
   /*wire RAZ_CHN;
@@ -261,6 +266,12 @@ module MicrorocControl(
     .UsbAcqStart           (AcqStart),
     .UsbStartStop          (UsbStartStop),
     .StartEnable           (StartEnable),
+    // Acquisition parameter
+    .ChipFullEnable(ChipFullEnable),
+    .AcquisitionModeSelect(AcquisitionModeSelect),
+    .TriggerModeSelect(TriggerModeSelect),
+    .TriggerDelayTime(TriggerDelayTime),
+
     .EndReadout            (EndReadout),
     .StartReadout          (StartReadout),
     .CHIPSATB              (CHIPSATB),

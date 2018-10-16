@@ -25,6 +25,11 @@ module AutoDaq_tb();
   reg reset_n;
   reg start;
   reg StartEnable;
+  reg ChipFullEnable;
+  reg AcquisitionModeSelect;
+  reg TriggerModeSelect;
+  reg SlowTrigger;
+  reg [15:0] TriggerDelayTime;
   reg End_Readout;
   reg Chipsatb;
   reg [15:0] T_acquisition;
@@ -40,20 +45,25 @@ module AutoDaq_tb();
   //instance:../../../src/AutoDaq.v
   AutoDaq uut
   (
-    .Clk(Clk),                     // 40M
+    .Clk(Clk),                  // 40M
     .reset_n(reset_n),
     .start(start),
     .StartEnable(StartEnable),
-    .End_Readout(End_Readout),     // Digitial RAM end reading signal, Active H
-    .Chipsatb(Chipsatb),           // Chip is full, Active L
+    .ChipFullEnable(ChipFullEnable),       // When enable, the acquisition phase will stop when chip is full
+    .AcquisitionModeSelect(AcquisitionModeSelect),
+    .TriggerModeSelect(TriggerModeSelect),
+    .SlowTrigger(SlowTrigger),
+    .TriggerDelayTime(TriggerDelayTime),
+    .End_Readout(End_Readout),          // Digitial RAM end reading signal, Active H
+    .Chipsatb(Chipsatb),             // Chip is full, Active L
     .T_acquisition(T_acquisition), // Send from USB, default 8
-    .Reset_b(Reset_b),             // Reset ASIC digital part
-    .Start_Acq(Start_Acq),         // Start & maintain acquisition, Active H
-    .Start_Readout(Start_Readout), // Digital RAM start reading signal
-    .Pwr_on_a(Pwr_on_a),           // Analogue Part Power Pulsing control, active H
-    .Pwr_on_d(Pwr_on_d),           // Digital Power Pulsing control, active H
-    .Pwr_on_adc(Pwr_on_adc),       // Slow shaper Power Pulsing Control, active H
-    .Pwr_on_dac(Pwr_on_dac),       // DAC Power Pulsing Control, Active H
+    .Reset_b(Reset_b),         // Reset ASIC digital part
+    .Start_Acq(Start_Acq),       // Start & maintain acquisition, Active H
+    .Start_Readout(Start_Readout),   // Digital RAM start reading signal
+    .Pwr_on_a(Pwr_on_a),        // Analogue Part Power Pulsing control, active H
+    .Pwr_on_d(Pwr_on_d),        // Digital Power Pulsing control, active H
+    .Pwr_on_adc(Pwr_on_adc),          // Slow shaper Power Pulsing Control, active H
+    .Pwr_on_dac(Pwr_on_dac),      // DAC Power Pulsing Control, Active H
     .Once_end(Once_end)
     );
 
@@ -62,7 +72,12 @@ module AutoDaq_tb();
     reset_n = 1'b0;
     start = 1'b0;
     StartEnable = 1'b0;
-    T_acquisition = 16'd20;
+    T_acquisition = 16'd100;
+    ChipFullEnable = 1'b1;
+    AcquisitionModeSelect = 1'b0;
+    TriggerDelayTime = 16'd0;
+    TriggerModeSelect = 1'b0;
+    SlowTrigger = 1'b0;
     #100;
     reset_n = 1'b1;
     #100;
@@ -79,57 +94,174 @@ module AutoDaq_tb();
     start = 1'b0;
     #2000;
     start = 1'b1;
+    #15000;
+    StartEnable = 1'b1;
+    #10000;
+    ChipFullEnable = 1'b0;
+    #10000;
+    ChipFullEnable = 1'b1;
+    AcquisitionModeSelect = 1'b1;
+    TriggerModeSelect = 1'b1;
+    #100;
+    reset_n = 1'b1;
+    #100;
+    reset_n = 1'b0;
+    #100;
+    reset_n = 1'b1;
+    #1000;
+    start = 1'b1;
+    #5000;
+    StartEnable = 1'b1;
+    #2525;
+    StartEnable = 1'b0;
+    #5000;
+    start = 1'b0;
+    #2000;
+    start = 1'b1;
+    #15000;
+    StartEnable = 1'b1;
+    #10000;
+    ChipFullEnable = 1'b0;
+    #10000;
+    ChipFullEnable = 1'b1;
+    AcquisitionModeSelect = 1'b1;
+    TriggerModeSelect = 1'b0;
+    #100;
+    reset_n = 1'b1;
+    #100;
+    reset_n = 1'b0;
+    #100;
+    reset_n = 1'b1;
+    #1000;
+    start = 1'b1;
+    #526;
+    SlowTrigger = 1'b1;
+    #50;
+    SlowTrigger = 1'b0;
+    #1077
+    SlowTrigger = 1'b1;
+    #50;
+    SlowTrigger = 1'b0;
+    #5000;
+    StartEnable = 1'b1;
+    #526;
+    SlowTrigger = 1'b1;
+    #50;
+    SlowTrigger = 1'b0;
+    #1077
+    SlowTrigger = 1'b1;
+    #50;
+    SlowTrigger = 1'b0;
+    #2525;
+    StartEnable = 1'b0;
+    #526;
+    SlowTrigger = 1'b1;
+    #50;
+    SlowTrigger = 1'b0;
+    #1077
+    SlowTrigger = 1'b1;
+    #50;
+    SlowTrigger = 1'b0;
+    #5000;
+    start = 1'b0;
+    #2000;
+    start = 1'b1;
+    #526;
+    SlowTrigger = 1'b1;
+    #50;
+    SlowTrigger = 1'b0;
+    #1077
+    SlowTrigger = 1'b1;
+    #50;
+    SlowTrigger = 1'b0;
+    #15000;
+    #526;
+    SlowTrigger = 1'b1;
+    #50;
+    SlowTrigger = 1'b0;
+    #1077
+    SlowTrigger = 1'b1;
+    #50;
+    SlowTrigger = 1'b0;
+    #586;
+    SlowTrigger = 1'b1;
+    #50;
+    SlowTrigger = 1'b0;
+    #1477
+    SlowTrigger = 1'b1;
+    #50;
+    SlowTrigger = 1'b0;
+    StartEnable = 1'b1;
+    #10000;
+    ChipFullEnable = 1'b0;
+    #526;
+    SlowTrigger = 1'b1;
+    #50;
+    SlowTrigger = 1'b0;
+    #1077
+    SlowTrigger = 1'b1;
+    #50;
+    SlowTrigger = 1'b0;
+    #526;
+    SlowTrigger = 1'b1;
+    #50;
+    SlowTrigger = 1'b0;
+    #1077
+    SlowTrigger = 1'b1;
+    #50;
+    SlowTrigger = 1'b0;
+    #10000;
 
   end
 
   reg [5:0] StartCount;
-	reg [1:0] StartState;
-	localparam [1:0] IDLE = 2'b00,
-	START = 2'b01,
-	CHIP_FULL = 2'b10;
-	//DONE = 2'b11;
-	always @(posedge Clk or negedge reset_n) begin
-		if(~reset_n) begin
-			Chipsatb <= 1'b1;
-			StartCount <= 6'b0;
-			StartState <= IDLE;
-		end
-		else begin
-			case(StartState)
-				IDLE:begin
-					if(Start_Acq) begin
-						StartState <= START;
-					end
-					else
-						StartState <= IDLE;
-				end
-				START:begin
-					if(StartCount < 6'd60 && Start_Acq) begin
-						StartCount <= StartCount + 1'b1;
-						StartState <= START;
-					end
-					else begin
-						StartState <= CHIP_FULL;
-						StartCount <= 6'b0;
-						Chipsatb <= 1'b0;
-					end
-				end
-				CHIP_FULL:begin
-					if(StartCount < 6'd10) begin
-						StartCount <= StartCount + 1'b1;
-						StartState <= CHIP_FULL;
-					end
-					else begin
-						Chipsatb <= 1'b1;
-						StartCount <= 6'b0;
-						StartState <= IDLE;
-					end
-				end
-				default:StartState <= IDLE;
-			endcase
-		end
+  reg [1:0] StartState;
+  localparam [1:0] IDLE = 2'b00,
+  START = 2'b01,
+  CHIP_FULL = 2'b10;
+  //DONE = 2'b11;
+  always @(posedge Clk or negedge reset_n) begin
+    if(~reset_n) begin
+      Chipsatb <= 1'b1;
+      StartCount <= 6'b0;
+      StartState <= IDLE;
+    end
+    else begin
+      case(StartState)
+        IDLE:begin
+          if(Start_Acq) begin
+            StartState <= START;
+          end
+          else
+            StartState <= IDLE;
+        end
+        START:begin
+          if(StartCount < 6'd60 && Start_Acq) begin
+            StartCount <= StartCount + 1'b1;
+            StartState <= START;
+          end
+          else begin
+            StartState <= CHIP_FULL;
+            StartCount <= 6'b0;
+            Chipsatb <= 1'b0;
+          end
+        end
+        CHIP_FULL:begin
+          if(StartCount < 6'd10 || Start_Acq) begin
+            StartCount <= (StartCount < 6'd10) ? StartCount + 1'b1 : StartCount;
+            StartState <= CHIP_FULL;
+          end
+          else begin
+            Chipsatb <= 1'b1;
+            StartCount <= 6'b0;
+            StartState <= IDLE;
+          end
+        end
+        default:StartState <= IDLE;
+      endcase
+    end
   end
-  
+
   reg [5:0] ReadCount;
   always @ (posedge Clk or negedge reset_n) begin
     if(~reset_n) begin

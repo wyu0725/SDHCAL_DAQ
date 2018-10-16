@@ -18,21 +18,21 @@
 // Additional Comments:
 //
 //////////////////////////////////////////////////////////////////
-//                                
-//                                                    `:/+:   
-//                                                 .odNmydMs  
-//                                               :hMNy: `dMh  
-//     ./+oo+-   -://////+oo`  `:/ooso/`       :dMNy.  .dMm-  
-//   /dNy/:/hM/ odyNMmssso+. +dNNd+/+yMM/    .hMMh- ..oNMd-   
-// `hMd-     -  ` .MMo      -m+sMN-   mMy   /NMN+ .yMMMNs`    
-// yMm.         `ymMMmddd+  .- dMd` -hMh.  yMMd- :NMMNy.    
-// NMh          .:NMh...`   .ymMMmdmds:   yMMm.  /dd+.    `   
-// dMm.    `+h`  :MM/         yMm-`      :MMN/         `oh-   
-// .hMNysydNd+   /MMdyyhdd`  `NMs        sMMN.       :yd+`    
-//   ./++/:.      ./++/:-`   -mm:        /MMMh:..-+ymd/`    
-//                                        +mMMMMMNdo-     
-//                                          .:/:-`        
-//                                
+//
+//                                                    `:/+:
+//                                                 .odNmydMs
+//                                               :hMNy: `dMh
+//     ./+oo+-   -://////+oo`  `:/ooso/`       :dMNy.  .dMm-
+//   /dNy/:/hM/ odyNMmssso+. +dNNd+/+yMM/    .hMMh- ..oNMd-
+// `hMd-     -  ` .MMo      -m+sMN-   mMy   /NMN+ .yMMMNs`
+// yMm.         `ymMMmddd+  .- dMd` -hMh.  yMMd- :NMMNy.
+// NMh          .:NMh...`   .ymMMmdmds:   yMMm.  /dd+.    `
+// dMm.    `+h`  :MM/         yMm-`      :MMN/         `oh-
+// .hMNysydNd+   /MMdyyhdd`  `NMs        sMMN.       :yd+`
+//   ./++/:.      ./++/:-`   -mm:        /MMMh:..-+ymd/`
+//                                        +mMMMMMNdo-
+//                                          .:/:-`
+//
 //////////////////////////////////////////////////////////////////
 module FPGA_Top(
   //*** Clock and reset
@@ -173,7 +173,7 @@ module FPGA_Top(
 
   wire [3:0] MicrorocAcquisitionOnceDone;
   assign EXT_TRIG_OUT = |MicrorocAcquisitionOnceDone;
-  
+
   wire Clk;
   wire Clk5M;
   wire SyncClk;
@@ -239,9 +239,9 @@ module FPGA_Top(
   end
   wire nPKTEND;
   BUFG BUFG_NPKTEND (
-      .O(nPKTEND), // 1-bit output: Clock output
-      .I(nPKTEND_r2)  // 1-bit input: Clock input
-   );
+    .O(nPKTEND), // 1-bit output: Clock output
+    .I(nPKTEND_r2)  // 1-bit input: Clock input
+    );
 
   wire ExternalDataFifoFull;
   wire [15:0] OutTestData;
@@ -329,6 +329,7 @@ module FPGA_Top(
   wire [15:0] SCurveTestTriggerCountMax;
   wire [3:0] SCurveTestTriggerDelay;
   wire SCurveTestUnmaskAllChannel;
+  wire CommandSCurveTestInnerClockEnable;
   wire SCurveTestTriggerEfficiencyOrCountEfficiency;
   wire [15:0] SCurveTestCounterMax;
   wire ForceMicrorocAcqReset;
@@ -343,6 +344,12 @@ module FPGA_Top(
   wire [15:0] CommandMicrorocStartAcquisitionTime;
   wire ResetSCurveTest;
   wire [19:0] CommandSCurveTestTriggerSuppressWidth;
+
+  wire CommandChipFullEnable;
+  wire CommandAutoDaqAcquisitionModeSelect;
+  wire CommandAutoDaqTriggerModeSelect;
+  wire [15:0] CommandAutoDaqTriggerDelayTime;
+
   CommandInterpreter Command(
     .Clk(Clk),
     .IFCLK(IFCLK),
@@ -417,6 +424,11 @@ module FPGA_Top(
     // Mode Select
     .ModeSelect(CommandModeSelect),
     .DacSelect(CommandDacSelect),
+    // Acquisition parameter
+    .ChipFullEnable(CommandChipFullEnable),
+    .AutoDaqAcquisitionModeSelect(CommandAutoDaqAcquisitionModeSelect),
+    .AutoDaqTriggerModeSelect(CommandAutoDaqTriggerModeSelect),
+    .AutoDaqTriggerDelayTime(CommandAutoDaqTriggerDelayTime),
     // Sweep Dac parameter
     .StartDac(SCurveTestDacStart),
     .EndDac(SCurveTestDacStop),
@@ -429,6 +441,7 @@ module FPGA_Top(
     .TriggerDelay(SCurveTestTriggerDelay),
     .SweepTestStartStop(CommandSCurveTestStartStop),
     .UnmaskAllChannel(SCurveTestUnmaskAllChannel),
+    .SCurveTestInnerClockEnable(CommandSCurveTestInnerClockEnable),
     // Count Efficiency
     .TriggerEfficiencyOrCountEfficiency(SCurveTestTriggerEfficiencyOrCountEfficiency),
     .CounterMax(SCurveTestCounterMax),
@@ -502,7 +515,7 @@ module FPGA_Top(
   wire [ASIC_CHAIN_NUMBER - 1:0] MicrorocLatchedOrDirectOutputChain;
   wire [ASIC_CHAIN_NUMBER - 1:0] MicrorocDiscriminator2PPEnableChain;
   wire [ASIC_CHAIN_NUMBER - 1:0] MicrorocDiscriminator1PPEnableChain;
-  wire [ASIC_CHAIN_NUMBER - 1:0] MicrorocDiscriminator0PPEnableChain; 
+  wire [ASIC_CHAIN_NUMBER - 1:0] MicrorocDiscriminator0PPEnableChain;
   wire [ASIC_CHAIN_NUMBER - 1:0] MicrorocOTAqPPEnableChain;
   wire [ASIC_CHAIN_NUMBER - 1:0] MicrorocOTAqEnableChain;
   wire [ASIC_CHAIN_NUMBER - 1:0] MicrorocDac4bitPPEnableChain;
@@ -705,6 +718,7 @@ module FPGA_Top(
     .AsicNumber(CommandAsicNumberSet[2:0]),
     .TestAsicNumber(CommandSCurveTestAsicSelect[2:0]),
     .UnmaskAllChannel(SCurveTestUnmaskAllChannel),
+    .InnerClockEnable(CommandSCurveTestInnerClockEnable),
     .TriggerSuppressWidth(CommandSCurveTestTriggerSuppressWidth),
     // Pins
     .SynchronousSignalIn(SynchronousSignalIn),
@@ -750,7 +764,7 @@ module FPGA_Top(
   wire [3:0] PowerOnDigital;
   wire [3:0] PowerOnAdc;
   wire [3:0] PowerOnDac;
-  
+
   wire TRIG_EXT;
   MicrorocCommonControl
   #(
@@ -885,6 +899,11 @@ module FPGA_Top(
     .AcqStart(CommandMicrorocAcquisitionStartStop[0]),
     .UsbStartStop(MicrorocAcquisitionUsbStartStop[0]),
     .StartEnable(RamReadoutDone),
+    // Acquisition parameter
+    .ChipFullEnable(CommandChipFullEnable),
+    .AcquisitionModeSelect(CommandAutoDaqAcquisitionModeSelect),
+    .TriggerModeSelect(CommandAutoDaqTriggerModeSelect),
+    .TriggerDelayTime(CommandAutoDaqTriggerDelayTime),
     .AcquisitionStartTime(CommandMicrorocStartAcquisitionTime),
     .EndHoldTime(EndHoldTime),
     // *** Pins
@@ -990,6 +1009,11 @@ module FPGA_Top(
     .AcqStart(CommandMicrorocAcquisitionStartStop[1]),
     .UsbStartStop(MicrorocAcquisitionUsbStartStop[1]),
     .StartEnable(RamReadoutDone),
+    // Acquisition parameter
+    .ChipFullEnable(CommandChipFullEnable),
+    .AcquisitionModeSelect(CommandAutoDaqAcquisitionModeSelect),
+    .TriggerModeSelect(CommandAutoDaqTriggerModeSelect),
+    .TriggerDelayTime(CommandAutoDaqTriggerDelayTime),
     .AcquisitionStartTime(CommandMicrorocStartAcquisitionTime),
     .EndHoldTime(EndHoldTime),
     // *** Pins
@@ -1095,6 +1119,11 @@ module FPGA_Top(
     .AcqStart(CommandMicrorocAcquisitionStartStop[2]),
     .UsbStartStop(MicrorocAcquisitionUsbStartStop[2]),
     .StartEnable(RamReadoutDone),
+    // Acquisition parameter
+    .ChipFullEnable(CommandChipFullEnable),
+    .AcquisitionModeSelect(CommandAutoDaqAcquisitionModeSelect),
+    .TriggerModeSelect(CommandAutoDaqTriggerModeSelect),
+    .TriggerDelayTime(CommandAutoDaqTriggerDelayTime),
     .AcquisitionStartTime(CommandMicrorocStartAcquisitionTime),
     .EndHoldTime(EndHoldTime),
     // *** Pins
@@ -1200,6 +1229,11 @@ module FPGA_Top(
     .AcqStart(CommandMicrorocAcquisitionStartStop[3]),
     .UsbStartStop(MicrorocAcquisitionUsbStartStop[3]),
     .StartEnable(RamReadoutDone),
+    // Acquisition parameter
+    .ChipFullEnable(CommandChipFullEnable),
+    .AcquisitionModeSelect(CommandAutoDaqAcquisitionModeSelect),
+    .TriggerModeSelect(CommandAutoDaqTriggerModeSelect),
+    .TriggerDelayTime(CommandAutoDaqTriggerDelayTime),
     .AcquisitionStartTime(CommandMicrorocStartAcquisitionTime),
     .EndHoldTime(EndHoldTime),
     // *** Pins
@@ -1233,26 +1267,27 @@ module FPGA_Top(
   assign TP[2] = EndReadout1_A;
   assign TP[3] = MicrorocConfigurationParameterLoadStart;
 
+  
   (* MARK_DEBUG="true" *)wire [15:0] UsbData_debug;
   (* MARK_DEBUG="true" *)wire UsbDataEnable_debug;
-  (* MARK_DEBUG="true" *)wire [15:0] Chain1Data_debug;
+  /*(* MARK_DEBUG="true" *)wire [15:0] Chain1Data_debug;
   (* MARK_DEBUG="true" *)wire Chain1DataEnable_debug;
   (* MARK_DEBUG="true" *)wire [15:0] Chain2Data_debug;
   (* MARK_DEBUG="true" *)wire Chain2DataEnable_debug;
   (* MARK_DEBUG="true" *)wire [15:0] Chain3Data_debug;
   (* MARK_DEBUG="true" *)wire Chain3DataEnable_debug;
   (* MARK_DEBUG="true" *)wire [15:0] Chain4Data_debug;
-  (* MARK_DEBUG="true" *)wire Chain4DataEnable_debug;
+  (* MARK_DEBUG="true" *)wire Chain4DataEnable_debug;*/
   assign UsbData_debug = ExternalFifoData;
   assign UsbDataEnable_debug = ExternalFifoDataReadEnable;
-  assign Chain1Data_debug = MicrorocChain1Data;
+  /*assign Chain1Data_debug = MicrorocChain1Data;
   assign Chain1DataEnable_debug = MicrorocChain1DataEnable;
   assign Chain2Data_debug = MicrorocChain2Data;
   assign Chain2DataEnable_debug = MicrorocChain2DataEnable;
   assign Chain3Data_debug = MicrorocChain3Data;
   assign Chain3DataEnable_debug = MicrorocChain3DataEnable;
   assign Chain4Data_debug = MicrorocChain4Data;
-  assign Chain4DataEnable_debug = MicrorocChain4DataEnable;
+  assign Chain4DataEnable_debug = MicrorocChain4DataEnable;*/
   (* MARK_DEBUG="true" *)wire UsbStartStop_Debug;
   assign UsbStartStop_Debug = UsbStartStop;
   (* MARK_DEBUG="true" *)wire MicrorocConfigurationParameterLoadStart_Debug;
@@ -1263,8 +1298,8 @@ module FPGA_Top(
   assign MicrorocConfigurationParameterLoadDone_Debug = MicrorocConfigurationParameterLoadDone;
   (* MARK_DEBUG="true" *)wire [3:0] CommandModeSelect_Debug;
   assign CommandModeSelect_Debug = CommandModeSelect;
-  (* MARK_DEBUG="true" *)wire [15:0] OutTestData_Debug;
-  assign OutTestData_Debug = OutTestData;
+  //(* MARK_DEBUG="true" *)wire [15:0] OutTestData_Debug;
+  //assign OutTestData_Debug = OutTestData;
   (* MARK_DEBUG="true" *)wire OutTestDataEnable_Debug;
   assign OutTestDataEnable_Debug = OutTestDataEnable;
   (* MARK_DEBUG="true" *)wire ExternalFifoFull_Debug;
