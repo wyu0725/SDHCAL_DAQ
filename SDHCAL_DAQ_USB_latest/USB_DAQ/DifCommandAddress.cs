@@ -58,6 +58,10 @@ namespace USB_DAQ
         public const string AsicNumberSetAddress = "A3E0";
         public const string SCurveTestAsicSelectAddress = "A3F0";
         public const string ResetTimeStampAddress = "A300";
+
+        public const string AsicChainSelectSetAddress = "B0A0";
+        public const string LightLedAddress = "B000";
+
         public const string Dac0Vth3to0Address = "C000";
         public const string Dac0Vth7to4Address = "C010";
         public const string Dac0Vth9to8Address = "C020";
@@ -67,7 +71,9 @@ namespace USB_DAQ
         public const string Dac2Vth3to0Address = "C060";
         public const string Dac2Vth7to4Address = "C070";
         public const string Dac2Vth9to8Address = "C080";
+
         public const string ParameterLoadStartAddress = "D0A0";
+
         public const string RunningModeSelectAddress = "E0A0";
         public const string SweepDacSelectAddress = "E0B0";
         public const string SweepDacStartValue3to0Address = "E0C0";
@@ -116,10 +122,7 @@ namespace USB_DAQ
         public const string EndHoldTimeSet7to4Address = "E260";
         public const string EndHoldTimeSet11to8Address = "E270";
         public const string EndHoldTimeSet15to12Address = "E280";
-        public const string AsicChainSelectSetAddress = "B0A0";
-        public const string LightLedAddress = "B000";
-        public const string AcquisitionStartStopAddress = "F0F0";
-        public const string ResetDataFifoAddress = "F1A0";
+        
         public const string DaqSelectAddress = "E290";
         public const string MicrorocStartAcquisitionTime3to0Address = "E3A0";
         public const string MicrorocStartAcquisitionTime7to4Address = "E3B0";
@@ -127,6 +130,22 @@ namespace USB_DAQ
         public const string MicrorocStartAcquisitionTime15to12Address = "E3D0";
         public const string TestSignalColumnSelectAdress = "E3E0";
         public const string TestSignalRowSelectAdress = "E3F0";
+        public const string TriggerSuppressWidth3to0Address = "E300";
+        public const string TriggerSuppressWidth7to4Address = "E31B";
+        public const string TriggerSuppressWidth11to8Address = "E321";
+        public const string TriggerSuppressWidth15to12Address = "E337";
+        public const string TriggerSuppressWidth19to16Address = "E34B";
+        public const string ChipFullEnableAddress = "E351";
+        public const string AutoDaqAcquisitionModeSelectAddress = "E360";
+        public const string AutoDaqTriggerModeSelectAddress = "E370";
+        public const string AutoDaqTriggerDelayTime3to0Address = "E380";
+        public const string AutoDaqTriggerDelayTime7to4Address = "E390";
+        public const string AutoDaqTriggerDelayTime11to8Address = "E4A0";
+        public const string AutoDaqTriggerDelayTime15to12Address = "E4B0";
+        public const string SCurveTestInnerClockEnableAddress = "E4C0";
+
+        public const string AcquisitionStartStopAddress = "F0F0";
+        public const string ResetDataFifoAddress = "F1A0";
         public const string ResetSCurveTestAdress = "F1B0";
 
     }

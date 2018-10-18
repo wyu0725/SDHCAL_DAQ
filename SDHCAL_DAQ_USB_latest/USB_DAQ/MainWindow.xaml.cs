@@ -4877,6 +4877,13 @@ namespace USB_DAQ
                 {
                     continue;
                 }
+                #region Set PowerPulsing parameter
+                bResult = SetPowerPulsingParameter(cbxPreAmpPPNewDif.SelectedIndex, cbxHighGainShaperPPNewDif.SelectedIndex, cbxLowGainShaperPPNewDif.SelectedIndex, cbxWidlarPPNewDif.SelectedIndex, cbxDac4BitPPNewDif.SelectedIndex, cbxOTAqPPNewDif.SelectedIndex, cbxDiscriPPNewDif.SelectedIndex, cbxVbgPPNewDif.SelectedIndex, cbxDac10BitPPNewDif.SelectedIndex, cbxLvdsPPNewDif.SelectedIndex);
+                if(!bResult)
+                {
+                    return;
+                }
+                #endregion
                 #region Select ASIC chain
                 bResult = SelectAsicChain(MicrorocAsicChain[i]);
                 if(!bResult)
@@ -5386,6 +5393,41 @@ namespace USB_DAQ
             }
         }
 
+        private bool SetPowerPulsingParameter(int PreAmp, int HgShaper, int LgShaper, int Widlar, int AlignDac, int Otaq, int Discriminator, int Vbg, int ThresholdDac, int Lvds)
+        {
+            int PowerPulsingValue = Lvds + (ThresholdDac << 1) + (Vbg << 2) + (Discriminator << 3) + (Otaq << 4) + (AlignDac << 5) + (Widlar << 6) + (LgShaper << 7) + (HgShaper << 8) + (PreAmp << 9);
+            bool bResult = MicrorocAsic.SlowControlParameterPowerPulsingEnable(PowerPulsingValue, MyUsbDevice1);
+            if(bResult)
+            {
+                string report = string.Format("Power On:\nPreAmp:{0}\n", PreAmp == 1 ? "Enable" : "Disenable");
+                txtReport.AppendText(report);
+                report = string.Format("  HG Shaper:{0}\n", HgShaper == 1 ? "Enable" : "Disenable");
+                txtReport.AppendText(report);
+                report = string.Format("  LG Shaper:{0}\n", LgShaper == 1 ? "Enable" : "Disenable");
+                txtReport.AppendText(report);
+                report = string.Format("  Wildar:{0}\n", Widlar == 1 ? "Enable" : "Disenable");
+                txtReport.AppendText(report);
+                report = string.Format("  4-bit DAC {0}\n", AlignDac == 1 ? "Enable" : "Disenable");
+                txtReport.AppendText(report);
+                report = string.Format("  OTAq:{0}\n", Otaq == 1 ? "Enable" : "Disenable");
+                txtReport.AppendText(report);
+                report = string.Format("  Discriminator:{0}\n", Discriminator == 1 ? "Enable" : "Disenable");
+                txtReport.AppendText(report);
+                report = string.Format("  Vbg:{0}\n", Vbg == 1 ? "Enable" : "Disenable");
+                txtReport.AppendText(report);
+                report = string.Format("  10-bit DAC:{0}\n", ThresholdDac == 1 ? "Enable" : "Disenable");
+                txtReport.AppendText(report);
+                report = string.Format("  LVDS:{0}\n", Lvds == 1 ? "Enable" : "Disenable");
+                txtReport.AppendText(report);
+                return true;
+            }
+            else
+            {
+                ShowUsbError("Set Power Pulsing SlowControl parameter");
+                return false;
+            }
+        }
+
         private void ShowIllegalInput(string SetItem)
         {
             string ErrorMessage = string.Format("Illegal Input Value. {0}", SetItem);
@@ -5644,10 +5686,7 @@ namespace USB_DAQ
 
         private void rdbAutoDaqNewDif_Checked(object sender, RoutedEventArgs e)
         {
-            
-
             bool bResult = false;
-            
             bResult = SelectSlowControl();
             if(!bResult)
             {
@@ -5742,6 +5781,9 @@ namespace USB_DAQ
                 tbxAcquisitionHoldTimeNewDif.IsEnabled = false;
                 txtReport.AppendText("Select auto DAQ mode\n");
                 btnNewDifAcquisitionStartNewDif.IsEnabled = true;
+                cbxChipFullNewDif.IsEnabled = true;
+                cbxAutoDaqAcquisitionNewDif.IsEnabled = true;
+                cbxTriggerEnableNewDif.IsEnabled = true;
             }
             else
             {
@@ -5874,6 +5916,9 @@ namespace USB_DAQ
                 txtReport.AppendText("Select slave DAQ\n");
                 tbxAcquisitionHoldTimeNewDif.IsEnabled = true;
                 btnNewDifAcquisitionStartNewDif.IsEnabled = true;
+                cbxChipFullNewDif.IsEnabled = false;
+                cbxAutoDaqAcquisitionNewDif.IsEnabled = false;
+                cbxTriggerEnableNewDif.IsEnabled = false;
             }
             else
             {
@@ -5919,6 +5964,27 @@ namespace USB_DAQ
                 }
                 string report = string.Format("Set Start Acquisition Time{0}\n", tbxAcquisitionDataNumberNewDif.Text);
                 txtReport.AppendText(report);
+                #endregion
+                #region AutoDaq parameter
+                if(StateIndicator.DaqModeSelect == StateIndicator.DaqMode.AutoDaq)
+                {
+                    if (!SetChipFullEnable(cbxChipFullNewDif.SelectedIndex, MyUsbDevice1))
+                    {
+                        return;
+                    }
+                    if (!SelectAutoDaqMode(cbxAutoDaqAcquisitionNewDif.SelectedIndex, MyUsbDevice1))
+                    {
+                        return;
+                    }
+                    if (!SelectAutoDaqTriggerMode(cbxTriggerEnableNewDif.SelectedIndex, MyUsbDevice1))
+                    {
+                        return;
+                    }
+                    if (!SetAutoDaqTriggerDelayTime(tbxAutoDaqTriggerDelayTimeNewDif.Text, MyUsbDevice1))
+                    {
+                        return;
+                    }
+                }
                 #endregion
                 #region Reset
                 bResult = ClearUsbFifo();
@@ -6057,6 +6123,86 @@ namespace USB_DAQ
             else
             {
                 ShowUsbError("Microroc Reset");
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 1:Continue Mode, 0: PP Mode
+        /// </summary>
+        /// <param name="DaqMode"></param>
+        /// <param name="usbInterface"></param>
+        /// <returns></returns>
+        private bool SelectAutoDaqMode(int DaqMode, MyCyUsb usbInterface)
+        {
+            bool bResult = MicrorocAsic.AutoDaqAcquisitionModeSelect(DaqMode, usbInterface);
+            if (bResult)
+            {
+                string report = string.Format("Set {0} mode\n", DaqMode == 1 ? "PowerPulsing" : "Continue");
+                txtReport.AppendText(report);
+                return true;
+            }
+            else
+            {
+                ShowUsbError("Set AutoDAQ Acq mode");
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 0: TriggerMode, 1: Continue Mode
+        /// </summary>
+        /// <param name="TriggerMode"></param>
+        /// <param name="usbInterface"></param>
+        /// <returns></returns>
+        private bool SelectAutoDaqTriggerMode(int TriggerMode, MyCyUsb usbInterface)
+        {
+            if (MicrorocAsic.AutoDaqTriggerModeSelect(TriggerMode, usbInterface)) 
+            {
+                string report = string.Format("{0} trigger mode\n", TriggerMode == 1 ? "Disable" : "Enable");
+                txtReport.AppendText(report);
+                return true;
+            }
+            else
+            {
+                ShowUsbError("Set trigger mode");
+                return false;
+            }
+        }
+        private bool SetAutoDaqTriggerDelayTime(string DelayTime, MyCyUsb usbInterface)
+        {
+            bool IllegalInput;
+            bool bResult = MicrorocAsic.AutoDaqTriggerDelayTimeSet(DelayTime, usbInterface, out IllegalInput);
+            if(IllegalInput)
+            {
+                ShowIllegalInput("The DelayTime should be 50-1638400ns");
+                return false;
+            }
+            if(bResult)
+            {
+                string report = string.Format("Set Auto DAQ Delay time: {0}ns\n", DelayTime);
+                txtReport.AppendText(report);
+                return true;
+            }
+            else
+            {
+                ShowUsbError("Set Auto DAQ delay time");
+                return false;
+            }
+        }
+
+        private bool SetChipFullEnable(int Enable, MyCyUsb usbInterface)
+        {
+            bool bResult = MicrorocAsic.AutoDaqChipEnableSet(Enable, usbInterface);
+            if(bResult)
+            {
+                string report = string.Format("Set ChipFull {0}\n", Enable == 1 ? "Enable" : "Disable");
+                txtReport.AppendText(report);
+                return true;
+            }
+            else
+            {
+                ShowUsbError("Set ChipFull enable");
                 return false;
             }
         }
@@ -6385,7 +6531,13 @@ namespace USB_DAQ
             }
             #endregion
             #endregion
-            
+            #region Clock select
+            if (!SCurveTestSynchroniseClockSelect(cbxSCurveTestClockSelectNewDif.SelectedIndex, MyUsbDevice1))
+            {
+                return false;
+            }
+            #endregion
+
             return true;
         }
 
@@ -6807,6 +6959,27 @@ namespace USB_DAQ
             else
             {
                 ShowUsbError("Reset SCurve");
+                return false;
+            }
+        }
+        /// <summary>
+        /// 0: Internal Clock, 1: External Clock
+        /// </summary>
+        /// <param name="SyncClock"></param>
+        /// <param name="usbInterface"></param>
+        /// <returns></returns>
+        private bool SCurveTestSynchroniseClockSelect(int SyncClock, MyCyUsb usbInterface)
+        {
+            bool bResult = MicrorocAsic.SCurveTestSynchroniseClockSelect(SyncClock, usbInterface);
+            if(bResult)
+            {
+                string report = string.Format("Select {0} Clock\n", SyncClock == 1 ? "Internal" : "External");
+                txtReport.AppendText(report);
+                return true;
+            }
+            else
+            {
+                ShowUsbError("Select SCurve Clock");
                 return false;
             }
         }

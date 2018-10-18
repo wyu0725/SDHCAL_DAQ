@@ -292,7 +292,13 @@ namespace USB_DAQ
             }
         }
 
-        public bool SlowControlParameterPowerPulsingEnable(int PowerPulsingEnable, MyCyUsb usbInterface)
+        /// <summary>
+        /// All Asic should be set with the same value
+        /// </summary>
+        /// <param name="PowerPulsingEnable"></param>
+        /// <param name="usbInterface"></param>
+        /// <returns></returns>
+        public static bool SlowControlParameterPowerPulsingEnable(int PowerPulsingEnable, MyCyUsb usbInterface)
         {
             int LvdsReceiverPPEnableValue = (PowerPulsingEnable & 1) + HexToInt(DifCommandAddress.LvdsReceiverPPEnableAddress);
             int DacPPEnableValue = (PowerPulsingEnable & 2) + HexToInt(DifCommandAddress.DacPPEnableAddress);
@@ -505,6 +511,8 @@ namespace USB_DAQ
             int EndReadoutParameterValue = EndReadoutParameter + HexToInt(DifCommandAddress.EndReadoutParameterAddress);
             return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(EndReadoutParameterValue));
         }
+
+
 
         public static bool SCurveTestAsicSelect(int SCurveTestAsic, MyCyUsb usbInterface)
         {
@@ -989,12 +997,67 @@ namespace USB_DAQ
         public static bool TestSignalRowSelect(int TestRow, MyCyUsb usbInterface)
         {
             int TestRowValue = TestRow + HexToInt(DifCommandAddress.TestSignalRowSelectAdress);
-            return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(HexToInt(DifCommandAddress.TestSignalRowSelectAdress)));
+            return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(TestRowValue));
         }
 
         public static bool SCurveTestReset(MyCyUsb usbInterface)
         {
             return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(HexToInt(DifCommandAddress.ResetSCurveTestAdress) + 1));
+        }
+
+        public static bool AutoDaqChipEnableSet(int Enable, MyCyUsb usbInterface)
+        {
+            int EnableValue = Enable + HexToInt(DifCommandAddress.ChipFullEnableAddress);
+            return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(EnableValue));
+        }
+
+        public static bool AutoDaqAcquisitionModeSelect(int AcquisitionMode, MyCyUsb usbInterface)
+        {
+            int AcquisitionModeValue = AcquisitionMode + HexToInt(DifCommandAddress.AutoDaqAcquisitionModeSelectAddress);
+            return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(AcquisitionModeValue));
+        }
+
+        public static bool AutoDaqTriggerModeSelect(int TriggerMode, MyCyUsb usbInterface)
+        {
+            int TriggerModeValue = TriggerMode + HexToInt(DifCommandAddress.AutoDaqTriggerModeSelectAddress);
+            return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(TriggerModeValue));
+        }
+
+        public static bool AutoDaqTriggerDelayTimeSet(string TriggerDelayTime, MyCyUsb usbInterface, out bool IllegealInput)
+        {
+            if (CheckStringLegal.CheckIntegerLegal(TriggerDelayTime) && (int.Parse(TriggerDelayTime) < 1638400) && (int.Parse(TriggerDelayTime) >= 50))
+            {
+                IllegealInput = false;
+                int TriggerDelayValue = (int.Parse(TriggerDelayTime) - 50) / 25;
+                int TriggerDelayValue1 = (TriggerDelayValue & 15) + HexToInt(DifCommandAddress.AutoDaqTriggerDelayTime3to0Address);
+                int TriggerDelayValue2 = ((TriggerDelayValue >> 4) & 15) + HexToInt(DifCommandAddress.AutoDaqTriggerDelayTime7to4Address);
+                int TriggerDelayValue3 = ((TriggerDelayValue >> 8) & 15) + HexToInt(DifCommandAddress.AutoDaqTriggerDelayTime11to8Address);
+                int TriggerDelayValue4 = ((TriggerDelayValue >> 12) & 15) + HexToInt(DifCommandAddress.AutoDaqTriggerDelayTime15to12Address);
+                if (!usbInterface.CommandSend(usbInterface.ConstCommandByteArray(TriggerDelayValue1)))
+                {
+                    return false;
+                }
+                if (!usbInterface.CommandSend(usbInterface.ConstCommandByteArray(TriggerDelayValue2)))
+                {
+                    return false;
+                }
+                if (!usbInterface.CommandSend(usbInterface.ConstCommandByteArray(TriggerDelayValue3)))
+                {
+                    return false;
+                }
+                return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(TriggerDelayValue4));
+            }
+            else
+            {
+                IllegealInput = true;
+                return false;
+            }
+        }
+
+        public static bool SCurveTestSynchroniseClockSelect(int SyncClockSelect, MyCyUsb usbInterface)
+        {
+            int SyncClockSelectValue = SyncClockSelect + HexToInt(DifCommandAddress.SCurveTestInnerClockEnableAddress);
+            return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(SyncClockSelectValue));
         }
 
         public bool SetChannelCalibration(MyCyUsb usbInterface, params byte[] CalibrationData)
