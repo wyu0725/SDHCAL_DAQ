@@ -333,7 +333,7 @@ namespace USB_DAQ
             #endregion
             #region Discriminator
             bResult = usbInterface.CommandSend(usbInterface.ConstCommandByteArray(DiscriminatorPPEnableValue));
-            if (bResult)
+            if (!bResult)
             {
                 return false;
             }
