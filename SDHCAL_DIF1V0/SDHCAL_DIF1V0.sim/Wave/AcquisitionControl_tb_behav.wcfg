@@ -3,229 +3,113 @@
    <wave_state>
    </wave_state>
    <db_ref_list>
-      <db_ref path="SCurve_Test_Top_tb_behav.wdb" id="1">
+      <db_ref path="ChannelMaskSim_tb_behav.wdb" id="1">
          <top_modules>
-            <top_module name="SCurve_Test_Top_tb" />
+            <top_module name="ChannelMaskSim_tb" />
             <top_module name="glbl" />
          </top_modules>
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="0fs"></ZoomStartTime>
-      <ZoomEndTime time="7300000000001fs"></ZoomEndTime>
-      <Cursor1Time time="234000000000fs"></Cursor1Time>
+      <ZoomStartTime time="1558000000fs"></ZoomStartTime>
+      <ZoomEndTime time="2923000001fs"></ZoomEndTime>
+      <Cursor1Time time="2785000000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="187"></NameColumnWidth>
+      <NameColumnWidth column_width="171"></NameColumnWidth>
       <ValueColumnWidth column_width="58"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="52" />
-   <wvobject fp_name="/SCurve_Test_Top_tb/uut/Clk" type="logic">
+   <WVObjectSize size="23" />
+   <wvobject fp_name="/ChannelMaskSim_tb/uut/Clk" type="logic">
       <obj_property name="ElementShortName">Clk</obj_property>
       <obj_property name="ObjectShortName">Clk</obj_property>
    </wvobject>
-   <wvobject fp_name="/SCurve_Test_Top_tb/uut/Clk_5M" type="logic">
-      <obj_property name="ElementShortName">Clk_5M</obj_property>
-      <obj_property name="ObjectShortName">Clk_5M</obj_property>
+   <wvobject fp_name="/ChannelMaskSim_tb/uut/IFCLK" type="logic">
+      <obj_property name="ElementShortName">IFCLK</obj_property>
+      <obj_property name="ObjectShortName">IFCLK</obj_property>
    </wvobject>
-   <wvobject fp_name="/SCurve_Test_Top_tb/uut/reset_n" type="logic">
+   <wvobject fp_name="/ChannelMaskSim_tb/uut/reset_n" type="logic">
       <obj_property name="ElementShortName">reset_n</obj_property>
       <obj_property name="ObjectShortName">reset_n</obj_property>
    </wvobject>
-   <wvobject fp_name="/SCurve_Test_Top_tb/uut/TriggerEfficiencyOrCountEfficiency" type="logic">
-      <obj_property name="ElementShortName">TriggerEfficiencyOrCountEfficiency</obj_property>
-      <obj_property name="ObjectShortName">TriggerEfficiencyOrCountEfficiency</obj_property>
+   <wvobject fp_name="/ChannelMaskSim_tb/uut/CommandWordEn" type="logic">
+      <obj_property name="ElementShortName">CommandWordEn</obj_property>
+      <obj_property name="ObjectShortName">CommandWordEn</obj_property>
    </wvobject>
-   <wvobject fp_name="/SCurve_Test_Top_tb/uut/Test_Start" type="logic">
-      <obj_property name="ElementShortName">Test_Start</obj_property>
-      <obj_property name="ObjectShortName">Test_Start</obj_property>
+   <wvobject fp_name="/ChannelMaskSim_tb/uut/CommandWord" type="array">
+      <obj_property name="ElementShortName">CommandWord[15:0]</obj_property>
+      <obj_property name="ObjectShortName">CommandWord[15:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/SCurve_Test_Top_tb/uut/SingleTestChannel" type="array">
-      <obj_property name="ElementShortName">SingleTestChannel[5:0]</obj_property>
-      <obj_property name="ObjectShortName">SingleTestChannel[5:0]</obj_property>
+   <wvobject fp_name="/ChannelMaskSim_tb/uut/CommandFifoReadEn" type="logic">
+      <obj_property name="ElementShortName">CommandFifoReadEn</obj_property>
+      <obj_property name="ObjectShortName">CommandFifoReadEn</obj_property>
    </wvobject>
-   <wvobject fp_name="/SCurve_Test_Top_tb/uut/Single_or_64Chn" type="logic">
-      <obj_property name="ElementShortName">Single_or_64Chn</obj_property>
-      <obj_property name="ObjectShortName">Single_or_64Chn</obj_property>
+   <wvobject fp_name="/ChannelMaskSim_tb/uut/CommandFifoEmpty" type="logic">
+      <obj_property name="ElementShortName">CommandFifoEmpty</obj_property>
+      <obj_property name="ObjectShortName">CommandFifoEmpty</obj_property>
    </wvobject>
-   <wvobject fp_name="/SCurve_Test_Top_tb/uut/Ctest_or_Input" type="logic">
-      <obj_property name="ElementShortName">Ctest_or_Input</obj_property>
-      <obj_property name="ObjectShortName">Ctest_or_Input</obj_property>
+   <wvobject fp_name="/ChannelMaskSim_tb/uut/FifoFull" type="logic">
+      <obj_property name="ElementShortName">FifoFull</obj_property>
+      <obj_property name="ObjectShortName">FifoFull</obj_property>
    </wvobject>
-   <wvobject fp_name="/SCurve_Test_Top_tb/uut/CPT_MAX" type="array">
-      <obj_property name="ElementShortName">CPT_MAX[15:0]</obj_property>
-      <obj_property name="ObjectShortName">CPT_MAX[15:0]</obj_property>
+   <wvobject fp_name="/ChannelMaskSim_tb/uut/FifoWriteResetBusy" type="logic">
+      <obj_property name="ElementShortName">FifoWriteResetBusy</obj_property>
+      <obj_property name="ObjectShortName">FifoWriteResetBusy</obj_property>
    </wvobject>
-   <wvobject fp_name="/SCurve_Test_Top_tb/uut/Counter_MAX" type="array">
-      <obj_property name="ElementShortName">Counter_MAX[15:0]</obj_property>
-      <obj_property name="ObjectShortName">Counter_MAX[15:0]</obj_property>
+   <wvobject fp_name="/ChannelMaskSim_tb/uut/FifoReadResetBusy" type="logic">
+      <obj_property name="ElementShortName">FifoReadResetBusy</obj_property>
+      <obj_property name="ObjectShortName">FifoReadResetBusy</obj_property>
    </wvobject>
-   <wvobject fp_name="/SCurve_Test_Top_tb/uut/StartDac" type="array">
-      <obj_property name="ElementShortName">StartDac[9:0]</obj_property>
-      <obj_property name="ObjectShortName">StartDac[9:0]</obj_property>
+   <wvobject fp_name="/ChannelMaskSim_tb/uut/FifoReady" type="logic">
+      <obj_property name="ElementShortName">FifoReady</obj_property>
+      <obj_property name="ObjectShortName">FifoReady</obj_property>
    </wvobject>
-   <wvobject fp_name="/SCurve_Test_Top_tb/uut/EndDac" type="array">
-      <obj_property name="ElementShortName">EndDac[9:0]</obj_property>
-      <obj_property name="ObjectShortName">EndDac[9:0]</obj_property>
+   <wvobject fp_name="/ChannelMaskSim_tb/uut/State" type="logic">
+      <obj_property name="ElementShortName">State</obj_property>
+      <obj_property name="ObjectShortName">State</obj_property>
    </wvobject>
-   <wvobject fp_name="/SCurve_Test_Top_tb/uut/DacStep" type="array">
-      <obj_property name="ElementShortName">DacStep[9:0]</obj_property>
-      <obj_property name="ObjectShortName">DacStep[9:0]</obj_property>
+   <wvobject fp_name="/ChannelMaskSim_tb/uut/CommandFifoReadEnDelayed" type="logic">
+      <obj_property name="ElementShortName">CommandFifoReadEnDelayed</obj_property>
+      <obj_property name="ObjectShortName">CommandFifoReadEnDelayed</obj_property>
    </wvobject>
-   <wvobject fp_name="/SCurve_Test_Top_tb/uut/TriggerDelay" type="array">
-      <obj_property name="ElementShortName">TriggerDelay[3:0]</obj_property>
-      <obj_property name="ObjectShortName">TriggerDelay[3:0]</obj_property>
+   <wvobject fp_name="/ChannelMaskSim_tb/uut/COMMAND_WORD" type="array">
+      <obj_property name="ElementShortName">COMMAND_WORD[15:0]</obj_property>
+      <obj_property name="ObjectShortName">COMMAND_WORD[15:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/SCurve_Test_Top_tb/uut/AsicNumber" type="array">
-      <obj_property name="ElementShortName">AsicNumber[2:0]</obj_property>
-      <obj_property name="ObjectShortName">AsicNumber[2:0]</obj_property>
+   <wvobject fp_name="/ChannelMaskSim_tb/uut/DiscriMask" type="array">
+      <obj_property name="ElementShortName">DiscriMask[2:0]</obj_property>
+      <obj_property name="ObjectShortName">DiscriMask[2:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/SCurve_Test_Top_tb/uut/TestAsicNumber" type="array">
-      <obj_property name="ElementShortName">TestAsicNumber[2:0]</obj_property>
-      <obj_property name="ObjectShortName">TestAsicNumber[2:0]</obj_property>
+   <wvobject fp_name="/ChannelMaskSim_tb/uut/MaskChannel" type="array">
+      <obj_property name="ElementShortName">MaskChannel[5:0]</obj_property>
+      <obj_property name="ObjectShortName">MaskChannel[5:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/SCurve_Test_Top_tb/uut/UnmaskAllChannel" type="logic">
-      <obj_property name="ElementShortName">UnmaskAllChannel</obj_property>
-      <obj_property name="ObjectShortName">UnmaskAllChannel</obj_property>
+   <wvobject fp_name="/ChannelMaskSim_tb/uut/MaskShift" type="array">
+      <obj_property name="ElementShortName">MaskShift[7:0]</obj_property>
+      <obj_property name="ObjectShortName">MaskShift[7:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/SCurve_Test_Top_tb/uut/InnerClockEnable" type="logic">
-      <obj_property name="ElementShortName">InnerClockEnable</obj_property>
-      <obj_property name="ObjectShortName">InnerClockEnable</obj_property>
+   <wvobject fp_name="/ChannelMaskSim_tb/uut/MaskOrUnmask" type="array">
+      <obj_property name="ElementShortName">MaskOrUnmask[2:0]</obj_property>
+      <obj_property name="ObjectShortName">MaskOrUnmask[2:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/SCurve_Test_Top_tb/uut/SCurveTestDataoutEnable" type="logic">
-      <obj_property name="ElementShortName">SCurveTestDataoutEnable</obj_property>
-      <obj_property name="ObjectShortName">SCurveTestDataoutEnable</obj_property>
+   <wvobject fp_name="/ChannelMaskSim_tb/uut/SingleChannelMask" type="array">
+      <obj_property name="ElementShortName">SingleChannelMask[191:0]</obj_property>
+      <obj_property name="ObjectShortName">SingleChannelMask[191:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/SCurve_Test_Top_tb/uut/SCurveTestDataout" type="array">
-      <obj_property name="ElementShortName">SCurveTestDataout[15:0]</obj_property>
-      <obj_property name="ObjectShortName">SCurveTestDataout[15:0]</obj_property>
+   <wvobject fp_name="/ChannelMaskSim_tb/uut/MicrorocChannelDiscriminatorMask" type="array">
+      <obj_property name="ElementShortName">MicrorocChannelDiscriminatorMask[191:0]</obj_property>
+      <obj_property name="ObjectShortName">MicrorocChannelDiscriminatorMask[191:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/SCurve_Test_Top_tb/uut/ExternalDataFifoFull" type="logic">
-      <obj_property name="ElementShortName">ExternalDataFifoFull</obj_property>
-      <obj_property name="ObjectShortName">ExternalDataFifoFull</obj_property>
+   <wvobject fp_name="/ChannelMaskSim_tb/uut/MaskState" type="array">
+      <obj_property name="ElementShortName">MaskState[2:0]</obj_property>
+      <obj_property name="ObjectShortName">MaskState[2:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/SCurve_Test_Top_tb/uut/MicrorocConfigurationDone" type="logic">
-      <obj_property name="ElementShortName">MicrorocConfigurationDone</obj_property>
-      <obj_property name="ObjectShortName">MicrorocConfigurationDone</obj_property>
+   <wvobject fp_name="/ChannelMaskSim_tb/uut/Idle" type="logic">
+      <obj_property name="ElementShortName">Idle</obj_property>
+      <obj_property name="ObjectShortName">Idle</obj_property>
    </wvobject>
-   <wvobject fp_name="/SCurve_Test_Top_tb/uut/Microroc_CTest_Chn_Out" type="array">
-      <obj_property name="ElementShortName">Microroc_CTest_Chn_Out[63:0]</obj_property>
-      <obj_property name="ObjectShortName">Microroc_CTest_Chn_Out[63:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/SCurve_Test_Top_tb/uut/Microroc_10bit_DAC_Out" type="array">
-      <obj_property name="ElementShortName">Microroc_10bit_DAC_Out[9:0]</obj_property>
-      <obj_property name="ObjectShortName">Microroc_10bit_DAC_Out[9:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/SCurve_Test_Top_tb/uut/Microroc_Discriminator_Mask" type="array">
-      <obj_property name="ElementShortName">Microroc_Discriminator_Mask[191:0]</obj_property>
-      <obj_property name="ObjectShortName">Microroc_Discriminator_Mask[191:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/SCurve_Test_Top_tb/uut/SlowControlParameterLoadStart" type="logic">
-      <obj_property name="ElementShortName">SlowControlParameterLoadStart</obj_property>
-      <obj_property name="ObjectShortName">SlowControlParameterLoadStart</obj_property>
-   </wvobject>
-   <wvobject fp_name="/SCurve_Test_Top_tb/uut/Force_Ext_RAZ" type="logic">
-      <obj_property name="ElementShortName">Force_Ext_RAZ</obj_property>
-      <obj_property name="ObjectShortName">Force_Ext_RAZ</obj_property>
-   </wvobject>
-   <wvobject fp_name="/SCurve_Test_Top_tb/uut/TriggerSuppressWidth" type="array">
-      <obj_property name="ElementShortName">TriggerSuppressWidth[19:0]</obj_property>
-      <obj_property name="ObjectShortName">TriggerSuppressWidth[19:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/SCurve_Test_Top_tb/uut/CLK_EXT" type="logic">
-      <obj_property name="ElementShortName">CLK_EXT</obj_property>
-      <obj_property name="ObjectShortName">CLK_EXT</obj_property>
-   </wvobject>
-   <wvobject fp_name="/SCurve_Test_Top_tb/uut/out_trigger0b" type="logic">
-      <obj_property name="ElementShortName">out_trigger0b</obj_property>
-      <obj_property name="ObjectShortName">out_trigger0b</obj_property>
-   </wvobject>
-   <wvobject fp_name="/SCurve_Test_Top_tb/uut/out_trigger1b" type="logic">
-      <obj_property name="ElementShortName">out_trigger1b</obj_property>
-      <obj_property name="ObjectShortName">out_trigger1b</obj_property>
-   </wvobject>
-   <wvobject fp_name="/SCurve_Test_Top_tb/uut/out_trigger2b" type="logic">
-      <obj_property name="ElementShortName">out_trigger2b</obj_property>
-      <obj_property name="ObjectShortName">out_trigger2b</obj_property>
-   </wvobject>
-   <wvobject fp_name="/SCurve_Test_Top_tb/uut/SCurve_Test_Done" type="logic">
-      <obj_property name="ElementShortName">SCurve_Test_Done</obj_property>
-      <obj_property name="ObjectShortName">SCurve_Test_Done</obj_property>
-   </wvobject>
-   <wvobject fp_name="/SCurve_Test_Top_tb/uut/Data_Transmit_Done" type="logic">
-      <obj_property name="ElementShortName">Data_Transmit_Done</obj_property>
-      <obj_property name="ObjectShortName">Data_Transmit_Done</obj_property>
-   </wvobject>
-   <wvobject fp_name="/SCurve_Test_Top_tb/uut/Test_Start_reg1" type="logic">
-      <obj_property name="ElementShortName">Test_Start_reg1</obj_property>
-      <obj_property name="ObjectShortName">Test_Start_reg1</obj_property>
-   </wvobject>
-   <wvobject fp_name="/SCurve_Test_Top_tb/uut/Test_Start_reg2" type="logic">
-      <obj_property name="ElementShortName">Test_Start_reg2</obj_property>
-      <obj_property name="ObjectShortName">Test_Start_reg2</obj_property>
-   </wvobject>
-   <wvobject fp_name="/SCurve_Test_Top_tb/uut/Test_Start_Pulse" type="logic">
-      <obj_property name="ElementShortName">Test_Start_Pulse</obj_property>
-      <obj_property name="ObjectShortName">Test_Start_Pulse</obj_property>
-   </wvobject>
-   <wvobject fp_name="/SCurve_Test_Top_tb/uut/Clock1K_Cnt" type="array">
-      <obj_property name="ElementShortName">Clock1K_Cnt[11:0]</obj_property>
-      <obj_property name="ObjectShortName">Clock1K_Cnt[11:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/SCurve_Test_Top_tb/uut/Clk_1K" type="logic">
-      <obj_property name="ElementShortName">Clk_1K</obj_property>
-      <obj_property name="ObjectShortName">Clk_1K</obj_property>
-   </wvobject>
-   <wvobject fp_name="/SCurve_Test_Top_tb/uut/InnerClockCount" type="array">
-      <obj_property name="ElementShortName">InnerClockCount[5:0]</obj_property>
-      <obj_property name="ObjectShortName">InnerClockCount[5:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/SCurve_Test_Top_tb/uut/InnerClk" type="logic">
-      <obj_property name="ElementShortName">InnerClk</obj_property>
-      <obj_property name="ObjectShortName">InnerClk</obj_property>
-   </wvobject>
-   <wvobject fp_name="/SCurve_Test_Top_tb/uut/CLK_EXT_Gen" type="logic">
-      <obj_property name="ElementShortName">CLK_EXT_Gen</obj_property>
-      <obj_property name="ObjectShortName">CLK_EXT_Gen</obj_property>
-   </wvobject>
-   <wvobject fp_name="/SCurve_Test_Top_tb/uut/CPT_MAX_Gen" type="array">
-      <obj_property name="ElementShortName">CPT_MAX_Gen[15:0]</obj_property>
-      <obj_property name="ObjectShortName">CPT_MAX_Gen[15:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/SCurve_Test_Top_tb/uut/TriggerModeClock" type="logic">
-      <obj_property name="ElementShortName">TriggerModeClock</obj_property>
-      <obj_property name="ObjectShortName">TriggerModeClock</obj_property>
-   </wvobject>
-   <wvobject fp_name="/SCurve_Test_Top_tb/uut/Single_Test_Start" type="logic">
-      <obj_property name="ElementShortName">Single_Test_Start</obj_property>
-      <obj_property name="ObjectShortName">Single_Test_Start</obj_property>
-   </wvobject>
-   <wvobject fp_name="/SCurve_Test_Top_tb/uut/Single_Test_Done" type="logic">
-      <obj_property name="ElementShortName">Single_Test_Done</obj_property>
-      <obj_property name="ObjectShortName">Single_Test_Done</obj_property>
-   </wvobject>
-   <wvobject fp_name="/SCurve_Test_Top_tb/uut/SCurve_Data_fifo_empty" type="logic">
-      <obj_property name="ElementShortName">SCurve_Data_fifo_empty</obj_property>
-      <obj_property name="ObjectShortName">SCurve_Data_fifo_empty</obj_property>
-   </wvobject>
-   <wvobject fp_name="/SCurve_Test_Top_tb/uut/SCurve_Data_fifo_din" type="array">
-      <obj_property name="ElementShortName">SCurve_Data_fifo_din[15:0]</obj_property>
-      <obj_property name="ObjectShortName">SCurve_Data_fifo_din[15:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/SCurve_Test_Top_tb/uut/SCurve_Data_fifo_rd_en" type="logic">
-      <obj_property name="ElementShortName">SCurve_Data_fifo_rd_en</obj_property>
-      <obj_property name="ObjectShortName">SCurve_Data_fifo_rd_en</obj_property>
-   </wvobject>
-   <wvobject fp_name="/SCurve_Test_Top_tb/uut/SCurve_Data" type="array">
-      <obj_property name="ElementShortName">SCurve_Data[15:0]</obj_property>
-      <obj_property name="ObjectShortName">SCurve_Data[15:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/SCurve_Test_Top_tb/uut/SCurve_Data_wr_en" type="logic">
-      <obj_property name="ElementShortName">SCurve_Data_wr_en</obj_property>
-      <obj_property name="ObjectShortName">SCurve_Data_wr_en</obj_property>
-   </wvobject>
-   <wvobject fp_name="/SCurve_Test_Top_tb/uut/fifo_full" type="logic">
-      <obj_property name="ElementShortName">fifo_full</obj_property>
-      <obj_property name="ObjectShortName">fifo_full</obj_property>
+   <wvobject fp_name="/ChannelMaskSim_tb/uut/READ" type="logic">
+      <obj_property name="ElementShortName">READ</obj_property>
+      <obj_property name="ObjectShortName">READ</obj_property>
    </wvobject>
 </wave_config>
