@@ -56,8 +56,24 @@ module ChannelMaskSim_tb(
     CommandWordEn = 1'b1;
     #24;
     CommandWordEn = 1'b0;
+    // Channel 1
+    CommandWord = 16'hA2A0;
+    #120;
+    CommandWordEn = 1'b1;
+    #24;
+    CommandWordEn = 1'b0;
+    CommandWord = 16'hA2B0;
+    #120;
+    CommandWordEn = 1'b1;
+    #24;
+    CommandWordEn = 1'b0;
+    CommandWord = 16'hA2D1;
+    #120;
+    CommandWordEn = 1'b1;
+    #24
+    CommandWordEn = 1'b0;
     // Channel 5
-    CommandWord = 16'hA2A5;
+    CommandWord = 16'hA2A4;
     #120;
     CommandWordEn = 1'b1;
     #24;
@@ -73,7 +89,7 @@ module ChannelMaskSim_tb(
     #24
     CommandWordEn = 1'b0;
     // Channel 21
-    CommandWord = 16'hA2A5;
+    CommandWord = 16'hA2A4;
     #120;
     CommandWordEn = 1'b1;
     #24;
@@ -89,7 +105,7 @@ module ChannelMaskSim_tb(
     #24
     CommandWordEn = 1'b0;
     // Channel 37
-    CommandWord = 16'hA2A5;
+    CommandWord = 16'hA2A4;
     #120;
     CommandWordEn = 1'b1;
     #24;
