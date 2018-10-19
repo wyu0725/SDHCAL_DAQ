@@ -4985,6 +4985,7 @@ namespace USB_DAQ
                                 MaskChannel.Add(MaskChannelTemp);
                                 MaskChannelTemp = MaskFile.ReadLine();
                             }
+                            MaskFile.Close();
                             string[] Channel = (string[])MaskChannel.ToArray(typeof(string));
                             bResult = SetChannelMask(cbxMaskSelectAsic[i, j].SelectedIndex, cbxMaskDiscriminatorAsic[i, j].SelectedIndex, j, MicrorocAsicChain[i], Channel);
                             if(!bResult)
@@ -5041,6 +5042,7 @@ namespace USB_DAQ
                         CalibrationData[m] = 0;
                     }
                 }
+                CalibrationFile.Close();
                 return SetCalibrationData(MicrorocAsicChain[ChainNumber], AsicNumbner, CalibrationData);
             }
             else
@@ -5282,27 +5284,45 @@ namespace USB_DAQ
             {
                 return false;
             }
-            bool IllegalInput;
-            foreach(string Channel in MaskChannel)
+            // Clear the mask parameter when set a new ASIC
+            bResult = MyMicroroc.MaskModeSet(2, MyUsbDevice1);
+            if (!bResult)
             {
-                bResult = MyMicroroc.MaskChannelSet(Channel, MyUsbDevice1, out IllegalInput);
-                if(IllegalInput)
-                {
-                    ShowIllegalInput("The Channel mask should be 0-63");
-                    return false;
-                }
-                if(!bResult)
-                {
-                    ShowUsbError("Mask Channel");
-                    return false;
-                }
+                return false;
+            }
+            bool IllegalInput;
+            if(MaskMode == 2 || MaskMode == 3)
+            {
                 bResult = MyMicroroc.MaskModeSet(MaskMode, MyUsbDevice1);
-                if(!bResult)
+                if (!bResult)
                 {
                     return false;
                 }
             }
-            string report = string.Format("Set ASIC[0][1] Mask Successful", MyMicroroc.ChainID + 1, AsicLocation + 1);
+            else
+            {
+                foreach (string Channel in MaskChannel)
+                {
+                    bResult = MyMicroroc.MaskChannelSet(Channel, MyUsbDevice1, out IllegalInput);
+                    if (IllegalInput)
+                    {
+                        ShowIllegalInput("The Channel mask should be 1-64");
+                        return false;
+                    }
+                    if (!bResult)
+                    {
+                        ShowUsbError("Mask Channel");
+                        return false;
+                    }
+                    bResult = MyMicroroc.MaskModeSet(MaskMode, MyUsbDevice1);
+                    if (!bResult)
+                    {
+                        return false;
+                    }
+                }
+            }
+            
+            string report = string.Format("Set ASIC{0}{1} Mask Successful", MyMicroroc.ChainID + 1, AsicLocation + 1);
             txtReport.AppendText(report);
             return true;
         }

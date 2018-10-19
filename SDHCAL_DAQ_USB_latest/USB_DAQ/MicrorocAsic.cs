@@ -172,7 +172,7 @@ namespace USB_DAQ
 
         public bool MaskChannelSet(string MaskChannel, MyCyUsb usbInterface, out bool IllegalInput)
         {
-            if (CheckStringLegal.CheckIntegerLegal(MaskChannel) && int.Parse(MaskChannel) < 64)
+            if (CheckStringLegal.CheckIntegerLegal(MaskChannel) && int.Parse(MaskChannel) <= 64)
             {
                 IllegalInput = false;
                 int MaskChannelValue = int.Parse(MaskChannel) - 1;
