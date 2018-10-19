@@ -6263,6 +6263,69 @@ namespace USB_DAQ
             btnStartAdcNewDif.IsEnabled = true;
         }
 
+        private void btnSelectAllMaskNewDif_Click(object sender, RoutedEventArgs e)
+        {
+            CheckBox[] cbCh = new CheckBox[64]
+                { cbCh1, cbCh2, cbCh3, cbCh4, cbCh5, cbCh6, cbCh7, cbCh8,
+                    cbCh9, cbCh10, cbCh11, cbCh12, cbCh13, cbCh14, cbCh15, cbCh16,
+                    cbCh17, cbCh18, cbCh19, cbCh20, cbCh21, cbCh22, cbCh23, cbCh24,
+                    cbCh25, cbCh26, cbCh27, cbCh28, cbCh29, cbCh30, cbCh31, cbCh32,
+                    cbCh33, cbCh34, cbCh35, cbCh36, cbCh37, cbCh38, cbCh39, cbCh40,
+                    cbCh41, cbCh42, cbCh43, cbCh44, cbCh45, cbCh46, cbCh47, cbCh48,
+                    cbCh49, cbCh50, cbCh51, cbCh52, cbCh53, cbCh54, cbCh55, cbCh56,
+                    cbCh57, cbCh58, cbCh59, cbCh60, cbCh61, cbCh62, cbCh63, cbCh64 };
+            foreach (CheckBox b in cbCh)
+            {
+                b.IsChecked = true;
+            }
+        }
+        private void btnClearAllMaskNewDif_Click(object sender, RoutedEventArgs e)
+        {
+            CheckBox[] cbCh = new CheckBox[64]
+                { cbCh1, cbCh2, cbCh3, cbCh4, cbCh5, cbCh6, cbCh7, cbCh8,
+                    cbCh9, cbCh10, cbCh11, cbCh12, cbCh13, cbCh14, cbCh15, cbCh16,
+                    cbCh17, cbCh18, cbCh19, cbCh20, cbCh21, cbCh22, cbCh23, cbCh24,
+                    cbCh25, cbCh26, cbCh27, cbCh28, cbCh29, cbCh30, cbCh31, cbCh32,
+                    cbCh33, cbCh34, cbCh35, cbCh36, cbCh37, cbCh38, cbCh39, cbCh40,
+                    cbCh41, cbCh42, cbCh43, cbCh44, cbCh45, cbCh46, cbCh47, cbCh48,
+                    cbCh49, cbCh50, cbCh51, cbCh52, cbCh53, cbCh54, cbCh55, cbCh56,
+                    cbCh57, cbCh58, cbCh59, cbCh60, cbCh61, cbCh62, cbCh63, cbCh64 };
+            foreach (CheckBox b in cbCh)
+            {
+                b.IsChecked = false;
+            }
+        }
+        private void btnGenerateMaskFileNewDif_Click(object sender, RoutedEventArgs e)
+        {
+            int AsicChain = cbxMaskFileGenSelectDif.SelectedIndex / 4 + 1;
+            int AsicLocation = cbxMaskFileGenSelectDif.SelectedIndex % 4 + 1;
+            GenerateChannelMaskFile(AsicChain, AsicLocation);
+        }
+        private void GenerateChannelMaskFile(int AsicChain, int AsicLocation)
+        {
+            string fileName = string.Format("M{0}{1}.txt", AsicChain, AsicLocation);
+            string MaskFileName = Path.Combine(CurrentPath, fileName);
+            using (StreamWriter MaskFile = new StreamWriter(MaskFileName))
+            {
+                CheckBox[] cbCh = new CheckBox[64] 
+                { cbCh1, cbCh2, cbCh3, cbCh4, cbCh5, cbCh6, cbCh7, cbCh8,
+                    cbCh9, cbCh10, cbCh11, cbCh12, cbCh13, cbCh14, cbCh15, cbCh16,
+                    cbCh17, cbCh18, cbCh19, cbCh20, cbCh21, cbCh22, cbCh23, cbCh24,
+                    cbCh25, cbCh26, cbCh27, cbCh28, cbCh29, cbCh30, cbCh31, cbCh32,
+                    cbCh33, cbCh34, cbCh35, cbCh36, cbCh37, cbCh38, cbCh39, cbCh40,
+                    cbCh41, cbCh42, cbCh43, cbCh44, cbCh45, cbCh46, cbCh47, cbCh48,
+                    cbCh49, cbCh50, cbCh51, cbCh52, cbCh53, cbCh54, cbCh55, cbCh56,
+                    cbCh57, cbCh58, cbCh59, cbCh60, cbCh61, cbCh62, cbCh63, cbCh64 };
+                for (int i = 1; i <= 64; i++)
+                {
+                    if (cbCh[i - 1].IsChecked == true)
+                    {
+                        MaskFile.WriteLine(i.ToString());
+                    }
+                }               
+            }          
+        }
+
         private bool SelectTrigger(int Trigger)
         {
             int TriggerValue;
@@ -7266,6 +7329,7 @@ namespace USB_DAQ
                 return false;
             }
         }
+
     }
     
 }
