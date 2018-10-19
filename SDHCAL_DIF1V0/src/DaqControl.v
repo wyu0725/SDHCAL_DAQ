@@ -95,7 +95,7 @@ module DaqControl(
   wire AutoDaq_DataTransmitDone;
   wire SlaveDaq_DataTransmitDone;
   wire SingleStart;
-  wire SlowTriger;
+  wire SlowTrigger;
   wire AutoDaq_UsbStartStop;
   reg SlaveDaq_UsbStartStop;
   wire [15:0] SlaveDaqData;
