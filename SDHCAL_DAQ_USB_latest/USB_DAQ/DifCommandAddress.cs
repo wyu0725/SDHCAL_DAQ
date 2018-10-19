@@ -135,7 +135,7 @@ namespace USB_DAQ
         public const string TriggerSuppressWidth11to8Address = "E321";
         public const string TriggerSuppressWidth15to12Address = "E337";
         public const string TriggerSuppressWidth19to16Address = "E34B";
-        public const string ChipFullEnableAddress = "E351";
+        public const string ChipFullEnableAddress = "E350";
         public const string AutoDaqAcquisitionModeSelectAddress = "E360";
         public const string AutoDaqTriggerModeSelectAddress = "E370";
         public const string AutoDaqTriggerDelayTime3to0Address = "E380";

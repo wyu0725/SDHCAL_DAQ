@@ -301,15 +301,15 @@ namespace USB_DAQ
         public static bool SlowControlParameterPowerPulsingEnable(int PowerPulsingEnable, MyCyUsb usbInterface)
         {
             int LvdsReceiverPPEnableValue = (PowerPulsingEnable & 1) + HexToInt(DifCommandAddress.LvdsReceiverPPEnableAddress);
-            int DacPPEnableValue = (PowerPulsingEnable & 2) + HexToInt(DifCommandAddress.DacPPEnableAddress);
-            int BandGapPPEnableValue = (PowerPulsingEnable & 4) + HexToInt(DifCommandAddress.BandGapPPEnableAddress);
-            int DiscriminatorPPEnableValue = (PowerPulsingEnable & 8) + HexToInt(DifCommandAddress.DiscriminatorPPEnableAddress);
-            int OTAqPPEnableValue = (PowerPulsingEnable & 16) + HexToInt(DifCommandAddress.OTAqPPEnableAddress);
-            int Dac4bitPPEnabelValue = (PowerPulsingEnable & 32) + HexToInt(DifCommandAddress.Dac4bitPPEnableAddress);
-            int WidlarPPEnableValue = (PowerPulsingEnable & 64) + HexToInt(DifCommandAddress.WidlarPPEnableAddress);
-            int LowGainShaperPPEnableValue = (PowerPulsingEnable & 128) + HexToInt(DifCommandAddress.LowGainShaperPPEnableAddress);
-            int HighGainShaperPPEnableValue = (PowerPulsingEnable & 256) + HexToInt(DifCommandAddress.HighGainShaperPPEnableAddress);
-            int PreAmplifierPPEnableValue = (PowerPulsingEnable & 512) + HexToInt(DifCommandAddress.PreAmplifierPPEnableAddress);
+            int DacPPEnableValue = ((PowerPulsingEnable & 2) >> 1) + HexToInt(DifCommandAddress.DacPPEnableAddress);
+            int BandGapPPEnableValue = ((PowerPulsingEnable & 4) >> 2) + HexToInt(DifCommandAddress.BandGapPPEnableAddress);
+            int DiscriminatorPPEnableValue = ((PowerPulsingEnable & 8) >> 3) + HexToInt(DifCommandAddress.DiscriminatorPPEnableAddress);
+            int OTAqPPEnableValue = ((PowerPulsingEnable & 16) >> 4) + HexToInt(DifCommandAddress.OTAqPPEnableAddress);
+            int Dac4bitPPEnabelValue = ((PowerPulsingEnable & 32) >> 5) + HexToInt(DifCommandAddress.Dac4bitPPEnableAddress);
+            int WidlarPPEnableValue = ((PowerPulsingEnable & 64) >> 6) + HexToInt(DifCommandAddress.WidlarPPEnableAddress);
+            int LowGainShaperPPEnableValue = ((PowerPulsingEnable & 128) >> 7) + HexToInt(DifCommandAddress.LowGainShaperPPEnableAddress);
+            int HighGainShaperPPEnableValue = ((PowerPulsingEnable & 256) >> 8) + HexToInt(DifCommandAddress.HighGainShaperPPEnableAddress);
+            int PreAmplifierPPEnableValue = ((PowerPulsingEnable & 512) >> 9) + HexToInt(DifCommandAddress.PreAmplifierPPEnableAddress);
             #region LVDS Receiver
             bool bResult = usbInterface.CommandSend(usbInterface.ConstCommandByteArray(LvdsReceiverPPEnableValue));
             if (!bResult)
