@@ -175,7 +175,7 @@ namespace USB_DAQ
             if (CheckStringLegal.CheckIntegerLegal(MaskChannel) && int.Parse(MaskChannel) < 64)
             {
                 IllegalInput = false;
-                int MaskChannelValue = int.Parse(MaskChannel);
+                int MaskChannelValue = int.Parse(MaskChannel) - 1;
                 int MaskChannelValue1 = (byte)(MaskChannelValue & 15) + HexToInt(DifCommandAddress.MaskChannel3to0Address);
                 int MaskChannelValue2 = (byte)((MaskChannelValue >> 4) & 15) + HexToInt(DifCommandAddress.MaskChannel5to4Address);
                 if (usbInterface.CommandSend(usbInterface.ConstCommandByteArray(MaskChannelValue1)))
