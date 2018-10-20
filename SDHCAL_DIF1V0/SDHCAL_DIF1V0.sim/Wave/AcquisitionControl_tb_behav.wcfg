@@ -3,113 +3,65 @@
    <wave_state>
    </wave_state>
    <db_ref_list>
-      <db_ref path="ChannelMaskSim_tb_behav.wdb" id="1">
+      <db_ref path="SpiMaster_tb_behav.wdb" id="1">
          <top_modules>
-            <top_module name="ChannelMaskSim_tb" />
+            <top_module name="SpiMaster_tb" />
             <top_module name="glbl" />
          </top_modules>
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="1558000000fs"></ZoomStartTime>
-      <ZoomEndTime time="2923000001fs"></ZoomEndTime>
-      <Cursor1Time time="2785000000fs"></Cursor1Time>
+      <ZoomStartTime time="611000000fs"></ZoomStartTime>
+      <ZoomEndTime time="1361000001fs"></ZoomEndTime>
+      <Cursor1Time time="763000000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="171"></NameColumnWidth>
+      <NameColumnWidth column_width="167"></NameColumnWidth>
       <ValueColumnWidth column_width="58"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="23" />
-   <wvobject fp_name="/ChannelMaskSim_tb/uut/Clk" type="logic">
-      <obj_property name="ElementShortName">Clk</obj_property>
-      <obj_property name="ObjectShortName">Clk</obj_property>
-   </wvobject>
-   <wvobject fp_name="/ChannelMaskSim_tb/uut/IFCLK" type="logic">
-      <obj_property name="ElementShortName">IFCLK</obj_property>
-      <obj_property name="ObjectShortName">IFCLK</obj_property>
-   </wvobject>
-   <wvobject fp_name="/ChannelMaskSim_tb/uut/reset_n" type="logic">
+   <WVObjectSize size="11" />
+   <wvobject fp_name="/SpiMaster_tb/uut/reset_n" type="logic">
       <obj_property name="ElementShortName">reset_n</obj_property>
       <obj_property name="ObjectShortName">reset_n</obj_property>
    </wvobject>
-   <wvobject fp_name="/ChannelMaskSim_tb/uut/CommandWordEn" type="logic">
-      <obj_property name="ElementShortName">CommandWordEn</obj_property>
-      <obj_property name="ObjectShortName">CommandWordEn</obj_property>
+   <wvobject fp_name="/SpiMaster_tb/uut/SerialData" type="array">
+      <obj_property name="ElementShortName">SerialData[15:0]</obj_property>
+      <obj_property name="ObjectShortName">SerialData[15:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/ChannelMaskSim_tb/uut/CommandWord" type="array">
-      <obj_property name="ElementShortName">CommandWord[15:0]</obj_property>
-      <obj_property name="ObjectShortName">CommandWord[15:0]</obj_property>
+   <wvobject fp_name="/SpiMaster_tb/uut/DataoutStart" type="logic">
+      <obj_property name="ElementShortName">DataoutStart</obj_property>
+      <obj_property name="ObjectShortName">DataoutStart</obj_property>
    </wvobject>
-   <wvobject fp_name="/ChannelMaskSim_tb/uut/CommandFifoReadEn" type="logic">
-      <obj_property name="ElementShortName">CommandFifoReadEn</obj_property>
-      <obj_property name="ObjectShortName">CommandFifoReadEn</obj_property>
+   <wvobject fp_name="/SpiMaster_tb/uut/DataoutDone" type="logic">
+      <obj_property name="ElementShortName">DataoutDone</obj_property>
+      <obj_property name="ObjectShortName">DataoutDone</obj_property>
    </wvobject>
-   <wvobject fp_name="/ChannelMaskSim_tb/uut/CommandFifoEmpty" type="logic">
-      <obj_property name="ElementShortName">CommandFifoEmpty</obj_property>
-      <obj_property name="ObjectShortName">CommandFifoEmpty</obj_property>
+   <wvobject fp_name="/SpiMaster_tb/uut/Clk" type="logic">
+      <obj_property name="ElementShortName">Clk</obj_property>
+      <obj_property name="ObjectShortName">Clk</obj_property>
    </wvobject>
-   <wvobject fp_name="/ChannelMaskSim_tb/uut/FifoFull" type="logic">
-      <obj_property name="ElementShortName">FifoFull</obj_property>
-      <obj_property name="ObjectShortName">FifoFull</obj_property>
+   <wvobject fp_name="/SpiMaster_tb/uut/SCLK" type="logic">
+      <obj_property name="ElementShortName">SCLK</obj_property>
+      <obj_property name="ObjectShortName">SCLK</obj_property>
    </wvobject>
-   <wvobject fp_name="/ChannelMaskSim_tb/uut/FifoWriteResetBusy" type="logic">
-      <obj_property name="ElementShortName">FifoWriteResetBusy</obj_property>
-      <obj_property name="ObjectShortName">FifoWriteResetBusy</obj_property>
+   <wvobject fp_name="/SpiMaster_tb/uut/SDI" type="logic">
+      <obj_property name="ElementShortName">SDI</obj_property>
+      <obj_property name="ObjectShortName">SDI</obj_property>
    </wvobject>
-   <wvobject fp_name="/ChannelMaskSim_tb/uut/FifoReadResetBusy" type="logic">
-      <obj_property name="ElementShortName">FifoReadResetBusy</obj_property>
-      <obj_property name="ObjectShortName">FifoReadResetBusy</obj_property>
+   <wvobject fp_name="/SpiMaster_tb/uut/nCS" type="logic">
+      <obj_property name="ElementShortName">nCS</obj_property>
+      <obj_property name="ObjectShortName">nCS</obj_property>
    </wvobject>
-   <wvobject fp_name="/ChannelMaskSim_tb/uut/FifoReady" type="logic">
-      <obj_property name="ElementShortName">FifoReady</obj_property>
-      <obj_property name="ObjectShortName">FifoReady</obj_property>
+   <wvobject fp_name="/SpiMaster_tb/uut/SerialDataShift" type="array">
+      <obj_property name="ElementShortName">SerialDataShift[15:0]</obj_property>
+      <obj_property name="ObjectShortName">SerialDataShift[15:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/ChannelMaskSim_tb/uut/State" type="logic">
-      <obj_property name="ElementShortName">State</obj_property>
-      <obj_property name="ObjectShortName">State</obj_property>
+   <wvobject fp_name="/SpiMaster_tb/uut/State" type="array">
+      <obj_property name="ElementShortName">State[1:0]</obj_property>
+      <obj_property name="ObjectShortName">State[1:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/ChannelMaskSim_tb/uut/CommandFifoReadEnDelayed" type="logic">
-      <obj_property name="ElementShortName">CommandFifoReadEnDelayed</obj_property>
-      <obj_property name="ObjectShortName">CommandFifoReadEnDelayed</obj_property>
-   </wvobject>
-   <wvobject fp_name="/ChannelMaskSim_tb/uut/COMMAND_WORD" type="array">
-      <obj_property name="ElementShortName">COMMAND_WORD[15:0]</obj_property>
-      <obj_property name="ObjectShortName">COMMAND_WORD[15:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/ChannelMaskSim_tb/uut/DiscriMask" type="array">
-      <obj_property name="ElementShortName">DiscriMask[2:0]</obj_property>
-      <obj_property name="ObjectShortName">DiscriMask[2:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/ChannelMaskSim_tb/uut/MaskChannel" type="array">
-      <obj_property name="ElementShortName">MaskChannel[5:0]</obj_property>
-      <obj_property name="ObjectShortName">MaskChannel[5:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/ChannelMaskSim_tb/uut/MaskShift" type="array">
-      <obj_property name="ElementShortName">MaskShift[7:0]</obj_property>
-      <obj_property name="ObjectShortName">MaskShift[7:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/ChannelMaskSim_tb/uut/MaskOrUnmask" type="array">
-      <obj_property name="ElementShortName">MaskOrUnmask[2:0]</obj_property>
-      <obj_property name="ObjectShortName">MaskOrUnmask[2:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/ChannelMaskSim_tb/uut/SingleChannelMask" type="array">
-      <obj_property name="ElementShortName">SingleChannelMask[191:0]</obj_property>
-      <obj_property name="ObjectShortName">SingleChannelMask[191:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/ChannelMaskSim_tb/uut/MicrorocChannelDiscriminatorMask" type="array">
-      <obj_property name="ElementShortName">MicrorocChannelDiscriminatorMask[191:0]</obj_property>
-      <obj_property name="ObjectShortName">MicrorocChannelDiscriminatorMask[191:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/ChannelMaskSim_tb/uut/MaskState" type="array">
-      <obj_property name="ElementShortName">MaskState[2:0]</obj_property>
-      <obj_property name="ObjectShortName">MaskState[2:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/ChannelMaskSim_tb/uut/Idle" type="logic">
-      <obj_property name="ElementShortName">Idle</obj_property>
-      <obj_property name="ObjectShortName">Idle</obj_property>
-   </wvobject>
-   <wvobject fp_name="/ChannelMaskSim_tb/uut/READ" type="logic">
-      <obj_property name="ElementShortName">READ</obj_property>
-      <obj_property name="ObjectShortName">READ</obj_property>
+   <wvobject fp_name="/SpiMaster_tb/uut/DataoutCount" type="array">
+      <obj_property name="ElementShortName">DataoutCount[4:0]</obj_property>
+      <obj_property name="ObjectShortName">DataoutCount[4:0]</obj_property>
    </wvobject>
 </wave_config>

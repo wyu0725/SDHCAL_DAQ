@@ -144,6 +144,7 @@ BitShiftOutStart	BitShiftOut.v	/^  input BitShiftOutStart,$/;"	p	language:Verilo
 BitShiftOutStart	SlowControlAndReadScopeSet.v	/^  wire BitShiftOutStart;$/;"	n	language:Verilog	module:SlowControlAndReadScopeSet
 CHECK_ALL_DONE	SCurve_Test_Control.v	/^  CHECK_ALL_DONE                  = 5'd16,$/;"	c	language:Verilog	module:SCurve_Test_Control
 CHECK_CHN_DONE	SCurve_Test_Control.v	/^  CHECK_CHN_DONE                  = 5'd15,$/;"	c	language:Verilog	module:SCurve_Test_Control
+CHECK_DONE	DacControlTlv5618.v	/^  CHECK_DONE = 3'd4,$/;"	c	language:Verilog	module:DacControlTlv5618
 CHIPRESET	AutoDaq.v	/^  CHIPRESET = 4'd3,$/;"	c	language:Verilog	module:AutoDaq
 CHIPSATB	DaqControl.v	/^  input CHIPSATB,$/;"	p	language:Verilog	module:DaqControl
 CHIPSATB	DaqSwitcher.v	/^  input CHIPSATB,$/;"	p	language:Verilog	module:DaqSwitcher
@@ -415,8 +416,7 @@ DAC1	DacControlTlv5618.v	/^  DAC1 = 2'b01,$/;"	c	language:Verilog	module:DacCont
 DAC12	DacControlTlv5618.v	/^  DAC12 = 2'b11;$/;"	c	language:Verilog	module:DacControlTlv5618
 DAC2	DacControlTlv5618.v	/^  DAC2 = 2'b10,$/;"	c	language:Verilog	module:DacControlTlv5618
 DATA_DISCARD	AdcControl.v	/^                     DATA_DISCARD = 3'd2,$/;"	c	language:Verilog	module:AdcControl
-DATA_GEN	DacControlTlv5618.v	/^  DATA_GEN = 2'd1,$/;"	c	language:Verilog	module:DacControlTlv5618
-DATA_GEN_DAC12	DacControlTlv5618.v	/^  DATA_GEN_DAC12 = 2'd4,$/;"	c	language:Verilog	module:DacControlTlv5618
+DATA_GEN	DacControlTlv5618.v	/^  DATA_GEN = 3'd1,$/;"	c	language:Verilog	module:DacControlTlv5618
 DATA_LATENCY	BitShiftOut.v	/^  DATA_LATENCY = 3'b110,\/\/The data latency of the FIFO is 1 period$/;"	c	language:Verilog	module:BitShiftOut
 DATA_OUT	SCurve_Single_Test.v	/^                     DATA_OUT = 3'd4,$/;"	c	language:Verilog	module:SCurve_Single_Test
 DATA_OUT	SpiMaster.v	/^  DATA_OUT = 2'd2,$/;"	c	language:Verilog	module:SpiMaster
@@ -427,7 +427,7 @@ DIN	DacControlTlv5618.v	/^  output DIN$/;"	p	language:Verilog	module:DacControlT
 DISCRIMINATOR_MASK	SCurve_Test_Control.v	/^  localparam [191:0] DISCRIMINATOR_MASK     = {189'b0, 3'b111};$/;"	c	language:Verilog	module:SCurve_Test_Control
 DISCRIMINATOR_MASK_FILTER	SCurve_Test_Control.v	/^  DISCRIMINATOR_MASK_FILTER       = 5'd6,$/;"	c	language:Verilog	module:SCurve_Test_Control
 DONE	AdcControl.v	/^                     DONE = 3'd4;$/;"	c	language:Verilog	module:AdcControl
-DONE	DacControlTlv5618.v	/^  DONE = 2'd5;$/;"	c	language:Verilog	module:DacControlTlv5618
+DONE	DacControlTlv5618.v	/^  DONE = 3'd5;$/;"	c	language:Verilog	module:DacControlTlv5618
 DONE	MicrorocDataSwitcher.v	/^  DONE         = 4'd9;$/;"	c	language:Verilog	module:MicrorocDataSwitcher
 DONE	SpiMaster.v	/^  DONE = 2'd3;$/;"	c	language:Verilog	module:SpiMaster
 DOUT1B	MicrorocControl.v	/^  input DOUT1B,$/;"	p	language:Verilog	module:MicrorocControl
@@ -467,6 +467,8 @@ DacEnable	MicrorocControl.v	/^  input DacEnable,                          \/\/ D
 DacEnable	ParameterGenerator.v	/^	input DacEnable,$/;"	p	language:Verilog	module:ParameterGenerator
 DacEnable	SlowControlAndReadScopeSet.v	/^  input DacEnable,$/;"	p	language:Verilog	module:SlowControlAndReadScopeSet
 DacEnable_CAND	CommandParameter.v	/^`define DacEnable_CAND                             16'hA091$/;"	c	language:Verilog
+DacLoadData	DacControlTlv5618.v	/^  reg [11:0] DacLoadData;$/;"	r	language:Verilog	module:DacControlTlv5618
+DacLoadDone	DacControlTlv5618.v	/^  output reg DacLoadDone,$/;"	p	language:Verilog	module:DacControlTlv5618
 DacLoadStart	DacControlTlv5618.v	/^  input DacLoadStart,$/;"	p	language:Verilog	module:DacControlTlv5618
 DacPPEnable	MicrorocControl.v	/^  input DacPPEnable,$/;"	p	language:Verilog	module:MicrorocControl
 DacPPEnable	ParameterGenerator.v	/^	input DacPPEnable,$/;"	p	language:Verilog	module:ParameterGenerator
@@ -515,7 +517,7 @@ DataoutChannelSelect_CAND	CommandParameter.v	/^`define DataoutChannelSelect_CAND
 DataoutCount	SpiMaster.v	/^  reg [4:0] DataoutCount;$/;"	r	language:Verilog	module:SpiMaster
 DataoutDone	DacControlTlv5618.v	/^  wire DataoutDone;$/;"	n	language:Verilog	module:DacControlTlv5618
 DataoutDone	SpiMaster.v	/^  output reg DataoutDone,$/;"	p	language:Verilog	module:SpiMaster
-DataoutStart	DacControlTlv5618.v	/^  wire DataoutStart;$/;"	n	language:Verilog	module:DacControlTlv5618
+DataoutStart	DacControlTlv5618.v	/^  reg DataoutStart;$/;"	r	language:Verilog	module:DacControlTlv5618
 DataoutStart	SpiMaster.v	/^  input DataoutStart,$/;"	p	language:Verilog	module:SpiMaster
 DelayCount	SlaveDaq.v	/^	reg [15:0] DelayCount;$/;"	r	language:Verilog	module:SlaveDaq
 DiscriMask	ChannelMaskSim.v	/^  wire [2:0] DiscriMask;$/;"	n	language:Verilog	module:ChannelMaskSim
@@ -758,7 +760,7 @@ Hold_reg2	AdcControl.v	/^    reg Hold_reg2;$/;"	r	language:Verilog	module:AdcCon
 IDLE	AdcControl.v	/^    localparam [2:0] IDLE = 3'd0,$/;"	c	language:Verilog	module:AdcControl
 IDLE	ChannelMaskSim.v	/^  localparam [2:0]  IDLE = 3'b000,$/;"	c	language:Verilog	module:ChannelMaskSim
 IDLE	CommandInterpreter.v	/^  localparam [2:0]  IDLE = 3'b000,$/;"	c	language:Verilog	module:CommandInterpreter
-IDLE	DacControlTlv5618.v	/^  IDLE = 2'd0,$/;"	c	language:Verilog	module:DacControlTlv5618
+IDLE	DacControlTlv5618.v	/^  IDLE = 3'd0,$/;"	c	language:Verilog	module:DacControlTlv5618
 IDLE	MicrorocDataSwitcher.v	/^  IDLE         = 4'd0,$/;"	c	language:Verilog	module:MicrorocDataSwitcher
 IDLE	SCurve_Single_Test.v	/^    localparam [2:0] IDLE = 3'd0,$/;"	c	language:Verilog	module:SCurve_Single_Test
 IDLE	SCurve_Test_Control.v	/^  IDLE                            = 5'd0,$/;"	c	language:Verilog	module:SCurve_Test_Control
@@ -1124,7 +1126,7 @@ OUT_COUNT2	SlaveDaq.v	/^	OUT_COUNT2 = 5'd16,$/;"	c	language:Verilog	module:Slave
 OUT_COUNT3	SlaveDaq.v	/^	OUT_COUNT3 = 5'd17,$/;"	c	language:Verilog	module:SlaveDaq
 OUT_DAC_CODE_SC	SCurve_Test_Control.v	/^  OUT_DAC_CODE_SC                 = 5'd4,$/;"	c	language:Verilog	module:SCurve_Test_Control
 OUT_DAC_CODE_USB	SCurve_Test_Control.v	/^  OUT_DAC_CODE_USB                = 5'd5,$/;"	c	language:Verilog	module:SCurve_Test_Control
-OUT_DATA	DacControlTlv5618.v	/^  OUT_DATA = 2'd2,$/;"	c	language:Verilog	module:DacControlTlv5618
+OUT_DATA	DacControlTlv5618.v	/^  OUT_DATA = 3'd2,$/;"	c	language:Verilog	module:DacControlTlv5618
 OUT_TAIL	SlaveDaq.v	/^	OUT_TAIL = 5'd14,$/;"	c	language:Verilog	module:SlaveDaq
 OUT_TEST_CHN_AND_DISCRI_MASK_SC	SCurve_Test_Control.v	/^  OUT_TEST_CHN_AND_DISCRI_MASK_SC = 5'd2,$/;"	c	language:Verilog	module:SCurve_Test_Control
 OUT_TEST_CHN_USB	SCurve_Test_Control.v	/^  OUT_TEST_CHN_USB                = 5'd3,$/;"	c	language:Verilog	module:SCurve_Test_Control
@@ -1503,6 +1505,7 @@ SlowTriggerSync2	AutoDaq.v	/^  reg SlowTriggerSync2;$/;"	r	language:Verilog	modu
 SlowTriggerSync3	AutoDaq.v	/^  wire SlowTriggerSync3 = SlowTriggerSync1 & (~SlowTriggerSync2); \/\/ Rising edge$/;"	n	language:Verilog	module:AutoDaq
 Speed	DacControlTlv5618.v	/^  input Speed,  \/\/ 1 -> fast mode, 0 -> slow mode$/;"	p	language:Verilog	module:DacControlTlv5618
 SpiMaster	SpiMaster.v	/^module SpiMaster($/;"	m	language:Verilog
+SpiReset_n	DacControlTlv5618.v	/^  reg SpiReset_n;$/;"	r	language:Verilog	module:DacControlTlv5618
 StartAcq	AdcControl.v	/^    input StartAcq,$/;"	p	language:Verilog	module:AdcControl
 StartAcq_A	FPGA_Top.v	/^  output StartAcq_A,$/;"	p	language:Verilog	module:FPGA_Top
 StartAcq_B	FPGA_Top.v	/^  output StartAcq_B,$/;"	p	language:Verilog	module:FPGA_Top
@@ -1745,10 +1748,10 @@ VAL_EVTP	MicrorocCommonControl.v	/^  output VAL_EVTP,$/;"	p	language:Verilog	mod
 WAIT	AutoDaq.v	/^  WAIT = 4'd7,$/;"	c	language:Verilog	module:AutoDaq
 WAIT	MicrorocDataSwitcher.v	/^  WAIT         = 4'd1,$/;"	c	language:Verilog	module:MicrorocDataSwitcher
 WAIT_DATA	AdcControl.v	/^                     WAIT_DATA = 3'd3,$/;"	c	language:Verilog	module:AdcControl
+WAIT_DATAOUT_DONE	DacControlTlv5618.v	/^  WAIT_DATAOUT_DONE = 3'd3,$/;"	c	language:Verilog	module:DacControlTlv5618
 WAIT_DATA_END	SlaveDaq.v	/^	WAIT_DATA_END =5'd12,$/;"	c	language:Verilog	module:SlaveDaq
 WAIT_DONE	SCurve_Test_Control.v	/^  WAIT_DONE                       = 5'd19,$/;"	c	language:Verilog	module:SCurve_Test_Control
 WAIT_LOAD_SC_PARAM_DONE	SCurve_Test_Control.v	/^  WAIT_LOAD_SC_PARAM_DONE         = 5'd8,$/;"	c	language:Verilog	module:SCurve_Test_Control
-WAIT_OUT_DONE	DacControlTlv5618.v	/^  WAIT_OUT_DONE = 2'd3,$/;"	c	language:Verilog	module:DacControlTlv5618
 WAIT_READ	AutoDaq.v	/^  WAIT_READ = 4'd9,$/;"	c	language:Verilog	module:AutoDaq
 WAIT_READ	SlaveDaq.v	/^	WAIT_READ = 5'd6,$/;"	c	language:Verilog	module:SlaveDaq
 WAIT_READ_DONE	SlaveDaq.v	/^	WAIT_READ_DONE = 5'd8,$/;"	c	language:Verilog	module:SlaveDaq

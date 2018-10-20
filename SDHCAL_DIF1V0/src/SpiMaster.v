@@ -73,6 +73,7 @@ module SpiMaster(
           else begin
             SCLK <= 1'b1;
             SDI <= 1'b0;
+            DataoutCount <= 5'b0;
             State <= DONE;
           end
         end
