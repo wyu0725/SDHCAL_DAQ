@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2018.1 (win64) Build 2188600 Wed Apr  4 18:40:38 MDT 2018
-| Date         : Tue Oct 16 20:01:04 2018
+| Date         : Tue Oct 23 14:07:16 2018
 | Host         : WYU running 64-bit major release  (build 9200)
 | Command      : report_methodology -file FPGA_Top_methodology_drc_routed.rpt -pb FPGA_Top_methodology_drc_routed.pb -rpx FPGA_Top_methodology_drc_routed.rpx
 | Design       : FPGA_Top
@@ -20,14 +20,14 @@ Table of Contents
 1. REPORT SUMMARY
 -----------------
             Netlist: netlist
-          Floorplan: checkpoint_FPGA_Top
+          Floorplan: design_1
       Design limits: <entire design considered>
              Max violations: <unlimited>
-             Violations found: 293
+             Violations found: 299
 +-----------+----------+-------------------------------------------------+------------+
 | Rule      | Severity | Description                                     | Violations |
 +-----------+----------+-------------------------------------------------+------------+
-| LUTAR-1   | Warning  | LUT drives async reset alert                    | 18         |
+| LUTAR-1   | Warning  | LUT drives async reset alert                    | 19         |
 | PDRC-190  | Warning  | Suboptimally placed synchronized register chain | 26         |
 | TIMING-6  | Warning  | No common primary clock between related clocks  | 2          |
 | TIMING-7  | Warning  | No common node between related clocks           | 2          |
@@ -35,7 +35,7 @@ Table of Contents
 | TIMING-10 | Warning  | Missing property on synchronizer                | 1          |
 | TIMING-14 | Warning  | LUT on the clock tree                           | 6          |
 | TIMING-17 | Warning  | Non-clocked sequential cell                     | 127        |
-| TIMING-18 | Warning  | Missing input or output delay                   | 109        |
+| TIMING-18 | Warning  | Missing input or output delay                   | 114        |
 +-----------+----------+-------------------------------------------------+------------+
 
 2. REPORT DETAILS
@@ -52,7 +52,7 @@ Related violations: <none>
 
 LUTAR-1#3 Warning
 LUT drives async reset alert  
-LUT cell Acquisition/MicrorocSCurveTest/SC_test_single/FSM_sequential_TEST_State[2]_i_2, with 2 or more inputs, drives asynchronous reset pin(s) Acquisition/MicrorocSCurveTest/Clk_1K_reg/CLR, Acquisition/MicrorocSCurveTest/Clock1K_Cnt_reg[0]/CLR, Acquisition/MicrorocSCurveTest/Clock1K_Cnt_reg[10]/CLR, Acquisition/MicrorocSCurveTest/Clock1K_Cnt_reg[11]/CLR, Acquisition/MicrorocSCurveTest/Clock1K_Cnt_reg[1]/CLR, Acquisition/MicrorocSCurveTest/Clock1K_Cnt_reg[2]/CLR, Acquisition/MicrorocSCurveTest/Clock1K_Cnt_reg[3]/CLR, Acquisition/MicrorocSCurveTest/Clock1K_Cnt_reg[4]/CLR, Acquisition/MicrorocSCurveTest/Clock1K_Cnt_reg[5]/CLR, Acquisition/MicrorocSCurveTest/Clock1K_Cnt_reg[6]/CLR, Acquisition/MicrorocSCurveTest/Clock1K_Cnt_reg[7]/CLR, Acquisition/MicrorocSCurveTest/Clock1K_Cnt_reg[8]/CLR, Acquisition/MicrorocSCurveTest/Clock1K_Cnt_reg[9]/CLR, Acquisition/MicrorocSCurveTest/InnerClk_reg/CLR, Acquisition/MicrorocSCurveTest/InnerClockCount_reg[0]/CLR (the first 15 of 144 listed). The LUT may glitch and trigger an unexpected reset, even if it is a properly timed path.
+LUT cell Acquisition/MicrorocSCurveTest/SC_test_single/FSM_sequential_TEST_State[2]_i_2, with 2 or more inputs, drives asynchronous reset pin(s) Acquisition/MicrorocSCurveTest/Clk_1K_reg/CLR, Acquisition/MicrorocSCurveTest/Clock1K_Cnt_reg[0]/CLR, Acquisition/MicrorocSCurveTest/Clock1K_Cnt_reg[10]/CLR, Acquisition/MicrorocSCurveTest/Clock1K_Cnt_reg[11]/CLR, Acquisition/MicrorocSCurveTest/Clock1K_Cnt_reg[1]/CLR, Acquisition/MicrorocSCurveTest/Clock1K_Cnt_reg[2]/CLR, Acquisition/MicrorocSCurveTest/Clock1K_Cnt_reg[3]/CLR, Acquisition/MicrorocSCurveTest/Clock1K_Cnt_reg[4]/CLR, Acquisition/MicrorocSCurveTest/Clock1K_Cnt_reg[5]/CLR, Acquisition/MicrorocSCurveTest/Clock1K_Cnt_reg[6]/CLR, Acquisition/MicrorocSCurveTest/Clock1K_Cnt_reg[7]/CLR, Acquisition/MicrorocSCurveTest/Clock1K_Cnt_reg[8]/CLR, Acquisition/MicrorocSCurveTest/Clock1K_Cnt_reg[9]/CLR, Acquisition/MicrorocSCurveTest/Test_Start_reg1_reg/CLR, Acquisition/MicrorocSCurveTest/Test_Start_reg2_reg/CLR (the first 15 of 137 listed). The LUT may glitch and trigger an unexpected reset, even if it is a properly timed path.
 Related violations: <none>
 
 LUTAR-1#4 Warning
@@ -82,182 +82,187 @@ Related violations: <none>
 
 LUTAR-1#9 Warning
 LUT drives async reset alert  
-LUT cell ClockGenerator/SlaveDaq_ResetUsbStart_n_inv_i_2, with 2 or more inputs, drives asynchronous reset pin(s) MicrorocChain2/MicrorocDaq/SlaveDaqControl/DelayCount_reg[14]/CLR, MicrorocChain2/MicrorocDaq/SlaveDaqControl/DelayCount_reg[15]/CLR, MicrorocChain2/MicrorocDaq/SlaveDaq_ResetUsbStart_n_reg_inv/PRE, MicrorocChain3/MicrorocDaq/SlaveDaq_ResetUsbStart_n_reg_inv/PRE, MicrorocChain1/MicrorocDaq/SlaveDaq_ResetUsbStart_n_reg_inv/PRE, MicrorocChain4/MicrorocDaq/SlaveDaq_ResetUsbStart_n_reg_inv/PRE. The LUT may glitch and trigger an unexpected reset, even if it is a properly timed path.
+LUT cell ClockGenerator/SCLK_i_3, with 2 or more inputs, drives asynchronous reset pin(s) MicrorocAutoCaliSignalGen/DacValueSet/DacSpiOut/DataoutCount_reg[0]/CLR, MicrorocAutoCaliSignalGen/DacValueSet/DacSpiOut/DataoutCount_reg[1]/CLR, MicrorocAutoCaliSignalGen/DacValueSet/DacSpiOut/DataoutCount_reg[2]/CLR, MicrorocAutoCaliSignalGen/DacValueSet/DacSpiOut/DataoutCount_reg[3]/CLR, MicrorocAutoCaliSignalGen/DacValueSet/DacSpiOut/DataoutCount_reg[4]/CLR, MicrorocAutoCaliSignalGen/DacValueSet/DacSpiOut/DataoutDone_reg/CLR, MicrorocAutoCaliSignalGen/DacValueSet/DacSpiOut/FSM_sequential_State_reg[0]/CLR, MicrorocAutoCaliSignalGen/DacValueSet/DacSpiOut/FSM_sequential_State_reg[1]/CLR, MicrorocAutoCaliSignalGen/DacValueSet/DacSpiOut/SDI_reg/CLR, MicrorocAutoCaliSignalGen/DacValueSet/DacSpiOut/SerialDataShift_reg[0]/CLR, MicrorocAutoCaliSignalGen/DacValueSet/DacSpiOut/SerialDataShift_reg[10]/CLR, MicrorocAutoCaliSignalGen/DacValueSet/DacSpiOut/SerialDataShift_reg[11]/CLR, MicrorocAutoCaliSignalGen/DacValueSet/DacSpiOut/SerialDataShift_reg[12]/CLR, MicrorocAutoCaliSignalGen/DacValueSet/DacSpiOut/SerialDataShift_reg[13]/CLR, MicrorocAutoCaliSignalGen/DacValueSet/DacSpiOut/SerialDataShift_reg[14]/CLR (the first 15 of 27 listed). The LUT may glitch and trigger an unexpected reset, even if it is a properly timed path.
 Related violations: <none>
 
 LUTAR-1#10 Warning
 LUT drives async reset alert  
-LUT cell ClockGenerator/TrigCounter_sync[13]_i_1, with 2 or more inputs, drives asynchronous reset pin(s) MicrorocChain3/MicrorocDaq/AutoDaqControl/End_Readout_sync1_reg/CLR, MicrorocChain3/MicrorocDaq/AutoDaqControl/End_Readout_sync2_reg/CLR, MicrorocChain3/MicrorocDaq/AutoDaqControl/FSM_onehot_State_reg[0]/CLR, MicrorocChain3/MicrorocDaq/AutoDaqControl/FSM_onehot_State_reg[10]/CLR, MicrorocChain3/MicrorocDaq/AutoDaqControl/FSM_onehot_State_reg[1]/CLR, MicrorocChain3/MicrorocDaq/AutoDaqControl/FSM_onehot_State_reg[2]/CLR, MicrorocChain3/MicrorocDaq/AutoDaqControl/FSM_onehot_State_reg[3]/CLR, MicrorocChain3/MicrorocDaq/AutoDaqControl/FSM_onehot_State_reg[4]/CLR, MicrorocChain3/MicrorocDaq/AutoDaqControl/FSM_onehot_State_reg[6]/CLR, MicrorocChain3/MicrorocDaq/AutoDaqControl/FSM_onehot_State_reg[7]/CLR, MicrorocChain3/MicrorocDaq/AutoDaqControl/FSM_onehot_State_reg[8]/CLR, MicrorocChain3/MicrorocDaq/AutoDaqControl/FSM_onehot_State_reg[9]/CLR, MicrorocChain3/MicrorocDaq/AutoDaqControl/Once_end_reg/CLR, MicrorocChain3/MicrorocDaq/AutoDaqControl/ResetStartRising_n_reg/CLR, MicrorocChain3/MicrorocDaq/AutoDaqControl/SlowTriggerSync_reg/CLR (the first 15 of 107 listed). The LUT may glitch and trigger an unexpected reset, even if it is a properly timed path.
+LUT cell ClockGenerator/SlaveDaq_ResetUsbStart_n_inv_i_2, with 2 or more inputs, drives asynchronous reset pin(s) MicrorocChain2/MicrorocDaq/SlaveDaqControl/DelayCount_reg[14]/CLR, MicrorocChain2/MicrorocDaq/SlaveDaqControl/DelayCount_reg[15]/CLR, MicrorocChain2/MicrorocDaq/SlaveDaq_ResetUsbStart_n_reg_inv/PRE, MicrorocChain3/MicrorocDaq/SlaveDaq_ResetUsbStart_n_reg_inv/PRE, MicrorocChain1/MicrorocDaq/SlaveDaq_ResetUsbStart_n_reg_inv/PRE, MicrorocChain4/MicrorocDaq/SlaveDaq_ResetUsbStart_n_reg_inv/PRE. The LUT may glitch and trigger an unexpected reset, even if it is a properly timed path.
 Related violations: <none>
 
 LUTAR-1#11 Warning
 LUT drives async reset alert  
-LUT cell ClockGenerator/TriggerDelayCount[0]_i_2__2, with 2 or more inputs, drives asynchronous reset pin(s) MicrorocChain4/MicrorocDaq/AutoDaqControl/SlowTriggerSync2_reg/CLR, MicrorocChain4/MicrorocDaq/AutoDaqControl/TriggerDelayCount_reg[0]/CLR, MicrorocChain4/MicrorocDaq/AutoDaqControl/TriggerDelayCount_reg[10]/CLR, MicrorocChain4/MicrorocDaq/AutoDaqControl/TriggerDelayCount_reg[11]/CLR, MicrorocChain4/MicrorocDaq/AutoDaqControl/TriggerDelayCount_reg[12]/CLR, MicrorocChain4/MicrorocDaq/AutoDaqControl/TriggerDelayCount_reg[13]/CLR, MicrorocChain4/MicrorocDaq/AutoDaqControl/TriggerDelayCount_reg[14]/CLR, MicrorocChain4/MicrorocDaq/AutoDaqControl/TriggerDelayCount_reg[15]/CLR, MicrorocChain4/MicrorocDaq/AutoDaqControl/TriggerDelayCount_reg[1]/CLR, MicrorocChain4/MicrorocDaq/AutoDaqControl/TriggerDelayCount_reg[2]/CLR, MicrorocChain4/MicrorocDaq/AutoDaqControl/TriggerDelayCount_reg[3]/CLR, MicrorocChain4/MicrorocDaq/AutoDaqControl/TriggerDelayCount_reg[4]/CLR, MicrorocChain4/MicrorocDaq/AutoDaqControl/TriggerDelayCount_reg[5]/CLR, MicrorocChain4/MicrorocDaq/AutoDaqControl/TriggerDelayCount_reg[6]/CLR, MicrorocChain4/MicrorocDaq/AutoDaqControl/TriggerDelayCount_reg[7]/CLR (the first 15 of 66 listed). The LUT may glitch and trigger an unexpected reset, even if it is a properly timed path.
+LUT cell ClockGenerator/TrigCounter_sync[13]_i_1, with 2 or more inputs, drives asynchronous reset pin(s) MicrorocChain3/MicrorocDaq/AutoDaqControl/End_Readout_sync1_reg/CLR, MicrorocChain3/MicrorocDaq/AutoDaqControl/End_Readout_sync2_reg/CLR, MicrorocChain3/MicrorocDaq/AutoDaqControl/FSM_onehot_State_reg[0]/CLR, MicrorocChain3/MicrorocDaq/AutoDaqControl/FSM_onehot_State_reg[10]/CLR, MicrorocChain3/MicrorocDaq/AutoDaqControl/FSM_onehot_State_reg[1]/CLR, MicrorocChain3/MicrorocDaq/AutoDaqControl/FSM_onehot_State_reg[2]/CLR, MicrorocChain3/MicrorocDaq/AutoDaqControl/FSM_onehot_State_reg[3]/CLR, MicrorocChain3/MicrorocDaq/AutoDaqControl/FSM_onehot_State_reg[4]/CLR, MicrorocChain3/MicrorocDaq/AutoDaqControl/FSM_onehot_State_reg[6]/CLR, MicrorocChain3/MicrorocDaq/AutoDaqControl/FSM_onehot_State_reg[7]/CLR, MicrorocChain3/MicrorocDaq/AutoDaqControl/FSM_onehot_State_reg[8]/CLR, MicrorocChain3/MicrorocDaq/AutoDaqControl/FSM_onehot_State_reg[9]/CLR, MicrorocChain3/MicrorocDaq/AutoDaqControl/Once_end_reg/CLR, MicrorocChain3/MicrorocDaq/AutoDaqControl/ResetStartRising_n_reg/CLR, MicrorocChain3/MicrorocDaq/AutoDaqControl/SlowTriggerSync_reg/CLR (the first 15 of 107 listed). The LUT may glitch and trigger an unexpected reset, even if it is a properly timed path.
 Related violations: <none>
 
 LUTAR-1#12 Warning
 LUT drives async reset alert  
-LUT cell ClockGenerator/TriggerShift[127]_i_1, with 2 or more inputs, drives asynchronous reset pin(s) CommonControlSignalGenerator/HoldGen/TriggerShift_reg[0]/CLR, CommonControlSignalGenerator/HoldGen/TriggerShift_reg[100]/CLR, CommonControlSignalGenerator/HoldGen/TriggerShift_reg[101]/CLR, CommonControlSignalGenerator/HoldGen/TriggerShift_reg[102]/CLR, CommonControlSignalGenerator/HoldGen/TriggerShift_reg[103]/CLR, CommonControlSignalGenerator/HoldGen/TriggerShift_reg[104]/CLR, CommonControlSignalGenerator/HoldGen/TriggerShift_reg[105]/CLR, CommonControlSignalGenerator/HoldGen/TriggerShift_reg[106]/CLR, CommonControlSignalGenerator/HoldGen/TriggerShift_reg[107]/CLR, CommonControlSignalGenerator/HoldGen/TriggerShift_reg[108]/CLR, CommonControlSignalGenerator/HoldGen/TriggerShift_reg[109]/CLR, CommonControlSignalGenerator/HoldGen/TriggerShift_reg[10]/CLR, CommonControlSignalGenerator/HoldGen/TriggerShift_reg[110]/CLR, CommonControlSignalGenerator/HoldGen/TriggerShift_reg[111]/CLR, CommonControlSignalGenerator/HoldGen/TriggerShift_reg[112]/CLR (the first 15 of 128 listed). The LUT may glitch and trigger an unexpected reset, even if it is a properly timed path.
+LUT cell ClockGenerator/TriggerDelayCount[0]_i_2__2, with 2 or more inputs, drives asynchronous reset pin(s) MicrorocChain4/MicrorocDaq/AutoDaqControl/SlowTriggerSync2_reg/CLR, MicrorocChain4/MicrorocDaq/AutoDaqControl/TriggerDelayCount_reg[0]/CLR, MicrorocChain4/MicrorocDaq/AutoDaqControl/TriggerDelayCount_reg[10]/CLR, MicrorocChain4/MicrorocDaq/AutoDaqControl/TriggerDelayCount_reg[11]/CLR, MicrorocChain4/MicrorocDaq/AutoDaqControl/TriggerDelayCount_reg[12]/CLR, MicrorocChain4/MicrorocDaq/AutoDaqControl/TriggerDelayCount_reg[13]/CLR, MicrorocChain4/MicrorocDaq/AutoDaqControl/TriggerDelayCount_reg[14]/CLR, MicrorocChain4/MicrorocDaq/AutoDaqControl/TriggerDelayCount_reg[15]/CLR, MicrorocChain4/MicrorocDaq/AutoDaqControl/TriggerDelayCount_reg[1]/CLR, MicrorocChain4/MicrorocDaq/AutoDaqControl/TriggerDelayCount_reg[2]/CLR, MicrorocChain4/MicrorocDaq/AutoDaqControl/TriggerDelayCount_reg[3]/CLR, MicrorocChain4/MicrorocDaq/AutoDaqControl/TriggerDelayCount_reg[4]/CLR, MicrorocChain4/MicrorocDaq/AutoDaqControl/TriggerDelayCount_reg[5]/CLR, MicrorocChain4/MicrorocDaq/AutoDaqControl/TriggerDelayCount_reg[6]/CLR, MicrorocChain4/MicrorocDaq/AutoDaqControl/TriggerDelayCount_reg[7]/CLR (the first 15 of 66 listed). The LUT may glitch and trigger an unexpected reset, even if it is a properly timed path.
 Related violations: <none>
 
 LUTAR-1#13 Warning
 LUT drives async reset alert  
-LUT cell ClockGenerator/TriggerShift[255]_i_1, with 2 or more inputs, drives asynchronous reset pin(s) CommonControlSignalGenerator/HoldGen/TriggerShift_reg[128]/CLR, CommonControlSignalGenerator/HoldGen/TriggerShift_reg[129]/CLR, CommonControlSignalGenerator/HoldGen/TriggerShift_reg[130]/CLR, CommonControlSignalGenerator/HoldGen/TriggerShift_reg[131]/CLR, CommonControlSignalGenerator/HoldGen/TriggerShift_reg[132]/CLR, CommonControlSignalGenerator/HoldGen/TriggerShift_reg[133]/CLR, CommonControlSignalGenerator/HoldGen/TriggerShift_reg[134]/CLR, CommonControlSignalGenerator/HoldGen/TriggerShift_reg[135]/CLR, CommonControlSignalGenerator/HoldGen/TriggerShift_reg[136]/CLR, CommonControlSignalGenerator/HoldGen/TriggerShift_reg[137]/CLR, CommonControlSignalGenerator/HoldGen/TriggerShift_reg[138]/CLR, CommonControlSignalGenerator/HoldGen/TriggerShift_reg[139]/CLR, CommonControlSignalGenerator/HoldGen/TriggerShift_reg[140]/CLR, CommonControlSignalGenerator/HoldGen/TriggerShift_reg[141]/CLR, CommonControlSignalGenerator/HoldGen/TriggerShift_reg[142]/CLR (the first 15 of 128 listed). The LUT may glitch and trigger an unexpected reset, even if it is a properly timed path.
+LUT cell ClockGenerator/TriggerShift[127]_i_1, with 2 or more inputs, drives asynchronous reset pin(s) CommonControlSignalGenerator/HoldGen/TriggerShift_reg[0]/CLR, CommonControlSignalGenerator/HoldGen/TriggerShift_reg[100]/CLR, CommonControlSignalGenerator/HoldGen/TriggerShift_reg[101]/CLR, CommonControlSignalGenerator/HoldGen/TriggerShift_reg[102]/CLR, CommonControlSignalGenerator/HoldGen/TriggerShift_reg[103]/CLR, CommonControlSignalGenerator/HoldGen/TriggerShift_reg[104]/CLR, CommonControlSignalGenerator/HoldGen/TriggerShift_reg[105]/CLR, CommonControlSignalGenerator/HoldGen/TriggerShift_reg[106]/CLR, CommonControlSignalGenerator/HoldGen/TriggerShift_reg[107]/CLR, CommonControlSignalGenerator/HoldGen/TriggerShift_reg[108]/CLR, CommonControlSignalGenerator/HoldGen/TriggerShift_reg[109]/CLR, CommonControlSignalGenerator/HoldGen/TriggerShift_reg[10]/CLR, CommonControlSignalGenerator/HoldGen/TriggerShift_reg[110]/CLR, CommonControlSignalGenerator/HoldGen/TriggerShift_reg[111]/CLR, CommonControlSignalGenerator/HoldGen/TriggerShift_reg[112]/CLR (the first 15 of 128 listed). The LUT may glitch and trigger an unexpected reset, even if it is a properly timed path.
 Related violations: <none>
 
 LUTAR-1#14 Warning
 LUT drives async reset alert  
-LUT cell Command/SweepTestStartStopSet/CommandOut[0]_i_2__12, with 2 or more inputs, drives asynchronous reset pin(s) Command/SweepTestStartStopSet/CommandOut_reg[0]/CLR. The LUT may glitch and trigger an unexpected reset, even if it is a properly timed path.
+LUT cell ClockGenerator/TriggerShift[255]_i_1, with 2 or more inputs, drives asynchronous reset pin(s) CommonControlSignalGenerator/HoldGen/TriggerShift_reg[128]/CLR, CommonControlSignalGenerator/HoldGen/TriggerShift_reg[129]/CLR, CommonControlSignalGenerator/HoldGen/TriggerShift_reg[130]/CLR, CommonControlSignalGenerator/HoldGen/TriggerShift_reg[131]/CLR, CommonControlSignalGenerator/HoldGen/TriggerShift_reg[132]/CLR, CommonControlSignalGenerator/HoldGen/TriggerShift_reg[133]/CLR, CommonControlSignalGenerator/HoldGen/TriggerShift_reg[134]/CLR, CommonControlSignalGenerator/HoldGen/TriggerShift_reg[135]/CLR, CommonControlSignalGenerator/HoldGen/TriggerShift_reg[136]/CLR, CommonControlSignalGenerator/HoldGen/TriggerShift_reg[137]/CLR, CommonControlSignalGenerator/HoldGen/TriggerShift_reg[138]/CLR, CommonControlSignalGenerator/HoldGen/TriggerShift_reg[139]/CLR, CommonControlSignalGenerator/HoldGen/TriggerShift_reg[140]/CLR, CommonControlSignalGenerator/HoldGen/TriggerShift_reg[141]/CLR, CommonControlSignalGenerator/HoldGen/TriggerShift_reg[142]/CLR (the first 15 of 128 listed). The LUT may glitch and trigger an unexpected reset, even if it is a properly timed path.
 Related violations: <none>
 
 LUTAR-1#15 Warning
 LUT drives async reset alert  
-LUT cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD6_RD/U_RD_FIFO/SUBCORE_FIFO.xsdbm_v3_0_0_rdfifo_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gwrrd_rst_sync_stage[2].rrst_inst/ngwrdrst.grst.g7serrst.rd_rst_reg[2]_i_1__0, with 2 or more inputs, drives asynchronous reset pin(s) dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD6_RD/U_RD_FIFO/SUBCORE_FIFO.xsdbm_v3_0_0_rdfifo_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.rd_rst_reg_reg[0]/PRE, dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD6_RD/U_RD_FIFO/SUBCORE_FIFO.xsdbm_v3_0_0_rdfifo_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.rd_rst_reg_reg[1]/PRE, dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD6_RD/U_RD_FIFO/SUBCORE_FIFO.xsdbm_v3_0_0_rdfifo_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.rd_rst_reg_reg[2]/PRE. The LUT may glitch and trigger an unexpected reset, even if it is a properly timed path.
+LUT cell Command/SweepTestStartStopSet/CommandOut[0]_i_2__5, with 2 or more inputs, drives asynchronous reset pin(s) Command/SweepTestStartStopSet/CommandOut_reg[0]/CLR. The LUT may glitch and trigger an unexpected reset, even if it is a properly timed path.
 Related violations: <none>
 
 LUTAR-1#16 Warning
 LUT drives async reset alert  
-LUT cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD6_RD/U_RD_FIFO/SUBCORE_FIFO.xsdbm_v3_0_0_rdfifo_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gwrrd_rst_sync_stage[2].wrst_inst/ngwrdrst.grst.g7serrst.wr_rst_reg[2]_i_1__0, with 2 or more inputs, drives asynchronous reset pin(s) dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD6_RD/U_RD_FIFO/SUBCORE_FIFO.xsdbm_v3_0_0_rdfifo_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.wr_rst_reg_reg[0]/PRE, dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD6_RD/U_RD_FIFO/SUBCORE_FIFO.xsdbm_v3_0_0_rdfifo_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.wr_rst_reg_reg[1]/PRE, dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD6_RD/U_RD_FIFO/SUBCORE_FIFO.xsdbm_v3_0_0_rdfifo_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.wr_rst_reg_reg[2]/PRE. The LUT may glitch and trigger an unexpected reset, even if it is a properly timed path.
+LUT cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD6_RD/U_RD_FIFO/SUBCORE_FIFO.xsdbm_v3_0_0_rdfifo_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gwrrd_rst_sync_stage[2].rrst_inst/ngwrdrst.grst.g7serrst.rd_rst_reg[2]_i_1__0, with 2 or more inputs, drives asynchronous reset pin(s) dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD6_RD/U_RD_FIFO/SUBCORE_FIFO.xsdbm_v3_0_0_rdfifo_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.rd_rst_reg_reg[0]/PRE, dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD6_RD/U_RD_FIFO/SUBCORE_FIFO.xsdbm_v3_0_0_rdfifo_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.rd_rst_reg_reg[1]/PRE, dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD6_RD/U_RD_FIFO/SUBCORE_FIFO.xsdbm_v3_0_0_rdfifo_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.rd_rst_reg_reg[2]/PRE. The LUT may glitch and trigger an unexpected reset, even if it is a properly timed path.
 Related violations: <none>
 
 LUTAR-1#17 Warning
 LUT drives async reset alert  
-LUT cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD6_WR/U_WR_FIFO/SUBCORE_FIFO.xsdbm_v3_0_0_wrfifo_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gwrrd_rst_sync_stage[2].rrst_inst/ngwrdrst.grst.g7serrst.rd_rst_reg[2]_i_1, with 2 or more inputs, drives asynchronous reset pin(s) dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD6_WR/U_WR_FIFO/SUBCORE_FIFO.xsdbm_v3_0_0_wrfifo_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.rd_rst_reg_reg[0]/PRE, dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD6_WR/U_WR_FIFO/SUBCORE_FIFO.xsdbm_v3_0_0_wrfifo_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.rd_rst_reg_reg[1]/PRE, dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD6_WR/U_WR_FIFO/SUBCORE_FIFO.xsdbm_v3_0_0_wrfifo_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.rd_rst_reg_reg[2]/PRE. The LUT may glitch and trigger an unexpected reset, even if it is a properly timed path.
+LUT cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD6_RD/U_RD_FIFO/SUBCORE_FIFO.xsdbm_v3_0_0_rdfifo_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gwrrd_rst_sync_stage[2].wrst_inst/ngwrdrst.grst.g7serrst.wr_rst_reg[2]_i_1__0, with 2 or more inputs, drives asynchronous reset pin(s) dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD6_RD/U_RD_FIFO/SUBCORE_FIFO.xsdbm_v3_0_0_rdfifo_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.wr_rst_reg_reg[0]/PRE, dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD6_RD/U_RD_FIFO/SUBCORE_FIFO.xsdbm_v3_0_0_rdfifo_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.wr_rst_reg_reg[1]/PRE, dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD6_RD/U_RD_FIFO/SUBCORE_FIFO.xsdbm_v3_0_0_rdfifo_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.wr_rst_reg_reg[2]/PRE. The LUT may glitch and trigger an unexpected reset, even if it is a properly timed path.
 Related violations: <none>
 
 LUTAR-1#18 Warning
+LUT drives async reset alert  
+LUT cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD6_WR/U_WR_FIFO/SUBCORE_FIFO.xsdbm_v3_0_0_wrfifo_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gwrrd_rst_sync_stage[2].rrst_inst/ngwrdrst.grst.g7serrst.rd_rst_reg[2]_i_1, with 2 or more inputs, drives asynchronous reset pin(s) dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD6_WR/U_WR_FIFO/SUBCORE_FIFO.xsdbm_v3_0_0_wrfifo_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.rd_rst_reg_reg[0]/PRE, dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD6_WR/U_WR_FIFO/SUBCORE_FIFO.xsdbm_v3_0_0_wrfifo_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.rd_rst_reg_reg[1]/PRE, dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD6_WR/U_WR_FIFO/SUBCORE_FIFO.xsdbm_v3_0_0_wrfifo_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.rd_rst_reg_reg[2]/PRE. The LUT may glitch and trigger an unexpected reset, even if it is a properly timed path.
+Related violations: <none>
+
+LUTAR-1#19 Warning
 LUT drives async reset alert  
 LUT cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD6_WR/U_WR_FIFO/SUBCORE_FIFO.xsdbm_v3_0_0_wrfifo_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gwrrd_rst_sync_stage[2].wrst_inst/ngwrdrst.grst.g7serrst.wr_rst_reg[2]_i_1, with 2 or more inputs, drives asynchronous reset pin(s) dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD6_WR/U_WR_FIFO/SUBCORE_FIFO.xsdbm_v3_0_0_wrfifo_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.wr_rst_reg_reg[0]/PRE, dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD6_WR/U_WR_FIFO/SUBCORE_FIFO.xsdbm_v3_0_0_wrfifo_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.wr_rst_reg_reg[1]/PRE, dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD6_WR/U_WR_FIFO/SUBCORE_FIFO.xsdbm_v3_0_0_wrfifo_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.wr_rst_reg_reg[2]/PRE. The LUT may glitch and trigger an unexpected reset, even if it is a properly timed path.
 Related violations: <none>
 
 PDRC-190#1 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell Acquisition/AcquisitionDataSwitcher/MicrorocChain1DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d2_reg in site SLICE_X32Y87 is part of a synchronized register chain that is suboptimally placed as the load FDSE cell Acquisition/AcquisitionDataSwitcher/MicrorocChain1DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d3_reg is not placed in the same (SLICE) site.
+The FDRE cell Acquisition/AcquisitionDataSwitcher/MicrorocChain1DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d2_reg in site SLICE_X41Y66 is part of a synchronized register chain that is suboptimally placed as the load FDSE cell Acquisition/AcquisitionDataSwitcher/MicrorocChain1DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d3_reg is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#2 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell Acquisition/AcquisitionDataSwitcher/MicrorocChain2DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d2_reg in site SLICE_X29Y87 is part of a synchronized register chain that is suboptimally placed as the load FDSE cell Acquisition/AcquisitionDataSwitcher/MicrorocChain2DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d3_reg is not placed in the same (SLICE) site.
+The FDRE cell Acquisition/AcquisitionDataSwitcher/MicrorocChain2DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d2_reg in site SLICE_X37Y74 is part of a synchronized register chain that is suboptimally placed as the load FDSE cell Acquisition/AcquisitionDataSwitcher/MicrorocChain2DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d3_reg is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#3 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell Acquisition/AcquisitionDataSwitcher/MicrorocChain3DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d2_reg in site SLICE_X28Y90 is part of a synchronized register chain that is suboptimally placed as the load FDSE cell Acquisition/AcquisitionDataSwitcher/MicrorocChain3DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d3_reg is not placed in the same (SLICE) site.
+The FDRE cell Acquisition/AcquisitionDataSwitcher/MicrorocChain3DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d2_reg in site SLICE_X41Y68 is part of a synchronized register chain that is suboptimally placed as the load FDSE cell Acquisition/AcquisitionDataSwitcher/MicrorocChain3DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d3_reg is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#4 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell Acquisition/AcquisitionDataSwitcher/MicrorocChain4DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d2_reg in site SLICE_X30Y96 is part of a synchronized register chain that is suboptimally placed as the load FDSE cell Acquisition/AcquisitionDataSwitcher/MicrorocChain4DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d3_reg is not placed in the same (SLICE) site.
+The FDRE cell Acquisition/AcquisitionDataSwitcher/MicrorocChain4DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d2_reg in site SLICE_X47Y64 is part of a synchronized register chain that is suboptimally placed as the load FDSE cell Acquisition/AcquisitionDataSwitcher/MicrorocChain4DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d3_reg is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#5 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell Command/CommandFifo32Depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d2_reg in site SLICE_X78Y125 is part of a synchronized register chain that is suboptimally placed as the load FDSE cell Command/CommandFifo32Depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d3_reg is not placed in the same (SLICE) site.
+The FDRE cell Command/CommandFifo32Depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d2_reg in site SLICE_X81Y111 is part of a synchronized register chain that is suboptimally placed as the load FDSE cell Command/CommandFifo32Depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d3_reg is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#6 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell MicrorocChain1/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d2_reg in site SLICE_X32Y101 is part of a synchronized register chain that is suboptimally placed as the load FDSE cell MicrorocChain1/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d3_reg is not placed in the same (SLICE) site.
+The FDRE cell MicrorocChain1/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d2_reg in site SLICE_X69Y90 is part of a synchronized register chain that is suboptimally placed as the load FDSE cell MicrorocChain1/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d3_reg is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#7 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell MicrorocChain2/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d2_reg in site SLICE_X33Y109 is part of a synchronized register chain that is suboptimally placed as the load FDSE cell MicrorocChain2/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d3_reg is not placed in the same (SLICE) site.
+The FDRE cell MicrorocChain2/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d2_reg in site SLICE_X80Y93 is part of a synchronized register chain that is suboptimally placed as the load FDSE cell MicrorocChain2/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d3_reg is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#8 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell MicrorocChain3/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d2_reg in site SLICE_X14Y102 is part of a synchronized register chain that is suboptimally placed as the load FDSE cell MicrorocChain3/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d3_reg is not placed in the same (SLICE) site.
+The FDRE cell MicrorocChain3/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d2_reg in site SLICE_X66Y87 is part of a synchronized register chain that is suboptimally placed as the load FDSE cell MicrorocChain3/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d3_reg is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#9 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell MicrorocChain4/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d2_reg in site SLICE_X29Y119 is part of a synchronized register chain that is suboptimally placed as the load FDSE cell MicrorocChain4/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d3_reg is not placed in the same (SLICE) site.
+The FDRE cell MicrorocChain4/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d2_reg in site SLICE_X15Y96 is part of a synchronized register chain that is suboptimally placed as the load FDSE cell MicrorocChain4/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d3_reg is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#10 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d2_reg in site SLICE_X68Y107 is part of a synchronized register chain that is suboptimally placed as the load FDSE cell UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d3_reg is not placed in the same (SLICE) site.
+The FDRE cell UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d2_reg in site SLICE_X74Y80 is part of a synchronized register chain that is suboptimally placed as the load FDSE cell UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/grstd1.grst_full.grst_f.rst_d3_reg is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#11 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD2/stat_reg_reg[0] in site SLICE_X39Y47 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD2/stat_reg_1_reg[0] is not placed in the same (SLICE) site.
+The FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD2/stat_reg_reg[0] in site SLICE_X36Y76 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD2/stat_reg_1_reg[0] is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#12 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD2/stat_reg_reg[1] in site SLICE_X36Y48 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD2/stat_reg_1_reg[1] is not placed in the same (SLICE) site.
+The FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD2/stat_reg_reg[1] in site SLICE_X37Y77 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD2/stat_reg_1_reg[1] is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#13 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD2/stat_reg_reg[2] in site SLICE_X40Y46 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD2/stat_reg_1_reg[2] is not placed in the same (SLICE) site.
+The FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD2/stat_reg_reg[2] in site SLICE_X35Y77 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD2/stat_reg_1_reg[2] is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#14 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD2/stat_reg_reg[3] in site SLICE_X38Y46 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD2/stat_reg_1_reg[3] is not placed in the same (SLICE) site.
+The FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD2/stat_reg_reg[3] in site SLICE_X36Y78 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD2/stat_reg_1_reg[3] is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#15 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD3/stat_reg_reg[0] in site SLICE_X36Y46 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD3/stat_reg_1_reg[0] is not placed in the same (SLICE) site.
+The FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD3/stat_reg_reg[0] in site SLICE_X33Y78 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD3/stat_reg_1_reg[0] is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#16 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD3/stat_reg_reg[1] in site SLICE_X35Y46 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD3/stat_reg_1_reg[1] is not placed in the same (SLICE) site.
+The FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD3/stat_reg_reg[1] in site SLICE_X34Y79 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD3/stat_reg_1_reg[1] is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#17 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD3/stat_reg_reg[2] in site SLICE_X37Y46 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD3/stat_reg_1_reg[2] is not placed in the same (SLICE) site.
+The FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD3/stat_reg_reg[2] in site SLICE_X34Y77 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD3/stat_reg_1_reg[2] is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#18 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD4/shift_reg_in_reg[12] in site SLICE_X32Y47 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD4/shift_reg_in_reg[11] is not placed in the same (SLICE) site.
+The FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD4/shift_reg_in_reg[12] in site SLICE_X30Y77 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD4/shift_reg_in_reg[11] is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#19 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD4/shift_reg_in_reg[20] in site SLICE_X32Y46 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD4/shift_reg_in_reg[19] is not placed in the same (SLICE) site.
+The FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD4/shift_reg_in_reg[20] in site SLICE_X30Y76 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD4/shift_reg_in_reg[19] is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#20 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD4/shift_reg_in_reg[4] in site SLICE_X32Y48 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD4/shift_reg_in_reg[3] is not placed in the same (SLICE) site.
+The FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD4/shift_reg_in_reg[4] in site SLICE_X30Y78 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD4/shift_reg_in_reg[3] is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#21 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD5/shift_reg_in_reg[10] in site SLICE_X43Y49 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD5/shift_reg_in_reg[9] is not placed in the same (SLICE) site.
+The FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD5/shift_reg_in_reg[10] in site SLICE_X31Y68 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD5/shift_reg_in_reg[9] is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#22 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD5/shift_reg_in_reg[2] in site SLICE_X43Y50 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD5/shift_reg_in_reg[1] is not placed in the same (SLICE) site.
+The FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD5/shift_reg_in_reg[2] in site SLICE_X31Y69 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD5/shift_reg_in_reg[1] is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#23 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD7_CTL/shift_reg_in_reg[0] in site SLICE_X28Y49 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD7_STAT/stat_reg_reg[0] is not placed in the same (SLICE) site.
+The FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD7_CTL/shift_reg_in_reg[0] in site SLICE_X37Y79 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD7_STAT/stat_reg_reg[0] is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#24 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD7_STAT/stat_reg_reg[0] in site SLICE_X28Y50 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD7_STAT/stat_reg_1_reg[0] is not placed in the same (SLICE) site.
+The FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD7_STAT/stat_reg_reg[0] in site SLICE_X37Y80 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD7_STAT/stat_reg_1_reg[0] is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#25 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD7_STAT/stat_reg_reg[1] in site SLICE_X30Y49 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD7_STAT/stat_reg_1_reg[1] is not placed in the same (SLICE) site.
+The FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD7_STAT/stat_reg_reg[1] in site SLICE_X36Y82 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD7_STAT/stat_reg_1_reg[1] is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#26 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD7_STAT/stat_reg_reg[2] in site SLICE_X29Y49 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD7_STAT/stat_reg_1_reg[2] is not placed in the same (SLICE) site.
+The FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD7_STAT/stat_reg_reg[2] in site SLICE_X37Y82 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell dbg_hub/inst/BSCANID.u_xsdbm_id/CORE_XSDB.UUT_MASTER/U_ICON_INTERFACE/U_CMD7_STAT/stat_reg_1_reg[2] is not placed in the same (SLICE) site.
 Related violations: <none>
 
 TIMING-6#1 Warning
@@ -1302,205 +1307,230 @@ Related violations: <none>
 
 TIMING-18#69 Warning
 Missing input or output delay  
-An output delay is missing on EXT_TRIG_OUT relative to clock(s) Clk40M
+An output delay is missing on DIN relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#70 Warning
 Missing input or output delay  
-An output delay is missing on LED[0] relative to clock(s) Clk40M
+An output delay is missing on EXT_TRIG_OUT relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#71 Warning
 Missing input or output delay  
-An output delay is missing on LED[1] relative to clock(s) Clk40M
+An output delay is missing on LED[0] relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#72 Warning
 Missing input or output delay  
-An output delay is missing on LED[2] relative to clock(s) Clk40M
+An output delay is missing on LED[1] relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#73 Warning
 Missing input or output delay  
-An output delay is missing on LED[3] relative to clock(s) Clk40M
+An output delay is missing on LED[2] relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#74 Warning
 Missing input or output delay  
-An output delay is missing on LED[4] relative to clock(s) Clk40M
+An output delay is missing on LED[3] relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#75 Warning
 Missing input or output delay  
-An output delay is missing on LED[5] relative to clock(s) Clk40M
+An output delay is missing on LED[4] relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#76 Warning
 Missing input or output delay  
-An output delay is missing on LED[6] relative to clock(s) Clk40M
+An output delay is missing on LED[5] relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#77 Warning
 Missing input or output delay  
-An output delay is missing on LED[7] relative to clock(s) Clk40M
+An output delay is missing on LED[6] relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#78 Warning
 Missing input or output delay  
-An output delay is missing on PKTEND relative to clock(s) CLKOUT
+An output delay is missing on LED[7] relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#79 Warning
 Missing input or output delay  
-An output delay is missing on ROW[0] relative to clock(s) Clk40M
+An output delay is missing on PKTEND relative to clock(s) CLKOUT
 Related violations: <none>
 
 TIMING-18#80 Warning
 Missing input or output delay  
-An output delay is missing on ROW[1] relative to clock(s) Clk40M
+An output delay is missing on ROW[0] relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#81 Warning
 Missing input or output delay  
-An output delay is missing on ROW[2] relative to clock(s) Clk40M
+An output delay is missing on ROW[1] relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#82 Warning
 Missing input or output delay  
-An output delay is missing on SLOE relative to clock(s) CLKOUT
+An output delay is missing on ROW[2] relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#83 Warning
 Missing input or output delay  
-An output delay is missing on SLRD relative to clock(s) CLKOUT
+An output delay is missing on SCLK relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#84 Warning
 Missing input or output delay  
-An output delay is missing on SLWR relative to clock(s) CLKOUT
+An output delay is missing on SLOE relative to clock(s) CLKOUT
 Related violations: <none>
 
 TIMING-18#85 Warning
 Missing input or output delay  
-An output delay is missing on StartAcq_A relative to clock(s) Clk40M
+An output delay is missing on SLRD relative to clock(s) CLKOUT
 Related violations: <none>
 
 TIMING-18#86 Warning
 Missing input or output delay  
-An output delay is missing on StartAcq_B relative to clock(s) Clk40M
+An output delay is missing on SLWR relative to clock(s) CLKOUT
 Related violations: <none>
 
 TIMING-18#87 Warning
 Missing input or output delay  
-An output delay is missing on StartAcq_C relative to clock(s) Clk40M
+An output delay is missing on StartAcq_A relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#88 Warning
 Missing input or output delay  
-An output delay is missing on StartAcq_D relative to clock(s) Clk40M
+An output delay is missing on StartAcq_B relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#89 Warning
 Missing input or output delay  
-An output delay is missing on StartReadout1_A relative to clock(s) Clk40M
+An output delay is missing on StartAcq_C relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#90 Warning
 Missing input or output delay  
-An output delay is missing on StartReadout1_B relative to clock(s) Clk40M
+An output delay is missing on StartAcq_D relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#91 Warning
 Missing input or output delay  
-An output delay is missing on StartReadout1_C relative to clock(s) Clk40M
+An output delay is missing on StartReadout1_A relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#92 Warning
 Missing input or output delay  
-An output delay is missing on StartReadout1_D relative to clock(s) Clk40M
+An output delay is missing on StartReadout1_B relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#93 Warning
 Missing input or output delay  
-An output delay is missing on StartReadout2_A relative to clock(s) Clk40M
+An output delay is missing on StartReadout1_C relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#94 Warning
 Missing input or output delay  
-An output delay is missing on StartReadout2_B relative to clock(s) Clk40M
+An output delay is missing on StartReadout1_D relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#95 Warning
 Missing input or output delay  
-An output delay is missing on StartReadout2_C relative to clock(s) Clk40M
+An output delay is missing on StartReadout2_A relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#96 Warning
 Missing input or output delay  
-An output delay is missing on StartReadout2_D relative to clock(s) Clk40M
+An output delay is missing on StartReadout2_B relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#97 Warning
 Missing input or output delay  
-An output delay is missing on TP[0] relative to clock(s) Clk40M
+An output delay is missing on StartReadout2_C relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#98 Warning
 Missing input or output delay  
-An output delay is missing on TP[1] relative to clock(s) Clk40M
+An output delay is missing on StartReadout2_D relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#99 Warning
 Missing input or output delay  
-An output delay is missing on TP[2] relative to clock(s) Clk40M
+An output delay is missing on SwitcherOn_A relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#100 Warning
 Missing input or output delay  
-An output delay is missing on TP[3] relative to clock(s) Clk40M
+An output delay is missing on SwitcherOn_B relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#101 Warning
 Missing input or output delay  
-An output delay is missing on pwr_on_a relative to clock(s) Clk40M
+An output delay is missing on TP[0] relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#102 Warning
 Missing input or output delay  
-An output delay is missing on pwr_on_adc relative to clock(s) Clk40M
+An output delay is missing on TP[1] relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#103 Warning
 Missing input or output delay  
-An output delay is missing on pwr_on_d relative to clock(s) Clk40M
+An output delay is missing on TP[2] relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#104 Warning
 Missing input or output delay  
-An output delay is missing on pwr_on_dac relative to clock(s) Clk40M
+An output delay is missing on TP[3] relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#105 Warning
 Missing input or output delay  
-An output delay is missing on raz_chnn relative to clock(s) Clk40M
+An output delay is missing on nCS relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#106 Warning
 Missing input or output delay  
-An output delay is missing on raz_chnp relative to clock(s) Clk40M
+An output delay is missing on pwr_on_a relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#107 Warning
 Missing input or output delay  
-An output delay is missing on reset_b relative to clock(s) Clk40M
+An output delay is missing on pwr_on_adc relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#108 Warning
 Missing input or output delay  
-An output delay is missing on rst_counterb relative to clock(s) Clk40M
+An output delay is missing on pwr_on_d relative to clock(s) Clk40M
 Related violations: <none>
 
 TIMING-18#109 Warning
+Missing input or output delay  
+An output delay is missing on pwr_on_dac relative to clock(s) Clk40M
+Related violations: <none>
+
+TIMING-18#110 Warning
+Missing input or output delay  
+An output delay is missing on raz_chnn relative to clock(s) Clk40M
+Related violations: <none>
+
+TIMING-18#111 Warning
+Missing input or output delay  
+An output delay is missing on raz_chnp relative to clock(s) Clk40M
+Related violations: <none>
+
+TIMING-18#112 Warning
+Missing input or output delay  
+An output delay is missing on reset_b relative to clock(s) Clk40M
+Related violations: <none>
+
+TIMING-18#113 Warning
+Missing input or output delay  
+An output delay is missing on rst_counterb relative to clock(s) Clk40M
+Related violations: <none>
+
+TIMING-18#114 Warning
 Missing input or output delay  
 An output delay is missing on select relative to clock(s) Clk40M
 Related violations: <none>

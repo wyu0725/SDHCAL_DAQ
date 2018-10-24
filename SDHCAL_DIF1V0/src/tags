@@ -92,6 +92,30 @@ AsicNumber	SCurve_Test_Top.v	/^  input [2:0] AsicNumber,$/;"	p	language:Verilog	
 AsicNumberSet	CommandInterpreter.v	/^  output [3:0] AsicNumberSet,$/;"	p	language:Verilog	module:CommandInterpreter
 AsicNumberSet_CAND	CommandParameter.v	/^`define AsicNumberSet_CAND                         16'hA3E4$/;"	c	language:Verilog
 AsicRamReadout	AsicRamReadout.v	/^module AsicRamReadout($/;"	m	language:Verilog
+AutoCalibrationDac1Data	CommandInterpreter.v	/^  output [11:0] AutoCalibrationDac1Data,$/;"	p	language:Verilog	module:CommandInterpreter
+AutoCalibrationDac1Data11to8_CAND	CommandParameter.v	/^`define AutoCalibrationDac1Data11to8_CAND          16'hE450$/;"	c	language:Verilog
+AutoCalibrationDac1Data3to0_CAND	CommandParameter.v	/^`define AutoCalibrationDac1Data3to0_CAND           16'hE430$/;"	c	language:Verilog
+AutoCalibrationDac1Data7to4_CAND	CommandParameter.v	/^`define AutoCalibrationDac1Data7to4_CAND           16'hE440$/;"	c	language:Verilog
+AutoCalibrationDac2Data	CommandInterpreter.v	/^  output [11:0] AutoCalibrationDac2Data,$/;"	p	language:Verilog	module:CommandInterpreter
+AutoCalibrationDac2Data11to8_CAND	CommandParameter.v	/^`define AutoCalibrationDac2Data11to8_CAND          16'hE480$/;"	c	language:Verilog
+AutoCalibrationDac2Data3to0_CAND	CommandParameter.v	/^`define AutoCalibrationDac2Data3to0_CAND           16'hE460$/;"	c	language:Verilog
+AutoCalibrationDac2Data7to4_CAND	CommandParameter.v	/^`define AutoCalibrationDac2Data7to4_CAND           16'hE470$/;"	c	language:Verilog
+AutoCalibrationDacLoadSelect_CAND	CommandParameter.v	/^`define AutoCalibrationDacLoadSelect_CAND          16'hE490$/;"	c	language:Verilog
+AutoCalibrationDacLoadStart	CommandInterpreter.v	/^  output AutoCalibrationDacLoadStart,$/;"	p	language:Verilog	module:CommandInterpreter
+AutoCalibrationDacLoadStart_CAND	CommandParameter.v	/^`define AutoCalibrationDacLoadStart_CAND           16'hE5A0$/;"	c	language:Verilog
+AutoCalibrationDacPowerDown	CommandInterpreter.v	/^  output AutoCalibrationDacPowerDown,$/;"	p	language:Verilog	module:CommandInterpreter
+AutoCalibrationDacPowerDown_CAND	CommandParameter.v	/^`define AutoCalibrationDacPowerDown_CAND           16'hE410$/;"	c	language:Verilog
+AutoCalibrationDacSelect	CommandInterpreter.v	/^  output [1:0] AutoCalibrationDacSelect,$/;"	p	language:Verilog	module:CommandInterpreter
+AutoCalibrationDacSpeed	CommandInterpreter.v	/^  output AutoCalibrationDacSpeed,$/;"	p	language:Verilog	module:CommandInterpreter
+AutoCalibrationDacSpeed_CAND	CommandParameter.v	/^`define AutoCalibrationDacSpeed_CAND               16'hE420$/;"	c	language:Verilog
+AutoCalibrationSignalGen	AutoCalibrationSignalGen.v	/^module AutoCalibrationSignalGen($/;"	m	language:Verilog
+AutoCalibrationSwitcherOnTime	CommandInterpreter.v	/^  output [15:0] AutoCalibrationSwitcherOnTime,$/;"	p	language:Verilog	module:CommandInterpreter
+AutoCalibrationSwitcherOnTime11to8_CAND	CommandParameter.v	/^`define AutoCalibrationSwitcherOnTime11to8_CAND    16'hE5D0$/;"	c	language:Verilog
+AutoCalibrationSwitcherOnTime15to12_CAND	CommandParameter.v	/^`define AutoCalibrationSwitcherOnTime15to12_CAND   16'hE5E0$/;"	c	language:Verilog
+AutoCalibrationSwitcherOnTime3to0_CAND	CommandParameter.v	/^`define AutoCalibrationSwitcherOnTime3to0_CAND     16'hE5B0$/;"	c	language:Verilog
+AutoCalibrationSwitcherOnTime7to4_CAND	CommandParameter.v	/^`define AutoCalibrationSwitcherOnTime7to4_CAND     16'hE5C0$/;"	c	language:Verilog
+AutoCalibrationSwitcherSelect	CommandInterpreter.v	/^  output [1:0] AutoCalibrationSwitcherSelect,$/;"	p	language:Verilog	module:CommandInterpreter
+AutoCalibrationSwitcherSelect_CAND	CommandParameter.v	/^`define AutoCalibrationSwitcherSelect_CAND         16'hE5F0$/;"	c	language:Verilog
 AutoDaq	AutoDaq.v	/^module AutoDaq$/;"	m	language:Verilog
 AutoDaqAcquisitionModeSelect	CommandInterpreter.v	/^  output AutoDaqAcquisitionModeSelect,$/;"	p	language:Verilog	module:CommandInterpreter
 AutoDaqAcquisitionModeSelect_CAND	CommandParameter.v	/^`define AutoDaqAcquisitionModeSelect_CAND          16'hE360$/;"	c	language:Verilog
@@ -203,6 +227,7 @@ CTestOrInput	AcquisitionControl.v	/^  input CTestOrInput,$/;"	p	language:Verilog
 CTestOrInput	CommandInterpreter.v	/^  output CTestOrInput,$/;"	p	language:Verilog	module:CommandInterpreter
 CTestOrInputSelect_CAND	CommandParameter.v	/^`define CTestOrInputSelect_CAND                    16'hE061$/;"	c	language:Verilog
 CTest_CHN_PARAM_Input	SCurve_Test_Control.v	/^  localparam [63:0] CTest_CHN_PARAM_Input   = 64'h0;$/;"	c	language:Verilog	module:SCurve_Test_Control
+CalibrationSwitcherControl	CalibrationSwitcherControl.v	/^module CalibrationSwitcherControl($/;"	m	language:Verilog
 ChannelAdjust	MicrorocControl.v	/^  input [255:0] ChannelAdjust,              \/\/ MSB to LSB from channel0 to channel 63$/;"	p	language:Verilog	module:MicrorocControl
 ChannelAdjust	ParameterGenerator.v	/^	input [255:0] ChannelAdjust,\/\/ MSB to LSB from channel0 to channel 63$/;"	p	language:Verilog	module:ParameterGenerator
 ChannelAdjust	SlowControlAndReadScopeSet.v	/^  input [255:0] ChannelAdjust,              \/\/ MSB to LSB from channel0 to channel 63$/;"	p	language:Verilog	module:SlowControlAndReadScopeSet
@@ -245,7 +270,9 @@ Clk	ADC_AD9220.v	/^  input Clk,$/;"	p	language:Verilog	module:ADC_AD9220
 Clk	AcquisitionControl.v	/^  input Clk,$/;"	p	language:Verilog	module:AcquisitionControl
 Clk	AdcControl.v	/^    input Clk,$/;"	p	language:Verilog	module:AdcControl
 Clk	AsicRamReadout.v	/^  input Clk,$/;"	p	language:Verilog	module:AsicRamReadout
+Clk	AutoCalibrationSignalGen.v	/^  input Clk,$/;"	p	language:Verilog	module:AutoCalibrationSignalGen
 Clk	AutoDaq.v	/^  input Clk,                   \/\/ 40M$/;"	p	language:Verilog	module:AutoDaq
+Clk	CalibrationSwitcherControl.v	/^  input Clk,$/;"	p	language:Verilog	module:CalibrationSwitcherControl
 Clk	ChannelMaskSim.v	/^  input Clk,$/;"	p	language:Verilog	module:ChannelMaskSim
 Clk	ClockManagement.v	/^  output Clk,$/;"	p	language:Verilog	module:ClockManagement
 Clk	CommandDecoder.v	/^	input Clk,$/;"	p	language:Verilog	module:CommandDecoder
@@ -293,6 +320,14 @@ CommandAdcStartStop	AcquisitionControl.v	/^  input CommandAdcStartStop,$/;"	p	la
 CommandAdcStartStop	AcquisitionSwitcher.v	/^  input CommandAdcStartStop,$/;"	p	language:Verilog	module:AcquisitionSwitcher
 CommandAdcStartStop	FPGA_Top.v	/^  wire CommandAdcStartStop;$/;"	n	language:Verilog	module:FPGA_Top
 CommandAsicNumberSet	FPGA_Top.v	/^  wire [3:0] CommandAsicNumberSet;$/;"	n	language:Verilog	module:FPGA_Top
+CommandAutoCalibrationDac1Data	FPGA_Top.v	/^  wire [11:0] CommandAutoCalibrationDac1Data;$/;"	n	language:Verilog	module:FPGA_Top
+CommandAutoCalibrationDac2Data	FPGA_Top.v	/^  wire [11:0] CommandAutoCalibrationDac2Data;$/;"	n	language:Verilog	module:FPGA_Top
+CommandAutoCalibrationDacLoadStart	FPGA_Top.v	/^  wire CommandAutoCalibrationDacLoadStart;$/;"	n	language:Verilog	module:FPGA_Top
+CommandAutoCalibrationDacPowerDown	FPGA_Top.v	/^  wire CommandAutoCalibrationDacPowerDown;$/;"	n	language:Verilog	module:FPGA_Top
+CommandAutoCalibrationDacSelect	FPGA_Top.v	/^  wire [1:0] CommandAutoCalibrationDacSelect;$/;"	n	language:Verilog	module:FPGA_Top
+CommandAutoCalibrationDacSpeed	FPGA_Top.v	/^  wire CommandAutoCalibrationDacSpeed;$/;"	n	language:Verilog	module:FPGA_Top
+CommandAutoCalibrationSwitcherOnTime	FPGA_Top.v	/^  wire [15:0] CommandAutoCalibrationSwitcherOnTime;$/;"	n	language:Verilog	module:FPGA_Top
+CommandAutoCalibrationSwitcherSelect	FPGA_Top.v	/^  wire [1:0] CommandAutoCalibrationSwitcherSelect;$/;"	n	language:Verilog	module:FPGA_Top
 CommandAutoDaqAcquisitionModeSelect	FPGA_Top.v	/^  wire CommandAutoDaqAcquisitionModeSelect;$/;"	n	language:Verilog	module:FPGA_Top
 CommandAutoDaqTriggerDelayTime	FPGA_Top.v	/^  wire [15:0] CommandAutoDaqTriggerDelayTime;$/;"	n	language:Verilog	module:FPGA_Top
 CommandAutoDaqTriggerModeSelect	FPGA_Top.v	/^  wire CommandAutoDaqTriggerModeSelect;$/;"	n	language:Verilog	module:FPGA_Top
@@ -309,6 +344,7 @@ CommandFifoReadEn	CommandInterpreter.v	/^  reg CommandFifoReadEn;$/;"	r	language
 CommandFifoReadEnDelayed	ChannelMaskSim.v	/^  reg CommandFifoReadEnDelayed;$/;"	r	language:Verilog	module:ChannelMaskSim
 CommandFifoReadEnDelayed	CommandDecoder.v	/^	input CommandFifoReadEnDelayed,$/;"	p	language:Verilog	module:CommandDecoder
 CommandFifoReadEnDelayed	CommandInterpreter.v	/^  reg CommandFifoReadEnDelayed;$/;"	r	language:Verilog	module:CommandInterpreter
+CommandInternalSynchronousClockPeriod	FPGA_Top.v	/^  wire [15:0] CommandInternalSynchronousClockPeriod;$/;"	n	language:Verilog	module:FPGA_Top
 CommandInterpreter	CommandInterpreter.v	/^module CommandInterpreter($/;"	m	language:Verilog
 CommandMicrorocAcquisitionStartStop	AcquisitionControl.v	/^  input CommandMicrorocAcquisitionStartStop,$/;"	p	language:Verilog	module:AcquisitionControl
 CommandMicrorocAcquisitionStartStop	AcquisitionSwitcher.v	/^  input CommandMicrorocAcquisitionStartStop,$/;"	p	language:Verilog	module:AcquisitionSwitcher
@@ -423,7 +459,9 @@ DATA_OUT	SpiMaster.v	/^  DATA_OUT = 2'd2,$/;"	c	language:Verilog	module:SpiMaste
 DATA_OUT_ONCE	SCurve_Single_Test.v	/^                     DATA_OUT_ONCE = 3'd5,$/;"	c	language:Verilog	module:SCurve_Single_Test
 DATA_WIDTH	AsicRamReadout.v	/^  parameter DATA_WIDTH = 4'd15;$/;"	c	language:Verilog	module:AsicRamReadout
 DELAY_CONST	ExternalRazGenerate.v	/^	reg [5:0] DELAY_CONST;$/;"	r	language:Verilog	module:ExternalRazGenerate
+DIN	AutoCalibrationSignalGen.v	/^  output DIN,$/;"	p	language:Verilog	module:AutoCalibrationSignalGen
 DIN	DacControlTlv5618.v	/^  output DIN$/;"	p	language:Verilog	module:DacControlTlv5618
+DIN	FPGA_Top.v	/^  output DIN,$/;"	p	language:Verilog	module:FPGA_Top
 DISCRIMINATOR_MASK	SCurve_Test_Control.v	/^  localparam [191:0] DISCRIMINATOR_MASK     = {189'b0, 3'b111};$/;"	c	language:Verilog	module:SCurve_Test_Control
 DISCRIMINATOR_MASK_FILTER	SCurve_Test_Control.v	/^  DISCRIMINATOR_MASK_FILTER       = 5'd6,$/;"	c	language:Verilog	module:SCurve_Test_Control
 DONE	AdcControl.v	/^                     DONE = 3'd4;$/;"	c	language:Verilog	module:AdcControl
@@ -441,6 +479,7 @@ Dac0Vth3to0_CAND	CommandParameter.v	/^`define Dac0Vth3to0_CAND                  
 Dac0Vth7to4_CAND	CommandParameter.v	/^`define Dac0Vth7to4_CAND                           16'hC010$/;"	c	language:Verilog
 Dac0Vth9to8_CAND	CommandParameter.v	/^`define Dac0Vth9to8_CAND                           16'hC020$/;"	c	language:Verilog
 Dac0VthInternal	CommandInterpreter.v	/^  wire [9:0] Dac0VthInternal;$/;"	n	language:Verilog	module:CommandInterpreter
+Dac1Data	AutoCalibrationSignalGen.v	/^  input [11:0] Dac1Data,$/;"	p	language:Verilog	module:AutoCalibrationSignalGen
 Dac1Data	DacControlTlv5618.v	/^  input [11:0] Dac1Data,$/;"	p	language:Verilog	module:DacControlTlv5618
 Dac1Vth	MicrorocControl.v	/^  input [9:0] Dac1Vth,$/;"	p	language:Verilog	module:MicrorocControl
 Dac1Vth	ParameterGenerator.v	/^	input [9:0] Dac1Vth,$/;"	p	language:Verilog	module:ParameterGenerator
@@ -449,6 +488,7 @@ Dac1Vth3to0_CAND	CommandParameter.v	/^`define Dac1Vth3to0_CAND                  
 Dac1Vth7to4_CAND	CommandParameter.v	/^`define Dac1Vth7to4_CAND                           16'hC040$/;"	c	language:Verilog
 Dac1Vth9to8_CAND	CommandParameter.v	/^`define Dac1Vth9to8_CAND                           16'hC050$/;"	c	language:Verilog
 Dac1VthInternal	CommandInterpreter.v	/^  wire [9:0] Dac1VthInternal;$/;"	n	language:Verilog	module:CommandInterpreter
+Dac2Data	AutoCalibrationSignalGen.v	/^  input [11:0] Dac2Data,$/;"	p	language:Verilog	module:AutoCalibrationSignalGen
 Dac2Data	DacControlTlv5618.v	/^  input [11:0] Dac2Data,$/;"	p	language:Verilog	module:DacControlTlv5618
 Dac2Vth	MicrorocControl.v	/^  input [9:0] Dac2Vth,                      \/\/ MSB->LSB$/;"	p	language:Verilog	module:MicrorocControl
 Dac2Vth	ParameterGenerator.v	/^	input [9:0] Dac2Vth, \/\/ MSB->LSB$/;"	p	language:Verilog	module:ParameterGenerator
@@ -467,6 +507,7 @@ DacEnable	MicrorocControl.v	/^  input DacEnable,                          \/\/ D
 DacEnable	ParameterGenerator.v	/^	input DacEnable,$/;"	p	language:Verilog	module:ParameterGenerator
 DacEnable	SlowControlAndReadScopeSet.v	/^  input DacEnable,$/;"	p	language:Verilog	module:SlowControlAndReadScopeSet
 DacEnable_CAND	CommandParameter.v	/^`define DacEnable_CAND                             16'hA091$/;"	c	language:Verilog
+DacLoad	AutoCalibrationSignalGen.v	/^  input DacLoad,$/;"	p	language:Verilog	module:AutoCalibrationSignalGen
 DacLoadData	DacControlTlv5618.v	/^  reg [11:0] DacLoadData;$/;"	r	language:Verilog	module:DacControlTlv5618
 DacLoadDone	DacControlTlv5618.v	/^  output reg DacLoadDone,$/;"	p	language:Verilog	module:DacControlTlv5618
 DacLoadStart	DacControlTlv5618.v	/^  input DacLoadStart,$/;"	p	language:Verilog	module:DacControlTlv5618
@@ -650,6 +691,7 @@ ExternalRazSignalEnable_CAND	CommandParameter.v	/^`define ExternalRazSignalEnabl
 ExternalRaz_en	ExternalRazGenerate.v	/^	input ExternalRaz_en,$/;"	p	language:Verilog	module:ExternalRazGenerate
 ExternalRaz_en_Debug	ExternalRazGenerate.v	/^  (* MARK_DEBUG="true" *)wire ExternalRaz_en_Debug;$/;"	n	language:Verilog	module:ExternalRazGenerate
 ExternalSyncSignalIn	TriggerSwitcher.v	/^  input ExternalSyncSignalIn,$/;"	p	language:Verilog	module:TriggerSwitcher
+ExternalSynchronousSignalIn	FPGA_Top.v	/^  wire ExternalSynchronousSignalIn;$/;"	n	language:Verilog	module:FPGA_Top
 ExternalTrigger	DaqControl.v	/^  input ExternalTrigger$/;"	p	language:Verilog	module:DaqControl
 ExternalTrigger	DaqSwitcher.v	/^  input ExternalTrigger,$/;"	p	language:Verilog	module:DaqSwitcher
 ExternalTriggerEnable	MicrorocControl.v	/^  input ExternalTriggerEnable,              \/\/ Default: 1 Enable$/;"	p	language:Verilog	module:MicrorocControl
@@ -758,6 +800,7 @@ HoldTimeSet7to4_CAND	CommandParameter.v	/^`define HoldTimeSet7to4_CAND          
 Hold_reg1	AdcControl.v	/^    reg Hold_reg1;$/;"	r	language:Verilog	module:AdcControl
 Hold_reg2	AdcControl.v	/^    reg Hold_reg2;$/;"	r	language:Verilog	module:AdcControl
 IDLE	AdcControl.v	/^    localparam [2:0] IDLE = 3'd0,$/;"	c	language:Verilog	module:AdcControl
+IDLE	CalibrationSwitcherControl.v	/^  IDLE = 2'b00,$/;"	c	language:Verilog	module:CalibrationSwitcherControl
 IDLE	ChannelMaskSim.v	/^  localparam [2:0]  IDLE = 3'b000,$/;"	c	language:Verilog	module:ChannelMaskSim
 IDLE	CommandInterpreter.v	/^  localparam [2:0]  IDLE = 3'b000,$/;"	c	language:Verilog	module:CommandInterpreter
 IDLE	DacControlTlv5618.v	/^  IDLE = 3'd0,$/;"	c	language:Verilog	module:DacControlTlv5618
@@ -771,7 +814,6 @@ IFCLK	ClockManagement.v	/^  output IFCLK,$/;"	p	language:Verilog	module:ClockMan
 IFCLK	CommandInterpreter.v	/^  input IFCLK,$/;"	p	language:Verilog	module:CommandInterpreter
 IFCLK	FPGA_Top.v	/^  output IFCLK,$/;"	p	language:Verilog	module:FPGA_Top
 IFCLK	usb_synchronous_slavefifo.v	/^    input IFCLK,$/;"	p	language:Verilog	module:usb_synchronous_slavefifo
-INNER_CLOCK_PEROID	SCurve_Test_Top.v	/^  localparam [5:0] INNER_CLOCK_PEROID = 6'd22;$/;"	c	language:Verilog	module:SCurve_Test_Top
 Idle	ADC_AD9220.v	/^localparam [1:0] Idle = 2'b00,$/;"	c	language:Verilog	module:ADC_AD9220
 Idle	AutoDaq.v	/^  localparam [3:0] Idle = 4'd0,$/;"	c	language:Verilog	module:AutoDaq
 Idle	BitShiftOut.v	/^  localparam [2:0] Idle = 3'b000,$/;"	c	language:Verilog	module:BitShiftOut
@@ -779,8 +821,6 @@ Idle	ChannelMaskSim.v	/^  localparam Idle = 1'b0;$/;"	c	language:Verilog	module:
 Idle	CommandInterpreter.v	/^  localparam Idle = 1'b0;$/;"	c	language:Verilog	module:CommandInterpreter
 Idle	ParameterGenerator.v	/^	localparam [2:0] Idle = 3'd0,$/;"	c	language:Verilog	module:ParameterGenerator
 Idle	usb_synchronous_slavefifo.v	/^    localparam [2:0] Idle = 3'd0,$/;"	c	language:Verilog	module:usb_synchronous_slavefifo
-InnerClk	SCurve_Test_Top.v	/^  reg InnerClk;$/;"	r	language:Verilog	module:SCurve_Test_Top
-InnerClockCount	SCurve_Test_Top.v	/^  reg [5:0] InnerClockCount;$/;"	r	language:Verilog	module:SCurve_Test_Top
 InnerClockEnable	AcquisitionControl.v	/^  input InnerClockEnable,$/;"	p	language:Verilog	module:AcquisitionControl
 InnerClockEnable	SCurve_Test_Top.v	/^  input InnerClockEnable,$/;"	p	language:Verilog	module:SCurve_Test_Top
 InternalData_en	SlaveDaq.v	/^	reg InternalData_en;$/;"	r	language:Verilog	module:SlaveDaq
@@ -792,6 +832,14 @@ InternalRazSignalLength	MicrorocControl.v	/^  input [1:0] InternalRazSignalLengt
 InternalRazSignalLength	ParameterGenerator.v	/^	input [1:0] InternalRazSignalLength,\/\/ 00: 75ns, 01: 250ns, 10: 500ns, 11: 1us Default: 11$/;"	p	language:Verilog	module:ParameterGenerator
 InternalRazSignalLength	SlowControlAndReadScopeSet.v	/^  input [1:0] InternalRazSignalLength,      \/\/ 00: 75ns, 01: 250ns, 10: 500ns, 11: 1us Default/;"	p	language:Verilog	module:SlowControlAndReadScopeSet
 InternalRazSignalLength_CAND	CommandParameter.v	/^`define InternalRazSignalLength_CAND               16'hA0F3$/;"	c	language:Verilog
+InternalSynchronousClockPeriod	CommandInterpreter.v	/^  output [15:0] InternalSynchronousClockPeriod,$/;"	p	language:Verilog	module:CommandInterpreter
+InternalSynchronousClockPeriod11to8_CAND	CommandParameter.v	/^`define InternalSynchronousClockPeriod11to8_CAND   16'hE4F0$/;"	c	language:Verilog
+InternalSynchronousClockPeriod15to12_CAND	CommandParameter.v	/^`define InternalSynchronousClockPeriod15to12_CAND  16'hE400$/;"	c	language:Verilog
+InternalSynchronousClockPeriod3to0_CAND	CommandParameter.v	/^`define InternalSynchronousClockPeriod3to0_CAND    16'hE4DF$/;"	c	language:Verilog
+InternalSynchronousClockPeriod7to4_CAND	CommandParameter.v	/^`define InternalSynchronousClockPeriod7to4_CAND    16'hE4EF$/;"	c	language:Verilog
+InternalSynchronousSignalIn	AcquisitionControl.v	/^  input InternalSynchronousSignalIn,$/;"	p	language:Verilog	module:AcquisitionControl
+InternalSynchronousSignalIn	FPGA_Top.v	/^  wire InternalSynchronousSignalIn;$/;"	n	language:Verilog	module:FPGA_Top
+InternalSynchronousSignalIn	SCurve_Test_Top.v	/^  input InternalSynchronousSignalIn,$/;"	p	language:Verilog	module:SCurve_Test_Top
 InternalTrigger0	TriggerSwitcher.v	/^  reg InternalTrigger0;$/;"	r	language:Verilog	module:TriggerSwitcher
 InternalTrigger1	TriggerSwitcher.v	/^  reg InternalTrigger1;$/;"	r	language:Verilog	module:TriggerSwitcher
 InternalTrigger2	TriggerSwitcher.v	/^  reg InternalTrigger2;$/;"	r	language:Verilog	module:TriggerSwitcher
@@ -810,6 +858,7 @@ LatchedOrDirectOutput	SlowControlAndReadScopeSet.v	/^  input LatchedOrDirectOutp
 LatchedOrDirectOutput_CAND	CommandParameter.v	/^`define LatchedOrDirectOutput_CAND                 16'hA101$/;"	c	language:Verilog
 LightLed_CAND	CommandParameter.v	/^`define LightLed_CAND                              16'hB000$/;"	c	language:Verilog
 LoadAsicNumberCount	SCurve_Test_Control.v	/^  reg [2:0]   LoadAsicNumberCount;$/;"	r	language:Verilog	module:SCurve_Test_Control
+LoadDacSelect	AutoCalibrationSignalGen.v	/^  input [1:0] LoadDacSelect,$/;"	p	language:Verilog	module:AutoCalibrationSignalGen
 LoadDacSelect	DacControlTlv5618.v	/^  input [1:0] LoadDacSelect,$/;"	p	language:Verilog	module:DacControlTlv5618
 LowGainShaperFeedbackSelect	MicrorocControl.v	/^  input [1:0] LowGainShaperFeedbackSelect,  \/\/ Default: 10$/;"	p	language:Verilog	module:MicrorocControl
 LowGainShaperFeedbackSelect	ParameterGenerator.v	/^	input [1:0] LowGainShaperFeedbackSelect, \/\/ Default: 101$/;"	p	language:Verilog	module:ParameterGenerator
@@ -1208,6 +1257,7 @@ ParameterLoadStart	MicrorocControl.v	/^  input ParameterLoadStart,$/;"	p	languag
 ParameterLoadStart	ParameterGenerator.v	/^	input ParameterLoadStart,$/;"	p	language:Verilog	module:ParameterGenerator
 ParameterLoadStart	SlowControlAndReadScopeSet.v	/^  input ParameterLoadStart,$/;"	p	language:Verilog	module:SlowControlAndReadScopeSet
 ParameterLoadStart_CAND	CommandParameter.v	/^`define ParameterLoadStart_CAND                    16'hD0A0$/;"	c	language:Verilog
+PowerDown	AutoCalibrationSignalGen.v	/^  input PowerDown,$/;"	p	language:Verilog	module:AutoCalibrationSignalGen
 PowerDown	DacControlTlv5618.v	/^  input PowerDown,\/\/ 1 -> power down, 0 -> normal mode$/;"	p	language:Verilog	module:DacControlTlv5618
 PowerOnA	AutoDaq.v	/^  reg PowerOnA;$/;"	r	language:Verilog	module:AutoDaq
 PowerOnAdc	FPGA_Top.v	/^  wire [3:0] PowerOnAdc;$/;"	n	language:Verilog	module:FPGA_Top
@@ -1312,7 +1362,9 @@ ResetTrigCount_n	SlaveDaq.v	/^	reg ResetTrigCount_n;$/;"	r	language:Verilog	modu
 Reset_b	AutoDaq.v	/^  output reg Reset_b,          \/\/ Reset ASIC digital part$/;"	p	language:Verilog	module:AutoDaq
 RowSelect	CommandInterpreter.v	/^  output [2:0] RowSelect,$/;"	p	language:Verilog	module:CommandInterpreter
 RunningModeSelect_CAND	CommandParameter.v	/^`define RunningModeSelect_CAND                     16'hE0A0$/;"	c	language:Verilog
+SCLK	AutoCalibrationSignalGen.v	/^  output SCLK,$/;"	p	language:Verilog	module:AutoCalibrationSignalGen
 SCLK	DacControlTlv5618.v	/^  output SCLK,$/;"	p	language:Verilog	module:DacControlTlv5618
+SCLK	FPGA_Top.v	/^  output SCLK,$/;"	p	language:Verilog	module:FPGA_Top
 SCLK	SpiMaster.v	/^  output reg SCLK,$/;"	p	language:Verilog	module:SpiMaster
 SCParamLoadDebug	SCurve_Test_Control.v	/^  (*mark_debug = "true"*)wire SCParamLoadDebug;$/;"	n	language:Verilog	module:SCurve_Test_Control
 SCTestStateDebug	SCurve_Test_Control.v	/^  (*mark_debug = "true"*)wire[4:0] SCTestStateDebug;$/;"	n	language:Verilog	module:SCurve_Test_Control
@@ -1343,7 +1395,7 @@ SCurveTestForceExternalRaz	AcquisitionControl.v	/^  wire SCurveTestForceExternal
 SCurveTestForceExternalRaz	AcquisitionSwitcher.v	/^  input SCurveTestForceExternalRaz,$/;"	p	language:Verilog	module:AcquisitionSwitcher
 SCurveTestForceExternalRaz	FPGA_Top.v	/^  wire SCurveTestForceExternalRaz;$/;"	n	language:Verilog	module:FPGA_Top
 SCurveTestInnerClockEnable	CommandInterpreter.v	/^  output SCurveTestInnerClockEnable,$/;"	p	language:Verilog	module:CommandInterpreter
-SCurveTestInnerClockEnable_CAND	CommandParameter.v	/^`define SCurveTestInnerClockEnable_CAND 16'hE4C0$/;"	c	language:Verilog
+SCurveTestInnerClockEnable_CAND	CommandParameter.v	/^`define SCurveTestInnerClockEnable_CAND            16'hE4C0$/;"	c	language:Verilog
 SCurveTestMicrorocCTestChannel	AcquisitionControl.v	/^  wire [63:0] SCurveTestMicrorocCTestChannel;$/;"	n	language:Verilog	module:AcquisitionControl
 SCurveTestMicrorocCTestChannel	AcquisitionSwitcher.v	/^  input [63:0] SCurveTestMicrorocCTestChannel,$/;"	p	language:Verilog	module:AcquisitionSwitcher
 SCurveTestMicrorocChannelDiscriminatorMask	AcquisitionControl.v	/^  wire [191:0] SCurveTestMicrorocChannelDiscriminatorMask;$/;"	n	language:Verilog	module:AcquisitionControl
@@ -1406,6 +1458,7 @@ START_READOUT1	Redundancy.v	/^	output START_READOUT1,$/;"	p	language:Verilog	mod
 START_READOUT2	MicrorocControl.v	/^  output START_READOUT2,$/;"	p	language:Verilog	module:MicrorocControl
 START_READOUT2	Redundancy.v	/^	output START_READOUT2,$/;"	p	language:Verilog	module:Redundancy
 START_SCURVE_TEST	SCurve_Test_Control.v	/^  START_SCURVE_TEST               = 5'd10,$/;"	c	language:Verilog	module:SCurve_Test_Control
+SWITCHER_ON	CalibrationSwitcherControl.v	/^  SWITCHER_ON = 2'b10;$/;"	c	language:Verilog	module:CalibrationSwitcherControl
 SerialClock	BitShiftOut.v	/^  output SerialClock,$/;"	p	language:Verilog	module:BitShiftOut
 SerialData	DacControlTlv5618.v	/^  reg [15:0] SerialData;$/;"	r	language:Verilog	module:DacControlTlv5618
 SerialData	SpiMaster.v	/^  input [15:0] SerialData,$/;"	p	language:Verilog	module:SpiMaster
@@ -1503,6 +1556,7 @@ SlowTriggerSync	AutoDaq.v	/^  reg SlowTriggerSync;$/;"	r	language:Verilog	module
 SlowTriggerSync1	AutoDaq.v	/^  reg SlowTriggerSync1;$/;"	r	language:Verilog	module:AutoDaq
 SlowTriggerSync2	AutoDaq.v	/^  reg SlowTriggerSync2;$/;"	r	language:Verilog	module:AutoDaq
 SlowTriggerSync3	AutoDaq.v	/^  wire SlowTriggerSync3 = SlowTriggerSync1 & (~SlowTriggerSync2); \/\/ Rising edge$/;"	n	language:Verilog	module:AutoDaq
+Speed	AutoCalibrationSignalGen.v	/^  input Speed,$/;"	p	language:Verilog	module:AutoCalibrationSignalGen
 Speed	DacControlTlv5618.v	/^  input Speed,  \/\/ 1 -> fast mode, 0 -> slow mode$/;"	p	language:Verilog	module:DacControlTlv5618
 SpiMaster	SpiMaster.v	/^module SpiMaster($/;"	m	language:Verilog
 SpiReset_n	DacControlTlv5618.v	/^  reg SpiReset_n;$/;"	r	language:Verilog	module:DacControlTlv5618
@@ -1542,6 +1596,7 @@ State	ADC_AD9220.v	/^reg [1:0] State;$/;"	r	language:Verilog	module:ADC_AD9220
 State	AdcControl.v	/^    reg [2:0] State;$/;"	r	language:Verilog	module:AdcControl
 State	AutoDaq.v	/^  reg [3:0] State;$/;"	r	language:Verilog	module:AutoDaq
 State	BitShiftOut.v	/^  reg [2:0] State;$/;"	r	language:Verilog	module:BitShiftOut
+State	CalibrationSwitcherControl.v	/^  reg [1:0] State;$/;"	r	language:Verilog	module:CalibrationSwitcherControl
 State	ChannelMaskSim.v	/^  reg State;$/;"	r	language:Verilog	module:ChannelMaskSim
 State	CommandInterpreter.v	/^  reg State;$/;"	r	language:Verilog	module:CommandInterpreter
 State	DacControlTlv5618.v	/^  reg [2:0] State;$/;"	r	language:Verilog	module:DacControlTlv5618
@@ -1570,15 +1625,32 @@ SweepTestDataTransmitDone	CommandInterpreter.v	/^  wire SweepTestDataTransmitDon
 SweepTestDone	CommandInterpreter.v	/^  input SweepTestDone,$/;"	p	language:Verilog	module:CommandInterpreter
 SweepTestStartStop	CommandInterpreter.v	/^  output SweepTestStartStop,$/;"	p	language:Verilog	module:CommandInterpreter
 SweepTestStartStop_CAND	CommandParameter.v	/^`define SweepTestStartStop_CAND                    16'hF0A0$/;"	c	language:Verilog
+SwitcherCounter	CalibrationSwitcherControl.v	/^  reg [15:0] SwitcherCounter;$/;"	r	language:Verilog	module:CalibrationSwitcherControl
+SwitcherEnable	CalibrationSwitcherControl.v	/^  input SwitcherEnable,$/;"	p	language:Verilog	module:CalibrationSwitcherControl
+SwitcherIn	CalibrationSwitcherControl.v	/^  output reg SwitcherIn$/;"	p	language:Verilog	module:CalibrationSwitcherControl
+SwitcherOnTime	AutoCalibrationSignalGen.v	/^  input [15:0] SwitcherOnTime,$/;"	p	language:Verilog	module:AutoCalibrationSignalGen
+SwitcherOnTime	CalibrationSwitcherControl.v	/^  input [15:0] SwitcherOnTime,$/;"	p	language:Verilog	module:CalibrationSwitcherControl
+SwitcherOn_A	AutoCalibrationSignalGen.v	/^  output SwitcherOn_A,$/;"	p	language:Verilog	module:AutoCalibrationSignalGen
+SwitcherOn_A	FPGA_Top.v	/^  output SwitcherOn_A,$/;"	p	language:Verilog	module:FPGA_Top
+SwitcherOn_B	AutoCalibrationSignalGen.v	/^  output SwitcherOn_B$/;"	p	language:Verilog	module:AutoCalibrationSignalGen
+SwitcherOn_B	FPGA_Top.v	/^  output SwitcherOn_B,$/;"	p	language:Verilog	module:FPGA_Top
+SwitcherSelect	AutoCalibrationSignalGen.v	/^  input [1:0] SwitcherSelect,$/;"	p	language:Verilog	module:AutoCalibrationSignalGen
 SyncClk	ClockManagement.v	/^  output SyncClk,$/;"	p	language:Verilog	module:ClockManagement
 SyncClk	FPGA_Top.v	/^  wire SyncClk;$/;"	n	language:Verilog	module:FPGA_Top
 SyncClk	HoldGenerate.v	/^	input SyncClk,$/;"	p	language:Verilog	module:HoldGenerate
 SyncClk	MicrorocCommonControl.v	/^  input SyncClk,$/;"	p	language:Verilog	module:MicrorocCommonControl
 SyncClk	TriggerSwitcher.v	/^  input SyncClk,$/;"	p	language:Verilog	module:TriggerSwitcher
+SyncClock	AutoCalibrationSignalGen.v	/^  reg SyncClock;$/;"	r	language:Verilog	module:AutoCalibrationSignalGen
+SyncClock	CalibrationSwitcherControl.v	/^  input SyncClock,$/;"	p	language:Verilog	module:CalibrationSwitcherControl
+SyncClockDelay	AutoCalibrationSignalGen.v	/^  reg [1:0] SyncClockDelay;$/;"	r	language:Verilog	module:AutoCalibrationSignalGen
+SyncClockRising	CalibrationSwitcherControl.v	/^  wire SyncClockRising = (SyncClock_r == 2'b01);$/;"	n	language:Verilog	module:CalibrationSwitcherControl
+SyncClock_r	CalibrationSwitcherControl.v	/^  reg [1:0] SyncClock_r;$/;"	r	language:Verilog	module:CalibrationSwitcherControl
 SyncSignalOut	TriggerSwitcher.v	/^  output SyncSignalOut$/;"	p	language:Verilog	module:TriggerSwitcher
+SynchronousClock	AutoCalibrationSignalGen.v	/^  output SynchronousClock,$/;"	p	language:Verilog	module:AutoCalibrationSignalGen
+SynchronousClockPeroid	AutoCalibrationSignalGen.v	/^  input [15:0] SynchronousClockPeroid,$/;"	p	language:Verilog	module:AutoCalibrationSignalGen
+SynchronousCounter	AutoCalibrationSignalGen.v	/^  reg [15:0] SynchronousCounter;$/;"	r	language:Verilog	module:AutoCalibrationSignalGen
 SynchronousReg	PulseSynchronous.v	/^	reg [2:0] SynchronousReg;$/;"	r	language:Verilog	module:PulseSynchronous
 SynchronousSignalIn	AcquisitionControl.v	/^  input SynchronousSignalIn,$/;"	p	language:Verilog	module:AcquisitionControl
-SynchronousSignalIn	FPGA_Top.v	/^  wire SynchronousSignalIn;$/;"	n	language:Verilog	module:FPGA_Top
 TAIL_OUT	SCurve_Test_Control.v	/^  TAIL_OUT                        = 5'd17,$/;"	c	language:Verilog	module:SCurve_Test_Control
 TEST_DONE	SCurve_Single_Test.v	/^                     TEST_DONE = 3'd3,$/;"	c	language:Verilog	module:SCurve_Single_Test
 TEST_PROCESS	SCurve_Single_Test.v	/^                     TEST_PROCESS = 3'd2,$/;"	c	language:Verilog	module:SCurve_Single_Test
@@ -1684,7 +1756,7 @@ TriggerIn2	ExternalRazGenerate.v	/^	reg TriggerIn2;$/;"	r	language:Verilog	modul
 TriggerInRise	ExternalRazGenerate.v	/^	wire TriggerInRise;$/;"	n	language:Verilog	module:ExternalRazGenerate
 TriggerInRise_Debug	ExternalRazGenerate.v	/^  (* MARK_DEBUG="true" *)wire TriggerInRise_Debug;$/;"	n	language:Verilog	module:ExternalRazGenerate
 TriggerIn_Debug	ExternalRazGenerate.v	/^  (* MARK_DEBUG="true" *)wire TriggerIn_Debug;$/;"	n	language:Verilog	module:ExternalRazGenerate
-TriggerModeClock	SCurve_Test_Top.v	/^  wire TriggerModeClock = InnerClockEnable ? InnerClk : CLK_EXT;$/;"	n	language:Verilog	module:SCurve_Test_Top
+TriggerModeClock	SCurve_Test_Top.v	/^  wire TriggerModeClock = InnerClockEnable ? InternalSynchronousSignalIn : CLK_EXT;$/;"	n	language:Verilog	module:SCurve_Test_Top
 TriggerModeSelect	AutoDaq.v	/^  input TriggerModeSelect,     \/\/ Low: Trigger Mode, AcquisitionModeSelect == 1, TriggerModeSe/;"	p	language:Verilog	module:AutoDaq
 TriggerModeSelect	DaqControl.v	/^  input TriggerModeSelect,$/;"	p	language:Verilog	module:DaqControl
 TriggerModeSelect	MicrorocControl.v	/^  input TriggerModeSelect,$/;"	p	language:Verilog	module:MicrorocControl
@@ -1755,6 +1827,7 @@ WAIT_LOAD_SC_PARAM_DONE	SCurve_Test_Control.v	/^  WAIT_LOAD_SC_PARAM_DONE       
 WAIT_READ	AutoDaq.v	/^  WAIT_READ = 4'd9,$/;"	c	language:Verilog	module:AutoDaq
 WAIT_READ	SlaveDaq.v	/^	WAIT_READ = 5'd6,$/;"	c	language:Verilog	module:SlaveDaq
 WAIT_READ_DONE	SlaveDaq.v	/^	WAIT_READ_DONE = 5'd8,$/;"	c	language:Verilog	module:SlaveDaq
+WAIT_START	CalibrationSwitcherControl.v	/^  WAIT_START = 2'b01,$/;"	c	language:Verilog	module:CalibrationSwitcherControl
 WAIT_START	SlaveDaq.v	/^	WAIT_START = 5'd4,$/;"	c	language:Verilog	module:SlaveDaq
 WAIT_TAIL_WRITE	SCurve_Test_Control.v	/^  WAIT_TAIL_WRITE                 = 5'd18,$/;"	c	language:Verilog	module:SCurve_Test_Control
 WAIT_TRIGGER	AutoDaq.v	/^  WAIT_TRIGGER = 4'd2,$/;"	c	language:Verilog	module:AutoDaq
@@ -1787,7 +1860,9 @@ fifo_full	SCurve_Test_Top.v	/^  wire fifo_full;$/;"	n	language:Verilog	module:SC
 hold	FPGA_Top.v	/^  output hold,$/;"	p	language:Verilog	module:FPGA_Top
 in_from_ext_fifo_dout	usb_synchronous_slavefifo.v	/^    input [15:0] in_from_ext_fifo_dout,$/;"	p	language:Verilog	module:usb_synchronous_slavefifo
 in_from_ext_fifo_empty	usb_synchronous_slavefifo.v	/^    input in_from_ext_fifo_empty,$/;"	p	language:Verilog	module:usb_synchronous_slavefifo
+nCS	AutoCalibrationSignalGen.v	/^  output nCS,$/;"	p	language:Verilog	module:AutoCalibrationSignalGen
 nCS	DacControlTlv5618.v	/^  output nCS,$/;"	p	language:Verilog	module:DacControlTlv5618
+nCS	FPGA_Top.v	/^  output nCS,$/;"	p	language:Verilog	module:FPGA_Top
 nCS	SpiMaster.v	/^  output reg nCS$/;"	p	language:Verilog	module:SpiMaster
 nPKTEND	AcquisitionControl.v	/^  input nPKTEND,$/;"	p	language:Verilog	module:AcquisitionControl
 nPKTEND	FPGA_Top.v	/^  wire nPKTEND;$/;"	n	language:Verilog	module:FPGA_Top
@@ -1832,8 +1907,10 @@ reset_n	ADC_AD9220.v	/^  input reset_n,$/;"	p	language:Verilog	module:ADC_AD9220
 reset_n	AcquisitionControl.v	/^  input reset_n,$/;"	p	language:Verilog	module:AcquisitionControl
 reset_n	AdcControl.v	/^    input reset_n,$/;"	p	language:Verilog	module:AdcControl
 reset_n	AsicRamReadout.v	/^  input reset_n,$/;"	p	language:Verilog	module:AsicRamReadout
+reset_n	AutoCalibrationSignalGen.v	/^  input reset_n,$/;"	p	language:Verilog	module:AutoCalibrationSignalGen
 reset_n	AutoDaq.v	/^  input reset_n,$/;"	p	language:Verilog	module:AutoDaq
 reset_n	BitShiftOut.v	/^  input reset_n,$/;"	p	language:Verilog	module:BitShiftOut
+reset_n	CalibrationSwitcherControl.v	/^  input reset_n,$/;"	p	language:Verilog	module:CalibrationSwitcherControl
 reset_n	ChannelMaskSim.v	/^  input reset_n,$/;"	p	language:Verilog	module:ChannelMaskSim
 reset_n	ClockManagement.v	/^  output reset_n,$/;"	p	language:Verilog	module:ClockManagement
 reset_n	CommandDecoder.v	/^	input reset_n,$/;"	p	language:Verilog	module:CommandDecoder

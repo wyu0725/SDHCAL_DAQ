@@ -131,7 +131,26 @@
 `define AutoDaqTriggerDelayTime7to4_CAND           16'hE390
 `define AutoDaqTriggerDelayTime11to8_CAND          16'hE4A0
 `define AutoDaqTriggerDelayTime15to12_CAND         16'hE4B0
-`define SCurveTestInnerClockEnable_CAND 16'hE4C0
+`define SCurveTestInnerClockEnable_CAND            16'hE4C0
+`define InternalSynchronousClockPeriod3to0_CAND    16'hE4DF
+`define InternalSynchronousClockPeriod7to4_CAND    16'hE4EF
+`define InternalSynchronousClockPeriod11to8_CAND   16'hE4F0
+`define InternalSynchronousClockPeriod15to12_CAND  16'hE400
+`define AutoCalibrationDacPowerDown_CAND           16'hE410
+`define AutoCalibrationDacSpeed_CAND               16'hE420
+`define AutoCalibrationDac1Data3to0_CAND           16'hE430
+`define AutoCalibrationDac1Data7to4_CAND           16'hE440
+`define AutoCalibrationDac1Data11to8_CAND          16'hE450
+`define AutoCalibrationDac2Data3to0_CAND           16'hE460
+`define AutoCalibrationDac2Data7to4_CAND           16'hE470
+`define AutoCalibrationDac2Data11to8_CAND          16'hE480
+`define AutoCalibrationDacLoadSelect_CAND          16'hE490
+`define AutoCalibrationDacLoadStart_CAND           16'hE5A0
+`define AutoCalibrationSwitcherOnTime3to0_CAND     16'hE5B0
+`define AutoCalibrationSwitcherOnTime7to4_CAND     16'hE5C0
+`define AutoCalibrationSwitcherOnTime11to8_CAND    16'hE5D0
+`define AutoCalibrationSwitcherOnTime15to12_CAND   16'hE5E0
+`define AutoCalibrationSwitcherSelect_CAND         16'hE5F0
 
 `define AcquisitionStartStop_CAND                  16'hF0F0
 `define ResetDataFifo_CAND                         16'hF1A0

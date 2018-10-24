@@ -168,6 +168,16 @@ module CommandInterpreter(
   output ResetSCurveTest,
   // Trigger Suppress
   output [19:0] SCurveTestTriggerSuppressWidth,
+  // AutoCalibration ports
+  output [15:0] InternalSynchronousClockPeriod,
+  output AutoCalibrationDacPowerDown,
+  output AutoCalibrationDacSpeed,
+  output [11:0] AutoCalibrationDac1Data,
+  output [11:0] AutoCalibrationDac2Data,
+  output [1:0] AutoCalibrationDacSelect,
+  output AutoCalibrationDacLoadStart,
+  output [15:0] AutoCalibrationSwitcherOnTime,
+  output [1:0] AutoCalibrationSwitcherSelect,
   // LED
   output [3:0] LED
   );
@@ -2758,19 +2768,320 @@ module CommandInterpreter(
 
     // SCurveTest InnerClockEnable default E4C0
     CommandDecoder
-      #(
-		    .LEVEL_OR_PULSE(1'b1),
-		    .COMMAND_WIDTH(2'b0),
-		    .COMMAND_ADDRESS_AND_DEFAULT(`SCurveTestInnerClockEnable_CAND)
-	    )
+    #(
+      .LEVEL_OR_PULSE(1'b1),
+      .COMMAND_WIDTH(2'b0),
+      .COMMAND_ADDRESS_AND_DEFAULT(`SCurveTestInnerClockEnable_CAND)
+    )
     EnableSCurveInnerClock(
-	    .Clk(Clk),
-	    .reset_n(reset_n),
-	    .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
-	    .COMMAND_WORD(COMMAND_WORD),
-	    // input [COMMAND_WIDTH:0] DefaultValue,
-	    .CommandOut(SCurveTestInnerClockEnable)
-	    );
+      .Clk(Clk),
+      .reset_n(reset_n),
+      .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
+      .COMMAND_WORD(COMMAND_WORD),
+      // input [COMMAND_WIDTH:0] DefaultValue,
+      .CommandOut(SCurveTestInnerClockEnable)
+      );
+
+    // Internal Synchronous Clock Period 16bits
+    // [3:0] E4DF
+    // [7:4] E4EF
+    // [11:8] E4F0
+    // [15:12] E400
+    CommandDecoder
+    #(
+      .LEVEL_OR_PULSE(1'b1),
+      .COMMAND_WIDTH(2'b11),
+      .COMMAND_ADDRESS_AND_DEFAULT(`InternalSynchronousClockPeriod3to0_CAND)
+    )
+    SetInternalSynchronousClockPeriod3to0(
+      .Clk(Clk),
+      .reset_n(reset_n),
+      .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
+      .COMMAND_WORD(COMMAND_WORD),
+      // input [COMMAND_WIDTH:0] DefaultValue,
+      .CommandOut(InternalSynchronousClockPeriod[3:0])
+      );
+    CommandDecoder
+    #(
+      .LEVEL_OR_PULSE(1'b1),
+      .COMMAND_WIDTH(2'b11),
+      .COMMAND_ADDRESS_AND_DEFAULT(`InternalSynchronousClockPeriod7to4_CAND)
+    )
+    SetInternalSynchronousClockPeriod7to4(
+      .Clk(Clk),
+      .reset_n(reset_n),
+      .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
+      .COMMAND_WORD(COMMAND_WORD),
+      // input [COMMAND_WIDTH:0] DefaultValue,
+      .CommandOut(InternalSynchronousClockPeriod[7:4])
+      );
+    CommandDecoder
+    #(
+      .LEVEL_OR_PULSE(1'b1),
+      .COMMAND_WIDTH(2'b11),
+      .COMMAND_ADDRESS_AND_DEFAULT(`InternalSynchronousClockPeriod11to8_CAND)
+    )
+    SetInternalSynchronousClockPeriod11to8(
+      .Clk(Clk),
+      .reset_n(reset_n),
+      .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
+      .COMMAND_WORD(COMMAND_WORD),
+      // input [COMMAND_WIDTH:0] DefaultValue,
+      .CommandOut(InternalSynchronousClockPeriod[11:8])
+      );
+    CommandDecoder
+    #(
+      .LEVEL_OR_PULSE(1'b1),
+      .COMMAND_WIDTH(2'b11),
+      .COMMAND_ADDRESS_AND_DEFAULT(`InternalSynchronousClockPeriod15to12_CAND)
+    )
+    SetInternalSynchronousClockPeriod15to12(
+      .Clk(Clk),
+      .reset_n(reset_n),
+      .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
+      .COMMAND_WORD(COMMAND_WORD),
+      // input [COMMAND_WIDTH:0] DefaultValue,
+      .CommandOut(InternalSynchronousClockPeriod[15:12])
+      );
+
+    // AutoCalibration DAC Power Down: 1 for power down 0 for normal mode
+    // 1bit default E410
+    CommandDecoder
+    #(
+      .LEVEL_OR_PULSE(1'b1),
+      .COMMAND_WIDTH(2'b0),
+      .COMMAND_ADDRESS_AND_DEFAULT(`AutoCalibrationDacPowerDown_CAND)
+    )
+    SetAutoCalibrationDacPowerDown(
+      .Clk(Clk),
+      .reset_n(reset_n),
+      .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
+      .COMMAND_WORD(COMMAND_WORD),
+      // input [COMMAND_WIDTH:0] DefaultValue,
+      .CommandOut(AutoCalibrationDacPowerDown)
+      );
+
+    // AutoCalibration DAC Speed 1bit default E420
+    CommandDecoder
+    #(
+      .LEVEL_OR_PULSE(1'b1),
+      .COMMAND_WIDTH(2'b0),
+      .COMMAND_ADDRESS_AND_DEFAULT(`AutoCalibrationDacSpeed_CAND)
+    )
+    SetAutoCalibrationDacSpeed(
+      .Clk(Clk),
+      .reset_n(reset_n),
+      .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
+      .COMMAND_WORD(COMMAND_WORD),
+      // input [COMMAND_WIDTH:0] DefaultValue,
+      .CommandOut(AutoCalibrationDacSpeed)
+      );
+
+    // AutoCalibration DAC1 Data 12 bits
+    // [3:0] E430
+    // [7:4] E440
+    // [11:8] E450
+    CommandDecoder
+    #(
+      .LEVEL_OR_PULSE(1'b1),
+      .COMMAND_WIDTH(2'b11),
+      .COMMAND_ADDRESS_AND_DEFAULT(`AutoCalibrationDac1Data3to0_CAND)
+    )
+    SetAutoCalibrationDac1Data3to0(
+      .Clk(Clk),
+      .reset_n(reset_n),
+      .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
+      .COMMAND_WORD(COMMAND_WORD),
+      // input [COMMAND_WIDTH:0] DefaultValue,
+      .CommandOut(AutoCalibrationDac1Data[3:0])
+      );
+    CommandDecoder
+    #(
+      .LEVEL_OR_PULSE(1'b1),
+      .COMMAND_WIDTH(2'b11),
+      .COMMAND_ADDRESS_AND_DEFAULT(`AutoCalibrationDac1Data7to4_CAND)
+    )
+    SetAutoCalibrationDac1Data7to4(
+      .Clk(Clk),
+      .reset_n(reset_n),
+      .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
+      .COMMAND_WORD(COMMAND_WORD),
+      // input [COMMAND_WIDTH:0] DefaultValue,
+      .CommandOut(AutoCalibrationDac1Data[7:4])
+      );
+    CommandDecoder
+    #(
+      .LEVEL_OR_PULSE(1'b1),
+      .COMMAND_WIDTH(2'b11),
+      .COMMAND_ADDRESS_AND_DEFAULT(`AutoCalibrationDac1Data11to8_CAND)
+    )
+    SetAutoCalibrationDac1Data11to8(
+      .Clk(Clk),
+      .reset_n(reset_n),
+      .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
+      .COMMAND_WORD(COMMAND_WORD),
+      // input [COMMAND_WIDTH:0] DefaultValue,
+      .CommandOut(AutoCalibrationDac1Data[11:8])
+      );
+
+    // AutoCalibration DAC2 Data 12 bits
+    // [3:0] E460
+    // [7:4] E470
+    // [11:8] E480
+    CommandDecoder
+    #(
+      .LEVEL_OR_PULSE(1'b1),
+      .COMMAND_WIDTH(2'b11),
+      .COMMAND_ADDRESS_AND_DEFAULT(`AutoCalibrationDac2Data3to0_CAND)
+    )
+    SetAutoCalibrationDac2Data3to0(
+      .Clk(Clk),
+      .reset_n(reset_n),
+      .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
+      .COMMAND_WORD(COMMAND_WORD),
+      // input [COMMAND_WIDTH:0] DefaultValue,
+      .CommandOut(AutoCalibrationDac2Data[3:0])
+      );
+    CommandDecoder
+    #(
+      .LEVEL_OR_PULSE(1'b1),
+      .COMMAND_WIDTH(2'b11),
+      .COMMAND_ADDRESS_AND_DEFAULT(`AutoCalibrationDac2Data7to4_CAND)
+    )
+    SetAutoCalibrationDac2Data7to4(
+      .Clk(Clk),
+      .reset_n(reset_n),
+      .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
+      .COMMAND_WORD(COMMAND_WORD),
+      // input [COMMAND_WIDTH:0] DefaultValue,
+      .CommandOut(AutoCalibrationDac2Data[7:4])
+      );
+    CommandDecoder
+    #(
+      .LEVEL_OR_PULSE(1'b1),
+      .COMMAND_WIDTH(2'b11),
+      .COMMAND_ADDRESS_AND_DEFAULT(`AutoCalibrationDac2Data11to8_CAND)
+    )
+    SetAutoCalibrationDac2Data11to8(
+      .Clk(Clk),
+      .reset_n(reset_n),
+      .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
+      .COMMAND_WORD(COMMAND_WORD),
+      // input [COMMAND_WIDTH:0] DefaultValue,
+      .CommandOut(AutoCalibrationDac2Data[11:8])
+      );
+
+    // AutoCalibration DAC Select 2 bits default E490
+    CommandDecoder
+    #(
+      .LEVEL_OR_PULSE(1'b1),
+      .COMMAND_WIDTH(2'b01),
+      .COMMAND_ADDRESS_AND_DEFAULT(`AutoCalibrationDacLoadSelect_CAND)
+    )
+    SelectAutoCalibrationDac(
+      .Clk(Clk),
+      .reset_n(reset_n),
+      .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
+      .COMMAND_WORD(COMMAND_WORD),
+      // input [COMMAND_WIDTH:0] DefaultValue,
+      .CommandOut(AutoCalibrationDacSelect)
+      );
+
+    // AutoCalibration DAC load start 1 bit default E5A0 pulse
+    CommandDecoder
+    #(
+      .LEVEL_OR_PULSE(1'b0),
+      .COMMAND_WIDTH(2'b0),
+      .COMMAND_ADDRESS_AND_DEFAULT(`AutoCalibrationDacLoadStart_CAND)
+    )
+    LoadAutoCalibrationDac(
+      .Clk(Clk),
+      .reset_n(reset_n),
+      .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
+      .COMMAND_WORD(COMMAND_WORD),
+      // input [COMMAND_WIDTH:0] DefaultValue,
+      .CommandOut(AutoCalibrationDacLoadStart)
+      );
+
+    // AutoCalibration Switcher on time 16 bits
+    // [3:0] E5B0
+    // [7:4] E5C0
+    // [11:8] E5D0
+    // [15:12] E5E0
+    CommandDecoder
+    #(
+      .LEVEL_OR_PULSE(1'b1),
+      .COMMAND_WIDTH(2'b11),
+      .COMMAND_ADDRESS_AND_DEFAULT(`AutoCalibrationSwitcherOnTime3to0_CAND)
+    )
+    SetAutoCalibrationSwitcherOnTime3to0(
+      .Clk(Clk),
+      .reset_n(reset_n),
+      .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
+      .COMMAND_WORD(COMMAND_WORD),
+      // input [COMMAND_WIDTH:0] DefaultValue,
+      .CommandOut(AutoCalibrationSwitcherOnTime[3:0])
+      );
+    CommandDecoder
+    #(
+      .LEVEL_OR_PULSE(1'b1),
+      .COMMAND_WIDTH(2'b11),
+      .COMMAND_ADDRESS_AND_DEFAULT(`AutoCalibrationSwitcherOnTime7to4_CAND)
+    )
+    SetAutoCalibrationSwitcherOnTime7to4(
+      .Clk(Clk),
+      .reset_n(reset_n),
+      .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
+      .COMMAND_WORD(COMMAND_WORD),
+      // input [COMMAND_WIDTH:0] DefaultValue,
+      .CommandOut(AutoCalibrationSwitcherOnTime[7:4])
+      );
+    CommandDecoder
+    #(
+      .LEVEL_OR_PULSE(1'b1),
+      .COMMAND_WIDTH(2'b11),
+      .COMMAND_ADDRESS_AND_DEFAULT(`AutoCalibrationSwitcherOnTime11to8_CAND)
+    )
+    SetAutoCalibrationSwitcherOnTime11to8(
+      .Clk(Clk),
+      .reset_n(reset_n),
+      .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
+      .COMMAND_WORD(COMMAND_WORD),
+      // input [COMMAND_WIDTH:0] DefaultValue,
+      .CommandOut(AutoCalibrationSwitcherOnTime[11:8])
+      );
+    CommandDecoder
+    #(
+      .LEVEL_OR_PULSE(1'b1),
+      .COMMAND_WIDTH(2'b11),
+      .COMMAND_ADDRESS_AND_DEFAULT(`AutoCalibrationSwitcherOnTime15to12_CAND)
+    )
+    SetAutoCalibrationSwitcherOnTime15to12(
+      .Clk(Clk),
+      .reset_n(reset_n),
+      .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
+      .COMMAND_WORD(COMMAND_WORD),
+      // input [COMMAND_WIDTH:0] DefaultValue,
+      .CommandOut(AutoCalibrationSwitcherOnTime[15:12])
+      );
+
+    // AutoCalibration Switcher on Select 2 bits default E5F0
+    CommandDecoder
+    #(
+      .LEVEL_OR_PULSE(1'b1),
+      .COMMAND_WIDTH(2'b01),
+      .COMMAND_ADDRESS_AND_DEFAULT(`AutoCalibrationSwitcherSelect_CAND)
+    )
+    SelectAutoCalibrationSwitcher(
+      .Clk(Clk),
+      .reset_n(reset_n),
+      .CommandFifoReadEnDelayed(CommandFifoReadEnDelayed),
+      .COMMAND_WORD(COMMAND_WORD),
+      // input [COMMAND_WIDTH:0] DefaultValue,
+      .CommandOut(AutoCalibrationSwitcherSelect)
+      );
+
+
 
     // LED 4bits, default B000
     CommandDecoder

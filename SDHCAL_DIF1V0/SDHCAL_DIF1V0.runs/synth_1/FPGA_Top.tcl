@@ -16,6 +16,7 @@ proc create_report { reportName command } {
     send_msg_id runtcl-5 warning "$msg"
   }
 }
+set_msg_config -id {Common 17-41} -limit 10000000
 create_project -in_memory -part xc7a100tfgg484-2L
 
 set_param project.singleFileAddWarning.threshold 0
@@ -63,6 +64,10 @@ read_verilog -library xil_defaultlib {
   D:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/src/MicrorocDataSwitcher.v
   D:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/src/MicrorocCommonControl.v
   D:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/src/RamReadDoneSync4Chain.v
+  D:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/src/SpiMaster.v
+  D:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/src/DacControlTlv5618.v
+  D:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/src/AutoCalibrationSignalGen.v
+  D:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/src/CalibrationSwitcherControl.v
 }
 read_ip -quiet D:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.srcs/sources_1/ip/CommandFifo/CommandFifo.xci
 set_property used_in_implementation false [get_files -all d:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.srcs/sources_1/ip/CommandFifo/CommandFifo.xdc]

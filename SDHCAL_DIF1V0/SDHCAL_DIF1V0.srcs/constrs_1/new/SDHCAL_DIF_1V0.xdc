@@ -610,17 +610,6 @@ set_property BITSTREAM.CONFIG.UNUSEDPIN PULLUP [current_design]
 
 
 
-
-connect_debug_port u_ila_0/probe1 [get_nets [list {Chain2Data_debug[0]} {Chain2Data_debug[1]} {Chain2Data_debug[2]} {Chain2Data_debug[3]} {Chain2Data_debug[4]} {Chain2Data_debug[5]} {Chain2Data_debug[6]} {Chain2Data_debug[7]} {Chain2Data_debug[8]} {Chain2Data_debug[9]} {Chain2Data_debug[10]} {Chain2Data_debug[11]} {Chain2Data_debug[12]} {Chain2Data_debug[13]} {Chain2Data_debug[14]} {Chain2Data_debug[15]}]]
-connect_debug_port u_ila_0/probe2 [get_nets [list {Chain3Data_debug[0]} {Chain3Data_debug[1]} {Chain3Data_debug[2]} {Chain3Data_debug[3]} {Chain3Data_debug[4]} {Chain3Data_debug[5]} {Chain3Data_debug[6]} {Chain3Data_debug[7]} {Chain3Data_debug[8]} {Chain3Data_debug[9]} {Chain3Data_debug[10]} {Chain3Data_debug[11]} {Chain3Data_debug[12]} {Chain3Data_debug[13]} {Chain3Data_debug[14]} {Chain3Data_debug[15]}]]
-connect_debug_port u_ila_0/probe3 [get_nets [list {Chain4Data_debug[0]} {Chain4Data_debug[1]} {Chain4Data_debug[2]} {Chain4Data_debug[3]} {Chain4Data_debug[4]} {Chain4Data_debug[5]} {Chain4Data_debug[6]} {Chain4Data_debug[7]} {Chain4Data_debug[8]} {Chain4Data_debug[9]} {Chain4Data_debug[10]} {Chain4Data_debug[11]} {Chain4Data_debug[12]} {Chain4Data_debug[13]} {Chain4Data_debug[14]} {Chain4Data_debug[15]}]]
-connect_debug_port u_ila_0/probe4 [get_nets [list {Chain1Data_debug[0]} {Chain1Data_debug[1]} {Chain1Data_debug[2]} {Chain1Data_debug[3]} {Chain1Data_debug[4]} {Chain1Data_debug[5]} {Chain1Data_debug[6]} {Chain1Data_debug[7]} {Chain1Data_debug[8]} {Chain1Data_debug[9]} {Chain1Data_debug[10]} {Chain1Data_debug[11]} {Chain1Data_debug[12]} {Chain1Data_debug[13]} {Chain1Data_debug[14]} {Chain1Data_debug[15]}]]
-connect_debug_port u_ila_0/probe7 [get_nets [list {OutTestData_Debug[0]} {OutTestData_Debug[1]} {OutTestData_Debug[2]} {OutTestData_Debug[3]} {OutTestData_Debug[4]} {OutTestData_Debug[5]} {OutTestData_Debug[6]} {OutTestData_Debug[7]} {OutTestData_Debug[8]} {OutTestData_Debug[9]} {OutTestData_Debug[10]} {OutTestData_Debug[11]} {OutTestData_Debug[12]} {OutTestData_Debug[13]} {OutTestData_Debug[14]} {OutTestData_Debug[15]}]]
-connect_debug_port u_ila_0/probe8 [get_nets [list Chain1DataEnable_debug]]
-connect_debug_port u_ila_0/probe9 [get_nets [list Chain2DataEnable_debug]]
-connect_debug_port u_ila_0/probe10 [get_nets [list Chain3DataEnable_debug]]
-connect_debug_port u_ila_0/probe11 [get_nets [list Chain4DataEnable_debug]]
-
 create_debug_core u_ila_0 ila
 set_property ALL_PROBE_SAME_MU true [get_debug_cores u_ila_0]
 set_property ALL_PROBE_SAME_MU_CNT 4 [get_debug_cores u_ila_0]
@@ -663,6 +652,16 @@ create_debug_port u_ila_0 probe
 set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe7]
 set_property port_width 1 [get_debug_ports u_ila_0/probe7]
 connect_debug_port u_ila_0/probe7 [get_nets [list UsbStartStop_Debug]]
+set_property PACKAGE_PIN U15 [get_ports DIN]
+set_property IOSTANDARD LVCMOS33 [get_ports DIN]
+set_property PACKAGE_PIN W15 [get_ports SCLK]
+set_property IOSTANDARD LVCMOS33 [get_ports SCLK]
+set_property PACKAGE_PIN AA14 [get_ports nCS]
+set_property IOSTANDARD LVCMOS33 [get_ports nCS]
+set_property PACKAGE_PIN AB15 [get_ports SwitcherOn_A]
+set_property IOSTANDARD LVCMOS33 [get_ports SwitcherOn_A]
+set_property PACKAGE_PIN W14 [get_ports SwitcherOn_B]
+set_property IOSTANDARD LVCMOS33 [get_ports SwitcherOn_B]
 set_property C_CLK_INPUT_FREQ_HZ 300000000 [get_debug_cores dbg_hub]
 set_property C_ENABLE_CLK_DIVIDER false [get_debug_cores dbg_hub]
 set_property C_USER_SCAN_CHAIN 1 [get_debug_cores dbg_hub]

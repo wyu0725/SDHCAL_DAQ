@@ -86,6 +86,7 @@ module AcquisitionControl(
   input [2:0] TestAsicNumber,
   input UnmaskAllChannel,
   input InnerClockEnable,
+  input InternalSynchronousSignalIn,
   input [19:0] TriggerSuppressWidth,
   // Pins
   input SynchronousSignalIn,
@@ -210,6 +211,7 @@ module AcquisitionControl(
     .TestAsicNumber(TestAsicNumber),
     .UnmaskAllChannel(UnmaskAllChannel),
     .InnerClockEnable(InnerClockEnable),
+    .InternalSynchronousSignalIn(InternalSynchronousSignalIn),
 
     .SCurveTestDataoutEnable(SCurveTestDataEnable),
     .SCurveTestDataout(SCurveTestData),

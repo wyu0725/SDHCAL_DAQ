@@ -41,6 +41,7 @@ module SCurve_Test_Top(
   input [2:0] TestAsicNumber,
   input UnmaskAllChannel,
   input InnerClockEnable,
+  input InternalSynchronousSignalIn,
   /*--- USB Data FIFO Interface ---*/
   //input ExternalDataFifoFull,
   output SCurveTestDataoutEnable,
@@ -101,28 +102,11 @@ module SCurve_Test_Top(
       Clk_1K <= Clk_1K;
     end
   end
-  /*--- Generate clock for self-pedestal test ---*/
-  localparam [5:0] INNER_CLOCK_PEROID = 6'd22;
-  reg [5:0] InnerClockCount;
-  reg InnerClk;
-  always @ (posedge Clk_5M or negedge reset_n) begin
-    if(~reset_n) begin
-      InnerClockCount <= 6'd0;
-      InnerClk <= 1'b0;
-    end
-    else if(InnerClockCount == INNER_CLOCK_PEROID) begin
-      InnerClockCount <= 6'd0;
-      InnerClk <= ~InnerClk;
-    end
-    else begin
-      InnerClockCount <= InnerClockCount + 1'b1;
-      InnerClk <= InnerClk;
-    end
-  end
+  
   /*--- Switcher for Trigger-efficiency and Count-efficiency ---*/
   wire CLK_EXT_Gen;
   wire [15:0] CPT_MAX_Gen;
-  wire TriggerModeClock = InnerClockEnable ? InnerClk : CLK_EXT;
+  wire TriggerModeClock = InnerClockEnable ? InternalSynchronousSignalIn : CLK_EXT;
   assign CLK_EXT_Gen = TriggerEfficiencyOrCountEfficiency ? TriggerModeClock : Clk_1K;
   assign CPT_MAX_Gen = TriggerEfficiencyOrCountEfficiency ? CPT_MAX : Counter_MAX;
   //

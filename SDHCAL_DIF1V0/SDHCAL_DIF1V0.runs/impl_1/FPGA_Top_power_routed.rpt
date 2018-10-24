@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2018.1 (win64) Build 2188600 Wed Apr  4 18:40:38 MDT 2018
-| Date             : Tue Oct 16 20:01:14 2018
+| Date             : Tue Oct 23 14:07:25 2018
 | Host             : WYU running 64-bit major release  (build 9200)
 | Command          : report_power -file FPGA_Top_power_routed.rpt -pb FPGA_Top_power_summary_routed.pb -rpx FPGA_Top_power_routed.rpx
 | Design           : FPGA_Top
@@ -53,20 +53,20 @@ Table of Contents
 +--------------------------+-----------+----------+-----------+-----------------+
 | On-Chip                  | Power (W) | Used     | Available | Utilization (%) |
 +--------------------------+-----------+----------+-----------+-----------------+
-| Clocks                   |     0.025 |        9 |       --- |             --- |
-| Slice Logic              |     0.007 |    32753 |       --- |             --- |
-|   LUT as Logic           |     0.006 |    12320 |     63400 |           19.43 |
-|   Register               |    <0.001 |    14922 |    126800 |           11.77 |
-|   CARRY4                 |    <0.001 |      487 |     15850 |            3.07 |
+| Clocks                   |     0.024 |        9 |       --- |             --- |
+| Slice Logic              |     0.007 |    33112 |       --- |             --- |
+|   LUT as Logic           |     0.006 |    12457 |     63400 |           19.65 |
+|   Register               |    <0.001 |    15099 |    126800 |           11.91 |
+|   CARRY4                 |    <0.001 |      505 |     15850 |            3.19 |
 |   LUT as Distributed RAM |    <0.001 |      152 |     19000 |            0.80 |
 |   F7/F8 Muxes            |    <0.001 |      211 |     63400 |            0.33 |
-|   BUFG                   |    <0.001 |        3 |        32 |            9.38 |
+|   BUFG                   |    <0.001 |        4 |        32 |           12.50 |
 |   LUT as Shift Register  |    <0.001 |      805 |     19000 |            4.24 |
-|   Others                 |     0.000 |     1266 |       --- |             --- |
-| Signals                  |     0.010 |    20880 |       --- |             --- |
+|   Others                 |     0.000 |     1275 |       --- |             --- |
+| Signals                  |     0.010 |    21085 |       --- |             --- |
 | Block RAM                |     0.003 |       10 |       135 |            7.41 |
 | MMCM                     |     0.084 |        1 |         6 |           16.67 |
-| I/O                      |     0.162 |      140 |       285 |           49.12 |
+| I/O                      |     0.162 |      145 |       285 |           50.88 |
 | Static Power             |     0.108 |          |           |                 |
 | Total                    |     0.398 |          |           |                 |
 +--------------------------+-----------+----------+-----------+-----------------+
@@ -281,7 +281,7 @@ Table of Contents
 |                 rstblk                                                                  |    <0.001 |
 |                   ngwrdrst.grst.g7serrst.gsckt_wrst.xpm_cdc_sync_rst_inst_wrst          |    <0.001 |
 |   ClockGenerator                                                                        |     0.084 |
-|   Command                                                                               |     0.003 |
+|   Command                                                                               |     0.004 |
 |     AcquisitionStartStopSet                                                             |    <0.001 |
 |     AdcDataNumberSet3to0                                                                |    <0.001 |
 |     AdcDataNumberSet7to4                                                                |    <0.001 |
@@ -374,6 +374,7 @@ Table of Contents
 |     InternalRazSignalLenth                                                              |    <0.001 |
 |     LatchedOrDirectOutput                                                               |    <0.001 |
 |     LightLed                                                                            |    <0.001 |
+|     LoadAutoCalibrationDac                                                              |    <0.001 |
 |     LowGainShaperFeedbackSelect                                                         |    <0.001 |
 |     LowGainShaperPPEnable                                                               |    <0.001 |
 |     LvdsReceiverPPEnable                                                                |    <0.001 |
@@ -390,10 +391,28 @@ Table of Contents
 |     ResetMicrorocAcq                                                                    |    <0.001 |
 |     RunningModeSelect                                                                   |    <0.001 |
 |     SCurveTestReset                                                                     |    <0.001 |
+|     SelectAutoCalibrationDac                                                            |    <0.001 |
+|     SelectAutoCalibrationSwitcher                                                       |    <0.001 |
 |     SelectAutoDaqAcquisitionMode                                                        |    <0.001 |
 |     SelectAutoDaqTriggerMode                                                            |    <0.001 |
 |     SelectSCurveTestAsic                                                                |    <0.001 |
 |     SetAsicNumber                                                                       |    <0.001 |
+|     SetAutoCalibrationDac1Data11to8                                                     |    <0.001 |
+|     SetAutoCalibrationDac1Data3to0                                                      |    <0.001 |
+|     SetAutoCalibrationDac1Data7to4                                                      |    <0.001 |
+|     SetAutoCalibrationDac2Data11to8                                                     |    <0.001 |
+|     SetAutoCalibrationDac2Data3to0                                                      |    <0.001 |
+|     SetAutoCalibrationDac2Data7to4                                                      |    <0.001 |
+|     SetAutoCalibrationDacPowerDown                                                      |    <0.001 |
+|     SetAutoCalibrationDacSpeed                                                          |    <0.001 |
+|     SetAutoCalibrationSwitcherOnTime11to8                                               |    <0.001 |
+|     SetAutoCalibrationSwitcherOnTime15to12                                              |    <0.001 |
+|     SetAutoCalibrationSwitcherOnTime3to0                                                |    <0.001 |
+|     SetAutoCalibrationSwitcherOnTime7to4                                                |    <0.001 |
+|     SetInternalSynchronousClockPeriod11to8                                              |    <0.001 |
+|     SetInternalSynchronousClockPeriod15to12                                             |    <0.001 |
+|     SetInternalSynchronousClockPeriod3to0                                               |    <0.001 |
+|     SetInternalSynchronousClockPeriod7to4                                               |    <0.001 |
 |     SetStartAcquisitionTime11to8                                                        |    <0.001 |
 |     SetStartAcquisitionTime15to12                                                       |    <0.001 |
 |     SetStartAcquisitionTime3to0                                                         |    <0.001 |
@@ -407,7 +426,6 @@ Table of Contents
 |     SweepDacEndValue3to0                                                                |    <0.001 |
 |     SweepDacEndValue7to4                                                                |    <0.001 |
 |     SweepDacEndValue9to8                                                                |    <0.001 |
-|     SweepDacSelect                                                                      |    <0.001 |
 |     SweepDacStartValue3to0                                                              |    <0.001 |
 |     SweepDacStartValue7to4                                                              |    <0.001 |
 |     SweepDacStartValue9to8                                                              |    <0.001 |
@@ -436,12 +454,17 @@ Table of Contents
 |     TriggerToWriteSelect                                                                |    <0.001 |
 |     UnmaskAllChannelSet                                                                 |    <0.001 |
 |     WidlarPPEnable                                                                      |    <0.001 |
-|   CommonControlSignalGenerator                                                          |     0.155 |
+|   CommonControlSignalGenerator                                                          |     0.154 |
 |     ExternalRazGen                                                                      |    <0.001 |
 |     HoldGen                                                                             |     0.003 |
 |     RamReadDoneDetect                                                                   |    <0.001 |
 |     TimeStampSyncAndTrigger                                                             |    <0.001 |
 |   ConfigurationSelect                                                                   |     0.004 |
+|   MicrorocAutoCaliSignalGen                                                             |    <0.001 |
+|     CalibrationWaveGenA                                                                 |    <0.001 |
+|     CalibrationWaveGenB                                                                 |    <0.001 |
+|     DacValueSet                                                                         |    <0.001 |
+|       DacSpiOut                                                                         |    <0.001 |
 |   MicrorocChain1                                                                        |     0.004 |
 |     MicrorocDaq                                                                         |     0.001 |
 |       AutoDaqControl                                                                    |    <0.001 |
@@ -517,7 +540,7 @@ Table of Contents
 |       AutoDaqControl                                                                    |    <0.001 |
 |       SlaveDaqControl                                                                   |    <0.001 |
 |     ReadOnChipRam                                                                       |    <0.001 |
-|     SlowControlAndReadScope                                                             |     0.002 |
+|     SlowControlAndReadScope                                                             |     0.003 |
 |       ConfigParameter                                                                   |    <0.001 |
 |         U0                                                                              |    <0.001 |
 |           inst_fifo_gen                                                                 |    <0.001 |
@@ -548,11 +571,11 @@ Table of Contents
 |       ParameterShiftOut                                                                 |    <0.001 |
 |       PulseSync                                                                         |    <0.001 |
 |   MicrorocChain4                                                                        |     0.004 |
-|     MicrorocDaq                                                                         |     0.001 |
+|     MicrorocDaq                                                                         |    <0.001 |
 |       AutoDaqControl                                                                    |    <0.001 |
 |       SlaveDaqControl                                                                   |    <0.001 |
 |     ReadOnChipRam                                                                       |    <0.001 |
-|     SlowControlAndReadScope                                                             |     0.003 |
+|     SlowControlAndReadScope                                                             |     0.002 |
 |       ConfigParameter                                                                   |    <0.001 |
 |         U0                                                                              |    <0.001 |
 |           inst_fifo_gen                                                                 |    <0.001 |

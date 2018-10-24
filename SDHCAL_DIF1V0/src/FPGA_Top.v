@@ -167,6 +167,12 @@ module FPGA_Top(
   // TEST COLUMN and ROW
   output [2:0] COLUMN,
   output [2:0] ROW,
+  // Calibration
+  output nCS,
+  output SCLK,
+  output DIN,
+  output SwitcherOn_A,
+  output SwitcherOn_B,
   //*** LED
   output [7:0] LED
   );
@@ -349,6 +355,15 @@ module FPGA_Top(
   wire CommandAutoDaqAcquisitionModeSelect;
   wire CommandAutoDaqTriggerModeSelect;
   wire [15:0] CommandAutoDaqTriggerDelayTime;
+  wire [15:0] CommandInternalSynchronousClockPeriod;
+  wire CommandAutoCalibrationDacPowerDown;
+  wire CommandAutoCalibrationDacSpeed;
+  wire [11:0] CommandAutoCalibrationDac1Data;
+  wire [11:0] CommandAutoCalibrationDac2Data;
+  wire [1:0] CommandAutoCalibrationDacSelect;
+  wire CommandAutoCalibrationDacLoadStart;
+  wire [15:0] CommandAutoCalibrationSwitcherOnTime;
+  wire [1:0] CommandAutoCalibrationSwitcherSelect;
 
   CommandInterpreter Command(
     .Clk(Clk),
@@ -467,6 +482,16 @@ module FPGA_Top(
     .RowSelect(ROW),
     .ResetSCurveTest(ResetSCurveTest),
     .SCurveTestTriggerSuppressWidth(CommandSCurveTestTriggerSuppressWidth),
+    // AutoCalibration port
+    .InternalSynchronousClockPeriod(CommandInternalSynchronousClockPeriod),
+    .AutoCalibrationDacPowerDown(CommandAutoCalibrationDacPowerDown),
+    .AutoCalibrationDacSpeed(CommandAutoCalibrationDacSpeed),
+    .AutoCalibrationDac1Data(CommandAutoCalibrationDac1Data),
+    .AutoCalibrationDac2Data(CommandAutoCalibrationDac2Data),
+    .AutoCalibrationDacSelect(CommandAutoCalibrationDacSelect),
+    .AutoCalibrationDacLoadStart(CommandAutoCalibrationDacLoadStart),// pulse
+    .AutoCalibrationSwitcherOnTime(CommandAutoCalibrationSwitcherOnTime),
+    .AutoCalibrationSwitcherSelect(CommandAutoCalibrationSwitcherSelect),
     // LED
     .LED(LED[3:0])
     );
@@ -650,7 +675,8 @@ module FPGA_Top(
   wire [3:0] MicrorocAcquisitionUsbStartStop;
   wire SCurveTestForceExternalRaz;
   wire RamReadoutDone;
-  wire SynchronousSignalIn;
+  wire ExternalSynchronousSignalIn;
+  wire InternalSynchronousSignalIn;
 
   AcquisitionControl Acquisition(
     .Clk(Clk),
@@ -719,9 +745,10 @@ module FPGA_Top(
     .TestAsicNumber(CommandSCurveTestAsicSelect[2:0]),
     .UnmaskAllChannel(SCurveTestUnmaskAllChannel),
     .InnerClockEnable(CommandSCurveTestInnerClockEnable),
+    .InternalSynchronousSignalIn(InternalSynchronousSignalIn),
     .TriggerSuppressWidth(CommandSCurveTestTriggerSuppressWidth),
     // Pins
-    .SynchronousSignalIn(SynchronousSignalIn),
+    .SynchronousSignalIn(ExternalSynchronousSignalIn),
     .OutTrigger0b(out_trigger0b),
     .OutTrigger1b(out_trigger1b),
     .OutTrigger2b(out_trigger2b),
@@ -754,7 +781,32 @@ module FPGA_Top(
     .TriggerOr(TriggerOr),
     .ExternalTriggerSyncOut(ExternalTriggerIn),
     .ExternalSyncSignalIn(EXT_CLK_IN),
-    .SyncSignalOut(SynchronousSignalIn)
+    .SyncSignalOut(ExternalSynchronousSignalIn)
+    );
+
+  //---------- Auto Calibration Module ----------//
+  AutoCalibrationSignalGen MicrorocAutoCaliSignalGen(
+    .Clk(Clk),
+    .reset_n(reset_n),
+    .SynchronousClockPeroid(CommandInternalSynchronousClockPeriod),
+    .SynchronousClock(InternalSynchronousSignalIn),
+    // DAC control port
+    .PowerDown(CommandAutoCalibrationDacPowerDown),
+    .Speed(CommandAutoCalibrationDacSpeed),
+    .Dac1Data(CommandAutoCalibrationDac1Data),
+    .Dac2Data(CommandAutoCalibrationDac2Data),
+    .LoadDacSelect(CommandAutoCalibrationDacSelect),
+    .DacLoad(CommandAutoCalibrationDacLoadStart),
+    // DAC PIN
+    .nCS(nCS),
+    .SCLK(SCLK),
+    .DIN(DIN),
+    // Switcher Control port
+    .SwitcherOnTime(CommandAutoCalibrationSwitcherOnTime),
+    .SwitcherSelect(CommandAutoCalibrationSwitcherSelect),
+    // pin
+    .SwitcherOn_A(SwitcherOn_A),
+    .SwitcherOn_B(SwitcherOn_B)
     );
 
   //---------- Microroc Control ----------//
@@ -1262,12 +1314,12 @@ module FPGA_Top(
     .TRANSMITON2B(TransmitOn2b_D)
     );
   assign hold = HoldSignal;
-  assign TP[0] = MicrorocConfigurationParameterLoadDone;
+  assign TP[0] = InternalSynchronousSignalIn;
   assign TP[1] = StartReadout1_A;
   assign TP[2] = EndReadout1_A;
   assign TP[3] = MicrorocConfigurationParameterLoadStart;
 
-  
+
   (* MARK_DEBUG="true" *)wire [15:0] UsbData_debug;
   (* MARK_DEBUG="true" *)wire UsbDataEnable_debug;
   /*(* MARK_DEBUG="true" *)wire [15:0] Chain1Data_debug;
