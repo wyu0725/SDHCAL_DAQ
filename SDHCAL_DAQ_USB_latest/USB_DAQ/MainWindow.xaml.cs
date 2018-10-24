@@ -7713,6 +7713,28 @@ namespace USB_DAQ
                 return;
             }
         }
+
+        private void btnSyncClockSelect_Click(object sender, RoutedEventArgs e)
+        {
+            if (btnSyncClockSelect.Content.ToString() == "External Clock")
+            {
+                if(SCurveTestSynchroniseClockSelect(1, MyUsbDevice1))
+                {
+                    btnSyncClockSelect.Content = "Internal Clock";
+                    btnSyncClockSelect.Background = Brushes.LightCoral;
+                    cbxSCurveTestClockSelectNewDif.SelectedIndex = 1;
+                }
+            }
+            else if (btnSyncClockSelect.Content.ToString() == "Internal Clock")
+            {
+                if (SCurveTestSynchroniseClockSelect(0, MyUsbDevice1))
+                {
+                    btnSyncClockSelect.Content = "External Clock";
+                    btnSyncClockSelect.Background = Brushes.LightCyan;
+                    cbxSCurveTestClockSelectNewDif.SelectedIndex = 0;
+                }
+            }
+        }
     }
     
 }
