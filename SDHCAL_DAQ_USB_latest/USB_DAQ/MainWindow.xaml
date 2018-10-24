@@ -771,15 +771,11 @@
                     </TabItem>
                     <TabItem Name="tbiTestParam" Header="ASIC Test Parameters">
                         <Grid Margin="0,0,0,0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="388*"/>
-                                <ColumnDefinition Width="391*"/>
-                            </Grid.ColumnDefinitions>
                             <StackPanel HorizontalAlignment="Left" Height="30" Margin="100,60,0,0" VerticalAlignment="Top" Width="70">
                                 <RadioButton Name="rdbPowerPulsingEnable" GroupName="PP_En_Dis" Checked="PowerPulsing_Checked" Content="Enable"/>
                                 <RadioButton Name="rdbPowerPulsingDisable" GroupName="PP_En_Dis" Checked="PowerPulsing_Checked" Content="Disable" HorizontalAlignment="Right" Width="70"/>
                             </StackPanel>
-                            <GroupBox x:Name="gbxPowerPulsing" Header="Power Pulsing" HorizontalAlignment="Left" Margin="122,0,0,0" VerticalAlignment="Top" Height="250" Width="160" Grid.Column="1">
+                            <GroupBox x:Name="gbxPowerPulsing" Header="Power Pulsing" HorizontalAlignment="Left" Margin="220,10,0,0" VerticalAlignment="Top" Height="250" Width="160">
                                 <Grid Margin="0,0,0,0">
                                     <Label x:Name="lblPreAmpPP" Content="PraAmp" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Height="25" Width="75"/>
                                     <Label x:Name="lblShaperPP" Content="Shaper" HorizontalAlignment="Left" Margin="0,25,0,0" VerticalAlignment="Top" Height="25" Width="75"/>
@@ -846,10 +842,25 @@
                             <Button x:Name="btnTRIG_EXT_EN" Content="TRIG EXT" HorizontalAlignment="Left" Margin="0,400,0,0" VerticalAlignment="Top" Width="75" Height="24" Click="btnTRIG_EXT_EN_Click"/>
                             <TextBox x:Name="txtTestLed" HorizontalAlignment="Left" Height="23" Margin="185,337,0,0" TextWrapping="Wrap" Text="7" VerticalAlignment="Top" Width="120"/>
                             <Button x:Name="TestLed" Content="LED" HorizontalAlignment="Left" Margin="305,341,0,0" VerticalAlignment="Top" Width="75" Height="24" Click="TestLed_Click"/>
-                            <Button x:Name="btnTestSlowControlSend" Content="SC Param Load" HorizontalAlignment="Left" Margin="232,235,0,0" VerticalAlignment="Top" Width="100" Height="24" Click="btnTestSlowControlSend_Click"/>
+                            <Button x:Name="btnTestSlowControlSend" Content="SC Param Load" HorizontalAlignment="Left" Margin="53,307,0,0" VerticalAlignment="Top" Width="100" Height="24" Click="btnTestSlowControlSend_Click"/>
                             <TextBox x:Name="tbxCurrentPath" Height="24" TextWrapping="Wrap" Text="Null" Margin="185,402,243,22" Grid.ColumnSpan="2"/>
                             <Button x:Name="btnShowCurrentPath" Content="Show Path" HorizontalAlignment="Left" Margin="148,400,0,0" VerticalAlignment="Top" Width="75" Height="24" Click="btnShowCurrentPath_Click" Grid.Column="1"/>
                             <Label x:Name="lblCurrentPath" Content="Current Path:" HorizontalAlignment="Left" Margin="100,400,0,0" VerticalAlignment="Top" Height="24"/>
+                            <GroupBox x:Name="gbxSendMail" Header="Mail" HorizontalAlignment="Left" Margin="433,20,0,0" VerticalAlignment="Top" Width="295" Height="240">
+                                <Grid Margin="0,0,0,0">
+                                    <Label x:Name="lblSend" Content="Send:" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Height="25" Width="80"/>
+                                    <Label x:Name="lblSendMail" Content="Mail:" HorizontalAlignment="Left" Margin="0,30,0,0" VerticalAlignment="Top" Height="25" Width="70"/>
+                                    <Label x:Name="lblMailPassword" Content="Password:" HorizontalAlignment="Left" Margin="0,60,0,0" VerticalAlignment="Top" Height="25" Width="70"/>
+                                    <TextBox x:Name="tbcSendEmail" HorizontalAlignment="Left" Height="24" Margin="70,30,0,0" TextWrapping="Wrap" Text="labworkwyu@163.com" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="180"/>
+                                    <PasswordBox x:Name="psbxMailPassword" VerticalAlignment="Top" HorizontalAlignment="Left" VerticalContentAlignment="Center" Height="24" Width="180" Margin="70,60,0,0" Password="uyW112358"/>
+                                    <Label x:Name="lblSendServer" Content="Server:" HorizontalAlignment="Left" Margin="0,90,0,0" VerticalAlignment="Top" Height="25" Width="70"/>
+                                    <TextBox x:Name="tbcSendServer" HorizontalAlignment="Left" Height="24" Margin="70,90,0,0" TextWrapping="Wrap" Text="smtp.163.com" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="180"/>
+                                    <Label x:Name="lblReceive" Content="Receive:" HorizontalAlignment="Left" Margin="0,120,0,0" VerticalAlignment="Top" Height="25" Width="80"/>
+                                    <Label x:Name="lblReceiveMail" Content="Mail:" HorizontalAlignment="Left" Margin="0,150,0,0" VerticalAlignment="Top" Height="25" Width="70"/>
+                                    <TextBox x:Name="tbcReceiveEmail" HorizontalAlignment="Left" Height="24" Margin="70,150,0,0" TextWrapping="Wrap" Text="wyu0725@mail.ustc.edu.cn" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="180"/>
+                                    <Button x:Name="btnSendTestMail" Content="Test Mail" HorizontalAlignment="Left" Margin="0,180,0,0" VerticalAlignment="Top" Width="90" Height="24" Click="btnSendTestMail_Click"/>
+                                </Grid>
+                            </GroupBox>
                         </Grid>
                     </TabItem>
                     <TabItem Name="tbiDifControl" Header="New DIF" >
@@ -1941,7 +1952,7 @@
 
                                                     </Grid>
                                                 </GroupBox>
-                                                
+
                                             </Grid>
                                         </TabItem>
                                         <TabItem Name="MaskGen" Header="Mask Gen">
@@ -2208,7 +2219,7 @@
                                             <Label x:Name="lblSingleTestChannelND" Content="Single Channel:" HorizontalAlignment="Left" Margin="0,130,0,0" VerticalAlignment="Top" Height="25" Width="100"/>
                                             <TextBox x:Name="tbcSingleTestChannelNewDif" HorizontalAlignment="Left" Height="24" Margin="95,130,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="75"/>
                                             <TextBox x:Name="tbcCountTimeNewDif" HorizontalAlignment="Left" Height="24" Margin="95,105,0,0" TextWrapping="Wrap" Text="10" VerticalAlignment="Top" Width="75"/>
-                                            <Label x:Name="lblSCurveClockSelectNewDif" Content="Single or Auto" HorizontalAlignment="Left" Margin="0,155,0,0" VerticalAlignment="Top" Height="24"/>
+                                            <Label x:Name="lblCalibrationSourceNewDif" Content="Cali Source" HorizontalAlignment="Left" Margin="0,155,0,0" VerticalAlignment="Top" Height="24"/>
                                             <ComboBox x:Name="cbxSCurveTestClockSelectNewDif" HorizontalAlignment="Left" Margin="95,155,0,0" VerticalAlignment="Top" Width="75" Height="24">
                                                 <ComboBoxItem Content="External" IsSelected="True"/>
                                                 <ComboBoxItem Content="Internal" />
@@ -2284,22 +2295,44 @@
                                     <TextBox x:Name="tbxACStatus" HorizontalAlignment="Left" Height="25" Margin="250,90,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="70" BorderBrush="White"/>
                                 </Grid>
                             </GroupBox>
-
-                            <GroupBox x:Name="gbxSendMail" Header="Mail" HorizontalAlignment="Left" Margin="405,100,0,0" VerticalAlignment="Top" Width="295" Height="240">
+                            <GroupBox x:Name="gbxOnboardCalibration" Header="On board Calibration debug" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="405, 80, 0, 0" Height="300" Width="300">
                                 <Grid Margin="0,0,0,0">
-                                    <Label x:Name="lblSend" Content="Send:" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Height="25" Width="80"/>
-                                    <Label x:Name="lblSendMail" Content="Mail:" HorizontalAlignment="Left" Margin="0,30,0,0" VerticalAlignment="Top" Height="25" Width="70"/>
-                                    <Label x:Name="lblMailPassword" Content="Password:" HorizontalAlignment="Left" Margin="0,60,0,0" VerticalAlignment="Top" Height="25" Width="70"/>
-                                    <TextBox x:Name="tbcSendEmail" HorizontalAlignment="Left" Height="24" Margin="70,30,0,0" TextWrapping="Wrap" Text="labworkwyu@163.com" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="180"/>
-                                    <PasswordBox x:Name="psbxMailPassword" VerticalAlignment="Top" HorizontalAlignment="Left" VerticalContentAlignment="Center" Height="24" Width="180" Margin="70,60,0,0" Password="uyW112358"/>
-                                    <Label x:Name="lblSendServer" Content="Server:" HorizontalAlignment="Left" Margin="0,90,0,0" VerticalAlignment="Top" Height="25" Width="70"/>
-                                    <TextBox x:Name="tbcSendServer" HorizontalAlignment="Left" Height="24" Margin="70,90,0,0" TextWrapping="Wrap" Text="smtp.163.com" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="180"/>
-                                    <Label x:Name="lblReceive" Content="Receive:" HorizontalAlignment="Left" Margin="0,120,0,0" VerticalAlignment="Top" Height="25" Width="80"/>
-                                    <Label x:Name="lblReceiveMail" Content="Mail:" HorizontalAlignment="Left" Margin="0,150,0,0" VerticalAlignment="Top" Height="25" Width="70"/>
-                                    <TextBox x:Name="tbcReceiveEmail" HorizontalAlignment="Left" Height="24" Margin="70,150,0,0" TextWrapping="Wrap" Text="wyu0725@mail.ustc.edu.cn" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="180"/>
-                                    <Button x:Name="btnSendTestMail" Content="Test Mail" HorizontalAlignment="Left" Margin="0,180,0,0" VerticalAlignment="Top" Width="90" Height="24" Click="btnSendTestMail_Click"/>
+                                    <Label x:Name="lblDac1Value" Content="DAC1 Value" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0"/>
+                                    <TextBox x:Name="tbxDac1Value" HorizontalAlignment="Left" Height="25" Margin="95,0,0,0" TextWrapping="Wrap" Text="10" VerticalAlignment="Top" Width="40"/>
+                                    <ComboBox x:Name="cbxDac1EnableNewDif" HorizontalAlignment="Left" Margin="135,0,0,253" VerticalAlignment="Bottom" VerticalContentAlignment="Center" Width="70" Height="25">
+                                        <ComboBoxItem Content="Disable" IsSelected="True"/>
+                                        <ComboBoxItem Content="Enable" />
+                                    </ComboBox>
+                                    <ComboBox x:Name="cbxDACSpeed" HorizontalAlignment="Left" Margin="205,0,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="60" Height="50">
+                                        <ComboBoxItem Content="Slow" IsSelected="True"/>
+                                        <ComboBoxItem Content="Fast" />
+                                    </ComboBox>
+                                    <Label x:Name="lblDac2Value" Content="DAC2 Value" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,25,0,0"/>
+                                    <TextBox x:Name="tbxDac2Value" HorizontalAlignment="Left" Height="25" Margin="95,25,0,0" TextWrapping="Wrap" Text="10" VerticalAlignment="Top" Width="40"/>
+                                    <ComboBox x:Name="cbxDac2EnableNewDif" HorizontalAlignment="Left" Margin="135,25,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="70" Height="25">
+                                        <ComboBoxItem Content="Disable" IsSelected="True"/>
+                                        <ComboBoxItem Content="Enable" />
+                                    </ComboBox>
+                                    <Button x:Name="btnDacOnOff" Content="Power Off" HorizontalAlignment="Left" Margin="0,50,0,0" VerticalAlignment="Top" Width="130" Height="24" Background="Gray" Click="btnDacOnOff_Click"/>
+                                    <Button x:Name="btnDacLoad" Content="DAC Load" HorizontalAlignment="Left" Margin="130,50,0,0" VerticalAlignment="Top" Width="135" Height="24" Click="btnDacLoad_Click"/>
+                                    <Label x:Name="lblSynchronousClockPeriod" Content="Clock Period:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,75,0,0" Width="90"/>
+                                    <TextBox x:Name="tbxSynchronousClockPeriod" HorizontalAlignment="Left" Height="24" Margin="90,75,0,0" TextWrapping="Wrap" Text="12800" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="60"/>
+
+                                    <Label x:Name="lblSwitcherA" Content="SW_A" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,100,0,0"/>
+                                    <TextBox x:Name="tbxSwitcherOnTime" HorizontalAlignment="Left" Height="50" Margin="40,100,0,0" TextWrapping="Wrap" Text="3000" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="60"/>
+                                    <Label x:Name="lblSwitcherB" Content="SW_B" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,125,0,0"/>
+                                    <ComboBox x:Name="cbxSwicherA" HorizontalAlignment="Left" Margin="100,100,0,0" VerticalAlignment="Top" Width="50" Height="25">
+                                        <ComboBoxItem Content="Off" IsSelected="True"/>
+                                        <ComboBoxItem Content="On" />
+                                    </ComboBox>
+                                    <ComboBox x:Name="cbxSwicherB" HorizontalAlignment="Left" Margin="100,125,0,0" VerticalAlignment="Top" Width="50" Height="25">
+                                        <ComboBoxItem Content="Off" IsSelected="True"/>
+                                        <ComboBoxItem Content="On" />
+                                    </ComboBox>
+                                    <Button x:Name="btnSwitcherSet" Content="Switcher Set" HorizontalAlignment="Left" Margin="0,150,0,0" VerticalAlignment="Top" Width="150" Height="24" Click="btnSwitcherSet_Click"/>
                                 </Grid>
                             </GroupBox>
+
                         </Grid>
                     </TabItem>
                     <TabItem Name="MicrorocCarier" Header="Microroc Carier">

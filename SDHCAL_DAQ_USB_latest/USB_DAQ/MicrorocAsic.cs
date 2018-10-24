@@ -1054,10 +1054,164 @@ namespace USB_DAQ
             }
         }
 
-        public static bool SCurveTestSynchroniseClockSelect(int SyncClockSelect, MyCyUsb usbInterface)
+        public static bool SCurveTestSynchronousClockSelect(int SyncClockSelect, MyCyUsb usbInterface)
         {
             int SyncClockSelectValue = SyncClockSelect + HexToInt(DifCommandAddress.SCurveTestInnerClockEnableAddress);
             return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(SyncClockSelectValue));
+        }
+
+        public static bool InternalSynchronousClockPeriodSelect(int ClockPeriod, MyCyUsb usbInterface)
+        {
+            int ClockPeriodValue1 = (ClockPeriod & 15) + HexToInt(DifCommandAddress.InternalSynchronousClockPeriod3to0Address);
+            int ClockPeriodValue2 = ((ClockPeriod >> 4) & 15) + HexToInt(DifCommandAddress.InternalSynchronousClockPeriod7to4Address);
+            int ClockPeriodValue3 = ((ClockPeriod >> 8) & 15) + HexToInt(DifCommandAddress.InternalSynchronousClockPeriod11to8Address);
+            int ClockPeriodValue4 = ((ClockPeriod >> 12) & 15) + HexToInt(DifCommandAddress.InternalSynchronousClockPeriod15to12Address);
+            if (!usbInterface.CommandSend(usbInterface.ConstCommandByteArray(ClockPeriodValue1)))
+            {
+                return false;
+            }
+            if (!usbInterface.CommandSend(usbInterface.ConstCommandByteArray(ClockPeriodValue2)))
+            {
+                return false;
+            }
+            if (!usbInterface.CommandSend(usbInterface.ConstCommandByteArray(ClockPeriodValue3)))
+            {
+                return false;
+            }
+            return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(ClockPeriodValue4));
+        }
+        public static bool InternalSynchronousClockPeriodSelect(string ClockPeriod, MyCyUsb usbInterface, out bool IllegealInput)
+        {
+            if(CheckStringLegal.CheckIntegerLegal(ClockPeriod) && int.Parse(ClockPeriod) < 1638400)
+            {
+                IllegealInput = false;
+                return InternalSynchronousClockPeriodSelect(int.Parse(ClockPeriod) / 25, usbInterface);
+            }
+            else
+            {
+                IllegealInput = true;
+                return false;
+            }
+        }
+
+        public static bool AutoCalibrationDacPowerDownSet(int PowerDown, MyCyUsb usbInterface)
+        {
+            int PowerDownValue = PowerDown + HexToInt(DifCommandAddress.AutoCalibrationDacPowerDownAddress);
+            return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(PowerDownValue));
+        }
+        public static bool AutoCalibrationDacSpeedSet(int Speed, MyCyUsb usbInterface)
+        {
+            return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(Speed + HexToInt(DifCommandAddress.AutoCalibrationDacSpeedAddress)));
+        }
+
+        public static bool AutoCalibrationDac1DataSet(int Dac, MyCyUsb usbInterface)
+        {
+            int DacValue1 = (Dac & 15) + HexToInt(DifCommandAddress.AutoCalibrationDac1Data3to0Address);
+            int DacValue2 = ((Dac >> 4) & 15) + HexToInt(DifCommandAddress.AutoCalibrationDac1Data7to4Address);
+            int DacValue3 = ((Dac >> 8) & 15) + HexToInt(DifCommandAddress.AutoCalibrationDac1Data11to8Address);
+            if (!usbInterface.CommandSend(usbInterface.ConstCommandByteArray(DacValue1)))
+            {
+                return false;
+            }
+            if (!usbInterface.CommandSend(usbInterface.ConstCommandByteArray(DacValue2)))
+            {
+                return false;
+            }
+            return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(DacValue3));
+        }
+        public static bool AutoCalibrationDac1DataSet(string Dac, MyCyUsb usbInterface, out bool IllegalInput)
+        {
+            if(CheckStringLegal.CheckIntegerLegal(Dac) && (int.Parse(Dac) < 4096))
+            {
+                IllegalInput = false;
+                return AutoCalibrationDac1DataSet(int.Parse(Dac), usbInterface);
+            }
+            else
+            {
+                IllegalInput = true;
+                return false;
+            }
+        }
+
+        public static bool AutoCalibrationDac2DataSet(int Dac, MyCyUsb usbInterface)
+        {
+            int DacValue1 = (Dac & 15) + HexToInt(DifCommandAddress.AutoCalibrationDac2Data3to0Address);
+            int DacValue2 = ((Dac >> 4) & 15) + HexToInt(DifCommandAddress.AutoCalibrationDac2Data7to4Address);
+            int DacValue3 = ((Dac >> 8) & 15) + HexToInt(DifCommandAddress.AutoCalibrationDac2Data11to8Address);
+            if (!usbInterface.CommandSend(usbInterface.ConstCommandByteArray(DacValue1)))
+            {
+                return false;
+            }
+            if (!usbInterface.CommandSend(usbInterface.ConstCommandByteArray(DacValue2)))
+            {
+                return false;
+            }
+            return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(DacValue3));
+        }
+        public static bool AutoCalibrationDac2DataSet(string Dac, MyCyUsb usbInterface, out bool IllegalInput)
+        {
+            if (CheckStringLegal.CheckIntegerLegal(Dac) && (int.Parse(Dac) < 4096))
+            {
+                IllegalInput = false;
+                return AutoCalibrationDac2DataSet(int.Parse(Dac), usbInterface);
+            }
+            else
+            {
+                IllegalInput = true;
+                return false;
+            }
+        }
+
+        public static bool AutoCalibrationDacSelect(int DacSelect, MyCyUsb usbInterface)
+        {
+            int DacSelectValue = DacSelect + HexToInt(DifCommandAddress.AutoCalibrationDacLoadSelectAddress);
+            return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(DacSelectValue));
+        }
+
+        public static bool AutoCalibrationDacLoad(MyCyUsb usbInterface)
+        {
+            int LoadValue = HexToInt(DifCommandAddress.AutoCalibrationDacLoadStartAddress) + 1;
+            return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(LoadValue));
+        }
+
+        public static bool AutoCalibrationSwitcherOnTimeSet(int SwitcherOnTime, MyCyUsb usbInterface)
+        {
+            int SwitcherOnTimeValue1 = (SwitcherOnTime & 15) + HexToInt(DifCommandAddress.AutoCalibrationSwitcherOnTime3to0Address);
+            int SwitcherOnTimeValue2 = ((SwitcherOnTime >> 4) & 15) + HexToInt(DifCommandAddress.AutoCalibrationSwitcherOnTime7to4Address);
+            int SwitcherOnTimeValue3 = ((SwitcherOnTime >> 8) & 15) + HexToInt(DifCommandAddress.AutoCalibrationSwitcherOnTime11to8Address);
+            int SwitcherOnTimeValue4 = ((SwitcherOnTime >> 12) & 15) + HexToInt(DifCommandAddress.AutoCalibrationSwitcherOnTime15to12Address);
+            if (!usbInterface.CommandSend(usbInterface.ConstCommandByteArray(SwitcherOnTimeValue1)))
+            {
+                return false;
+            }
+            if (!usbInterface.CommandSend(usbInterface.ConstCommandByteArray(SwitcherOnTimeValue2)))
+            {
+                return false;
+            }
+            if (!usbInterface.CommandSend(usbInterface.ConstCommandByteArray(SwitcherOnTimeValue3)))
+            {
+                return false;
+            }
+            return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(SwitcherOnTimeValue4));
+        }
+        public static bool AutoCalibrationSwitcherOnTimeSet(string SwitcherOnTime, MyCyUsb usbInterface, out bool IllegalInput)
+        {
+            if(CheckStringLegal.CheckIntegerLegal(SwitcherOnTime) && (int.Parse(SwitcherOnTime) < 1638400))
+            {
+                IllegalInput = false;
+                return AutoCalibrationSwitcherOnTimeSet(int.Parse(SwitcherOnTime) / 25, usbInterface);
+            }
+            else
+            {
+                IllegalInput = true;
+                return false;
+            }
+        }
+
+        public static bool AutoCalibrationSwitcherSelect(int Switcher, MyCyUsb usbInterface)
+        {
+            int SwitcherValue = Switcher + HexToInt(DifCommandAddress.AutoCalibrationSwitcherSelectAddress);
+            return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(SwitcherValue));
         }
 
         public bool SetChannelCalibration(MyCyUsb usbInterface, params byte[] CalibrationData)

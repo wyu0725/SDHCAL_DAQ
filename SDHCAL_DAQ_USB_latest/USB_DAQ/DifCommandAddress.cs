@@ -143,6 +143,25 @@ namespace USB_DAQ
         public const string AutoDaqTriggerDelayTime11to8Address = "E4A0";
         public const string AutoDaqTriggerDelayTime15to12Address = "E4B0";
         public const string SCurveTestInnerClockEnableAddress = "E4C0";
+        public const string InternalSynchronousClockPeriod3to0Address = "E4DF";
+        public const string InternalSynchronousClockPeriod7to4Address = "E4EF";
+        public const string InternalSynchronousClockPeriod11to8Address = "E4F0";
+        public const string InternalSynchronousClockPeriod15to12Address = "E400";
+        public const string AutoCalibrationDacPowerDownAddress = "E410";
+        public const string AutoCalibrationDacSpeedAddress = "E420";
+        public const string AutoCalibrationDac1Data3to0Address = "E430";
+        public const string AutoCalibrationDac1Data7to4Address = "E440";
+        public const string AutoCalibrationDac1Data11to8Address = "E450";
+        public const string AutoCalibrationDac2Data3to0Address = "E460";
+        public const string AutoCalibrationDac2Data7to4Address = "E470";
+        public const string AutoCalibrationDac2Data11to8Address = "E480";
+        public const string AutoCalibrationDacLoadSelectAddress = "E490";
+        public const string AutoCalibrationDacLoadStartAddress = "E5A0";
+        public const string AutoCalibrationSwitcherOnTime3to0Address = "E5B0";
+        public const string AutoCalibrationSwitcherOnTime7to4Address = "E5C0";
+        public const string AutoCalibrationSwitcherOnTime11to8Address = "E5D0";
+        public const string AutoCalibrationSwitcherOnTime15to12Address = "E5E0";
+        public const string AutoCalibrationSwitcherSelectAddress = "E5F0";
 
         public const string AcquisitionStartStopAddress = "F0F0";
         public const string ResetDataFifoAddress = "F1A0";
