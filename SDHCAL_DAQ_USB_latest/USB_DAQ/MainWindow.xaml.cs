@@ -7570,15 +7570,11 @@ namespace USB_DAQ
             }
             if (cbxDac2EnableNewDif.SelectedIndex == 1)
             {
-                bResult = DacDataSet(tbxDac2Value.Text, 1, MyUsbDevice1);
+                bResult = DacDataSet(tbxDac2Value.Text, 2, MyUsbDevice1);
                 if (!bResult)
                 {
                     return;
                 }
-            }
-            else
-            {
-                return;
             }
             DacLoad(MyUsbDevice1);
         }
