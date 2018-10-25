@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2018.1 (win64) Build 2188600 Wed Apr  4 18:40:38 MDT 2018
-| Date             : Tue Oct 23 14:07:25 2018
+| Date             : Thu Oct 25 15:38:21 2018
 | Host             : WYU running 64-bit major release  (build 9200)
 | Command          : report_power -file FPGA_Top_power_routed.rpt -pb FPGA_Top_power_summary_routed.pb -rpx FPGA_Top_power_routed.rpx
 | Design           : FPGA_Top
@@ -30,10 +30,10 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.398        |
+| Total On-Chip Power (W)  | 0.399        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.290        |
+| Dynamic (W)              | 0.291        |
 | Device Static (W)        | 0.108        |
 | Total Off-Chip Power (W) | 0.005        |
 | Effective TJA (C/W)      | 2.7          |
@@ -53,9 +53,9 @@ Table of Contents
 +--------------------------+-----------+----------+-----------+-----------------+
 | On-Chip                  | Power (W) | Used     | Available | Utilization (%) |
 +--------------------------+-----------+----------+-----------+-----------------+
-| Clocks                   |     0.024 |        9 |       --- |             --- |
+| Clocks                   |     0.025 |        9 |       --- |             --- |
 | Slice Logic              |     0.007 |    33112 |       --- |             --- |
-|   LUT as Logic           |     0.006 |    12457 |     63400 |           19.65 |
+|   LUT as Logic           |     0.006 |    12464 |     63400 |           19.66 |
 |   Register               |    <0.001 |    15099 |    126800 |           11.91 |
 |   CARRY4                 |    <0.001 |      505 |     15850 |            3.19 |
 |   LUT as Distributed RAM |    <0.001 |      152 |     19000 |            0.80 |
@@ -63,12 +63,12 @@ Table of Contents
 |   BUFG                   |    <0.001 |        4 |        32 |           12.50 |
 |   LUT as Shift Register  |    <0.001 |      805 |     19000 |            4.24 |
 |   Others                 |     0.000 |     1275 |       --- |             --- |
-| Signals                  |     0.010 |    21085 |       --- |             --- |
+| Signals                  |     0.010 |    21092 |       --- |             --- |
 | Block RAM                |     0.003 |       10 |       135 |            7.41 |
 | MMCM                     |     0.084 |        1 |         6 |           16.67 |
 | I/O                      |     0.162 |      145 |       285 |           50.88 |
 | Static Power             |     0.108 |          |           |                 |
-| Total                    |     0.398 |          |           |                 |
+| Total                    |     0.399 |          |           |                 |
 +--------------------------+-----------+----------+-----------+-----------------+
 
 
@@ -78,7 +78,7 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) |
 +-----------+-------------+-----------+-------------+------------+
-| Vccint    |       1.000 |     0.060 |       0.044 |      0.016 |
+| Vccint    |       1.000 |     0.060 |       0.045 |      0.016 |
 | Vccaux    |       1.800 |     0.065 |       0.047 |      0.018 |
 | Vcco33    |       3.300 |     0.007 |       0.003 |      0.004 |
 | Vcco25    |       2.500 |     0.066 |       0.062 |      0.004 |
@@ -153,7 +153,7 @@ Table of Contents
 +-----------------------------------------------------------------------------------------+-----------+
 | Name                                                                                    | Power (W) |
 +-----------------------------------------------------------------------------------------+-----------+
-| FPGA_Top                                                                                |     0.290 |
+| FPGA_Top                                                                                |     0.291 |
 |   Acquisition                                                                           |     0.005 |
 |     AD9220Control                                                                       |    <0.001 |
 |       Ad9220Control                                                                     |    <0.001 |
@@ -281,7 +281,7 @@ Table of Contents
 |                 rstblk                                                                  |    <0.001 |
 |                   ngwrdrst.grst.g7serrst.gsckt_wrst.xpm_cdc_sync_rst_inst_wrst          |    <0.001 |
 |   ClockGenerator                                                                        |     0.084 |
-|   Command                                                                               |     0.004 |
+|   Command                                                                               |     0.003 |
 |     AcquisitionStartStopSet                                                             |    <0.001 |
 |     AdcDataNumberSet3to0                                                                |    <0.001 |
 |     AdcDataNumberSet7to4                                                                |    <0.001 |
@@ -454,7 +454,7 @@ Table of Contents
 |     TriggerToWriteSelect                                                                |    <0.001 |
 |     UnmaskAllChannelSet                                                                 |    <0.001 |
 |     WidlarPPEnable                                                                      |    <0.001 |
-|   CommonControlSignalGenerator                                                          |     0.154 |
+|   CommonControlSignalGenerator                                                          |     0.155 |
 |     ExternalRazGen                                                                      |    <0.001 |
 |     HoldGen                                                                             |     0.003 |
 |     RamReadDoneDetect                                                                   |    <0.001 |
@@ -571,11 +571,11 @@ Table of Contents
 |       ParameterShiftOut                                                                 |    <0.001 |
 |       PulseSync                                                                         |    <0.001 |
 |   MicrorocChain4                                                                        |     0.004 |
-|     MicrorocDaq                                                                         |    <0.001 |
+|     MicrorocDaq                                                                         |     0.001 |
 |       AutoDaqControl                                                                    |    <0.001 |
 |       SlaveDaqControl                                                                   |    <0.001 |
 |     ReadOnChipRam                                                                       |    <0.001 |
-|     SlowControlAndReadScope                                                             |     0.002 |
+|     SlowControlAndReadScope                                                             |     0.003 |
 |       ConfigParameter                                                                   |    <0.001 |
 |         U0                                                                              |    <0.001 |
 |           inst_fifo_gen                                                                 |    <0.001 |
