@@ -151,7 +151,7 @@
                                             <Label x:Name="lblInternal_RAZ_Time" Content="Internal RAZ time" HorizontalAlignment="Left" Margin="0,225,0,0" VerticalAlignment="Top" Width="110" Height="24"/>
                                             <Label x:Name="lblRead_Reg" Content="ReadRegister:" HorizontalAlignment="Left" Margin="0,275,0,0" VerticalAlignment="Top" Height="24" Width="90"/>
                                             <Label x:Name="lblMaskFile" Content="Mask File" HorizontalAlignment="Left" Margin="0,300,0,0" VerticalAlignment="Top"/>
-                                            <TabControl x:Name="tbcAsicParameter" HorizontalAlignment="Left" Margin="110,0,0,0" VerticalAlignment="Top" Width="200" Height="325">
+                                            <TabControl x:Name="tbcAsicParameter" HorizontalAlignment="Left" Margin="110,0,0,0" VerticalAlignment="Top" Width="188" Height="325">
                                                 <TabItem Header="ASIC1">
                                                     <Grid Margin="0,0,0,0">
 
@@ -2325,10 +2325,12 @@
                                         <ComboBoxItem Content="Off" IsSelected="True"/>
                                         <ComboBoxItem Content="On" />
                                     </ComboBox>
+                                    <Button x:Name="btnSwitcherAOnOff" Content="Off" HorizontalAlignment="Left" Margin="150,100,0,0" VerticalAlignment="Top" Width="30" Height="25" Background="LightGray" Click="btnSwitcherAOnOff_Click"/>
                                     <ComboBox x:Name="cbxSwicherB" HorizontalAlignment="Left" Margin="100,125,0,0" VerticalAlignment="Top" Width="50" Height="25">
                                         <ComboBoxItem Content="Off" IsSelected="True"/>
                                         <ComboBoxItem Content="On" />
                                     </ComboBox>
+                                    <Button x:Name="btnSwitcherBOnOff" Content="Off" HorizontalAlignment="Left" Margin="150,125,0,0" VerticalAlignment="Top" Width="30" Height="25" Background="LightGray" Click="btnSwitcherBOnOff_Click"/>
                                     <Button x:Name="btnSwitcherSet" Content="Switcher Set" HorizontalAlignment="Left" Margin="0,150,0,0" VerticalAlignment="Top" Width="150" Height="24" Click="btnSwitcherSet_Click"/>
                                     <Button x:Name="btnSyncClockSelect" Content="External Clock" HorizontalAlignment="Left" Margin="0,175,0,0" VerticalAlignment="Top" Width="150" Height="24" Background="LightCyan" Click="btnSyncClockSelect_Click"/>
                                 </Grid>

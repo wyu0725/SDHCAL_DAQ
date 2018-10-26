@@ -6548,15 +6548,15 @@ namespace USB_DAQ {
         
         #line 2328 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.ComboBox cbxSwicherB;
+        internal System.Windows.Controls.Button btnSwitcherAOnOff;
         
         #line default
         #line hidden
         
         
-        #line 2332 "..\..\MainWindow.xaml"
+        #line 2329 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.Button btnSwitcherSet;
+        internal System.Windows.Controls.ComboBox cbxSwicherB;
         
         #line default
         #line hidden
@@ -6564,15 +6564,23 @@ namespace USB_DAQ {
         
         #line 2333 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.Button btnSyncClockSelect;
+        internal System.Windows.Controls.Button btnSwitcherBOnOff;
         
         #line default
         #line hidden
         
         
-        #line 2339 "..\..\MainWindow.xaml"
+        #line 2334 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.TabItem MicrorocCarier;
+        internal System.Windows.Controls.Button btnSwitcherSet;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 2335 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.Button btnSyncClockSelect;
         
         #line default
         #line hidden
@@ -6580,15 +6588,7 @@ namespace USB_DAQ {
         
         #line 2341 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.Button btnStartCarrierUsb;
-        
-        #line default
-        #line hidden
-        
-        
-        #line 2342 "..\..\MainWindow.xaml"
-        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.Button btnSelectCarrier;
+        internal System.Windows.Controls.TabItem MicrorocCarier;
         
         #line default
         #line hidden
@@ -6596,7 +6596,7 @@ namespace USB_DAQ {
         
         #line 2343 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.TextBox tbxSerialData;
+        internal System.Windows.Controls.Button btnStartCarrierUsb;
         
         #line default
         #line hidden
@@ -6604,7 +6604,7 @@ namespace USB_DAQ {
         
         #line 2344 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.Button btnSendSerialData;
+        internal System.Windows.Controls.Button btnSelectCarrier;
         
         #line default
         #line hidden
@@ -6612,13 +6612,29 @@ namespace USB_DAQ {
         
         #line 2345 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.TextBox tbxSerialData;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 2346 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.Button btnSendSerialData;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 2347 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button btnMicrorocCarierUsbStart;
         
         #line default
         #line hidden
         
         
-        #line 2355 "..\..\MainWindow.xaml"
+        #line 2357 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.GroupBox gbxAsicStatus;
         
@@ -6626,7 +6642,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 2356 "..\..\MainWindow.xaml"
+        #line 2358 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TabControl tbcAsicStatus;
         
@@ -6634,7 +6650,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 2368 "..\..\MainWindow.xaml"
+        #line 2370 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button btnHelp;
         
@@ -6642,7 +6658,7 @@ namespace USB_DAQ {
         #line hidden
         
         
-        #line 2369 "..\..\MainWindow.xaml"
+        #line 2371 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lblFinishDate;
         
@@ -9554,84 +9570,102 @@ namespace USB_DAQ {
             this.cbxSwicherA = ((System.Windows.Controls.ComboBox)(target));
             return;
             case 822:
-            this.cbxSwicherB = ((System.Windows.Controls.ComboBox)(target));
-            return;
-            case 823:
-            this.btnSwitcherSet = ((System.Windows.Controls.Button)(target));
+            this.btnSwitcherAOnOff = ((System.Windows.Controls.Button)(target));
             
-            #line 2332 "..\..\MainWindow.xaml"
-            this.btnSwitcherSet.Click += new System.Windows.RoutedEventHandler(this.btnSwitcherSet_Click);
+            #line 2328 "..\..\MainWindow.xaml"
+            this.btnSwitcherAOnOff.Click += new System.Windows.RoutedEventHandler(this.btnSwitcherAOnOff_Click);
             
             #line default
             #line hidden
             return;
+            case 823:
+            this.cbxSwicherB = ((System.Windows.Controls.ComboBox)(target));
+            return;
             case 824:
-            this.btnSyncClockSelect = ((System.Windows.Controls.Button)(target));
+            this.btnSwitcherBOnOff = ((System.Windows.Controls.Button)(target));
             
             #line 2333 "..\..\MainWindow.xaml"
-            this.btnSyncClockSelect.Click += new System.Windows.RoutedEventHandler(this.btnSyncClockSelect_Click);
+            this.btnSwitcherBOnOff.Click += new System.Windows.RoutedEventHandler(this.btnSwitcherBOnOff_Click);
             
             #line default
             #line hidden
             return;
             case 825:
-            this.MicrorocCarier = ((System.Windows.Controls.TabItem)(target));
+            this.btnSwitcherSet = ((System.Windows.Controls.Button)(target));
+            
+            #line 2334 "..\..\MainWindow.xaml"
+            this.btnSwitcherSet.Click += new System.Windows.RoutedEventHandler(this.btnSwitcherSet_Click);
+            
+            #line default
+            #line hidden
             return;
             case 826:
-            this.btnStartCarrierUsb = ((System.Windows.Controls.Button)(target));
+            this.btnSyncClockSelect = ((System.Windows.Controls.Button)(target));
             
-            #line 2341 "..\..\MainWindow.xaml"
-            this.btnStartCarrierUsb.Click += new System.Windows.RoutedEventHandler(this.btnStartCarrierUsb_Click);
+            #line 2335 "..\..\MainWindow.xaml"
+            this.btnSyncClockSelect.Click += new System.Windows.RoutedEventHandler(this.btnSyncClockSelect_Click);
             
             #line default
             #line hidden
             return;
             case 827:
+            this.MicrorocCarier = ((System.Windows.Controls.TabItem)(target));
+            return;
+            case 828:
+            this.btnStartCarrierUsb = ((System.Windows.Controls.Button)(target));
+            
+            #line 2343 "..\..\MainWindow.xaml"
+            this.btnStartCarrierUsb.Click += new System.Windows.RoutedEventHandler(this.btnStartCarrierUsb_Click);
+            
+            #line default
+            #line hidden
+            return;
+            case 829:
             this.btnSelectCarrier = ((System.Windows.Controls.Button)(target));
             
-            #line 2342 "..\..\MainWindow.xaml"
+            #line 2344 "..\..\MainWindow.xaml"
             this.btnSelectCarrier.Click += new System.Windows.RoutedEventHandler(this.btnSelectCarrier_Click);
             
             #line default
             #line hidden
             return;
-            case 828:
+            case 830:
             this.tbxSerialData = ((System.Windows.Controls.TextBox)(target));
             return;
-            case 829:
+            case 831:
             this.btnSendSerialData = ((System.Windows.Controls.Button)(target));
             
-            #line 2344 "..\..\MainWindow.xaml"
+            #line 2346 "..\..\MainWindow.xaml"
             this.btnSendSerialData.Click += new System.Windows.RoutedEventHandler(this.btnSendSerialData_Click);
             
             #line default
             #line hidden
             return;
-            case 830:
+            case 832:
             this.btnMicrorocCarierUsbStart = ((System.Windows.Controls.Button)(target));
             
-            #line 2345 "..\..\MainWindow.xaml"
+            #line 2347 "..\..\MainWindow.xaml"
             this.btnMicrorocCarierUsbStart.Click += new System.Windows.RoutedEventHandler(this.btnMicrorocCarierUsbStart_Click);
             
             #line default
             #line hidden
             return;
-            case 831:
+            case 833:
             this.gbxAsicStatus = ((System.Windows.Controls.GroupBox)(target));
             return;
-            case 832:
+            case 834:
             this.tbcAsicStatus = ((System.Windows.Controls.TabControl)(target));
             return;
-            case 833:
+            case 835:
             this.btnHelp = ((System.Windows.Controls.Button)(target));
             
-            #line 2368 "..\..\MainWindow.xaml"
+            #line 2370 "..\..\MainWindow.xaml"
             this.btnHelp.Click += new System.Windows.RoutedEventHandler(this.btnHelp_Click);
             
             #line default
             #line hidden
             return;
-            case 834:
+            case 836:
             this.lblFinishDate = ((System.Windows.Controls.Label)(target));
             return;
             }

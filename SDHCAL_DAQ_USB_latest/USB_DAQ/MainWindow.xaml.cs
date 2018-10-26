@@ -4478,11 +4478,35 @@ namespace USB_DAQ
                     {
                         TestVoltage = DeltaV;
                     }
-                    bResult = MyAFG3252.SetVoltageHigh(1, TestVoltage, AFG3252.VoltageUnitMV);
-                    if (!bResult)
+                    if(TestVoltage < 0)
                     {
-                        ShowUsbError("Set AFG3252");
+                        ShowIllegalInput("The charge should equal or greater than 0");
                         return;
+                    }
+                    if(TestVoltage == 0)
+                    {
+                        if (MessageBox.Show("The Voltage is zero. Continue", "Confirm Message", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                        {
+                            bResult = MyAFG3252.CloseOutput(1);
+                            if (!bResult)
+                            {
+                                ShowUsbError("Close AFG3252 Channel1");
+                                return;
+                            }
+                        }
+                        else
+                        {
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        bResult = MyAFG3252.SetVoltageHigh(1, TestVoltage, AFG3252.VoltageUnitMV);
+                        if (!bResult)
+                        {
+                            ShowUsbError("Set AFG3252");
+                            return;
+                        }
                     }
                     #endregion
                     #region Set Start and End DAC
@@ -4568,6 +4592,15 @@ namespace USB_DAQ
                         return;
                     }
                     #endregion
+                    if (TestVoltage == 0)
+                    {
+                        bResult = MyAFG3252.OpenOutput(1);
+                        if (!bResult)
+                        {
+                            ShowUsbError("Open AFG3252 Channel1");
+                            return;
+                        }
+                    }
                 }
                 StateIndicator.AutoCalibrationStart = false;
                 btnAutoCalibrationStart.Content = "Calibration Start";
@@ -4877,15 +4910,15 @@ namespace USB_DAQ
                 {
                     continue;
                 }
-                #region Set PowerPulsing parameter
-                bResult = SetPowerPulsingParameter(cbxPreAmpPPNewDif.SelectedIndex, cbxHighGainShaperPPNewDif.SelectedIndex, cbxLowGainShaperPPNewDif.SelectedIndex, cbxWidlarPPNewDif.SelectedIndex, cbxDac4BitPPNewDif.SelectedIndex, cbxOTAqPPNewDif.SelectedIndex, cbxDiscriPPNewDif.SelectedIndex, cbxVbgPPNewDif.SelectedIndex, cbxDac10BitPPNewDif.SelectedIndex, cbxLvdsPPNewDif.SelectedIndex);
+                #region Select ASIC chain
+                bResult = SelectAsicChain(MicrorocAsicChain[i]);
                 if (!bResult)
                 {
                     return;
                 }
                 #endregion
-                #region Select ASIC chain
-                bResult = SelectAsicChain(MicrorocAsicChain[i]);
+                #region Set PowerPulsing parameter
+                bResult = SetPowerPulsingParameter(cbxPreAmpPPNewDif.SelectedIndex, cbxHighGainShaperPPNewDif.SelectedIndex, cbxLowGainShaperPPNewDif.SelectedIndex, cbxWidlarPPNewDif.SelectedIndex, cbxDac4BitPPNewDif.SelectedIndex, cbxOTAqPPNewDif.SelectedIndex, cbxDiscriPPNewDif.SelectedIndex, cbxVbgPPNewDif.SelectedIndex, cbxDac10BitPPNewDif.SelectedIndex, cbxLvdsPPNewDif.SelectedIndex);
                 if (!bResult)
                 {
                     return;
@@ -7729,6 +7762,101 @@ namespace USB_DAQ
                     btnSyncClockSelect.Background = Brushes.LightCyan;
                     cbxSCurveTestClockSelectNewDif.SelectedIndex = 0;
                 }
+            }
+        }
+
+        private void btnSwitcherAOnOff_Click(object sender, RoutedEventArgs e)
+        {
+            if (btnSwitcherAOnOff.Content.ToString() == "Off")
+            {
+                int SwitcherSelect = 1 + cbxSwicherB.SelectedIndex * 2;
+                bool bResult = CalibrationSwitcherSelect(SwitcherSelect, MyUsbDevice1);
+                if (!bResult)
+                {  
+                    return;
+                }
+                cbxSwicherA.SelectedIndex = 1;
+                btnSwitcherAOnOff.Content = "On";
+                btnSwitcherAOnOff.Background = Brushes.LightGreen;
+            }
+            else if (btnSwitcherAOnOff.Content.ToString() == "On")
+            {
+                int SwitcherSelect = 0 + cbxSwicherB.SelectedIndex * 2;
+                bool bResult = CalibrationSwitcherSelect(SwitcherSelect, MyUsbDevice1);
+                if (!bResult)
+                {
+                    return;
+                }
+                cbxSwicherA.SelectedIndex = 0;
+                btnSwitcherAOnOff.Content = "Off";
+                btnSwitcherAOnOff.Background = Brushes.LightGray;
+            }
+
+        }
+
+        private void btnSwitcherBOnOff_Click(object sender, RoutedEventArgs e)
+        {
+            if (btnSwitcherBOnOff.Content.ToString() == "Off")
+            {
+                int SwitcherSelect = 2 + cbxSwicherA.SelectedIndex;
+                bool bResult = CalibrationSwitcherSelect(SwitcherSelect, MyUsbDevice1);
+                if (!bResult)
+                {
+                    return;
+                }
+                cbxSwicherB.SelectedIndex = 1;
+                btnSwitcherBOnOff.Content = "On";
+                btnSwitcherBOnOff.Background = Brushes.LightGreen;
+            }
+            else if (btnSwitcherBOnOff.Content.ToString() == "On")
+            {
+                int SwitcherSelect = 0 + cbxSwicherA.SelectedIndex;
+                bool bResult = CalibrationSwitcherSelect(SwitcherSelect, MyUsbDevice1);
+                if (!bResult)
+                {
+                    return;
+                }
+                cbxSwicherB.SelectedIndex = 0;
+                btnSwitcherBOnOff.Content = "Off";
+                btnSwitcherBOnOff.Background = Brushes.LightGray;
+            }
+        }
+
+        private bool SetCalibration1Voltage(double Voltage, int DacSelection, double Slope, double Intercept, MyCyUsb usbInterface)
+        {
+            if (Slope != 0)
+            {
+                int DacValue = (int)((Voltage - Intercept) / Slope);
+                bool bResult = false;
+                if (DacSelection == 1)
+                {
+                    bResult = MicrorocAsic.AutoCalibrationDac1DataSet(DacValue, usbInterface);
+                }
+                else if (DacSelection == 2)
+                {
+                    bResult = MicrorocAsic.AutoCalibrationDac2DataSet(DacValue, usbInterface);
+                }
+                else
+                {
+                    ShowIllegalInput("Dac Selection Error");
+                    return false;
+                }
+                if (bResult)
+                {
+                    string report = string.Format("Set DAC{0}: {1} mV\n", DacSelection, Voltage);
+                    txtReport.AppendText(report);
+                    return true;
+                }
+                else
+                {
+                    ShowUsbError("Set DAC Value");
+                    return false;
+                }
+            }
+            else
+            {
+                ShowIllegalInput("The charge should equal or greater than 0");
+                return false;
             }
         }
     }
