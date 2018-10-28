@@ -242,23 +242,28 @@ namespace USB_DAQ
             return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(GainBoostEnableValue));
         }
 
+        public bool CTestChannelSet(int CTestChannel, MyCyUsb usbInterface)
+        {
+            
+            int CTestChannelValue1 = (byte)(CTestChannel & 15) + HexToInt(DifCommandAddress.CTestChannel3to0Address);
+            int CTestChannelValue2 = (byte)((CTestChannel >> 4) & 15) + HexToInt(DifCommandAddress.CTestChannel7to4Address);
+            bool bResult = usbInterface.CommandSend(usbInterface.ConstCommandByteArray(CTestChannelValue1));
+            if (bResult)
+            {
+                return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(CTestChannelValue2));
+            }
+            else
+            {
+                return false;
+            }
+        }
         public bool CTestChannelSet(string CTestChannel, MyCyUsb usbInterface, out bool IllegalInput)
         {
             if (CheckStringLegal.CheckIntegerLegal(CTestChannel) && int.Parse(CTestChannel) <= 64)
             {
                 IllegalInput = false;
                 int CTestChannelValue = int.Parse(CTestChannel);
-                int CTestChannelValue1 = (byte)(CTestChannelValue & 15) + HexToInt(DifCommandAddress.CTestChannel3to0Address);
-                int CTestChannelValue2 = (byte)((CTestChannelValue >> 4) & 15) + HexToInt(DifCommandAddress.CTestChannel7to4Address);
-                bool bResult = usbInterface.CommandSend(usbInterface.ConstCommandByteArray(CTestChannelValue1));
-                if (bResult)
-                {
-                    return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(CTestChannelValue2));
-                }
-                else
-                {
-                    return false;
-                }
+                return CTestChannelSet(CTestChannelValue, usbInterface);
             }
             else
             {
@@ -530,26 +535,30 @@ namespace USB_DAQ
             return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(HexToInt(DifCommandAddress.SweepDacSelectAddress) + SweepTestDac));
         }
 
+        public static bool SCurveTestStartDacSet(int StartDac, MyCyUsb usbInterface)
+        {
+            int StartDacValue1 = (StartDac & 15) + HexToInt(DifCommandAddress.SweepDacStartValue3to0Address);
+            int StartDacValue2 = ((StartDac >> 4) & 15) + HexToInt(DifCommandAddress.SweepDacStartValue7to4Address);
+            int StartDacValue3 = ((StartDac >> 8) & 3) + HexToInt(DifCommandAddress.SweepDacStartValue9to8Address);
+            bool bResult = usbInterface.CommandSend(usbInterface.ConstCommandByteArray(StartDacValue1));
+            if (!bResult)
+            {
+                return false;
+            }
+            bResult = usbInterface.CommandSend(usbInterface.ConstCommandByteArray(StartDacValue2));
+            if (!bResult)
+            {
+                return false;
+            }
+            return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(StartDacValue3));
+        }
         public static bool SCurveTestStartDacSet(string StartDac, MyCyUsb usbInterface, out bool IllegalInput)
         {
             if (CheckStringLegal.CheckIntegerLegal(StartDac) && int.Parse(StartDac) < 1023)
             {
                 IllegalInput = false;
                 int StartDacValue = int.Parse(StartDac);
-                int StartDacValue1 = (StartDacValue & 15) + HexToInt(DifCommandAddress.SweepDacStartValue3to0Address);
-                int StartDacValue2 = ((StartDacValue >> 4) & 15) + HexToInt(DifCommandAddress.SweepDacStartValue7to4Address);
-                int StartDacValue3 = ((StartDacValue >> 8) & 3) + HexToInt(DifCommandAddress.SweepDacStartValue9to8Address);
-                bool bResult = usbInterface.CommandSend(usbInterface.ConstCommandByteArray(StartDacValue1));
-                if (!bResult)
-                {
-                    return false;
-                }
-                bResult = usbInterface.CommandSend(usbInterface.ConstCommandByteArray(StartDacValue2));
-                if (!bResult)
-                {
-                    return false;
-                }
-                return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(StartDacValue3));
+                return SCurveTestStartDacSet(StartDacValue, usbInterface);
             }
             else
             {
@@ -558,26 +567,30 @@ namespace USB_DAQ
             }
         }
 
+        public static bool SCurveTestEndDacSet(int EndDac, MyCyUsb usbInterface)
+        {
+            int EndDacValue1 = (EndDac & 15) + HexToInt(DifCommandAddress.SweepDacEndValue3to0Address);
+            int EndDacValue2 = ((EndDac >> 4) & 15) + HexToInt(DifCommandAddress.SweepDacEndValue7to4Address);
+            int EndDacValue3 = ((EndDac >> 8) & 3) + HexToInt(DifCommandAddress.SweepDacEndValue9to8Address);
+            bool bResult = usbInterface.CommandSend(usbInterface.ConstCommandByteArray(EndDacValue1));
+            if (!bResult)
+            {
+                return false;
+            }
+            bResult = usbInterface.CommandSend(usbInterface.ConstCommandByteArray(EndDacValue2));
+            if (!bResult)
+            {
+                return false;
+            }
+            return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(EndDacValue3));
+        }
         public static bool SCurveTestEndDacSet(string EndDac, MyCyUsb usbInterface, out bool IllegalInput)
         {
             if (CheckStringLegal.CheckIntegerLegal(EndDac) && int.Parse(EndDac) < 1024)
             {
                 IllegalInput = false;
                 int EndDacValue = int.Parse(EndDac);
-                int EndDacValue1 = (EndDacValue & 15) + HexToInt(DifCommandAddress.SweepDacEndValue3to0Address);
-                int EndDacValue2 = ((EndDacValue >> 4) & 15) + HexToInt(DifCommandAddress.SweepDacEndValue7to4Address);
-                int EndDacValue3 = ((EndDacValue >> 8) & 3) + HexToInt(DifCommandAddress.SweepDacEndValue9to8Address);
-                bool bResult = usbInterface.CommandSend(usbInterface.ConstCommandByteArray(EndDacValue1));
-                if (!bResult)
-                {
-                    return false;
-                }
-                bResult = usbInterface.CommandSend(usbInterface.ConstCommandByteArray(EndDacValue2));
-                if (!bResult)
-                {
-                    return false;
-                }
-                return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(EndDacValue3));
+                return SCurveTestEndDacSet(EndDacValue, usbInterface);
             }
             else
             {
@@ -586,26 +599,30 @@ namespace USB_DAQ
             }
         }
 
+        public static bool SCurveTestDacStepSet(int DacStep, MyCyUsb usbInterface)
+        {
+            int DacStepValue1 = (DacStep & 15) + HexToInt(DifCommandAddress.SweepDacStepValue3to0Address);
+            int DacStepValue2 = ((DacStep >> 4) & 15) + HexToInt(DifCommandAddress.SweepDacStepValue7to4Address);
+            int DacStepValue3 = ((DacStep >> 8) & 3) + HexToInt(DifCommandAddress.SweepDacStepValue9to8Address);
+            bool bResult = usbInterface.CommandSend(usbInterface.ConstCommandByteArray(DacStepValue1));
+            if (!bResult)
+            {
+                return false;
+            }
+            bResult = usbInterface.CommandSend(usbInterface.ConstCommandByteArray(DacStepValue2));
+            if (!bResult)
+            {
+                return false;
+            }
+            return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(DacStepValue3));
+        }
         public static bool SCurveTestDacStepSet(string DacStep, MyCyUsb usbInterface, out bool IllegalInput)
         {
             if (CheckStringLegal.CheckIntegerLegal(DacStep) && int.Parse(DacStep) < 1023)
             {
                 IllegalInput = false;
                 int DacStepValue = int.Parse(DacStep);
-                int DacStepValue1 = (DacStepValue & 15) + HexToInt(DifCommandAddress.SweepDacStepValue3to0Address);
-                int DacStepValue2 = ((DacStepValue >> 4) & 15) + HexToInt(DifCommandAddress.SweepDacStepValue7to4Address);
-                int DacStepValue3 = ((DacStepValue >> 8) & 3) + HexToInt(DifCommandAddress.SweepDacStepValue9to8Address);
-                bool bResult = usbInterface.CommandSend(usbInterface.ConstCommandByteArray(DacStepValue1));
-                if (!bResult)
-                {
-                    return false;
-                }
-                bResult = usbInterface.CommandSend(usbInterface.ConstCommandByteArray(DacStepValue2));
-                if (!bResult)
-                {
-                    return false;
-                }
-                return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(DacStepValue3));
+                return SCurveTestDacStepSet(DacStepValue, usbInterface);
             }
             else
             {
