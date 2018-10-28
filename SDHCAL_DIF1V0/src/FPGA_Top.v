@@ -1350,8 +1350,8 @@ module FPGA_Top(
   assign MicrorocConfigurationParameterLoadDone_Debug = MicrorocConfigurationParameterLoadDone;
   (* MARK_DEBUG="true" *)wire [3:0] CommandModeSelect_Debug;
   assign CommandModeSelect_Debug = CommandModeSelect;
-  //(* MARK_DEBUG="true" *)wire [15:0] OutTestData_Debug;
-  //assign OutTestData_Debug = OutTestData;
+  (* MARK_DEBUG="true" *)wire [15:0] OutTestData_Debug;
+  assign OutTestData_Debug = OutTestData;
   (* MARK_DEBUG="true" *)wire OutTestDataEnable_Debug;
   assign OutTestDataEnable_Debug = OutTestDataEnable;
   (* MARK_DEBUG="true" *)wire ExternalFifoFull_Debug;
