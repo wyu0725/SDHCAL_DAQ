@@ -910,6 +910,7 @@ MicrorocCTestChannel	AcquisitionControl.v	/^  output [63:0] MicrorocCTestChannel
 MicrorocCTestChannel	CommandInterpreter.v	/^  output reg [63:0] MicrorocCTestChannel,$/;"	p	language:Verilog	module:CommandInterpreter
 MicrorocCTestChannel	FPGA_Top.v	/^  wire [63:0] MicrorocCTestChannel;$/;"	n	language:Verilog	module:FPGA_Top
 MicrorocCTestChannelChain	FPGA_Top.v	/^  wire [64*ASIC_CHAIN_NUMBER - 1:0] MicrorocCTestChannelChain;$/;"	n	language:Verilog	module:FPGA_Top
+MicrorocCTestChannelInternal	SCurve_Test_Control.v	/^  reg [63:0] MicrorocCTestChannelInternal;$/;"	r	language:Verilog	module:SCurve_Test_Control
 MicrorocCTestChannel_Input	ConfigurationParameterDistribution.v	/^    input [63:0] MicrorocCTestChannel_Input,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
 MicrorocCTestChannel_Output	ConfigurationParameterDistribution.v	/^    output reg [64*ASIC_CHAIN_NUMBER - 1:0] MicrorocCTestChannel_Output,$/;"	p	language:Verilog	module:ConfigurationParameterDistribution
 MicrorocChain1Data	AcquisitionControl.v	/^  input [15:0] MicrorocChain1Data,$/;"	p	language:Verilog	module:AcquisitionControl
@@ -1209,6 +1210,7 @@ OutTestDataEnable	AcquisitionControl.v	/^  output OutTestDataEnable,$/;"	p	langu
 OutTestDataEnable	AcquisitionSwitcher.v	/^  output reg OutTestDataEnable,$/;"	p	language:Verilog	module:AcquisitionSwitcher
 OutTestDataEnable	FPGA_Top.v	/^  wire OutTestDataEnable;$/;"	n	language:Verilog	module:FPGA_Top
 OutTestDataEnable_Debug	FPGA_Top.v	/^  (* MARK_DEBUG="true" *)wire OutTestDataEnable_Debug;$/;"	n	language:Verilog	module:FPGA_Top
+OutTestData_Debug	FPGA_Top.v	/^  (* MARK_DEBUG="true" *)wire [15:0] OutTestData_Debug;$/;"	n	language:Verilog	module:FPGA_Top
 OutTrigger0b	AcquisitionControl.v	/^  input OutTrigger0b,$/;"	p	language:Verilog	module:AcquisitionControl
 OutTrigger0b	TriggerSwitcher.v	/^  input OutTrigger0b,$/;"	p	language:Verilog	module:TriggerSwitcher
 OutTrigger1b	AcquisitionControl.v	/^  input OutTrigger1b,$/;"	p	language:Verilog	module:AcquisitionControl
