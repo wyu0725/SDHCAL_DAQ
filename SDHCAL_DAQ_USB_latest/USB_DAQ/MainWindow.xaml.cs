@@ -4341,7 +4341,7 @@ namespace USB_DAQ
         }
         private bool SaveSCTestFile(int TestCharge, string AsicID, int HighGainOrLowGain)
         {
-            string TestFileName = string.Format("ASIC{0}SCTest{1}fC{2}.dat", AsicID, TestCharge, ((HighGainOrLowGain == 1) ? "HighGain" : "LowGain"));
+            string TestFileName = string.Format("{0}SCTest{1}fC{2}.dat", AsicID, TestCharge, ((HighGainOrLowGain == 1) ? "HighGain" : "LowGain"));
             filepath = Path.Combine(txtFileDir.Text, TestFileName);
             FileStream fs = null;
             if (!File.Exists(filepath))
@@ -4359,275 +4359,6 @@ namespace USB_DAQ
                 MessageBox.Show("Save file failure. Please save the file manual", "File Save Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
-        }
-
-
-        private async void btnAutoCalibrationStart_Click(object sender, RoutedEventArgs e)
-        {
-            bool bResult;
-            if (!StateIndicator.AutoCalibrationStart)
-            {
-                #region Set Common SCurve Parameter
-                if (!SetSCurveTestCommomParameter())
-                {
-                    return;
-                }
-                #endregion
-                #region Set test row and column
-                if (!SetSCurveTestAsic(cbxSCurveTestAsicNewDif.SelectedIndex))
-                {
-                    return;
-                }
-                #endregion
-                #region Set Channel Align
-                if (cbxAlignOrNot.SelectedIndex == 0)
-                {
-                    int TestAsic = cbxSCurveTestAsicNewDif.SelectedIndex % 4;
-                    int TestRow = cbxSCurveTestAsicNewDif.SelectedIndex / 4;
-                    string FileName = string.Format("C{0}{1}.txt", TestRow + 1, TestAsic + 1);
-                    string AlignmentFileName = Path.Combine(CurrentPath, FileName);
-                    bool FileExist;
-                    bResult = AsicBaseLineAlignment(TestRow, TestAsic, AlignmentFileName, out FileExist);
-                    if (!FileExist)
-                    {
-                        MessageBox.Show("Do not found Calibration File. Skip the calibration", "FILE NOT FOUND", MessageBoxButton.OK, MessageBoxImage.Information);
-                        return;
-                    }
-                    else
-                    {
-                        if (bResult)
-                        {
-                            txtReport.AppendText("Aligned\n");
-                        }
-                        else
-                        {
-                            ShowUsbError("Align");
-                            return;
-                        }
-                    }
-                }
-                #endregion
-                #region Caculate Start and end Charge
-                if (!CheckStringLegal.CheckIntegerLegal(tbxACStartCharge.Text))
-                {
-                    ShowIllegalInput("Start Charge should be Integer");
-                    return;
-                }
-                if (!CheckStringLegal.CheckIntegerLegal(tbxACEndCharge.Text))
-                {
-                    ShowIllegalInput("End Charge should be Integer");
-                    return;
-                }
-                if ((int.Parse(tbxACEndCharge.Text) < int.Parse(tbxACStartCharge.Text)))
-                {
-                    ShowIllegalInput("Start Charge should lower than End Charge");
-                    return;
-                }
-                if (!CheckStringLegal.CheckIntegerLegal(tbxACChargeStep.Text))
-                {
-                    ShowIllegalInput("Charge Step should be interger");
-                    return;
-                }
-                int StartCharge = int.Parse(tbxACStartCharge.Text);
-                int EndCharge = int.Parse(tbxACEndCharge.Text);
-                int ChargeStep = int.Parse(tbxACChargeStep.Text);
-                #endregion
-                #region Check test capacitor
-                if (!CheckStringLegal.CheckDoubleLegal(tbxACCTestCapacitor.Text))
-                {
-                    ShowIllegalInput("Test capacitor should be double");
-                    return;
-                }
-                double TestCapacitor = double.Parse(tbxACCTestCapacitor.Text);
-                #endregion
-                bool AttenuatorOrNot = cbxACAttenuator.SelectedIndex == 0;
-                for (int TestCharge = StartCharge; TestCharge <= EndCharge; TestCharge += ChargeStep)
-                {
-                    #region Set AFG3252 Voltage
-                    double DeltaV = TestCharge / TestCapacitor;
-                    double TestVoltage;
-                    #region Check attenuator
-                    if (DeltaV < 50 & !AttenuatorOrNot)
-                    {
-                        if (MessageBox.Show("AFG3252 voltage < 50mV. Add Attenuator?", "Confirm Message", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
-                        {
-                            AttenuatorOrNot = true;
-                        }
-                        else
-                        {
-                            return;
-                        }
-                    }
-                    else if (DeltaV > 50 & AttenuatorOrNot)
-                    {
-                        if (MessageBox.Show("AFG3252 voltage > 5V. Remove Attenuator?", "Confirm Message", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
-                        {
-                            AttenuatorOrNot = false;
-                        }
-                        else
-                        {
-                            return;
-                        }
-                    }
-                    #endregion
-                    if (AttenuatorOrNot)
-                    {
-                        TestVoltage = DeltaV * 100;
-                    }
-                    else
-                    {
-                        TestVoltage = DeltaV;
-                    }
-                    if(TestVoltage < 0)
-                    {
-                        ShowIllegalInput("The charge should equal or greater than 0");
-                        return;
-                    }
-                    if(TestVoltage == 0)
-                    {
-                        if (MessageBox.Show("The Voltage is zero. Continue", "Confirm Message", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
-                        {
-                            bResult = MyAFG3252.CloseOutput(1);
-                            if (!bResult)
-                            {
-                                ShowUsbError("Close AFG3252 Channel1");
-                                return;
-                            }
-                        }
-                        else
-                        {
-                            return;
-                        }
-                    }
-                    else
-                    {
-                        bResult = MyAFG3252.SetVoltageHigh(1, TestVoltage, AFG3252.VoltageUnitMV);
-                        if (!bResult)
-                        {
-                            ShowUsbError("Set AFG3252");
-                            return;
-                        }
-                    }
-                    #endregion
-                    #region Set Start and End DAC
-                    int TestDac;
-                    if (cbxACHighGainOrLowGain.SelectedIndex == 1)
-                    {
-                        TestDac = 600 - 4 * TestCharge;
-                    }
-                    else
-                    {
-                        TestDac = 600 - TestCharge;
-                    }
-                    int StartDac = (TestDac >= 50) ? (TestDac - 50) : 0;
-                    if (StartDac > 923)
-                    {
-                        MessageBox.Show("Start DAC Caculate wrong. Please run debug", "System Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                        return;
-                    }
-                    int EndDac = StartDac + 100;
-                    if (!SetStartDac(StartDac.ToString()))
-                    {
-                        return;
-                    }
-                    if (!SetEndDac(EndDac.ToString()))
-                    {
-                        return;
-                    }
-                    if (!SetDacStep(tbcDacStepNewDif.Text))
-                    {
-                        return;
-                    }
-                    int DacStep = int.Parse(tbcDacStepNewDif.Text);
-                    #endregion
-                    #region Data number
-                    if (cbxSingleOrAutoNewDif.SelectedIndex == 1)
-                    {
-                        StateIndicator.SlowDataRatePackageNumber = HeaderLength + ChannelLength + ((EndDac - StartDac) / DacStep + 1) * OneDacDataLength + TailLength;
-                    }
-                    //--- 64 Channel Test ---//
-                    else
-                    {
-                        StateIndicator.SlowDataRatePackageNumber = HeaderLength + (ChannelLength + ((EndDac - StartDac) / DacStep + 1) * OneDacDataLength) * 64 + TailLength;
-                    }
-                    #endregion
-                    #region SaveFile
-                    if (!SaveSCTestFile(TestCharge, tbxACAsicID.Text, cbxACHighGainOrLowGain.SelectedIndex))
-                    {
-                        MessageBox.Show("Save file failure", "File Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                        return;
-                    }
-                    #endregion
-                    #region Reset test
-                    if (!ResetSCurveTest())
-                    {
-                        return;
-                    }
-                    if (!ClearUsbFifo())
-                    {
-                        return;
-                    }
-                    #endregion
-                    tbxACStatus.Text = string.Format("{0}fC", TestCharge);
-                    #region Single charge SCurve
-                    bResult = SCurveTestStart();
-                    if (bResult)
-                    {
-                        StateIndicator.FileSaved = false;
-                        StateIndicator.SlowAcqStart = true;
-                        StateIndicator.AutoCalibrationStart = true;
-                        btnAutoCalibrationStart.Content = "Calibration Stop";
-                        btnAutoCalibrationStart.Background = Brushes.Red;
-                        btnSCurveTestStartNewDif.Content = "SCurve Test Stop";
-                        btnSCurveTestStartNewDif.Background = Brushes.Red;
-                        await Task.Run(() => GetSlowDataRateResultCallBack(MyUsbDevice1));
-                        SCurveTestStop();
-                        ResetSCurveTest();
-                        StateIndicator.SlowAcqStart = false;
-                        btnSCurveTestStartNewDif.Content = "SCurve Test Start";
-                        btnSCurveTestStartNewDif.Background = Brushes.Green;
-                    }
-                    else
-                    {
-                        return;
-                    }
-                    #endregion
-                    if (TestVoltage == 0)
-                    {
-                        bResult = MyAFG3252.OpenOutput(1);
-                        if (!bResult)
-                        {
-                            ShowUsbError("Open AFG3252 Channel1");
-                            return;
-                        }
-                    }
-                }
-                StateIndicator.AutoCalibrationStart = false;
-                btnAutoCalibrationStart.Content = "Calibration Start";
-                btnAutoCalibrationStart.Background = Brushes.Green;
-            }
-            else
-            {
-                bResult = SCurveTestStop();
-                if (!bResult)
-                {
-                    return;
-                }
-                bResult = ResetSCurveTest();
-                if (!bResult)
-                {
-                    return;
-                }
-                StateIndicator.SlowAcqStart = false;
-                btnSCurveTestStartNewDif.Content = "SCurve Test Start";
-                btnSCurveTestStartNewDif.Background = Brushes.Green;
-                StateIndicator.AutoCalibrationStart = false;
-                btnAutoCalibrationStart.Content = "Calibration Start";
-                btnAutoCalibrationStart.Background = Brushes.Green;
-            }
-            MediaPlayer TestDonePlayer = new MediaPlayer();
-            TestDonePlayer.Open(new Uri("TestDone.wav", UriKind.Relative));
-            TestDonePlayer.Play();
         }
 
         private void btnAutoCalibrationInitial_Click(object sender, RoutedEventArgs e)
@@ -6878,6 +6609,22 @@ namespace USB_DAQ
                 return false;
             }
         }
+
+        private bool SetStartDac(int StartDac)
+        {
+            bool bResult = MicrorocAsic.SCurveTestStartDacSet(StartDac, MyUsbDevice1);
+            if (bResult)
+            {
+                string report = string.Format("Set Start DAC {0}\n", StartDac);
+                txtReport.AppendText(report);
+                return true;
+            }
+            else
+            {
+                ShowUsbError("Set Start DAC");
+                return false;
+            }
+        }
         private bool SetStartDac(string StartDac)
         {
             bool IllegalInput;
@@ -6899,6 +6646,22 @@ namespace USB_DAQ
                 return false;
             }
         }
+
+        private bool SetEndDac(int EndDac)
+        {
+            bool bResult = MicrorocAsic.SCurveTestEndDacSet(EndDac, MyUsbDevice1);
+            if (bResult)
+            {
+                string report = string.Format("Set End DAC {0}\n", EndDac);
+                txtReport.AppendText(report);
+                return true;
+            }
+            else
+            {
+                ShowUsbError("Set End DAC");
+                return false;
+            }
+        }
         private bool SetEndDac(string EndDac)
         {
             bool IllegalInput;
@@ -6917,6 +6680,22 @@ namespace USB_DAQ
             else
             {
                 ShowUsbError("Set End DAC");
+                return false;
+            }
+        }
+
+        private bool SetDacStep(int DacStep)
+        {
+            bool bResult = MicrorocAsic.SCurveTestDacStepSet(DacStep, MyUsbDevice1);
+            if (bResult)
+            {
+                string report = string.Format("Set DAC step {0}\n", DacStep);
+                txtReport.AppendText(report);
+                return true;
+            }
+            else
+            {
+                ShowUsbError("Set DAC Step");
                 return false;
             }
         }
@@ -7747,21 +7526,41 @@ namespace USB_DAQ
         {
             if (btnSyncClockSelect.Content.ToString() == "External Clock")
             {
-                if(SCurveTestSynchroniseClockSelect(1, MyUsbDevice1))
-                {
-                    btnSyncClockSelect.Content = "Internal Clock";
-                    btnSyncClockSelect.Background = Brushes.LightCoral;
-                    cbxSCurveTestClockSelectNewDif.SelectedIndex = 1;
-                }
+                SelectInternalSyncClock();
             }
             else if (btnSyncClockSelect.Content.ToString() == "Internal Clock")
             {
-                if (SCurveTestSynchroniseClockSelect(0, MyUsbDevice1))
-                {
-                    btnSyncClockSelect.Content = "External Clock";
-                    btnSyncClockSelect.Background = Brushes.LightCyan;
-                    cbxSCurveTestClockSelectNewDif.SelectedIndex = 0;
-                }
+                SelectExternalSyncClock();
+            }
+        }
+        private bool SelectInternalSyncClock()
+        {
+            if (SCurveTestSynchroniseClockSelect(1, MyUsbDevice1))
+            {
+                btnSyncClockSelect.Content = "Internal Clock";
+                btnSyncClockSelect.Background = Brushes.LightCoral;
+                cbxSCurveTestClockSelectNewDif.SelectedIndex = 1;
+                return true;
+            }
+            else
+            {
+                ShowUsbError("Select internal clock");
+                return false;
+            }
+        }
+        private bool SelectExternalSyncClock()
+        {
+            if (SCurveTestSynchroniseClockSelect(0, MyUsbDevice1))
+            {
+                btnSyncClockSelect.Content = "External Clock";
+                btnSyncClockSelect.Background = Brushes.LightCyan;
+                cbxSCurveTestClockSelectNewDif.SelectedIndex = 0;
+                return true;
+            }
+            else
+            {
+                ShowUsbError("Select external Sync clock");
+                return false;
             }
         }
 
@@ -7769,60 +7568,84 @@ namespace USB_DAQ
         {
             if (btnSwitcherAOnOff.Content.ToString() == "Off")
             {
-                int SwitcherSelect = 1 + cbxSwicherB.SelectedIndex * 2;
-                bool bResult = CalibrationSwitcherSelect(SwitcherSelect, MyUsbDevice1);
-                if (!bResult)
-                {  
-                    return;
-                }
-                cbxSwicherA.SelectedIndex = 1;
-                btnSwitcherAOnOff.Content = "On";
-                btnSwitcherAOnOff.Background = Brushes.LightGreen;
+                SwitcherAOn();
             }
             else if (btnSwitcherAOnOff.Content.ToString() == "On")
             {
-                int SwitcherSelect = 0 + cbxSwicherB.SelectedIndex * 2;
-                bool bResult = CalibrationSwitcherSelect(SwitcherSelect, MyUsbDevice1);
-                if (!bResult)
-                {
-                    return;
-                }
-                cbxSwicherA.SelectedIndex = 0;
-                btnSwitcherAOnOff.Content = "Off";
-                btnSwitcherAOnOff.Background = Brushes.LightGray;
+                SwitcherAOff();
             }
 
+        }
+        public bool SwitcherAOn()
+        {
+            int SwitcherSelect = 1 + cbxSwicherB.SelectedIndex * 2;
+            bool bResult = CalibrationSwitcherSelect(SwitcherSelect, MyUsbDevice1);
+            if (!bResult)
+            {
+                ShowUsbError("On Switcher A");
+                return false;
+            }
+            cbxSwicherA.SelectedIndex = 1;
+            btnSwitcherAOnOff.Content = "On";
+            btnSwitcherAOnOff.Background = Brushes.LightGreen;
+            return true;
+        }
+        public bool SwitcherAOff()
+        {
+            int SwitcherSelect = 0 + cbxSwicherB.SelectedIndex * 2;
+            bool bResult = CalibrationSwitcherSelect(SwitcherSelect, MyUsbDevice1);
+            if (!bResult)
+            {
+                ShowUsbError("Off Switcher A");
+                return false;
+            }
+            cbxSwicherA.SelectedIndex = 0;
+            btnSwitcherAOnOff.Content = "Off";
+            btnSwitcherAOnOff.Background = Brushes.LightGray;
+            return true;
         }
 
         private void btnSwitcherBOnOff_Click(object sender, RoutedEventArgs e)
         {
             if (btnSwitcherBOnOff.Content.ToString() == "Off")
             {
-                int SwitcherSelect = 2 + cbxSwicherA.SelectedIndex;
-                bool bResult = CalibrationSwitcherSelect(SwitcherSelect, MyUsbDevice1);
-                if (!bResult)
-                {
-                    return;
-                }
-                cbxSwicherB.SelectedIndex = 1;
-                btnSwitcherBOnOff.Content = "On";
-                btnSwitcherBOnOff.Background = Brushes.LightGreen;
+                SwitcherBOn();
             }
             else if (btnSwitcherBOnOff.Content.ToString() == "On")
             {
-                int SwitcherSelect = 0 + cbxSwicherA.SelectedIndex;
-                bool bResult = CalibrationSwitcherSelect(SwitcherSelect, MyUsbDevice1);
-                if (!bResult)
-                {
-                    return;
-                }
-                cbxSwicherB.SelectedIndex = 0;
-                btnSwitcherBOnOff.Content = "Off";
-                btnSwitcherBOnOff.Background = Brushes.LightGray;
+                SwitcherBOff();
             }
         }
+        private bool SwitcherBOn()
+        {
+            int SwitcherSelect = 2 + cbxSwicherA.SelectedIndex;
+            bool bResult = CalibrationSwitcherSelect(SwitcherSelect, MyUsbDevice1);
+            if (!bResult)
+            {
+                ShowUsbError("On Switcher B");
+                return false;
+            }
+            cbxSwicherB.SelectedIndex = 1;
+            btnSwitcherBOnOff.Content = "On";
+            btnSwitcherBOnOff.Background = Brushes.LightGreen;
+            return true;
+        }
+        private bool SwitcherBOff()
+        {
+            int SwitcherSelect = 0 + cbxSwicherA.SelectedIndex;
+            bool bResult = CalibrationSwitcherSelect(SwitcherSelect, MyUsbDevice1);
+            if (!bResult)
+            {
+                ShowUsbError("Off Switcher B");
+                return false;
+            }
+            cbxSwicherB.SelectedIndex = 0;
+            btnSwitcherBOnOff.Content = "Off";
+            btnSwitcherBOnOff.Background = Brushes.LightGray;
+            return true;
+        }
 
-        private bool SetCalibration1Voltage(double Voltage, int DacSelection, double Slope, double Intercept, MyCyUsb usbInterface)
+        private bool SetCalibrationVoltage(double Voltage, int DacSelection, double Slope, double Intercept, MyCyUsb usbInterface)
         {
             if (Slope != 0)
             {
@@ -7858,6 +7681,589 @@ namespace USB_DAQ
                 ShowIllegalInput("The charge should equal or greater than 0");
                 return false;
             }
+        }
+
+        private async void btnOnBoardCalibrationStart_Click(object sender, RoutedEventArgs e)
+        {
+            bool bResult;
+            if(btnOnBoardCalibrationStart.Content.ToString() == "On Board Cali Start")
+            {
+                
+                #region Check the DAC parameter
+                if (!CheckStringLegal.CheckDoubleLegal(tbxSlopeSwitcherA.Text) || double.Parse(tbxSlopeSwitcherA.Text) == 0)
+                {
+                    ShowIllegalInput("The slope should be a double and not equal to 0");
+                    return;
+                }
+                if (!CheckStringLegal.CheckDoubleLegal(tbxInterceptSwitcherA.Text))
+                {
+                    ShowIllegalInput("The intercept should be a double value");
+                    return;
+                }
+                if (!CheckStringLegal.CheckDoubleLegal(tbxSlopeSwitcherB.Text) || double.Parse(tbxSlopeSwitcherB.Text) == 0)
+                {
+                    ShowIllegalInput("The slope should be a double and not equal to 0");
+                    return;
+                }
+                if (!CheckStringLegal.CheckDoubleLegal(tbxInterceptSwitcherB.Text))
+                {
+                    ShowIllegalInput("The intercept should be a double value");
+                    return;
+                }
+                #endregion
+                string ParentFolder = txtFileDir.Text;
+                for (int Row = 0; Row < 4; Row++)
+                {
+                    for(int Column = 0; Column < 4; Column++)
+                    {
+                        // Single ASIC Start
+                        #region Set all CTest channel to 0
+                        if (!CloseAllCTestChannel())
+                        {
+                            return;
+                        }
+                        #endregion
+                        #region Create Test Folder
+                        string AsicID = string.Format("ASIC{0}{1}", Row + 1, Column + 1);
+                        
+                        string TestFolder = Path.Combine(ParentFolder, AsicID);
+                        if (!Directory.Exists(TestFolder))//路径不存在
+                        {
+                            string path = String.Format("File Directory {0} Created\n", TestFolder);
+                            Directory.CreateDirectory(TestFolder);
+                            txtReport.AppendText(path);
+                            txtFileDir.Text = TestFolder;
+                        }
+                        else
+                        {
+                            MessageBox.Show("The File Directory already exits", //text
+                                            "Created failure",   //caption
+                                            MessageBoxButton.OK,//button
+                                            MessageBoxImage.Warning);//icon
+                        }
+                        #endregion
+                        SelectInternalSyncClock();
+                        #region SetSwitcher
+                        int DacSelect;
+                        double DacSlope;
+                        double DacIntercept;
+                        if(Column < 2)
+                        {
+                            DacSelect = 1;
+                            DacSlope = double.Parse(tbxSlopeSwitcherB.Text);
+                            DacIntercept = double.Parse(tbxInterceptSwitcherB.Text);
+                            SwitcherBOn();
+                            SwitcherAOff();
+                        }
+                        else
+                        {
+                            DacSelect = 2;
+                            DacSlope = double.Parse(tbxSlopeSwitcherA.Text);
+                            DacIntercept = double.Parse(tbxInterceptSwitcherA.Text);
+                            SwitcherAOn();
+                            SwitcherBOff();
+                        }
+                        #endregion
+                        #region Set Common SCurve Parameter
+                        if (!SetSCurveTestCommomParameter())
+                        {
+                            return;
+                        }
+                        #endregion
+                        #region Set test row and column
+                        cbxSCurveTestAsicNewDif.SelectedIndex = Row * 4 + Column;
+                        if (!SetSCurveTestAsic(cbxSCurveTestAsicNewDif.SelectedIndex))
+                        {
+                            return;
+                        }
+                        #endregion
+                        #region Set Channel Align
+                        if (cbxAlignOrNot.SelectedIndex == 0)
+                        {
+                            string FileName = string.Format("C{0}{1}.txt", Row + 1, Column + 1);
+                            string AlignmentFileName = Path.Combine(CurrentPath, FileName);
+                            bool FileExist;
+                            bResult = AsicBaseLineAlignment(Row, Column, AlignmentFileName, out FileExist);
+                            if (!FileExist)
+                            {
+                                MessageBox.Show("Do not found Calibration File. Skip the calibration", "FILE NOT FOUND", MessageBoxButton.OK, MessageBoxImage.Information);
+                                return;
+                            }
+                            else
+                            {
+                                if (bResult)
+                                {
+                                    txtReport.AppendText("Aligned\n");
+                                }
+                                else
+                                {
+                                    ShowUsbError("Align");
+                                    return;
+                                }
+                            }
+                        }
+                        #endregion
+                        #region Caculate Start and end Charge
+                        if (!CheckStringLegal.CheckIntegerLegal(tbxACStartCharge.Text))
+                        {
+                            ShowIllegalInput("Start Charge should be Integer");
+                            return;
+                        }
+                        if (!CheckStringLegal.CheckIntegerLegal(tbxACEndCharge.Text))
+                        {
+                            ShowIllegalInput("End Charge should be Integer");
+                            return;
+                        }
+                        if ((int.Parse(tbxACEndCharge.Text) < int.Parse(tbxACStartCharge.Text)))
+                        {
+                            ShowIllegalInput("Start Charge should lower than End Charge");
+                            return;
+                        }
+                        if (!CheckStringLegal.CheckIntegerLegal(tbxACChargeStep.Text))
+                        {
+                            ShowIllegalInput("Charge Step should be interger");
+                            return;
+                        }
+                        int StartCharge = int.Parse(tbxACStartCharge.Text);
+                        int EndCharge = int.Parse(tbxACEndCharge.Text);
+                        int ChargeStep = int.Parse(tbxACChargeStep.Text);
+                        #endregion
+                        #region Check test capacitor
+                        if (!(CheckStringLegal.CheckDoubleLegal(tbxACCTestCapacitor.Text) && double.Parse(tbxACCTestCapacitor.Text) > 0))
+                        {
+                            ShowIllegalInput("Test capacitor should greater than 0");
+                            return;
+                        }
+                        double TestCapacitor = double.Parse(tbxACCTestCapacitor.Text);
+                        #endregion
+                        for (int TestCharge = StartCharge; TestCharge <= EndCharge; TestCharge += ChargeStep)
+                        {
+                            #region Set Test voltage
+                            double DeltaV = TestCharge / TestCapacitor;
+                            bResult = SetCalibrationVoltage(DeltaV, DacSelect, DacSlope, DacIntercept, MyUsbDevice1);
+                            if(!bResult)
+                            {
+                                return;
+                            }
+                            #endregion
+                            #region Set Start and End DAC
+                            int TestDac;
+                            if (cbxACHighGainOrLowGain.SelectedIndex == 1)
+                            {
+                                TestDac = 600 - 4 * TestCharge;
+                            }
+                            else
+                            {
+                                TestDac = 600 - TestCharge;
+                            }
+                            int StartDac = (TestDac >= 50) ? (TestDac - 50) : 0;
+                            if (StartDac > 923)
+                            {
+                                MessageBox.Show("Start DAC Caculate wrong. Please run debug", "System Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                return;
+                            }
+                            int EndDac = StartDac + 100;
+                            if (!SetStartDac(StartDac))
+                            {
+                                return;
+                            }
+                            if (!SetEndDac(EndDac))
+                            {
+                                return;
+                            }
+                            if (!SetDacStep(tbcDacStepNewDif.Text))
+                            {
+                                return;
+                            }
+                            int DacStep = int.Parse(tbcDacStepNewDif.Text);
+                            #endregion
+                            #region Data number
+                            if (cbxSingleOrAutoNewDif.SelectedIndex == 1)
+                            {
+                                StateIndicator.SlowDataRatePackageNumber = HeaderLength + ChannelLength + ((EndDac - StartDac) / DacStep + 1) * OneDacDataLength + TailLength;
+                            }
+                            //--- 64 Channel Test ---//
+                            else
+                            {
+                                StateIndicator.SlowDataRatePackageNumber = HeaderLength + (ChannelLength + ((EndDac - StartDac) / DacStep + 1) * OneDacDataLength) * 64 + TailLength;
+                            }
+                            #endregion
+                            #region SaveFile
+                            if (!SaveSCTestFile(TestCharge, AsicID, cbxACHighGainOrLowGain.SelectedIndex))
+                            {
+                                MessageBox.Show("Save file failure", "File Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                return;
+                            }
+                            #endregion
+                            #region Reset test
+                            if (!ResetSCurveTest())
+                            {
+                                return;
+                            }
+                            if (!ClearUsbFifo())
+                            {
+                                return;
+                            }
+                            #endregion
+                            tbxACStatus.Text = string.Format("{0}fC", TestCharge);
+                            #region Single charge SCurve
+                            bResult = SCurveTestStart();
+                            if (bResult)
+                            {
+                                StateIndicator.FileSaved = false;
+                                StateIndicator.SlowAcqStart = true;
+                                StateIndicator.AutoCalibrationStart = true;
+                                btnOnBoardCalibrationStart.Content = "On Board Cali Stop";
+                                btnOnBoardCalibrationStart.Background = Brushes.Red;
+                                btnSCurveTestStartNewDif.Content = "SCurve Test Stop";
+                                btnSCurveTestStartNewDif.Background = Brushes.Red;
+                                await Task.Run(() => GetSlowDataRateResultCallBack(MyUsbDevice1));
+                                SCurveTestStop();
+                                ResetSCurveTest();
+                                StateIndicator.SlowAcqStart = false;
+                                btnSCurveTestStartNewDif.Content = "SCurve Test Start";
+                                btnSCurveTestStartNewDif.Background = Brushes.Green;
+                            }
+                            else
+                            {
+                                return;
+                            }
+                            #endregion
+                        }
+                    }
+                }
+                btnSCurveTestStartNewDif.Content = "SCurve Test Start";
+                btnSCurveTestStartNewDif.Background = Brushes.Green;
+                btnOnBoardCalibrationStart.Content = "On Board Cali Start";
+                btnOnBoardCalibrationStart.Background = Brushes.LightGreen;
+            }
+            else
+            {
+                bResult = SCurveTestStop();
+                if (!bResult)
+                {
+                    return;
+                }
+                bResult = ResetSCurveTest();
+                if (!bResult)
+                {
+                    return;
+                }
+                StateIndicator.SlowAcqStart = false;
+                btnSCurveTestStartNewDif.Content = "SCurve Test Start";
+                btnSCurveTestStartNewDif.Background = Brushes.Green;
+                btnOnBoardCalibrationStart.Content = "On Board Cali Start";
+                btnOnBoardCalibrationStart.Background = Brushes.LightGreen;
+            }
+        }
+
+        private bool CloseAllCTestChannel()
+        {
+            bool bResult = MicrorocAsic.RunningModeSelect(0, MyUsbDevice1);
+            if (!bResult)
+            {
+                ShowUsbError("Set parameter");
+                return false;
+            }
+            for (int i = 0; i < 4; i++)
+            {
+                #region Select ASIC chain
+                bResult = SelectAsicChain(MicrorocAsicChain[i]);
+                if (!bResult)
+                {
+                    return false;
+                }
+                #endregion
+                bResult = MicrorocAsicChain[i].CTestChannelSet(0, MyUsbDevice1);
+                if (!bResult)
+                {
+                    ShowUsbError("Close all CTest channel");
+                    return false;
+                }
+                for (int j = 0; j < 4; j++)
+                {
+                    bResult = ConfigurationParameterLoad(MicrorocAsicChain[i]);
+                    if (!bResult)
+                    {
+                        return false;
+                    }
+                }
+            }
+            bResult = MicrorocAsic.RunningModeSelect(1, MyUsbDevice1);
+            if (!bResult)
+            {
+                ShowUsbError("Please reset the SCurve Test mode");
+                return false;
+            }
+            return true;
+        }
+
+        private async void btnAutoCalibrationStart_Click(object sender, RoutedEventArgs e)
+        {
+            bool bResult;
+            if (!StateIndicator.AutoCalibrationStart)
+            {
+                #region Set Common SCurve Parameter
+                if (!SetSCurveTestCommomParameter())
+                {
+                    return;
+                }
+                #endregion
+                #region Set test row and column
+                if (!SetSCurveTestAsic(cbxSCurveTestAsicNewDif.SelectedIndex))
+                {
+                    return;
+                }
+                #endregion
+                #region Set Channel Align
+                if (cbxAlignOrNot.SelectedIndex == 0)
+                {
+                    int TestAsic = cbxSCurveTestAsicNewDif.SelectedIndex % 4;
+                    int TestRow = cbxSCurveTestAsicNewDif.SelectedIndex / 4;
+                    string FileName = string.Format("C{0}{1}.txt", TestRow + 1, TestAsic + 1);
+                    string AlignmentFileName = Path.Combine(CurrentPath, FileName);
+                    bool FileExist;
+                    bResult = AsicBaseLineAlignment(TestRow, TestAsic, AlignmentFileName, out FileExist);
+                    if (!FileExist)
+                    {
+                        MessageBox.Show("Do not found Calibration File. Skip the calibration", "FILE NOT FOUND", MessageBoxButton.OK, MessageBoxImage.Information);
+                        return;
+                    }
+                    else
+                    {
+                        if (bResult)
+                        {
+                            txtReport.AppendText("Aligned\n");
+                        }
+                        else
+                        {
+                            ShowUsbError("Align");
+                            return;
+                        }
+                    }
+                }
+                #endregion
+                #region Caculate Start and end Charge
+                if (!CheckStringLegal.CheckIntegerLegal(tbxACStartCharge.Text))
+                {
+                    ShowIllegalInput("Start Charge should be Integer");
+                    return;
+                }
+                if (!CheckStringLegal.CheckIntegerLegal(tbxACEndCharge.Text))
+                {
+                    ShowIllegalInput("End Charge should be Integer");
+                    return;
+                }
+                if ((int.Parse(tbxACEndCharge.Text) < int.Parse(tbxACStartCharge.Text)))
+                {
+                    ShowIllegalInput("Start Charge should lower than End Charge");
+                    return;
+                }
+                if (!CheckStringLegal.CheckIntegerLegal(tbxACChargeStep.Text))
+                {
+                    ShowIllegalInput("Charge Step should be interger");
+                    return;
+                }
+                int StartCharge = int.Parse(tbxACStartCharge.Text);
+                int EndCharge = int.Parse(tbxACEndCharge.Text);
+                int ChargeStep = int.Parse(tbxACChargeStep.Text);
+                #endregion
+                #region Check test capacitor
+                if (!CheckStringLegal.CheckDoubleLegal(tbxACCTestCapacitor.Text))
+                {
+                    ShowIllegalInput("Test capacitor should be double");
+                    return;
+                }
+                double TestCapacitor = double.Parse(tbxACCTestCapacitor.Text);
+                #endregion
+                bool AttenuatorOrNot = cbxACAttenuator.SelectedIndex == 0;
+                for (int TestCharge = StartCharge; TestCharge <= EndCharge; TestCharge += ChargeStep)
+                {
+                    #region Set AFG3252 Voltage
+                    double DeltaV = TestCharge / TestCapacitor;
+                    double TestVoltage;
+                    #region Check attenuator
+                    if (DeltaV < 50 & !AttenuatorOrNot)
+                    {
+                        if (MessageBox.Show("AFG3252 voltage < 50mV. Add Attenuator?", "Confirm Message", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                        {
+                            AttenuatorOrNot = true;
+                        }
+                        else
+                        {
+                            return;
+                        }
+                    }
+                    else if (DeltaV > 50 & AttenuatorOrNot)
+                    {
+                        if (MessageBox.Show("AFG3252 voltage > 5V. Remove Attenuator?", "Confirm Message", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                        {
+                            AttenuatorOrNot = false;
+                        }
+                        else
+                        {
+                            return;
+                        }
+                    }
+                    #endregion
+                    if (AttenuatorOrNot)
+                    {
+                        TestVoltage = DeltaV * 100;
+                    }
+                    else
+                    {
+                        TestVoltage = DeltaV;
+                    }
+                    if (TestVoltage < 0)
+                    {
+                        ShowIllegalInput("The charge should equal or greater than 0");
+                        return;
+                    }
+                    if (TestVoltage == 0)
+                    {
+                        if (MessageBox.Show("The Voltage is zero. Continue", "Confirm Message", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                        {
+                            bResult = MyAFG3252.CloseOutput(1);
+                            if (!bResult)
+                            {
+                                ShowUsbError("Close AFG3252 Channel1");
+                                return;
+                            }
+                        }
+                        else
+                        {
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        bResult = MyAFG3252.SetVoltageHigh(1, TestVoltage, AFG3252.VoltageUnitMV);
+                        if (!bResult)
+                        {
+                            ShowUsbError("Set AFG3252");
+                            return;
+                        }
+                    }
+                    #endregion
+                    #region Set Start and End DAC
+                    int TestDac;
+                    if (cbxACHighGainOrLowGain.SelectedIndex == 1)
+                    {
+                        TestDac = 600 - 4 * TestCharge;
+                    }
+                    else
+                    {
+                        TestDac = 600 - TestCharge;
+                    }
+                    int StartDac = (TestDac >= 50) ? (TestDac - 50) : 0;
+                    if (StartDac > 923)
+                    {
+                        MessageBox.Show("Start DAC Caculate wrong. Please run debug", "System Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+                    int EndDac = StartDac + 100;
+                    if (!SetStartDac(StartDac))
+                    {
+                        return;
+                    }
+                    if (!SetEndDac(EndDac))
+                    {
+                        return;
+                    }
+                    if (!SetDacStep(tbcDacStepNewDif.Text))
+                    {
+                        return;
+                    }
+                    int DacStep = int.Parse(tbcDacStepNewDif.Text);
+                    #endregion
+                    #region Data number
+                    if (cbxSingleOrAutoNewDif.SelectedIndex == 1)
+                    {
+                        StateIndicator.SlowDataRatePackageNumber = HeaderLength + ChannelLength + ((EndDac - StartDac) / DacStep + 1) * OneDacDataLength + TailLength;
+                    }
+                    //--- 64 Channel Test ---//
+                    else
+                    {
+                        StateIndicator.SlowDataRatePackageNumber = HeaderLength + (ChannelLength + ((EndDac - StartDac) / DacStep + 1) * OneDacDataLength) * 64 + TailLength;
+                    }
+                    #endregion
+                    #region SaveFile
+                    if (!SaveSCTestFile(TestCharge, tbxACAsicID.Text, cbxACHighGainOrLowGain.SelectedIndex))
+                    {
+                        MessageBox.Show("Save file failure", "File Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+                    #endregion
+                    #region Reset test
+                    if (!ResetSCurveTest())
+                    {
+                        return;
+                    }
+                    if (!ClearUsbFifo())
+                    {
+                        return;
+                    }
+                    #endregion
+                    tbxACStatus.Text = string.Format("{0}fC", TestCharge);
+                    #region Single charge SCurve
+                    bResult = SCurveTestStart();
+                    if (bResult)
+                    {
+                        StateIndicator.FileSaved = false;
+                        StateIndicator.SlowAcqStart = true;
+                        StateIndicator.AutoCalibrationStart = true;
+                        btnAutoCalibrationStart.Content = "Calibration Stop";
+                        btnAutoCalibrationStart.Background = Brushes.Red;
+                        btnSCurveTestStartNewDif.Content = "SCurve Test Stop";
+                        btnSCurveTestStartNewDif.Background = Brushes.Red;
+                        await Task.Run(() => GetSlowDataRateResultCallBack(MyUsbDevice1));
+                        SCurveTestStop();
+                        ResetSCurveTest();
+                        StateIndicator.SlowAcqStart = false;
+                        btnSCurveTestStartNewDif.Content = "SCurve Test Start";
+                        btnSCurveTestStartNewDif.Background = Brushes.Green;
+                    }
+                    else
+                    {
+                        return;
+                    }
+                    #endregion
+                    if (TestVoltage == 0)
+                    {
+                        bResult = MyAFG3252.OpenOutput(1);
+                        if (!bResult)
+                        {
+                            ShowUsbError("Open AFG3252 Channel1");
+                            return;
+                        }
+                    }
+                }
+                StateIndicator.AutoCalibrationStart = false;
+                btnAutoCalibrationStart.Content = "Calibration Start";
+                btnAutoCalibrationStart.Background = Brushes.Green;
+            }
+            else
+            {
+                bResult = SCurveTestStop();
+                if (!bResult)
+                {
+                    return;
+                }
+                bResult = ResetSCurveTest();
+                if (!bResult)
+                {
+                    return;
+                }
+                StateIndicator.SlowAcqStart = false;
+                btnSCurveTestStartNewDif.Content = "SCurve Test Start";
+                btnSCurveTestStartNewDif.Background = Brushes.Green;
+                StateIndicator.AutoCalibrationStart = false;
+                btnAutoCalibrationStart.Content = "Calibration Start";
+                btnAutoCalibrationStart.Background = Brushes.Green;
+            }
+            MediaPlayer TestDonePlayer = new MediaPlayer();
+            TestDonePlayer.Open(new Uri("TestDone.wav", UriKind.Relative));
+            TestDonePlayer.Play();
         }
     }
     
