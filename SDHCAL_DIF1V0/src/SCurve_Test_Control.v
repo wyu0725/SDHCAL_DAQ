@@ -100,6 +100,7 @@ module SCurve_Test_Control(
   reg [2:0]   LoadAsicNumberCount;
   reg [191:0] MicrorocDiscriminatorMaskInternal;
   reg [9:0] MicrorocVthDacInternal;
+  reg [63:0] MicrorocCTestChannelInternal;
   reg TriggerSuppressStart;
   reg [19:0] TriggerSuppressCounter;
   always @(posedge Clk or negedge reset_n)begin
@@ -109,6 +110,7 @@ module SCurve_Test_Control(
       SCurve_Data_fifo_rd_en <= 1'b0;
       Single_Test_Start <= 1'b0;
       Microroc_CTest_Chn_Out <= 64'd0;
+      MicrorocCTestChannelInternal <= 64'b0;
       SCurveTestDataout <= 16'd0;
       SCurveTestDataoutEnable <= 1'b0;
       Actual_10bit_DAC_Code <= 10'b0;
@@ -136,6 +138,7 @@ module SCurve_Test_Control(
             SCurve_Data_fifo_rd_en <= 1'b0;
             Single_Test_Start <= 1'b0;
             Microroc_CTest_Chn_Out <= 64'd0;
+            MicrorocCTestChannelInternal <= 64'b0;
             SCurveTestDataout <= 16'd0;
             SCurveTestDataoutEnable <= 1'b0;
             Actual_10bit_DAC_Code <= StartDac;
@@ -165,19 +168,19 @@ module SCurve_Test_Control(
         OUT_TEST_CHN_AND_DISCRI_MASK_SC:begin
           SCurveTestDataoutEnable <= 1'b0;
           if(UnmaskAllChannel) begin
-            Microroc_CTest_Chn_Out <= (SINGLE_CHN_PARAM_Ctest << SingleTestChannel);
+            MicrorocCTestChannelInternal <= (SINGLE_CHN_PARAM_Ctest << SingleTestChannel);
             SCurveTestDataout <= 16'h43ff;
             MicrorocDiscriminatorMaskInternal <= {192{1'b1}};
             State <= OUT_TEST_CHN_USB;
           end
           else if(Single_or_64Chn) begin //Select single channel test and the charge is injected from CTest pin
-            Microroc_CTest_Chn_Out <= Ctest_or_Input ? (SINGLE_CHN_PARAM_Ctest << SingleTestChannel) : CTest_CHN_PARAM_Input;
+            MicrorocCTestChannelInternal <= Ctest_or_Input ? (SINGLE_CHN_PARAM_Ctest << SingleTestChannel) : CTest_CHN_PARAM_Input;
             SCurveTestDataout <= {8'h43, 2'b00, SingleTestChannel};//0x43 in ascii is C
             MicrorocDiscriminatorMaskInternal <= (DISCRIMINATOR_MASK << Discri_Mask_Shift);
             State <= OUT_TEST_CHN_USB;
           end
           else begin
-            Microroc_CTest_Chn_Out <= Ctest_or_Input ? All_Chn_Param : CTest_CHN_PARAM_Input;
+            MicrorocCTestChannelInternal <= Ctest_or_Input ? All_Chn_Param : CTest_CHN_PARAM_Input;
             SCurveTestDataout <= {8'h63, 2'b00, Test_Chn};//0x63 in ascii is c, meaning channel
             MicrorocDiscriminatorMaskInternal <= All_Chn_Discri_Mask;
             State <= OUT_TEST_CHN_USB;
@@ -215,11 +218,13 @@ module SCurve_Test_Control(
           SCurveTestDataoutEnable <= 1'b0;
           if(LoadAsicNumberCount == (AsicNumber - TestAsicNumber - 1'b1)) begin
             Microroc_Discriminator_Mask <= MicrorocDiscriminatorMaskInternal;
+            Microroc_CTest_Chn_Out <= MicrorocCTestChannelInternal;
             Microroc_10bit_DAC_Out <= MicrorocVthDacInternal;
             State <= LOAD_SC_PARAM;
           end
           else begin
             Microroc_Discriminator_Mask <= ALL_DISCRIMINATOR_MASK;
+            Microroc_CTest_Chn_Out <= 64'b0;
             Microroc_10bit_DAC_Out <= 10'b0;
             State <= LOAD_SC_PARAM;
           end
