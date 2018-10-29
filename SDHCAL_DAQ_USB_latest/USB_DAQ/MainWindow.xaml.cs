@@ -7379,6 +7379,8 @@ namespace USB_DAQ
                 {
                     return;
                 }
+                btnDacOnOff.Content = "Power On";
+                btnDacOnOff.Background = Brushes.Green;
             }
             if (cbxDac2EnableNewDif.SelectedIndex == 1)
             {
@@ -7387,6 +7389,8 @@ namespace USB_DAQ
                 {
                     return;
                 }
+                btnDacOnOff.Content = "Power On";
+                btnDacOnOff.Background = Brushes.Green;
             }
             DacLoad(MyUsbDevice1);
         }
@@ -7654,10 +7658,14 @@ namespace USB_DAQ
                 if (DacSelection == 1)
                 {
                     bResult = MicrorocAsic.AutoCalibrationDac1DataSet(DacValue, usbInterface);
+                    tbxDac1Value.Text = bResult ? DacValue.ToString() : tbxDac1Value.Text;
+                    cbxDac1EnableNewDif.SelectedIndex = bResult ? 1 : 0;
                 }
                 else if (DacSelection == 2)
                 {
                     bResult = MicrorocAsic.AutoCalibrationDac2DataSet(DacValue, usbInterface);
+                    tbxDac2Value.Text = bResult ? DacValue.ToString() : tbxDac2Value.Text;
+                    cbxDac2EnableNewDif.SelectedIndex = bResult ? 1 : 0;
                 }
                 else
                 {
@@ -7668,6 +7676,8 @@ namespace USB_DAQ
                 {
                     string report = string.Format("Set DAC{0}: {1} mV\n", DacSelection, Voltage);
                     txtReport.AppendText(report);
+                    btnDacOnOff.Content = "Power On";
+                    btnDacOnOff.Background = Brushes.Green;
                     return true;
                 }
                 else
@@ -7693,7 +7703,12 @@ namespace USB_DAQ
             bool bResult;
             if(btnOnBoardCalibrationStart.Content.ToString() == "On Board Cali Start")
             {
-                
+                #region Create test folder
+                if (!CreateOnBoardCaliFolder())
+                {
+                    return;
+                }
+                #endregion
                 #region Check the DAC parameter
                 if (!CheckStringLegal.CheckDoubleLegal(tbxSlopeSwitcherA.Text) || double.Parse(tbxSlopeSwitcherA.Text) == 0)
                 {
@@ -7754,20 +7769,21 @@ namespace USB_DAQ
                         double DacIntercept;
                         if(Column < 2)
                         {
-                            DacSelect = 1;
-                            DacSlope = double.Parse(tbxSlopeSwitcherB.Text);
-                            DacIntercept = double.Parse(tbxInterceptSwitcherB.Text);
-                            SwitcherBOn();
-                            SwitcherAOff();
-                        }
-                        else
-                        {
                             DacSelect = 2;
                             DacSlope = double.Parse(tbxSlopeSwitcherA.Text);
                             DacIntercept = double.Parse(tbxInterceptSwitcherA.Text);
                             SwitcherAOn();
                             SwitcherBOff();
                         }
+                        else
+                        {
+                            DacSelect = 1;
+                            DacSlope = double.Parse(tbxSlopeSwitcherB.Text);
+                            DacIntercept = double.Parse(tbxInterceptSwitcherB.Text);
+                            SwitcherBOn();
+                            SwitcherAOff();
+                        }
+                        
                         #endregion
                         #region Set test row and column
                         cbxSCurveTestAsicNewDif.SelectedIndex = Row * 4 + Column;
@@ -7959,6 +7975,33 @@ namespace USB_DAQ
                 btnSCurveTestStartNewDif.Background = Brushes.Green;
                 btnOnBoardCalibrationStart.Content = "On Board Cali Start";
                 btnOnBoardCalibrationStart.Background = Brushes.LightGreen;
+            }
+        }
+
+        private bool CreateOnBoardCaliFolder()
+        {
+            string DefaultPath = @"D:\ExperimentsData\test";
+            string DefaultSubPath = DateTime.Now.ToString();
+            DefaultSubPath = DefaultSubPath.Replace("/", "");
+            DefaultSubPath = DefaultSubPath.Replace(":", "");
+            DefaultSubPath = DefaultSubPath.Replace(" ", "");
+            DefaultSubPath = string.Format("OnBoardCali{0}", DefaultSubPath);
+            string InitialFolder = Path.Combine(DefaultPath, "OnBoardCalibration", DefaultSubPath);
+            if (!Directory.Exists(InitialFolder))//路径不存在
+            {
+                string path = String.Format("File Directory {0} Created\n", InitialFolder);
+                Directory.CreateDirectory(InitialFolder);
+                txtReport.AppendText(path);
+                txtFileDir.Text = InitialFolder;
+                return true;
+            }
+            else
+            {
+                MessageBox.Show("The File Directory already exits", //text
+                                "Created failure",   //caption
+                                MessageBoxButton.OK,//button
+                                MessageBoxImage.Warning);//icon
+                return false;
             }
         }
 
