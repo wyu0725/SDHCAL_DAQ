@@ -131,10 +131,10 @@ namespace USB_DAQ
         public const string TestSignalColumnSelectAdress = "E3E0";
         public const string TestSignalRowSelectAdress = "E3F0";
         public const string TriggerSuppressWidth3to0Address = "E300";
-        public const string TriggerSuppressWidth7to4Address = "E31B";
-        public const string TriggerSuppressWidth11to8Address = "E321";
-        public const string TriggerSuppressWidth15to12Address = "E337";
-        public const string TriggerSuppressWidth19to16Address = "E34B";
+        public const string TriggerSuppressWidth7to4Address = "E310";
+        public const string TriggerSuppressWidth11to8Address = "E320";
+        public const string TriggerSuppressWidth15to12Address = "E330";
+        public const string TriggerSuppressWidth19to16Address = "E340";
         public const string ChipFullEnableAddress = "E350";
         public const string AutoDaqAcquisitionModeSelectAddress = "E360";
         public const string AutoDaqTriggerModeSelectAddress = "E370";
@@ -143,8 +143,8 @@ namespace USB_DAQ
         public const string AutoDaqTriggerDelayTime11to8Address = "E4A0";
         public const string AutoDaqTriggerDelayTime15to12Address = "E4B0";
         public const string SCurveTestInnerClockEnableAddress = "E4C0";
-        public const string InternalSynchronousClockPeriod3to0Address = "E4DF";
-        public const string InternalSynchronousClockPeriod7to4Address = "E4EF";
+        public const string InternalSynchronousClockPeriod3to0Address = "E4D0";
+        public const string InternalSynchronousClockPeriod7to4Address = "E4E0";
         public const string InternalSynchronousClockPeriod11to8Address = "E4F0";
         public const string InternalSynchronousClockPeriod15to12Address = "E400";
         public const string AutoCalibrationDacPowerDownAddress = "E410";
