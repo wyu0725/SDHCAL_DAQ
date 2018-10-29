@@ -7683,6 +7683,11 @@ namespace USB_DAQ
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void btnOnBoardCalibrationStart_Click(object sender, RoutedEventArgs e)
         {
             bool bResult;
@@ -7764,12 +7769,6 @@ namespace USB_DAQ
                             SwitcherBOff();
                         }
                         #endregion
-                        #region Set Common SCurve Parameter
-                        if (!SetSCurveTestCommomParameter())
-                        {
-                            return;
-                        }
-                        #endregion
                         #region Set test row and column
                         cbxSCurveTestAsicNewDif.SelectedIndex = Row * 4 + Column;
                         if (!SetSCurveTestAsic(cbxSCurveTestAsicNewDif.SelectedIndex))
@@ -7777,8 +7776,14 @@ namespace USB_DAQ
                             return;
                         }
                         #endregion
+                        #region Set Common SCurve Parameter
+                        if (!SetSCurveTestCommomParameter())
+                        {
+                            return;
+                        }
+                        #endregion
                         #region Set Channel Align
-                        if (cbxAlignOrNot.SelectedIndex == 0)
+                        if (cbxAlignOrNot.SelectedIndex == 1)
                         {
                             string FileName = string.Format("C{0}{1}.txt", Row + 1, Column + 1);
                             string AlignmentFileName = Path.Combine(CurrentPath, FileName);
