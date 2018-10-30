@@ -2267,7 +2267,7 @@
                                     </ComboBox>
                                 </Grid>
                             </GroupBox>
-                            <GroupBox x:Name="gbxAutoCalibration" Header="Auto Calibration" HorizontalAlignment="Left" Margin="0,230,0,0" VerticalAlignment="Top" Height="200" Width="400">
+                            <GroupBox x:Name="gbxAutoCalibration" Header="Auto Calibration" HorizontalAlignment="Left" Margin="0,240,0,0" VerticalAlignment="Top" Height="200" Width="400">
                                 <Grid Margin="0,0,0,0">
                                     <Label x:Name="lblACStartCharge" Content="Start Charge:" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Height="25" Width="100"/>
                                     <TextBox x:Name="tbxACStartCharge" HorizontalAlignment="Left" Height="25" Margin="100,0,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="60"/>
@@ -2296,11 +2296,11 @@
                                     <TextBox x:Name="tbxACStatus" HorizontalAlignment="Left" Height="25" Margin="250,120,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="70" BorderBrush="White"/>
                                 </Grid>
                             </GroupBox>
-                            <GroupBox x:Name="gbxOnboardCalibration" Header="On board Calibration debug" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="405, 80, 0, 0" Height="300" Width="300">
+                            <GroupBox x:Name="gbxOnboardCalibration" Header="On board Calibration debug" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="405, 80, 0, 0" Height="350" Width="300">
                                 <Grid Margin="0,0,0,0">
                                     <Label x:Name="lblDac1Value" Content="DAC1 Value" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0"/>
                                     <TextBox x:Name="tbxDac1Value" HorizontalAlignment="Left" Height="25" Margin="95,0,0,0" TextWrapping="Wrap" Text="10" VerticalAlignment="Top" Width="40"/>
-                                    <ComboBox x:Name="cbxDac1EnableNewDif" HorizontalAlignment="Left" Margin="135,0,0,253" VerticalAlignment="Bottom" VerticalContentAlignment="Center" Width="70" Height="25">
+                                    <ComboBox x:Name="cbxDac1EnableNewDif" HorizontalAlignment="Left" Margin="135,0,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="70" Height="25">
                                         <ComboBoxItem Content="Disable" IsSelected="True"/>
                                         <ComboBoxItem Content="Enable" />
                                     </ComboBox>
@@ -2332,15 +2332,16 @@
                                         <ComboBoxItem Content="On" />
                                     </ComboBox>
                                     <Button x:Name="btnSwitcherBOnOff" Content="Off" HorizontalAlignment="Left" Margin="150,125,0,0" VerticalAlignment="Top" Width="30" Height="25" Background="LightGray" Click="btnSwitcherBOnOff_Click"/>
-                                    <Label x:Name="lblSlope" Content="Slope" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="180,75,0,0" Width="50"/>
-                                    <Label x:Name="lblIntercept" Content="Intercept" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="230,75,0,0" Width="70"/>
-                                    <TextBox x:Name="tbxSlopeSwitcherA" HorizontalAlignment="Left" Height="25" Margin="180,100,0,0" TextWrapping="Wrap" Text="0.6315" VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="50"/>
-                                    <TextBox x:Name="tbxInterceptSwitcherA" HorizontalAlignment="Left" Height="25" Margin="230,100,0,0" TextWrapping="Wrap" Text="6.7147" VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="50"/>
-                                    <TextBox x:Name="tbxSlopeSwitcherB" HorizontalAlignment="Left" Height="25" Margin="180,125,0,0" TextWrapping="Wrap" Text="0.6298" VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="50"/>
-                                    <TextBox x:Name="tbxInterceptSwitcherB" HorizontalAlignment="Left" Height="25" Margin="230,125,0,0" TextWrapping="Wrap" Text="2.5552" VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="50"/>
+                                    <Label x:Name="lblSlope" Content="Slope" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,200,0,0" Width="50"/>
+                                    <Label x:Name="lblIntercept" Content="Intercept" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,230,0,0" Width="70"/>
+                                    <TextBox x:Name="tbxSlopeFileName" HorizontalAlignment="Left" Height="25" Margin="70,200,0,0" TextWrapping="Wrap" Text="CTestSlope.txt" VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Width="120"/>
+                                    <TextBox x:Name="tbxInterceptFileName" HorizontalAlignment="Left" Height="25" Margin="70,230,0,0" TextWrapping="Wrap" Text="CTestIntercept.txt" VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Width="120"/>
 
                                     <Button x:Name="btnSwitcherSet" Content="Switcher Set" HorizontalAlignment="Left" Margin="0,150,0,0" VerticalAlignment="Top" Width="150" Height="24" Click="btnSwitcherSet_Click"/>
                                     <Button x:Name="btnSyncClockSelect" Content="External Clock" HorizontalAlignment="Left" Margin="0,175,0,0" VerticalAlignment="Top" Width="150" Height="24" Background="LightCyan" Click="btnSyncClockSelect_Click"/>
+                                    <Label x:Name="lblOnboardCaliCharge" Content="Cali Charge (fC)" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,260,0,0" Width="100"/>
+                                    <TextBox x:Name="tbxOnBoardCaliCharge" HorizontalAlignment="Left" Height="25" Margin="100,260,0,0" TextWrapping="Wrap" Text="50" VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="90"/>
+                                    <Button x:Name="btnOnBoardCaliChargeSet" Content="Charge Set" HorizontalAlignment="Left" Margin="190,260,0,0" VerticalAlignment="Top" Width="90" Height="24" Click="btnOnBoardCaliChargeSet_Click"/>
                                 </Grid>
                             </GroupBox>
 

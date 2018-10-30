@@ -7726,25 +7726,21 @@ namespace USB_DAQ
                     return;
                 }
                 #endregion
-                #region Check the DAC parameter
-                if (!CheckStringLegal.CheckDoubleLegal(tbxSlopeSwitcherA.Text) || double.Parse(tbxSlopeSwitcherA.Text) == 0)
+                double[,] DacSlope = new double[4, 4];
+                double[,] DacIntercept = new double[4, 4];
+                #region Readback DAC slope and DAC intercept
+                string CalibrationFileName;
+                CalibrationFileName = Path.Combine(CurrentPath, tbxSlopeFileName.Text);
+                bool ReadFailure;
+                DacSlope = ReadbackDacCaliParameter(CalibrationFileName, 4, 4, out ReadFailure);
+                if (ReadFailure)
                 {
-                    ShowIllegalInput("The slope should be a double and not equal to 0");
                     return;
                 }
-                if (!CheckStringLegal.CheckDoubleLegal(tbxInterceptSwitcherA.Text))
+                CalibrationFileName = Path.Combine(CurrentPath, tbxInterceptFileName.Text);
+                DacIntercept = ReadbackDacCaliParameter(CalibrationFileName, 4, 4, out ReadFailure);
+                if (ReadFailure)
                 {
-                    ShowIllegalInput("The intercept should be a double value");
-                    return;
-                }
-                if (!CheckStringLegal.CheckDoubleLegal(tbxSlopeSwitcherB.Text) || double.Parse(tbxSlopeSwitcherB.Text) == 0)
-                {
-                    ShowIllegalInput("The slope should be a double and not equal to 0");
-                    return;
-                }
-                if (!CheckStringLegal.CheckDoubleLegal(tbxInterceptSwitcherB.Text))
-                {
-                    ShowIllegalInput("The intercept should be a double value");
                     return;
                 }
                 #endregion
@@ -7782,21 +7778,15 @@ namespace USB_DAQ
                         SelectInternalSyncClock();
                         #region SetSwitcher
                         int DacSelect;
-                        double DacSlope;
-                        double DacIntercept;
                         if(Column < 2)
                         {
                             DacSelect = 2;
-                            DacSlope = double.Parse(tbxSlopeSwitcherA.Text);
-                            DacIntercept = double.Parse(tbxInterceptSwitcherA.Text);
                             SwitcherAOn();
                             SwitcherBOff();
                         }
                         else
                         {
                             DacSelect = 1;
-                            DacSlope = double.Parse(tbxSlopeSwitcherB.Text);
-                            DacIntercept = double.Parse(tbxInterceptSwitcherB.Text);
                             SwitcherBOn();
                             SwitcherAOff();
                         }
@@ -7878,7 +7868,7 @@ namespace USB_DAQ
                         {
                             #region Set Test voltage
                             double DeltaV = TestCharge / TestCapacitor;
-                            bResult = SetCalibrationVoltage(DeltaV, DacSelect, DacSlope, DacIntercept, MyUsbDevice1);
+                            bResult = SetCalibrationVoltage(DeltaV, DacSelect, DacSlope[Row, Column], DacIntercept[Row, Column], MyUsbDevice1);
                             if(!bResult)
                             {
                                 return;
@@ -8061,6 +8051,70 @@ namespace USB_DAQ
                 return false;
             }
             return true;
+        }
+
+        private double[,] ReadbackDacCaliParameter(string FileName, int row, int column, out bool ReadFileFailure)
+        {
+            double[,] CaliParam = new double[row,column];
+            for(int i = 0; i < row; i++)
+            {
+                for (int j = 0; j < column; j++)
+                {
+                    CaliParam[i, j] = 0.0;
+                }
+            }
+            if (row == 0 || column == 0)
+            {
+                ReadFileFailure = true;
+                return CaliParam;
+            }
+            if (File.Exists(FileName))
+            {
+                StreamReader CalibrationFile;
+                CalibrationFile = File.OpenText(FileName);
+                string CalibrationDataString;
+                for (int m = 0; m < row; m++)
+                {
+                    CalibrationDataString = CalibrationFile.ReadLine();
+                    if (CalibrationDataString != null)
+                    {
+                        string[] Cali = CalibrationDataString.Split(' ');
+                        if (Cali.Length != column)
+                        {
+                            ReadFileFailure = true;
+                            string ErrorMesg = string.Format("Data error in {0}", FileName);
+                            MessageBox.Show(ErrorMesg, "File Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                            return CaliParam;
+                        }
+                        for (int n = 0; n < column; n++)
+                        {
+                            if (!CheckStringLegal.CheckDoubleLegal(Cali[n]))
+                            {
+                                ReadFileFailure = true;
+                                string ErrorMesg = string.Format("Data error in {0}", FileName);
+                                MessageBox.Show(ErrorMesg, "File Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                return CaliParam;
+                            }
+                            CaliParam[m, n] = double.Parse(Cali[n]);
+                        }
+                    }
+                    else
+                    {
+                        ReadFileFailure = true;
+                        string ErrorMesg = string.Format("Data error in {0}", FileName);
+                        MessageBox.Show(ErrorMesg, "File Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return CaliParam;
+                    }
+                }
+                CalibrationFile.Close();
+                ReadFileFailure = false;
+                return CaliParam;
+            }
+            else
+            {
+                ReadFileFailure = true;
+                return CaliParam;
+            }
         }
 
         private async void btnAutoCalibrationStart_Click(object sender, RoutedEventArgs e)
@@ -8329,6 +8383,57 @@ namespace USB_DAQ
             MediaPlayer TestDonePlayer = new MediaPlayer();
             TestDonePlayer.Open(new Uri("TestDone.wav", UriKind.Relative));
             TestDonePlayer.Play();
+        }
+
+        private void btnOnBoardCaliChargeSet_Click(object sender, RoutedEventArgs e)
+        {
+            if (!CheckStringLegal.CheckDoubleLegal(tbxOnBoardCaliCharge.Text))
+            {
+                ShowIllegalInput("The charge should be equal to or greater than 0");
+                return;
+            }
+            double TestCharge = double.Parse(tbxOnBoardCaliCharge.Text);
+            double[,] DacSlope = new double[4, 4];
+            double[,] DacIntercept = new double[4, 4];
+            #region Readback DAC slope and DAC intercept
+            string CalibrationFileName;
+            CalibrationFileName = Path.Combine(CurrentPath, tbxSlopeFileName.Text);
+            bool ReadFailure;
+            DacSlope = ReadbackDacCaliParameter(CalibrationFileName, 4, 4, out ReadFailure);
+            if (ReadFailure)
+            {
+                return;
+            }
+            CalibrationFileName = Path.Combine(CurrentPath, tbxInterceptFileName.Text);
+            DacIntercept = ReadbackDacCaliParameter(CalibrationFileName, 4, 4, out ReadFailure);
+            if (ReadFailure)
+            {
+                return;
+            }
+            #endregion
+            int Row = cbxSCurveTestAsicNewDif.SelectedIndex / 4;
+            int Column = cbxSCurveTestAsicNewDif.SelectedIndex % 4;
+            int DacSelect;
+            if (Column < 2)
+            {
+                DacSelect = 2;
+                SwitcherAOn();
+                SwitcherBOff();
+            }
+            else
+            {
+                DacSelect = 1;
+                SwitcherBOn();
+                SwitcherAOff();
+            }
+            #region Set Test voltage
+            double DeltaV = TestCharge / 0.5;
+            bool bResult = SetCalibrationVoltage(DeltaV, DacSelect, DacSlope[Row, Column], DacIntercept[Row, Column], MyUsbDevice1);
+            if (!bResult)
+            {
+                return;
+            }
+            #endregion
         }
     }
     
