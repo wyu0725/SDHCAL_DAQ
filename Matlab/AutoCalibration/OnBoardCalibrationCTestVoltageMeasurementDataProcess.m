@@ -18,13 +18,14 @@ CTestVoltage(4,4,:) = ASIC44;
 Slope = zeros(4,4);
 Intercept = zeros(4,4);
 R = zeros(4,4);
-Voltage = zeros(11,1);
+Voltage = zeros(10,1);
+DacCodeFit = DACCode(2:11);
 for i = 1:1:4
     for j = 1:1:4
         AsicID = sprintf('%d%d',i,j);
-        for k = 1:1:11
-            Voltage(k) = CTestVoltage(i,j,k);
+        for k = 1:1:10
+            Voltage(k) = CTestVoltage(i,j,k+1);
         end
-        [Slope(i,j),Intercept(i,j),R(i,j)] = CTestVoltageTest(DACCode,Voltage,AsicID);
+        [Slope(i,j),Intercept(i,j),R(i,j)] = CTestVoltageTest(DacCodeFit,Voltage,AsicID);
     end
 end
