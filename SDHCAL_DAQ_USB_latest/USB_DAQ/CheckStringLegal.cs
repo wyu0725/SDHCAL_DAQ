@@ -12,7 +12,7 @@ namespace USB_DAQ
         private const string rx_Hex = @"\b[0-9a-fA-F]{1,8}\b";// Match 8 bytes Hex
         private const string rx_Byte = @"\b[0-9a-fA-F]{2}\b";// Match 8 bit Hex
         private const string rx_Integer = @"^\d+$";   // Match positive integer
-        private const string rx_Double = @"^-?\d+(\.\d{1,6})?$";// Match double with 6 decimal
+        private const string rx_Double = @"^-?\d+(\.\d+)?$";// Match double
         public static bool CheckHexLegal(string HexInString)
         {
             Regex rxHex = new Regex(rx_Hex);
