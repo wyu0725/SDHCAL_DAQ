@@ -7653,8 +7653,21 @@ namespace USB_DAQ
         {
             if (Slope != 0)
             {
+
                 int DacValue = (int)((Voltage - Intercept) / Slope);
                 bool bResult = false;
+                if (!DacPowerOn(MyUsbDevice1))
+                {
+                    return false;
+                }
+                if (!DacSelectSet(DacSelection, MyUsbDevice1)) 
+                {
+                    return false;
+                }
+                if(!DacSpeedSet(cbxDACSpeed.SelectedIndex, MyUsbDevice1))
+                {
+                    return false;
+                }
                 if (DacSelection == 1)
                 {
                     bResult = MicrorocAsic.AutoCalibrationDac1DataSet(DacValue, usbInterface);
@@ -7670,6 +7683,10 @@ namespace USB_DAQ
                 else
                 {
                     ShowIllegalInput("Dac Selection Error");
+                    return false;
+                }
+                if (!DacLoad(MyUsbDevice1))
+                {
                     return false;
                 }
                 if (bResult)
