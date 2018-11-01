@@ -8195,73 +8195,101 @@ namespace USB_DAQ
                 }
                 double TestCapacitor = double.Parse(tbxACCTestCapacitor.Text);
                 #endregion
+                #region If On board calibration
+                int Column;
+                int Row;
+                Column = cbxSCurveTestAsicNewDif.SelectedIndex % 4;
+                Row = cbxSCurveTestAsicNewDif.SelectedIndex / 4;
+                if (cbxSCurveTestClockSelectNewDif.SelectedIndex == 0)
+                {
+                    #region Close Switcher
+                    SwitcherAOff();
+                    SwitcherBOff();
+                    #endregion
+                }
+                #endregion
                 bool AttenuatorOrNot = cbxACAttenuator.SelectedIndex == 0;
                 for (int TestCharge = StartCharge; TestCharge <= EndCharge; TestCharge += ChargeStep)
                 {
-                    #region Set AFG3252 Voltage
+                    #region Set TestVoltage
                     double DeltaV = TestCharge / TestCapacitor;
                     double TestVoltage;
-                    #region Check attenuator
-                    if (DeltaV < 50 & !AttenuatorOrNot)
+                    if (cbxSCurveTestClockSelectNewDif.SelectedIndex == 0)
                     {
-                        if (MessageBox.Show("AFG3252 voltage < 50mV. Add Attenuator?", "Confirm Message", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                        #region Set AFG3252 Voltage
+                        #region Check attenuator
+                        if (DeltaV < 50 & !AttenuatorOrNot)
                         {
-                            AttenuatorOrNot = true;
-                        }
-                        else
-                        {
-                            return;
-                        }
-                    }
-                    else if (DeltaV > 50 & AttenuatorOrNot)
-                    {
-                        if (MessageBox.Show("AFG3252 voltage > 5V. Remove Attenuator?", "Confirm Message", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
-                        {
-                            AttenuatorOrNot = false;
-                        }
-                        else
-                        {
-                            return;
-                        }
-                    }
-                    #endregion
-                    if (AttenuatorOrNot)
-                    {
-                        TestVoltage = DeltaV * 100;
-                    }
-                    else
-                    {
-                        TestVoltage = DeltaV;
-                    }
-                    if (TestVoltage < 0)
-                    {
-                        ShowIllegalInput("The charge should equal or greater than 0");
-                        return;
-                    }
-                    if (TestVoltage == 0)
-                    {
-                        if (MessageBox.Show("The Voltage is zero. Continue", "Confirm Message", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
-                        {
-                            bResult = MyAFG3252.CloseOutput(1);
-                            if (!bResult)
+                            if (MessageBox.Show("AFG3252 voltage < 50mV. Add Attenuator?", "Confirm Message", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                             {
-                                ShowUsbError("Close AFG3252 Channel1");
+                                AttenuatorOrNot = true;
+                            }
+                            else
+                            {
+                                return;
+                            }
+                        }
+                        else if (DeltaV > 50 & AttenuatorOrNot)
+                        {
+                            if (MessageBox.Show("AFG3252 voltage > 5V. Remove Attenuator?", "Confirm Message", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                            {
+                                AttenuatorOrNot = false;
+                            }
+                            else
+                            {
+                                return;
+                            }
+                        }
+                        #endregion
+                        if (AttenuatorOrNot)
+                        {
+                            TestVoltage = DeltaV * 100;
+                        }
+                        else
+                        {
+                            TestVoltage = DeltaV;
+                        }
+                        if (TestVoltage < 0)
+                        {
+                            ShowIllegalInput("The charge should equal or greater than 0");
+                            return;
+                        }
+                        if (TestVoltage == 0)
+                        {
+                            if (MessageBox.Show("The Voltage is zero. Continue", "Confirm Message", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                            {
+                                bResult = MyAFG3252.CloseOutput(1);
+                                if (!bResult)
+                                {
+                                    ShowUsbError("Close AFG3252 Channel1");
+                                    return;
+                                }
+                            }
+                            else
+                            {
                                 return;
                             }
                         }
                         else
                         {
-                            return;
+                            bResult = MyAFG3252.SetVoltageHigh(1, TestVoltage, AFG3252.VoltageUnitMV);
+                            if (!bResult)
+                            {
+                                ShowUsbError("Set AFG3252");
+                                return;
+                            }
                         }
+                        #endregion
                     }
                     else
                     {
-                        bResult = MyAFG3252.SetVoltageHigh(1, TestVoltage, AFG3252.VoltageUnitMV);
-                        if (!bResult)
+                        #region Set DAC Voltage
+                        TestVoltage = DeltaV;
+                        if(!SetOnBoardCalibrationVoltage(TestVoltage, Row, Column))
                         {
-                            ShowUsbError("Set AFG3252");
                             return;
                         }
+                        #endregion
                     }
                     #endregion
                     #region Set Start and End DAC
@@ -8306,8 +8334,9 @@ namespace USB_DAQ
                         StateIndicator.SlowDataRatePackageNumber = HeaderLength + (ChannelLength + ((EndDac - StartDac) / DacStep + 1) * OneDacDataLength) * 64 + TailLength;
                     }
                     #endregion
+                    
                     #region SaveFile
-                    if (!SaveSCTestFile(TestCharge, tbxACAsicID.Text, cbxACHighGainOrLowGain.SelectedIndex))
+                    if (!SaveSCTestFile(TestCharge, cbxSCurveTestAsicNewDif.Text, cbxACHighGainOrLowGain.SelectedIndex))
                     {
                         MessageBox.Show("Save file failure", "File Error", MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
@@ -8347,13 +8376,16 @@ namespace USB_DAQ
                         return;
                     }
                     #endregion
-                    if (TestVoltage == 0)
+                    if (cbxSCurveTestClockSelectNewDif.SelectedIndex == 0)
                     {
-                        bResult = MyAFG3252.OpenOutput(1);
-                        if (!bResult)
+                        if (TestVoltage == 0)
                         {
-                            ShowUsbError("Open AFG3252 Channel1");
-                            return;
+                            bResult = MyAFG3252.OpenOutput(1);
+                            if (!bResult)
+                            {
+                                ShowUsbError("Open AFG3252 Channel1");
+                                return;
+                            }
                         }
                     }
                 }
@@ -8393,6 +8425,20 @@ namespace USB_DAQ
                 return;
             }
             double TestCharge = double.Parse(tbxOnBoardCaliCharge.Text);
+            double DeltaV = TestCharge / 0.5;
+            int Row = cbxSCurveTestAsicNewDif.SelectedIndex / 4;
+            int Column = cbxSCurveTestAsicNewDif.SelectedIndex % 4;
+            SetOnBoardCalibrationVoltage(DeltaV, Row, Column);
+        }
+
+        private bool SetOnBoardCalibrationVoltage(double DeltaV, int Row, int Column)
+        {
+            if(DeltaV == 0)
+            {
+                SwitcherAOff();
+                SwitcherBOff();
+                return true;
+            }
             double[,] DacSlope = new double[4, 4];
             double[,] DacIntercept = new double[4, 4];
             #region Readback DAC slope and DAC intercept
@@ -8402,17 +8448,15 @@ namespace USB_DAQ
             DacSlope = ReadbackDacCaliParameter(CalibrationFileName, 4, 4, out ReadFailure);
             if (ReadFailure)
             {
-                return;
+                return false;
             }
             CalibrationFileName = Path.Combine(CurrentPath, tbxInterceptFileName.Text);
             DacIntercept = ReadbackDacCaliParameter(CalibrationFileName, 4, 4, out ReadFailure);
             if (ReadFailure)
             {
-                return;
+                return false;
             }
             #endregion
-            int Row = cbxSCurveTestAsicNewDif.SelectedIndex / 4;
-            int Column = cbxSCurveTestAsicNewDif.SelectedIndex % 4;
             int DacSelect;
             if (Column < 2)
             {
@@ -8427,13 +8471,197 @@ namespace USB_DAQ
                 SwitcherAOff();
             }
             #region Set Test voltage
-            double DeltaV = TestCharge / 0.5;
+
             bool bResult = SetCalibrationVoltage(DeltaV, DacSelect, DacSlope[Row, Column], DacIntercept[Row, Column], MyUsbDevice1);
             if (!bResult)
             {
-                return;
+                return false;
+            }
+            else
+            {
+                string report = string.Format("Set ASIC{0}{1} CTest Charge: {2}\n", Row, Column, DeltaV);
+                txtReport.AppendText(report);
+                return true;
             }
             #endregion
+        }
+
+        private int[] ConvertChargeToVth(double[] Charge, string GainFileName, string InterceptFileName, int ChainID, out bool ReadFailure)
+        {
+            double[,] Gain = new double[4, 4];
+            double[,] Intercept = new double[4, 4];
+            int[] Vth = new int[] { 0, 0, 0, 0 };
+            if (ChainID > 3)
+            {
+                ReadFailure = true;
+                MessageBox.Show("Chain ID should be less than 4","System Error",MessageBoxButton.OK,MessageBoxImage.Error);
+                return Vth;
+            }
+            if(Charge.Length != 4)
+            {
+                ReadFailure = true;
+                MessageBox.Show("Charge should be 4", "System Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return Vth;
+            }
+            Gain = ReadbackDacCaliParameter(GainFileName, 4, 4, out ReadFailure);
+            if (ReadFailure)
+            {
+                return Vth;
+            }
+            Intercept = ReadbackDacCaliParameter(InterceptFileName, 4, 4, out ReadFailure);
+            if(ReadFailure)
+            {
+                return Vth;
+            }
+            double[] GainCaculate = new double[4];
+            double[] InterceptCaculate = new double[4];
+            for(int i = 0; i < 4; i++)
+            {
+                GainCaculate[i] = Gain[ChainID, i];
+                InterceptCaculate[i] = Intercept[ChainID, i];
+                Vth[i] = (int)Math.Floor(GainCaculate[i] * Charge[i] + InterceptCaculate[i]);
+            }
+            ReadFailure = false;
+            return Vth;
+        }
+
+        private bool SetVthToCharge(int ChainID)
+        {
+            TextBox[,] tbxVth0Charge = new TextBox[,] { { tbxVth0ChargeAsic11, tbxVth0ChargeAsic12, tbxVth0ChargeAsic13, tbxVth0ChargeAsic14 },
+                                                        { tbxVth0ChargeAsic21, tbxVth0ChargeAsic22, tbxVth0ChargeAsic23, tbxVth0ChargeAsic24 },
+                                                        { tbxVth0ChargeAsic31, tbxVth0ChargeAsic32, tbxVth0ChargeAsic33, tbxVth0ChargeAsic34 },
+                                                        { tbxVth0ChargeAsic41, tbxVth0ChargeAsic42, tbxVth0ChargeAsic43, tbxVth0ChargeAsic44 } };
+            TextBox[,] tbxDac0Vth = new TextBox[,] { { tbxVth0Asic11, tbxVth0Asic12, tbxVth0Asic13, tbxVth0Asic14 },
+                                                     { tbxVth0Asic21, tbxVth0Asic22, tbxVth0Asic23, tbxVth0Asic24 },
+                                                     { tbxVth0Asic31, tbxVth0Asic32, tbxVth0Asic33, tbxVth0Asic34 },
+                                                     { tbxVth0Asic41, tbxVth0Asic42, tbxVth0Asic43, tbxVth0Asic44 }};
+            TextBox[,] tbxVth1Charge = new TextBox[,] { { tbxVth1ChargeAsic11, tbxVth1ChargeAsic12, tbxVth1ChargeAsic13, tbxVth1ChargeAsic14 },
+                                                        { tbxVth1ChargeAsic21, tbxVth1ChargeAsic22, tbxVth1ChargeAsic23, tbxVth1ChargeAsic24 },
+                                                        { tbxVth1ChargeAsic31, tbxVth1ChargeAsic32, tbxVth1ChargeAsic33, tbxVth1ChargeAsic34 },
+                                                        { tbxVth1ChargeAsic41, tbxVth1ChargeAsic42, tbxVth1ChargeAsic43, tbxVth1ChargeAsic44 } };
+            TextBox[,] tbxDac1Vth = new TextBox[,] { { tbxVth1Asic11, tbxVth1Asic12, tbxVth1Asic13, tbxVth1Asic14 },
+                                                     { tbxVth1Asic21, tbxVth1Asic22, tbxVth1Asic23, tbxVth1Asic24 },
+                                                     { tbxVth1Asic31, tbxVth1Asic32, tbxVth1Asic33, tbxVth1Asic34 },
+                                                     { tbxVth1Asic41, tbxVth1Asic42, tbxVth1Asic43, tbxVth1Asic44 }};
+            TextBox[,] tbxVth2Charge = new TextBox[,] { { tbxVth2ChargeAsic11, tbxVth2ChargeAsic12, tbxVth2ChargeAsic13, tbxVth2ChargeAsic14 },
+                                                        { tbxVth2ChargeAsic21, tbxVth2ChargeAsic22, tbxVth2ChargeAsic23, tbxVth2ChargeAsic24 },
+                                                        { tbxVth2ChargeAsic31, tbxVth2ChargeAsic32, tbxVth2ChargeAsic33, tbxVth2ChargeAsic34 },
+                                                        { tbxVth2ChargeAsic41, tbxVth2ChargeAsic42, tbxVth2ChargeAsic43, tbxVth2ChargeAsic44 } };
+            TextBox[,] tbxDac2Vth = new TextBox[,] { { tbxVth2Asic11, tbxVth2Asic12, tbxVth2Asic13, tbxVth2Asic14 },
+                                                     { tbxVth2Asic21, tbxVth2Asic22, tbxVth2Asic23, tbxVth2Asic24 },
+                                                     { tbxVth2Asic31, tbxVth2Asic32, tbxVth2Asic33, tbxVth2Asic34 },
+                                                     { tbxVth2Asic41, tbxVth2Asic42, tbxVth2Asic43, tbxVth2Asic44 }};
+            string GainFileName;
+            string InterceptFileName;
+            GainFileName = Path.Combine(CurrentPath, tbxVth0GainFileNameNewDif.Text);
+            InterceptFileName = Path.Combine(CurrentPath, tbxVth0InterceptFileNameNewDif.Text);
+            int[] Vth0 = new int[4];
+            int[] Vth1 = new int[4];
+            int[] Vth2 = new int[4];
+            double[] Vth0Charge = new double[4];
+            double[] Vth1Charge = new double[4];
+            double[] Vth2Charge = new double[4];
+            for (int i = 0; i < 4; i++)
+            {
+                if (CheckStringLegal.CheckDoubleLegal(tbxVth0Charge[ChainID, i].Text) && double.Parse(tbxVth0Charge[ChainID, i].Text) <= 500)
+                {
+                    Vth0Charge[i] = double.Parse(tbxVth0Charge[ChainID, i].Text);
+                }
+                else
+                {
+                    ShowIllegalInput("Charge should be 0-500 double");
+                    return false;
+                }
+            }
+            for (int i = 0; i < 4; i++)
+            {
+                if (CheckStringLegal.CheckDoubleLegal(tbxVth1Charge[ChainID, i].Text) && double.Parse(tbxVth1Charge[ChainID, i].Text) <= 500)
+                {
+                    Vth1Charge[i] = double.Parse(tbxVth1Charge[ChainID, i].Text);
+                }
+                else
+                {
+                    ShowIllegalInput("Charge should be 0-500 double");
+                    return false;
+                }
+            }
+            for (int i = 0; i < 4; i++)
+            {
+                if (CheckStringLegal.CheckDoubleLegal(tbxVth2Charge[ChainID, i].Text) && double.Parse(tbxVth2Charge[ChainID, i].Text) <= 500)
+                {
+                    Vth2Charge[i] = double.Parse(tbxVth2Charge[ChainID, i].Text);
+                }
+                else
+                {
+                    ShowIllegalInput("Charge should be 0-500 double");
+                    return false;
+                }
+            }
+            bool ReadFailure;
+            Vth0 = ConvertChargeToVth(Vth0Charge, GainFileName, InterceptFileName, ChainID, out ReadFailure);
+            if (ReadFailure)
+            {
+                return false;
+            }
+            for (int i = 0; i < 4; i++)
+            {
+                tbxDac0Vth[ChainID, i].Text = Vth0[i].ToString();
+            }
+            GainFileName = Path.Combine(CurrentPath, tbxVth1GainFileNameNewDif.Text);
+            InterceptFileName = Path.Combine(CurrentPath, tbxVth1InterceptFileNameNewDif.Text);
+            Vth1 = ConvertChargeToVth(Vth1Charge, GainFileName, InterceptFileName, ChainID, out ReadFailure);
+            if (ReadFailure)
+            {
+                return false;
+            }
+            for (int i = 0; i < 4; i++)
+            {
+                tbxDac1Vth[ChainID, i].Text = Vth1[i].ToString();
+            }
+            GainFileName = Path.Combine(CurrentPath, tbxVth2GainFileNameNewDif.Text);
+            InterceptFileName = Path.Combine(CurrentPath, tbxVth2InterceptFileNameNewDif.Text);
+            Vth2 = ConvertChargeToVth(Vth2Charge, GainFileName, InterceptFileName, 0, out ReadFailure);
+            if (ReadFailure)
+            {
+                return false;
+            }
+            for (int i = 0; i < 4; i++)
+            {
+                tbxDac2Vth[ChainID, i].Text = Vth2[i].ToString();
+            }
+            return true;
+        }
+
+        private void btnChain1VthSet_Click(object sender, RoutedEventArgs e)
+        {
+            if (SetVthToCharge(0))
+            {
+                txtReport.AppendText("Convert Chain1 Charge to DAC successfully\n");
+            }
+        }
+
+        private void btnChain2VthSet_Click(object sender, RoutedEventArgs e)
+        {
+            if (SetVthToCharge(1))
+            {
+                txtReport.AppendText("Convert Chain2 Charge to DAC successfully\n");
+            }
+        }
+
+        private void btnChain3VthSet_Click(object sender, RoutedEventArgs e)
+        {
+            if (SetVthToCharge(2))
+            {
+                txtReport.AppendText("Convert Chain3 Charge to DAC successfully\n");
+            }
+        }
+
+        private void btnChain4VthSet_Click(object sender, RoutedEventArgs e)
+        {
+            if (SetVthToCharge(3))
+            {
+                txtReport.AppendText("Convert Chain4 Charge to DAC successfully\n");
+            }
         }
     }
     
