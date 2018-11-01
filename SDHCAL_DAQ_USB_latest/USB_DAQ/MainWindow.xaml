@@ -2049,7 +2049,165 @@
                                                 <Button x:Name="btnSelectAllMaskNewDif" Content="Select All" HorizontalAlignment="Left" Margin="100,250,0,0" VerticalAlignment="Top" Width="90" Height="24" Click="btnSelectAllMaskNewDif_Click"/>
                                             </Grid>
                                         </TabItem>
+                                        <TabItem Name="VthGen" Header="Vth Gen">
+                                            <Grid Margin="0,0,0,0">
+                                                <Label x:Name="lblVth0ChargeChain1" Content="VTH0(fC)" HorizontalAlignment="Left" Margin="0,15,0,0" VerticalAlignment="Top" Width="65" Height="24"/>
+                                                <Label x:Name="lblVth1ChargeChain1" Content="VTH1(fC)" HorizontalAlignment="Left" Margin="0,40,0,0" VerticalAlignment="Top" Width="65" Height="24"/>
+                                                <Label x:Name="lblVth2ChargeChain1" Content="VTH2(fC)" HorizontalAlignment="Left" Margin="0,65,0,0" VerticalAlignment="Top" Width="65" Height="24"/>
+                                                <GroupBox x:Name="gbxVthChargeAsic14" Header="ASIC14" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="60,0,0,0"  Height="100" Width="60">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <TextBox x:Name="tbxVth0ChargeAsic14" HorizontalAlignment="Center" Height="25" Margin="0,0,0,0" TextWrapping="Wrap"  Text="5" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                        <TextBox x:Name="tbxVth1ChargeAsic14" HorizontalAlignment="Center" Height="25" Margin="0,25,0,0" TextWrapping="Wrap"  Text="15" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                        <TextBox x:Name="tbxVth2ChargeAsic14" HorizontalAlignment="Center" Height="25" Margin="0,50,0,0" TextWrapping="Wrap"  Text="25" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
 
+                                                    </Grid>
+                                                </GroupBox>
+                                                <GroupBox x:Name="gbxVthChargeAsic13" Header="ASIC13" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="120,0,0,0"  Height="100" Width="60">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <TextBox x:Name="tbxVth0ChargeAsic13" HorizontalAlignment="Center" Height="25" Margin="0,0,0,0" TextWrapping="Wrap"  Text="5" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                        <TextBox x:Name="tbxVth1ChargeAsic13" HorizontalAlignment="Center" Height="25" Margin="0,25,0,0" TextWrapping="Wrap"  Text="15" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                        <TextBox x:Name="tbxVth2ChargeAsic13" HorizontalAlignment="Center" Height="25" Margin="0,50,0,0" TextWrapping="Wrap"  Text="25" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+
+                                                    </Grid>
+                                                </GroupBox>
+                                                <GroupBox x:Name="gbxVthChargeAsic12" Header="ASIC12" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="180,0,0,0"  Height="100" Width="60">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <TextBox x:Name="tbxVth0ChargeAsic12" HorizontalAlignment="Center" Height="25" Margin="0,0,0,0" TextWrapping="Wrap"  Text="5" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                        <TextBox x:Name="tbxVth1ChargeAsic12" HorizontalAlignment="Center" Height="25" Margin="0,25,0,0" TextWrapping="Wrap"  Text="15" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                        <TextBox x:Name="tbxVth2ChargeAsic12" HorizontalAlignment="Center" Height="25" Margin="0,50,0,0" TextWrapping="Wrap"  Text="25" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+
+                                                    </Grid>
+                                                </GroupBox>
+                                                <GroupBox x:Name="gbxVthChargeAsic11" Header="ASIC11" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="240,0,0,0"  Height="100" Width="60">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <TextBox x:Name="tbxVth0ChargeAsic11" HorizontalAlignment="Center" Height="25" Margin="0,0,0,0" TextWrapping="Wrap"  Text="5" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                        <TextBox x:Name="tbxVth1ChargeAsic11" HorizontalAlignment="Center" Height="25" Margin="0,25,0,0" TextWrapping="Wrap"  Text="15" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                        <TextBox x:Name="tbxVth2ChargeAsic11" HorizontalAlignment="Center" Height="25" Margin="0,50,0,0" TextWrapping="Wrap"  Text="25" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                    </Grid>
+                                                </GroupBox>
+                                                <Button x:Name="btnChain1VthSet" Content="Set" HorizontalAlignment="Left" Margin="310,50,0,0" VerticalAlignment="Top" Width="75" Height="24" Click="btnChain1VthSet_Click"/>
+                                                <Label x:Name="lblVth0ChargeChain2" Content="VTH0(fC)" HorizontalAlignment="Left" Margin="0,115,0,0" VerticalAlignment="Top" Width="65" Height="24"/>
+                                                <Label x:Name="lblVth1ChargeChain2" Content="VTH1(fC)" HorizontalAlignment="Left" Margin="0,140,0,0" VerticalAlignment="Top" Width="65" Height="24"/>
+                                                <Label x:Name="lblVth2ChargeChain2" Content="VTH2(fC)" HorizontalAlignment="Left" Margin="0,165,0,0" VerticalAlignment="Top" Width="65" Height="24"/>
+                                                <GroupBox x:Name="gbxVthChargeAsic24" Header="ASIC24" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="60,100,0,0"  Height="100" Width="60">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <TextBox x:Name="tbxVth0ChargeAsic24" HorizontalAlignment="Center" Height="25" Margin="0,0,0,0" TextWrapping="Wrap"  Text="5" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                        <TextBox x:Name="tbxVth1ChargeAsic24" HorizontalAlignment="Center" Height="25" Margin="0,25,0,0" TextWrapping="Wrap"  Text="15" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                        <TextBox x:Name="tbxVth2ChargeAsic24" HorizontalAlignment="Center" Height="25" Margin="0,50,0,0" TextWrapping="Wrap"  Text="25" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+
+                                                    </Grid>
+                                                </GroupBox>
+                                                <GroupBox x:Name="gbxVthChargeAsic23" Header="ASIC23" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="120,100,0,0"  Height="100" Width="60">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <TextBox x:Name="tbxVth0ChargeAsic23" HorizontalAlignment="Center" Height="25" Margin="0,0,0,0" TextWrapping="Wrap"  Text="5" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                        <TextBox x:Name="tbxVth1ChargeAsic23" HorizontalAlignment="Center" Height="25" Margin="0,25,0,0" TextWrapping="Wrap"  Text="15" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                        <TextBox x:Name="tbxVth2ChargeAsic23" HorizontalAlignment="Center" Height="25" Margin="0,50,0,0" TextWrapping="Wrap"  Text="25" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+
+                                                    </Grid>
+                                                </GroupBox>
+                                                <GroupBox x:Name="gbxVthChargeAsic22" Header="ASIC22" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="180,100,0,0"  Height="100" Width="60">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <TextBox x:Name="tbxVth0ChargeAsic22" HorizontalAlignment="Center" Height="25" Margin="0,0,0,0" TextWrapping="Wrap"  Text="5" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                        <TextBox x:Name="tbxVth1ChargeAsic22" HorizontalAlignment="Center" Height="25" Margin="0,25,0,0" TextWrapping="Wrap"  Text="15" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                        <TextBox x:Name="tbxVth2ChargeAsic22" HorizontalAlignment="Center" Height="25" Margin="0,50,0,0" TextWrapping="Wrap"  Text="25" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+
+                                                    </Grid>
+                                                </GroupBox>
+                                                <GroupBox x:Name="gbxVthChargeAsic21" Header="ASIC21" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="240,100,0,0"  Height="100" Width="60">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <TextBox x:Name="tbxVth0ChargeAsic21" HorizontalAlignment="Center" Height="25" Margin="0,0,0,0" TextWrapping="Wrap"  Text="5" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                        <TextBox x:Name="tbxVth1ChargeAsic21" HorizontalAlignment="Center" Height="25" Margin="0,25,0,0" TextWrapping="Wrap"  Text="15" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                        <TextBox x:Name="tbxVth2ChargeAsic21" HorizontalAlignment="Center" Height="25" Margin="0,50,0,0" TextWrapping="Wrap"  Text="25" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                    </Grid>
+                                                </GroupBox>
+                                                <Button x:Name="btnChain2VthSet" Content="Set" HorizontalAlignment="Left" Margin="310,150,0,0" VerticalAlignment="Top" Width="75" Height="24" Click="btnChain2VthSet_Click"/>
+                                                <Label x:Name="lblVth0ChargeChain3" Content="VTH0(fC)" HorizontalAlignment="Left" Margin="0,215,0,0" VerticalAlignment="Top" Width="65" Height="24"/>
+                                                <Label x:Name="lblVth1ChargeChain3" Content="VTH1(fC)" HorizontalAlignment="Left" Margin="0,240,0,0" VerticalAlignment="Top" Width="65" Height="24"/>
+                                                <Label x:Name="lblVth2ChargeChain3" Content="VTH2(fC)" HorizontalAlignment="Left" Margin="0,265,0,0" VerticalAlignment="Top" Width="65" Height="24"/>
+                                                <GroupBox x:Name="gbxVthChargeAsic34" Header="ASIC14" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="60,200,0,0"  Height="100" Width="60">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <TextBox x:Name="tbxVth0ChargeAsic34" HorizontalAlignment="Center" Height="25" Margin="0,0,0,0" TextWrapping="Wrap"  Text="5" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                        <TextBox x:Name="tbxVth1ChargeAsic34" HorizontalAlignment="Center" Height="25" Margin="0,25,0,0" TextWrapping="Wrap"  Text="15" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                        <TextBox x:Name="tbxVth2ChargeAsic34" HorizontalAlignment="Center" Height="25" Margin="0,50,0,0" TextWrapping="Wrap"  Text="25" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+
+                                                    </Grid>
+                                                </GroupBox>
+                                                <GroupBox x:Name="gbxVthChargeAsic33" Header="ASIC33" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="120,200,0,0"  Height="100" Width="60">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <TextBox x:Name="tbxVth0ChargeAsic33" HorizontalAlignment="Center" Height="25" Margin="0,0,0,0" TextWrapping="Wrap"  Text="5" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                        <TextBox x:Name="tbxVth1ChargeAsic33" HorizontalAlignment="Center" Height="25" Margin="0,25,0,0" TextWrapping="Wrap"  Text="15" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                        <TextBox x:Name="tbxVth2ChargeAsic33" HorizontalAlignment="Center" Height="25" Margin="0,50,0,0" TextWrapping="Wrap"  Text="25" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+
+                                                    </Grid>
+                                                </GroupBox>
+                                                <GroupBox x:Name="gbxVthChargeAsic32" Header="ASIC32" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="180,200,0,0"  Height="100" Width="60">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <TextBox x:Name="tbxVth0ChargeAsic32" HorizontalAlignment="Center" Height="25" Margin="0,0,0,0" TextWrapping="Wrap"  Text="5" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                        <TextBox x:Name="tbxVth1ChargeAsic32" HorizontalAlignment="Center" Height="25" Margin="0,25,0,0" TextWrapping="Wrap"  Text="15" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                        <TextBox x:Name="tbxVth2ChargeAsic32" HorizontalAlignment="Center" Height="25" Margin="0,50,0,0" TextWrapping="Wrap"  Text="25" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+
+                                                    </Grid>
+                                                </GroupBox>
+                                                <GroupBox x:Name="gbxVthChargeAsic31" Header="ASIC31" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="240,200,0,0"  Height="100" Width="60">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <TextBox x:Name="tbxVth0ChargeAsic31" HorizontalAlignment="Center" Height="25" Margin="0,0,0,0" TextWrapping="Wrap"  Text="5" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                        <TextBox x:Name="tbxVth1ChargeAsic31" HorizontalAlignment="Center" Height="25" Margin="0,25,0,0" TextWrapping="Wrap"  Text="15" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                        <TextBox x:Name="tbxVth2ChargeAsic31" HorizontalAlignment="Center" Height="25" Margin="0,50,0,0" TextWrapping="Wrap"  Text="25" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                    </Grid>
+                                                </GroupBox>
+                                                <Button x:Name="btnChain3VthSet" Content="Set" HorizontalAlignment="Left" Margin="310,250,0,0" VerticalAlignment="Top" Width="75" Height="24" Click="btnChain3VthSet_Click"/>
+                                                <Label x:Name="lblVth0ChargeChain4" Content="VTH0(fC)" HorizontalAlignment="Left" Margin="0,315,0,0" VerticalAlignment="Top" Width="65" Height="24"/>
+                                                <Label x:Name="lblVth1ChargeChain4" Content="VTH1(fC)" HorizontalAlignment="Left" Margin="0,340,0,0" VerticalAlignment="Top" Width="65" Height="24"/>
+                                                <Label x:Name="lblVth2ChargeChain4" Content="VTH2(fC)" HorizontalAlignment="Left" Margin="0,365,0,0" VerticalAlignment="Top" Width="65" Height="24"/>
+                                                <GroupBox x:Name="gbxVthChargeAsic44" Header="ASIC44" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="60,300,0,0"  Height="100" Width="60">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <TextBox x:Name="tbxVth0ChargeAsic44" HorizontalAlignment="Center" Height="25" Margin="0,0,0,0" TextWrapping="Wrap"  Text="5" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                        <TextBox x:Name="tbxVth1ChargeAsic44" HorizontalAlignment="Center" Height="25" Margin="0,25,0,0" TextWrapping="Wrap"  Text="15" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                        <TextBox x:Name="tbxVth2ChargeAsic44" HorizontalAlignment="Center" Height="25" Margin="0,50,0,0" TextWrapping="Wrap"  Text="25" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+
+                                                    </Grid>
+                                                </GroupBox>
+                                                <GroupBox x:Name="gbxVthChargeAsic43" Header="ASIC43" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="120,300,0,0"  Height="100" Width="60">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <TextBox x:Name="tbxVth0ChargeAsic43" HorizontalAlignment="Center" Height="25" Margin="0,0,0,0" TextWrapping="Wrap"  Text="5" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                        <TextBox x:Name="tbxVth1ChargeAsic43" HorizontalAlignment="Center" Height="25" Margin="0,25,0,0" TextWrapping="Wrap"  Text="15" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                        <TextBox x:Name="tbxVth2ChargeAsic43" HorizontalAlignment="Center" Height="25" Margin="0,50,0,0" TextWrapping="Wrap"  Text="25" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+
+                                                    </Grid>
+                                                </GroupBox>
+                                                <GroupBox x:Name="gbxVthChargeAsic42" Header="ASIC42" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="180,300,0,0"  Height="100" Width="60">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <TextBox x:Name="tbxVth0ChargeAsic42" HorizontalAlignment="Center" Height="25" Margin="0,0,0,0" TextWrapping="Wrap"  Text="5" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                        <TextBox x:Name="tbxVth1ChargeAsic42" HorizontalAlignment="Center" Height="25" Margin="0,25,0,0" TextWrapping="Wrap"  Text="15" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                        <TextBox x:Name="tbxVth2ChargeAsic42" HorizontalAlignment="Center" Height="25" Margin="0,50,0,0" TextWrapping="Wrap"  Text="25" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+
+                                                    </Grid>
+                                                </GroupBox>
+                                                <GroupBox x:Name="gbxVthChargeAsic41" Header="ASIC41" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="240,300,0,0"  Height="100" Width="60">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <TextBox x:Name="tbxVth0ChargeAsic41" HorizontalAlignment="Center" Height="25" Margin="0,0,0,0" TextWrapping="Wrap"  Text="5" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                        <TextBox x:Name="tbxVth1ChargeAsic41" HorizontalAlignment="Center" Height="25" Margin="0,25,0,0" TextWrapping="Wrap"  Text="15" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                        <TextBox x:Name="tbxVth2ChargeAsic41" HorizontalAlignment="Center" Height="25" Margin="0,50,0,0" TextWrapping="Wrap"  Text="25" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+                                                    </Grid>
+                                                </GroupBox>
+                                                <Button x:Name="btnChain4VthSet" Content="Set" HorizontalAlignment="Left" Margin="310,350,0,0" VerticalAlignment="Top" Width="75" Height="24" Click="btnChain4VthSet_Click"/>
+                                            </Grid>
+                                        </TabItem>
+                                        <TabItem Name="VthFile" Header="Vth File">
+                                            <Grid Margin="0,0,0,0">
+                                                <Label x:Name="lblGainFileName" Content="Gain File" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="50,0,0,0" VerticalAlignment="Top" Width="100" Height="24"/>
+                                                <Label x:Name="lblInterceptFileName" Content="Intercept File" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="150,0,0,0" VerticalAlignment="Top" Width="100" Height="24"/>
+                                                <Label x:Name="lblVth0FileName" Content="VTH0" HorizontalAlignment="Left" Margin="0,25,0,0" VerticalAlignment="Top" Width="50" Height="24"/>
+                                                <Label x:Name="lblVth1FileName" Content="VTH1" HorizontalAlignment="Left" Margin="0,50,0,0" VerticalAlignment="Top" Width="50" Height="24"/>
+                                                <Label x:Name="lblVth2FileName" Content="VTH2" HorizontalAlignment="Left" Margin="0,75,0,0" VerticalAlignment="Top" Width="50" Height="24"/>
+                                                <TextBox x:Name="tbxVth0GainFileNameNewDif" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Height="24" Margin="50,25,0,0" TextWrapping="Wrap" Text="Vth0Gain.txt" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="100"/>
+                                                <TextBox x:Name="tbxVth1GainFileNameNewDif" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Height="24" Margin="50,50,0,0" TextWrapping="Wrap" Text="Vth1Gain.txt" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="100"/>
+                                                <TextBox x:Name="tbxVth2GainFileNameNewDif" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Height="24" Margin="50,75,0,0" TextWrapping="Wrap" Text="Vth2Gain.txt" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="100"/>
+                                                <TextBox x:Name="tbxVth0InterceptFileNameNewDif" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Height="24" Margin="150,25,0,0" TextWrapping="Wrap" Text="Vth0Intercept.txt" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="120"/>
+                                                <TextBox x:Name="tbxVth1InterceptFileNameNewDif" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Height="24" Margin="150,50,0,0" TextWrapping="Wrap" Text="Vth1Intercept.txt" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="120"/>
+                                                <TextBox x:Name="tbxVth2InterceptFileNameNewDif" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Height="24" Margin="150,75,0,0" TextWrapping="Wrap" Text="Vth2Intercept.txt" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="120"/>
+                                            </Grid>
+                                        </TabItem>
                                     </TabControl>
                                 </Grid>
                             </GroupBox>
