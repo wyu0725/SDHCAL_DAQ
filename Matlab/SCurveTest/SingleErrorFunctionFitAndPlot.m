@@ -33,8 +33,8 @@ function [] = SingleErrorFunctionFitAndPlot()
         ylabel('\bf Distribution');
         xlabel('\bf DAC Code');
         legend('Measure Data','Fit','Distribution')
-        titleString = sprintf('\\bf Channel%d Shaper 0, R = %5f', Channel, DacFitR);
-        title(titleString);        
+        titleString = sprintf('\\bf Channel%d Shaper 0,\\mu = %f,\\sigma = %f, R = %5f', Channel, mu, sigma, DacFitR);
+        title(titleString,'Interpreter','tex');        
     end
     
     if(bitand(Shaper,2) == 2)
@@ -46,7 +46,7 @@ function [] = SingleErrorFunctionFitAndPlot()
         sigma = 1/(sqrt(2)*a);
         mu = b;
         ErrorFunction = @(x) A*(erf(a*(x-b))+c);
-        GaussFunction = @(x) 1/(sqrt(2*pi))*exp(-(x-mu)^2/(2*sigma^2));
+        GaussFunction = @(x) 1/(sqrt(2*pi))*exp(-(x-mu).^2/(2*sigma^2));
         figure;
         yyaxis left;
         plot(DacCode, TriggerRatio1,'*');
@@ -72,7 +72,7 @@ function [] = SingleErrorFunctionFitAndPlot()
         sigma = 1/(sqrt(2)*a);
         mu = b;
         ErrorFunction = @(x) A*(erf(a*(x-b))+c);
-        GaussFunction = @(x) 1/(sqrt(2*pi))*exp(-(x-mu)^2/(2*sigma^2));
+        GaussFunction = @(x) 1/(sqrt(2*pi))*exp(-(x-mu).^2/(2*sigma^2));
         figure;
         yyaxis left;
         plot(DacCode, TriggerRatio2,'*');
