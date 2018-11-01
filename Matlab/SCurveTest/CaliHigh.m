@@ -4,7 +4,7 @@ dlg = 'Input data info';
 answer = inputdlg(prompt,dlg);
 AsicID = str2double(answer(1));
 DacRange = 101;
-ChargeHigh = [2 4 6 8 10 12 14 16 18 20 40 60 80 100 120 140 160];
+ChargeHigh = [2 4 6 8 10 12 14 16 18 20 40 60 80 100 120 140];
 % ChargeHigh = [2 4 6 8 10 40 60 80 100 120 140];
 
 ChargeLow = [50 100 150 200 250 300 350 400 450 500];
