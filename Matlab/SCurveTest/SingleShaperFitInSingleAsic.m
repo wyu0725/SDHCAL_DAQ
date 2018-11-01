@@ -7,8 +7,8 @@ function [FitSlope,FitIntercept,FitR] = SingleShaperFitInSingleAsic(Charge,DacCo
     FitR = zeros(1,64);
     for i = 1:1:64
         [FitSlope(i), FitIntercept(i),FitR(i)] = LinearFit(Charge',DacCode(i,:)');
-%         figure;
-%         plot(Charge,DacCode(i,:))
+        figure;
+        plot(Charge,DacCode(i,:))
     end
 end
 
