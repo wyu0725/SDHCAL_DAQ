@@ -107,7 +107,7 @@ for i = 1:1:4
             sigmaPlot(k) = 1/(sqrt(2)*a);
         end
         subplot(2,2,j)
-        plot(muPlot);
+        plot(muPlot,'*-');
         ylabel('\bf DAC Code');
         xlabel('\bf Channel');
         titleString = sprintf('\\bf ASIC%d%d',i,j);
