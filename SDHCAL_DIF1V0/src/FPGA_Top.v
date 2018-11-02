@@ -249,6 +249,24 @@ module FPGA_Top(
     .I(nPKTEND_r2)  // 1-bit input: Clock input
     );
 
+  (* ASYNC_REG = "true" *)reg ExternalFifoEmptySync1;
+  reg ExternalFifoEmptySync2;
+  wire ExternalFifoEmptySync;
+  always @ (posedge Clk or negedge reset_n) begin
+    if(~reset_n) begin
+      ExternalFifoEmptySync1 <= 1'b0;
+      ExternalFifoEmptySync2 <= 1'b0;
+    end
+    else begin
+      ExternalFifoEmptySync1 <= ExternalFifoEmpty;
+      ExternalFifoEmptySync2 <= ExternalFifoEmptySync1;
+    end
+  end
+    BUFG BUFG_EXTERNAL_FIFO_EMPTY (
+    .O(ExternalFifoEmptySync), // 1-bit output: Clock output
+    .I(ExternalFifoEmptySync2)  // 1-bit input: Clock input
+    );
+
   wire ExternalDataFifoFull;
   wire [15:0] OutTestData;
   wire OutTestDataEnable;
@@ -945,7 +963,7 @@ module FPGA_Top(
     .OnceEnd(MicrorocAcquisitionOnceDone[0]),
     .nPKTEND(nPKTEND),
     .ExternalFifoFull(ExternalFifoFull),
-    .ExternalFifoEmpty(ExternalFifoEmpty),
+    .ExternalFifoEmpty(ExternalFifoEmptySync),
     // AcqControl
     .DaqSelect(DaqSelect),
     .AcqStart(CommandMicrorocAcquisitionStartStop[0]),
@@ -1055,7 +1073,7 @@ module FPGA_Top(
     .OnceEnd(MicrorocAcquisitionOnceDone[1]),
     .nPKTEND(nPKTEND),
     .ExternalFifoFull(ExternalFifoFull),
-    .ExternalFifoEmpty(ExternalFifoEmpty),
+    .ExternalFifoEmpty(ExternalFifoEmptySync),
     // AcqControl
     .DaqSelect(DaqSelect),
     .AcqStart(CommandMicrorocAcquisitionStartStop[1]),
@@ -1165,7 +1183,7 @@ module FPGA_Top(
     .OnceEnd(MicrorocAcquisitionOnceDone[2]),
     .nPKTEND(nPKTEND),
     .ExternalFifoFull(ExternalFifoFull),
-    .ExternalFifoEmpty(ExternalFifoEmpty),
+    .ExternalFifoEmpty(ExternalFifoEmptySync),
     // AcqControl
     .DaqSelect(DaqSelect),
     .AcqStart(CommandMicrorocAcquisitionStartStop[2]),
@@ -1275,7 +1293,7 @@ module FPGA_Top(
     .OnceEnd(MicrorocAcquisitionOnceDone[3]),
     .nPKTEND(nPKTEND),
     .ExternalFifoFull(ExternalFifoFull),
-    .ExternalFifoEmpty(ExternalFifoEmpty),
+    .ExternalFifoEmpty(ExternalFifoEmptySync),
     // AcqControl
     .DaqSelect(DaqSelect),
     .AcqStart(CommandMicrorocAcquisitionStartStop[3]),
