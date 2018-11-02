@@ -665,6 +665,9 @@ ExternalFifoDataReadEnable	FPGA_Top.v	/^  wire ExternalFifoDataReadEnable;$/;"	n
 ExternalFifoEmpty	BitShiftOut.v	/^  input ExternalFifoEmpty,$/;"	p	language:Verilog	module:BitShiftOut
 ExternalFifoEmpty	FPGA_Top.v	/^  wire ExternalFifoEmpty;$/;"	n	language:Verilog	module:FPGA_Top
 ExternalFifoEmpty	MicrorocControl.v	/^  input ExternalFifoEmpty,$/;"	p	language:Verilog	module:MicrorocControl
+ExternalFifoEmptySync	FPGA_Top.v	/^  wire ExternalFifoEmptySync;$/;"	n	language:Verilog	module:FPGA_Top
+ExternalFifoEmptySync1	FPGA_Top.v	/^  (* ASYNC_REG = "true" *)reg ExternalFifoEmptySync1;$/;"	r	language:Verilog	module:FPGA_Top
+ExternalFifoEmptySync2	FPGA_Top.v	/^  reg ExternalFifoEmptySync2;$/;"	r	language:Verilog	module:FPGA_Top
 ExternalFifoEmpty_Debug	FPGA_Top.v	/^  (* MARK_DEBUG="true" *)wire ExternalFifoEmpty_Debug;$/;"	n	language:Verilog	module:FPGA_Top
 ExternalFifoFull	AcquisitionControl.v	/^  input ExternalFifoFull,$/;"	p	language:Verilog	module:AcquisitionControl
 ExternalFifoFull	AcquisitionSwitcher.v	/^  input ExternalFifoFull,$/;"	p	language:Verilog	module:AcquisitionSwitcher

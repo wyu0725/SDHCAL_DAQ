@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2018.1 (win64) Build 2188600 Wed Apr  4 18:40:38 MDT 2018
-| Date             : Sun Oct 28 10:01:49 2018
+| Date             : Fri Nov  2 15:33:25 2018
 | Host             : WYU running 64-bit major release  (build 9200)
 | Command          : report_power -file FPGA_Top_power_routed.rpt -pb FPGA_Top_power_summary_routed.pb -rpx FPGA_Top_power_routed.rpx
 | Design           : FPGA_Top
@@ -30,10 +30,10 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.400        |
+| Total On-Chip Power (W)  | 0.403        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.292        |
+| Dynamic (W)              | 0.295        |
 | Device Static (W)        | 0.108        |
 | Total Off-Chip Power (W) | 0.005        |
 | Effective TJA (C/W)      | 2.7          |
@@ -53,22 +53,22 @@ Table of Contents
 +--------------------------+-----------+----------+-----------+-----------------+
 | On-Chip                  | Power (W) | Used     | Available | Utilization (%) |
 +--------------------------+-----------+----------+-----------+-----------------+
-| Clocks                   |     0.026 |        9 |       --- |             --- |
-| Slice Logic              |     0.007 |    36726 |       --- |             --- |
-|   LUT as Logic           |     0.006 |    13175 |     63400 |           20.78 |
-|   Register               |    <0.001 |    16173 |    126800 |           12.75 |
+| Clocks                   |     0.028 |        9 |       --- |             --- |
+| Slice Logic              |     0.007 |    36727 |       --- |             --- |
+|   LUT as Logic           |     0.006 |    13178 |     63400 |           20.79 |
+|   Register               |    <0.001 |    16175 |    126800 |           12.76 |
 |   CARRY4                 |    <0.001 |      648 |     15850 |            4.09 |
 |   LUT as Distributed RAM |    <0.001 |      152 |     19000 |            0.80 |
 |   F7/F8 Muxes            |    <0.001 |      317 |     63400 |            0.50 |
 |   LUT as Shift Register  |    <0.001 |     1328 |     19000 |            6.99 |
-|   BUFG                   |    <0.001 |        4 |        32 |           12.50 |
+|   BUFG                   |    <0.001 |        3 |        32 |            9.38 |
 |   Others                 |     0.000 |     1654 |       --- |             --- |
-| Signals                  |     0.010 |    22683 |       --- |             --- |
+| Signals                  |     0.010 |    22663 |       --- |             --- |
 | Block RAM                |     0.003 |       11 |       135 |            8.15 |
 | MMCM                     |     0.084 |        1 |         6 |           16.67 |
 | I/O                      |     0.162 |      145 |       285 |           50.88 |
 | Static Power             |     0.108 |          |           |                 |
-| Total                    |     0.400 |          |           |                 |
+| Total                    |     0.403 |          |           |                 |
 +--------------------------+-----------+----------+-----------+-----------------+
 
 
@@ -78,7 +78,7 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) |
 +-----------+-------------+-----------+-------------+------------+
-| Vccint    |       1.000 |     0.062 |       0.046 |      0.016 |
+| Vccint    |       1.000 |     0.064 |       0.048 |      0.016 |
 | Vccaux    |       1.800 |     0.065 |       0.047 |      0.018 |
 | Vcco33    |       3.300 |     0.007 |       0.003 |      0.004 |
 | Vcco25    |       2.500 |     0.066 |       0.062 |      0.004 |
@@ -153,7 +153,7 @@ Table of Contents
 +-----------------------------------------------------------------------------------------+-----------+
 | Name                                                                                    | Power (W) |
 +-----------------------------------------------------------------------------------------+-----------+
-| FPGA_Top                                                                                |     0.292 |
+| FPGA_Top                                                                                |     0.295 |
 |   Acquisition                                                                           |     0.005 |
 |     AD9220Control                                                                       |    <0.001 |
 |       Ad9220Control                                                                     |    <0.001 |
@@ -281,7 +281,7 @@ Table of Contents
 |                 rstblk                                                                  |    <0.001 |
 |                   ngwrdrst.grst.g7serrst.gsckt_wrst.xpm_cdc_sync_rst_inst_wrst          |    <0.001 |
 |   ClockGenerator                                                                        |     0.084 |
-|   Command                                                                               |     0.003 |
+|   Command                                                                               |     0.004 |
 |     AcquisitionStartStopSet                                                             |    <0.001 |
 |     AdcDataNumberSet3to0                                                                |    <0.001 |
 |     AdcDataNumberSet7to4                                                                |    <0.001 |
@@ -459,14 +459,14 @@ Table of Contents
 |     HoldGen                                                                             |     0.004 |
 |     RamReadDoneDetect                                                                   |    <0.001 |
 |     TimeStampSyncAndTrigger                                                             |    <0.001 |
-|   ConfigurationSelect                                                                   |     0.003 |
+|   ConfigurationSelect                                                                   |     0.004 |
 |   MicrorocAutoCaliSignalGen                                                             |    <0.001 |
 |     CalibrationWaveGenA                                                                 |    <0.001 |
 |     CalibrationWaveGenB                                                                 |    <0.001 |
 |     DacValueSet                                                                         |    <0.001 |
 |       DacSpiOut                                                                         |    <0.001 |
 |   MicrorocChain1                                                                        |     0.004 |
-|     MicrorocDaq                                                                         |    <0.001 |
+|     MicrorocDaq                                                                         |     0.001 |
 |       AutoDaqControl                                                                    |    <0.001 |
 |       SlaveDaqControl                                                                   |    <0.001 |
 |     ReadOnChipRam                                                                       |    <0.001 |
@@ -535,7 +535,7 @@ Table of Contents
 |       ParameterGen                                                                      |     0.002 |
 |       ParameterShiftOut                                                                 |    <0.001 |
 |       PulseSync                                                                         |    <0.001 |
-|   MicrorocChain3                                                                        |     0.003 |
+|   MicrorocChain3                                                                        |     0.004 |
 |     MicrorocDaq                                                                         |    <0.001 |
 |       AutoDaqControl                                                                    |    <0.001 |
 |       SlaveDaqControl                                                                   |    <0.001 |
@@ -570,7 +570,7 @@ Table of Contents
 |       ParameterGen                                                                      |     0.002 |
 |       ParameterShiftOut                                                                 |    <0.001 |
 |       PulseSync                                                                         |    <0.001 |
-|   MicrorocChain4                                                                        |     0.003 |
+|   MicrorocChain4                                                                        |     0.004 |
 |     MicrorocDaq                                                                         |    <0.001 |
 |       AutoDaqControl                                                                    |    <0.001 |
 |       SlaveDaqControl                                                                   |    <0.001 |
@@ -647,7 +647,7 @@ Table of Contents
 |     inst                                                                                |     0.002 |
 |       BSCANID.u_xsdbm_id                                                                |     0.002 |
 |         CORE_XSDB.UUT_MASTER                                                            |     0.001 |
-|           U_ICON_INTERFACE                                                              |    <0.001 |
+|           U_ICON_INTERFACE                                                              |     0.001 |
 |             U_CMD1                                                                      |    <0.001 |
 |             U_CMD2                                                                      |    <0.001 |
 |             U_CMD3                                                                      |    <0.001 |
@@ -828,7 +828,7 @@ Table of Contents
 |                       u_srlB                                                            |    <0.001 |
 |                       u_srlC                                                            |    <0.001 |
 |                       u_srlD                                                            |    <0.001 |
-|         u_ila_regs                                                                      |     0.006 |
+|         u_ila_regs                                                                      |     0.007 |
 |           ADV_TRIG_STREAM.reg_stream_ffc                                                |    <0.001 |
 |             I_EN_CTL_EQ1.U_CTL                                                          |    <0.001 |
 |           ADV_TRIG_STREAM_READBACK.reg_stream_ffb                                       |    <0.001 |
