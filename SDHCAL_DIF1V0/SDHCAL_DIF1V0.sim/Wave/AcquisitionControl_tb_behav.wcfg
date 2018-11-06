@@ -3,89 +3,98 @@
    <wave_state>
    </wave_state>
    <db_ref_list>
-      <db_ref path="AutoCalibrationSignalGen_tb_behav.wdb" id="1">
+      <db_ref path="Param_Bitshift_tb_behav.wdb" id="1">
          <top_modules>
-            <top_module name="AutoCalibrationSignalGen_tb" />
+            <top_module name="Param_Bitshift_tb" />
             <top_module name="glbl" />
          </top_modules>
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="50000000fs"></ZoomStartTime>
-      <ZoomEndTime time="76250000001fs"></ZoomEndTime>
-      <Cursor1Time time="1238000000fs"></Cursor1Time>
+      <ZoomStartTime time="2644666667fs"></ZoomStartTime>
+      <ZoomEndTime time="4176666668fs"></ZoomEndTime>
+      <Cursor1Time time="2900000000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="155"></NameColumnWidth>
+      <NameColumnWidth column_width="151"></NameColumnWidth>
       <ValueColumnWidth column_width="58"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="17" />
-   <wvobject fp_name="/AutoCalibrationSignalGen_tb/Clk" type="logic">
-      <obj_property name="ElementShortName">Clk</obj_property>
-      <obj_property name="ObjectShortName">Clk</obj_property>
+   <WVObjectSize size="19" />
+   <wvobject fp_name="/Param_Bitshift_tb/uut/Clk5M" type="logic">
+      <obj_property name="ElementShortName">Clk5M</obj_property>
+      <obj_property name="ObjectShortName">Clk5M</obj_property>
    </wvobject>
-   <wvobject fp_name="/AutoCalibrationSignalGen_tb/reset_n" type="logic">
+   <wvobject fp_name="/Param_Bitshift_tb/uut/reset_n" type="logic">
       <obj_property name="ElementShortName">reset_n</obj_property>
       <obj_property name="ObjectShortName">reset_n</obj_property>
    </wvobject>
-   <wvobject fp_name="/AutoCalibrationSignalGen_tb/SynchronousClockPeroid" type="array">
-      <obj_property name="ElementShortName">SynchronousClockPeroid[15:0]</obj_property>
-      <obj_property name="ObjectShortName">SynchronousClockPeroid[15:0]</obj_property>
+   <wvobject fp_name="/Param_Bitshift_tb/uut/BitShiftOutStart" type="logic">
+      <obj_property name="ElementShortName">BitShiftOutStart</obj_property>
+      <obj_property name="ObjectShortName">BitShiftOutStart</obj_property>
    </wvobject>
-   <wvobject fp_name="/AutoCalibrationSignalGen_tb/PowerDown" type="logic">
-      <obj_property name="ElementShortName">PowerDown</obj_property>
-      <obj_property name="ObjectShortName">PowerDown</obj_property>
+   <wvobject fp_name="/Param_Bitshift_tb/uut/ExternalFifoReadEn" type="logic">
+      <obj_property name="ElementShortName">ExternalFifoReadEn</obj_property>
+      <obj_property name="ObjectShortName">ExternalFifoReadEn</obj_property>
    </wvobject>
-   <wvobject fp_name="/AutoCalibrationSignalGen_tb/Speed" type="logic">
-      <obj_property name="ElementShortName">Speed</obj_property>
-      <obj_property name="ObjectShortName">Speed</obj_property>
+   <wvobject fp_name="/Param_Bitshift_tb/uut/ExternalFifoEmpty" type="logic">
+      <obj_property name="ElementShortName">ExternalFifoEmpty</obj_property>
+      <obj_property name="ObjectShortName">ExternalFifoEmpty</obj_property>
    </wvobject>
-   <wvobject fp_name="/AutoCalibrationSignalGen_tb/Dac1Data" type="array">
-      <obj_property name="ElementShortName">Dac1Data[11:0]</obj_property>
-      <obj_property name="ObjectShortName">Dac1Data[11:0]</obj_property>
+   <wvobject fp_name="/Param_Bitshift_tb/uut/ExternalFifoDataIn" type="array">
+      <obj_property name="ElementShortName">ExternalFifoDataIn[15:0]</obj_property>
+      <obj_property name="ObjectShortName">ExternalFifoDataIn[15:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/AutoCalibrationSignalGen_tb/Dac2Data" type="array">
-      <obj_property name="ElementShortName">Dac2Data[11:0]</obj_property>
-      <obj_property name="ObjectShortName">Dac2Data[11:0]</obj_property>
+   <wvobject fp_name="/Param_Bitshift_tb/uut/SerialReset" type="logic">
+      <obj_property name="ElementShortName">SerialReset</obj_property>
+      <obj_property name="ObjectShortName">SerialReset</obj_property>
    </wvobject>
-   <wvobject fp_name="/AutoCalibrationSignalGen_tb/LoadDacSelect" type="array">
-      <obj_property name="ElementShortName">LoadDacSelect[1:0]</obj_property>
-      <obj_property name="ObjectShortName">LoadDacSelect[1:0]</obj_property>
+   <wvobject fp_name="/Param_Bitshift_tb/uut/SerialDataout" type="logic">
+      <obj_property name="ElementShortName">SerialDataout</obj_property>
+      <obj_property name="ObjectShortName">SerialDataout</obj_property>
    </wvobject>
-   <wvobject fp_name="/AutoCalibrationSignalGen_tb/DacLoad" type="logic">
-      <obj_property name="ElementShortName">DacLoad</obj_property>
-      <obj_property name="ObjectShortName">DacLoad</obj_property>
+   <wvobject fp_name="/Param_Bitshift_tb/uut/SerialClock" type="logic">
+      <obj_property name="ElementShortName">SerialClock</obj_property>
+      <obj_property name="ObjectShortName">SerialClock</obj_property>
    </wvobject>
-   <wvobject fp_name="/AutoCalibrationSignalGen_tb/SwitcherOnTime" type="array">
-      <obj_property name="ElementShortName">SwitcherOnTime[7:0]</obj_property>
-      <obj_property name="ObjectShortName">SwitcherOnTime[7:0]</obj_property>
+   <wvobject fp_name="/Param_Bitshift_tb/uut/cnt" type="array">
+      <obj_property name="ElementShortName">cnt[1:0]</obj_property>
+      <obj_property name="ObjectShortName">cnt[1:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
    </wvobject>
-   <wvobject fp_name="/AutoCalibrationSignalGen_tb/SwitcherEnable" type="logic">
-      <obj_property name="ElementShortName">SwitcherEnable</obj_property>
-      <obj_property name="ObjectShortName">SwitcherEnable</obj_property>
+   <wvobject fp_name="/Param_Bitshift_tb/uut/sr_ck_en" type="logic">
+      <obj_property name="ElementShortName">sr_ck_en</obj_property>
+      <obj_property name="ObjectShortName">sr_ck_en</obj_property>
    </wvobject>
-   <wvobject fp_name="/AutoCalibrationSignalGen_tb/SynchronousClock" type="logic">
-      <obj_property name="ElementShortName">SynchronousClock</obj_property>
-      <obj_property name="ObjectShortName">SynchronousClock</obj_property>
+   <wvobject fp_name="/Param_Bitshift_tb/uut/BitShiftDone" type="logic">
+      <obj_property name="ElementShortName">BitShiftDone</obj_property>
+      <obj_property name="ObjectShortName">BitShiftDone</obj_property>
    </wvobject>
-   <wvobject fp_name="/AutoCalibrationSignalGen_tb/nCS" type="logic">
-      <obj_property name="ElementShortName">nCS</obj_property>
-      <obj_property name="ObjectShortName">nCS</obj_property>
+   <wvobject fp_name="/Param_Bitshift_tb/uut/start" type="logic">
+      <obj_property name="ElementShortName">start</obj_property>
+      <obj_property name="ObjectShortName">start</obj_property>
    </wvobject>
-   <wvobject fp_name="/AutoCalibrationSignalGen_tb/SCLK" type="logic">
-      <obj_property name="ElementShortName">SCLK</obj_property>
-      <obj_property name="ObjectShortName">SCLK</obj_property>
+   <wvobject fp_name="/Param_Bitshift_tb/uut/sr_ck_temp" type="logic">
+      <obj_property name="ElementShortName">sr_ck_temp</obj_property>
+      <obj_property name="ObjectShortName">sr_ck_temp</obj_property>
    </wvobject>
-   <wvobject fp_name="/AutoCalibrationSignalGen_tb/DIN" type="logic">
-      <obj_property name="ElementShortName">DIN</obj_property>
-      <obj_property name="ObjectShortName">DIN</obj_property>
+   <wvobject fp_name="/Param_Bitshift_tb/uut/shift_reg16bit" type="array">
+      <obj_property name="ElementShortName">shift_reg16bit[15:0]</obj_property>
+      <obj_property name="ObjectShortName">shift_reg16bit[15:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/AutoCalibrationSignalGen_tb/SwitcherIn" type="logic">
-      <obj_property name="ElementShortName">SwitcherIn</obj_property>
-      <obj_property name="ObjectShortName">SwitcherIn</obj_property>
+   <wvobject fp_name="/Param_Bitshift_tb/uut/delay_cnt" type="array">
+      <obj_property name="ElementShortName">delay_cnt[2:0]</obj_property>
+      <obj_property name="ObjectShortName">delay_cnt[2:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/AutoCalibrationSignalGen_tb/SwitcerIn" type="logic">
-      <obj_property name="ElementShortName">SwitcerIn</obj_property>
-      <obj_property name="ObjectShortName">SwitcerIn</obj_property>
+   <wvobject fp_name="/Param_Bitshift_tb/uut/data_cnt" type="array">
+      <obj_property name="ElementShortName">data_cnt[3:0]</obj_property>
+      <obj_property name="ObjectShortName">data_cnt[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Param_Bitshift_tb/uut/SerialReset_r" type="logic">
+      <obj_property name="ElementShortName">SerialReset_r</obj_property>
+      <obj_property name="ObjectShortName">SerialReset_r</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Param_Bitshift_tb/uut/State" type="array">
+      <obj_property name="ElementShortName">State[2:0]</obj_property>
+      <obj_property name="ObjectShortName">State[2:0]</obj_property>
    </wvobject>
 </wave_config>
