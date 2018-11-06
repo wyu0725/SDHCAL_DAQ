@@ -208,7 +208,7 @@ module BitShiftOut(
       cnt <= 2'b01;
   end
   wire sr_ck_temp;
-  assign sr_ck_temp = cnt[1];
+  assign sr_ck_temp = ~cnt[1];
   //internal register definition
   reg sr_ck_en;   // sr_ck output enble
 
