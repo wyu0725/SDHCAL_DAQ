@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2018.1 (win64) Build 2188600 Wed Apr  4 18:40:38 MDT 2018
-| Date             : Mon Nov  5 23:10:32 2018
+| Date             : Wed Nov 21 20:34:48 2018
 | Host             : WYU running 64-bit major release  (build 9200)
 | Command          : report_power -file FPGA_Top_power_routed.rpt -pb FPGA_Top_power_summary_routed.pb -rpx FPGA_Top_power_routed.rpx
 | Design           : FPGA_Top
@@ -54,15 +54,15 @@ Table of Contents
 | On-Chip                 | Power (W) | Used     | Available | Utilization (%) |
 +-------------------------+-----------+----------+-----------+-----------------+
 | Clocks                  |     0.015 |        8 |       --- |             --- |
-| Slice Logic             |     0.006 |    21269 |       --- |             --- |
+| Slice Logic             |     0.006 |    21278 |       --- |             --- |
 |   LUT as Logic          |     0.006 |     9102 |     63400 |           14.36 |
-|   Register              |    <0.001 |     9946 |    126800 |            7.84 |
+|   Register              |    <0.001 |     9949 |    126800 |            7.85 |
 |   CARRY4                |    <0.001 |      239 |     15850 |            1.51 |
 |   F7/F8 Muxes           |    <0.001 |       58 |     63400 |            0.09 |
 |   BUFG                  |    <0.001 |        4 |        32 |           12.50 |
 |   Others                |     0.000 |      350 |       --- |             --- |
 |   LUT as Shift Register |     0.000 |       22 |     19000 |            0.12 |
-| Signals                 |     0.008 |    14091 |       --- |             --- |
+| Signals                 |     0.009 |    14105 |       --- |             --- |
 | Block RAM               |     0.003 |        9 |       135 |            6.67 |
 | MMCM                    |     0.084 |        1 |         6 |           16.67 |
 | I/O                     |     0.162 |      145 |       285 |           50.88 |
@@ -533,7 +533,7 @@ Table of Contents
 |       ParameterGen                                                                      |     0.002 |
 |       ParameterShiftOut                                                                 |    <0.001 |
 |       PulseSync                                                                         |    <0.001 |
-|   MicrorocChain3                                                                        |     0.003 |
+|   MicrorocChain3                                                                        |     0.004 |
 |     MicrorocDaq                                                                         |    <0.001 |
 |       AutoDaqControl                                                                    |    <0.001 |
 |       SlaveDaqControl                                                                   |    <0.001 |

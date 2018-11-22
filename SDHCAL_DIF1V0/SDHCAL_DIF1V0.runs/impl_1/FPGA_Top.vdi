@@ -2,40 +2,149 @@
 # Vivado v2018.1 (64-bit)
 # SW Build 2188600 on Wed Apr  4 18:40:38 MDT 2018
 # IP Build 2185939 on Wed Apr  4 20:55:05 MDT 2018
-# Start of session at: Mon Nov  5 23:06:27 2018
-# Process ID: 6712
+# Start of session at: Wed Nov 21 20:31:07 2018
+# Process ID: 4260
 # Current directory: D:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.runs/impl_1
 # Command line: vivado.exe -log FPGA_Top.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source FPGA_Top.tcl -notrace
 # Log file: D:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.runs/impl_1/FPGA_Top.vdi
 # Journal file: D:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.runs/impl_1\vivado.jou
 #-----------------------------------------------------------
 source FPGA_Top.tcl -notrace
-Command: open_checkpoint D:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.runs/impl_1/FPGA_Top.dcp
-
-Starting open_checkpoint Task
-
-Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.064 . Memory (MB): peak = 243.660 ; gain = 0.000
+Command: link_design -top FPGA_Top -part xc7a100tfgg484-2L
+Design is defaulting to srcset: sources_1
+Design is defaulting to constrset: constrs_1
 INFO: [Netlist 29-17] Analyzing 384 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-479] Netlist was created with Vivado 2018.1
 INFO: [Device 21-403] Loading part xc7a100tfgg484-2L
 INFO: [Project 1-570] Preparing netlist for logic optimization
-INFO: [Timing 38-478] Restoring timing data from binary archive.
-INFO: [Timing 38-479] Binary timing data restore complete.
-INFO: [Project 1-856] Restoring constraints from binary archive.
-INFO: [Project 1-853] Binary constraint restore complete.
-Reading XDEF placement.
-Reading placer database...
-Reading XDEF routing.
-Read XDEF File: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.173 . Memory (MB): peak = 1196.078 ; gain = 0.000
-Restored from archive | CPU: 0.000000 secs | Memory: 0.000000 MB |
-Finished XDEF File Restore: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.173 . Memory (MB): peak = 1196.078 ; gain = 0.000
+Parsing XDC File [d:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.srcs/sources_1/ip/CommandFifo/CommandFifo.xdc] for cell 'Command/CommandFifo32Depth/U0'
+Finished Parsing XDC File [d:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.srcs/sources_1/ip/CommandFifo/CommandFifo.xdc] for cell 'Command/CommandFifo32Depth/U0'
+Parsing XDC File [d:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.srcs/sources_1/ip/ConfigParameterFIFO/ConfigParameterFIFO.xdc] for cell 'MicrorocChain1/SlowControlAndReadScope/ConfigParameter/U0'
+Finished Parsing XDC File [d:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.srcs/sources_1/ip/ConfigParameterFIFO/ConfigParameterFIFO.xdc] for cell 'MicrorocChain1/SlowControlAndReadScope/ConfigParameter/U0'
+Parsing XDC File [d:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.srcs/sources_1/ip/ConfigParameterFIFO/ConfigParameterFIFO.xdc] for cell 'MicrorocChain2/SlowControlAndReadScope/ConfigParameter/U0'
+Finished Parsing XDC File [d:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.srcs/sources_1/ip/ConfigParameterFIFO/ConfigParameterFIFO.xdc] for cell 'MicrorocChain2/SlowControlAndReadScope/ConfigParameter/U0'
+Parsing XDC File [d:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.srcs/sources_1/ip/ConfigParameterFIFO/ConfigParameterFIFO.xdc] for cell 'MicrorocChain3/SlowControlAndReadScope/ConfigParameter/U0'
+Finished Parsing XDC File [d:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.srcs/sources_1/ip/ConfigParameterFIFO/ConfigParameterFIFO.xdc] for cell 'MicrorocChain3/SlowControlAndReadScope/ConfigParameter/U0'
+Parsing XDC File [d:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.srcs/sources_1/ip/ConfigParameterFIFO/ConfigParameterFIFO.xdc] for cell 'MicrorocChain4/SlowControlAndReadScope/ConfigParameter/U0'
+Finished Parsing XDC File [d:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.srcs/sources_1/ip/ConfigParameterFIFO/ConfigParameterFIFO.xdc] for cell 'MicrorocChain4/SlowControlAndReadScope/ConfigParameter/U0'
+Parsing XDC File [d:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.srcs/sources_1/ip/SCurveDataFifo/SCurveDataFifo.xdc] for cell 'Acquisition/MicrorocSCurveTest/scurve_data_fifo_16x16/U0'
+Finished Parsing XDC File [d:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.srcs/sources_1/ip/SCurveDataFifo/SCurveDataFifo.xdc] for cell 'Acquisition/MicrorocSCurveTest/scurve_data_fifo_16x16/U0'
+Parsing XDC File [d:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.srcs/sources_1/ip/MicrorocChainDataFifo/MicrorocChainDataFifo.xdc] for cell 'Acquisition/AcquisitionDataSwitcher/MicrorocChain1DataFIFO/U0'
+Finished Parsing XDC File [d:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.srcs/sources_1/ip/MicrorocChainDataFifo/MicrorocChainDataFifo.xdc] for cell 'Acquisition/AcquisitionDataSwitcher/MicrorocChain1DataFIFO/U0'
+Parsing XDC File [d:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.srcs/sources_1/ip/MicrorocChainDataFifo/MicrorocChainDataFifo.xdc] for cell 'Acquisition/AcquisitionDataSwitcher/MicrorocChain2DataFIFO/U0'
+Finished Parsing XDC File [d:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.srcs/sources_1/ip/MicrorocChainDataFifo/MicrorocChainDataFifo.xdc] for cell 'Acquisition/AcquisitionDataSwitcher/MicrorocChain2DataFIFO/U0'
+Parsing XDC File [d:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.srcs/sources_1/ip/MicrorocChainDataFifo/MicrorocChainDataFifo.xdc] for cell 'Acquisition/AcquisitionDataSwitcher/MicrorocChain3DataFIFO/U0'
+Finished Parsing XDC File [d:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.srcs/sources_1/ip/MicrorocChainDataFifo/MicrorocChainDataFifo.xdc] for cell 'Acquisition/AcquisitionDataSwitcher/MicrorocChain3DataFIFO/U0'
+Parsing XDC File [d:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.srcs/sources_1/ip/MicrorocChainDataFifo/MicrorocChainDataFifo.xdc] for cell 'Acquisition/AcquisitionDataSwitcher/MicrorocChain4DataFIFO/U0'
+Finished Parsing XDC File [d:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.srcs/sources_1/ip/MicrorocChainDataFifo/MicrorocChainDataFifo.xdc] for cell 'Acquisition/AcquisitionDataSwitcher/MicrorocChain4DataFIFO/U0'
+Parsing XDC File [d:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.srcs/sources_1/ip/ExternalDataFifo/ExternalDataFifo.xdc] for cell 'UsbDataFifo/U0'
+Finished Parsing XDC File [d:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.srcs/sources_1/ip/ExternalDataFifo/ExternalDataFifo.xdc] for cell 'UsbDataFifo/U0'
+Parsing XDC File [D:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.srcs/constrs_1/new/SDHCAL_DIF_1V0.xdc]
+Finished Parsing XDC File [D:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.srcs/constrs_1/new/SDHCAL_DIF_1V0.xdc]
+Parsing XDC File [d:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.srcs/sources_1/ip/CommandFifo/CommandFifo_clocks.xdc] for cell 'Command/CommandFifo32Depth/U0'
+Finished Parsing XDC File [d:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.srcs/sources_1/ip/CommandFifo/CommandFifo_clocks.xdc] for cell 'Command/CommandFifo32Depth/U0'
+Parsing XDC File [d:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.srcs/sources_1/ip/ConfigParameterFIFO/ConfigParameterFIFO_clocks.xdc] for cell 'MicrorocChain1/SlowControlAndReadScope/ConfigParameter/U0'
+Finished Parsing XDC File [d:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.srcs/sources_1/ip/ConfigParameterFIFO/ConfigParameterFIFO_clocks.xdc] for cell 'MicrorocChain1/SlowControlAndReadScope/ConfigParameter/U0'
+Parsing XDC File [d:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.srcs/sources_1/ip/ConfigParameterFIFO/ConfigParameterFIFO_clocks.xdc] for cell 'MicrorocChain2/SlowControlAndReadScope/ConfigParameter/U0'
+Finished Parsing XDC File [d:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.srcs/sources_1/ip/ConfigParameterFIFO/ConfigParameterFIFO_clocks.xdc] for cell 'MicrorocChain2/SlowControlAndReadScope/ConfigParameter/U0'
+Parsing XDC File [d:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.srcs/sources_1/ip/ConfigParameterFIFO/ConfigParameterFIFO_clocks.xdc] for cell 'MicrorocChain3/SlowControlAndReadScope/ConfigParameter/U0'
+Finished Parsing XDC File [d:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.srcs/sources_1/ip/ConfigParameterFIFO/ConfigParameterFIFO_clocks.xdc] for cell 'MicrorocChain3/SlowControlAndReadScope/ConfigParameter/U0'
+Parsing XDC File [d:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.srcs/sources_1/ip/ConfigParameterFIFO/ConfigParameterFIFO_clocks.xdc] for cell 'MicrorocChain4/SlowControlAndReadScope/ConfigParameter/U0'
+Finished Parsing XDC File [d:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.srcs/sources_1/ip/ConfigParameterFIFO/ConfigParameterFIFO_clocks.xdc] for cell 'MicrorocChain4/SlowControlAndReadScope/ConfigParameter/U0'
+Parsing XDC File [d:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.srcs/sources_1/ip/ExternalDataFifo/ExternalDataFifo_clocks.xdc] for cell 'UsbDataFifo/U0'
+Finished Parsing XDC File [d:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.srcs/sources_1/ip/ExternalDataFifo/ExternalDataFifo_clocks.xdc] for cell 'UsbDataFifo/U0'
+Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_gray.tcl] for cell 'UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gcx.clkx/rd_pntr_cdc_inst'
+Finished Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_gray.tcl] for cell 'UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gcx.clkx/rd_pntr_cdc_inst'
+Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_gray.tcl] for cell 'UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gcx.clkx/wr_pntr_cdc_inst'
+Finished Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_gray.tcl] for cell 'UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gcx.clkx/wr_pntr_cdc_inst'
+Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_gray.tcl] for cell 'Command/CommandFifo32Depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gcx.clkx/rd_pntr_cdc_inst'
+Finished Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_gray.tcl] for cell 'Command/CommandFifo32Depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gcx.clkx/rd_pntr_cdc_inst'
+Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_gray.tcl] for cell 'Command/CommandFifo32Depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gcx.clkx/wr_pntr_cdc_inst'
+Finished Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_gray.tcl] for cell 'Command/CommandFifo32Depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gcx.clkx/wr_pntr_cdc_inst'
+Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_gray.tcl] for cell 'MicrorocChain1/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gcx.clkx/rd_pntr_cdc_inst'
+Finished Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_gray.tcl] for cell 'MicrorocChain1/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gcx.clkx/rd_pntr_cdc_inst'
+Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_gray.tcl] for cell 'MicrorocChain1/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gcx.clkx/wr_pntr_cdc_inst'
+Finished Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_gray.tcl] for cell 'MicrorocChain1/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gcx.clkx/wr_pntr_cdc_inst'
+Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_gray.tcl] for cell 'MicrorocChain4/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gcx.clkx/wr_pntr_cdc_inst'
+Finished Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_gray.tcl] for cell 'MicrorocChain4/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gcx.clkx/wr_pntr_cdc_inst'
+Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_gray.tcl] for cell 'MicrorocChain4/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gcx.clkx/rd_pntr_cdc_inst'
+Finished Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_gray.tcl] for cell 'MicrorocChain4/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gcx.clkx/rd_pntr_cdc_inst'
+Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_gray.tcl] for cell 'MicrorocChain3/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gcx.clkx/wr_pntr_cdc_inst'
+Finished Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_gray.tcl] for cell 'MicrorocChain3/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gcx.clkx/wr_pntr_cdc_inst'
+Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_gray.tcl] for cell 'MicrorocChain3/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gcx.clkx/rd_pntr_cdc_inst'
+Finished Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_gray.tcl] for cell 'MicrorocChain3/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gcx.clkx/rd_pntr_cdc_inst'
+Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_gray.tcl] for cell 'MicrorocChain2/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gcx.clkx/wr_pntr_cdc_inst'
+Finished Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_gray.tcl] for cell 'MicrorocChain2/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gcx.clkx/wr_pntr_cdc_inst'
+Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_gray.tcl] for cell 'MicrorocChain2/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gcx.clkx/rd_pntr_cdc_inst'
+Finished Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_gray.tcl] for cell 'MicrorocChain2/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gcx.clkx/rd_pntr_cdc_inst'
+Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_single.tcl] for cell 'Command/CommandFifo32Depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_single_inst_rrst_wr'
+Finished Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_single.tcl] for cell 'Command/CommandFifo32Depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_single_inst_rrst_wr'
+Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_single.tcl] for cell 'UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_single_inst_wrst_rd'
+Finished Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_single.tcl] for cell 'UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_single_inst_wrst_rd'
+Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_single.tcl] for cell 'UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_single_inst_rrst_wr'
+Finished Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_single.tcl] for cell 'UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_single_inst_rrst_wr'
+Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_single.tcl] for cell 'MicrorocChain2/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_single_inst_wrst_rd'
+Finished Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_single.tcl] for cell 'MicrorocChain2/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_single_inst_wrst_rd'
+Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_single.tcl] for cell 'MicrorocChain2/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_single_inst_rrst_wr'
+Finished Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_single.tcl] for cell 'MicrorocChain2/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_single_inst_rrst_wr'
+Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_single.tcl] for cell 'MicrorocChain1/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_single_inst_wrst_rd'
+Finished Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_single.tcl] for cell 'MicrorocChain1/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_single_inst_wrst_rd'
+Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_single.tcl] for cell 'MicrorocChain1/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_single_inst_rrst_wr'
+Finished Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_single.tcl] for cell 'MicrorocChain1/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_single_inst_rrst_wr'
+Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_single.tcl] for cell 'Command/CommandFifo32Depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_single_inst_wrst_rd'
+Finished Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_single.tcl] for cell 'Command/CommandFifo32Depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_single_inst_wrst_rd'
+Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_single.tcl] for cell 'MicrorocChain4/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_single_inst_wrst_rd'
+Finished Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_single.tcl] for cell 'MicrorocChain4/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_single_inst_wrst_rd'
+Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_single.tcl] for cell 'MicrorocChain4/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_single_inst_rrst_wr'
+Finished Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_single.tcl] for cell 'MicrorocChain4/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_single_inst_rrst_wr'
+Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_single.tcl] for cell 'MicrorocChain3/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_single_inst_wrst_rd'
+Finished Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_single.tcl] for cell 'MicrorocChain3/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_single_inst_wrst_rd'
+Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_single.tcl] for cell 'MicrorocChain3/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_single_inst_rrst_wr'
+Finished Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_single.tcl] for cell 'MicrorocChain3/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_single_inst_rrst_wr'
+Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_sync_rst.tcl] for cell 'Acquisition/AcquisitionDataSwitcher/MicrorocChain1DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gsckt_wrst.xpm_cdc_sync_rst_inst_wrst'
+Finished Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_sync_rst.tcl] for cell 'Acquisition/AcquisitionDataSwitcher/MicrorocChain1DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gsckt_wrst.xpm_cdc_sync_rst_inst_wrst'
+Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_sync_rst.tcl] for cell 'MicrorocChain4/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gsckt_wrst.xpm_cdc_sync_rst_inst_wrst'
+Finished Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_sync_rst.tcl] for cell 'MicrorocChain4/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gsckt_wrst.xpm_cdc_sync_rst_inst_wrst'
+Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_sync_rst.tcl] for cell 'MicrorocChain4/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_sync_rst_inst_wrst'
+Finished Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_sync_rst.tcl] for cell 'MicrorocChain4/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_sync_rst_inst_wrst'
+Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_sync_rst.tcl] for cell 'MicrorocChain3/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gsckt_wrst.xpm_cdc_sync_rst_inst_wrst'
+Finished Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_sync_rst.tcl] for cell 'MicrorocChain3/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gsckt_wrst.xpm_cdc_sync_rst_inst_wrst'
+Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_sync_rst.tcl] for cell 'MicrorocChain3/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_sync_rst_inst_wrst'
+Finished Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_sync_rst.tcl] for cell 'MicrorocChain3/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_sync_rst_inst_wrst'
+Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_sync_rst.tcl] for cell 'UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gsckt_wrst.xpm_cdc_sync_rst_inst_wrst'
+Finished Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_sync_rst.tcl] for cell 'UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gsckt_wrst.xpm_cdc_sync_rst_inst_wrst'
+Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_sync_rst.tcl] for cell 'UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_sync_rst_inst_wrst'
+Finished Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_sync_rst.tcl] for cell 'UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_sync_rst_inst_wrst'
+Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_sync_rst.tcl] for cell 'MicrorocChain2/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gsckt_wrst.xpm_cdc_sync_rst_inst_wrst'
+Finished Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_sync_rst.tcl] for cell 'MicrorocChain2/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gsckt_wrst.xpm_cdc_sync_rst_inst_wrst'
+Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_sync_rst.tcl] for cell 'MicrorocChain2/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_sync_rst_inst_wrst'
+Finished Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_sync_rst.tcl] for cell 'MicrorocChain2/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_sync_rst_inst_wrst'
+Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_sync_rst.tcl] for cell 'MicrorocChain1/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gsckt_wrst.xpm_cdc_sync_rst_inst_wrst'
+Finished Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_sync_rst.tcl] for cell 'MicrorocChain1/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gsckt_wrst.xpm_cdc_sync_rst_inst_wrst'
+Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_sync_rst.tcl] for cell 'MicrorocChain1/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_sync_rst_inst_wrst'
+Finished Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_sync_rst.tcl] for cell 'MicrorocChain1/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_sync_rst_inst_wrst'
+Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_sync_rst.tcl] for cell 'Command/CommandFifo32Depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gsckt_wrst.xpm_cdc_sync_rst_inst_wrst'
+Finished Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_sync_rst.tcl] for cell 'Command/CommandFifo32Depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gsckt_wrst.xpm_cdc_sync_rst_inst_wrst'
+Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_sync_rst.tcl] for cell 'Command/CommandFifo32Depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_sync_rst_inst_wrst'
+Finished Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_sync_rst.tcl] for cell 'Command/CommandFifo32Depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_sync_rst_inst_wrst'
+Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_sync_rst.tcl] for cell 'Acquisition/MicrorocSCurveTest/scurve_data_fifo_16x16/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gsckt_wrst.xpm_cdc_sync_rst_inst_wrst'
+Finished Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_sync_rst.tcl] for cell 'Acquisition/MicrorocSCurveTest/scurve_data_fifo_16x16/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gsckt_wrst.xpm_cdc_sync_rst_inst_wrst'
+Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_sync_rst.tcl] for cell 'Acquisition/AcquisitionDataSwitcher/MicrorocChain4DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gsckt_wrst.xpm_cdc_sync_rst_inst_wrst'
+Finished Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_sync_rst.tcl] for cell 'Acquisition/AcquisitionDataSwitcher/MicrorocChain4DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gsckt_wrst.xpm_cdc_sync_rst_inst_wrst'
+Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_sync_rst.tcl] for cell 'Acquisition/AcquisitionDataSwitcher/MicrorocChain3DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gsckt_wrst.xpm_cdc_sync_rst_inst_wrst'
+Finished Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_sync_rst.tcl] for cell 'Acquisition/AcquisitionDataSwitcher/MicrorocChain3DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gsckt_wrst.xpm_cdc_sync_rst_inst_wrst'
+Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_sync_rst.tcl] for cell 'Acquisition/AcquisitionDataSwitcher/MicrorocChain2DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gsckt_wrst.xpm_cdc_sync_rst_inst_wrst'
+Finished Sourcing Tcl File [D:/Xilinx/2018.1/Vivado/2018.1/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_sync_rst.tcl] for cell 'Acquisition/AcquisitionDataSwitcher/MicrorocChain2DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gsckt_wrst.xpm_cdc_sync_rst_inst_wrst'
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
 INFO: [Project 1-111] Unisim Transformation Summary:
-  A total of 16 instances were transformed.
+  A total of 20 instances were transformed.
   IOBUF => IOBUF (IBUF, OBUFT): 16 instances
+  OBUFDS => OBUFDS: 4 instances
 
-INFO: [Project 1-604] Checkpoint was created with Vivado v2018.1 (64-bit) build 2188600
-open_checkpoint: Time (s): cpu = 00:00:32 ; elapsed = 00:00:40 . Memory (MB): peak = 1196.078 ; gain = 961.316
+7 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
+link_design completed successfully
+link_design: Time (s): cpu = 00:00:31 ; elapsed = 00:00:36 . Memory (MB): peak = 1311.457 ; gain = 973.313
 Command: opt_design
 Attempting to get a license for feature 'Implementation' and/or device 'xc7a100t'
 INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7a100t'
@@ -46,7 +155,7 @@ INFO: [DRC 23-27] Running DRC with 2 threads
 INFO: [Project 1-461] DRC finished with 0 Errors
 INFO: [Project 1-462] Please refer to the DRC report (report_drc) for more information.
 
-Time (s): cpu = 00:00:02 ; elapsed = 00:00:01 . Memory (MB): peak = 1196.078 ; gain = 0.000
+Time (s): cpu = 00:00:02 ; elapsed = 00:00:01 . Memory (MB): peak = 1311.457 ; gain = 0.000
 INFO: [Timing 38-35] Done setting XDC timing constraints.
 
 Starting Logic Optimization Task
@@ -54,56 +163,56 @@ Starting Logic Optimization Task
 Phase 1 Retarget
 INFO: [Opt 31-138] Pushed 10 inverter(s) to 801 load pin(s).
 INFO: [Opt 31-49] Retargeted 0 cell(s).
-Phase 1 Retarget | Checksum: 17cadd860
+Phase 1 Retarget | Checksum: 1652fee98
 
-Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 1272.129 ; gain = 0.000
+Time (s): cpu = 00:00:03 ; elapsed = 00:00:02 . Memory (MB): peak = 1311.457 ; gain = 0.000
 INFO: [Opt 31-389] Phase Retarget created 0 cells and removed 0 cells
 
 Phase 2 Constant propagation
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Phase 2 Constant propagation | Checksum: 17cadd860
+Phase 2 Constant propagation | Checksum: 1652fee98
 
-Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 1272.129 ; gain = 0.000
+Time (s): cpu = 00:00:04 ; elapsed = 00:00:03 . Memory (MB): peak = 1311.457 ; gain = 0.000
 INFO: [Opt 31-389] Phase Constant propagation created 0 cells and removed 0 cells
 
 Phase 3 Sweep
-Phase 3 Sweep | Checksum: 1a36f93cc
+Phase 3 Sweep | Checksum: c332d8b1
 
-Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1272.129 ; gain = 0.000
+Time (s): cpu = 00:00:04 ; elapsed = 00:00:03 . Memory (MB): peak = 1311.457 ; gain = 0.000
 INFO: [Opt 31-389] Phase Sweep created 0 cells and removed 29 cells
 
 Phase 4 BUFG optimization
 INFO: [Opt 31-194] Inserted BUFG TriggerSwitcher/SingleStart_BUFG_inst to drive 105 load(s) on clock net MicrorocDaq/SingleStart
 INFO: [Opt 31-193] Inserted 1 BUFG(s) on clock nets
-Phase 4 BUFG optimization | Checksum: 10de3c626
+Phase 4 BUFG optimization | Checksum: b80cbf86
 
-Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1272.129 ; gain = 0.000
+Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1311.457 ; gain = 0.000
 INFO: [Opt 31-389] Phase BUFG optimization created 2 cells and removed 4 cells
 
 Phase 5 Shift Register Optimization
-Phase 5 Shift Register Optimization | Checksum: 10de3c626
+Phase 5 Shift Register Optimization | Checksum: b80cbf86
 
-Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 1272.129 ; gain = 0.000
+Time (s): cpu = 00:00:05 ; elapsed = 00:00:04 . Memory (MB): peak = 1311.457 ; gain = 0.000
 INFO: [Opt 31-389] Phase Shift Register Optimization created 0 cells and removed 0 cells
 
 Phase 6 Post Processing Netlist
-Phase 6 Post Processing Netlist | Checksum: 136c27b90
+Phase 6 Post Processing Netlist | Checksum: fd77af4d
 
-Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 1272.129 ; gain = 0.000
+Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 1311.457 ; gain = 0.000
 INFO: [Opt 31-389] Phase Post Processing Netlist created 0 cells and removed 0 cells
 
 Starting Connectivity Check Task
 
-Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.076 . Memory (MB): peak = 1272.129 ; gain = 0.000
-Ending Logic Optimization Task | Checksum: 136c27b90
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.063 . Memory (MB): peak = 1311.457 ; gain = 0.000
+Ending Logic Optimization Task | Checksum: fd77af4d
 
-Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 1272.129 ; gain = 0.000
+Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 1311.457 ; gain = 0.000
 
 Starting Power Optimization Task
 INFO: [Pwropt 34-132] Skipping clock gating for clocks with a period < 2.00 ns.
+INFO: [Timing 38-35] Done setting XDC timing constraints.
 INFO: [Pwropt 34-9] Applying IDT optimizations ...
 INFO: [Pwropt 34-10] Applying ODC optimizations ...
-INFO: [Timing 38-35] Done setting XDC timing constraints.
 INFO: [Physopt 32-619] Estimated Timing Summary | WNS=0.592 | TNS=0.000 |
 Running Vector-less Activity Propagation...
 
@@ -115,51 +224,46 @@ INFO: [Pwropt 34-162] WRITE_MODE attribute of 8 BRAM(s) out of a total of 14 has
 INFO: [Timing 38-35] Done setting XDC timing constraints.
 INFO: [Pwropt 34-201] Structural ODC has moved 4 WE to EN ports
 Number of BRAM Ports augmented: 4 newly gated: 4 Total Ports: 28
-Ending PowerOpt Patch Enables Task | Checksum: 10c32f3d9
+Ending PowerOpt Patch Enables Task | Checksum: 11fb8d0a0
 
-Time (s): cpu = 00:00:01 ; elapsed = 00:00:01 . Memory (MB): peak = 1530.035 ; gain = 0.000
-Ending Power Optimization Task | Checksum: 10c32f3d9
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:01 . Memory (MB): peak = 1565.637 ; gain = 0.000
+Ending Power Optimization Task | Checksum: 11fb8d0a0
 
-Time (s): cpu = 00:00:17 ; elapsed = 00:00:11 . Memory (MB): peak = 1530.035 ; gain = 257.906
+Time (s): cpu = 00:00:14 ; elapsed = 00:00:10 . Memory (MB): peak = 1565.637 ; gain = 254.180
 
 Starting Logic Optimization Task
 INFO: [Timing 38-35] Done setting XDC timing constraints.
 
 Phase 1 Remap
-Phase 1 Remap | Checksum: 1224d4f51
+Phase 1 Remap | Checksum: 1d26c9d03
 
-Time (s): cpu = 00:00:04 ; elapsed = 00:00:02 . Memory (MB): peak = 1530.035 ; gain = 0.000
+Time (s): cpu = 00:00:03 ; elapsed = 00:00:02 . Memory (MB): peak = 1565.637 ; gain = 0.000
 INFO: [Opt 31-389] Phase Remap created 4 cells and removed 12 cells
 
 Phase 2 Post Processing Netlist
-Phase 2 Post Processing Netlist | Checksum: 184d23572
+Phase 2 Post Processing Netlist | Checksum: 1901c5d15
 
-Time (s): cpu = 00:00:04 ; elapsed = 00:00:02 . Memory (MB): peak = 1530.035 ; gain = 0.000
+Time (s): cpu = 00:00:03 ; elapsed = 00:00:02 . Memory (MB): peak = 1565.637 ; gain = 0.000
 INFO: [Opt 31-389] Phase Post Processing Netlist created 0 cells and removed 0 cells
-Ending Logic Optimization Task | Checksum: 184d23572
+Ending Logic Optimization Task | Checksum: 1901c5d15
 
-Time (s): cpu = 00:00:04 ; elapsed = 00:00:03 . Memory (MB): peak = 1530.035 ; gain = 0.000
+Time (s): cpu = 00:00:03 ; elapsed = 00:00:02 . Memory (MB): peak = 1565.637 ; gain = 0.000
 INFO: [Common 17-83] Releasing license: Implementation
-39 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
+35 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
 opt_design completed successfully
-opt_design: Time (s): cpu = 00:00:31 ; elapsed = 00:00:22 . Memory (MB): peak = 1530.035 ; gain = 333.957
+opt_design: Time (s): cpu = 00:00:26 ; elapsed = 00:00:20 . Memory (MB): peak = 1565.637 ; gain = 254.180
 INFO: [Timing 38-480] Writing timing data to binary archive.
 Writing placer database...
 Writing XDEF routing.
 Writing XDEF routing logical nets.
 Writing XDEF routing special nets.
-Write XDEF Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.090 . Memory (MB): peak = 1530.035 ; gain = 0.000
+Write XDEF Complete: Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.185 . Memory (MB): peak = 1565.637 ; gain = 0.000
 INFO: [Common 17-1381] The checkpoint 'D:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.runs/impl_1/FPGA_Top_opt.dcp' has been generated.
-write_checkpoint: Time (s): cpu = 00:00:07 ; elapsed = 00:00:05 . Memory (MB): peak = 1530.035 ; gain = 0.000
 INFO: [runtcl-4] Executing : report_drc -file FPGA_Top_drc_opted.rpt -pb FPGA_Top_drc_opted.pb -rpx FPGA_Top_drc_opted.rpx
 Command: report_drc -file FPGA_Top_drc_opted.rpt -pb FPGA_Top_drc_opted.pb -rpx FPGA_Top_drc_opted.rpx
-INFO: [IP_Flow 19-234] Refreshing IP repositories
-INFO: [IP_Flow 19-1704] No user IP repositories specified
-INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'D:/Xilinx/2018.1/Vivado/2018.1/data/ip'.
 INFO: [DRC 23-27] Running DRC with 2 threads
 INFO: [Coretcl 2-168] The results of DRC are in file D:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.runs/impl_1/FPGA_Top_drc_opted.rpt.
 report_drc completed successfully
-report_drc: Time (s): cpu = 00:00:09 ; elapsed = 00:00:07 . Memory (MB): peak = 1530.035 ; gain = 0.000
 Command: place_design
 Attempting to get a license for feature 'Implementation' and/or device 'xc7a100t'
 INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7a100t'
@@ -219,128 +323,128 @@ INFO: [Place 30-611] Multithreading enabled for place_design using a maximum of 
 Phase 1 Placer Initialization
 
 Phase 1.1 Placer Initialization Netlist Sorting
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.145 . Memory (MB): peak = 1530.035 ; gain = 0.000
-Phase 1.1 Placer Initialization Netlist Sorting | Checksum: da3d4952
+Netlist sorting complete. Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.121 . Memory (MB): peak = 1565.637 ; gain = 0.000
+Phase 1.1 Placer Initialization Netlist Sorting | Checksum: 11c000ccf
 
-Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.152 . Memory (MB): peak = 1530.035 ; gain = 0.000
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.230 . Memory (MB): peak = 1565.637 ; gain = 0.000
 INFO: [Timing 38-35] Done setting XDC timing constraints.
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.140 . Memory (MB): peak = 1530.035 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.121 . Memory (MB): peak = 1565.637 ; gain = 0.000
 
 Phase 1.2 IO Placement/ Clock Placement/ Build Placer Device
 WARNING: [Place 30-568] A LUT 'Acquisition/MicrorocChain1DataFIFO_i_1' is driving clock pin of 20 registers. This could lead to large hold time violations. First few involved registers are:
-	Acquisition/AcquisitionDataSwitcher/MicrorocChain1DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_full_i_reg {FDSE}
-	Acquisition/AcquisitionDataSwitcher/MicrorocChain1DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_full_fb_i_reg {FDSE}
-	Acquisition/AcquisitionDataSwitcher/MicrorocChain2DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/grss.rsts/ram_empty_i_reg {FDRE}
-	Acquisition/AcquisitionDataSwitcher/MicrorocChain2DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/grss.rsts/ram_empty_fb_i_reg {FDRE}
 	Acquisition/AcquisitionDataSwitcher/MicrorocChain2DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_full_fb_i_reg {FDSE}
+	Acquisition/AcquisitionDataSwitcher/MicrorocChain2DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_full_i_reg {FDSE}
+	Acquisition/AcquisitionDataSwitcher/MicrorocChain3DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/grss.rsts/ram_empty_i_reg {FDRE}
+	Acquisition/AcquisitionDataSwitcher/MicrorocChain3DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/grss.rsts/ram_empty_fb_i_reg {FDRE}
+	Acquisition/AcquisitionDataSwitcher/MicrorocChain4DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_full_fb_i_reg {FDSE}
 WARNING: [Place 30-568] A LUT 'Command/CommandFifo32Depth_i_1' is driving clock pin of 2 registers. This could lead to large hold time violations. First few involved registers are:
 	Command/CommandFifo32Depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwas.wsts/ram_full_fb_i_reg {FDSE}
 	Command/CommandFifo32Depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwas.wsts/ram_full_i_reg {FDSE}
 WARNING: [Place 30-568] A LUT 'Command/CommandFifo32Depth_i_2' is driving clock pin of 2 registers. This could lead to large hold time violations. First few involved registers are:
 	Command/CommandFifo32Depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_fb_i_reg {FDSE}
 	Command/CommandFifo32Depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_i_reg {FDSE}
-WARNING: [Place 30-568] A LUT 'MicrorocChain4/ReadOnChipRam/MicrorocHit_i_1__0' is driving clock pin of 1 registers. This could lead to large hold time violations. First few involved registers are:
-	MicrorocChain4/MicrorocDaq/SlaveDaqControl/MicrorocHit_reg {FDCE}
-WARNING: [Place 30-568] A LUT 'MicrorocChain4/MicrorocDaq/AutoDaqControl/StartRising_i_1__0' is driving clock pin of 1 registers. This could lead to large hold time violations. First few involved registers are:
-	MicrorocChain4/MicrorocDaq/AutoDaqControl/StartRising_reg {FDCE}
-WARNING: [Place 30-568] A LUT 'MicrorocChain4/MicrorocDaq/SlaveDaqControl/SlaveDaq_UsbStartStop_i_1__0' is driving clock pin of 1 registers. This could lead to large hold time violations. First few involved registers are:
-	MicrorocChain4/MicrorocDaq/SlaveDaq_UsbStartStop_reg {FDCE}
+WARNING: [Place 30-568] A LUT 'MicrorocChain1/ReadOnChipRam/MicrorocHit_i_1__2' is driving clock pin of 1 registers. This could lead to large hold time violations. First few involved registers are:
+	MicrorocChain1/MicrorocDaq/SlaveDaqControl/MicrorocHit_reg {FDCE}
 WARNING: [Place 30-568] A LUT 'MicrorocChain1/MicrorocDaq/AutoDaqControl/StartRising_i_1__2' is driving clock pin of 1 registers. This could lead to large hold time violations. First few involved registers are:
 	MicrorocChain1/MicrorocDaq/AutoDaqControl/StartRising_reg {FDCE}
 WARNING: [Place 30-568] A LUT 'MicrorocChain1/MicrorocDaq/SlaveDaqControl/SlaveDaq_UsbStartStop_i_1__2' is driving clock pin of 1 registers. This could lead to large hold time violations. First few involved registers are:
 	MicrorocChain1/MicrorocDaq/SlaveDaq_UsbStartStop_reg {FDCE}
-WARNING: [Place 30-568] A LUT 'MicrorocChain1/ReadOnChipRam/MicrorocHit_i_1__2' is driving clock pin of 1 registers. This could lead to large hold time violations. First few involved registers are:
-	MicrorocChain1/MicrorocDaq/SlaveDaqControl/MicrorocHit_reg {FDCE}
+WARNING: [Place 30-568] A LUT 'MicrorocChain4/MicrorocDaq/AutoDaqControl/StartRising_i_1__0' is driving clock pin of 1 registers. This could lead to large hold time violations. First few involved registers are:
+	MicrorocChain4/MicrorocDaq/AutoDaqControl/StartRising_reg {FDCE}
+WARNING: [Place 30-568] A LUT 'MicrorocChain4/MicrorocDaq/SlaveDaqControl/SlaveDaq_UsbStartStop_i_1__0' is driving clock pin of 1 registers. This could lead to large hold time violations. First few involved registers are:
+	MicrorocChain4/MicrorocDaq/SlaveDaq_UsbStartStop_reg {FDCE}
+WARNING: [Place 30-568] A LUT 'MicrorocChain4/ReadOnChipRam/MicrorocHit_i_1__0' is driving clock pin of 1 registers. This could lead to large hold time violations. First few involved registers are:
+	MicrorocChain4/MicrorocDaq/SlaveDaqControl/MicrorocHit_reg {FDCE}
 WARNING: [Place 30-568] A LUT 'MicrorocChain2/ReadOnChipRam/MicrorocHit_i_1__1' is driving clock pin of 1 registers. This could lead to large hold time violations. First few involved registers are:
 	MicrorocChain2/MicrorocDaq/SlaveDaqControl/MicrorocHit_reg {FDCE}
 WARNING: [Place 30-568] A LUT 'MicrorocChain2/MicrorocDaq/AutoDaqControl/StartRising_i_1__1' is driving clock pin of 1 registers. This could lead to large hold time violations. First few involved registers are:
 	MicrorocChain2/MicrorocDaq/AutoDaqControl/StartRising_reg {FDCE}
 WARNING: [Place 30-568] A LUT 'MicrorocChain2/MicrorocDaq/SlaveDaqControl/SlaveDaq_UsbStartStop_i_1__1' is driving clock pin of 1 registers. This could lead to large hold time violations. First few involved registers are:
 	MicrorocChain2/MicrorocDaq/SlaveDaq_UsbStartStop_reg {FDCE}
-WARNING: [Place 30-568] A LUT 'MicrorocChain3/MicrorocDaq/AutoDaqControl/StartRising_i_1' is driving clock pin of 1 registers. This could lead to large hold time violations. First few involved registers are:
-	MicrorocChain3/MicrorocDaq/AutoDaqControl/StartRising_reg {FDCE}
 WARNING: [Place 30-568] A LUT 'MicrorocChain3/ReadOnChipRam/MicrorocHit_i_1' is driving clock pin of 1 registers. This could lead to large hold time violations. First few involved registers are:
 	MicrorocChain3/MicrorocDaq/SlaveDaqControl/MicrorocHit_reg {FDCE}
+WARNING: [Place 30-568] A LUT 'MicrorocChain3/MicrorocDaq/AutoDaqControl/StartRising_i_1' is driving clock pin of 1 registers. This could lead to large hold time violations. First few involved registers are:
+	MicrorocChain3/MicrorocDaq/AutoDaqControl/StartRising_reg {FDCE}
 WARNING: [Place 30-568] A LUT 'MicrorocChain3/MicrorocDaq/SlaveDaqControl/SlaveDaq_UsbStartStop_i_1' is driving clock pin of 1 registers. This could lead to large hold time violations. First few involved registers are:
 	MicrorocChain3/MicrorocDaq/SlaveDaq_UsbStartStop_reg {FDCE}
 WARNING: [Place 30-568] A LUT 'ConfigParameter_i_2' is driving clock pin of 8 registers. This could lead to large hold time violations. First few involved registers are:
-	MicrorocChain4/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_fb_i_reg {FDSE}
-	MicrorocChain4/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_i_reg {FDSE}
-	MicrorocChain1/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_fb_i_reg {FDSE}
 	MicrorocChain1/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_i_reg {FDSE}
+	MicrorocChain1/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_fb_i_reg {FDSE}
+	MicrorocChain4/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_i_reg {FDSE}
+	MicrorocChain4/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_fb_i_reg {FDSE}
 	MicrorocChain2/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_fb_i_reg {FDSE}
-WARNING: [Place 30-568] A LUT 'UsbDataFifo_i_2' is driving clock pin of 2 registers. This could lead to large hold time violations. First few involved registers are:
-	UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwas.wsts/ram_full_i_reg {FDSE}
-	UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwas.wsts/ram_full_fb_i_reg {FDSE}
 WARNING: [Place 30-568] A LUT 'UsbDataFifo_i_3' is driving clock pin of 15 registers. This could lead to large hold time violations. First few involved registers are:
-	UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gcx.clkx/rd_pntr_cdc_inst/src_gray_ff_reg[3] {FDRE}
-	UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gcx.clkx/rd_pntr_cdc_inst/src_gray_ff_reg[1] {FDRE}
-	UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gcx.clkx/rd_pntr_cdc_inst/src_gray_ff_reg[7] {FDRE}
-	UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gcx.clkx/rd_pntr_cdc_inst/src_gray_ff_reg[0] {FDRE}
+	UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gcx.clkx/rd_pntr_cdc_inst/src_gray_ff_reg[2] {FDRE}
 	UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gcx.clkx/rd_pntr_cdc_inst/src_gray_ff_reg[11] {FDRE}
+	UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gcx.clkx/rd_pntr_cdc_inst/src_gray_ff_reg[6] {FDRE}
+	UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gcx.clkx/rd_pntr_cdc_inst/src_gray_ff_reg[1] {FDRE}
+	UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gcx.clkx/rd_pntr_cdc_inst/src_gray_ff_reg[9] {FDRE}
+WARNING: [Place 30-568] A LUT 'UsbDataFifo_i_2' is driving clock pin of 2 registers. This could lead to large hold time violations. First few involved registers are:
+	UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwas.wsts/ram_full_fb_i_reg {FDSE}
+	UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwas.wsts/ram_full_i_reg {FDSE}
 INFO: [Timing 38-35] Done setting XDC timing constraints.
-Phase 1.2 IO Placement/ Clock Placement/ Build Placer Device | Checksum: 1323cec2a
+Phase 1.2 IO Placement/ Clock Placement/ Build Placer Device | Checksum: 107f5d3d0
 
-Time (s): cpu = 00:00:09 ; elapsed = 00:00:08 . Memory (MB): peak = 1530.035 ; gain = 0.000
+Time (s): cpu = 00:00:08 ; elapsed = 00:00:07 . Memory (MB): peak = 1565.637 ; gain = 0.000
 
 Phase 1.3 Build Placer Netlist Model
-Phase 1.3 Build Placer Netlist Model | Checksum: 21a27cacd
+Phase 1.3 Build Placer Netlist Model | Checksum: 1c990d3d9
 
-Time (s): cpu = 00:00:16 ; elapsed = 00:00:12 . Memory (MB): peak = 1530.035 ; gain = 0.000
+Time (s): cpu = 00:00:14 ; elapsed = 00:00:11 . Memory (MB): peak = 1565.637 ; gain = 0.000
 
 Phase 1.4 Constrain Clocks/Macros
-Phase 1.4 Constrain Clocks/Macros | Checksum: 21a27cacd
+Phase 1.4 Constrain Clocks/Macros | Checksum: 1c990d3d9
 
-Time (s): cpu = 00:00:16 ; elapsed = 00:00:13 . Memory (MB): peak = 1530.035 ; gain = 0.000
-Phase 1 Placer Initialization | Checksum: 21a27cacd
+Time (s): cpu = 00:00:14 ; elapsed = 00:00:11 . Memory (MB): peak = 1565.637 ; gain = 0.000
+Phase 1 Placer Initialization | Checksum: 1c990d3d9
 
-Time (s): cpu = 00:00:16 ; elapsed = 00:00:13 . Memory (MB): peak = 1530.035 ; gain = 0.000
+Time (s): cpu = 00:00:14 ; elapsed = 00:00:11 . Memory (MB): peak = 1565.637 ; gain = 0.000
 
 Phase 2 Global Placement
-Phase 2 Global Placement | Checksum: 19f679d9e
+Phase 2 Global Placement | Checksum: 2613229da
 
-Time (s): cpu = 00:00:39 ; elapsed = 00:00:26 . Memory (MB): peak = 1530.035 ; gain = 0.000
+Time (s): cpu = 00:00:35 ; elapsed = 00:00:23 . Memory (MB): peak = 1565.637 ; gain = 0.000
 
 Phase 3 Detail Placement
 
 Phase 3.1 Commit Multi Column Macros
-Phase 3.1 Commit Multi Column Macros | Checksum: 19f679d9e
+Phase 3.1 Commit Multi Column Macros | Checksum: 2613229da
 
-Time (s): cpu = 00:00:39 ; elapsed = 00:00:26 . Memory (MB): peak = 1530.035 ; gain = 0.000
+Time (s): cpu = 00:00:35 ; elapsed = 00:00:23 . Memory (MB): peak = 1565.637 ; gain = 0.000
 
 Phase 3.2 Commit Most Macros & LUTRAMs
-Phase 3.2 Commit Most Macros & LUTRAMs | Checksum: 240173078
+Phase 3.2 Commit Most Macros & LUTRAMs | Checksum: 1cb6436fd
 
-Time (s): cpu = 00:00:44 ; elapsed = 00:00:29 . Memory (MB): peak = 1530.035 ; gain = 0.000
+Time (s): cpu = 00:00:39 ; elapsed = 00:00:26 . Memory (MB): peak = 1565.637 ; gain = 0.000
 
 Phase 3.3 Area Swap Optimization
-Phase 3.3 Area Swap Optimization | Checksum: 215b731e9
+Phase 3.3 Area Swap Optimization | Checksum: 1bd818ed9
 
-Time (s): cpu = 00:00:45 ; elapsed = 00:00:29 . Memory (MB): peak = 1530.035 ; gain = 0.000
+Time (s): cpu = 00:00:40 ; elapsed = 00:00:26 . Memory (MB): peak = 1565.637 ; gain = 0.000
 
 Phase 3.4 Pipeline Register Optimization
-Phase 3.4 Pipeline Register Optimization | Checksum: 215b731e9
+Phase 3.4 Pipeline Register Optimization | Checksum: 238e0e675
 
-Time (s): cpu = 00:00:45 ; elapsed = 00:00:30 . Memory (MB): peak = 1530.035 ; gain = 0.000
+Time (s): cpu = 00:00:40 ; elapsed = 00:00:26 . Memory (MB): peak = 1565.637 ; gain = 0.000
 
 Phase 3.5 Small Shape Detail Placement
-Phase 3.5 Small Shape Detail Placement | Checksum: 1e63c1763
+Phase 3.5 Small Shape Detail Placement | Checksum: 1e65e0897
 
-Time (s): cpu = 00:00:55 ; elapsed = 00:00:39 . Memory (MB): peak = 1530.035 ; gain = 0.000
+Time (s): cpu = 00:00:49 ; elapsed = 00:00:35 . Memory (MB): peak = 1565.637 ; gain = 0.000
 
 Phase 3.6 Re-assign LUT pins
-Phase 3.6 Re-assign LUT pins | Checksum: 2298302c0
+Phase 3.6 Re-assign LUT pins | Checksum: 281969f58
 
-Time (s): cpu = 00:00:56 ; elapsed = 00:00:41 . Memory (MB): peak = 1530.035 ; gain = 0.000
+Time (s): cpu = 00:00:50 ; elapsed = 00:00:36 . Memory (MB): peak = 1565.637 ; gain = 0.000
 
 Phase 3.7 Pipeline Register Optimization
-Phase 3.7 Pipeline Register Optimization | Checksum: 2298302c0
+Phase 3.7 Pipeline Register Optimization | Checksum: 281969f58
 
-Time (s): cpu = 00:00:56 ; elapsed = 00:00:41 . Memory (MB): peak = 1530.035 ; gain = 0.000
-Phase 3 Detail Placement | Checksum: 2298302c0
+Time (s): cpu = 00:00:50 ; elapsed = 00:00:37 . Memory (MB): peak = 1565.637 ; gain = 0.000
+Phase 3 Detail Placement | Checksum: 281969f58
 
-Time (s): cpu = 00:00:56 ; elapsed = 00:00:41 . Memory (MB): peak = 1530.035 ; gain = 0.000
+Time (s): cpu = 00:00:50 ; elapsed = 00:00:37 . Memory (MB): peak = 1565.637 ; gain = 0.000
 
 Phase 4 Post Placement Optimization and Clean-Up
 
@@ -348,61 +452,60 @@ Phase 4.1 Post Commit Optimization
 INFO: [Timing 38-35] Done setting XDC timing constraints.
 
 Phase 4.1.1 Post Placement Optimization
-Post Placement Optimization Initialization | Checksum: 15cc3e57e
+Post Placement Optimization Initialization | Checksum: 29826befc
 
 Phase 4.1.1.1 BUFG Insertion
 INFO: [Physopt 32-721] Multithreading enabled for phys_opt_design using a maximum of 2 CPUs
 INFO: [Place 46-33] Processed net ClockGenerator/InternalTrigger2_reg, BUFG insertion was skipped due to placement/routing conflicts.
 INFO: [Place 46-31] BUFG insertion identified 1 candidate nets, 0 success, 1 skipped for placement/routing, 0 skipped for timing, 0 skipped for netlist change reason.
-Phase 4.1.1.1 BUFG Insertion | Checksum: 15cc3e57e
+Phase 4.1.1.1 BUFG Insertion | Checksum: 29826befc
 
-Time (s): cpu = 00:01:04 ; elapsed = 00:00:46 . Memory (MB): peak = 1530.035 ; gain = 0.000
-INFO: [Place 30-746] Post Placement Timing Summary WNS=0.546. For the most accurate timing information please run report_timing.
-Phase 4.1.1 Post Placement Optimization | Checksum: 1f0dacfd5
+Time (s): cpu = 00:00:57 ; elapsed = 00:00:41 . Memory (MB): peak = 1565.637 ; gain = 0.000
+INFO: [Place 30-746] Post Placement Timing Summary WNS=0.557. For the most accurate timing information please run report_timing.
+Phase 4.1.1 Post Placement Optimization | Checksum: 17d0b81b3
 
-Time (s): cpu = 00:01:05 ; elapsed = 00:00:48 . Memory (MB): peak = 1530.035 ; gain = 0.000
-Phase 4.1 Post Commit Optimization | Checksum: 1f0dacfd5
+Time (s): cpu = 00:00:58 ; elapsed = 00:00:43 . Memory (MB): peak = 1565.637 ; gain = 0.000
+Phase 4.1 Post Commit Optimization | Checksum: 17d0b81b3
 
-Time (s): cpu = 00:01:06 ; elapsed = 00:00:48 . Memory (MB): peak = 1530.035 ; gain = 0.000
+Time (s): cpu = 00:00:59 ; elapsed = 00:00:43 . Memory (MB): peak = 1565.637 ; gain = 0.000
 
 Phase 4.2 Post Placement Cleanup
-Phase 4.2 Post Placement Cleanup | Checksum: 1f0dacfd5
+Phase 4.2 Post Placement Cleanup | Checksum: 17d0b81b3
 
-Time (s): cpu = 00:01:06 ; elapsed = 00:00:48 . Memory (MB): peak = 1530.035 ; gain = 0.000
+Time (s): cpu = 00:00:59 ; elapsed = 00:00:43 . Memory (MB): peak = 1565.637 ; gain = 0.000
 
 Phase 4.3 Placer Reporting
-Phase 4.3 Placer Reporting | Checksum: 1f0dacfd5
+Phase 4.3 Placer Reporting | Checksum: 17d0b81b3
 
-Time (s): cpu = 00:01:06 ; elapsed = 00:00:48 . Memory (MB): peak = 1530.035 ; gain = 0.000
+Time (s): cpu = 00:00:59 ; elapsed = 00:00:43 . Memory (MB): peak = 1565.637 ; gain = 0.000
 
 Phase 4.4 Final Placement Cleanup
-Phase 4.4 Final Placement Cleanup | Checksum: 1a8526bfb
+Phase 4.4 Final Placement Cleanup | Checksum: 14d1d5195
 
-Time (s): cpu = 00:01:07 ; elapsed = 00:00:49 . Memory (MB): peak = 1530.035 ; gain = 0.000
-Phase 4 Post Placement Optimization and Clean-Up | Checksum: 1a8526bfb
+Time (s): cpu = 00:00:59 ; elapsed = 00:00:44 . Memory (MB): peak = 1565.637 ; gain = 0.000
+Phase 4 Post Placement Optimization and Clean-Up | Checksum: 14d1d5195
 
-Time (s): cpu = 00:01:07 ; elapsed = 00:00:49 . Memory (MB): peak = 1530.035 ; gain = 0.000
-Ending Placer Task | Checksum: bad81b4f
+Time (s): cpu = 00:00:59 ; elapsed = 00:00:44 . Memory (MB): peak = 1565.637 ; gain = 0.000
+Ending Placer Task | Checksum: 101636cd1
 
-Time (s): cpu = 00:01:07 ; elapsed = 00:00:49 . Memory (MB): peak = 1530.035 ; gain = 0.000
+Time (s): cpu = 00:00:59 ; elapsed = 00:00:44 . Memory (MB): peak = 1565.637 ; gain = 0.000
 INFO: [Common 17-83] Releasing license: Implementation
-64 Infos, 60 Warnings, 0 Critical Warnings and 0 Errors encountered.
+57 Infos, 60 Warnings, 0 Critical Warnings and 0 Errors encountered.
 place_design completed successfully
-place_design: Time (s): cpu = 00:01:11 ; elapsed = 00:00:51 . Memory (MB): peak = 1530.035 ; gain = 0.000
+place_design: Time (s): cpu = 00:01:03 ; elapsed = 00:00:46 . Memory (MB): peak = 1565.637 ; gain = 0.000
 INFO: [Timing 38-480] Writing timing data to binary archive.
 Writing placer database...
 Writing XDEF routing.
 Writing XDEF routing logical nets.
 Writing XDEF routing special nets.
-Write XDEF Complete: Time (s): cpu = 00:00:06 ; elapsed = 00:00:02 . Memory (MB): peak = 1530.035 ; gain = 0.000
+Write XDEF Complete: Time (s): cpu = 00:00:05 ; elapsed = 00:00:02 . Memory (MB): peak = 1565.637 ; gain = 0.000
 INFO: [Common 17-1381] The checkpoint 'D:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.runs/impl_1/FPGA_Top_placed.dcp' has been generated.
-write_checkpoint: Time (s): cpu = 00:00:09 ; elapsed = 00:00:06 . Memory (MB): peak = 1530.035 ; gain = 0.000
 INFO: [runtcl-4] Executing : report_io -file FPGA_Top_io_placed.rpt
-report_io: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.212 . Memory (MB): peak = 1530.035 ; gain = 0.000
+report_io: Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.220 . Memory (MB): peak = 1565.637 ; gain = 0.000
 INFO: [runtcl-4] Executing : report_utilization -file FPGA_Top_utilization_placed.rpt -pb FPGA_Top_utilization_placed.pb
-report_utilization: Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.322 . Memory (MB): peak = 1530.035 ; gain = 0.000
+report_utilization: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.307 . Memory (MB): peak = 1565.637 ; gain = 0.000
 INFO: [runtcl-4] Executing : report_control_sets -verbose -file FPGA_Top_control_sets_placed.rpt
-report_control_sets: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.129 . Memory (MB): peak = 1530.035 ; gain = 0.000
+report_control_sets: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.121 . Memory (MB): peak = 1565.637 ; gain = 0.000
 Command: route_design
 Attempting to get a license for feature 'Implementation' and/or device 'xc7a100t'
 INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7a100t'
@@ -414,111 +517,118 @@ INFO: [Vivado_Tcl 4-199] Please refer to the DRC report (report_drc) for more in
 
 Starting Routing Task
 INFO: [Route 35-254] Multithreading enabled for route_design using a maximum of 2 CPUs
-Checksum: PlaceDB: 5b429989 ConstDB: 0 ShapeSum: 5f9581c6 RouteDB: 0
+Checksum: PlaceDB: 75f272f4 ConstDB: 0 ShapeSum: 8b70f9dd RouteDB: 0
 
 Phase 1 Build RT Design
-Phase 1 Build RT Design | Checksum: 5fa46de1
+Phase 1 Build RT Design | Checksum: 6cc317fa
 
-Time (s): cpu = 00:00:52 ; elapsed = 00:00:46 . Memory (MB): peak = 1530.035 ; gain = 0.000
-Post Restoration Checksum: NetGraph: 39ec9566 NumContArr: 25b7d87b Constraints: 0 Timing: 0
+Time (s): cpu = 00:00:45 ; elapsed = 00:00:38 . Memory (MB): peak = 1565.637 ; gain = 0.000
+Post Restoration Checksum: NetGraph: 3db84422 NumContArr: 2f0ad3d8 Constraints: 0 Timing: 0
 
 Phase 2 Router Initialization
 
 Phase 2.1 Create Timer
-Phase 2.1 Create Timer | Checksum: 5fa46de1
+Phase 2.1 Create Timer | Checksum: 6cc317fa
 
-Time (s): cpu = 00:00:53 ; elapsed = 00:00:47 . Memory (MB): peak = 1530.035 ; gain = 0.000
+Time (s): cpu = 00:00:45 ; elapsed = 00:00:39 . Memory (MB): peak = 1565.637 ; gain = 0.000
 
 Phase 2.2 Fix Topology Constraints
-Phase 2.2 Fix Topology Constraints | Checksum: 5fa46de1
+Phase 2.2 Fix Topology Constraints | Checksum: 6cc317fa
 
-Time (s): cpu = 00:00:53 ; elapsed = 00:00:47 . Memory (MB): peak = 1530.035 ; gain = 0.000
+Time (s): cpu = 00:00:46 ; elapsed = 00:00:39 . Memory (MB): peak = 1565.637 ; gain = 0.000
 
 Phase 2.3 Pre Route Cleanup
-Phase 2.3 Pre Route Cleanup | Checksum: 5fa46de1
+Phase 2.3 Pre Route Cleanup | Checksum: 6cc317fa
 
-Time (s): cpu = 00:00:54 ; elapsed = 00:00:47 . Memory (MB): peak = 1530.035 ; gain = 0.000
+Time (s): cpu = 00:00:46 ; elapsed = 00:00:39 . Memory (MB): peak = 1565.637 ; gain = 0.000
  Number of Nodes with overlaps = 0
 
 Phase 2.4 Update Timing
-Phase 2.4 Update Timing | Checksum: 1d3729058
+Phase 2.4 Update Timing | Checksum: 159cfda50
 
-Time (s): cpu = 00:01:04 ; elapsed = 00:00:54 . Memory (MB): peak = 1530.957 ; gain = 0.922
-INFO: [Route 35-416] Intermediate Timing Summary | WNS=0.544  | TNS=0.000  | WHS=-0.667 | THS=-430.622|
+Time (s): cpu = 00:00:55 ; elapsed = 00:00:45 . Memory (MB): peak = 1565.637 ; gain = 0.000
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=0.422  | TNS=0.000  | WHS=-0.936 | THS=-462.406|
 
 
 Phase 2.5 Update Timing for Bus Skew
 
 Phase 2.5.1 Update Timing
-Phase 2.5.1 Update Timing | Checksum: 2a8f8a8c0
+Phase 2.5.1 Update Timing | Checksum: 1969fb5d2
 
-Time (s): cpu = 00:01:09 ; elapsed = 00:00:57 . Memory (MB): peak = 1541.848 ; gain = 11.813
-INFO: [Route 35-416] Intermediate Timing Summary | WNS=0.544  | TNS=0.000  | WHS=N/A    | THS=N/A    |
+Time (s): cpu = 00:01:00 ; elapsed = 00:00:48 . Memory (MB): peak = 1565.637 ; gain = 0.000
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=0.422  | TNS=0.000  | WHS=N/A    | THS=N/A    |
 
-Phase 2.5 Update Timing for Bus Skew | Checksum: 24520c32a
+Phase 2.5 Update Timing for Bus Skew | Checksum: 1882a25f2
 
-Time (s): cpu = 00:01:10 ; elapsed = 00:00:58 . Memory (MB): peak = 1554.219 ; gain = 24.184
-Phase 2 Router Initialization | Checksum: 2a8acc3b0
+Time (s): cpu = 00:01:00 ; elapsed = 00:00:48 . Memory (MB): peak = 1565.637 ; gain = 0.000
+Phase 2 Router Initialization | Checksum: 148e1dbae
 
-Time (s): cpu = 00:01:10 ; elapsed = 00:00:58 . Memory (MB): peak = 1554.219 ; gain = 24.184
+Time (s): cpu = 00:01:00 ; elapsed = 00:00:48 . Memory (MB): peak = 1565.637 ; gain = 0.000
 
 Phase 3 Initial Routing
-Phase 3 Initial Routing | Checksum: 25185505c
+Phase 3 Initial Routing | Checksum: 1d24ea4aa
 
-Time (s): cpu = 00:01:16 ; elapsed = 00:01:01 . Memory (MB): peak = 1554.219 ; gain = 24.184
+Time (s): cpu = 00:01:05 ; elapsed = 00:00:51 . Memory (MB): peak = 1565.637 ; gain = 0.000
 
 Phase 4 Rip-up And Reroute
 
 Phase 4.1 Global Iteration 0
- Number of Nodes with overlaps = 974
- Number of Nodes with overlaps = 19
+ Number of Nodes with overlaps = 1209
+ Number of Nodes with overlaps = 30
  Number of Nodes with overlaps = 0
-INFO: [Route 35-416] Intermediate Timing Summary | WNS=0.507  | TNS=0.000  | WHS=N/A    | THS=N/A    |
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=0.397  | TNS=0.000  | WHS=N/A    | THS=N/A    |
 
-Phase 4.1 Global Iteration 0 | Checksum: 21a079f5c
+Phase 4.1 Global Iteration 0 | Checksum: 1b9c1e44b
 
-Time (s): cpu = 00:01:28 ; elapsed = 00:01:08 . Memory (MB): peak = 1554.219 ; gain = 24.184
-Phase 4 Rip-up And Reroute | Checksum: 21a079f5c
+Time (s): cpu = 00:01:17 ; elapsed = 00:00:57 . Memory (MB): peak = 1565.637 ; gain = 0.000
+Phase 4 Rip-up And Reroute | Checksum: 1b9c1e44b
 
-Time (s): cpu = 00:01:28 ; elapsed = 00:01:08 . Memory (MB): peak = 1554.219 ; gain = 24.184
+Time (s): cpu = 00:01:17 ; elapsed = 00:00:57 . Memory (MB): peak = 1565.637 ; gain = 0.000
 
 Phase 5 Delay and Skew Optimization
 
 Phase 5.1 Delay CleanUp
-Phase 5.1 Delay CleanUp | Checksum: 21a079f5c
 
-Time (s): cpu = 00:01:28 ; elapsed = 00:01:08 . Memory (MB): peak = 1554.219 ; gain = 24.184
+Phase 5.1.1 Update Timing
+Phase 5.1.1 Update Timing | Checksum: 1c97f4df1
+
+Time (s): cpu = 00:01:18 ; elapsed = 00:00:58 . Memory (MB): peak = 1565.637 ; gain = 0.000
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=0.397  | TNS=0.000  | WHS=N/A    | THS=N/A    |
+
+Phase 5.1 Delay CleanUp | Checksum: 1516c7045
+
+Time (s): cpu = 00:01:18 ; elapsed = 00:00:58 . Memory (MB): peak = 1565.637 ; gain = 0.000
 
 Phase 5.2 Clock Skew Optimization
-Phase 5.2 Clock Skew Optimization | Checksum: 21a079f5c
+Phase 5.2 Clock Skew Optimization | Checksum: 1516c7045
 
-Time (s): cpu = 00:01:28 ; elapsed = 00:01:08 . Memory (MB): peak = 1554.219 ; gain = 24.184
-Phase 5 Delay and Skew Optimization | Checksum: 21a079f5c
+Time (s): cpu = 00:01:18 ; elapsed = 00:00:58 . Memory (MB): peak = 1565.637 ; gain = 0.000
+Phase 5 Delay and Skew Optimization | Checksum: 1516c7045
 
-Time (s): cpu = 00:01:28 ; elapsed = 00:01:08 . Memory (MB): peak = 1554.219 ; gain = 24.184
+Time (s): cpu = 00:01:18 ; elapsed = 00:00:58 . Memory (MB): peak = 1565.637 ; gain = 0.000
 
 Phase 6 Post Hold Fix
 
 Phase 6.1 Hold Fix Iter
 
 Phase 6.1.1 Update Timing
-Phase 6.1.1 Update Timing | Checksum: 167b6a917
+Phase 6.1.1 Update Timing | Checksum: 18698443d
 
-Time (s): cpu = 00:01:30 ; elapsed = 00:01:09 . Memory (MB): peak = 1554.219 ; gain = 24.184
-INFO: [Route 35-416] Intermediate Timing Summary | WNS=0.507  | TNS=0.000  | WHS=0.039  | THS=0.000  |
+Time (s): cpu = 00:01:19 ; elapsed = 00:00:59 . Memory (MB): peak = 1565.637 ; gain = 0.000
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=0.397  | TNS=0.000  | WHS=0.035  | THS=0.000  |
 
-Phase 6.1 Hold Fix Iter | Checksum: 1d2a3c1e3
+Phase 6.1 Hold Fix Iter | Checksum: 1da05f650
 
-Time (s): cpu = 00:01:30 ; elapsed = 00:01:09 . Memory (MB): peak = 1554.219 ; gain = 24.184
-Phase 6 Post Hold Fix | Checksum: 1d2a3c1e3
+Time (s): cpu = 00:01:20 ; elapsed = 00:00:59 . Memory (MB): peak = 1565.637 ; gain = 0.000
+Phase 6 Post Hold Fix | Checksum: 1da05f650
 
-Time (s): cpu = 00:01:30 ; elapsed = 00:01:09 . Memory (MB): peak = 1554.219 ; gain = 24.184
+Time (s): cpu = 00:01:20 ; elapsed = 00:00:59 . Memory (MB): peak = 1565.637 ; gain = 0.000
 
 Phase 7 Route finalize
 
 Router Utilization Summary
-  Global Vertical Routing Utilization    = 2.64486 %
-  Global Horizontal Routing Utilization  = 3.07168 %
+  Global Vertical Routing Utilization    = 2.55534 %
+  Global Horizontal Routing Utilization  = 3.10436 %
   Routable Net Status*
   *Does not include unroutable nets such as driverless and loadless.
   Run report_route_status for detailed report.
@@ -527,52 +637,52 @@ Router Utilization Summary
   Number of Partially Routed Nets     = 0
   Number of Node Overlaps             = 0
 
-Phase 7 Route finalize | Checksum: 1abab22cd
+Phase 7 Route finalize | Checksum: 10ce7792b
 
-Time (s): cpu = 00:01:30 ; elapsed = 00:01:09 . Memory (MB): peak = 1554.219 ; gain = 24.184
+Time (s): cpu = 00:01:20 ; elapsed = 00:00:59 . Memory (MB): peak = 1565.637 ; gain = 0.000
 
 Phase 8 Verifying routed nets
 
  Verification completed successfully
-Phase 8 Verifying routed nets | Checksum: 1abab22cd
+Phase 8 Verifying routed nets | Checksum: 10ce7792b
 
-Time (s): cpu = 00:01:30 ; elapsed = 00:01:09 . Memory (MB): peak = 1554.219 ; gain = 24.184
+Time (s): cpu = 00:01:20 ; elapsed = 00:00:59 . Memory (MB): peak = 1565.637 ; gain = 0.000
 
 Phase 9 Depositing Routes
-Phase 9 Depositing Routes | Checksum: 1b263f91c
+Phase 9 Depositing Routes | Checksum: 147606fa5
 
-Time (s): cpu = 00:01:32 ; elapsed = 00:01:12 . Memory (MB): peak = 1554.219 ; gain = 24.184
+Time (s): cpu = 00:01:22 ; elapsed = 00:01:01 . Memory (MB): peak = 1565.637 ; gain = 0.000
 
 Phase 10 Post Router Timing
-INFO: [Route 35-57] Estimated Timing Summary | WNS=0.507  | TNS=0.000  | WHS=0.039  | THS=0.000  |
+INFO: [Route 35-57] Estimated Timing Summary | WNS=0.397  | TNS=0.000  | WHS=0.035  | THS=0.000  |
 
 INFO: [Route 35-327] The final timing numbers are based on the router estimated timing analysis. For a complete and accurate timing signoff, please run report_timing_summary.
-Phase 10 Post Router Timing | Checksum: 1b263f91c
+Phase 10 Post Router Timing | Checksum: 147606fa5
 
-Time (s): cpu = 00:01:32 ; elapsed = 00:01:12 . Memory (MB): peak = 1554.219 ; gain = 24.184
+Time (s): cpu = 00:01:22 ; elapsed = 00:01:01 . Memory (MB): peak = 1565.637 ; gain = 0.000
 INFO: [Route 35-16] Router Completed Successfully
 
-Time (s): cpu = 00:01:32 ; elapsed = 00:01:12 . Memory (MB): peak = 1554.219 ; gain = 24.184
+Time (s): cpu = 00:01:22 ; elapsed = 00:01:01 . Memory (MB): peak = 1565.637 ; gain = 0.000
 
 Routing Is Done.
 INFO: [Common 17-83] Releasing license: Implementation
-82 Infos, 60 Warnings, 0 Critical Warnings and 0 Errors encountered.
+76 Infos, 60 Warnings, 0 Critical Warnings and 0 Errors encountered.
 route_design completed successfully
-route_design: Time (s): cpu = 00:01:37 ; elapsed = 00:01:15 . Memory (MB): peak = 1554.219 ; gain = 24.184
+route_design: Time (s): cpu = 00:01:26 ; elapsed = 00:01:04 . Memory (MB): peak = 1565.637 ; gain = 0.000
 INFO: [Timing 38-480] Writing timing data to binary archive.
 Writing placer database...
 Writing XDEF routing.
 Writing XDEF routing logical nets.
 Writing XDEF routing special nets.
-Write XDEF Complete: Time (s): cpu = 00:00:07 ; elapsed = 00:00:03 . Memory (MB): peak = 1554.219 ; gain = 0.000
+Write XDEF Complete: Time (s): cpu = 00:00:06 ; elapsed = 00:00:02 . Memory (MB): peak = 1565.637 ; gain = 0.000
+WARNING: [Runs 36-115] Could not delete directory 'D:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.runs/impl_1/.Xil/Vivado-4260-WYU/dcp2'.
 INFO: [Common 17-1381] The checkpoint 'D:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.runs/impl_1/FPGA_Top_routed.dcp' has been generated.
-write_checkpoint: Time (s): cpu = 00:00:10 ; elapsed = 00:00:06 . Memory (MB): peak = 1554.219 ; gain = 0.000
+write_checkpoint: Time (s): cpu = 00:00:09 ; elapsed = 00:00:05 . Memory (MB): peak = 1565.637 ; gain = 0.000
 INFO: [runtcl-4] Executing : report_drc -file FPGA_Top_drc_routed.rpt -pb FPGA_Top_drc_routed.pb -rpx FPGA_Top_drc_routed.rpx
 Command: report_drc -file FPGA_Top_drc_routed.rpt -pb FPGA_Top_drc_routed.pb -rpx FPGA_Top_drc_routed.rpx
 INFO: [DRC 23-27] Running DRC with 2 threads
 INFO: [Coretcl 2-168] The results of DRC are in file D:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.runs/impl_1/FPGA_Top_drc_routed.rpt.
 report_drc completed successfully
-report_drc: Time (s): cpu = 00:00:10 ; elapsed = 00:00:05 . Memory (MB): peak = 1554.219 ; gain = 0.000
 INFO: [runtcl-4] Executing : report_methodology -file FPGA_Top_methodology_drc_routed.rpt -pb FPGA_Top_methodology_drc_routed.pb -rpx FPGA_Top_methodology_drc_routed.rpx
 Command: report_methodology -file FPGA_Top_methodology_drc_routed.rpt -pb FPGA_Top_methodology_drc_routed.pb -rpx FPGA_Top_methodology_drc_routed.rpx
 INFO: [Timing 38-35] Done setting XDC timing constraints.
@@ -580,16 +690,16 @@ INFO: [Timing 38-35] Done setting XDC timing constraints.
 INFO: [DRC 23-133] Running Methodology with 2 threads
 INFO: [Coretcl 2-1520] The results of Report Methodology are in file D:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.runs/impl_1/FPGA_Top_methodology_drc_routed.rpt.
 report_methodology completed successfully
-report_methodology: Time (s): cpu = 00:00:17 ; elapsed = 00:00:10 . Memory (MB): peak = 1604.316 ; gain = 50.098
+report_methodology: Time (s): cpu = 00:00:14 ; elapsed = 00:00:08 . Memory (MB): peak = 1612.020 ; gain = 46.383
 INFO: [runtcl-4] Executing : report_power -file FPGA_Top_power_routed.rpt -pb FPGA_Top_power_summary_routed.pb -rpx FPGA_Top_power_routed.rpx
 Command: report_power -file FPGA_Top_power_routed.rpt -pb FPGA_Top_power_summary_routed.pb -rpx FPGA_Top_power_routed.rpx
 INFO: [Timing 38-35] Done setting XDC timing constraints.
 Running Vector-less Activity Propagation...
 
 Finished Running Vector-less Activity Propagation
-94 Infos, 60 Warnings, 0 Critical Warnings and 0 Errors encountered.
+88 Infos, 61 Warnings, 0 Critical Warnings and 0 Errors encountered.
 report_power completed successfully
-report_power: Time (s): cpu = 00:00:12 ; elapsed = 00:00:08 . Memory (MB): peak = 1658.531 ; gain = 54.215
+report_power: Time (s): cpu = 00:00:11 ; elapsed = 00:00:07 . Memory (MB): peak = 1666.184 ; gain = 54.164
 INFO: [runtcl-4] Executing : report_route_status -file FPGA_Top_route_status.rpt -pb FPGA_Top_route_status.pb
 INFO: [runtcl-4] Executing : report_timing_summary -max_paths 10 -file FPGA_Top_timing_summary_routed.rpt -pb FPGA_Top_timing_summary_routed.pb -rpx FPGA_Top_timing_summary_routed.rpx -warn_on_violation 
 INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -2L, Delay Type: min_max, Timing Stage: Requireds.
@@ -598,7 +708,6 @@ WARNING: [Timing 38-436] There are set_bus_skew constraint(s) in this design. Pl
 INFO: [runtcl-4] Executing : report_incremental_reuse -file FPGA_Top_incremental_reuse_routed.rpt
 INFO: [Vivado_Tcl 4-545] No incremental reuse to report, no incremental placement and routing data was found.
 INFO: [runtcl-4] Executing : report_clock_utilization -file FPGA_Top_clock_utilization_routed.rpt
-report_clock_utilization: Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 1662.133 ; gain = 1.012
 INFO: [runtcl-4] Executing : report_bus_skew -warn_on_violation -file route_report_bus_skew_0.rpt -rpx route_report_bus_skew_0.rpx
 INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -2L, Delay Type: min_max, Timing Stage: Requireds.
 INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 2 CPUs
@@ -629,11 +738,11 @@ WARNING: [DRC PDRC-153] Gated clock check: Net MicrorocChain4/ReadOnChipRam/CLK 
 WARNING: [DRC PDRC-153] Gated clock check: Net UsbDataFifo_i_2_n_0 is a gated clock net sourced by a combinational pin UsbDataFifo_i_2/O, cell UsbDataFifo_i_2. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
 WARNING: [DRC PDRC-153] Gated clock check: Net UsbDataFifo_i_3_n_0 is a gated clock net sourced by a combinational pin UsbDataFifo_i_3/O, cell UsbDataFifo_i_3. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
 WARNING: [DRC PLHOLDVIO-2] Non-Optimal connections which could lead to hold violations: A LUT Acquisition/MicrorocChain1DataFIFO_i_1 is driving clock pin of 20 cells. This could lead to large hold time violations. First few involved cells are:
-    Acquisition/AcquisitionDataSwitcher/MicrorocChain1DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_full_i_reg {FDSE}
-    Acquisition/AcquisitionDataSwitcher/MicrorocChain1DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_full_fb_i_reg {FDSE}
-    Acquisition/AcquisitionDataSwitcher/MicrorocChain2DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/grss.rsts/ram_empty_i_reg {FDRE}
-    Acquisition/AcquisitionDataSwitcher/MicrorocChain2DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/grss.rsts/ram_empty_fb_i_reg {FDRE}
     Acquisition/AcquisitionDataSwitcher/MicrorocChain2DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_full_fb_i_reg {FDSE}
+    Acquisition/AcquisitionDataSwitcher/MicrorocChain2DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_full_i_reg {FDSE}
+    Acquisition/AcquisitionDataSwitcher/MicrorocChain3DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/grss.rsts/ram_empty_i_reg {FDRE}
+    Acquisition/AcquisitionDataSwitcher/MicrorocChain3DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/grss.rsts/ram_empty_fb_i_reg {FDRE}
+    Acquisition/AcquisitionDataSwitcher/MicrorocChain4DataFIFO/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_full_fb_i_reg {FDSE}
 WARNING: [DRC PLHOLDVIO-2] Non-Optimal connections which could lead to hold violations: A LUT Command/CommandFifo32Depth_i_1 is driving clock pin of 2 cells. This could lead to large hold time violations. First few involved cells are:
     Command/CommandFifo32Depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwas.wsts/ram_full_fb_i_reg {FDSE}
     Command/CommandFifo32Depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwas.wsts/ram_full_i_reg {FDSE}
@@ -641,10 +750,10 @@ WARNING: [DRC PLHOLDVIO-2] Non-Optimal connections which could lead to hold viol
     Command/CommandFifo32Depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_fb_i_reg {FDSE}
     Command/CommandFifo32Depth/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_i_reg {FDSE}
 WARNING: [DRC PLHOLDVIO-2] Non-Optimal connections which could lead to hold violations: A LUT ConfigParameter_i_2 is driving clock pin of 8 cells. This could lead to large hold time violations. First few involved cells are:
-    MicrorocChain4/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_fb_i_reg {FDSE}
-    MicrorocChain4/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_i_reg {FDSE}
-    MicrorocChain1/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_fb_i_reg {FDSE}
     MicrorocChain1/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_i_reg {FDSE}
+    MicrorocChain1/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_fb_i_reg {FDSE}
+    MicrorocChain4/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_i_reg {FDSE}
+    MicrorocChain4/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_fb_i_reg {FDSE}
     MicrorocChain2/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_fb_i_reg {FDSE}
 WARNING: [DRC PLHOLDVIO-2] Non-Optimal connections which could lead to hold violations: A LUT MicrorocChain1/MicrorocDaq/AutoDaqControl/StartRising_i_1__2 is driving clock pin of 1 cells. This could lead to large hold time violations. First few involved cells are:
     MicrorocChain1/MicrorocDaq/AutoDaqControl/StartRising_reg {FDCE}
@@ -671,14 +780,14 @@ WARNING: [DRC PLHOLDVIO-2] Non-Optimal connections which could lead to hold viol
 WARNING: [DRC PLHOLDVIO-2] Non-Optimal connections which could lead to hold violations: A LUT MicrorocChain4/ReadOnChipRam/MicrorocHit_i_1__0 is driving clock pin of 1 cells. This could lead to large hold time violations. First few involved cells are:
     MicrorocChain4/MicrorocDaq/SlaveDaqControl/MicrorocHit_reg {FDCE}
 WARNING: [DRC PLHOLDVIO-2] Non-Optimal connections which could lead to hold violations: A LUT UsbDataFifo_i_2 is driving clock pin of 2 cells. This could lead to large hold time violations. First few involved cells are:
-    UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwas.wsts/ram_full_i_reg {FDSE}
     UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwas.wsts/ram_full_fb_i_reg {FDSE}
+    UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwas.wsts/ram_full_i_reg {FDSE}
 WARNING: [DRC PLHOLDVIO-2] Non-Optimal connections which could lead to hold violations: A LUT UsbDataFifo_i_3 is driving clock pin of 15 cells. This could lead to large hold time violations. First few involved cells are:
-    UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gcx.clkx/rd_pntr_cdc_inst/src_gray_ff_reg[3] {FDRE}
-    UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gcx.clkx/rd_pntr_cdc_inst/src_gray_ff_reg[1] {FDRE}
-    UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gcx.clkx/rd_pntr_cdc_inst/src_gray_ff_reg[7] {FDRE}
-    UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gcx.clkx/rd_pntr_cdc_inst/src_gray_ff_reg[0] {FDRE}
+    UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gcx.clkx/rd_pntr_cdc_inst/src_gray_ff_reg[2] {FDRE}
     UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gcx.clkx/rd_pntr_cdc_inst/src_gray_ff_reg[11] {FDRE}
+    UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gcx.clkx/rd_pntr_cdc_inst/src_gray_ff_reg[6] {FDRE}
+    UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gcx.clkx/rd_pntr_cdc_inst/src_gray_ff_reg[1] {FDRE}
+    UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gcx.clkx/rd_pntr_cdc_inst/src_gray_ff_reg[9] {FDRE}
 WARNING: [DRC REQP-1839] RAMB36 async control check: The RAMB36E1 UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.mem/gbm.gbmg.gbmga.ngecc.bmg/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/prim_noinit.ram/DEVICE_7SERIES.NO_BMM_INFO.SDP.SIMPLE_PRIM36.ram has an input control pin UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.mem/gbm.gbmg.gbmga.ngecc.bmg/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/prim_noinit.ram/DEVICE_7SERIES.NO_BMM_INFO.SDP.SIMPLE_PRIM36.ram/ENARDEN (net: UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.mem/gbm.gbmg.gbmga.ngecc.bmg/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/prim_noinit.ram/DEVICE_7SERIES.NO_BMM_INFO.SDP.SIMPLE_PRIM36.ram_ENARDEN_cooolgate_en_sig_1) which is driven by a register (Acquisition/AD9220Control/Ad9220Control/data_ready_reg) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 WARNING: [DRC REQP-1839] RAMB36 async control check: The RAMB36E1 UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.mem/gbm.gbmg.gbmga.ngecc.bmg/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/prim_noinit.ram/DEVICE_7SERIES.NO_BMM_INFO.SDP.SIMPLE_PRIM36.ram has an input control pin UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.mem/gbm.gbmg.gbmga.ngecc.bmg/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/prim_noinit.ram/DEVICE_7SERIES.NO_BMM_INFO.SDP.SIMPLE_PRIM36.ram/ENARDEN (net: UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.mem/gbm.gbmg.gbmga.ngecc.bmg/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/prim_noinit.ram/DEVICE_7SERIES.NO_BMM_INFO.SDP.SIMPLE_PRIM36.ram_ENARDEN_cooolgate_en_sig_1) which is driven by a register (Acquisition/AD9220Control/DataOutput_en_reg) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 WARNING: [DRC REQP-1839] RAMB36 async control check: The RAMB36E1 UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.mem/gbm.gbmg.gbmga.ngecc.bmg/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/prim_noinit.ram/DEVICE_7SERIES.NO_BMM_INFO.SDP.SIMPLE_PRIM36.ram has an input control pin UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.mem/gbm.gbmg.gbmga.ngecc.bmg/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/prim_noinit.ram/DEVICE_7SERIES.NO_BMM_INFO.SDP.SIMPLE_PRIM36.ram/ENARDEN (net: UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.mem/gbm.gbmg.gbmga.ngecc.bmg/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/prim_noinit.ram/DEVICE_7SERIES.NO_BMM_INFO.SDP.SIMPLE_PRIM36.ram_ENARDEN_cooolgate_en_sig_1) which is driven by a register (Acquisition/AcquisitionDataSwitcher/MicrorocAcquisitionDataEnable_reg) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
@@ -736,9 +845,8 @@ Creating logic location data...
 Writing logic location file ./FPGA_Top.ll...
 INFO: [Vivado 12-1842] Bitgen Completed Successfully.
 INFO: [Project 1-120] WebTalk data collection is mandatory when using a WebPACK part without a full Vivado license. To see the specific WebTalk data collected for your design, open the usage_statistics_webtalk.html or usage_statistics_webtalk.xml file in the implementation directory.
-INFO: [Common 17-186] 'D:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.runs/impl_1/usage_statistics_webtalk.xml' has been successfully sent to Xilinx on Mon Nov  5 23:11:27 2018. For additional details about this file, please refer to the WebTalk help file at D:/Xilinx/2018.1/Vivado/2018.1/doc/webtalk_introduction.html.
 INFO: [Common 17-83] Releasing license: Implementation
-113 Infos, 141 Warnings, 0 Critical Warnings and 0 Errors encountered.
+106 Infos, 142 Warnings, 0 Critical Warnings and 0 Errors encountered.
 write_bitstream completed successfully
-write_bitstream: Time (s): cpu = 00:00:55 ; elapsed = 00:00:48 . Memory (MB): peak = 2169.598 ; gain = 507.465
-INFO: [Common 17-206] Exiting Vivado at Mon Nov  5 23:11:28 2018...
+write_bitstream: Time (s): cpu = 00:00:48 ; elapsed = 00:00:47 . Memory (MB): peak = 2166.527 ; gain = 492.125
+INFO: [Common 17-206] Exiting Vivado at Wed Nov 21 20:35:42 2018...

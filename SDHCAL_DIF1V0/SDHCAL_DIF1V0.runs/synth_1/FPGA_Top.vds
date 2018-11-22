@@ -2,8 +2,8 @@
 # Vivado v2018.1 (64-bit)
 # SW Build 2188600 on Wed Apr  4 18:40:38 MDT 2018
 # IP Build 2185939 on Wed Apr  4 20:55:05 MDT 2018
-# Start of session at: Mon Nov  5 20:52:21 2018
-# Process ID: 19120
+# Start of session at: Wed Nov 21 20:19:39 2018
+# Process ID: 2944
 # Current directory: D:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.runs/synth_1
 # Command line: vivado.exe -log FPGA_Top.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source FPGA_Top.tcl
 # Log file: D:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.runs/synth_1/FPGA_Top.vds
@@ -15,9 +15,9 @@ Starting synth_design
 Attempting to get a license for feature 'Synthesis' and/or device 'xc7a100t'
 INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a100t'
 INFO: Launching helper process for spawning children vivado processes
-INFO: Helper process launched with PID 20940 
+INFO: Helper process launched with PID 11636 
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:14 ; elapsed = 00:00:18 . Memory (MB): peak = 455.289 ; gain = 106.547
+Starting RTL Elaboration : Time (s): cpu = 00:00:12 ; elapsed = 00:00:14 . Memory (MB): peak = 455.129 ; gain = 107.109
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-6157] synthesizing module 'FPGA_Top' [D:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/src/FPGA_Top.v:37]
 	Parameter ASIC_CHAIN_NUMBER bound to: 4 - type: integer 
@@ -2012,7 +2012,7 @@ WARNING: [Synth 8-3331] design blk_mem_gen_prim_wrapper__parameterized6 has unco
 WARNING: [Synth 8-3331] design blk_mem_gen_prim_wrapper__parameterized6 has unconnected port DINB[19]
 INFO: [Common 17-14] Message 'Synth 8-3331' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:09:00 ; elapsed = 00:09:32 . Memory (MB): peak = 1059.402 ; gain = 710.660
+Finished RTL Elaboration : Time (s): cpu = 00:07:14 ; elapsed = 00:07:19 . Memory (MB): peak = 1053.887 ; gain = 705.867
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -2026,10 +2026,10 @@ WARNING: [Synth 8-3295] tying undriven pin CommonControlSignalGenerator:DataTrig
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:09:01 ; elapsed = 00:09:34 . Memory (MB): peak = 1059.402 ; gain = 710.660
+Finished Handling Custom Attributes : Time (s): cpu = 00:07:15 ; elapsed = 00:07:20 . Memory (MB): peak = 1053.887 ; gain = 705.867
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:09:01 ; elapsed = 00:09:34 . Memory (MB): peak = 1059.402 ; gain = 710.660
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:07:15 ; elapsed = 00:07:20 . Memory (MB): peak = 1053.887 ; gain = 705.867
 ---------------------------------------------------------------------------------
 INFO: [Netlist 29-17] Analyzing 127 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
@@ -2177,16 +2177,16 @@ INFO: [Project 1-111] Unisim Transformation Summary:
   MMCME2_BASE => MMCME2_ADV: 1 instances
   OBUFDS => OBUFDS: 4 instances
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.076 . Memory (MB): peak = 1059.402 ; gain = 0.000
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.057 . Memory (MB): peak = 1053.887 ; gain = 0.000
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:09:36 ; elapsed = 00:10:16 . Memory (MB): peak = 1059.402 ; gain = 710.660
+Finished Constraint Validation : Time (s): cpu = 00:07:44 ; elapsed = 00:07:56 . Memory (MB): peak = 1053.887 ; gain = 705.867
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7a100tfgg484-2L
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:09:36 ; elapsed = 00:10:16 . Memory (MB): peak = 1059.402 ; gain = 710.660
+Finished Loading Part and Timing Information : Time (s): cpu = 00:07:44 ; elapsed = 00:07:56 . Memory (MB): peak = 1053.887 ; gain = 705.867
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
@@ -2255,7 +2255,7 @@ Applied set_property DONT_TOUCH = true for MicrorocChain2/SlowControlAndReadScop
 Applied set_property DONT_TOUCH = true for MicrorocChain3/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/\gconvfifo.rf /\grf.rf /rstblk/\ngwrdrst.grst.g7serrst.gsckt_wrst.xpm_cdc_sync_rst_inst_wrst . (constraint file  auto generated constraint, line ).
 Applied set_property DONT_TOUCH = true for MicrorocChain4/SlowControlAndReadScope/ConfigParameter/U0/inst_fifo_gen/\gconvfifo.rf /\grf.rf /rstblk/\ngwrdrst.grst.g7serrst.gsckt_wrst.xpm_cdc_sync_rst_inst_wrst . (constraint file  auto generated constraint, line ).
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:09:37 ; elapsed = 00:10:17 . Memory (MB): peak = 1059.402 ; gain = 710.660
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:07:45 ; elapsed = 00:07:57 . Memory (MB): peak = 1053.887 ; gain = 705.867
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-802] inferred FSM for state register 'State_reg' in module 'usb_synchronous_slavefifo'
 INFO: [Synth 8-5544] ROM "nSLOE" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
@@ -2582,14 +2582,14 @@ INFO: [Synth 8-3354] encoded FSM with state register 'State_reg' using encoding 
 ---------------------------------------------------------------------------------------------------
 INFO: [Synth 8-3354] encoded FSM with state register 'State_reg' using encoding 'sequential' in module 'SlaveDaq'
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:09:51 ; elapsed = 00:10:33 . Memory (MB): peak = 1059.402 ; gain = 710.660
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:07:57 ; elapsed = 00:08:11 . Memory (MB): peak = 1053.887 ; gain = 705.867
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
 +------+---------------------------+------------+----------+
 |      |RTL Partition              |Replication |Instances |
 +------+---------------------------+------------+----------+
-|1     |MicrorocCommonControl__GC0 |           1|      1305|
+|1     |MicrorocCommonControl__GC0 |           1|      1312|
 |2     |FPGA_Top__GCB0             |           1|     33343|
 |3     |FPGA_Top__GCB1             |           1|     12014|
 |4     |FPGA_Top__GCB2             |           1|     13631|
@@ -2637,7 +2637,7 @@ Detailed RTL Component Info :
 	                6 Bit    Registers := 59    
 	                5 Bit    Registers := 72    
 	                4 Bit    Registers := 203   
-	                3 Bit    Registers := 19    
+	                3 Bit    Registers := 20    
 	                2 Bit    Registers := 31    
 	                1 Bit    Registers := 530   
 +---Muxes : 
@@ -2734,6 +2734,7 @@ Detailed RTL Component Info :
 +---Registers : 
 	              256 Bit    Registers := 1     
 	               16 Bit    Registers := 1     
+	                3 Bit    Registers := 1     
 	                1 Bit    Registers := 2     
 +---Muxes : 
 	   2 Input     16 Bit        Muxes := 2     
@@ -5043,14 +5044,14 @@ INFO: [Synth 8-3886] merging instance 'i_3/Acquisition/MicrorocSCurveTest/SC_tes
 INFO: [Common 17-14] Message 'Synth 8-3886' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
 INFO: [Synth 8-3333] propagating constant 0 across sequential element (CommonControlSignalGeneratori_4/\TimeStampSyncAndTrigger/TriggerExt_reg )
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:11:34 ; elapsed = 00:12:23 . Memory (MB): peak = 1059.402 ; gain = 710.660
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:09:23 ; elapsed = 00:09:40 . Memory (MB): peak = 1053.887 ; gain = 705.867
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
 +------+---------------------------+------------+----------+
 |      |RTL Partition              |Replication |Instances |
 +------+---------------------------+------------+----------+
-|1     |MicrorocCommonControl__GC0 |           1|       895|
+|1     |MicrorocCommonControl__GC0 |           1|       899|
 |2     |FPGA_Top__GCB0             |           1|      6469|
 |3     |FPGA_Top__GCB1             |           1|      7581|
 |4     |FPGA_Top__GCB2             |           1|      8735|
@@ -5060,20 +5061,20 @@ Report RTL Partitions:
 Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:11:50 ; elapsed = 00:12:43 . Memory (MB): peak = 1059.402 ; gain = 710.660
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:09:37 ; elapsed = 00:09:54 . Memory (MB): peak = 1053.887 ; gain = 705.867
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:12:19 ; elapsed = 00:13:29 . Memory (MB): peak = 1074.840 ; gain = 726.098
+Finished Timing Optimization : Time (s): cpu = 00:09:58 ; elapsed = 00:10:16 . Memory (MB): peak = 1078.020 ; gain = 730.000
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
 +------+---------------------------+------------+----------+
 |      |RTL Partition              |Replication |Instances |
 +------+---------------------------+------------+----------+
-|1     |MicrorocCommonControl__GC0 |           1|       895|
+|1     |MicrorocCommonControl__GC0 |           1|       899|
 |2     |FPGA_Top__GCB0             |           1|      6469|
 |3     |FPGA_Top_GT0               |           1|     29394|
 +------+---------------------------+------------+----------+
@@ -5081,7 +5082,7 @@ Report RTL Partitions:
 Start Technology Mapping
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:12:33 ; elapsed = 00:13:44 . Memory (MB): peak = 1115.664 ; gain = 766.922
+Finished Technology Mapping : Time (s): cpu = 00:10:10 ; elapsed = 00:10:28 . Memory (MB): peak = 1121.422 ; gain = 773.402
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -5110,7 +5111,7 @@ INFO: [Synth 8-5365] Flop MicrorocChain1/MicrorocDaq/SlaveDaq_ResetUsbStart_n_re
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:12:36 ; elapsed = 00:13:47 . Memory (MB): peak = 1115.664 ; gain = 766.922
+Finished IO Insertion : Time (s): cpu = 00:10:12 ; elapsed = 00:10:31 . Memory (MB): peak = 1121.422 ; gain = 773.402
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -5123,7 +5124,7 @@ Report Check Netlist:
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:12:36 ; elapsed = 00:13:47 . Memory (MB): peak = 1115.664 ; gain = 766.922
+Finished Renaming Generated Instances : Time (s): cpu = 00:10:13 ; elapsed = 00:10:31 . Memory (MB): peak = 1121.422 ; gain = 773.402
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -5135,25 +5136,25 @@ Report RTL Partitions:
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:12:39 ; elapsed = 00:13:50 . Memory (MB): peak = 1115.664 ; gain = 766.922
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:10:15 ; elapsed = 00:10:33 . Memory (MB): peak = 1121.422 ; gain = 773.402
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:12:39 ; elapsed = 00:13:50 . Memory (MB): peak = 1115.664 ; gain = 766.922
+Finished Renaming Generated Ports : Time (s): cpu = 00:10:15 ; elapsed = 00:10:33 . Memory (MB): peak = 1121.422 ; gain = 773.402
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:12:42 ; elapsed = 00:13:53 . Memory (MB): peak = 1115.664 ; gain = 766.922
+Finished Handling Custom Attributes : Time (s): cpu = 00:10:18 ; elapsed = 00:10:36 . Memory (MB): peak = 1121.422 ; gain = 773.402
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:12:42 ; elapsed = 00:13:54 . Memory (MB): peak = 1115.664 ; gain = 766.922
+Finished Renaming Generated Nets : Time (s): cpu = 00:10:18 ; elapsed = 00:10:36 . Memory (MB): peak = 1121.422 ; gain = 773.402
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP and Shift Register Reporting
@@ -5187,11 +5188,11 @@ Report Cell Usage:
 |1     |BUFG        |    12|
 |2     |CARRY4      |   199|
 |3     |LUT1        |   141|
-|4     |LUT2        |  1328|
-|5     |LUT3        |  4138|
+|4     |LUT2        |  1330|
+|5     |LUT3        |  4142|
 |6     |LUT4        |  1190|
-|7     |LUT5        |  1296|
-|8     |LUT6        |  2577|
+|7     |LUT5        |  1297|
+|8     |LUT6        |  2576|
 |9     |MMCME2_BASE |     1|
 |10    |MUXCY       |   108|
 |11    |MUXF7       |    41|
@@ -5201,7 +5202,7 @@ Report Cell Usage:
 |15    |RAMB18E1_2  |     1|
 |16    |RAMB36E1    |     4|
 |17    |SRL16E      |    22|
-|18    |FDCE        |  7994|
+|18    |FDCE        |  7997|
 |19    |FDPE        |   817|
 |20    |FDRE        |  1082|
 |21    |FDSE        |    74|
@@ -5216,7 +5217,7 @@ Report Instance Areas:
 +------+------------------------------------------------------------------------------------------+--------------------------------------------------------+------+
 |      |Instance                                                                                  |Module                                                  |Cells |
 +------+------------------------------------------------------------------------------------------+--------------------------------------------------------+------+
-|1     |top                                                                                       |                                                        | 21192|
+|1     |top                                                                                       |                                                        | 21201|
 |2     |  ConfigurationSelect                                                                     |ConfigurationParameterDistribution                      |  4360|
 |3     |  UsbDataFifo                                                                             |ExternalDataFifo                                        |   368|
 |4     |    U0                                                                                    |fifo_generator_v13_2_2                                  |   368|
@@ -5560,10 +5561,10 @@ Report Instance Areas:
 |342   |    UnmaskAllChannelSet                                                                   |CommandDecoder__parameterized74                         |     2|
 |343   |    WidlarPPEnable                                                                        |CommandDecoder__parameterized45                         |     2|
 |344   |  usb_cy7c68013A                                                                          |usb_synchronous_slavefifo                               |    66|
-|345   |  ClockGenerator                                                                          |ClockManagement                                         |    19|
-|346   |  CommonControlSignalGenerator                                                            |MicrorocCommonControl                                   |   525|
+|345   |  ClockGenerator                                                                          |ClockManagement                                         |    21|
+|346   |  CommonControlSignalGenerator                                                            |MicrorocCommonControl                                   |   528|
 |347   |    ExternalRazGen                                                                        |ExternalRazGenerate                                     |    43|
-|348   |    HoldGen                                                                               |HoldGenerate                                            |   444|
+|348   |    HoldGen                                                                               |HoldGenerate                                            |   447|
 |349   |    RamReadDoneDetect                                                                     |RamReadDoneSync4Chain                                   |    19|
 |350   |    TimeStampSyncAndTrigger                                                               |TimeStampSyncAndDataTrigger                             |    15|
 |351   |  MicrorocAutoCaliSignalGen                                                               |AutoCalibrationSignalGen                                |   294|
@@ -5606,10 +5607,10 @@ Report Instance Areas:
 |388   |      ParameterGen                                                                        |ParameterGenerator_42                                   |  1375|
 |389   |      ParameterShiftOut                                                                   |BitShiftOut_43                                          |    73|
 |390   |      PulseSync                                                                           |PulseSynchronous_44                                     |     5|
-|391   |  MicrorocChain2                                                                          |MicrorocControl__xdcDup__2                              |  2223|
-|392   |    MicrorocDaq                                                                           |DaqControl_20                                           |   514|
+|391   |  MicrorocChain2                                                                          |MicrorocControl__xdcDup__2                              |  2224|
+|392   |    MicrorocDaq                                                                           |DaqControl_20                                           |   515|
 |393   |      AutoDaqControl                                                                      |AutoDaq_38                                              |   186|
-|394   |      SlaveDaqControl                                                                     |SlaveDaq_39                                             |   325|
+|394   |      SlaveDaqControl                                                                     |SlaveDaq_39                                             |   326|
 |395   |    ReadOnChipRam                                                                         |AsicRamReadout_21                                       |    71|
 |396   |    SlowControlAndReadScope                                                               |SlowControlAndReadScopeSet__xdcDup__2                   |  1636|
 |397   |      ConfigParameter                                                                     |ConfigParameterFIFO__xdcDup__2                          |   183|
@@ -5641,10 +5642,10 @@ Report Instance Areas:
 |423   |      ParameterGen                                                                        |ParameterGenerator_22                                   |  1375|
 |424   |      ParameterShiftOut                                                                   |BitShiftOut_23                                          |    73|
 |425   |      PulseSync                                                                           |PulseSynchronous_24                                     |     5|
-|426   |  MicrorocChain3                                                                          |MicrorocControl__xdcDup__3                              |  2223|
-|427   |    MicrorocDaq                                                                           |DaqControl_0                                            |   514|
+|426   |  MicrorocChain3                                                                          |MicrorocControl__xdcDup__3                              |  2225|
+|427   |    MicrorocDaq                                                                           |DaqControl_0                                            |   516|
 |428   |      AutoDaqControl                                                                      |AutoDaq_18                                              |   186|
-|429   |      SlaveDaqControl                                                                     |SlaveDaq_19                                             |   325|
+|429   |      SlaveDaqControl                                                                     |SlaveDaq_19                                             |   327|
 |430   |    ReadOnChipRam                                                                         |AsicRamReadout_1                                        |    71|
 |431   |    SlowControlAndReadScope                                                               |SlowControlAndReadScopeSet__xdcDup__3                   |  1636|
 |432   |      ConfigParameter                                                                     |ConfigParameterFIFO__xdcDup__3                          |   183|
@@ -5676,10 +5677,10 @@ Report Instance Areas:
 |458   |      ParameterGen                                                                        |ParameterGenerator_2                                    |  1375|
 |459   |      ParameterShiftOut                                                                   |BitShiftOut_3                                           |    73|
 |460   |      PulseSync                                                                           |PulseSynchronous_4                                      |     5|
-|461   |  MicrorocChain4                                                                          |MicrorocControl                                         |  2225|
-|462   |    MicrorocDaq                                                                           |DaqControl                                              |   517|
+|461   |  MicrorocChain4                                                                          |MicrorocControl                                         |  2226|
+|462   |    MicrorocDaq                                                                           |DaqControl                                              |   518|
 |463   |      AutoDaqControl                                                                      |AutoDaq                                                 |   186|
-|464   |      SlaveDaqControl                                                                     |SlaveDaq                                                |   329|
+|464   |      SlaveDaqControl                                                                     |SlaveDaq                                                |   330|
 |465   |    ReadOnChipRam                                                                         |AsicRamReadout                                          |    70|
 |466   |    SlowControlAndReadScope                                                               |SlowControlAndReadScopeSet                              |  1636|
 |467   |      ConfigParameter                                                                     |ConfigParameterFIFO                                     |   183|
@@ -5714,11 +5715,11 @@ Report Instance Areas:
 |496   |  TriggerSwitcher                                                                         |TriggerSwitcher                                         |    19|
 +------+------------------------------------------------------------------------------------------+--------------------------------------------------------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:12:42 ; elapsed = 00:13:54 . Memory (MB): peak = 1115.664 ; gain = 766.922
+Finished Writing Synthesis Report : Time (s): cpu = 00:10:18 ; elapsed = 00:10:36 . Memory (MB): peak = 1121.422 ; gain = 773.402
 ---------------------------------------------------------------------------------
 Synthesis finished with 0 errors, 0 critical warnings and 13 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:03:16 ; elapsed = 00:13:22 . Memory (MB): peak = 1115.664 ; gain = 766.922
-Synthesis Optimization Complete : Time (s): cpu = 00:12:43 ; elapsed = 00:13:54 . Memory (MB): peak = 1115.664 ; gain = 766.922
+Synthesis Optimization Runtime : Time (s): cpu = 00:02:41 ; elapsed = 00:10:09 . Memory (MB): peak = 1121.422 ; gain = 773.402
+Synthesis Optimization Complete : Time (s): cpu = 00:10:18 ; elapsed = 00:10:36 . Memory (MB): peak = 1121.422 ; gain = 773.402
 INFO: [Project 1-571] Translating synthesized netlist
 INFO: [Netlist 29-17] Analyzing 452 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
@@ -5734,9 +5735,8 @@ INFO: [Project 1-111] Unisim Transformation Summary:
 INFO: [Common 17-83] Releasing license: Synthesis
 592 Infos, 109 Warnings, 1 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:12:55 ; elapsed = 00:14:10 . Memory (MB): peak = 1115.664 ; gain = 778.395
+synth_design: Time (s): cpu = 00:10:29 ; elapsed = 00:10:50 . Memory (MB): peak = 1121.422 ; gain = 784.871
 INFO: [Common 17-1381] The checkpoint 'D:/MyProject/SDHCAL_DAQ/SDHCAL_DIF1V0/SDHCAL_DIF1V0.runs/synth_1/FPGA_Top.dcp' has been generated.
-write_checkpoint: Time (s): cpu = 00:00:07 ; elapsed = 00:00:05 . Memory (MB): peak = 1115.664 ; gain = 0.000
 INFO: [runtcl-4] Executing : report_utilization -file FPGA_Top_utilization_synth.rpt -pb FPGA_Top_utilization_synth.pb
-report_utilization: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.344 . Memory (MB): peak = 1115.664 ; gain = 0.000
-INFO: [Common 17-206] Exiting Vivado at Mon Nov  5 21:06:56 2018...
+report_utilization: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.370 . Memory (MB): peak = 1121.422 ; gain = 0.000
+INFO: [Common 17-206] Exiting Vivado at Wed Nov 21 20:30:52 2018...

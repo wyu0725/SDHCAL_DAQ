@@ -746,9 +746,12 @@ ForceExternalRaz	AcquisitionControl.v	/^  output ForceExternalRaz,$/;"	p	languag
 ForceExternalRaz	DaqControl.v	/^  output ForceExternalRaz,$/;"	p	language:Verilog	module:DaqControl
 ForceExternalRaz	DaqSwitcher.v	/^  output ForceExternalRaz,$/;"	p	language:Verilog	module:DaqSwitcher
 ForceExternalRaz	FPGA_Top.v	/^  wire [3:0] ForceExternalRaz;$/;"	n	language:Verilog	module:FPGA_Top
+ForceExternalRaz	HoldGenerate.v	/^  output ForceExternalRaz$/;"	p	language:Verilog	module:HoldGenerate
 ForceExternalRaz	MicrorocCommonControl.v	/^  input [ASIC_CHAIN_NUMBER - 1:0] ForceExternalRaz,$/;"	p	language:Verilog	module:MicrorocCommonControl
 ForceExternalRaz	MicrorocControl.v	/^  output ForceExternalRaz,$/;"	p	language:Verilog	module:MicrorocControl
 ForceExternalRaz	SlaveDaq.v	/^	output reg ForceExternalRaz,    \/\/Active H, When the start does not come, force externalRaz$/;"	p	language:Verilog	module:SlaveDaq
+ForceExternalRazDelay	HoldGenerate.v	/^  reg [2:0] ForceExternalRazDelay;$/;"	r	language:Verilog	module:HoldGenerate
+ForceExternalRazFromHold	MicrorocCommonControl.v	/^  wire ForceExternalRazFromHold;$/;"	n	language:Verilog	module:MicrorocCommonControl
 ForceMicrorocAcqReset	CommandInterpreter.v	/^  output ForceMicrorocAcqReset,$/;"	p	language:Verilog	module:CommandInterpreter
 ForceMicrorocAcqReset	FPGA_Top.v	/^  wire ForceMicrorocAcqReset;$/;"	n	language:Verilog	module:FPGA_Top
 ForceMicrorocAcqReset_n	AcquisitionControl.v	/^  input ForceMicrorocAcqReset_n,$/;"	p	language:Verilog	module:AcquisitionControl
@@ -786,7 +789,7 @@ HoldEnable	MicrorocCommonControl.v	/^  input HoldEnable,$/;"	p	language:Verilog	
 HoldEnableSet_CAND	CommandParameter.v	/^`define HoldEnableSet_CAND                         16'hE240$/;"	c	language:Verilog
 HoldFalling	AdcControl.v	/^    wire HoldFalling;$/;"	n	language:Verilog	module:AdcControl
 HoldGenerate	HoldGenerate.v	/^module HoldGenerate($/;"	m	language:Verilog
-HoldOut	HoldGenerate.v	/^	output reg HoldOut$/;"	p	language:Verilog	module:HoldGenerate
+HoldOut	HoldGenerate.v	/^	output reg HoldOut,$/;"	p	language:Verilog	module:HoldGenerate
 HoldRising	AdcControl.v	/^    wire HoldRising;$/;"	n	language:Verilog	module:AdcControl
 HoldSignal	AcquisitionControl.v	/^  input HoldSignal,$/;"	p	language:Verilog	module:AcquisitionControl
 HoldSignal	FPGA_Top.v	/^  wire HoldSignal;$/;"	n	language:Verilog	module:FPGA_Top
