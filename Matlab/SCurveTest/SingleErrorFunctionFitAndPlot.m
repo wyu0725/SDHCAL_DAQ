@@ -59,7 +59,7 @@ function [] = SingleErrorFunctionFitAndPlot()
         ylabel('\bf Distribution');
         xlabel('\bf DAC Code');
         legend('Measure Data','Fit','Distribution')
-        titleString = sprintf('\\bf Channel%d Shaper 1, R = %5f', Channel, DacFitR);
+        titleString = sprintf('\\bf Channel%d Shaper 1,\\mu = %f,\\sigma = %f, R = %5f', Channel, mu, sigma, DacFitR);
         title(titleString);        
     end
     
@@ -85,7 +85,7 @@ function [] = SingleErrorFunctionFitAndPlot()
         ylabel('\bf Distribution');
         xlabel('\bf DAC Code');
         legend('Measure Data','Fit','Distribution')
-        titleString = sprintf('\\bf Channel%d Shaper 2, R = %5f', Channel, DacFitR);
+        titleString = sprintf('\\bf Channel%d Shaper 2,\\mu = %f,\\sigma = %f, R = %5f', Channel, mu, sigma, DacFitR);
         title(titleString);        
     end
 end

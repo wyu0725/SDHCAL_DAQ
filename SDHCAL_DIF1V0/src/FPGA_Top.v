@@ -1335,7 +1335,7 @@ module FPGA_Top(
   assign TP[0] = InternalSynchronousSignalIn;
   assign TP[1] = StartReadout1_A;
   assign TP[2] = EndReadout1_A;
-  assign TP[3] = MicrorocConfigurationParameterLoadStart;
+  assign TP[3] = ~InternalSynchronousSignalIn;
 
 
   (* MARK_DEBUG="true" *)wire [15:0] UsbData_debug;

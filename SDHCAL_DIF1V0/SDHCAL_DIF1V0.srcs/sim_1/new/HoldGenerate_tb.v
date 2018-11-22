@@ -29,16 +29,18 @@ module HoldGenerate_tb();
 	reg [7:0] HoldDelay;
 	reg [15:0] HoldTime;
 	wire HoldOut;
+  wire ForceExternalRaz;
 
 	HoldGenerate uut(
 		.Clk      (Clk),
 		.SyncClk  (SyncClk),
 		.reset_n  (reset_n),
 		.TriggerIn(TriggerIn),
-		.Hold_en  (Hold_en),
+		.HoldEnable  (Hold_en),
 		.HoldDelay(HoldDelay),
 		.HoldTime (HoldTime),
-		.HoldOut  (HoldOut)
+		.HoldOut  (HoldOut),
+    .ForceExternalRaz(ForceExternalRaz)
 		);
 	initial begin
 		Clk = 1'b0;

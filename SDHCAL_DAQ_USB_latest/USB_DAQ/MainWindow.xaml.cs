@@ -6288,26 +6288,18 @@ namespace USB_DAQ
             int Row, Column;
             Row = AsicIndex / 4;
             Column = AsicIndex % 4;
-            bool bResult = MicrorocAsic.TestSignalRowSelect(Row, MyUsbDevice1);
-            if (!bResult)
+            if (!RowAndColumnSelect(Row, Column, MyUsbDevice1))
             {
-                ShowUsbError("Set Row");
+                ShowUsbError("Select ASIC");
                 return false;
             }
-            bResult = MicrorocAsic.TestSignalColumnSelect(Column, MyUsbDevice1);
-            if (bResult)
+            if (!AsicSelectMask(Row, Column, MyUsbDevice1))
             {
-                string report = string.Format("Select ASIC{0}{1}\n", Row + 1, Column + 1);
-                txtReport.AppendText(report);
-                return true;
-            }
-            else
-            {
-                ShowUsbError("Set Column");
+                ShowUsbError("Select ASIC");
                 return false;
             }
+            return true;
         }
-
 
         private bool SetSCurveTestCommomParameter()
         {
@@ -6770,42 +6762,86 @@ namespace USB_DAQ
                 return false;
             }
         }
-        private bool SetSCurveTestAsic(int AsicIndex)
+
+        private bool RowAndColumnSelect(int Row, int Column, MyCyUsb usbInterface)
         {
-            int TestAsic = AsicIndex % 4;
-            int TestRow = AsicIndex / 4;
-            #region Select Row
-            // There is an error in the PCB design that the row and column is swithced. The column does not connect as 1, 2, 3
-            int ColumnSetValue;
-            switch (TestRow)
+            if(!MicrorocAsic.TestSignalColumnSelect(Column, usbInterface))
             {
-                case 0: ColumnSetValue = 0; break;
-                case 1: ColumnSetValue = 4; break;
-                case 2: ColumnSetValue = 2; break;
-                case 3: ColumnSetValue = 6; break;
-                default: ColumnSetValue = 0; break;
-            }
-            bool bResult = MicrorocAsic.TestSignalColumnSelect(ColumnSetValue, MyUsbDevice1);
-            if (bResult)
-            {
-                string report = string.Format("Set Test ASIC chain{0}\n", TestRow + 1);
-                txtReport.AppendText(report);
-            }
-            else
-            {
-                ShowUsbError("Set Test Column");
                 return false;
             }
-            #endregion
-            bResult = SetTotalAsicNumber(4, MicrorocAsicChain[TestRow]);
+            if(!MicrorocAsic.TestSignalRowSelect(Row, usbInterface))
+            {
+                return false;
+            }
+            return true;
+        }
+
+        private bool AsicSelectMask(int Row, int Column, MyCyUsb usbInterface)
+        {
+            for(int i = 0; i < 4; i++)
+            {
+                if (!MicrorocAsicChain[i].SelectAsicChain(usbInterface))
+                {
+                    return false;
+                }
+                for(int j = 0; j < 4; j++)
+                {
+                    if(i == Row && j == Column)
+                    {
+                        if(!MicrorocAsicChain[i].MaskModeSet(3, usbInterface))
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        if(!MicrorocAsicChain[i].MaskModeSet(4, usbInterface))
+                        {
+                            return false;
+                        }
+                    }
+                }
+                if (!MicrorocAsicChain[i].ParameterLoadStart(usbInterface))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        private bool SetSCurveTestAsic(int AsicIndex)
+        {
+            int TestColumn = AsicIndex % 4;
+            int TestRow = AsicIndex / 4;
+            if (!RowAndColumnSelect(TestRow, TestColumn, MyUsbDevice1))
+            {
+                ShowUsbError("Set row and column");
+                return false;
+            }
+            if (!MicrorocAsic.RunningModeSelect(0, MyUsbDevice1))
+            {
+                ShowUsbError("Select acquisition mode");
+                return false;
+            }
+            if (!AsicSelectMask(TestRow, TestColumn, MyUsbDevice1))
+            {
+                ShowUsbError("Set ASIC mask");
+                return false;
+            }
+            if (!MicrorocAsic.RunningModeSelect(1, MyUsbDevice1))
+            {
+                ShowUsbError("Select SCurve mode");
+                return false;
+            }
+            bool bResult = SetTotalAsicNumber(4, MicrorocAsicChain[TestRow]);
             if (!bResult)
             {
                 return false;
             }
-            bResult = MicrorocAsic.SCurveTestAsicSelect(TestAsic, MyUsbDevice1);
+            bResult = MicrorocAsic.SCurveTestAsicSelect(TestColumn, MyUsbDevice1);
             if (bResult)
             {
-                string report = string.Format("Select ASIC{0}{1}\n", TestRow + 1, TestAsic + 1);
+                string report = string.Format("Select ASIC{0}{1}\n", TestRow + 1, TestColumn + 1);
                 txtReport.AppendText(report);
                 return MicrorocAsicChain[TestRow].SelectAsicChain(MyUsbDevice1);
             }
@@ -6815,6 +6851,7 @@ namespace USB_DAQ
                 return false;
             }
         }
+
         private bool SCurveTestStart()
         {
             bool bResult = MicrorocAsic.SweepTestStart(MyUsbDevice1);

@@ -3,89 +3,69 @@
    <wave_state>
    </wave_state>
    <db_ref_list>
-      <db_ref path="AutoCalibrationSignalGen_tb_behav.wdb" id="1">
+      <db_ref path="HoldGenerate_tb_behav.wdb" id="1">
          <top_modules>
-            <top_module name="AutoCalibrationSignalGen_tb" />
+            <top_module name="HoldGenerate_tb" />
             <top_module name="glbl" />
          </top_modules>
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="50000000fs"></ZoomStartTime>
-      <ZoomEndTime time="76250000001fs"></ZoomEndTime>
-      <Cursor1Time time="1238000000fs"></Cursor1Time>
+      <ZoomStartTime time="17172000000fs"></ZoomStartTime>
+      <ZoomEndTime time="32652000001fs"></ZoomEndTime>
+      <Cursor1Time time="28612000000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="155"></NameColumnWidth>
+      <NameColumnWidth column_width="143"></NameColumnWidth>
       <ValueColumnWidth column_width="58"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="17" />
-   <wvobject fp_name="/AutoCalibrationSignalGen_tb/Clk" type="logic">
+   <WVObjectSize size="12" />
+   <wvobject fp_name="/HoldGenerate_tb/uut/Clk" type="logic">
       <obj_property name="ElementShortName">Clk</obj_property>
       <obj_property name="ObjectShortName">Clk</obj_property>
    </wvobject>
-   <wvobject fp_name="/AutoCalibrationSignalGen_tb/reset_n" type="logic">
+   <wvobject fp_name="/HoldGenerate_tb/uut/SyncClk" type="logic">
+      <obj_property name="ElementShortName">SyncClk</obj_property>
+      <obj_property name="ObjectShortName">SyncClk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/HoldGenerate_tb/uut/reset_n" type="logic">
       <obj_property name="ElementShortName">reset_n</obj_property>
       <obj_property name="ObjectShortName">reset_n</obj_property>
    </wvobject>
-   <wvobject fp_name="/AutoCalibrationSignalGen_tb/SynchronousClockPeroid" type="array">
-      <obj_property name="ElementShortName">SynchronousClockPeroid[15:0]</obj_property>
-      <obj_property name="ObjectShortName">SynchronousClockPeroid[15:0]</obj_property>
+   <wvobject fp_name="/HoldGenerate_tb/uut/TriggerIn" type="logic">
+      <obj_property name="ElementShortName">TriggerIn</obj_property>
+      <obj_property name="ObjectShortName">TriggerIn</obj_property>
    </wvobject>
-   <wvobject fp_name="/AutoCalibrationSignalGen_tb/PowerDown" type="logic">
-      <obj_property name="ElementShortName">PowerDown</obj_property>
-      <obj_property name="ObjectShortName">PowerDown</obj_property>
+   <wvobject fp_name="/HoldGenerate_tb/uut/HoldEnable" type="logic">
+      <obj_property name="ElementShortName">HoldEnable</obj_property>
+      <obj_property name="ObjectShortName">HoldEnable</obj_property>
    </wvobject>
-   <wvobject fp_name="/AutoCalibrationSignalGen_tb/Speed" type="logic">
-      <obj_property name="ElementShortName">Speed</obj_property>
-      <obj_property name="ObjectShortName">Speed</obj_property>
+   <wvobject fp_name="/HoldGenerate_tb/uut/HoldDelay" type="array">
+      <obj_property name="ElementShortName">HoldDelay[7:0]</obj_property>
+      <obj_property name="ObjectShortName">HoldDelay[7:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/AutoCalibrationSignalGen_tb/Dac1Data" type="array">
-      <obj_property name="ElementShortName">Dac1Data[11:0]</obj_property>
-      <obj_property name="ObjectShortName">Dac1Data[11:0]</obj_property>
+   <wvobject fp_name="/HoldGenerate_tb/uut/HoldTime" type="array">
+      <obj_property name="ElementShortName">HoldTime[15:0]</obj_property>
+      <obj_property name="ObjectShortName">HoldTime[15:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/AutoCalibrationSignalGen_tb/Dac2Data" type="array">
-      <obj_property name="ElementShortName">Dac2Data[11:0]</obj_property>
-      <obj_property name="ObjectShortName">Dac2Data[11:0]</obj_property>
+   <wvobject fp_name="/HoldGenerate_tb/uut/HoldOut" type="logic">
+      <obj_property name="ElementShortName">HoldOut</obj_property>
+      <obj_property name="ObjectShortName">HoldOut</obj_property>
    </wvobject>
-   <wvobject fp_name="/AutoCalibrationSignalGen_tb/LoadDacSelect" type="array">
-      <obj_property name="ElementShortName">LoadDacSelect[1:0]</obj_property>
-      <obj_property name="ObjectShortName">LoadDacSelect[1:0]</obj_property>
+   <wvobject fp_name="/HoldGenerate_tb/uut/ForceExternalRaz" type="logic">
+      <obj_property name="ElementShortName">ForceExternalRaz</obj_property>
+      <obj_property name="ObjectShortName">ForceExternalRaz</obj_property>
    </wvobject>
-   <wvobject fp_name="/AutoCalibrationSignalGen_tb/DacLoad" type="logic">
-      <obj_property name="ElementShortName">DacLoad</obj_property>
-      <obj_property name="ObjectShortName">DacLoad</obj_property>
+   <wvobject fp_name="/HoldGenerate_tb/uut/TriggerShift" type="array">
+      <obj_property name="ElementShortName">TriggerShift[255:0]</obj_property>
+      <obj_property name="ObjectShortName">TriggerShift[255:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/AutoCalibrationSignalGen_tb/SwitcherOnTime" type="array">
-      <obj_property name="ElementShortName">SwitcherOnTime[7:0]</obj_property>
-      <obj_property name="ObjectShortName">SwitcherOnTime[7:0]</obj_property>
+   <wvobject fp_name="/HoldGenerate_tb/uut/TriggerDelayed" type="logic">
+      <obj_property name="ElementShortName">TriggerDelayed</obj_property>
+      <obj_property name="ObjectShortName">TriggerDelayed</obj_property>
    </wvobject>
-   <wvobject fp_name="/AutoCalibrationSignalGen_tb/SwitcherEnable" type="logic">
-      <obj_property name="ElementShortName">SwitcherEnable</obj_property>
-      <obj_property name="ObjectShortName">SwitcherEnable</obj_property>
-   </wvobject>
-   <wvobject fp_name="/AutoCalibrationSignalGen_tb/SynchronousClock" type="logic">
-      <obj_property name="ElementShortName">SynchronousClock</obj_property>
-      <obj_property name="ObjectShortName">SynchronousClock</obj_property>
-   </wvobject>
-   <wvobject fp_name="/AutoCalibrationSignalGen_tb/nCS" type="logic">
-      <obj_property name="ElementShortName">nCS</obj_property>
-      <obj_property name="ObjectShortName">nCS</obj_property>
-   </wvobject>
-   <wvobject fp_name="/AutoCalibrationSignalGen_tb/SCLK" type="logic">
-      <obj_property name="ElementShortName">SCLK</obj_property>
-      <obj_property name="ObjectShortName">SCLK</obj_property>
-   </wvobject>
-   <wvobject fp_name="/AutoCalibrationSignalGen_tb/DIN" type="logic">
-      <obj_property name="ElementShortName">DIN</obj_property>
-      <obj_property name="ObjectShortName">DIN</obj_property>
-   </wvobject>
-   <wvobject fp_name="/AutoCalibrationSignalGen_tb/SwitcherIn" type="logic">
-      <obj_property name="ElementShortName">SwitcherIn</obj_property>
-      <obj_property name="ObjectShortName">SwitcherIn</obj_property>
-   </wvobject>
-   <wvobject fp_name="/AutoCalibrationSignalGen_tb/SwitcerIn" type="logic">
-      <obj_property name="ElementShortName">SwitcerIn</obj_property>
-      <obj_property name="ObjectShortName">SwitcerIn</obj_property>
+   <wvobject fp_name="/HoldGenerate_tb/uut/ResetHold_n" type="logic">
+      <obj_property name="ElementShortName">ResetHold_n</obj_property>
+      <obj_property name="ObjectShortName">ResetHold_n</obj_property>
    </wvobject>
 </wave_config>

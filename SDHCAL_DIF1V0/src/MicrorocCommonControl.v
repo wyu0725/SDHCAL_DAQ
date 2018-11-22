@@ -74,6 +74,7 @@ module MicrorocCommonControl
   );
 
   wire RAZ_CHN;
+  wire ForceExternalRazFromHold;
   ExternalRazGenerate ExternalRazGen(
     .Clk                 (Clk),
     .reset_n             (reset_n),
@@ -81,7 +82,7 @@ module MicrorocCommonControl
     .ExternalRaz_en      (ExternalRazSignalEnable),
     .ExternalRazDelayTime(ExternalRazDelayTime),
     .RazMode             (RazMode),
-    .ForceRaz            (|ForceExternalRaz),
+    .ForceRaz            ((|ForceExternalRaz) || ForceExternalRazFromHold),
     .RAZ_CHN             (RAZ_CHN)
     );
 
@@ -93,7 +94,8 @@ module MicrorocCommonControl
     .HoldEnable       (HoldEnable),
     .HoldDelay        (HoldDelay),
     .HoldTime         (HoldTime),
-    .HoldOut          (HoldSignal)
+    .HoldOut          (HoldSignal),
+    .ForceExternalRaz (ForceExternalRazFromHold)
     );
 
   TimeStampSyncAndDataTrigger TimeStampSyncAndTrigger(
