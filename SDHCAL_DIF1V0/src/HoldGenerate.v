@@ -30,7 +30,8 @@ module HoldGenerate(
 	input HoldEnable,
 	input [7:0] HoldDelay,
 	input [15:0] HoldTime,
-	output reg HoldOut
+	output reg HoldOut,
+  output ForceExternalRaz
 	);
 	reg [255:0] TriggerShift;
 	always @(posedge SyncClk or negedge reset_n) begin
@@ -70,4 +71,14 @@ module HoldGenerate(
 		else
 			HoldOut <= 1'b0;
 	end
+
+  reg [2:0] ForceExternalRazDelay;
+  always @ (posedge Clk or negedge reset_n) begin
+    if (~reset_n)
+      ForceExternalRazDelay <= 3'b0;
+    else
+      ForceExternalRazDelay <= {ForceExternalRazDelay[1:0], HoldOut};
+  end
+  assign ForceExternalRaz = ForceExternalRazDelay[2];
+  
 endmodule
