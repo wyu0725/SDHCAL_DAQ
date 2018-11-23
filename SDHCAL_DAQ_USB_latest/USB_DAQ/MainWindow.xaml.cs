@@ -4490,6 +4490,11 @@ namespace USB_DAQ
 
         private void btnConfigurationParameterLoad_Click(object sender, RoutedEventArgs e)
         {
+            ConfigurationParameterLoadNedDif();
+        }
+
+        private bool ConfigurationParameterLoadNedDif()
+        {
             #region Generate parameter array
             #region Header
             TextBox[] tbxHeaderChain = new TextBox[4] { tbxHeaderChain1, tbxHeaderChain2, tbxHeaderChain3, tbxHeaderChain4 };
@@ -4611,28 +4616,39 @@ namespace USB_DAQ
             else
             {
                 ShowUsbError("EndReadoutParameter");
+                return false;
             }
             #endregion
             #region RAZ Channel
             bResult = SelectRazChannel(cbxRazSelectNewDif.SelectedIndex);
             if (!bResult)
             {
-                return;
+                return false;
             }
             bResult = SetInternalRazTime(cbxInternalRazTimeNewDif.SelectedIndex);
             if (!bResult)
             {
-                return;
+                return false;
             }
             bResult = SetExternalRazTime(cbxExternalRazTimeNewDif.SelectedIndex);
             if (!bResult)
             {
-                return;
+                return false;
             }
-            bResult = SetExternalRazDelay("200");
+            bResult = SetExternalRazDelay(tbcExternalRazDelaySlowControl.Text);
             if (!bResult)
             {
-                return;
+                return false;
+            }
+            #endregion
+            #region Trigger output mode
+            if (!TriggerOutputEnable(cbxTriggerEnableNewDif.SelectedIndex))
+            {
+                return false;
+            }
+            if (!TriggerOutputNor64OrDirect(cbxTriggerOutputDirectOrNor64NewDif.SelectedIndex))
+            {
+                return false;
             }
             #endregion
             for (int i = 0; i < 4; i++)
@@ -4645,14 +4661,14 @@ namespace USB_DAQ
                 bResult = SelectAsicChain(MicrorocAsicChain[i]);
                 if (!bResult)
                 {
-                    return;
+                    return false;
                 }
                 #endregion
                 #region Set PowerPulsing parameter
                 bResult = SetPowerPulsingParameter(cbxPreAmpPPNewDif.SelectedIndex, cbxHighGainShaperPPNewDif.SelectedIndex, cbxLowGainShaperPPNewDif.SelectedIndex, cbxWidlarPPNewDif.SelectedIndex, cbxDac4BitPPNewDif.SelectedIndex, cbxOTAqPPNewDif.SelectedIndex, cbxDiscriPPNewDif.SelectedIndex, cbxVbgPPNewDif.SelectedIndex, cbxDac10BitPPNewDif.SelectedIndex, cbxLvdsPPNewDif.SelectedIndex);
                 if (!bResult)
                 {
-                    return;
+                    return false;
                 }
                 #endregion
                 for (int j = 3; j >= 0; j--)
@@ -4664,38 +4680,38 @@ namespace USB_DAQ
                         bResult = SetAsicHeader(tbxHeaderChain[i].Text, MicrorocAsicChain[i], j);
                         if (!bResult)
                         {
-                            return;
+                            return false;
                         }
                         #endregion
                         #region Set VTH
                         bResult = SetDac0Vth(tbxVth0Asic[i, j].Text, MicrorocAsicChain[i], j);
                         if (!bResult)
                         {
-                            return;
+                            return false;
                         }
                         bResult = SetDac1Vth(tbxVth1Asic[i, j].Text, MicrorocAsicChain[i], j);
                         if (!bResult)
                         {
-                            return;
+                            return false;
                         }
                         bResult = SetDac2Vth(tbxVth2Asic[i, j].Text, MicrorocAsicChain[i], j);
                         if (!bResult)
                         {
-                            return;
+                            return false;
                         }
                         #endregion
                         #region Shaper Out
                         bResult = SetShaperHighOrLowGain(cbxShaperHighOrLowGainChain[i, j].SelectedIndex, MicrorocAsicChain[i], j);
                         if (!bResult)
                         {
-                            return;
+                            return false;
                         }
                         #endregion
                         #region Set CTest channel
                         bResult = SetCTestChannel(tbxCTestChannelAsic[i, j].Text, MicrorocAsicChain[i], j);
                         if (!bResult)
                         {
-                            return;
+                            return false;
                         }
                         #endregion
                         #region Calibration
@@ -4716,7 +4732,7 @@ namespace USB_DAQ
                             else
                             {
                                 ShowUsbError("Align");
-                                return;
+                                return false;
                             }
                         }
                         #endregion
@@ -4724,14 +4740,14 @@ namespace USB_DAQ
                         bResult = SetHighGainFeedbackParameter(cbxHighGainFeedbackAsic[i, j].SelectedIndex, MicrorocAsicChain[i], j);
                         if (!bResult)
                         {
-                            return;
+                            return false;
                         }
                         #endregion
                         #region SW lg
                         bResult = SetLowGainFeedbackParameter(cbxLowGainShaperFeedbackAsic[i, j].SelectedIndex, MicrorocAsicChain[i], j);
                         if (!bResult)
                         {
-                            return;
+                            return false;
                         }
                         #endregion
                         #region Discriminator Mask
@@ -4754,7 +4770,7 @@ namespace USB_DAQ
                             bResult = SetChannelMask(cbxMaskSelectAsic[i, j].SelectedIndex, cbxMaskDiscriminatorAsic[i, j].SelectedIndex, j, MicrorocAsicChain[i], Channel);
                             if (!bResult)
                             {
-                                return;
+                                return false;
                             }
                         }
                         else
@@ -4770,7 +4786,7 @@ namespace USB_DAQ
                         bResult = SetReadScopeChannel(tbxReadScopeAsic[i, j].Text, MicrorocAsicChain[i], j);
                         if (!bResult)
                         {
-                            return;
+                            return false;
                         }
                     }
                     #endregion
@@ -4778,11 +4794,12 @@ namespace USB_DAQ
                     bResult = ConfigurationParameterLoad(MicrorocAsicChain[j]);
                     if (!bResult)
                     {
-                        return;
+                        return false;
                     }
                     #endregion
                 }
             }
+            return true;
         }
 
         private bool AsicBaseLineAlignment(int ChainNumber, int AsicNumbner, string AlignmentFileName, out bool FileExistance)
@@ -5212,6 +5229,36 @@ namespace USB_DAQ
             }
         }
 
+        private bool TriggerOutputEnable(int Enable)
+        {
+            if (MicrorocAsic.TriggerOutputEnableSet(Enable, MyUsbDevice1))
+            {
+                string report = string.Format("{0} trigger output\n", Enable == 1 ? "Enable" : "Disbale");
+                txtReport.AppendText(report);
+                return true;
+            }
+            else
+            {
+                ShowUsbError("Set trigger outout enable");
+                return false;
+            }
+        }
+
+        private bool TriggerOutputNor64OrDirect(int Nor64OrDirect)
+        {
+            if (MicrorocAsic.TriggerNor64OrDirectOutputSelect(Nor64OrDirect, MyUsbDevice1))
+            {
+                string report = string.Format("Trigger output: {0}\n", Nor64OrDirect == 1 ? "NOR64" : "Direct");
+                txtReport.AppendText(report);
+                return true;
+            }
+            else
+            {
+                ShowUsbError("Set trigger outout mode");
+                return false;
+            }
+        }
+
         private void ShowIllegalInput(string SetItem)
         {
             string ErrorMessage = string.Format("Illegal Input Value. {0}", SetItem);
@@ -5259,6 +5306,8 @@ namespace USB_DAQ
             bool bResult = MicrorocAsic.RunningModeSelect(1, MyUsbDevice1);
             if (bResult)
             {
+                cbxTriggerOutputDirectOrNor64NewDif.SelectedIndex = 0;
+                cbxTriggerOutEnableNewDif.SelectedIndex = 1;
                 txtReport.AppendText("Select SCurveTest\n");
                 DisableNewDif();
             }
@@ -5276,6 +5325,7 @@ namespace USB_DAQ
                 txtReport.AppendText("Select Acquisition\n");
                 SelectAcuqisitionNewDif();
                 DisableSCurveTestNewDif();
+                AsicMaskDefault();
                 btnNewDifAcquisitionStartNewDif.Background = Brushes.Green;
             }
             else
@@ -6024,6 +6074,9 @@ namespace USB_DAQ
                 HoldDisable();
             }
             #endregion
+            cbxTriggerOutputDirectOrNor64NewDif.SelectedIndex = 0;
+            cbxTriggerOutEnableNewDif.SelectedIndex = 1;
+            SelectTestAsic(cbxAdcTestAsicNewDif.SelectedIndex);
             btnStartAdcNewDif.IsEnabled = true;
         }
 
@@ -6293,11 +6346,13 @@ namespace USB_DAQ
                 ShowUsbError("Select ASIC");
                 return false;
             }
-            if (!AsicSelectMask(Row, Column, MyUsbDevice1))
+            AsicSelectMask(Row, Column);
+            if (!ConfigurationParameterLoadNedDif())
             {
-                ShowUsbError("Select ASIC");
                 return false;
             }
+            PowerPulsingPinEnable();
+            PowerPulsingPinDisable();
             return true;
         }
 
@@ -6776,38 +6831,52 @@ namespace USB_DAQ
             return true;
         }
 
-        private bool AsicSelectMask(int Row, int Column, MyCyUsb usbInterface)
+        private void AsicSelectMask(int Row, int Column)
         {
-            for(int i = 0; i < 4; i++)
+            #region Mask Select
+            ComboBox[,] cbxMaskSelectAsic = new ComboBox[4, 4]
             {
-                if (!MicrorocAsicChain[i].SelectAsicChain(usbInterface))
-                {
-                    return false;
-                }
+                {cbxMaskSelectAsic11, cbxMaskSelectAsic12, cbxMaskSelectAsic13, cbxMaskSelectAsic14 },
+                {cbxMaskSelectAsic21, cbxMaskSelectAsic22, cbxMaskSelectAsic23, cbxMaskSelectAsic24 },
+                {cbxMaskSelectAsic31, cbxMaskSelectAsic32, cbxMaskSelectAsic33, cbxMaskSelectAsic34 },
+                {cbxMaskSelectAsic41, cbxMaskSelectAsic42, cbxMaskSelectAsic43, cbxMaskSelectAsic44 }
+            };
+            #endregion
+            for (int i = 0; i < 4; i++)
+            {
                 for(int j = 0; j < 4; j++)
                 {
                     if(i == Row && j == Column)
                     {
-                        if(!MicrorocAsicChain[i].MaskModeSet(3, usbInterface))
-                        {
-                            return false;
-                        }
+                        cbxMaskSelectAsic[i, j].SelectedIndex = 2; // Unmask all
                     }
                     else
                     {
-                        if(!MicrorocAsicChain[i].MaskModeSet(4, usbInterface))
-                        {
-                            return false;
-                        }
+                        cbxMaskSelectAsic[i, j].SelectedIndex = 3; // Mask all
                     }
                 }
-                if (!MicrorocAsicChain[i].ParameterLoadStart(usbInterface))
+            }
+        }
+        private void AsicMaskDefault()
+        {
+            #region Mask Select
+            ComboBox[,] cbxMaskSelectAsic = new ComboBox[4, 4]
+            {
+                {cbxMaskSelectAsic11, cbxMaskSelectAsic12, cbxMaskSelectAsic13, cbxMaskSelectAsic14 },
+                {cbxMaskSelectAsic21, cbxMaskSelectAsic22, cbxMaskSelectAsic23, cbxMaskSelectAsic24 },
+                {cbxMaskSelectAsic31, cbxMaskSelectAsic32, cbxMaskSelectAsic33, cbxMaskSelectAsic34 },
+                {cbxMaskSelectAsic41, cbxMaskSelectAsic42, cbxMaskSelectAsic43, cbxMaskSelectAsic44 }
+            };
+            #endregion
+            for (int i = 0; i < 4; i++)
+            {
+                for (int j = 0; j < 4; j++)
                 {
-                    return false;
+                    cbxMaskSelectAsic[i, j].SelectedIndex = 0; // Default mask                    
                 }
             }
-            return true;
         }
+    
 
         private bool SetSCurveTestAsic(int AsicIndex)
         {
@@ -6818,21 +6887,15 @@ namespace USB_DAQ
                 ShowUsbError("Set row and column");
                 return false;
             }
-            if (!MicrorocAsic.RunningModeSelect(0, MyUsbDevice1))
+            AsicSelectMask(TestRow, TestColumn);
+            cbxTriggerOutputDirectOrNor64NewDif.SelectedIndex = 0;
+            cbxTriggerOutEnableNewDif.SelectedIndex = 1;
+            if (!ConfigurationParameterLoadNedDif())
             {
-                ShowUsbError("Select acquisition mode");
                 return false;
             }
-            if (!AsicSelectMask(TestRow, TestColumn, MyUsbDevice1))
-            {
-                ShowUsbError("Set ASIC mask");
-                return false;
-            }
-            if (!MicrorocAsic.RunningModeSelect(1, MyUsbDevice1))
-            {
-                ShowUsbError("Select SCurve mode");
-                return false;
-            }
+            PowerPulsingPinEnable();
+            PowerPulsingPinDisable();
             bool bResult = SetTotalAsicNumber(4, MicrorocAsicChain[TestRow]);
             if (!bResult)
             {
