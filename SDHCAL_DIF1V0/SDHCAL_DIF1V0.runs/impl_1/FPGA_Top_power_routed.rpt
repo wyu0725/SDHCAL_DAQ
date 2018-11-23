@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2018.1 (win64) Build 2188600 Wed Apr  4 18:40:38 MDT 2018
-| Date             : Wed Nov 21 20:34:48 2018
+| Date             : Fri Nov 23 10:34:28 2018
 | Host             : WYU running 64-bit major release  (build 9200)
 | Command          : report_power -file FPGA_Top_power_routed.rpt -pb FPGA_Top_power_summary_routed.pb -rpx FPGA_Top_power_routed.rpx
 | Design           : FPGA_Top
@@ -30,10 +30,10 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.387        |
+| Total On-Chip Power (W)  | 0.388        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.279        |
+| Dynamic (W)              | 0.280        |
 | Device Static (W)        | 0.108        |
 | Total Off-Chip Power (W) | 0.005        |
 | Effective TJA (C/W)      | 2.7          |
@@ -53,9 +53,9 @@ Table of Contents
 +-------------------------+-----------+----------+-----------+-----------------+
 | On-Chip                 | Power (W) | Used     | Available | Utilization (%) |
 +-------------------------+-----------+----------+-----------+-----------------+
-| Clocks                  |     0.015 |        8 |       --- |             --- |
-| Slice Logic             |     0.006 |    21278 |       --- |             --- |
-|   LUT as Logic          |     0.006 |     9102 |     63400 |           14.36 |
+| Clocks                  |     0.014 |        8 |       --- |             --- |
+| Slice Logic             |     0.007 |    21278 |       --- |             --- |
+|   LUT as Logic          |     0.007 |     9106 |     63400 |           14.36 |
 |   Register              |    <0.001 |     9949 |    126800 |            7.85 |
 |   CARRY4                |    <0.001 |      239 |     15850 |            1.51 |
 |   F7/F8 Muxes           |    <0.001 |       58 |     63400 |            0.09 |
@@ -67,7 +67,7 @@ Table of Contents
 | MMCM                    |     0.084 |        1 |         6 |           16.67 |
 | I/O                     |     0.162 |      145 |       285 |           50.88 |
 | Static Power            |     0.108 |          |           |                 |
-| Total                   |     0.387 |          |           |                 |
+| Total                   |     0.388 |          |           |                 |
 +-------------------------+-----------+----------+-----------+-----------------+
 
 
@@ -77,7 +77,7 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) |
 +-----------+-------------+-----------+-------------+------------+
-| Vccint    |       1.000 |     0.049 |       0.033 |      0.016 |
+| Vccint    |       1.000 |     0.049 |       0.034 |      0.016 |
 | Vccaux    |       1.800 |     0.065 |       0.047 |      0.018 |
 | Vcco33    |       3.300 |     0.007 |       0.003 |      0.004 |
 | Vcco25    |       2.500 |     0.066 |       0.062 |      0.004 |
@@ -151,8 +151,8 @@ Table of Contents
 +-----------------------------------------------------------------------------------------+-----------+
 | Name                                                                                    | Power (W) |
 +-----------------------------------------------------------------------------------------+-----------+
-| FPGA_Top                                                                                |     0.279 |
-|   Acquisition                                                                           |     0.005 |
+| FPGA_Top                                                                                |     0.280 |
+|   Acquisition                                                                           |     0.004 |
 |     AD9220Control                                                                       |    <0.001 |
 |       Ad9220Control                                                                     |    <0.001 |
 |     AcquisitionDataSwitcher                                                             |     0.001 |
@@ -452,19 +452,19 @@ Table of Contents
 |     TriggerToWriteSelect                                                                |    <0.001 |
 |     UnmaskAllChannelSet                                                                 |    <0.001 |
 |     WidlarPPEnable                                                                      |    <0.001 |
-|   CommonControlSignalGenerator                                                          |     0.155 |
+|   CommonControlSignalGenerator                                                          |     0.154 |
 |     ExternalRazGen                                                                      |    <0.001 |
 |     HoldGen                                                                             |     0.003 |
 |     RamReadDoneDetect                                                                   |    <0.001 |
 |     TimeStampSyncAndTrigger                                                             |    <0.001 |
-|   ConfigurationSelect                                                                   |     0.004 |
+|   ConfigurationSelect                                                                   |     0.003 |
 |   MicrorocAutoCaliSignalGen                                                             |    <0.001 |
 |     CalibrationWaveGenA                                                                 |    <0.001 |
 |     CalibrationWaveGenB                                                                 |    <0.001 |
 |     DacValueSet                                                                         |    <0.001 |
 |       DacSpiOut                                                                         |    <0.001 |
 |   MicrorocChain1                                                                        |     0.004 |
-|     MicrorocDaq                                                                         |     0.001 |
+|     MicrorocDaq                                                                         |    <0.001 |
 |       AutoDaqControl                                                                    |    <0.001 |
 |       SlaveDaqControl                                                                   |    <0.001 |
 |     ReadOnChipRam                                                                       |    <0.001 |
@@ -495,7 +495,7 @@ Table of Contents
 |                   ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_single_inst_wrst_rd |    <0.001 |
 |                   ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_sync_rst_inst_wrst  |    <0.001 |
 |                   ngwrdrst.grst.g7serrst.gsckt_wrst.xpm_cdc_sync_rst_inst_wrst          |    <0.001 |
-|       ParameterGen                                                                      |     0.002 |
+|       ParameterGen                                                                      |     0.003 |
 |       ParameterShiftOut                                                                 |    <0.001 |
 |       PulseSync                                                                         |    <0.001 |
 |   MicrorocChain2                                                                        |     0.004 |
@@ -530,7 +530,7 @@ Table of Contents
 |                   ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_single_inst_wrst_rd |    <0.001 |
 |                   ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.xpm_cdc_sync_rst_inst_wrst  |    <0.001 |
 |                   ngwrdrst.grst.g7serrst.gsckt_wrst.xpm_cdc_sync_rst_inst_wrst          |    <0.001 |
-|       ParameterGen                                                                      |     0.002 |
+|       ParameterGen                                                                      |     0.003 |
 |       ParameterShiftOut                                                                 |    <0.001 |
 |       PulseSync                                                                         |    <0.001 |
 |   MicrorocChain3                                                                        |     0.004 |
@@ -538,7 +538,7 @@ Table of Contents
 |       AutoDaqControl                                                                    |    <0.001 |
 |       SlaveDaqControl                                                                   |    <0.001 |
 |     ReadOnChipRam                                                                       |    <0.001 |
-|     SlowControlAndReadScope                                                             |     0.002 |
+|     SlowControlAndReadScope                                                             |     0.003 |
 |       ConfigParameter                                                                   |    <0.001 |
 |         U0                                                                              |    <0.001 |
 |           inst_fifo_gen                                                                 |    <0.001 |
@@ -568,12 +568,12 @@ Table of Contents
 |       ParameterGen                                                                      |     0.002 |
 |       ParameterShiftOut                                                                 |    <0.001 |
 |       PulseSync                                                                         |    <0.001 |
-|   MicrorocChain4                                                                        |     0.003 |
+|   MicrorocChain4                                                                        |     0.004 |
 |     MicrorocDaq                                                                         |    <0.001 |
 |       AutoDaqControl                                                                    |    <0.001 |
 |       SlaveDaqControl                                                                   |    <0.001 |
 |     ReadOnChipRam                                                                       |    <0.001 |
-|     SlowControlAndReadScope                                                             |     0.002 |
+|     SlowControlAndReadScope                                                             |     0.003 |
 |       ConfigParameter                                                                   |    <0.001 |
 |         U0                                                                              |    <0.001 |
 |           inst_fifo_gen                                                                 |    <0.001 |
