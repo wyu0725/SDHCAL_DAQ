@@ -1598,6 +1598,15 @@
                                                         </ComboBox>
                                                     </Grid>
                                                 </GroupBox>
+                                                <Label x:Name="lblDirectOrNor64NewDif" Content="Trigger" HorizontalAlignment="Left" Margin="160,0,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" Width="80" Height="24"/>
+                                                <ComboBox x:Name="cbxTriggerOutputDirectOrNor64NewDif" HorizontalAlignment="Left" Margin="240,0,0,0" VerticalAlignment="Top" Width="75" Height="24">
+                                                    <ComboBoxItem Content="Direct"/>
+                                                    <ComboBoxItem Content="NOR64" IsSelected="True"/>
+                                                </ComboBox>
+                                                <ComboBox x:Name="cbxTriggerOutEnableNewDif" HorizontalAlignment="Left" Margin="315,0,0,0" VerticalAlignment="Top" Width="75" Height="24">
+                                                    <ComboBoxItem Content="Disable"/>
+                                                    <ComboBoxItem Content="Enable" IsSelected="True"/>
+                                                </ComboBox>
                                             </Grid>
                                         </TabItem>
                                         <TabItem Name="Mask" Header="Mask">

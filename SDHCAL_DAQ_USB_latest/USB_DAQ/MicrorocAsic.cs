@@ -140,13 +140,13 @@ namespace USB_DAQ
             return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(ExternalTriggerEnableValue));
         }
 
-        public bool TriggerNor64OrDirectOutputSelect(int TriggerNor64OrDirectOutput, MyCyUsb usbInterface)
+        public static bool TriggerNor64OrDirectOutputSelect(int TriggerNor64OrDirectOutput, MyCyUsb usbInterface)
         {
             int TriggerNor64OrDirectOutputValue = TriggerNor64OrDirectOutput + HexToInt(DifCommandAddress.TriggerNor64OrDirectSelectAddress);
             return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(TriggerNor64OrDirectOutputValue));
         }
 
-        public bool TriggerOutputEnableSet(int TriggerOutputEnable, MyCyUsb usbInterface)
+        public static bool TriggerOutputEnableSet(int TriggerOutputEnable, MyCyUsb usbInterface)
         {
             int TriggerOutputEnableValue = TriggerOutputEnable + HexToInt(DifCommandAddress.TriggerOutputEnableAddress);
             return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(TriggerOutputEnableValue));
