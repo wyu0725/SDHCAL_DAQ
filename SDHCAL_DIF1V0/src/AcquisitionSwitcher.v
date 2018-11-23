@@ -38,7 +38,7 @@ module AcquisitionSwitcher(
   // ConfigInterface
   input CommandMicrorocConfigurationParameterLoad,
   input SCurveTestMicrorocConfigurationParameterLoad,
-  output reg OutMicrorocConfigurationParameterLoad,
+  output OutMicrorocConfigurationParameterLoad,
   // Configuration Done
   input MicrorocConfigurationDone,
   output reg MicrorocConfigurationDoneToAcquisition,
@@ -84,7 +84,7 @@ module AcquisitionSwitcher(
         ExternalFifoFullToMicrorocAcquisition    <= ExternalFifoFull;
         ExternalFifoFullToSCurveTest             <= 1'b0;
         ExternalFifoFullToAdc                    <= 1'b0;
-        OutMicrorocConfigurationParameterLoad    <= CommandMicrorocConfigurationParameterLoad;
+        //OutMicrorocConfigurationParameterLoad    <= CommandMicrorocConfigurationParameterLoad;
         MicrorocConfigurationDoneToAcquisition   <= MicrorocConfigurationDone;
         OutMicrorocConfigurationDoneToSCurveTest <= 1'b0;
         OutMicrorocCTestChannel                  <= CommandMicrorocCTestChannel;
@@ -102,7 +102,7 @@ module AcquisitionSwitcher(
         ExternalFifoFullToMicrorocAcquisition    <= 1'b0;
         ExternalFifoFullToSCurveTest             <= ExternalFifoFull;
         ExternalFifoFullToAdc                    <= 1'b0;
-        OutMicrorocConfigurationParameterLoad    <= SCurveTestMicrorocConfigurationParameterLoad;
+        //OutMicrorocConfigurationParameterLoad    <= SCurveTestMicrorocConfigurationParameterLoad;
         MicrorocConfigurationDoneToAcquisition   <= 1'b0;
         OutMicrorocConfigurationDoneToSCurveTest <= MicrorocConfigurationDone;
         OutMicrorocCTestChannel                  <= SCurveTestMicrorocCTestChannel;
@@ -120,7 +120,7 @@ module AcquisitionSwitcher(
         ExternalFifoFullToMicrorocAcquisition    <= 1'b0;
         ExternalFifoFullToSCurveTest             <= 1'b0;
         ExternalFifoFullToAdc                    <= ExternalFifoFull;
-        OutMicrorocConfigurationParameterLoad    <= CommandMicrorocConfigurationParameterLoad;
+        //OutMicrorocConfigurationParameterLoad    <= CommandMicrorocConfigurationParameterLoad;
         MicrorocConfigurationDoneToAcquisition   <= MicrorocConfigurationDone;
         OutMicrorocConfigurationDoneToSCurveTest <= 1'b0;
         OutMicrorocCTestChannel                  <= CommandMicrorocCTestChannel;
@@ -138,7 +138,7 @@ module AcquisitionSwitcher(
         ExternalFifoFullToMicrorocAcquisition    <= ExternalFifoFull;
         ExternalFifoFullToSCurveTest             <= 1'b0;
         ExternalFifoFullToAdc                    <= 1'b0;
-        OutMicrorocConfigurationParameterLoad    <= CommandMicrorocConfigurationParameterLoad;
+       //OutMicrorocConfigurationParameterLoad    <= CommandMicrorocConfigurationParameterLoad;
         MicrorocConfigurationDoneToAcquisition   <= MicrorocConfigurationDone;
         OutMicrorocConfigurationDoneToSCurveTest <= 1'b0;
         OutMicrorocCTestChannel                  <= CommandMicrorocCTestChannel;
@@ -152,4 +152,5 @@ module AcquisitionSwitcher(
       end
     endcase
   end
+  assign OutMicrorocConfigurationParameterLoad = CommandMicrorocConfigurationParameterLoad || SCurveTestMicrorocConfigurationParameterLoad;
 endmodule
