@@ -4642,7 +4642,7 @@ namespace USB_DAQ
             }
             #endregion
             #region Trigger output mode
-            if (!TriggerOutputEnable(cbxTriggerEnableNewDif.SelectedIndex))
+            if (!TriggerOutputEnable(cbxTriggerOutEnableNewDif.SelectedIndex))
             {
                 return false;
             }
@@ -8761,6 +8761,92 @@ namespace USB_DAQ
             if (SetVthToCharge(3))
             {
                 txtReport.AppendText("Convert Chain4 Charge to DAC successfully\n");
+            }
+        }
+
+        private void btnSetMaskAsicNewDif_Click(object sender, RoutedEventArgs e)
+        {
+            int Row, Column;
+            Row = cbxMaskAsicSelectNewDif.SelectedIndex / 4;
+            Column = cbxMaskAsicSelectNewDif.SelectedIndex % 4;
+            #region Mask Select
+            ComboBox[,] cbxMaskSelectAsic = new ComboBox[4, 4]
+            {
+                {cbxMaskSelectAsic11, cbxMaskSelectAsic12, cbxMaskSelectAsic13, cbxMaskSelectAsic14 },
+                {cbxMaskSelectAsic21, cbxMaskSelectAsic22, cbxMaskSelectAsic23, cbxMaskSelectAsic24 },
+                {cbxMaskSelectAsic31, cbxMaskSelectAsic32, cbxMaskSelectAsic33, cbxMaskSelectAsic34 },
+                {cbxMaskSelectAsic41, cbxMaskSelectAsic42, cbxMaskSelectAsic43, cbxMaskSelectAsic44 }
+            };
+            #endregion
+            for (int i = 0; i < 4; i++)
+            {
+                for (int j = 0; j < 4; j++)
+                {
+                    if (i == Row && j == Column)
+                    {
+                        cbxMaskSelectAsic[i, j].SelectedIndex = 0; // Mask
+                    }
+                    else
+                    {
+                        cbxMaskSelectAsic[i, j].SelectedIndex = 3; // Mask all
+                    }
+                }
+            }
+        }
+
+        private void btnClearMaskAsicNewDif_Click(object sender, RoutedEventArgs e)
+        {
+            #region Mask Select
+            ComboBox[,] cbxMaskSelectAsic = new ComboBox[4, 4]
+            {
+                {cbxMaskSelectAsic11, cbxMaskSelectAsic12, cbxMaskSelectAsic13, cbxMaskSelectAsic14 },
+                {cbxMaskSelectAsic21, cbxMaskSelectAsic22, cbxMaskSelectAsic23, cbxMaskSelectAsic24 },
+                {cbxMaskSelectAsic31, cbxMaskSelectAsic32, cbxMaskSelectAsic33, cbxMaskSelectAsic34 },
+                {cbxMaskSelectAsic41, cbxMaskSelectAsic42, cbxMaskSelectAsic43, cbxMaskSelectAsic44 }
+            };
+            #endregion
+            for (int i = 0; i < 4; i++)
+            {
+                for (int j = 0; j < 4; j++)
+                {
+                    cbxMaskSelectAsic[i, j].SelectedIndex = 0; // Mask
+                }
+            }
+        }
+
+        private void btnLoadMaskFileNewDif_Click(object sender, RoutedEventArgs e)
+        {
+            int AsicChain = cbxMaskFileGenSelectDif.SelectedIndex / 4 + 1;
+            int AsicLocation = cbxMaskFileGenSelectDif.SelectedIndex % 4 + 1;
+            string fileName = string.Format("M{0}{1}.txt", AsicChain, AsicLocation);
+            string MaskFileName = Path.Combine(CurrentPath, fileName);
+            CheckBox[] cbCh = new CheckBox[64]
+                    { cbCh1, cbCh2, cbCh3, cbCh4, cbCh5, cbCh6, cbCh7, cbCh8,
+                    cbCh9, cbCh10, cbCh11, cbCh12, cbCh13, cbCh14, cbCh15, cbCh16,
+                    cbCh17, cbCh18, cbCh19, cbCh20, cbCh21, cbCh22, cbCh23, cbCh24,
+                    cbCh25, cbCh26, cbCh27, cbCh28, cbCh29, cbCh30, cbCh31, cbCh32,
+                    cbCh33, cbCh34, cbCh35, cbCh36, cbCh37, cbCh38, cbCh39, cbCh40,
+                    cbCh41, cbCh42, cbCh43, cbCh44, cbCh45, cbCh46, cbCh47, cbCh48,
+                    cbCh49, cbCh50, cbCh51, cbCh52, cbCh53, cbCh54, cbCh55, cbCh56,
+                    cbCh57, cbCh58, cbCh59, cbCh60, cbCh61, cbCh62, cbCh63, cbCh64 };
+            foreach (CheckBox b in cbCh)
+            {
+                b.IsChecked = false;
+            }
+            using (StreamReader MaskFile = new StreamReader(MaskFileName))
+            {
+                string MaskChannelTemp;
+                MaskChannelTemp = MaskFile.ReadLine();
+                int MaskChannel;
+                while (MaskChannelTemp != null)
+                {
+                    if (CheckStringLegal.CheckIntegerLegal(MaskChannelTemp) && int.Parse(MaskChannelTemp) <= 64)
+                    {
+                        MaskChannel = int.Parse(MaskChannelTemp);
+                        cbCh[MaskChannel - 1].IsChecked = true;
+                    }
+                    MaskChannelTemp = MaskFile.ReadLine();
+                }
             }
         }
     }

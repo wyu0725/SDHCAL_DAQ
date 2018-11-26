@@ -1607,6 +1607,31 @@
                                                     <ComboBoxItem Content="Disable"/>
                                                     <ComboBoxItem Content="Enable" IsSelected="True"/>
                                                 </ComboBox>
+                                                <GroupBox x:Name="gbxMaskAsicSet" Header="ASIC Select" HorizontalAlignment="Left" Margin="160,120,0,0" VerticalAlignment="Top" Height="110" Width="160">
+                                                    <Grid Margin="0,0,0,0">
+                                                        <Label x:Name="lblMaskAsicSelectNewDif" Content="ASIC" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top" Height="25" Width="75"/>
+                                                        <ComboBox x:Name="cbxMaskAsicSelectNewDif" HorizontalAlignment="Left" Margin="70,0,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="70" Height="24" >
+                                                            <ComboBoxItem Content="ASIC11" IsSelected="True"/>
+                                                            <ComboBoxItem Content="ASIC12"/>
+                                                            <ComboBoxItem Content="ASIC13"/>
+                                                            <ComboBoxItem Content="ASIC14"/>
+                                                            <ComboBoxItem Content="ASIC21"/>
+                                                            <ComboBoxItem Content="ASIC22"/>
+                                                            <ComboBoxItem Content="ASIC23"/>
+                                                            <ComboBoxItem Content="ASIC24"/>
+                                                            <ComboBoxItem Content="ASIC31"/>
+                                                            <ComboBoxItem Content="ASIC32"/>
+                                                            <ComboBoxItem Content="ASIC33"/>
+                                                            <ComboBoxItem Content="ASIC34"/>
+                                                            <ComboBoxItem Content="ASIC41"/>
+                                                            <ComboBoxItem Content="ASIC42"/>
+                                                            <ComboBoxItem Content="ASIC43"/>
+                                                            <ComboBoxItem Content="ASIC44"/>
+                                                        </ComboBox>
+                                                        <Button x:Name="btnSetMaskAsicNewDif" Content="Set select" HorizontalAlignment="Left" Margin="0,30,0,0" VerticalAlignment="Top" Width="140" Height="24" Click="btnSetMaskAsicNewDif_Click"/>
+                                                        <Button x:Name="btnClearMaskAsicNewDif" Content="Clear select" HorizontalAlignment="Left" Margin="0,60,0,0" VerticalAlignment="Top" Width="140" Height="24" Click="btnClearMaskAsicNewDif_Click"/>
+                                                    </Grid>
+                                                </GroupBox>
                                             </Grid>
                                         </TabItem>
                                         <TabItem Name="Mask" Header="Mask">
@@ -2035,6 +2060,7 @@
                                                     <CheckBox Name="cbCh63">Ch63</CheckBox>
                                                     <CheckBox Name="cbCh64">Ch64</CheckBox>
                                                 </WrapPanel>
+                                                <Button x:Name="btnLoadMaskFileNewDif" Content="Load file" HorizontalAlignment="Left" Margin="0,220,0,0" VerticalAlignment="Top" Width="90" Height="24" Click="btnLoadMaskFileNewDif_Click"/>
                                                 <ComboBox x:Name="cbxMaskFileGenSelectDif" HorizontalAlignment="Left" Margin="0,250,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="90" Height="24" >
                                                     <ComboBoxItem Content="ASIC11" IsSelected="True"/>
                                                     <ComboBoxItem Content="ASIC12"/>
