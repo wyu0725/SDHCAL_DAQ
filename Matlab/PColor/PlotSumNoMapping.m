@@ -1,26 +1,18 @@
-% Pesudocolor Plot of 8*8 Square
-% Read data from *.dat, and plot as hitmap
-
 %--- Open file and Import data ---%
 InitialData = ImportData();
 % Read one pack
-prompt = {'Which package would you want to display'};
+prompt = {'Which package would you want to display start from','How many package would you like to display'};
 dlg_title = 'Input the package number';
 answer = inputdlg(prompt,dlg_title);
 PackNo = str2double(answer(1));
-[header, BCID, Ch_data] = ReadPackageSlaveDaq(InitialData, PackNo);
-% % % Get mapping function
-% [FileName,PathName,FilterIndex] = uigetfile('*.txt','Select the file');
-% if FilterIndex
-%     filename = [PathName FileName];
-%     delimiterIn = ' ';
-%     headerlinesIn = 1;
-%     A = importdata(filename, delimiterIn, headerlinesIn);
-% end
-% ASIC_Channel = A.data(:,1);
-% Pad_Channel = A.data(:,2);
-[ASIC_Channel, Pad_Channel] = GetMapping();
-New_ChannelData = SingleMapping(Ch_data, ASIC_Channel, Pad_Channel);
+DisplayNo = str2double(answer(2));
+
+
+New_ChannelData = zeros(64,1);
+for i = 1:DisplayNo
+    [~, ~, Ch_data] = ReadPackageSlaveDaq(InitialData, PackNo + i - 1);
+    New_ChannelData = New_ChannelData + Ch_data;
+end
 
 %----- Plot The Data -----%
 X = 1:9;
@@ -39,10 +31,10 @@ figure;
 fig = pcolor(X,Y,C);
 % coclormap summer
 ax = gca;
-colormap(flipud(gray(4)))
+colormap(flipud(gray))
 % a = axes;
-caxis([0,4]);
-colorbar('Ticks',[0.5,1.5,2.5,3.5],'TickLabels',{'<2fC','2fC~20fC','20fC~200fC','>200fC'});
+caxis;
+colorbar;
 axis ij
 axis square
 
@@ -63,9 +55,3 @@ for i = 1:8
     end
 end
 
-% ax = gca;
-% ax.Color = 'b';
-% ax.XAxis.Color = 'r';
-% ax.YAxis.Color = 'g';
-%h = axes('xcolor','y','ycolor','r','xgrid','on','ygrid','on');
-%set(h,);
