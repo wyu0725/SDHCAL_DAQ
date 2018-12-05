@@ -1,6 +1,6 @@
 function [header, BCID, Ch_data] = ReadPackageSlaveDaq(InitialData, PackNum)
 % Read one pack
-StartNum = PackNum*128;
+StartNum = (PackNum-1)*128;
 header = 0;
 for i=1:4
     header = header + InitialData(i + StartNum)*4^(4-i);
