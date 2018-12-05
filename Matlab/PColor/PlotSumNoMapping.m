@@ -10,7 +10,7 @@ DisplayNo = str2double(answer(2));
 
 New_ChannelData = zeros(64,1);
 for i = 1:DisplayNo
-    [~, ~, Ch_data] = ReadPackageSlaveDaq(InitialData, PackNo + i - 1);
+    [header, ~, Ch_data] = ReadPackageSlaveDaq(InitialData, PackNo + i - 1);
     New_ChannelData = New_ChannelData + Ch_data;
 end
 
@@ -40,7 +40,7 @@ axis square
 
 set(fig,'linestyle','-','edgecolor','b')
 
-legend_str = sprintf('The Pad that hitted \n header = %X, BCID = %u',header,BCID);
+legend_str = sprintf('The Pad that hitted \n header = %X',header);
 h = legend(legend_str);
 set(h,'Location','northoutside');
 for i = 1:8
