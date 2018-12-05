@@ -1,7 +1,7 @@
-function [ Average,Std ] = CaculateAdcAutoImport(AverageNumber, HistNumber, PathName, Charge)
+function [ Average,Std,h] = CaculateAdcAutoImport(AverageNumber, HistNumber, Charge,AsicID,DataFolder)
 %CaculateAdc AverageNumber是多少个点将ADC的数据平均一次 HistNumber是为调用hist
 %   此处显示详细说明
-    filename = sprintf('%s\\%s\\%dfC.dat',pwd,PathName,Charge);
+    filename = sprintf('%s\\Adc_ASIC%s_%dfC.dat',DataFolder,AsicID,Charge);
     [fid,~] = fopen(filename,'r');
     if fid <= 0
         % There was an error--tell user
@@ -26,7 +26,7 @@ function [ Average,Std ] = CaculateAdcAutoImport(AverageNumber, HistNumber, Path
     end
     
     [AdcCount,Adc] = hist(AdcData,HistNumber);
-    h = histogram(AdcData,10);
+    h = histogram(AdcData);
     hold on;
     FAdc = AdcCount/sum(AdcCount);
     Average = FAdc*Adc';
