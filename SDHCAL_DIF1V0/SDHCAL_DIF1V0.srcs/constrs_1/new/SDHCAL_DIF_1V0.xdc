@@ -600,7 +600,6 @@ set_property PACKAGE_PIN AB13 [get_ports {ROW[0]}]
 set_property PACKAGE_PIN Y13 [get_ports {ROW[1]}]
 set_property PACKAGE_PIN Y12 [get_ports {ROW[2]}]
 
-set_false_path -from [get_pins {usb_cy7c68013A/FSM_onehot_State_reg[5]/C}] -to [get_pins nPKTEND_r1_reg/D]
 
 set_property BITSTREAM.CONFIG.UNUSEDPIN PULLUP [current_design]
 
@@ -620,7 +619,4 @@ set_property PACKAGE_PIN AB15 [get_ports SwitcherOn_A]
 set_property IOSTANDARD LVCMOS33 [get_ports SwitcherOn_A]
 set_property PACKAGE_PIN W14 [get_ports SwitcherOn_B]
 set_property IOSTANDARD LVCMOS33 [get_ports SwitcherOn_B]
-
-set_false_path -from [get_pins UsbDataFifo/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_i_reg/C] -to [get_pins {Command/SweepTestStartStopSet/CommandOut_reg[0]/CLR}]
-
 
