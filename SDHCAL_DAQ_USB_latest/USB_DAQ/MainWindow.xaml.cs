@@ -20,8 +20,12 @@ using System.Windows.Interop;
 using System.Diagnostics;
 using System.Collections;
 using System.Net.Mail;
+using MathWorks.MATLAB.NET.Arrays;
+using MathWorks.MATLAB.NET.Utility;
+using PlotAcquisitionData;
 //using System.Collections.ObjectModel;//new add 20150823
 //using Target7_NEWDAQ.DataModel;      //new add 20150823
+[assembly: MathWorks.MATLAB.NET.Utility.MWMCROption("-nojit")]
 namespace USB_DAQ
 {
     /// <summary>
@@ -2833,6 +2837,16 @@ namespace USB_DAQ
                         bw.Write(DataReceiveBytes);
                     }
                 }
+                int EndFrame = 0;
+                while(EndFrame <= 2)
+                {
+                    bResult = usbInterface.DataRecieve(DataReceiveBytes, DataReceiveBytes.Length);
+                    if (bResult)
+                    {
+                        bw.Write(DataReceiveBytes);
+                    }
+                    EndFrame++;
+                }
             }
             #endregion
             bw.Flush();
@@ -4796,6 +4810,7 @@ namespace USB_DAQ
                     {
                         return false;
                     }
+                    Thread.Sleep(10);
                     #endregion
                 }
             }
@@ -6270,6 +6285,7 @@ namespace USB_DAQ
                     StateIndicator.SlowAcqStart = true;
                     txtReport.AppendText("ADC Start\n");
                     await Task.Run(() => GetSlowDataRateResultCallBack(MyUsbDevice1));
+                    StateIndicator.FileSaved = false;
                 }
                 else
                 {
@@ -6888,7 +6904,7 @@ namespace USB_DAQ
                 return false;
             }
             AsicSelectMask(TestRow, TestColumn);
-            cbxTriggerOutputDirectOrNor64NewDif.SelectedIndex = 0;
+            cbxTriggerOutputDirectOrNor64NewDif.SelectedIndex = 1;
             cbxTriggerOutEnableNewDif.SelectedIndex = 1;
             if (!ConfigurationParameterLoadNedDif())
             {
@@ -6901,6 +6917,13 @@ namespace USB_DAQ
             {
                 return false;
             }
+            #region Select ASIC chain
+            bResult = SelectAsicChain(MicrorocAsicChain[TestRow]);
+            if (!bResult)
+            {
+                return false;
+            }
+            #endregion
             bResult = MicrorocAsic.SCurveTestAsicSelect(TestColumn, MyUsbDevice1);
             if (bResult)
             {
@@ -8847,6 +8870,92 @@ namespace USB_DAQ
                     }
                     MaskChannelTemp = MaskFile.ReadLine();
                 }
+            }
+        }
+
+        private void PlotMicrorocAcquisition(string Filename, int PackageStart, int PackageNumber)
+        {
+            MatlabPlot plotFunction = new MatlabPlot();
+            plotFunction.PlotAcquisitionData(Filename, PackageStart, PackageNumber); 
+        }
+
+        private void btnTestMatlab_Click(object sender, RoutedEventArgs e)
+        {
+            PlotMicrorocAcquisition(tbxCurrentPath.Text, 1, 10);
+        }
+
+        private void btnSetChargeAndSaveFileNewDif_Click(object sender, RoutedEventArgs e)
+        {
+            double Voltage;
+            if (CheckStringLegal.CheckDoubleLegal(tbcTestChargeAdcNewDif.Text) && (double.Parse(tbcTestChargeAdcNewDif.Text) >= 0))
+            {
+                Voltage = double.Parse(tbcTestChargeAdcNewDif.Text) / 0.5;
+            }
+            else
+            {
+                ShowIllegalInput("The test charge should greater than 0");
+                return;
+            }
+            bool bResult;
+            if(Voltage < 50 && Voltage > 0)
+            {
+                MessageBox.Show("Charge should equal to or greater than 25fC", "Input ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if(Voltage == 0)
+            {
+                MyAFG3252.CloseOutput(1);
+            }
+            else
+            {
+                MyAFG3252.OpenOutput(1);
+                bResult = MyAFG3252.SetVoltageHigh(1, Voltage, AFG3252.VoltageUnitMV);
+                if (!bResult)
+                {
+                    MessageBox.Show("Set Channel1 High Level Error", "AFG3252 Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                bResult = MyAFG3252.SetVoltageLow(1, 0, AFG3252.VoltageUnitMV);
+                if (!bResult)
+                {
+                    MessageBox.Show("Set Channel1 Low Level Error", "AFG3252 Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            if (!SaveAdcTestFile(cbxAdcTestAsicNewDif.Text, tbcTestChargeAdcNewDif.Text))
+            {
+                MessageBox.Show("Save file failure! lease check the file", "File Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                btnStartAdcNewDif.IsEnabled = false;
+            }
+            {
+                btnStartAdcNewDif.IsEnabled = true;
+            }
+
+        }
+        private bool SaveAdcTestFile(string AsicID, string Charge)
+        {
+            string DefaultDicrectory = @txtFileDir.Text;
+            string FileName = string.Format("ADC_{0}_{1}fC.dat", AsicID, Charge);
+            filepath = Path.Combine(DefaultDicrectory, FileName);
+            FileStream fs = null;
+            if (!Directory.Exists(DefaultDicrectory))//路径不存在
+            {
+                string path = String.Format("File Directory {0} Created\n", txtFileDir.Text);
+                Directory.CreateDirectory(DefaultDicrectory);
+                txtReport.AppendText(path);
+            }
+            if (!File.Exists(filepath))
+            {
+                fs = File.Create(filepath);
+                string report = String.Format("File:{0} Created\n", filepath);
+                txtReport.AppendText(report.ToString());
+                StateIndicator.FileSaved = true;
+                fs.Close();
+                txtFileName.Text = FileName;
+                return true;
+            }
+            else
+            {
+                MessageBox.Show("Save file failure. Please save the file manual", "File Save Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
             }
         }
     }
