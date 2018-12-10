@@ -93,6 +93,7 @@ namespace USB_DAQ
         private bool AFG3252Attach = false;
         private bool AmplitudeOrLevel = true;
         string CurrentPath = Environment.CurrentDirectory;
+        private Hashtable htPadMapping = new Hashtable();
         //SC Parameter
 
 
@@ -5852,8 +5853,30 @@ namespace USB_DAQ
                     return;
                 }
                 #endregion
-                int Start = cbxEnableChain1.SelectedIndex * 1 + cbxEnableChain2.SelectedIndex * 2 + cbxEnableChain3.SelectedIndex * 4 + cbxEnableChain4.SelectedIndex * 8;
-                bResult = MicrorocAsic.MicrorocAcquisitionStart(Start, MyUsbDevice1);
+                int StartIndex = 0;
+                if (cbStartIndexChain1.IsChecked == true)
+                {
+                    StartIndex += 1;
+                }
+                if (cbStartIndexChain2.IsChecked == true)
+                {
+                    StartIndex += 2;
+                }
+                if (cbStartIndexChain3.IsChecked == true)
+                {
+                    StartIndex += 4;
+                }
+                if (cbStartIndexChain4.IsChecked == true)
+                {
+                    StartIndex += 8;
+                }
+                if (!MicrorocAsic.AcquisitionStartIndexSet(StartIndex, MyUsbDevice1))
+                {
+                    ShowUsbError("Set start index");
+                    return;
+                }
+                bResult = MicrorocAsic.MicrorocAcquisitionStart(MyUsbDevice1);
+                
                 if (bResult)
                 {
                     StateIndicator.SlowAcqStart = true;
@@ -8956,6 +8979,115 @@ namespace USB_DAQ
             {
                 MessageBox.Show("Save file failure. Please save the file manual", "File Save Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
+            }
+        }
+
+        private void btnSetPadLocation_Click(object sender, RoutedEventArgs e)
+        {
+            string PadLocation = tbcPadLocationNewDif.Text;
+            if (!htPadMapping.ContainsKey(PadLocation))
+            {
+                MessageBox.Show("Mapping failed. Please make sure the pad location is correct and \"Hash Gen\" is clicked", "Location ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            string AsicLocation = (string)htPadMapping[PadLocation];
+            string[] LocationItem = AsicLocation.Split('_');
+            if(LocationItem.Length != 3)
+            {
+                MessageBox.Show("PadMappingFEB.txt ERROR. Please check the file", "File ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (!(CheckStringLegal.CheckIntegerLegal(LocationItem[0]) && CheckStringLegal.CheckIntegerLegal(LocationItem[1]) && CheckStringLegal.CheckIntegerLegal(LocationItem[2])))
+            {
+                MessageBox.Show("Mapping failed. Please make sure the pad location is correct and \"Hash Gen\" is clicked", "Location ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            int Row = int.Parse(LocationItem[0]) - 1;
+            int Column = int.Parse(LocationItem[1]) - 1;
+            int AsicChannel = int.Parse(LocationItem[2]);
+            if(!(Row>=0 && Row < 4 && Column >= 0 && Column < 4))
+            {
+                MessageBox.Show("Mapping failed. Please make sure the pad location is correct and \"Hash Gen\" is clicked", "Location ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            #region Read Scope
+            TextBox[,] tbxReadScopeAsic = new TextBox[4, 4]
+            {
+                {tbxReadScopeAsic11, tbxReadScopeAsic12, tbxReadScopeAsic13, tbxReadScopeAsic14 },
+                {tbxReadScopeAsic21, tbxReadScopeAsic22, tbxReadScopeAsic23, tbxReadScopeAsic24 },
+                {tbxReadScopeAsic31, tbxReadScopeAsic32, tbxReadScopeAsic33, tbxReadScopeAsic34 },
+                {tbxReadScopeAsic41, tbxReadScopeAsic42, tbxReadScopeAsic43, tbxReadScopeAsic44 }
+            };
+            #endregion
+            tbxReadScopeAsic[Row, Column].Text = LocationItem[2];
+            btnConfigurationParameterLoad.Content = "Read Scope";
+            SelectReadScope();
+            rdbSlowControlSet.IsChecked = false;
+            rdbReadScopeSet.IsChecked = true;
+            ConfigurationParameterLoadNedDif();
+            Thread.Sleep(10);
+            rdbSlowControlSet.IsChecked = true;
+            rdbReadScopeSet.IsChecked = false;
+            btnConfigurationParameterLoad.Content = "Slow Control";
+            SelectSlowControl();
+            cbxAdcTestAsicNewDif.SelectedIndex = Row * 4 + Column;
+            #region Check mask
+            #region Mask File
+            TextBox[,] tbxMaskFileAsic = new TextBox[4, 4]
+            {
+                {tbxMaskFileAsic11, tbxMaskFileAsic12, tbxMaskFileAsic13, tbxMaskFileAsic14 },
+                {tbxMaskFileAsic21, tbxMaskFileAsic22, tbxMaskFileAsic23, tbxMaskFileAsic24 },
+                {tbxMaskFileAsic31, tbxMaskFileAsic32, tbxMaskFileAsic33, tbxMaskFileAsic34 },
+                {tbxMaskFileAsic41, tbxMaskFileAsic42, tbxMaskFileAsic43, tbxMaskFileAsic44 }
+            };
+            #endregion
+            string MaskFileName = Path.Combine(CurrentPath, tbxMaskFileAsic[Row, Column].Text);
+            if (!File.Exists(MaskFileName))
+            {
+                MessageBox.Show("Mask file does not exist. Please check the file", "File ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            using (StreamReader MaskFile = new StreamReader(MaskFileName))
+            {
+                string MaskChannelTemp;
+                MaskChannelTemp = MaskFile.ReadLine();
+                while(MaskChannelTemp != null)
+                {
+                    if(MaskChannelTemp == LocationItem[2])
+                    {
+                        MessageBox.Show("Select a bad channel. Please set a higher threshold (>25fC)", "Bad channel WARNING", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        break;
+                    }
+                    MaskChannelTemp = MaskFile.ReadLine();
+                }
+            }
+            #endregion
+        }
+
+        private void btnGeneratePad2AsicChannel_Click(object sender, RoutedEventArgs e)
+        {
+            htPadMapping.Clear();
+            string MappingFileName = Path.Combine(CurrentPath, "PadMappingFEB.txt");
+            if (!File.Exists(MappingFileName))
+            {
+                MessageBox.Show("\"PadMappingFEB.txt\" does not exist. Please check the file", "File ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            using (StreamReader MappingFile = new StreamReader(MappingFileName))
+            {
+                string MappingDataTemp;
+                MappingDataTemp = MappingFile.ReadLine();
+                while (MappingDataTemp != null)
+                {
+                    string[] HashItem = MappingDataTemp.Split(' ');
+                    if(HashItem.Length != 2)
+                    {
+                        MessageBox.Show("PadMappingFEB.txt ERROR. Please check the file", "File ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+                    htPadMapping.Add(HashItem[0], HashItem[1]);
+                    MappingDataTemp = MappingFile.ReadLine();
+                }
             }
         }
     }

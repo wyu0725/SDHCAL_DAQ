@@ -945,6 +945,11 @@ namespace USB_DAQ
             int StartValue = StartAsic + HexToInt(DifCommandAddress.AcquisitionStartStopAddress);
             return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(StartValue));
         }
+        public static bool MicrorocAcquisitionStart(MyCyUsb usbInterface)
+        {
+            int StartValue = 1 + HexToInt(DifCommandAddress.AcquisitionStartStopAddress);
+            return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(StartValue));
+        }
         public static bool MicrorocAcquisitionStop(MyCyUsb usbInterface)
         {
             return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(HexToInt(DifCommandAddress.AcquisitionStartStopAddress)));
@@ -1260,6 +1265,12 @@ namespace USB_DAQ
                 ChannelCaliCommandHeader[i] = (byte)(0xC0 + i);
             }
             return ChannelCaliCommandHeader;
+        }
+
+        public static bool AcquisitionStartIndexSet(int StartIndex, MyCyUsb usbInterface)
+        {
+            int StartIndexValue = StartIndex + HexToInt(DifCommandAddress.AcquisitionStartAsicIndexAddress);
+            return usbInterface.CommandSend(usbInterface.ConstCommandByteArray(StartIndexValue));
         }
 
     }

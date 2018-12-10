@@ -164,6 +164,7 @@ namespace USB_DAQ
         public const string AutoCalibrationSwitcherSelectAddress = "E5F0";
 
         public const string AcquisitionStartStopAddress = "F0F0";
+        public const string AcquisitionStartAsicIndexAddress = "F0C0";
         public const string ResetDataFifoAddress = "F1A0";
         public const string ResetSCurveTestAdress = "F1B0";
 

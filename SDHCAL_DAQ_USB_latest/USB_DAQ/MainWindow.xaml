@@ -2267,7 +2267,7 @@
                                 <RadioButton Name="rdbAD9220NewDif" Content="AD9220" Checked="rdbAD9220NewDif_Checked"/>
                             </StackPanel>
 
-                            <TabControl x:Name="tbcNewDifAcquisition" Height="300" Margin="500,130,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="250">
+                            <TabControl x:Name="tbcNewDifAcquisition" Height="300" Margin="500,130,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="270">
                                 <TabItem Name="tbmNewDifAcquisition" Header="Acquisition" >
                                     <Grid Margin="0,0,0,0">
                                         <GroupBox x:Name="gbxAcquisition" Header="Acq" HorizontalAlignment="Left" VerticalAlignment="Top" Height="270" Width="185" Margin="0,0,0,0">
@@ -2311,6 +2311,12 @@
                                                 </Button>
                                             </Grid>
                                         </GroupBox>
+                                        <WrapPanel Margin="185,0,0,0" Width="65" HorizontalAlignment="Left" VerticalAlignment="Top" Height="80" ItemWidth="60" ItemHeight="20">
+                                            <CheckBox Name="cbStartIndexChain1">Chain1</CheckBox>
+                                            <CheckBox Name="cbStartIndexChain2">Chain2</CheckBox>
+                                            <CheckBox Name="cbStartIndexChain3">Chain3</CheckBox>
+                                            <CheckBox Name="cbStartIndexChain4">Chain4</CheckBox>
+                                        </WrapPanel>
                                     </Grid>
                                 </TabItem>
                                 <TabItem Name="tbmAdcControlNewDif" Header="AD9220" Height="21" VerticalAlignment="Bottom" IsSelected="True">
@@ -2326,12 +2332,15 @@
                                         <TextBox x:Name="tbcHoldDelayNewDif" HorizontalAlignment="Left" Height="24" Margin="100,30,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="50"/>
                                         <Label x:Name="lblHoldTimeNewDif" Content="Hold Time(ns)" HorizontalAlignment="Left" Margin="0,60,0,0" VerticalAlignment="Top"/>
                                         <TextBox x:Name="tbcHoldTimeNewDif" HorizontalAlignment="Left" Height="24" Margin="100,60,0,0" TextWrapping="Wrap" Text="5000" VerticalAlignment="Top" Width="50" />
-                                        <ComboBox x:Name="cbxHoldEnableNewDif" HorizontalAlignment="Left" Margin="0,90,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="80" Height="24">
+                                        <ComboBox x:Name="cbxHoldEnableNewDif" HorizontalAlignment="Left" Margin="160,30,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="80" Height="24">
                                             <ComboBoxItem Content="Disable"/>
                                             <ComboBoxItem Content="Enable" IsSelected="True"/>
                                         </ComboBox>
-                                        <Button x:Name="btnSetHoldNewDif" Content="SET HOLD" HorizontalAlignment="Left" Margin="170,90,0,0" VerticalAlignment="Top" Width="70" Height="24" Click="btnSetHoldNewDif_Click"/>
-                                        <ComboBox x:Name="cbxAdcTestAsicNewDif" HorizontalAlignment="Left" Margin="85,90,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="80" Height="24" >
+                                        <Button x:Name="btnSetHoldNewDif" Content="SET HOLD" HorizontalAlignment="Left" Margin="160,60,0,0" VerticalAlignment="Top" Width="80" Height="24" Click="btnSetHoldNewDif_Click"/>
+                                        <Label x:Name="lblPadLocationNewDif" Content="Test Pad:" HorizontalAlignment="Left" Margin="0,90,0,0" VerticalAlignment="Top"/>
+                                        <TextBox x:Name="tbcPadLocationNewDif" HorizontalAlignment="Left" Height="24" Margin="100,90,0,0" TextWrapping="Wrap" Text="A1" VerticalAlignment="Top" Width="50" />
+                                        <Button x:Name="btnSetPadLocation" Content="Set location" HorizontalAlignment="Left" Margin="160,90,0,0" VerticalAlignment="Top" Width="80" Height="24" Click="btnSetPadLocation_Click"/>
+                                        <ComboBox x:Name="cbxAdcTestAsicNewDif" HorizontalAlignment="Left" Margin="160,160,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="80" Height="24" >
                                             <ComboBoxItem Content="ASIC11" IsSelected="True"/>
                                             <ComboBoxItem Content="ASIC12"/>
                                             <ComboBoxItem Content="ASIC13"/>
@@ -2349,6 +2358,7 @@
                                             <ComboBoxItem Content="ASIC43"/>
                                             <ComboBoxItem Content="ASIC44"/>
                                         </ComboBox>
+                                        <Button x:Name="btnGeneratePad2AsicChannel" Content="Hash Gen" HorizontalAlignment="Left" Margin="160,190,0,0" VerticalAlignment="Top" Width="80" Height="24" Click="btnGeneratePad2AsicChannel_Click"/>
                                         <Label x:Name="lblTestChargeAdcNewDif" Content="Test Charge(fC)" HorizontalAlignment="Left" Margin="0,120,0,0" VerticalAlignment="Top"/>
                                         <TextBox x:Name="tbcTestChargeAdcNewDif" HorizontalAlignment="Left" Height="24" Margin="100,120,0,0" TextWrapping="Wrap" Text="50" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40" />
                                         <Button x:Name="btnSetChargeAndSaveFileNewDif" Content="Set and Save" HorizontalAlignment="Left" Margin="140,120,0,0" VerticalAlignment="Top" Width="100" Height="24" Click="btnSetChargeAndSaveFileNewDif_Click"/>
