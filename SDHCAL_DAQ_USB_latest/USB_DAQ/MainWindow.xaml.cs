@@ -7103,6 +7103,7 @@ namespace USB_DAQ
                         #endregion
                         #region Set test row and column
                         int TestAsicIndex = i * 4 + j;
+                        cbxSCurveTestAsicNewDif.SelectedIndex = TestAsicIndex;
                         if (!SetSCurveTestAsic(TestAsicIndex))
                         {
                             return;
