@@ -1608,7 +1608,7 @@
                                                     <ComboBoxItem Content="Disable"/>
                                                     <ComboBoxItem Content="Enable" IsSelected="True"/>
                                                 </ComboBox>
-                                                <GroupBox x:Name="gbxMaskAsicSet" Header="ASIC Select" HorizontalAlignment="Left" Margin="160,120,0,0" VerticalAlignment="Top" Height="110" Width="160">
+                                                <GroupBox x:Name="gbxMaskAsicSet" Header="ASIC Select" HorizontalAlignment="Left" Margin="160,120,0,0" VerticalAlignment="Top" Height="110" Width="240">
                                                     <Grid Margin="0,0,0,0">
                                                         <Label x:Name="lblMaskAsicSelectNewDif" Content="ASIC" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top" Height="25" Width="75"/>
                                                         <ComboBox x:Name="cbxMaskAsicSelectNewDif" HorizontalAlignment="Left" Margin="70,0,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="70" Height="24" >
@@ -1629,10 +1629,20 @@
                                                             <ComboBoxItem Content="ASIC43"/>
                                                             <ComboBoxItem Content="ASIC44"/>
                                                         </ComboBox>
+                                                        <ComboBox x:Name="cbxMaskAsicChoiseSelect" HorizontalAlignment="Center" Margin="140,0,0,0" VerticalAlignment="Top" Width="75" Height="24">
+                                                            <ComboBoxItem Content="Mask" IsSelected="True"/>
+                                                            <ComboBoxItem Content="Unmask"/>
+                                                            <ComboBoxItem Content="Unmask All"/>
+                                                            <ComboBoxItem Content="Mask All"/>
+                                                        </ComboBox>
                                                         <Button x:Name="btnSetMaskAsicNewDif" Content="Set select" HorizontalAlignment="Left" Margin="0,30,0,0" VerticalAlignment="Top" Width="140" Height="24" Click="btnSetMaskAsicNewDif_Click"/>
                                                         <Button x:Name="btnClearMaskAsicNewDif" Content="Clear select" HorizontalAlignment="Left" Margin="0,60,0,0" VerticalAlignment="Top" Width="140" Height="24" Click="btnClearMaskAsicNewDif_Click"/>
                                                     </Grid>
                                                 </GroupBox>
+                                                <Label x:Name="lblCheckPadLocationNewDif" Content="Test Pad:" HorizontalAlignment="Left" Margin="160,230,0,0" VerticalAlignment="Top" Width="60"/>
+                                                <TextBox x:Name="tbcCheckPadLocationNewDif" HorizontalAlignment="Left" Height="24" Margin="220,230,0,0" TextWrapping="Wrap" Text="AA30" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="40" />
+                                                <Button x:Name="btnCheckPadLocation" Content="Check" HorizontalAlignment="Left" Margin="270,230,0,0" VerticalAlignment="Top" Width="80" Height="24" Click="btnCheckPadLocation_Click"/>
+
                                             </Grid>
                                         </TabItem>
                                         <TabItem Name="Mask" Header="Mask">
