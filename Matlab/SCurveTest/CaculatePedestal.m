@@ -15,8 +15,8 @@ Dac2FitP = zeros(4,4,64,4);
 Dac0Rsquare = zeros(4,4,64);
 Dac1Rsquare = zeros(4,4,64);
 Dac2Rsquare = zeros(4,4,64);
-for Column = 0:1:3
-    for Row = 0:1:3
+for Column = 1:1:4
+    for Row = 1:1:4
         filename = sprintf('%s\\ASIC%d%d.dat',filepath,Column,Row);
         [fid,~] = fopen(filename,'r');
         if fid <= 0
@@ -33,8 +33,8 @@ for Column = 0:1:3
         end
         for i = 0:1:63
             [DacCode,~,~,~,...,
-            Dac0FitP(Column+1,Row+1,i+1,:),Dac1FitP(Column+1,Row+1,i+1,:),Dac2FitP(Column+1,Row+1,i+1,:),...,
-                Dac0Rsquare(Column+1,Row+1,i+1,:),Dac1Rsquare(Column+1,Row+1,i+1,:),Dac2Rsquare(Column+1,Row+1,i+1,:)] ...,
+            Dac0FitP(Column,Row,i+1,:),Dac1FitP(Column,Row,i+1,:),Dac2FitP(Column,Row,i+1,:),...,
+                Dac0Rsquare(Column,Row+1,i+1,:),Dac1Rsquare(Column,Row,i+1,:),Dac2Rsquare(Column,Row,i+1,:)] ...,
             = SingleChannelSCurveCaculate(InitialData,i,DacRange);
         end
     end
