@@ -1641,7 +1641,12 @@
                                                 </GroupBox>
                                                 <Label x:Name="lblCheckPadLocationNewDif" Content="Test Pad:" HorizontalAlignment="Left" Margin="160,230,0,0" VerticalAlignment="Top" Width="60"/>
                                                 <TextBox x:Name="tbcCheckPadLocationNewDif" HorizontalAlignment="Left" Height="24" Margin="220,230,0,0" TextWrapping="Wrap" Text="AA30" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="40" />
-                                                <Button x:Name="btnCheckPadLocation" Content="Check" HorizontalAlignment="Left" Margin="270,230,0,0" VerticalAlignment="Top" Width="80" Height="24" Click="btnCheckPadLocation_Click"/>
+                                                <Button x:Name="btnCheckPadLocation" Content="Check" HorizontalAlignment="Left" Margin="260,230,0,0" VerticalAlignment="Top" Width="80" Height="24" Click="btnCheckPadLocation_Click"/>
+                                                <TextBox x:Name="tbcResultPadLocationNewDif" HorizontalAlignment="Left" Height="24" Margin="340,230,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="60" Foreground="#FF040000" />
+                                                <Button x:Name="btnGeneratePad2AsicChannel" Content="Hash Gen" HorizontalAlignment="Left" Margin="160,260,0,0" VerticalAlignment="Top" Width="80" Height="24" Click="btnGeneratePad2AsicChannel_Click"/>
+                                                <Label x:Name="lblPadLocationNewDif" Content="Test Pad:" HorizontalAlignment="Left" Margin="160,290,0,0" VerticalAlignment="Top"/>
+                                                <TextBox x:Name="tbcPadLocationNewDif" HorizontalAlignment="Left" Height="24" Margin="230,290,0,0" TextWrapping="Wrap" Text="A1" VerticalAlignment="Top" Width="50" />
+                                                <Button x:Name="btnSetPadLocation" Content="Set location" HorizontalAlignment="Left" Margin="280,290,0,0" VerticalAlignment="Top" Width="80" Height="24" Click="btnSetPadLocation_Click"/>
 
                                             </Grid>
                                         </TabItem>
@@ -2347,9 +2352,6 @@
                                             <ComboBoxItem Content="Enable" IsSelected="True"/>
                                         </ComboBox>
                                         <Button x:Name="btnSetHoldNewDif" Content="SET HOLD" HorizontalAlignment="Left" Margin="160,60,0,0" VerticalAlignment="Top" Width="80" Height="24" Click="btnSetHoldNewDif_Click"/>
-                                        <Label x:Name="lblPadLocationNewDif" Content="Test Pad:" HorizontalAlignment="Left" Margin="0,90,0,0" VerticalAlignment="Top"/>
-                                        <TextBox x:Name="tbcPadLocationNewDif" HorizontalAlignment="Left" Height="24" Margin="100,90,0,0" TextWrapping="Wrap" Text="A1" VerticalAlignment="Top" Width="50" />
-                                        <Button x:Name="btnSetPadLocation" Content="Set location" HorizontalAlignment="Left" Margin="160,90,0,0" VerticalAlignment="Top" Width="80" Height="24" Click="btnSetPadLocation_Click"/>
                                         <ComboBox x:Name="cbxAdcTestAsicNewDif" HorizontalAlignment="Left" Margin="160,160,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="80" Height="24" >
                                             <ComboBoxItem Content="ASIC11" IsSelected="True"/>
                                             <ComboBoxItem Content="ASIC12"/>
@@ -2368,7 +2370,7 @@
                                             <ComboBoxItem Content="ASIC43"/>
                                             <ComboBoxItem Content="ASIC44"/>
                                         </ComboBox>
-                                        <Button x:Name="btnGeneratePad2AsicChannel" Content="Hash Gen" HorizontalAlignment="Left" Margin="160,190,0,0" VerticalAlignment="Top" Width="80" Height="24" Click="btnGeneratePad2AsicChannel_Click"/>
+                                        
                                         <Label x:Name="lblTestChargeAdcNewDif" Content="Test Charge(fC)" HorizontalAlignment="Left" Margin="0,120,0,0" VerticalAlignment="Top"/>
                                         <TextBox x:Name="tbcTestChargeAdcNewDif" HorizontalAlignment="Left" Height="24" Margin="100,120,0,0" TextWrapping="Wrap" Text="50" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40" />
                                         <Button x:Name="btnSetChargeAndSaveFileNewDif" Content="Set and Save" HorizontalAlignment="Left" Margin="140,120,0,0" VerticalAlignment="Top" Width="100" Height="24" Click="btnSetChargeAndSaveFileNewDif_Click"/>

@@ -5883,6 +5883,7 @@ namespace USB_DAQ
                     btnNewDifAcquisitionStartNewDif.Background = Brushes.Red;
                     btnNewDifAcquisitionStartNewDif.Content = "Slow ACQ Stop";
                     await Task.Run(() => GetSlowDataRateResultCallBack(MyUsbDevice1));
+                    ClearUsbFifo();
                     bResult = MicrorocAsic.MicrorocAcquisitionStop(MyUsbDevice1);
                     if (bResult)
                     {
@@ -9135,6 +9136,36 @@ namespace USB_DAQ
             {
                 MessageBox.Show("All right","Good",MessageBoxButton.OK,MessageBoxImage.Information);
             }
+            #region Set pad location
+            string PadLocation = tbcCheckPadLocationNewDif.Text;
+            if (!htPadMapping.ContainsKey(PadLocation))
+            {
+                MessageBox.Show("Mapping failed. Please make sure the pad location is correct and \"Hash Gen\" is clicked", "Location ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            string AsicLocation = (string)htPadMapping[PadLocation];
+            string[] LocationItem = AsicLocation.Split('_');
+            if (LocationItem.Length != 3)
+            {
+                MessageBox.Show("PadMappingFEB.txt ERROR. Please check the file", "File ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (!(CheckStringLegal.CheckIntegerLegal(LocationItem[0]) && CheckStringLegal.CheckIntegerLegal(LocationItem[1]) && CheckStringLegal.CheckIntegerLegal(LocationItem[2])))
+            {
+                MessageBox.Show("Mapping failed. Please make sure the pad location is correct and \"Hash Gen\" is clicked", "Location ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            int Row = int.Parse(LocationItem[0]);
+            int Column = int.Parse(LocationItem[1]);
+            int AsicChannel = int.Parse(LocationItem[2]);
+            if (!(Row >= 1 && Row <= 4 && Column >= 1 && Column <= 4))
+            {
+                MessageBox.Show("Mapping failed. Please make sure the pad location is correct and \"Hash Gen\" is clicked", "Location ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            string ResultChannel = string.Format("{0},{1}-{2}", Row, Column, AsicChannel);
+            tbcResultPadLocationNewDif.Text = ResultChannel;
+            #endregion
         }
     }
     
