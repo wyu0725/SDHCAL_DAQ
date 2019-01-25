@@ -6,6 +6,7 @@ AverageNumber = str2double(answer(1));
 StartCharge = str2double(answer(2));
 EndCharge = str2double(answer(3));
 ChargeStep = str2double(answer(4));
+% AsicID = str2double(answer(5));
 AsicID = str2double(answer(5));
 DataNumber = (EndCharge - StartCharge)/ChargeStep + 1;
 Charge = StartCharge:ChargeStep:EndCharge;
@@ -28,6 +29,17 @@ plot(Charge,AverageAdc,'o-')
 xlabel('\bf Charge(fC)');
 ylabel('\bf ADC code');
 title('\bf ADC code Vs. Charge');
+
+AdcChannel = zeros(1,DataNumber);
+for i = 1:1:DataNumber
+    AdcChannel(i) = AverageAdc(1) - AverageAdc(i);
+end
+figure;
+plot(Charge,AdcChannel,'o-')
+xlabel('\bf Charge(fC)');
+ylabel('\bf ADC code');
+title('\bf ADC code Vs. Charge');
+
 
 % figure;
 % AdcVoltage = AverageAdc * 5 / 4095;
