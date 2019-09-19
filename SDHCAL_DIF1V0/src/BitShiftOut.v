@@ -31,7 +31,7 @@ module BitShiftOut(
   output SerialClock,
   output SerialReset,
   output reg SerialDataout,
-  output reg BitShiftDone
+  output reg BitShiftDone,
   );
   /*
   //--- Convert the start pulse to a level signal ---//

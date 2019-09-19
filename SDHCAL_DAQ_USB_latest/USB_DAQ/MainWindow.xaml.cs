@@ -23,6 +23,7 @@ using System.Net.Mail;
 using MathWorks.MATLAB.NET.Arrays;
 using MathWorks.MATLAB.NET.Utility;
 using PlotAcquisitionData;
+using NationalInstruments.VisaNS;
 //using System.Collections.ObjectModel;//new add 20150823
 //using Target7_NEWDAQ.DataModel;      //new add 20150823
 [assembly: MathWorks.MATLAB.NET.Utility.MWMCROption("-nojit")]
@@ -87,8 +88,8 @@ namespace USB_DAQ
         //private const string AFG3252Descr = "USB[0-9]::0x0699::0x034E::C[0-9]+::INSTR";
         //private const string AFG3252VidPid = "VID_0699&PID_034E";
 
-        private const string AFG3252Descr = "USB[0-9]::0x0699::0x0345::C[0-9]+::INSTR";
-        private const string AFG3252VidPid = "VID_0699&PID_0345";
+        private const string AFG3252Descr = "USB[0-9]::0x0699::0x034E::C[0-9]+::INSTR";
+        private const string AFG3252VidPid = "VID_0699&PID_034E";
         private AFG3252 MyAFG3252 = new AFG3252(AFG3252Descr);
         private bool AFG3252Attach = false;
         private bool AmplitudeOrLevel = true;
